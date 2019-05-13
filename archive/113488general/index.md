@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean lexer (pygments)](20585leanlexerpygments.html) (9 messages, latest: May 13 2019 at 05:54)
+* [lean lexer (pygments)](20585leanlexerpygments.html) (11 messages, latest: May 13 2019 at 06:15)
+
+* [travis failing, works locally?](43301travisfailingworkslocally.html) (4 messages, latest: May 13 2019 at 06:08)
 
 * [choose](14850choose.html) (10 messages, latest: May 13 2019 at 05:05)
-
-* [travis failing, works locally?](43301travisfailingworkslocally.html) (3 messages, latest: May 13 2019 at 04:49)
 
 * [setting up lean on Windows](92044settingupleanonWindows.html) (5 messages, latest: May 13 2019 at 02:40)
 

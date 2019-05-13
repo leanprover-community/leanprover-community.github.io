@@ -50,5 +50,19 @@ permalink: archive/113488general/20585leanlexerpygments.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20lexer%20%28pygments%29/near/165500563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20585leanlexerpygments.html#165500563">William DeMeo (May 13 2019 at 05:54)</a>:</h4>
 <p><span class="user-mention" data-user-id="110032">@Reid Barton</span> thanks for the suggestion. It's hard for me to know version I'm using.  I did clone Gabriel Ebner's fork of pygments and I installed it with the command <code>pip3 install Pygments</code>.  Nothing changed.  I then tried <span class="user-mention" data-user-id="122022">@Joseph Corneli</span> 's suggestion from last July, adding <code>version = '2.1a0.dev20180725',</code> to the setup.py file in the pygments-main directory and (re)installed pygments with the command <code>sudo python3 setup.py install</code>  It seems to have installed successfully.  (I get the response <code>Installed /usr/local/lib/python3.6/dist-packages/Pygments-2.1a0.dev20180725dev_20190512-py3.6.egg</code> among lots of other output.)  Nothing changed.  The lexer still fails to lex correct Lean code involving the symbols I mentioned above.</p>
 
+<a name="165500826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20lexer%20%28pygments%29/near/165500826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20585leanlexerpygments.html#165500826">William DeMeo (May 13 2019 at 06:00)</a>:</h4>
+<p>Next I tried to replicate the setup of the Logic and Proof book as closely as possible.  This sets up a fresh install of needed dependencies in a local directory called .venv, when one invokes <code>make install-deps</code>(in particular, this make directive installs pygments with <code> pip3 install https://bitbucket.org/gebner/pygments-main/get/default.tar.gz#egg=Pygments</code>.   However, after <code>make install-deps</code> completes successfully, I invoke <code>make html</code> and I get the following weird output:  <br>
+``Running Sphinx v2.0.1</p>
+<p>Extension error:<br>
+Could not import extension sphinx.builders.epub3 (exception: No module named 'sphinxcontrib.serializinghtml')<br>
+Makefile:35: recipe for target 'html' failed<br>
+make: *** [html] Error 2``</p>
+<p>...which is strange because I have compiled the Logic and Proof book before and it worked fine.  Well, I'll keep hacking away at this for a while, but may have to let it go unresolved for now.</p>
+
+<a name="165501359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20lexer%20%28pygments%29/near/165501359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20585leanlexerpygments.html#165501359">William DeMeo (May 13 2019 at 06:15)</a>:</h4>
+<p>Out of curiosity, I tried the following experiment: I inserted the seemingly unlexable bit of Lean code (code that includes symbols like <code>↑</code> and <code>∘</code>) into a code-block of my fork of the Logic and Proof book and tried <code>make html</code>, and low and behold, the lexer could handle it... so clearly there's something wrong with the setup of my other project.  When I resolve it, if there's any useful information that comes out of this, I'll post again.  Thanks again for your help!</p>
+
 
 {% endraw %}
