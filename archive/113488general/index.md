@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [another timeout](98841anothertimeout.html) (44 messages, latest: May 13 2019 at 11:00)
+
 * [lean lexer (pygments)](20585leanlexerpygments.html) (11 messages, latest: May 13 2019 at 06:15)
 
 * [travis failing, works locally?](43301travisfailingworkslocally.html) (4 messages, latest: May 13 2019 at 06:08)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [choose](14850choose.html) (10 messages, latest: May 13 2019 at 05:05)
 
 * [setting up lean on Windows](92044settingupleanonWindows.html) (5 messages, latest: May 13 2019 at 02:40)
-
-* [another timeout](98841anothertimeout.html) (2 messages, latest: May 12 2019 at 23:32)
 
 * [Lean in the wild](43625Leaninthewild.html) (73 messages, latest: May 12 2019 at 21:56)
 

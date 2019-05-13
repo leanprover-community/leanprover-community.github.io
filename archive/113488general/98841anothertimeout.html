@@ -20,5 +20,243 @@ permalink: archive/113488general/98841anothertimeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165486652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165486652">Scott Morrison (May 12 2019 at 23:32)</a>:</h4>
 <p>Oh, I definitely get this when I let tactics go berserk. It's usually solved by splitting things into smaller lemmas.</p>
 
+<a name="165514559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165514559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165514559">Kevin Buzzard (May 13 2019 at 10:10)</a>:</h4>
+<p>I have managed to tame the timeouts but I don't think it's a tactic issue.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">presheaf_map</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="o">(</span><span class="n">spa</span> <span class="n">A</span><span class="o">)}</span> <span class="o">(</span><span class="n">hUV</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">≤</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">presheaf_value</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">presheaf_value</span> <span class="n">U</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="bp">⟨λ</span> <span class="n">rd</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">TEMP</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">val</span> <span class="k">in</span> <span class="n">TEMP</span> <span class="bp">⟨</span><span class="n">rd</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">rd</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hUV</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="c1">--  f.val ⟨rd.val, set.subset.trans rd.2 hUV⟩, -- this times out with lean -T100000</span>
+<span class="bp">λ</span> <span class="n">rd1</span> <span class="n">rd2</span> <span class="n">h</span><span class="o">,</span>
+<span class="c1">-- I do not particularly want to go into tactic mode right now</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">TEMP2</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">rational_open_data_subsets</span><span class="bp">.</span><span class="n">map</span> <span class="n">hUV</span> <span class="n">rd1</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">rational_open_data_subsets</span><span class="bp">.</span><span class="n">map</span> <span class="n">hUV</span> <span class="n">rd2</span><span class="o">)</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">TEMP2</span><span class="o">,</span>
+  <span class="c1">-- exact f.2 (rational_open_data... times out</span>
+  <span class="c1">-- convert f.2 (rational_open_data... works</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>This should be a purely term mode proof. The first problem is that <code> f.val ⟨rd.val, set.subset.trans rd.2 hUV⟩</code> times out when applied directly; this <code>let</code> hack fixes the first timeout. The second timeout I solve in tactic mode (it's a prop) but it's the same story; a term should work, but <code>exact</code> fails and it's only <code>convert</code> or the <code>let</code> which save us. A <code>convert</code> can be used with the first timeout too, but this causes errors later in the file for some reason.</p>
+<p>I would like to debug this further. I do not know what is going on at all. If this is happening because we have written bad code then I'd like to write better code but I don't know which code is bad. If this is happening because of some other reason I'd still  like to know what is going on. I feel a bit helpless at the minute; I have no understanding why the first <code>let</code> changes anything. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> can either of you make some educated guesses about what is happening?</p>
+<p>A completely compiled version of the perfectoid project, all the olean files, with current mathlib master, is available here:</p>
+<p><a href="http://wwwf.imperial.ac.uk/~buzzard/xena/perfectoid_20190513.tar" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/perfectoid_20190513.tar">wwwf.imperial.ac.uk/~buzzard/xena/perfectoid_20190513.tar</a></p>
+<p>If you download this, and run <code>lean --make</code> in <code>src</code> the command returns very quickly with no output. The project is all compiled and all fine. Now open it in VS Code and in <code>src/Spa.lean</code> on line 720 there is a timeout, which can be fixed by changing -T100000 to a higher value in VS Code settings. Lean is working far too hard to compile this lemma. Changing <code>f.val ⟨rd.val, set.subset.trans rd.2 hUV⟩, </code> to <code>let TEMP := f.val in TEMP ⟨rd.val, set.subset.trans rd.2 hUV⟩,</code> fixes everything.</p>
+
+<a name="165514653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165514653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165514653">Mario Carneiro (May 13 2019 at 10:12)</a>:</h4>
+<p>what is the type of <code>TEMP</code>?</p>
+
+<a name="165514669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165514669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165514669">Mario Carneiro (May 13 2019 at 10:12)</a>:</h4>
+<p>and <code>f</code> and <code>⟨rd.val, set.subset.trans rd.2 hUV⟩</code></p>
+
+<a name="165515200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515200">Mario Carneiro (May 13 2019 at 10:21)</a>:</h4>
+<p>Here's a working term mode proof:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">presheaf_map</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="o">(</span><span class="n">spa</span> <span class="n">A</span><span class="o">)}</span> <span class="o">(</span><span class="n">hUV</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">≤</span> <span class="n">V</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">presheaf_value</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">presheaf_value</span> <span class="n">U</span> <span class="o">:=</span>
+<span class="bp">⟨_</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">rd1</span> <span class="n">rd2</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="n">rational_open_data_subsets</span><span class="bp">.</span><span class="n">map</span> <span class="n">hUV</span> <span class="n">rd1</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">rational_open_data_subsets</span><span class="bp">.</span><span class="n">map</span> <span class="n">hUV</span> <span class="n">rd2</span><span class="o">)</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">_</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="165515549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515549">Kevin Buzzard (May 13 2019 at 10:27)</a>:</h4>
+<p>But what's going on? How is (blah : _) any different to blah?</p>
+
+<a name="165515674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515674">Kevin Buzzard (May 13 2019 at 10:29)</a>:</h4>
+<p>This is my actual question. Is the point that your code is somehow better than my code in some intrinsic way -- I should never have written my code the way I wrote it? Or is the problem that I have made some ghastly types and the fact that they're difficult to manipulate is my fault and something should be changed? Or is the problem that Lean is not very good at something and you know how to work around the deficiency? What is actually happening?</p>
+
+<a name="165515681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515681">Mario Carneiro (May 13 2019 at 10:29)</a>:</h4>
+<p><code>(blah : _)</code> says "ignore the expected type here, figure out the type of blah first and then unify with the goal"</p>
+
+<a name="165515702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515702">Kevin Buzzard (May 13 2019 at 10:29)</a>:</h4>
+<p>But doesn't <code>(blah)</code> also say that?</p>
+
+<a name="165515774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515774">Mario Carneiro (May 13 2019 at 10:30)</a>:</h4>
+<p><code>blah</code> says "use the expected type to elaborate <code>blah</code>"</p>
+
+<a name="165515798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515798">Mario Carneiro (May 13 2019 at 10:30)</a>:</h4>
+<p>usually this is a good thing, but occasionally it gives a bad result</p>
+
+<a name="165515828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515828">Kevin Buzzard (May 13 2019 at 10:31)</a>:</h4>
+<p>Aah. So the elaboration process of a term usually takes the type of this term into account, and this is a workaround to stop it doing this?</p>
+
+<a name="165515858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515858">Kevin Buzzard (May 13 2019 at 10:32)</a>:</h4>
+<p>Running Lean with -T200000 succeeds, by the way -- so everything is consistent; this is just, for some reason, a way of making Lean succeed quicker.</p>
+
+<a name="165515926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515926">Mario Carneiro (May 13 2019 at 10:32)</a>:</h4>
+<p>I think I figured out the problem (and I guess you could class it as "lean is not very good at something"). If I start with</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">presheaf_map</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="o">(</span><span class="n">spa</span> <span class="n">A</span><span class="o">)}</span> <span class="o">(</span><span class="n">hUV</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">≤</span> <span class="n">V</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">presheaf_value</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">presheaf_value</span> <span class="n">U</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="bp">⟨λ</span> <span class="n">rd</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I see that the goal has type <code>r_o_d_completion (rd.val)</code>, and the <code>have</code> has type <code>Π (rd : rational_open_data_subsets V), r_o_d_completion (rd.val)</code>. The obvious solution is to plug <code>rd</code> into <code>f.val</code> but this doesn't work because <code>rd : rational_open_data_subsets U</code> instead</p>
+
+<a name="165515965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165515965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165515965">Kevin Buzzard (May 13 2019 at 10:33)</a>:</h4>
+<p>I am deeply sorry about <code>r_o_d_completion</code> by the way. I got sick of typing <code>rational_open_data</code>. It's on my job list to change it to something more sensible.</p>
+
+<a name="165516047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516047">Mario Carneiro (May 13 2019 at 10:35)</a>:</h4>
+<p>But the problem is that when you use <code>refine f.val _</code> here lean thinks "okay, let's make <code>r_o_d_completion (rd.val) =?= r_o_d_completion (?m.val)</code>. I know, let's try to make all the arguments to <code>r_o_d_completion</code> the same and <code>rd =?= ?m</code>. So I have to prove <code>rational_open_data_subsets U =?= rational_open_data_subsets V</code>." Lean then gets lost unfolding your tower of definitions, hoping that U doesn't actually appear in the definition so that <code>rational_open_data_subsets U</code> is defeq to <code>rational_open_data_subsets V</code></p>
+
+<a name="165516049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516049">Kevin Buzzard (May 13 2019 at 10:35)</a>:</h4>
+<blockquote>
+<p>but this doesn't work because <code>rd : rational_open_data_subsets U</code> instead</p>
+</blockquote>
+<p>Right, that's what all the <code>set.subset.trans rd.2 hUV</code> is about.</p>
+
+<a name="165516117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516117">Kevin Buzzard (May 13 2019 at 10:36)</a>:</h4>
+<p>Oh you have maybe completely debugged this. Many thanks as ever! Did you use some trace tools or was this just pure thought? I think it is worth my while thinking about what you're saying here. This is a trick I don't know yet.</p>
+
+<a name="165516133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516133">Mario Carneiro (May 13 2019 at 10:36)</a>:</h4>
+<p>This is often the place where the <code>:_</code> trick works</p>
+
+<a name="165516170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516170">Mario Carneiro (May 13 2019 at 10:37)</a>:</h4>
+<p>I usually see this when you use <code>congr_arg</code>, which is another place where the heuristic <code>f x =?= g y =&gt; f =?= g /\ x =?= y</code> leads lean astray</p>
+
+<a name="165516342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516342">Kevin Buzzard (May 13 2019 at 10:40)</a>:</h4>
+<p>I knew the maths I was formalising in the project (although as Patrick pointed out I didn't know all of the details in several places), but the timeouts were scary.  Before we finished the project I was sometimes thinking "you know, Lean actually can't do this can it". I've been forced to wrestle with several timeouts.</p>
+
+<a name="165516355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516355">Kevin Buzzard (May 13 2019 at 10:40)</a>:</h4>
+<p>But Lean always came through in the end, although the solutions were a bit random.</p>
+
+<a name="165516378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516378">Kevin Buzzard (May 13 2019 at 10:41)</a>:</h4>
+<p>On line 744 of <code>src/valuation/field.lean</code> if you change <code>Type u</code> to <code>Type*</code> then Lean times out. That was the worst one. I have no idea why.</p>
+
+<a name="165516627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516627">Mario Carneiro (May 13 2019 at 10:44)</a>:</h4>
+<p>For that one, I tried</p>
+
+<a name="165516646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516646">Mario Carneiro (May 13 2019 at 10:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">valuation</span><span class="bp">.</span><span class="n">completion_extend</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="c1">-- try_for 10000 {</span>
+  <span class="c1">--   exact valuation.completion_extend (valuation_field.canonical_valuation v)</span>
+  <span class="c1">-- }</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>and it says</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="n">valuation</span> <span class="o">(</span><span class="n">ring_completion</span> <span class="o">(</span><span class="n">valued_ring</span> <span class="err">?</span><span class="n">m_3</span> <span class="err">?</span><span class="n">m_5</span><span class="o">))</span> <span class="err">?</span><span class="n">m_1</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="err">?</span> <span class="err">?</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">valuation</span> <span class="o">(</span><span class="n">ring_completion</span> <span class="o">(</span><span class="n">valuation_field</span> <span class="n">v</span><span class="o">))</span> <span class="o">(</span><span class="n">value_group</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span>
+</pre></div>
+
+<a name="165516681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516681">Mario Carneiro (May 13 2019 at 10:45)</a>:</h4>
+<p>what is the relation between <code>valuation_field</code> and <code>valued_ring</code>?</p>
+
+<a name="165516897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165516897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165516897">Mario Carneiro (May 13 2019 at 10:48)</a>:</h4>
+<p>I see, <code>valued_ring</code> is a wrapper. This is not being very nice to lean, it has no idea what to unwrap here. I'm guessing <code>valuation_field</code> is much more complicated, so lean's heuristics say to unfold the more complicated one and it gets lost</p>
+
+<a name="165517102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517102">Kevin Buzzard (May 13 2019 at 10:52)</a>:</h4>
+<p>That wrapper caused us problems.</p>
+
+<a name="165517120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517120">Kevin Buzzard (May 13 2019 at 10:53)</a>:</h4>
+<p>It's funny that changing the universe made it work though.</p>
+
+<a name="165517212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517212">Kevin Buzzard (May 13 2019 at 10:55)</a>:</h4>
+<p>In fact even <code>with_zero</code> caused us problems (a wrapper for <code>option</code>) -- we used <code>with_zero</code> a lot and at some point we seriously considered redefining it by just copying some <code>option</code> code; the <code>option</code> kept leaking out.</p>
+
+<a name="165517221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517221">Mario Carneiro (May 13 2019 at 10:55)</a>:</h4>
+<p>have you tried printing the definition? It makes me weep to see</p>
+
+<a name="165517225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517225">Kevin Buzzard (May 13 2019 at 10:55)</a>:</h4>
+<p>The definition of what?</p>
+
+<a name="165517276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517276">Mario Carneiro (May 13 2019 at 10:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">valuation_on_completion</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">valuation</span>
+    <span class="o">(</span><span class="n">ring_completion</span>
+      <span class="o">(</span><span class="n">valuation</span><span class="bp">.</span><span class="n">valuation_field</span> <span class="n">v</span><span class="o">))</span>
+    <span class="o">(</span><span class="n">value_group</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">valuation</span><span class="bp">.</span><span class="n">completion_extend</span> <span class="o">(</span><span class="n">valuation_field</span><span class="bp">.</span><span class="n">canonical_valuation</span> <span class="n">v</span><span class="o">)</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">valuation_on_completion</span>
+</pre></div>
+
+<a name="165517286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517286">Mario Carneiro (May 13 2019 at 10:56)</a>:</h4>
+<p>oh, actually that's not so bad</p>
+
+<a name="165517300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517300">Mario Carneiro (May 13 2019 at 10:57)</a>:</h4>
+<p>this version looks much worse</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">valuation</span><span class="bp">.</span><span class="n">completion_extend</span> <span class="o">(</span><span class="n">valuation_field</span><span class="bp">.</span><span class="n">canonical_valuation</span> <span class="n">v</span><span class="o">),</span>
+  <span class="n">dunfold</span> <span class="n">valued_ring</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">this</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="165517320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517320">Mario Carneiro (May 13 2019 at 10:57)</a>:</h4>
+<p>I need a deduplicating pp printer</p>
+
+<a name="165517366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517366">Kevin Buzzard (May 13 2019 at 10:58)</a>:</h4>
+<p>I don't really understand what you're saying.</p>
+
+<a name="165517373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517373">Mario Carneiro (May 13 2019 at 10:58)</a>:</h4>
+<p>These printouts always make expressions look worse than they are</p>
+
+<a name="165517377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517377">Kevin Buzzard (May 13 2019 at 10:58)</a>:</h4>
+<p>We just typed in normal maths</p>
+
+<a name="165517387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517387">Mario Carneiro (May 13 2019 at 10:58)</a>:</h4>
+<p>but if expressions are much much worse under the hood than they appear then that's a bad sign</p>
+
+<a name="165517400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517400">Mario Carneiro (May 13 2019 at 10:59)</a>:</h4>
+<p>and stuff like timeouts is just the symptom</p>
+
+<a name="165517421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517421">Mario Carneiro (May 13 2019 at 10:59)</a>:</h4>
+<p>the moral of the story is "don't make lean work too hard"</p>
+
+<a name="165517445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517445">Mario Carneiro (May 13 2019 at 11:00)</a>:</h4>
+<p>sometimes you accidentally ask lean to do something silly and then you get a timeout for no reason</p>
+
 
 {% endraw %}
