@@ -1,0 +1,38 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/11899Definitionofsimplefunctionsanditsintegral.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/11899Definitionofsimplefunctionsanditsintegral.html">Definition of simple functions and its integral</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165531366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Definition%20of%20simple%20functions%20and%20its%20integral/near/165531366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11899Definitionofsimplefunctionsanditsintegral.html#165531366">Joe (May 13 2019 at 14:05)</a>:</h4>
+<p>Hi everyone, <br>
+here is a definition for integral over simple functions,<br>
+a definition for simple functions as a subtype of integrable functions,<br>
+and a definition for its integral.</p>
+<p>Do these look okay?</p>
+<div class="codehilite"><pre><span></span>variables  {γ : Type*}  [normed_space ℝ γ] [second_countable_topology γ] [topological_add_group γ]
+
+def integral&#39; (f : measure_theory.simple_func α γ) : γ :=
+  f.range.sum (λ (x : γ), (ennreal.to_real (volume (f ⁻¹&#39; {x}))) • x)
+
+section
+variables (α γ)
+def simple_func : Type* :=
+  { f : α →ᵢ γ // ∃ (s : measure_theory.simple_func α γ), (ae_eq_fun.mk s s.measurable) = f.val}
+end
+
+local infixr ` →ₛ `:25 := simple_func
+
+def integral_over_simple_func (f : α →ₛ γ) : γ := integral&#39; (classical.some f.2)
+</pre></div>
+
+
+{% endraw %}
