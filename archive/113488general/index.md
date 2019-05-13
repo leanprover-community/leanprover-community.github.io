@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [strictly monotone](43086strictlymonotone.html) (5 messages, latest: May 13 2019 at 13:05)
+* [Install documentation](54866Installdocumentation.html) (201 messages, latest: May 13 2019 at 15:50)
+
+* [strictly monotone](43086strictlymonotone.html) (6 messages, latest: May 13 2019 at 15:05)
 
 * [travis failing, works locally?](43301travisfailingworkslocally.html) (14 messages, latest: May 13 2019 at 12:28)
 
@@ -89,8 +91,6 @@ permalink: archive/113488general/index.html
 * [squeeze_dsimp?](80798squeezedsimp.html) (14 messages, latest: May 03 2019 at 18:43)
 
 * [travis-ci/{push,pr}](22440traviscipushpr.html) (12 messages, latest: May 03 2019 at 14:24)
-
-* [Install documentation](54866Installdocumentation.html) (198 messages, latest: May 03 2019 at 14:10)
 
 * [forward implication from an `iff`, with typeclasses](17631forwardimplicationfromaniffwithtypeclasses.html) (78 messages, latest: May 03 2019 at 11:29)
 
