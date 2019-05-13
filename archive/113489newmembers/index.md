@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (9 messages, latest: May 13 2019 at 16:52)
+* [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (30 messages, latest: May 13 2019 at 17:58)
 
 * [nat lemmas](73955natlemmas.html) (14 messages, latest: May 13 2019 at 00:26)
 
