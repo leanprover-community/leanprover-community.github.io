@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [strictly monotone](43086strictlymonotone.html) (2 messages, latest: May 13 2019 at 12:58)
+* [strictly monotone](43086strictlymonotone.html) (5 messages, latest: May 13 2019 at 13:05)
 
 * [travis failing, works locally?](43301travisfailingworkslocally.html) (14 messages, latest: May 13 2019 at 12:28)
 
