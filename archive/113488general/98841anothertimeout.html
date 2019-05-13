@@ -258,5 +258,327 @@ permalink: archive/113488general/98841anothertimeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517445">Mario Carneiro (May 13 2019 at 11:00)</a>:</h4>
 <p>sometimes you accidentally ask lean to do something silly and then you get a timeout for no reason</p>
 
+<a name="165517535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517535">Kevin Buzzard (May 13 2019 at 11:01)</a>:</h4>
+<p>We're just extending a valuation on a ring to a valuation on its completion. What's not to like?</p>
+
+<a name="165517604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517604">Kevin Buzzard (May 13 2019 at 11:02)</a>:</h4>
+<p>You're saying we should be looking at our terms to see if any of them are getting suspiciously large?</p>
+
+<a name="165517614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517614">Kevin Buzzard (May 13 2019 at 11:02)</a>:</h4>
+<p>But what can we do to stop this happening?</p>
+
+<a name="165517646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517646">Kevin Buzzard (May 13 2019 at 11:03)</a>:</h4>
+<p>You shouldn't have unfolded our wrapper!</p>
+
+<a name="165517730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517730">Mario Carneiro (May 13 2019 at 11:04)</a>:</h4>
+<p>The reason this happened was the first error message I posted:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="n">valuation</span> <span class="o">(</span><span class="n">ring_completion</span> <span class="o">(</span><span class="n">valued_ring</span> <span class="err">?</span><span class="n">m_3</span> <span class="err">?</span><span class="n">m_5</span><span class="o">))</span> <span class="err">?</span><span class="n">m_1</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="err">?</span> <span class="err">?</span><span class="o">)</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">valuation</span> <span class="o">(</span><span class="n">ring_completion</span> <span class="o">(</span><span class="n">valuation_field</span> <span class="n">v</span><span class="o">))</span> <span class="o">(</span><span class="n">value_group</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span>
+</pre></div>
+
+
+<p>I think the problem is not actually <code>valued_ring</code> itself but all the instances on it</p>
+
+<a name="165517761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517761">Mario Carneiro (May 13 2019 at 11:05)</a>:</h4>
+<p><code>valuation_field</code> has a bunch of instances, and <code>valued_ring</code> has different instances, and a lot of unfolding needs to happen to see they are the same</p>
+
+<a name="165517850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517850">Mario Carneiro (May 13 2019 at 11:06)</a>:</h4>
+<p>Why are you applying a theorem which isn't obviously applicable?</p>
+
+<a name="165517877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517877">Mario Carneiro (May 13 2019 at 11:07)</a>:</h4>
+<p>what's the logic here? How does the stuff on <code>valuation_field</code> relate to <code>valued_ring</code>?</p>
+
+<a name="165517972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165517972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165517972">Johan Commelin (May 13 2019 at 11:08)</a>:</h4>
+<p>A valued ring is a ring together with a valuation. This valuation induces a topology, etc...</p>
+<p>A valuation field is a particular example.</p>
+
+<a name="165518015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518015">Mario Carneiro (May 13 2019 at 11:09)</a>:</h4>
+<p>maybe you need a typeclass for that</p>
+
+<a name="165518020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518020">Mario Carneiro (May 13 2019 at 11:09)</a>:</h4>
+<p>rather than a type constructor</p>
+
+<a name="165518142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518142">Mario Carneiro (May 13 2019 at 11:11)</a>:</h4>
+<p>i.e. <code>valued_ring R v</code> is a prop assertion that says that a topological ring is generated by a valuation</p>
+
+<a name="165518216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518216">Mario Carneiro (May 13 2019 at 11:12)</a>:</h4>
+<p>that way you can assert that <code>valuation_field</code> is a valued ring, even though it isn't literally constructed as "adjoin this valuation to the ring"</p>
+
+<a name="165518236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518236">Mario Carneiro (May 13 2019 at 11:13)</a>:</h4>
+<p>aka stricklandize it</p>
+
+<a name="165518241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518241">Johan Commelin (May 13 2019 at 11:13)</a>:</h4>
+<p>Or we change it to <code>valued_ring.mk</code>? And we have class</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">valued_ring</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">)</span>
+</pre></div>
+
+<a name="165518255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165518255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165518255">Mario Carneiro (May 13 2019 at 11:13)</a>:</h4>
+<p>I was going to say that, and then I realized that the gamma will give you problems</p>
+
+<a name="165519572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519572">Kevin Buzzard (May 13 2019 at 11:36)</a>:</h4>
+<p>Sorry, my exam just finished and I had to pick up several hundred pieces of paper</p>
+
+<a name="165519699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519699">Kevin Buzzard (May 13 2019 at 11:38)</a>:</h4>
+<p>With a random ring R there are lots of valuations, so lots of topologies. But given a valuation v we wanted a topology on R so we went with a wrapper because topological_space is a class I guess.</p>
+
+<a name="165519806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519806">Kevin Buzzard (May 13 2019 at 11:40)</a>:</h4>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  valuation (ring_completion (valued_ring ?m_3 ?m_5)) ?m_1 : Type (max ? ?)
+but is expected to have type
+  valuation (ring_completion (valuation_field v)) (value_group v) : Type ?
+</pre></div>
+
+
+<p><code>valued_ring ?m_3 ?m_5</code> is just by definition <code>?m_3</code> but this is all about topology, and I can't put a topology on <code>?m_3</code> because it depends on <code>?m_5</code></p>
+
+<a name="165519885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519885">Kevin Buzzard (May 13 2019 at 11:42)</a>:</h4>
+<p>We mathematicians need to learn the right way to think about this stuff.</p>
+
+<a name="165519900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519900">Johan Commelin (May 13 2019 at 11:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Can you formulate a general principal here? Why is <code>valued_ring</code> a bad type wrapper, but <code>multiplicative</code> a good one?</p>
+
+<a name="165519923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519923">Kevin Buzzard (May 13 2019 at 11:43)</a>:</h4>
+<blockquote>
+<p>but if expressions are much much worse under the hood than they appear then that's a bad sign</p>
+</blockquote>
+<p>Do you mean "much worse after you've unfolded absolutely everything" or something else?</p>
+
+<a name="165519949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519949">Mario Carneiro (May 13 2019 at 11:43)</a>:</h4>
+<p>I mean much worse explicitly, before any unfolding</p>
+
+<a name="165519954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165519954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165519954">Mario Carneiro (May 13 2019 at 11:43)</a>:</h4>
+<p>or after any unfolding that needs to be done in the moment</p>
+
+<a name="165520051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520051">Kevin Buzzard (May 13 2019 at 11:45)</a>:</h4>
+<p>like unfolding <code>valued_ring</code>.</p>
+
+<a name="165520124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520124">Mario Carneiro (May 13 2019 at 11:45)</a>:</h4>
+<p><code>valued_ring</code> is not a bad type wrapper, but it's not sufficient for all things. In particular, this is the same problem we've seen before with <code>localization</code>. Sometimes you want to perform the construction, and sometimes you want to say that an independently constructed type is isomorphic to the construction</p>
+
+<a name="165520182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520182">Mario Carneiro (May 13 2019 at 11:46)</a>:</h4>
+<p><code>quotient</code> is another example of this</p>
+
+<a name="165520194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520194">Mario Carneiro (May 13 2019 at 11:46)</a>:</h4>
+<p>It doesn't apply if the type isn't actually <code>quotient bla</code></p>
+
+<a name="165520236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520236">Kevin Buzzard (May 13 2019 at 11:47)</a>:</h4>
+<blockquote>
+<p>I was going to say that, and then I realized that the gamma will give you problems</p>
+</blockquote>
+<p>Because of universe issues or because we just need to input it directly with</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">valued_ring</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">[</span><span class="n">totally_ordered_group</span> <span class="err">Γ</span><span class="o">]</span> <span class="c1">-- or whatever we called it</span>
+<span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">valuation</span> <span class="n">R</span> <span class="err">Γ</span><span class="o">)</span>
+</pre></div>
+
+<a name="165520237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520237">Mario Carneiro (May 13 2019 at 11:47)</a>:</h4>
+<p>In this case you have <code>valued_ring R v</code>, the construction, and you want to apply it to <code>valuation_field v</code>, which after unfolding is <em>not</em> defined as <code>valued_ring bla bla</code></p>
+
+<a name="165520310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520310">Kevin Buzzard (May 13 2019 at 11:48)</a>:</h4>
+<p>There's something a bit wrong. Those v's are perhaps not the same.</p>
+
+<a name="165520323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520323">Kevin Buzzard (May 13 2019 at 11:48)</a>:</h4>
+<p><code>valuation_field v</code> has got a valuation on it but it's not <code>v</code></p>
+
+<a name="165520335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520335">Mario Carneiro (May 13 2019 at 11:48)</a>:</h4>
+<p>right, I'm not saying they are</p>
+
+<a name="165520336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520336">Kevin Buzzard (May 13 2019 at 11:48)</a>:</h4>
+<p>Oh Ok</p>
+
+<a name="165520344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520344">Kevin Buzzard (May 13 2019 at 11:49)</a>:</h4>
+<p>No, you're supposed to be unfolding valued_ring here, not valuation_field</p>
+
+<a name="165520357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520357">Mario Carneiro (May 13 2019 at 11:49)</a>:</h4>
+<p>I'm saying that <code>valuation_field v =?= valued_ring ?m1 ?m2</code> doesn't have a solution by unfolding <code>valuation_field</code></p>
+
+<a name="165520367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520367">Kevin Buzzard (May 13 2019 at 11:49)</a>:</h4>
+<p>Right!</p>
+
+<a name="165520370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520370">Kevin Buzzard (May 13 2019 at 11:49)</a>:</h4>
+<p>Unfold the other one.</p>
+
+<a name="165520374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520374">Mario Carneiro (May 13 2019 at 11:49)</a>:</h4>
+<p>Even if you unfold <code>valued_ring</code> here, it doesn't solve the problem of all the instances</p>
+
+<a name="165520441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520441">Kevin Buzzard (May 13 2019 at 11:50)</a>:</h4>
+<p>I think that you're saying that if we're going to use a wrapper type, then we must be very careful to wrap everything up.</p>
+
+<a name="165520449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520449">Mario Carneiro (May 13 2019 at 11:50)</a>:</h4>
+<p><code>valued_ring</code> has a bunch of instances on it, a uniform structure and so on - does <code>valuation_field v</code> have the same structure?</p>
+
+<a name="165520457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520457">Kevin Buzzard (May 13 2019 at 11:50)</a>:</h4>
+<p>No</p>
+
+<a name="165520461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520461">Mario Carneiro (May 13 2019 at 11:50)</a>:</h4>
+<p>then you shouldn't apply this theorem</p>
+
+<a name="165520462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520462">Kevin Buzzard (May 13 2019 at 11:50)</a>:</h4>
+<p>Hmm...we could put those structures on it.</p>
+
+<a name="165520507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520507">Kevin Buzzard (May 13 2019 at 11:51)</a>:</h4>
+<p>We wrote the wrapper because for a general ring R and a general valuation v, we definitely don't want R to inherit the uniform structure from v, because often R will be fixed and v will change</p>
+
+<a name="165520517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520517">Mario Carneiro (May 13 2019 at 11:51)</a>:</h4>
+<p>My guess is you want to prove <code>is_valued_ring (valuation_field v) (valuation_field.canonical_valuation v)</code></p>
+
+<a name="165520572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520572">Kevin Buzzard (May 13 2019 at 11:52)</a>:</h4>
+<p><code>valuation_field v</code> is exactly the point where we've manipulated the ring so much that now we'll never put another valuation on it.</p>
+
+<a name="165520579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520579">Kevin Buzzard (May 13 2019 at 11:52)</a>:</h4>
+<p>None of this conversation is about mathematics, in some sense.</p>
+
+<a name="165520585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520585">Mario Carneiro (May 13 2019 at 11:52)</a>:</h4>
+<p>It's proof engineering stuff</p>
+
+<a name="165520587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520587">Kevin Buzzard (May 13 2019 at 11:52)</a>:</h4>
+<p>So I'm a beginner here.</p>
+
+<a name="165520591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520591">Kevin Buzzard (May 13 2019 at 11:52)</a>:</h4>
+<p>Yes exactly.</p>
+
+<a name="165520629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520629">Mario Carneiro (May 13 2019 at 11:53)</a>:</h4>
+<p>You can have <code>valued_ring R v</code> as before, and prove <code>is_valued_ring (valued_ring R v) v</code></p>
+
+<a name="165520710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520710">Kevin Buzzard (May 13 2019 at 11:54)</a>:</h4>
+<p>So we keep the wrapper?</p>
+
+<a name="165520712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520712">Mario Carneiro (May 13 2019 at 11:54)</a>:</h4>
+<p>and then <code>completion_extend</code> has the type <code>valuation (ring_completion K) Γ </code> where <code>is_valued_ring K v</code></p>
+
+<a name="165520737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520737">Mario Carneiro (May 13 2019 at 11:54)</a>:</h4>
+<p>I don't know if you need the wrapper, but I imagine that sometimes you just have a ring and need to put a valuation on it</p>
+
+<a name="165520771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520771">Mario Carneiro (May 13 2019 at 11:55)</a>:</h4>
+<p>rather than asserting that a pre-existing topological ring is generated by a valuation</p>
+
+<a name="165520781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520781">Kevin Buzzard (May 13 2019 at 11:55)</a>:</h4>
+<p>That's right.</p>
+
+<a name="165520788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520788">Mario Carneiro (May 13 2019 at 11:55)</a>:</h4>
+<p>so you want both</p>
+
+<a name="165520815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520815">Kevin Buzzard (May 13 2019 at 11:55)</a>:</h4>
+<p>In fact I think that always we just have the ring and need to put a topology on it coming from a valuation.</p>
+
+<a name="165520876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520876">Kevin Buzzard (May 13 2019 at 11:56)</a>:</h4>
+<p>That's why we used a wrapper -- because the valuation can vary, but topological_space is a class.</p>
+
+<a name="165520886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520886">Mario Carneiro (May 13 2019 at 11:56)</a>:</h4>
+<p>I think that's what you thought originally and that's why the code looks like it does, but it turns out not to be the case</p>
+
+<a name="165520893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520893">Mario Carneiro (May 13 2019 at 11:56)</a>:</h4>
+<p>because <code>valuation_field</code> is clearly not of that form</p>
+
+<a name="165520902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520902">Johan Commelin (May 13 2019 at 11:56)</a>:</h4>
+<p>It is of that form mathematically</p>
+
+<a name="165520907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520907">Johan Commelin (May 13 2019 at 11:56)</a>:</h4>
+<p>But not Lean-ny</p>
+
+<a name="165520915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520915">Kevin Buzzard (May 13 2019 at 11:57)</a>:</h4>
+<p>valuation_field was a field that didn't have a valuation for most of the projects, and then I realised far too late (because I never wrote a proper roadmap) that we needed a topology on it.</p>
+
+<a name="165520931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520931">Mario Carneiro (May 13 2019 at 11:57)</a>:</h4>
+<p>and that's what <code>is_valued_ring</code> is for, to say "this ring is generated by this valuation"</p>
+
+<a name="165520956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165520956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165520956">Mario Carneiro (May 13 2019 at 11:57)</a>:</h4>
+<p>You might also consider writing <code>valuation_field</code> so it has the form <code>valued_ring bla bla</code>, but that will affect other things</p>
+
+<a name="165521005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165521005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165521005">Kevin Buzzard (May 13 2019 at 11:58)</a>:</h4>
+<p>Then Patrick found the part of Bourbaki that did what we wanted, and worked in what a library-builder would say was the correct generality: given a valuation on a ring, the ring gets a topology, and the valuation extends to the completion of the ring.</p>
+
+<a name="165521020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165521020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165521020">Johan Commelin (May 13 2019 at 11:58)</a>:</h4>
+<p>I guess an alternative would be to rename <code>valuation_field</code> to <code>valuation_field.aux</code> and then define <code>valuation_field</code> as <code>valued_ring (valuation_field_aux _) _</code></p>
+
+<a name="165521066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165521066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165521066">Mario Carneiro (May 13 2019 at 11:59)</a>:</h4>
+<p>I thought about that too, but there are some nontrivial theorems here about how the topological ring structure is preserved</p>
+
+<a name="165521068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165521068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165521068">Johan Commelin (May 13 2019 at 11:59)</a>:</h4>
+<p>But I guess that Mario is saying that the predicate approach is better (because more flexible?)</p>
+
+<a name="165521071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165521071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165521071">Kevin Buzzard (May 13 2019 at 11:59)</a>:</h4>
+<p>I suspect that the only time we ever apply the valued_ring stuff is to <code>valuation_field v</code> (which is a field), however there were a bunch of general theorems about the topology on a ring induced by a valuation in Bourbaki and Patrick formalised those.</p>
+
+<a name="165521090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/another%20timeout/near/165521090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98841anothertimeout.html#165521090">Mario Carneiro (May 13 2019 at 11:59)</a>:</h4>
+<p>the predicate approach means that the instances are not impacted - they are just the <code>valuation_field</code> instances</p>
+
 
 {% endraw %}
