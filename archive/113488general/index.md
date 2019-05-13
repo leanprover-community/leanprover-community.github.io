@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean lexer (pygments)](20585leanlexerpygments.html) (9 messages, latest: May 13 2019 at 05:54)
+
+* [choose](14850choose.html) (10 messages, latest: May 13 2019 at 05:05)
+
 * [travis failing, works locally?](43301travisfailingworkslocally.html) (3 messages, latest: May 13 2019 at 04:49)
 
 * [setting up lean on Windows](92044settingupleanonWindows.html) (5 messages, latest: May 13 2019 at 02:40)
@@ -21,10 +25,6 @@ permalink: archive/113488general/index.html
 * [Sigma types](75591Sigmatypes.html) (6 messages, latest: May 12 2019 at 21:54)
 
 * [contraposition](54269contraposition.html) (29 messages, latest: May 12 2019 at 21:43)
-
-* [choose](14850choose.html) (8 messages, latest: May 12 2019 at 20:08)
-
-* [lean lexer (pygments)](20585leanlexerpygments.html) (8 messages, latest: May 12 2019 at 15:55)
 
 * [pygments](17208pygments.html) (54 messages, latest: May 12 2019 at 14:22)
 
