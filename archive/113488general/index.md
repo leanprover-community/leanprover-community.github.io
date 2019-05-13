@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [another timeout](98841anothertimeout.html) (117 messages, latest: May 13 2019 at 11:59)
+* [strictly monotone](43086strictlymonotone.html) (2 messages, latest: May 13 2019 at 12:58)
+
+* [travis failing, works locally?](43301travisfailingworkslocally.html) (14 messages, latest: May 13 2019 at 12:28)
+
+* [another timeout](98841anothertimeout.html) (120 messages, latest: May 13 2019 at 12:09)
 
 * [lean lexer (pygments)](20585leanlexerpygments.html) (11 messages, latest: May 13 2019 at 06:15)
-
-* [travis failing, works locally?](43301travisfailingworkslocally.html) (4 messages, latest: May 13 2019 at 06:08)
 
 * [choose](14850choose.html) (10 messages, latest: May 13 2019 at 05:05)
 
