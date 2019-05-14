@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [unique ring hom from ℚ](59968uniqueringhomfrom.html) (75 messages, latest: May 14 2019 at 13:43)
+* [unique ring hom from ℚ](59968uniqueringhomfrom.html) (76 messages, latest: May 14 2019 at 14:50)
 
 * [representations](84839representations.html) (98 messages, latest: May 12 2019 at 12:10)
 
