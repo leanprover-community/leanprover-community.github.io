@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (6 messages, latest: May 14 2019 at 07:30)
+* [int div nat eq floor rat](67601intdivnateqfloorrat.html) (1 message, latest: May 14 2019 at 09:39)
+
+* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (7 messages, latest: May 14 2019 at 09:36)
 
 * [(no topic)](79918notopic.html) (164 messages, latest: May 14 2019 at 04:10)
 
