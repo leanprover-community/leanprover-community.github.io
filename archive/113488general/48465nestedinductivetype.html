@@ -49,5 +49,14 @@ If I want to define a recursive function over expressions like so:</p>
 The only way around that I can think of is to use the recursor directly. Is there a more convenient way?<br>
 (I left out some details, expression is actually indexed over types)</p>
 
+<a name="165632127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20inductive%20type/near/165632127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html#165632127">Chris Hughes (May 14 2019 at 15:30)</a>:</h4>
+<p>This is probably easier to define using <code>expression.rec_on</code></p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expression</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">expression</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">e</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="n">idx</span> <span class="n">f</span><span class="o">,</span>  <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">of_fn</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">sum</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+  <span class="bp">_</span>
+</pre></div>
+
 
 {% endraw %}
