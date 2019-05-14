@@ -1,0 +1,144 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/39072PossibleBug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html">Possible Bug</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165592348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592348">James Shaker (May 14 2019 at 04:34)</a>:</h4>
+<p>Hello, I’m one of <span class="user-mention" data-user-id="110087">@Scott Morrison</span> 's students and I’ve got what could possibly be an issue in mathlib. I was wondering if others would be willing to take a look before I file a bug report on GitHub:</p>
+<div class="codehilite"><pre><span></span>import ring_theory.algebra -- commenting this out fixes the problem
+
+def power_series (α : Type) [comm_ring α] := ℕ → α
+
+variables {α : Type} [comm_ring α]
+
+def of_alpha (x : α) : power_series α
+| 0 := x
+| _ := 0
+
+instance : has_coe α (power_series α) := ⟨of_alpha⟩
+
+example (x : α) : power_series α := (x : power_series α) -- can&#39;t find defined instance
+</pre></div>
+
+
+<p>As described in the comments, the simple coercion from <code>α</code> to <code>power_series α</code> fails despite the instance being clearly defined on the line above. What’s more it works correctly when the algebra import is commented.</p>
+
+<a name="165592373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592373">Johan Commelin (May 14 2019 at 04:35)</a>:</h4>
+<p>Where do you want to file a bug report? Lean doesn't take bug reports.... didn't Scott tell you this?</p>
+
+<a name="165592423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592423">Johan Commelin (May 14 2019 at 04:36)</a>:</h4>
+<p>These kind of issues are really quite annoying. I don't spot anything obviously wrong.</p>
+
+<a name="165592444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592444">Johan Commelin (May 14 2019 at 04:37)</a>:</h4>
+<p><del>Aaah I do!</del></p>
+
+<a name="165592575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592575">Mario Carneiro (May 14 2019 at 04:41)</a>:</h4>
+<p>You shouldn't use <code>has_coe</code> for these kinds of coercions, it will cause lean to go in a loop</p>
+
+<a name="165592585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592585">Mario Carneiro (May 14 2019 at 04:41)</a>:</h4>
+<p>There's some discussion about the coercion for <code>option A</code> in the file in core</p>
+
+<a name="165592587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592587">Mario Carneiro (May 14 2019 at 04:41)</a>:</h4>
+<p>use <code>has_coe_t</code> instead</p>
+
+<a name="165592639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592639">Mario Carneiro (May 14 2019 at 04:42)</a>:</h4>
+<p>I did not get a "can't find instance" error, I get a instance resolution depth overflow</p>
+
+<a name="165592797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592797">Mario Carneiro (May 14 2019 at 04:47)</a>:</h4>
+<p>Oh, there is a bad instance in <code>group_theory.coset</code>, <code>instance : has_coe α (quotient s) := ⟨mk⟩</code></p>
+
+<a name="165592818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592818">James Shaker (May 14 2019 at 04:47)</a>:</h4>
+<p>Sorry that's the same issue I get, just forgot to include the specifics of the bug</p>
+
+<a name="165592869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592869">James Shaker (May 14 2019 at 04:48)</a>:</h4>
+<p><code>has_coe_t</code> doesn't seem to fix the issue</p>
+
+<a name="165592888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592888">James Shaker (May 14 2019 at 04:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  I think Scott was referring to posting an issue on the GitHub repo but I'm not 100% sure..</p>
+
+<a name="165592972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592972">Johan Commelin (May 14 2019 at 04:51)</a>:</h4>
+<p>If you want to post issues, please post them here: <a href="https://github.com/leanprover-community/lean" target="_blank" title="https://github.com/leanprover-community/lean">https://github.com/leanprover-community/lean</a></p>
+
+<a name="165592975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165592975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165592975">Johan Commelin (May 14 2019 at 04:51)</a>:</h4>
+<p><del>Aaahrg! Stupid copy paste buffer</del> fixed the link</p>
+
+<a name="165593029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593029">Johan Commelin (May 14 2019 at 04:52)</a>:</h4>
+<p>Anyway, the best way to deal with such issues is by posting them here <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="165593031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593031">Mario Carneiro (May 14 2019 at 04:52)</a>:</h4>
+<p>this isn't a lean problem it's a mathlib problem</p>
+
+<a name="165593043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593043">Mario Carneiro (May 14 2019 at 04:53)</a>:</h4>
+<p>it's some typeclass architecture bug</p>
+
+<a name="165593048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593048">Mario Carneiro (May 14 2019 at 04:53)</a>:</h4>
+<p>but I suspect the result will be that you can't define this coercion</p>
+
+<a name="165593094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593094">James Shaker (May 14 2019 at 04:54)</a>:</h4>
+<p>Should we just turn off that instance (in <code>group_theory.coset</code>)?</p>
+
+<a name="165593098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593098">Mario Carneiro (May 14 2019 at 04:54)</a>:</h4>
+<p>working on it</p>
+
+<a name="165593104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593104">Mario Carneiro (May 14 2019 at 04:54)</a>:</h4>
+<p>but I think the power_series coercion is also a bad instance</p>
+
+<a name="165593107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593107">Mario Carneiro (May 14 2019 at 04:54)</a>:</h4>
+<p>for similar reasons</p>
+
+<a name="165593115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593115">James Shaker (May 14 2019 at 04:54)</a>:</h4>
+<p>ok so it would be safe if I used <code>has_coe_t</code>?</p>
+
+<a name="165593119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593119">James Shaker (May 14 2019 at 04:54)</a>:</h4>
+<p>for <code>power_series</code>?</p>
+
+<a name="165593141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593141">Mario Carneiro (May 14 2019 at 04:55)</a>:</h4>
+<p>basically, lean will try to eagerly apply transitivity paths from the left for <code>has_coe</code>, so you end up reducing the problem <code>has_coe A B</code> to <code>has_coe (power_series A) B</code> and then <code>has_coe (power_series (power_series A)) B</code>, etc</p>
+
+<a name="165593149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593149">Mario Carneiro (May 14 2019 at 04:55)</a>:</h4>
+<p>using has_coe_t will ensure that it will only apply the instance once</p>
+
+<a name="165593221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593221">Mario Carneiro (May 14 2019 at 04:56)</a>:</h4>
+<p>it looks like removing the <code>quotient_group.mk</code> instance fixes the problem</p>
+
+<a name="165593311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Possible%20Bug/near/165593311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39072PossibleBug.html#165593311">James Shaker (May 14 2019 at 04:59)</a>:</h4>
+<p>Can I try PR-ing that, or are you already there?</p>
+
+
+{% endraw %}
