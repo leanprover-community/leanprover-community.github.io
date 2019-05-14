@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (164 messages, latest: May 14 2019 at 04:10)
+* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (6 messages, latest: May 14 2019 at 07:30)
 
-* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (1 message, latest: May 14 2019 at 04:04)
+* [(no topic)](79918notopic.html) (164 messages, latest: May 14 2019 at 04:10)
 
 * [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (33 messages, latest: May 13 2019 at 18:39)
 

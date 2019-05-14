@@ -25,5 +25,25 @@ but is expected to have type<br>
 <p>How could I tell Lean that a set constructed in a particular way is guaranteed to be a finset? Or is there any other way to fix this error message? </p>
 <p>Thank you very much for your response!</p>
 
+<a name="165599209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Guarantee%20a%20set%20to%20be%20a%20finset/near/165599209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76606Guaranteeasettobeafinset.html#165599209">Kevin Buzzard (May 14 2019 at 07:18)</a>:</h4>
+<p>a <code>finset</code> is not the same as a <code>set</code>. A <code>finset</code> is <em>not</em> "a set, plus some more stuff".</p>
+
+<a name="165599294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Guarantee%20a%20set%20to%20be%20a%20finset/near/165599294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76606Guaranteeasettobeafinset.html#165599294">Kevin Buzzard (May 14 2019 at 07:20)</a>:</h4>
+<p>If you want some help, I would urge you to post a minimal working example of your code, rather than a fragment or just an error message. Quote code within triple backticks <code> ``` </code>, or even better use <code> ```lean </code> to quote Lean code with syntax highlighting.</p>
+
+<a name="165599476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Guarantee%20a%20set%20to%20be%20a%20finset/near/165599476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76606Guaranteeasettobeafinset.html#165599476">Kevin Buzzard (May 14 2019 at 07:24)</a>:</h4>
+<p>There are lots of potential solutions to your situation but it's difficult to know what the best one is without seeing the code. As an example, if you want to say that a set is equal to a finset, you could just coerce the finset into a set. Alternatively if you want to map a set plus a proof that it's finite into type finset then this is no doubt also possible (but I don't know the finset API well enough to know how to do it off the top of my head). The best solution might be to never use sets at all. It depends on what you want to do.</p>
+
+<a name="165599743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Guarantee%20a%20set%20to%20be%20a%20finset/near/165599743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76606Guaranteeasettobeafinset.html#165599743">Mario Carneiro (May 14 2019 at 07:29)</a>:</h4>
+<p><code>finite.to_finset</code> will convert a set that is finite to a finset</p>
+
+<a name="165599808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Guarantee%20a%20set%20to%20be%20a%20finset/near/165599808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76606Guaranteeasettobeafinset.html#165599808">Mario Carneiro (May 14 2019 at 07:30)</a>:</h4>
+<p>but in this case you are left with proving that the set is finite, which basically amounts to constructing a finset</p>
+
 
 {% endraw %}
