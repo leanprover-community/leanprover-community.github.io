@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (164 messages, latest: May 14 2019 at 04:10)
+
+* [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (1 message, latest: May 14 2019 at 04:04)
+
 * [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (33 messages, latest: May 13 2019 at 18:39)
 
 * [nat lemmas](73955natlemmas.html) (14 messages, latest: May 13 2019 at 00:26)
@@ -121,8 +125,6 @@ permalink: archive/113489newmembers/index.html
 * [rw failure](50770rwfailure.html) (13 messages, latest: Mar 16 2019 at 10:03)
 
 * [wrote a definition for free objects, requesting feedback](20711wroteadefinitionforfreeobjectsrequestingfeedback.html) (5 messages, latest: Mar 16 2019 at 02:32)
-
-* [(no topic)](79918notopic.html) (162 messages, latest: Mar 15 2019 at 12:30)
 
 * [Playing with GL(V)](04011PlayingwithGLV.html) (36 messages, latest: Mar 15 2019 at 12:29)
 
