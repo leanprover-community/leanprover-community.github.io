@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cast woes](88074castwoes.html) (104 messages, latest: May 14 2019 at 19:53)
+
 * [unique ring hom from ℚ](59968uniqueringhomfrom.html) (76 messages, latest: May 14 2019 at 14:50)
 
 * [representations](84839representations.html) (98 messages, latest: May 12 2019 at 12:10)
@@ -25,8 +27,6 @@ permalink: archive/116395maths/index.html
 * [equality between natural transformations](34618equalitybetweennaturaltransformations.html) (13 messages, latest: May 07 2019 at 04:01)
 
 * [Integer gcd issues](42489Integergcdissues.html) (2 messages, latest: May 06 2019 at 22:27)
-
-* [cast woes](88074castwoes.html) (97 messages, latest: May 06 2019 at 15:51)
 
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)
 
