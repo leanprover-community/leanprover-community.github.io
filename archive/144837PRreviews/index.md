@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1029 group conjugates](676321029groupconjugates.html) (3 messages, latest: May 14 2019 at 05:54)
+
 * [#1007 compatibility with Lean 3.5.0c](237691007compatibilitywithLean350c.html) (11 messages, latest: May 11 2019 at 16:51)
 
 * [#734 free ring](17428734freering.html) (50 messages, latest: May 11 2019 at 07:55)
