@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [int div nat eq floor rat](67601intdivnateqfloorrat.html) (1 message, latest: May 14 2019 at 09:39)
+* [int div nat eq floor rat](67601intdivnateqfloorrat.html) (5 messages, latest: May 14 2019 at 10:13)
 
 * [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (7 messages, latest: May 14 2019 at 09:36)
 
