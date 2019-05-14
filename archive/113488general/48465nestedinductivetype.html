@@ -34,5 +34,20 @@ permalink: archive/113488general/48465nestedinductivetype.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20inductive%20type/near/164443408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html#164443408">Björn Fischer (Apr 29 2019 at 11:21)</a>:</h4>
 <p>That works. Thanks!</p>
 
+<a name="165623723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20inductive%20type/near/165623723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48465nestedinductivetype.html#165623723">Björn Fischer (May 14 2019 at 13:49)</a>:</h4>
+<p>Follow up question:<br>
+If I want to define a recursive function over expressions like so:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">expression</span> <span class="bp">-&gt;</span> <span class="n">N</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="n">idx</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">1</span> <span class="bp">+</span> <span class="o">((</span><span class="n">vector</span><span class="bp">.</span><span class="n">of_fn</span> <span class="n">idx</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span>
+<span class="bp">|</span> <span class="n">b</span> <span class="bp">...</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="n">expression_size</span> <span class="n">e</span><span class="o">)</span><span class="bp">⟩</span><span class="o">]</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>I have to proof that the function application is decreasing for some arbitrary expression e, i.e. <code>expression_size e &lt; expression_size (a idx)</code>. However I don't have a proof that e comes from idx, ergo I cannot proof it.<br>
+The only way around that I can think of is to use the recursor directly. Is there a more convenient way?<br>
+(I left out some details, expression is actually indexed over types)</p>
+
 
 {% endraw %}

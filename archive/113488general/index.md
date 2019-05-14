@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nested inductive type](48465nestedinductivetype.html) (5 messages, latest: May 14 2019 at 13:49)
+
 * [Possible Bug](39072PossibleBug.html) (31 messages, latest: May 14 2019 at 05:10)
 
 * [Install documentation](54866Installdocumentation.html) (202 messages, latest: May 13 2019 at 16:37)
@@ -109,8 +111,6 @@ permalink: archive/113488general/index.html
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
 
 * [Assumptions about data produced by `classical.choice`](21205Assumptionsaboutdataproducedbyclassicalchoice.html) (9 messages, latest: Apr 29 2019 at 18:27)
-
-* [nested inductive type](48465nestedinductivetype.html) (4 messages, latest: Apr 29 2019 at 11:21)
 
 * [equiv module](58705equivmodule.html) (10 messages, latest: Apr 28 2019 at 11:23)
 
