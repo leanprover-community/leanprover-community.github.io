@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Possible Bug](39072PossibleBug.html) (33 messages, latest: May 14 2019 at 17:57)
+* [Possible Bug](39072PossibleBug.html) (38 messages, latest: May 14 2019 at 18:17)
 
 * [nested inductive type](48465nestedinductivetype.html) (6 messages, latest: May 14 2019 at 15:30)
 
