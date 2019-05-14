@@ -235,5 +235,113 @@ permalink: archive/116395maths/59968uniqueringhomfrom.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165612068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165612068">Kevin Buzzard (May 14 2019 at 10:59)</a>:</h4>
 <p>It's lunchtime now ;-)</p>
 
+<a name="165612573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165612573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165612573">Mario Carneiro (May 14 2019 at 11:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">char_zero</span>
+
+<span class="kn">theorem</span> <span class="n">nat</span><span class="bp">.</span><span class="n">semiring_hom_eq_cast</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_semiring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">eq_cast&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">)</span> <span class="bp">_</span>
+
+<span class="kn">theorem</span> <span class="n">int</span><span class="bp">.</span><span class="n">ring_hom_eq_cast</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="n">int</span><span class="bp">.</span><span class="n">eq_cast</span> <span class="bp">_</span> <span class="o">(</span><span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">)</span> <span class="bp">_</span>
+
+<span class="kn">theorem</span> <span class="n">rat</span><span class="bp">.</span><span class="n">ring_hom_unique</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">[</span><span class="n">is_ring_hom</span> <span class="n">g</span><span class="o">]</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="n">rat</span><span class="bp">.</span><span class="n">num_denom_cases_on&#39;</span> <span class="n">r</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">b0</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">rat</span><span class="bp">.</span><span class="n">mk_eq_div</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast_coe_nat</span><span class="o">],</span>
+  <span class="k">have</span> <span class="n">b0&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_ne_zero</span><span class="bp">.</span><span class="mi">2</span> <span class="n">b0</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span>
+    <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">ring_hom_eq_cast</span> <span class="o">(</span><span class="n">f</span> <span class="err">∘</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span>
+    <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">ring_hom_eq_cast</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">int</span><span class="bp">.</span><span class="n">cast</span><span class="o">)</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="k">calc</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span>
+      <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">b</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">g</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="n">g</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span>
+    <span class="n">int</span><span class="bp">.</span><span class="n">cast_coe_nat</span><span class="o">,</span> <span class="err">←</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">g</span><span class="o">,</span>
+    <span class="n">mul_inv_cancel</span> <span class="n">b0&#39;</span><span class="o">,</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">g</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">,</span>
+    <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">f</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">b</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="n">g</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">this</span> <span class="n">a</span><span class="o">,</span> <span class="err">←</span> <span class="n">this</span> <span class="n">b</span><span class="o">]</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span>
+    <span class="n">int</span><span class="bp">.</span><span class="n">cast_coe_nat</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="err">←</span> <span class="n">mul_assoc</span> <span class="o">(</span><span class="n">f</span> <span class="n">b</span><span class="bp">⁻¹</span><span class="o">),</span>
+    <span class="err">←</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">inv_mul_cancel</span> <span class="n">b0&#39;</span><span class="o">,</span>
+    <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">f</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">,</span>
+    <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="n">g</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="165612691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165612691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165612691">Johan Commelin (May 14 2019 at 11:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Merci beaucoup!</p>
+
+<a name="165612700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165612700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165612700">Mario Carneiro (May 14 2019 at 11:09)</a>:</h4>
+<p>de rien</p>
+
+<a name="165612721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165612721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165612721">Johan Commelin (May 14 2019 at 11:10)</a>:</h4>
+<p>Now we know for sure that ring homs from ℚ are unique <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span></p>
+
+<a name="165613023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613023">Chris Hughes (May 14 2019 at 11:13)</a>:</h4>
+<p>If they're two sided inverses then you obviously don't need commutativity.</p>
+
+<a name="165613078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613078">Chris Hughes (May 14 2019 at 11:14)</a>:</h4>
+<p>Unless I'm being stupid.</p>
+
+<a name="165613147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613147">Chris Hughes (May 14 2019 at 11:15)</a>:</h4>
+<p>The image of a ring hom from a commutative ring is a commutative ring.</p>
+
+<a name="165613230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613230">Mario Carneiro (May 14 2019 at 11:16)</a>:</h4>
+<p>this is the important bit, I think; the fact that <code>f n</code> is always in the center of the ring</p>
+
+<a name="165613293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613293">Kevin Buzzard (May 14 2019 at 11:17)</a>:</h4>
+<blockquote>
+<p>The image of a ring hom from a commutative ring is a commutative ring.</p>
+</blockquote>
+<p>Yes but the problem with this argument is that the two images might be different commutative subrings.</p>
+
+<a name="165613389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613389">Kevin Buzzard (May 14 2019 at 11:19)</a>:</h4>
+<blockquote>
+<p>this is the important bit, I think; the fact that <code>f n</code> is always in the center of the ring</p>
+</blockquote>
+<p>Is that obvious? I don't see how we have access to facts about stuff not in the image.</p>
+
+<a name="165613446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613446">Kevin Buzzard (May 14 2019 at 11:20)</a>:</h4>
+<p>It might well be true but I don't see it immediately.</p>
+
+<a name="165613459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613459">Kevin Buzzard (May 14 2019 at 11:20)</a>:</h4>
+<p>and lunch is nearly over :-/</p>
+
+<a name="165613482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613482">Kevin Buzzard (May 14 2019 at 11:20)</a>:</h4>
+<p>I have no feeling for how bad noncommutative rings can be.</p>
+
+<a name="165613627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613627">Kevin Buzzard (May 14 2019 at 11:22)</a>:</h4>
+<p>Is there some crazy non-commutative polynomial ring Q[z] where lambda z isn't z lambda for lambda in Q?</p>
+
+<a name="165613631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613631">Mario Carneiro (May 14 2019 at 11:22)</a>:</h4>
+<p>Oops, I mean that <code>f n</code> and <code>f m</code> commute</p>
+
+<a name="165613677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613677">Mario Carneiro (May 14 2019 at 11:23)</a>:</h4>
+<p>there's a theorem about that in <code>nat.cast</code></p>
+
+<a name="165613689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613689">Kevin Buzzard (May 14 2019 at 11:23)</a>:</h4>
+<p>For commutative rings I have a really powerful feeling about how to build them -- throwing in generators and relations -- but for non-commutative rings I don't know what one can get away with.</p>
+
+<a name="165613753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/unique%20ring%20hom%20from%20%E2%84%9A/near/165613753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59968uniqueringhomfrom.html#165613753">Kevin Buzzard (May 14 2019 at 11:24)</a>:</h4>
+<p>I think non-commutative rings are as broken as semigroups -- not enough axioms!</p>
+
 
 {% endraw %}
