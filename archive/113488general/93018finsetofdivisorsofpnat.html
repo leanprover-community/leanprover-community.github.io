@@ -1,0 +1,58 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/93018finsetofdivisorsofpnat.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html">finset of divisors of pnat</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165739350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165739350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165739350">Johan Commelin (May 15 2019 at 18:18)</a>:</h4>
+<p>I've got a <code>n : pnat</code> and I want the <code>finset pnat</code> consisting of the divisors of <code>n</code>. I've already made an instance <code>has_dvd pnat</code> (woot!). What is now the cleanest way to get this finset?<br>
+Of course... ... <code>{ d | d \| n }</code> will not work... ... ... <span aria-label="expressionless" class="emoji emoji-1f611" role="img" title="expressionless">:expressionless:</span></p>
+
+<a name="165739367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165739367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165739367">Johan Commelin (May 15 2019 at 18:18)</a>:</h4>
+<p>And <code>finset.range</code> lives in <code>finset nat</code>.</p>
+
+<a name="165739524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165739524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165739524">Chris Hughes (May 15 2019 at 18:20)</a>:</h4>
+<p><code>(range (n : nat).succ).filter (\| n)</code> gives the correct finset in nat.</p>
+
+<a name="165739551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165739551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165739551">Chris Hughes (May 15 2019 at 18:21)</a>:</h4>
+<p>I guess you want a version of <code>range</code> for <code>pnat</code>?</p>
+
+<a name="165739661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165739661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165739661">Chris Hughes (May 15 2019 at 18:22)</a>:</h4>
+<p>I used this finset in <code>data.nat.totient</code></p>
+
+<a name="165740349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165740349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165740349">Johan Commelin (May 15 2019 at 18:29)</a>:</h4>
+<p>Did you give it a name?</p>
+
+<a name="165740486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165740486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165740486">Johan Commelin (May 15 2019 at 18:31)</a>:</h4>
+<p>I really don't like the idea of duplicating all the <code>range</code> and <code>Ico</code>, etc... definitions and all their lemmas for <code>nat</code> and <code>pnat</code> and <code>int</code>... etc...</p>
+
+<a name="165740985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165740985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165740985">Johan Commelin (May 15 2019 at 18:35)</a>:</h4>
+<p>I think I might do</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pnat</span><span class="bp">.</span><span class="n">divisors</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ+</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ+</span> <span class="o">:=</span>
+<span class="o">{</span><span class="n">d</span> <span class="bp">|</span> <span class="n">d</span> <span class="err">∣</span> <span class="n">n</span><span class="o">}</span>
+</pre></div>
+
+
+<p>and then provide a <code>fintype</code> instance</p>
+
+<a name="165742518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/finset%20of%20divisors%20of%20pnat/near/165742518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/93018finsetofdivisorsofpnat.html#165742518">Chris Hughes (May 15 2019 at 18:50)</a>:</h4>
+<p>It depends what you want to do with it, but you almost certainly want a finset.</p>
+
+
+{% endraw %}
