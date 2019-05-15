@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [why did this work?](92772whydidthiswork.html) (1 message, latest: May 15 2019 at 18:54)
+
+* [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (9 messages, latest: May 15 2019 at 18:50)
+
 * [Convention on composition order](18033Conventiononcompositionorder.html) (20 messages, latest: May 15 2019 at 17:24)
 
 * [import analysis](82976importanalysis.html) (13 messages, latest: May 15 2019 at 15:34)
