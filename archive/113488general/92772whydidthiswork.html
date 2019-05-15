@@ -30,5 +30,13 @@ permalink: archive/113488general/92772whydidthiswork.html
 
 <p>If I remove the <code>topological_space</code> instances, Lean complains that it doesn't know how to find an instance of <code>topological_space (α → β)</code>.  So if I leave them on, somehow it is finding that instance on its own. Is this because of the <code>compact_open</code> topology? (But isn't that only for the subtype of continuous functions from<code>(α → β)</code>?</p>
 
+<a name="165743879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20did%20this%20work%3F/near/165743879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92772whydidthiswork.html#165743879">Koundinya Vajjha (May 15 2019 at 19:02)</a>:</h4>
+<p>Ah. <code>set_option trace.class_instances true</code> says that <code>Pi.topological_space</code> is the culprit.</p>
+
+<a name="165747094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/why%20did%20this%20work%3F/near/165747094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/92772whydidthiswork.html#165747094">Kevin Buzzard (May 15 2019 at 19:36)</a>:</h4>
+<p>Right. A -&gt; B can be regarded as a product of B's over A, so for lots of structures (groups, topological spaces etc) A -&gt; B inherits a structure from B. For topological groups this results in a gotcha -- asking that G -&gt; G -&gt; G is continuous makes sense but is not what you want, you lose the topology on the middle G.</p>
+
 
 {% endraw %}
