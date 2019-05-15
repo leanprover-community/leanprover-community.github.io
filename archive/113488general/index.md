@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Convention on composition order](18033Conventiononcompositionorder.html) (14 messages, latest: May 15 2019 at 12:14)
+* [Convention on composition order](18033Conventiononcompositionorder.html) (15 messages, latest: May 15 2019 at 14:34)
 
 * [online leanprover](19268onlineleanprover.html) (56 messages, latest: May 15 2019 at 05:10)
 
