@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Convention on composition order](18033Conventiononcompositionorder.html) (15 messages, latest: May 15 2019 at 14:34)
+* [import analysis](82976importanalysis.html) (13 messages, latest: May 15 2019 at 15:34)
+
+* [Convention on composition order](18033Conventiononcompositionorder.html) (18 messages, latest: May 15 2019 at 15:31)
 
 * [online leanprover](19268onlineleanprover.html) (56 messages, latest: May 15 2019 at 05:10)
-
-* [import analysis](82976importanalysis.html) (12 messages, latest: May 15 2019 at 02:35)
 
 * [Possible Bug](39072PossibleBug.html) (38 messages, latest: May 14 2019 at 18:17)
 

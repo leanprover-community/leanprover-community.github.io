@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [⟨x.fst, x.snd⟩](77022xfstxsnd.html) (9 messages, latest: May 15 2019 at 15:58)
+
 * [int div nat eq floor rat](67601intdivnateqfloorrat.html) (6 messages, latest: May 14 2019 at 12:15)
 
 * [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (7 messages, latest: May 14 2019 at 09:36)
