@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [why did this work?](92772whydidthiswork.html) (3 messages, latest: May 15 2019 at 19:36)
+* [why did this work?](92772whydidthiswork.html) (5 messages, latest: May 15 2019 at 20:56)
 
 * [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (9 messages, latest: May 15 2019 at 18:50)
 
