@@ -1,0 +1,32 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/18033Conventiononcompositionorder.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/18033Conventiononcompositionorder.html">Convention on composition order</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165699204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Convention%20on%20composition%20order/near/165699204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18033Conventiononcompositionorder.html#165699204">Sebastien Gouezel (May 15 2019 at 09:28)</a>:</h4>
+<p>When one composes two functions <code>f</code> and <code>g</code>, the notation <code>g ∘ f</code> means: apply <code>f</code> first, and then <code>g</code>. However, since <code>g</code> is written first, one may want to replicate this in the definitions. For instance, the composition of linear maps takes <code>g</code> first and then <code>f</code>, and can be written as <code>linear_map.comp g f</code>, or as <code>g.comp f</code>. As far as I can tell, this is the convention that is mostly followed in mathlib. Let me call it (1).</p>
+<p>However, there are examples in the other direction. For instance, the fact that the composition of two continuous functions <code>g</code> and <code>f</code> (I mean, <code>g ∘ f</code>) is continuous, is written as <code>continuous.comp hf hg</code> (where <code>hf</code> is the assumption that <code>f</code> is continuous, and similarly for <code>hg</code>). This can also be written as <code>hf.comp hg</code>. Let me call this (2).</p>
+<p>I think this should be made coherent all over mathlib. I started to work on this, with the idea to convert everything to (1). However,  it turns out that category theory follows convention (2), in</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">concrete_category</span> <span class="o">(</span><span class="n">hom</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">},</span> <span class="n">c</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">c</span> <span class="n">β</span> <span class="bp">→</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hom_id</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">ia</span> <span class="o">:</span> <span class="n">c</span> <span class="n">α</span><span class="o">),</span> <span class="n">hom</span> <span class="n">ia</span> <span class="n">ia</span> <span class="n">id</span><span class="o">)</span>
+<span class="o">(</span><span class="n">hom_comp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span><span class="o">}</span> <span class="o">(</span><span class="n">ia</span> <span class="o">:</span> <span class="n">c</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">ib</span> <span class="o">:</span> <span class="n">c</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">ic</span> <span class="o">:</span> <span class="n">c</span> <span class="n">γ</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span><span class="o">},</span> <span class="n">hom</span> <span class="n">ia</span> <span class="n">ib</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">hom</span> <span class="n">ib</span> <span class="n">ic</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">hom</span> <span class="n">ia</span> <span class="n">ic</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">))</span>
+</pre></div>
+
+
+<p>And I definitely don't want to mess with category theory without asking first here. Any opinion on this?</p>
+
+<a name="165699491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Convention%20on%20composition%20order/near/165699491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18033Conventiononcompositionorder.html#165699491">Johan Commelin (May 15 2019 at 09:32)</a>:</h4>
+<p>Big fights have been fought... epic stories can be told...</p>
+
+
+{% endraw %}
