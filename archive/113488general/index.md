@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How to design math libraries](34835Howtodesignmathlibraries.html) (1 message, latest: May 15 2019 at 22:53)
+
 * [why did this work?](92772whydidthiswork.html) (13 messages, latest: May 15 2019 at 21:40)
 
 * [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (12 messages, latest: May 15 2019 at 21:32)
