@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [best practice for Lean code blocks inside LaTeX?](22483bestpracticeforLeancodeblocksinsideLaTeX.html) (3 messages, latest: May 16 2019 at 06:18)
+* [what is a diamond?](58637whatisadiamond.html) (22 messages, latest: May 16 2019 at 09:51)
 
-* [what is a diamond?](58637whatisadiamond.html) (19 messages, latest: May 16 2019 at 06:16)
+* [best practice for Lean code blocks inside LaTeX?](22483bestpracticeforLeancodeblocksinsideLaTeX.html) (3 messages, latest: May 16 2019 at 06:18)
 
 * [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (15 messages, latest: May 16 2019 at 05:51)
 
