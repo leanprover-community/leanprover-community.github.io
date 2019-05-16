@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [what is a diamond?](58637whatisadiamond.html) (31 messages, latest: May 16 2019 at 10:37)
+* [what is a diamond?](58637whatisadiamond.html) (57 messages, latest: May 16 2019 at 11:24)
+
+* [nat.has_pow](34243nathaspow.html) (2 messages, latest: May 16 2019 at 11:14)
 
 * [best practice for Lean code blocks inside LaTeX?](22483bestpracticeforLeancodeblocksinsideLaTeX.html) (3 messages, latest: May 16 2019 at 06:18)
 

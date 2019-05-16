@@ -142,5 +142,122 @@ Then you have no way to say "A which is both B and C"</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165797521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165797521">Kevin Buzzard (May 16 2019 at 10:37)</a>:</h4>
 <p>But at the end of the day the project does compile</p>
 
+<a name="165799283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799283">RalfJ (May 16 2019 at 11:08)</a>:</h4>
+<blockquote>
+<p>"partially unbundled" structures, where the type is a parameter but none of the operators</p>
+</blockquote>
+<p>I mentioned having the operators unbundled but the superclasses bundled, that gives you <code>O(n^3)</code> If you just have the type unbundled you get <code>O(n^2)</code>, but you have even more sharing problems and you cannot even use the typeclasses for the operators and their notation before having shown the axioms. We had some cases where that was annoying, but the real trouble here is sharing once your inheritance hierarchy has a diamond.</p>
+
+<a name="165799345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799345">RalfJ (May 16 2019 at 11:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> </p>
+<blockquote>
+<p>not mentioned in that asymptotic analysis is the amount of subterm sharing in the term. I think the size of those instances is actually linear, but if you write it as a tree instead of a dag then it becomes quadratic or cubic etc</p>
+</blockquote>
+<p>I explicitly mention that in the conclusion. :) And yes, if you fully exploit sharing I think it remains linear. But then you have to ensure that every pass traversing your AST (unification, reduction, elaboration, type checking, whatever...) exploits sharing. A single lapse and your get the bad complexities back. At least in the Coq world people tell me that is not feasible.</p>
+
+<a name="165799593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799593">RalfJ (May 16 2019 at 11:12)</a>:</h4>
+<blockquote>
+<p>I don't think so... you have to be dealing with some pretty complicated objects for it to come up, so if it was an issue it would have stopped us already</p>
+</blockquote>
+<p>in our case, it was really when we started to put the hierarchy to use that the performance became an issue. as long as you are just defining your algebraic classes and show all sorts of properties about them it's good, but then we ended up defining our logic with 5 or more nested combinators (i.e., the equivalent of <code>Zn 5</code>), and then we nest that <em>again</em> in several more layers, so we end up with n=10 and more -- and then we have quite a few lemmas about that, and everything got slow. I have no idea what people have been doing in Lean so I cannot compare.</p>
+
+<a name="165799618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799618">Mario Carneiro (May 16 2019 at 11:13)</a>:</h4>
+<p>what do you mean about Zn 5?</p>
+
+<a name="165799722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799722">RalfJ (May 16 2019 at 11:14)</a>:</h4>
+<p>I was referring to my post; I mean that we had something like <code>iProp := T*U*V -&gt; A -&gt; B</code>, where <code>*</code> and <code>-&gt;</code> have TC instances like <code>prod</code> in my post. This is like <code>Zn 5 = Z*Z*Z*Z*Z</code>.</p>
+
+<a name="165799769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799769">Mario Carneiro (May 16 2019 at 11:15)</a>:</h4>
+<p>so you are trying to infer that e.g. Z^5 has a ring structure?</p>
+
+<a name="165799786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799786">RalfJ (May 16 2019 at 11:15)</a>:</h4>
+<p>and then we built things like <code>((X -&gt; iProp) -&gt; T -&gt; iProp) -&gt; ((X -&gt; iProp) -&gt; T -&gt; iProp)</code>. So if you count the number of combinators here, it's... 20 or more.</p>
+
+<a name="165799865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799865">Mario Carneiro (May 16 2019 at 11:16)</a>:</h4>
+<p>I'm confused about the role of T,U,V etc in those examples</p>
+
+<a name="165799871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799871">RalfJ (May 16 2019 at 11:16)</a>:</h4>
+<p>just random types that are in our hierarchy</p>
+
+<a name="165799872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799872">Mario Carneiro (May 16 2019 at 11:16)</a>:</h4>
+<p>You have a theorem that has 20 type arguments, plus all their typeclasses?</p>
+
+<a name="165799889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799889">RalfJ (May 16 2019 at 11:17)</a>:</h4>
+<p>like, random rings, if we stick to that example</p>
+
+<a name="165799900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799900">RalfJ (May 16 2019 at 11:17)</a>:</h4>
+<p>no, these are all concrete types</p>
+
+<a name="165799903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165799903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165799903">RalfJ (May 16 2019 at 11:17)</a>:</h4>
+<p>well, most of them</p>
+
+<a name="165800004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800004">Mario Carneiro (May 16 2019 at 11:18)</a>:</h4>
+<p>Inferring that Z^5 has a ring structure should be quadratic, since you have to talk about Z^n itself and the ring structure for each of the subterms</p>
+
+<a name="165800015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800015">Mario Carneiro (May 16 2019 at 11:18)</a>:</h4>
+<p>it's not quintic</p>
+
+<a name="165800019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800019">RalfJ (May 16 2019 at 11:18)</a>:</h4>
+<p>with the fully unbundled approach and if ring is a subclass of group, the power is 6 at least</p>
+
+<a name="165800049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800049">RalfJ (May 16 2019 at 11:19)</a>:</h4>
+<p>that's what I explained in my post</p>
+
+<a name="165800122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800122">Mario Carneiro (May 16 2019 at 11:20)</a>:</h4>
+<p>So in mathlib if ring is a subclass of group that only increases things by a constant factor, I think, since the typeclass args will be twice as big</p>
+
+<a name="165800152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800152">Mario Carneiro (May 16 2019 at 11:20)</a>:</h4>
+<p>I think fully unbundled is the killer here</p>
+
+<a name="165800284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800284">RalfJ (May 16 2019 at 11:22)</a>:</h4>
+<blockquote>
+<p>I think fully unbundled is the killer here</p>
+</blockquote>
+<p>it definitely is</p>
+
+<a name="165800306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800306">RalfJ (May 16 2019 at 11:23)</a>:</h4>
+<p>but we've also had loads of problems with bundling^^</p>
+
+<a name="165800322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800322">Mario Carneiro (May 16 2019 at 11:23)</a>:</h4>
+<p>with partially unbundled style you won't get that kind of thing unless you have n different type arguments, which is quite rare for mathematical structures</p>
+
+<a name="165800332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800332">RalfJ (May 16 2019 at 11:23)</a>:</h4>
+<p>the sheer number of arguments doesnt even matter</p>
+
+<a name="165800336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800336">RalfJ (May 16 2019 at 11:23)</a>:</h4>
+<p>only their "level of nesting" -- like arguments that have arguments</p>
+
+<a name="165800413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800413">Mario Carneiro (May 16 2019 at 11:24)</a>:</h4>
+<p>So I guess this is another variant on "don't use dependent types in DTT"</p>
+
+<a name="165800425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165800425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165800425">RalfJ (May 16 2019 at 11:24)</a>:</h4>
+<p>;)</p>
+
 
 {% endraw %}
