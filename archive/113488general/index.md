@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How to design math libraries](34835Howtodesignmathlibraries.html) (5 messages, latest: May 16 2019 at 02:38)
+
+* [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (14 messages, latest: May 16 2019 at 02:20)
+
 * [what is a diamond?](58637whatisadiamond.html) (15 messages, latest: May 15 2019 at 23:26)
 
-* [How to design math libraries](34835Howtodesignmathlibraries.html) (4 messages, latest: May 15 2019 at 23:17)
-
 * [why did this work?](92772whydidthiswork.html) (14 messages, latest: May 15 2019 at 23:00)
-
-* [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (12 messages, latest: May 15 2019 at 21:32)
 
 * [Convention on composition order](18033Conventiononcompositionorder.html) (20 messages, latest: May 15 2019 at 17:24)
 
