@@ -1,0 +1,76 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/18531coenatenat.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html">coe nat enat</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165814627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165814627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165814627">Johan Commelin (May 16 2019 at 14:24)</a>:</h4>
+<p>Is this line evil? <a href="https://github.com/leanprover-community/mathlib/blob/ad0f42dfaae66f646155e33acd047aa5c8a35014/src/data/nat/enat.lean#L20" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/ad0f42dfaae66f646155e33acd047aa5c8a35014/src/data/nat/enat.lean#L20">https://github.com/leanprover-community/mathlib/blob/ad0f42dfaae66f646155e33acd047aa5c8a35014/src/data/nat/enat.lean#L20</a></p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="bp">ℕ</span> <span class="n">enat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">some</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>Because <code>enat</code> is also receives <code>nat.cast</code>. So now we get <code>\u n = \u n</code> which is not true by <code>rfl</code>.</p>
+
+<a name="165816346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165816346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165816346">Mario Carneiro (May 16 2019 at 14:42)</a>:</h4>
+<p>No, that's fine</p>
+
+<a name="165816354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165816354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165816354">Mario Carneiro (May 16 2019 at 14:42)</a>:</h4>
+<p>It can't be helped</p>
+
+<a name="165816373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165816373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165816373">Mario Carneiro (May 16 2019 at 14:42)</a>:</h4>
+<p>There should be a simp lemma to get rid of the transitive path though</p>
+
+<a name="165816531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165816531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165816531">Mario Carneiro (May 16 2019 at 14:44)</a>:</h4>
+<p>oh wait, they are going the same direction</p>
+
+<a name="165816558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165816558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165816558">Mario Carneiro (May 16 2019 at 14:44)</a>:</h4>
+<p>so this is like <code>int.coe_nat</code></p>
+
+<a name="165816622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165816622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165816622">Mario Carneiro (May 16 2019 at 14:45)</a>:</h4>
+<p>there should be a simp lemma one way or the other</p>
+
+<a name="165817047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817047">Johan Commelin (May 16 2019 at 14:49)</a>:</h4>
+<p>How do I even state the simp-lemma?</p>
+
+<a name="165817071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817071">Johan Commelin (May 16 2019 at 14:49)</a>:</h4>
+<p>I mean, how do I get Lean to infer the cast on the LHS and the coe on the RHS.</p>
+
+<a name="165817143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817143">Johan Commelin (May 16 2019 at 14:50)</a>:</h4>
+<p>Can't we just define the coe to be <code>nat.cast</code>? And have a simp-lemma that simps away <code>some n</code>?</p>
+
+<a name="165817345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817345">Mario Carneiro (May 16 2019 at 14:52)</a>:</h4>
+<p>you have to write it out, yes it's ugly</p>
+
+<a name="165817384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817384">Mario Carneiro (May 16 2019 at 14:53)</a>:</h4>
+<p>yes that's an alternative</p>
+
+<a name="165817407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817407">Mario Carneiro (May 16 2019 at 14:53)</a>:</h4>
+<p>the defeqs on <code>roption.some</code> aren't that great, so it doesn't seem like a bad idea</p>
+
+<a name="165817423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165817423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165817423">Mario Carneiro (May 16 2019 at 14:53)</a>:</h4>
+<p>of course the run time is exponential rather than O(1)</p>
+
+
+{% endraw %}
