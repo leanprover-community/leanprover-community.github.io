@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [coe nat enat](18531coenatenat.html) (26 messages, latest: May 16 2019 at 15:49)
+* [coe nat enat](18531coenatenat.html) (30 messages, latest: May 16 2019 at 16:35)
 
 * [nat.has_pow](34243nathaspow.html) (6 messages, latest: May 16 2019 at 14:04)
 
