@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How to design math libraries](34835Howtodesignmathlibraries.html) (8 messages, latest: May 16 2019 at 17:55)
+
 * [coe nat enat](18531coenatenat.html) (30 messages, latest: May 16 2019 at 16:35)
 
 * [nat.has_pow](34243nathaspow.html) (6 messages, latest: May 16 2019 at 14:04)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [best practice for Lean code blocks inside LaTeX?](22483bestpracticeforLeancodeblocksinsideLaTeX.html) (3 messages, latest: May 16 2019 at 06:18)
 
 * [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (15 messages, latest: May 16 2019 at 05:51)
-
-* [How to design math libraries](34835Howtodesignmathlibraries.html) (7 messages, latest: May 16 2019 at 04:05)
 
 * [why did this work?](92772whydidthiswork.html) (14 messages, latest: May 15 2019 at 23:00)
 
