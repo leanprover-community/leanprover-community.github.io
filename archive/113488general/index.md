@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nat.has_pow](34243nathaspow.html) (7 messages, latest: May 16 2019 at 18:38)
+
 * [How to design math libraries](34835Howtodesignmathlibraries.html) (8 messages, latest: May 16 2019 at 17:55)
 
 * [coe nat enat](18531coenatenat.html) (30 messages, latest: May 16 2019 at 16:35)
-
-* [nat.has_pow](34243nathaspow.html) (6 messages, latest: May 16 2019 at 14:04)
 
 * [what is a diamond?](58637whatisadiamond.html) (57 messages, latest: May 16 2019 at 11:24)
 
