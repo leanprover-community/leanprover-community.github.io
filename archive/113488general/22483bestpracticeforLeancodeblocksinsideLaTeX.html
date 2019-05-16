@@ -15,5 +15,28 @@ permalink: archive/113488general/22483bestpracticeforLeancodeblocksinsideLaTeX.h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20practice%20for%20Lean%20code%20blocks%20inside%20LaTeX%3F/near/165777371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22483bestpracticeforLeancodeblocksinsideLaTeX.html#165777371">Scott Morrison (May 16 2019 at 04:03)</a>:</h4>
 <p>I understand I'll have to use xelatex, in order to cope with unicode symbols. Does anyone have a nice solution for displaying code blocks?</p>
 
+<a name="165782750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20practice%20for%20Lean%20code%20blocks%20inside%20LaTeX%3F/near/165782750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22483bestpracticeforLeancodeblocksinsideLaTeX.html#165782750">matt rice (May 16 2019 at 06:09)</a>:</h4>
+<p>I have in the past had luck following: <a href="https://github.com/leanprover-community/lean/blob/master/doc/syntax_highlight_in_latex.md" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/doc/syntax_highlight_in_latex.md">https://github.com/leanprover-community/lean/blob/master/doc/syntax_highlight_in_latex.md</a></p>
+<p>using minted/the lean pygments fork,  Also see here for something to try if having issues with unicode symbols<br>
+<a href="#narrow/stream/113488-general/topic/Lean.20in.20Beamer/near/154253727" title="#narrow/stream/113488-general/topic/Lean.20in.20Beamer/near/154253727">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean.20in.20Beamer/near/154253727</a></p>
+<p>I recently had a case where the (lean chat link) didn't work, and I had to resort to:</p>
+<p><span class="tex-error">\usepackage{newunicodechar}
+\usepackage{fontspec}</span>
+
+<span class="tex-error">\AtBeginDocument{\setmainfont[
+ BoldFont={STIX2Text-Bold.otf},
+ ItalicFont={STIX2Text-Italic.otf},
+ BoldItalicFont={STIX2Text-BoldItalic.otf}
+]
+{STIX2Text-Regular.otf}}</span>
+
+<span class="tex-error">\newfontfamily{\mathfont}{STIX2Math.otf}
+\AtBeginDocument{\newunicodechar{⋁} {\mathfont{⋁}}}</span></p>
+
+<a name="165783170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/best%20practice%20for%20Lean%20code%20blocks%20inside%20LaTeX%3F/near/165783170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22483bestpracticeforLeancodeblocksinsideLaTeX.html#165783170">matt rice (May 16 2019 at 06:18)</a>:</h4>
+<p>that said, recently i've been hacking on using <a href="https://crates.io/crates/syntect/" target="_blank" title="https://crates.io/crates/syntect/">https://crates.io/crates/syntect/</a>, and generating the syntax highlighting directly from the same highlighter as used by the vscode extension, so it looks the same, and syntect is a lot easier of a dependency to require (IMO), but it's not ready yet</p>
+
 
 {% endraw %}
