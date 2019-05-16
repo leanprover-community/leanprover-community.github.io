@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [maximal/minimal elements](38749maximalminimalelements.html) (2 messages, latest: May 16 2019 at 22:21)
+
 * [nat.has_pow](34243nathaspow.html) (7 messages, latest: May 16 2019 at 18:38)
 
 * [How to design math libraries](34835Howtodesignmathlibraries.html) (8 messages, latest: May 16 2019 at 17:55)
