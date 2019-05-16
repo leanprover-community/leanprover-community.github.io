@@ -106,5 +106,41 @@ Then you have no way to say "A which is both B and C"</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165794897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165794897">Johan Commelin (May 16 2019 at 09:51)</a>:</h4>
 <p>Cool, welcome!</p>
 
+<a name="165796691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165796691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165796691">Mario Carneiro (May 16 2019 at 10:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="222132">@RalfJ</span> Lean has the same foundational problem, but it isn't yet a big issue. The blog post doesn't discuss the style used in mathlib, which is to have "partially unbundled" structures, where the type is a parameter but none of the operators. This minimizes the nesting level, although there are some examples where we have deeper depth like modules (that use two variables) and there was an example using three variables that floated on the chat recently</p>
+
+<a name="165796772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165796772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165796772">Mario Carneiro (May 16 2019 at 10:23)</a>:</h4>
+<p>Also, not mentioned in that asymptotic analysis is the amount of subterm sharing in the term. I think the size of those instances is actually linear, but if you write it as a tree instead of a dag then it becomes quadratic or cubic etc</p>
+
+<a name="165796774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165796774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165796774">Johan Commelin (May 16 2019 at 10:23)</a>:</h4>
+<p>But it is very likely to become a problem in the (near?) future?</p>
+
+<a name="165796853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165796853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165796853">Mario Carneiro (May 16 2019 at 10:24)</a>:</h4>
+<p>I don't think so... you have to be dealing with some pretty complicated objects for it to come up, so if it was an issue it would have stopped us already</p>
+
+<a name="165796880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165796880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165796880">Mario Carneiro (May 16 2019 at 10:25)</a>:</h4>
+<p>We have issues with typeclass search order, but that's a different matter</p>
+
+<a name="165796987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165796987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165796987">Scott Morrison (May 16 2019 at 10:27)</a>:</h4>
+<p>This is a really great thing about the <code>lean-perfectoid-spaces</code> project: we've made a definition which is about as complicated as they come (at least in algebraic geometry / number theory?), and Lean could cope.</p>
+
+<a name="165797486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165797486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165797486">Kevin Buzzard (May 16 2019 at 10:36)</a>:</h4>
+<p>One of my main motivations for doing perfectoids was to see if Lean could handle them -- it was clear from the start that it was theoretically possible but Patrick pointed out very early on that this didn't mean that it was possible, and at times I was (incorrectly) worried that it might not be. I am still trying hard to understand what Mario wrote about timeouts. I've taken to trying to compile the perfectoid project with smaller values for the timeout parameter and am trying to understand what makes part of it slow to compile -- everything so far is pointing at naivity in the code -- poor proof engineering, as Mario calls it.</p>
+
+<a name="165797498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165797498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165797498">Kevin Buzzard (May 16 2019 at 10:36)</a>:</h4>
+<p>In short, I have no formal training in programming and this is now beginning to show</p>
+
+<a name="165797521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/what%20is%20a%20diamond%3F/near/165797521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58637whatisadiamond.html#165797521">Kevin Buzzard (May 16 2019 at 10:37)</a>:</h4>
+<p>But at the end of the day the project does compile</p>
+
 
 {% endraw %}
