@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [How to design math libraries](34835Howtodesignmathlibraries.html) (5 messages, latest: May 16 2019 at 02:38)
+* [How to design math libraries](34835Howtodesignmathlibraries.html) (6 messages, latest: May 16 2019 at 03:42)
+
+* [what is a diamond?](58637whatisadiamond.html) (18 messages, latest: May 16 2019 at 03:07)
 
 * [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (14 messages, latest: May 16 2019 at 02:20)
-
-* [what is a diamond?](58637whatisadiamond.html) (15 messages, latest: May 15 2019 at 23:26)
 
 * [why did this work?](92772whydidthiswork.html) (14 messages, latest: May 15 2019 at 23:00)
 
