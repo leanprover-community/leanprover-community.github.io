@@ -44,5 +44,122 @@ permalink: archive/113488general/02999Integralofaconstant.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165927196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165927196">Kevin Buzzard (May 17 2019 at 18:59)</a>:</h4>
 <p>It might be trying to prove that two types are defeq when they're not, it might be user error, it might be that two types are defeq but it's very hard to prove, it might be fixable by changing the timeout parameter (but the point of the -T50000 thread is that we'd rather be changing it the other way ;-) )</p>
 
+<a name="165934792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165934792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165934792">Koundinya Vajjha (May 17 2019 at 20:40)</a>:</h4>
+<p>Here a complete working example: </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">giry_monad</span>
+
+<span class="kn">open</span> <span class="n">set</span> <span class="n">measure_theory</span> <span class="n">measurable_space</span>
+
+<span class="kn">infixl</span> <span class="bp">`&gt;&gt;=</span><span class="err">ₐ</span><span class="bp">`</span> <span class="o">:</span><span class="mi">55</span> <span class="o">:=</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span><span class="bp">.</span><span class="n">bind</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">do</span><span class="bp">`</span> <span class="n">binders</span> <span class="bp">`</span><span class="err">←ₐ</span><span class="bp">`</span> <span class="n">m</span> <span class="bp">`;`</span> <span class="n">t</span><span class="o">:(</span><span class="n">scoped</span> <span class="n">p</span><span class="o">,</span> <span class="n">m</span> <span class="bp">&gt;&gt;=</span><span class="err">ₐ</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="n">t</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">ret</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span><span class="bp">.</span><span class="n">dirac</span>
+
+<span class="kn">variable</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="bp">ℕ</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">probability_measure</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_one</span> <span class="o">:</span> <span class="n">measure_of</span> <span class="n">univ</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">double</span><span class="o">(</span><span class="n">m</span><span class="o">:</span> <span class="n">probability_measure</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">measure</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">x</span> <span class="err">←ₐ</span> <span class="n">m</span><span class="bp">.</span><span class="n">to_measure</span><span class="bp">;</span>
+<span class="n">ret</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">even</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="n">k</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">test</span><span class="o">:</span>
+<span class="bp">∀</span> <span class="n">m</span><span class="o">:</span> <span class="n">probability_measure</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">m&#39;</span><span class="o">:</span> <span class="n">measure</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">m&#39;</span> <span class="bp">=</span> <span class="n">double</span><span class="o">(</span><span class="n">m</span><span class="o">)</span> <span class="bp">→</span> <span class="n">m&#39;</span><span class="o">(</span><span class="n">even</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">even</span><span class="o">,</span>
+  <span class="n">unfold</span> <span class="n">double</span> <span class="n">at</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">rewrite</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">rewrite</span> <span class="n">measure</span><span class="bp">.</span><span class="n">bind_apply</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'm afraid I don't know if this is even provable with the current technology...</p>
+
+<a name="165935050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935050">Mario Carneiro (May 17 2019 at 20:43)</a>:</h4>
+<p>This is provable, but it looks like one of those things I don't <em>want</em> to prove. As in, I challenge the premise that this theorem matters. It reminds me of Kevin's M1F problems</p>
+
+<a name="165935174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935174">Koundinya Vajjha (May 17 2019 at 20:45)</a>:</h4>
+<p>Let's just say it matters very much to me.</p>
+
+<a name="165935193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935193">Mario Carneiro (May 17 2019 at 20:45)</a>:</h4>
+<p>Step back. What do you want to say?</p>
+
+<a name="165935216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935216">Mario Carneiro (May 17 2019 at 20:46)</a>:</h4>
+<p>maybe this isn't the easiest way to formalize whatever the real goal is</p>
+
+<a name="165935304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935304">Koundinya Vajjha (May 17 2019 at 20:46)</a>:</h4>
+<p>Basically I want to <em>reason</em> about the measure which is returned by the <code>do x &lt;- D; return(f(x)</code> part of the Giry monad.</p>
+
+<a name="165935339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935339">Mario Carneiro (May 17 2019 at 20:47)</a>:</h4>
+<p>first of all, bind return is map</p>
+
+<a name="165935370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935370">Mario Carneiro (May 17 2019 at 20:47)</a>:</h4>
+<p>This generalizes in a few ways. The double function doesn't matter, replace it with an arbitrary function A -&gt; B</p>
+
+<a name="165935426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935426">Mario Carneiro (May 17 2019 at 20:48)</a>:</h4>
+<p>the measure takes values in the image of the function</p>
+
+<a name="165935456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935456">Koundinya Vajjha (May 17 2019 at 20:48)</a>:</h4>
+<p>Yes. Well maybe this particular example is too hard.</p>
+
+<a name="165935464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935464">Mario Carneiro (May 17 2019 at 20:48)</a>:</h4>
+<p>Examples are always harder than general theorems</p>
+
+<a name="165935494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935494">Mario Carneiro (May 17 2019 at 20:49)</a>:</h4>
+<p>they add additional irrelevant stuff</p>
+
+<a name="165935550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935550">Koundinya Vajjha (May 17 2019 at 20:49)</a>:</h4>
+<blockquote>
+<p>Basically I want to <em>reason</em> about the measure which is returned by the <code>do x &lt;- D; return(f(x)</code> part of the Giry monad.</p>
+</blockquote>
+<p>In particular, I want to characterize the measure zero sets of this measure.</p>
+
+<a name="165935801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935801">Mario Carneiro (May 17 2019 at 20:52)</a>:</h4>
+<p>It's not hard to prove your theorem using <code>measure.map_apply</code> once you have the monad laws</p>
+
+<a name="165935865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935865">Koundinya Vajjha (May 17 2019 at 20:53)</a>:</h4>
+<p>Okay this is the most general I can make it</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">][</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">D</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">A</span><span class="o">]</span> <span class="o">:</span>
+<span class="o">(</span><span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span><span class="bp">.</span><span class="n">bind</span> <span class="n">D</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span><span class="bp">.</span><span class="n">dirac</span> <span class="err">$</span> <span class="n">p</span> <span class="n">x</span><span class="o">))</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">D</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">p</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">A</span><span class="o">}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="165935939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935939">Mario Carneiro (May 17 2019 at 20:54)</a>:</h4>
+<p>the thing on the right is <code>D.map p A</code></p>
+
+<a name="165935946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165935946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165935946">Mario Carneiro (May 17 2019 at 20:54)</a>:</h4>
+<p>so this is the monad law</p>
+
+<a name="165936324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165936324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165936324">Koundinya Vajjha (May 17 2019 at 20:59)</a>:</h4>
+<p>That worked. (Btw it's failing to apply the <code>coe_fn</code> coercion. I need to explicitly say <code>(D.map p).measure_of A</code>.</p>
+
+<a name="165936344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165936344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165936344">Mario Carneiro (May 17 2019 at 20:59)</a>:</h4>
+<p>you can use <code>(D.map p : function type) A</code></p>
+
 
 {% endraw %}
