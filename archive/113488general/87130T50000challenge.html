@@ -280,5 +280,56 @@ It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894625">Rob Lewis (May 17 2019 at 12:08)</a>:</h4>
 <p>Regardless, I think we should also be a bit more aggressive about marking things irreducible.</p>
 
+<a name="165911267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165911267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165911267">Kevin Buzzard (May 17 2019 at 15:46)</a>:</h4>
+<p>So this one has actually now been fixed by the latest PR! Nice!</p>
+<p>The next one is I think one of <span class="user-mention" data-user-id="110032">@Reid Barton</span> 's:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">stone_cech</span><span class="bp">.</span><span class="n">t2_space</span> <span class="o">:</span> <span class="n">t2_space</span> <span class="o">(</span><span class="n">stone_cech</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">t2_iff_ultrafilter</span><span class="o">,</span>
+  <span class="n">rintros</span> <span class="n">g</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="bp">⟩</span> <span class="n">u</span> <span class="n">gx</span> <span class="n">gy</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">γ</span> <span class="n">tγ</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">f</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="n">resetI</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">stone_cech_extend</span> <span class="n">hf</span> <span class="err">⟦</span><span class="n">x</span><span class="err">⟧</span> <span class="bp">=</span> <span class="n">stone_cech_extend</span> <span class="n">hf</span> <span class="err">⟦</span><span class="n">y</span><span class="err">⟧</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">tendsto_nhds_unique</span> <span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">stone_cech_extend</span> <span class="n">hf</span> <span class="o">},</span>
+  <span class="n">all_goals</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">map_mono</span> <span class="bp">_</span><span class="o">)</span> <span class="o">((</span><span class="n">continuous_stone_cech_extend</span> <span class="n">hf</span><span class="o">)</span><span class="bp">.</span><span class="n">tendsto</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">assumption</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Times out at -T50000. It's in <code>src/topology/stone_cech.lean</code>, <a href="https://github.com/leanprover-community/mathlib/blob/f633c948ff523b9a47b3b41bc1dc0b1b4b2be5c4/src/topology/stone_cech.lean#L253" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/f633c948ff523b9a47b3b41bc1dc0b1b4b2be5c4/src/topology/stone_cech.lean#L253">line 253</a>.</p>
+
+<a name="165911320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165911320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165911320">Reid Barton (May 17 2019 at 15:47)</a>:</h4>
+<p>I think Patrick sent me a faster version of this proof at some point, let me check whether it got merged...</p>
+
+<a name="165911620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165911620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165911620">Reid Barton (May 17 2019 at 15:50)</a>:</h4>
+<p>Indeed this is still the old version</p>
+
+<a name="165911914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165911914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165911914">Kevin Buzzard (May 17 2019 at 15:53)</a>:</h4>
+<p>Did Patrick figure out why it was slow?</p>
+
+<a name="165912091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912091">Kevin Buzzard (May 17 2019 at 15:55)</a>:</h4>
+<p>I think it's kind of important that we understand the various reasons that code ends up running slowly, because if we're not careful then slow code can turn into code which doesn't compile.</p>
+
+<a name="165912131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912131">Reid Barton (May 17 2019 at 15:55)</a>:</h4>
+<p>I don't know.</p>
+
+<a name="165912285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912285">Rob Lewis (May 17 2019 at 15:57)</a>:</h4>
+<p>The problem is solving the very last goal <code>g ≤ nhds ⟦y⟧</code>, the second branch of the <code>all_goals</code>. It succeeds with the assumption <code>gy : g ≤ nhds (quot.mk setoid.r y)</code> but first it tries <code>gx : g ≤ nhds (quot.mk setoid.r x)</code> and takes ages to fail.</p>
+
+<a name="165912459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912459">Rob Lewis (May 17 2019 at 15:59)</a>:</h4>
+<p>Did we not have a variant of <code>assumption</code> that takes a reducibility setting?</p>
+
 
 {% endraw %}

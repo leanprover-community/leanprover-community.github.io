@@ -1,0 +1,60 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/53597applyrulesexample.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html">apply_rules example</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165911155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165911155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165911155">Joseph Corneli (May 17 2019 at 15:45)</a>:</h4>
+<p>I thought this might be a clever way to automate simple continuity proofs, but it's not working except on the very simplest case. I would be looking to recover a proof like this, which seems reasonably similar to the example for <code>apply_rules</code> in the docs. </p>
+<div class="codehilite"><pre><span></span>theorem continuous_sin_sin_sin : continuous (λ (x : ℝ), sin (sin (sin x))) :=
+continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
+</pre></div>
+
+
+<p>Here's what I tried:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">intervals</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="c1">-- * sin(sin(x)) and friends are continuous on ℝ</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">user_attribute</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">cts_rules</span> <span class="o">:</span> <span class="n">user_attribute</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">name</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">cts_rules</span><span class="o">,</span>
+  <span class="n">descr</span> <span class="o">:=</span> <span class="s2">&quot;lemmas usable to prove continuity&quot;</span> <span class="o">}</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">cts_rules</span><span class="o">]</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="n">continuous_sin</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_rules</span> <span class="o">[</span><span class="n">cts_rules</span><span class="o">]</span> <span class="mi">3</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous_sin&#39;</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span><span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_rules</span> <span class="o">[</span><span class="n">cts_rules</span><span class="o">]</span> <span class="mi">6</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous_sin_sin_sin</span>
+</pre></div>
+
+<a name="165911338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165911338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165911338">Joseph Corneli (May 17 2019 at 15:47)</a>:</h4>
+<p>I guess <code>apply_rules</code> doesn't know how to do the equivalent of <code>refine</code>, is that correct?</p>
+
+
+{% endraw %}
