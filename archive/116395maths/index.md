@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Manifolds](12382Manifolds.html) (24 messages, latest: May 17 2019 at 09:02)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3087 messages, latest: May 17 2019 at 04:11)
 
 * [is_open {true}](82278isopentrue.html) (7 messages, latest: May 16 2019 at 20:05)
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [cast woes](88074castwoes.html) (110 messages, latest: May 15 2019 at 08:31)
 
 * [representations](84839representations.html) (98 messages, latest: May 12 2019 at 12:10)
-
-* [Manifolds](12382Manifolds.html) (23 messages, latest: May 11 2019 at 11:22)
 
 * [quasicategories](12618quasicategories.html) (6 messages, latest: May 11 2019 at 03:50)
 
