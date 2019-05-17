@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How to design math libraries](34835Howtodesignmathlibraries.html) (9 messages, latest: May 17 2019 at 01:33)
+
 * [-T50000 challenge](87130T50000challenge.html) (11 messages, latest: May 16 2019 at 23:43)
 
 * [renaming multiple labels](56657renamingmultiplelabels.html) (2 messages, latest: May 16 2019 at 23:41)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [maximal/minimal elements](38749maximalminimalelements.html) (2 messages, latest: May 16 2019 at 22:21)
 
 * [nat.has_pow](34243nathaspow.html) (7 messages, latest: May 16 2019 at 18:38)
-
-* [How to design math libraries](34835Howtodesignmathlibraries.html) (8 messages, latest: May 16 2019 at 17:55)
 
 * [coe nat enat](18531coenatenat.html) (30 messages, latest: May 16 2019 at 16:35)
 
