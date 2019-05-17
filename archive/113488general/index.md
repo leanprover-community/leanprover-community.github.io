@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (10 messages, latest: May 17 2019 at 07:53)
+* [-T50000 challenge](87130T50000challenge.html) (16 messages, latest: May 17 2019 at 08:35)
 
-* [-T50000 challenge](87130T50000challenge.html) (13 messages, latest: May 17 2019 at 07:05)
+* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (11 messages, latest: May 17 2019 at 08:06)
 
 * [what is a diamond?](58637whatisadiamond.html) (66 messages, latest: May 17 2019 at 06:45)
 

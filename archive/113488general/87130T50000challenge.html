@@ -108,5 +108,50 @@ It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</c
 
 <p>Times out at -T50000.</p>
 
+<a name="165881328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165881328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165881328">Mario Carneiro (May 17 2019 at 08:17)</a>:</h4>
+<p>This one is a bit perplexing. Consider the following proof of <code>sin_add</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">two_sin</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">sin</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="n">exp</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="bp">-</span> <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">I</span><span class="o">))</span> <span class="bp">*</span> <span class="n">I</span> <span class="o">:=</span>
+<span class="n">mul_div_cancel&#39;</span> <span class="bp">_</span> <span class="n">two_ne_zero&#39;</span>
+
+<span class="kn">lemma</span> <span class="n">two_cos</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">cos</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="bp">+</span> <span class="n">exp</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">mul_div_cancel&#39;</span> <span class="bp">_</span> <span class="n">two_ne_zero&#39;</span>
+
+<span class="kn">lemma</span> <span class="n">sin_add</span> <span class="o">:</span> <span class="n">sin</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">sin</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">cos</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">cos</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">sin</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">domain</span><span class="bp">.</span><span class="n">mul_left_inj</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span> <span class="n">two_sin</span><span class="o">,</span>
+      <span class="n">neg_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">,</span> <span class="n">eq_comm</span><span class="o">,</span>
+      <span class="n">mul_add</span><span class="o">,</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">two_sin</span><span class="o">,</span> <span class="n">mul_left_comm</span><span class="o">,</span> <span class="n">two_sin</span><span class="o">,</span>
+      <span class="err">←</span> <span class="n">domain</span><span class="bp">.</span><span class="n">mul_left_inj</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span> <span class="n">mul_add</span><span class="o">,</span>
+      <span class="n">mul_left_comm</span><span class="o">,</span> <span class="n">two_cos</span><span class="o">,</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">two_cos</span><span class="o">],</span> <span class="n">ring</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The <code>rw</code> part of the proof is instantaneous (less than 150ms if you replace <code>ring</code> by <code>sorry</code>). The <code>ring</code> tactic is also fast (a fraction of a second). The kernel is also quickly able to check the proof. Yet the <em>elaborator</em> spends a whopping 30s on... something... coming from the <code>ring</code>  tactic, despite the fact that <code>ring</code> produces fully elaborated proof terms.</p>
+
+<a name="165881647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165881647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165881647">Mario Carneiro (May 17 2019 at 08:23)</a>:</h4>
+<p>Bizarrely, this takes a long time...</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">sin_add</span> <span class="o">:</span> <span class="n">sin</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">sin</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">cos</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">cos</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">sin</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">domain</span><span class="bp">.</span><span class="n">mul_left_inj</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span> <span class="n">two_sin</span><span class="o">,</span>
+      <span class="n">neg_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">,</span> <span class="n">eq_comm</span><span class="o">,</span>
+      <span class="n">mul_add</span><span class="o">,</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">two_sin</span><span class="o">,</span> <span class="n">mul_left_comm</span><span class="o">,</span> <span class="n">two_sin</span><span class="o">,</span>
+      <span class="err">←</span> <span class="n">domain</span><span class="bp">.</span><span class="n">mul_left_inj</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span> <span class="n">mul_add</span><span class="o">,</span>
+      <span class="n">mul_left_comm</span><span class="o">,</span> <span class="n">two_cos</span><span class="o">,</span> <span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">two_cos</span><span class="o">],</span>
+  <span class="n">generalize</span><span class="o">:</span> <span class="n">exp</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="n">generalize</span><span class="o">:</span> <span class="n">exp</span> <span class="o">(</span><span class="bp">-</span><span class="n">x</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">generalize</span><span class="o">:</span> <span class="n">exp</span> <span class="o">(</span><span class="n">y</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span><span class="o">,</span> <span class="n">generalize</span><span class="o">:</span> <span class="n">exp</span> <span class="o">(</span><span class="bp">-</span><span class="n">y</span> <span class="bp">*</span> <span class="n">I</span><span class="o">)</span> <span class="bp">=</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">ring</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>because <code>generalize</code> takes 6s</p>
+
+<a name="165882367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165882367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165882367">Kevin Buzzard (May 17 2019 at 08:35)</a>:</h4>
+<p>I'm glad that this slightly frivolous challenge is throwing up interesting questions!</p>
+
 
 {% endraw %}
