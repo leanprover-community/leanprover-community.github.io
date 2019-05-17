@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [-T50000 challenge](87130T50000challenge.html) (53 messages, latest: May 17 2019 at 15:59)
+
 * [Convention on composition order](18033Conventiononcompositionorder.html) (24 messages, latest: May 17 2019 at 14:30)
 
 * [cache-olean](72177cacheolean.html) (25 messages, latest: May 17 2019 at 14:16)
 
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (18 messages, latest: May 17 2019 at 13:08)
-
-* [-T50000 challenge](87130T50000challenge.html) (45 messages, latest: May 17 2019 at 12:08)
 
 * [what is a diamond?](58637whatisadiamond.html) (66 messages, latest: May 17 2019 at 06:45)
 
