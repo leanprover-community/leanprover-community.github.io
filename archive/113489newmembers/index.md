@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Math physics in Lean](24293MathphysicsinLean.html) (3 messages, latest: May 17 2019 at 16:37)
+
 * [smul_mem_span](68849smulmemspan.html) (3 messages, latest: May 17 2019 at 14:46)
 
 * [⟨x.fst, x.snd⟩](77022xfstxsnd.html) (11 messages, latest: May 15 2019 at 16:31)
