@@ -42,5 +42,32 @@ permalink: archive/113489newmembers/24293MathphysicsinLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/165920714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#165920714">Kevin Buzzard (May 17 2019 at 17:43)</a>:</h4>
 <p>You might find that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68889em;"></span><span class="strut bottom" style="height:0.68889em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathit mtight">n</span></span></span></span></span></span></span></span></span></span></span> automatically becomes a real vector space, so a bunch of what you're hoping to find might just magically appear.</p>
 
+<a name="165922591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/165922591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#165922591">Kevin Buzzard (May 17 2019 at 18:05)</a>:</h4>
+<p>Feel free to ask questions -- I think this is a very attainable goal.</p>
+
+<a name="165923272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/165923272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#165923272">Kevin Buzzard (May 17 2019 at 18:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">pi_instances</span>
+
+<span class="n">def</span> <span class="n">ℝspace</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">ℝ</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">ℝspace</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">ℝspace</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">vector_space</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">ℝspace</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">dunfold</span> <span class="n">ℝspace</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="n">w</span> <span class="o">:</span> <span class="n">ℝspace</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">v</span> <span class="bp">+</span> <span class="n">w</span> <span class="c1">-- adding vectors</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">r</span> <span class="err">•</span> <span class="n">v</span> <span class="c1">-- scalar times vector</span>
+</pre></div>
+
+<a name="165923426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/165923426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#165923426">Johan Commelin (May 17 2019 at 18:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="124175">@Kevin Sullivan</span> Further tips: the search function on Github and in VScode can be really useful. If those fail, just ask about a specific concept here, and we'll be able to tell you if it's in the library. You will hit things that are missing quite soon. But it is hard to tell what they are without starting out on a Lean file.</p>
+
+<a name="165923546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/165923546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#165923546">Kevin Buzzard (May 17 2019 at 18:16)</a>:</h4>
+<p>And feel free to change the name of Rspace! I just had to write something...</p>
+
 
 {% endraw %}

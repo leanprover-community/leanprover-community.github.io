@@ -24,5 +24,25 @@ permalink: archive/113488general/02999Integralofaconstant.html
 
 <p>Where I have extended the <code>measure</code> structure with the extra field that the measure of <code>univ</code> is 1. Is there a lemma which says I can rewrite the LHS as the measure of the whole set?</p>
 
+<a name="165922409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165922409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165922409">Kevin Buzzard (May 17 2019 at 18:02)</a>:</h4>
+<p>I can't help you, but it's wonderful to see that people are now trying to do differentiation and integration. Very little has happened in this area since 2017, until recently, when things seem to be slowly taking off. An attainable (in my opinion) goal is to have Lean's maths library knowing essentially all of a pure mathematics degree course within the next few years, and this stuff is absolutely essential.</p>
+
+<a name="165923265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165923265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165923265">Mario Carneiro (May 17 2019 at 18:13)</a>:</h4>
+<p>There doesn't seem to be much about <code>measure.integral</code> yet. Also it's generally presumed that the measure of univ is infinite, so there isn't much about stuff like integrable constant functions. Presumably that's part of the focus of your <code>probability_measure</code> work. <code>measure.integral</code> is defined in terms of <code>lintegral</code>, which has the theorem <code>simple_func.lintegral_eq_integral</code>. Show that the constant function is a simple function; it follows that the integral of <code>a</code> is <code>a * measure univ = a</code> for a probability measure.</p>
+
+<a name="165926878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165926878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165926878">Koundinya Vajjha (May 17 2019 at 18:55)</a>:</h4>
+<p><code>apply simple_func.lintegral_eq_integral</code> is giving me a deterministic timeout. I probably shouldn't have done this, but are there any general reasons behind an <code>apply</code> giving  deterministic timeouts?</p>
+
+<a name="165927043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165927043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165927043">Kevin Buzzard (May 17 2019 at 18:57)</a>:</h4>
+<p>Can you post a complete working example?</p>
+
+<a name="165927196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Integral%20of%20a%20constant/near/165927196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02999Integralofaconstant.html#165927196">Kevin Buzzard (May 17 2019 at 18:59)</a>:</h4>
+<p>It might be trying to prove that two types are defeq when they're not, it might be user error, it might be that two types are defeq but it's very hard to prove, it might be fixable by changing the timeout parameter (but the point of the -T50000 thread is that we'd rather be changing it the other way ;-) )</p>
+
 
 {% endraw %}

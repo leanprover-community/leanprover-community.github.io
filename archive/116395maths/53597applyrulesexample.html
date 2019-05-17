@@ -109,5 +109,41 @@ continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165921734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165921734">Jesse Michael Han (May 17 2019 at 17:54)</a>:</h4>
 <p><span class="user-mention" data-user-id="122022">@Joseph Corneli</span> maybe there's a <code>meta</code> way to query Lean for the number of explicit arguments for a lemma?</p>
 
+<a name="165922628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165922628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165922628">Joseph Corneli (May 17 2019 at 18:05)</a>:</h4>
+<p>I've tried making a (simple) variant of <code>apply_rules</code> that can also do <code>refine</code>, but I've run into an unexpected syntax problem.  I don't want to detract from a wider and more interesting discussion with a "debug my code" discussion, but might get another thread going, because I'm likely to stay stuck.</p>
+
+<a name="165922634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165922634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165922634">Chris Hughes (May 17 2019 at 18:05)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110044">Chris Hughes</span> that's odd---was that from <code>squeeze_simp</code>? on my machine, if i <code>squeeze_simp</code> the <code>change B_ext _, simp</code> in <code>theorem bSet_axiom_of_infinity'</code> (line 1750), i get</p>
+<div class="codehilite"><pre><span></span><span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">bSet</span><span class="bp">.</span><span class="n">subst_congr_inf</span><span class="o">,</span>
+ <span class="n">bSet</span><span class="bp">.</span><span class="n">subst_congr_supr</span><span class="o">,</span>
+ <span class="n">bSet</span><span class="bp">.</span><span class="n">subst_congr_const</span><span class="o">,</span>
+ <span class="n">bSet</span><span class="bp">.</span><span class="n">mem</span><span class="o">,</span>
+ <span class="n">bSet</span><span class="bp">.</span><span class="n">B_ext_mem_left</span><span class="o">,</span>
+ <span class="n">forall_true_iff</span><span class="o">]</span>
+</pre></div>
+
+
+<p>(<code>subst_congr</code> and <code>B_ext</code> are unfortunately synonymous prefixes)</p>
+</blockquote>
+<p>I didn't look at that one. I'm confused about that. <code>set_option trace.simplify.rewrite true</code> seems to be rewriting things that aren't even in the goal.</p>
+
+<a name="165922871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165922871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165922871">Jesse Michael Han (May 17 2019 at 18:08)</a>:</h4>
+<p>maybe <code>simp</code> is suited to do this kind of reasoning when the operations (inf, sup, +, -) are lifted pointwise from the codomain, but actual function composition is confusing it somehow</p>
+
+<a name="165923374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165923374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165923374">Mario Carneiro (May 17 2019 at 18:14)</a>:</h4>
+<blockquote>
+<p>I don't want to detract from a wider and more interesting discussion with a "debug my code" discussion</p>
+</blockquote>
+<p>you clearly have different views on what is interesting than me</p>
+
+<a name="165924476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165924476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165924476">Joseph Corneli (May 17 2019 at 18:26)</a>:</h4>
+<p>I posted the code in the new members list.</p>
+
 
 {% endraw %}

@@ -509,5 +509,100 @@ elaboration of card_nth_roots took 12.8s
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921706">Kevin Buzzard (May 17 2019 at 17:54)</a>:</h4>
 <p>It should do some nice damage to the perfectoid project too ;-)</p>
 
+<a name="165924231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924231">Kevin Buzzard (May 17 2019 at 18:24)</a>:</h4>
+<div class="codehilite"><pre><span></span>class is_linear_map (α : Type u) {β : Type v} {γ : Type w}
+  [ring α] [add_comm_group β] [add_comm_group γ] [module α β] [module α γ]
+  (f : β → γ) : Prop :=
+(add  : ∀x y, f (x + y) = f x + f y)
+(smul : ∀(c : α) x, f (c • x) = c • f x)
+</pre></div>
+
+
+<p>That doesn't look bundled to me. What is a bundled example of a property of maps?</p>
+
+<a name="165924318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924318">Johan Commelin (May 17 2019 at 18:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> There is also <code>linear_map</code></p>
+
+<a name="165924346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924346">Johan Commelin (May 17 2019 at 18:25)</a>:</h4>
+<p><code>is_linear_map</code> is kind of deprecated</p>
+
+<a name="165924387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924387">Kevin Buzzard (May 17 2019 at 18:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">linear_map</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">)</span>
+  <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">add</span>  <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">smul</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="n">x</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">c</span> <span class="err">•</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="err">•</span> <span class="n">to_fun</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Aah yes -- immediately afterwards, in fact! So we have both? Will one be removed one day? Or are they both useful?</p>
+
+<a name="165924446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924446">Kevin Buzzard (May 17 2019 at 18:26)</a>:</h4>
+<blockquote>
+<p><code>is_linear_map</code> is kind of deprecated</p>
+</blockquote>
+<p>I see.</p>
+
+<a name="165924679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924679">Kevin Buzzard (May 17 2019 at 18:28)</a>:</h4>
+<p>Well there are 499 instances of <code>is_ring_hom</code> in mathlib...</p>
+
+<a name="165924742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924742">Kevin Buzzard (May 17 2019 at 18:29)</a>:</h4>
+<p>Do you think we can fix this with a regular expression?</p>
+
+<a name="165924866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924866">Johan Commelin (May 17 2019 at 18:30)</a>:</h4>
+<p>There were more issues. I think Chris spent some time looking into this</p>
+
+<a name="165924873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165924873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165924873">Kevin Buzzard (May 17 2019 at 18:30)</a>:</h4>
+<p>More seriously, is it the sort of thing that can be done half-heartedly? Someone makes <code>ring_hom</code>, and then every now and then when someone is bored they change a few problematic <code>is_ring_hom</code>s to <code>ring_hom</code>s? Or doesn't life work like that?</p>
+
+<a name="165925891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165925891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165925891">Kevin Buzzard (May 17 2019 at 18:43)</a>:</h4>
+<p>I guess more generally, is it now believed by the community that <code>is_ring_hom</code> should be deprecated and replaced by a bundled <code>ring_hom</code>, and the only reason it hasn't been done is that it is a non-trivial thing to do which will involve changing 47 files? If so, is there a roadmap for getting it done? Can one start by just adding the definition and trying to change one file? Or does this then involve changing the 5 files it depends on, and then this breaks all the remaining 40-odd files?</p>
+
+<a name="165926033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926033">Kevin Buzzard (May 17 2019 at 18:44)</a>:</h4>
+<p>Does it have to be done quickly? If there is a <code>ring_hom</code> branch then is it the case that if it's left for a week then it inevitably has merge conflicts?</p>
+
+<a name="165926047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926047">Kevin Buzzard (May 17 2019 at 18:45)</a>:</h4>
+<p>Or actually is the jury still out on whether it should be done at all?</p>
+
+<a name="165926097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926097">Kevin Buzzard (May 17 2019 at 18:45)</a>:</h4>
+<p>Sorry to ask such basic questions; I have 0 experience maintaining large projects.</p>
+
+<a name="165926180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926180">Johan Commelin (May 17 2019 at 18:46)</a>:</h4>
+<p>See also <a href="https://github.com/leanprover-community/mathlib/issues/717" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/717">#717</a></p>
+
+<a name="165926374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926374">Kevin Buzzard (May 17 2019 at 18:49)</a>:</h4>
+<p>Oh so field and and ring and group homs all go hand in hand. I'm sorry, I never look at the PRs for mathlib, I only ever scan the ones that get merged.</p>
+
+<a name="165926382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926382">Kevin Buzzard (May 17 2019 at 18:49)</a>:</h4>
+<p>Thanks for the link!</p>
+
+<a name="165926492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926492">Kevin Buzzard (May 17 2019 at 18:50)</a>:</h4>
+<p>I can now see Kenny's logic -- do field homs first, because that will be the smallest number of changes.</p>
+
+<a name="165926532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926532">Johan Commelin (May 17 2019 at 18:51)</a>:</h4>
+<p>and monoid homs and add_monoid homs and add_group homs and mul_homs and add_homs and .....</p>
+
+<a name="165926631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165926631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165926631">Johan Commelin (May 17 2019 at 18:52)</a>:</h4>
+<p>We need <a href="https://www.xkcd.com/208/" target="_blank" title="https://www.xkcd.com/208/">https://www.xkcd.com/208/</a></p>
+
 
 {% endraw %}

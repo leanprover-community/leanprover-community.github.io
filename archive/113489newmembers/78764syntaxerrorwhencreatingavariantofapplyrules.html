@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/78764syntaxerrorwhencreatingavariantofapplyrules.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/78764syntaxerrorwhencreatingavariantofapplyrules.html">syntax error when creating a variant of apply_rules</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165924234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/syntax%20error%20when%20creating%20a%20variant%20of%20apply_rules/near/165924234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78764syntaxerrorwhencreatingavariantofapplyrules.html#165924234">Joseph Corneli (May 17 2019 at 18:24)</a>:</h4>
+<p>I get an error why I try to apply my new tactic, below.  This seems strange to me because I did little more than a copy and paste job to define the tactic. Clearly I have made some mistake along the way.  Lean expects a pexpr but gets something else.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">core</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">refine_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">(</span><span class="n">refine</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span> <span class="bp">&lt;|&gt;</span> <span class="n">refine_list_expr</span> <span class="n">t</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_rules_with_refine</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">l</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">hs</span><span class="o">,</span>
+   <span class="n">iterate_at_most_on_subgoals</span> <span class="n">n</span> <span class="o">(</span><span class="n">assumption</span> <span class="bp">&lt;|&gt;</span> <span class="n">refine_list_expr</span> <span class="n">l</span> <span class="bp">&lt;|&gt;</span> <span class="n">apply_list_expr</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_rules_with_refine_interactive</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="mi">50</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">apply_rules_with_refine</span> <span class="n">hs</span> <span class="n">n</span>
+
+<span class="c1">-- * sin(sin(x)) and friends are continuous on ℝ</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_rules</span> <span class="o">[</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span><span class="o">,</span> <span class="n">continuous_sin</span><span class="o">]</span> <span class="mi">3</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous_sin&#39;</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span><span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_rules_with_refine_interactive</span> <span class="o">[</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span><span class="o">,</span> <span class="n">continuous_sin</span><span class="o">]</span> <span class="mi">30</span>
+</pre></div>
+
+<a name="165924281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/syntax%20error%20when%20creating%20a%20variant%20of%20apply_rules/near/165924281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/78764syntaxerrorwhencreatingavariantofapplyrules.html#165924281">Joseph Corneli (May 17 2019 at 18:24)</a>:</h4>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  list.cons continuous.comp
+term
+  continuous.comp
+has type
+  continuous ?m_5 → continuous ?m_8 → continuous (?m_8 ∘ ?m_5) : Prop
+but is expected to have type
+  pexpr : Type
+</pre></div>
+
+
+{% endraw %}
