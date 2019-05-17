@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [-T50000 challenge](87130T50000challenge.html) (45 messages, latest: May 17 2019 at 12:08)
+* [Convention on composition order](18033Conventiononcompositionorder.html) (21 messages, latest: May 17 2019 at 13:43)
 
-* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (17 messages, latest: May 17 2019 at 11:55)
+* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (18 messages, latest: May 17 2019 at 13:08)
+
+* [-T50000 challenge](87130T50000challenge.html) (45 messages, latest: May 17 2019 at 12:08)
 
 * [what is a diamond?](58637whatisadiamond.html) (66 messages, latest: May 17 2019 at 06:45)
 
@@ -33,8 +35,6 @@ permalink: archive/113488general/index.html
 * [finset of divisors of pnat](93018finsetofdivisorsofpnat.html) (15 messages, latest: May 16 2019 at 05:51)
 
 * [why did this work?](92772whydidthiswork.html) (14 messages, latest: May 15 2019 at 23:00)
-
-* [Convention on composition order](18033Conventiononcompositionorder.html) (20 messages, latest: May 15 2019 at 17:24)
 
 * [import analysis](82976importanalysis.html) (13 messages, latest: May 15 2019 at 15:34)
 
