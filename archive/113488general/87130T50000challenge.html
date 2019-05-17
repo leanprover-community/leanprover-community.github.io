@@ -1,0 +1,91 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/87130T50000challenge.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html">-T50000 challenge</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165857644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165857644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165857644">Kevin Buzzard (May 16 2019 at 23:17)</a>:</h4>
+<p>I just tried compiling mathlib with the timeout flag set to T50000 and it doesn't compile -- there are some deterministic timeouts.</p>
+<p>Why do this? Well, when making the perfectoid project there were times when we were really battling against timeouts; for example check out </p>
+<p><a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/c1fec0fe89a6bac395935c759b8387316df0e3a6/src/valuation/field.lean#L653" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/c1fec0fe89a6bac395935c759b8387316df0e3a6/src/valuation/field.lean#L653">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/c1fec0fe89a6bac395935c759b8387316df0e3a6/src/valuation/field.lean#L653</a></p>
+<p>which should be a one line term mode proof but Lean would time out at -T100000 (the default time-out value) so we had to tread really carefully to make the proof compile. At the time I thought that we were pushing Lean to the edge -- but since Mario responded in the timeout thread and showed us some more tricks I realise now that actually we were simply not getting Lean to unify efficiently. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I don't know whether a judicious <code>: _</code> fixes that proof, but definitely a judicious bunch of <code>let</code>s makes the proof compile instantly -- I've made this happen myself.</p>
+<p>Compiling mathlib with <code>-T50000</code> might show up some more instances where people have written code which takes several seconds to compile instead of several tenths of a second because of similar issues. The first issue I ran into is</p>
+<div class="codehilite"><pre><span></span>mathlib-community-master/src/category_theory/equivalence.lean:124:33: error: (deterministic) timeout
+mathlib-community-master/src/category_theory/equivalence.lean:124:30: error: (deterministic) timeout
+mathlib-community-master/src/category_theory/equivalence.lean:124:30: error: (deterministic) timeout
+mathlib-community-master/src/category_theory/equivalence.lean:123:2: error: (deterministic) timeout
+mathlib-community-master/src/category_theory/equivalence.lean:122:23: error: (deterministic) timeout
+</pre></div>
+
+
+<p>with code</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">adjointify_η</span> <span class="o">:</span> <span class="mi">𝟭</span> <span class="n">C</span> <span class="err">≅</span> <span class="n">F</span> <span class="err">⋙</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="n">η</span> <span class="err">≪≫</span> <span class="n">iso_whisker_left</span> <span class="n">F</span> <span class="o">((</span><span class="n">left_unitor</span> <span class="n">G</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span> <span class="err">≪≫</span>
+  <span class="n">iso_whisker_right</span> <span class="n">ε</span><span class="bp">.</span><span class="n">symm</span> <span class="n">G</span><span class="o">)</span> <span class="err">≪≫</span> <span class="n">iso_whisker_right</span> <span class="n">η</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">F</span> <span class="err">⋙</span> <span class="n">G</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Is there some way of making Lean unify this more quickly? </p>
+<p>NB the easiest way to play along at home is to open mathlib in VS Code, File -&gt; Preferences -&gt; Settings, search for Lean and find the timeout value and change it from 100000 to 50000, and then add and remove a character from equivalence.lean to make it recompile.</p>
+
+<a name="165858601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858601">Floris van Doorn (May 16 2019 at 23:32)</a>:</h4>
+<p>Yeah, I can imagine that that definition is a stress test on Lean. So for functors the associator <code>(F ⋙ G) ⋙ H ≅ F ⋙ (G ⋙ H</code> is true by reflexivity and the unitors <code>1 ⋙ F ≅ F</code> are true by reflexivity as long as <code>F</code> is of the form <code>⟨_, _, _, _⟩</code> (usually this is the case if <code>F</code> is anything other than a variable). In the category theory library we can use/abuse this, by not explicitly writing down these associators and unitors, but at the cost of making Lean do (a lot of) extra work. We maybe should decide that we want to avoid doing these rules silently. However, this would change the definitions of natural isomorphisms we are defining, which might make future proofs more finicky. See also the discussion below this comment:<br>
+<a href="https://github.com/leanprover-community/mathlib/pull/1018#discussion_r283978240" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1018#discussion_r283978240">https://github.com/leanprover-community/mathlib/pull/1018#discussion_r283978240</a></p>
+<p>In this particular case I think there are two silent associators and one silent left unitor (and 1 non-silent one). We should probably include them explicitly. <span class="user-mention" data-user-id="110087">@Scott Morrison</span></p>
+
+<a name="165858733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858733">Scott Morrison (May 16 2019 at 23:34)</a>:</h4>
+<p>I agree this is a problem, and perhaps it indicates we should go back to your original construction for <code>adjointify</code>, which explicitly provided the components, at the expense of needing to check naturality.</p>
+
+<a name="165858738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858738">Scott Morrison (May 16 2019 at 23:34)</a>:</h4>
+<p>Actually, what we really should do is both.</p>
+
+<a name="165858761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858761">Scott Morrison (May 16 2019 at 23:35)</a>:</h4>
+<p>Define <code>adjointify</code> so that it is obviously natural, but inserting unitors and associators so elaboration fast</p>
+
+<a name="165858770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858770">Scott Morrison (May 16 2019 at 23:35)</a>:</h4>
+<p>and then give a simp lemma that says the components are what you want them to be.</p>
+
+<a name="165858864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858864">Kevin Buzzard (May 16 2019 at 23:36)</a>:</h4>
+<p>Out of interest, when we compiled the perfectoid project at -T50000 there were problems in four places. Two were fixed with Mario's <code>: _</code> trick, one was a <code>use</code> which we changed to <code>existsi</code>, and one was <code>embedding f</code> which had a potential overload and was fixed by changing it to <code>_root_.embedding f</code>. In all four cases elaboration time dropped dramatically from "takes several seconds to compile" to "compiles instantly".</p>
+
+<a name="165858894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858894">Kevin Buzzard (May 16 2019 at 23:37)</a>:</h4>
+<p>But is this associator thing yet another kind of problem?</p>
+
+<a name="165858943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165858943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165858943">Floris van Doorn (May 16 2019 at 23:37)</a>:</h4>
+<blockquote>
+<p>Actually, what we really should do is both.</p>
+</blockquote>
+<p>I wanted to also suggest that. That is basically what I did in the Lean 2 HoTT library:<br>
+<a href="https://github.com/leanprover/lean2/blob/master/hott/algebra/category/functor/equivalence.hlean#L82-L102" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/algebra/category/functor/equivalence.hlean#L82-L102">https://github.com/leanprover/lean2/blob/master/hott/algebra/category/functor/equivalence.hlean#L82-L102</a><br>
+I defined the new <code>η</code> first on components, and to show naturality I showed that it was equal to the map of a natural transformation, defined fully explicit.</p>
+
+<a name="165859067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165859067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165859067">Kevin Buzzard (May 16 2019 at 23:39)</a>:</h4>
+<p>What I feel I learnt from this experiment was that long elaboration times are not always inevitable -- sometimes persuading Lean to elaborate the same thing slightly differently can have a massively beneficial effect and perhaps even teach us something.</p>
+
+<a name="165859297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165859297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165859297">Floris van Doorn (May 16 2019 at 23:43)</a>:</h4>
+<blockquote>
+<p>But is this associator thing yet another kind of problem?</p>
+</blockquote>
+<p>Yes, but we're basically abusing the Lean type checker. We have an expression <code>(F ⋙ ((G ⋙ F) ⋙ G)</code> which we need to match with <code>(F ⋙ G) ⋙ (F ⋙ G)</code>. We should really rewrite one expression to the other (using natural isomorphisms), but we proof it "by reflexivity". This is true, but only if Lean unfolds all occurrences of <code>⋙</code> (and likely gets a huge term in the process).<br>
+It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</code> instead of <code>norm_num</code>.</p>
+
+
+{% endraw %}
