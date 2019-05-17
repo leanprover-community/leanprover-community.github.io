@@ -10,11 +10,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [lean --export problems with #999](60299leanexportproblemswith999.html) (2 messages, latest: May 17 2019 at 02:39)
+* [lean --export problems with #999](60299leanexportproblemswith999.html) (4 messages, latest: May 17 2019 at 04:58)
+
+* [#1029 group conjugates](676321029groupconjugates.html) (33 messages, latest: May 17 2019 at 04:53)
 
 * [#734 free ring](17428734freering.html) (51 messages, latest: May 15 2019 at 17:08)
-
-* [#1029 group conjugates](676321029groupconjugates.html) (31 messages, latest: May 15 2019 at 11:41)
 
 * [#1007 compatibility with Lean 3.5.0c](237691007compatibilitywithLean350c.html) (11 messages, latest: May 11 2019 at 16:51)
 
