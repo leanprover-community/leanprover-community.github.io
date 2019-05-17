@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (3 messages, latest: May 17 2019 at 04:58)
+* [what is a diamond?](58637whatisadiamond.html) (66 messages, latest: May 17 2019 at 06:45)
 
-* [what is a diamond?](58637whatisadiamond.html) (63 messages, latest: May 17 2019 at 04:03)
+* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (6 messages, latest: May 17 2019 at 06:39)
 
-* [How to design math libraries](34835Howtodesignmathlibraries.html) (9 messages, latest: May 17 2019 at 01:33)
+* [tactic.basic](96649tacticbasic.html) (10 messages, latest: May 17 2019 at 06:39)
+
+* [How to design math libraries](34835Howtodesignmathlibraries.html) (10 messages, latest: May 17 2019 at 06:37)
 
 * [-T50000 challenge](87130T50000challenge.html) (11 messages, latest: May 16 2019 at 23:43)
 

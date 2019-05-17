@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1029 group conjugates](676321029groupconjugates.html) (34 messages, latest: May 17 2019 at 05:05)
+* [lean --export problems with #999](60299leanexportproblemswith999.html) (9 messages, latest: May 17 2019 at 06:16)
 
-* [lean --export problems with #999](60299leanexportproblemswith999.html) (5 messages, latest: May 17 2019 at 05:00)
+* [#1029 group conjugates](676321029groupconjugates.html) (34 messages, latest: May 17 2019 at 05:05)
 
 * [#734 free ring](17428734freering.html) (51 messages, latest: May 15 2019 at 17:08)
 
