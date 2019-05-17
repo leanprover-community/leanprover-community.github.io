@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Math physics in Lean](24293MathphysicsinLean.html) (7 messages, latest: May 17 2019 at 17:43)
+* [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (2 messages, latest: May 17 2019 at 18:24)
+
+* [Math physics in Lean](24293MathphysicsinLean.html) (11 messages, latest: May 17 2019 at 18:16)
 
 * [smul_mem_span](68849smulmemspan.html) (3 messages, latest: May 17 2019 at 14:46)
 
