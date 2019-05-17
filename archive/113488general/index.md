@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Convention on composition order](18033Conventiononcompositionorder.html) (21 messages, latest: May 17 2019 at 13:43)
+* [Convention on composition order](18033Conventiononcompositionorder.html) (24 messages, latest: May 17 2019 at 14:30)
+
+* [cache-olean](72177cacheolean.html) (25 messages, latest: May 17 2019 at 14:16)
 
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (18 messages, latest: May 17 2019 at 13:08)
 
@@ -87,8 +89,6 @@ permalink: archive/113488general/index.html
 * [simp_proj](13812simpproj.html) (6 messages, latest: May 09 2019 at 23:46)
 
 * [PR 1000](08196PR1000.html) (22 messages, latest: May 08 2019 at 23:50)
-
-* [cache-olean](72177cacheolean.html) (23 messages, latest: May 08 2019 at 22:00)
 
 * [exists_finset_of...](71399existsfinsetof.html) (5 messages, latest: May 08 2019 at 20:40)
 
