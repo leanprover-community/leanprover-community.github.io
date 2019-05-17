@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [-T50000 challenge](87130T50000challenge.html) (34 messages, latest: May 17 2019 at 11:59)
+* [-T50000 challenge](87130T50000challenge.html) (45 messages, latest: May 17 2019 at 12:08)
 
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (17 messages, latest: May 17 2019 at 11:55)
 

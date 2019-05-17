@@ -236,5 +236,49 @@ It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893703">Mario Carneiro (May 17 2019 at 11:59)</a>:</h4>
 <p>it's triggering because it wants to find out if <code>exp x =?= exp (-x)</code> and other variations</p>
 
+<a name="165893838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893838">Rob Lewis (May 17 2019 at 12:00)</a>:</h4>
+<p>Instead of using <code>is_def_eq</code> less, maybe we should be marking more things <code>irreducible</code>.</p>
+
+<a name="165893863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893863">Mario Carneiro (May 17 2019 at 12:00)</a>:</h4>
+<p>This is what reducibility settings are for</p>
+
+<a name="165893881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893881">Mario Carneiro (May 17 2019 at 12:00)</a>:</h4>
+<p>like how <code>rw</code> tries <code>refl</code> but not really hard in case it's not true</p>
+
+<a name="165894094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894094">Mario Carneiro (May 17 2019 at 12:02)</a>:</h4>
+<p>I guess that's not enough to get <code>id x &gt;= x</code> though</p>
+
+<a name="165894116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894116">Mario Carneiro (May 17 2019 at 12:03)</a>:</h4>
+<p>because <code>id</code> is semireducible</p>
+
+<a name="165894254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894254">Mario Carneiro (May 17 2019 at 12:04)</a>:</h4>
+<p>how about giving <code>linarith</code> and <code>ring</code> a reducibility config option? I think the default should be unfold reducible</p>
+
+<a name="165894366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894366">Rob Lewis (May 17 2019 at 12:05)</a>:</h4>
+<p>Exactly. Same thing in the example here: <a href="#narrow/stream/144837-PR-reviews/topic/.23878.20.20remove.20dependencies" title="#narrow/stream/144837-PR-reviews/topic/.23878.20.20remove.20dependencies">https://leanprover.zulipchat.com/#narrow/stream/144837-PR-reviews/topic/.23878.20.20remove.20dependencies</a> . Matching up to defeq lets <code>ring</code> and <code>linarith</code> unify two different coercions, which is sensible to do. But I'm pretty sure those coercions are semireducible.</p>
+
+<a name="165894376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894376">Rob Lewis (May 17 2019 at 12:05)</a>:</h4>
+<p>That would work.</p>
+
+<a name="165894432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894432">Rob Lewis (May 17 2019 at 12:06)</a>:</h4>
+<p>Linarith already has a bunch of config options. I worry this one would be pretty obscure.</p>
+
+<a name="165894462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894462">Rob Lewis (May 17 2019 at 12:07)</a>:</h4>
+<p>On the other hand, they were both using syntactic eq for a while with no issues. It wouldn't be a big loss to go half a step back and add a config option.</p>
+
+<a name="165894625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165894625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165894625">Rob Lewis (May 17 2019 at 12:08)</a>:</h4>
+<p>Regardless, I think we should also be a bit more aggressive about marking things irreducible.</p>
+
 
 {% endraw %}
