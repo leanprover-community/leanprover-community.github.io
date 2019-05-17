@@ -153,5 +153,88 @@ It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165882367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165882367">Kevin Buzzard (May 17 2019 at 08:35)</a>:</h4>
 <p>I'm glad that this slightly frivolous challenge is throwing up interesting questions!</p>
 
+<a name="165891888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165891888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165891888">Rob Lewis (May 17 2019 at 11:32)</a>:</h4>
+<blockquote>
+<p>The <code>rw</code> part of the proof is instantaneous (less than 150ms if you replace <code>ring</code> by <code>sorry</code>). The <code>ring</code> tactic is also fast (a fraction of a second). The kernel is also quickly able to check the proof. Yet the <em>elaborator</em> spends a whopping 30s on... something... coming from the <code>ring</code>  tactic, despite the fact that <code>ring</code> produces fully elaborated proof terms.</p>
+</blockquote>
+<p>This is really strange. There's something going on in the <code>is_def_eq</code> call in <code>add_atom</code>. The profiler says <code>ring</code> is spending 6 seconds there. But each call is a fraction of a millisecond and there are only a couple dozen calls.</p>
+
+<a name="165891918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165891918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165891918">Rob Lewis (May 17 2019 at 11:33)</a>:</h4>
+<p>I used this to profile:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">time_defeq</span> <span class="o">(</span><span class="n">e</span> <span class="n">e&#39;</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">pe</span> <span class="err">←</span> <span class="n">pp</span> <span class="n">e</span><span class="o">,</span>
+   <span class="n">pe&#39;</span> <span class="err">←</span> <span class="n">pp</span> <span class="n">e&#39;</span><span class="o">,</span>
+   <span class="n">timeit</span> <span class="o">(</span><span class="s2">&quot;defeq</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">pe</span> <span class="bp">++</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">pe&#39;</span><span class="bp">++</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">)</span> <span class="o">(</span><span class="n">sleep</span> <span class="mi">1</span> <span class="bp">&gt;&gt;</span> <span class="n">is_def_eq</span> <span class="n">e</span> <span class="n">e&#39;</span><span class="o">)</span>
+</pre></div>
+
+
+<p><code>ring</code> spends 6500 ms in <code>time_defeq</code>, 18 in <code>pp</code>, and 1 in <code>timeit</code>.</p>
+
+<a name="165892003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892003">Rob Lewis (May 17 2019 at 11:35)</a>:</h4>
+<p>Hmm, but this profiling is wrong, increasing the sleep time doesn't change the profile time of <code>timeit</code>?</p>
+
+<a name="165892285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892285">Keeley Hoek (May 17 2019 at 11:40)</a>:</h4>
+<p>ah, <code>timeit</code> doesn't time tactics</p>
+
+<a name="165892289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892289">Keeley Hoek (May 17 2019 at 11:40)</a>:</h4>
+<p>I think you're timing how long it takes to build the monad or something</p>
+
+<a name="165892293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892293">Keeley Hoek (May 17 2019 at 11:40)</a>:</h4>
+<p>(I think)</p>
+
+<a name="165892303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892303">Keeley Hoek (May 17 2019 at 11:41)</a>:</h4>
+<p>Isn't there a tactic version</p>
+
+<a name="165892318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892318">Rob Lewis (May 17 2019 at 11:41)</a>:</h4>
+<p>You're right, it's <code>timetac</code>, not <code>timeit</code>. Getting my timers mixed up.</p>
+
+<a name="165892467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892467">Rob Lewis (May 17 2019 at 11:44)</a>:</h4>
+<p>Would it be safe to set <code>complex.exp</code> to be irreducible at the end of <code>complex/exponential.lean</code>?</p>
+
+<a name="165892478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892478">Rob Lewis (May 17 2019 at 11:44)</a>:</h4>
+<p>This is the culprit. <code>is_def_eq</code> is unfolding that and getting lost.</p>
+
+<a name="165892483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892483">Mario Carneiro (May 17 2019 at 11:44)</a>:</h4>
+<p>yeah, that makes sense</p>
+
+<a name="165892502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892502">Mario Carneiro (May 17 2019 at 11:45)</a>:</h4>
+<p>We should probably back off on <code>is_def_eq</code> as well though</p>
+
+<a name="165892518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892518">Mario Carneiro (May 17 2019 at 11:45)</a>:</h4>
+<p>use some reducibility setting</p>
+
+<a name="165892721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165892721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165892721">Rob Lewis (May 17 2019 at 11:48)</a>:</h4>
+<p>I'm not sure if syntactic eq is enough there, it might be. But I guess a weaker <code>is_def_eq</code> probably is.</p>
+
+<a name="165893518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893518">Mario Carneiro (May 17 2019 at 11:57)</a>:</h4>
+<p>it is enough for this goal, but of course not for some goals</p>
+
+<a name="165893527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893527">Rob Lewis (May 17 2019 at 11:57)</a>:</h4>
+<p>Hmm, no, this goes back to the discussion we had a few months ago about <code>ring</code> and <code>linarith</code> handling defeq atoms. Weakening that check means <code>linarith</code> fails to prove <code>id x ≥ x</code>.</p>
+
+<a name="165893618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893618">Mario Carneiro (May 17 2019 at 11:58)</a>:</h4>
+<p>but I definitely want to avoid a cost for unfolding defeq when it's not even necessary. <code>assumption</code> has the same problem</p>
+
+<a name="165893703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165893703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165893703">Mario Carneiro (May 17 2019 at 11:59)</a>:</h4>
+<p>it's triggering because it wants to find out if <code>exp x =?= exp (-x)</code> and other variations</p>
+
 
 {% endraw %}
