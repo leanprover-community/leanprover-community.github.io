@@ -87,5 +87,26 @@ I defined the new <code>η</code> first on components, and to show naturality I 
 <p>Yes, but we're basically abusing the Lean type checker. We have an expression <code>(F ⋙ ((G ⋙ F) ⋙ G)</code> which we need to match with <code>(F ⋙ G) ⋙ (F ⋙ G)</code>. We should really rewrite one expression to the other (using natural isomorphisms), but we proof it "by reflexivity". This is true, but only if Lean unfolds all occurrences of <code>⋙</code> (and likely gets a huge term in the process).<br>
 It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</code> instead of <code>norm_num</code>.</p>
 
+<a name="165877926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165877926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165877926">Kevin Buzzard (May 17 2019 at 07:04)</a>:</h4>
+<p>Oh that's a very clear explanation Floris, thanks!</p>
+
+<a name="165877990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165877990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165877990">Kevin Buzzard (May 17 2019 at 07:05)</a>:</h4>
+<p>The next one is this, from <code>src/data/complex/exponential.lean:456:0</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">cos_add</span> <span class="o">:</span> <span class="n">cos</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">cos</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">cos</span> <span class="n">y</span> <span class="bp">-</span> <span class="n">sin</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">sin</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">domain</span><span class="bp">.</span><span class="n">mul_left_inj</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+      <span class="err">←</span> <span class="n">domain</span><span class="bp">.</span><span class="n">mul_left_inj</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)],</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">,</span> <span class="n">mul_sub</span><span class="o">,</span> <span class="n">sub_mul</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">,</span> <span class="n">div_mul_div</span><span class="o">,</span>
+    <span class="n">div_add_div_same</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="o">(</span><span class="n">div_div_eq_div_mul</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+    <span class="n">mul_div_cancel&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">two_ne_zero&#39;</span> <span class="n">ℂ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span> <span class="n">sin</span><span class="o">,</span> <span class="n">cos</span><span class="o">],</span>
+  <span class="n">apply</span> <span class="n">complex</span><span class="bp">.</span><span class="n">ext</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">add_mul</span><span class="o">,</span> <span class="n">exp_add</span><span class="o">]</span><span class="bp">;</span> <span class="n">ring</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Times out at -T50000.</p>
+
 
 {% endraw %}
