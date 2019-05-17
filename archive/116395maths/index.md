@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [apply_rules example](53597applyrulesexample.html) (2 messages, latest: May 17 2019 at 15:47)
+* [apply_rules example](53597applyrulesexample.html) (6 messages, latest: May 17 2019 at 16:56)
 
 * [Manifolds](12382Manifolds.html) (24 messages, latest: May 17 2019 at 09:02)
 

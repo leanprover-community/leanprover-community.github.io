@@ -331,5 +331,60 @@ It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912459">Rob Lewis (May 17 2019 at 15:59)</a>:</h4>
 <p>Did we not have a variant of <code>assumption</code> that takes a reducibility setting?</p>
 
+<a name="165912854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912854">Rob Lewis (May 17 2019 at 16:04)</a>:</h4>
+<p>Oh, this is a little more subtle, the goal and <code>gy</code> don't unify with only reducible.</p>
+
+<a name="165912926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165912926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165912926">Kevin Buzzard (May 17 2019 at 16:05)</a>:</h4>
+<p>The other issue is when when I'm writing code, if something turned out super-slow then it makes it very painful to continue writing after that point. One thing I've learnt from this exercise is that sometimes if you understand what's going on then you can actually fix things up and the code compiles quickly and the pain goes away.</p>
+
+<a name="165913036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165913036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165913036">Rob Lewis (May 17 2019 at 16:06)</a>:</h4>
+<p>The easy patch is</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">stone_cech</span><span class="bp">.</span><span class="n">t2_space</span> <span class="o">:</span> <span class="n">t2_space</span> <span class="o">(</span><span class="n">stone_cech</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">t2_iff_ultrafilter</span><span class="o">,</span>
+  <span class="n">rintros</span> <span class="n">g</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="bp">⟩</span> <span class="n">u</span> <span class="n">gx</span> <span class="n">gy</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">sound</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">γ</span> <span class="n">tγ</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">f</span> <span class="n">hf</span><span class="o">,</span>
+  <span class="n">resetI</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">stone_cech_extend</span> <span class="n">hf</span> <span class="err">⟦</span><span class="n">x</span><span class="err">⟧</span> <span class="bp">=</span> <span class="n">stone_cech_extend</span> <span class="n">hf</span> <span class="err">⟦</span><span class="n">y</span><span class="err">⟧</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">tendsto_nhds_unique</span> <span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">stone_cech_extend</span> <span class="n">hf</span> <span class="o">},</span>
+  <span class="n">all_goals</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">map_mono</span> <span class="bp">_</span><span class="o">)</span> <span class="o">((</span><span class="n">continuous_stone_cech_extend</span> <span class="n">hf</span><span class="o">)</span><span class="bp">.</span><span class="n">tendsto</span> <span class="bp">_</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">gx</span> <span class="o">},</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">gy</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="165913064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165913064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165913064">Rob Lewis (May 17 2019 at 16:06)</a>:</h4>
+<p>I'm not sure what can be made irreducible to speed up the failure to unify <code>gx</code>.</p>
+
+<a name="165913184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165913184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165913184">Rob Lewis (May 17 2019 at 16:08)</a>:</h4>
+<p><code>attribute [irreducible] nhds</code> works but I suspect that will break things.</p>
+
+<a name="165914221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165914221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165914221">Reid Barton (May 17 2019 at 16:22)</a>:</h4>
+<p>I made a PR with Patrick's proof: <a href="https://github.com/leanprover-community/mathlib/pull/1042" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1042">https://github.com/leanprover-community/mathlib/pull/1042</a></p>
+
+<a name="165914996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165914996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165914996">Rob Lewis (May 17 2019 at 16:33)</a>:</h4>
+<p>It looks like making <code>nhds</code> irreducible at the end of <code>topology/order.lean</code> is safe, and this salvages the original proof.</p>
+
+<a name="165915012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165915012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165915012">Rob Lewis (May 17 2019 at 16:33)</a>:</h4>
+<p>Meaning, the original proof is basically instant.</p>
+
+<a name="165915081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165915081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165915081">Rob Lewis (May 17 2019 at 16:34)</a>:</h4>
+<p>This is probably a good abstraction barrier too. I assumed it was broken more, but it seems like not.</p>
+
+<a name="165915111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165915111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165915111">Rob Lewis (May 17 2019 at 16:34)</a>:</h4>
+<p>Is Patrick's change preferable to the old one if the old one is equally fast?</p>
+
 
 {% endraw %}
