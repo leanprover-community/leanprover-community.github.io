@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [what is a diamond?](58637whatisadiamond.html) (61 messages, latest: May 17 2019 at 03:59)
+
 * [How to design math libraries](34835Howtodesignmathlibraries.html) (9 messages, latest: May 17 2019 at 01:33)
 
 * [-T50000 challenge](87130T50000challenge.html) (11 messages, latest: May 16 2019 at 23:43)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [nat.has_pow](34243nathaspow.html) (7 messages, latest: May 16 2019 at 18:38)
 
 * [coe nat enat](18531coenatenat.html) (30 messages, latest: May 16 2019 at 16:35)
-
-* [what is a diamond?](58637whatisadiamond.html) (57 messages, latest: May 16 2019 at 11:24)
 
 * [best practice for Lean code blocks inside LaTeX?](22483bestpracticeforLeancodeblocksinsideLaTeX.html) (3 messages, latest: May 16 2019 at 06:18)
 
