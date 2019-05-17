@@ -25,5 +25,20 @@ permalink: archive/144837PRreviews/60299leanexportproblemswith999.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/lean%20--export%20problems%20with%20%23999/near/165867445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/60299leanexportproblemswith999.html#165867445">Simon Hudon (May 17 2019 at 02:39)</a>:</h4>
 <p>And it's not generated through meta programming?</p>
 
+<a name="165872761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/lean%20--export%20problems%20with%20%23999/near/165872761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/60299leanexportproblemswith999.html#165872761">Scott Morrison (May 17 2019 at 04:57)</a>:</h4>
+<p>Nope, it's perfectly normal definition:</p>
+<div class="codehilite"><pre><span></span>meta def mk_congr_arg_using_dsimp (G W : expr) (u : list name) : tactic expr :=
+do s ← simp_lemmas.mk_default,
+   t ← infer_type G,
+   t&#39; ← s.dsimplify u t {fail_if_unchanged := ff},
+   definev `_mk_congr_arg_aux t&#39; G,
+   to_expr ```(congr_arg _mk_congr_arg_aux %%W)
+</pre></div>
+
+<a name="165872812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/lean%20--export%20problems%20with%20%23999/near/165872812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/60299leanexportproblemswith999.html#165872812">Mario Carneiro (May 17 2019 at 04:58)</a>:</h4>
+<p>I assume you tried changing the name?</p>
+
 
 {% endraw %}
