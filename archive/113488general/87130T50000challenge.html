@@ -386,5 +386,128 @@ It's roughly similar to proving <code>1000 + 1000 = 2000</code> by <code>refl</c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165915111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165915111">Rob Lewis (May 17 2019 at 16:34)</a>:</h4>
 <p>Is Patrick's change preferable to the old one if the old one is equally fast?</p>
 
+<a name="165919009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165919009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165919009">Kevin Buzzard (May 17 2019 at 17:22)</a>:</h4>
+<p>The next one is in <code>data/polynomial.lean</code> and it's <code>card_nth_roots</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">card_nth_roots</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">integral_domain</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">nth_roots</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">card</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">letI</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="k">if</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="k">then</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">C</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span>
+  <span class="k">then</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span><span class="o">,</span> <span class="n">nth_roots</span><span class="o">,</span> <span class="n">roots</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">dif_pos</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">card_empty</span><span class="o">]</span>
+  <span class="k">else</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_le_coe</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">le_trans</span> <span class="o">(</span><span class="n">card_roots</span> <span class="n">h</span><span class="o">)</span>
+    <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">hn</span><span class="o">,</span> <span class="n">pow_zero</span><span class="o">,</span> <span class="err">←</span> <span class="bp">@</span><span class="n">C_1</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="err">←</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_sub</span> <span class="o">(</span><span class="bp">@</span><span class="n">C</span> <span class="n">α</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)]</span><span class="bp">;</span>
+      <span class="n">exact</span> <span class="n">degree_C_le</span><span class="o">))</span>
+<span class="k">else</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_le_coe</span><span class="o">,</span> <span class="err">←</span> <span class="n">degree_X_pow_sub_C</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="n">hn</span><span class="o">)</span> <span class="n">a</span><span class="o">]</span><span class="bp">;</span>
+  <span class="n">exact</span> <span class="n">card_roots</span> <span class="o">(</span><span class="n">X_pow_sub_C_ne_zero</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">pos_of_ne_zero</span> <span class="n">hn</span><span class="o">)</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+
+
+<p>It's a whopping <a href="https://github.com/leanprover-community/mathlib/blob/0b350228544244f2861ec8afc84dad0c27113a73/src/data/polynomial.lean#L1770" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/0b350228544244f2861ec8afc84dad0c27113a73/src/data/polynomial.lean#L1770">1770 lines in</a>, and given the amount that Kenny complained about timings for polynomials it's a miracle that Chris managed to make it so long without going insane ;-) Is there an official or unofficial max length for mathlib files? For some reason I thought we were unkeen on going over 1000 lines.</p>
+
+<a name="165919229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165919229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165919229">Kevin Buzzard (May 17 2019 at 17:25)</a>:</h4>
+<p>ha ha this lemma is true because the zero polynomial is defined to have no roots :D</p>
+
+<a name="165919436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165919436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165919436">Kevin Buzzard (May 17 2019 at 17:27)</a>:</h4>
+<p>How do people actually debug these things? I throw them out and then Rob or Mario says something like "eew this specific thing is happening". I have no idea how to check what is going on at all, other than just setting -T50000 on VS Code and then randomly inserting lines of the form <code>sorry end #exit</code> until I find the problematic line, and even that tells me much less than the things the CS people come up with within minutes.</p>
+
+<a name="165919924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165919924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165919924">Rob Lewis (May 17 2019 at 17:33)</a>:</h4>
+<p>I mean, that's basically it. Sometimes certain lines look suspicious and you start looking there. <code>assumption</code> and <code>convert</code> are likely candidates for this particular kind of problem.</p>
+
+<a name="165919948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165919948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165919948">Rob Lewis (May 17 2019 at 17:33)</a>:</h4>
+<p><code>set_option profiler true</code> can show if a particular tactic is misbehaving.</p>
+
+<a name="165920078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165920078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165920078">Kevin Buzzard (May 17 2019 at 17:34)</a>:</h4>
+<p>Aah I'd forgotten about the profiler.</p>
+<p>I am very familiar with some <code>set_option</code> things -- the ones I use relatively regularly like <code>pp.all true</code> or implict or proofs or the one that turns on simp lemmas, but the ones I've only used a couple of times I forget about; there should be a list of options ordered by usefulness rather than alphabetically ;-)</p>
+
+<a name="165920559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165920559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165920559">Kevin Buzzard (May 17 2019 at 17:41)</a>:</h4>
+<p>Well, the #exit strategy seems to indicate that it's the <code>    rw [hn, pow_zero, ← @C_1 α _ _, ← is_ring_hom.map_sub (@C α _ _)]</code> line</p>
+
+<a name="165920627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165920627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165920627">Rob Lewis (May 17 2019 at 17:42)</a>:</h4>
+<p>Yep, and in particular, the <code>map_sub</code>.</p>
+
+<a name="165921035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921035">Kevin Buzzard (May 17 2019 at 17:47)</a>:</h4>
+<p>And the profiler informs us</p>
+<div class="codehilite"><pre><span></span>polynomial.lean:1771:6: information
+parsing took 27.7ms
+polynomial.lean:1771:6: information
+type checking of card_nth_roots took 0.0746ms
+polynomial.lean:1771:6: information
+decl post-processing of card_nth_roots took 0.00477ms
+</pre></div>
+
+
+<p>and then there's a very long pause and it adds</p>
+<div class="codehilite"><pre><span></span>polynomial.lean:1771:6: information
+elaboration of card_nth_roots took 12.8s
+</pre></div>
+
+<a name="165921055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921055">Kevin Buzzard (May 17 2019 at 17:47)</a>:</h4>
+<p>(and that's with <code>sorry end)) else sorry #exit</code> just after the rewrite)</p>
+
+<a name="165921079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921079">Chris Hughes (May 17 2019 at 17:47)</a>:</h4>
+<p>I think this is another reason in favour of bundled homs.</p>
+
+<a name="165921114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921114">Sebastien Gouezel (May 17 2019 at 17:48)</a>:</h4>
+<p>In the same direction, I would be happy to make <code>continuous</code> irreducible (as it is a Pi type, it is complicated to unify).</p>
+
+<a name="165921147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921147">Mario Carneiro (May 17 2019 at 17:48)</a>:</h4>
+<p>I keep convincing myself this has already happened</p>
+
+<a name="165921185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921185">Kevin Buzzard (May 17 2019 at 17:48)</a>:</h4>
+<div class="codehilite"><pre><span></span>11363ms   100.0%   _private.3200700535.rw_goal._lambda_4
+11354ms    99.9%   tactic.to_expr
+11354ms    99.9%   tactic.interactive.to_expr&#39;
+    9ms     0.1%   tactic.rewrite_target
+    8ms     0.1%   tactic.rewrite_core
+    8ms     0.1%   tactic.rewrite
+    1ms     0.0%   tactic.assert
+</pre></div>
+
+
+<p>if this helps</p>
+
+<a name="165921208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921208">Mario Carneiro (May 17 2019 at 17:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> Due to a bug in lean, marking <code>continuous</code> as irreducible won't fix the issue with <code>apply</code></p>
+
+<a name="165921391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921391">Sebastien Gouezel (May 17 2019 at 17:51)</a>:</h4>
+<p>Even in Lean 3.5c? :)</p>
+
+<a name="165921424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921424">Mario Carneiro (May 17 2019 at 17:51)</a>:</h4>
+<p>I haven't looked into it in detail, but I think it should not be hard to fix</p>
+
+<a name="165921562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921562">Kevin Buzzard (May 17 2019 at 17:53)</a>:</h4>
+<div class="codehilite"><pre><span></span>is_ring_hom.map_sub : ∀ {α β : Type u_1} [_inst_1 : ring α] [_inst_2 : ring β] (f : α → β) [_inst_3 : is_ring_hom f] {x y : α}, f (x - y) = f x - f y
+</pre></div>
+
+
+<p>Chris is saying that <code>is_ring_hom</code> should be bundled?</p>
+
+<a name="165921687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921687">Kevin Buzzard (May 17 2019 at 17:54)</a>:</h4>
+<p>Is that one of those PR's where you break 20 files and then fix them all and then PR it and pray that it gets accepted quickly?</p>
+
+<a name="165921706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/165921706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#165921706">Kevin Buzzard (May 17 2019 at 17:54)</a>:</h4>
+<p>It should do some nice damage to the perfectoid project too ;-)</p>
+
 
 {% endraw %}
