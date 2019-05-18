@@ -1,0 +1,48 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/01036rsimp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html">rsimp</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="165992248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/165992248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#165992248">Jesse Michael Han (May 18 2019 at 21:36)</a>:</h4>
+<p>What is <code>rsimp</code>, how does it work, and why is it so slow?</p>
+
+<a name="165992828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rsimp/near/165992828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01036rsimp.html#165992828">Jesse Michael Han (May 18 2019 at 21:55)</a>:</h4>
+<p>prompted by the discussion about the simp lemma <code>eq_self_iff_true</code>, I was playing around with <code>simp</code> and its occasional inability to prove definitional equalities</p>
+<p>i'm surprised that below <code>{[smt] close}</code> closes the goal, but <code>cc</code> doesnt (i thought they had the same strength)</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">squeeze</span>
+
+<span class="n">def</span> <span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="n">def</span> <span class="n">B</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">A</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="n">rfl</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rsimp</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">eblast</span><span class="o">}</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{[</span><span class="n">smt</span><span class="o">]</span> <span class="n">close</span><span class="o">}</span> <span class="c1">-- works</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cc</span> <span class="c1">-- fails</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+{% endraw %}
