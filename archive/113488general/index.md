@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (3 messages, latest: May 18 2019 at 05:50)
+* [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (4 messages, latest: May 18 2019 at 06:59)
 
-* [transitivity](39163transitivity.html) (2 messages, latest: May 18 2019 at 05:49)
+* [transitivity](39163transitivity.html) (5 messages, latest: May 18 2019 at 06:58)
 
 * [Integral of a constant](02999Integralofaconstant.html) (33 messages, latest: May 18 2019 at 03:20)
 
