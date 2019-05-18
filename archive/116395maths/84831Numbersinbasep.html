@@ -23,5 +23,58 @@ permalink: archive/116395maths/84831Numbersinbasep.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Numbers%20in%20base%20p/near/165967214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84831Numbersinbasep.html#165967214">Kevin Buzzard (May 18 2019 at 09:31)</a>:</h4>
 <p><a href="https://github.com/leanprover-community/mathlib/tree/digits" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/digits">https://github.com/leanprover-community/mathlib/tree/digits</a> is something; there was definitely more than that though.</p>
 
+<a name="165970747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Numbers%20in%20base%20p/near/165970747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84831Numbersinbasep.html#165970747">Calle Sönne (May 18 2019 at 11:24)</a>:</h4>
+<p>I have some more stuff, but I only locally. It contains some basic definitions of "digits" in  base b in a linearly ordered floor ring and some very elementary theorems.</p>
+
+<a name="165970765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Numbers%20in%20base%20p/near/165970765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84831Numbersinbasep.html#165970765">Calle Sönne (May 18 2019 at 11:25)</a>:</h4>
+<p>The only harder theorem I have proved so far is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">digit</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">floor</span><span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="bp">-</span> <span class="n">floor</span><span class="o">(</span><span class="n">r</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span><span class="bp">*</span><span class="n">b</span>
+
+<span class="kn">theorem</span> <span class="n">approx</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+    <span class="err">⌊</span><span class="o">(</span><span class="n">fract</span> <span class="n">r</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span><span class="o">)</span><span class="err">⌋</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">digit</span> <span class="n">b</span> <span class="n">r</span> <span class="n">i</span> <span class="bp">*</span> <span class="n">b</span> <span class="err">^</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="bp">-</span><span class="n">i</span><span class="o">))</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="165971685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Numbers%20in%20base%20p/near/165971685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84831Numbersinbasep.html#165971685">Johan Commelin (May 18 2019 at 11:55)</a>:</h4>
+<p>I was wondering if we can formalise (something math-equivalent to):</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">multiplicity</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">p</span><span class="o">]</span>
+
+<span class="kn">section</span>
+<span class="kn">open</span> <span class="n">multiplicity</span> <span class="n">nat</span>
+
+<span class="kn">lemma</span> <span class="n">finite_nat_prime_iff</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite</span> <span class="n">p</span> <span class="n">i</span> <span class="bp">↔</span> <span class="n">i</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">finite_nat_iff</span><span class="o">,</span> <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">prime</span><span class="bp">.</span><span class="n">gt_one</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">),</span> <span class="n">h</span><span class="bp">⟩</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">finite_nat_choose_iff&#39;</span> <span class="o">(</span><span class="n">k</span> <span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite</span> <span class="n">p</span> <span class="o">(</span><span class="n">choose</span> <span class="o">(</span><span class="n">p</span><span class="err">^</span><span class="n">k</span><span class="o">)</span> <span class="n">i</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">i</span> <span class="bp">≤</span> <span class="n">p</span><span class="err">^</span><span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">finite_nat_iff</span><span class="o">,</span> <span class="n">split</span><span class="bp">;</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">by_contradiction</span> <span class="n">H</span><span class="o">,</span> <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_le</span><span class="o">,</span> <span class="n">choose_eq_zero_of_lt</span><span class="o">,</span> <span class="n">not_lt_zero</span><span class="o">,</span> <span class="bp">*</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">prime</span><span class="bp">.</span><span class="n">gt_one</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">)</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">choose_pos</span> <span class="n">h</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">multiplicity_choose_prime_pow</span> <span class="o">(</span><span class="n">k</span> <span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">ipos</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">ile</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">p</span><span class="err">^</span><span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">multiplicity</span> <span class="n">p</span> <span class="o">(</span><span class="n">choose</span> <span class="o">(</span><span class="n">p</span><span class="err">^</span><span class="n">k</span><span class="o">)</span> <span class="n">i</span><span class="o">))</span><span class="bp">.</span><span class="n">get</span> <span class="o">((</span><span class="n">finite_nat_choose_iff&#39;</span> <span class="n">p</span> <span class="n">k</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">ile</span><span class="o">)</span> <span class="bp">=</span>
+  <span class="n">k</span> <span class="bp">-</span> <span class="o">(</span><span class="n">multiplicity</span> <span class="n">p</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">get</span> <span class="o">((</span><span class="n">finite_nat_prime_iff</span> <span class="n">p</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">ipos</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
