@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Numbers in base p](84831Numbersinbasep.html) (1 message, latest: May 18 2019 at 07:02)
+
 * [apply_rules example](53597applyrulesexample.html) (16 messages, latest: May 17 2019 at 18:26)
 
 * [Manifolds](12382Manifolds.html) (24 messages, latest: May 17 2019 at 09:02)
