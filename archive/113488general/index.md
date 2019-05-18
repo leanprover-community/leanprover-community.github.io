@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (6 messages, latest: May 18 2019 at 15:33)
+
 * [Integral of a constant](02999Integralofaconstant.html) (41 messages, latest: May 18 2019 at 13:02)
 
 * [transitivity](39163transitivity.html) (10 messages, latest: May 18 2019 at 11:47)
-
-* [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (4 messages, latest: May 18 2019 at 06:59)
 
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
 
