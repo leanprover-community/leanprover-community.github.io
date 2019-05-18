@@ -10,17 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [-T50000 challenge](87130T50000challenge.html) (146 messages, latest: May 18 2019 at 01:30)
+* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
 
-* [Integral of a constant](02999Integralofaconstant.html) (31 messages, latest: May 18 2019 at 01:29)
+* [Integral of a constant](02999Integralofaconstant.html) (32 messages, latest: May 18 2019 at 02:10)
+
+* [-T50000 challenge](87130T50000challenge.html) (146 messages, latest: May 18 2019 at 01:30)
 
 * [cache-olean](72177cacheolean.html) (33 messages, latest: May 17 2019 at 19:07)
 
 * [what is a diamond?](58637whatisadiamond.html) (68 messages, latest: May 17 2019 at 18:02)
 
 * [Convention on composition order](18033Conventiononcompositionorder.html) (24 messages, latest: May 17 2019 at 14:30)
-
-* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (18 messages, latest: May 17 2019 at 13:08)
 
 * [tactic.basic](96649tacticbasic.html) (10 messages, latest: May 17 2019 at 06:39)
 
