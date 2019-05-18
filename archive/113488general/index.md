@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transitivity](39163transitivity.html) (10 messages, latest: May 18 2019 at 11:47)
+* [Integral of a constant](02999Integralofaconstant.html) (39 messages, latest: May 18 2019 at 12:58)
 
-* [Integral of a constant](02999Integralofaconstant.html) (38 messages, latest: May 18 2019 at 08:57)
+* [transitivity](39163transitivity.html) (10 messages, latest: May 18 2019 at 11:47)
 
 * [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (4 messages, latest: May 18 2019 at 06:59)
 
