@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
+* [Integral of a constant](02999Integralofaconstant.html) (33 messages, latest: May 18 2019 at 03:20)
 
-* [Integral of a constant](02999Integralofaconstant.html) (32 messages, latest: May 18 2019 at 02:10)
+* [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
 
 * [-T50000 challenge](87130T50000challenge.html) (146 messages, latest: May 18 2019 at 01:30)
 
