@@ -139,5 +139,45 @@ permalink: archive/113488general/18531coenatenat.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165825747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165825747">Johan Commelin (May 16 2019 at 16:35)</a>:</h4>
 <p>Ok... fine with me...</p>
 
+<a name="165980852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165980852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165980852">Johan Commelin (May 18 2019 at 16:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What is the reasoning behind simp-lemmas like this?<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/nat/enat.lean#L173" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/nat/enat.lean#L173">https://github.com/leanprover-community/mathlib/blob/master/src/data/nat/enat.lean#L173</a></p>
+
+<a name="165980913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165980913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165980913">Johan Commelin (May 18 2019 at 16:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">to_with_top_top</span> <span class="o">:</span> <span class="n">to_with_top</span> <span class="err">⊤</span> <span class="bp">=</span> <span class="err">⊤</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">to_with_top_top&#39;</span> <span class="o">[</span><span class="n">decidable</span> <span class="o">(</span><span class="err">⊤</span> <span class="o">:</span> <span class="n">enat</span><span class="o">)</span><span class="bp">.</span><span class="n">dom</span><span class="o">]</span> <span class="o">:</span> <span class="n">to_with_top</span> <span class="err">⊤</span> <span class="bp">=</span> <span class="err">⊤</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">convert</span> <span class="n">to_with_top_top</span>
+</pre></div>
+
+<a name="165980920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165980920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165980920">Johan Commelin (May 18 2019 at 16:20)</a>:</h4>
+<p>Why can't we just make the first lemma a simp-lemma, and remove the 2nd lemma?</p>
+
+<a name="165981125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165981125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165981125">Chris Hughes (May 18 2019 at 16:27)</a>:</h4>
+<p>Sometimes the <code>decidable top.dom</code> instance ends up not being defeq to <code>decidable_true</code> and then the first lemma won't work.</p>
+
+<a name="165981313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165981313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165981313">Johan Commelin (May 18 2019 at 16:32)</a>:</h4>
+<p>Aah, I see, thanks!</p>
+
+<a name="165981724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165981724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165981724">Johan Commelin (May 18 2019 at 16:42)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1048" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1048">#1048</a></p>
+
+<a name="165981743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165981743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165981743">Johan Commelin (May 18 2019 at 16:43)</a>:</h4>
+<p>Probably breaks other files...</p>
+
+<a name="165981753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165981753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165981753">Johan Commelin (May 18 2019 at 16:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you think these changes are fine? I had to replace a whole bunch of <code>rfl</code> proofs with more elaborate proofs.</p>
+
+<a name="165981798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20nat%20enat/near/165981798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18531coenatenat.html#165981798">Johan Commelin (May 18 2019 at 16:44)</a>:</h4>
+<p>If you think this is ok, then I'll fix the files that depend on <code>enat</code>.</p>
+
 
 {% endraw %}

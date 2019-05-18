@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (6 messages, latest: May 18 2019 at 15:33)
+* [coe nat enat](18531coenatenat.html) (39 messages, latest: May 18 2019 at 16:44)
 
-* [Integral of a constant](02999Integralofaconstant.html) (41 messages, latest: May 18 2019 at 13:02)
+* [Integral of a constant](02999Integralofaconstant.html) (42 messages, latest: May 18 2019 at 16:25)
+
+* [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (6 messages, latest: May 18 2019 at 15:33)
 
 * [transitivity](39163transitivity.html) (10 messages, latest: May 18 2019 at 11:47)
 
@@ -35,8 +37,6 @@ permalink: archive/113488general/index.html
 * [maximal/minimal elements](38749maximalminimalelements.html) (2 messages, latest: May 16 2019 at 22:21)
 
 * [nat.has_pow](34243nathaspow.html) (7 messages, latest: May 16 2019 at 18:38)
-
-* [coe nat enat](18531coenatenat.html) (30 messages, latest: May 16 2019 at 16:35)
 
 * [best practice for Lean code blocks inside LaTeX?](22483bestpracticeforLeancodeblocksinsideLaTeX.html) (3 messages, latest: May 16 2019 at 06:18)
 
