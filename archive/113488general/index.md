@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout and irreducibility](96863timeoutandirreducibility.html) (1 message, latest: May 19 2019 at 20:18)
+* [AI and theorem proving](41431AIandtheoremproving.html) (6 messages, latest: May 19 2019 at 21:57)
+
+* [timeout and irreducibility](96863timeoutandirreducibility.html) (7 messages, latest: May 19 2019 at 21:12)
 
 * [linarith argument parsing](09683linarithargumentparsing.html) (12 messages, latest: May 19 2019 at 14:24)
 
