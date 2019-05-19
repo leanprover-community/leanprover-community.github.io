@@ -943,5 +943,57 @@ I wonder if it might be possible to build a top-5 old_peak-get_peak_rss() delta,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166014326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166014326">Mario Carneiro (May 19 2019 at 09:04)</a>:</h4>
 <p>it could just be new material. We're always fighting the tide of general library growth</p>
 
+<a name="166016920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166016920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166016920">Sebastien Gouezel (May 19 2019 at 10:23)</a>:</h4>
+<p>I could decrase the compilation of <code>GH_dist_le_of_approx_subsets</code> from 50s to 5s on my computer by replacing two <code>linarith</code> calls by explicit computations. See <a href="https://github.com/leanprover-community/mathlib/issues/1052" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1052">#1052</a>.</p>
+
+<a name="166016971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166016971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166016971">Sebastien Gouezel (May 19 2019 at 10:24)</a>:</h4>
+<p>I tried first to avoid problems by telling <code>linarith</code> which equations it should look at, but I don't understand the syntax. Consider for instance</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">a</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">linarith</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>works, but if I use instead <code>linarith ha hb</code> it fails. While the docstring says <code>linarith h1 h2 h3 will only use hypotheses h1, h2, h3.</code></p>
+
+<a name="166017305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017305">Mario Carneiro (May 19 2019 at 10:34)</a>:</h4>
+<p>From my experience <code>ring</code> and <code>linarith</code> aren't usually bottlenecks; it's usually the <code>simp</code>ing they do in the preprocessing stage</p>
+
+<a name="166017394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017394">Keeley Hoek (May 19 2019 at 10:36)</a>:</h4>
+<p>I think Sebastien said that it got bad after the <code>is_def_eq</code> changes</p>
+
+<a name="166017395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017395">Keeley Hoek (May 19 2019 at 10:36)</a>:</h4>
+<p>What about <code>ring</code> and <code>ring!</code></p>
+
+<a name="166017404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017404">Mario Carneiro (May 19 2019 at 10:36)</a>:</h4>
+<p>I like that</p>
+
+<a name="166017422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017422">Keeley Hoek (May 19 2019 at 10:37)</a>:</h4>
+<p>That way you when you're angry that <code>linarith</code> can't solve <code>id x = x</code> you can take it out on lean when you press <code>!</code></p>
+
+<a name="166017433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017433">Keeley Hoek (May 19 2019 at 10:38)</a>:</h4>
+<p>:D</p>
+
+<a name="166017782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017782">Rob Lewis (May 19 2019 at 10:47)</a>:</h4>
+<p>The <code>!</code> notation is better than another config option. In both <code>ring</code> and <code>linarith</code>, it will take a little bit of work to propagate that flag from the tactic call to the place where it's actually used. But it's a refactor that's worth doing.</p>
+
+<a name="166017832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166017832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166017832">Rob Lewis (May 19 2019 at 10:48)</a>:</h4>
+<p>More generally, though. If this change to <code>linarith</code> causes this kind of slowdown, there's probably something missing an <code>irreducible</code> attribute.</p>
+
+<a name="166018128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018128">Rob Lewis (May 19 2019 at 10:56)</a>:</h4>
+<p>As for restricting <code>linarith</code> to only certain hypotheses: iirc, it won't use the goal if you do this. It will just try to find a contradiction with <code>ha, hb</code>. <code>apply le_of_not_gt, intro hc, linarith ha hb hc</code> would work. I remember noticing this a while back and thought I changed it but maybe I never got around to it.</p>
+
 
 {% endraw %}
