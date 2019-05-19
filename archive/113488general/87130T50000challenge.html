@@ -995,5 +995,40 @@ I wonder if it might be possible to build a top-5 old_peak-get_peak_rss() delta,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018128">Rob Lewis (May 19 2019 at 10:56)</a>:</h4>
 <p>As for restricting <code>linarith</code> to only certain hypotheses: iirc, it won't use the goal if you do this. It will just try to find a contradiction with <code>ha, hb</code>. <code>apply le_of_not_gt, intro hc, linarith ha hb hc</code> would work. I remember noticing this a while back and thought I changed it but maybe I never got around to it.</p>
 
+<a name="166018280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018280">Mario Carneiro (May 19 2019 at 11:00)</a>:</h4>
+<p>What about using <code>linarith h1 h2 \|-</code> for this?</p>
+
+<a name="166018371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018371">Rob Lewis (May 19 2019 at 11:03)</a>:</h4>
+<p>That would be ideal. It takes slightly more work to parse because it's no longer a list of names.</p>
+
+<a name="166018604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018604">Rob Lewis (May 19 2019 at 11:10)</a>:</h4>
+<p>By the way, any idea what's up with Travis here? <a href="https://github.com/leanprover-community/mathlib/pull/1043" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1043">https://github.com/leanprover-community/mathlib/pull/1043</a> I'm certain the original PR compiled, and I don't see why Mario's changes should change that.</p>
+
+<a name="166018695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018695">Mario Carneiro (May 19 2019 at 11:12)</a>:</h4>
+<p>you could just use the <code>loc</code> parser</p>
+
+<a name="166018708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018708">Mario Carneiro (May 19 2019 at 11:13)</a>:</h4>
+<p>It timed out. I restarted the build</p>
+
+<a name="166018924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166018924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166018924">Rob Lewis (May 19 2019 at 11:18)</a>:</h4>
+<blockquote>
+<p>you could just use the <code>loc</code> parser</p>
+</blockquote>
+<p>That takes an <code>at</code>, right? <code>linarith at h1 h2 |-</code> sounds strange. But yes, that can be adapted.</p>
+
+<a name="166019613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166019613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166019613">Rob Lewis (May 19 2019 at 11:39)</a>:</h4>
+<p>There's something entirely different going on in the <code>GH_dist_le_of_approx_subsets</code> proof. Even if you clear everything irrelevant from the context, <code>linarith</code> (with no arguments) still fails. With the same goal and context in a separate proof right above, it succeeds.</p>
+
+<a name="166019977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166019977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166019977">Sebastien Gouezel (May 19 2019 at 11:49)</a>:</h4>
+<p><code>attribute [irreducible] Hausdorff_dist</code> makes it instantaneous. I will add this and keep the <code>linarith</code> calls, instead of the current version of <a href="https://github.com/leanprover-community/mathlib/issues/1052" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1052">#1052</a>.</p>
+
 
 {% endraw %}
