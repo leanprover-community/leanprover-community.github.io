@@ -1,0 +1,46 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/09683linarithargumentparsing.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html">linarith argument parsing</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166024275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20argument%20parsing/near/166024275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html#166024275">Rob Lewis (May 19 2019 at 13:49)</a>:</h4>
+<p>While making some changes discussed in the -T50000 thread, I realized the linarith argument parsing is wrong: </p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">x</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="n">h</span> <span class="kn">using</span> <span class="o">[</span><span class="n">f</span> <span class="n">a</span><span class="o">]</span>
+</pre></div>
+
+
+<p>fails, I guess because <code>using</code> is confused for an identifier.</p>
+<p>This is the opportunity to suggest a better pattern. I was thinking <code>linarith [t1, t2, t3]</code> could replace the current <code>linarith using [t1, t2, t3]</code>, and <code>linarith only [h1, h2, h3, t1, t2, t3]</code> could be a working version of <code>linarith h1 h2 h3 using [t1, t2, t3]</code>. The only problem: <code>linarith h1 h2 h3</code> doesn't include the goal by default, and I wanted to add <code>|-</code> for the option to do that. But <code>linarith only [h1, h2, h3, |-]</code> is a pattern we don't use anywhere else.</p>
+
+<a name="166024276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20argument%20parsing/near/166024276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html#166024276">Rob Lewis (May 19 2019 at 13:49)</a>:</h4>
+<p>Any better ideas?</p>
+
+<a name="166024413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20argument%20parsing/near/166024413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html#166024413">Mario Carneiro (May 19 2019 at 13:53)</a>:</h4>
+<p>why not always include the goal?</p>
+
+<a name="166024622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20argument%20parsing/near/166024622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html#166024622">Rob Lewis (May 19 2019 at 13:58)</a>:</h4>
+<p>Just because, if the user says to only use certain hypotheses, it feels presumptuous to throw in the goal anyway. It's possible using the goal could slow things down. Although probably pretty rarely.</p>
+
+<a name="166024626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20argument%20parsing/near/166024626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html#166024626">Rob Lewis (May 19 2019 at 13:58)</a>:</h4>
+<p>As far as the notation goes, that's the cleanest solution.</p>
+
+<a name="166024642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linarith%20argument%20parsing/near/166024642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/09683linarithargumentparsing.html#166024642">Rob Lewis (May 19 2019 at 13:59)</a>:</h4>
+<p>And I guess if you really don't want the goal then <code>exfalso; linarith only [h1, h2]</code> will get rid of it.</p>
+
+
+{% endraw %}
