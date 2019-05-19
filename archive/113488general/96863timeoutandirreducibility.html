@@ -15,5 +15,29 @@ permalink: archive/113488general/96863timeoutandirreducibility.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166038456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166038456">Patrick Massot (May 19 2019 at 20:18)</a>:</h4>
 <p>I don't have much time for careful Zulip reading those days. Could someone write a summary of what has been learned about slow elaboration and also about irreducible definitions? Are there approximate rules one could list?</p>
 
+<a name="166040086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166040086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166040086">Rob Lewis (May 19 2019 at 21:02)</a>:</h4>
+<p>We should be better about sealing off definitions by marking them as irreducible after the interface is finished. Irreducible doesn't mean completely opaque, you can always explicitly unfold it. But we're finding slow proofs that are caused by the elaborator doing way too much unfolding. If you run into a proof that seems like it should be fast, but isn't, see if tagging something as irreducible helps it along. This can show up especially when using tactics like <code>assumption</code>, which try to unify lots of things with the goal and depend on that failing quickly.</p>
+
+<a name="166040166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166040166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166040166">Kevin Buzzard (May 19 2019 at 21:03)</a>:</h4>
+<p>I remember a while ago when people decided that the reals were better off irreducible, and I was thinking "yeah, I mean, do I even care if they're Cauchy sequences of rationals or Dedekind cuts? Why would anyone ever care about that ever?". Is it the same sort of phenomenon?</p>
+
+<a name="166040216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166040216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166040216">Rob Lewis (May 19 2019 at 21:04)</a>:</h4>
+<p>Yes, it's exactly that.</p>
+
+<a name="166040220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166040220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166040220">Rob Lewis (May 19 2019 at 21:04)</a>:</h4>
+<p>For some things, the definitional reduction is useful and shouldn't be hidden.</p>
+
+<a name="166040238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166040238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166040238">Rob Lewis (May 19 2019 at 21:05)</a>:</h4>
+<p>But lots of things have an interface that, once it's there, removes the need to know how the thing is actually defined.</p>
+
+<a name="166040508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20and%20irreducibility/near/166040508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96863timeoutandirreducibility.html#166040508">Chris Hughes (May 19 2019 at 21:12)</a>:</h4>
+<p>And we still mark things as irreducible when we do care about the definition (we care that exp is a power series), because I guess we don't care about it often enough, and there's an equation lemma we can still use.</p>
+
 
 {% endraw %}
