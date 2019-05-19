@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [rsimp](01036rsimp.html) (3 messages, latest: May 19 2019 at 00:36)
+* [coe nat enat](18531coenatenat.html) (42 messages, latest: May 19 2019 at 04:26)
 
-* [coe nat enat](18531coenatenat.html) (40 messages, latest: May 19 2019 at 00:28)
+* [rsimp](01036rsimp.html) (3 messages, latest: May 19 2019 at 00:36)
 
 * [Integral of a constant](02999Integralofaconstant.html) (45 messages, latest: May 19 2019 at 00:11)
 
