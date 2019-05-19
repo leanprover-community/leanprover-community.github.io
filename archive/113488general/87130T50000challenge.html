@@ -1030,5 +1030,45 @@ I wonder if it might be possible to build a top-5 old_peak-get_peak_rss() delta,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166019977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166019977">Sebastien Gouezel (May 19 2019 at 11:49)</a>:</h4>
 <p><code>attribute [irreducible] Hausdorff_dist</code> makes it instantaneous. I will add this and keep the <code>linarith</code> calls, instead of the current version of <a href="https://github.com/leanprover-community/mathlib/issues/1052" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1052">#1052</a>.</p>
 
+<a name="166020536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020536">Sebastien Gouezel (May 19 2019 at 12:05)</a>:</h4>
+<p>Done. This is more satisfactory, as the proofs with <code>linarith</code> are clearly better, and moreover this was just a symptom of a problem that would have shown up again later on.</p>
+
+<a name="166020671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020671">Rob Lewis (May 19 2019 at 12:08)</a>:</h4>
+<p>As for the other issue here: the type of <code>δ0</code> is actually a metavariable. The <code>refine</code> call at the very first line never instantiates it. We'll have to add calls to <code>instantiate_mvars</code> in <code>linarith</code>. I think we saw something similar in <code>ring</code> a while back.</p>
+
+<a name="166020812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020812">Sebastien Gouezel (May 19 2019 at 12:12)</a>:</h4>
+<p>Where it the other issue? The original proof (with several calls to <code>linarith</code>) works fine just by making <code>Hausdorff_dist</code> irreducible and no other change.</p>
+
+<a name="166020829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020829">Sebastien Gouezel (May 19 2019 at 12:13)</a>:</h4>
+<p>In particular, <code>linarith</code> is able to use <code>δ0</code> just fine.</p>
+
+<a name="166020900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020900">Rob Lewis (May 19 2019 at 12:15)</a>:</h4>
+<p>I started looking at your changes to see what needed to be irreducible. The first thing I tried was clearing all the irrelevant stuff:</p>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">I5</span> <span class="o">:</span> <span class="n">Hausdorff_dist</span> <span class="o">(</span><span class="n">Fl</span> <span class="err">&#39;&#39;</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">Fr</span> <span class="err">&#39;&#39;</span> <span class="o">(</span><span class="n">range</span> <span class="err">Φ</span><span class="o">))</span> <span class="bp">≤</span> <span class="n">ε2</span><span class="bp">/</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">δ</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">Hausdorff_dist_le_of_mem_dist</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">clear</span> <span class="n">I4</span> <span class="n">I3</span> <span class="n">I2</span> <span class="n">I1</span> <span class="n">Il</span> <span class="n">Ir</span> <span class="n">Fr</span> <span class="n">Fl</span> <span class="bp">_</span><span class="n">inst_7</span> <span class="n">this</span> <span class="n">sne</span> <span class="n">hs</span> <span class="n">hs&#39;</span> <span class="n">H</span> <span class="n">h</span> <span class="n">Dxs</span>  <span class="bp">_</span><span class="n">inst</span> <span class="n">hxs</span> <span class="n">xα</span> <span class="n">xs</span> <span class="err">Φ</span> <span class="n">s</span> <span class="n">ε1</span> <span class="n">ε3</span> <span class="bp">_</span><span class="n">inst_6</span> <span class="bp">_</span><span class="n">inst_5</span> <span class="bp">_</span><span class="n">inst_4</span> <span class="bp">_</span><span class="n">inst_3</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="n">β</span> <span class="n">α</span><span class="o">,</span>
+      <span class="n">linarith</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>This fails, even though it works elsewhere with the exact same context and goal.</p>
+
+<a name="166020956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020956">Rob Lewis (May 19 2019 at 12:16)</a>:</h4>
+<p>It works if you <code>revert ε2 δ, intros,</code> before <code>linarith</code>, and printing the raw format of the type of <code>δ0</code> shows it's a metavar.</p>
+
+<a name="166020975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166020975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166020975">Rob Lewis (May 19 2019 at 12:17)</a>:</h4>
+<p>But that's curious that <code>linarith</code> manages to use it in the improved proof. It must get instantiated somewhere.</p>
+
+<a name="166021401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166021401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166021401">Rob Lewis (May 19 2019 at 12:29)</a>:</h4>
+<p>Yep. At the <code>linarith</code> call in the line <code> refine Hausdorff_dist_le_of_mem_dist  (by linarith) _ _</code>, the type of <code>δ0</code> has been instantiated. If you change this to <code>refine Hausdorff_dist_le_of_mem_dist _ _ _</code>, <code>linarith</code> fails on the first goal, because type of <code>δ0</code> is still an mvar.</p>
+
 
 {% endraw %}
