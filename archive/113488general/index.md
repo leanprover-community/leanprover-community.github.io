@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (6 messages, latest: May 19 2019 at 21:57)
+* [AI and theorem proving](41431AIandtheoremproving.html) (11 messages, latest: May 19 2019 at 22:36)
 
 * [timeout and irreducibility](96863timeoutandirreducibility.html) (7 messages, latest: May 19 2019 at 21:12)
 
