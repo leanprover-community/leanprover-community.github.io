@@ -10,6 +10,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Patrick's course](67258Patrickscourse.html) (1 message, latest: May 19 2019 at 20:34)
+
 * [format_lean](19241formatlean.html) (2 messages, latest: Apr 16 2019 at 21:32)
 
 * [Papers](32460Papers.html) (3 messages, latest: Mar 06 2019 at 09:57)
