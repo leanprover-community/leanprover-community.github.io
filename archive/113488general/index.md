@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [-T50000 challenge](87130T50000challenge.html) (181 messages, latest: May 19 2019 at 12:29)
+* [linarith argument parsing](09683linarithargumentparsing.html) (6 messages, latest: May 19 2019 at 13:59)
 
-* [coe nat enat](18531coenatenat.html) (43 messages, latest: May 19 2019 at 07:15)
+* [coe nat enat](18531coenatenat.html) (44 messages, latest: May 19 2019 at 13:14)
+
+* [-T50000 challenge](87130T50000challenge.html) (181 messages, latest: May 19 2019 at 12:29)
 
 * [rsimp](01036rsimp.html) (3 messages, latest: May 19 2019 at 00:36)
 
