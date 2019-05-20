@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [issues](89373issues.html) (24 messages, latest: May 20 2019 at 10:51)
+* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (1 message, latest: May 20 2019 at 11:41)
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (13 messages, latest: May 20 2019 at 04:54)
+* [AI and theorem proving](41431AIandtheoremproving.html) (14 messages, latest: May 20 2019 at 11:06)
+
+* [issues](89373issues.html) (24 messages, latest: May 20 2019 at 10:51)
 
 * [(no topic)](79918notopic.html) (51 messages, latest: May 20 2019 at 04:52)
 

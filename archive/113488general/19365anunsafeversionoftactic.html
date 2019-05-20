@@ -1,0 +1,28 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/19365anunsafeversionoftactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html">an unsafe version of tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166077591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166077591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166077591">Edward Ayers (May 20 2019 at 11:41)</a>:</h4>
+<p>Hello all, I've been playing with Lean 3's source a lot recently and I am toying with exposing some of the datastructures that Lean uses to implement the <code>tactic</code> monad. For example <code>metavar_context</code>, <code>local_context</code>, <code>type_context_old</code>.</p>
+<p>Afaik, the reason why these are not available in the Lean VM is:<br>
+1. there are some caching optimisations in <code>tactic</code> that will be hard to get right if you are allowed to see its guts.<br>
+2. the abstraction offered by <code>tactic</code> is that it is very hard for the result expression to be badly typed according to the kernel. That is, if I only use <code>tactic</code> builtins and it succeeds, then it is highly likely that I won't have a strange type error in the declaration.<br>
+3. The user model gets more complicated, you have not only metavariables but temporary metavariables which live in special scopes and so on. <br>
+However, some of my automation projects could be made much faster and easier to write by working with these deeper constructs instead of through <code>tactic</code>.  For example I want to hold lots of different metavariable contexts and be able to unify terms within specific contexts, which is what temporary mvars were invented for. At the moment I do this by having lots of <code>tactic_state</code>s flying around, but this is bad for caching since the cache resets every time you use <code>&lt;|&gt;</code> so unification is really slow. I would also love to be able to add locals directly to the context and use delayed abstraction without having to use <code>intro</code>. </p>
+<p>I don't think it is sensible to simply add new builtins on to <code>tactic.lean</code> though, because now we have lost some safety as described in reason 2. I am wondering if there is a demand to do this and if there is, what would be a good way to do it that keeps with the functional paradigm while not breaking <code>tactic</code> and also ideally with some of the same caching that <code>tactic</code> enjoys.</p>
+<p>I've got an experiment going on <a href="https://github.com/leanprover-community/lean/tree/ctxt_manip" target="_blank" title="https://github.com/leanprover-community/lean/tree/ctxt_manip">https://github.com/leanprover-community/lean/tree/ctxt_manip</a><br>
+See <a href="https://github.com/leanprover-community/lean/commit/e63221a527ac485843e1002a3ff98450807092de#diff-49385857c0541f8c567b0d3d000d6665" target="_blank" title="https://github.com/leanprover-community/lean/commit/e63221a527ac485843e1002a3ff98450807092de#diff-49385857c0541f8c567b0d3d000d6665">this file</a> where I've reimplemented <code>intro</code> as <code>my_intro</code> using some new builtins.</p>
+<p>I recall <span class="user-mention" data-user-id="110026">@Simon Hudon</span> saying that people have already talked about this, but I don't know where I would find this discussion.</p>
+
+
+{% endraw %}
