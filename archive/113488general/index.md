@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean installation](13267leaninstallation.html) (4 messages, latest: May 20 2019 at 20:35)
+
 * [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
 
 * [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
-
-* [lean installation](13267leaninstallation.html) (3 messages, latest: May 20 2019 at 17:21)
 
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (6 messages, latest: May 20 2019 at 17:03)
 
