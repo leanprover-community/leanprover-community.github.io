@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [apply_rules example](53597applyrulesexample.html) (18 messages, latest: May 20 2019 at 13:50)
+
 * [←add_assoc](44346addassoc.html) (8 messages, latest: May 19 2019 at 08:04)
 
 * [Numbers in base p](84831Numbersinbasep.html) (11 messages, latest: May 18 2019 at 20:52)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3090 messages, latest: May 18 2019 at 16:55)
-
-* [apply_rules example](53597applyrulesexample.html) (16 messages, latest: May 17 2019 at 18:26)
 
 * [Manifolds](12382Manifolds.html) (24 messages, latest: May 17 2019 at 09:02)
 

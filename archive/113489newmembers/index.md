@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Tutorial Exercise](25037TutorialExercise.html) (59 messages, latest: May 20 2019 at 13:21)
+
 * [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (3 messages, latest: May 20 2019 at 11:48)
 
 * [the projective space](54057theprojectivespace.html) (171 messages, latest: May 19 2019 at 17:39)
@@ -33,8 +35,6 @@ permalink: archive/113489newmembers/index.html
 * [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (47 messages, latest: May 12 2019 at 23:14)
 
 * [Induction](51886Induction.html) (178 messages, latest: May 12 2019 at 16:29)
-
-* [Tutorial Exercise](25037TutorialExercise.html) (58 messages, latest: May 12 2019 at 08:00)
 
 * [Kind of a vague question](81837Kindofavaguequestion.html) (15 messages, latest: May 10 2019 at 02:48)
 
