@@ -145,5 +145,115 @@ continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/165924476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#165924476">Joseph Corneli (May 17 2019 at 18:26)</a>:</h4>
 <p>I posted the code in the new members list.</p>
 
+<a name="166086086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166086086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166086086">Joseph Corneli (May 20 2019 at 13:47)</a>:</h4>
+<p>... and here's some revised code that looks very close to working.  <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  it gets up to an application of <code>exact</code> but for some reason that fails and the goal doesn't close.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">core</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">defs</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="c1">----------------------</span>
+<span class="c">/-</span><span class="cm"> Attempt to use `refine` alongside `apply` -/</span>
+<span class="kn">namespace</span> <span class="n">sin_sin</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">refine_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;fail&quot;</span><span class="o">,</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span><span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;refine, initial target:&quot;</span><span class="o">,</span>
+                <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">refine</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)),</span>
+                <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;REFINE: {h}&quot;</span><span class="o">),</span>
+                <span class="n">pure</span><span class="o">()</span> <span class="bp">&lt;|&gt;</span> <span class="n">refine_list_expr</span> <span class="n">t</span> <span class="o">}</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">exact_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;fail&quot;</span><span class="o">,</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span><span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;exact, initial target:&quot;</span><span class="o">,</span>
+                <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span>
+                <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;EXACT: {h}&quot;</span><span class="o">),</span>
+                <span class="c1">-- Some problem here...</span>
+                <span class="n">exact</span> <span class="n">h</span><span class="o">,</span>
+                <span class="n">trace</span> <span class="s2">&quot;exact, final target:&quot;</span><span class="o">,</span>
+                <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span>
+                <span class="n">return</span> <span class="o">()</span> <span class="bp">&lt;|&gt;</span> <span class="n">exact_list_expr</span> <span class="n">t</span> <span class="o">}</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span> <span class="n">trace</span> <span class="s2">&quot;apply, initial target:&quot;</span><span class="o">,</span>
+                 <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span>
+                 <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;APPLY: {h}&quot;</span><span class="o">)</span> <span class="o">,</span>
+                 <span class="n">interactive</span><span class="bp">.</span><span class="n">concat_tags</span> <span class="o">(</span><span class="n">apply</span> <span class="n">h</span><span class="o">),</span> <span class="n">pure</span><span class="o">()</span> <span class="bp">&lt;|&gt;</span> <span class="n">apply_list_expr</span> <span class="n">t</span> <span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">iterate_at_most_on_all_goals&#39;</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span>        <span class="n">tac</span> <span class="o">:=</span> <span class="n">trace</span> <span class="s2">&quot;maximal iterations reached&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">tac</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">all_goals</span> <span class="err">$</span> <span class="o">(</span><span class="n">do</span> <span class="n">tac</span><span class="o">,</span> <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;{n}&quot;</span><span class="o">),</span> <span class="n">iterate_at_most_on_all_goals&#39;</span> <span class="n">n</span> <span class="n">tac</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">skip</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">iterate_at_most_on_subgoals&#39;</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span>        <span class="n">tac</span> <span class="o">:=</span> <span class="n">trace</span> <span class="s2">&quot;maximal iterations reached&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">tac</span> <span class="o">:=</span> <span class="n">focus1</span> <span class="o">(</span><span class="n">do</span> <span class="n">tac</span><span class="o">,</span> <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;{n}&quot;</span><span class="o">),</span> <span class="n">iterate_at_most_on_all_goals&#39;</span> <span class="n">n</span> <span class="n">tac</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_rules_with_refine</span> <span class="o">(</span><span class="n">apps</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">refs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">exas</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">a</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">apps</span><span class="o">,</span>
+   <span class="n">r</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">refs</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">exas</span><span class="o">,</span>
+   <span class="n">iterate_at_most_on_subgoals&#39;</span> <span class="n">n</span> <span class="o">(</span><span class="n">assumption</span> <span class="bp">&lt;|&gt;</span>
+                                  <span class="c1">-- guess: we can refine iff the expression is a lambda?</span>
+                                  <span class="c1">-- oh, but we need to peel off the &quot;continuous&quot; part</span>
+                                  <span class="o">(</span><span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span><span class="o">,</span>
+                                      <span class="n">trace</span> <span class="n">t</span><span class="o">,</span>
+                                      <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">app_arg</span> <span class="n">t</span><span class="o">,</span>
+                                        <span class="k">if</span> <span class="n">expr</span><span class="bp">.</span><span class="n">is_lambda</span> <span class="n">a</span> <span class="k">then</span> <span class="n">refine_list_expr</span> <span class="n">r</span>
+                                        <span class="k">else</span> <span class="n">fail</span> <span class="s2">&quot;can&#39;t refine&quot;</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+                                  <span class="o">(</span><span class="n">sin_sin</span><span class="bp">.</span><span class="n">apply_list_expr</span> <span class="n">a</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+                                  <span class="o">(</span><span class="n">sin_sin</span><span class="bp">.</span><span class="n">exact_list_expr</span> <span class="n">e</span><span class="o">))</span>
+
+<span class="kn">end</span> <span class="n">sin_sin</span>
+<span class="c1">----------------------</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">lean</span>
+<span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_rules_with_refine_interactive</span> <span class="o">(</span><span class="n">as</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span>
+                                             <span class="o">(</span><span class="n">rs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span>
+                                             <span class="o">(</span><span class="n">es</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span>
+                                             <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="mi">50</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">sin_sin</span><span class="bp">.</span><span class="n">apply_rules_with_refine</span> <span class="n">as</span> <span class="n">rs</span> <span class="n">es</span> <span class="n">n</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+
+<span class="c1">-- * sin(sin(x)) and friends are continuous on ℝ</span>
+
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span><span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">apply_rules_with_refine_interactive</span> <span class="o">[</span><span class="n">continuous_sin</span><span class="o">]</span> <span class="o">[</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span><span class="o">]</span> <span class="o">[</span><span class="n">continuous_id</span><span class="o">]</span> <span class="mi">30</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous_sin_sin</span>
+
+<span class="c1">-- Note, with latest version of mathlib, this proof is slightly different from earlier versions</span>
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">continuous_id</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous_sin_sin_sin</span>
+</pre></div>
+
+<a name="166086384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166086384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166086384">Joseph Corneli (May 20 2019 at 13:50)</a>:</h4>
+<p>You'll see I separated out the rules for <code>apply</code>, <code>refine</code>, and <code>exact</code>, and that here there's just one rule available for each such step.  So obvs. this preliminary to anything more general.</p>
+
 
 {% endraw %}
