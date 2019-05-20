@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
+
+* [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
+
 * [lean installation](13267leaninstallation.html) (3 messages, latest: May 20 2019 at 17:21)
 
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (6 messages, latest: May 20 2019 at 17:03)
@@ -157,8 +161,6 @@ permalink: archive/113488general/index.html
 * [eblast](79292eblast.html) (29 messages, latest: May 01 2019 at 13:27)
 
 * [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (30 messages, latest: May 01 2019 at 13:19)
-
-* [library_search](97355librarysearch.html) (19 messages, latest: Apr 30 2019 at 18:27)
 
 * [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (28 messages, latest: Apr 30 2019 at 18:20)
 
