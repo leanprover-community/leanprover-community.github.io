@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [issues](89373issues.html) (19 messages, latest: May 20 2019 at 09:55)
+* [issues](89373issues.html) (24 messages, latest: May 20 2019 at 10:51)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (13 messages, latest: May 20 2019 at 04:54)
 
