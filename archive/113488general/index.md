@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (5 messages, latest: May 20 2019 at 16:21)
+* [lean installation](13267leaninstallation.html) (3 messages, latest: May 20 2019 at 17:21)
+
+* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (6 messages, latest: May 20 2019 at 17:03)
 
 * [dependencies](91432dependencies.html) (2 messages, latest: May 20 2019 at 15:15)
 

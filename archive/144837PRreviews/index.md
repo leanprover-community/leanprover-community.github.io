@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1066 Battle of Hastings](388831066BattleofHastings.html) (2 messages, latest: May 20 2019 at 17:43)
+
 * [lean --export problems with #999](60299leanexportproblemswith999.html) (12 messages, latest: May 18 2019 at 01:41)
 
 * [#1029 group conjugates](676321029groupconjugates.html) (34 messages, latest: May 17 2019 at 05:05)
