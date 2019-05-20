@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [issues](89373issues.html) (4 messages, latest: May 20 2019 at 02:08)
+* [AI and theorem proving](41431AIandtheoremproving.html) (13 messages, latest: May 20 2019 at 04:54)
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (12 messages, latest: May 19 2019 at 23:21)
+* [(no topic)](79918notopic.html) (51 messages, latest: May 20 2019 at 04:52)
+
+* [issues](89373issues.html) (4 messages, latest: May 20 2019 at 02:08)
 
 * [timeout and irreducibility](96863timeoutandirreducibility.html) (7 messages, latest: May 19 2019 at 21:12)
 
@@ -951,8 +953,6 @@ permalink: archive/113488general/index.html
 * [List of lean repositories](47066Listofleanrepositories.html) (2 messages, latest: Jan 08 2019 at 14:12)
 
 * [Cubical HoTT Library](30056CubicalHoTTLibrary.html) (4 messages, latest: Jan 08 2019 at 04:20)
-
-* [(no topic)](79918notopic.html) (50 messages, latest: Jan 07 2019 at 17:24)
 
 * [have in mathlib](58237haveinmathlib.html) (11 messages, latest: Jan 05 2019 at 12:31)
 

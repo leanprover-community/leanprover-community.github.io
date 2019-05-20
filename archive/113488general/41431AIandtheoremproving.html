@@ -72,5 +72,134 @@ permalink: archive/113488general/41431AIandtheoremproving.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AI%20and%20theorem%20proving/near/166045274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41431AIandtheoremproving.html#166045274">Jesse Michael Han (May 19 2019 at 23:21)</a>:</h4>
 <p>This is a nice summary. It would be nice to compare the rlCoP-style approach of guiding tableaux/superposition calculus proof search with the <code>tidy_on_steroids</code> approach of TacticToe/HOList, but it doesn't seem like they've been implemented for the same systems yet.</p>
 
+<a name="166056603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/AI%20and%20theorem%20proving/near/166056603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41431AIandtheoremproving.html#166056603">Jason Rute (May 20 2019 at 04:54)</a>:</h4>
+<p>The short answer to your question is that the main ideas of the systems are similar.  Connection tableau or tactic-goals, it is basically the same idea.  We progressively modify the proof goal until it is solved.  The devil is in the details.  These details include generating human data by recording proofs and hooking up the theorem prover to a machine learning library.  Even after that, there are a number of challenges with learning tactics since they take arguments and that can greatly expand your search space.</p>
+<p><strong>rlCoP</strong></p>
+<ul>
+<li>Logic: Classical FOL</li>
+<li>Search space: <ul>
+<li>States: Connection tableau</li>
+<li>Actions: Inference rules (cut-free so limited set of valid rules to choose from)</li>
+</ul>
+</li>
+<li>Search algorithm:<ul>
+<li>AlphaZero style Monte Carlo tree search (with learned policy/value)</li>
+</ul>
+</li>
+<li>Machine learning method and training algorithm:<ul>
+<li>Hand-engineered features fed into XGBoost</li>
+<li>AlphaZero style reinforcement learning</li>
+<li>It was given first order statements to solve from a list of problems. If it could solve them, then it was rewarded, else punished.  (This is not exactly true, especially for the policy.)</li>
+</ul>
+</li>
+<li>Dataset: Miz40<ul>
+<li>Only the statements, not the proofs.</li>
+<li>It used RL to learn proofs.</li>
+</ul>
+</li>
+<li>What prevents this from being applied to Lean?<ul>
+<li>If used as a first order theorem prover, it would have to be ported from OCaml to Lean. (The most difficult would be the bindings to a machine learning tool to do XGBoost.)</li>
+<li>If used as a tactic theorem prover,  the training method is very extensible to tactics and goals.  The main differences are:<ul>
+<li>The search space with tactics isn’t necessarily cut-free so it can be quite larger, but it might be possible to fix a smaller subset of tactics (and tactic arguments).</li>
+<li>One needs to redo the hand-engineered features (and obviously the RL training).</li>
+<li>One needs a good diverse set of training problems of varying difficulty.  (Just theorem statements, not proofs.)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>TacticToe</strong></p>
+<ul>
+<li>System: HOL4 tactics</li>
+<li>Search space:<ul>
+<li>States: Lists of open goals (plus meta information such as how many times each tactic has been applied)</li>
+<li>Actions: Tactics (but this is complicated since tactics have arguments and tactics may fail or do nothing)</li>
+</ul>
+</li>
+<li>Search algorithm:<ul>
+<li>AlphaZero style Monte Carlo tree search (with policy/value)</li>
+<li>The policy and value cover special tactics like applying an ATP or applying tactics which take arguments.</li>
+</ul>
+</li>
+<li>Machine learning method and training algorithm:<ul>
+<li>Curated database of tactics</li>
+<li>Hand engineered “predictor” features</li>
+<li>“Learning” means creating and improving this database</li>
+<li>There is a lot I don’t understand yet about the learning step</li>
+<li>Policy / value are based on how similar the current tactic / goal is to what is in the database based on the hand-engineered predictor features.</li>
+</ul>
+</li>
+<li>Dataset: <ul>
+<li>“Human proofs” (I assume the HOL4 library, with proper proof recording)</li>
+</ul>
+</li>
+<li>What prevents this from being applied to Lean?<ul>
+<li>It is probably mostly just engineering, but there is a lot of engineering involved.</li>
+<li>I don’t know if the differences in logic really matter.</li>
+</ul>
+</li>
+</ul>
+<p><em>GamePad</em></p>
+<ul>
+<li>System: Coq tactics</li>
+<li>Search space:<ul>
+<li>States: Lists of open goals</li>
+<li>Actions: Tactics (they didn’t deal with the complicated case of the have tactic or the rewrite tactic which take arguments)</li>
+</ul>
+</li>
+<li>Search algorithm:<ul>
+<li>The GamePad baselines don’t have a proof search, but the whole point of GamePad it is a framework for one two build machine learning tools for Coq such as Monte Carlo tree search.</li>
+<li>While they don’t do full theorem proving, they do predict tactics used in human proofs and proof evaluation (number of steps left in the proof) which could be used for a tree search algorithm.</li>
+</ul>
+</li>
+<li>Machine learning method and training algorithm:<ul>
+<li>Recursive tree neural networks learn embeddings (feature vectors encoding information) for terms, formulas, goals, etc.</li>
+<li>Tried a number of machine learning methods (SVM, GRU, LSTM) for the prediction and evaluation tasks. </li>
+<li>Trained with supervised learning</li>
+</ul>
+</li>
+<li>Dataset: <ul>
+<li>Coq Library, Feit Thompson</li>
+</ul>
+</li>
+<li>What prevents this from being applied to Lean?<ul>
+<li>This is closest to Lean in logic.  Again, it’s a lot of engineering.  </li>
+<li>Also, there is no prover built yet.  This is more of a learning framework than a final product.  (The goal is for others to work in this framework and beat their baselines.)</li>
+</ul>
+</li>
+</ul>
+<p><em>HOList</em></p>
+<ul>
+<li>System: HOL Light tactics</li>
+<li>Search space:<ul>
+<li>States: Goal (set of subgoals if I am not mistaken)</li>
+<li>Actions: Tactics (both tactic and premise argument)</li>
+</ul>
+</li>
+<li>Search algorithm:<ul>
+<li>Breath first search</li>
+<li>Limit on the number of tactic actions from each goal</li>
+<li>Tactics are ranked by neural network policy</li>
+<li>Again, this baseline algorithm is designed to be improved by other users.</li>
+</ul>
+</li>
+<li>Machine learning method and training algorithm:<ul>
+<li>Neural network embeddings for goals and premises.  (I think they tried both convolutional NNs and WaveNet, but I don’t know for sure.)</li>
+<li>Neural networks which rank tactics and tactic + premise pairs.  (Again, I’m not clear on the details.)</li>
+<li>Trained with supervised learning first on human proof and then reinforcement learning.  (I’m not clear on the RL training details.)</li>
+</ul>
+</li>
+<li>Datasets: <ul>
+<li>HOL Light core, complex (as in complex arithmetic), and Flyspeck</li>
+</ul>
+</li>
+<li>What prevents this from being applied to Lean?<ul>
+<li>Again, it’s a lot of engineering.  </li>
+<li>It could be possible to hook up their system to Lean in theory.  Of course the exact logic and tactics are different.</li>
+</ul>
+</li>
+</ul>
+
 
 {% endraw %}
