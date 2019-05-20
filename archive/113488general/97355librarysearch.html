@@ -110,5 +110,40 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/164563090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#164563090">Mario Carneiro (Apr 30 2019 at 18:27)</a>:</h4>
 <p>In this case you need that <code>exp x - 1 - x</code> is O(x^2)</p>
 
+<a name="166112089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166112089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166112089">Sebastien Gouezel (May 20 2019 at 19:23)</a>:</h4>
+<p><code>library_search</code> works extremely well most of the time (many thanks for this). However, I just got the following strange behavior</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">continuous_at</span><span class="bp">.</span><span class="n">preimage_mem_nhds</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">continuous_at</span> <span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">nhds</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">library_search</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>the output of <code>library_search</code> is <code>exact mem_def.mpr (h s hs)</code>, which does not work. It should be <code>exact mem_def.mpr (h hs)</code> (or simply <code>exact h hs</code>).</p>
+
+<a name="166112350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166112350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166112350">Simon Hudon (May 20 2019 at 19:26)</a>:</h4>
+<p>Is it because <code>s</code> should be an implicit argument?</p>
+
+<a name="166113191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166113191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166113191">Sebastien Gouezel (May 20 2019 at 19:37)</a>:</h4>
+<p>It's complicated to say: there is a lot of nontrivial unfolding to be done.</p>
+
+<a name="166113773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166113773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166113773">Simon Hudon (May 20 2019 at 19:43)</a>:</h4>
+<p>You can see the function type of <code>h</code> by putting this into your proof script:</p>
+<div class="codehilite"><pre><span></span>   <span class="n">do</span> <span class="o">{</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">h</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span> <span class="bp">&gt;&gt;=</span> <span class="n">whnf</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span> <span class="o">}</span>
+</pre></div>
+
+<a name="166113782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166113782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166113782">Simon Hudon (May 20 2019 at 19:43)</a>:</h4>
+<p>(don't forget to <code>open tactic</code>)</p>
+
+<a name="166114441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/166114441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#166114441">Sebastien Gouezel (May 20 2019 at 19:51)</a>:</h4>
+<p>semi-implicit argument: <code>∀ ⦃a : set β⦄, a ∈ (nhds (f x)).sets → a ∈ (filter.map f (nhds x)).sets</code></p>
+
 
 {% endraw %}
