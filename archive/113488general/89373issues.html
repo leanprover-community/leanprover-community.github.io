@@ -27,5 +27,95 @@ permalink: archive/113488general/89373issues.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166050850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166050850">Mario Carneiro (May 20 2019 at 02:08)</a>:</h4>
 <p>I think that issues-as-roadmaps will work better than our previous attempts. You can use a big checklist (which has some nice github support) to make the progress more concrete.</p>
 
+<a name="166069852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166069852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166069852">Kevin Buzzard (May 20 2019 at 09:26)</a>:</h4>
+<p>I am keen to get homological algebra off the ground. When I think about what <em>mathematics</em> I would like to see in Lean, there are two main types of things: firstly, definitions and results which form part of a standard undergraduate mathematics curriculum, and secondly some deeper definitions which one sees used in modern mathematical research papers.</p>
+<p>The canonical examples in the first category, which I've mentioned here several times and which other people have thought about and which in some cases are actively being worked on are: </p>
+<p>Algebra-ish things:<br>
+1) Galois theory, and in particular algebraic closure [status: being worked on by IC undergrads]<br>
+2) Factorization of ideals into prime ideals in number fields [status: I have a summer student who might work on this]<br>
+3) Structure theory of modules over a PID [status: I have a summer student who might work on this]</p>
+<p>Analysis-ish things:<br>
+4) Derivative of sin is cos, and more generally a basic theory of calculus in one variable including the proof that a power series is differentiable term by term within its radius of convergence [status: I have this vague idea that people like Jeremy and/or Sebastien and/or Patrick are thinking about this]<br>
+5) Real and complex manifolds. Note: almost certainly need (4) first, and I believe that Sebastien is working towards manifolds and his work on (4) is at least partially being driven by what he needs for this.<br>
+6) Contour integration in the complex numbers (Cauchy integral formula etc). Because it's so basic and it's so not there.</p>
+<p>I should say that not only am I not an analyst, but I have never lectured any of the analysis courses at Imperial, so my knowledge of how exactly everything fits together has faded. I am hoping that other people can lead on 4--6. I will note that when it comes to Imperial's undergraduate syllabus, pretty much all of the algebra done in the first two years is now covered (<span class="user-mention" data-user-id="110064">@Kenny Lau</span>  <span class="user-mention" data-user-id="110044">@Chris Hughes</span> am I right? We don't have Jordan normal form but we can get this from structure theory of modules over a PID which is one of the reasons this is on my list above) but the analysis still has some gaping holes (like (4) and (6)).</p>
+<p>As for the second category, ultimately I would like to formalise parts of the Langlands philosophy in Lean, and the next few things reflect this:<br>
+7) Group cohomology [status: I have a project student who might end up working on this]<br>
+8) Homological algebra [status: related to (7) but not the same; as far as I know the last time we thought about this <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="112680">@Johan Commelin</span> had some discussion about how best to implement exact sequences and then nothing else happened]. We need homological methods to get somewhere with things like flatness<br>
+9) Adeles [status: waiting for (2)]<br>
+10) Relationship between algebraic number theory and Galois theory [Frobenius elements in Galois groups etc; needs (1) and (2)]<br>
+11) Statement of main theorems of local and global class field theory [status: Kenny has thought about this but we definitely need (7) and (10) to do this properly]<br>
+12) Galois representations [needs (10) and (1) but not much else if you stick to complex representations; some more p-adic API if we want p-adic Galois representations]<br>
+13) Reductive algebraic groups over a field [status: I still haven't figured out whether one should use schemes to do this or varieties over a field; this is complicated. Ultimately there is a theory over schemes, but many of the key theorems are proved by reducing to the case of varieties over fields, and for the Langlands programme one only needs it for varieties over a field]<br>
+14) Automorphic representations [status: a dream away, because we need (13) and (11) and (9) and some serious analysis]<br>
+15) Statement of parts of the Langlands Philosophy: needs (11) and (12) and (14), but would create a media buzz.</p>
+<p>That's just what came off the top of my head when I sat down to respond to Scott's post -- it is not impossible that if I did the same thing tomorrow then I would instead have been fixated on the Birch and Swninerton-Dyer conjecture instead and would have come up with a rather different list. Of course on top of this there is also more work that needs to be done for both the schemes repo and the perfectoid repo, but here things are under control, we have a team working on it in both cases.</p>
+<p>I look at this now and it looks like a gigantic research project of grant proposal level; I will at some point apply for money to hire people to do some or all of these jobs. I was putting this off because I wanted to get some publications under my belt first but now I am in two minds about whether I need the publications or not.</p>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> one reason for posting this brain-dump above is to give you some sort of idea of the kinds of projects I have in mind -- and as you can see these range from "can be done and I can help" to "can be done but not by me" to "will be do-able in the future but waiting on other things". Note also the issue of "can be done, Kevin thinks he knows how to do it, and Kevin already has someone pencilled in to do it (who may even have started on it), and if someone else does it then it kind of messes up their plans (which may or may not be a good thing because they may or may not have other plans)". For example if someone came along and did some schemes stuff and then wanted to be a co-author of the paper, things might get complicated. If someone came along and did group cohomology then I have an MSc student in the middle of a project who is suddenly in a difficult situation. On the other hand if someone came along and just did Galois theory or algebraic closures, then Chris would just move onto something else.  </p>
+<p>I would happily hear advice from both Scott and people like <span class="user-mention" data-user-id="110031">@Patrick Massot</span> (who also understand what it means to formalise some research level maths) as to which, if any, of the ideas above are appropriate for turning into roadmaps and in particular whether the issues list is an appropriate place for them. Ultimately what I have written above all seems theoretically possible in Lean but doing it will be a vast amount of work which will need considerable expertise from both maths and computer science, and one of my concerns about getting funding for it is that I will almost surely meet resistance from referees in mathematics department who will simply say "yes but whatever is the <em>point</em>? We know it all already!" . In computer science my impression is that a dissenting referee, but my experience with mathematics funding is that the moment one of your three referees is not super-positive your grant application is dead. This doesn't mean the ideas are dead, but it does mean having to apply and re-apply and re-apply until you get lucky.</p>
+
+<a name="166069902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166069902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166069902">Kevin Buzzard (May 20 2019 at 09:27)</a>:</h4>
+<p>PS my friend Lance mentioned on twitter recently that he was seeing a lot of posts from academics recently and noted that it must be marking season. I am indeed sitting at home "getting round to going to work to face a pile of scripts..."</p>
+
+<a name="166069996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166069996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166069996">Reid Barton (May 20 2019 at 09:29)</a>:</h4>
+<p>If only you had a script to mark your scripts</p>
+
+<a name="166070000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070000">Johan Commelin (May 20 2019 at 09:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think it is better to post this as a github issue. That way it is a lot easier to find it back. There is a lot of material in your post (-;</p>
+
+<a name="166070064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070064">Johan Commelin (May 20 2019 at 09:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Also: some typos: you want (4) instead of (2) in your description of (5)... right?</p>
+
+<a name="166070066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070066">Scott Morrison (May 20 2019 at 09:30)</a>:</h4>
+<p>No, no! This is already 10 separate issues. :-)</p>
+
+<a name="166070079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070079">Johan Commelin (May 20 2019 at 09:30)</a>:</h4>
+<p>Sure, we can flesh them out into 10 issues afterwards</p>
+
+<a name="166070119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070119">Scott Morrison (May 20 2019 at 09:31)</a>:</h4>
+<p>I think each individual issue should be pretty "short", even if it is "formalise the Langlands philosophy".</p>
+
+<a name="166070177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070177">Scott Morrison (May 20 2019 at 09:32)</a>:</h4>
+<p>Lowest level issues should have a code stub with <code>sorry</code>. Medium level issues can have lists of things that could have low level issues written for them. High level issues can have lists of topics which will need completing.</p>
+
+<a name="166070641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070641">Kevin Buzzard (May 20 2019 at 09:40)</a>:</h4>
+<p>I'm posting here precisely to try and get some opinions on how the sort of ideas I have might be managed using the github infrastructure. As well as issues there are other things, right? Milestones or something? For perfectoids we're using issues (and assuming nobody else is reading, I guess).</p>
+
+<a name="166070698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070698">Kevin Buzzard (May 20 2019 at 09:42)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> Also: some typos: you want (4) instead of (2) in your description of (5)... right?</p>
+</blockquote>
+<p>Thanks. There was some renumbering involved at some point when I decided to break UG stuff into "stuff I could do myself in a hopefully competent manner" and "stuff which I'd be better off leaving other people to think about"</p>
+
+<a name="166070855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070855">Kevin Buzzard (May 20 2019 at 09:44)</a>:</h4>
+<blockquote>
+<p>If only you had a script to mark your scripts</p>
+</blockquote>
+<p>That's another story entirely, and one I would also love to solve with Lean, but that's for another thread. <span class="user-mention" data-user-id="110032">@Reid Barton</span> I always imagine that you have in your head some analogous picture about what you'd like to see formalised in Lean and how it would all fit together, with basic notions of algebraic topology leading on to homology and homotopy groups and then on to stuff which you understand much better than I do. I'd be very interested to see your version of what you think Lean could do. I guess this applies to anyone else who has engaged with pure mathematics at research level too, like Johan and Patrick and all the others. Neil Strickland! What would you like to see formalised in Lean?</p>
+
+<a name="166070987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166070987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166070987">Kevin Buzzard (May 20 2019 at 09:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span></p>
+
+<a name="166071358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166071358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166071358">Kevin Buzzard (May 20 2019 at 09:53)</a>:</h4>
+<p>There is probably a ton of material which people have some sort of idea as to "how it should be done", or "how it might be done". I think Scott's idea of more formally writing down some sort of a plan so we can see what is currently accessible, and what is waiting for what, is very interesting. And I think it's very nice to see some lofty goals like the Langlands philosophy at the top. A year ago people might have argued that we were just dreamers, but things like Kenny's work on local Langlands for abelian algebraic groups, and the perfectoid project, are proofs that one can formalise highly non-trivial mathematics in Lean. Ultimately the Fabstracts people are going to have to start making lists of goals of concrete things they want, and they will be able to start with abstract top level goals such as "the Hodge conjecture" which can then be broken down to more accessible things. There's also <a href="https://mathoverflow.net/questions/311071/which-mathematical-definitions-should-be-formalised-in-lean" target="_blank" title="https://mathoverflow.net/questions/311071/which-mathematical-definitions-should-be-formalised-in-lean">the MO post</a>. But what we'd like to have here is not just some huge list of dreams, that's easy to do -- e.g. "formalise the statement of every theorem in the Annals this century" -- we have to stick to things here for which we can actually see some sort of coherent plan. I am not suggesting that my sketch of how to get to Langlands is anywhere near coherent yet, however there are most definitely some coherent parts which I could flesh out into concrete issues. As I've said before, many of these are things which I have already got someone pencilled in to work on.</p>
+
+<a name="166071450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/issues/near/166071450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89373issues.html#166071450">Kevin Buzzard (May 20 2019 at 09:55)</a>:</h4>
+<p>I would happily spend tomorrow morning procrastinating by working on trying to turn something into an issue or a milestone or whatever, it's just that at this point I am a bit unclear about what would be best for the community.  OK enough! I'm going marking.</p>
+
 
 {% endraw %}

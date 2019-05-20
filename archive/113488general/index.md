@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [issues](89373issues.html) (19 messages, latest: May 20 2019 at 09:55)
+
 * [AI and theorem proving](41431AIandtheoremproving.html) (13 messages, latest: May 20 2019 at 04:54)
 
 * [(no topic)](79918notopic.html) (51 messages, latest: May 20 2019 at 04:52)
-
-* [issues](89373issues.html) (4 messages, latest: May 20 2019 at 02:08)
 
 * [timeout and irreducibility](96863timeoutandirreducibility.html) (7 messages, latest: May 19 2019 at 21:12)
 
