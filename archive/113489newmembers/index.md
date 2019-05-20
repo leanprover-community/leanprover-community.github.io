@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [the projective space](54057theprojectivespace.html) (171 messages, latest: May 19 2019 at 17:39)
+* [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (3 messages, latest: May 20 2019 at 11:48)
 
-* [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (2 messages, latest: May 17 2019 at 18:24)
+* [the projective space](54057theprojectivespace.html) (171 messages, latest: May 19 2019 at 17:39)
 
 * [Math physics in Lean](24293MathphysicsinLean.html) (11 messages, latest: May 17 2019 at 18:16)
 

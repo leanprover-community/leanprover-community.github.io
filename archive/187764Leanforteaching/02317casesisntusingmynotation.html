@@ -1,0 +1,59 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/187764Leanforteaching/02317casesisntusingmynotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/index.html">Lean for teaching</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html">`cases` isn't using my notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166076766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166076766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166076766">Kevin Buzzard (May 20 2019 at 11:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">xnat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">:</span> <span class="n">xnat</span>
+
+<span class="kn">namespace</span> <span class="n">xnat</span>
+
+<span class="kn">inductive</span> <span class="n">le</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">:</span> <span class="n">le</span> <span class="n">a</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">:</span> <span class="n">le</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">le</span> <span class="n">a</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_le</span> <span class="n">xnat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">le</span><span class="bp">⟩</span>
+
+<span class="kn">lemma</span> <span class="n">some_easy_thing</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">c</span> <span class="n">hc</span><span class="o">,</span> <span class="c1">-- &lt;-- THIS</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  2 goals</span>
+<span class="cm">case xnat.le.refl</span>
+<span class="cm">a : xnat,</span>
+<span class="cm">h : a ≤ a</span>
+<span class="cm">⊢ false</span>
+
+<span class="cm">case xnat.le.succ</span>
+<span class="cm">a c : xnat,</span>
+<span class="cm">hc : le a c, &lt;-- AND THIS</span>
+<span class="cm">h : a ≤ succ c</span>
+<span class="cm">⊢ false</span>
+<span class="cm">  -/</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>That <code>cases h with _ _ c hc</code> line is problematic for beginners in two ways; firstly, the <code>_ _</code> nonsense (which I actually don't really understand myself, I just got it right through experiment) and secondly the fact that the result is <code>hc : le a c</code> instead of <code>hc : a ≤ c</code>. I tried <code>rcases</code> but the <code>le</code> leakage still occurred.</p>
+<p>As part of my plan of doing anything other than going to my office today, I'm thinking about teaching materials. I am pretty sure this issue has come up before and perhaps there are clever solutions using clever things, but I am hoping for a solution which is intuitive for beginners. If that solution is "don't use inductive props" then so be it, but I really like the idea of an inductive prop for <code>le</code>, just as some sort of introduction for mathematicians to the power of inductive types -- they're "not just for nat".</p>
+
+<a name="166076884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166076884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166076884">Kevin Buzzard (May 20 2019 at 11:28)</a>:</h4>
+<p>PS <a href="/user_uploads/3121/FIt3QAQzs8ebROYvWYN44Y9i/rcases.png" target="_blank" title="rcases.png">rcases.png</a> <br>
+what needs to be done to make that terrifying-for-beginners thing not happen any more?</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/FIt3QAQzs8ebROYvWYN44Y9i/rcases.png" target="_blank" title="rcases.png"><img src="/user_uploads/3121/FIt3QAQzs8ebROYvWYN44Y9i/rcases.png"></a></div>
+
+
+{% endraw %}
