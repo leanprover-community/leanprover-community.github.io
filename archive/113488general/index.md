@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [dependencies](91432dependencies.html) (4 messages, latest: May 20 2019 at 21:51)
+
 * [lean installation](13267leaninstallation.html) (4 messages, latest: May 20 2019 at 20:35)
 
 * [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
 
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (6 messages, latest: May 20 2019 at 17:03)
-
-* [dependencies](91432dependencies.html) (2 messages, latest: May 20 2019 at 15:15)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (14 messages, latest: May 20 2019 at 11:06)
 
