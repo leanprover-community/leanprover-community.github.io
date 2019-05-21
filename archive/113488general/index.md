@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [3.4.2 branch](99076342branch.html) (58 messages, latest: May 21 2019 at 01:04)
+
 * [dependencies](91432dependencies.html) (5 messages, latest: May 20 2019 at 22:10)
 
 * [lean installation](13267leaninstallation.html) (4 messages, latest: May 20 2019 at 20:35)
@@ -119,8 +121,6 @@ permalink: archive/113488general/index.html
 * [PR 1000](08196PR1000.html) (22 messages, latest: May 08 2019 at 23:50)
 
 * [exists_finset_of...](71399existsfinsetof.html) (5 messages, latest: May 08 2019 at 20:40)
-
-* [3.4.2 branch](99076342branch.html) (55 messages, latest: May 08 2019 at 16:40)
 
 * [preorder.lift'](13800preorderlift.html) (7 messages, latest: May 08 2019 at 11:05)
 
