@@ -44,5 +44,27 @@ See <a href="https://github.com/leanprover-community/lean/commit/e63221a527ac485
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166101546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166101546">Simon Hudon (May 20 2019 at 17:03)</a>:</h4>
 <p>That sounds like an interesting idea. How hard will it be to build and what are the benefit beside distinguishing temporary meta-variables?</p>
 
+<a name="166174248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166174248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166174248">Edward Ayers (May 21 2019 at 13:55)</a>:</h4>
+<p>Benefits:</p>
+<ul>
+<li>can implement many builtins within Lean. eg <code>intro</code>. An example tactic that I find myself wanting is one that solves the goal <code>Type u</code> with the expression <code>Pi x : X, ?m[x]</code>. Maybe one could even reimplement more complicated ones like <code>simp</code> within lean. Would be interesting to see perf differences.</li>
+<li>can use temporary metavariables.</li>
+<li>can avoid cache resets when speculatively trying to unify things</li>
+<li>can add local constants to the context without going through <code>intro</code>.</li>
+<li>just being able to manipulate the tactic's context directly is so much easier than builtins for some tasks. <br>
+   When I am writing automation I catch myself thinking: "I really just want to change the type context to look like this, how can I do that only using the library builtins which were not designed for this use case?". I feel like I am working against the tactic abstraction and I would much rather be able to just explicitly say what I want the metavariable context to look like.</li>
+<li>This wouldn't be solved directly by just making this new module, but I feel like it is important for <code>tactic</code> to not just be this black box where you can't understand how it works without looking at the C++ source code. Eg at the moment it's basically impossible to understand the seemingly contradictory message <code>tactic failed, result contains meta-variables \n state: no goals</code> without someone explaining what <code>tactic</code> is doing under the hood. You can't discover how <code>tactic</code> works for yourself but it is easy to newcomers to end up with the wrong mental model of it.</li>
+</ul>
+<p>Difficulties: exposing a <code>type_context</code> monad wouldn't be that difficult. All of the machinery is already in the C++ it's just about making it available leanside.  Testing and managing caches might be a little more challenging.</p>
+
+<a name="166174557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166174557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166174557">Mario Carneiro (May 21 2019 at 13:58)</a>:</h4>
+<p>I'm definitely sold, but it sounds like a lot of work</p>
+
+<a name="166174705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166174705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166174705">Mario Carneiro (May 21 2019 at 13:59)</a>:</h4>
+<p>Your first example can be achieved by <code>refine</code> btw. That doesn't address the rest of it or efficiency though</p>
+
 
 {% endraw %}

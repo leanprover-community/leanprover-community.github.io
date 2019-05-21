@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (9 messages, latest: May 21 2019 at 13:59)
+
+* [How to trace all goals explicitly?](51734Howtotraceallgoalsexplicitly.html) (2 messages, latest: May 21 2019 at 13:15)
+
 * [what is a diamond?](58637whatisadiamond.html) (69 messages, latest: May 21 2019 at 10:34)
 
 * [problems with coercion to function](83580problemswithcoerciontofunction.html) (4 messages, latest: May 21 2019 at 08:01)
@@ -23,8 +27,6 @@ permalink: archive/113488general/index.html
 * [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
 
 * [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
-
-* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (6 messages, latest: May 20 2019 at 17:03)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (14 messages, latest: May 20 2019 at 11:06)
 
