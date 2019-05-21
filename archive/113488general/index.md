@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [what is a diamond?](58637whatisadiamond.html) (69 messages, latest: May 21 2019 at 10:34)
+
 * [problems with coercion to function](83580problemswithcoerciontofunction.html) (4 messages, latest: May 21 2019 at 08:01)
 
 * [3.4.2 branch](99076342branch.html) (58 messages, latest: May 21 2019 at 01:04)
@@ -49,8 +51,6 @@ permalink: archive/113488general/index.html
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
 
 * [cache-olean](72177cacheolean.html) (33 messages, latest: May 17 2019 at 19:07)
-
-* [what is a diamond?](58637whatisadiamond.html) (68 messages, latest: May 17 2019 at 18:02)
 
 * [Convention on composition order](18033Conventiononcompositionorder.html) (24 messages, latest: May 17 2019 at 14:30)
 
