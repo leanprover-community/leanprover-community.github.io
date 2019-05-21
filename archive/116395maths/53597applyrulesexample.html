@@ -358,5 +358,252 @@ theorem continuous_sin_sin : continuous (λ (x : ℝ), sin (sin x)) :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166166316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166166316">Mario Carneiro (May 21 2019 at 12:13)</a>:</h4>
 <p>for example if it was <code>continuous.comp</code> and lean said "aha, composition with identity"</p>
 
+<a name="166170385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170385">Patrick Massot (May 21 2019 at 13:09)</a>:</h4>
+<blockquote>
+<p>for example if it was <code>continuous.comp</code> and lean said "aha, composition with identity"</p>
+</blockquote>
+<p>If only Lean could stop saying that...</p>
+
+<a name="166170521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170521">Mario Carneiro (May 21 2019 at 13:11)</a>:</h4>
+<p>there is an easy way to make that happen: take off that dang <code>@[reducible]</code> on <code>comp</code></p>
+
+<a name="166170597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170597">Mario Carneiro (May 21 2019 at 13:12)</a>:</h4>
+<p>however in that case this won't match at all because the input is <code>continuous (λ x : ℝ, sin (sin x))</code> instead of <code>continuous (sin ∘ sin)</code></p>
+
+<a name="166170599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170599">Patrick Massot (May 21 2019 at 13:12)</a>:</h4>
+<p>About <code>apply</code> and continuity, would it be evil to change the definition of continuity so that it's no longer a forall? It would feel weird, and many proofs we already have would need to start with a rewrite to get back to the forall definition. But having automatic proofs of continuity of the kind Joe is hoping would be a huge progress (and Isabelle have them). Our stupid manual proofs are very visible in the perfectoid project. They generate many many lines that don't exist in real world</p>
+
+<a name="166170655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170655">Mario Carneiro (May 21 2019 at 13:13)</a>:</h4>
+<p>an easy way to make it not a forall without really changing anything is to wrap it in a <code>structure</code></p>
+
+<a name="166170678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170678">Mario Carneiro (May 21 2019 at 13:13)</a>:</h4>
+<p>with luck you just have to add a few anonymous constructors in places</p>
+
+<a name="166170973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170973">Patrick Massot (May 21 2019 at 13:17)</a>:</h4>
+<p>This would bring no mathematical benefit. With a different mathematical definition we would at least get <em>some</em> simpler proofs</p>
+
+<a name="166170993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166170993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166170993">Mario Carneiro (May 21 2019 at 13:17)</a>:</h4>
+<p>?</p>
+
+<a name="166171009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171009">Mario Carneiro (May 21 2019 at 13:17)</a>:</h4>
+<p>The current definition is certainly the best one</p>
+
+<a name="166171060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171060">Patrick Massot (May 21 2019 at 13:18)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/order.lean#L428" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/order.lean#L428">https://github.com/leanprover-community/mathlib/blob/master/src/topology/order.lean#L428</a> could become the definition</p>
+
+<a name="166171064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171064">Mario Carneiro (May 21 2019 at 13:18)</a>:</h4>
+<p>I want to disturb that as little as possible</p>
+
+<a name="166171077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171077">Patrick Massot (May 21 2019 at 13:18)</a>:</h4>
+<p>No one would recognize it but it's not a forall</p>
+
+<a name="166171100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171100">Mario Carneiro (May 21 2019 at 13:18)</a>:</h4>
+<p>Well okay when you put it like that... but it's defeq to the obvious definition</p>
+
+<a name="166171145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171145">Patrick Massot (May 21 2019 at 13:19)</a>:</h4>
+<p>So <code>apply</code> would fail as well?</p>
+
+<a name="166171164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171164">Mario Carneiro (May 21 2019 at 13:19)</a>:</h4>
+<p>the usual definition <em>is</em> a forall</p>
+
+<a name="166171218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171218">Mario Carneiro (May 21 2019 at 13:20)</a>:</h4>
+<p>this one is just a le which unfolds to a forall</p>
+
+<a name="166171415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171415">Patrick Massot (May 21 2019 at 13:22)</a>:</h4>
+<p>By the way, is the order relation on <code>topological_space</code> and <code>uniform_space</code> open for debate? Currently we have incompatibility with the order on filters, as seen in <a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/order.lean#L147-L148" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/order.lean#L147-L148">https://github.com/leanprover-community/mathlib/blob/master/src/topology/order.lean#L147-L148</a> and <a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/uniform_space/basic.lean#L472" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/uniform_space/basic.lean#L472">https://github.com/leanprover-community/mathlib/blob/master/src/topology/uniform_space/basic.lean#L472</a>, generating things like <a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/uniform_space/basic.lean#L542" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/uniform_space/basic.lean#L542">https://github.com/leanprover-community/mathlib/blob/master/src/topology/uniform_space/basic.lean#L542</a> and generating a push-forward which is <em>right</em>-adjoint to pull-back</p>
+
+<a name="166171435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171435">Patrick Massot (May 21 2019 at 13:23)</a>:</h4>
+<blockquote>
+<p>this one is just a le which unfolds to a forall</p>
+</blockquote>
+<p>I understand that, my question is: is this enough to hide from the <code>apply</code> bug?</p>
+
+<a name="166171583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171583">Patrick Massot (May 21 2019 at 13:24)</a>:</h4>
+<p>As far as I can see, real world never write <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mn>1</mn></msub><mo>≤</mo><msub><mi>t</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">t_1 \leq t_2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.63597em;"></span><span class="strut bottom" style="height:0.7859700000000001em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span><span class="mrel">≤</span><span class="mord"><span class="mord mathit">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> for topologies <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mn>1</mn></msub></mrow><annotation encoding="application/x-tex">t_1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.61508em;"></span><span class="strut bottom" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>t</mi><mn>2</mn></msub></mrow><annotation encoding="application/x-tex">t_2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.61508em;"></span><span class="strut bottom" style="height:0.76508em;vertical-align:-0.15em;"></span><span class="base"><span class="mord"><span class="mord mathit">t</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.30110799999999993em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"></span></span></span></span></span></span></span></span> but write sentences randomly using either the "finer than" or "coarser than" relation</p>
+
+<a name="166171682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171682">Mario Carneiro (May 21 2019 at 13:25)</a>:</h4>
+<p>you can't hide from the apply bug</p>
+
+<a name="166171741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166171741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166171741">Mario Carneiro (May 21 2019 at 13:26)</a>:</h4>
+<p>seriously, it can see through <code>irreducible</code> and theorems, it's crazy</p>
+
+<a name="166172243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166172243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166172243">Joseph Corneli (May 21 2019 at 13:32)</a>:</h4>
+<p>Got the example working, thanks to <span class="user-mention" data-user-id="110044">@Chris Hughes</span> for suggesting to use <code>@continuous_id ℝ _</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">core</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">defs</span>
+<span class="kn">open</span> <span class="n">real</span> <span class="n">set</span>
+
+<span class="c1">----------------------</span>
+<span class="c">/-</span><span class="cm"> Attempt to use `refine` alongside `apply` -/</span>
+<span class="kn">namespace</span> <span class="n">sin_sin</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">refine_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;fail&quot;</span><span class="o">,</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span><span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;refine, initial goals:&quot;</span><span class="o">,</span>
+                <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+                <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">gs</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+                <span class="o">(</span><span class="n">refine</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)),</span>
+                <span class="c1">--trace &quot;refine, subsequent target:&quot;,</span>
+                <span class="c1">--tactic.target &gt;&gt;= tactic.trace,</span>
+                <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot; REFINE: {h}&quot;</span><span class="o">),</span>
+                <span class="n">trace</span> <span class="s2">&quot;refine, final goals:&quot;</span><span class="o">,</span>
+                <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+                <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">gs</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+                <span class="n">pure</span><span class="o">()</span> <span class="bp">&lt;|&gt;</span> <span class="n">refine_list_expr</span> <span class="n">t</span> <span class="o">}</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">exact_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;fail&quot;</span><span class="o">,</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span><span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span><span class="n">trace</span> <span class="s2">&quot;exact, initial goals:&quot;</span><span class="o">,</span>
+                <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+                <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">gs</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+                <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot; EXACT: {h}&quot;</span><span class="o">),</span>
+                <span class="c1">-- Some problem here...</span>
+                <span class="n">exact</span> <span class="n">h</span><span class="o">,</span>
+                <span class="n">trace</span> <span class="s2">&quot;exact, final goals:&quot;</span><span class="o">,</span>
+                <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+                <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">gs</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+                <span class="n">pure</span><span class="o">()</span> <span class="bp">&lt;|&gt;</span> <span class="n">exact_list_expr</span> <span class="n">t</span> <span class="o">}</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_list_expr</span> <span class="o">:</span> <span class="n">list</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;no matching rule&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">{</span> <span class="n">trace</span> <span class="s2">&quot;apply, initial goals:&quot;</span><span class="o">,</span>
+                 <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+                 <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">gs</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+                 <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot; APPLY: {h}&quot;</span><span class="o">)</span> <span class="o">,</span>
+                 <span class="n">interactive</span><span class="bp">.</span><span class="n">concat_tags</span> <span class="o">(</span><span class="n">apply</span> <span class="n">h</span><span class="o">),</span>
+                 <span class="n">trace</span> <span class="s2">&quot;apply, final goals:&quot;</span><span class="o">,</span>
+                 <span class="n">gs</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+                 <span class="n">mmap</span> <span class="n">infer_type</span> <span class="n">gs</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span><span class="o">,</span>
+                 <span class="n">pure</span><span class="o">()</span> <span class="bp">&lt;|&gt;</span> <span class="n">apply_list_expr</span> <span class="n">t</span> <span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">iterate_at_most_on_all_goals&#39;</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span>        <span class="n">tac</span> <span class="o">:=</span> <span class="n">trace</span> <span class="s2">&quot;All goals: maximal iterations reached&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">tac</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">all_goals</span> <span class="err">$</span> <span class="o">(</span><span class="n">do</span> <span class="n">tac</span><span class="o">,</span> <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;All goals:{n}&quot;</span><span class="o">),</span> <span class="n">iterate_at_most_on_all_goals&#39;</span> <span class="n">n</span> <span class="n">tac</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">skip</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">iterate_at_most_on_subgoals&#39;</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span>        <span class="n">tac</span> <span class="o">:=</span> <span class="n">trace</span> <span class="s2">&quot;Subgoals: maximal iterations reached&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">tac</span> <span class="o">:=</span> <span class="n">focus1</span> <span class="o">(</span><span class="n">do</span> <span class="n">tac</span><span class="o">,</span> <span class="n">trace</span> <span class="o">(</span><span class="n">format</span><span class="bp">!</span><span class="s2">&quot;Subgoals:{n}&quot;</span><span class="o">),</span> <span class="n">iterate_at_most_on_all_goals&#39;</span> <span class="n">n</span> <span class="n">tac</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_rules_with_refine</span> <span class="o">(</span><span class="n">apps</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">refs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">exas</span> <span class="o">:</span> <span class="n">list</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">a</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">apps</span><span class="o">,</span>
+   <span class="n">r</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">refs</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">build_list_expr_for_apply</span> <span class="n">exas</span><span class="o">,</span>
+   <span class="n">iterate_at_most_on_subgoals&#39;</span> <span class="n">n</span> <span class="o">(</span><span class="n">assumption</span>
+                                    <span class="bp">&lt;|&gt;</span> <span class="o">(</span><span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">target</span><span class="o">,</span>
+                                          <span class="k">let</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">expr</span><span class="bp">.</span><span class="n">app_arg</span> <span class="n">t</span><span class="o">,</span>
+                                          <span class="k">if</span> <span class="o">(</span><span class="n">band</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">is_lambda</span> <span class="n">a</span><span class="o">)</span>
+                                                   <span class="o">(</span><span class="n">bnot</span> <span class="o">(</span><span class="n">eq</span> <span class="n">a</span> <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">x</span><span class="o">))))</span>
+                                          <span class="k">then</span> <span class="n">refine_list_expr</span> <span class="n">r</span>
+                                          <span class="k">else</span> <span class="n">fail</span> <span class="s2">&quot;can&#39;t refine&quot;</span><span class="o">)</span>
+                                    <span class="bp">&lt;|&gt;</span> <span class="o">(</span><span class="n">sin_sin</span><span class="bp">.</span><span class="n">apply_list_expr</span> <span class="n">a</span><span class="o">)),</span>
+   <span class="n">sin_sin</span><span class="bp">.</span><span class="n">exact_list_expr</span> <span class="n">e</span><span class="o">,</span>
+   <span class="c1">-- trace &quot;context at the end of the run:&quot;,</span>
+   <span class="c1">-- tactic.local_context &gt;&gt;= tactic.trace,</span>
+   <span class="c1">-- trace &quot;target at the end of the run:&quot;,</span>
+   <span class="c1">-- tactic.target &gt;&gt;= tactic.trace,</span>
+   <span class="n">pure</span><span class="o">()</span>
+
+<span class="kn">end</span> <span class="n">sin_sin</span>
+<span class="c1">----------------------</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">lean</span>
+<span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply_rules_with_refine_interactive</span> <span class="o">(</span><span class="n">as</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span>
+                                             <span class="o">(</span><span class="n">rs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span>
+                                             <span class="o">(</span><span class="n">es</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">pexpr_list_or_texpr</span><span class="o">)</span>
+                                             <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span> <span class="o">:=</span> <span class="mi">50</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">sin_sin</span><span class="bp">.</span><span class="n">apply_rules_with_refine</span> <span class="n">as</span> <span class="n">rs</span> <span class="n">es</span> <span class="n">n</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+
+<span class="c1">-- * sin(sin(x)) and friends are continuous on ℝ</span>
+
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span><span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">apply_rules_with_refine_interactive</span> <span class="o">[</span><span class="n">continuous_sin</span><span class="o">]</span> <span class="o">[</span><span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span><span class="o">]</span> <span class="o">[</span><span class="bp">@</span><span class="n">continuous_id</span> <span class="n">ℝ</span> <span class="bp">_</span><span class="o">]</span> <span class="mi">5</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous_sin_sin</span>
+</pre></div>
+
+<a name="166172318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166172318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166172318">Joseph Corneli (May 21 2019 at 13:33)</a>:</h4>
+<p>And <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> thanks for the advice on printing goals, that helped me debug it properly.</p>
+
+<a name="166172573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166172573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166172573">Joseph Corneli (May 21 2019 at 13:36)</a>:</h4>
+<p>And I appreciate the comment from <span class="user-mention" data-user-id="110031">@Patrick Massot</span> -- this is only a small step towards a more full automation; a reimplementation of Hanne Gottliebsen's <code>cts</code> tactic from PVS would be impressive :-)</p>
+
+<a name="166172592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166172592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166172592">Mario Carneiro (May 21 2019 at 13:36)</a>:</h4>
+<p>what does it do?</p>
+
+<a name="166172600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166172600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166172600">Mario Carneiro (May 21 2019 at 13:37)</a>:</h4>
+<p>I mean precisely</p>
+
+<a name="166173068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173068">Joseph Corneli (May 21 2019 at 13:42)</a>:</h4>
+<p>Much as this example, but for a broader class of functions.  So, it would automate continuity proofs for many compositions.  It runs into trouble with examples like <code>1/(cos x + 2)</code>.</p>
+
+<a name="166173092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173092">Joseph Corneli (May 21 2019 at 13:42)</a>:</h4>
+<p>... Compositions, and combinations under arithmetic operations.</p>
+
+<a name="166173660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173660">Johan Commelin (May 21 2019 at 13:49)</a>:</h4>
+<p>Can we write a tactic that determines whether some expression is a composition or not?</p>
+
+<a name="166173664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173664">Johan Commelin (May 21 2019 at 13:49)</a>:</h4>
+<p>By inspecting it syntactically</p>
+
+<a name="166173841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173841">Mario Carneiro (May 21 2019 at 13:51)</a>:</h4>
+<p>yes, that's how this should be done</p>
+
+<a name="166173929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173929">Reid Barton (May 21 2019 at 13:52)</a>:</h4>
+<p>My continuity tactic <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/tactic.lean#L14" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/homotopy_theory/topological_spaces/tactic.lean#L14">does this</a> in a different way</p>
+
+<a name="166173979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166173979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166173979">Reid Barton (May 21 2019 at 13:52)</a>:</h4>
+<p>But it waited forever for <code>backwards_reasoning</code></p>
+
+<a name="166174198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166174198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166174198">Joseph Corneli (May 21 2019 at 13:55)</a>:</h4>
+<p>Ah, I had initially set off to write this example with <code>tidy</code> using <code>apply_rules</code> inside, I didn't realise that you could feed individual rules into <code>tidy</code> quite so straightforwardly.</p>
+
 
 {% endraw %}
