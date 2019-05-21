@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (9 messages, latest: May 21 2019 at 13:59)
+* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (19 messages, latest: May 21 2019 at 14:11)
 
 * [How to trace all goals explicitly?](51734Howtotraceallgoalsexplicitly.html) (2 messages, latest: May 21 2019 at 13:15)
 

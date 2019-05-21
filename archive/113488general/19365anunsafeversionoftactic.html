@@ -66,5 +66,51 @@ See <a href="https://github.com/leanprover-community/lean/commit/e63221a527ac485
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166174705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166174705">Mario Carneiro (May 21 2019 at 13:59)</a>:</h4>
 <p>Your first example can be achieved by <code>refine</code> btw. That doesn't address the rest of it or efficiency though</p>
 
+<a name="166174800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166174800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166174800">Mario Carneiro (May 21 2019 at 14:00)</a>:</h4>
+<p><code>simp</code> in lean is a non-starter, I think. It's not a question of capabilities, it's an efficiency problem</p>
+
+<a name="166174825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166174825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166174825">Mario Carneiro (May 21 2019 at 14:00)</a>:</h4>
+<p>You would have to do this via code generation, JIT, or lean 4</p>
+
+<a name="166175343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175343">Edward Ayers (May 21 2019 at 14:05)</a>:</h4>
+<blockquote>
+<p>Your first example can be achieved by <code>refine</code> btw. That doesn't address the rest of it or efficiency though</p>
+</blockquote>
+<p>I guess you mean something like <code>refine \lambda x, _</code>? I mean you can't create a local constant on the context without already having your target be a Pi, and you can't create a local constant without also making all of the metavariables and delayed abstractions that go along with using <code>refine</code> or <code>intro</code>.</p>
+
+<a name="166175460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175460">Mario Carneiro (May 21 2019 at 14:06)</a>:</h4>
+<p>I mean <code>refine \Pi x, _</code>, since that's your goal</p>
+
+<a name="166175463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175463">Edward Ayers (May 21 2019 at 14:06)</a>:</h4>
+<p>Ah no you mean the <code>Pi x, ?m</code> thing</p>
+
+<a name="166175516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175516">Mario Carneiro (May 21 2019 at 14:07)</a>:</h4>
+<p>You can use <code>refine</code> with a placeholder</p>
+
+<a name="166175544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175544">Mario Carneiro (May 21 2019 at 14:07)</a>:</h4>
+<p>as in construct <code>\Pi x, _</code> as a pexpr</p>
+
+<a name="166175558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175558">Edward Ayers (May 21 2019 at 14:07)</a>:</h4>
+<p>yep</p>
+
+<a name="166175636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175636">Mario Carneiro (May 21 2019 at 14:08)</a>:</h4>
+<p>I think your way is better though</p>
+
+<a name="166175970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/an%20unsafe%20version%20of%20tactic/near/166175970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19365anunsafeversionoftactic.html#166175970">Edward Ayers (May 21 2019 at 14:11)</a>:</h4>
+<blockquote>
+<p><code>simp</code> in lean is a non-starter, I think. It's not a question of capabilities, it's an efficiency problem</p>
+</blockquote>
+<p>Yeah you are probably right here. My point was just that you could implement simp within Lean and get the temp-mvars efficiency boost, but that's probably not enough.</p>
+
 
 {% endraw %}
