@@ -255,5 +255,68 @@ continuous.comp (continuous.comp continuous_sin continuous_sin) continuous_sin
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166086384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166086384">Joseph Corneli (May 20 2019 at 13:50)</a>:</h4>
 <p>You'll see I separated out the rules for <code>apply</code>, <code>refine</code>, and <code>exact</code>, and that here there's just one rule available for each such step.  So obvs. this preliminary to anything more general.</p>
 
+<a name="166164744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166164744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166164744">Joseph Corneli (May 21 2019 at 11:51)</a>:</h4>
+<p>Is there a way to run <code>sorry</code> inside of a tactic, so I can at least get it to print out a proof with a hole in it as opposed to <code>⁇</code> <span aria-label="question" class="emoji emoji-2753" role="img" title="question">:question:</span></p>
+
+<a name="166164811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166164811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166164811">Joseph Corneli (May 21 2019 at 11:51)</a>:</h4>
+<p>Naively substituting in <code>sorry</code> I get this error:</p>
+<div class="codehilite"><pre><span></span>don&#39;t know how to synthesize placeholder
+context:
+exact_list_expr : list expr → tactic unit,
+h : expr,
+t : list expr,
+_x _x _x _x : unit
+⊢ Type
+</pre></div>
+
+
+<p>That seems a bit suspicious, i.e., <code>_x _x _x _x </code> looks weird.</p>
+
+<a name="166165201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165201">Mario Carneiro (May 21 2019 at 11:57)</a>:</h4>
+<p><code>tactic.admit</code></p>
+
+<a name="166165253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165253">Joseph Corneli (May 21 2019 at 11:58)</a>:</h4>
+<p>Ah, <code>tactic.admit</code>, I just found it.  But impressively it doesn't work.</p>
+
+<a name="166165329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165329">Joseph Corneli (May 21 2019 at 11:59)</a>:</h4>
+<p>The trace commands are like this:</p>
+<div class="codehilite"><pre><span></span>$  lean refine_rules.lean
+refine, initial target:
+continuous (λ (x : ℝ), sin (sin x))
+REFINE: continuous.comp.{?_mlocal._fresh.13.928650 ?_mlocal._fresh.13.928651 ?_mlocal._fresh.13.928652}
+29
+apply, initial target:
+continuous sin
+APPLY: real.continuous_sin
+28
+refine, initial target:
+continuous (λ (x : ℝ), sin x)
+REFINE: continuous.comp.{?_mlocal._fresh.13.928650 ?_mlocal._fresh.13.928651 ?_mlocal._fresh.13.928652}
+28
+apply, initial target:
+continuous sin
+APPLY: real.continuous_sin
+27
+refine, initial target:
+continuous (λ (x : ℝ), x)
+apply, initial target:
+continuous (λ (x : ℝ), x)
+APPLY: real.continuous_sin
+exact, initial target:
+continuous (λ (x : ℝ), x)
+EXACT: continuous_id.{?_mlocal._fresh.13.928653}
+exact, final target:
+/Users/joe/my_playground_tidy2/src/refine_rules.lean:87:0: error: tactic failed, there are unsolved goals
+state:
+⊢ continuous (λ (x : ℝ), x)
+theorem continuous_sin_sin : continuous (λ (x : ℝ), sin (sin x)) :=
+⁇
+</pre></div>
+
 
 {% endraw %}
