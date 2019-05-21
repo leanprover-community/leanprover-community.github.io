@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Tutorial Exercise](25037TutorialExercise.html) (59 messages, latest: May 20 2019 at 13:21)
+* [Tutorial Exercise](25037TutorialExercise.html) (60 messages, latest: May 21 2019 at 21:10)
 
 * [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (3 messages, latest: May 20 2019 at 11:48)
 
