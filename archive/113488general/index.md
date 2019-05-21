@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [problems with coercion to function](83580problemswithcoerciontofunction.html) (3 messages, latest: May 21 2019 at 07:50)
+* [problems with coercion to function](83580problemswithcoerciontofunction.html) (4 messages, latest: May 21 2019 at 08:01)
 
 * [3.4.2 branch](99076342branch.html) (58 messages, latest: May 21 2019 at 01:04)
 
