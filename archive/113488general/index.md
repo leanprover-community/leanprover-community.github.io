@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean installation](13267leaninstallation.html) (5 messages, latest: May 21 2019 at 17:24)
+
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (19 messages, latest: May 21 2019 at 14:11)
 
 * [How to trace all goals explicitly?](51734Howtotraceallgoalsexplicitly.html) (2 messages, latest: May 21 2019 at 13:15)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [3.4.2 branch](99076342branch.html) (58 messages, latest: May 21 2019 at 01:04)
 
 * [dependencies](91432dependencies.html) (5 messages, latest: May 20 2019 at 22:10)
-
-* [lean installation](13267leaninstallation.html) (4 messages, latest: May 20 2019 at 20:35)
 
 * [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
 
