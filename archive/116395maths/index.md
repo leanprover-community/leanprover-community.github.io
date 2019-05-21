@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [open subgroups](85789opensubgroups.html) (7 messages, latest: May 20 2019 at 20:18)
+* [apply_rules example](53597applyrulesexample.html) (23 messages, latest: May 21 2019 at 11:59)
 
-* [apply_rules example](53597applyrulesexample.html) (18 messages, latest: May 20 2019 at 13:50)
+* [open subgroups](85789opensubgroups.html) (7 messages, latest: May 20 2019 at 20:18)
 
 * [←add_assoc](44346addassoc.html) (8 messages, latest: May 19 2019 at 08:04)
 
