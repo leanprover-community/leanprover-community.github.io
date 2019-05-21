@@ -318,5 +318,45 @@ theorem continuous_sin_sin : continuous (λ (x : ℝ), sin (sin x)) :=
 ⁇
 </pre></div>
 
+<a name="166165433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165433">Joseph Corneli (May 21 2019 at 12:00)</a>:</h4>
+<p>So it seems to claim there's no target in the last step, but then there are unsolved goals at the end of the run.</p>
+
+<a name="166165567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165567">Joseph Corneli (May 21 2019 at 12:02)</a>:</h4>
+<p>Oh, maybe this is the difference between <code>pure</code> and <code>return</code>?</p>
+
+<a name="166165582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165582">Joseph Corneli (May 21 2019 at 12:02)</a>:</h4>
+<p><span aria-label="fingers crossed" class="emoji emoji-1f91e" role="img" title="fingers crossed">:fingers_crossed:</span></p>
+
+<a name="166165617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166165617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166165617">Joseph Corneli (May 21 2019 at 12:03)</a>:</h4>
+<p>Nope, that's not the problem.</p>
+
+<a name="166166141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166166141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166166141">Joseph Corneli (May 21 2019 at 12:10)</a>:</h4>
+<p>The steps exactly match those of my interactive proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">continuous_sin_sin&#39;</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">refine</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">continuous_sin</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">continuous_id</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>... well, almost exactly.  There's an extra <code>apply</code> but it doesn't change the target.</p>
+
+<a name="166166300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166166300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166166300">Mario Carneiro (May 21 2019 at 12:13)</a>:</h4>
+<p>maybe that extra apply made a new subgoal</p>
+
+<a name="166166316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166166316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166166316">Mario Carneiro (May 21 2019 at 12:13)</a>:</h4>
+<p>for example if it was <code>continuous.comp</code> and lean said "aha, composition with identity"</p>
+
 
 {% endraw %}
