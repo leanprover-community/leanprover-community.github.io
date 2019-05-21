@@ -605,5 +605,25 @@ theorem continuous_sin_sin : continuous (λ (x : ℝ), sin (sin x)) :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166174198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166174198">Joseph Corneli (May 21 2019 at 13:55)</a>:</h4>
 <p>Ah, I had initially set off to write this example with <code>tidy</code> using <code>apply_rules</code> inside, I didn't realise that you could feed individual rules into <code>tidy</code> quite so straightforwardly.</p>
 
+<a name="166174889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166174889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166174889">Joseph Corneli (May 21 2019 at 14:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think Reid's tactic is pretty much equivalent to the <code>cts</code> tactic I mentioned.  Again it wouldn't do <code>1/(cos x + 2)</code>. The idea I was pursuing in some other threads was to get a bound <code>cos x + 2 &gt; 0</code> using an SMT solver.</p>
+
+<a name="166174979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166174979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166174979">Mario Carneiro (May 21 2019 at 14:02)</a>:</h4>
+<p>why not just spit out a subgoal for it? Proving cos x + 2 != 0 seems out of scope for a continuity prover</p>
+
+<a name="166175543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166175543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166175543">Joseph Corneli (May 21 2019 at 14:07)</a>:</h4>
+<p>Well, proving things to be non-zero is needed in order to apply <code>continuous_inv</code>.  So, the check would play a similar role to the conditions in Reid's <code>apply_continuous.comp</code>.</p>
+
+<a name="166175666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166175666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166175666">Mario Carneiro (May 21 2019 at 14:08)</a>:</h4>
+<p>right, that's why it is a subgoal</p>
+
+<a name="166175681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/apply_rules%20example/near/166175681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53597applyrulesexample.html#166175681">Mario Carneiro (May 21 2019 at 14:08)</a>:</h4>
+<p>it's a tactic, you don't have to prove everything</p>
+
 
 {% endraw %}
