@@ -142,5 +142,56 @@ If you do not mind, please can you give me advice about it, special name of func
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166260450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166260450">Mario Carneiro (May 22 2019 at 11:54)</a>:</h4>
 <p>Jeremy and I worked it out a while ago</p>
 
+<a name="166260990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166260990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166260990">Sebastien Gouezel (May 22 2019 at 12:04)</a>:</h4>
+<p>You can definitely work it out. The same for continuity: there is already an API for continuity of partial functions, crafted by Jeremy. Except that it is some amount of work. Then when you want to talk about C^k functions, or analytic functions, or Besov functions, or whatever, and even if you have already done it for functions you will need to spend some time to define again the same notions for partial functions (with a well developed API if you want these notions to be usable). This is completely avoided by the approach (1), at the expense of the mild annoyance that equality between charts (which is essentially never used) is not the right notion.</p>
+
+<a name="166261014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261014">Mario Carneiro (May 22 2019 at 12:04)</a>:</h4>
+<p>You don't want to lift every algebraic operation to roption exactly; you use the monad structure for that</p>
+
+<a name="166261063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261063">Mario Carneiro (May 22 2019 at 12:05)</a>:</h4>
+<p>I'm not sure it's true to say it's completely avoided; instead you have to build an API for <code>eq_on_bla</code> and <code>local_equiv</code> and such. It's moving the work elsewhere</p>
+
+<a name="166261246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261246">Sebastien Gouezel (May 22 2019 at 12:08)</a>:</h4>
+<p>I think in any case you will need to build an API for <code>local_equiv</code>. Even with partial functions, you will need to bundle two partial functions which are inverse to each other on their respective domains, and see how they compose and so on.</p>
+
+<a name="166261374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261374">Mario Carneiro (May 22 2019 at 12:10)</a>:</h4>
+<p>no, that's equiv of subtypes</p>
+
+<a name="166261712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261712">Sebastien Gouezel (May 22 2019 at 12:16)</a>:</h4>
+<p>Not really, because you want to be able to compose them even when when the target of the first one is not the source of the second one, by automatically taking the intersection of the domains. Composition of roption-valued functions does that automatically, but composition of equivs of subtypes does not.</p>
+
+<a name="166261828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261828">Mario Carneiro (May 22 2019 at 12:18)</a>:</h4>
+<p>that's true. I guess you need to forget about the domains in the types in your case</p>
+
+<a name="166261884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166261884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166261884">Mario Carneiro (May 22 2019 at 12:19)</a>:</h4>
+<p>still I like the fact that using subtypes gives you topology for free... can roption do the same?</p>
+
+<a name="166262151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166262151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166262151">Hoang Le Truong (May 22 2019 at 12:24)</a>:</h4>
+<p>2) With the roption approach, I change a function <code>E → roption E</code> to function <code> E → E</code> by <br>
+<code>def ext_by_zero(f : β →. α) (z:β) : α := 
+if  h:z ∈  f.dom    then f.fn z h else 0</code><br>
+When we only work on <code>x ∈ f.dom</code></p>
+
+<a name="166262200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166262200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166262200">Hoang Le Truong (May 22 2019 at 12:25)</a>:</h4>
+<p>Fisrt I work only with complex field and   definition of <code>manifold ℂ β</code> <code>local_equiv α  β</code> also work only funtions <code>α → β</code>.  But we can change ℂ to any field <code>k</code>.  When we work on field <code>𝔽₁</code> then empty function joint theory as absorbing element.  Therefore I choose <code>local_equiv α  β</code> include empty function</p>
+
+<a name="166262206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166262206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166262206">Mario Carneiro (May 22 2019 at 12:25)</a>:</h4>
+<p>I think the natural topology on roption A is the one-point compactification</p>
+
+<a name="166262394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166262394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166262394">Mario Carneiro (May 22 2019 at 12:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> Do you know a way to do the topology of <code>roption A</code> with filters?</p>
+
 
 {% endraw %}
