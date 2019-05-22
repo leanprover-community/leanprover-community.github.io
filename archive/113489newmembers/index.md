@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Rewrite in lambda expr](04378Rewriteinlambdaexpr.html) (3 messages, latest: May 22 2019 at 12:11)
+
 * [Eliminate classical.some](66890Eliminateclassicalsome.html) (23 messages, latest: May 22 2019 at 11:52)
 
 * [What is a motive?](37413Whatisamotive.html) (31 messages, latest: May 22 2019 at 06:25)
