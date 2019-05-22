@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What is a motive?](37413Whatisamotive.html) (24 messages, latest: May 22 2019 at 00:58)
+
 * [Tutorial Exercise](25037TutorialExercise.html) (60 messages, latest: May 21 2019 at 21:10)
 
 * [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (3 messages, latest: May 20 2019 at 11:48)
