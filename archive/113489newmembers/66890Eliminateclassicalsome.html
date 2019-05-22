@@ -38,5 +38,25 @@ permalink: archive/113489newmembers/66890Eliminateclassicalsome.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166236667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166236667">Mario Carneiro (May 22 2019 at 04:42)</a>:</h4>
 <p>For example, you could use this to compute the busy beaver function</p>
 
+<a name="166239269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166239269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166239269">Jesse Michael Han (May 22 2019 at 05:50)</a>:</h4>
+<p>are lean's constructive reals the same as the computable reals? another example could be definable but noncomputable reals</p>
+
+<a name="166239612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166239612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166239612">Mario Carneiro (May 22 2019 at 05:58)</a>:</h4>
+<p>Oh, wait, what's that <code>(x : α)</code> doing there? It's not used in the definition</p>
+
+<a name="166239650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166239650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166239650">Mario Carneiro (May 22 2019 at 05:59)</a>:</h4>
+<p>I will assume that's a typo. Here's how everything becomes computable using (computable) unique choice:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">unique_choice</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">he</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">p</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">choice&#39;</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">unique_choice</span> <span class="o">(</span><span class="n">eq</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span><span class="o">)</span> <span class="n">id</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
+
 
 {% endraw %}
