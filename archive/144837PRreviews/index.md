@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (3 messages, latest: May 22 2019 at 10:44)
+* [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (4 messages, latest: May 22 2019 at 17:01)
 
 * [#1066 Battle of Hastings](388831066BattleofHastings.html) (2 messages, latest: May 20 2019 at 17:43)
 
