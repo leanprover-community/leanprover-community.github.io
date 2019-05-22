@@ -123,5 +123,24 @@ If you do not mind, please can you give me advice about it, special name of func
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166246445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166246445">Neil Strickland (May 22 2019 at 08:17)</a>:</h4>
 <p>Can you comment on why your <code>local_equiv α  β</code> actually involves maps defined on all of <code>α</code> and  <code>β</code>, rather than just the indicated subsets?   This seems to be asking for trouble later.  Among other things, it means that an empty type cannot have a local equivalence with a nonempty one, which is a problem if <code>α</code> and  <code>β</code> arise naturally as subtypes of something else.  Can you not use maps <code>α → roption β</code> and <code>β → roption α</code> or something like that?  That way, the <code>eq_on_source</code> thing would become unnecessary.</p>
 
+<a name="166259295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166259295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166259295">Sebastien Gouezel (May 22 2019 at 11:35)</a>:</h4>
+<p>There are pros and cons to both approaches, i.e. (1): functions defined everywhere, but you don't care about the values outside of the source, and (2): roption, i.e., really kill the values outside of source.</p>
+<p>In (1), if functions are equal on the source but different outside, then they are not equal, while you want to think of them as the same function. That's the role of <code>eq_on_source</code>, which is definitely an annoyance.</p>
+<p>In (2), your function does not take values in the right space, and this calls for trouble. For instance, if you want to define the derivative of a function <code>f : M -&gt; M' </code> where <code>M</code> and <code>M'</code> are manifolds, what you do is write <code>f</code> in charts, i.e., consider <code>e' o f o e^{-1}</code> where <code>e</code> and <code>e'</code> are charts around <code>x</code>and <code>f x</code>, and then you differentiate. With the roption approach, what you get is a function from <code>E</code> to <code>roption E'</code>, so you can not define the derivative as the limit of <code>(f(x+hv)-f(x))/h</code> when <code>h</code>tends to <code>0</code> (or an equivalent definition using small o) as it does not make sense to subtract elements of <code>roption E'</code>, or to divide them by a scalar. So, you would need to extend many algebraic definitions to <code>roption</code>, or to restrict your function to some suitable set and play some nontrivial dance there. </p>
+<p>I have the feeling that (2) will create many more concrete problems than (1). Most of the time, we don't care at all about equality of charts, we just use one given chart and that's it. While having to reproject your function back to <code>E</code>to do some algebraic manipulation happens all the time. That's why I went for (1). But you are not the first person to voice concerns about this choice.</p>
+
+<a name="166260363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166260363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166260363">Mario Carneiro (May 22 2019 at 11:53)</a>:</h4>
+<p>You can define the derivative when the function is defined on an open set around the target point</p>
+
+<a name="166260436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166260436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166260436">Mario Carneiro (May 22 2019 at 11:54)</a>:</h4>
+<p>the little o definition with a filter for roption functions actually makes this pretty painless</p>
+
+<a name="166260450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Manifolds/near/166260450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/12382Manifolds.html#166260450">Mario Carneiro (May 22 2019 at 11:54)</a>:</h4>
+<p>Jeremy and I worked it out a while ago</p>
+
 
 {% endraw %}

@@ -77,5 +77,70 @@ permalink: archive/113489newmembers/66890Eliminateclassicalsome.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166247083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166247083">Neil Strickland (May 22 2019 at 08:28)</a>:</h4>
 <p>It's also worth pointing out that you can avoid <code>classical.some</code> if  <code>α</code>  and <code>β</code> are finite with decidable equality.  I think that this is in mathlib with a non-obvious name that I do not remember.  There is a more extensive set of similar results <a href="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/unique_element.lean" target="_blank" title="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/unique_element.lean">here</a>.  This will need some work before it can go into mathlib, but I hope to do that at some point.</p>
 
+<a name="166257466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166257466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166257466">Kevin Buzzard (May 22 2019 at 11:07)</a>:</h4>
+<p>Even if alpha is infinite I guess you could get away with it, as long as it has decidable equality and can be computably enumerated (e.g. <code>nat</code>, for which there is even some explicit function that does it IIRC, <code>nat.some</code> or something? Not at Lean right now). </p>
+<p>Can someone remind me of a computable bijection (on the reals, or the power set of the naturals or something) with no computable inverse?</p>
+
+<a name="166257568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166257568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166257568">Kevin Buzzard (May 22 2019 at 11:09)</a>:</h4>
+<blockquote>
+<p>There is a more extensive set of similar results <a href="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/unique_element.lean" target="_blank" title="https://github.com/NeilStrickland/lean_lib/blob/master/src/data/unique_element.lean">here</a>.  </p>
+</blockquote>
+<p>Is this one of these situations where the <code>trunc</code> trick can somehow help? I didn't understand this trick in the past but it's getting to the point where the next time that someone explains it to me, I'll probably get it.</p>
+
+<a name="166257921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166257921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166257921">Mario Carneiro (May 22 2019 at 11:14)</a>:</h4>
+<p>Yes. If you replace <code>\ex x, p x</code> with <code>trunc {x // p x}</code> then it's definable</p>
+
+<a name="166258183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166258183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166258183">Mario Carneiro (May 22 2019 at 11:18)</a>:</h4>
+<p>The proof of this is just the literal construction -</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">quot</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">unique_choice</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">he</span> <span class="o">:</span> <span class="n">trunc</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">x</span><span class="o">})</span>
+  <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">p</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="n">trunc</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">:{</span><span class="n">x</span><span class="bp">//</span><span class="n">p</span> <span class="n">x</span><span class="o">},</span> <span class="n">f</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">ha</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">a</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">b</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">he</span>
+</pre></div>
+
+
+<p>but the meaning explanation is that <code>trunc</code> contains data that can be used in further computation, because it lives in <code>Type</code> instead of <code>Prop</code>. So when the VM wants to execute this function it just takes <code>f</code> and applies it to the value stored in <code>he</code></p>
+
+<a name="166258215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166258215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166258215">Mario Carneiro (May 22 2019 at 11:18)</a>:</h4>
+<p>You can't do this with the exists version because <code>he</code> isn't storing anything in that case</p>
+
+<a name="166258485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166258485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166258485">Mario Carneiro (May 22 2019 at 11:22)</a>:</h4>
+<p>I guess the canonical function from <code>option A</code> to <code>roption A</code> is a bijection with no computable inverse</p>
+
+<a name="166259022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166259022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166259022">Neil Strickland (May 22 2019 at 11:31)</a>:</h4>
+<p>I guess that the coercion <code>bool → Prop</code> is also a bijection without computable inverse.</p>
+
+<a name="166259706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166259706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166259706">Kevin Buzzard (May 22 2019 at 11:42)</a>:</h4>
+<blockquote>
+<p>I guess that the coercion <code>bool → Prop</code> is also a bijection without computable inverse.</p>
+</blockquote>
+<p>I'm not sure it is provably a bijection in Lean, is it?</p>
+
+<a name="166259799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166259799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166259799">Kevin Buzzard (May 22 2019 at 11:44)</a>:</h4>
+<blockquote>
+<p>I guess the canonical function from <code>option A</code> to <code>roption A</code> is a bijection with no computable inverse</p>
+</blockquote>
+<p>We could also consider the function from functions to bool sending f to true iff f is canonical</p>
+
+<a name="166260156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166260156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166260156">Mario Carneiro (May 22 2019 at 11:50)</a>:</h4>
+<p>both are provably bijections assuming choice</p>
+
+<a name="166260292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Eliminate%20classical.some/near/166260292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66890Eliminateclassicalsome.html#166260292">Mario Carneiro (May 22 2019 at 11:52)</a>:</h4>
+<p>If you don't assume choice then it's a very different problem... In this case you are purely intuitionistic and so from the existence property from a closed proof that the function is bijective you can reconstruct a function that was the existential witness</p>
+
 
 {% endraw %}
