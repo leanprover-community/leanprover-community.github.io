@@ -1,0 +1,166 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/37413Whatisamotive.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html">What is a motive?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166226652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226652">Keeley Hoek (May 22 2019 at 00:36)</a>:</h4>
+<p>In the course of leaning (some <code>rw h at h1</code>), I've gotten <code>rewrite tactic failed, motive is not type correct</code>. What's a <code>motive</code>?</p>
+
+<a name="166226688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226688">Keeley Hoek (May 22 2019 at 00:37)</a>:</h4>
+<p>MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">struct</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">axioms</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">ss</span> <span class="o">:</span> <span class="n">struct</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">struct</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h</span> <span class="n">at</span> <span class="n">ss</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="166226692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226692">Mario Carneiro (May 22 2019 at 00:37)</a>:</h4>
+<p>The goal of a <code>cases_on</code> or a <code>rec_on</code> is of the form <code>\all a, C a</code>. <code>C</code> is the motive</p>
+
+<a name="166226753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226753">Mario Carneiro (May 22 2019 at 00:38)</a>:</h4>
+<p>In the case of <code>rw (bla : a = b)</code>, it's constructing an <code>eq.rec_on</code> application, and so the motive is a lambda term <code>C</code> such that <code>C b</code> is the goal and <code>C a</code> is where rw wants to end up</p>
+
+<a name="166226779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226779">Keeley Hoek (May 22 2019 at 00:39)</a>:</h4>
+<p>Aha, so does this mean that <code>rw</code> is not smart enough to (for example in my example above), after having rewritten the <code>α</code> into a <code>β</code>, use <code>id</code> to wrap <code>a</code> in a function application which views <code>a</code> as a term of type <code>β</code>?</p>
+
+<a name="166226836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226836">Mario Carneiro (May 22 2019 at 00:40)</a>:</h4>
+<p>yes, that's exactly it. It rewrites <code>α</code> to let's say <code>x</code> (the lambda variable), but then <code>a : α</code> does not match the type <code>x</code> expected</p>
+
+<a name="166226886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226886">Mario Carneiro (May 22 2019 at 00:41)</a>:</h4>
+<p>To resolve this, you can abstract <code>a</code> in some way. For example if the goal was <code>struct.mk α a = struct.mk α a </code> you could <code>revert a</code> to get <code>\all a : α, struct.mk α a = struct.mk α a</code>, and now uniformly rewriting <code>α</code> with <code>x</code> will not break typecorrectness</p>
+
+<a name="166226982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226982">Keeley Hoek (May 22 2019 at 00:43)</a>:</h4>
+<p>Aha! great, thanks. On the other hand</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">ss</span> <span class="o">:</span> <span class="n">struct</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">struct</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="n">at</span> <span class="n">ss</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>does work (ish, I guess <code>simp</code> automatically does something like <code>cases</code> when it sees an inductive constructor too, but modulo that). So is <code>simp</code> programmed to deal with situations like this? I always imagined it was doing something like a <code>rw</code> at every step...</p>
+
+<a name="166226991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226991">Mario Carneiro (May 22 2019 at 00:43)</a>:</h4>
+<p>This, by the way, is why <code>rw</code> always rewrites a value everywhere; you are much more likely to get a type correct result than if you just rewrite half of the variables</p>
+
+<a name="166226999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166226999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166226999">Keeley Hoek (May 22 2019 at 00:43)</a>:</h4>
+<p>Yep, sure!</p>
+
+<a name="166227056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227056">Mario Carneiro (May 22 2019 at 00:44)</a>:</h4>
+<p>Right, <code>simp</code> works here because it's using a completely different strategy for rewriting</p>
+
+<a name="166227058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227058">Mario Carneiro (May 22 2019 at 00:44)</a>:</h4>
+<p>It uses <code>congr</code> lemmas</p>
+
+<a name="166227092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227092">Mario Carneiro (May 22 2019 at 00:45)</a>:</h4>
+<p>Actually i'm not sure it does work in this example, I would expect it does nothing</p>
+
+<a name="166227103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227103">Keeley Hoek (May 22 2019 at 00:45)</a>:</h4>
+<p>Well the result is</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">ss</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">=</span> <span class="n">β</span> <span class="bp">∧</span> <span class="n">a</span> <span class="bp">==</span> <span class="n">a</span>
+<span class="err">⊢</span> <span class="n">false</span>
+</pre></div>
+
+<a name="166227159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227159">Keeley Hoek (May 22 2019 at 00:46)</a>:</h4>
+<p>So I guess it worked?</p>
+
+<a name="166227185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227185">Mario Carneiro (May 22 2019 at 00:46)</a>:</h4>
+<p>Here's a better example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span>
+
+<span class="n">axioms</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="k">have</span> <span class="n">ss</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">α</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">foo</span> <span class="n">α</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="n">at</span> <span class="n">ss</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="166227200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227200">Mario Carneiro (May 22 2019 at 00:47)</a>:</h4>
+<p>now simp's heuristic stuff doesn't apply, and so it does nothing</p>
+
+<a name="166227267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227267">Keeley Hoek (May 22 2019 at 00:48)</a>:</h4>
+<p>Riiight, ok. So probably it was "working" before because of doing (something like) <code>cases</code> on the inductive constructor first, so the type-inter-dependencies weren't around anymore?</p>
+
+<a name="166227291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227291">Keeley Hoek (May 22 2019 at 00:49)</a>:</h4>
+<p>Any completely unrelated I guess, why do I get a <code>heq</code> after the simp application in the previous example?</p>
+
+<a name="166227385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227385">Mario Carneiro (May 22 2019 at 00:51)</a>:</h4>
+<p>because the lemma it applied is <code>struct.mk A a = struct B b &lt;-&gt; (A = B /\ a == b)</code></p>
+
+<a name="166227465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227465">Keeley Hoek (May 22 2019 at 00:52)</a>:</h4>
+<p>Thanks so much Mario, as always!</p>
+
+<a name="166227481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227481">Mario Carneiro (May 22 2019 at 00:53)</a>:</h4>
+<p>Here's an example of <code>simp</code> rewriting under a dependency, where <code>rw</code> would fail:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="kn">constant</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">bar</span> <span class="n">a</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+
+<span class="n">axioms</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">bar</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">proofs</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">a</span> <span class="n">h</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">e</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="166227607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227607">Mario Carneiro (May 22 2019 at 00:56)</a>:</h4>
+<p>This works because it generates a congr lemma for every constant and when one of the arguments is a subsingleton it is clever and avoids the subgoal. Notice the lack of a <code>a_2 = a_3</code> assumption in the statement of the lemma:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span> <span class="n">c</span> <span class="bp">&lt;-</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">mk_congr_lemma</span> <span class="bp">`</span><span class="o">(</span><span class="n">foo</span><span class="o">),</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">c</span><span class="bp">.</span><span class="n">type</span>
+<span class="c1">-- ∀ (a a_1 : α), a = a_1 → ∀ (a_2 : bar a) (a_3 : bar a_1), foo a a_2 = foo a_1 a_3</span>
+</pre></div>
+
+<a name="166227691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166227691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166227691">Mario Carneiro (May 22 2019 at 00:58)</a>:</h4>
+<p>If we look at the congr lemma for my first example, it determines that alpha has proper dependencies so it doesn't allow it to change at all:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span>
+
+<span class="n">axioms</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span> <span class="n">c</span> <span class="bp">&lt;-</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">mk_congr_lemma</span> <span class="bp">`</span><span class="o">(</span><span class="n">foo</span><span class="o">),</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">c</span><span class="bp">.</span><span class="n">type</span>
+<span class="c1">-- ∀ (α : Type) (a a_1 : α), a = a_1 → foo α a = foo α a_1</span>
+</pre></div>
+
+
+<p>So that means that simp will not "see" into the <code>α</code> argument of <code>foo</code> to apply any rewrites</p>
+
+
+{% endraw %}
