@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Eliminate classical.some](66890Eliminateclassicalsome.html) (11 messages, latest: May 22 2019 at 07:03)
+* [Eliminate classical.some](66890Eliminateclassicalsome.html) (12 messages, latest: May 22 2019 at 08:28)
 
 * [What is a motive?](37413Whatisamotive.html) (31 messages, latest: May 22 2019 at 06:25)
 
