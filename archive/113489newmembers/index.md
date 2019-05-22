@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [What is a motive?](37413Whatisamotive.html) (26 messages, latest: May 22 2019 at 04:58)
+* [Eliminate classical.some](66890Eliminateclassicalsome.html) (8 messages, latest: May 22 2019 at 05:59)
 
-* [Eliminate classical.some](66890Eliminateclassicalsome.html) (5 messages, latest: May 22 2019 at 04:42)
+* [What is a motive?](37413Whatisamotive.html) (29 messages, latest: May 22 2019 at 05:28)
 
 * [Tutorial Exercise](25037TutorialExercise.html) (60 messages, latest: May 21 2019 at 21:10)
 
