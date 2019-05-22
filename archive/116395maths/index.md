@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Manifolds](12382Manifolds.html) (25 messages, latest: May 22 2019 at 08:17)
+
 * [apply_rules example](53597applyrulesexample.html) (69 messages, latest: May 21 2019 at 14:08)
 
 * [open subgroups](85789opensubgroups.html) (7 messages, latest: May 20 2019 at 20:18)
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [Numbers in base p](84831Numbersinbasep.html) (11 messages, latest: May 18 2019 at 20:52)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3090 messages, latest: May 18 2019 at 16:55)
-
-* [Manifolds](12382Manifolds.html) (24 messages, latest: May 17 2019 at 09:02)
 
 * [is_open {true}](82278isopentrue.html) (7 messages, latest: May 16 2019 at 20:05)
 
