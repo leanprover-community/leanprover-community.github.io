@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [what happened to update-mathlib?](09517whathappenedtoupdatemathlib.html) (8 messages, latest: May 22 2019 at 03:37)
+
 * [Lean in the wild](43625Leaninthewild.html) (77 messages, latest: May 21 2019 at 23:40)
 
 * [lean installation](13267leaninstallation.html) (6 messages, latest: May 21 2019 at 23:12)
