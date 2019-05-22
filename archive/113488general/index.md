@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean installation](13267leaninstallation.html) (5 messages, latest: May 21 2019 at 17:24)
+* [Lean in the wild](43625Leaninthewild.html) (77 messages, latest: May 21 2019 at 23:40)
+
+* [lean installation](13267leaninstallation.html) (6 messages, latest: May 21 2019 at 23:12)
 
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (19 messages, latest: May 21 2019 at 14:11)
 
@@ -93,8 +95,6 @@ permalink: archive/113488general/index.html
 * [choose](14850choose.html) (10 messages, latest: May 13 2019 at 05:05)
 
 * [setting up lean on Windows](92044settingupleanonWindows.html) (5 messages, latest: May 13 2019 at 02:40)
-
-* [Lean in the wild](43625Leaninthewild.html) (73 messages, latest: May 12 2019 at 21:56)
 
 * [Sigma types](75591Sigmatypes.html) (6 messages, latest: May 12 2019 at 21:54)
 
