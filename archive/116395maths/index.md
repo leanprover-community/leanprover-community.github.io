@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Manifolds](12382Manifolds.html) (47 messages, latest: May 23 2019 at 16:48)
+* [Manifolds](12382Manifolds.html) (54 messages, latest: May 23 2019 at 18:49)
+
+* [Numbers in base p](84831Numbersinbasep.html) (20 messages, latest: May 23 2019 at 18:21)
 
 * [topology on roption](50982topologyonroption.html) (10 messages, latest: May 23 2019 at 15:45)
 
@@ -21,8 +23,6 @@ permalink: archive/116395maths/index.html
 * [open subgroups](85789opensubgroups.html) (7 messages, latest: May 20 2019 at 20:18)
 
 * [←add_assoc](44346addassoc.html) (8 messages, latest: May 19 2019 at 08:04)
-
-* [Numbers in base p](84831Numbersinbasep.html) (11 messages, latest: May 18 2019 at 20:52)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3090 messages, latest: May 18 2019 at 16:55)
 
