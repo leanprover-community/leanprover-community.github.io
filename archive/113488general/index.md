@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [@ makes the difference](41278makesthedifference.html) (6 messages, latest: May 23 2019 at 13:30)
+* [definitional equality](10949definitionalequality.html) (1 message, latest: May 23 2019 at 14:51)
+
+* [auto bundling](49485autobundling.html) (33 messages, latest: May 23 2019 at 14:46)
+
+* [@ makes the difference](41278makesthedifference.html) (8 messages, latest: May 23 2019 at 14:21)
 
 * [protected](00779protected.html) (7 messages, latest: May 23 2019 at 10:43)
-
-* [auto bundling](49485autobundling.html) (32 messages, latest: May 23 2019 at 07:06)
 
 * [Convert Divisibility Hypothesis to pexpr](68729ConvertDivisibilityHypothesistopexpr.html) (13 messages, latest: May 23 2019 at 06:55)
 
