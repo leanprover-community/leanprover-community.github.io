@@ -1,0 +1,56 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/363811074categoryinstancestoroot.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html">#1074 category instances to root</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166335564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166335564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166335564">Johan Commelin (May 23 2019 at 06:14)</a>:</h4>
+<p>What do people think of the idea to just move these instances into the rest of the mathlib hierarchy instead of in the directory <code>category_theory/instances</code>? I wouldn't mind having a file <code>ring_theory/category.lean</code> etc...<br>
+I think it would stimulate the tighter integration of category theory with the rest of mathlib.</p>
+
+<a name="166335579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166335579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166335579">Mario Carneiro (May 23 2019 at 06:15)</a>:</h4>
+<p>that sounds reasonable</p>
+
+<a name="166335735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166335735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166335735">Scott Morrison (May 23 2019 at 06:19)</a>:</h4>
+<p>I'm on it.</p>
+
+<a name="166336748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166336748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166336748">Scott Morrison (May 23 2019 at 06:41)</a>:</h4>
+<p>The question is where to put all the subsidiary files. One option is to just move the current <code>category_theory/instances/Top/</code> directory to <code>topology/Top/</code>. Another is to move it to <code>topology/category/</code>. The choice is I guess between things like:</p>
+<div class="codehilite"><pre><span></span>import topology.Top
+import topology.Top.limits -- this is redundant
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span>import topology.category
+import topology.category.limits -- this is redundant
+</pre></div>
+
+
+<p>I guess the second one is clearly better.</p>
+
+<a name="166336832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166336832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166336832">Johan Commelin (May 23 2019 at 06:43)</a>:</h4>
+<p>I prefer the second. And I'm being a bit dense, but what do you mean with "this is redundant"?</p>
+
+<a name="166337155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166337155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166337155">Scott Morrison (May 23 2019 at 06:51)</a>:</h4>
+<p>Oh, sorry, I showed two import statements in each case, but since <code>import topology.category</code> will import <code>topology/category/default.lean</code>, which just contains a list of import statements for all the subsidiary files, there's no need to <code>import topology.category.limits</code> if you've already done that.</p>
+
+<a name="166337373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166337373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166337373">Johan Commelin (May 23 2019 at 06:56)</a>:</h4>
+<p>Ok... I see. I certainly prefer the second. On the other hand... where will <code>TopCommRing</code> go?</p>
+
+
+{% endraw %}

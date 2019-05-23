@@ -1,0 +1,70 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/49485autobundling.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html">auto bundling</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166337332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337332">Johan Commelin (May 23 2019 at 06:55)</a>:</h4>
+<p>I'm wondering if we can somehow bridge the gap between bundled and unbundled classes. Let's take <code>Top</code> as an example. If I have <code>X : Top</code>, and I want to apply a lemma from the library to <code>X</code>, then this will usually work. The lemma is written with assumptions <code>{X : Type*} [topological_space X]</code>, and Lean can figure out how to fill them in. It has a <code>coe_to_sort</code> that turns <code>X</code> into a type, and a type class search will figure out the <code>topological_space</code> instance.<br>
+The other direction is currently not so easy. If we have and <code>X : Type*</code> and an instance <code>[topological_space X]</code> it is not so user-friendly to apply a lemma that assumes a <code>Top</code> (for example a generic lemma from the category library). One has to manually bundle everything up using <code>\&lt; X, by apply_instance \&gt;</code>. I would like to be able to just write <code>🗃 X</code> and move on. This becomes especially nice if the bundling takes more than one instance (for example topological groups). The <code>🗃</code> would flag to Lean that it should first infer the expected type of the argument. The user "promises" that this type is a structure that contains exactly one data field. In this field Lean should plug <code>X</code>. All the other fields will be <code>Prop</code>s, and Lean should figure them out using <code>apply_instance</code>.<br>
+I have no idea whether this proposal makes any sense. I fear that it is impossible to implement this in Lean 3.4.2. I hope it will be possible in some future version of Lean...</p>
+
+<a name="166337392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337392">Scott Morrison (May 23 2019 at 06:56)</a>:</h4>
+<p>It's not that hard to build a <code>Top</code>. You can just write <code>Top.of X</code>, and typeclass resolution finds the instance.</p>
+
+<a name="166337412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337412">Johan Commelin (May 23 2019 at 06:57)</a>:</h4>
+<p>I still think that we are drifting away from the beautiful and concise notation that we have in regular maths</p>
+
+<a name="166337494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337494">Johan Commelin (May 23 2019 at 06:58)</a>:</h4>
+<p>I would like to stay as close as possible to that notation. Inserting a single crazy symbol (an arrow, or an emoji) that is the same for every category, seems to get closer to that ideal than having <code>foo_bar.of</code> for every category.</p>
+
+<a name="166337498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337498">Johan Commelin (May 23 2019 at 06:58)</a>:</h4>
+<p>I would like to have a <code>has_of</code> class.</p>
+
+<a name="166337500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337500">Johan Commelin (May 23 2019 at 06:58)</a>:</h4>
+<p>But that seems to be impossible with current tech.</p>
+
+<a name="166337501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337501">Scott Morrison (May 23 2019 at 06:58)</a>:</h4>
+<p>Multiple typeclasses are not a problem:</p>
+<div class="codehilite"><pre><span></span>noncomputable example : TopCommRing := TopCommRing.of ℂ
+</pre></div>
+
+<a name="166337516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337516">Mario Carneiro (May 23 2019 at 06:59)</a>:</h4>
+<p>Please don't replace useful words with emoji</p>
+
+<a name="166337520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337520">Johan Commelin (May 23 2019 at 06:59)</a>:</h4>
+<blockquote>
+<p>Please don't replace useful words with emoji</p>
+</blockquote>
+<p>Why do you replace <code>coe</code> with an arrow?</p>
+
+<a name="166337531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337531">Mario Carneiro (May 23 2019 at 06:59)</a>:</h4>
+<p>I find myself peering closely at <span aria-label="archive" class="emoji emoji-1f5c3" role="img" title="archive">:archive:</span> trying to figure out what it is</p>
+
+<a name="166337533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337533">Mario Carneiro (May 23 2019 at 07:00)</a>:</h4>
+<p>Oh</p>
+
+<a name="166337550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/auto%20bundling/near/166337550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49485autobundling.html#166337550">Johan Commelin (May 23 2019 at 07:00)</a>:</h4>
+<p>Or <code>int.add</code> with <code>+</code>?</p>
+
+
+{% endraw %}
