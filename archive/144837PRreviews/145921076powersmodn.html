@@ -1,0 +1,98 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/144837PRreviews/145921076powersmodn.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/144837PRreviews/index.html">PR reviews</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html">#1076 powers mod n</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166345996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166345996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166345996">Johan Commelin (May 23 2019 at 09:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span> Can you explain why you want <code>n</code> to be a <code>pnat</code> in your assumption <code>hg</code>? Because as far as I can see you are coercing <code>n</code> to a <code>nat</code> almost everywhere.</p>
+
+<a name="166346309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346309">Neil Strickland (May 23 2019 at 09:44)</a>:</h4>
+<p>The main point is that <code>zmod n</code> needs <code>n : pnat</code>.  You could refactor things so some parts of the story work with nat, but the interaction with <code>zmod</code> is really the main point.</p>
+
+<a name="166346445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346445">Mario Carneiro (May 23 2019 at 09:47)</a>:</h4>
+<p>I was thinking about defining a <code>zmod' n</code> such that <code>zmod' (n+1) = zmod (n+1)</code> and <code>zmod' 0 = int</code>; this would unify a lot of your finite/infinite stuff</p>
+
+<a name="166346523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346523">Mario Carneiro (May 23 2019 at 09:48)</a>:</h4>
+<p>Also, I think you can define the dihedral group construction over any (abelian?) group. That's another way to reduce the duplication</p>
+
+<a name="166346651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346651">Johan Commelin (May 23 2019 at 09:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="130308">@Neil Strickland</span> Would it be an idea to use <code>(i : ℕ)</code> in the definition of <code>pow_mod</code>. And then in fact, you can leave out that definition, and prove a bunch of lemmas about <code>foo ^ (i : ℕ)</code>. That way you also have nice notation.</p>
+
+<a name="166346692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346692">Mario Carneiro (May 23 2019 at 09:51)</a>:</h4>
+<p>You will always need the type ascription</p>
+
+<a name="166346697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346697">Johan Commelin (May 23 2019 at 09:51)</a>:</h4>
+<p>Returning to the <code>n : ℕ+</code> assumption. I think that lemmas that don't need the positivity assumption should be proved without it. Someone will thank you for including that edge case.</p>
+
+<a name="166346698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346698">Neil Strickland (May 23 2019 at 09:51)</a>:</h4>
+<p>Yes, you can certainly make everything much more general.  But part of my motivation comes from formalising some early undergraduate material, which I think is useful for expository purposes.  I don't want to wrap that in too many layers of additional abstraction.</p>
+
+<a name="166346743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346743">Johan Commelin (May 23 2019 at 09:52)</a>:</h4>
+<blockquote>
+<p>You will always need the type ascription</p>
+</blockquote>
+<p>And you will have readable notation.</p>
+
+<a name="166346758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346758">Mario Carneiro (May 23 2019 at 09:52)</a>:</h4>
+<p>I'm not saying it's a bad idea, but keep this in mind - there is no way to infer the coercion</p>
+
+<a name="166346768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346768">Johan Commelin (May 23 2019 at 09:52)</a>:</h4>
+<p>Alternative: define an instance <code>has_pow M (zmod n)</code>?</p>
+
+<a name="166346785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346785">Mario Carneiro (May 23 2019 at 09:53)</a>:</h4>
+<p>that's what I thought Neil did</p>
+
+<a name="166346855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346855">Johan Commelin (May 23 2019 at 09:54)</a>:</h4>
+<p>No, he just uses the function.</p>
+
+<a name="166346876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346876">Mario Carneiro (May 23 2019 at 09:54)</a>:</h4>
+<p>Having <code>zmod'</code> will help with the edge case, especially once you get to more abstract group theory</p>
+
+<a name="166346908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346908">Neil Strickland (May 23 2019 at 09:55)</a>:</h4>
+<p>I'm not keen on writing <code>i.val</code> as <code>i : nat</code> for <code>i : zmod n</code>, because this coercion does not preserve any useful structure.</p>
+
+<a name="166346924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346924">Mario Carneiro (May 23 2019 at 09:55)</a>:</h4>
+<p>But it does, in this case</p>
+
+<a name="166346976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166346976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166346976">Mario Carneiro (May 23 2019 at 09:56)</a>:</h4>
+<p>the fact that <code>zmod'</code> is a type defined by cases will make some concrete stuff on it a bit weird, but as long as you just need that it's a group or something it should be useful</p>
+
+<a name="166347021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166347021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166347021">Mario Carneiro (May 23 2019 at 09:57)</a>:</h4>
+<p>alternatively it could literally be the abstract definition - <code>zmod' n = int / span {n}</code></p>
+
+<a name="166347098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166347098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166347098">Mario Carneiro (May 23 2019 at 09:58)</a>:</h4>
+<p>this is computationally less efficient than <code>zmod</code>, but as long as the other one is available it might be useful to have both</p>
+
+<a name="166347122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231076%20powers%20mod%20n/near/166347122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/145921076powersmodn.html#166347122">Neil Strickland (May 23 2019 at 09:59)</a>:</h4>
+<p>I am also not keen on having <code>has_pow M (zmod n)</code>, because the natural translation into ordinary mathematical language is a false statement.</p>
+
+
+{% endraw %}
