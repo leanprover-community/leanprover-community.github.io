@@ -39,5 +39,50 @@ permalink: archive/144837PRreviews/96169943lcrefactor.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166372225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166372225">Alexander Bentkamp (May 23 2019 at 15:35)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> How do you think should the lemmas <code>exists_linear_independent</code> and <code>linear_independent_sUnion_of_directed</code> look like after the refactoring? I am tempted to use sets for this, i.e. <code>linear_independent α (subtype.val : s → β)</code> for <code>s : set β</code>.</p>
 
+<a name="166406601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166406601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166406601">Mario Carneiro (May 23 2019 at 22:39)</a>:</h4>
+<p><code>exists_linear_independent</code> should use sets to some extent. Given a linear independent family <code>f : I -&gt; V</code> and a set <code>t : set V</code> such that <code>\all i, f i \in t</code>, there exists a <code>b \sub t</code> such that <code>\all i, f i \in b</code> and <code>t \sub span b</code> and <code>(coe : b -&gt; V)</code> is linear independent</p>
+
+<a name="166406701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166406701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166406701">Mario Carneiro (May 23 2019 at 22:41)</a>:</h4>
+<p><code>linear_independent_sUnion_of_directed</code> looks equivalent to some statement about colimits, I will ask <span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
+
+<a name="166407026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407026">Mario Carneiro (May 23 2019 at 22:47)</a>:</h4>
+<p>The background is a collection of maps <code>f j : I j -&gt; V</code> where <code>j : J</code> is coming from a partially ordered index set, and there is a map <code>h j j' : I j -&gt; I j'</code> when <code>j &lt;= j'</code>, and <code>f j' = h j j' o f j</code></p>
+
+<a name="166407193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407193">Reid Barton (May 23 2019 at 22:50)</a>:</h4>
+<p>This is for the goal of proving that every vector space has a basis, right?<br>
+If you're going to do it using Zorn's lemma then you need to bring in sets at some point I suppose.</p>
+
+<a name="166407211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407211">Mario Carneiro (May 23 2019 at 22:50)</a>:</h4>
+<p>I'm just thinking about <code>linear_independent_sUnion_of_directed</code> in isolation at the moment</p>
+
+<a name="166407215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407215">Reid Barton (May 23 2019 at 22:50)</a>:</h4>
+<p>In its current form, it looks like the lemma basically reflects the fact that linear independence can be checked on finite subsets</p>
+
+<a name="166407310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407310">Mario Carneiro (May 23 2019 at 22:51)</a>:</h4>
+<p>if you replace the sets with familes, then I think it's talking about a colimit cone in Type</p>
+
+<a name="166407394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407394">Mario Carneiro (May 23 2019 at 22:52)</a>:</h4>
+<p>(Obviously this is bringing enough new tech to the statement that the original version will be wanted anyway, but I'm trying to find the "natural generalization")</p>
+
+<a name="166407425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407425">Reid Barton (May 23 2019 at 22:53)</a>:</h4>
+<p>Not just in Type, but types equipped with a map to β (i.e. <code>over Type β</code>)</p>
+
+<a name="166407442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407442">Reid Barton (May 23 2019 at 22:54)</a>:</h4>
+<p>i.e. "families in β"</p>
+
+<a name="166407522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/166407522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#166407522">Reid Barton (May 23 2019 at 22:54)</a>:</h4>
+<p>So then I suppose it says that the families which consist of linearly independent elements are closed under directed colimits</p>
+
 
 {% endraw %}
