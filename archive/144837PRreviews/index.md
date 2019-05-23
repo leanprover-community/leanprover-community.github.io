@@ -10,7 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (8 messages, latest: May 23 2019 at 05:07)
+* [#1074 category instances to root](363811074categoryinstancestoroot.html) (7 messages, latest: May 23 2019 at 06:56)
+
+* [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (14 messages, latest: May 23 2019 at 06:19)
 
 * [#1066 Battle of Hastings](388831066BattleofHastings.html) (2 messages, latest: May 20 2019 at 17:43)
 
