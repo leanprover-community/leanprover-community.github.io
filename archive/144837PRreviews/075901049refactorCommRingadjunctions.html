@@ -32,5 +32,20 @@ Should the mention of <code>int.cast</code> be explicit, or should we use coerci
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231049%20refactor%20CommRing%20adjunctions/near/166287608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/075901049refactorCommRingadjunctions.html#166287608">Johan Commelin (May 22 2019 at 17:01)</a>:</h4>
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Could you make this change? After that, I think it's ready to merge.</p>
 
+<a name="166319047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231049%20refactor%20CommRing%20adjunctions/near/166319047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/075901049refactorCommRingadjunctions.html#166319047">Scott Morrison (May 22 2019 at 23:36)</a>:</h4>
+<p>Unfortunately this change causes a deterministic timeout in the next proof, that I haven't been able to fix. See the latest commit, or:</p>
+<div class="codehilite"><pre><span></span>lemma hom_C (f : mv_polynomial σ ℤ → β) [is_ring_hom f] (n : ℤ) : f (C n) = (n : β) :=
+congr_fun (int.eq_cast&#39; (f ∘ C)) n
+
+/-- A ring homomorphism f : Z[X_1, X_2, ...] -&gt; R is determined by the evaluations f(X_1), f(X_2), ... -/
+@[simp] lemma eval₂_hom_X {α : Type u} [decidable_eq α] (f : mv_polynomial α ℤ → β) [is_ring_hom f]
+  (x : mv_polynomial α ℤ) : eval₂ (λ n : ℤ, (n : β)) (f ∘ X) x = f x :=
+mv_polynomial.induction_on x
+(λ n, by { rw [hom_C f], /- deterministic timeout: -/ rw [eval₂_C], })
+(λ p q hp hq, by { sorry /- rw [eval₂_add, hp, hq], exact (is_ring_hom.map_add f).symm }) -/})
+(λ p n hp, by { sorry /-rw [eval₂_mul, eval₂_X, hp], exact (is_ring_hom.map_mul f).symm }) -/})
+</pre></div>
+
 
 {% endraw %}
