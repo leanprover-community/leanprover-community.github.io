@@ -10,7 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1074 category instances to root](363811074categoryinstancestoroot.html) (7 messages, latest: May 23 2019 at 06:56)
+* [#1076 powers mod n](145921076powersmodn.html) (20 messages, latest: May 23 2019 at 09:59)
+
+* [#1074 category instances to root](363811074categoryinstancestoroot.html) (10 messages, latest: May 23 2019 at 09:16)
 
 * [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (14 messages, latest: May 23 2019 at 06:19)
 
