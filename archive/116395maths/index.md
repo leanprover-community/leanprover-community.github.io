@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topology on roption](50982topologyonroption.html) (2 messages, latest: May 23 2019 at 14:59)
+* [topology on roption](50982topologyonroption.html) (10 messages, latest: May 23 2019 at 15:45)
+
+* [Manifolds](12382Manifolds.html) (46 messages, latest: May 23 2019 at 15:22)
 
 * [Manifolds local_equiv](83314Manifoldslocalequiv.html) (1 message, latest: May 22 2019 at 17:03)
-
-* [Manifolds](12382Manifolds.html) (42 messages, latest: May 22 2019 at 14:07)
 
 * [apply_rules example](53597applyrulesexample.html) (69 messages, latest: May 21 2019 at 14:08)
 

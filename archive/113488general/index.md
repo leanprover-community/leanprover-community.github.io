@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [definitional equality](10949definitionalequality.html) (1 message, latest: May 23 2019 at 14:51)
+* [lean installation](13267leaninstallation.html) (7 messages, latest: May 23 2019 at 15:38)
+
+* [definitional equality](10949definitionalequality.html) (4 messages, latest: May 23 2019 at 15:23)
 
 * [auto bundling](49485autobundling.html) (33 messages, latest: May 23 2019 at 14:46)
 
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [what happened to update-mathlib?](09517whathappenedtoupdatemathlib.html) (8 messages, latest: May 22 2019 at 03:37)
 
 * [Lean in the wild](43625Leaninthewild.html) (77 messages, latest: May 21 2019 at 23:40)
-
-* [lean installation](13267leaninstallation.html) (6 messages, latest: May 21 2019 at 23:12)
 
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (19 messages, latest: May 21 2019 at 14:11)
 
