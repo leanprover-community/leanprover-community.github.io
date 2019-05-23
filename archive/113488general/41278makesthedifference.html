@@ -1,0 +1,52 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/41278makesthedifference.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html">@ makes the difference</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166358371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%20makes%20the%20difference/near/166358371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html#166358371">Johan Commelin (May 23 2019 at 13:05)</a>:</h4>
+<p>I'm debugging <a href="https://github.com/leanprover-community/mathlib/issues/1049" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1049">#1049</a>. At some point, I have now written</p>
+<div class="codehilite"><pre><span></span><span class="n">CommRing</span><span class="bp">.</span><span class="n">hom</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="o">(</span><span class="bp">@</span><span class="n">eval₂_hom_X</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I also have</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">eval₂_hom_X</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">eval₂_hom_X :</span>
+<span class="cm">  ∀ {β : Type u_2} [_inst_4 : comm_ring β] {α : Type u_1} [_inst_6 : decidable_eq α] (c : ℤ → β)</span>
+<span class="cm">  [_inst_7 : is_ring_hom c] (f : mv_polynomial α ℤ → β) [_inst_8 : is_ring_hom f] (x : mv_polynomial α ℤ),</span>
+<span class="cm">    eval₂ c (f ∘ X) x = f x</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="166358438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%20makes%20the%20difference/near/166358438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html#166358438">Johan Commelin (May 23 2019 at 13:06)</a>:</h4>
+<p>This code works. But if I replace <code>(@eval₂_hom_X _ _ _ _ _ _ f _)</code> with <code>(eval₂_hom_X f)</code> it times out.</p>
+
+<a name="166358466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%20makes%20the%20difference/near/166358466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html#166358466">Johan Commelin (May 23 2019 at 13:06)</a>:</h4>
+<p>Can someone explain to me why? Does <code>@</code> do more than just making all arguments explicit?</p>
+
+<a name="166360056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%20makes%20the%20difference/near/166360056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html#166360056">Rob Lewis (May 23 2019 at 13:26)</a>:</h4>
+<p>Yes, it changes the elaboration strategy. You can see descriptions of the three possibilities if you look at the autocomplete for <code>@[elab</code>. <code>elab_with_expected_type</code>is the default, but if you use <code>@</code>, it changes to <code>elab_simple</code>.</p>
+
+<a name="166360252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%20makes%20the%20difference/near/166360252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html#166360252">Johan Commelin (May 23 2019 at 13:29)</a>:</h4>
+<p>It's a bit ugly... but I'll stick with the <code>@</code> version, in that case.</p>
+
+<a name="166360365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%40%20makes%20the%20difference/near/166360365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41278makesthedifference.html#166360365">Rob Lewis (May 23 2019 at 13:30)</a>:</h4>
+<p>You could do <code>local attribute [elab_simple]</code> if you think it's less ugly, but I'm not so sure.</p>
+
+
+{% endraw %}
