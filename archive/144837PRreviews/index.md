@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#943 lc refactor](96169943lcrefactor.html) (7 messages, latest: May 23 2019 at 15:35)
+
 * [#1074 category instances to root](363811074categoryinstancestoroot.html) (11 messages, latest: May 23 2019 at 14:47)
 
 * [#1076 powers mod n](145921076powersmodn.html) (35 messages, latest: May 23 2019 at 14:07)
@@ -35,8 +37,6 @@ permalink: archive/144837PRreviews/index.html
 * [#988 norm_cast](38579988normcast.html) (26 messages, latest: May 09 2019 at 14:31)
 
 * [#993 comp2](02762993comp2.html) (11 messages, latest: May 08 2019 at 19:13)
-
-* [#943 lc refactor](96169943lcrefactor.html) (6 messages, latest: May 08 2019 at 09:47)
 
 * [#966 more derivatives](29410966morederivatives.html) (57 messages, latest: May 05 2019 at 05:41)
 
