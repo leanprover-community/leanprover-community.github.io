@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Manifolds](12382Manifolds.html) (56 messages, latest: May 23 2019 at 20:17)
+* [Manifolds](12382Manifolds.html) (57 messages, latest: May 23 2019 at 21:02)
 
 * [Numbers in base p](84831Numbersinbasep.html) (20 messages, latest: May 23 2019 at 18:21)
 
