@@ -84,5 +84,25 @@ permalink: archive/113489newmembers/24293MathphysicsinLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166417475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166417475">Kevin Sullivan (May 24 2019 at 02:20)</a>:</h4>
 <p>Ok, I see.</p>
 
+<a name="166460252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166460252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166460252">Kevin Sullivan (May 24 2019 at 14:57)</a>:</h4>
+<blockquote>
+<p>And feel free to change the name of Rspace! I just had to write something...</p>
+</blockquote>
+<p>Ok, so I have started typing. The aim is to develop at least a formal sketch of a formalization of affine spaces. Here's how I started, and I immediately ran into a few questions, which I pose here.</p>
+<p>You will recall that an affine space comprises a vector space V over a field K and a nonempty set, A, of points, with an addition operation, + : point -&gt; vector -&gt; point, satisfying a few axioms (e.g., \all p, p + 0 = p). My implementation strategy is to build on what's already in the libraries. So here's how I started.</p>
+<div class="codehilite"><pre><span></span>class affine_space
+    (P : Type)                                                  -- points
+    (K: Type) [discrete_field K]               -- scalars
+    (G : Type) [add_comm_group G]    -- vectors
+    (V : vector_space K G) :=                     -- K vector space over G
+(add : P → G → P)
+</pre></div>
+
+
+<p>I initially typed "add : P  → V → P", but of course V isn't s type. So, question <a href="https://github.com/leanprover-community/mathlib/issues/1" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1">#1</a>: does "add : P → G → P" look right? I'd like to be sure that I start with a sound typeclass specification before building all the rest of it.  Question <a href="https://github.com/leanprover-community/mathlib/issues/2" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2">#2</a>: I've chosen to use "has-a" relations rather than "is-a", using object-oriented lexicon, by which I mean that I incorporate P, K, G, and V as field values rather than using "extends" to "inherit" these structures. The rational is that an affine space "has a" vector space but not "is a" vector space. Does this look right to those of you who design these kinds of libraries?</p>
+<p>Thank you!<br>
+Kevin</p>
+
 
 {% endraw %}
