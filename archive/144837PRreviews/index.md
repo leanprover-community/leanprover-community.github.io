@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1080 props of elements in rings](039491080propsofelementsinrings.html) (8 messages, latest: May 24 2019 at 13:53)
+
 * [#943 lc refactor](96169943lcrefactor.html) (22 messages, latest: May 24 2019 at 08:50)
 
 * [#1074 category instances to root](363811074categoryinstancestoroot.html) (27 messages, latest: May 24 2019 at 07:44)

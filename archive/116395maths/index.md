@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Topological vector spaces](52784Topologicalvectorspaces.html) (1 message, latest: May 24 2019 at 11:53)
+* [Topological vector spaces](52784Topologicalvectorspaces.html) (4 messages, latest: May 24 2019 at 13:30)
 
 * [Manifolds](12382Manifolds.html) (92 messages, latest: May 24 2019 at 07:28)
 
