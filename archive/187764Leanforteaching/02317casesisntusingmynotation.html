@@ -63,5 +63,89 @@ what needs to be done to make that terrifying-for-beginners thing not happen any
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166418219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166418219">Mario Carneiro (May 24 2019 at 02:40)</a>:</h4>
 <p>make that <code>local infix</code> or else disambiguation will give you a bad day</p>
 
+<a name="166425695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425695">Kevin Buzzard (May 24 2019 at 06:03)</a>:</h4>
+<p>That stinks. Why is the leakage happening? I'm realising the importance of syntactic equality now, because I'm trying to get <code>simp</code> to perform.</p>
+
+<a name="166425827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425827">Mario Carneiro (May 24 2019 at 06:06)</a>:</h4>
+<p>Because that's how <code>le</code> is defined</p>
+
+<a name="166425836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425836">Mario Carneiro (May 24 2019 at 06:07)</a>:</h4>
+<p><code>le</code> is defined using <code>le</code></p>
+
+<a name="166425840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425840">Mario Carneiro (May 24 2019 at 06:07)</a>:</h4>
+<p>not <code>&lt;=</code></p>
+
+<a name="166425846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425846">Mario Carneiro (May 24 2019 at 06:07)</a>:</h4>
+<p>When you use <code>cases</code>, you are basically applying the function <code>xnat.le.cases_on</code>, which doesn't mention <code>&lt;=</code></p>
+
+<a name="166425896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425896">Kevin Buzzard (May 24 2019 at 06:08)</a>:</h4>
+<p>Am I stick in some catch 22 here?</p>
+
+<a name="166425906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425906">Mario Carneiro (May 24 2019 at 06:08)</a>:</h4>
+<p>it requires <code>le x y</code> as input and you give it <code>x &lt;= y</code>, so lean unfolds it; in the hypotheses which become subgoals there are more references to <code>le</code> and lean doesn't "refold" them because that's not a thing</p>
+
+<a name="166425907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425907">Mario Carneiro (May 24 2019 at 06:09)</a>:</h4>
+<p>This is why equation lemmas exist</p>
+
+<a name="166425921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425921">Mario Carneiro (May 24 2019 at 06:09)</a>:</h4>
+<p>otherwise whenever you unfold <code>a + succ b</code> you would get <code>succ (&lt;unreadable mess&gt; a b)</code></p>
+
+<a name="166425985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425985">Mario Carneiro (May 24 2019 at 06:10)</a>:</h4>
+<p>But there is no equation lemma for cases_on</p>
+
+<a name="166425992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166425992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166425992">Mario Carneiro (May 24 2019 at 06:10)</a>:</h4>
+<p>you have to define the function yourself, and use it</p>
+
+<a name="166426017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166426017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166426017">Kevin Buzzard (May 24 2019 at 06:11)</a>:</h4>
+<p>I see. Then we lose the ability to apply the <code>cases</code> and <code>rcases</code> tactics though</p>
+
+<a name="166426107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166426107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166426107">Mario Carneiro (May 24 2019 at 06:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">le</span><span class="bp">.</span><span class="n">cases_on&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="n">xnat</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">a&#39;</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">},</span>
+  <span class="n">a</span> <span class="bp">≤</span> <span class="n">a&#39;</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">),</span> <span class="n">C</span> <span class="n">a</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">),</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">))</span> <span class="bp">→</span> <span class="n">C</span> <span class="n">a</span> <span class="n">a&#39;</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">le</span><span class="bp">.</span><span class="n">cases_on</span>
+
+<span class="kn">lemma</span> <span class="n">some_easy_thing</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">xnat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine</span> <span class="n">le</span><span class="bp">.</span><span class="n">cases_on&#39;</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">c</span> <span class="n">hc</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="c1">-- etc</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I don't think this is better than the alternative</p>
+
+<a name="166426177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166426177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166426177">Mario Carneiro (May 24 2019 at 06:15)</a>:</h4>
+<p>I don't know if you've ever tried induction on <code>a &lt;= b</code> where <code>a b : nat</code> but it's not pretty</p>
+
+<a name="166426264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166426264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166426264">Kevin Buzzard (May 24 2019 at 06:17)</a>:</h4>
+<p>I developed enough of the theory to show that nat was a totally ordered semiring</p>
+
+<a name="166426269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166426269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166426269">Kevin Buzzard (May 24 2019 at 06:17)</a>:</h4>
+<p>I was trying to figure out the best way to teach this stuff</p>
+
+<a name="166426996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166426996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166426996">Mario Carneiro (May 24 2019 at 06:32)</a>:</h4>
+<p>I don't think it's a leap to say that since you just defined a thing called <code>le</code>, lean says <code>le</code></p>
+
+<a name="166427015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/187764-Lean%20for%20teaching/topic/%60cases%60%20isn%27t%20using%20my%20notation/near/166427015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/187764Leanforteaching/02317casesisntusingmynotation.html#166427015">Mario Carneiro (May 24 2019 at 06:33)</a>:</h4>
+<p>One option is to delay the introduction of the notation until after the proofs, so that there is no reason to expect the notation in the first place</p>
+
 
 {% endraw %}
