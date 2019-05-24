@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1080 props of elements in rings](039491080propsofelementsinrings.html) (8 messages, latest: May 24 2019 at 13:53)
+* [#1080 props of elements in rings](039491080propsofelementsinrings.html) (11 messages, latest: May 24 2019 at 14:45)
 
 * [#943 lc refactor](96169943lcrefactor.html) (22 messages, latest: May 24 2019 at 08:50)
 
