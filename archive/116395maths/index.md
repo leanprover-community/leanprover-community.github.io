@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Manifolds](12382Manifolds.html) (66 messages, latest: May 24 2019 at 06:59)
+* [Manifolds](12382Manifolds.html) (92 messages, latest: May 24 2019 at 07:28)
 
 * [topology on roption](50982topologyonroption.html) (43 messages, latest: May 24 2019 at 02:48)
 
