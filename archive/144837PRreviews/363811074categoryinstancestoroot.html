@@ -91,5 +91,49 @@ import topology.category.limits -- this is redundant
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166413282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166413282">Scott Morrison (May 24 2019 at 00:39)</a>:</h4>
 <p>It would certainly be possible to split <code>types.lean</code> into two pieces and strip off the bottom four from that list...</p>
 
+<a name="166422637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422637">Johan Commelin (May 24 2019 at 04:41)</a>:</h4>
+<p>I wouldn't mind that change. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> What do you think? After all, no-one cares about having posets in their dependency chain. We shouldn't be too scared by a bit of basic category theory either...</p>
+
+<a name="166422684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422684">Mario Carneiro (May 24 2019 at 04:42)</a>:</h4>
+<p>I don't like it, not for <code>topology.basic</code>. Ideally that should give me the basics of topology only, independent of other fields to the degree possible</p>
+
+<a name="166422686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422686">Mario Carneiro (May 24 2019 at 04:42)</a>:</h4>
+<p>if <code>topology.basic</code> doesn't give me that then what does?</p>
+
+<a name="166422696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422696">Johan Commelin (May 24 2019 at 04:43)</a>:</h4>
+<p>Ok, so we want <code>topology.category</code> and then <code>topology.default</code> gives me everything I want...</p>
+
+<a name="166422701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422701">Mario Carneiro (May 24 2019 at 04:43)</a>:</h4>
+<p>I don't even know what the extent of <code>topology.default</code> is... that could be the entire library</p>
+
+<a name="166422748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422748">Scott Morrison (May 24 2019 at 04:44)</a>:</h4>
+<p>Ok, I will for now move things like <code>Top</code> into files like <code>topology/category.lean</code>.</p>
+
+<a name="166422750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422750">Keeley Hoek (May 24 2019 at 04:44)</a>:</h4>
+<p><code>import mathlib</code></p>
+
+<a name="166422753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422753">Scott Morrison (May 24 2019 at 04:44)</a>:</h4>
+<p>We can go for tighter integration later. :-)</p>
+
+<a name="166422756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422756">Mario Carneiro (May 24 2019 at 04:44)</a>:</h4>
+<p>I like <code>import mathlib</code> because it's obvious what goes in and what doesn't</p>
+
+<a name="166422778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422778">Mario Carneiro (May 24 2019 at 04:45)</a>:</h4>
+<p>I think too many files are unclear about their intended dependencies, so dependency creep is a thing which eventually blows up in some cycle</p>
+
+<a name="166422824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231074%20category%20instances%20to%20root/near/166422824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/363811074categoryinstancestoroot.html#166422824">Mario Carneiro (May 24 2019 at 04:46)</a>:</h4>
+<p>or just means that it takes half an hour to compile any file</p>
+
 
 {% endraw %}
