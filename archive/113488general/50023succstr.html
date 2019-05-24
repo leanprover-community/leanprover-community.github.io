@@ -55,5 +55,71 @@ permalink: archive/113488general/50023succstr.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166439397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166439397">Keeley Hoek (May 24 2019 at 10:18)</a>:</h4>
 <p>:D</p>
 
+<a name="166475834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166475834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166475834">Floris van Doorn (May 24 2019 at 18:02)</a>:</h4>
+<p>Yes, it's just a type with a successor function. The reason we used that is that if we have a sequence <code>X</code> of types over the natural numbers or the integers, then the maps can go from <code>X n -&gt; X (n+1)</code> or from <code>X n -&gt; X (n-1)</code>.</p>
+
+<a name="166475996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166475996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166475996">Floris van Doorn (May 24 2019 at 18:04)</a>:</h4>
+<p>(there are other options, for example maps <code>X (n-1) -&gt; X n</code> or <code>X (n+1) -&gt; X n</code>, which are equivalent (but not definitionally equal to) when indexing over the integers and "almost equivalent" when indexing over the natural numbers. We didn't feel a need to use these in Lean 2)</p>
+
+<a name="166476188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166476188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166476188">Floris van Doorn (May 24 2019 at 18:07)</a>:</h4>
+<p>We also used other indexing types. For example for the long exact sequence of homotopy groups, we indexed over <code>nat \times fin 3</code>. The reason is that if you index over <code>nat</code> then <code>X(3n)=\pi_n(B)</code> and <code>X(3n+1)=\pi_n(E)</code> and <code>X(3n+2)=\pi_n(F)</code>(if you start with a map <code>E -&gt; B</code> with fiber <code>F</code>). However, there is no way to get these equalities definitionally, which would be a huge pain. You can get them definitionally if you index over <code>N x 3</code> (where <code>(n,i)</code> of course represents <code>3n+i</code>).</p>
+
+<a name="166476445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166476445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166476445">Johan Commelin (May 24 2019 at 18:11)</a>:</h4>
+<p>This seems like a pretty good approach! Once the monoidal cats land, we should build additive/abelian cats and port this stuff over from Lean 2.</p>
+
+<a name="166476598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166476598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166476598">Reid Barton (May 24 2019 at 18:12)</a>:</h4>
+<p>Yes, it looks very useful. And sometimes you encounter Z/2-graded chain complexes or even just ungraded ones (<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>d</mi><mo>:</mo><mi>A</mi><mo>→</mo><mi>A</mi></mrow><annotation encoding="application/x-tex">d : A \to A</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.69444em;"></span><span class="strut bottom" style="height:0.69444em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">d</span><span class="mrel">:</span><span class="mord mathit">A</span><span class="mrel">→</span><span class="mord mathit">A</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>d</mi><mn>2</mn></msup><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">d^2 = 0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit">d</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span><span class="mrel">=</span><span class="mord mathrm">0</span></span></span></span>)</p>
+
+<a name="166476652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166476652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166476652">Reid Barton (May 24 2019 at 18:13)</a>:</h4>
+<p>I wondered if there might be some extra axiom like two elements with the same successor are equal... since I can't think of a reasonable situation where that would fail</p>
+
+<a name="166476777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166476777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166476777">Floris van Doorn (May 24 2019 at 18:15)</a>:</h4>
+<p>You can also read the comment at the top of this file with some explanation: <a href="https://github.com/leanprover/lean2/blob/master/hott/homotopy/LES_of_homotopy_groups.hlean" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/homotopy/LES_of_homotopy_groups.hlean">https://github.com/leanprover/lean2/blob/master/hott/homotopy/LES_of_homotopy_groups.hlean</a></p>
+<p>One disadvantage is that these sequences are a bit hard to work with. For example, all the constructions with long exact sequences are with pointed sets, but then at the bottom of the LES-file we need to convince Lean that most of these pointed sets are actually groups (and most of those are abelian). This turned out to be a bit awkward.</p>
+
+<a name="166476902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166476902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166476902">Floris van Doorn (May 24 2019 at 18:16)</a>:</h4>
+<p>Also, it is not quite general to capture short exact sequences (where some elements don't have a successor).<br>
+And as Reid mentions: it is interesting that we never have to use that the successor is injective (at least if we formulate all results in the right way)</p>
+
+<a name="166477407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166477407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166477407">Floris van Doorn (May 24 2019 at 18:22)</a>:</h4>
+<p>In Agda they used a different approach, which is definitely worth considering. <br>
+Instead of a single long exact sequence </p>
+<div class="codehilite"><pre><span></span>... -&gt;
+\pi_{n+2}(F) -&gt; \pi_{n+2}(E) -&gt; \pi_{n+2}(B) -&gt;
+\pi_{n+1}(F) -&gt; \pi_{n+1}(E) -&gt; \pi_{n+1}(B) -&gt;
+\pi_n(F) -&gt; \pi_n(E) -&gt; \pi_n(B) -&gt;
+...
+</pre></div>
+
+
+<p>you consider a sequence of short exact sequences </p>
+<div class="codehilite"><pre><span></span>\pi_{n+2}(B) -&gt; \pi_{n+1}(F) -&gt; \pi_{n+1}(E) -&gt; \pi_{n+1}(B) -&gt; \pi_n(F)
+</pre></div>
+
+
+<p>one for each <code>n</code>.</p>
+<p>This captures the same information and has the advantage that you only have to consider short exact sequences, not SESs and LESs separately. (And all my attempts to find a common generalization of LESs and SESs seems like it is more work than doing them separately.)</p>
+
+<a name="166477611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166477611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166477611">Johan Commelin (May 24 2019 at 18:24)</a>:</h4>
+<p>Won't we want the category of complexes anyway? As soon as we start doing homological algebra, derived categories, etc...</p>
+
+<a name="166477669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166477669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166477669">Johan Commelin (May 24 2019 at 18:25)</a>:</h4>
+<p>So you would at least need a very good interface to "long" sequences.</p>
+
+<a name="166477780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/succ_str/near/166477780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/50023succstr.html#166477780">Floris van Doorn (May 24 2019 at 18:26)</a>:</h4>
+<p>Oh, that's a good point. Once we start to talk about the category of LESs, then we would indeed want them as a single type.</p>
+
 
 {% endraw %}

@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Math physics in Lean](24293MathphysicsinLean.html) (36 messages, latest: May 24 2019 at 17:56)
+* [Math physics in Lean](24293MathphysicsinLean.html) (41 messages, latest: May 24 2019 at 18:23)
 
 * [Rewrite in lambda expr](04378Rewriteinlambdaexpr.html) (3 messages, latest: May 22 2019 at 12:11)
 
