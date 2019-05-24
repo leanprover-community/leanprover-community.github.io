@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Manifolds](12382Manifolds.html) (66 messages, latest: May 24 2019 at 06:59)
+
 * [topology on roption](50982topologyonroption.html) (43 messages, latest: May 24 2019 at 02:48)
 
 * [Numbers in base p](84831Numbersinbasep.html) (43 messages, latest: May 24 2019 at 00:00)
-
-* [Manifolds](12382Manifolds.html) (60 messages, latest: May 23 2019 at 22:11)
 
 * [Manifolds local_equiv](83314Manifoldslocalequiv.html) (1 message, latest: May 22 2019 at 17:03)
 
