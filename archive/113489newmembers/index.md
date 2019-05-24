@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Math physics in Lean](24293MathphysicsinLean.html) (12 messages, latest: May 24 2019 at 01:59)
+
 * [Rewrite in lambda expr](04378Rewriteinlambdaexpr.html) (3 messages, latest: May 22 2019 at 12:11)
 
 * [Eliminate classical.some](66890Eliminateclassicalsome.html) (23 messages, latest: May 22 2019 at 11:52)
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [syntax error when creating a variant of apply_rules](78764syntaxerrorwhencreatingavariantofapplyrules.html) (3 messages, latest: May 20 2019 at 11:48)
 
 * [the projective space](54057theprojectivespace.html) (171 messages, latest: May 19 2019 at 17:39)
-
-* [Math physics in Lean](24293MathphysicsinLean.html) (11 messages, latest: May 17 2019 at 18:16)
 
 * [smul_mem_span](68849smulmemspan.html) (3 messages, latest: May 17 2019 at 14:46)
 
