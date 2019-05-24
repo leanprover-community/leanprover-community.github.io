@@ -10,9 +10,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#943 lc refactor](96169943lcrefactor.html) (18 messages, latest: May 23 2019 at 22:54)
+* [#1074 category instances to root](363811074categoryinstancestoroot.html) (14 messages, latest: May 24 2019 at 00:39)
 
-* [#1074 category instances to root](363811074categoryinstancestoroot.html) (11 messages, latest: May 23 2019 at 14:47)
+* [#943 lc refactor](96169943lcrefactor.html) (18 messages, latest: May 23 2019 at 22:54)
 
 * [#1076 powers mod n](145921076powersmodn.html) (35 messages, latest: May 23 2019 at 14:07)
 
