@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Numbers in base p](84831Numbersinbasep.html) (23 messages, latest: May 23 2019 at 22:58)
+* [Numbers in base p](84831Numbersinbasep.html) (42 messages, latest: May 23 2019 at 23:59)
 
-* [topology on roption](50982topologyonroption.html) (40 messages, latest: May 23 2019 at 22:55)
+* [topology on roption](50982topologyonroption.html) (42 messages, latest: May 23 2019 at 23:08)
 
 * [Manifolds](12382Manifolds.html) (60 messages, latest: May 23 2019 at 22:11)
 
