@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntactic equality](15425syntacticequality.html) (2 messages, latest: May 24 2019 at 21:05)
+* [syntactic equality](15425syntacticequality.html) (4 messages, latest: May 24 2019 at 22:27)
 
 * [cache-olean](72177cacheolean.html) (34 messages, latest: May 24 2019 at 19:29)
 
