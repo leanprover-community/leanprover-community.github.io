@@ -205,5 +205,39 @@ Kevin</p>
 
 <p>I can work the details of the axioms from here. I guess the remaining pending question is whether this is a good start on an affine space library or whether to revert to a more general theory of torsors with the affine space case as a special case. Or to go with the suggestion by Neil Strickland. The torsor direction is intriguing as our aim is to formalize aspects of physics and metrology, and, indeed, things like time, location, and voltage are torsors. I don't have a strong intuition for how hard it'd be to go in this direction given what's already in the libraries, nor what tradeoffs would be involved in eventually using such a formalization as a target for a physical denotational semantics of programming code (which is where we're headed with this work). Comments/thoughts welcome.</p>
 
+<a name="166472144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166472144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166472144">Kevin Sullivan (May 24 2019 at 17:21)</a>:</h4>
+<blockquote>
+<p>It would probably make sense to setup a general theory of torsors... and then define an affine space to be a torsor of a vector space.</p>
+</blockquote>
+<p>Is something like this what you had in mind?</p>
+<div class="codehilite"><pre><span></span>class torsor
+    (G : Type) [add_group G]
+    (X : Type) [inhabited X] :=
+(add : G → X → X)
+(left_zero : ∀ (x : X), add 0 x = x)
+(add_assoc : ∀ (g1 g2 : G) (x : X), add (g1 + g2) x = add g1 (add g2 x))
+(sub : ∀ (x1 x2 : X), ∃ d, x2 = add d x1)
+(sub_unique : ∀ (g1 g2 : G) (x1 x2 : X), x2 = add g1 x1 → x2 = add g2 x1 → g1 = g2)
+
+class affine_space
+        (K: Type)  [discrete_field K]
+        (V : Type) [add_comm_group V] [vector_space K V]
+        (P : Type) [inhabited P]
+    extends torsor V P
+</pre></div>
+
+<a name="166472387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166472387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166472387">Mario Carneiro (May 24 2019 at 17:24)</a>:</h4>
+<p>sub still isn't a function... are you expecting to be able to define the function after the fact?</p>
+
+<a name="166472436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166472436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166472436">Mario Carneiro (May 24 2019 at 17:24)</a>:</h4>
+<p>that's how it's done in maths but in lean it doesn't work as well</p>
+
+<a name="166475255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166475255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166475255">Reid Barton (May 24 2019 at 17:56)</a>:</h4>
+<p>From a math (or a <code>mathlib</code>) perspective it certainly makes sense to define torsors in general and then define affine spaces as torsors over a vector space. But if you're just prototyping for now then there's no need to try to do everything in maximal generality from the start.</p>
+
 
 {% endraw %}
