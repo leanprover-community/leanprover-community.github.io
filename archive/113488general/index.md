@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cache-olean](72177cacheolean.html) (34 messages, latest: May 24 2019 at 19:29)
+
 * [succ_str](50023succstr.html) (23 messages, latest: May 24 2019 at 18:26)
 
 * [lean installation](13267leaninstallation.html) (7 messages, latest: May 23 2019 at 15:38)
@@ -69,8 +71,6 @@ permalink: archive/113488general/index.html
 * [transitivity](39163transitivity.html) (10 messages, latest: May 18 2019 at 11:47)
 
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
-
-* [cache-olean](72177cacheolean.html) (33 messages, latest: May 17 2019 at 19:07)
 
 * [Convention on composition order](18033Conventiononcompositionorder.html) (24 messages, latest: May 17 2019 at 14:30)
 
