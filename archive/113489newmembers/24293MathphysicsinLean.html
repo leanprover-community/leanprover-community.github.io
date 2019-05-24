@@ -104,5 +104,106 @@ permalink: archive/113489newmembers/24293MathphysicsinLean.html
 <p>Thank you!<br>
 Kevin</p>
 
+<a name="166461067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166461067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166461067">Mario Carneiro (May 24 2019 at 15:05)</a>:</h4>
+<p>Q1: The convention would be to call <code>G</code> <code>V</code>, and call <code>V</code> nothing (put it in square brackets)</p>
+
+<a name="166461270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166461270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166461270">Kevin Sullivan (May 24 2019 at 15:07)</a>:</h4>
+<blockquote>
+<p>Q1: The convention would be to call <code>G</code> <code>V</code>, and call <code>V</code> nothing (put it in square brackets)</p>
+</blockquote>
+<p>Perfect, thank you.</p>
+
+<a name="166461500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166461500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166461500">Reid Barton (May 24 2019 at 15:10)</a>:</h4>
+<p>And <code>P</code> would probably go last</p>
+
+<a name="166461986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166461986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166461986">Johan Commelin (May 24 2019 at 15:15)</a>:</h4>
+<p>Unfortunately we only have <code>mul_action</code>... so you can't use that class (in a clean way).</p>
+
+<a name="166462262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166462262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166462262">Johan Commelin (May 24 2019 at 15:18)</a>:</h4>
+<p>It would probably make sense to setup a general theory of torsors... and then define an affine space to be a torsor of a vector space.</p>
+
+<a name="166462409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166462409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166462409">Johan Commelin (May 24 2019 at 15:20)</a>:</h4>
+<p>You would be able to reuse the general setup for things like quantities (mass, length, &amp;c are torsors under <code>units real</code>). I'm far from being a (mathematical) physicist, so I have no idea if that would be useful.</p>
+
+<a name="166462466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166462466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166462466">Neil Strickland (May 24 2019 at 15:21)</a>:</h4>
+<p>Let's ignore for the moment the fact that you want to use additive notation.  Then the natural thing would be to start with the class <code>mul_action G X</code> from <code>src/group_theory/group_action.lean</code>, and extend it to give a class <code>principal_action</code> involving a "division" map <code>X  →  X →  G</code> such that <code>(y / x) • x = y</code>.  You might need some other axioms, or they might follow automatically, especially in the case where <code>G</code> is a group.  Then you could specialise to the case where <code>G</code> is the additive group of a vector space.</p>
+<p>It's also possible to leave <code>G</code> out of the picture and axiomatize everything in terms of the subset of parallelograms in <code>X ^ 4</code>; then you recover <code>G</code> as a quotient of <code>X ^ 2</code>.  </p>
+<p>Ideally we should have a class for additive actions that is magically connected to the class for multiplicative actions, so we don't have to prove essentially the same results twice.  We have similar things in some closely related contexts, but not this one.  But it would not be hard for you to define <code>add_action</code> by hand, just following the example of <code>mul_action</code>.</p>
+
+<a name="166462559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166462559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166462559">Johan Commelin (May 24 2019 at 15:22)</a>:</h4>
+<p>The reason I did not define <code>add_action</code> is notation...</p>
+
+<a name="166462570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166462570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166462570">Johan Commelin (May 24 2019 at 15:22)</a>:</h4>
+<p>We can't reuse <code>+</code> for these, even though that would be <em>very</em> natural.</p>
+
+<a name="166463084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463084">Kevin Sullivan (May 24 2019 at 15:29)</a>:</h4>
+<p>I'm listening. I've incorporated comments down through Reid Barton's to arrive at the following. But I'm open to reworking it entirely in light of the subsequent comments. Feedback sought on both the current formulation, as well as on the subsequent comments. My overall aim is to develop a formalization in terms of which to express mathematical physics, starting with the classical (Newtonian) case.  </p>
+<div class="codehilite"><pre><span></span>class affine_space
+    (K: Type) [discrete_field K]
+    (V : Type) [add_comm_group V] [vector_space K V] :=
+    (P : Type)
+(add : P → V → P)
+(right_zero : ∀ (p : P), add p 0 = p)
+(add_assoc : ∀ (p : P), ∀ (a b : V), add (add p a) b = add p (a + b))
+(unique : ∀ (p q : P), ∃ (a : V),
+            (q = add p a) ∧
+            (∀ (a b : V), (q = add p a) → (q = add p b) → a = b))
+</pre></div>
+
+<a name="166463381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463381">Mario Carneiro (May 24 2019 at 15:32)</a>:</h4>
+<p><code>unique</code> has a name clash in the variables</p>
+
+<a name="166463424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463424">Mario Carneiro (May 24 2019 at 15:33)</a>:</h4>
+<p>also don't use <code>/\</code> in an axiom if you can avoid it - use two axioms</p>
+
+<a name="166463450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463450">Reid Barton (May 24 2019 at 15:33)</a>:</h4>
+<p>You probably want to replace <code>unique</code> anyways with a second operation <code>sub : P -&gt; P -&gt; V</code> and whatever axioms are necessary to characterize it uniquely</p>
+
+<a name="166463460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463460">Mario Carneiro (May 24 2019 at 15:33)</a>:</h4>
+<p>^ that</p>
+
+<a name="166463756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463756">Reid Barton (May 24 2019 at 15:37)</a>:</h4>
+<p><code>∀ (p : P), ∀ (a b : V),</code> can be simply <code>∀ (p : P) (a b : V),</code></p>
+
+<a name="166463765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166463765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166463765">Reid Barton (May 24 2019 at 15:37)</a>:</h4>
+<p>but now this is getting into just style things</p>
+
+<a name="166464423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166464423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166464423">Kevin Sullivan (May 24 2019 at 15:45)</a>:</h4>
+<blockquote>
+<p>but now this is getting into just style things</p>
+</blockquote>
+<p>So here's where I've gotten to. </p>
+<div class="codehilite"><pre><span></span>class affine_space
+    (K: Type) [discrete_field K]
+    (V : Type) [add_comm_group V] [vector_space K V] :=
+    (P : Type)
+(add : P → V → P)
+(right_zero : ∀ (p : P), add p 0 = p)
+(add_assoc : ∀ (p : P) (a b : V), add (add p a) b = add p (a + b))
+(sub : P → P → V)
+(sub_exists : ∀ (p q : P), ∃ (a : V),  a = sub q p)
+(sub_unique : (∀ (p q : P) (a b : V), (q = add p a) → (q = add p b) → a = b))
+</pre></div>
+
+
+<p>I can work the details of the axioms from here. I guess the remaining pending question is whether this is a good start on an affine space library or whether to revert to a more general theory of torsors with the affine space case as a special case. Or to go with the suggestion by Neil Strickland. The torsor direction is intriguing as our aim is to formalize aspects of physics and metrology, and, indeed, things like time, location, and voltage are torsors. I don't have a strong intuition for how hard it'd be to go in this direction given what's already in the libraries, nor what tradeoffs would be involved in eventually using such a formalization as a target for a physical denotational semantics of programming code (which is where we're headed with this work). Comments/thoughts welcome.</p>
+
 
 {% endraw %}
