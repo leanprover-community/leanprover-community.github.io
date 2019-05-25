@@ -34,5 +34,142 @@ example : nat.zero = 0 := _ /- not syntactically equal -/
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516107">Kevin Buzzard (May 25 2019 at 07:50)</a>:</h4>
 <p>gaargh, <code>#print notation 0</code> is an error because <code>0</code> is some sort of numeral. Maybe my question is: is <code>(has_le.le 3 4) = (3 ≤ 4)</code> a syntactic equality?</p>
 
+<a name="166516704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516704">Mario Carneiro (May 25 2019 at 08:06)</a>:</h4>
+<p>yes, assuming you haven't locally overridden <code>&lt;=</code></p>
+
+<a name="166516719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516719">Mario Carneiro (May 25 2019 at 08:07)</a>:</h4>
+<p>and assuming 3 and 4 aren't being represented differently on the two sides, which can happen "in the wild"</p>
+
+<a name="166516768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516768">Kevin Buzzard (May 25 2019 at 08:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">ℕ</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I am surprised both of these work.</p>
+
+<a name="166516784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516784">Kevin Buzzard (May 25 2019 at 08:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">ℕ</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Maybe that's a better example of what I mean. I thought rw was picky about syntactic equality. Neither rewrite fails.</p>
+
+<a name="166516793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516793">Mario Carneiro (May 25 2019 at 08:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">bit1</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span> <span class="c1">-- 3</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">bit1</span> <span class="o">(</span><span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="c1">-- 3</span>
+</pre></div>
+
+<a name="166516840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516840">Kevin Buzzard (May 25 2019 at 08:10)</a>:</h4>
+<p>I understand the numerals point. I'm trying to work out when rewrites work, that's the heart of it.</p>
+
+<a name="166516842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516842">Mario Carneiro (May 25 2019 at 08:10)</a>:</h4>
+<p><code>has_zero.zero</code> is reducible</p>
+
+<a name="166516854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516854">Kevin Buzzard (May 25 2019 at 08:11)</a>:</h4>
+<p>But is <code>has_zero.zero nat</code> syntactically equal to <code>nat.zero</code>?</p>
+
+<a name="166516855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516855">Mario Carneiro (May 25 2019 at 08:11)</a>:</h4>
+<p>no</p>
+
+<a name="166516902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516902">Mario Carneiro (May 25 2019 at 08:12)</a>:</h4>
+<p>but it is up to unfolding reducible definitions</p>
+
+<a name="166516904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516904">Kevin Buzzard (May 25 2019 at 08:12)</a>:</h4>
+<p>So does Lean unfold all reducible definitions before trying to rewrite?</p>
+
+<a name="166516905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516905">Mario Carneiro (May 25 2019 at 08:12)</a>:</h4>
+<p>I think so</p>
+
+<a name="166516906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516906">Kevin Buzzard (May 25 2019 at 08:12)</a>:</h4>
+<p>Or does it just internally store them as unfolded?</p>
+
+<a name="166516907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516907">Mario Carneiro (May 25 2019 at 08:12)</a>:</h4>
+<p>or at least it does something equivalent to that</p>
+
+<a name="166516908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516908">Mario Carneiro (May 25 2019 at 08:12)</a>:</h4>
+<p>I think it unfolds when necessary in the matching algorithm</p>
+
+<a name="166516927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516927">Mario Carneiro (May 25 2019 at 08:13)</a>:</h4>
+<p>it's the same as the unification you get from <code>exact</code> except it only unfolds reducible instead of reducible + semireducible</p>
+
+<a name="166516972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516972">Kevin Buzzard (May 25 2019 at 08:14)</a>:</h4>
+<p>I see. A rewrite attempts to find a subterm of the goal which is "equal" to the lhs of what I'm wanting to rewrite with, and "equal" is somewhere between syntactic and definitional equality.</p>
+
+<a name="166516988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516988">Mario Carneiro (May 25 2019 at 08:15)</a>:</h4>
+<p>yes</p>
+
+<a name="166516991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166516991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166516991">Mario Carneiro (May 25 2019 at 08:15)</a>:</h4>
+<p>yet another equality, I know</p>
+
+<a name="166517095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517095">Kevin Buzzard (May 25 2019 at 08:18)</a>:</h4>
+<p><code>class has_scalar (α : Type u) (γ : Type v) := (smul : α → γ → γ)</code><br>
+(from mathlib somewhere). Why is that marked as <code>[reducible]</code>?</p>
+
+<a name="166517097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517097">Kevin Buzzard (May 25 2019 at 08:18)</a>:</h4>
+<p>I mean</p>
+
+<a name="166517098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517098">Kevin Buzzard (May 25 2019 at 08:18)</a>:</h4>
+<p>how come <code>has_scalar.smul</code> is reducible?</p>
+
+<a name="166517104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517104">Kevin Buzzard (May 25 2019 at 08:19)</a>:</h4>
+<p>I don't see anyone adding the tag explicitly</p>
+
+<a name="166517108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517108">Kevin Buzzard (May 25 2019 at 08:19)</a>:</h4>
+<p>but apparently the system is that notation is reducible</p>
+
+<a name="166517110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517110">Kevin Buzzard (May 25 2019 at 08:19)</a>:</h4>
+<p>and I can indeed check it's reducible using <code>#print</code></p>
+
+<a name="166517165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517165">Kevin Buzzard (May 25 2019 at 08:20)</a>:</h4>
+<p>Are all fields of a class automatically reducible?</p>
+
+<a name="166517897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517897">Mario Carneiro (May 25 2019 at 08:43)</a>:</h4>
+<p>Hm, I didn't know that. I would guess all fields are reducible by default</p>
+
 
 {% endraw %}
