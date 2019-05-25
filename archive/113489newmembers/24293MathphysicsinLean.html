@@ -275,5 +275,45 @@ In this way time, length, etc. are quantities that belong to non-isomorphic repr
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166477472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166477472">Neil Strickland (May 24 2019 at 18:23)</a>:</h4>
 <p>Here's a similar but slightly different perspective.  The special relativity model says that spacetime is an affine space <code>V</code>.  This can be formulated in terms of parallelograms, which are quadruples of events that can be characterised by certain idealised physical properties.  The parallelogram structure gives an equivalence  relation on <code>V × V</code> with quotient <code>T</code> say, and gives a vector space structure on <code>T</code>.  Experimental properties characterise the light cone <code>C ⊂ T</code> and divide <code>T \ C</code> into subsets <code> T₊</code>,  <code>T₋</code> and <code>T₀</code> of future, past and spacelike vectors.  Let <code>L'</code> be the space of homogeneous quadratic functions on <code>T</code> that vanish on the light cone.  This is one-dimensional and has a canonical half-space of forms that are positive on timelike vectors.  This gives us a canonical oriented square root <code>L</code> with <code>L ⊗ L = L'</code>, and measurements of time and distance naturally take values in <code>L</code>.  (In this framework, times and distances are automatically identified via the speed of light.)</p>
 
+<a name="166503400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166503400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166503400">Kevin Sullivan (May 25 2019 at 01:28)</a>:</h4>
+<blockquote>
+<p><code>diff_exists</code> is now redundant. And you can rephrase <code>diff_unique</code> using <code>sub</code>, I guess.</p>
+</blockquote>
+<p>Edited as follows:</p>
+<div class="codehilite"><pre><span></span>class torsor
+    (G : Type) [add_group G]
+    (X : Type) [inhabited X] :=
+(add : G → X → X)
+(left_zero : ∀ (x : X), add 0 x = x)
+(add_assoc : ∀ (g1 g2 : G) (x : X), add (g1 + g2) x = add g1 (add g2 x))
+(sub : X → X → G)
+(add_diff : ∀ (x1 x2 : X), add (sub x2 x1) x1 = x2)
+(diff_unique : ∀ (g1 g2 : G) (x1 x2 : X), g1 = sub x2 x1 → g2 = sub x2 x1 → g1 = g2)
+</pre></div>
+
+
+<p>Any comments on field names vs prevailing conventions?</p>
+
+<a name="166503610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166503610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166503610">Kevin Sullivan (May 25 2019 at 01:34)</a>:</h4>
+<blockquote>
+<p>Here's a similar but slightly different perspective.  The special relativity model says that spacetime is an affine space <code>V</code>.  This can be formulated in terms of parallelograms, which are quadruples of events that can be characterised by certain idealised physical properties.  The parallelogram structure gives an equivalence  relation on <code>V × V</code> with quotient <code>T</code> say, and gives a vector space structure on <code>T</code>.  Experimental properties characterise the light cone <code>C ⊂ T</code> and divide <code>T \ C</code> into subsets <code> T₊</code>,  <code>T₋</code> and <code>T₀</code> of future, past and spacelike vectors.  Let <code>L'</code> be the space of homogeneous quadratic functions on <code>T</code> that vanish on the light cone.  This is one-dimensional and has a canonical half-space of forms that are positive on timelike vectors.  This gives us a canonical oriented square root <code>L</code> with <code>L ⊗ L = L'</code>, and measurements of time and distance naturally take values in <code>L</code>.  (In this framework, times and distances are automatically identified via the speed of light.)</p>
+</blockquote>
+<p>Neil,</p>
+<p>Thank you for your suggestion. For formalizing basic metrology (units of measure) and classical dynamics, my guess is that the formalization of the ordinary definition of torsors and affine spaces as torsors over vector spaces will suffice. However, we mean to develop a physical semantics of code for cyber-physical systems in general, eventually to include systems that are subject to relativistic effects (satellites, space missions, etc). We might well circle back around to the path you suggest. In the meantime I will try to acquaint myself with the material you highlight. Thank you.</p>
+
+<a name="166503679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166503679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166503679">Mario Carneiro (May 25 2019 at 01:36)</a>:</h4>
+<p><code>diff_unique</code> is now just transitivity</p>
+
+<a name="166503702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166503702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166503702">Mario Carneiro (May 25 2019 at 01:37)</a>:</h4>
+<p>I think what you could say is <code>add g x = y &lt;-&gt; sub x y = g</code></p>
+
+<a name="166503749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Math%20physics%20in%20Lean/near/166503749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24293MathphysicsinLean.html#166503749">Mario Carneiro (May 25 2019 at 01:38)</a>:</h4>
+<p>or you could express it as the two cancellation laws <code>add (sub x y) y = x</code> and <code>sub (add g x) x = g</code></p>
+
 
 {% endraw %}
