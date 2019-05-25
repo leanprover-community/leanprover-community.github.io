@@ -1,0 +1,73 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/70598defeq.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html">defeq</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166529968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166529968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166529968">Sebastien Gouezel (May 25 2019 at 14:39)</a>:</h4>
+<p>In the following snipper, I don't get why <code>refl</code> is not able to close the goal:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">with_bound</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="err">∥</span><span class="n">f</span> <span class="n">x</span><span class="err">∥</span> <span class="bp">≤</span> <span class="n">C</span> <span class="bp">*</span> <span class="err">∥</span><span class="n">x</span><span class="err">∥</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">cont</span> <span class="o">:=</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">continuous_of_bound</span> <span class="n">f</span> <span class="n">C</span> <span class="n">h</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">f</span> <span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">linear_map_with_bound_coe</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="err">∥</span><span class="n">f</span> <span class="n">x</span><span class="err">∥</span> <span class="bp">≤</span> <span class="n">C</span> <span class="bp">*</span> <span class="err">∥</span><span class="n">x</span><span class="err">∥</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">f</span><span class="bp">.</span><span class="n">with_bound</span> <span class="n">C</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ext</span><span class="o">,</span>
+  <span class="c1">-- dunfold linear_map.with_bound,</span>
+  <span class="n">refl</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Here, <code>E →ₗ[k] F</code> is the space of linear maps from <code>E</code> to <code>F</code>, and <code>E →L[k] F</code> is the space of continuous linear maps (it extends linear maps, with just one additional field <code>cont : continuous to_fun</code> requiring the continuity of the function). Obviously, the <code>to_fun</code>fields of <code>f</code> and <code>f.with_bound C h</code> are the same by construction, but still something is preventing Lean from computing just by itself. If I uncomment the line with <code>dunfold</code>, everything is OK.</p>
+
+<a name="166530025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530025">Mario Carneiro (May 25 2019 at 14:41)</a>:</h4>
+<p>it's a lemma</p>
+
+<a name="166530034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530034">Mario Carneiro (May 25 2019 at 14:41)</a>:</h4>
+<p>that defines data</p>
+
+<a name="166530038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530038">Sebastien Gouezel (May 25 2019 at 14:41)</a>:</h4>
+<p>Ah, thanks! Stupid me.</p>
+
+<a name="166530043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530043">Kevin Buzzard (May 25 2019 at 14:41)</a>:</h4>
+<p>I have run into this in the past, and I think Lean should tell me whenever I do it.</p>
+
+<a name="166530094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530094">Mario Carneiro (May 25 2019 at 14:42)</a>:</h4>
+<p>It really should. You will actually get a (very confusing and misattributed) error message if you try to use it to define a <code>def</code></p>
+
+<a name="166530096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530096">Kevin Buzzard (May 25 2019 at 14:42)</a>:</h4>
+<p>"You just wrote <code>lemma X : Y := Z</code>but <code>Y</code> isn't a Prop."</p>
+
+<a name="166530112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530112">Kevin Buzzard (May 25 2019 at 14:43)</a>:</h4>
+<p>This issue often manifests itself in some "VM can't compute this" error</p>
+
+<a name="166530114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530114">Mario Carneiro (May 25 2019 at 14:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="n">def</span> <span class="n">bar</span> <span class="o">:=</span> <span class="n">foo</span>
+<span class="c1">-- failed to generate bytecode for &#39;bar&#39;</span>
+<span class="c1">-- code generation failed, VM does not have code for &#39;foo&#39;</span>
+</pre></div>
+
+<a name="166530121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/166530121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#166530121">Kevin Buzzard (May 25 2019 at 14:43)</a>:</h4>
+<p>I have done it often enough to know that this error means I did it, but Sebastien just managed to get a different manifestation of the issue. Yes, that's the error.</p>
+
+
+{% endraw %}
