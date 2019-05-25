@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [finset bUnion](89621finsetbUnion.html) (7 messages, latest: May 25 2019 at 09:00)
+* [finset bUnion](89621finsetbUnion.html) (9 messages, latest: May 25 2019 at 09:02)
 
 * [syntactic equality](15425syntacticequality.html) (32 messages, latest: May 25 2019 at 08:43)
 
