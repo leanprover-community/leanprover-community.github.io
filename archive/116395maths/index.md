@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [non-terminal simp in complex.lean](36395nonterminalsimpincomplexlean.html) (2 messages, latest: May 25 2019 at 18:57)
+
 * [HoTT](75424HoTT.html) (62 messages, latest: May 25 2019 at 14:39)
 
 * [Topological vector spaces](52784Topologicalvectorspaces.html) (4 messages, latest: May 24 2019 at 13:30)
