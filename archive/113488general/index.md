@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntactic equality](15425syntacticequality.html) (4 messages, latest: May 24 2019 at 22:27)
+* [syntactic equality](15425syntacticequality.html) (5 messages, latest: May 25 2019 at 07:50)
+
+* [finset bUnion](89621finsetbUnion.html) (3 messages, latest: May 25 2019 at 07:42)
+
+* [auto-recompiling](02272autorecompiling.html) (3 messages, latest: May 25 2019 at 07:33)
 
 * [cache-olean](72177cacheolean.html) (34 messages, latest: May 24 2019 at 19:29)
 
