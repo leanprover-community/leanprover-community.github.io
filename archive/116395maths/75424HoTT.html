@@ -159,5 +159,68 @@ permalink: archive/116395maths/75424HoTT.html
 <p>I mean formalizing even relatively basic constructions like this one that (apparently) require choice.<br>
 I'm pretty sure that this is possible in HoTT (plus choice). In either HoTT or Lean you must first prove that X is finite dimensional (has a finite basis); that part will go the same way. In HoTT you will also need to prove that the trace is independent of the choice of basis, which is not a bad thing.</p>
 
+<a name="166524854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166524854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166524854">Kevin Buzzard (May 25 2019 at 12:15)</a>:</h4>
+<p>In HoTT if I define what it means for a ring to be local, would I have to prove that a ring isomorphic to a local ring is local before I can even make the definition?</p>
+
+<a name="166525101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525101">Reid Barton (May 25 2019 at 12:22)</a>:</h4>
+<p>No, you'd define it the same way as in Lean</p>
+
+<a name="166525291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525291">Chris Hughes (May 25 2019 at 12:28)</a>:</h4>
+<p>I think even stupid thing like this are isomorphism invariant in HoTT.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">=</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h</span> <span class="mi">37</span>
+</pre></div>
+
+<a name="166525302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525302">Reid Barton (May 25 2019 at 12:29)</a>:</h4>
+<p>I think a first approximation to how choice works in HoTT, expressed in the language of Lean, is that one can no longer have <code>choice : nonempty X -&gt; X</code>, but one still has</p>
+<ul>
+<li><code>unique_choice : nonempty X -&gt; trunc X</code>, which means that you can extract a witness for an existential to construct something provided you can prove the result doesn't depend on the choice of witness, and</li>
+<li><code>axiom_of_choice : (∀ x, ∃ y, r x y) -&gt; ∃ f, ∀ x, r x (f x)</code></li>
+</ul>
+
+<a name="166525353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525353">Chris Hughes (May 25 2019 at 12:30)</a>:</h4>
+<p>What's the difference between <code>nonempty</code> and <code>trunc</code> in HoTT?</p>
+
+<a name="166525366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525366">Reid Barton (May 25 2019 at 12:31)</a>:</h4>
+<p>There isn't one (at least in book HoTT) because HoTT has no notion of judgmentally being a proposition.</p>
+
+<a name="166525373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525373">Chris Hughes (May 25 2019 at 12:31)</a>:</h4>
+<p>So unique choice is <code>id</code>?</p>
+
+<a name="166525374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525374">Reid Barton (May 25 2019 at 12:31)</a>:</h4>
+<p>So the result is that places where we would use an ∃ in Lean correspond to <code>|| ∃ ... ||</code> in HoTT</p>
+
+<a name="166525419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525419">Reid Barton (May 25 2019 at 12:32)</a>:</h4>
+<p>or let's say <code>|| Σ ... ||</code> to be more clear</p>
+
+<a name="166525435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525435">Reid Barton (May 25 2019 at 12:33)</a>:</h4>
+<p>where <code>|| ... ||</code> is the propositional truncation (Lean <code>trunc</code>)</p>
+
+<a name="166525484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525484">Reid Barton (May 25 2019 at 12:34)</a>:</h4>
+<p>Right, so unique choice doesn't really correspond to anything in HoTT but I tried to give a translation into a Lean worldview.</p>
+
+<a name="166525501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525501">Reid Barton (May 25 2019 at 12:35)</a>:</h4>
+<p>Actually the HoTT book does have something it calls "unique choice", which is the statement that if P is a Prop (Lean: <code>subsingleton P</code>) then P is equivalent to ||P||.</p>
+
+<a name="166525503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166525503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166525503">Reid Barton (May 25 2019 at 12:35)</a>:</h4>
+<p>But it's a theorem</p>
+
+<a name="166526168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166526168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166526168">Kevin Buzzard (May 25 2019 at 12:53)</a>:</h4>
+<p>Is UniMath written in book HoTT?</p>
+
 
 {% endraw %}
