@@ -52,5 +52,151 @@ In other words, this could be a more readable version of <code>refine le_trans _
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/165971447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#165971447">Johan Commelin (May 18 2019 at 11:47)</a>:</h4>
 <p>I know that <code>transitivity e</code> already means something. But I thought that the tactic could nevertheless be smart, depending on the type of <code>e</code>. But your suggestion is even better</p>
 
+<a name="166528732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166528732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166528732">Simon Hudon (May 25 2019 at 14:05)</a>:</h4>
+<p>Has anyone noticed <code>transitivity</code> acting strange sometimes? Sometimes, I want to prove <code>a ≤ b</code> and transitivity will fail because it doesn't match <code>? ≤ ? -&gt; ? ≤ ? -&gt; ? ≤ ?</code>. Right now, I'm working on a <code>semilattice_inf_bot</code>. Could it be a type class issue?</p>
+
+<a name="166528805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166528805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166528805">Koundinya Vajjha (May 25 2019 at 14:07)</a>:</h4>
+<p>I faced this issue yesterday.</p>
+
+<a name="166529041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529041">Simon Hudon (May 25 2019 at 14:14)</a>:</h4>
+<p>Did you manage to solve it?</p>
+
+<a name="166529291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529291">Koundinya Vajjha (May 25 2019 at 14:20)</a>:</h4>
+<p>No I couldn't figure it out so I just worked around it.</p>
+
+<a name="166529356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529356">Simon Hudon (May 25 2019 at 14:22)</a>:</h4>
+<p>I'm thinking it might have something to do with <code>apply</code>. It manages to find the right lemma but then applying it goes wrong. If you replace <code>transitivity</code> with <code>apply le_trans</code> (or the appropriate lemma) does it also fail?</p>
+
+<a name="166529425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529425">Koundinya Vajjha (May 25 2019 at 14:24)</a>:</h4>
+<p><code>apply le_trans</code> fails, but <code>convert le_trans _ _</code> seems to match something</p>
+
+<a name="166529428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529428">Koundinya Vajjha (May 25 2019 at 14:24)</a>:</h4>
+<p>Which makes me think it's a type class issue?</p>
+
+<a name="166529504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529504">Simon Hudon (May 25 2019 at 14:26)</a>:</h4>
+<p><code>refine le_trans _ _</code> would probably work too and <code>apply le_trans _ _</code> also.</p>
+
+<a name="166529532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529532">Koundinya Vajjha (May 25 2019 at 14:27)</a>:</h4>
+<p>yes they both work.</p>
+
+<a name="166529533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529533">Simon Hudon (May 25 2019 at 14:27)</a>:</h4>
+<p>I'm thinking it has to do with type classes because <code>le_trans</code> is probably the most used transitivity lemma and people seem to be able to use it via <code>transitivity</code> pretty well in mathlib</p>
+
+<a name="166529678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529678">Mario Carneiro (May 25 2019 at 14:31)</a>:</h4>
+<p>sounds like the apply bug</p>
+
+<a name="166529683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529683">Mario Carneiro (May 25 2019 at 14:32)</a>:</h4>
+<p>is your <code>&lt;=</code> definitionally a pi?</p>
+
+<a name="166529750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529750">Koundinya Vajjha (May 25 2019 at 14:33)</a>:</h4>
+<p>it's the <code>le</code> on <code>ennreal</code>...</p>
+
+<a name="166529829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529829">Mario Carneiro (May 25 2019 at 14:35)</a>:</h4>
+<p>which comes from <code>with_top</code> which is a pi</p>
+
+<a name="166529831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529831">Simon Hudon (May 25 2019 at 14:35)</a>:</h4>
+<p>mine is the subset relation</p>
+
+<a name="166529833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529833">Simon Hudon (May 25 2019 at 14:36)</a>:</h4>
+<p>Oh!</p>
+
+<a name="166529880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529880">Simon Hudon (May 25 2019 at 14:36)</a>:</h4>
+<p>Do you have a fix for that?</p>
+
+<a name="166529881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529881">Koundinya Vajjha (May 25 2019 at 14:36)</a>:</h4>
+<p>what does that mean?</p>
+
+<a name="166529950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529950">Simon Hudon (May 25 2019 at 14:38)</a>:</h4>
+<p>The type of your lemma may look like: <code>? ≤ ? -&gt; ? ≤ ? -&gt; ? ≤ ?</code> which would suggest that the head of the type is <code>? ≤ ?</code> but that part is a <code>pi</code> too so you can keep applying arguments to it and <code>apply</code> does</p>
+
+<a name="166529951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166529951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166529951">Mario Carneiro (May 25 2019 at 14:38)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/bounded_lattice.lean#L503" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/bounded_lattice.lean#L503">https://github.com/leanprover-community/mathlib/blob/master/src/order/bounded_lattice.lean#L503</a></p>
+
+<a name="166530193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530193">Kevin Buzzard (May 25 2019 at 14:45)</a>:</h4>
+<blockquote>
+<p>sounds like the apply bug</p>
+</blockquote>
+<p>What's "the apply bug"? Someone mentioned this the other day. The bug itself has passed me by though.</p>
+
+<a name="166530221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530221">Mario Carneiro (May 25 2019 at 14:46)</a>:</h4>
+<p>It's stymied things like <code>apply continuous.comp</code> in the past</p>
+
+<a name="166530266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530266">Mario Carneiro (May 25 2019 at 14:47)</a>:</h4>
+<p>basically <code>apply foo</code> gives an error even if <code>foo</code> applies, but the consequent of <code>foo</code> is a pi after <em>completely</em> reducing it</p>
+
+<a name="166530324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530324">Kevin Buzzard (May 25 2019 at 14:48)</a>:</h4>
+<blockquote>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/bounded_lattice.lean#L503" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/bounded_lattice.lean#L503">https://github.com/leanprover-community/mathlib/blob/master/src/order/bounded_lattice.lean#L503</a></p>
+</blockquote>
+<p>This fancy-schmancy definition could be replaced with a simple case split.</p>
+
+<a name="166530353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530353">Simon Hudon (May 25 2019 at 14:49)</a>:</h4>
+<p>But then it would get ugly</p>
+
+<a name="166530358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530358">Mario Carneiro (May 25 2019 at 14:49)</a>:</h4>
+<p>yeah I knew that this suggestion would come up</p>
+
+<a name="166530365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530365">Kevin Buzzard (May 25 2019 at 14:49)</a>:</h4>
+<p>What's wrong with it?</p>
+
+<a name="166530371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530371">Mario Carneiro (May 25 2019 at 14:49)</a>:</h4>
+<p>I really don't like the idea of lean bugs changing the way I write my definitions</p>
+
+<a name="166530424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530424">Kevin Buzzard (May 25 2019 at 14:50)</a>:</h4>
+<p>For sure</p>
+
+<a name="166530431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530431">Kevin Buzzard (May 25 2019 at 14:50)</a>:</h4>
+<p>but the case split definition sounds easier to work with to me</p>
+
+<a name="166530436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530436">Mario Carneiro (May 25 2019 at 14:50)</a>:</h4>
+<p>it's one case vs 4</p>
+
+<a name="166530459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530459">Simon Hudon (May 25 2019 at 14:51)</a>:</h4>
+<p>Case splits have a way of multiplying</p>
+
+<a name="166530515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530515">Simon Hudon (May 25 2019 at 14:52)</a>:</h4>
+<p>If I make a <code>apply</code> and <code>transitivity</code> that do not suffer from the same problems, should I call them <code>apply'</code> and <code>transitivity'</code>?</p>
+
+<a name="166530544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530544">Simon Hudon (May 25 2019 at 14:53)</a>:</h4>
+<p>I think ideally, it should be a flag in <code>apply_cfg</code> but I think it needs to go into mathlib until we officially switch to 3.5.*c</p>
+
+<a name="166530688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transitivity/near/166530688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39163transitivity.html#166530688">Mario Carneiro (May 25 2019 at 14:56)</a>:</h4>
+<p>or we could just fix the bug</p>
+
 
 {% endraw %}

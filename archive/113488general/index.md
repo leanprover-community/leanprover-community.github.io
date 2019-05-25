@@ -10,11 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [transitivity](39163transitivity.html) (45 messages, latest: May 25 2019 at 14:56)
+
+* [defeq](70598defeq.html) (10 messages, latest: May 25 2019 at 14:43)
+
+* [auto-recompiling](02272autorecompiling.html) (4 messages, latest: May 25 2019 at 14:02)
+
 * [syntactic equality](15425syntacticequality.html) (44 messages, latest: May 25 2019 at 13:05)
 
 * [finset bUnion](89621finsetbUnion.html) (12 messages, latest: May 25 2019 at 12:46)
-
-* [auto-recompiling](02272autorecompiling.html) (3 messages, latest: May 25 2019 at 07:33)
 
 * [cache-olean](72177cacheolean.html) (34 messages, latest: May 24 2019 at 19:29)
 
@@ -73,8 +77,6 @@ permalink: archive/113488general/index.html
 * [Integral of a constant](02999Integralofaconstant.html) (45 messages, latest: May 19 2019 at 00:11)
 
 * [squeeze_simp reports spurious `eq_self_iff_true`](93862squeezesimpreportsspuriouseqselfifftrue.html) (6 messages, latest: May 18 2019 at 15:33)
-
-* [transitivity](39163transitivity.html) (10 messages, latest: May 18 2019 at 11:47)
 
 * [maximal ideals map to maximal ideal by iso](16235maximalidealsmaptomaximalidealbyiso.html) (20 messages, latest: May 18 2019 at 02:12)
 
