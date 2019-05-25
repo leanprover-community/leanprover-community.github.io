@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [finset bUnion](89621finsetbUnion.html) (9 messages, latest: May 25 2019 at 09:02)
+* [syntactic equality](15425syntacticequality.html) (42 messages, latest: May 25 2019 at 12:51)
 
-* [syntactic equality](15425syntacticequality.html) (32 messages, latest: May 25 2019 at 08:43)
+* [finset bUnion](89621finsetbUnion.html) (12 messages, latest: May 25 2019 at 12:46)
 
 * [auto-recompiling](02272autorecompiling.html) (3 messages, latest: May 25 2019 at 07:33)
 

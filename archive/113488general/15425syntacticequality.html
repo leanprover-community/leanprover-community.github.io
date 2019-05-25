@@ -171,5 +171,47 @@ example : nat.zero = 0 := _ /- not syntactically equal -/
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166517897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166517897">Mario Carneiro (May 25 2019 at 08:43)</a>:</h4>
 <p>Hm, I didn't know that. I would guess all fields are reducible by default</p>
 
+<a name="166524901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166524901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166524901">Kevin Buzzard (May 25 2019 at 12:16)</a>:</h4>
+<p>If <code>z : complex</code> then is <code>z.re</code> syntactically equal to <code>complex.re z</code>?</p>
+
+<a name="166525425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525425">Keeley Hoek (May 25 2019 at 12:32)</a>:</h4>
+<p>I'm pretty sure <code>z.re</code> is elaborated into <code>complex.re z</code> before the expression you typed is even "real"</p>
+
+<a name="166525437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525437">Keeley Hoek (May 25 2019 at 12:33)</a>:</h4>
+<p>something something "projection macro"</p>
+
+<a name="166525485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525485">Chris Hughes (May 25 2019 at 12:34)</a>:</h4>
+<p>I think it's actually parsed as <code>complex.re z</code>, rather than elaborated.</p>
+
+<a name="166525568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525568">Keeley Hoek (May 25 2019 at 12:37)</a>:</h4>
+<p>I thought the parser created a projection <code>macro</code> application which said "remember to turn this into a <code>something.re</code> later, you can figure out what <code>something</code> means then too" and that's why if you write <code>nonsense.foo</code> you get a special error in the elaborator "invalid field notation... blah"</p>
+
+<a name="166525574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525574">Keeley Hoek (May 25 2019 at 12:37)</a>:</h4>
+<p>Indeed, <a href="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/src/frontends/lean/elaborator.cpp#L1921" target="_blank" title="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/src/frontends/lean/elaborator.cpp#L1921">https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/src/frontends/lean/elaborator.cpp#L1921</a></p>
+
+<a name="166525633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525633">Chris Hughes (May 25 2019 at 12:39)</a>:</h4>
+<p>You're probably right. I don't know that much about this.</p>
+
+<a name="166525637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525637">Chris Hughes (May 25 2019 at 12:39)</a>:</h4>
+<p>Incidentally</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">expr</span><span class="bp">.</span><span class="n">alpha_eqv</span> <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="n">complex</span><span class="bp">.</span><span class="n">re</span> <span class="n">z</span><span class="o">)</span> <span class="bp">`</span><span class="o">(</span><span class="bp">λ</span> <span class="n">z</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">,</span> <span class="n">z</span><span class="bp">.</span><span class="n">re</span><span class="o">)</span> <span class="c1">-- tt</span>
+</pre></div>
+
+<a name="166525696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166525696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166525696">Chris Hughes (May 25 2019 at 12:40)</a>:</h4>
+<p>I'm not sure if <code>alpha_eqv</code> is the same as syntactically equal.</p>
+
+<a name="166526095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntactic%20equality/near/166526095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15425syntacticequality.html#166526095">Kevin Buzzard (May 25 2019 at 12:51)</a>:</h4>
+<p>Aah -- if I can test for syntactic equality then I don't need to bug you guys with questions :D</p>
+
 
 {% endraw %}

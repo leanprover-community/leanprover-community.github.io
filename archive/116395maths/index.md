@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (33 messages, latest: May 25 2019 at 11:27)
+* [HoTT](75424HoTT.html) (47 messages, latest: May 25 2019 at 12:53)
 
 * [Topological vector spaces](52784Topologicalvectorspaces.html) (4 messages, latest: May 24 2019 at 13:30)
 
