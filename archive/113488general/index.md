@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Big Proof](59609BigProof.html) (10 messages, latest: May 25 2019 at 16:29)
+
 * [transitivity](39163transitivity.html) (49 messages, latest: May 25 2019 at 15:33)
 
 * [defeq](70598defeq.html) (10 messages, latest: May 25 2019 at 14:43)
@@ -739,8 +741,6 @@ permalink: archive/113488general/index.html
 * [importing tactic.linarith - error when algebra.group loaded](61078importingtacticlinaritherrorwhenalgebragrouploaded.html) (4 messages, latest: Feb 12 2019 at 20:23)
 
 * ["...then y = z and furthermore...](41788thenyzandfurthermore.html) (127 messages, latest: Feb 12 2019 at 20:06)
-
-* [Big Proof](59609BigProof.html) (9 messages, latest: Feb 12 2019 at 16:09)
 
 * [toolchains names](78377toolchainsnames.html) (6 messages, latest: Feb 12 2019 at 14:15)
 
