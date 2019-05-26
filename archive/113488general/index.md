@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [finset bUnion](89621finsetbUnion.html) (13 messages, latest: May 26 2019 at 11:33)
+
 * [Big Proof](59609BigProof.html) (10 messages, latest: May 25 2019 at 16:29)
 
 * [transitivity](39163transitivity.html) (49 messages, latest: May 25 2019 at 15:33)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [auto-recompiling](02272autorecompiling.html) (4 messages, latest: May 25 2019 at 14:02)
 
 * [syntactic equality](15425syntacticequality.html) (44 messages, latest: May 25 2019 at 13:05)
-
-* [finset bUnion](89621finsetbUnion.html) (12 messages, latest: May 25 2019 at 12:46)
 
 * [cache-olean](72177cacheolean.html) (34 messages, latest: May 24 2019 at 19:29)
 
