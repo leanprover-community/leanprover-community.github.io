@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [fintype from enumerated type](71488fintypefromenumeratedtype.html) (1 message, latest: May 26 2019 at 12:08)
+
 * [finset bUnion](89621finsetbUnion.html) (13 messages, latest: May 26 2019 at 11:33)
 
 * [Big Proof](59609BigProof.html) (10 messages, latest: May 25 2019 at 16:29)

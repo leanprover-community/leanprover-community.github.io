@@ -1,0 +1,37 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/83318Bundledhoms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/83318Bundledhoms.html">Bundled homs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166573708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Bundled%20homs/near/166573708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83318Bundledhoms.html#166573708">Chris Hughes (May 26 2019 at 12:48)</a>:</h4>
+<p>I think it's time to bundle homs. I'm doing algebraic closure, and unbundled homs are causing some problems.</p>
+<p>1) It is difficult to compose them, particularly if there are more than two.<br>
+2) Lemmas that contain bundled homs in their statements tend to be slow to use. Examples are <code>polynomial.map_map</code> and <code>polynomial.eval₂_map</code> This lemma is also causing me problems.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">algebraic_comp&#39;</span> <span class="o">{</span><span class="n">L</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">L</span><span class="o">]</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">M</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">L</span><span class="o">)</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">L</span> <span class="bp">→</span> <span class="n">M</span><span class="o">)</span> <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">i</span><span class="o">]</span> <span class="o">[</span><span class="n">is_field_hom</span> <span class="n">j</span><span class="o">]</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">algebraic</span> <span class="n">i</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">algebraic</span> <span class="n">j</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">algebraic</span> <span class="o">(</span><span class="n">j</span> <span class="err">∘</span> <span class="n">i</span><span class="o">)</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>3) All the simp lemmas will work.</p>
+<p>How should this be done? In particular should it be done in some sort of category theory framework?</p>
+
+<a name="166573795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Bundled%20homs/near/166573795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83318Bundledhoms.html#166573795">Kenny Lau (May 26 2019 at 12:51)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/717" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/717">https://github.com/leanprover-community/mathlib/pull/717</a></p>
+
+<a name="166573849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Bundled%20homs/near/166573849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83318Bundledhoms.html#166573849">Chris Hughes (May 26 2019 at 12:52)</a>:</h4>
+<p>I want to bundle all of them at once. No good only bundling field homs, because I use ring hom lemmas.</p>
+
+
+{% endraw %}
