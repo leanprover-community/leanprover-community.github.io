@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [fintype from enumerated type](71488fintypefromenumeratedtype.html) (1 message, latest: May 26 2019 at 12:08)
+* [fintype from enumerated type](71488fintypefromenumeratedtype.html) (3 messages, latest: May 26 2019 at 13:21)
 
 * [finset bUnion](89621finsetbUnion.html) (13 messages, latest: May 26 2019 at 11:33)
 
