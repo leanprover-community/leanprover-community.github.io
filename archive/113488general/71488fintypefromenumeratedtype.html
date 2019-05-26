@@ -1,0 +1,36 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/71488fintypefromenumeratedtype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71488fintypefromenumeratedtype.html">fintype from enumerated type</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166572362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype%20from%20enumerated%20type/near/166572362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71488fintypefromenumeratedtype.html#166572362">Jeremy Avigad (May 26 2019 at 12:08)</a>:</h4>
+<p>Is there a canonical idiom for making a <code>fintype</code> from an enumerated type? This is what I came up with:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">inductive</span> <span class="n">foo</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">a</span> <span class="bp">|</span> <span class="n">b</span> <span class="bp">|</span> <span class="n">c</span>
+<span class="kn">open</span> <span class="n">foo</span>
+
+<span class="n">def</span> <span class="n">foo</span><span class="bp">.</span><span class="n">of_fin</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span> <span class="bp">→</span> <span class="n">foo</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="mi">2</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="bp">_</span>     <span class="o">:=</span> <span class="n">c</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">foo</span> <span class="o">:=</span>
+<span class="n">fintype</span><span class="bp">.</span><span class="n">of_surjective</span> <span class="n">foo</span><span class="bp">.</span><span class="n">of_fin</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">foo</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">x</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="mi">2</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="mi">3</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I actually want to do something a little more general, namely an inductive type with nonrecursive constructors with arguments from other fintypes. It would be an interesting metaprogramming exercise to build the instance automatically, but not hard to build a surjection by hand in the instance I need.</p>
+
+
+{% endraw %}
