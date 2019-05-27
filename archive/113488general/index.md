@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (26 messages, latest: May 27 2019 at 07:57)
+* [algebraic closure](74840algebraicclosure.html) (27 messages, latest: May 27 2019 at 08:49)
+
+* [auto-recompiling](02272autorecompiling.html) (6 messages, latest: May 27 2019 at 08:12)
 
 * [algebraic geometry](49383algebraicgeometry.html) (4 messages, latest: May 27 2019 at 06:28)
 
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [transitivity](39163transitivity.html) (49 messages, latest: May 25 2019 at 15:33)
 
 * [defeq](70598defeq.html) (10 messages, latest: May 25 2019 at 14:43)
-
-* [auto-recompiling](02272autorecompiling.html) (4 messages, latest: May 25 2019 at 14:02)
 
 * [syntactic equality](15425syntacticequality.html) (44 messages, latest: May 25 2019 at 13:05)
 
