@@ -1,0 +1,99 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/53302infinitesets.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html">infinite sets</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166648386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166648386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166648386">Kenny Lau (May 27 2019 at 16:08)</a>:</h4>
+<p>We know a lot of things about <code>set.finite</code>, but what do we know when the set is not finite?</p>
+
+<a name="166648523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166648523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166648523">Kenny Lau (May 27 2019 at 16:10)</a>:</h4>
+<p>for example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">set</span><span class="bp">.</span><span class="n">of_not_finite</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hfs</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">s</span><span class="bp">.</span><span class="n">finite</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="166648682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166648682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166648682">Mario Carneiro (May 27 2019 at 16:13)</a>:</h4>
+<p>that's equivalent to a <code>cardinal</code> theorem</p>
+
+<a name="166648776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166648776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166648776">Kenny Lau (May 27 2019 at 16:14)</a>:</h4>
+<p>how many lines would I need?</p>
+
+<a name="166650012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650012">Kenny Lau (May 27 2019 at 16:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">set</span><span class="bp">.</span><span class="n">of_not_finite</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hfs</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">s</span><span class="bp">.</span><span class="n">finite</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">t</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">t</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">t</span><span class="o">,</span> <span class="n">by_contradiction</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_exists</span><span class="o">,</span> <span class="n">not_not</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hfs</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">finite_subset</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">finite_to_set</span> <span class="n">t</span><span class="o">)</span> <span class="n">h</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">choose</span> <span class="n">f</span> <span class="n">hf1</span> <span class="n">hf2</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="bp">⟨</span><span class="n">nat</span><span class="bp">.</span><span class="n">strong_rec&#39;</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span> <span class="n">f</span> <span class="err">$</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">image</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">ih</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">m</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="n">apply</span> <span class="n">linarith</span><span class="bp">.</span><span class="n">eq_of_not_lt_of_not_gt</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">hmn</span><span class="o">,</span> <span class="n">conv_rhs</span> <span class="n">at</span> <span class="n">h</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">strong_rec&#39;</span> <span class="o">},</span>
+      <span class="n">apply</span> <span class="n">hf2</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">h</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image</span><span class="o">],</span> <span class="n">use</span> <span class="o">[</span><span class="bp">⟨</span><span class="n">m</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hmn</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_attach</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">]</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">hnm</span><span class="o">,</span> <span class="n">conv_lhs</span> <span class="n">at</span> <span class="n">h</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">strong_rec&#39;</span> <span class="o">},</span>
+      <span class="n">apply</span> <span class="n">hf2</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image</span><span class="o">],</span> <span class="n">use</span> <span class="o">[</span><span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_range</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hnm</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_attach</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">]</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">n</span><span class="o">,</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">strong_rec&#39;</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hf1</span> <span class="bp">_</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="166650015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650015">Kenny Lau (May 27 2019 at 16:34)</a>:</h4>
+<p>14 lines without <code>cardinal</code></p>
+
+<a name="166650130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650130">Mario Carneiro (May 27 2019 at 16:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">set</span><span class="bp">.</span><span class="n">of_not_finite</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hfs</span> <span class="o">:</span> <span class="bp">¬</span><span class="n">s</span><span class="bp">.</span><span class="n">finite</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">le_of_not_lt</span> <span class="o">(</span><span class="n">mt</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">lt_omega_iff_finite</span><span class="bp">.</span><span class="mi">1</span> <span class="n">hfs</span><span class="o">)</span> <span class="k">with</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ulift</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_embedding</span><span class="bp">.</span><span class="n">trans</span> <span class="n">f</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">trans</span> <span class="o">(</span><span class="n">function</span><span class="bp">.</span><span class="n">embedding</span><span class="bp">.</span><span class="n">subtype</span> <span class="n">s</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">g</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="166650223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650223">Mario Carneiro (May 27 2019 at 16:38)</a>:</h4>
+<p>the proof is morally done after line 2 (you have <code>ℕ ↪ ↥s</code>) and the rest is making it fit your statement</p>
+
+<a name="166650269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650269">Mario Carneiro (May 27 2019 at 16:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> By the way, this is how I want high powered libraries to work</p>
+
+<a name="166650324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650324">Mario Carneiro (May 27 2019 at 16:40)</a>:</h4>
+<p>The main theorem is one line, and the rest is elementary unpacking</p>
+
+<a name="166650370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650370">Kenny Lau (May 27 2019 at 16:41)</a>:</h4>
+<p>great</p>
+
+<a name="166650375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650375">Kenny Lau (May 27 2019 at 16:41)</a>:</h4>
+<p>where should we put this lemma? it has some tricky dependencies...</p>
+
+<a name="166650554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650554">Johan Commelin (May 27 2019 at 16:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Sounds good... I want more high-powered libraries (-;</p>
+
+<a name="166650588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/infinite%20sets/near/166650588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53302infinitesets.html#166650588">Johan Commelin (May 27 2019 at 16:45)</a>:</h4>
+<p>Also... if possible the elementary unpacking should be <code>by tidy</code> or <code>by schoolkid</code> or <code>by elementary</code></p>
+
+
+{% endraw %}
