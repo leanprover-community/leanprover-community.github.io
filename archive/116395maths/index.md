@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cubing a cube](80825cubingacube.html) (3 messages, latest: May 27 2019 at 15:59)
+
 * [Bundled homs](83318Bundledhoms.html) (51 messages, latest: May 27 2019 at 12:11)
 
 * [non-terminal simp in complex.lean](36395nonterminalsimpincomplexlean.html) (4 messages, latest: May 25 2019 at 19:19)
