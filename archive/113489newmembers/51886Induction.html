@@ -1323,5 +1323,172 @@ Chris: What does the <code>h</code> in each case correspond to?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166663823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166663823">Mario Carneiro (May 27 2019 at 20:59)</a>:</h4>
 <p>what does <code>is_def</code> mean in the first conjunct?</p>
 
+<a name="166663917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166663917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166663917">Patrick Thomas (May 27 2019 at 21:01)</a>:</h4>
+<p>Sorry, left out the notation:</p>
+<div class="codehilite"><pre><span></span><span class="kn">notation</span> <span class="n">M</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">x</span> <span class="bp">`</span><span class="o">:=</span><span class="bp">`</span> <span class="n">N</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="bp">`</span><span class="n">is_def</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">sub_is_def</span> <span class="n">M</span> <span class="n">x</span> <span class="n">N</span>
+<span class="kn">notation</span> <span class="n">M</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">x</span> <span class="bp">`</span><span class="o">:=</span><span class="bp">`</span> <span class="n">N</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">sub</span> <span class="n">M</span> <span class="n">x</span> <span class="n">N</span>
+</pre></div>
+
+<a name="166663920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166663920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166663920">Mario Carneiro (May 27 2019 at 21:01)</a>:</h4>
+<p>wow that's an ambiguous notation</p>
+
+<a name="166663924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166663924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166663924">Kevin Buzzard (May 27 2019 at 21:01)</a>:</h4>
+<p>Why not just post your full working code?</p>
+
+<a name="166663975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166663975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166663975">Mario Carneiro (May 27 2019 at 21:02)</a>:</h4>
+<p>it's mostly the same as the code in this thread I think</p>
+
+<a name="166664020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664020">Patrick Thomas (May 27 2019 at 21:03)</a>:</h4>
+<p>Yeah. Here it is</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">open</span> <span class="n">set</span>
+
+
+<span class="n">def</span> <span class="n">var</span> <span class="o">:=</span> <span class="bp">ℕ</span>
+
+<span class="kn">inductive</span> <span class="n">pre_term</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="bp">|</span> <span class="n">abs</span> <span class="o">:</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+
+
+<span class="n">def</span> <span class="n">FV</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">var</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">FV</span> <span class="n">P</span><span class="o">)</span> <span class="err">∪</span> <span class="o">(</span><span class="n">FV</span> <span class="n">Q</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">x</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">FV</span> <span class="n">P</span><span class="o">)</span> <span class="err">\</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span>
+
+
+<span class="c1">-- sub_is_def M x N means M [ x := N ] is defined</span>
+<span class="kn">inductive</span> <span class="n">sub_is_def</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="c1">-- y [ x := N ] is defined</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">sub_is_def</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span>
+
+<span class="c1">-- P [ x := N ] is defined → Q [ x := N ] is defined → (P Q) [ x := N ] is defined</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">sub_is_def</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span>
+
+<span class="c1">-- x = y → ( λ y . P ) [ x := N ] is defined</span>
+<span class="bp">|</span> <span class="n">abs_same</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span>
+
+<span class="c1">-- x ≠ y → x ∉ FV ( λ y . P ) → ( λ y . P ) [ x := N ] is defined</span>
+<span class="bp">|</span> <span class="n">abs_diff_nel</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">FV</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span>
+
+<span class="c1">-- x ≠ y → y ∉ FV ( N ) → P [ x := N ] is defined → ( λ y . P ) [ x := N ] is defined</span>
+<span class="bp">|</span> <span class="n">abs_diff</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∉</span> <span class="n">FV</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">sub_is_def</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span>
+
+<span class="kn">notation</span> <span class="n">M</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">x</span> <span class="bp">`</span><span class="o">:=</span><span class="bp">`</span> <span class="n">N</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="bp">`</span><span class="n">is_def</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">sub_is_def</span> <span class="n">M</span> <span class="n">x</span> <span class="n">N</span>
+
+
+<span class="c1">-- M [ x := N ]</span>
+<span class="n">def</span> <span class="n">sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span>
+<span class="c1">-- if x = y then y [ x := N ] = N else y [ x := N ] = y</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="o">(</span><span class="n">x</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="k">then</span> <span class="n">N</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- (P Q) [ x := N ] = (P [ x := N ] Q [ x := N ])</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span><span class="o">)</span>
+
+<span class="c1">-- if x = y then ( λ y . P ) [ x := N ] = ( λ y . P ) else ( λ y . P ) [ x := N ] = ( λ y . P [ x := N ] )</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="k">then</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="k">else</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="o">(</span><span class="n">sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span><span class="o">))</span>
+
+<span class="kn">notation</span> <span class="n">M</span> <span class="bp">`</span><span class="o">[</span><span class="bp">`</span> <span class="n">x</span> <span class="bp">`</span><span class="o">:=</span><span class="bp">`</span> <span class="n">N</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">sub</span> <span class="n">M</span> <span class="n">x</span> <span class="n">N</span>
+
+
+<span class="c1">-- is_sub M x N L means M [ x := N ] = L</span>
+<span class="kn">inductive</span> <span class="n">is_sub</span> <span class="o">:</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">var</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="n">pre_term</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="c1">-- x = y → y [ x := N ] = N</span>
+<span class="bp">|</span> <span class="n">var_same</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="n">N</span>
+
+<span class="c1">-- x ≠ y → y [ x := N ] = y</span>
+<span class="bp">|</span> <span class="n">var_diff</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">var</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- P [ x := N ] = P&#39; → Q [ x := N ] = Q&#39; → (P Q) [ x := N ] = (P&#39; Q&#39;)</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">P&#39;</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">Q&#39;</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="n">P&#39;</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="n">Q</span> <span class="n">x</span> <span class="n">N</span> <span class="n">Q&#39;</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P</span> <span class="n">Q</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">app</span> <span class="n">P&#39;</span> <span class="n">Q&#39;</span><span class="o">)</span>
+
+<span class="c1">-- x = y → ( λ y . P ) [ x := N ] = ( λ y . P )</span>
+<span class="bp">|</span> <span class="n">abs_same</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span>
+
+<span class="c1">-- x ≠ y → x ∉ FV ( λ y . P ) → ( λ y . P ) [ x := N ] = ( λ y . P )</span>
+<span class="bp">|</span> <span class="n">abs_diff_nel</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∉</span> <span class="n">FV</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span>
+
+<span class="c1">-- x ≠ y → y ∉ FV ( N ) → P [ x := N ] = P&#39; → ( λ y . P ) [ x := N ] = ( λ y . P&#39; )</span>
+<span class="bp">|</span> <span class="n">abs_diff</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">(</span><span class="n">P&#39;</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="bp">→</span> <span class="n">y</span> <span class="err">∉</span> <span class="n">FV</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="n">P</span> <span class="n">x</span> <span class="n">N</span> <span class="n">P&#39;</span> <span class="bp">→</span> <span class="n">is_sub</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P</span><span class="o">)</span> <span class="n">x</span> <span class="n">N</span> <span class="o">(</span><span class="n">pre_term</span><span class="bp">.</span><span class="n">abs</span> <span class="n">y</span> <span class="n">P&#39;</span><span class="o">)</span>
+
+
+<span class="kn">lemma</span> <span class="n">sub_iff</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span><span class="n">var</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="n">pre_term</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span> <span class="n">is_sub</span> <span class="n">M</span> <span class="n">x</span> <span class="n">N</span> <span class="n">L</span> <span class="o">)</span> <span class="bp">↔</span> <span class="o">(</span> <span class="n">M</span> <span class="o">[</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">N</span> <span class="o">]</span> <span class="n">is_def</span> <span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span> <span class="n">M</span> <span class="o">[</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">N</span> <span class="o">]</span> <span class="bp">=</span> <span class="n">L</span> <span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="166664119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664119">Mario Carneiro (May 27 2019 at 21:05)</a>:</h4>
+<p>seems like this is the wrong question. The answer to "is this provable" is either "no you got the math wrong" or "yes this can be formalized"</p>
+
+<a name="166664208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664208">Kenny Lau (May 27 2019 at 21:07)</a>:</h4>
+<p>what if the provability is independent of the Lean axioms? :P</p>
+
+<a name="166664226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664226">Patrick Thomas (May 27 2019 at 21:07)</a>:</h4>
+<p>That would be good to know too :)</p>
+
+<a name="166664232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664232">Mario Carneiro (May 27 2019 at 21:07)</a>:</h4>
+<p>do you bring that up in all your intro classes Kenny?</p>
+
+<a name="166664290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664290">Kevin Buzzard (May 27 2019 at 21:08)</a>:</h4>
+<p>In maths it's very unlikely that something Kenny saw so far would be even close to being indepedent!</p>
+
+<a name="166664292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664292">Kevin Buzzard (May 27 2019 at 21:08)</a>:</h4>
+<p>Maybe I mentioned CH but I bet that's it.</p>
+
+<a name="166664301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664301">Mario Carneiro (May 27 2019 at 21:08)</a>:</h4>
+<p>well, as you know there are several independent statements "close to the surface" in lean because MLTT is underdetermined... but this is off topic</p>
+
+<a name="166664401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664401">Patrick Thomas (May 27 2019 at 21:10)</a>:</h4>
+<p>I guess my question is, that it was suggested that I use <code>is_sub</code> instead of the other two, and I was wondering if that is equivalent. I thought maybe this lemma would show that it is, if it is true.</p>
+
+<a name="166664492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664492">Mario Carneiro (May 27 2019 at 21:12)</a>:</h4>
+<p>it is true, unless there is some subtle bug in the inductives</p>
+
+<a name="166664525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664525">Patrick Thomas (May 27 2019 at 21:13)</a>:</h4>
+<p>Ok, thank you. I will try to prove it. Probably induction on <code>M</code>?</p>
+
+<a name="166664594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664594">Mario Carneiro (May 27 2019 at 21:14)</a>:</h4>
+<p>induction on the predicates</p>
+
+<a name="166664625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166664625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166664625">Patrick Thomas (May 27 2019 at 21:15)</a>:</h4>
+<p>Hmm, I'm not sure I am familiar with that form of induction.</p>
+
+<a name="166665680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166665680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166665680">Patrick Thomas (May 27 2019 at 21:42)</a>:</h4>
+<p>How would you set that up? Can you use the induction tactic?</p>
+
+<a name="166666382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/166666382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#166666382">Kevin Buzzard (May 27 2019 at 21:59)</a>:</h4>
+<p>Yes. If you have some hypothesis <code>h</code> whose type is an inductive type, then <code>induction h</code> will do some kind of induction on <code>h</code>.</p>
+
 
 {% endraw %}
