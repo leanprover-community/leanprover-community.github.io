@@ -1,0 +1,49 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/12532Reducibilityrewriteetc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html">Reducibility, rewrite etc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166632699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reducibility%2C%20rewrite%20etc/near/166632699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html#166632699">Neil Strickland (May 27 2019 at 12:27)</a>:</h4>
+<p>I am proving some lemmas about commuting elements.  I define <code>commute a b := a * b = b * a</code>, then prove things like <code>commute a b → commute a c → commute a (b * c)</code>; this seems like a very natural idiom to use.  However, with this framework, if I have <code>h : commute a b</code> then <code>rw [h]</code> fails with <code>rewrite tactic failed, lemma is not an equality nor a iff</code>.  It does not help to mark the definition of <code>commute</code> with <code>@[reducible]</code>.  You can do <code>change _ = _ at h, rw [h]</code> but that is awkward.  Is there a standard approach to this kind of thing?</p>
+
+<a name="166633095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reducibility%2C%20rewrite%20etc/near/166633095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html#166633095">Kenny Lau (May 27 2019 at 12:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">algebra</span><span class="o">,</span> <span class="n">class</span><span class="o">]</span>
+<span class="kn">structure</span> <span class="n">is_commutative</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">),</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="n">fields</span><span class="o">:</span>
+<span class="n">is_commutative</span><span class="bp">.</span><span class="n">comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">c</span> <span class="o">:</span> <span class="n">is_commutative</span> <span class="n">α</span> <span class="n">op</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">op</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">op</span> <span class="n">b</span> <span class="n">a</span>
+</pre></div>
+
+<a name="166633097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reducibility%2C%20rewrite%20etc/near/166633097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html#166633097">Kenny Lau (May 27 2019 at 12:32)</a>:</h4>
+<p>it's already in core</p>
+
+<a name="166633135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reducibility%2C%20rewrite%20etc/near/166633135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html#166633135">Kenny Lau (May 27 2019 at 12:33)</a>:</h4>
+<p>I would just unfold <code>commute</code></p>
+
+<a name="166633506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reducibility%2C%20rewrite%20etc/near/166633506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html#166633506">Chris Hughes (May 27 2019 at 12:38)</a>:</h4>
+<p><code>rw (show _ = _, from h)</code> is what I would do.</p>
+
+<a name="166633822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reducibility%2C%20rewrite%20etc/near/166633822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/12532Reducibilityrewriteetc.html#166633822">Neil Strickland (May 27 2019 at 12:43)</a>:</h4>
+<p><code>is_commutative</code> is universally quantified:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">algebra</span><span class="o">]</span> <span class="n">class</span> <span class="n">is_commutative</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">op</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">op</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">op</span> <span class="n">b</span> <span class="n">a</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I am looking at particular pairs of elements that commute even though they live in a noncommutative structure.  I don't think that that is in  core or mathlib at the moment.</p>
+
+
+{% endraw %}
