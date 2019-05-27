@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (8 messages, latest: May 27 2019 at 10:29)
+
 * [#1080 props of elements in rings](039491080propsofelementsinrings.html) (11 messages, latest: May 24 2019 at 14:45)
 
 * [#943 lc refactor](96169943lcrefactor.html) (22 messages, latest: May 24 2019 at 08:50)
@@ -73,8 +75,6 @@ permalink: archive/144837PRreviews/index.html
 * [colimits](83397colimits.html) (98 messages, latest: Apr 03 2019 at 21:41)
 
 * [#883](29799883.html) (1 message, latest: Apr 03 2019 at 14:08)
-
-* [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (5 messages, latest: Apr 03 2019 at 09:49)
 
 * [#854 pointwise operations for sets](87825854pointwiseoperationsforsets.html) (10 messages, latest: Apr 03 2019 at 06:32)
 
