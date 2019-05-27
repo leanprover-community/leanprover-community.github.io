@@ -109,5 +109,95 @@ permalink: archive/113488general/74840algebraicclosure.html
 
 <p>You can see how many typeclasses this depends on.</p>
 
+<a name="166614089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166614089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166614089">Kevin Buzzard (May 27 2019 at 07:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">asdf</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">F</span> <span class="o">(</span><span class="n">big_ring</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+
+<span class="kn">instance</span> <span class="n">qwer</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="o">((</span><span class="n">big_ideal</span> <span class="n">F</span><span class="o">)</span><span class="bp">.</span><span class="n">quotient</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized</span>
+<span class="cm">  ⁇</span>
+<span class="cm">inferred</span>
+<span class="cm">  mv_polynomial.comm_ring</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Could this be something to do with it?</p>
+
+<a name="166614158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166614158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166614158">Kevin Buzzard (May 27 2019 at 07:18)</a>:</h4>
+<p>no wait, that's my user error (no F)</p>
+
+<a name="166614705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166614705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166614705">Kevin Buzzard (May 27 2019 at 07:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">36</span> <span class="c1">-- and no lower</span>
+<span class="kn">instance</span> <span class="n">asdf</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">F</span> <span class="o">(</span><span class="n">big_ring</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">86</span> <span class="c1">-- and no lower</span>
+<span class="kn">instance</span> <span class="n">zxcv</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">big_ideal</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>Why is this nonsense happening?</p>
+
+<a name="166615343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166615343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166615343">Kevin Buzzard (May 27 2019 at 07:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">36</span> <span class="c1">-- and no lower</span>
+<span class="kn">instance</span> <span class="n">asdf</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">F</span> <span class="o">(</span><span class="n">big_ring</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">86</span> <span class="c1">-- and no lower</span>
+<span class="kn">instance</span> <span class="n">zxcv</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">big_ideal</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="kn">instance</span> <span class="n">wert</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">comm_ring</span> <span class="o">(</span><span class="n">big_ideal</span> <span class="n">F</span><span class="o">)</span><span class="bp">.</span><span class="n">quotient</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="kn">instance</span> <span class="n">qwer</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">module</span> <span class="n">F</span> <span class="o">(</span><span class="n">big_ideal</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="166615636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166615636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166615636">Kevin Buzzard (May 27 2019 at 07:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> is the issue simply this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">R</span> <span class="n">S</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>This should probably fail, because Lean does not know that the R-module structure on S has anything to do with the ring structure.</p>
+
+<a name="166615662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166615662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166615662">Kevin Buzzard (May 27 2019 at 07:47)</a>:</h4>
+<p>Aah, but this also fails:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">S</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">module</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="166615726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166615726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166615726">Kevin Buzzard (May 27 2019 at 07:48)</a>:</h4>
+<p>We humans are too clever. We synthesize the instance automatically.</p>
+
+<a name="166615945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166615945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166615945">Kevin Buzzard (May 27 2019 at 07:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">R</span> <span class="n">S</span> <span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">S</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">R</span> <span class="n">S</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">S</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">R</span> <span class="n">M</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p>Are there just some missing instances? Should these even be instances? There is no mention of <code>S</code> in the conclusion.</p>
+
+<a name="166616107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166616107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166616107">Kevin Buzzard (May 27 2019 at 07:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> you know the instance "map" for this stuff better than me -- is this the issue?</p>
+
+<a name="166616145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/166616145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#166616145">Kenny Lau (May 27 2019 at 07:57)</a>:</h4>
+<p>oh I'm stupid</p>
+
 
 {% endraw %}
