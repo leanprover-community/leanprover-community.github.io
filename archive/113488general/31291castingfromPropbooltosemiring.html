@@ -1,0 +1,40 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/31291castingfromPropbooltosemiring.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/31291castingfromPropbooltosemiring.html">casting from Prop/bool to semiring</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166632236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casting%20from%20Prop/bool%20to%20semiring/near/166632236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31291castingfromPropbooltosemiring.html#166632236">Kenny Lau (May 27 2019 at 12:20)</a>:</h4>
+<p>Do we have a function that sends a prop/bool to 1 if it is true and 0 if it is false?</p>
+
+<a name="166632544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casting%20from%20Prop/bool%20to%20semiring/near/166632544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31291castingfromPropbooltosemiring.html#166632544">Keeley Hoek (May 27 2019 at 12:24)</a>:</h4>
+<p>There is no instance for <code>semiring bool</code> in mathlib I think</p>
+
+<a name="166632829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casting%20from%20Prop/bool%20to%20semiring/near/166632829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31291castingfromPropbooltosemiring.html#166632829">Neil Strickland (May 27 2019 at 12:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ring</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">refine_struct</span> <span class="o">{</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="n">ff</span><span class="o">,</span> <span class="n">one</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">,</span>
+  <span class="n">neg</span> <span class="o">:=</span> <span class="n">id</span><span class="o">,</span> <span class="n">inv</span> <span class="o">:=</span> <span class="n">id</span><span class="o">,</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="n">bxor</span><span class="o">,</span> <span class="n">mul</span> <span class="o">:=</span> <span class="n">band</span><span class="o">,</span>
+  <span class="n">zero_ne_one</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">e</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span><span class="n">cases</span> <span class="n">e</span><span class="o">},</span>
+  <span class="n">has_decidable_eq</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">apply_instance</span> <span class="o">}</span>
+ <span class="o">}</span><span class="bp">;</span>
+ <span class="n">try</span> <span class="o">{</span> <span class="n">repeat</span> <span class="o">{</span> <span class="n">intro</span> <span class="n">a</span><span class="o">,</span> <span class="n">cases</span> <span class="n">a</span> <span class="o">}</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">,</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}

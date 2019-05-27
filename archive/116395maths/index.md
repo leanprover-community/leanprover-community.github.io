@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Bundled homs](83318Bundledhoms.html) (42 messages, latest: May 27 2019 at 11:53)
+* [Bundled homs](83318Bundledhoms.html) (51 messages, latest: May 27 2019 at 12:11)
 
 * [non-terminal simp in complex.lean](36395nonterminalsimpincomplexlean.html) (4 messages, latest: May 25 2019 at 19:19)
 
