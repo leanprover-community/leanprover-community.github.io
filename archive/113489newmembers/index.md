@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (180 messages, latest: May 27 2019 at 20:59)
+
 * [Math physics in Lean](24293MathphysicsinLean.html) (46 messages, latest: May 25 2019 at 01:38)
 
 * [Rewrite in lambda expr](04378Rewriteinlambdaexpr.html) (3 messages, latest: May 22 2019 at 12:11)
@@ -39,8 +41,6 @@ permalink: archive/113489newmembers/index.html
 * [nat lemmas](73955natlemmas.html) (14 messages, latest: May 13 2019 at 00:26)
 
 * [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (47 messages, latest: May 12 2019 at 23:14)
-
-* [Induction](51886Induction.html) (178 messages, latest: May 12 2019 at 16:29)
 
 * [Kind of a vague question](81837Kindofavaguequestion.html) (15 messages, latest: May 10 2019 at 02:48)
 
