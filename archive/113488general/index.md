@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (16 messages, latest: May 27 2019 at 06:53)
+* [algebraic closure](74840algebraicclosure.html) (26 messages, latest: May 27 2019 at 07:57)
 
 * [algebraic geometry](49383algebraicgeometry.html) (4 messages, latest: May 27 2019 at 06:28)
 
