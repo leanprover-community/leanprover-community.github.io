@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Reducibility, rewrite etc](12532Reducibilityrewriteetc.html) (8 messages, latest: May 27 2019 at 14:08)
+* ["transitivity" elaboration](83759transitivityelaboration.html) (2 messages, latest: May 27 2019 at 15:34)
+
+* [Reducibility, rewrite etc](12532Reducibilityrewriteetc.html) (9 messages, latest: May 27 2019 at 15:08)
 
 * [casting from Prop/bool to semiring](31291castingfromPropbooltosemiring.html) (3 messages, latest: May 27 2019 at 12:29)
 
