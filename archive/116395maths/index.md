@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [HoTT](75424HoTT.html) (65 messages, latest: May 27 2019 at 17:20)
+
 * [cubing a cube](80825cubingacube.html) (4 messages, latest: May 27 2019 at 16:08)
 
 * [Bundled homs](83318Bundledhoms.html) (51 messages, latest: May 27 2019 at 12:11)
 
 * [non-terminal simp in complex.lean](36395nonterminalsimpincomplexlean.html) (4 messages, latest: May 25 2019 at 19:19)
-
-* [HoTT](75424HoTT.html) (62 messages, latest: May 25 2019 at 14:39)
 
 * [Topological vector spaces](52784Topologicalvectorspaces.html) (4 messages, latest: May 24 2019 at 13:30)
 
