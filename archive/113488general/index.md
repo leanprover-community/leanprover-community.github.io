@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (20 messages, latest: May 27 2019 at 01:18)
+
 * [algebraic closure](74840algebraicclosure.html) (6 messages, latest: May 26 2019 at 23:12)
 
 * [algebraic geometry](49383algebraicgeometry.html) (1 message, latest: May 26 2019 at 22:34)
@@ -49,8 +51,6 @@ permalink: archive/113488general/index.html
 * [what happened to update-mathlib?](09517whathappenedtoupdatemathlib.html) (8 messages, latest: May 22 2019 at 03:37)
 
 * [Lean in the wild](43625Leaninthewild.html) (77 messages, latest: May 21 2019 at 23:40)
-
-* [an unsafe version of tactic](19365anunsafeversionoftactic.html) (19 messages, latest: May 21 2019 at 14:11)
 
 * [How to trace all goals explicitly?](51734Howtotraceallgoalsexplicitly.html) (2 messages, latest: May 21 2019 at 13:15)
 
