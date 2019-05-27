@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [infinite sets](53302infinitesets.html) (14 messages, latest: May 27 2019 at 16:45)
+
 * ["transitivity" elaboration](83759transitivityelaboration.html) (2 messages, latest: May 27 2019 at 15:34)
 
 * [Reducibility, rewrite etc](12532Reducibilityrewriteetc.html) (9 messages, latest: May 27 2019 at 15:08)
