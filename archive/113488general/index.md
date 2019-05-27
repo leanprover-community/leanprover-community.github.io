@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (16 messages, latest: May 27 2019 at 06:53)
+
+* [algebraic geometry](49383algebraicgeometry.html) (4 messages, latest: May 27 2019 at 06:28)
+
 * [an unsafe version of tactic](19365anunsafeversionoftactic.html) (20 messages, latest: May 27 2019 at 01:18)
-
-* [algebraic closure](74840algebraicclosure.html) (6 messages, latest: May 26 2019 at 23:12)
-
-* [algebraic geometry](49383algebraicgeometry.html) (1 message, latest: May 26 2019 at 22:34)
 
 * [fintype from enumerated type](71488fintypefromenumeratedtype.html) (3 messages, latest: May 26 2019 at 13:21)
 
