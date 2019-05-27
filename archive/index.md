@@ -24,7 +24,7 @@ permalink: archive/index.html
 
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
-* [Big Proof 2019](198800BigProof2019/index.html) (1 topic)
+* [Big Proof 2019](198800BigProof2019/index.html) (2 topics)
 
 
 {% include archive_update.html %}
