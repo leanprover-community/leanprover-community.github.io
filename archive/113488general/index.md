@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (27 messages, latest: May 27 2019 at 08:49)
+* [auto-recompiling](02272autorecompiling.html) (7 messages, latest: May 27 2019 at 09:42)
 
-* [auto-recompiling](02272autorecompiling.html) (6 messages, latest: May 27 2019 at 08:12)
+* [algebraic closure](74840algebraicclosure.html) (30 messages, latest: May 27 2019 at 09:38)
 
 * [algebraic geometry](49383algebraicgeometry.html) (4 messages, latest: May 27 2019 at 06:28)
 
