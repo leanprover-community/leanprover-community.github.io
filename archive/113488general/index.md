@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic geometry](49383algebraicgeometry.html) (1 message, latest: May 26 2019 at 22:34)
+* [algebraic closure](74840algebraicclosure.html) (6 messages, latest: May 26 2019 at 23:12)
 
-* [algebraic closure](74840algebraicclosure.html) (4 messages, latest: May 26 2019 at 21:40)
+* [algebraic geometry](49383algebraicgeometry.html) (1 message, latest: May 26 2019 at 22:34)
 
 * [fintype from enumerated type](71488fintypefromenumeratedtype.html) (3 messages, latest: May 26 2019 at 13:21)
 
