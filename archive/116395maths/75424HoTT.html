@@ -288,5 +288,34 @@ But people <em>have</em> tried to get Univalent parametricity without changing t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166529972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166529972">Kevin Buzzard (May 25 2019 at 14:39)</a>:</h4>
 <p>I still don't really understand how Strickland's idea managed to get the schemes project out of the hole I'd dug it into.</p>
 
+<a name="166651904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166651904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166651904">Floris van Doorn (May 27 2019 at 17:07)</a>:</h4>
+<p>I'm late to the party, but here are some of my responses.</p>
+<blockquote>
+<p>Does the construction of the Serre SS use any axioms?</p>
+</blockquote>
+<p>No, only univalence and higher inductive types. In HoTT there is a very strong sense of "trying to avoid the axiom of choice". And if you care about that (which mathematicians of course don't), there are some nice new things you can do with HoTT to avoid axioms:</p>
+<ul>
+<li>You can elimination from the propositional truncation (which is like <code>nonempty</code>) to any subsingleton type without using an axiom. In Lean you would use <code>choice</code> for this.</li>
+<li>Normally, if you define the real numbers as Cauchy sequences, you need the (countable) axiom of choice to prove completeness of the real numbers. In HoTT there is a definition of the Cauchy real numbers as a higher inductive type where you can prove completeness without the axiom of choice (you still need choice to prove that it is equivalent to the Dedekind real numbers).</li>
+</ul>
+<p>This is not to say you cannot add the axiom of choice to HoTT and work classically. This is very much possible. However, as Reid mentions you cannot add <code>classical.choice</code> (that is inconsistent with univalence), you need the weaker set-theoretic formulation of choice (e.g. every surjection has a section).</p>
+
+<a name="166652260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166652260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166652260">Floris van Doorn (May 27 2019 at 17:14)</a>:</h4>
+<blockquote>
+<p>what would the pain points be if one tried to formalise a scheme in HoTT?</p>
+</blockquote>
+<p>I think the pain points much more depend on which proof assistant you use, and more importantly: which tactics and automation is available. One example of a pain point when doing HoTT in Lean 2 which are specific to HoTT, is that - for example - I had to prove that the ordering on the natural numbers is a proposition (subsingleton): <a href="https://github.com/leanprover/lean2/blob/master/hott/types/nat/hott.hlean#L14" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/types/nat/hott.hlean#L14">https://github.com/leanprover/lean2/blob/master/hott/types/nat/hott.hlean#L14</a></p>
+<div class="codehilite"><pre><span></span>definition is_prop_le [instance] (n m : ℕ) : is_prop (n ≤ m)
+</pre></div>
+
+
+<p>A much bigger pain point is that univalence doesn't compute in Lean 2, so if you want a function you define to compute definitionally (and in Lean 2 we wanted that, partially because of the lack of a good <code>simp</code>), then you want to avoid using univalence. This made me define many many concepts explicitly which I could have defined using univalence.</p>
+
+<a name="166652496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/166652496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#166652496">Floris van Doorn (May 27 2019 at 17:20)</a>:</h4>
+<p>One mentality problem in HoTT is that everything - even proofs of propositions - are definitions and it sometimes matters how you define/prove them, especially if you use dependent types heavily. For example, if you have a sequence of maps <code>X 0 -&gt; X 1 -&gt; X 2 -&gt; ...</code> then you can define a function <code>n &lt;= m -&gt; X n -&gt; X m</code>. In HoTT you can define this function by recursion on the proof that <code>n &lt;= m</code>, and so how that function computes depends on how you have proven that <code>n &lt;= m</code> (for numerals <code>n</code> and <code>m</code> there is only 1 way to do this, but for variables there could be different ways, of course). At one point, I reproved some inequalities of natural numbers to make this function compute better (and it was important that it computed better because I was using dependent types).</p>
+
 
 {% endraw %}
