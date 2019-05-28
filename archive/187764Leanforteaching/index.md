@@ -10,7 +10,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [`cases` isn't using my notation](02317casesisntusingmynotation.html) (31 messages, latest: May 24 2019 at 13:34)
+* [`cases` isn't using my notation](02317casesisntusingmynotation.html) (32 messages, latest: May 28 2019 at 14:03)
 
 * [Patrick's course](67258Patrickscourse.html) (2 messages, latest: May 20 2019 at 00:20)
 
