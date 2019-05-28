@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction](51886Induction.html) (208 messages, latest: May 28 2019 at 20:45)
+* [Max element of a set](56915Maxelementofaset.html) (7 messages, latest: May 28 2019 at 21:57)
 
-* [Max element of a set](56915Maxelementofaset.html) (6 messages, latest: May 28 2019 at 12:04)
+* [Induction](51886Induction.html) (212 messages, latest: May 28 2019 at 21:35)
 
 * [expr: fields and @](45316exprfieldsand.html) (116 messages, latest: May 28 2019 at 11:48)
 
