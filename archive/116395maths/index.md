@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (68 messages, latest: May 27 2019 at 23:02)
+* [cubing a cube](80825cubingacube.html) (12 messages, latest: May 28 2019 at 00:44)
 
-* [cubing a cube](80825cubingacube.html) (11 messages, latest: May 27 2019 at 23:00)
+* [HoTT](75424HoTT.html) (68 messages, latest: May 27 2019 at 23:02)
 
 * [Bundled homs](83318Bundledhoms.html) (51 messages, latest: May 27 2019 at 12:11)
 

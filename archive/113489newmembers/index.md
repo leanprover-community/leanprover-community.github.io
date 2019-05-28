@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction](51886Induction.html) (202 messages, latest: May 27 2019 at 23:11)
+* [Induction](51886Induction.html) (204 messages, latest: May 28 2019 at 00:47)
 
 * [Math physics in Lean](24293MathphysicsinLean.html) (46 messages, latest: May 25 2019 at 01:38)
 
