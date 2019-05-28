@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [pre-compiling mathlib](32280precompilingmathlib.html) (18 messages, latest: May 28 2019 at 06:56)
+
 * [Induction](51886Induction.html) (205 messages, latest: May 28 2019 at 02:37)
 
 * [Math physics in Lean](24293MathphysicsinLean.html) (46 messages, latest: May 25 2019 at 01:38)
