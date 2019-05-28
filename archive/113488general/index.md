@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Tutorial](44981Tutorial.html) (19 messages, latest: May 28 2019 at 18:11)
+* [Tutorial](44981Tutorial.html) (23 messages, latest: May 28 2019 at 19:46)
 
 * [addition of surreals](26515additionofsurreals.html) (6 messages, latest: May 28 2019 at 16:40)
 
