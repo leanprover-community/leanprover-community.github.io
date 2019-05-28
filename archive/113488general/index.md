@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Tutorial](44981Tutorial.html) (10 messages, latest: May 28 2019 at 07:32)
+* [Structures in meta](37699Structuresinmeta.html) (2 messages, latest: May 28 2019 at 11:58)
+
+* [Tutorial](44981Tutorial.html) (11 messages, latest: May 28 2019 at 11:06)
 
 * [infinite sets](53302infinitesets.html) (14 messages, latest: May 27 2019 at 16:45)
 

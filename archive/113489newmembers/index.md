@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Max element of a set](56915Maxelementofaset.html) (5 messages, latest: May 28 2019 at 11:50)
+
+* [expr: fields and @](45316exprfieldsand.html) (116 messages, latest: May 28 2019 at 11:48)
+
 * [Induction](51886Induction.html) (206 messages, latest: May 28 2019 at 08:15)
 
 * [pre-compiling mathlib](32280precompilingmathlib.html) (18 messages, latest: May 28 2019 at 06:56)
@@ -49,8 +53,6 @@ permalink: archive/113489newmembers/index.html
 * [VS Code: copy from Lean messages](12038VSCodecopyfromLeanmessages.html) (7 messages, latest: May 08 2019 at 19:14)
 
 * [inverse of injective functions](39084inverseofinjectivefunctions.html) (5 messages, latest: May 08 2019 at 10:31)
-
-* [expr: fields and @](45316exprfieldsand.html) (114 messages, latest: May 06 2019 at 20:51)
 
 * [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (18 messages, latest: May 06 2019 at 12:55)
 
