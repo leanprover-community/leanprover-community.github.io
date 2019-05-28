@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [addition of surreals](26515additionofsurreals.html) (6 messages, latest: May 28 2019 at 16:40)
+* [Tutorial](44981Tutorial.html) (19 messages, latest: May 28 2019 at 18:11)
 
-* [Tutorial](44981Tutorial.html) (16 messages, latest: May 28 2019 at 15:43)
+* [addition of surreals](26515additionofsurreals.html) (6 messages, latest: May 28 2019 at 16:40)
 
 * [Structures in meta](37699Structuresinmeta.html) (2 messages, latest: May 28 2019 at 11:58)
 
