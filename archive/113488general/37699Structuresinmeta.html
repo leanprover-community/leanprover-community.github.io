@@ -1,0 +1,44 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/37699Structuresinmeta.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html">Structures in meta</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166707601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166707601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166707601">Fabian Glöckle (May 28 2019 at 11:45)</a>:</h4>
+<p>Hello everyone, my attempts at auto-generating the corresponding homomorphism types and categories for the classes we have already defined in mathlib have moved a bit. For example</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">add_homomorphism_type</span> <span class="bp">`</span><span class="n">ordered_ring</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ordered_ring_homomorphism</span>
+</pre></div>
+
+
+<p>yields</p>
+<div class="codehilite"><pre><span></span>def ordered_ring_homomorphism : Π {α : Type u} {β : Type v} [i₁ : ordered_ring α] [i₂ : ordered_ring β], (α → β) → Prop :=
+λ {α : Type u} {β : Type v} [i₁ : ordered_ring α] [i₂ : ordered_ring β] (f : α → β),
+  (∀ {x0 x1 : α}, f (ordered_ring.add x0 x1) = ordered_ring.add (f x0) (f x1)) ∧
+    f (ordered_ring.zero α) = ordered_ring.zero β ∧
+      (∀ {x0 : α}, f (ordered_ring.neg x0) = ordered_ring.neg (f x0)) ∧
+        (∀ {x0 x1 : α}, f (ordered_ring.mul x0 x1) = ordered_ring.mul (f x0) (f x1)) ∧
+          f (ordered_ring.one α) = ordered_ring.one β ∧
+            (∀ {x0 x1 : α}, ordered_ring.le x0 x1 → ordered_ring.le (f x0) (f x1)) ∧
+              ∀ {x0 x1 : α}, ordered_ring.lt x0 x1 → ordered_ring.lt (f x0) (f x1)
+</pre></div>
+
+
+<p>This is not perfect though, as one would hope for a class for the homomorphism type (to access the fields more easily).<br>
+ How can I generate structures/classes in meta code?<br>
+And connected to that: can one retrieve the information that <code>group</code>extends <code>monoid</code> programmatically somehow, or is this immediately inlined?</p>
+
+<a name="166708585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/166708585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#166708585">Mario Carneiro (May 28 2019 at 11:58)</a>:</h4>
+<p>The only way to create structures and classes in 3.4 is to use <code>emit_code_here</code> and build a string to send to the parser. There is an API for this in 3.5c</p>
+
+
+{% endraw %}
