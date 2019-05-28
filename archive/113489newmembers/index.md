@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Max element of a set](56915Maxelementofaset.html) (7 messages, latest: May 28 2019 at 21:57)
+* [Max element of a set](56915Maxelementofaset.html) (9 messages, latest: May 28 2019 at 22:06)
 
 * [Induction](51886Induction.html) (212 messages, latest: May 28 2019 at 21:35)
 
