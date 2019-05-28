@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Max element of a set](56915Maxelementofaset.html) (5 messages, latest: May 28 2019 at 11:50)
+* [Max element of a set](56915Maxelementofaset.html) (6 messages, latest: May 28 2019 at 12:04)
 
 * [expr: fields and @](45316exprfieldsand.html) (116 messages, latest: May 28 2019 at 11:48)
 
