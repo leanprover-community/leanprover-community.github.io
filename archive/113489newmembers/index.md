@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (208 messages, latest: May 28 2019 at 20:45)
+
 * [Max element of a set](56915Maxelementofaset.html) (6 messages, latest: May 28 2019 at 12:04)
 
 * [expr: fields and @](45316exprfieldsand.html) (116 messages, latest: May 28 2019 at 11:48)
-
-* [Induction](51886Induction.html) (206 messages, latest: May 28 2019 at 08:15)
 
 * [pre-compiling mathlib](32280precompilingmathlib.html) (18 messages, latest: May 28 2019 at 06:56)
 
