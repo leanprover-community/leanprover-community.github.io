@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout and irreducibility](96863timeoutandirreducibility.html) (8 messages, latest: May 29 2019 at 18:59)
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (25 messages, latest: May 29 2019 at 19:49)
 
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (24 messages, latest: May 29 2019 at 18:18)
+* [timeout and irreducibility](96863timeoutandirreducibility.html) (11 messages, latest: May 29 2019 at 19:01)
 
 * [VSCode Live Share](77256VSCodeLiveShare.html) (6 messages, latest: May 29 2019 at 17:52)
 
