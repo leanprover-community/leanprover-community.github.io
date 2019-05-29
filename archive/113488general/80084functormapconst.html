@@ -1,0 +1,51 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/80084functormapconst.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html">functor.map_const</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166797441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166797441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166797441">Johan Commelin (May 29 2019 at 09:13)</a>:</h4>
+<p>I don't understand lawless functors. What is <code>functor.map_const</code> supposed to mean? Does every "maths" functor satisfy this?</p>
+
+<a name="166797602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166797602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166797602">Mario Carneiro (May 29 2019 at 09:15)</a>:</h4>
+<p><code>map_const</code> is another operation available as part of <code>functor</code> data, which should always be the same as <code>map ∘ const</code></p>
+
+<a name="166797665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166797665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166797665">Mario Carneiro (May 29 2019 at 09:16)</a>:</h4>
+<p>but the function slot is provided in case there is an easier or faster implementation of this composition</p>
+
+<a name="166797696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166797696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166797696">Mario Carneiro (May 29 2019 at 09:17)</a>:</h4>
+<p>In <code>functor</code> it is only a default value, but in <code>is_lawful_functor</code> it is required that they coincide</p>
+
+<a name="166797928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166797928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166797928">Mario Carneiro (May 29 2019 at 09:20)</a>:</h4>
+<p>For example, the functor <code>(λ b, X -&gt; b)</code> has an efficient implementation <code>map_const (a : A) (f : X -&gt; B) : X -&gt; A := λ x, a</code> which does not have to evaluate the function <code>f</code>, while <code>map (const a) f x := const a (f x)</code> will end up evaluating <code>f</code> before discarding the result</p>
+
+<a name="166798118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166798118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166798118">Johan Commelin (May 29 2019 at 09:22)</a>:</h4>
+<p>bfhwrgg... I'm still confused.</p>
+
+<a name="166798128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166798128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166798128">Johan Commelin (May 29 2019 at 09:23)</a>:</h4>
+<p>Why does a maths functor always have a default value?</p>
+
+<a name="166798147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166798147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166798147">Johan Commelin (May 29 2019 at 09:23)</a>:</h4>
+<p>I'm missing something about endo-functors of Type, I guess.</p>
+
+<a name="166798280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor.map_const/near/166798280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/80084functormapconst.html#166798280">Johan Commelin (May 29 2019 at 09:25)</a>:</h4>
+<p>Whatever, I entered some constant thing, and Lean is happy.</p>
+
+
+{% endraw %}
