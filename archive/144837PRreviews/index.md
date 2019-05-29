@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1074 category instances to root](363811074categoryinstancestoroot.html) (29 messages, latest: May 29 2019 at 17:27)
+
 * [#1088 counting measure](443021088countingmeasure.html) (2 messages, latest: May 27 2019 at 21:14)
 
 * [#943 lc refactor](96169943lcrefactor.html) (23 messages, latest: May 27 2019 at 14:50)
@@ -17,8 +19,6 @@ permalink: archive/144837PRreviews/index.html
 * [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (8 messages, latest: May 27 2019 at 10:29)
 
 * [#1080 props of elements in rings](039491080propsofelementsinrings.html) (11 messages, latest: May 24 2019 at 14:45)
-
-* [#1074 category instances to root](363811074categoryinstancestoroot.html) (27 messages, latest: May 24 2019 at 07:44)
 
 * [#1076 powers mod n](145921076powersmodn.html) (35 messages, latest: May 23 2019 at 14:07)
 
