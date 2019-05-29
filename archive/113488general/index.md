@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VSCode Live Share](77256VSCodeLiveShare.html) (6 messages, latest: May 29 2019 at 17:52)
+* [timeout and irreducibility](96863timeoutandirreducibility.html) (8 messages, latest: May 29 2019 at 18:59)
 
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (21 messages, latest: May 29 2019 at 17:48)
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (24 messages, latest: May 29 2019 at 18:18)
+
+* [VSCode Live Share](77256VSCodeLiveShare.html) (6 messages, latest: May 29 2019 at 17:52)
 
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (8 messages, latest: May 29 2019 at 14:37)
 
@@ -93,8 +95,6 @@ permalink: archive/113488general/index.html
 * [issues](89373issues.html) (24 messages, latest: May 20 2019 at 10:51)
 
 * [(no topic)](79918notopic.html) (51 messages, latest: May 20 2019 at 04:52)
-
-* [timeout and irreducibility](96863timeoutandirreducibility.html) (7 messages, latest: May 19 2019 at 21:12)
 
 * [linarith argument parsing](09683linarithargumentparsing.html) (12 messages, latest: May 19 2019 at 14:24)
 
