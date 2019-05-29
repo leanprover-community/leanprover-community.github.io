@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VSCode Live Share](77256VSCodeLiveShare.html) (1 message, latest: May 29 2019 at 15:44)
+* [VSCode Live Share](77256VSCodeLiveShare.html) (3 messages, latest: May 29 2019 at 16:59)
 
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (8 messages, latest: May 29 2019 at 14:37)
 
