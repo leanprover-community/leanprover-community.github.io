@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [cubing a cube](80825cubingacube.html) (121 messages, latest: May 29 2019 at 17:47)
+* [cubing a cube](80825cubingacube.html) (125 messages, latest: May 29 2019 at 18:06)
 
 * [abel multiplication](00067abelmultiplication.html) (5 messages, latest: May 29 2019 at 17:38)
 
