@@ -319,5 +319,49 @@ Oh, I didn't know that this was one of the 7 unsolved problems on Freek's 100 li
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cubing%20a%20cube/near/166781560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80825cubingacube.html#166781560">Floris van Doorn (May 29 2019 at 03:59)</a>:</h4>
 <p>(deleted)</p>
 
+<a name="166781655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cubing%20a%20cube/near/166781655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80825cubingacube.html#166781655">Floris van Doorn (May 29 2019 at 04:01)</a>:</h4>
+<p>The final result is</p>
+<div class="codehilite"><pre><span></span>theorem cannot_cube_a_cube :
+  ∀{n : ℕ}, n ≥ 3 →                              -- In ℝ^n for n ≥ 3
+  ∀{ι : Type} [fintype ι] {cs : ι → cube n},     -- given a finite collection of (hyper)cubes
+  2 ≤ cardinal.mk ι →                            -- containing at least two elements
+  pairwise (disjoint on (cube.to_set ∘ cs)) →    -- which is pairwise disjoint
+  (⋃(i : ι), (cs i).to_set) = unit_cube.to_set → -- whose union is the unit cube
+  injective (cube.w ∘ cs) →                      -- such that the widths of all cubes are different
+  false :=                                       -- then we can derive a contradiction
+</pre></div>
+
+
+<p>and it only depends on the following definitions not in mathlib:</p>
+<div class="codehilite"><pre><span></span>structure cube (n : ℕ) : Type :=
+(b : fin n → ℝ) -- bottom-left coordinate
+(w : ℝ) -- width
+(hw : 0 &lt; w)
+
+/- The j-th side of a cube is the half-open interval `[b j, b j + w)` -/
+def side (c : cube n) (j : fin n) : set ℝ :=
+Ico (c.b j) (c.b j + c.w)
+
+def to_set (c : cube n) : set (fin n → ℝ) :=
+{ x | ∀j, x j ∈ side c j }
+
+def unit_cube : cube n :=
+⟨λ _, 0, 1, by norm_num⟩
+</pre></div>
+
+<a name="166781881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cubing%20a%20cube/near/166781881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80825cubingacube.html#166781881">Johan Commelin (May 29 2019 at 04:06)</a>:</h4>
+<p>Nice work!</p>
+
+<a name="166783715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cubing%20a%20cube/near/166783715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/80825cubingacube.html#166783715">Floris van Doorn (May 29 2019 at 04:54)</a>:</h4>
+<p>Oh, and thanks to Mario, I stole some small things from his files:</p>
+<ul>
+<li>The idea of using <code>din n -&gt; _</code> for vectors. That works much nicer than either <code>vector</code> or <code>dvector</code>(which I tried both before that)</li>
+<li>Some basic lemmas at the top of his file</li>
+<li>The idea on how to define the "tightness" in a valley (the property that all sides are higher than the base of the valley). I formulated it a bit differently, since I'm not removing cubes from my family during the process.</li>
+</ul>
+
 
 {% endraw %}
