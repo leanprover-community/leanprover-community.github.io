@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [betweenness](67844betweenness.html) (5 messages, latest: May 29 2019 at 14:20)
+* [cubing a cube](80825cubingacube.html) (112 messages, latest: May 29 2019 at 15:50)
 
-* [cubing a cube](80825cubingacube.html) (108 messages, latest: May 29 2019 at 06:12)
+* [betweenness](67844betweenness.html) (5 messages, latest: May 29 2019 at 14:20)
 
 * [Bundled homs](83318Bundledhoms.html) (52 messages, latest: May 28 2019 at 15:38)
 
