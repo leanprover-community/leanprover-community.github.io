@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (14 messages, latest: May 29 2019 at 12:16)
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (16 messages, latest: May 29 2019 at 13:33)
+
+* [morphisms up to associativity](36087morphismsuptoassociativity.html) (6 messages, latest: May 29 2019 at 13:11)
 
 * [functor.map_const](80084functormapconst.html) (10 messages, latest: May 29 2019 at 10:41)
-
-* [morphisms up to associativity](36087morphismsuptoassociativity.html) (5 messages, latest: May 29 2019 at 10:23)
 
 * [Tutorial](44981Tutorial.html) (23 messages, latest: May 28 2019 at 19:46)
 

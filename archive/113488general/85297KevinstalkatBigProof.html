@@ -117,5 +117,18 @@ permalink: archive/113488general/85297KevinstalkatBigProof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20Big%20Proof/near/166808666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85297KevinstalkatBigProof.html#166808666">Mario Carneiro (May 29 2019 at 12:16)</a>:</h4>
 <p>so <code>X</code> here is a member of <code>lists nat</code> where the <code>nat</code> gives atoms at the bottom like <code>1</code> and <code>2</code>. Here I used finite von Neumann ordinals for 1 and 2 and so the final part is a bit tricky since you have to show that the empty set is not equal to <code>1</code> or <code>2</code></p>
 
+<a name="166812545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20Big%20Proof/near/166812545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85297KevinstalkatBigProof.html#166812545">Scott Morrison (May 29 2019 at 13:09)</a>:</h4>
+<blockquote>
+<p>What if there was a theorem prover where whenever you declared a structure, unless you explicitly declared that you wouldn't (with the <code>evil</code> keyword or something :D), you had to provide a notion of isomorphism, and it was then illegal to make a definition which used the structure without that definition being transportable over under your defined notion of isomorphism?</p>
+</blockquote>
+<p>I think this is just a matter of not ever writing <code>def my_predicate (X : Type) [group X] : Prop := ...</code>, and instead writing <code>def my_predicate_functorial (G : core Group) ⥤ Prop := ...</code>.</p>
+<p>One then hopes that the <code>map</code> field of the functor can be built by automation. Once that automation is in place, one goes back to just writing <br>
+<code>def my_predicate (X : Type) [group X] : Prop := ...</code>, but with <code>@[derive iso_functorial]</code> prepended, and then you have transport of structure using the tactic <code>iso_induction</code> Yiming is writing.</p>
+
+<a name="166814959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20Big%20Proof/near/166814959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85297KevinstalkatBigProof.html#166814959">Keeley Hoek (May 29 2019 at 13:33)</a>:</h4>
+<p><code>isodef my_predicate (X : Type) [group X] : Prop := ...</code></p>
+
 
 {% endraw %}
