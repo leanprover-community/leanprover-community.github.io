@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [100 theorems](37529100theorems.html) (5 messages, latest: May 29 2019 at 21:57)
+* [100 theorems](37529100theorems.html) (19 messages, latest: May 29 2019 at 22:59)
+
+* [syntax](83688syntax.html) (20 messages, latest: May 29 2019 at 22:59)
+
+* [AI and theorem proving](41431AIandtheoremproving.html) (15 messages, latest: May 29 2019 at 22:36)
 
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (21 messages, latest: May 29 2019 at 21:56)
 
@@ -91,8 +95,6 @@ permalink: archive/113488general/index.html
 * [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
 
 * [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
-
-* [AI and theorem proving](41431AIandtheoremproving.html) (14 messages, latest: May 20 2019 at 11:06)
 
 * [issues](89373issues.html) (24 messages, latest: May 20 2019 at 10:51)
 
@@ -2659,8 +2661,6 @@ permalink: archive/113488general/index.html
 * [Flip inductive parameters](92619Flipinductiveparameters.html) (11 messages, latest: Jun 05 2018 at 03:36)
 
 * [Avoiding explicit setoid instances](65380Avoidingexplicitsetoidinstances.html) (6 messages, latest: Jun 04 2018 at 18:35)
-
-* [syntax](83688syntax.html) (17 messages, latest: Jun 04 2018 at 13:56)
 
 * [mathlib file organization](67415mathlibfileorganization.html) (113 messages, latest: Jun 04 2018 at 12:50)
 

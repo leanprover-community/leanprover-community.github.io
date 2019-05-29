@@ -39,5 +39,76 @@ for Freek's 100 theorem project: <a href="http://www.cs.ru.nl/~freek/100/" targe
 <p>We had the number of combinations in Lean 2: <a href="https://github.com/leanprover/lean2/blob/227fcad22ab2bc27bb7471be7911075d101ba3f9/library/theories/combinatorics/choose.lean#L208" target="_blank" title="https://github.com/leanprover/lean2/blob/227fcad22ab2bc27bb7471be7911075d101ba3f9/library/theories/combinatorics/choose.lean#L208">https://github.com/leanprover/lean2/blob/227fcad22ab2bc27bb7471be7911075d101ba3f9/library/theories/combinatorics/choose.lean#L208</a><br>
 I don't think it's in Lean 3 yet. Someone port this! :)</p>
 
+<a name="166861629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166861629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166861629">Neil Strickland (May 29 2019 at 22:06)</a>:</h4>
+<p>That's <code>card_powerset_len</code> at <a href="https://github.com/leanprover-community/mathlib/blob/00aaf05a00b928ea9ac09721d87ae5d2ca1ae5a1/src/data/finset.lean#L1300" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/00aaf05a00b928ea9ac09721d87ae5d2ca1ae5a1/src/data/finset.lean#L1300">https://github.com/leanprover-community/mathlib/blob/00aaf05a00b928ea9ac09721d87ae5d2ca1ae5a1/src/data/finset.lean#L1300</a></p>
+
+<a name="166862020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862020">Floris van Doorn (May 29 2019 at 22:12)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="166862042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862042">Floris van Doorn (May 29 2019 at 22:12)</a>:</h4>
+<p>Ah, when searching for the Euclidean Algorithm, I found Bezout's theorem:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/4845b663c182704738868db5861ffb4c6056be23/src/algebra/euclidean_domain.lean#L233" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/4845b663c182704738868db5861ffb4c6056be23/src/algebra/euclidean_domain.lean#L233">https://github.com/leanprover-community/mathlib/blob/4845b663c182704738868db5861ffb4c6056be23/src/algebra/euclidean_domain.lean#L233</a></p>
+
+<a name="166862352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862352">Kevin Buzzard (May 29 2019 at 22:17)</a>:</h4>
+<blockquote>
+<p>72. Sylow’s Theorem</p>
+</blockquote>
+<p>What even is Sylow's Theorem? Chris proved all three Sylow Theorems as part of his 1st year project last year: <a href="https://github.com/ChrisHughes24/Sylow" target="_blank" title="https://github.com/ChrisHughes24/Sylow">https://github.com/ChrisHughes24/Sylow</a> . The things I was told were Sylow's theorems are all pretty near the bottom of the file.</p>
+
+<a name="166862533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862533">Floris van Doorn (May 29 2019 at 22:19)</a>:</h4>
+<p>What should I cite as the Euclidean Algorithm? Maybe just the definition of <code>gcd</code>?</p>
+<div class="codehilite"><pre><span></span>def gcd : α → α → α
+| a := λ b, if a0 : a = 0 then b else
+  have h:_ := mod_lt b a0,
+  gcd (b%a) a
+using_well_founded {dec_tac := tactic.assumption,
+  rel_tac := λ _ _, `[exact ⟨_, r_well_founded α⟩]}
+</pre></div>
+
+<a name="166862758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862758">Floris van Doorn (May 29 2019 at 22:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think these three theorems: <a href="https://en.wikipedia.org/wiki/Sylow_theorems" target="_blank" title="https://en.wikipedia.org/wiki/Sylow_theorems">https://en.wikipedia.org/wiki/Sylow_theorems</a></p>
+<p>I saw the first one at the bottom of the <code>sylow.lean</code> file in mathlib, and therefore assumed that the other 2 were not yet proven, but I'll dig a little deeper.</p>
+
+<a name="166862786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862786">Neil Strickland (May 29 2019 at 22:22)</a>:</h4>
+<p>The Isabelle version proves only the existence of Sylow p-subgroups, which is what we have in mathlib.  HOL Light, Metamath, Coq and Mizar all have the other theorems: all Sylow subgroups are conjugate, and their number is congruent to one mod p and divides the order of the group.  These also appear in Chris's repository, and should certainly move into mathlib at some point.</p>
+
+<a name="166862925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862925">Kevin Buzzard (May 29 2019 at 22:24)</a>:</h4>
+<p>I don't know what made it into mathlib; my post linked to the repo Chris wrote for his project. I'm assuming we can link to non-mathlib stuff?</p>
+
+<a name="166862972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166862972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166862972">Floris van Doorn (May 29 2019 at 22:25)</a>:</h4>
+<p>Of course! I'll link to that repository.</p>
+
+<a name="166863221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166863221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166863221">Chris Hughes (May 29 2019 at 22:28)</a>:</h4>
+<p>I should PR the other two theorems at some point. Haven't done it yet.</p>
+
+<a name="166863371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166863371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166863371">Floris van Doorn (May 29 2019 at 22:30)</a>:</h4>
+<p>Did you formalize the last part of Theorem 3?</p>
+<blockquote>
+<p><code>np = |G : NG(P)|</code>, where P is any Sylow p-subgroup of G and NG denotes the normalizer.</p>
+</blockquote>
+
+<a name="166863591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166863591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166863591">Floris van Doorn (May 29 2019 at 22:34)</a>:</h4>
+<p>Should I cite Leo de Moura author of The Principle of Mathematical Induction in Lean? :P</p>
+
+<a name="166864630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166864630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166864630">Floris van Doorn (May 29 2019 at 22:53)</a>:</h4>
+<p>Have we proven that <code>int</code> is a <code>unique_factorization_domain</code>?</p>
+
+<a name="166864948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166864948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166864948">Chris Hughes (May 29 2019 at 22:59)</a>:</h4>
+<p>We have proven that int is a UFD. This is probably multiple authors, because it goes via general results about Euclidean domains and PIDs. But mainly Johannes. It's there for nat as well, and that was Mario.</p>
+
 
 {% endraw %}
