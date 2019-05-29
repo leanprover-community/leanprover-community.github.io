@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (8 messages, latest: May 29 2019 at 11:42)
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (14 messages, latest: May 29 2019 at 12:16)
 
 * [functor.map_const](80084functormapconst.html) (10 messages, latest: May 29 2019 at 10:41)
 
