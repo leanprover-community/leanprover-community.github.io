@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VSCode Live Share](77256VSCodeLiveShare.html) (3 messages, latest: May 29 2019 at 16:59)
+* [VSCode Live Share](77256VSCodeLiveShare.html) (6 messages, latest: May 29 2019 at 17:52)
+
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (21 messages, latest: May 29 2019 at 17:48)
 
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (8 messages, latest: May 29 2019 at 14:37)
-
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (17 messages, latest: May 29 2019 at 14:09)
 
 * [functor.map_const](80084functormapconst.html) (10 messages, latest: May 29 2019 at 10:41)
 
