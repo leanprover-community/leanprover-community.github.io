@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Structures in meta](37699Structuresinmeta.html) (5 messages, latest: May 30 2019 at 05:40)
+* [100 theorems](37529100theorems.html) (37 messages, latest: May 30 2019 at 06:59)
 
-* [100 theorems](37529100theorems.html) (36 messages, latest: May 30 2019 at 01:31)
+* [Structures in meta](37699Structuresinmeta.html) (5 messages, latest: May 30 2019 at 05:40)
 
 * [Cubical Computational Type Theory](88337CubicalComputationalTypeTheory.html) (14 messages, latest: May 30 2019 at 00:19)
 
