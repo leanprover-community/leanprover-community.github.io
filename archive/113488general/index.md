@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Structures in meta](37699Structuresinmeta.html) (5 messages, latest: May 30 2019 at 05:40)
+
 * [100 theorems](37529100theorems.html) (36 messages, latest: May 30 2019 at 01:31)
 
 * [Cubical Computational Type Theory](88337CubicalComputationalTypeTheory.html) (14 messages, latest: May 30 2019 at 00:19)
@@ -31,8 +33,6 @@ permalink: archive/113488general/index.html
 * [Tutorial](44981Tutorial.html) (23 messages, latest: May 28 2019 at 19:46)
 
 * [addition of surreals](26515additionofsurreals.html) (6 messages, latest: May 28 2019 at 16:40)
-
-* [Structures in meta](37699Structuresinmeta.html) (2 messages, latest: May 28 2019 at 11:58)
 
 * [infinite sets](53302infinitesets.html) (14 messages, latest: May 27 2019 at 16:45)
 

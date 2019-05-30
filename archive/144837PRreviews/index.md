@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1067 open subgroups](826061067opensubgroups.html) (1 message, latest: May 30 2019 at 05:29)
+
 * [#1074 category instances to root](363811074categoryinstancestoroot.html) (29 messages, latest: May 29 2019 at 17:27)
 
 * [#1088 counting measure](443021088countingmeasure.html) (2 messages, latest: May 27 2019 at 21:14)
