@@ -24,5 +24,53 @@ Given such an implementation, would it be possible to compute ordinary things? Y
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166867758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166867758">Floris van Doorn (May 29 2019 at 23:51)</a>:</h4>
 <p>Part of the reason that Lean's kernel computation is bad is that we use unary natural numbers instead of binary ones. It would still be slow to compute things in the kernel, even if we optimize our definitions for computation. I have not tried it though, so I don't know how slow it would be compared to programming languages.</p>
 
+<a name="166868155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868155">Uros Nedic (May 30 2019 at 00:00)</a>:</h4>
+<p>What is example of an implementation of <em>Cubical CTT</em>? And how it relates to HoTT? I thought that HoTT is framework.</p>
+
+<a name="166868460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868460">Floris van Doorn (May 30 2019 at 00:06)</a>:</h4>
+<p>Cubical Computational Type Theory is a type theory, just as HoTT or CiC, or the type theory of Lean. <br>
+It was designed to give a computational meaning to the univalence axiom in HoTT. In HoTT (more precisely: the type theory of the HoTT book) the univalence axiom is an axiom and doesn't compute. In CCTT the "univalence axiom" is a theorem that can be proven using new primitives in the type theory. These primitives compute, and so does univalence.</p>
+
+<a name="166868580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868580">Uros Nedic (May 30 2019 at 00:08)</a>:</h4>
+<p>Is <strong>RedPRL</strong> an example of implementation og CCTT?</p>
+
+<a name="166868603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868603">Floris van Doorn (May 30 2019 at 00:09)</a>:</h4>
+<p>There are some big differences in the way Computational type theory works, compared to Formal(?) type theories (HoTT or CiC, or the type theory of Lean). In computational type theory you start with a programming language, and then "carve out" the programs which are well behaved and have a certain type, so you get the type theory second. In formal type theory the type theory comes first: you cannot talk about a term without telling me what type that term is. Computational type theory comes from a different tradition (c.f. NuPrl)</p>
+<p>This means that I should probably take back my statement about efficiency: maybe implementations of CCTT can be as efficient as you want, in theory.</p>
+
+<a name="166868668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868668">Tim Daly (May 30 2019 at 00:10)</a>:</h4>
+<p>In Cubical type theory, as I understand it, there is a path that can be traced around every face of the cube. Assuming one corner of the cube is a point it seems to me that every face attached to that point traces a closed path, making it the identity path. Topologically, then, the cube is isomorphic to the point. I suspect I'm wrong but it isn't clear why.</p>
+
+<a name="166868670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868670">Floris van Doorn (May 30 2019 at 00:10)</a>:</h4>
+<p>There are different proof assistants of <em>cubical</em> type theory, some of those are also of <em>cubical computational</em> type theory. RedPrl is indeed an implementation of cubical computational type theory.</p>
+
+<a name="166868695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868695">Koundinya Vajjha (May 30 2019 at 00:11)</a>:</h4>
+<p>But RedPrl development has ceased. Now it's redtt. I'm not sure if that is "computational" in the sense of computational type theory.</p>
+
+<a name="166868765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868765">Floris van Doorn (May 30 2019 at 00:12)</a>:</h4>
+<p>Redtt is indeed the successor of RedPrl, and they dropped the <em>computational</em> aspect of the proof assistant.</p>
+
+<a name="166868793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868793">Floris van Doorn (May 30 2019 at 00:13)</a>:</h4>
+<p>Other cubical proof assistants (none of them computational):<br>
+<a href="https://github.com/mortberg/yacctt" target="_blank" title="https://github.com/mortberg/yacctt">https://github.com/mortberg/yacctt</a><br>
+<a href="https://github.com/mortberg/cubicaltt" target="_blank" title="https://github.com/mortberg/cubicaltt">https://github.com/mortberg/cubicaltt</a></p>
+
+<a name="166868861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166868861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166868861">Floris van Doorn (May 30 2019 at 00:14)</a>:</h4>
+<p><a href="https://github.com/agda/cubical" target="_blank" title="https://github.com/agda/cubical">https://github.com/agda/cubical</a></p>
+
+<a name="166869054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cubical%20Computational%20Type%20Theory/near/166869054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88337CubicalComputationalTypeTheory.html#166869054">Uros Nedic (May 30 2019 at 00:19)</a>:</h4>
+<p>Thank you for all you answers (Carry on, I am glad to read this thread). My idea was if HoTT makes foundation for all mathematics than is it possible to develop some computing language from HoTT (let it be pure type-level programming, if necessary) like Cartesian CCTT or some 2-Level TT if needed, and then do everyday programming (software development) and proving our software as easy as proving math proofs because we would use Cat Theory, Topoi, etc., as objects in that programming language?</p>
+
 
 {% endraw %}

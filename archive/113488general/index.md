@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cubical Computational Type Theory](88337CubicalComputationalTypeTheory.html) (3 messages, latest: May 29 2019 at 23:51)
+* [Cubical Computational Type Theory](88337CubicalComputationalTypeTheory.html) (14 messages, latest: May 30 2019 at 00:19)
 
 * [100 theorems](37529100theorems.html) (35 messages, latest: May 29 2019 at 23:48)
 
