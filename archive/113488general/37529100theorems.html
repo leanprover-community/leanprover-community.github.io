@@ -110,5 +110,74 @@ using_well_founded {dec_tac := tactic.assumption,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166864948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166864948">Chris Hughes (May 29 2019 at 22:59)</a>:</h4>
 <p>We have proven that int is a UFD. This is probably multiple authors, because it goes via general results about Euclidean domains and PIDs. But mainly Johannes. It's there for nat as well, and that was Mario.</p>
 
+<a name="166865203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865203">Neil Strickland (May 29 2019 at 23:03)</a>:</h4>
+<p>In <code>algebra.euclidean_domain</code> we have <code>int.euclidean_domain</code>.  In <code>ring_theory.principal_ideal_domain</code> we have  <code> euclidean_domain.to_principal_ideal_domain</code> and <code>principal_ideal_domain.to_unique_factorization_domain</code>.</p>
+
+<a name="166865298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865298">Floris van Doorn (May 29 2019 at 23:04)</a>:</h4>
+<p>Ah, thanks!</p>
+
+<a name="166865327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865327">Floris van Doorn (May 29 2019 at 23:05)</a>:</h4>
+<p>I'll use <code>mathlib</code> as the author.</p>
+
+<a name="166865333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865333">Chris Hughes (May 29 2019 at 23:05)</a>:</h4>
+<p>I don't think I formalised that last part of theorem three. I don't understand your statement.</p>
+
+<a name="166865406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865406">Floris van Doorn (May 29 2019 at 23:06)</a>:</h4>
+<p>Ok. It's the last bullet point of Theorem 3 from Wikipedia: <a href="https://en.wikipedia.org/wiki/Sylow_theorems" target="_blank" title="https://en.wikipedia.org/wiki/Sylow_theorems">https://en.wikipedia.org/wiki/Sylow_theorems</a></p>
+
+<a name="166865618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865618">Neil Strickland (May 29 2019 at 23:09)</a>:</h4>
+<p>But <code>principal_ideal_domain.to_unique_factorization_domain</code> is not an instance, so <code>by apply_instance : unique_factorization_domain ℤ</code> fails.  I'm not sure why that is.  It might be related to the fact that  <code>principal_ideal_domain.to_unique_factorization_domain</code> is marked as <code>noncomputable</code>.</p>
+
+<a name="166865759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865759">Chris Hughes (May 29 2019 at 23:11)</a>:</h4>
+<p>It is because of that fact.</p>
+
+<a name="166865898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166865898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166865898">Neil Strickland (May 29 2019 at 23:14)</a>:</h4>
+<p>That bullet point is the <code>have</code> at line 935 of <a href="https://github.com/ChrisHughes24/Sylow/blob/master/src/sylow.lean" target="_blank" title="https://github.com/ChrisHughes24/Sylow/blob/master/src/sylow.lean">https://github.com/ChrisHughes24/Sylow/blob/master/src/sylow.lean</a>, but it is not stated as a separate theorem.</p>
+
+<a name="166866094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166866094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166866094">Floris van Doorn (May 29 2019 at 23:17)</a>:</h4>
+<p>Ah, ok. Then I'll just write that.</p>
+
+<a name="166866780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166866780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166866780">Rob Lewis (May 29 2019 at 23:31)</a>:</h4>
+<p>I can claim an earlier proof of the IVT, although I'm not sure we want to draw anyone's attention to the days before simp and style conventions! <a href="https://github.com/leanprover/lean2/blob/master/library/theories/analysis/ivt.lean" target="_blank" title="https://github.com/leanprover/lean2/blob/master/library/theories/analysis/ivt.lean">https://github.com/leanprover/lean2/blob/master/library/theories/analysis/ivt.lean</a></p>
+
+<a name="166866862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166866862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166866862">Floris van Doorn (May 29 2019 at 23:32)</a>:</h4>
+<p>I updated the markdown file. We have formalized 23/100 results (that I could find).</p>
+
+<a name="166866865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166866865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166866865">Floris van Doorn (May 29 2019 at 23:32)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/100-thms/docs/100-theorems.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/100-thms/docs/100-theorems.md">https://github.com/leanprover-community/mathlib/blob/100-thms/docs/100-theorems.md</a></p>
+
+<a name="166867045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166867045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166867045">Floris van Doorn (May 29 2019 at 23:36)</a>:</h4>
+<p>The ones on Mario's list that I couldn't find:</p>
+<ul>
+<li>78 (cauchy-schwarz)</li>
+<li>94 (law of cosines)</li>
+</ul>
+
+<a name="166867286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166867286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166867286">Floris van Doorn (May 29 2019 at 23:41)</a>:</h4>
+<p>In cases that there is not a clear single author, I now liberally used <code>mathlib</code> as an author. If anyone is unhappy with that, feel free to change it.</p>
+
+<a name="166867540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166867540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166867540">Chris Hughes (May 29 2019 at 23:46)</a>:</h4>
+<p>I don't think I should be the author of Bezout's theorem. I more or less copied that proof exactly from the nat version.</p>
+
+<a name="166867642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/166867642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#166867642">Floris van Doorn (May 29 2019 at 23:48)</a>:</h4>
+<p>Ok, I'll change it to mathlib.</p>
+<p>I used Github's history to figure out authorship. This is of course a flawed method. Please check if there are attributions which are clearly wrong.</p>
+
 
 {% endraw %}
