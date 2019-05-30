@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Structures in meta](37699Structuresinmeta.html) (6 messages, latest: May 30 2019 at 07:56)
+* [100 theorems](37529100theorems.html) (56 messages, latest: May 30 2019 at 08:48)
 
-* [100 theorems](37529100theorems.html) (51 messages, latest: May 30 2019 at 07:55)
+* [Structures in meta](37699Structuresinmeta.html) (6 messages, latest: May 30 2019 at 07:56)
 
 * [syntax](83688syntax.html) (25 messages, latest: May 30 2019 at 07:44)
 
