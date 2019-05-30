@@ -24,5 +24,60 @@ but it doesn't work</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166919462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166919462">Mario Carneiro (May 30 2019 at 15:47)</a>:</h4>
 <p>what kind of reduction? What you see is what lean expects</p>
 
+<a name="166926954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166926954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166926954">Gun Pinyo (May 30 2019 at 17:16)</a>:</h4>
+<p>For example, if I have the following code</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bool_to_prop</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="n">false</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">bool</span><span class="o">),</span> <span class="n">bool_to_prop</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="o">:=</span> <span class="bp">_</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="o">:=</span> <span class="bp">_</span> <span class="c1">-- cursor is at this underscore</span>
+</pre></div>
+
+
+<p>when I place the cursor at the underscore of the last line I get a message</p>
+<div class="codehilite"><pre><span></span>don&#39;t know how to synthesize placeholder
+context:
+_example : ∀ (b : bool), bool_to_prop b
+⊢ bool_to_prop tt
+</pre></div>
+
+
+<p>I would like <code>bool_to_prop tt</code> to reduce and show just <code>true</code></p>
+
+<a name="166927012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166927012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166927012">Mario Carneiro (May 30 2019 at 17:17)</a>:</h4>
+<p>use <code>begin dsimp [bool_to_prop], end</code></p>
+
+<a name="166927612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166927612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166927612">Gun Pinyo (May 30 2019 at 17:23)</a>:</h4>
+<p>Sorry, but it doesn't work.</p>
+
+<a name="166927741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166927741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166927741">Gun Pinyo (May 30 2019 at 17:24)</a>:</h4>
+<p>Ok, I mistake, it works.</p>
+
+<a name="166928150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166928150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166928150">Gun Pinyo (May 30 2019 at 17:29)</a>:</h4>
+<p>Anyway, rather than stating the function explicitly. I would like to reduce the main goal into its normal form. Can I use <code>dsimp</code> to do it?</p>
+
+<a name="166929772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166929772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166929772">Mario Carneiro (May 30 2019 at 17:46)</a>:</h4>
+<p><code>dsimp</code> would do it if you marked the function as <code>@[simp]</code></p>
+
+<a name="166929792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166929792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166929792">Mario Carneiro (May 30 2019 at 17:46)</a>:</h4>
+<p>in general unfolding all definitions is a bad idea and can take a very long time</p>
+
+<a name="166929833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166929833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166929833">Mario Carneiro (May 30 2019 at 17:47)</a>:</h4>
+<p>there is a low level tactic called <code>whnf</code> that will do this, at least at the head of the expression</p>
+
+<a name="166930561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduction%20in%20the%20error%20message/near/166930561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/97589reductionintheerrormessage.html#166930561">Gun Pinyo (May 30 2019 at 17:56)</a>:</h4>
+<p>Thank you so much for your help :)</p>
+
 
 {% endraw %}
