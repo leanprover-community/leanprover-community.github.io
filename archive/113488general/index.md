@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [100 theorems](37529100theorems.html) (19 messages, latest: May 29 2019 at 22:59)
+* [Cubical Computational Type Theory](88337CubicalComputationalTypeTheory.html) (3 messages, latest: May 29 2019 at 23:51)
 
-* [syntax](83688syntax.html) (20 messages, latest: May 29 2019 at 22:59)
+* [100 theorems](37529100theorems.html) (35 messages, latest: May 29 2019 at 23:48)
+
+* [syntax](83688syntax.html) (24 messages, latest: May 29 2019 at 23:14)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (15 messages, latest: May 29 2019 at 22:36)
 
