@@ -10,9 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VS Code red thing](21722VSCoderedthing.html) (2 messages, latest: May 31 2019 at 18:57)
+* [leaky option](90448leakyoption.html) (26 messages, latest: May 31 2019 at 19:59)
 
-* [@\[class\]](49775class.html) (1 message, latest: May 31 2019 at 18:51)
+* [@\[class\]](49775class.html) (4 messages, latest: May 31 2019 at 19:54)
+
+* [VS Code red thing](21722VSCoderedthing.html) (9 messages, latest: May 31 2019 at 19:27)
+
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (512 messages, latest: May 31 2019 at 19:26)
 
 * [LiveShare](07876LiveShare.html) (7 messages, latest: May 31 2019 at 14:47)
 
@@ -2599,8 +2603,6 @@ permalink: archive/113488general/index.html
 * [Graphs, subtypes, sets, fintypes](29242Graphssubtypessetsfintypes.html) (7 messages, latest: Jun 15 2018 at 14:04)
 
 * [`leanpkg upgrade` no longer working?](74447leanpkgupgradenolongerworking.html) (14 messages, latest: Jun 15 2018 at 11:51)
-
-* [more type class inference issues](00919moretypeclassinferenceissues.html) (465 messages, latest: Jun 15 2018 at 11:47)
 
 * [ml methods in interactive theorem proving](90876mlmethodsininteractivetheoremproving.html) (4 messages, latest: Jun 15 2018 at 08:01)
 

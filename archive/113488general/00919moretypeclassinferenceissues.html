@@ -2313,5 +2313,270 @@ inferred<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/128115887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#128115887">Johan Commelin (Jun 15 2018 at 11:47)</a>:</h4>
 <p>Anyway, I'll be back later. AFK</p>
 
+<a name="167024345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024345">Kevin Buzzard (May 31 2019 at 19:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">punit_instances</span>
+
+<span class="c1">-- works fine</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="n">unit</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">class</span> <span class="n">G_module</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="kn">extends</span> <span class="n">add_comm_group</span> <span class="n">M</span><span class="o">,</span> <span class="n">has_scalar</span> <span class="n">G</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">id</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">(</span><span class="n">mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">g</span> <span class="n">h</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="n">g</span> <span class="err">•</span> <span class="o">(</span><span class="n">h</span> <span class="err">•</span> <span class="n">m</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">g</span> <span class="bp">*</span> <span class="n">h</span><span class="o">)</span> <span class="err">•</span> <span class="n">m</span><span class="o">)</span>
+<span class="o">(</span><span class="n">linear</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="n">g</span> <span class="err">•</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">g</span> <span class="err">•</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="n">unit</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">maximum class-instance resolution depth has been reached (the limit can be increased by setting option &#39;class.instance_max_depth&#39;) (the class-instance resolution trace can be visualized by setting option &#39;trace.class_instances&#39;)</span>
+<span class="cm">state:</span>
+<span class="cm">⊢ add_comm_group unit</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>What did I do to deserve that? Is the class bad in some way?</p>
+
+<a name="167024427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024427">Kevin Buzzard (May 31 2019 at 19:04)</a>:</h4>
+<p><code>set_option class.instance_max_depth 1000</code> doesn't fix it</p>
+
+<a name="167024506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024506">Kevin Buzzard (May 31 2019 at 19:05)</a>:</h4>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : add_comm_group unit := @G_module.to_add_comm_group ?x_1 ?x_2 ?x_3 ?x_4
+[class_instances] (1) ?x_2 : group ?x_1 := @subtype.group ?x_5 ?x_6 ?x_7 ?x_8
+[class_instances] (2) ?x_6 : group ?x_5 := @subtype.group ?x_9 ?x_10 ?x_11 ?x_12
+[class_instances] (3) ?x_10 : group ?x_9 := @subtype.group ?x_13 ?x_14 ?x_15 ?x_16
+[class_instances] (4) ?x_14 : group ?x_13 := @subtype.group ?x_17 ?x_18 ?x_19 ?x_20
+[class_instances] (5) ?x_18 : group ?x_17 := @subtype.group ?x_21 ?x_22 ?x_23 ?x_24
+[class_instances] (6) ?x_22 : group ?x_21 := @subtype.group ?x_25 ?x_26 ?x_27 ?x_28
+[class_instances] (7) ?x_26 : group ?x_25 := @subtype.group ?x_29 ?x_30 ?x_31 ?x_32
+[class_instances] (8) ?x_30 : group ?x_29 := @subtype.group ?x_33 ?x_34 ?x_35 ?x_36
+[class_instances] (9) ?x_34 : group ?x_33 := @subtype.group ?x_37 ?x_38 ?x_39 ?x_40
+[class_instances] (10) ?x_38 : group ?x_37 := @subtype.group ?x_41 ?x_42 ?x_43 ?x_44
+[class_instances] (11) ?x_42 : group ?x_41 := @subtype.group ?x_45 ?x_46 ?x_47 ?x_48
+[class_instances] (12) ?x_46 : group ?x_45 := @subtype.group ?x_49 ?x_50 ?x_51 ?x_52
+[class_instances] (13) ?x_50 : group ?x_49 := @subtype.group ?x_53 ?x_54 ?x_55 ?x_56
+[class_instances] (14) ?x_54 : group ?x_53 := @subtype.group ?x_57 ?x_58 ?x_59 ?x_60
+[class_instances] (15) ?x_58 : group ?x_57 := @subtype.group ?x_61 ?x_62 ?x_63 ?x_64
+[class_instances] (16) ?x_62 : group ?x_61 := @subtype.group ?x_65 ?x_66 ?x_67 ?x_68
+[class_instances] (17) ?x_66 : group ?x_65 := @subtype.group ?x_69 ?x_70 ?x_71 ?x_72
+[class_instances] (18) ?x_70 : group ?x_69 := @subtype.group ?x_73 ?x_74 ?x_75 ?x_76
+[class_instances] (19) ?x_74 : group ?x_73 := @subtype.group ?x_77 ?x_78 ?x_79 ?x_80
+[class_instances] (20) ?x_78 : group ?x_77 := @subtype.group ?x_81 ?x_82 ?x_83 ?x_84
+[class_instances] (21) ?x_82 : group ?x_81 := @subtype.group ?x_85 ?x_86 ?x_87 ?x_88
+[class_instances] (22) ?x_86 : group ?x_85 := @subtype.group ?x_89 ?x_90 ?x_91 ?x_92
+[class_instances] (23) ?x_90 : group ?x_89 := @subtype.group ?x_93 ?x_94 ?x_95 ?x_96
+[class_instances] (24) ?x_94 : group ?x_93 := @subtype.group ?x_97 ?x_98 ?x_99 ?x_100
+[class_instances] (25) ?x_98 : group ?x_97 := @subtype.group ?x_101 ?x_102 ?x_103 ?x_104
+[class_instances] (26) ?x_102 : group ?x_101 := @subtype.group ?x_105 ?x_106 ?x_107 ?x_108
+[class_instances] (27) ?x_106 : group ?x_105 := @subtype.group ?x_109 ?x_110 ?x_111 ?x_112
+[class_instances] (28) ?x_110 : group ?x_109 := @subtype.group ?x_113 ?x_114 ?x_115 ?x_116
+[class_instances] (29) ?x_114 : group ?x_113 := @subtype.group ?x_117 ?x_118 ?x_119 ?x_120
+[class_instances] (30) ?x_118 : group ?x_117 := @subtype.group ?x_121 ?x_122 ?x_123 ?x_124
+[class_instances] (31) ?x_122 : group ?x_121 := @subtype.group ?x_125 ?x_126 ?x_127 ?x_128
+[class_instances] (32) ?x_126 : group ?x_125 := @subtype.group ?x_129 ?x_130 ?x_131 ?x_132
+</pre></div>
+
+<a name="167024586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024586">Kevin Buzzard (May 31 2019 at 19:06)</a>:</h4>
+<p>Can I solve this with some priority hack? Why does this happen?</p>
+
+<a name="167024656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024656">Mario Carneiro (May 31 2019 at 19:07)</a>:</h4>
+<p>the class is bad, as you suspect</p>
+
+<a name="167024677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024677">Floris van Doorn (May 31 2019 at 19:07)</a>:</h4>
+<p>Make <code>add_comm_group M</code> an argument of the class.</p>
+
+<a name="167024679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024679">Mario Carneiro (May 31 2019 at 19:07)</a>:</h4>
+<p>and the offending instance is right there in the trace - <code>G_module.to_add_comm_group</code></p>
+
+<a name="167024793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024793">Floris van Doorn (May 31 2019 at 19:09)</a>:</h4>
+<p>something like </p>
+<div class="codehilite"><pre><span></span>class G_module (G : Type*) (M : Type*) [group G] [add_comm_group M]
+  extends has_scalar G M :=
+</pre></div>
+
+<a name="167024796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024796">Kevin Buzzard (May 31 2019 at 19:09)</a>:</h4>
+<p>That sounds like a really super instance though.</p>
+
+<a name="167024876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024876">Kevin Buzzard (May 31 2019 at 19:10)</a>:</h4>
+<p>There is some subtlety here which I don't understand -- this is exactly one of those times where you're saying "don't do it this way, do it in some way which looks exactly the same to a mathematician". Is there some general principle I'm unaware of?</p>
+
+<a name="167024899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024899">Mario Carneiro (May 31 2019 at 19:10)</a>:</h4>
+<p>Don't have a parent instance with fewer type arguments than the class</p>
+
+<a name="167024929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024929">Kevin Buzzard (May 31 2019 at 19:11)</a>:</h4>
+<p>wait, what is a parent instance?</p>
+
+<a name="167024936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024936">Mario Carneiro (May 31 2019 at 19:11)</a>:</h4>
+<p><code>extends</code> produces an instance</p>
+
+<a name="167024949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024949">Kevin Buzzard (May 31 2019 at 19:11)</a>:</h4>
+<p>And Floris' suggestion doesn't?</p>
+
+<a name="167024977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167024977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167024977">Mario Carneiro (May 31 2019 at 19:11)</a>:</h4>
+<p>In the original case it was <code>[G_module G M] : add_comm_group M</code></p>
+
+<a name="167025031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025031">Mario Carneiro (May 31 2019 at 19:12)</a>:</h4>
+<p>no, I am in complete agreement with floris</p>
+
+<a name="167025055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025055">Mario Carneiro (May 31 2019 at 19:12)</a>:</h4>
+<p>floris is proposing to remove this instance, which is bad because <code>G</code> is "dangling"</p>
+
+<a name="167025056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025056">Kevin Buzzard (May 31 2019 at 19:12)</a>:</h4>
+<p>Yes I understand that. And this is not generated in the suggested fix?</p>
+
+<a name="167025085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025085">Kevin Buzzard (May 31 2019 at 19:13)</a>:</h4>
+<p>Sorry, I had a little internet time-out. My comment referred to "extends produces an instance"</p>
+
+<a name="167025086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025086">Johan Commelin (May 31 2019 at 19:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> You know about <a href="https://github.com/leanprover-community/mathlib/blob/66a86ffe010ffc32ee92e2e92cbdaf83487af168/src/group_theory/group_action.lean#L173" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/66a86ffe010ffc32ee92e2e92cbdaf83487af168/src/group_theory/group_action.lean#L173">https://github.com/leanprover-community/mathlib/blob/66a86ffe010ffc32ee92e2e92cbdaf83487af168/src/group_theory/group_action.lean#L173</a> ?</p>
+
+<a name="167025090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025090">Mario Carneiro (May 31 2019 at 19:13)</a>:</h4>
+<p>reading it from right to left, <code>G</code> just appears and lean doesn't know how to pick a value</p>
+
+<a name="167025096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025096">Johan Commelin (May 31 2019 at 19:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Typeclass for multiplicative actions on additive structures. This generalizes group modules. -/</span>
+<span class="n">class</span> <span class="n">distrib_mul_action</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">β</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">mul_action</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">smul_add</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">r</span> <span class="err">•</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">smul_zero</span> <span class="o">{}</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+<a name="167025238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025238">Kevin Buzzard (May 31 2019 at 19:15)</a>:</h4>
+<blockquote>
+<p>reading it from right to left, <code>G</code> just appears and lean doesn't know how to pick a value</p>
+</blockquote>
+<p>I appreciate the problem; I am just saying that my understanding of why it occurs the way I did it and not the way Floris did it is hazy. <code>extends</code> produces an instance, this is the point. So Floris' method produces no instances?</p>
+
+<a name="167025242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025242">Kevin Buzzard (May 31 2019 at 19:15)</a>:</h4>
+<p>Johan -- no, I didn't know about this.</p>
+
+<a name="167025246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025246">Floris van Doorn (May 31 2019 at 19:15)</a>:</h4>
+<p>My solution doesn't generate the instance, because Lean will need to synthesize the instance <code>add_comm_group M</code> before it can even start searching for an instance of <code>G_module G M</code></p>
+
+<a name="167025266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025266">Kevin Buzzard (May 31 2019 at 19:15)</a>:</h4>
+<p>Right.</p>
+
+<a name="167025299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025299">Mario Carneiro (May 31 2019 at 19:15)</a>:</h4>
+<p>there is still a parent instance coming from the other <code>extends</code> clause</p>
+
+<a name="167025301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025301">Kevin Buzzard (May 31 2019 at 19:16)</a>:</h4>
+<p>In a parallel universe someone could tell me that this [Floris' suggestion] produces an instance anyway, and I would happily believe them.</p>
+
+<a name="167025418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025418">Mario Carneiro (May 31 2019 at 19:17)</a>:</h4>
+<p>The easiest way to think of it is <code>extends</code> is notation for an extra field in the class + an instance to get to the parent from the child</p>
+
+<a name="167025511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025511">Mario Carneiro (May 31 2019 at 19:18)</a>:</h4>
+<p>AFAIK it's the only way to get autogenerated instances</p>
+
+<a name="167025524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025524">Floris van Doorn (May 31 2019 at 19:18)</a>:</h4>
+<p>Well, let's try do define this instance:</p>
+<div class="codehilite"><pre><span></span>instance (G : Type*) (M : Type*) [group G] [add_comm_group M] [G_module G M] :
+  add_comm_group M :=
+_
+</pre></div>
+
+
+<p>What would you pick for the value of the underscore? It's the instance you already got as an argument. So this instance says "if you want <code>add_comm_group M</code> then you need to search for <code>add_comm_group M</code> (and a bunch more things). It's (worse than) useless.</p>
+
+<a name="167025571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025571">Kevin Buzzard (May 31 2019 at 19:19)</a>:</h4>
+<p>My understanding of what is going on here is hazy at best. I even don't really understand, in some sense, why the instance is bad, because I don't really understand how type class inference works; I can of course see that it's bad because of what just happened, but the fact that I asked here instead of trying to fix it myself (which is nowadays my preferred solution with problems I run into) is just an indication of my poor understanding of this stuff. </p>
+<p>I keep meaning to write some doc for <code>docs/extras/</code> about the nitty-gritty of how type class inference works but I've had a busy year. The next three months are looking much nicer though, maybe I should actually do this; writing the docs myself will show me what I don't understand.</p>
+
+<a name="167025595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025595">Mario Carneiro (May 31 2019 at 19:19)</a>:</h4>
+<p>It's a prolog-like search</p>
+
+<a name="167025827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025827">Mario Carneiro (May 31 2019 at 19:22)</a>:</h4>
+<p>Every instance says "to prove A it suffices to prove B, C, D" and lean just applies all instances greedily hoping to get somewhere</p>
+
+<a name="167025859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025859">Kevin Buzzard (May 31 2019 at 19:22)</a>:</h4>
+<p>[prolog] Yeah, somehow this is exactly the problem. I can believe that at some point in CS UG there's a chance to do some lectures / problem sets on how prolog works. In maths departments we don't do this. On a couple of occasions now I've sat down to fathom this out (even installing prolog on one occasion) but then never wrote down any of my thoughts and then I just forget them again. Writing things down is really helpful for me at my age -- only today did I look at my <code>simp</code> notes that I wrote so I could find out how to turn the trace on for <code>simp</code> -- I always forget, but I know where to look. The docs I write are "by me now, for me next week" :-)</p>
+
+<a name="167025861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025861">Floris van Doorn (May 31 2019 at 19:22)</a>:</h4>
+<p>Btw, I don't have some magical superpower that I know how to do these things. The general strategy for a lot of formalization is to see if someone has done something similar before. If so, copy their code and adapt it to your case. In this case, the definition of <code>module</code> is similar:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/src/algebra/module.lean#L25" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/algebra/module.lean#L25">https://github.com/leanprover-community/mathlib/blob/master/src/algebra/module.lean#L25</a><br>
+Often the design decisions will be the same for your case.</p>
+
+<a name="167025910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025910">Kevin Buzzard (May 31 2019 at 19:23)</a>:</h4>
+<blockquote>
+<p>Btw, I don't have some magical superpower</p>
+</blockquote>
+<p>Rotten luck! Mathematicians have a super-power.</p>
+
+<a name="167025919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025919">Floris van Doorn (May 31 2019 at 19:23)</a>:</h4>
+<p>I do this all the time, even if I wrote the previous code. Past me was usually much more aware of all the pitfalls (because he fell into them, and then changed the code).</p>
+
+<a name="167025931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025931">Kevin Buzzard (May 31 2019 at 19:23)</a>:</h4>
+<p>Unfortunately, Lean disables our super-power.</p>
+
+<a name="167025973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167025973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167025973">Mario Carneiro (May 31 2019 at 19:24)</a>:</h4>
+<p>You should mostly assume that lean applies instances in the worst possible order, because anything else is luck. So if there is an instance like "to prove T A it suffices to prove T (A x A)" then it should be clear that lean will loop</p>
+
+<a name="167026010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026010">Kevin Buzzard (May 31 2019 at 19:24)</a>:</h4>
+<p>ha ha, that rule of thumb stinks! It's crying out for a fix.</p>
+
+<a name="167026051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026051">Kevin Buzzard (May 31 2019 at 19:25)</a>:</h4>
+<p>The rule of thumb makes perfect sense,  but somehow says "we could be doing this better". I guess we had this conversation once before quite recently.</p>
+
+<a name="167026067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026067">Mario Carneiro (May 31 2019 at 19:25)</a>:</h4>
+<p>It's not as bad as it sounds; you just have to make sure that the worst possible order isn't that bad</p>
+
+<a name="167026081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026081">Kevin Buzzard (May 31 2019 at 19:25)</a>:</h4>
+<p>I know that making typeclass inference better is on Leo's mind.</p>
+
+<a name="167026105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026105">Floris van Doorn (May 31 2019 at 19:25)</a>:</h4>
+<p>i really think we should use <code>priority n</code> more in mathlib so that we can decide which instances should be applied first and which ones should be applied last.</p>
+
+<a name="167026110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026110">Kevin Buzzard (May 31 2019 at 19:25)</a>:</h4>
+<p>[we had a brief email exchange when perfectoids got done, and he mentioned it]</p>
+
+<a name="167026191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026191">Mario Carneiro (May 31 2019 at 19:26)</a>:</h4>
+<p>I agree that more use of priority would be a good thing, but I currently don't have a good model for how to structure the priorities</p>
+
 
 {% endraw %}
