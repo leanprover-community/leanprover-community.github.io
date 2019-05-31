@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtype question](87269subtypequestion.html) (17 messages, latest: May 31 2019 at 11:59)
+* [Inductive decls](87223Inductivedecls.html) (35 messages, latest: May 31 2019 at 12:21)
 
-* [Inductive decls](87223Inductivedecls.html) (33 messages, latest: May 31 2019 at 10:01)
+* [subtype question](87269subtypequestion.html) (21 messages, latest: May 31 2019 at 12:07)
 
 * [reduction in the error message](97589reductionintheerrormessage.html) (11 messages, latest: May 30 2019 at 17:56)
 
