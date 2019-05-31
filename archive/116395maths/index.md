@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [group namespace](90939groupnamespace.html) (8 messages, latest: May 31 2019 at 17:49)
+* [group namespace](90939groupnamespace.html) (12 messages, latest: May 31 2019 at 18:07)
 
 * [zero group](90158zerogroup.html) (56 messages, latest: May 31 2019 at 10:50)
 
