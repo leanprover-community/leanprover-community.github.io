@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [leaky option](90448leakyoption.html) (26 messages, latest: May 31 2019 at 19:59)
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (536 messages, latest: May 31 2019 at 20:50)
 
-* [@\[class\]](49775class.html) (4 messages, latest: May 31 2019 at 19:54)
+* [leaky option](90448leakyoption.html) (34 messages, latest: May 31 2019 at 20:36)
+
+* [@\[class\]](49775class.html) (5 messages, latest: May 31 2019 at 20:15)
 
 * [VS Code red thing](21722VSCoderedthing.html) (9 messages, latest: May 31 2019 at 19:27)
-
-* [more type class inference issues](00919moretypeclassinferenceissues.html) (512 messages, latest: May 31 2019 at 19:26)
 
 * [LiveShare](07876LiveShare.html) (7 messages, latest: May 31 2019 at 14:47)
 

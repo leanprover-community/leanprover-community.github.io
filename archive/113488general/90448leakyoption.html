@@ -159,5 +159,40 @@ permalink: archive/113488general/90448leakyoption.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029011">Kevin Buzzard (May 31 2019 at 19:59)</a>:</h4>
 <p>I had no idea that the elaborator did not read <code>(x : t)</code> as "this term must have type <code>t</code>" -- my understanding now is that it says "this term has some type which Lean can prove is definitionally equal to <code>t</code> but the elaborator reserves the right to insist that it has another type when trying to figure out some other types of other things later on in its elaboration journey"</p>
 
+<a name="167029323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029323">Mario Carneiro (May 31 2019 at 20:03)</a>:</h4>
+<p>Note that the elaborator does get some information from <code>(x : t)</code>, because it produces the goal "(expected type of x) =?= t" which may cause metavariables to be instantiated</p>
+
+<a name="167029364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029364">Mario Carneiro (May 31 2019 at 20:03)</a>:</h4>
+<p>and then after that it continues with checking "x :? expected type"</p>
+
+<a name="167029682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029682">Kevin Buzzard (May 31 2019 at 20:07)</a>:</h4>
+<blockquote>
+<p>Note that the elaborator does get some information from <code>(x : t)</code>, because it produces the goal "(expected type of x) =?= t" which may cause metavariables to be instantiated</p>
+</blockquote>
+<p>Just not the metavariable in <code>@has_add.add ?m_1 ...</code></p>
+
+<a name="167029796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029796">Mario Carneiro (May 31 2019 at 20:08)</a>:</h4>
+<p>ah, you are right, that description has the order wrong</p>
+
+<a name="167029839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029839">Mario Carneiro (May 31 2019 at 20:08)</a>:</h4>
+<p>it first uses the expected type to elaborate x, then does "(expected type of x) =?= t"</p>
+
+<a name="167029981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167029981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167029981">Kevin Buzzard (May 31 2019 at 20:10)</a>:</h4>
+<p>Is there no way I can work out exactly what the elaborator is doing, short of reading the C++ (which I am not capable of doing, of course) or asking here?</p>
+
+<a name="167030000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167030000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167030000">Kevin Buzzard (May 31 2019 at 20:11)</a>:</h4>
+<p>Maybe there is some weird <code>meta</code> hack</p>
+
+<a name="167032248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/leaky%20option/near/167032248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90448leakyoption.html#167032248">Mario Carneiro (May 31 2019 at 20:36)</a>:</h4>
+<p>you can infer the behavior from various real and toy examples; that's what I do</p>
+
 
 {% endraw %}
