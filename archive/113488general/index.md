@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [boolean ring](11313booleanring.html) (3 messages, latest: May 31 2019 at 11:35)
+* [LiveShare](07876LiveShare.html) (7 messages, latest: May 31 2019 at 14:47)
 
-* [LiveShare](07876LiveShare.html) (2 messages, latest: May 31 2019 at 11:05)
+* [boolean ring](11313booleanring.html) (3 messages, latest: May 31 2019 at 11:35)
 
 * [100 theorems](37529100theorems.html) (67 messages, latest: May 30 2019 at 16:43)
 
