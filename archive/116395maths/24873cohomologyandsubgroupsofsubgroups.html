@@ -1,0 +1,31 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html">cohomology, and subgroups of subgroups</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167038419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167038419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167038419">Kevin Buzzard (May 31 2019 at 22:04)</a>:</h4>
+<p>Cocycles are subgroups of cochains; coboundaries are subgroups of cocycles. Cohomology groups are cocycles over coboundaries. At least, that's how it works in group cohomology, and maybe in topology too.</p>
+<p>I guess the cocycles will have to end up being a type at some point, because many arguments involve chasing cocycles and then proving that everything descends...sorry...lifts...to cohomology classes. (That still leaves a bad taste in my mouth). But the coboundaries are going to end up being a subtype of a subtype, which is kind of silly. In general we'll have a group <code>G</code> and then <code>Z B : set G</code> with <code>B \subseteq Z</code>, but will end up using the subtype corresponding to <code>B</code> and then we'll have to make the subtype of <code>B</code> corresponding to <code>Z</code>. Is this a situation where I should just try something and see if it works? Have we already run into this issue <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> ? Am I fussing over nothing? I have a student working on group cohomology and this is about to hit us.</p>
+
+<a name="167040355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167040355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167040355">Floris van Doorn (May 31 2019 at 22:35)</a>:</h4>
+<p>In the Lean 2 HoTT library I've done homology (in this case of modules over a ring - obviously at some point we want to do it generally in an abelian category): <a href="https://github.com/cmu-phil/Spectral/blob/master/algebra/submodule.hlean#L376" target="_blank" title="https://github.com/cmu-phil/Spectral/blob/master/algebra/submodule.hlean#L376">https://github.com/cmu-phil/Spectral/blob/master/algebra/submodule.hlean#L376</a><br>
+(note: <code>property</code> means <code>set</code>)</p>
+<p>You will indeed need lemma's/constructions, like if <code>Z</code> and <code>B</code> are both subgroups of <code>G</code> and <code>B \subseteq Z</code> then <code>B</code> is a subgroup of <code>Z</code>. Of course, the last <code>B</code> is not actually <code>B</code> but something like <code>(subtype.val \-1' B : set Z)</code>. But everything works fine.</p>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span>  might tell you a different story, which is also worth considering. The idea is that if you do a lot of group theory in a <em>single</em> group <code>G</code>, you should be really doing subgroup theory. That means that for every definition and lemma, when a mathematician would write "Group", you would write "subgroup of <code>G</code>". And then you try to reason as much as you can using sets (and subsets) instead of subtypes. Jeremy can probably tell this story better.</p>
+
+<a name="167041427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/cohomology%2C%20and%20subgroups%20of%20subgroups/near/167041427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24873cohomologyandsubgroupsofsubgroups.html#167041427">Patrick Massot (May 31 2019 at 22:54)</a>:</h4>
+<p>I think this always the same story, explained in <a href="https://hal.inria.fr/hal-00825074v1/document" target="_blank" title="https://hal.inria.fr/hal-00825074v1/document">https://hal.inria.fr/hal-00825074v1/document</a> that was already quoted countless times on this chat</p>
+
+
+{% endraw %}
