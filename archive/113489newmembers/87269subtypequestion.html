@@ -119,5 +119,24 @@ permalink: archive/113489newmembers/87269subtypequestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20question/near/166991110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87269subtypequestion.html#166991110">Mario Carneiro (May 31 2019 at 12:07)</a>:</h4>
 <p>you can also <code>simp at H</code></p>
 
+<a name="166999117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20question/near/166999117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87269subtypequestion.html#166999117">Xindi Ai (May 31 2019 at 13:59)</a>:</h4>
+<p>(I am new to Lean so please excuse my style)<br>
+I ran into a  similar problem before and what I roughly did was</p>
+<div class="codehilite"><pre><span></span>def mysubtype (X : Type) (P : X → Prop) : Type := {x : X // P x}
+
+def myfun (X : Type) (P : X → Prop): mysubtype X P → X
+|⟨x, hx⟩ := x
+
+lemma mylemma (X : Type) (P : X → Prop) (x : X) (hx : P x): myfun X P ⟨x, hx⟩ = x := rfl
+
+example (X : Type) (P : X → Prop) (x y : X) (hx : P x) (hy : P y)
+  (H : (⟨x, hx⟩ : mysubtype X P) = ⟨y, hy⟩ ) : x = y :=
+congr_arg (myfun X P) H
+</pre></div>
+
+
+<p>Seems to be a bit of a detour though.</p>
+
 
 {% endraw %}
