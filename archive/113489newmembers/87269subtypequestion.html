@@ -145,5 +145,20 @@ congr_arg (myfun X P) H
 </blockquote>
 <p>Yes! That was the annoying thing. I was showing an undergraduate how to use Lean and then this came up, and all of a sudden the whole thing looked far more complicated than it should have been.</p>
 
+<a name="167024894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20question/near/167024894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87269subtypequestion.html#167024894">Floris van Doorn (May 31 2019 at 19:10)</a>:</h4>
+<p><code>injection H</code> is probably the best way to so this. Another possibility is <code>congr_arg subtype.val H</code></p>
+
+<a name="167025367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20question/near/167025367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87269subtypequestion.html#167025367">Jesse Michael Han (May 31 2019 at 19:16)</a>:</h4>
+<p>laziest solution:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">P</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">P</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="o">:</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">//</span> <span class="n">P</span> <span class="n">x</span><span class="o">})</span> <span class="bp">=</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">library_search</span>
+  <span class="c1">-- exact subtype.mk.inj H</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
