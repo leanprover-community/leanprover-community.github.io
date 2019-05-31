@@ -1,0 +1,49 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/90939groupnamespace.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html">group namespace</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167010233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20namespace/near/167010233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html#167010233">Chris Hughes (May 31 2019 at 16:11)</a>:</h4>
+<p>Should we not use the group namespace?</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">group</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">mul_assoc</span><span class="o">],</span> <span class="c1">-- ⊢ mul a (mul b c) = a * (b * c)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The trouble is it used <code>group.mul_assoc</code> instead of <code>mul_assoc</code>, so we ended up with <code>group.mul</code> in the goal</p>
+
+<a name="167011745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20namespace/near/167011745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html#167011745">Mario Carneiro (May 31 2019 at 16:26)</a>:</h4>
+<p>you could use <code>_root_.mul_assoc</code>, or you could not be in the namespace but declare the theorem as <code>theorem group.foo ...</code></p>
+
+<a name="167011976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20namespace/near/167011976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html#167011976">Chris Hughes (May 31 2019 at 16:29)</a>:</h4>
+<p>I know, but last time this came up it took me ages to work out what was going on. Which makes things hard for people who don't know the tricks.</p>
+
+<a name="167012677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20namespace/near/167012677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html#167012677">Mario Carneiro (May 31 2019 at 16:37)</a>:</h4>
+<p>where are we using the <code>group</code> namespace?</p>
+
+<a name="167012781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20namespace/near/167012781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html#167012781">Mario Carneiro (May 31 2019 at 16:38)</a>:</h4>
+<p>Actually I think opening lots of namespaces is something I see a lot but don't really recommend</p>
+
+<a name="167013432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20namespace/near/167013432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/90939groupnamespace.html#167013432">Chris Hughes (May 31 2019 at 16:46)</a>:</h4>
+<p>I was using <code>conjugates_of_set</code> which is in the <code>group</code> namespace.</p>
+
+
+{% endraw %}
