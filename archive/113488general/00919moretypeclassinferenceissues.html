@@ -2578,5 +2578,180 @@ Often the design decisions will be the same for your case.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167026191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167026191">Mario Carneiro (May 31 2019 at 19:26)</a>:</h4>
 <p>I agree that more use of priority would be a good thing, but I currently don't have a good model for how to structure the priorities</p>
 
+<a name="167029799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167029799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167029799">Floris van Doorn (May 31 2019 at 20:08)</a>:</h4>
+<p>My gut feeling says priorities should be as follows:</p>
+<ul>
+<li>Structural instances: an instance which only works for certain types (like <code>group A -&gt; group B -&gt; group (prod A B)</code> or <code>ring int</code>). If such an instance applies, then it's almost always the instance you want to apply. So the order doesn't matter that much, but you can put the more common instances in front.</li>
+<li>Forgetful instances, like <code>comm_group A -&gt; group A</code>. Here you want to order them by how likely they are to apply (taking into consideration how long it would take for this instance to fail). Ultimately this will depend on which area of maths you're doing. When doing ring theory, you'll want to apply <code>ring.to_add_comm_group</code>first, while in other cases you might want to do apply <code>ordered_comm_group.to_add_comm_group</code> first (this is not a great example, I think you almost always want to apply <code>ring.to_add_comm_group</code> first).</li>
+</ul>
+<p>Looking a bit over <code>#print instances</code>, it looks like mathlib does this mostly right. I think this is partially accidental, since forgetful instances tend to be declared before structural instances are, and so even if they have the same priority they will be considered later. Some things I noticed:</p>
+<ul>
+<li>Sometimes there are "shortcuts", like <code>decidable_linear_ordered_comm_group.to_add_comm_group</code> and <code>ordered_comm_group.to_add_comm_group</code> (or <code>linear_ordered_ring.to_linear_order</code> and <code>linear_ordered_semiring.to_linear_order</code>). If these instances do not apply, the search through the "order hierarchy" will happen twice, right? Probably these shortcuts should be removed?</li>
+<li><code>nonneg_comm_group.to_add_comm_group</code> should have a lower priority.</li>
+<li>Some declarations should probably not be instances: <code>decidable_eq_of_decidable_le</code> or <code>decidable_lt_of_decidable_le</code>. Unfortunately they are in core...</li>
+</ul>
+
+<a name="167030029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167030029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167030029">Mario Carneiro (May 31 2019 at 20:11)</a>:</h4>
+<p>We need a real test to find out if shortcuts are taken twice</p>
+
+<a name="167030675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167030675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167030675">Floris van Doorn (May 31 2019 at 20:18)</a>:</h4>
+<p>Is <code>set_option trace.class_instances true</code> a reliable test?</p>
+<div class="codehilite"><pre><span></span>example : add_comm_group bool := by apply_instance
+</pre></div>
+
+
+<p>gives</p>
+<div class="codehilite"><pre><span></span>[...]
+[class_instances] (0) ?x_0 : add_comm_group bool := @decidable_linear_ordered_comm_group.to_add_comm_group ?x_1 ?x_2
+[class_instances] (1) ?x_2 : decidable_linear_ordered_comm_group bool := int.decidable_linear_ordered_comm_group
+failed is_def_eq
+[class_instances] (1) ?x_2 : decidable_linear_ordered_comm_group bool := @decidable_linear_ordered_comm_ring.to_decidable_linear_ordered_comm_group ?x_3 ?x_4
+[class_instances] (2) ?x_4 : decidable_linear_ordered_comm_ring bool := @linear_nonneg_ring.to_decidable_linear_ordered_comm_ring ?x_5 ?x_6 ?x_7 ?x_8
+[class_instances] (2) ?x_4 : decidable_linear_ordered_comm_ring bool := int.decidable_linear_ordered_comm_ring
+failed is_def_eq
+[class_instances] (2) ?x_4 : decidable_linear_ordered_comm_ring bool := @discrete_linear_ordered_field.to_decidable_linear_ordered_comm_ring ?x_5 ?x_6
+[class_instances] (0) ?x_0 : add_comm_group bool := @ordered_comm_group.to_add_comm_group ?x_1 ?x_2
+[...]
+[class_instances] (4) ?x_8 : linear_ordered_comm_ring bool := @decidable_linear_ordered_comm_ring.to_linear_ordered_comm_ring ?x_9 ?x_10
+[class_instances] (5) ?x_10 : decidable_linear_ordered_comm_ring bool := @linear_nonneg_ring.to_decidable_linear_ordered_comm_ring ?x_11 ?x_12 ?x_13 ?x_14
+[class_instances] (5) ?x_10 : decidable_linear_ordered_comm_ring bool := int.decidable_linear_ordered_comm_ring
+failed is_def_eq
+[class_instances] (5) ?x_10 : decidable_linear_ordered_comm_ring bool := @discrete_linear_ordered_field.to_decidable_linear_ordered_comm_ring ?x_11 ?x_12
+[class_instances] (1) ?x_2 : ordered_comm_group bool := @decidable_linear_ordered_comm_group.to_ordered_comm_group ?x_3 ?x_4
+[class_instances] (2) ?x_4 : decidable_linear_ordered_comm_group bool := int.decidable_linear_ordered_comm_group
+failed is_def_eq
+[class_instances] (2) ?x_4 : decidable_linear_ordered_comm_group bool := @decidable_linear_ordered_comm_ring.to_decidable_linear_ordered_comm_group ?x_5 ?x_6
+[class_instances] (3) ?x_6 : decidable_linear_ordered_comm_ring bool := @linear_nonneg_ring.to_decidable_linear_ordered_comm_ring ?x_7 ?x_8 ?x_9 ?x_10
+[class_instances] (3) ?x_6 : decidable_linear_ordered_comm_ring bool := int.decidable_linear_ordered_comm_ring
+failed is_def_eq
+[class_instances] (3) ?x_6 : decidable_linear_ordered_comm_ring bool := @discrete_linear_ordered_field.to_decidable_linear_ordered_comm_ring ?x_7 ?x_8
+</pre></div>
+
+
+<p>It seems like it considered <code>decidable_linear_ordered_comm_ring bool</code> three times.</p>
+
+<a name="167030809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167030809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167030809">Floris van Doorn (May 31 2019 at 20:19)</a>:</h4>
+<p>Now sometimes duplication is impossible to avoid, without changing the code to the search, when you have diamonds...</p>
+
+<a name="167031132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031132">Mario Carneiro (May 31 2019 at 20:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">A</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="n">class</span> <span class="n">B</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">A</span> <span class="n">α</span> <span class="n">n</span>
+<span class="n">class</span> <span class="n">C</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">B</span> <span class="n">α</span> <span class="n">n</span>
+
+<span class="kn">instance</span> <span class="n">C_nat</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">ℕ</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">C</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">B</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">C_of_A&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="n">n</span><span class="o">)</span> <span class="o">[</span><span class="n">A</span> <span class="n">α</span> <span class="n">n</span><span class="o">]</span> <span class="o">:</span> <span class="n">C</span> <span class="n">α</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">C</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">B</span><span class="bp">.</span><span class="n">mk</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">)</span>
+<span class="kn">instance</span> <span class="n">shortcut</span> <span class="o">(</span><span class="n">α</span> <span class="n">n</span><span class="o">)</span> <span class="o">[</span><span class="n">C</span> <span class="n">α</span> <span class="n">n</span><span class="o">]</span> <span class="o">:</span> <span class="n">A</span> <span class="n">α</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">1000</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">C</span> <span class="bp">ℕ</span> <span class="mi">30</span><span class="o">)</span>
+</pre></div>
+
+
+<p>it's considering <code>shortcut</code> at each level but it's not exponential</p>
+
+<a name="167031274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031274">Floris van Doorn (May 31 2019 at 20:25)</a>:</h4>
+<p>About the <code>decidable_eq_of_decidable_le</code>issue: maybe we should set their priorities in <code>mathlib</code> to <code>0</code>, and decide that <code>local attribute [instance, priority 10] classical.prop_decidable</code> should happen at priority 10, not 0. Now, it probably searches through big chunks of the order hierarchy twice, when you want that <code>prop_decidable</code> should decide an equality on any type:</p>
+<ul>
+<li>through <code>decidable_linear_order α</code></li>
+<li>through <code>decidable_eq_of_decidable_le</code></li>
+</ul>
+
+<a name="167031300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031300">Mario Carneiro (May 31 2019 at 20:25)</a>:</h4>
+<p>oh wait, <code>C unit 7</code> is definitely exponential</p>
+
+<a name="167031320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031320">Mario Carneiro (May 31 2019 at 20:25)</a>:</h4>
+<p>that's disconcerting</p>
+
+<a name="167031431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031431">Mario Carneiro (May 31 2019 at 20:26)</a>:</h4>
+<p>once again I am staggered that typeclass inference works at all</p>
+
+<a name="167031475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031475">Floris van Doorn (May 31 2019 at 20:27)</a>:</h4>
+<p>numerals have special support on <code>nat</code>, maybe that makes a difference?</p>
+
+<a name="167031497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031497">Mario Carneiro (May 31 2019 at 20:27)</a>:</h4>
+<p>no, that just makes it a bit easier to write a bunch of succs here</p>
+
+<a name="167031570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031570">Mario Carneiro (May 31 2019 at 20:28)</a>:</h4>
+<p>Compare the instance trace on <code>C unit 7</code> with and without <code>shortcut</code></p>
+
+<a name="167031597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031597">Floris van Doorn (May 31 2019 at 20:28)</a>:</h4>
+<p>the problem is that your first instance <em>never</em> fails: all instances it tries succeed. Each branch is linear: backtracking is exponential.</p>
+
+<a name="167031728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031728">Mario Carneiro (May 31 2019 at 20:30)</a>:</h4>
+<p>To some extent that's not unreasonable - I'm not sure how much we should care about failing searches</p>
+
+<a name="167031789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031789">Floris van Doorn (May 31 2019 at 20:31)</a>:</h4>
+<p>a lot</p>
+
+<a name="167031811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031811">Floris van Doorn (May 31 2019 at 20:31)</a>:</h4>
+<p>whenever you do <code>local attribute [instance, priority 0] classical.prop_decidable</code> there are a whole lot of failing searches.</p>
+
+<a name="167031837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031837">Floris van Doorn (May 31 2019 at 20:31)</a>:</h4>
+<p>probably half of the "Forgetful instances" will fail. (even if applying another instance succeeds)</p>
+
+<a name="167031936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167031936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167031936">Mario Carneiro (May 31 2019 at 20:32)</a>:</h4>
+<p>here's a case where the instance succeeds but takes a long time:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">D</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="kn">instance</span> <span class="n">D_unit</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="n">unit</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span>
+<span class="kn">instance</span> <span class="n">D_of_C</span> <span class="o">(</span><span class="n">α</span> <span class="n">n</span><span class="o">)</span> <span class="o">[</span><span class="n">C</span> <span class="n">α</span> <span class="n">n</span><span class="o">]</span> <span class="o">:</span> <span class="n">D</span> <span class="n">α</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_⟩</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">class</span><span class="bp">.</span><span class="n">instance_max_depth</span> <span class="mi">1000</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span> <span class="o">:</span> <span class="n">D</span> <span class="n">unit</span> <span class="mi">7</span><span class="o">)</span>
+</pre></div>
+
+<a name="167032404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167032404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167032404">Floris van Doorn (May 31 2019 at 20:38)</a>:</h4>
+<p>when doing some testing on my own</p>
+<div class="codehilite"><pre><span></span>(message too long, truncated at 262144 characters)
+</pre></div>
+
+
+<p>lol,</p>
+<p>But I think it's pretty clear we should remove these shortcuts of "forgetful" instances.</p>
+
+<a name="167032576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167032576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167032576">Mario Carneiro (May 31 2019 at 20:41)</a>:</h4>
+<p>this is a real shame, these could be useful in principle but lean really doesn't like them</p>
+
+<a name="167032635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167032635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167032635">Kevin Buzzard (May 31 2019 at 20:41)</a>:</h4>
+<blockquote>
+<p>(message too long, truncated at 262144 characters)</p>
+</blockquote>
+<p>Gabriel put that check there precisely because I was fiddling around with this sort of thing once and managed to get a message that was so long that it broke stuff.</p>
+
+<a name="167032642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167032642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167032642">Mario Carneiro (May 31 2019 at 20:41)</a>:</h4>
+<p>but actually I don't know to what degree we can make our hierarchy "tree-like"</p>
+
+<a name="167032712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167032712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167032712">Mario Carneiro (May 31 2019 at 20:42)</a>:</h4>
+<p>algebraic hierarchies don't work like that</p>
+
+<a name="167033408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167033408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167033408">Floris van Doorn (May 31 2019 at 20:50)</a>:</h4>
+<p>There should really be a different algorithm for these "forgetful instances". Make a graph of all instances that change the class but not the type (like <code>add_comm_group \a -&gt; add_group \a</code>) and when you have searched through all structural instances (or all instances with priority &gt;= default priority), then use a graph reachability algorithm to quickly search for a path to any instance in the local context.</p>
+
 
 {% endraw %}
