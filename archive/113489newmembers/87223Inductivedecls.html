@@ -1,0 +1,104 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/87223Inductivedecls.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html">Inductive decls</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="166976460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166976460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166976460">Keeley Hoek (May 31 2019 at 08:00)</a>:</h4>
+<p>Why is it illegal to declare</p>
+<div class="codehilite"><pre><span></span>inductive foo
+| mk (f : foo → ℕ)
+</pre></div>
+
+<a name="166976486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166976486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166976486">Keeley Hoek (May 31 2019 at 08:01)</a>:</h4>
+<p>whereas</p>
+<div class="codehilite"><pre><span></span>inductive foo&#39;
+| mk (f : ℕ → foo&#39;)
+</pre></div>
+
+
+<p>is fine?</p>
+
+<a name="166976494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166976494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166976494">Keeley Hoek (May 31 2019 at 08:01)</a>:</h4>
+<p>Is there an (easy?) proof of false?</p>
+
+<a name="166977904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166977904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166977904">Edward Ayers (May 31 2019 at 08:23)</a>:</h4>
+<p>I think the first problem is that it's not clear what the recursor should be.</p>
+
+<a name="166977973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166977973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166977973">Kenny Lau (May 31 2019 at 08:24)</a>:</h4>
+<p>yeah I was thinking about that.</p>
+
+<a name="166978033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166978033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166978033">Edward Ayers (May 31 2019 at 08:25)</a>:</h4>
+<p>And then all of the sensible definitions of <code>rec</code>  let you make infinite descending terms. edit: or derive false or something.</p>
+
+<a name="166978206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166978206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166978206">Edward Ayers (May 31 2019 at 08:27)</a>:</h4>
+<p>The thing to look up is called "strict positivity"</p>
+
+<a name="166978486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166978486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166978486">Rob Lewis (May 31 2019 at 08:32)</a>:</h4>
+<p>It's easy enough to adapt examples like this one: <a href="https://cstheory.stackexchange.com/questions/14415/guarded-negative-occurrences-in-definition-of-inductive-types-always-bad" target="_blank" title="https://cstheory.stackexchange.com/questions/14415/guarded-negative-occurrences-in-definition-of-inductive-types-always-bad">https://cstheory.stackexchange.com/questions/14415/guarded-negative-occurrences-in-definition-of-inductive-types-always-bad</a></p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">foo</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">mk</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span>
+<span class="kn">constant</span> <span class="n">inj</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x</span> <span class="o">:</span> <span class="n">foo</span><span class="o">,</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">mk</span> <span class="n">f</span><span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">self_app</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">hf</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">inj</span> <span class="n">a</span> <span class="k">in</span> <span class="n">f</span> <span class="n">a</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">ta</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">nf</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">self_app</span> <span class="err">$</span> <span class="n">mk</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">nf</span> <span class="err">$</span> <span class="n">self_app</span> <span class="n">a</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">ta</span> <span class="n">id</span>
+</pre></div>
+
+<a name="166979022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166979022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166979022">Keeley Hoek (May 31 2019 at 08:42)</a>:</h4>
+<p>Awesome! Thanks for the demo.<br>
+If I make <code>mk</code> increase universe level by one the demo fails;</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">constant</span> <span class="n">foo</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">mk</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">}</span>
+<span class="kn">constant</span> <span class="n">inj</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x</span> <span class="o">:</span> <span class="n">foo</span><span class="o">,</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">mk</span> <span class="n">f</span><span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">self_app</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">hf</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">inj</span> <span class="n">a</span> <span class="k">in</span> <span class="n">f</span> <span class="n">a</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">ta</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">nf</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">self_app</span> <span class="err">$</span> <span class="n">mk</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">nf</span> <span class="err">$</span> <span class="n">self_app</span> <span class="n">a</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">ta</span> <span class="n">id</span>
+</pre></div>
+
+
+<p>Am I safe now? If so, is there any way to make lean build this?</p>
+
+<a name="166980017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166980017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166980017">Rob Lewis (May 31 2019 at 08:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">constant</span> <span class="n">foo</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="kn">constant</span> <span class="n">mk</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">}</span>
+<span class="kn">constant</span> <span class="n">inj</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">x</span> <span class="o">:</span> <span class="n">foo</span><span class="o">,</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">mk</span> <span class="n">f</span><span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">self_app</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">hf</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">inj</span> <span class="o">(</span><span class="n">mk</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">trivial</span><span class="o">)</span> <span class="k">in</span> <span class="n">f</span> <span class="n">a</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">ta</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">nf</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">self_app</span> <span class="err">$</span> <span class="n">mk</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">nf</span> <span class="err">$</span> <span class="n">self_app</span> <span class="n">a</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">ta</span> <span class="n">id</span>
+</pre></div>
+
+
+{% endraw %}
