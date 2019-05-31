@@ -100,5 +100,89 @@ If I make <code>mk</code> increase universe level by one the demo fails;</p>
 <span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">ta</span> <span class="n">id</span>
 </pre></div>
 
+<a name="166981834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166981834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166981834">Keeley Hoek (May 31 2019 at 09:27)</a>:</h4>
+<p>Actually, I'm not quite sure I understand---why is <code>\alpha</code> free to vary in those axioms? If I force <code>\alpha</code> to be <code>\nat</code>, can it work?</p>
+
+<a name="166982028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982028">Mario Carneiro (May 31 2019 at 09:30)</a>:</h4>
+<p>the short answer is "no, this type violates cantor's theorem"</p>
+
+<a name="166982314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982314">Mario Carneiro (May 31 2019 at 09:35)</a>:</h4>
+<p>I agree that something is funny in Rob's example. We don't need <code>ta</code>, it's already a contradiction in <code>self_app</code> if we instantiate <code>alpha</code> as <code>false</code></p>
+
+<a name="166982378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982378">Mario Carneiro (May 31 2019 at 09:36)</a>:</h4>
+<p>and also <code>self_app</code> isn't diagonalizing in the second version</p>
+
+<a name="166982445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982445">Rob Lewis (May 31 2019 at 09:37)</a>:</h4>
+<p>Yeah, I just copied it from the StackOverflow answer, I'm sure there are shorter ways.</p>
+
+<a name="166982495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982495">Mario Carneiro (May 31 2019 at 09:38)</a>:</h4>
+<p>I would guess that you are actually safe if <code>mk</code> bumps the universe, but this is not the sort of definition lean can handle. It's recursive in a weird way - <code>foo.{n+1}</code> is defined in terms of <code>foo.{n}</code></p>
+
+<a name="166982685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982685">Mario Carneiro (May 31 2019 at 09:41)</a>:</h4>
+<p>Rob, I think that <code>inj</code> is not a reasonable axiom - if you just look at <code>inj</code> it says <code>foo -&gt; foo -&gt; A</code> for all <code>A</code></p>
+
+<a name="166982687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982687">Rob Lewis (May 31 2019 at 09:41)</a>:</h4>
+<p>Oh, wait, I see what you're saying.</p>
+
+<a name="166982696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982696">Rob Lewis (May 31 2019 at 09:41)</a>:</h4>
+<p>Heh, we just had our coffee break and it's kicking in now.</p>
+
+<a name="166982818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982818">Rob Lewis (May 31 2019 at 09:43)</a>:</h4>
+<p>You're right, that's too strong. But I'm not convinced that bumping the universe saves you, could you explain?</p>
+
+<a name="166982875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982875">Mario Carneiro (May 31 2019 at 09:44)</a>:</h4>
+<p>you have to have a fixed alpha, like Keeley says</p>
+
+<a name="166982895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982895">Mario Carneiro (May 31 2019 at 09:44)</a>:</h4>
+<p>right now you can use <code>mk</code> with one <code>alpha</code> and <code>inj</code> with another - and that's actually what you are doing in the proof, you use <code>mk</code> with <code>true</code> and <code>inj</code> with <code>false</code></p>
+
+<a name="166982943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982943">Mario Carneiro (May 31 2019 at 09:45)</a>:</h4>
+<p>Imagine you could just define <code>foo.{u+1} := foo.{u} -&gt; nat</code>, that would satisfy all the axioms</p>
+
+<a name="166982996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166982996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166982996">Mario Carneiro (May 31 2019 at 09:46)</a>:</h4>
+<p>it's not really recursive, since for each fixed u it's a finite number of arrows</p>
+
+<a name="166983026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983026">Mario Carneiro (May 31 2019 at 09:47)</a>:</h4>
+<p>in fact such a type probably even exists, since <code>Set.{u}</code> grows faster than <code>foo.{u}</code></p>
+
+<a name="166983397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983397">Mario Carneiro (May 31 2019 at 09:54)</a>:</h4>
+<p>Thinking about it more carefully, I think this is not definable. If it was, then we could define <code>level.{u} : nat</code> which is equal to <code>u</code> as a nat</p>
+
+<a name="166983526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983526">Mario Carneiro (May 31 2019 at 09:56)</a>:</h4>
+<p><code>Set.{u}</code> <em>almost</em> lets you define <code>level</code>, but you can only guarantee <code>u</code> <em>or more</em> inaccessible cardinals in it. There is a sort of cardinal collapsing property here - the theory can't tell if you just take one of the <code>Type u</code> universes out and shift the indexes of everything else down</p>
+
+<a name="166983556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983556">Keeley Hoek (May 31 2019 at 09:57)</a>:</h4>
+<p>Looking at <code>Set</code> more than I have before, it seems like the way to get around having a <code>foo -&gt; Prop</code> is choosing an indexing type <code>\alpha</code> and looking at maps <code>\alpha -&gt; foo</code> instead. Since you can choose the indexing type as large as you want, isn't there some sort of bijection between these two pieces of data?</p>
+
+<a name="166983569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983569">Mario Carneiro (May 31 2019 at 09:58)</a>:</h4>
+<p>that's why <code>Set</code> lives in a higher universe</p>
+
+<a name="166983616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983616">Keeley Hoek (May 31 2019 at 09:58)</a>:</h4>
+<p>(modulo a quotient of such maps by permutations of the indexing type and change of indexing type)</p>
+
+<a name="166983620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Inductive%20decls/near/166983620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87223Inductivedecls.html#166983620">Mario Carneiro (May 31 2019 at 09:58)</a>:</h4>
+<p>you can't instantiate <code>Set.{u}</code> with <code>Set.{u}</code> as the index type</p>
+
 
 {% endraw %}
