@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [@\[class\]](49775class.html) (6 messages, latest: May 31 2019 at 21:58)
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (538 messages, latest: Jun 01 2019 at 04:31)
 
-* [more type class inference issues](00919moretypeclassinferenceissues.html) (537 messages, latest: May 31 2019 at 21:36)
+* [@\[class\]](49775class.html) (6 messages, latest: May 31 2019 at 21:58)
 
 * [leaky option](90448leakyoption.html) (34 messages, latest: May 31 2019 at 20:36)
 
