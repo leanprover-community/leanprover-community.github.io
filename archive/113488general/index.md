@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntax](83688syntax.html) (26 messages, latest: Jun 01 2019 at 06:55)
+* [100 theorems](37529100theorems.html) (69 messages, latest: Jun 01 2019 at 07:07)
 
-* [100 theorems](37529100theorems.html) (68 messages, latest: Jun 01 2019 at 06:43)
+* [syntax](83688syntax.html) (26 messages, latest: Jun 01 2019 at 06:55)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (538 messages, latest: Jun 01 2019 at 04:31)
 
