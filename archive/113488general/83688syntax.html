@@ -141,5 +141,49 @@ What actually happened was that I was inside <code>namespace foo</code> and then
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167065472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167065472">Tim Daly (Jun 01 2019 at 09:57)</a>:</h4>
 <p>At the moment the only path seems to be to extract the Lean kernel and, for every proof, have the system dump a "kernel version" that used no syntax or tactics, just kernel-level I/O. That would enable proofs to be developed at the higher levels but stored and replayed as kernel code. The assumption is that the kernel is small and "30 year horizion" stable.</p>
 
+<a name="167065647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167065647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167065647">Andrew Ashworth (Jun 01 2019 at 10:02)</a>:</h4>
+<p>The API is likely to change drastically regardless when Lean v4 arrives later this year. There will be many breaking changes. At a minimum mutually inductive types are going to move into the kernel for performance reasons, and there is no reason to believe other things may not move into the kernel if necessary for usability.</p>
+
+<a name="167065649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167065649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167065649">Tim Daly (Jun 01 2019 at 10:02)</a>:</h4>
+<p>My code uses theorems from the 1890s so long-term proof stability is a vital issue.</p>
+
+<a name="167065809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167065809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167065809">Andrew Ashworth (Jun 01 2019 at 10:07)</a>:</h4>
+<p>I can't think of a single proof language with that kind of stability, unfortunately.</p>
+
+<a name="167066235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167066235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167066235">Tim Daly (Jun 01 2019 at 10:19)</a>:</h4>
+<p>How can I build up chains of Definitions and Lemmas proving code correctness if the whole thing fails a week later? I don't know how to do computational mathematics on that basis. I have common lisp source code for my computer algebra system that still compiles and executes with the same results today that it had when it was written in 1980. I have latex documents from then. It seems perfectly reasonable to expect that a "proof" by machine code would continue to be checkable in 2049.</p>
+
+<a name="167066617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167066617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167066617">Andrew Ashworth (Jun 01 2019 at 10:30)</a>:</h4>
+<p>If you're willing to never upgrade or import results from the proof community at large, you could fix a version of &lt;your favorite proof language&gt;. Hardly appealing, I know.</p>
+
+<a name="167066810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167066810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167066810">Tim Daly (Jun 01 2019 at 10:37)</a>:</h4>
+<p>It might be useful to consider a "standards effort" in proof technology. There used to be many competing lisp dialects and they eventually agreed on common lisp. I used lisp 1.5, maclisp, lispvm, psl, and many others and was good at "porting code". Now the common lisp standard makes that pointless. Perhaps there needs to be a Common Proof effort that provides a stable basis for (at least primitive syntax) of proofs  that can be universally accepted. Computational mathematics IS mathematics so it seems that long-term "30 year horizon" stability ought to be a major goal.</p>
+
+<a name="167067071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167067071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167067071">Tim Daly (Jun 01 2019 at 10:44)</a>:</h4>
+<p>Competing on "features" is for game programmers, not mathematicians.</p>
+
+<a name="167067132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167067132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167067132">Patrick Massot (Jun 01 2019 at 10:46)</a>:</h4>
+<p>I think you don't quite understand where we stand now. Freezing stuff at such an early stage would probably be very counter-productive. See <a href="https://deducteam.github.io/" target="_blank" title="https://deducteam.github.io/">https://deducteam.github.io/</a> however (but keep in mind that this is also very much work in progress)</p>
+
+<a name="167067381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167067381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167067381">Scott Morrison (Jun 01 2019 at 10:54)</a>:</h4>
+<p>At the moment we are still before the beginning of history. Theorem provers are not yet useful for mathematics.</p>
+
+<a name="167067386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167067386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167067386">Scott Morrison (Jun 01 2019 at 10:54)</a>:</h4>
+<p>(That is not to say they are not worth investing significant time in.)</p>
+
+<a name="167067397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167067397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167067397">Scott Morrison (Jun 01 2019 at 10:55)</a>:</h4>
+<p>But any serious plans for backwards compatibility should wait (implementation at least, not discussion) until we have something.</p>
+
 
 {% endraw %}
