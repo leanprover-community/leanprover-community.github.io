@@ -1,0 +1,31 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/53080tacticwritingfordummies.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html">tactic writing for dummies</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167088257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167088257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167088257">Patrick Massot (Jun 01 2019 at 20:27)</a>:</h4>
+<p>Here is what I think is a nice little Lean story. In the perfectoid project, we need to start with a multiplicative totally ordered group and add a zero element, which is absorbent for multiplication and lower than all original elements. For instance, starting from the group of positive real numbers, the new thing is isomorphic to the monoid of non-negative real numbers. Then there are many lemmas about the properties of this kind of monoid. In the real world, these lemmas are not even stated. If cornered, a mathematician will tell you that they follow from easy case discussions, depending on which element is zero or a an element of the original group. In general the case where something is zero is trivial, and the other case follows from properties of the original group. Of course when there are two or three elements, these discussions are nested. In the perfectoid project, we suffered quite a bit with those lemmas which are not even stated in the real world. First we modeled them using <code>with_zero</code>, which is a wrapper around <code>option</code>. But we were not careful to keep this abstraction, and stated various lemmas in terms of <code>none</code> instead of <code>zero</code> and, even more often, in terms of <code>some x</code> instead of <code>(x : with_zero G)</code>. Then we fixed that. And then comes the interesting bit. We need automation to get rid of proofs that mathematicians wouldn't write. We can't expect all mathematicians to become skilled tactic writers. But we can politely ask computer scientists to write heavy-lifting tactics. At some point <span class="user-mention" data-user-id="110596">@Rob Lewis</span>  got tired of listening to Kevin's whining and asked <span class="user-mention" data-user-id="213273">@Paul-Nicolas Madelaine</span> to write <code>norm_cast</code>. This was a huge boost to help getting rid of those proofs. But it was too general. In the mean time <span class="user-mention" data-user-id="110026">@Simon Hudon</span> taught me rudiments of tactic writing, and I was able to write a small very specialized tactic on top of <code>induction</code> and <code>norm_cast</code>. That last step was done in <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/commit/01fd6abb7127b0593dd82b02bab5799947e83327" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/commit/01fd6abb7127b0593dd82b02bab5799947e83327">https://github.com/leanprover-community/lean-perfectoid-spaces/commit/01fd6abb7127b0593dd82b02bab5799947e83327</a>. That's 7 lines of tactic code which gets rid of 38 lines of proof. It doesn't sound impressive, but it brings the proofs much closer to what they look like in my head (when I'm forced to think about these trivial lemmas of course).</p>
+
+<a name="167088461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167088461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167088461">Patrick Massot (Jun 01 2019 at 20:32)</a>:</h4>
+<p>Now I have a question for real tactic writers. My tactic is a bit slow, and it would probably be faster to call <code>norm_cast</code> only on elements of the context created by the <code>induction</code> calls. I know <code>induction</code> returns a list of tuples containing relevant information. But I don't know how to use this list in conjunction with the <code>seq</code> that is used to call induction on multiple elements. Any idea? Should I call <code>norm_cast</code> before the inductive call to my tactic? Or can I do it in the end but pass around some list?</p>
+
+<a name="167088524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167088524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167088524">Patrick Massot (Jun 01 2019 at 20:34)</a>:</h4>
+<p>I think I deserved to open that bottle I bought at the Edinburgh airport when leaving the Big Proof workshop.</p>
+
+<a name="167089215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167089215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167089215">Reid Barton (Jun 01 2019 at 20:54)</a>:</h4>
+<p>Those proof simplifications are very nice!</p>
+
+
+{% endraw %}
