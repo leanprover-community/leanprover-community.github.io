@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [homotopies and stuff](56419homotopiesandstuff.html) (3 messages, latest: Jun 01 2019 at 17:13)
+
 * [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (8 messages, latest: Jun 01 2019 at 15:03)
 
 * [sub_mul_action](08629submulaction.html) (2 messages, latest: Jun 01 2019 at 14:56)
