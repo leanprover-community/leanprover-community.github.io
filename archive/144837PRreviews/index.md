@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1102 local rings](859421102localrings.html) (1 message, latest: Jun 01 2019 at 18:49)
+
 * [#1067 open subgroups](826061067opensubgroups.html) (1 message, latest: May 30 2019 at 05:29)
 
 * [#1074 category instances to root](363811074categoryinstancestoroot.html) (29 messages, latest: May 29 2019 at 17:27)
