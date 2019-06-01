@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Direct Sums](48548DirectSums.html) (8 messages, latest: Jun 01 2019 at 10:56)
+* [Direct Sums](48548DirectSums.html) (9 messages, latest: Jun 01 2019 at 11:05)
 
 * [subtype question](87269subtypequestion.html) (25 messages, latest: May 31 2019 at 19:16)
 
