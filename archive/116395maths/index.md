@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (3 messages, latest: May 31 2019 at 22:54)
+* [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (4 messages, latest: May 31 2019 at 23:22)
 
 * [group namespace](90939groupnamespace.html) (12 messages, latest: May 31 2019 at 18:07)
 
