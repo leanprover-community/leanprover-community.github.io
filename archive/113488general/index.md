@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
+* [syntax](83688syntax.html) (66 messages, latest: Jun 01 2019 at 19:40)
 
-* [syntax](83688syntax.html) (65 messages, latest: Jun 01 2019 at 16:38)
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
 
 * [norm_cast almost working](81944normcastalmostworking.html) (8 messages, latest: Jun 01 2019 at 14:33)
 
