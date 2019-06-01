@@ -27,5 +27,27 @@ permalink: archive/113488general/53080tacticwritingfordummies.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167089215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167089215">Reid Barton (Jun 01 2019 at 20:54)</a>:</h4>
 <p>Those proof simplifications are very nice!</p>
 
+<a name="167089793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167089793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167089793">Simon Hudon (Jun 01 2019 at 21:09)</a>:</h4>
+<p><code>norm_cast</code> sometimes uses <code>simp</code> without arguments. That means that it tries every <code>simp</code> lemma in mathlib. It would be faster if you could be more targeted or optionally disable the use of <code>simp</code> all together.</p>
+
+<a name="167090123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167090123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167090123">Paul-Nicolas Madelaine (Jun 01 2019 at 21:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> you mean <code>simpa</code>?<br>
+<code>norm_cast</code> should never call <code>simp</code> without arguments.<br>
+But it uses <code>simpa</code> to discharge proofs, which may not be necessary.</p>
+
+<a name="167090244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167090244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167090244">Patrick Massot (Jun 01 2019 at 21:23)</a>:</h4>
+<p>Having a fast <code>norm_cast</code> could become important because I think it will be used a lot. But it needs to stay as powerful. We can wait a bit if this is the prize to pay for getting rid of all coercion bureaucracy.</p>
+
+<a name="167090638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167090638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167090638">Simon Hudon (Jun 01 2019 at 21:34)</a>:</h4>
+<p>Because you're using <code>simpa</code> inside of <code>norm_cast</code>, you're only going to be as fast as <code>simpa</code>. But <code>simpa</code> offers the <code>only</code>, <code>[_,_]</code> and <code>with</code> options that could be available through the <code>norm_cast</code> interface.</p>
+
+<a name="167090708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20writing%20for%20dummies/near/167090708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53080tacticwritingfordummies.html#167090708">Simon Hudon (Jun 01 2019 at 21:36)</a>:</h4>
+<p>You can even offers the options (e.g. through a <code>?</code> notation) of calling <code>squeeze_simpa</code> to help make an invocation faster</p>
+
 
 {% endraw %}

@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactic writing for dummies](53080tacticwritingfordummies.html) (4 messages, latest: Jun 01 2019 at 20:54)
+* [tactic writing for dummies](53080tacticwritingfordummies.html) (9 messages, latest: Jun 01 2019 at 21:36)
 
 * [syntax](83688syntax.html) (66 messages, latest: Jun 01 2019 at 19:40)
 
