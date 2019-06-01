@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [sub_mul_action](08629submulaction.html) (1 message, latest: Jun 01 2019 at 13:05)
+* [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (7 messages, latest: Jun 01 2019 at 14:58)
 
-* [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (6 messages, latest: Jun 01 2019 at 13:01)
+* [sub_mul_action](08629submulaction.html) (2 messages, latest: Jun 01 2019 at 14:56)
 
 * [group namespace](90939groupnamespace.html) (12 messages, latest: May 31 2019 at 18:07)
 

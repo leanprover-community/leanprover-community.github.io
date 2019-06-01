@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntax](83688syntax.html) (54 messages, latest: Jun 01 2019 at 13:47)
+* [syntax](83688syntax.html) (59 messages, latest: Jun 01 2019 at 14:57)
 
-* [norm_cast almost working](81944normcastalmostworking.html) (4 messages, latest: Jun 01 2019 at 11:34)
+* [norm_cast almost working](81944normcastalmostworking.html) (8 messages, latest: Jun 01 2019 at 14:33)
 
 * [leaky option](90448leakyoption.html) (35 messages, latest: Jun 01 2019 at 09:11)
 
