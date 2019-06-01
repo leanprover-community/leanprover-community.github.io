@@ -129,5 +129,17 @@ What actually happened was that I was inside <code>namespace foo</code> and then
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167061486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167061486">Mario Carneiro (Jun 01 2019 at 08:04)</a>:</h4>
 <p>You can still do decently if you know what syntaxes are defined, and parse up to the next command keyword</p>
 
+<a name="167064470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167064470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167064470">Tim Daly (Jun 01 2019 at 09:27)</a>:</h4>
+<p>This causes a portability problem. I'd like to have a parser / exporter that can communicate freely with Lean. But if the notation command is used the associations can change dynamically making previously accepted communications fail. The obvious workaround would be to export the led-nud tables but I don't see anything in the source code that provides that. Another alternative would be to communicate using only "unsugared syntax". I will read more about that level of detail soon.</p>
+
+<a name="167065160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167065160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167065160">Tim Daly (Jun 01 2019 at 09:47)</a>:</h4>
+<p>I am trying to combine proofs with code. This is a "30 year horizon" effort so it is important that the proofs are repeatable and stable (think latex, common lisp, and pdfs). The ability to modify syntax is one problem. The ability to modify tactics is another. Proofs are difficult, time consuming, and require a lot of effort. The hope is that today's proof will be accepted by the system years from now with the same result.</p>
+
+<a name="167065472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/syntax/near/167065472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83688syntax.html#167065472">Tim Daly (Jun 01 2019 at 09:57)</a>:</h4>
+<p>At the moment the only path seems to be to extract the Lean kernel and, for every proof, have the system dump a "kernel version" that used no syntax or tactics, just kernel-level I/O. That would enable proofs to be developed at the higher levels but stored and replayed as kernel code. The assumption is that the kernel is small and "30 year horizion" stable.</p>
+
 
 {% endraw %}
