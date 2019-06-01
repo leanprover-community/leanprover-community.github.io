@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntax](83688syntax.html) (64 messages, latest: Jun 01 2019 at 15:32)
+* [syntax](83688syntax.html) (65 messages, latest: Jun 01 2019 at 16:38)
 
 * [norm_cast almost working](81944normcastalmostworking.html) (8 messages, latest: Jun 01 2019 at 14:33)
 
