@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactic writing for dummies](53080tacticwritingfordummies.html) (4 messages, latest: Jun 01 2019 at 20:54)
+
 * [syntax](83688syntax.html) (66 messages, latest: Jun 01 2019 at 19:40)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
