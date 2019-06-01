@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntax](83688syntax.html) (28 messages, latest: Jun 01 2019 at 08:04)
+* [syntax](83688syntax.html) (31 messages, latest: Jun 01 2019 at 09:57)
+
+* [leaky option](90448leakyoption.html) (35 messages, latest: Jun 01 2019 at 09:11)
 
 * [100 theorems](37529100theorems.html) (69 messages, latest: Jun 01 2019 at 07:07)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (538 messages, latest: Jun 01 2019 at 04:31)
 
 * [@\[class\]](49775class.html) (6 messages, latest: May 31 2019 at 21:58)
-
-* [leaky option](90448leakyoption.html) (34 messages, latest: May 31 2019 at 20:36)
 
 * [VS Code red thing](21722VSCoderedthing.html) (9 messages, latest: May 31 2019 at 19:27)
 
