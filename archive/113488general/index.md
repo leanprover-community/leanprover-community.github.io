@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [syntax](83688syntax.html) (26 messages, latest: Jun 01 2019 at 06:55)
+
+* [100 theorems](37529100theorems.html) (68 messages, latest: Jun 01 2019 at 06:43)
+
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (538 messages, latest: Jun 01 2019 at 04:31)
 
 * [@\[class\]](49775class.html) (6 messages, latest: May 31 2019 at 21:58)
@@ -22,11 +26,7 @@ permalink: archive/113488general/index.html
 
 * [boolean ring](11313booleanring.html) (3 messages, latest: May 31 2019 at 11:35)
 
-* [100 theorems](37529100theorems.html) (67 messages, latest: May 30 2019 at 16:43)
-
 * [Structures in meta](37699Structuresinmeta.html) (6 messages, latest: May 30 2019 at 07:56)
-
-* [syntax](83688syntax.html) (25 messages, latest: May 30 2019 at 07:44)
 
 * [headers](20125headers.html) (1 message, latest: May 30 2019 at 07:37)
 
