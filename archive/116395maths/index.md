@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [HoTT](75424HoTT.html) (69 messages, latest: Jun 02 2019 at 17:59)
+
 * [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (9 messages, latest: Jun 02 2019 at 14:00)
 
 * [homotopies and stuff](56419homotopiesandstuff.html) (3 messages, latest: Jun 01 2019 at 17:13)
@@ -29,8 +31,6 @@ permalink: archive/116395maths/index.html
 * [betweenness](67844betweenness.html) (5 messages, latest: May 29 2019 at 14:20)
 
 * [Bundled homs](83318Bundledhoms.html) (52 messages, latest: May 28 2019 at 15:38)
-
-* [HoTT](75424HoTT.html) (68 messages, latest: May 27 2019 at 23:02)
 
 * [non-terminal simp in complex.lean](36395nonterminalsimpincomplexlean.html) (4 messages, latest: May 25 2019 at 19:19)
 
