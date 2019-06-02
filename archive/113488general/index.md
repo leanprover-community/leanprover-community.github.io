@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (27 messages, latest: Jun 02 2019 at 00:10)
+
 * [tactic writing for dummies](53080tacticwritingfordummies.html) (9 messages, latest: Jun 01 2019 at 21:36)
 
 * [syntax](83688syntax.html) (66 messages, latest: Jun 01 2019 at 19:40)
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [AI and theorem proving](41431AIandtheoremproving.html) (15 messages, latest: May 29 2019 at 22:36)
 
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (21 messages, latest: May 29 2019 at 21:56)
-
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (26 messages, latest: May 29 2019 at 21:23)
 
 * [timeout and irreducibility](96863timeoutandirreducibility.html) (11 messages, latest: May 29 2019 at 19:01)
 
