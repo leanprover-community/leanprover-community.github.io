@@ -1,0 +1,50 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/44927simpanddedup.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/44927simpanddedup.html">simp and dedup</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167133557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20and%20dedup/near/167133557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/44927simpanddedup.html#167133557">Sebastien Gouezel (Jun 02 2019 at 18:49)</a>:</h4>
+<p>I have been bitten several times lately by a weird <code>simp</code> behavior (bug?). Each time I have avoided it by using <code>rw</code> instead, but it keeps showing up, so I would be glad if someone can help me understand what is going on. I tried to build a minimal working example as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">foo_rec</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">normed_field</span> <span class="n">k</span><span class="o">]</span>
+  <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">E</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="o">(</span><span class="n">true</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">n</span> <span class="n">rec</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">stupid</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_field</span> <span class="n">k</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">]</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">E</span> <span class="bp">→</span> <span class="n">E</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">foo_rec</span> <span class="n">n</span> <span class="n">k</span> <span class="n">f</span> <span class="bp">↔</span> <span class="n">foo_rec</span> <span class="n">n</span> <span class="n">k</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Everything here is stupid, but hopefully my real use case is not. The proof of <code>stupid</code> is not accepted: more precisely, I get red squiggles under the name of the lemma, with the message</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="bp">@</span><span class="n">foo_rec</span> <span class="n">n</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span>
+<span class="n">term</span>
+  <span class="bp">_</span><span class="n">inst_1</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">normed_field</span> <span class="n">k_1</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">normed_field</span> <span class="n">k</span>
+<span class="n">types</span> <span class="n">contain</span> <span class="n">aliased</span> <span class="n">name</span><span class="o">(</span><span class="n">s</span><span class="o">):</span> <span class="n">k</span>
+<span class="n">remark</span><span class="o">:</span> <span class="n">the</span> <span class="n">tactic</span> <span class="bp">`</span><span class="n">dedup</span><span class="bp">`</span> <span class="n">can</span> <span class="n">be</span> <span class="n">used</span> <span class="n">to</span> <span class="n">rename</span> <span class="n">aliases</span>
+</pre></div>
+
+
+<p>This looks to me like a <code>simp</code> or <code>induction</code> bug. Any opinion on this?</p>
+
+
+{% endraw %}

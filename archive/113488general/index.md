@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp and dedup](44927simpanddedup.html) (1 message, latest: Jun 02 2019 at 18:49)
+
 * [syntax](83688syntax.html) (78 messages, latest: Jun 02 2019 at 15:26)
 
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (27 messages, latest: Jun 02 2019 at 00:10)
