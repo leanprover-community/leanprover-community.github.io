@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [syntax](83688syntax.html) (76 messages, latest: Jun 02 2019 at 13:11)
+* [syntax](83688syntax.html) (77 messages, latest: Jun 02 2019 at 14:46)
 
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (27 messages, latest: Jun 02 2019 at 00:10)
 
