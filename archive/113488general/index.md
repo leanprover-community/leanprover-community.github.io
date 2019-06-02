@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [syntax](83688syntax.html) (67 messages, latest: Jun 02 2019 at 03:54)
+
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (27 messages, latest: Jun 02 2019 at 00:10)
 
 * [tactic writing for dummies](53080tacticwritingfordummies.html) (9 messages, latest: Jun 01 2019 at 21:36)
-
-* [syntax](83688syntax.html) (66 messages, latest: Jun 01 2019 at 19:40)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
 
