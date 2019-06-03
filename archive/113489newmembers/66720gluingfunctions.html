@@ -69,5 +69,90 @@ permalink: archive/113489newmembers/66720gluingfunctions.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167235944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167235944">Kevin Buzzard (Jun 03 2019 at 21:58)</a>:</h4>
 <p>You could define a glued function only on the union</p>
 
+<a name="167238395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238395">Jean Lo (Jun 03 2019 at 22:34)</a>:</h4>
+<p>got stuck.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">set</span> <span class="n">function</span>
+
+<span class="n">def</span> <span class="n">glue</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">l₁</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="n">i</span><span class="o">,</span> <span class="k">from</span> <span class="n">mem_Union</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">h</span> <span class="n">x</span><span class="o">),</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">l₁</span> <span class="k">in</span> <span class="n">f</span> <span class="n">i</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>If I replace the <code>f i x</code> with an underscore, Lean tells me that it knows that <code>i</code> is of type <code>ι</code> and <code>hi</code> says <code>x ∈ s i</code>, but it's also unhappy about the <code>let</code> because <code>recursor 'Exists.dcases_on' can only eliminate into Prop</code>.</p>
+
+<a name="167238471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238471">Reid Barton (Jun 03 2019 at 22:35)</a>:</h4>
+<p>You will need to use <code>choice</code> or something equivalent (and <code>glue</code> will have to be noncomputable)</p>
+
+<a name="167238614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238614">Kevin Buzzard (Jun 03 2019 at 22:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="kn">theorem</span> <span class="n">indefinite_description</span>
+    <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">{</span><span class="n">x</span> <span class="bp">//</span> <span class="n">p</span> <span class="n">x</span><span class="o">}</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="167238678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238678">Kevin Buzzard (Jun 03 2019 at 22:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">some</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="167238698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238698">Kevin Buzzard (Jun 03 2019 at 22:38)</a>:</h4>
+<p>(and <code>some_spec</code> too). See <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#choice" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#choice">https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#choice</a></p>
+
+<a name="167238750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238750">Jean Lo (Jun 03 2019 at 22:39)</a>:</h4>
+<p>ow, I really need to go and actually understand the computability stuff. Thanks for the help!</p>
+
+<a name="167238752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238752">Kevin Buzzard (Jun 03 2019 at 22:39)</a>:</h4>
+<p>They're all in the <code>classical</code> namespace. You can't make this computable I don't think. Even with the hypothesis that the sub-functions agree on overlaps!</p>
+
+<a name="167238860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238860">Kevin Buzzard (Jun 03 2019 at 22:41)</a>:</h4>
+<p>The example I found most jarring was that even if you can prove that <code>f : X \to Y</code> is a bijection, and computable, you can't construct a computable inverse; you have to use <code>classical.some</code> to get from the abstract surjectivity statement ("there exists x in X such that...") to the actual value of x (even though it's unique!)</p>
+
+<a name="167238931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238931">Kevin Buzzard (Jun 03 2019 at 22:42)</a>:</h4>
+<p>Patrick wrote a <code>choose</code> tactic to do exactly this, but using tactics to define data is not always a good idea.</p>
+
+<a name="167238987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167238987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167238987">Kevin Buzzard (Jun 03 2019 at 22:43)</a>:</h4>
+<p>You're moving from <code>Prop</code> to <code>Type</code>. We do it all the time in the maths department, but basically you have to switch on maths mode to get Lean to do it without complaining.</p>
+
+<a name="167239460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167239460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167239460">Jean Lo (Jun 03 2019 at 22:51)</a>:</h4>
+<p>aha.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">glue</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">⋃</span> <span class="n">i</span><span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">mem_Union</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">h</span> <span class="n">x</span><span class="o">)))</span> <span class="n">x</span>
+
+<span class="kn">lemma</span> <span class="n">glue_eq</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="err">⋃</span> <span class="n">i</span> <span class="o">,</span> <span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">heq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="n">i</span> <span class="err">∩</span> <span class="n">s</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">j</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">i</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">glue</span> <span class="n">h</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">i</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>there! surely this looks sane now.</p>
+
+<a name="167239685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167239685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167239685">Jean Lo (Jun 03 2019 at 22:54)</a>:</h4>
+<p>and I guess actually proving the lemma is some exercise in fiddling around with <code>classical.some_spec</code>? will go try and do that.</p>
+<p>(...whoops, stated the lemma wrong. removed in edit. Sorry for that.)</p>
+
 
 {% endraw %}
