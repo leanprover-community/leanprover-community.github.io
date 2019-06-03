@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp and dedup](44927simpanddedup.html) (1 message, latest: Jun 02 2019 at 18:49)
+* [simp and dedup](44927simpanddedup.html) (2 messages, latest: Jun 02 2019 at 23:39)
 
 * [syntax](83688syntax.html) (78 messages, latest: Jun 02 2019 at 15:26)
 
