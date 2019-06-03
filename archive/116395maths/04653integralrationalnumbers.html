@@ -22,5 +22,48 @@ permalink: archive/116395maths/04653integralrationalnumbers.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167163680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167163680">Johan Commelin (Jun 03 2019 at 07:48)</a>:</h4>
 <p>The conclusion becomes <code>int.cast r.num = r</code>. Is that a good way, or should we use something else?</p>
 
+<a name="167167936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167167936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167167936">Reid Barton (Jun 03 2019 at 08:45)</a>:</h4>
+<p>There are so many ways one could write this, perhaps it's worth adding a dedicated one <code>is_int</code></p>
+
+<a name="167167999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167167999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167167999">Reid Barton (Jun 03 2019 at 08:46)</a>:</h4>
+<p>In general it could be defined as being in the image of <code>int.cast</code></p>
+
+<a name="167168326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168326">Johan Commelin (Jun 03 2019 at 08:51)</a>:</h4>
+<p>Yeah... that's part of what I'm after with this question</p>
+
+<a name="167168391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168391">Kevin Buzzard (Jun 03 2019 at 08:52)</a>:</h4>
+<p>I have felt for around a year now that for every "troublesome-to-a-mathematician" inclusion (e.g. like int in real) there could be a typeclass on the bigger type (e.g. <code>complex.is_int</code>), or even two typeclasses (the one which stores the int and the one which just says one exists). I have raised this suggestion before. One disadvantage pointed out to me was that now you get a "new int" (in fact several), i.e. <code>{q : rat // is_int q}</code>, which apparently is somehow bad.</p>
+
+<a name="167168404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168404">Johan Commelin (Jun 03 2019 at 08:52)</a>:</h4>
+<p>But maybe using <code>r.num</code> instead of some chosen preimage should make things more computable?</p>
+
+<a name="167168416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168416">Kevin Buzzard (Jun 03 2019 at 08:52)</a>:</h4>
+<p>One advantage was that you remove all the cast headaches; type class inferences shows <code>is_int z -&gt; is_rat z</code> for example.</p>
+
+<a name="167168513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168513">Johan Commelin (Jun 03 2019 at 08:54)</a>:</h4>
+<blockquote>
+<p>you get a "new int" (in fact several), i.e. <code>{q : rat // is_int q}</code>, which apparently is somehow bad.</p>
+</blockquote>
+<p>Very bad <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span> after all... they aren't equal. Only canonically isomorphic <span aria-label="tears" class="emoji emoji-1f602" role="img" title="tears">:tears:</span></p>
+
+<a name="167168540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168540">Kevin Buzzard (Jun 03 2019 at 08:55)</a>:</h4>
+<p>Yeah exactly. In some sense that's what makes it bad! You don't want canonically isomorphic stuff, you want stuff which is one of the standard type theory equals :-/</p>
+
+<a name="167168658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168658">Kevin Buzzard (Jun 03 2019 at 08:56)</a>:</h4>
+<p>In fact perhaps the reason the CS guys tell us it's bad is precisely because we don't have the <code>transfer</code> tactic which will enable us to port all the stuff we want from one type to the canonically isomorphic one.</p>
+
+<a name="167168687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/integral%20rational%20numbers/near/167168687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/04653integralrationalnumbers.html#167168687">Kevin Buzzard (Jun 03 2019 at 08:57)</a>:</h4>
+<p>[right, as Patrick says, back  to mowing the lawn...]</p>
+
 
 {% endraw %}
