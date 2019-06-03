@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [norm_cast almost working](81944normcastalmostworking.html) (9 messages, latest: Jun 03 2019 at 11:53)
+
+* [libiconfig](19479libiconfig.html) (2 messages, latest: Jun 03 2019 at 11:47)
+
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (28 messages, latest: Jun 03 2019 at 03:48)
 
 * [simp and dedup](44927simpanddedup.html) (2 messages, latest: Jun 02 2019 at 23:39)
@@ -19,8 +23,6 @@ permalink: archive/113488general/index.html
 * [tactic writing for dummies](53080tacticwritingfordummies.html) (9 messages, latest: Jun 01 2019 at 21:36)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
-
-* [norm_cast almost working](81944normcastalmostworking.html) (8 messages, latest: Jun 01 2019 at 14:33)
 
 * [leaky option](90448leakyoption.html) (35 messages, latest: Jun 01 2019 at 09:11)
 
