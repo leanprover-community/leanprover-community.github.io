@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (28 messages, latest: Jun 03 2019 at 03:48)
+
 * [simp and dedup](44927simpanddedup.html) (2 messages, latest: Jun 02 2019 at 23:39)
 
 * [syntax](83688syntax.html) (78 messages, latest: Jun 02 2019 at 15:26)
-
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (27 messages, latest: Jun 02 2019 at 00:10)
 
 * [tactic writing for dummies](53080tacticwritingfordummies.html) (9 messages, latest: Jun 01 2019 at 21:36)
 
