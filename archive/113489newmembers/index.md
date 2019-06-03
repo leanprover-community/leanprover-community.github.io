@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (12 messages, latest: Jun 03 2019 at 21:58)
+* [gluing functions](66720gluingfunctions.html) (24 messages, latest: Jun 03 2019 at 22:54)
 
 * [Direct Sums](48548DirectSums.html) (10 messages, latest: Jun 01 2019 at 13:30)
 
