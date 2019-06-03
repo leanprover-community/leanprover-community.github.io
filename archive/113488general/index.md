@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [libiconfig](19479libiconfig.html) (4 messages, latest: Jun 03 2019 at 13:19)
+
 * [norm_cast almost working](81944normcastalmostworking.html) (10 messages, latest: Jun 03 2019 at 12:19)
 
 * [simp and dedup](44927simpanddedup.html) (3 messages, latest: Jun 03 2019 at 12:04)
-
-* [libiconfig](19479libiconfig.html) (2 messages, latest: Jun 03 2019 at 11:47)
 
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (28 messages, latest: Jun 03 2019 at 03:48)
 
