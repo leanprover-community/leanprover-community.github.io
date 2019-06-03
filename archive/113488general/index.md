@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [libiconfig](19479libiconfig.html) (8 messages, latest: Jun 03 2019 at 15:56)
+* [quanta article](72175quantaarticle.html) (4 messages, latest: Jun 03 2019 at 17:52)
 
-* [Mac fonts](51644Macfonts.html) (4 messages, latest: Jun 03 2019 at 15:48)
+* [Mac fonts](51644Macfonts.html) (5 messages, latest: Jun 03 2019 at 17:09)
+
+* [libiconfig](19479libiconfig.html) (8 messages, latest: Jun 03 2019 at 15:56)
 
 * [norm_cast almost working](81944normcastalmostworking.html) (10 messages, latest: Jun 03 2019 at 12:19)
 
