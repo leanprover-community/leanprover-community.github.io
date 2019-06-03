@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1073 pnat](351701073pnat.html) (2 messages, latest: Jun 03 2019 at 13:05)
+
 * [#1102 local rings](859421102localrings.html) (2 messages, latest: Jun 01 2019 at 19:47)
 
 * [#1067 open subgroups](826061067opensubgroups.html) (1 message, latest: May 30 2019 at 05:29)
@@ -25,8 +27,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1080 props of elements in rings](039491080propsofelementsinrings.html) (11 messages, latest: May 24 2019 at 14:45)
 
 * [#1076 powers mod n](145921076powersmodn.html) (35 messages, latest: May 23 2019 at 14:07)
-
-* [#1073 pnat](351701073pnat.html) (1 message, latest: May 23 2019 at 14:05)
 
 * [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (14 messages, latest: May 23 2019 at 06:19)
 

@@ -19,5 +19,16 @@ permalink: archive/113488general/19479libiconfig.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167180785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167180785">Scott Morrison (Jun 03 2019 at 11:47)</a>:</h4>
 <p>I just had to modify it a little bit to compile against current mathlib, so I made a PR on your repository.</p>
 
+<a name="167187553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167187553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167187553">Keeley Hoek (Jun 03 2019 at 13:14)</a>:</h4>
+<p>I suppose the dream was to PR it. It's short for <code>LIBInteractiveCONFIG</code>.</p>
+<p>The point is to add a custom interactive monad which can parse config options. It makes mishmash syntax like <code>rewrite_search { visualiser, depth := 50, strategy.bfs, metric.svm { mode := float } }</code> and simultaneously also allow e.g. <code>rewrite_search { no visualiser, strategy := bfs, metric := svm }</code> and having sub-configs all work (without a host of <code>open</code>s to get the right name spaces of everything too), and having/resolving defaults, etc. (Okay, these are really long examples, but the point is the flexibility.) To be clear, we use a custom interaction monad to implement this, but this all works inside a normal tactic block.</p>
+<p>It can automatically do some pretty cool stuff; e.g. if you have a normal lean <code>structure</code>, then there is e.g. a command which lets you do <code>iconfig_add_struct[rewrite_search] tactic.rewrite_search.config</code> which automatically creates setters for all of the fields of the structure <code>tactic.rewrite_search.config</code> inside the custom monad, and then there is an API to automatically have an instance of the structure synthesised from this data without having to manually build it from the value of each field yourself. (It's literally like <code>mk_struct</code> and then the type.) This supports the usual <code>:= blah</code> default option syntax declared in normal structures, and gives a nice error if something can't be filled in, etc. You can also create arbitrary custom <code>def do_stuff : iconfig unit := ...</code> functions which can do arbitrary configuration logic when run as <code>rewrite_search { do_stuff }</code> for example.</p>
+<p>It definitely seems like a thing people could want to use.</p>
+
+<a name="167188058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167188058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167188058">Keeley Hoek (Jun 03 2019 at 13:19)</a>:</h4>
+<p>I could get it into canonical-style state on Friday, if you're not so keen. Of course, it's not absolutely required.</p>
+
 
 {% endraw %}
