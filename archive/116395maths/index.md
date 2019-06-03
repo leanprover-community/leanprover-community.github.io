@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [integral rational numbers](04653integralrationalnumbers.html) (2 messages, latest: Jun 03 2019 at 07:48)
+* [integral rational numbers](04653integralrationalnumbers.html) (12 messages, latest: Jun 03 2019 at 08:57)
 
 * [HoTT](75424HoTT.html) (69 messages, latest: Jun 02 2019 at 17:59)
 
