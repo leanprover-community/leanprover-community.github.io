@@ -1,0 +1,73 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/66720gluingfunctions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html">gluing functions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167233178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233178">Jean Lo (Jun 03 2019 at 21:19)</a>:</h4>
+<p>Was trying to (set-theoretically) glue functions together in Lean. My first thought was to write down something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">glue</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">X</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">s</span> <span class="n">i</span> <span class="err">∩</span> <span class="n">s</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">i</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">j</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>and going on to prove some lemmas saying that the resultant function agrees on each <code>f i</code> on <code>s i</code>.</p>
+<p>Is it a good idea to do this? What would be the idiomatic way of doing something like this in Lean?</p>
+
+<a name="167233281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233281">Kenny Lau (Jun 03 2019 at 21:20)</a>:</h4>
+<p>omit <code>h</code> from the definition of <code>glue</code></p>
+
+<a name="167233305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233305">Kenny Lau (Jun 03 2019 at 21:21)</a>:</h4>
+<p>include it in the lemmas</p>
+
+<a name="167233310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233310">Jean Lo (Jun 03 2019 at 21:21)</a>:</h4>
+<p>and add it as a hypothesis in the lemmas?</p>
+
+<a name="167233317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233317">Kenny Lau (Jun 03 2019 at 21:21)</a>:</h4>
+<p>right</p>
+
+<a name="167233318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233318">Jean Lo (Jun 03 2019 at 21:21)</a>:</h4>
+<p>ah okay, got it. Thanks!</p>
+
+<a name="167233411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233411">Scott Morrison (Jun 03 2019 at 21:22)</a>:</h4>
+<p>What do you do when <code>ι</code> is empty?</p>
+
+<a name="167233534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167233534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167233534">Jean Lo (Jun 03 2019 at 21:24)</a>:</h4>
+<p>either <code>ι</code> or <code>Y</code> being nonempty would prevent the sadness, I think. Probably add nonemptiness of <code>ι</code>as a hypothesis?</p>
+
+<a name="167234456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167234456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167234456">Kevin Buzzard (Jun 03 2019 at 21:38)</a>:</h4>
+<p>You could instead just ask that the Union of s is X, for one of the unions in Lean, I forget what it's called</p>
+
+<a name="167234504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167234504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167234504">Kevin Buzzard (Jun 03 2019 at 21:39)</a>:</h4>
+<p>Existence and uniqueness of the glued function is the sheaf axiom for the cover</p>
+
+<a name="167235538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167235538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167235538">Jean Lo (Jun 03 2019 at 21:52)</a>:</h4>
+<p>that's very tempting because asking the union to be X would eliminate one of the <code>ite</code>'s that I currently have to deal with.</p>
+<p>there's maybe some loss in generality in that I don't get to glue together function whose values I only care about within some subset, but I don't know how much I should worry about that.</p>
+
+<a name="167235944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167235944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167235944">Kevin Buzzard (Jun 03 2019 at 21:58)</a>:</h4>
+<p>You could define a glued function only on the union</p>
+
+
+{% endraw %}
