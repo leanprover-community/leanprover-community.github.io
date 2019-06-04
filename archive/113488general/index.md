@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type classes again](90385Typeclassesagain.html) (33 messages, latest: Jun 04 2019 at 08:51)
+* [Type classes again](90385Typeclassesagain.html) (43 messages, latest: Jun 04 2019 at 09:43)
 
 * [quanta article](72175quantaarticle.html) (9 messages, latest: Jun 04 2019 at 06:39)
 
