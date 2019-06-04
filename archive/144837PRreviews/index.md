@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#988 norm_cast](38579988normcast.html) (27 messages, latest: Jun 04 2019 at 11:27)
+
 * [#1085 topological modules](409681085topologicalmodules.html) (4 messages, latest: Jun 03 2019 at 19:47)
 
 * [#1073 pnat](351701073pnat.html) (2 messages, latest: Jun 03 2019 at 13:05)
@@ -45,8 +47,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1002 monoidal cats](306611002monoidalcats.html) (2 messages, latest: May 10 2019 at 06:44)
 
 * [#963 set-theory cardinals etc](34695963settheorycardinalsetc.html) (1 message, latest: May 09 2019 at 17:56)
-
-* [#988 norm_cast](38579988normcast.html) (26 messages, latest: May 09 2019 at 14:31)
 
 * [#993 comp2](02762993comp2.html) (11 messages, latest: May 08 2019 at 19:13)
 
