@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (10 messages, latest: Jun 04 2019 at 07:38)
+
 * [integral rational numbers](04653integralrationalnumbers.html) (12 messages, latest: Jun 03 2019 at 08:57)
 
 * [HoTT](75424HoTT.html) (69 messages, latest: Jun 02 2019 at 17:59)
-
-* [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (9 messages, latest: Jun 02 2019 at 14:00)
 
 * [homotopies and stuff](56419homotopiesandstuff.html) (3 messages, latest: Jun 01 2019 at 17:13)
 

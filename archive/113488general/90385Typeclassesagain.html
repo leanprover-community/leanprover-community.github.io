@@ -1,0 +1,108 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/90385Typeclassesagain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html">Type classes again</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167264211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167264211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167264211">Sebastien Gouezel (Jun 04 2019 at 07:08)</a>:</h4>
+<p>Trying to fix the <code>normed_space</code> issue, I ran into a weird behavior of typeclass resolution. The definition is now</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">normed_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">normed_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">β</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">vector_space</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">norm_smul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span><span class="n">β</span><span class="o">),</span> <span class="n">norm</span> <span class="o">(</span><span class="n">a</span> <span class="err">•</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">has_norm</span><span class="bp">.</span><span class="n">norm</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">norm</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Then, to define a normed space structure on the space of continuous linear maps between two normed spaces, I write</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">to_normed_group</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">normed_group</span><span class="bp">.</span><span class="n">of_core</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">op_norm_zero_iff</span><span class="o">,</span> <span class="n">op_norm_triangle</span><span class="o">,</span> <span class="n">op_norm_neg</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">to_normed_space</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">op_norm_smul</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>The surprising behavior is that Lean can not infer the normed group structure on <code>E →L[k] (F × G)</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">to_normed_group_prod</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="bp">×</span> <span class="n">G</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">continuous_linear_map</span><span class="bp">.</span><span class="n">to_normed_group</span>
+</pre></div>
+
+
+<p>works, but using <code>by apply_instance</code> instead of <code>continuous_linear_map.to_normed_group</code> fails. I can register this instance by hand as I just did, and then everything works fine, but I am afraid this shows there is something wrong with my definitions.</p>
+
+<a name="167266754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167266754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167266754">Sebastien Gouezel (Jun 04 2019 at 07:47)</a>:</h4>
+<p>If I try with <code>apply_instance</code>, the context is</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">,</span>
+<span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_3</span><span class="o">,</span>
+<span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_4</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">nondiscrete_normed_field</span> <span class="n">k</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">E</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">E</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">F</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_5</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">F</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">G</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="n">k</span> <span class="n">G</span>
+<span class="err">⊢</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="n">F</span> <span class="bp">×</span> <span class="n">G</span><span class="o">)</span>
+</pre></div>
+
+
+<p>and in the instance search trace I find the line</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
+
+
+<p>I don't understand what is going on...</p>
+
+<a name="167267018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267018">Sebastien Gouezel (Jun 04 2019 at 07:50)</a>:</h4>
+<p>Crap, universe issues: if I put all of them in <code>Type</code>, everything works...</p>
+
+<a name="167267097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267097">Kevin Buzzard (Jun 04 2019 at 07:51)</a>:</h4>
+<p>Try changing <code>Type*</code> to <code>Type u</code> in some places, if you want to remain polymorphic. That sometimes changes things.</p>
+
+<a name="167267161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267161">Kevin Buzzard (Jun 04 2019 at 07:52)</a>:</h4>
+<p>I have no proper understanding of why this helps, but apparently it changes elaboration. This might be an unrelated issue though of course.</p>
+
+<a name="167267169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267169">Sebastien Gouezel (Jun 04 2019 at 07:52)</a>:</h4>
+<p>I just tried this, but the problem remains.</p>
+
+<a name="167267182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267182">Kevin Buzzard (Jun 04 2019 at 07:52)</a>:</h4>
+<p>Well spotted though; universe problems are hard to debug.</p>
+
+<a name="167267322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267322">Kevin Buzzard (Jun 04 2019 at 07:54)</a>:</h4>
+<p>I have in the past suggested that mathematicians would be better off working in only one universe -- after all, that's how mathematics of this nature actually works in practice. Since when did any mathematician ever want to consider two normed fields in two different universes? Universes are for people wrestling with categories in a serious way, not for people doing "normal" mathematics like this.</p>
+
+<a name="167267337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267337">Kevin Buzzard (Jun 04 2019 at 07:54)</a>:</h4>
+<p>I don't necessarily mean <code>Type</code>, but I'm suggesting <code>Type u</code> for everything.</p>
+
+<a name="167267389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267389">Kevin Buzzard (Jun 04 2019 at 07:55)</a>:</h4>
+<p>The CS guys like this "maximally universe polymorphic" approach but I have never seen a benefit when doing this kind of mathematics. Are these issues present in Isabelle/HOL?</p>
+
+<a name="167267486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267486">Kevin Buzzard (Jun 04 2019 at 07:56)</a>:</h4>
+<p>If Lean struggles with them, and we don't actually need them, then this is an argument for just using one universe.</p>
+
+<a name="167267530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267530">Kevin Buzzard (Jun 04 2019 at 07:57)</a>:</h4>
+<p>What is done in Coq? Does anyone know?</p>
+
+
+{% endraw %}
