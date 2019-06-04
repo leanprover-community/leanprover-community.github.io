@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (30 messages, latest: Jun 04 2019 at 07:24)
+* [gluing functions](66720gluingfunctions.html) (31 messages, latest: Jun 04 2019 at 13:58)
+
+* [(no topic)](79918notopic.html) (174 messages, latest: Jun 04 2019 at 13:34)
 
 * [Direct Sums](48548DirectSums.html) (10 messages, latest: Jun 01 2019 at 13:30)
 
@@ -49,8 +51,6 @@ permalink: archive/113489newmembers/index.html
 * [int div nat eq floor rat](67601intdivnateqfloorrat.html) (6 messages, latest: May 14 2019 at 12:15)
 
 * [Guarantee a set to be a finset](76606Guaranteeasettobeafinset.html) (7 messages, latest: May 14 2019 at 09:36)
-
-* [(no topic)](79918notopic.html) (164 messages, latest: May 14 2019 at 04:10)
 
 * [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (33 messages, latest: May 13 2019 at 18:39)
 
