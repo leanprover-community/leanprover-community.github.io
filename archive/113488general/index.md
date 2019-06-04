@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type classes again](90385Typeclassesagain.html) (45 messages, latest: Jun 04 2019 at 16:05)
+* [to_additive](21549toadditive.html) (31 messages, latest: Jun 04 2019 at 17:41)
 
-* [to_additive](21549toadditive.html) (30 messages, latest: Jun 04 2019 at 15:05)
+* [Type classes again](90385Typeclassesagain.html) (47 messages, latest: Jun 04 2019 at 17:33)
 
 * [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
 
