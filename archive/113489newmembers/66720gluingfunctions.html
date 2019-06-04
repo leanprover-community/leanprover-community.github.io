@@ -235,5 +235,51 @@ permalink: archive/113489newmembers/66720gluingfunctions.html
 <p>apart from being a little verbose and suspiciously non-idiomatic, I'm not entirely sure it actually says what I want. What would be the right way of stating this result?</p>
 <p>I'm using some code for paths and homotopies as a test case, and in some cases I found that I'd still want to glue (plain) functions together without worrying about this restriction stuff. I'm currently thinking about appending the lemmas about gluing partial functions to <code>pfun.lean</code>, and having helper definitions available for some plain-function cases in the <code>function</code> namespace or something.</p>
 
+<a name="167339949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167339949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167339949">Kevin Buzzard (Jun 04 2019 at 22:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">glue_eq</span> <span class="o">{</span><span class="n">f_</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→.</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">i₁</span> <span class="n">i₂</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="o">(</span><span class="n">f_</span> <span class="n">i₁</span><span class="o">)</span><span class="bp">.</span><span class="n">fn</span> <span class="n">a</span> <span class="n">h₁</span> <span class="bp">=</span> <span class="o">(</span><span class="n">f_</span> <span class="n">i₂</span><span class="o">)</span><span class="bp">.</span><span class="n">fn</span> <span class="n">a</span> <span class="n">h₂</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">dom</span> <span class="o">(</span><span class="n">f_</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="o">(</span><span class="n">glue</span> <span class="n">f_</span><span class="o">)</span><span class="bp">.</span><span class="n">fn</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hx</span><span class="bp">⟩</span> <span class="bp">=</span> <span class="o">(</span><span class="n">f_</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">fn</span> <span class="n">x</span> <span class="n">hx</span> <span class="o">:=</span>
+<span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="167339981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167339981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167339981">Kevin Buzzard (Jun 04 2019 at 22:13)</a>:</h4>
+<p>I am not the person to talk to about idiomatic Lean but your theorem looks to me like it says what you want it to say.</p>
+
+<a name="167340179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167340179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167340179">Chris Hughes (Jun 04 2019 at 22:17)</a>:</h4>
+<p>Is that the proof? That was easy. Should we do the funny topology on <code>roption</code> idea, so if all the sets are open the function returnin roption is continuous iff the subtype function is continuous.</p>
+
+<a name="167340564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167340564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167340564">Kevin Buzzard (Jun 04 2019 at 22:24)</a>:</h4>
+<p>Yes, that proof works for me. It was discovered like this:</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">glue</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">h</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>
+  <span class="c1">-- done?!</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I thought the discussion about the topology on <code>roption</code> ended up undecided, with the issue being that Reid suggested several functors it could represent and we didn't know the best one.</p>
+
+<a name="167340721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167340721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167340721">Mario Carneiro (Jun 04 2019 at 22:27)</a>:</h4>
+<p>I would say this is not idiomatic, in that you should avoid talking about <code>fn</code> or <code>get</code> if you can avoid it, in favor of the <code>mem</code> relation. Here is a theorem you can prove about the function value without the equality constraint:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">glue_mem</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→.</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">dom</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">i</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">i</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">glue</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="167340841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167340841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167340841">Mario Carneiro (Jun 04 2019 at 22:29)</a>:</h4>
+<p>and with the equality constraint:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">glue_eq_mem</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→.</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">i&#39;</span> <span class="n">a</span> <span class="n">b</span> <span class="n">b&#39;</span><span class="o">,</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">i</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b&#39;</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">i&#39;</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b&#39;</span><span class="o">)</span>
+  <span class="o">{</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">f</span> <span class="n">i</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">glue</span> <span class="n">f</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
 
 {% endraw %}
