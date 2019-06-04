@@ -71,5 +71,68 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167244028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167244028">Scott Morrison (Jun 04 2019 at 00:08)</a>:</h4>
 <p>Thank you. :-) Sorry, I know you were pleased to get all those config options working nicely!</p>
 
+<a name="167285198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285198">Scott Morrison (Jun 04 2019 at 12:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> Any chance you can tell me how to construct a <code>tactic unit</code> that calls <code>rewrite_search</code> with <code>explain := tt</code>? I just can't do it. :-( I would like to have this for my talk in a day or two...</p>
+
+<a name="167285460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285460">Keeley Hoek (Jun 04 2019 at 12:05)</a>:</h4>
+<p>Ahhh, <span class="user-mention" data-user-id="110087">@Scott Morrison</span>, super rushing right now, but pasting:</p>
+<div class="codehilite"><pre><span></span>meta def rws : tactic string := `[rewrite_search {explain := tt}] &gt;&gt; pure &quot;&quot;
+</pre></div>
+
+
+<p>directly into <code>test/rewrite_search.lean</code> works just fine for me. Can you reproduce?</p>
+
+<a name="167285568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285568">Scott Morrison (Jun 04 2019 at 12:07)</a>:</h4>
+<p>Thank you. I'm absolutely sure I tried that earlier and got a mysterious error. :-) Sorry for the interruption!</p>
+
+<a name="167285578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285578">Keeley Hoek (Jun 04 2019 at 12:07)</a>:</h4>
+<p>I copied it from what you wrote earlier! So yeah, no idea what's going on there</p>
+
+<a name="167285692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285692">Scott Morrison (Jun 04 2019 at 12:09)</a>:</h4>
+<p>Err... this is weird.</p>
+
+<a name="167285705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285705">Scott Morrison (Jun 04 2019 at 12:09)</a>:</h4>
+<p>That compiles, but all the trace messages are proofs for the wrong theorems...?</p>
+
+<a name="167285789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285789">Scott Morrison (Jun 04 2019 at 12:10)</a>:</h4>
+<p>For every single rewrite problem it is printing one of</p>
+<div class="codehilite"><pre><span></span>/- `rewrite_search` says -/
+conv_lhs { congr, skip, erw [functor.image_preimage] },
+conv_lhs { erw [functor.image_preimage] },
+conv_lhs { congr, erw [functor.image_preimage] },
+conv_lhs { erw [functor.image_preimage] }
+</pre></div>
+
+
+<p>or </p>
+<div class="codehilite"><pre><span></span>/- `rewrite_search` says -/
+conv_rhs { erw [functor.image_preimage] }
+</pre></div>
+
+<a name="167285834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167285834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167285834">Keeley Hoek (Jun 04 2019 at 12:11)</a>:</h4>
+<p>:O</p>
+
+<a name="167286526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167286526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167286526">Keeley Hoek (Jun 04 2019 at 12:21)</a>:</h4>
+<p>Okay, what must have happened is that the <code>congr</code>-mode tracked rewrite reporting got broken when it was extracted for the mathlib</p>
+
+<a name="167286605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167286605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167286605">Keeley Hoek (Jun 04 2019 at 12:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> <br>
+I have to sleep now (exam :O), but I think the fastest solution is to put the old rewrite_all folder verbatim back in the lean-rewrite-search repo and then deleting it from the mathlib version</p>
+
+<a name="167286627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/libiconfig/near/167286627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19479libiconfig.html#167286627">Keeley Hoek (Jun 04 2019 at 12:23)</a>:</h4>
+<p>I don't know your mathlib version exactly but I think that's why garbage is coming out<br>
+I dont think what you are seeing are poofs at all</p>
+
 
 {% endraw %}

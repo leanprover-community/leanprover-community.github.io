@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (70 messages, latest: Jun 04 2019 at 09:34)
+* [HoTT](75424HoTT.html) (72 messages, latest: Jun 04 2019 at 12:24)
 
 * [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (10 messages, latest: Jun 04 2019 at 07:38)
 
