@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (78 messages, latest: Jun 04 2019 at 19:48)
+
 * [to_additive](21549toadditive.html) (31 messages, latest: Jun 04 2019 at 17:41)
 
 * [Type classes again](90385Typeclassesagain.html) (47 messages, latest: Jun 04 2019 at 17:33)
@@ -111,8 +113,6 @@ permalink: archive/113488general/index.html
 * [rw / simp difference](85693rwsimpdifference.html) (1 message, latest: May 22 2019 at 06:38)
 
 * [what happened to update-mathlib?](09517whathappenedtoupdatemathlib.html) (8 messages, latest: May 22 2019 at 03:37)
-
-* [Lean in the wild](43625Leaninthewild.html) (77 messages, latest: May 21 2019 at 23:40)
 
 * [How to trace all goals explicitly?](51734Howtotraceallgoalsexplicitly.html) (2 messages, latest: May 21 2019 at 13:15)
 
