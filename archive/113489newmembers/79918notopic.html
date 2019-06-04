@@ -1001,5 +1001,77 @@ put your code here
 
 <p>That way it is formatted as a code block with syntax highlighting.</p>
 
+<a name="167292319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167292319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167292319">hpxmd (Jun 04 2019 at 13:24)</a>:</h4>
+<p>Hello, newb in functional languages here! Im stuck on excercise at "2.4. Introducing Definitions"</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Above, we discussed the process of “currying” a function, that is, taking a function f (a, b) that takes an ordered pair as an argument, and recasting it as a function f&#39; a b that takes two arguments successively. As another exercise, we encourage you to complete the following definitions, which “curry” and “uncurry” a function.</span>
+<span class="cm">def curry (α β γ : Type) (f : α × β → γ) : α → β → γ := sorry</span>
+<span class="cm">def uncurry (α β γ : Type) (f : α → β → γ) : α × β → γ := sorry</span>
+<span class="cm">-/</span>
+<span class="n">def</span> <span class="n">curry</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>the closest solution i came up with is</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">curry</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span><span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">c</span>
+</pre></div>
+
+
+<p>returns error:</p>
+<div class="codehilite"><pre><span></span><span class="bp">/</span><span class="n">home</span><span class="bp">/</span><span class="n">runner</span><span class="bp">/.</span><span class="n">code</span><span class="bp">.</span><span class="n">tio</span><span class="o">:</span><span class="mi">2</span><span class="o">:</span><span class="mi">56</span><span class="o">:</span> <span class="n">error</span><span class="o">:</span> <span class="n">type</span> <span class="n">mismatch</span><span class="o">,</span> <span class="n">term</span>
+  <span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">γ</span><span class="o">),</span> <span class="n">c</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">γ</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span>
+</pre></div>
+
+
+<p>i don't understand how i should return this λ itself. As is can't just leave it like "λ (a: α) (b: β) (c: γ)"</p>
+
+<a name="167292425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167292425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167292425">Mario Carneiro (Jun 04 2019 at 13:25)</a>:</h4>
+<p>you need to use <code>f</code> at some point</p>
+
+<a name="167292828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167292828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167292828">hpxmd (Jun 04 2019 at 13:30)</a>:</h4>
+<p>I tried for like whole day and a half. Im no mathematitian also. Should i just continue reading then?</p>
+
+<a name="167292871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167292871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167292871">Marc Huisinga (Jun 04 2019 at 13:30)</a>:</h4>
+<p>the type signature of curry states that given a value of type alpha and a value of type beta, you get a value of type gamma. <br>
+the function you defined with your lambda however takes a value of type alpha, a value of type beta and a value of type gamma.<br>
+you need to drop the gamma parameter and come up with a way to produce a value of type gamma from values of types alpha and beta, which will involve using f.</p>
+
+<a name="167292909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167292909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167292909">Patrick Massot (Jun 04 2019 at 13:30)</a>:</h4>
+<blockquote>
+<p>you need to use <code>f</code> at some point</p>
+</blockquote>
+<p>See, the question was under-specified. No wonder the continuum hypothesis is undecidable.</p>
+
+<a name="167293143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167293143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167293143">Patrick Massot (Jun 04 2019 at 13:32)</a>:</h4>
+<p>Seriously, <span class="user-mention" data-user-id="224062">@hpxmd</span> you need to reread the last paragraph of <a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#simple-type-theory" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#simple-type-theory">https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#simple-type-theory</a></p>
+
+<a name="167293173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167293173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167293173">Johan Commelin (Jun 04 2019 at 13:33)</a>:</h4>
+<blockquote>
+<p>I tried for like whole day and a half. Im no mathematitian also. Should i just continue reading then?</p>
+</blockquote>
+<p>How many mathematicians do you think know what <code>curry</code> means? I bet that 99% think it is something you put on a sausage.</p>
+
+<a name="167293178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167293178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167293178">Patrick Massot (Jun 04 2019 at 13:33)</a>:</h4>
+<p>That's where the specification is explicitly given</p>
+
+<a name="167293221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167293221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167293221">Patrick Massot (Jun 04 2019 at 13:33)</a>:</h4>
+<p>Johan, I think you spend <em>way</em> too much time in Germany</p>
+
+<a name="167293295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%28no%20topic%29/near/167293295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79918notopic.html#167293295">hpxmd (Jun 04 2019 at 13:34)</a>:</h4>
+<p>Thanks Patrick, ill try that</p>
+
 
 {% endraw %}

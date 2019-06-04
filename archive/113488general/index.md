@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [libiconfig](19479libiconfig.html) (21 messages, latest: Jun 04 2019 at 12:23)
+* [to_additive](21549toadditive.html) (28 messages, latest: Jun 04 2019 at 13:57)
+
+* [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
 
 * [Type classes again](90385Typeclassesagain.html) (44 messages, latest: Jun 04 2019 at 11:41)
 
@@ -1611,8 +1613,6 @@ permalink: archive/113488general/index.html
 * [compile time statistics](39364compiletimestatistics.html) (368 messages, latest: Oct 12 2018 at 00:51)
 
 * [cfarm.tetaneutral.net - Compile Farm](65330cfarmtetaneutralnetCompileFarm.html) (144 messages, latest: Oct 11 2018 at 22:38)
-
-* [to_additive](21549toadditive.html) (8 messages, latest: Oct 11 2018 at 16:03)
 
 * [Löwenheim-Skolem](12683LwenheimSkolem.html) (17 messages, latest: Oct 11 2018 at 15:50)
 
