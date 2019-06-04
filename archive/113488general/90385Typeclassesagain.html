@@ -214,5 +214,55 @@ For cases where you want to work over some particular base field in <code>Type</
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167271433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167271433">Neil Strickland (Jun 04 2019 at 08:51)</a>:</h4>
 <p>I don't really buy this.  It's a basic part of the formalism that any ring <code>R</code> is isomorphic to the ring of global sections of the structure sheaf on the Zariski site for <code>R</code>.  But under the natural framework of definitions, the latter ring will be in a higher universe.  You can probably avoid that, by some argument showing that it is sufficient to consider <code>R</code>-algebras of finite presentation, which can be specified by finite lists of elements of <code>R</code>.  But that will take some work.  However, there is some real mathematical content here: we have no right to expect that the obvious definition of etale cohomology does not lead to Russell-type paradoxes, and the reasons behind that are essentially the same as the universe considerations that we are discussing.</p>
 
+<a name="167273439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273439">Reid Barton (Jun 04 2019 at 09:16)</a>:</h4>
+<p>Neil said basically what I was going to but just to spell out this "natural framework":<br>
+Etale cohomology is an instance of sheaf cohomology, which we can define for any site. If F is a sheaf on a site (C, J) then H^0(F) is the limit of F over C^{op}. In general if we allow C to be a large category then H^0(F) might really be too big to be a set even if all the values of F are sets.<br>
+Now in etale cohomology two things happen which each independently prevent this from occurring.</p>
+<ul>
+<li>The etale site of X has a terminal object (X itself) which means that H^0(F) is (isomorphic to) F(X). But we should regard this as a theorem, not a definition. Moreover we still have to do something about the higher H^i(F).</li>
+<li>The etale site of X is essentially small (by the kind of cardinality arguments Neil mentioned) and therefore we can compute all the H^i(F) by replacing the etale site by an equivalent small category. Again there are theorems involved here (these cardinality arguments, and the fact that cohomology is unchanged under an equivalence of sites) but perhaps it's most ergonomic to define etale cohomology as the sheaf cohomology over a genuinely small category equivalent to the etale site of X.</li>
+</ul>
+
+<a name="167273625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273625">Johan Commelin (Jun 04 2019 at 09:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> As mathematicians, we have <code>Type u ⊆ Type (u+1)</code>. Hence you're definition can spit out something in <code>Type (u+1)</code> but you can later prove that it actually lives in a smaller universe. We can't do that in Lean <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="167273825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273825">Kevin Buzzard (Jun 04 2019 at 09:21)</a>:</h4>
+<p>Conrad has thought hard about these issues and might have opinions on "the best way to do it". I'll see what he thinks. It will probably just be the "replace by an equivalent small category" argument.</p>
+
+<a name="167273968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167273968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167273968">Kevin Buzzard (Jun 04 2019 at 09:23)</a>:</h4>
+<p>I do think it's essential to prove that cohomology groups are in the right universe. Wait -- this is orthogonal to the underlying issue, isn't it? If I'm prepared once and for all to do some work (which should be done!) to prove that my cohomology groups are sets (which is one way of thinking about it with a ZFC perspective) then this is all just fine still; I still don't ever need more than one universe. I'm aware there's an issue, but I don't think universe polymorphism is the way to solve it; I think what Reid is saying is the way to solve it. This is hence not an argument for multiple universes.</p>
+
+<a name="167274185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274185">Johan Commelin (Jun 04 2019 at 09:26)</a>:</h4>
+<p>It's not yet clear to me how we can define <code>H^i_et</code> to be in <code>Type</code> and also make it interact nicely with the sheaf cohomology machinery. The answer is probably to have comparison isomorphisms all over the place. And once we get sufficiently annoyed by them, we try to write a tactic that hides them for us.</p>
+
+<a name="167274229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274229">Johan Commelin (Jun 04 2019 at 09:27)</a>:</h4>
+<blockquote>
+<p>I do think it's essential to prove that cohomology groups are in the right universe.</p>
+</blockquote>
+<p>In Lean you cannot <em>prove</em> this. You have to make a definition, and that is the place where you have to get it right. If you mess up... bad luck.</p>
+
+<a name="167274329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274329">Johan Commelin (Jun 04 2019 at 09:29)</a>:</h4>
+<p>But maybe we will have <code>norm_ulift</code> (-;</p>
+
+<a name="167274836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167274836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167274836">Reid Barton (Jun 04 2019 at 09:36)</a>:</h4>
+<p>I totally agree that having a field <code>k</code> and two <code>k</code>-algebras <code>R</code> and <code>S</code> and an <code>S</code>-module <code>M</code> all living in different universes is not sustainable and mathlib is probably close to exhausting the material for which it makes sense. If universes are causing any difficulty then just put everything in a single <code>Type u</code>. Kevin I'm not sure whether your "one universe" is <code>Type u</code> for a "fixed" <code>u</code> or genuinely <code>Type</code>--if the latter then I'm more skeptical.<br>
+The reason we have two parameters in category theory is just to avoid duplication between small and large categories. We have definitions with up to four category parameters, I think, so there would be a lot of combinations.</p>
+
+<a name="167275023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167275023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167275023">Johan Commelin (Jun 04 2019 at 09:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> But your problem didn't go away if you put everything in <code>Type u</code>, right? Only putting everything in <code>Type</code> worked, iirc...</p>
+
+<a name="167275473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167275473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167275473">Sebastien Gouezel (Jun 04 2019 at 09:43)</a>:</h4>
+<p>It works fine if everything is in <code>Type u</code>. If the field is in <code>Type u</code> and the normed spaces are in <code>Type v</code>, it doesn't.</p>
+
 
 {% endraw %}
