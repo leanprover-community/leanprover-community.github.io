@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Type classes again](90385Typeclassesagain.html) (12 messages, latest: Jun 04 2019 at 07:57)
+
 * [quanta article](72175quantaarticle.html) (9 messages, latest: Jun 04 2019 at 06:39)
 
 * [libiconfig](19479libiconfig.html) (10 messages, latest: Jun 04 2019 at 00:08)
