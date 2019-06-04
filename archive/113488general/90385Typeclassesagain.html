@@ -104,5 +104,115 @@ permalink: archive/113488general/90385Typeclassesagain.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267530">Kevin Buzzard (Jun 04 2019 at 07:57)</a>:</h4>
 <p>What is done in Coq? Does anyone know?</p>
 
+<a name="167267840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167267840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167267840">Sebastien Gouezel (Jun 04 2019 at 08:01)</a>:</h4>
+<p>I agree with this (almost: I would be ready to have the field <code>k</code> in some universe -- think of the real numbers, they are in <code>Type</code> -- and the vector spaces in another one -- but in my example it doesn't work, they really all need to be in the same universe). I haven't seen any benefit of universe polymorphism either, and these issues don't exist in Isabelle. We really need the CS guys either to make it better, or to grant us the right to use only one universe :)</p>
+
+<a name="167268035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268035">Johan Commelin (Jun 04 2019 at 08:03)</a>:</h4>
+<p>Linear equivalences between vector spaces are currently not universe polymorphic... so it's not like you can't have non-universe polymorphic stuff in mathlib. It works like a virus though</p>
+
+<a name="167268157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268157">Johan Commelin (Jun 04 2019 at 08:04)</a>:</h4>
+<p>I fear that the <code>ℚ_[ℓ]</code>-vector space that rolls out of étale cohomology will not live in <code>Type</code>.</p>
+
+<a name="167268180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268180">Johan Commelin (Jun 04 2019 at 08:04)</a>:</h4>
+<p>I would still like to be able to apply general theorems to it.</p>
+
+<a name="167268241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268241">Johan Commelin (Jun 04 2019 at 08:05)</a>:</h4>
+<p>Currently mathlib makes it hard for me to express that it is isomorphic to its double dual... (assuming that this cohomology group is fin.dim., which is often the case).</p>
+
+<a name="167268309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268309">Sebastien Gouezel (Jun 04 2019 at 08:06)</a>:</h4>
+<p>Just for the record, with <code>pp.all</code> I have in the context</p>
+<div class="codehilite"><pre><span></span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span>
+</pre></div>
+
+
+<p>and the line that fails in instance search, if I read the trace correctly, is</p>
+<div class="codehilite"><pre><span></span>[class_instances] (1) ?x_36 : @normed_space.{u uG} k G (@nondiscrete_normed_field.to_normed_field.{u} k _inst_1) _inst_6 := _inst_7
+failed is_def_eq
+</pre></div>
+
+
+<p>This is really a mystery to me...</p>
+
+<a name="167268338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268338">Johan Commelin (Jun 04 2019 at 08:07)</a>:</h4>
+<p>That's really crazy...</p>
+
+<a name="167268361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268361">Keeley Hoek (Jun 04 2019 at 08:07)</a>:</h4>
+<p>Is this the same reluctance to unify universe metavariables that makes you have to specify the category_theory morphism universe sometimes?</p>
+
+<a name="167268425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268425">Reid Barton (Jun 04 2019 at 08:08)</a>:</h4>
+<p>So the category theory one I understand</p>
+
+<a name="167268584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268584">Reid Barton (Jun 04 2019 at 08:10)</a>:</h4>
+<p>The issue there is that, just like how in group theory we only talk about <code>G : Type u</code> and rely on the type class system to find <code>[group G]</code>, in category theory we talk about <code>C : Type u</code> and rely on the type class system to find <code>[category C]</code>. But there is a difference, because <code>category</code> has a second universe parameter <code>v</code> which is not determined by <code>C</code>. If you're unlucky it might also not be determined by whatever context is requiring the <code>category</code> instance and then Lean will refuse to "guess" <code>v</code> for you.</p>
+
+<a name="167268618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268618">Reid Barton (Jun 04 2019 at 08:11)</a>:</h4>
+<p>In that case you might need to add a <code>.{v}</code> somewhere.</p>
+
+<a name="167268744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167268744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167268744">Reid Barton (Jun 04 2019 at 08:13)</a>:</h4>
+<p>When I saw Sebastien's tactic state my first thought was that there is some problem about universe variables, but I don't understand what the problem was. It looks as though there is just a bug.</p>
+
+<a name="167269587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167269587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167269587">Reid Barton (Jun 04 2019 at 08:26)</a>:</h4>
+<blockquote>
+<p>I agree with this (almost: I would be ready to have the field <code>k</code> in some universe -- think of the real numbers, they are in <code>Type</code> -- and the vector spaces in another one -- but in my example it doesn't work, they really all need to be in the same universe). I haven't seen any benefit of universe polymorphism either, and these issues don't exist in Isabelle. We really need the CS guys either to make it better, or to grant us the right to use only one universe :)</p>
+</blockquote>
+<p>I like the "<code>Type u</code> for everything" approach for all the parts of math that don't routinely use universes even in informal presentations.<br>
+For cases where you want to work over some particular base field in <code>Type</code> there's always <code>ulift</code>. If <code>ulift real</code> isn't already a field then we can have someone go and make <code>algebra/ulift_instances</code>.</p>
+
+<a name="167269733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167269733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167269733">Keeley Hoek (Jun 04 2019 at 08:29)</a>:</h4>
+<p>What actually is the point of <code>Type u</code> not being in <code>Type u+2</code></p>
+
+<a name="167270038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270038">Kevin Buzzard (Jun 04 2019 at 08:34)</a>:</h4>
+<blockquote>
+<p>I fear that the <code>ℚ_[ℓ]</code>-vector space that rolls out of étale cohomology will not live in <code>Type</code>.</p>
+</blockquote>
+<p>Removing my computer science hat completely, you sound like you just said "I fear that the etale cohomology groups are not sets", to which I reply "Johan that is complete nonsense, of course they're sets! What are you talking about?"</p>
+
+<a name="167270353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270353">Reid Barton (Jun 04 2019 at 08:38)</a>:</h4>
+<p>I think Johan means that the étale site of X is not small, but only essentially small. It's not clear what the best way to formalize this is--but informally we just pretend there's no difference at all.</p>
+
+<a name="167270471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270471">Johan Commelin (Jun 04 2019 at 08:39)</a>:</h4>
+<p>I don't like have <code>ulift ℤ</code> and <code>ulift ℝ</code> all over the place... it's quite ugly. Otoh, battling universe issues is also ugly. I hope that we can jump between the two horns of this bull.</p>
+
+<a name="167270713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270713">Kevin Buzzard (Jun 04 2019 at 08:42)</a>:</h4>
+<blockquote>
+<p>The issue there is that, just like how in group theory we only talk about <code>G : Type u</code> and rely on the type class system to find <code>[group G]</code>, in category theory we talk about <code>C : Type u</code> and rely on the type class system to find <code>[category C]</code>. But there is a difference, because <code>category</code> has a second universe parameter <code>v</code> which is not determined by <code>C</code>. If you're unlucky it might also not be determined by whatever context is requiring the <code>category</code> instance and then Lean will refuse to "guess" <code>v</code> for you.</p>
+</blockquote>
+<p>My way of thinking about this completely solves this issue. Every category that I run into as a "normal mathematician" who is not explicitly trying to prove theorems about categories but is instead just using them as a tool to do "normal mathematics", is either a category where the class of all objects is a set (e.g. a diagram category), or a category where the class of all objects is not a set, but Hom(X,Y) is a set for all objects X and Y (e.g. the categories of sets, groups, rings, vector spaces over a field, schemes, topological spaces, insert arbitrary sane mathematical object here i.e. not "category"). So in all of "normal mathematics" there are only two things: small categories and big categories. In both cases v is determined by u. Mathematicians use these two kinds of categories in different ways too; diagram categories are for taking limits, all the other categories are for giving us a unified language for managing data and theorems, giving us a general language such as "adjoint functor" to save pen when we're trying to say what we want to say. </p>
+<p>So the extension of my "just use one universe" argument to the category theory situation is "if you want to make the category of perfectoid spaces, make it a "category of the second kind" with just one universe parameter u, and have X : Type u and Hom(X,Y) : Type u. One universe, doing the thing which the ZFC universe was invented to solve". Problem solved. Not as universe polymorphic as some people like -- <em>but it works in Lean and it is enough for mathematicians</em>. </p>
+<p>Sure if you want to develop some theories about higher categories or whatever then feel free to wrestle with universes; I am not saying that all of the maths everyone does should stick to one universe. But I want to argue that for "normal" mathematics, being universe polymorphic is <em>actively bad</em>. It is bad because things don't work. It is bad because normal mathematicians say "why are you assuming the existence of universes?". I have no good answer to this question. I want to start a campaign for one universe.</p>
+
+<a name="167270902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167270902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167270902">Kevin Buzzard (Jun 04 2019 at 08:45)</a>:</h4>
+<blockquote>
+<p>I think Johan means that the étale site of X is not small, but only essentially small. It's not clear what the best way to formalize this is--but informally we just pretend there's no difference at all.</p>
+</blockquote>
+<p>I must understand all the mathematics here. How do we define the constant sheaf Z/nZ on the etale site? Insert definition here. It's a sheaf. H^0 is then in Type, right?</p>
+
+<a name="167271017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167271017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167271017">Kevin Buzzard (Jun 04 2019 at 08:46)</a>:</h4>
+<p>There are various ways of defining the higher H^i. Can't I just take some cohomologically trivial cover and then do some Cech-like thing? Is there really an issue here?</p>
+
+<a name="167271433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167271433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167271433">Neil Strickland (Jun 04 2019 at 08:51)</a>:</h4>
+<p>I don't really buy this.  It's a basic part of the formalism that any ring <code>R</code> is isomorphic to the ring of global sections of the structure sheaf on the Zariski site for <code>R</code>.  But under the natural framework of definitions, the latter ring will be in a higher universe.  You can probably avoid that, by some argument showing that it is sufficient to consider <code>R</code>-algebras of finite presentation, which can be specified by finite lists of elements of <code>R</code>.  But that will take some work.  However, there is some real mathematical content here: we have no right to expect that the obvious definition of etale cohomology does not lead to Russell-type paradoxes, and the reasons behind that are essentially the same as the universe considerations that we are discussing.</p>
+
 
 {% endraw %}
