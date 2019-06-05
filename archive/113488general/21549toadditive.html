@@ -399,5 +399,49 @@ grep <span class="s2">&quot;^</span><span class="nv">$MUL</span><span class="s2"
 Can we have <code>to_additive?</code> that will trace the block of <code>to_additive</code> statements?<br>
 It would be quite helpful, I guess.</p>
 
+<a name="167367501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167367501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167367501">Johan Commelin (Jun 05 2019 at 08:23)</a>:</h4>
+<p>This example has been posted many times:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">semigroup</span><span class="bp">._</span><span class="n">proof_1</span> <span class="n">α</span> <span class="bp">_</span><span class="n">inst_1</span>
+<span class="n">term</span>
+  <span class="bp">_</span><span class="n">inst_1</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">add_semigroup</span> <span class="n">α</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">semigroup</span> <span class="n">α</span>
+</pre></div>
+
+<a name="167367520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167367520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167367520">Johan Commelin (Jun 05 2019 at 08:23)</a>:</h4>
+<p>My question is: what is <code>semigroup._proof_1</code>?</p>
+
+<a name="167367544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167367544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167367544">Johan Commelin (Jun 05 2019 at 08:23)</a>:</h4>
+<p>If I try to <code>#print</code> it, I get <code>unknown identifier semigroup._proof_1</code>.</p>
+
+<a name="167368315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167368315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167368315">Sebastian Ullrich (Jun 05 2019 at 08:35)</a>:</h4>
+<p>It's a proof abstracted (extracted) from a definition</p>
+
+<a name="167368451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167368451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167368451">Sebastian Ullrich (Jun 05 2019 at 08:37)</a>:</h4>
+<p>This is done for all "non-trivial" proofs (i.e. terms of type <code>Prop</code>) inside a definition</p>
+
+<a name="167368463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167368463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167368463">Johan Commelin (Jun 05 2019 at 08:37)</a>:</h4>
+<p>But it's not a "known identifier"</p>
+
+<a name="167368574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167368574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167368574">Sebastian Ullrich (Jun 05 2019 at 08:39)</a>:</h4>
+<p>Yes, it's a hidden auxiliary definition. Users are not supposed to interact with it, though I suppose meta programs may still have to.</p>
+
+<a name="167368710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167368710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167368710">Johan Commelin (Jun 05 2019 at 08:41)</a>:</h4>
+<p><code>to_additive</code> has a hard time interacting with it...<br>
+I can't write</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_semigroup</span><span class="bp">._</span><span class="n">proof_1</span><span class="o">]</span> <span class="n">semigroup</span><span class="bp">._</span><span class="n">proof_1</span>
+</pre></div>
+
 
 {% endraw %}
