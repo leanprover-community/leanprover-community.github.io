@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Type classes again](90385Typeclassesagain.html) (84 messages, latest: Jun 05 2019 at 09:15)
+
 * [to_additive](21549toadditive.html) (39 messages, latest: Jun 05 2019 at 08:41)
 
 * [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
-
-* [Type classes again](90385Typeclassesagain.html) (83 messages, latest: Jun 05 2019 at 07:43)
 
 * [online leanprover](19268onlineleanprover.html) (67 messages, latest: Jun 05 2019 at 03:43)
 
