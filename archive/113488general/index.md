@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [travis: fork cannot allocate memory](22503travisforkcannotallocatememory.html) (5 messages, latest: Jun 05 2019 at 22:57)
+
 * [simplifier](47605simplifier.html) (6 messages, latest: Jun 05 2019 at 20:20)
 
 * [Structures in meta](37699Structuresinmeta.html) (15 messages, latest: Jun 05 2019 at 20:02)
 
 * [norm_cast almost working](81944normcastalmostworking.html) (23 messages, latest: Jun 05 2019 at 19:51)
-
-* [travis: fork cannot allocate memory](22503travisforkcannotallocatememory.html) (3 messages, latest: Jun 05 2019 at 18:15)
 
 * [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
 
