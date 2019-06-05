@@ -188,5 +188,40 @@ permalink: archive/113489newmembers/92728workingwithsetsofvectors.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167400683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167400683">Koundinya Vajjha (Jun 05 2019 at 15:31)</a>:</h4>
 <p>Yes, most of the definitions for the product construction were available in mathlib</p>
 
+<a name="167413375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167413375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167413375">Simon Hudon (Jun 05 2019 at 18:01)</a>:</h4>
+<p>I'm pretty sure I wrote traversable instance for vector and array</p>
+
+<a name="167413438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167413438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167413438">Simon Hudon (Jun 05 2019 at 18:02)</a>:</h4>
+<p><code>traversable (flip vector n)</code> to be exact</p>
+
+<a name="167413496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167413496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167413496">Simon Hudon (Jun 05 2019 at 18:02)</a>:</h4>
+<p>Just import <code>data.vector2</code></p>
+
+<a name="167417149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167417149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167417149">Koundinya Vajjha (Jun 05 2019 at 18:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span>  thank you! Can you please tell me how I can use this? I have a bunch of lemmas proven for binary cartesian products. Can I use this to extend to <code>n</code> tuples (vectors)?</p>
+
+<a name="167417304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167417304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167417304">Simon Hudon (Jun 05 2019 at 18:37)</a>:</h4>
+<p>Probably. It depends on the lemmas. What do you have in mind?</p>
+
+<a name="167418027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167418027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167418027">Koundinya Vajjha (Jun 05 2019 at 18:43)</a>:</h4>
+<p>At the most basic level, given a set <code>(A : set α)</code> and <code>(B : set (vector α n))</code> I want to construct <code>A.prod B</code> which lives in <code>set(vector α (succ n))</code>.</p>
+
+<a name="167418363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167418363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167418363">Simon Hudon (Jun 05 2019 at 18:46)</a>:</h4>
+<p>yes, that works. You can work by induction on <code>n</code></p>
+
+<a name="167419021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167419021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167419021">Simon Hudon (Jun 05 2019 at 18:53)</a>:</h4>
+<p>Proving this lemma might make things more straightforward:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">traverse_cons</span> <span class="o">{</span><span class="n">n</span> <span class="n">α</span> <span class="n">β</span> <span class="n">F</span><span class="o">}</span> <span class="o">[</span><span class="n">applicative</span> <span class="n">F</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">F</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">vs</span> <span class="o">:</span> <span class="n">flip</span> <span class="n">vector</span> <span class="n">n</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">traverse</span> <span class="n">f</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="n">v</span> <span class="n">vs</span><span class="o">)</span> <span class="o">:</span> <span class="n">F</span> <span class="o">(</span><span class="n">flip</span> <span class="n">vector</span> <span class="bp">_</span> <span class="n">β</span><span class="o">))</span> <span class="bp">=</span> <span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">f</span> <span class="n">v</span> <span class="bp">&lt;*&gt;</span> <span class="n">traverse</span> <span class="n">f</span> <span class="n">vs</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
 
 {% endraw %}

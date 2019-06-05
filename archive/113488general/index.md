@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Structures in meta](37699Structuresinmeta.html) (7 messages, latest: Jun 05 2019 at 18:59)
+
+* [travis: fork cannot allocate memory](22503travisforkcannotallocatememory.html) (3 messages, latest: Jun 05 2019 at 18:15)
+
 * [simplifier](47605simplifier.html) (3 messages, latest: Jun 05 2019 at 14:50)
 
 * [norm_cast almost working](81944normcastalmostworking.html) (18 messages, latest: Jun 05 2019 at 14:13)
@@ -53,8 +57,6 @@ permalink: archive/113488general/index.html
 * [LiveShare](07876LiveShare.html) (7 messages, latest: May 31 2019 at 14:47)
 
 * [boolean ring](11313booleanring.html) (3 messages, latest: May 31 2019 at 11:35)
-
-* [Structures in meta](37699Structuresinmeta.html) (6 messages, latest: May 30 2019 at 07:56)
 
 * [headers](20125headers.html) (1 message, latest: May 30 2019 at 07:37)
 
