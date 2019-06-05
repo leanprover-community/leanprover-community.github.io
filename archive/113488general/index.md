@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type classes again](90385Typeclassesagain.html) (84 messages, latest: Jun 05 2019 at 09:15)
+* [simplifier](47605simplifier.html) (1 message, latest: Jun 05 2019 at 12:51)
 
-* [to_additive](21549toadditive.html) (39 messages, latest: Jun 05 2019 at 08:41)
+* [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
+
+* [Type classes again](90385Typeclassesagain.html) (84 messages, latest: Jun 05 2019 at 09:15)
 
 * [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
 

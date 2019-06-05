@@ -1,0 +1,47 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/47605simplifier.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/47605simplifier.html">simplifier</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167384795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simplifier/near/167384795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47605simplifier.html#167384795">Alexander Bentkamp (Jun 05 2019 at 12:51)</a>:</h4>
+<p>We found a strange behavior with the simplifier setup. The congruence rule <code>if_simp_congr</code> introduces an extra term <code>@decidable_of_decidable_of_iff</code> even though nothing is rewritten under the if-then-else, which then leads to subtle unification failures.</p>
+<p>Here is an example:</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="kn">inductive</span> <span class="n">tree</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">leaf</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">tree</span>
+<span class="bp">|</span> <span class="n">inner</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">tree</span> <span class="bp">→</span> <span class="n">tree</span> <span class="bp">→</span> <span class="n">tree</span>
+
+<span class="kn">export</span> <span class="n">tree</span> <span class="o">(</span><span class="n">leaf</span> <span class="n">inner</span><span class="o">)</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">depth</span> <span class="o">:</span> <span class="n">tree</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">leaf</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">inner</span> <span class="bp">_</span> <span class="n">l</span> <span class="n">r</span><span class="o">)</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="k">then</span> <span class="n">depth</span> <span class="n">l</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span>
+  <span class="k">else</span> <span class="mi">0</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">simplify</span><span class="bp">.</span><span class="n">perm</span> <span class="n">true</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">simplify</span><span class="bp">.</span><span class="n">congruence</span> <span class="n">true</span>
+
+<span class="c1">-- local attribute [-congr] if_simp_congr</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="n">r</span> <span class="o">:</span> <span class="n">tree</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">depth</span> <span class="o">(</span><span class="n">inner</span> <span class="n">w</span> <span class="n">l</span> <span class="n">r</span><span class="o">)</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">depth</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}

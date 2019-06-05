@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (46 messages, latest: Jun 05 2019 at 10:11)
+* [gluing functions](66720gluingfunctions.html) (50 messages, latest: Jun 05 2019 at 12:32)
 
 * [string equality](12294stringequality.html) (3 messages, latest: Jun 05 2019 at 03:55)
 
