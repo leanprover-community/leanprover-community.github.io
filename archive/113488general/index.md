@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [record stub](00190recordstub.html) (14 messages, latest: Jun 05 2019 at 01:05)
+* [online leanprover](19268onlineleanprover.html) (57 messages, latest: Jun 05 2019 at 02:32)
+
+* [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
 
 * [Type classes again](90385Typeclassesagain.html) (81 messages, latest: Jun 05 2019 at 00:29)
 
@@ -167,8 +169,6 @@ permalink: archive/113488general/index.html
 * [why did this work?](92772whydidthiswork.html) (14 messages, latest: May 15 2019 at 23:00)
 
 * [import analysis](82976importanalysis.html) (13 messages, latest: May 15 2019 at 15:34)
-
-* [online leanprover](19268onlineleanprover.html) (56 messages, latest: May 15 2019 at 05:10)
 
 * [Possible Bug](39072PossibleBug.html) (38 messages, latest: May 14 2019 at 18:17)
 
