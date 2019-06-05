@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [to_additive](21549toadditive.html) (39 messages, latest: Jun 05 2019 at 08:41)
+
 * [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
 
 * [Type classes again](90385Typeclassesagain.html) (83 messages, latest: Jun 05 2019 at 07:43)
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
 
 * [Lean in the wild](43625Leaninthewild.html) (79 messages, latest: Jun 04 2019 at 20:07)
-
-* [to_additive](21549toadditive.html) (31 messages, latest: Jun 04 2019 at 17:41)
 
 * [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
 
