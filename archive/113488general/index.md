@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type classes again](90385Typeclassesagain.html) (80 messages, latest: Jun 04 2019 at 23:48)
+* [Type classes again](90385Typeclassesagain.html) (81 messages, latest: Jun 05 2019 at 00:29)
 
 * [Lean in the wild](43625Leaninthewild.html) (79 messages, latest: Jun 04 2019 at 20:07)
 
