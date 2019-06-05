@@ -93,5 +93,26 @@ Server response was:
 
 <p>which I built from copying bits from <code>lean-hole</code></p>
 
+<a name="167348618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/167348618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00190recordstub.html#167348618">Jesse Michael Han (Jun 05 2019 at 01:04)</a>:</h4>
+<p>i bound the first 3 lines of that command (just inserting the hole) to <code>C-c C-SPC</code>, do <code>C-c SPC</code> to open the menu, and tab-complete <code>Ins</code></p>
+
+<a name="167348641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/record%20stub/near/167348641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00190recordstub.html#167348641">Jesse Michael Han (Jun 05 2019 at 01:05)</a>:</h4>
+<p>is the <code>env &lt;- get_env</code> doing anything in the definition of <code>instance_stub</code>?</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">hole_command</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">instance_stub</span> <span class="o">:</span> <span class="n">hole_command</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">name</span> <span class="o">:=</span> <span class="s2">&quot;Instance Stub&quot;</span><span class="o">,</span>
+  <span class="n">descr</span> <span class="o">:=</span> <span class="s2">&quot;Generate a skeleton for the structure under construction.&quot;</span><span class="o">,</span>
+  <span class="n">action</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">do</span> <span class="n">tgt</span> <span class="err">←</span> <span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">whnf</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">cl</span> <span class="o">:=</span> <span class="n">tgt</span><span class="bp">.</span><span class="n">get_app_fn</span><span class="bp">.</span><span class="n">const_name</span><span class="o">,</span>
+     <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span>
+     <span class="n">fs</span> <span class="err">←</span> <span class="n">expanded_field_list</span> <span class="n">cl</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">fs</span> <span class="o">:=</span> <span class="n">fs</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">fs</span> <span class="o">:=</span> <span class="n">format</span><span class="bp">.</span><span class="n">intercalate</span> <span class="o">(</span><span class="s2">&quot;,</span><span class="se">\n</span><span class="s2">  &quot;</span> <span class="o">:</span> <span class="n">format</span><span class="o">)</span> <span class="err">$</span> <span class="n">fs</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">fn</span><span class="o">,</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;{fn} := _&quot;</span><span class="o">),</span>
+     <span class="k">let</span> <span class="n">out</span> <span class="o">:=</span> <span class="n">format</span><span class="bp">.</span><span class="n">to_string</span> <span class="n">format</span><span class="bp">!</span><span class="s2">&quot;{{ {fs} }&quot;</span><span class="o">,</span>
+     <span class="n">return</span> <span class="o">[(</span><span class="n">out</span><span class="o">,</span><span class="s2">&quot;&quot;</span><span class="o">)]</span> <span class="o">}</span>
+</pre></div>
+
 
 {% endraw %}

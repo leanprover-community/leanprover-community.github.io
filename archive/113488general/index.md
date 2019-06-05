@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [record stub](00190recordstub.html) (14 messages, latest: Jun 05 2019 at 01:05)
+
 * [Type classes again](90385Typeclassesagain.html) (81 messages, latest: Jun 05 2019 at 00:29)
 
 * [Lean in the wild](43625Leaninthewild.html) (79 messages, latest: Jun 04 2019 at 20:07)
@@ -1547,8 +1549,6 @@ permalink: archive/113488general/index.html
 * [CPP paper](92540CPPpaper.html) (124 messages, latest: Oct 21 2018 at 18:53)
 
 * [matching on vectors](07471matchingonvectors.html) (24 messages, latest: Oct 21 2018 at 00:02)
-
-* [record stub](00190recordstub.html) (12 messages, latest: Oct 20 2018 at 21:02)
 
 * [instances](23433instances.html) (8 messages, latest: Oct 20 2018 at 12:44)
 
