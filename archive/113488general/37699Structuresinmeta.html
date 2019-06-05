@@ -63,5 +63,37 @@ And connected to that: can one retrieve the information that <code>group</code>e
 </blockquote>
 <p>Thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ! Follow-up: how does one "call" a <code>lean.parser unit</code> as a user?</p>
 
+<a name="167420210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167420210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167420210">Simon Hudon (Jun 05 2019 at 19:06)</a>:</h4>
+<p>You have to write a user command. You can look through mathlib and core for the occurrence of <code>@[user_command]</code> to show you examples of how it's done</p>
+
+<a name="167421841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167421841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167421841">Fabian Glöckle (Jun 05 2019 at 19:22)</a>:</h4>
+<p>ah, I already tried this and got stuck. What is wrong about this?</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">emit_homomorphism_structure</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="err">$</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">tk</span> <span class="s2">&quot;emitte&quot;</span><span class="o">)</span> <span class="o">(</span><span class="n">struct_name</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">s</span> <span class="err">←</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">of_tactic</span> <span class="err">$</span> <span class="n">homomorphism_structure</span> <span class="n">struct_name</span><span class="o">,</span>
+   <span class="n">emit_structure_here</span> <span class="n">s</span>
+</pre></div>
+
+<a name="167421985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167421985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167421985">Fabian Glöckle (Jun 05 2019 at 19:24)</a>:</h4>
+<p>the error message reads </p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">user</span><span class="bp">-</span><span class="n">defined</span> <span class="n">command</span><span class="o">,</span> <span class="n">must</span> <span class="n">return</span> <span class="n">type</span> <span class="bp">`</span><span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span><span class="bp">`</span>
+</pre></div>
+
+<a name="167422333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167422333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167422333">Mario Carneiro (Jun 05 2019 at 19:28)</a>:</h4>
+<p>you can't put <code>struct_name</code> in the type; use <code>struct_name &lt;- ident</code> in the body</p>
+
+<a name="167423674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167423674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167423674">Fabian Glöckle (Jun 05 2019 at 19:45)</a>:</h4>
+<p>thanks, it now works!<br>
+I had to put a dot after the last line, what does it mean?</p>
+
+<a name="167424026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Structures%20in%20meta/near/167424026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37699Structuresinmeta.html#167424026">Reid Barton (Jun 05 2019 at 19:49)</a>:</h4>
+<p>Dot ends a top-level command. Usually it should be optional.</p>
+
 
 {% endraw %}

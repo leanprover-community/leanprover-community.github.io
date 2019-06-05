@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Structures in meta](37699Structuresinmeta.html) (7 messages, latest: Jun 05 2019 at 18:59)
+* [norm_cast almost working](81944normcastalmostworking.html) (23 messages, latest: Jun 05 2019 at 19:51)
+
+* [Structures in meta](37699Structuresinmeta.html) (13 messages, latest: Jun 05 2019 at 19:49)
 
 * [travis: fork cannot allocate memory](22503travisforkcannotallocatememory.html) (3 messages, latest: Jun 05 2019 at 18:15)
 
 * [simplifier](47605simplifier.html) (3 messages, latest: Jun 05 2019 at 14:50)
-
-* [norm_cast almost working](81944normcastalmostworking.html) (18 messages, latest: Jun 05 2019 at 14:13)
 
 * [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
 
