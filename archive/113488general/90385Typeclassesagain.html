@@ -337,5 +337,156 @@ The reason we have two parameters in category theory is just to avoid duplicatio
 
 <p>Then the equivalence to the first definition (for an arbitrary fintype in any universe) is a theorem.</p>
 
+<a name="167342630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342630">Jeremy Avigad (Jun 04 2019 at 23:01)</a>:</h4>
+<p>Thanks to all three of you for the quick responses! </p>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> You are right. It is convenient to use inductive types for graph-theoretic constructions, but then I don't see how to get a <code>finset</code> without avoiding the <code>fintype</code> problem. Probably the best solution, as you say, is to have a <code>finite_type</code> class in <code>Prop</code> that mirrors the <code>fintype</code> one (until <code>rw</code> and so on are able to handle subsingletons). The duplication would be unfortunate though. (Or does anyone really need the one in <code>Type</code>?)</p>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks for the explanation. Forcing the colors to be in the same type as the graph might work. (But maybe one day someone will want to 2-color a huge graph with <code>bool</code>?) Using a general type rather than <code>fin k</code> was useful in the proofs, because in the key argument Wikipedia runs as follows: "Suppose you have a coloring of the original graph with {1,...,k}. Without loss of generality, we can assume the hub is colored k." Can you see a clever way to get the WLOG using <code>fin k</code>?</p>
+
+<a name="167342761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342761">Mario Carneiro (Jun 04 2019 at 23:03)</a>:</h4>
+<p>I'm not saying you can't have <code>coloring G A</code> for some other type <code>A</code>, I'm saying to prove a lemma that this implies <code>coloring G (fin (card A))</code> and hence <code>colorable G (card A)</code></p>
+
+<a name="167342769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342769">Kevin Buzzard (Jun 04 2019 at 23:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">what_is_this_called</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">simp</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167342825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342825">Kevin Buzzard (Jun 04 2019 at 23:04)</a>:</h4>
+<p>My library-search-fu is failing me.</p>
+
+<a name="167342839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342839">Mario Carneiro (Jun 04 2019 at 23:04)</a>:</h4>
+<p>it's an iff, sub will be on the left, and on the left of the eq</p>
+
+<a name="167342855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342855">Mario Carneiro (Jun 04 2019 at 23:05)</a>:</h4>
+<p>so <code>nat.sub_eq_iff_add_eq</code> or similar</p>
+
+<a name="167342869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342869">Jeremy Avigad (Jun 04 2019 at 23:05)</a>:</h4>
+<p>Ah, got it. Yes, that seems the way to go.</p>
+
+<a name="167342878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167342878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167342878">Mario Carneiro (Jun 04 2019 at 23:05)</a>:</h4>
+<p>it's <code>nat.sub_eq_iff_eq_add</code></p>
+
+<a name="167343211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343211">Kevin Buzzard (Jun 04 2019 at 23:12)</a>:</h4>
+<p>It's not an iff because maybe a=0 and c&gt;&gt;b</p>
+
+<a name="167343223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343223">Mario Carneiro (Jun 04 2019 at 23:12)</a>:</h4>
+<p>oh, you aren't assuming the subtraction works?</p>
+
+<a name="167343243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343243">Kevin Buzzard (Jun 04 2019 at 23:13)</a>:</h4>
+<p>It's somehow not quite the right thing anyway. You do have to prove <code>1 ≤ 2 ^ n * 2 * 1 + 2 ^ n * 2 * d - 1</code> at some point -- yeah exactly, that the subtraction works.</p>
+
+<a name="167343315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343315">Mario Carneiro (Jun 04 2019 at 23:14)</a>:</h4>
+<p>I don't think we have it; if there is an equality in the hypotheses we usually just substitute it in, so it's just saying <code>a + b - b = a</code> which is one of the variants of <code>nat.add_sub_cancel</code></p>
+
+<a name="167343352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343352">Mario Carneiro (Jun 04 2019 at 23:15)</a>:</h4>
+<p>(also I think this is the wrong thread)</p>
+
+<a name="167343421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343421">Kevin Buzzard (Jun 04 2019 at 23:16)</a>:</h4>
+<p>this thread is already a mess ;-)</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">silly</span> <span class="o">(</span><span class="n">n</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>  <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span>
+<span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_eq_iff_eq_add</span><span class="o">,</span>
+    <span class="n">ring</span><span class="o">,</span>
+<span class="c1">--    ⊢ 1 ≤ 2 ^ n * 2 * 1 + 2 ^ n * 2 * d - 1</span>
+<span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I don't see how one can get away from that silly inequality goal.</p>
+
+<a name="167343437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343437">Mario Carneiro (Jun 04 2019 at 23:17)</a>:</h4>
+<p>oh I see this is Jeremy's nat equality issue</p>
+
+<a name="167343446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343446">Kevin Buzzard (Jun 04 2019 at 23:17)</a>:</h4>
+<p>Right.</p>
+
+<a name="167343455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343455">Kevin Buzzard (Jun 04 2019 at 23:17)</a>:</h4>
+<p>But he's doing exactly what I'm going to have to do now, n&gt;=0 and d&gt;=0 so done.</p>
+
+<a name="167343466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343466">Kevin Buzzard (Jun 04 2019 at 23:18)</a>:</h4>
+<p>Maybe some sort of mono tactic saves you the pain?</p>
+
+<a name="167343516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343516">Mario Carneiro (Jun 04 2019 at 23:18)</a>:</h4>
+<p>apply <code>a + b &lt;= c -&gt; a &lt;= c - b</code> and then linarith</p>
+
+<a name="167343601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343601">Kevin Buzzard (Jun 04 2019 at 23:19)</a>:</h4>
+<p><code>linarith</code> was the first thing I tried. It doesn't work.</p>
+
+<a name="167343677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167343677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167343677">Kevin Buzzard (Jun 04 2019 at 23:20)</a>:</h4>
+<p>The lemma is basically equivalent to <code>⊢ 1 ≤ 2 ^ n * 2 * 1 + 2 ^ n * 2 * d - 1</code>; if you can get the cancellation to work then <code>ring</code> does the job. But to prove this you need <code>2^n&gt;=1</code> and now it's all going a bit meh.</p>
+
+<a name="167344001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344001">Mario Carneiro (Jun 04 2019 at 23:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">silly</span> <span class="o">(</span><span class="n">n</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span>
+<span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">*</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">nat</span><span class="bp">.</span><span class="n">sub_eq_iff_eq_add</span><span class="o">,</span> <span class="o">{</span><span class="n">ring</span><span class="o">},</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_sub_left_of_add_le</span><span class="o">,</span>
+  <span class="n">linarith</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">pow_pos</span> <span class="o">(</span><span class="n">dec_trivial</span><span class="o">:</span><span class="mi">2</span><span class="bp">&gt;</span><span class="mi">0</span><span class="o">)</span> <span class="n">n</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167344329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344329">Kevin Buzzard (Jun 04 2019 at 23:34)</a>:</h4>
+<p>Aah you just beat me on length -- I didn't know about <code>nat.pow_pos</code> so used <code>nat.pow_le_pow_of_le_right</code>. I found <code>nat.le_sub_right_of_add_le</code> using <code>library_search</code> :D</p>
+
+<a name="167344347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344347">Mario Carneiro (Jun 04 2019 at 23:35)</a>:</h4>
+<p>Better solution: don't use subtraction</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">card_iterated_mycielskian</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">G</span><span class="bp">.</span><span class="n">vertex</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">card</span> <span class="o">(</span><span class="n">iterated_mycielskian</span> <span class="n">G</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">vertex</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">card</span> <span class="n">G</span><span class="bp">.</span><span class="n">vertex</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">iterated_mycielskian</span><span class="o">],</span> <span class="o">{</span><span class="n">simp</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">card_mycielskian</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_succ</span><span class="o">,</span> <span class="n">mul_right_comm</span><span class="o">,</span> <span class="err">←</span> <span class="n">ih</span><span class="o">],</span> <span class="n">ring</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167344357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344357">Kevin Buzzard (Jun 04 2019 at 23:35)</a>:</h4>
+<p>That horrific function shouldn't even be called subtraction.</p>
+
+<a name="167344361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344361">Mario Carneiro (Jun 04 2019 at 23:35)</a>:</h4>
+<p>monus then</p>
+
+<a name="167344415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344415">Kevin Buzzard (Jun 04 2019 at 23:36)</a>:</h4>
+<p>I think Patrick would prefer moanus</p>
+
+<a name="167344697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344697">Jeremy Avigad (Jun 04 2019 at 23:42)</a>:</h4>
+<p>I like Mario's last solution. I should have thought of it. I wonder: how can we record this general strategy so that others don't make the same mistake I did? We need a theorem linter that warns users away from subtraction on nat and suggests alternatives. (Similarly, one should replace division on int and nat by multiplication, despite Descartes' rule XX: <a href="https://en.wikisource.org/wiki/Rules_for_the_Direction_of_the_Mind" target="_blank" title="https://en.wikisource.org/wiki/Rules_for_the_Direction_of_the_Mind">https://en.wikisource.org/wiki/Rules_for_the_Direction_of_the_Mind</a>.)</p>
+
+<a name="167344965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167344965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167344965">Mario Carneiro (Jun 04 2019 at 23:48)</a>:</h4>
+<p>Perhaps we should collect some tips and tricks. It's not quite the same as the style guide, and I don't think any of the other doc pages covers this area, but I think we have a decent collection of things to avoid and beginner mistakes</p>
+
 
 {% endraw %}
