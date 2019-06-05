@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [norm_cast almost working](81944normcastalmostworking.html) (16 messages, latest: Jun 05 2019 at 13:57)
+
 * [simplifier](47605simplifier.html) (1 message, latest: Jun 05 2019 at 12:51)
 
 * [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (79 messages, latest: Jun 04 2019 at 20:07)
 
 * [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
-
-* [norm_cast almost working](81944normcastalmostworking.html) (13 messages, latest: Jun 04 2019 at 11:03)
 
 * [quanta article](72175quantaarticle.html) (9 messages, latest: Jun 04 2019 at 06:39)
 
