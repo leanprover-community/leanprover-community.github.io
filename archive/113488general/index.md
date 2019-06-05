@@ -10,11 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
+
+* [Type classes again](90385Typeclassesagain.html) (83 messages, latest: Jun 05 2019 at 07:43)
+
 * [online leanprover](19268onlineleanprover.html) (67 messages, latest: Jun 05 2019 at 03:43)
 
 * [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
-
-* [Type classes again](90385Typeclassesagain.html) (81 messages, latest: Jun 05 2019 at 00:29)
 
 * [Lean in the wild](43625Leaninthewild.html) (79 messages, latest: Jun 04 2019 at 20:07)
 
