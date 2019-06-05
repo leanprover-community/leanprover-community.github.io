@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [working with sets of vectors](92728workingwithsetsofvectors.html) (50 messages, latest: Jun 05 2019 at 18:53)
+* [gluing functions](66720gluingfunctions.html) (54 messages, latest: Jun 05 2019 at 22:48)
 
-* [gluing functions](66720gluingfunctions.html) (53 messages, latest: Jun 05 2019 at 15:27)
+* [working with sets of vectors](92728workingwithsetsofvectors.html) (50 messages, latest: Jun 05 2019 at 18:53)
 
 * [string equality](12294stringequality.html) (3 messages, latest: Jun 05 2019 at 03:55)
 
