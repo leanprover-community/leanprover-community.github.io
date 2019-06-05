@@ -353,5 +353,26 @@ permalink: archive/113489newmembers/66720gluingfunctions.html
 <span class="n">H</span> <span class="n">h₁</span> <span class="n">ha</span> <span class="bp">▸</span> <span class="n">h₂</span>
 </pre></div>
 
+<a name="167400215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/gluing%20functions/near/167400215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/66720gluingfunctions.html#167400215">Jean Lo (Jun 05 2019 at 15:27)</a>:</h4>
+<p>Nice! thanks for all the examples, it really helps with me trying to understand the reasoning behind how <code>pfun</code> works.</p>
+<p>some context from the topology stuff I'm trying to write: I guess an immediate goal for me is to be able to do things like</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">constructions</span>
+
+<span class="kn">open</span> <span class="n">pfun</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">pcontinuous_is_closed_cover</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→.</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h_lf</span> <span class="o">:</span> <span class="n">locally_finite</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">dom</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)))</span>
+  <span class="o">(</span><span class="n">h_is_closed</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">is_closed</span> <span class="o">(</span><span class="n">dom</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">)))</span>
+  <span class="o">(</span><span class="n">f_cont</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">pcontinuous</span> <span class="o">(</span><span class="n">f</span> <span class="n">i</span><span class="o">))</span>
+  <span class="o">:</span> <span class="n">pcontinuous</span> <span class="o">(</span><span class="n">glue</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p><del>(I thiiiink this says what I want it to say.)</del> no it doesn't, i forgot the hypothesis about the intersections. whoops.</p>
+<p>It looks attainable by fiddling around with <code>continuous_is_closed_cover</code> and the various ways of moving between a <code>pfun</code> and a function on a subtype. Will have a try later in the day and see what happens.</p>
+
 
 {% endraw %}

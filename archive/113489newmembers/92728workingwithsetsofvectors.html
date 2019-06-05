@@ -63,5 +63,130 @@ permalink: archive/113489newmembers/92728workingwithsetsofvectors.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167397326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167397326">Koundinya Vajjha (Jun 05 2019 at 14:58)</a>:</h4>
 <p>I'm finding it hard to convince lean that <code>vector A n</code> is the same thing as the <code>n</code>-fold cartesian product of elements of A.</p>
 
+<a name="167397733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167397733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167397733">Reid Barton (Jun 05 2019 at 15:02)</a>:</h4>
+<p>Is there a <code>traversable</code> instance for <code>\lam A, vector A n</code>? (Does that even work, with a lambda?)</p>
+
+<a name="167397921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167397921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167397921">Koundinya Vajjha (Jun 05 2019 at 15:03)</a>:</h4>
+<p><code>vector</code> is defined as a subtype of <code>list</code>. I assume <code>list</code> is <code>traversable</code>, so does <code>vector</code> inherit that?</p>
+
+<a name="167398059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398059">Mario Carneiro (Jun 05 2019 at 15:04)</a>:</h4>
+<p>no, that doesn't work in general</p>
+
+<a name="167398078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398078">Reid Barton (Jun 05 2019 at 15:05)</a>:</h4>
+<p>Not automatically, and in fact there is something to prove--that the length of the list doesn't change</p>
+
+<a name="167398097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398097">Reid Barton (Jun 05 2019 at 15:05)</a>:</h4>
+<p>It should be free by parametricity, but Lean doesn't know that</p>
+
+<a name="167398159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398159">Mario Carneiro (Jun 05 2019 at 15:06)</a>:</h4>
+<p>actually parametricity doesn't tell you the length doesn't change; it could drop the first element without violating parametricity</p>
+
+<a name="167398237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398237">Koundinya Vajjha (Jun 05 2019 at 15:06)</a>:</h4>
+<p>If <code>vector</code> does have a <code>traversable</code> instance, how would that help me define cartesian products?</p>
+
+<a name="167398243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398243">Reid Barton (Jun 05 2019 at 15:06)</a>:</h4>
+<p>I guess you need the traversable laws as well then</p>
+
+<a name="167398258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398258">Reid Barton (Jun 05 2019 at 15:06)</a>:</h4>
+<p><code>traverse</code> would exactly be the cartesian product</p>
+
+<a name="167398393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398393">Reid Barton (Jun 05 2019 at 15:08)</a>:</h4>
+<p>Of course if the traversable instance doesn't already exist then in some sense it doesn't help you.</p>
+
+<a name="167398419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398419">Koundinya Vajjha (Jun 05 2019 at 15:08)</a>:</h4>
+<p>Isn't there a simpler way to do this?</p>
+
+<a name="167398436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398436">Mario Carneiro (Jun 05 2019 at 15:08)</a>:</h4>
+<p>do it directly</p>
+
+<a name="167398439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398439">Chris Hughes (Jun 05 2019 at 15:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monad</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="n">M</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">))</span> <span class="bp">→</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">M</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span> <span class="n">i</span><span class="o">,</span> <span class="n">do</span> <span class="n">y</span> <span class="err">←</span> <span class="n">x</span><span class="o">,</span> <span class="n">return</span> <span class="o">(</span><span class="n">y</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+<a name="167398480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398480">Mario Carneiro (Jun 05 2019 at 15:09)</a>:</h4>
+<p>that's the wrong way around, I think</p>
+
+<a name="167398495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398495">Chris Hughes (Jun 05 2019 at 15:09)</a>:</h4>
+<p>So it is.</p>
+
+<a name="167398590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398590">Chris Hughes (Jun 05 2019 at 15:10)</a>:</h4>
+<p>The other way is harder.</p>
+
+<a name="167398726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398726">Mario Carneiro (Jun 05 2019 at 15:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span> is this an XY problem?</p>
+
+<a name="167398780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398780">Mario Carneiro (Jun 05 2019 at 15:12)</a>:</h4>
+<p>I suspect you don't want this</p>
+
+<a name="167398787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398787">Koundinya Vajjha (Jun 05 2019 at 15:12)</a>:</h4>
+<p>An XY problem?</p>
+
+<a name="167398793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398793">Reid Barton (Jun 05 2019 at 15:12)</a>:</h4>
+<p>It would be easy on the inductive family version of vector (like <a href="https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Data/Vect.idr#L11" target="_blank" title="https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Data/Vect.idr#L11">https://github.com/idris-lang/Idris-dev/blob/master/libs/base/Data/Vect.idr#L11</a> )--I forget whether this is also in mathlib. The "subtype of list" definition seems a bit more inconvenient here</p>
+
+<a name="167398838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398838">Mario Carneiro (Jun 05 2019 at 15:13)</a>:</h4>
+<p>the subtype of list definition is very rarely the convenient one</p>
+
+<a name="167398877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398877">Koundinya Vajjha (Jun 05 2019 at 15:13)</a>:</h4>
+<p>I just want to define the product measure and pass a vector of sets and not have it complain that it's not the right type.</p>
+
+<a name="167398914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398914">Mario Carneiro (Jun 05 2019 at 15:13)</a>:</h4>
+<p>what do you want to actually say?</p>
+
+<a name="167398976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398976">Koundinya Vajjha (Jun 05 2019 at 15:14)</a>:</h4>
+<p>I want to prove that the <code>n</code>-fold product measure has it's defining property.</p>
+
+<a name="167398978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167398978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167398978">Mario Carneiro (Jun 05 2019 at 15:14)</a>:</h4>
+<p>if you are giving something of the wrong type then "making it not complain" is the wrong way to approach the problem</p>
+
+<a name="167399662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167399662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167399662">Mario Carneiro (Jun 05 2019 at 15:21)</a>:</h4>
+<p>Given <code>s : ∀ i, set (A i)</code>, the set of elements of <code>∀ i:I, A i</code> in the s's is <code>Prod s : set (∀ i, A i) := { f | ∀ i, f i ∈ s i }</code></p>
+
+<a name="167400262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167400262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167400262">Koundinya Vajjha (Jun 05 2019 at 15:27)</a>:</h4>
+<p>Here is what I am working with: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">collapse_in</span> <span class="o">(</span><span class="n">S</span><span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">{</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">Es</span><span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">vector</span> <span class="n">α</span> <span class="n">n</span><span class="o">)):</span> <span class="n">set</span> <span class="o">(</span><span class="n">vector</span> <span class="n">α</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="n">set</span><span class="bp">.</span><span class="n">sUnion</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">v</span><span class="o">:</span> <span class="bp">_</span><span class="o">,</span> <span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="n">x</span> <span class="n">v</span><span class="o">)</span> <span class="n">Es</span><span class="o">)</span> <span class="n">S</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">collapse</span><span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">vector</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">set</span> <span class="o">(</span><span class="n">vector</span> <span class="n">α</span> <span class="n">n</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="o">:=</span> <span class="err">∅</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">collapse_in</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span> <span class="n">v</span><span class="o">)</span> <span class="n">n</span> <span class="o">(</span><span class="n">collapse</span> <span class="n">n</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span> <span class="n">v</span><span class="o">))</span>
+</pre></div>
+
+<a name="167400445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167400445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167400445">Reid Barton (Jun 05 2019 at 15:29)</a>:</h4>
+<p>Do you already have the product of two measure spaces?</p>
+
+<a name="167400683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20sets%20of%20vectors/near/167400683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92728workingwithsetsofvectors.html#167400683">Koundinya Vajjha (Jun 05 2019 at 15:31)</a>:</h4>
+<p>Yes, most of the definitions for the product construction were available in mathlib</p>
+
 
 {% endraw %}
