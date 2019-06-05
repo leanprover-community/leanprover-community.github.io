@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [norm_cast almost working](81944normcastalmostworking.html) (16 messages, latest: Jun 05 2019 at 13:57)
+* [simplifier](47605simplifier.html) (3 messages, latest: Jun 05 2019 at 14:50)
 
-* [simplifier](47605simplifier.html) (1 message, latest: Jun 05 2019 at 12:51)
+* [norm_cast almost working](81944normcastalmostworking.html) (18 messages, latest: Jun 05 2019 at 14:13)
 
 * [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
 
