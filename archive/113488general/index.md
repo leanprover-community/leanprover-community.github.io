@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (86 messages, latest: Jun 06 2019 at 18:40)
+* [Lean in the wild](43625Leaninthewild.html) (106 messages, latest: Jun 06 2019 at 19:47)
 
 * [Proving Lean Video](38493ProvingLeanVideo.html) (3 messages, latest: Jun 06 2019 at 18:12)
 
