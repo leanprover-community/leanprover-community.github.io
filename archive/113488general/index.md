@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Axioms don't respect private](51071Axiomsdontrespectprivate.html) (4 messages, latest: Jun 06 2019 at 11:55)
+
 * [div_le_iff](35880divleiff.html) (3 messages, latest: Jun 06 2019 at 08:52)
 
 * [modp setoid](91225modpsetoid.html) (29 messages, latest: Jun 06 2019 at 07:47)
