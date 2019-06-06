@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (29 messages, latest: Jun 06 2019 at 20:29)
+
 * [Lean in the wild](43625Leaninthewild.html) (106 messages, latest: Jun 06 2019 at 19:47)
 
 * [Proving Lean Video](38493ProvingLeanVideo.html) (3 messages, latest: Jun 06 2019 at 18:12)
@@ -49,8 +51,6 @@ permalink: archive/113488general/index.html
 * [Mac fonts](51644Macfonts.html) (5 messages, latest: Jun 03 2019 at 17:09)
 
 * [simp and dedup](44927simpanddedup.html) (3 messages, latest: Jun 03 2019 at 12:04)
-
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (28 messages, latest: Jun 03 2019 at 03:48)
 
 * [syntax](83688syntax.html) (78 messages, latest: Jun 02 2019 at 15:26)
 
