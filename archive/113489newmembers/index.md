@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (2 messages, latest: Jun 06 2019 at 18:39)
+* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (8 messages, latest: Jun 06 2019 at 19:54)
+
+* [quotient of product](30736quotientofproduct.html) (6 messages, latest: Jun 06 2019 at 19:15)
 
 * [Eliminate classical.some](66890Eliminateclassicalsome.html) (24 messages, latest: Jun 06 2019 at 16:26)
 

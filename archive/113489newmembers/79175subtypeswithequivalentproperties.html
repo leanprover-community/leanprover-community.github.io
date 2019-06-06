@@ -33,5 +33,37 @@ permalink: archive/113489newmembers/79175subtypeswithequivalentproperties.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167509291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167509291">Chris Hughes (Jun 06 2019 at 18:39)</a>:</h4>
 <p><code>equiv.subtype_congr_prop</code>. You can rewrite with the proof that the predicates are equal, but this <code>equiv</code> gives better defeq</p>
 
+<a name="167513400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513400">Jean Lo (Jun 06 2019 at 19:17)</a>:</h4>
+<p>Oh, how does this work in practice? I choose a subtype to state the theorem for, then I invoke <code>subtype_congr_prop</code> every time I want to apply it to a term of another subtype with an equivalent prop?</p>
+
+<a name="167513587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513587">Kevin Buzzard (Jun 06 2019 at 19:19)</a>:</h4>
+<p>Chris says yes -- choose one of them and always use that one</p>
+
+<a name="167513635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513635">Jean Lo (Jun 06 2019 at 19:20)</a>:</h4>
+<p>great, thanks for the help!</p>
+
+<a name="167513707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167513707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167513707">Mario Carneiro (Jun 06 2019 at 19:20)</a>:</h4>
+<p>My inclination is to agree that this is a bad idea and you should stick with roption. You will actually get a bunch of subtypes of subtypes, and there are functions to deal with it, but it's not very convenient</p>
+
+<a name="167515144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167515144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167515144">Jean Lo (Jun 06 2019 at 19:36)</a>:</h4>
+<p>I agree that <code>roption</code> is the right formulation for the stuff about gluing functions.</p>
+<p>But at the same time I also want to write down things about partial functions from vector spaces and topologies and stuff, where the relevant lemmas in mathlib seem to usually be stated in terms of <em>'make a subtype out of a set (, the library code automatically puts the appropriate structure on it,) then work on that'.</em> For example, my interest in being able to do gluing began with wanting to construct piecewise functions with the pasting lemma (<code>continuous_subtype_is_closed_cover</code>) , and currently to do that I seem to have to:</p>
+<ul>
+<li>define several partial functions, possibly by defining a (total) function, do <code>pfun.lift</code>, then <code>pfun.restrict</code> it onto the domain I want.</li>
+<li>glue them together.</li>
+<li>make the glued-together (partial) function a (total) function again</li>
+<li>use some sort of <code>glue_eq</code> lemma, together with <code>pfun.as_subtype</code>, to put together the hypotheses <code>(f_cont  : ∀i, continuous (λ(x : subtype (c i)), f x.val))</code></li>
+</ul>
+<p>before I can actually invoke the lemma. I guess it's to be expected that manipulating concrete examples like this is going to be tedious, but I still get the feeling that there's an amount of passing-back-and-forth-between-different-ways-of-writing-things that can possibly be avoided through some abstraction that I don't know yet.</p>
+
+<a name="167516518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167516518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167516518">Mario Carneiro (Jun 06 2019 at 19:54)</a>:</h4>
+<p>Isn't there a pasting lemma that uses <code>if</code>?</p>
+
 
 {% endraw %}
