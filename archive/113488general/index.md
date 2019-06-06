@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving Lean Video](38493ProvingLeanVideo.html) (2 messages, latest: Jun 06 2019 at 17:46)
+* [Lean in the wild](43625Leaninthewild.html) (86 messages, latest: Jun 06 2019 at 18:40)
+
+* [Proving Lean Video](38493ProvingLeanVideo.html) (3 messages, latest: Jun 06 2019 at 18:12)
 
 * [simpa at](83440simpaat.html) (1 message, latest: Jun 06 2019 at 12:59)
 
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [online leanprover](19268onlineleanprover.html) (67 messages, latest: Jun 05 2019 at 03:43)
 
 * [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
-
-* [Lean in the wild](43625Leaninthewild.html) (79 messages, latest: Jun 04 2019 at 20:07)
 
 * [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
 
