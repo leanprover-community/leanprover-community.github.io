@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction](51886Induction.html) (214 messages, latest: Jun 06 2019 at 01:57)
+* [Induction](51886Induction.html) (220 messages, latest: Jun 06 2019 at 02:57)
 
 * [gluing functions](66720gluingfunctions.html) (54 messages, latest: Jun 05 2019 at 22:48)
 
