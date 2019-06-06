@@ -1,0 +1,41 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/51071Axiomsdontrespectprivate.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/51071Axiomsdontrespectprivate.html">Axioms don't respect private</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167473177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Axioms%20don%27t%20respect%20private/near/167473177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51071Axiomsdontrespectprivate.html#167473177">Wojciech Nawrocki (Jun 06 2019 at 11:34)</a>:</h4>
+<p>Is this intended behaviour or a bug? From the reference: "bear the <code>private</code> modifier [..] An alias is generated at the point where the declaration is made and it survives until the namespace is closed, or to the end of the file if the declaration is at the top level."</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">foo</span>
+<span class="kn">private</span> <span class="kn">axiom</span> <span class="n">bar</span><span class="o">:</span> <span class="n">false</span>
+<span class="kn">private</span> <span class="n">def</span> <span class="n">baz</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="kn">end</span> <span class="n">foo</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">foo</span><span class="bp">.</span><span class="n">baz</span> <span class="c1">-- unknown identifier &#39;foo.baz&#39;</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">foo</span><span class="bp">.</span><span class="n">bar</span> <span class="c1">-- foo.bar : false</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="c1">-- foo.bar is here</span>
+</pre></div>
+
+<a name="167473811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Axioms%20don%27t%20respect%20private/near/167473811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51071Axiomsdontrespectprivate.html#167473811">Chris Hughes (Jun 06 2019 at 11:45)</a>:</h4>
+<p>I think it's the right behaviour, otherwise I could sneak extra axioms into my theorems and no one would know.</p>
+
+<a name="167473946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Axioms%20don%27t%20respect%20private/near/167473946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51071Axiomsdontrespectprivate.html#167473946">Chris Hughes (Jun 06 2019 at 11:47)</a>:</h4>
+<p>I think it's the right behaviour, otherwise I could sneak extra axioms into my theorems and no one would know.</p>
+
+<a name="167474396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Axioms%20don%27t%20respect%20private/near/167474396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/51071Axiomsdontrespectprivate.html#167474396">Wojciech Nawrocki (Jun 06 2019 at 11:55)</a>:</h4>
+<p>If <code>foo.bar</code> was inaccessible outside <code>foo</code>, it could only be used by declarations in <code>foo</code>, but the usual axiom propagation mechanism through transitive dependency (a declaration depends on <code>foo.bar</code> if it uses another decl. that depends on <code>foo.bar</code>) could still work with the dependency chain always terminating at something in <code>foo</code>, so that sneaking in axioms wouldn't be possible. I guess maybe the issue is that it would be difficult for the propagation to refer to a private name.</p>
+
+
+{% endraw %}
