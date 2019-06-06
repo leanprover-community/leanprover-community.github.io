@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#943 lc refactor](96169943lcrefactor.html) (24 messages, latest: Jun 06 2019 at 10:10)
+
 * [#988 norm_cast](38579988normcast.html) (27 messages, latest: Jun 04 2019 at 11:27)
 
 * [#1085 topological modules](409681085topologicalmodules.html) (4 messages, latest: Jun 03 2019 at 19:47)
@@ -23,8 +25,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1074 category instances to root](363811074categoryinstancestoroot.html) (29 messages, latest: May 29 2019 at 17:27)
 
 * [#1088 counting measure](443021088countingmeasure.html) (2 messages, latest: May 27 2019 at 21:14)
-
-* [#943 lc refactor](96169943lcrefactor.html) (23 messages, latest: May 27 2019 at 14:50)
 
 * [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (8 messages, latest: May 27 2019 at 10:29)
 
