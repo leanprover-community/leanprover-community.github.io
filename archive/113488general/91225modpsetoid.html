@@ -28,5 +28,84 @@ permalink: archive/113488general/91225modpsetoid.html
 <span class="kn">end</span> <span class="n">modp</span>
 </pre></div>
 
+<a name="167443153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443153">Chris Hughes (Jun 06 2019 at 01:04)</a>:</h4>
+<p>Look at <code>add_pow_char</code> in <code>algebra.char_p</code></p>
+
+<a name="167443181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443181">Chris Hughes (Jun 06 2019 at 01:05)</a>:</h4>
+<p>and use <code>quotient_ring.quotient</code> instead of <code>submodule.quotient</code></p>
+
+<a name="167443229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443229">Chris Hughes (Jun 06 2019 at 01:06)</a>:</h4>
+<p>Or <code>ideal.quotient</code>. I forget the name.</p>
+
+<a name="167443232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443232">Johan Commelin (Jun 06 2019 at 01:06)</a>:</h4>
+<p>I guess I should clarify (-;</p>
+
+<a name="167443236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443236">Johan Commelin (Jun 06 2019 at 01:06)</a>:</h4>
+<p>I want to use the relation.</p>
+
+<a name="167443242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443242">Johan Commelin (Jun 06 2019 at 01:06)</a>:</h4>
+<p>Point is that I want to do some computations with <code>mv_polynomial</code>s over the integers, modulo <code>p</code>.</p>
+
+<a name="167443247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443247">Johan Commelin (Jun 06 2019 at 01:06)</a>:</h4>
+<p>And using this relation would make for readable <code>calc</code> proofs</p>
+
+<a name="167443264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443264">Reid Barton (Jun 06 2019 at 01:07)</a>:</h4>
+<p>Can you use <code>mv_polynomial</code>s over the integers modulo <code>p</code>?</p>
+
+<a name="167443265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443265">Chris Hughes (Jun 06 2019 at 01:07)</a>:</h4>
+<p>But isn't it easier to map everything into the quotient and use <code>equality</code>?</p>
+
+<a name="167443268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443268">Johan Commelin (Jun 06 2019 at 01:07)</a>:</h4>
+<p>Otherwise you'll have <code>ideal.quotient.mk (ideal.span ({p} : set (mv_polynomial int _))</code> all over the place...</p>
+
+<a name="167443272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443272">Chris Hughes (Jun 06 2019 at 01:07)</a>:</h4>
+<p>use notation</p>
+
+<a name="167443313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443313">Johan Commelin (Jun 06 2019 at 01:08)</a>:</h4>
+<p>I guess I could define a local notation for that... but then the proof state is still ugly</p>
+
+<a name="167443321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443321">Chris Hughes (Jun 06 2019 at 01:08)</a>:</h4>
+<p>I don't like the fact that we can't quotient mod p without things being ugly.</p>
+
+<a name="167443493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443493">Reid Barton (Jun 06 2019 at 01:12)</a>:</h4>
+<p>I was hoping you could use <code>parameter</code> but it doesn't seem to help</p>
+
+<a name="167443494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443494">Johan Commelin (Jun 06 2019 at 01:12)</a>:</h4>
+<p>I would like to write</p>
+<div class="codehilite"><pre><span></span><span class="k">calc</span> <span class="o">[</span><span class="n">mod</span> <span class="n">p</span><span class="o">]</span> <span class="n">foo</span> <span class="bp">=</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">blah</span>
+  <span class="bp">...</span> <span class="bp">=</span> <span class="n">xyzzy</span> <span class="o">:</span> <span class="n">etc</span>
+</pre></div>
+
+<a name="167443496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443496">Johan Commelin (Jun 06 2019 at 01:12)</a>:</h4>
+<p>And then coercions should take care of the rest</p>
+
+<a name="167443517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443517">Reid Barton (Jun 06 2019 at 01:13)</a>:</h4>
+<p>You should at least be able to write <code>calc foo =[p]= bar : blah ... = xyzzy : etc</code> using notation</p>
+
+<a name="167443568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443568">Reid Barton (Jun 06 2019 at 01:14)</a>:</h4>
+<p>though at that point I guess you should just define notation which depends on <code>p</code></p>
+
+<a name="167443653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/modp%20setoid/near/167443653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91225modpsetoid.html#167443653">Johan Commelin (Jun 06 2019 at 01:16)</a>:</h4>
+<p>Isn't that what you are doing in your example?</p>
+
 
 {% endraw %}
