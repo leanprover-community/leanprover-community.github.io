@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (214 messages, latest: Jun 06 2019 at 01:57)
+
 * [gluing functions](66720gluingfunctions.html) (54 messages, latest: Jun 05 2019 at 22:48)
 
 * [working with sets of vectors](92728workingwithsetsofvectors.html) (50 messages, latest: Jun 05 2019 at 18:53)
@@ -27,8 +29,6 @@ permalink: archive/113489newmembers/index.html
 * [reduction in the error message](97589reductionintheerrormessage.html) (11 messages, latest: May 30 2019 at 17:56)
 
 * [Max element of a set](56915Maxelementofaset.html) (9 messages, latest: May 28 2019 at 22:06)
-
-* [Induction](51886Induction.html) (212 messages, latest: May 28 2019 at 21:35)
 
 * [expr: fields and @](45316exprfieldsand.html) (116 messages, latest: May 28 2019 at 11:48)
 
