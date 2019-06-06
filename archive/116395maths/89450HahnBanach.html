@@ -1,0 +1,33 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/89450HahnBanach.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/89450HahnBanach.html">Hahn-Banach</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167489782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hahn-Banach/near/167489782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89450HahnBanach.html#167489782">Patrick Massot (Jun 06 2019 at 15:03)</a>:</h4>
+<p>At the <a href="https://www.icms.org.uk/bigproof.php" target="_blank" title="https://www.icms.org.uk/bigproof.php">Big Proof 2</a> meeting, Marie Kerjean gave a <a href="https://www.irif.fr/~kerjean/slidesBigProof19.pdf" target="_blank" title="https://www.irif.fr/~kerjean/slidesBigProof19.pdf">nice talk</a> about her proof of Hahn-Banach in Coq. She is a beginner who started to learn Coq/SSReflect only six months ago, as a post-doc working with <span class="user-mention" data-user-id="110172">@Assia Mahboubi</span>. I thought it was a nice opportunity to learn how to translate from Coq to Lean, hoping she was not expert enough in SSReflect obfuscation to prevent me from understanding her code. For this experiment, I resisted the temptation to think about the proof, or to install Coq and watch the proof state evolving, I really followed the code, with only local adaptations. The original is at <a href="https://github.com/math-comp/analysis/blob/hb/hahn_banach.v" target="_blank" title="https://github.com/math-comp/analysis/blob/hb/hahn_banach.v">https://github.com/math-comp/analysis/blob/hb/hahn_banach.v</a> (see also an <a href="https://www.irif.fr/~kerjean/TYPES19.pdf" target="_blank" title="https://www.irif.fr/~kerjean/TYPES19.pdf">abstract</a>) and the translation at <a href="https://gist.github.com/PatrickMassot/328b58599618f8642da7fd45a5457f17" target="_blank" title="https://gist.github.com/PatrickMassot/328b58599618f8642da7fd45a5457f17">https://gist.github.com/PatrickMassot/328b58599618f8642da7fd45a5457f17</a>. It took me about one day to do it, which I think is pretty encouraging. So there is hope to be able to port more things from mathcomp. </p>
+<p>I hope this can be used a Rosetta stone. But of course it would also be interesting to learn from the proof itself, and maybe find a better way. There are two main independent questions: how to use classical logic? how to handle partial function? In particular she uses <a href="https://github.com/math-comp/analysis/blob/hb/hahn_banach.v#L21-L27" target="_blank" title="https://github.com/math-comp/analysis/blob/hb/hahn_banach.v#L21-L27">https://github.com/math-comp/analysis/blob/hb/hahn_banach.v#L21-L27</a> which is of course completely useless in Lean. Can we use the fact those things are more natural in Lean in order to make the proof nicer? About partial functions, the main trick of this formalization is to consider linear forms that are defined everywhere, but bounded only on a subspace, and handle partiality using relations. Could we use what <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> did when he worked on calculus for partial functions? Last note: the <a href="https://gist.github.com/PatrickMassot/328b58599618f8642da7fd45a5457f17#file-hahn_banach-lean-L298-L299" target="_blank" title="https://gist.github.com/PatrickMassot/328b58599618f8642da7fd45a5457f17#file-hahn_banach-lean-L298-L299">statement</a> is cheating a bit because the map to be extended is assumed linear everywhere (but bounded only on a subspace of course). So, in order to get the math version, we would need to prove that linear forms on subspaces can be extended as linear forms.</p>
+<p>I hope some form of this can be PR'ed at some point, but let's discuss first.</p>
+
+<a name="167493600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hahn-Banach/near/167493600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89450HahnBanach.html#167493600">Scott Morrison (Jun 06 2019 at 15:42)</a>:</h4>
+<p>Nice! Do you have a sense why your file is only 1/3 the length, if you were following the code? Is it that you found more prerequisites already available in mathlib, or was there genuinely some compression possible?</p>
+
+<a name="167493885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hahn-Banach/near/167493885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89450HahnBanach.html#167493885">Marie Kerjean (Jun 06 2019 at 15:45)</a>:</h4>
+<p>Hi Scott ! One reason may be that our Coq proof spends some time proving a fixpoint lemma and Zorn (we wanted a new demonstration of Zorn using only  the axiom of choice in Prop).</p>
+
+<a name="167495113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Hahn-Banach/near/167495113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89450HahnBanach.html#167495113">Scott Morrison (Jun 06 2019 at 15:59)</a>:</h4>
+<p>I see. Is there an axiomatic difference then in what Patrick did (pretending otherwise Lean and Coq have the same axioms?) Or did he already have that "stronger" version of Zorn available?</p>
+
+
+{% endraw %}
