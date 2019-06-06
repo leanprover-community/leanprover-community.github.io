@@ -1,0 +1,62 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/28157Shouldprimeidealsbeaclass.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html">Should prime ideals be a class</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167527868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167527868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167527868">Chris Hughes (Jun 06 2019 at 22:13)</a>:</h4>
+<p>Currently <code>is_prime</code> is a class on ideals. This is so that the instance that says that quotienting by a prime ideal is an integral domain can be an instance. However we could do this differently, either by bundling prime ideals, or by making a quotient_ring function whose type is something like <code>Π {α : Type*} (I : ideal α) (h : is_prime I), Type*</code>. Would either of these be better? Stuff like this might be overusing type class inference a little I think <a href="https://github.com/leanprover-community/mathlib/pull/768/files#diff-210de6c3e5a3b7cf7ed5f3fe5352c9a7R547" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/768/files#diff-210de6c3e5a3b7cf7ed5f3fe5352c9a7R547">https://github.com/leanprover-community/mathlib/pull/768/files#diff-210de6c3e5a3b7cf7ed5f3fe5352c9a7R547</a></p>
+
+<a name="167528795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167528795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167528795">Reid Barton (Jun 06 2019 at 22:26)</a>:</h4>
+<p>Using classes for theorem-type stuff is awkward in my experience.<br>
+What about leaving it a class, but just not writing any instances?</p>
+
+<a name="167528814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167528814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167528814">Mario Carneiro (Jun 06 2019 at 22:26)</a>:</h4>
+<p>I don't think that example can actually work, since <code>is_primary</code> is not a typeclass arg</p>
+
+<a name="167528939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167528939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167528939">Mario Carneiro (Jun 06 2019 at 22:28)</a>:</h4>
+<p>I would prefer that these things are local instances</p>
+
+<a name="167528953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167528953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167528953">Reid Barton (Jun 06 2019 at 22:29)</a>:</h4>
+<p>Is there a simple rule about that? Arguments of an instance to the left of a colon must be either inferrable from the result type or <code>[]</code> arguments?</p>
+
+<a name="167528970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167528970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167528970">Mario Carneiro (Jun 06 2019 at 22:29)</a>:</h4>
+<p>yes, it's just that</p>
+
+<a name="167529774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167529774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167529774">Chris Hughes (Jun 06 2019 at 22:44)</a>:</h4>
+<p><code>is_primary</code> is a class</p>
+
+<a name="167529836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167529836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167529836">Mario Carneiro (Jun 06 2019 at 22:45)</a>:</h4>
+<p>but it's not in brackets in the instance</p>
+
+<a name="167530116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167530116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167530116">Reid Barton (Jun 06 2019 at 22:51)</a>:</h4>
+<p>What I would suggest:</p>
+<ul>
+<li>Leave <code>is_prime</code> a class</li>
+<li>Turn all the <code>instance</code>s in the file you linked to into <code>theorem</code>s</li>
+<li>Leave <code>instance (I : ideal α) [hI : I.is_prime] : integral_domain I.quotient</code> unchanged</li>
+<li>Expect the user to use <code>letI</code> or <code>local attribute [instance]</code> to connect the theorems about <code>is_prime</code> to <code>integral_domain I.quotient</code> as necessary</li>
+</ul>
+
+<a name="167530126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Should%20prime%20ideals%20be%20a%20class/near/167530126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/28157Shouldprimeidealsbeaclass.html#167530126">Reid Barton (Jun 06 2019 at 22:51)</a>:</h4>
+<p>and often it won't be necessary, e.g., if we just have an <code>I.is_prime</code> hypothesis floating around (to the "left of the colon")</p>
+
+
+{% endraw %}
