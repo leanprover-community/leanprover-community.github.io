@@ -1,0 +1,33 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/79175subtypeswithequivalentproperties.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html">subtypes with equivalent properties</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167499233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167499233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167499233">Jean Lo (Jun 06 2019 at 16:50)</a>:</h4>
+<p>This grew out of attempts at implementing things related to what was discussed in <a href="#narrow/stream/113489-new-members/topic/gluing.20functions" title="#narrow/stream/113489-new-members/topic/gluing.20functions">another thread</a>, but I think it's generic enough that I should ask separately:</p>
+<p>What is the (correct?) way of moving between subtypes of the same type defined by equivalent (but not definitionally equal)? For instance,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="c1">-- i think these are different types.</span>
+<span class="n">def</span> <span class="n">f₁</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="bp">/</span><span class="mi">2</span>   <span class="o">}</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="mi">1</span>
+<span class="n">def</span> <span class="n">f₂</span> <span class="o">:</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">//</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">}</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="mi">1</span>
+
+<span class="c1">-- is there a non-awkward way of stating &amp; invoking</span>
+<span class="c1">-- theorems like this?</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">f₁</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f₂</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>(context: if I glued two partial functions, I get a partial function (still of the same type! like <code>α →. β</code>) whose domain is provably equal as a set to the union of the domains of the two functions I was gluing. Now I'm interested in having a statement for this gluing thing that instead takes two functions (say <code>f g : α → β</code>) and two sets (<code>u v: set α</code>), producing a function from <code>subtype (u ∪ v)</code> — and now this seems like a tremendously bad idea, because if I do this sort of thing two or three times I wind up with a whole bunch of subtypes that all disagree with each other. Does there already exist a way of making this not-painful?)</p>
+
+
+{% endraw %}
