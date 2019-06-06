@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (1 message, latest: Jun 06 2019 at 16:50)
+
+* [Eliminate classical.some](66890Eliminateclassicalsome.html) (24 messages, latest: Jun 06 2019 at 16:26)
+
 * [computability](27079computability.html) (4 messages, latest: Jun 06 2019 at 09:14)
 
 * [Induction](51886Induction.html) (220 messages, latest: Jun 06 2019 at 02:57)
@@ -39,8 +43,6 @@ permalink: archive/113489newmembers/index.html
 * [Math physics in Lean](24293MathphysicsinLean.html) (46 messages, latest: May 25 2019 at 01:38)
 
 * [Rewrite in lambda expr](04378Rewriteinlambdaexpr.html) (3 messages, latest: May 22 2019 at 12:11)
-
-* [Eliminate classical.some](66890Eliminateclassicalsome.html) (23 messages, latest: May 22 2019 at 11:52)
 
 * [What is a motive?](37413Whatisamotive.html) (31 messages, latest: May 22 2019 at 06:25)
 
