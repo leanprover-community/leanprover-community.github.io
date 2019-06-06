@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving Lean Video](38493ProvingLeanVideo.html) (1 message, latest: Jun 06 2019 at 16:35)
+* [Proving Lean Video](38493ProvingLeanVideo.html) (2 messages, latest: Jun 06 2019 at 17:46)
 
 * [simpa at](83440simpaat.html) (1 message, latest: Jun 06 2019 at 12:59)
 
