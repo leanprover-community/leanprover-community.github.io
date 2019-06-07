@@ -10,6 +10,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Mac fonts](51644Macfonts.html) (6 messages, latest: Jun 07 2019 at 08:55)
+
+* [choose crashes Lean](49867choosecrashesLean.html) (2 messages, latest: Jun 07 2019 at 08:17)
+
+* [Proving Axiom Sane](39467ProvingAxiomSane.html) (9 messages, latest: Jun 07 2019 at 08:13)
+
 * [Abelianization](70155Abelianization.html) (2 messages, latest: Jun 07 2019 at 07:34)
 
 * [Lean in the wild](43625Leaninthewild.html) (117 messages, latest: Jun 07 2019 at 07:23)
@@ -49,8 +55,6 @@ permalink: archive/113488general/index.html
 * [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
 
 * [quanta article](72175quantaarticle.html) (9 messages, latest: Jun 04 2019 at 06:39)
-
-* [Mac fonts](51644Macfonts.html) (5 messages, latest: Jun 03 2019 at 17:09)
 
 * [simp and dedup](44927simpanddedup.html) (3 messages, latest: Jun 03 2019 at 12:04)
 

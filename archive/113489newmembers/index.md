@@ -10,13 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noncomputable def vs lemma](68284noncomputabledefvslemma.html) (2 messages, latest: Jun 07 2019 at 08:33)
+
+* [Eliminate classical.some](66890Eliminateclassicalsome.html) (25 messages, latest: Jun 07 2019 at 08:14)
+
 * [quotient of product](30736quotientofproduct.html) (7 messages, latest: Jun 07 2019 at 07:37)
 
 * [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (13 messages, latest: Jun 07 2019 at 06:27)
 
 * [proving em from dne](93827provingemfromdne.html) (15 messages, latest: Jun 06 2019 at 21:00)
-
-* [Eliminate classical.some](66890Eliminateclassicalsome.html) (24 messages, latest: Jun 06 2019 at 16:26)
 
 * [computability](27079computability.html) (4 messages, latest: Jun 06 2019 at 09:14)
 
