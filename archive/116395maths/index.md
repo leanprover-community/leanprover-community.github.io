@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Should prime ideals be a class](28157Shouldprimeidealsbeaclass.html) (10 messages, latest: Jun 06 2019 at 22:51)
+* [Should prime ideals be a class](28157Shouldprimeidealsbeaclass.html) (11 messages, latest: Jun 07 2019 at 04:27)
 
 * [Hahn-Banach](89450HahnBanach.html) (14 messages, latest: Jun 06 2019 at 21:21)
 
