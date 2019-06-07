@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VSCode Live Share](77256VSCodeLiveShare.html) (7 messages, latest: Jun 07 2019 at 22:00)
+
 * [web editor](11270webeditor.html) (12 messages, latest: Jun 07 2019 at 21:20)
 
 * [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
@@ -91,8 +93,6 @@ permalink: archive/113488general/index.html
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (21 messages, latest: May 29 2019 at 21:56)
 
 * [timeout and irreducibility](96863timeoutandirreducibility.html) (11 messages, latest: May 29 2019 at 19:01)
-
-* [VSCode Live Share](77256VSCodeLiveShare.html) (6 messages, latest: May 29 2019 at 17:52)
 
 * [functor.map_const](80084functormapconst.html) (10 messages, latest: May 29 2019 at 10:41)
 
