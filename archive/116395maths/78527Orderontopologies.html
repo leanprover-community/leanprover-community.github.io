@@ -44,5 +44,74 @@ then you should use Patrick's order, with the discrete topology at the bottom an
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574022">Patrick Massot (Jun 07 2019 at 12:59)</a>:</h4>
 <p>Chris, the order on filters is nice because it makes <code>principal</code> monotone <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L358" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L358">https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L358</a> and because it makes push forward left adjoint to pull back, and not the other way around.</p>
 
+<a name="167574220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574220">Reid Barton (Jun 07 2019 at 13:01)</a>:</h4>
+<p>What about</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">to_topological_space_mono</span> <span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span> <span class="o">:</span> <span class="n">uniform_space</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">u₁</span> <span class="bp">≤</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">@</span><span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="bp">_</span> <span class="n">u₁</span> <span class="bp">≤</span> <span class="bp">@</span><span class="n">uniform_space</span><span class="bp">.</span><span class="n">to_topological_space</span> <span class="bp">_</span> <span class="n">u₂</span> <span class="o">:=</span>
+
+<span class="kn">lemma</span> <span class="n">uniform_continuous_iff</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">uα</span> <span class="o">:</span> <span class="n">uniform_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">uβ</span> <span class="o">:</span> <span class="n">uniform_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">uniform_continuous</span> <span class="n">f</span> <span class="bp">↔</span> <span class="n">uβ</span><span class="bp">.</span><span class="n">comap</span> <span class="n">f</span> <span class="bp">≤</span> <span class="n">uα</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="167574389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574389">Patrick Massot (Jun 07 2019 at 13:03)</a>:</h4>
+<p>The first lemma means you can't change the order on topologies without changing the order on uniform structures.</p>
+
+<a name="167574395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574395">Reid Barton (Jun 07 2019 at 13:03)</a>:</h4>
+<p>Or wait, were you going to reverse the order on <code>uniform_space</code> too?</p>
+
+<a name="167574408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574408">Reid Barton (Jun 07 2019 at 13:03)</a>:</h4>
+<p>Okay, I missed that <span aria-label="+1" class="emoji emoji-1f44d" role="img" title="+1">:+1:</span></p>
+
+<a name="167574413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574413">Patrick Massot (Jun 07 2019 at 13:03)</a>:</h4>
+<p>Yes, see the first message</p>
+
+<a name="167574521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167574521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167574521">Patrick Massot (Jun 07 2019 at 13:04)</a>:</h4>
+<p>The second lemma means the order on uniform spaces currently doesn't play nicely with the order on filters</p>
+
+<a name="167575692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167575692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167575692">Patrick Massot (Jun 07 2019 at 13:20)</a>:</h4>
+<blockquote>
+<p>Chris, the order on filters is nice because it makes <code>principal</code> monotone <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L358" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L358">https://github.com/leanprover-community/mathlib/blob/master/src/order/filter/basic.lean#L358</a> and because it makes push forward left adjoint to pull back, and not the other way around.</p>
+</blockquote>
+<p>I guess this is only one argument. I like push-forward to be the left adjoint because this is what happens for functions acting on subsets. But of course sheaves are the other way around.</p>
+
+<a name="167576054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576054">Kevin Buzzard (Jun 07 2019 at 13:25)</a>:</h4>
+<p>This is sort of like saying "wouldn't it be great if all -1's were +1's?". It's not so clear that there's a perfect answer here. I guess I mean that it is clear that there is not a perfect answer here.</p>
+
+<a name="167576133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576133">Patrick Massot (Jun 07 2019 at 13:26)</a>:</h4>
+<p>We don't want a perfect answer here. We want something consistent across filters, topology and uniform structures</p>
+
+<a name="167576146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576146">Patrick Massot (Jun 07 2019 at 13:26)</a>:</h4>
+<p>Currently it is not consistent in mathlib</p>
+
+<a name="167576199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576199">Patrick Massot (Jun 07 2019 at 13:27)</a>:</h4>
+<p>And if we add the constraint that <code>principal</code> is monotone then we get that the correct order is the one we currently have on filters (unless we want to reverse the orderings on subsets...)</p>
+
+<a name="167576204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576204">Kevin Buzzard (Jun 07 2019 at 13:27)</a>:</h4>
+<p>Is it <em>possible</em> for everything to be consistent? Or are you just focussed on some small subset of inconsistent things, and if you change to make it consistent that then some other small subset will be inconsistent?</p>
+
+<a name="167576231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576231">Patrick Massot (Jun 07 2019 at 13:27)</a>:</h4>
+<p>What would be a bigger set here?</p>
+
+<a name="167576336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167576336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167576336">Chris Hughes (Jun 07 2019 at 13:29)</a>:</h4>
+<p><code>filter.sets</code> isn't monotone.</p>
+
+<a name="167577532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167577532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167577532">Patrick Massot (Jun 07 2019 at 13:45)</a>:</h4>
+<p>Who cares? The goal of the theory is to hide this function as much as possible</p>
+
 
 {% endraw %}

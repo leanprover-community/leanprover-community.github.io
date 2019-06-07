@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Mac fonts](51644Macfonts.html) (8 messages, latest: Jun 07 2019 at 13:25)
+
 * [Lean in the wild](43625Leaninthewild.html) (119 messages, latest: Jun 07 2019 at 12:55)
 
 * [choose crashes Lean](49867choosecrashesLean.html) (4 messages, latest: Jun 07 2019 at 10:00)
-
-* [Mac fonts](51644Macfonts.html) (6 messages, latest: Jun 07 2019 at 08:55)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (9 messages, latest: Jun 07 2019 at 08:13)
 
