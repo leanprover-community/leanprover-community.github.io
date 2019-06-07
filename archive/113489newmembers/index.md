@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [set_option pp.proofs true](22444setoptionppproofstrue.html) (1 message, latest: Jun 07 2019 at 09:09)
+
 * [noncomputable def vs lemma](68284noncomputabledefvslemma.html) (2 messages, latest: Jun 07 2019 at 08:33)
 
 * [Eliminate classical.some](66890Eliminateclassicalsome.html) (25 messages, latest: Jun 07 2019 at 08:14)
