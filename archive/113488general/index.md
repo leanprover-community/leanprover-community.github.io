@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (107 messages, latest: Jun 06 2019 at 23:20)
+* [Lean in the wild](43625Leaninthewild.html) (110 messages, latest: Jun 07 2019 at 00:57)
 
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (29 messages, latest: Jun 06 2019 at 20:29)
 
