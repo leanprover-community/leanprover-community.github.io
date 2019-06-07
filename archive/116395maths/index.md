@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Order on topologies](78527Orderontopologies.html) (22 messages, latest: Jun 07 2019 at 13:45)
+* [Order on topologies](78527Orderontopologies.html) (23 messages, latest: Jun 07 2019 at 14:43)
 
 * [Hahn-Banach](89450HahnBanach.html) (15 messages, latest: Jun 07 2019 at 08:51)
 

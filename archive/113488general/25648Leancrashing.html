@@ -1,0 +1,38 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/25648Leancrashing.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/25648Leancrashing.html">Lean crashing</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167582186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20crashing/near/167582186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25648Leancrashing.html#167582186">Koundinya Vajjha (Jun 07 2019 at 14:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+<span class="n">def</span> <span class="n">vec</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span>
+<span class="bp">|</span> <span class="n">A</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">punit</span>
+<span class="bp">|</span> <span class="n">A</span> <span class="o">(</span><span class="n">succ</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span> <span class="n">A</span> <span class="bp">×</span> <span class="n">vec</span> <span class="n">A</span> <span class="n">k</span>
+
+<span class="kn">inductive</span> <span class="n">dfin</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">fz</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">dfin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">fs</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">dfin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">dfin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">kth_projn</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">vec</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">dfin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">(</span><span class="bp">_</span><span class="o">)</span> <span class="n">x</span> <span class="n">dfin</span><span class="bp">.</span><span class="n">fz</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">fst</span> <span class="c1">-- crashes lean</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">xs</span><span class="o">)</span> <span class="o">(</span><span class="n">dfin</span><span class="bp">.</span><span class="n">fs</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span> <span class="n">kth_projn</span> <span class="n">n</span> <span class="n">xs</span> <span class="n">k</span>
+</pre></div>
+
+
+<p>The above piece of code crashes Lean for me...</p>
+
+
+{% endraw %}
