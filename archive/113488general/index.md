@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
+* [web editor](11270webeditor.html) (12 messages, latest: Jun 07 2019 at 21:20)
 
-* [web editor](11270webeditor.html) (6 messages, latest: Jun 07 2019 at 16:25)
+* [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
 
 * [Lean in the wild](43625Leaninthewild.html) (121 messages, latest: Jun 07 2019 at 16:07)
 
