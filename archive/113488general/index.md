@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Mac fonts](51644Macfonts.html) (8 messages, latest: Jun 07 2019 at 13:25)
+* [Mac fonts](51644Macfonts.html) (9 messages, latest: Jun 07 2019 at 14:42)
+
+* [Lean crashing](25648Leancrashing.html) (1 message, latest: Jun 07 2019 at 14:36)
+
+* [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (1 message, latest: Jun 07 2019 at 14:17)
 
 * [Lean in the wild](43625Leaninthewild.html) (119 messages, latest: Jun 07 2019 at 12:55)
 
