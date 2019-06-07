@@ -42,5 +42,29 @@ permalink: archive/113488general/49867choosecrashesLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/167563684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#167563684">Reid Barton (Jun 07 2019 at 10:00)</a>:</h4>
 <p>Looks like maybe <code>choose</code> is invoking <code>tactic.revert</code> with <code>h.2</code>, and that crashes for some reason while trying to print an error?</p>
 
+<a name="167588094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/167588094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#167588094">Simon Hudon (Jun 07 2019 at 15:47)</a>:</h4>
+<p><code>revert</code> has some issues when you misuse it. I fixed that in Lean 3.5.0</p>
+
+<a name="167588172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/167588172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#167588172">Simon Hudon (Jun 07 2019 at 15:48)</a>:</h4>
+<p>It's probably being called with something that isn't a local_const</p>
+
+<a name="167588762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/167588762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#167588762">Bryan Gin-ge Chen (Jun 07 2019 at 15:54)</a>:</h4>
+<p>In Lean 3.5.0c it doesn't crash and instead returns this:</p>
+<div class="codehilite"><pre><span></span>revert tactic failed, expecting local variable, found &#39;and.right true (Pi (i : nat), (Exists.{1} nat (fun (j : nat), (ne.{1} nat i j)))) h&#39;
+state:
+h : true ∧ ∀ (i : ℕ), ∃ (j : ℕ), i ≠ j
+⊢ true
+</pre></div>
+
+
+<p><a href="https://bryangingechen.github.io/lean/lean-web-editor/#code=import%20tactic.interactive%0A%0Aexample%20(h%20%3A%20true%20%E2%88%A7%20%E2%88%80%20i%20%3A%20%E2%84%95%2C%20%E2%88%83%20j%20%3A%20%E2%84%95%2C%20i%20%E2%89%A0%20j)%20%3A%20true%20%3A%3D%0Aby%20choose%20f%20using%20h.2%0A%0A" target="_blank" title="https://bryangingechen.github.io/lean/lean-web-editor/#code=import%20tactic.interactive%0A%0Aexample%20(h%20%3A%20true%20%E2%88%A7%20%E2%88%80%20i%20%3A%20%E2%84%95%2C%20%E2%88%83%20j%20%3A%20%E2%84%95%2C%20i%20%E2%89%A0%20j)%20%3A%20true%20%3A%3D%0Aby%20choose%20f%20using%20h.2%0A%0A">web-editor link</a></p>
+
+<a name="167589094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/167589094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#167589094">Simon Hudon (Jun 07 2019 at 15:58)</a>:</h4>
+<p>The error message could be better but it's at least clearer than a crash</p>
+
 
 {% endraw %}
