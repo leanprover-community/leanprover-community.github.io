@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (119 messages, latest: Jun 07 2019 at 12:55)
+
 * [choose crashes Lean](49867choosecrashesLean.html) (4 messages, latest: Jun 07 2019 at 10:00)
 
 * [Mac fonts](51644Macfonts.html) (6 messages, latest: Jun 07 2019 at 08:55)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (9 messages, latest: Jun 07 2019 at 08:13)
 
 * [Abelianization](70155Abelianization.html) (2 messages, latest: Jun 07 2019 at 07:34)
-
-* [Lean in the wild](43625Leaninthewild.html) (117 messages, latest: Jun 07 2019 at 07:23)
 
 * [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (29 messages, latest: Jun 06 2019 at 20:29)
 
