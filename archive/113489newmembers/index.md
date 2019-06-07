@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [proving em from dne](93827provingemfromdne.html) (15 messages, latest: Jun 06 2019 at 21:00)
+* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (10 messages, latest: Jun 07 2019 at 05:58)
 
-* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (8 messages, latest: Jun 06 2019 at 19:54)
+* [proving em from dne](93827provingemfromdne.html) (15 messages, latest: Jun 06 2019 at 21:00)
 
 * [quotient of product](30736quotientofproduct.html) (6 messages, latest: Jun 06 2019 at 19:15)
 
