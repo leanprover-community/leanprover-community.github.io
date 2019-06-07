@@ -34,5 +34,25 @@ permalink: archive/113488general/25648Leancrashing.html
 
 <p>The above piece of code crashes Lean for me...</p>
 
+<a name="167589559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20crashing/near/167589559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25648Leancrashing.html#167589559">Bryan Gin-ge Chen (Jun 07 2019 at 16:03)</a>:</h4>
+<p>This might also be something fixed in 3.5.0c. I get these errors instead:</p>
+<div class="codehilite"><pre><span></span>14:0: error:
+equation compiler failed (use &#39;set_option trace.eqn_compiler.elim_match true&#39; for additional details)
+nested exception message:
+cases tactic failed, it is not applicable to the given hypothesis
+14:4: error:
+equation compiler failed (use &#39;set_option trace.eqn_compiler.elim_match true&#39; for additional details)
+nested exception message:
+cases tactic failed, it is not applicable to the given hypothesis
+</pre></div>
+
+
+<p><a href="https://bryangingechen.github.io/lean/lean-web-editor/#code=universe%20u%0A%0Aopen%20nat%0A%0Avariable%20%7B%CE%B1%20%3A%20Type%20u%7D%0Adef%20vec%20%3A%20Type%20u%20%E2%86%92%20%E2%84%95%20%E2%86%92%20Type*%0A%7C%20A%200%20%3A%3D%20punit%0A%7C%20A%20(succ%20k)%20%3A%3D%20A%20%C3%97%20vec%20A%20k%0A%0Ainductive%20dfin%20%3A%20%E2%84%95%20%E2%86%92%20Type%0A%7C%20fz%20%7Bn%7D%20%3A%20dfin%20(n%2B1)%0A%7C%20fs%20%7Bn%7D%20%3A%20dfin%20n%20%E2%86%92%20dfin%20(n%2B1)%0A%0Adef%20kth_projn%20%3A%20%CE%A0%20n%2C%20vec%20%CE%B1%20n%20%E2%86%92%20dfin%20n%20%E2%86%92%20%CE%B1%0A%7C%20(_)%20x%20dfin.fz%20%3A%3D%20x.fst%20--%20crashes%20lean%0A%7C%20(succ%20n)%20(x%2Cxs)%20(dfin.fs%20k)%20%3A%3D%20kth_projn%20n%20xs%20k" target="_blank" title="https://bryangingechen.github.io/lean/lean-web-editor/#code=universe%20u%0A%0Aopen%20nat%0A%0Avariable%20%7B%CE%B1%20%3A%20Type%20u%7D%0Adef%20vec%20%3A%20Type%20u%20%E2%86%92%20%E2%84%95%20%E2%86%92%20Type*%0A%7C%20A%200%20%3A%3D%20punit%0A%7C%20A%20(succ%20k)%20%3A%3D%20A%20%C3%97%20vec%20A%20k%0A%0Ainductive%20dfin%20%3A%20%E2%84%95%20%E2%86%92%20Type%0A%7C%20fz%20%7Bn%7D%20%3A%20dfin%20(n%2B1)%0A%7C%20fs%20%7Bn%7D%20%3A%20dfin%20n%20%E2%86%92%20dfin%20(n%2B1)%0A%0Adef%20kth_projn%20%3A%20%CE%A0%20n%2C%20vec%20%CE%B1%20n%20%E2%86%92%20dfin%20n%20%E2%86%92%20%CE%B1%0A%7C%20(_)%20x%20dfin.fz%20%3A%3D%20x.fst%20--%20crashes%20lean%0A%7C%20(succ%20n)%20(x%2Cxs)%20(dfin.fs%20k)%20%3A%3D%20kth_projn%20n%20xs%20k">web editor</a></p>
+
+<a name="167589920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20crashing/near/167589920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25648Leancrashing.html#167589920">Bryan Gin-ge Chen (Jun 07 2019 at 16:07)</a>:</h4>
+<p>Oh wait, nevermind. Somehow it works in the web editor but crashes lean 3.5.0 in vscode...</p>
+
 
 {% endraw %}
