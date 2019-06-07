@@ -74,5 +74,17 @@ permalink: archive/113489newmembers/79175subtypeswithequivalentproperties.html
 <p>Then use <code>continuous_subtype_is_closed_cover
 </code></p>
 
+<a name="167550557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167550557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167550557">Jean Lo (Jun 07 2019 at 06:03)</a>:</h4>
+<p>yeah. <code>continuous_subtype_is_closed_cover</code> wants a total function together with proofs that its restrictions to functions from subtypes are continuous, and I was wondering whether there's a good way to feed it a bunch of functions from subtypes (or pfuns)  and have it give me the continuity of the glued-together function that I wanted :D</p>
+
+<a name="167551567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167551567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167551567">Johannes Hölzl (Jun 07 2019 at 06:24)</a>:</h4>
+<p>Maybe you need to think it from the other side (which is obviously the same but sometimes makes a mental difference). You want to prove <code>continuous G</code> (where <code>G</code> is your glued-together function). Then you apply <code>continuous_subtype_is_closed_cover C</code>, and get the statement that for each <code>c</code> in <code>C</code> you need to prove <code>continuous (fn x:subtype c, G (coe x))</code>. But now you can rewrite <code>(fn x:subtype c, G (coe x))</code> into something your like more.</p>
+
+<a name="167551694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtypes%20with%20equivalent%20properties/near/167551694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/79175subtypeswithequivalentproperties.html#167551694">Johannes Hölzl (Jun 07 2019 at 06:27)</a>:</h4>
+<p>The trick is that we now talk about <code>G (coe x)</code> where <code>coe x</code> gives us enough information to rewrite <code>G (coe x) = f_c (coe_2 x)</code> where <code>c</code> is the index into our cover, and <code>coe_2</code> now may coerce from the cover into another set, the set where <code>f_c</code> is defined on.</p>
+
 
 {% endraw %}
