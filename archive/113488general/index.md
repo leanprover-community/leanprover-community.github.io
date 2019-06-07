@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (29 messages, latest: Jun 06 2019 at 20:29)
+* [Lean in the wild](43625Leaninthewild.html) (107 messages, latest: Jun 06 2019 at 23:20)
 
-* [Lean in the wild](43625Leaninthewild.html) (106 messages, latest: Jun 06 2019 at 19:47)
+* [Kevin's talk at Big Proof](85297KevinstalkatBigProof.html) (29 messages, latest: Jun 06 2019 at 20:29)
 
 * [Proving Lean Video](38493ProvingLeanVideo.html) (3 messages, latest: Jun 06 2019 at 18:12)
 
