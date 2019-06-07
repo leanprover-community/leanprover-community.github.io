@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (10 messages, latest: Jun 07 2019 at 05:58)
+* [subtypes with equivalent properties](79175subtypeswithequivalentproperties.html) (13 messages, latest: Jun 07 2019 at 06:27)
 
 * [proving em from dne](93827provingemfromdne.html) (15 messages, latest: Jun 06 2019 at 21:00)
 
