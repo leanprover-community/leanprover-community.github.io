@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Mac fonts](51644Macfonts.html) (6 messages, latest: Jun 07 2019 at 08:55)
+* [choose crashes Lean](49867choosecrashesLean.html) (3 messages, latest: Jun 07 2019 at 09:58)
 
-* [choose crashes Lean](49867choosecrashesLean.html) (2 messages, latest: Jun 07 2019 at 08:17)
+* [Mac fonts](51644Macfonts.html) (6 messages, latest: Jun 07 2019 at 08:55)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (9 messages, latest: Jun 07 2019 at 08:13)
 
