@@ -10,15 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
+
+* [web editor](11270webeditor.html) (6 messages, latest: Jun 07 2019 at 16:25)
+
+* [Lean in the wild](43625Leaninthewild.html) (121 messages, latest: Jun 07 2019 at 16:07)
+
+* [Lean crashing](25648Leancrashing.html) (3 messages, latest: Jun 07 2019 at 16:07)
+
 * [choose crashes Lean](49867choosecrashesLean.html) (8 messages, latest: Jun 07 2019 at 15:58)
 
-* [Lean in the wild](43625Leaninthewild.html) (120 messages, latest: Jun 07 2019 at 15:40)
-
 * [Mac fonts](51644Macfonts.html) (9 messages, latest: Jun 07 2019 at 14:42)
-
-* [Lean crashing](25648Leancrashing.html) (1 message, latest: Jun 07 2019 at 14:36)
-
-* [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (1 message, latest: Jun 07 2019 at 14:17)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (9 messages, latest: Jun 07 2019 at 08:13)
 
