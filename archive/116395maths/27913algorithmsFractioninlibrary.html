@@ -42,5 +42,57 @@ I see "localization.lean" somewhere in mathlib, this is a generalization for Fra
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167646109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167646109">Reid Barton (Jun 08 2019 at 10:54)</a>:</h4>
 <p>I think we have a merge sort (of the kind that uses linear additional space)--that's about it</p>
 
+<a name="167648433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167648433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167648433">Sergei (Jun 08 2019 at 12:05)</a>:</h4>
+<blockquote>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/rat.lean#L227" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/rat.lean#L227">https://github.com/leanprover-community/mathlib/blob/master/src/data/rat.lean#L227</a></p>
+</blockquote>
+<p>But this is actually Rational = (Fraction Integer). And I talk about (Fraction R) for arbitrary integral domain R supplied with gcd.</p>
+
+<a name="167648497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167648497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167648497">Kevin Buzzard (Jun 08 2019 at 12:06)</a>:</h4>
+<p>Yes, this is rational numbers. We do have field of fractions of an arbitrary integral domain though: <a href="https://github.com/leanprover-community/mathlib/blob/b55e44de0cdd632c2a1c3c21ce05f814ab6f614a/src/ring_theory/localization.lean#L436" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/b55e44de0cdd632c2a1c3c21ce05f814ab6f614a/src/ring_theory/localization.lean#L436">https://github.com/leanprover-community/mathlib/blob/b55e44de0cdd632c2a1c3c21ce05f814ab6f614a/src/ring_theory/localization.lean#L436</a></p>
+
+<a name="167648574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167648574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167648574">Sergei (Jun 08 2019 at 12:09)</a>:</h4>
+<blockquote>
+<p>I agree about comments in mathlib. Which files are you interested in in particular?</p>
+</blockquote>
+<p>I do not see these files.  They need to be about how so do + and * on Fractions with cancelling by gcd in a general case, not only for rational numbers.</p>
+
+<a name="167648793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167648793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167648793">Kevin Buzzard (Jun 08 2019 at 12:15)</a>:</h4>
+<p>The link I sent is just an abstract construction of the field of fractions of an integral domain. No gcd algorithm is needed to make this ring. There is no claim that any fraction can be put into a "canonical form" there.</p>
+
+<a name="167649387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167649387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167649387">Sergei (Jun 08 2019 at 12:33)</a>:</h4>
+<blockquote>
+<p>We do have field of fractions of an arbitrary integral domain though:<br>
+<a href="https://github.com/leanprover-community/mathlib" target="_blank" title="https://github.com/leanprover-community/mathlib">https://github.com/leanprover-community/mathlib</a>&gt; /blob/b55e44de0cdd632c2a1c3c21ce05f814ab6f614a/src/ring_theory/localization.lean#L436</p>
+</blockquote>
+<p>I have seen this from the start. I understand that substituting {0} for a prime ideal in an integral ring R for localization we obtain actually the domain (Fraction R).   But I do not know the Lean language. And I do not see any explanation concerning the algorithms. How are fractions summed? Is it <br>
+a/b + a'/b' = (a<em>b' + a'</em>b)/(b*b') ?<br>
+Is the result somehow reduced? If R has a sensible gcd, probably it can be applied, or may be one can reduce by some ideal ...  <br>
+If it is not reduced, then how will this arithmetic work say for  R = Z2[x]  for  <br>
+Z2 = Integer modulo 2 ? how will there grow the denominator degrees?<br>
+I mean different provable ways to sum fractions that aim at a bit of efficiency. Because in computer algebra not only proof matters, but also efficiency.<br>
+This file localization.lean is difficult to understand. The only thing I understood is that this is about a local ring, and that its equality is proved transitive. There needs to be somewhere a short explanation in a humanly language of what is such and such method, say, a reference to a textbook + several words about algorithms.<br>
+?<br>
+A similar strange problem is with the Coq math libraries. One needs just to read the bare code instead of observing literature references and humanly explanations.</p>
+
+<a name="167649699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167649699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167649699">Reid Barton (Jun 08 2019 at 12:43)</a>:</h4>
+<p>It's not reduced and it's not meant to be efficient. It's math, not computer algebra.<br>
+However, it would also be possible to implement what you suggest--it just hasn't been done in mathlib yet.</p>
+
+<a name="167649874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167649874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167649874">Sergei (Jun 08 2019 at 12:48)</a>:</h4>
+<p>I see now. Thank you.<br>
+Generally in these mathlib-s there is a problem of literature references and humanly explanations.</p>
+
+<a name="167650178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/algorithms%2C%20Fraction%20in%20library/near/167650178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27913algorithmsFractioninlibrary.html#167650178">Kevin Buzzard (Jun 08 2019 at 12:57)</a>:</h4>
+<p>The reference is Atiyah and Macdonald's book "commutative algebra". Yes, this is maths not computer algebra. The code is written so we can reason about maths, not do computations with it.</p>
+
 
 {% endraw %}
