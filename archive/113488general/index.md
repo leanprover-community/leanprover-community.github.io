@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (122 messages, latest: Jun 08 2019 at 07:22)
+
 * [AI and theorem proving](41431AIandtheoremproving.html) (16 messages, latest: Jun 08 2019 at 00:32)
 
 * [VSCode Live Share](77256VSCodeLiveShare.html) (7 messages, latest: Jun 07 2019 at 22:00)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [web editor](11270webeditor.html) (12 messages, latest: Jun 07 2019 at 21:20)
 
 * [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
-
-* [Lean in the wild](43625Leaninthewild.html) (121 messages, latest: Jun 07 2019 at 16:07)
 
 * [Lean crashing](25648Leancrashing.html) (3 messages, latest: Jun 07 2019 at 16:07)
 
