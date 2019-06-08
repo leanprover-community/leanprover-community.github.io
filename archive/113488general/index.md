@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
+
 * [Lean in the wild](43625Leaninthewild.html) (122 messages, latest: Jun 08 2019 at 07:22)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (16 messages, latest: Jun 08 2019 at 00:32)
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [choose crashes Lean](49867choosecrashesLean.html) (8 messages, latest: Jun 07 2019 at 15:58)
 
 * [Mac fonts](51644Macfonts.html) (9 messages, latest: Jun 07 2019 at 14:42)
-
-* [Proving Axiom Sane](39467ProvingAxiomSane.html) (9 messages, latest: Jun 07 2019 at 08:13)
 
 * [Abelianization](70155Abelianization.html) (2 messages, latest: Jun 07 2019 at 07:34)
 

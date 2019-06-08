@@ -50,5 +50,12 @@ The elaborator figures out this "chain" while defining "mul_assoc".</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20Axiom%20Sane/near/167556995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39467ProvingAxiomSane.html#167556995">Tim Daly (Jun 07 2019 at 08:13)</a>:</h4>
 <p>Is there a command / api to show the full elaboration?</p>
 
+<a name="167642197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20Axiom%20Sane/near/167642197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39467ProvingAxiomSane.html#167642197">Tim Daly (Jun 08 2019 at 08:59)</a>:</h4>
+<p>Axiom has general type constructs like Group, Ring, Field which exports 'signatures' of functions that must be implemented (e.g. a multiply operator) by any domain (e.g. polynomials need to implement multiply). What Axiom lacks, and I am working to provide, are the 'axioms' that a Ring needs to satisfy and specifications of polynomials (e.g. the multiply operation) that define the operations. To do this I have to re-implement the Axiom compiler for the Axiom language (called Spad, short for Scratchpad). </p>
+<p>The new compiler (called Sane) has the dual job of producing Axiom compatible code (common lisp functions) and Lean compatible proofs. I have done a 'first-cut' deep dive into the Lean source code. It seems that the Sane compiler needs to compile to Lean syntax (as well as common lisp). This is basically a 'dual tail' compiler.</p>
+<p>Such a compiler would make Axiom's computer algebra functions available in Lean.</p>
+<p>There are, of course, 'second level issues', such as proving the Sane compiler lisp output is correct. But, as we all know, "it's kittens all the way down" so it is not a simple job. But it does seem to be a realistic path forward, merging Axiom and Lean.</p>
+
 
 {% endraw %}
