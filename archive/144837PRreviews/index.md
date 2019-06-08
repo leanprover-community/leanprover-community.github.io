@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (25 messages, latest: Jun 08 2019 at 22:04)
+
 * [#1118 Presented groups](966331118Presentedgroups.html) (1 message, latest: Jun 07 2019 at 04:26)
 
 * [#943 lc refactor](96169943lcrefactor.html) (24 messages, latest: Jun 06 2019 at 10:10)
@@ -101,8 +103,6 @@ permalink: archive/144837PRreviews/index.html
 * [#851 FTA](82749851FTA.html) (12 messages, latest: Mar 26 2019 at 21:25)
 
 * [#766](67655766.html) (48 messages, latest: Mar 26 2019 at 13:03)
-
-* [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (24 messages, latest: Mar 24 2019 at 17:44)
 
 * [#789 extensions of equiv](48571789extensionsofequiv.html) (34 messages, latest: Mar 21 2019 at 12:41)
 

@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [HoTT](75424HoTT.html) (89 messages, latest: Jun 08 2019 at 22:59)
+
 * [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
 
 * [Order on topologies](78527Orderontopologies.html) (25 messages, latest: Jun 07 2019 at 15:04)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [Hahn-Banach](89450HahnBanach.html) (15 messages, latest: Jun 07 2019 at 08:51)
 
 * [Should prime ideals be a class](28157Shouldprimeidealsbeaclass.html) (11 messages, latest: Jun 07 2019 at 04:27)
-
-* [HoTT](75424HoTT.html) (72 messages, latest: Jun 04 2019 at 12:24)
 
 * [cohomology, and subgroups of subgroups](24873cohomologyandsubgroupsofsubgroups.html) (10 messages, latest: Jun 04 2019 at 07:38)
 
