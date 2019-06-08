@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AI and theorem proving](41431AIandtheoremproving.html) (16 messages, latest: Jun 08 2019 at 00:32)
+
 * [VSCode Live Share](77256VSCodeLiveShare.html) (7 messages, latest: Jun 07 2019 at 22:00)
 
 * [web editor](11270webeditor.html) (12 messages, latest: Jun 07 2019 at 21:20)
@@ -87,8 +89,6 @@ permalink: archive/113488general/index.html
 * [headers](20125headers.html) (1 message, latest: May 30 2019 at 07:37)
 
 * [Cubical Computational Type Theory](88337CubicalComputationalTypeTheory.html) (14 messages, latest: May 30 2019 at 00:19)
-
-* [AI and theorem proving](41431AIandtheoremproving.html) (15 messages, latest: May 29 2019 at 22:36)
 
 * [morphisms up to associativity](36087morphismsuptoassociativity.html) (21 messages, latest: May 29 2019 at 21:56)
 
