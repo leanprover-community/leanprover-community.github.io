@@ -351,5 +351,88 @@ But people <em>have</em> tried to get Univalent parametricity without changing t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167286716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167286716">Rob Lewis (Jun 04 2019 at 12:24)</a>:</h4>
 <p>Their paper says their p-adics are constructive. One way to interpret the computability question is to ask if they can define computable functions on the p-adics. For example, given a closed term of Z_p you might want to compute its norm. As far as I could tell, they don't define any functions beyond the arithmetic ones, computably or noncomputably. And univalence doesn't compute in UniMath. That may or may not show up to block things here, I don't know.</p>
 
+<a name="167670100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670100">Kevin Buzzard (Jun 08 2019 at 22:06)</a>:</h4>
+<p>A quote from (page 1 of) <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> 's <a href="https://florisvandoorn.com/papers/dissertation.pdf" target="_blank" title="https://florisvandoorn.com/papers/dissertation.pdf">thesis</a>:</p>
+<blockquote>
+<p>The fact that all constructions are homotopy invariant also leads to some challenges.<br>
+It is not always clear whether we can define a concept of homotopy theory in homotopy<br>
+type theory. For example, singular homology is a homotopy invariant notion, but in the<br>
+construction we use the set of all simplices in a space, which is not a homotopy invariant<br>
+notion. In this case, we can define homology in a different way (see Section 5.5).<br>
+However, for other definitions, such as the Grassmannian manifolds, it is an open<br>
+problem whether they can be constructed in homotopy type theory.</p>
+</blockquote>
+<p>Wait--what? Are we just talking about the standard smooth projective varieties of e.g. subspaces of a f.d. vector space? What is the trouble with making them in HoTT?</p>
+
+<a name="167670378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670378">Reid Barton (Jun 08 2019 at 22:15)</a>:</h4>
+<p>The problem is to construct HoTT types whose "internal homotopy type" is the homotopy type of a real or complex Grassmannian.<br>
+Here "internal homotopy type of X" means, for example, use the interpretation of HoTT in simplicial sets and take the homotopy type of the simplicial set corresponding to X.</p>
+
+<a name="167670689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670689">Reid Barton (Jun 08 2019 at 22:24)</a>:</h4>
+<p>Of course you can also reinvent the real numbers, classical topology, linear algebra, etc. in HoTT just the same way you would do in Lean and define Grassmannians that way, but there's no known way in book HoTT to relate this classical homotopy theory to the internal homotopy theory.</p>
+
+<a name="167670754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670754">Reid Barton (Jun 08 2019 at 22:26)</a>:</h4>
+<p>I think there was a discussion about this here before but I can't find it now</p>
+
+<a name="167670816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670816">Kevin Buzzard (Jun 08 2019 at 22:28)</a>:</h4>
+<p>The penny is slowly dropping. Last summer <span class="user-mention" data-user-id="120256">@Ali Sever</span> developed synthetic 2-dimensional geometry in Lean (following Tarski), where "point" and "line" are just abstract types and there are relations between them. This is different to "analytic 2-dimensional geometry" where you define <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span></span></span></span> and then points are points in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span></span></span></span> and lines are lines in <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi mathvariant="double-struck">R</mi><mn>2</mn></msup></mrow><annotation encoding="application/x-tex">\mathbb{R}^2</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord"><span class="mord mathbb">R</span></span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">2</span></span></span></span></span></span></span></span></span></span></span>. </p>
+<p>This HoTT is just the same sort of thing isn't it. You're saying we can do it the "analytic" way, but this basic interpretation of types as spaces-up-to-homotopy is like the synthetic way of doing it.</p>
+
+<a name="167670834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670834">Kevin Buzzard (Jun 08 2019 at 22:29)</a>:</h4>
+<p>This is basically explained on p4 of the thesis. "Synthetic geometry limits the things one can state or prove, but these proofs are applicable in every model of the axioms". That's all well and good, but what about if you only care about one model?</p>
+
+<a name="167670886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670886">Kevin Buzzard (Jun 08 2019 at 22:30)</a>:</h4>
+<p>So there might be more models of HoTT other than spaces-up-to-homotopy?</p>
+
+<a name="167670894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670894">Reid Barton (Jun 08 2019 at 22:30)</a>:</h4>
+<p>There are definitely multiple models (I know it's not in English, but see the bottom of page 2)</p>
+
+<a name="167670910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670910">Kevin Buzzard (Jun 08 2019 at 22:31)</a>:</h4>
+<p>Hmm, yeah that doesn't really help :-/</p>
+
+<a name="167670956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670956">Kevin Buzzard (Jun 08 2019 at 22:32)</a>:</h4>
+<p>So is "spaces up to homotopy" a "model" for HoTT?</p>
+
+<a name="167670972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670972">Kevin Buzzard (Jun 08 2019 at 22:33)</a>:</h4>
+<p>Is "the simplicial set model" something like "simplicial sets up to some sort of simplicial homotopy relation"?</p>
+
+<a name="167670977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167670977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167670977">Kevin Buzzard (Jun 08 2019 at 22:33)</a>:</h4>
+<p>Where can I read about Grothendieck infinity,1 toposes? Assume I know what a Grothendieck topos is.</p>
+
+<a name="167671150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167671150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167671150">Koundinya Vajjha (Jun 08 2019 at 22:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  this is what people usually refer to when they talk about the "simplicial set model" - <a href="https://arxiv.org/abs/1211.2851" target="_blank" title="https://arxiv.org/abs/1211.2851">https://arxiv.org/abs/1211.2851</a></p>
+
+<a name="167671706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167671706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167671706">Reid Barton (Jun 08 2019 at 22:55)</a>:</h4>
+<blockquote>
+<p>Where can I read about Grothendieck infinity,1 toposes? Assume I know what a Grothendieck topos is.</p>
+</blockquote>
+<p>Instead of sheaves of sets on a site, take sheaves of spaces on a site.</p>
+
+<a name="167671759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167671759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167671759">Reid Barton (Jun 08 2019 at 22:56)</a>:</h4>
+<p>An (infinity,1)-topos is a particular kind of (infinity,1)-category, which you could model using any choice of models for (infinity,1)-categories, for example, quasicategories as in Jacob's book.</p>
+
+<a name="167671828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167671828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167671828">Reid Barton (Jun 08 2019 at 22:58)</a>:</h4>
+<p>Incidentally Lean minus all the axioms can also be interpreted in any Grothendieck topos, so this question about multiple models is sort of orthogonal to the question about HoTT or not.</p>
+
+<a name="167671852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167671852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167671852">Reid Barton (Jun 08 2019 at 22:59)</a>:</h4>
+<p>You have to do a pretty large amount of work to get from an (infinity,1)-topos to an interpretation of HoTT though</p>
+
 
 {% endraw %}
