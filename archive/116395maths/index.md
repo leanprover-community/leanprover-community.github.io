@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (5 messages, latest: Jun 08 2019 at 10:54)
+* [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
 
 * [Order on topologies](78527Orderontopologies.html) (25 messages, latest: Jun 07 2019 at 15:04)
 
