@@ -702,5 +702,148 @@ Here "internal homotopy type of X" means, for example, use the interpretation of
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167673956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167673956">Kevin Buzzard (Jun 08 2019 at 23:59)</a>:</h4>
 <p>What's the easiest way of proving <code>false</code> using the Lean 3 HoTT package?</p>
 
+<a name="167674024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674024">Kevin Buzzard (Jun 09 2019 at 00:00)</a>:</h4>
+<p>Is <code>bool = fin 2 -&gt; false</code> provable in Lean?</p>
+
+<a name="167674083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674083">Reid Barton (Jun 09 2019 at 00:02)</a>:</h4>
+<p>It looks like the Agda cubical thing is a mode that Agda is aware of, so it probably automatically prevents you from breaking the rules (assuming there aren't bugs), like Lean 2's HoTT mode</p>
+
+<a name="167674090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674090">Kevin Buzzard (Jun 09 2019 at 00:02)</a>:</h4>
+<p>Maybe it's easier to write down two equivalences bool -&gt; bool</p>
+
+<a name="167674091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674091">Kenny Lau (Jun 09 2019 at 00:02)</a>:</h4>
+<blockquote>
+<p>Is <code>bool = fin 2 -&gt; false</code> provable in Lean?</p>
+</blockquote>
+<p>no</p>
+
+<a name="167674145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674145">Reid Barton (Jun 09 2019 at 00:04)</a>:</h4>
+<blockquote>
+<p>What's the easiest way of proving <code>false</code> using the Lean 3 HoTT package?</p>
+</blockquote>
+<p>Use univalence to construct <code>e : bool = bool</code> such that <code>eq.rec</code> on <code>e</code> swaps the values, and then use proof irrelevance to get <code>e = rfl</code></p>
+
+<a name="167674158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674158">Kevin Buzzard (Jun 09 2019 at 00:05)</a>:</h4>
+<p>right.</p>
+
+<a name="167674162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674162">Chris Hughes (Jun 09 2019 at 00:05)</a>:</h4>
+<p>Is <code>tt == ff</code> in HoTT</p>
+
+<a name="167674217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674217">Kevin Buzzard (Jun 09 2019 at 00:07)</a>:</h4>
+<blockquote>
+<p>Use univalence to construct <code>e : bool = bool</code> such that <code>eq.rec</code> on <code>e</code> swaps the values, and then use proof irrelevance to get <code>e = rfl</code></p>
+</blockquote>
+<p>dammit <code>e</code> has type Type 1 instead of <code>Prop</code></p>
+
+<a name="167674219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674219">Kevin Buzzard (Jun 09 2019 at 00:07)</a>:</h4>
+<p><code>=</code> has been redefined to mean <code>hott.eq</code></p>
+
+<a name="167674265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674265">Chris Hughes (Jun 09 2019 at 00:08)</a>:</h4>
+<p>Are you in HoTT Lean?</p>
+
+<a name="167674266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674266">Kevin Buzzard (Jun 09 2019 at 00:08)</a>:</h4>
+<p>rofl <code>=</code> is overloaded</p>
+
+<a name="167674268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674268">Kevin Buzzard (Jun 09 2019 at 00:08)</a>:</h4>
+<p>I'm just goofing around in <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> 's hott3 repo</p>
+
+<a name="167674270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674270">Kevin Buzzard (Jun 09 2019 at 00:08)</a>:</h4>
+<p><code>=</code> is overloaded! It's just like normal maths!</p>
+
+<a name="167674331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674331">Kevin Buzzard (Jun 09 2019 at 00:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">hott_theory_cmd</span> <span class="s2">&quot;local infix ` = ` := hott.eq&quot;</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">hott</span><span class="o">,</span> <span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">rfl</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">}</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>You've got to be pretty darn careful in this repo!</p>
+
+<a name="167674335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674335">Reid Barton (Jun 09 2019 at 00:10)</a>:</h4>
+<p>Oh I was afraid of that, but I only skimmed the source on github, I didn't actually build it.</p>
+
+<a name="167674349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674349">Kevin Buzzard (Jun 09 2019 at 00:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">eq</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="n">refl</span> <span class="o">:</span> <span class="n">eq</span> <span class="n">a</span>
+</pre></div>
+
+<a name="167674350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674350">Reid Barton (Jun 09 2019 at 00:11)</a>:</h4>
+<p>Okay so it's the same as the normal <code>eq</code>, just not a Prop.</p>
+
+<a name="167674352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674352">Kevin Buzzard (Jun 09 2019 at 00:11)</a>:</h4>
+<p>right</p>
+
+<a name="167674469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674469">Reid Barton (Jun 09 2019 at 00:15)</a>:</h4>
+<p>You can still prove that any two terms of type <code>hott.eq a b</code> are equal but it's more complicated than you might expect under the hood.</p>
+
+<a name="167674514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674514">Kevin Buzzard (Jun 09 2019 at 00:16)</a>:</h4>
+<p>Perhaps I'm not supposed to be proving that sort of thing.</p>
+
+<a name="167674520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674520">Reid Barton (Jun 09 2019 at 00:17)</a>:</h4>
+<p>Well that's how you finish the proof of <code>false</code>--it replaces the proof irrelevance step</p>
+
+<a name="167674532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674532">Reid Barton (Jun 09 2019 at 00:17)</a>:</h4>
+<p>So yes you're not supposed to prove it</p>
+
+<a name="167674818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674818">Chris Hughes (Jun 09 2019 at 00:25)</a>:</h4>
+<p>This always seemed to me to be something that felt accidentally consistent. You have a recursor that says every proof is <code>refl</code>, but somehow you can't prove everything's a set. A lot of the proofs in the HoTT book informally prove equalities by saying "assume everything's refl". Is there some intuition behind when this is valid? Very imprecise question, I know.</p>
+
+<a name="167674829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674829">Koundinya Vajjha (Jun 09 2019 at 00:25)</a>:</h4>
+<blockquote>
+<p>So one thing I would like to attempt some day is to turn the Kapulkin-Lumsdaine paper that <span class="user-mention silent" data-user-id="116448">Koundinya Vajjha</span> linked earlier into Lean so that you can do the synthetic homotopy theory parts in an embedded HoTT language and the analytic parts with whatever means are necessary.</p>
+</blockquote>
+<p>AFAIK, synthetic homotopy theory uses Higher Inductive types and the Kapulkin-Lumsdaine paper avoids HITs altogether. As of last year, I think HITs have a semantics in the simplicial model, although I'm not totally sure.</p>
+
+<a name="167674876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674876">Reid Barton (Jun 09 2019 at 00:26)</a>:</h4>
+<p>It avoids them in the sense that it does not handle them, yeah.</p>
+
+<a name="167674878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674878">Kevin Buzzard (Jun 09 2019 at 00:26)</a>:</h4>
+<p>The definition of the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>S</mi><mn>1</mn></msup></mrow><annotation encoding="application/x-tex">S^1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span></span></span></span></span></span></span></span> type (the circle) seems to have one point <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi></mrow><annotation encoding="application/x-tex">x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span></span></span></span> and one proof <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">x=x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span><span class="mrel">=</span><span class="mord mathit">x</span></span></span></span> and you can compose this proof with itself lots of times and get lots of proofs of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">x=x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span><span class="mrel">=</span><span class="mord mathit">x</span></span></span></span> and only one of them will be <code>refl</code></p>
+
+<a name="167674896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674896">Kevin Buzzard (Jun 09 2019 at 00:27)</a>:</h4>
+<p>This proof of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>x</mi><mo>=</mo><mi>x</mi></mrow><annotation encoding="application/x-tex">x=x</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.43056em;"></span><span class="strut bottom" style="height:0.43056em;vertical-align:0em;"></span><span class="base"><span class="mord mathit">x</span><span class="mrel">=</span><span class="mord mathit">x</span></span></span></span> is made as an explicit constructor in the definition of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>S</mi><mn>1</mn></msup></mrow><annotation encoding="application/x-tex">S^1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.8141079999999999em;"></span><span class="strut bottom" style="height:0.8141079999999999em;vertical-align:0em;"></span><span class="base"><span class="mord"><span class="mord mathit" style="margin-right:0.05764em;">S</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.8141079999999999em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathrm mtight">1</span></span></span></span></span></span></span></span></span></span></span> so is really not proved by <code>refl</code></p>
+
+<a name="167674899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167674899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167674899">Kevin Buzzard (Jun 09 2019 at 00:27)</a>:</h4>
+<p>I don't even know if I'm supposed to be calling it a "proof".</p>
+
+<a name="167675138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167675138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167675138">Mario Carneiro (Jun 09 2019 at 00:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> It's not exactly about "assume everything's refl", but it's hard not to read it that way because that's what the J rule (aka <code>eq.drec</code>) says</p>
+
+<a name="167675148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167675148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167675148">Reid Barton (Jun 09 2019 at 00:35)</a>:</h4>
+<blockquote>
+<p>This always seemed to me to be something that felt accidentally consistent. You have a recursor that says every proof is <code>refl</code>, but somehow you can't prove everything's a set. A lot of the proofs in the HoTT book informally prove equalities by saying "assume everything's refl". Is there some intuition behind when this is valid? Very imprecise question, I know.</p>
+</blockquote>
+<p>At least one endpoint of the equality has to be a variable; then you can replace it and the equality proof by the other endpoint and <code>refl</code>. The intuition is that if you have a path in a space, if you're allowed to move one endpoint, then you can collapse the path down to a constant path, but if you're not allowed to then you can't. (Well that is kind of obvious, but the point is that even if the two endpoints are the same then the path might not be equal to the constant path.)</p>
+
 
 {% endraw %}
