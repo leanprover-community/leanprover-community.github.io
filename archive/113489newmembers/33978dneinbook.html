@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/33978dneinbook.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html">dne in book</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167716052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167716052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167716052">Dave (Jun 09 2019 at 20:37)</a>:</h4>
+<p>Hello! In section 3.5 of the github book the second code snippet says:</p>
+<div class="codehilite"><pre><span></span>theorem dne {p : Prop} (h : ¬¬p) : p :=
+or.elim (em p)
+  (assume hp : p, hp)
+  (assume hnp : ¬p, absurd hnp h)
+</pre></div>
+
+
+<p>If you hit "try it!" and delete the (assume hp:p, hp) line it complains. How is hp:p, hp used? Isn't it enough to just assume hnp and h?</p>
+
+<a name="167716576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167716576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167716576">Chris Hughes (Jun 09 2019 at 20:53)</a>:</h4>
+<p>The first line splits the proof up into two cases, the case when <code>p</code> is true, and the case when <code>¬p</code> is true. You have to prove both. It will therefore expect two proofs as arguments, one of <code>p -&gt; p</code>, and also a proof of <code>¬p -&gt; p</code>. The second line is a proof of <code>p -&gt; p</code>, and the final line is the proof that <code>¬p -&gt; p</code>.</p>
+<p>You can only <code>assume hp : p</code> if you're trying to prove a goal of the form <code>p -&gt; something</code></p>
+
+<a name="167716625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167716625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167716625">Marc Huisinga (Jun 09 2019 at 20:54)</a>:</h4>
+<p>it complains because or.elim requires you to provide two functions/proofs, one for the left side of the or, one for the right side of the or. <br>
+say you want to prove a proposition p, and you're given a ∨ b. then you need to provide two proofs, a → p and b → p.<br>
+in your example, you want to prove p, by eliminating the disjunction em p = p ∨ ¬p.<br>
+one of these cases is trivial (the first one), and the second one requires you to use your assumption hnp.</p>
+
+
+{% endraw %}
