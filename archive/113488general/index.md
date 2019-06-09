@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
+
 * [emacs users](44956emacsusers.html) (6 messages, latest: Jun 09 2019 at 06:42)
 
 * [norm_cast](53959normcast.html) (1 message, latest: Jun 08 2019 at 14:42)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
 
 * [Lean in the wild](43625Leaninthewild.html) (122 messages, latest: Jun 08 2019 at 07:22)
-
-* [AI and theorem proving](41431AIandtheoremproving.html) (16 messages, latest: Jun 08 2019 at 00:32)
 
 * [VSCode Live Share](77256VSCodeLiveShare.html) (7 messages, latest: Jun 07 2019 at 22:00)
 
