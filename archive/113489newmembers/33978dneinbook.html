@@ -35,5 +35,136 @@ say you want to prove a proposition p, and you're given a ∨ b. then you need t
 in your example, you want to prove p, by eliminating the disjunction em p = p ∨ ¬p.<br>
 one of these cases is trivial (the first one), and the second one requires you to use your assumption hnp.</p>
 
+<a name="167716845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167716845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167716845">Kevin Buzzard (Jun 09 2019 at 21:01)</a>:</h4>
+<p>People wouldn't ask this sort of question if tactic mode were introduced first.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">dne</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">),</span>
+  <span class="c1">-- note that there are now two goals</span>
+  <span class="o">{</span> <span class="n">sorry</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167716894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167716894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167716894">Kevin Buzzard (Jun 09 2019 at 21:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="224655">@Dave</span>  can look forward to chapter 5, when easy mode is unlocked :-)</p>
+
+<a name="167717019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717019">Dave (Jun 09 2019 at 21:06)</a>:</h4>
+<p>This clears it up quite well, thank you! Would <code> cases </code> be useful here then? Clearly it's not necessary, but maybe to guide the eye.</p>
+
+<a name="167717021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717021">Marc Huisinga (Jun 09 2019 at 21:06)</a>:</h4>
+<p>personally, i really liked that term mode was introduced first, because it was easier to see what was going on. that being said, my background is cs, so having seen the lambda calculus before reading the book might have influenced that perception ;)</p>
+
+<a name="167717035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717035">Kevin Buzzard (Jun 09 2019 at 21:07)</a>:</h4>
+<p>Yes, it seems to me that it's often the mathematicians who appreciate tactic mode first and the computer scientists who appreciate term mode first.</p>
+
+<a name="167717036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717036">Dave (Jun 09 2019 at 21:07)</a>:</h4>
+<blockquote>
+<p>People wouldn't ask this sort of question if tactic mode were introduced first.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">dne</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">em</span> <span class="n">p</span><span class="o">),</span>
+  <span class="c1">-- note that there are now two goals</span>
+  <span class="o">{</span> <span class="n">sorry</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>Easy mode! Ok now I want to skip ahead!</p>
+
+<a name="167717037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717037">Kevin Buzzard (Jun 09 2019 at 21:07)</a>:</h4>
+<p>I wrote a huge amount of tactic mode code before I started venturing into term mode.</p>
+
+<a name="167717083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717083">Kevin Buzzard (Jun 09 2019 at 21:08)</a>:</h4>
+<p>Easy-if-you-dont-know-any-lambda-calculus-stuff mode. At all stages Lean displays exactly what you're trying to prove and what all your assumptions are.</p>
+
+<a name="167717094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717094">Kevin Buzzard (Jun 09 2019 at 21:08)</a>:</h4>
+<p>If you have the right Lean messages buffer open (ctrl-shift-enter) then you can click around the proof and see what state it's in at all times.</p>
+
+<a name="167717107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717107">Dave (Jun 09 2019 at 21:09)</a>:</h4>
+<blockquote>
+<p>Easy-if-you-dont-know-any-lambda-calculus-stuff mode. At all stages Lean displays exactly what you're trying to prove and what all your assumptions are.</p>
+</blockquote>
+<p>I don't really know lambda calculus stuff, but the first part of the book had a nice exposition. Still, tactics sounds like magic so I am even more interested now!</p>
+
+<a name="167717109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717109">Kevin Buzzard (Jun 09 2019 at 21:09)</a>:</h4>
+<p>I read through the book once, and then I read through it again and the second time I found chapter 3 very frustrating because I wanted to do everything in tactic mode by that point.</p>
+
+<a name="167717157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717157">Kevin Buzzard (Jun 09 2019 at 21:10)</a>:</h4>
+<p><a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html">http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/M1F_introduction/prop_exercises.html</a></p>
+
+<a name="167717161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717161">Kevin Buzzard (Jun 09 2019 at 21:10)</a>:</h4>
+<p>One day I'll write "TPIL for mathematicians". Until then, there are some super-scrappy notes.</p>
+
+<a name="167717166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717166">Marc Huisinga (Jun 09 2019 at 21:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="224655">@Dave</span> right after the or.elim em example, the by_cases function is introduced, which represents the "case analysis" notion in term mode</p>
+
+<a name="167717187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717187">Dave (Jun 09 2019 at 21:11)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="224655">Dave</span> right after the or.elim em example, the by_cases function is introduced, which represents the "case analysis" notion in term mode</p>
+</blockquote>
+<p>Wow, ok... forgive me, I've read through it schizophrenically and have lost the sense in which those kinds of things are introduced.</p>
+
+<a name="167717244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717244">Dave (Jun 09 2019 at 21:12)</a>:</h4>
+<blockquote>
+<p>One day I'll write "TPIL for mathematicians". Until then, there are some super-scrappy notes.</p>
+</blockquote>
+<p>I just realized you're the Xena Project guy on twitter! I am glad you gave me that link because I didn't know where to find your M1F notes and I wanted to for the longest time!</p>
+
+<a name="167717248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717248">Marc Huisinga (Jun 09 2019 at 21:12)</a>:</h4>
+<p>although further down in the book you'll learn that case analysis (over inductive types) in general is quite a powerful tool.</p>
+
+<a name="167717340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717340">Marc Huisinga (Jun 09 2019 at 21:15)</a>:</h4>
+<p>i've also found the introduction of tactic mode in the book to be quite transparent, and not that magical at all (although some of the concrete tactics might still feel like magic).</p>
+<p><span class="user-mention" data-user-id="224655">@Dave</span> i kind of felt like drowning in syntax at some points in the book, but if you do the exercises, you'll get used to everything</p>
+
+<a name="167717476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717476">Dave (Jun 09 2019 at 21:19)</a>:</h4>
+<blockquote>
+<p>i've also found the introduction of tactic mode in the book to be quite transparent, and not that magic at all (although some of the concrete tactics might still feel like magic).</p>
+<p><span class="user-mention silent" data-user-id="224655">Dave</span> i kind of felt like drowning in syntax at some points in the book, but if you do the exercises, you'll get used to everything</p>
+</blockquote>
+<p>Ok this is very reassuring, thanks! I'm experiencing that feeling currently. Also I don't properly know where to start with the second exercise at the bottom of the chapter. How would I remove the negation if I can't use false.elim? I believe I'm thinking about this problem altogether in the wrong way (which is why I went back to this section).</p>
+
+<a name="167717604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717604">Marc Huisinga (Jun 09 2019 at 21:22)</a>:</h4>
+<p>you can use false.elim!<br>
+as long you don't open classical, everything you're doing is constructive.</p>
+
+<a name="167717605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167717605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167717605">Dave (Jun 09 2019 at 21:22)</a>:</h4>
+<p>Oh I was under the wrong impression that false.elim was classical, lol. Thanks once more</p>
+
+<a name="167718569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167718569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167718569">Kevin Buzzard (Jun 09 2019 at 21:53)</a>:</h4>
+<p>You can do induction on any inductive type in Lean, it's pretty crazy. Induction on the natural numbers is normal induction, induction on false is <code>false.elim</code>. That function <code>or.elim</code> is induction on <code>or</code>.</p>
+
+<a name="167718637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/dne%20in%20book/near/167718637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/33978dneinbook.html#167718637">Kevin Buzzard (Jun 09 2019 at 21:55)</a>:</h4>
+<blockquote>
+<p>I am glad you gave me that link because I didn't know where to find your M1F notes and I wanted to for the longest time!</p>
+</blockquote>
+<p>When I get my act together all this will be very well signposted. I'm hoping that I will actually have some kind of coherent story for beginners by the end of July. An alternative introduction to Lean which undergraduate mathematicians might find more accessible than theorem proving in Lean (in the sense that it will get to maths more quickly).</p>
+
 
 {% endraw %}

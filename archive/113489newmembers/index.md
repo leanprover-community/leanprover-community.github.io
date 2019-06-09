@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [dne in book](33978dneinbook.html) (3 messages, latest: Jun 09 2019 at 20:54)
+* [dne in book](33978dneinbook.html) (26 messages, latest: Jun 09 2019 at 21:55)
 
 * [set_option pp.proofs true](22444setoptionppproofstrue.html) (1 message, latest: Jun 07 2019 at 09:09)
 
