@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [emacs users](44956emacsusers.html) (1 message, latest: Jun 08 2019 at 20:23)
+* [emacs users](44956emacsusers.html) (6 messages, latest: Jun 09 2019 at 06:42)
 
 * [norm_cast](53959normcast.html) (1 message, latest: Jun 08 2019 at 14:42)
 
