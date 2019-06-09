@@ -845,5 +845,25 @@ Here "internal homotopy type of X" means, for example, use the interpretation of
 </blockquote>
 <p>At least one endpoint of the equality has to be a variable; then you can replace it and the equality proof by the other endpoint and <code>refl</code>. The intuition is that if you have a path in a space, if you're allowed to move one endpoint, then you can collapse the path down to a constant path, but if you're not allowed to then you can't. (Well that is kind of obvious, but the point is that even if the two endpoints are the same then the path might not be equal to the constant path.)</p>
 
+<a name="167694290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167694290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167694290">Floris van Doorn (Jun 09 2019 at 10:41)</a>:</h4>
+<p>Some comments:</p>
+<blockquote>
+<p>Kevin Buzzard: So how's its [cubicaltt's] maths library?</p>
+</blockquote>
+<p>There is none, up to a rounding error. I doubt that the rational numbers are defined. Note that cubicaltt does not support implicit arguments, and yes, that is every bit as inconvenient as you think it is.</p>
+<blockquote>
+<p>What's the easiest way of proving false using the Lean 3 HoTT package?</p>
+</blockquote>
+<p>The claim of consistency of the Lean 3 HoTT library is that you cannot prove <code>false</code> in a declaration with the <code>@[hott]</code> attribute without generating a warning/error message. Without this attribute you can do it, as stated above (you have to prove that <code>hott.eq</code> and <code>eq</code> are equivalent).</p>
+<blockquote>
+<p>Is <code>tt == ff</code> in HoTT</p>
+</blockquote>
+<p>If <code>==</code> is the <code>heq</code> analogue for HoTT, then yes. However, this is not in contradiction, since you cannot prove that if <code>x == y</code> and <code>x : A</code> and <code>y : A</code> then <code>x = y</code>. What this shows is that <code>heq</code> is not a useful notion in HoTT. Instead, we use pathovers: <a href="https://github.com/gebner/hott3/blob/master/src/hott/init/pathover.lean" target="_blank" title="https://github.com/gebner/hott3/blob/master/src/hott/init/pathover.lean">https://github.com/gebner/hott3/blob/master/src/hott/init/pathover.lean</a></p>
+<blockquote>
+<p><code>=</code> is overloaded! It's just like normal maths!</p>
+</blockquote>
+<p>If I recall correctly, local notation doesn't overload global notation, but replaces it. But now that I test it, that doesn't seem to be true. I'm quite sure it was never a problem (presumably because <code>hott.eq</code> always applies when <code>eq</code> does [for the use cases of HoTT].</p>
+
 
 {% endraw %}
