@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [dne in book](33978dneinbook.html) (3 messages, latest: Jun 09 2019 at 20:54)
+
 * [set_option pp.proofs true](22444setoptionppproofstrue.html) (1 message, latest: Jun 07 2019 at 09:09)
 
 * [noncomputable def vs lemma](68284noncomputabledefvslemma.html) (2 messages, latest: Jun 07 2019 at 08:33)
