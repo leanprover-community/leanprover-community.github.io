@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (647 messages, latest: Jun 10 2019 at 12:26)
+
 * [fin n to list](36011finntolist.html) (2 messages, latest: Jun 10 2019 at 09:25)
 
 * [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (9 messages, latest: Jun 10 2019 at 02:45)
@@ -89,8 +91,6 @@ permalink: archive/113489newmembers/index.html
 * [inverse of injective functions](39084inverseofinjectivefunctions.html) (5 messages, latest: May 08 2019 at 10:31)
 
 * [rewrite tactic failed, lemma is not an equality nor a iff](50887rewritetacticfailedlemmaisnotanequalitynoraiff.html) (18 messages, latest: May 06 2019 at 12:55)
-
-* [noob question(s)](52075noobquestions.html) (642 messages, latest: May 04 2019 at 21:17)
 
 * [How to prove subtype instances?](57873Howtoprovesubtypeinstances.html) (30 messages, latest: May 03 2019 at 22:51)
 
