@@ -39,5 +39,59 @@ permalink: archive/113488general/32447listappendassocdefeq.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167739457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167739457">Keeley Hoek (Jun 10 2019 at 07:34)</a>:</h4>
 <p>Sure, but I think Scott is making the "strictification" of a monoidal category using lists, where the point is that in the new category nice things like <code>X</code> and <code>X \otimes 1</code> being equal actually hold because concatenation of lists is strictly associative.</p>
 
+<a name="167741568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167741568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167741568">Reid Barton (Jun 10 2019 at 08:10)</a>:</h4>
+<blockquote>
+<p>This may be a strange question, but can anyone think of a way of modelling lists so the <code>append</code> operation becomes definitionally associative?</p>
+</blockquote>
+<p>Yes, it is true if you use difference lists, although it is not quite true with the <code>dlist</code> implementation in core for reasons I forget off-hand</p>
+
+<a name="167741758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167741758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167741758">Reid Barton (Jun 10 2019 at 08:14)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/topic/strictification/near/127139698" title="#narrow/stream/116395-maths/topic/strictification/near/127139698">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/strictification/near/127139698</a></p>
+
+<a name="167742866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167742866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167742866">Kevin Buzzard (Jun 10 2019 at 08:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">-</span>
+<span class="cm">A difference list is a function that, given a list, returns the original</span>
+<span class="cm">contents of the difference list prepended to the given list.</span>
+
+<span class="cm">This structure supports `O(1)` `append` and `concat` operations on lists, making it</span>
+<span class="cm">useful for append-heavy uses such as logging and pretty printing.</span>
+<span class="cm">-/</span>
+<span class="kn">structure</span> <span class="n">dlist</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">apply</span>     <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">invariant</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">l</span><span class="o">,</span> <span class="n">apply</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">apply</span> <span class="o">[]</span> <span class="bp">++</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="kn">namespace</span> <span class="n">dlist</span>
+<span class="kn">open</span> <span class="n">function</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="err">♯</span><span class="bp">`</span><span class="o">:</span><span class="n">max</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">abstract</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">simp</span> <span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- Convert a list to a dlist -/</span>
+<span class="n">def</span> <span class="n">of_list</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">append</span> <span class="n">l</span><span class="o">,</span> <span class="err">♯</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>I've never seen this before today. It looks to me like some sort of tedious implementation issue ;-)</p>
+
+<a name="167742909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167742909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167742909">Kevin Buzzard (Jun 10 2019 at 08:39)</a>:</h4>
+<p>wooah is that local notation being used to denote a tactic? What is this <code>abstract</code>?</p>
+
+<a name="167742968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167742968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167742968">Kevin Buzzard (Jun 10 2019 at 08:40)</a>:</h4>
+<p>So a <code>dlist</code> is a way of changing lists (to be thought of as appending the given list). This does feel like that whole monoid thing that Reid linked to.</p>
+
+<a name="167743285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167743285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167743285">Kevin Buzzard (Jun 10 2019 at 08:46)</a>:</h4>
+<p>Are two functions defeq if they defeqly agree everywhere?</p>
+
+<a name="167743623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167743623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167743623">Reid Barton (Jun 10 2019 at 08:55)</a>:</h4>
+<p><code>f</code> is equal to <code>λ x, f x</code> definitionally, so I guess that means yes</p>
+
 
 {% endraw %}
