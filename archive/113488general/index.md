@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [list.append_assoc defeq?](32447listappendassocdefeq.html) (14 messages, latest: Jun 10 2019 at 08:55)
+* [list.append_assoc defeq?](32447listappendassocdefeq.html) (22 messages, latest: Jun 10 2019 at 09:58)
 
 * [VScode extension](56578VScodeextension.html) (408 messages, latest: Jun 10 2019 at 02:05)
 
