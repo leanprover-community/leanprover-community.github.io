@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [heq hell again](32676heqhellagain.html) (40 messages, latest: Jun 10 2019 at 11:26)
+* [list.append_assoc defeq?](32447listappendassocdefeq.html) (29 messages, latest: Jun 10 2019 at 12:34)
+
+* [heq hell again](32676heqhellagain.html) (41 messages, latest: Jun 10 2019 at 12:10)
 
 * [finsupp scalar diamond](88248finsuppscalardiamond.html) (1 message, latest: Jun 10 2019 at 11:12)
 
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (4 messages, latest: Jun 10 2019 at 10:57)
-
-* [list.append_assoc defeq?](32447listappendassocdefeq.html) (23 messages, latest: Jun 10 2019 at 10:01)
 
 * [VScode extension](56578VScodeextension.html) (408 messages, latest: Jun 10 2019 at 02:05)
 

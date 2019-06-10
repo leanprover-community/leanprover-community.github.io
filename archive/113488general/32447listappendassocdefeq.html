@@ -175,5 +175,73 @@ permalink: archive/113488general/32447listappendassocdefeq.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167746884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167746884">Kevin Buzzard (Jun 10 2019 at 10:01)</a>:</h4>
 <p>I think that if I'd gone the core way then both zero_add and add_zero would be rfl</p>
 
+<a name="167754335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167754335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167754335">Kevin Buzzard (Jun 10 2019 at 12:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">dlist</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">apply</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="c1">-- λ l, d ++ l</span>
+<span class="o">(</span><span class="n">thm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">l</span><span class="o">,</span> <span class="n">apply</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">apply</span> <span class="o">[]</span> <span class="bp">++</span> <span class="n">l</span><span class="o">)</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">dlist</span><span class="bp">.</span><span class="n">to_list</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">d</span><span class="bp">.</span><span class="n">apply</span> <span class="o">[]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">apply_def</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">d</span><span class="bp">.</span><span class="n">apply</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_list</span> <span class="bp">++</span> <span class="n">l</span><span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span><span class="n">rw</span> <span class="n">d</span><span class="bp">.</span><span class="n">thm</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">dlist</span><span class="bp">.</span><span class="n">nil</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">thm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nil_append</span> <span class="n">l</span><span class="o">)}</span>
+
+<span class="n">def</span> <span class="n">dlist</span><span class="bp">.</span><span class="n">append</span> <span class="o">(</span><span class="n">d</span> <span class="n">e</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">apply</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">apply</span> <span class="o">(</span><span class="n">d</span><span class="bp">.</span><span class="n">apply</span> <span class="n">l</span><span class="o">),</span>
+  <span class="n">thm</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">dlist</span><span class="bp">.</span><span class="n">append</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">dlist</span><span class="bp">.</span><span class="n">nil</span> <span class="n">α</span><span class="bp">⟩</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">c</span> <span class="n">d</span> <span class="n">e</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="n">d</span><span class="o">)</span> <span class="bp">+</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">+</span> <span class="o">(</span><span class="n">d</span> <span class="bp">+</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">d</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="n">cases</span> <span class="n">d</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dlist</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">d</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="n">cases</span> <span class="n">d</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span>
+</pre></div>
+
+
+<p>That's really annoying. How come I have to cases on d for add_zero and zero_add?</p>
+
+<a name="167754523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167754523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167754523">Reid Barton (Jun 10 2019 at 12:26)</a>:</h4>
+<p>Because one side is a variable and the other side is an application of <code>dlist.mk</code></p>
+
+<a name="167754677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167754677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167754677">Kevin Buzzard (Jun 10 2019 at 12:29)</a>:</h4>
+<p>And this is different to the add_assoc example?</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">dint</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">{</span> <span class="n">apply</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">commutes</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">add_zero</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">}</span><span class="bp">⟩</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dint</span><span class="o">)</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">d</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">d</span><span class="bp">;</span> <span class="n">refl</span> <span class="c1">-- rfl fails</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span></p>
+
+<a name="167754718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167754718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167754718">Reid Barton (Jun 10 2019 at 12:30)</a>:</h4>
+<p>If we had definitional eta for structures then these would become defeq. (Same with unitality of bundled morphisms, functors, etc.)</p>
+
+<a name="167754738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167754738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167754738">Reid Barton (Jun 10 2019 at 12:30)</a>:</h4>
+<p>In associativity both sides are <code>dlist.mk</code> applications</p>
+
+<a name="167755005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/list.append_assoc%20defeq%3F/near/167755005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32447listappendassocdefeq.html#167755005">Kevin Buzzard (Jun 10 2019 at 12:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">dint</span><span class="o">)</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">+</span> <span class="n">d</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>Penny has dropped</p>
+
 
 {% endraw %}
