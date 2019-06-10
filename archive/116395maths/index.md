@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Sheaves](28656Sheaves.html) (2 messages, latest: Jun 10 2019 at 14:56)
+
 * [HoTT](75424HoTT.html) (184 messages, latest: Jun 10 2019 at 02:35)
 
 * [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
