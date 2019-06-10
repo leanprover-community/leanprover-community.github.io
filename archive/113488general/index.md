@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [list.append_assoc defeq?](32447listappendassocdefeq.html) (5 messages, latest: Jun 10 2019 at 06:57)
+
 * [VScode extension](56578VScodeextension.html) (408 messages, latest: Jun 10 2019 at 02:05)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
