@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [list.append_assoc defeq?](32447listappendassocdefeq.html) (29 messages, latest: Jun 10 2019 at 12:34)
+* [list.append_assoc defeq?](32447listappendassocdefeq.html) (50 messages, latest: Jun 10 2019 at 15:51)
+
+* [cast](61260cast.html) (5 messages, latest: Jun 10 2019 at 15:25)
 
 * [heq hell again](32676heqhellagain.html) (41 messages, latest: Jun 10 2019 at 12:10)
 
