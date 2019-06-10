@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/31503whereclauseinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html">`where` clause in Lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167721020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721020">bruno c (Jun 09 2019 at 23:07)</a>:</h4>
+<p>I want to define local helper functions; I can use <code>let</code> for this, but it doesn't allow recursive definitions. what's the best way to do this? I can of course define separate functions, but then they end up having more arguments than they would if they were local... thanks for the help!</p>
+
+<a name="167721159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721159">matt rice (Jun 09 2019 at 23:11)</a>:</h4>
+<p>there is this where, for mutual inductive types <br>
+<a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types</a></p>
+
+<a name="167721680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721680">bruno c (Jun 09 2019 at 23:24)</a>:</h4>
+<p>thanks for the pointer, matt! this will do, but I don't like it as much because:</p>
+<ul>
+<li>the syntax is pretty heavy</li>
+<li>in the case of even/odd definitions this works well, but this syntax obfuscates the fact that one of the functions is the main one, and the other is simply a helper</li>
+</ul>
+
+<a name="167721758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721758">Mario Carneiro (Jun 09 2019 at 23:27)</a>:</h4>
+<p>No, you can't do this in lean 3, except via hackery</p>
+
+<a name="167721805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721805">Mario Carneiro (Jun 09 2019 at 23:28)</a>:</h4>
+<p>You have to define an auxiliary function if you have a nested recursion</p>
+
+<a name="167721810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721810">Mario Carneiro (Jun 09 2019 at 23:28)</a>:</h4>
+<p>if you search for <code>_aux</code> in mathlib you will find plenty of examples</p>
+
+<a name="167721823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721823">Mario Carneiro (Jun 09 2019 at 23:29)</a>:</h4>
+<p>Mutual inductive types aren't the same</p>
+
+<a name="167721947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167721947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167721947">Mario Carneiro (Jun 09 2019 at 23:32)</a>:</h4>
+<p>here's some hackery:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">reverse</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">aux</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">l</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="o">[],</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">r</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">),</span> <span class="n">r</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exact</span> <span class="bp">_</span><span class="n">match</span> <span class="n">l</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">r</span><span class="o">)</span>
+  <span class="kn">end</span>
+<span class="k">in</span> <span class="n">aux</span> <span class="o">[]</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">reverse</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">]</span>
+</pre></div>
+
+<a name="167722558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60where%60%20clause%20in%20Lean%3F/near/167722558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31503whereclauseinLean.html#167722558">Kenny Lau (Jun 09 2019 at 23:50)</a>:</h4>
+<p>why not use the recursor instead?</p>
+
+
+{% endraw %}
