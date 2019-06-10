@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Order on topologies](78527Orderontopologies.html) (33 messages, latest: Jun 10 2019 at 19:39)
+
 * [Sheaves](28656Sheaves.html) (38 messages, latest: Jun 10 2019 at 17:53)
 
 * [HoTT](75424HoTT.html) (184 messages, latest: Jun 10 2019 at 02:35)
 
 * [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
-
-* [Order on topologies](78527Orderontopologies.html) (25 messages, latest: Jun 07 2019 at 15:04)
 
 * [Hahn-Banach](89450HahnBanach.html) (15 messages, latest: Jun 07 2019 at 08:51)
 
