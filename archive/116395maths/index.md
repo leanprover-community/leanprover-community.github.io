@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [group.lean in natural language](40846groupleaninnaturallanguage.html) (4 messages, latest: Jun 10 2019 at 21:58)
+* [group.lean in natural language](40846groupleaninnaturallanguage.html) (6 messages, latest: Jun 10 2019 at 22:57)
 
 * [Order on topologies](78527Orderontopologies.html) (33 messages, latest: Jun 10 2019 at 19:39)
 
