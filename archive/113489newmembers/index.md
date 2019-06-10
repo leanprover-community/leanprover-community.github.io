@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [fin n to list](36011finntolist.html) (1 message, latest: Jun 10 2019 at 07:42)
+* [fin n to list](36011finntolist.html) (2 messages, latest: Jun 10 2019 at 09:25)
 
 * [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (9 messages, latest: Jun 10 2019 at 02:45)
 
