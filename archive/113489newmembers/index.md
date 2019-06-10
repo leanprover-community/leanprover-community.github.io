@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [`where` clause in Lean?](31503whereclauseinLean.html) (9 messages, latest: Jun 09 2019 at 23:50)
+
 * [dne in book](33978dneinbook.html) (27 messages, latest: Jun 09 2019 at 22:02)
 
 * [set_option pp.proofs true](22444setoptionppproofstrue.html) (1 message, latest: Jun 07 2019 at 09:09)
