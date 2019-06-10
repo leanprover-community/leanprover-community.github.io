@@ -34,5 +34,109 @@ universe level of type_of(arg #4) of &#39;apoint._mut_.mk_0&#39; is too big for 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/167726299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#167726299">Mario Carneiro (Jun 10 2019 at 01:38)</a>:</h4>
 <p>or at least the inductive itself, MWE not required</p>
 
+<a name="167727591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/167727591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#167727591">Kevin Sullivan (Jun 10 2019 at 02:14)</a>:</h4>
+<blockquote>
+<p>or at least the inductive itself, MWE not required</p>
+</blockquote>
+<div class="codehilite"><pre><span></span>mutual inductive apoint, avector, aframe
+
+with apoint :
+    Π (s : space), Type
+| mk :                      -- any point
+    Π {s : space}
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type) [discrete_field K]
+      (coords : { c : tuple (d+1) K // c.nth 0 = 1 }),
+      apoint s
+| mk_std :
+    Π { s : space }         -- std point, (1, 0, 0, ..., 0)
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type) [discrete_field K],
+      apoint s
+
+with avector :
+    Π (s : space), Type
+| mk :
+    Π {s : space}
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type) [discrete_field K]
+      (coords : { c : tuple (d+1) K // c.nth 0 = 1 }),
+      avector s     -- was: aframe s → scalar → avector s
+| mk_std :
+    Π { s : space }         -- std vector(0, 0, 0, ..., 0)
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type) [discrete_field K],
+      avector s
+
+with aframe :
+    Π (s : space), Type
+| mk : Π { s : space }, apoint s → avector s → aframe s
+| mk_std : Π { s : space }, aframe s -- not yet complete
+</pre></div>
+
+
+<p>If I use Type*, I get an error at the end about inductive types having to live in the same universe.</p>
+
+<a name="167727972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/167727972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#167727972">Kevin Sullivan (Jun 10 2019 at 02:25)</a>:</h4>
+<p>It has a few things that need fixing, but this should give the idea.</p>
+
+<a name="167728689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/167728689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#167728689">Floris van Doorn (Jun 10 2019 at 02:44)</a>:</h4>
+<p>Change the types of <code>apoint</code>, <code>avector</code> and <code>aframe</code> to <code>space → Type (u+1)</code>(this is the same as <code>Π (s : space), Type (u+1)</code>), and change the types of all <code>K</code>s to <code>Type u</code>. If you don't like to worry about universe levels, you can set <code>u</code> to <code>0</code> (so only use <code>Type</code> - which is <code>Type 0</code> - and <code>Type 1</code>).</p>
+
+<a name="167728693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/167728693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#167728693">Floris van Doorn (Jun 10 2019 at 02:44)</a>:</h4>
+<p>Here is a simplified version of your MWE:</p>
+<div class="codehilite"><pre><span></span>universe variable u
+constant space : Type
+
+mutual inductive apoint, avector, aframe
+
+with apoint :
+    Π (s : space), Type (u+1)
+| mk :                      -- any point
+    Π {s : space}
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type u) [discrete_field K],
+      apoint s
+| mk_std :
+    Π { s : space }         -- std point, (1, 0, 0, ..., 0)
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type u) [discrete_field K],
+      apoint s
+
+with avector :
+    Π (s : space), Type (u+1)
+| mk :
+    Π {s : space}
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type u) [discrete_field K],
+      avector s     -- was: aframe s → scalar → avector s
+| mk_std :
+    Π { s : space }         -- std vector(0, 0, 0, ..., 0)
+      (d : ℕ) [has_zero (fin d)]
+      (K: Type u) [discrete_field K],
+      avector s
+
+with aframe :
+    Π (s : space), Type (u+1)
+| mk : Π { s : space }, apoint s → avector s → aframe s
+| mk_std : Π { s : space }, aframe s -- not yet complete
+</pre></div>
+
+<a name="167728708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/167728708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#167728708">Kenny Lau (Jun 10 2019 at 02:45)</a>:</h4>
+<p>here is a simplified simplified version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">apoint</span><span class="o">,</span> <span class="n">aframe</span>
+<span class="k">with</span> <span class="n">apoint</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">apoint</span>
+<span class="k">with</span> <span class="n">aframe</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">apoint</span> <span class="bp">→</span> <span class="n">aframe</span>
+</pre></div>
+
 
 {% endraw %}
