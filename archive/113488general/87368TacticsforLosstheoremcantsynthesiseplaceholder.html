@@ -1,0 +1,57 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/87368TacticsforLosstheoremcantsynthesiseplaceholder.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/87368TacticsforLosstheoremcantsynthesiseplaceholder.html">Tactics for Los's theorem -- can't synthesise placeholder</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167749190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactics%20for%20Los%27s%20theorem%20--%20can%27t%20synthesise%20placeholder/near/167749190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87368TacticsforLosstheoremcantsynthesiseplaceholder.html#167749190">Abhimanyu Pallavi Sudhir (Jun 10 2019 at 10:50)</a>:</h4>
+<p>I'm trying to use tactics to do Los's theorem for the hyperreals -- e.g. you would have a goal <code>(¬ Q x ↔ {n : ℕ | ¬ Q ((quotient.out' x) n)} ∈ (@hyperfilter ℕ).sets)</code>, and a tactic called <code>transfer_not</code> would reduce it to the goal <code>(Q3 x ↔ {n : ℕ | Q3 ((quotient.out' x) n)} ∈ (@hyperfilter ℕ).sets)</code> -- similarly <code>transfer_and</code>, <code>transfer_exists</code>, so you can recursively reduce your goal to transfer for atomic formulae, and finally another tactic to sort that out. This doesn't work for any proposition <code>Q</code>, which is why we need tactics, rather than theorems. So I figured something like this should work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">hyperreal</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">trans_not</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="bp">*</span><span class="o">)</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_linear_ordered_field</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+<span class="bp">`</span><span class="o">[</span><span class="k">have</span> <span class="n">HImp</span> <span class="o">:</span> <span class="o">(</span><span class="n">P</span> <span class="n">x</span> <span class="bp">↔</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">P</span> <span class="o">((</span><span class="n">quotient</span><span class="bp">.</span><span class="n">out&#39;</span> <span class="n">x</span><span class="o">)</span> <span class="n">n</span><span class="o">)}</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">hyperfilter</span> <span class="bp">ℕ</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span><span class="o">)</span>
+    <span class="bp">→</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">P</span> <span class="n">x</span> <span class="bp">↔</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="bp">¬</span> <span class="n">P</span> <span class="o">((</span><span class="n">quotient</span><span class="bp">.</span><span class="n">out&#39;</span> <span class="n">x</span><span class="o">)</span> <span class="n">n</span><span class="o">)}</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">hyperfilter</span> <span class="bp">ℕ</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">λ</span> <span class="n">Hψ</span><span class="o">,</span> <span class="bp">⟨</span> <span class="bp">λ</span> <span class="n">HnQ</span><span class="o">,</span> <span class="o">(</span><span class="n">ultrafilter_iff_compl_mem_iff_not_mem</span><span class="bp">.</span><span class="n">mp</span> <span class="n">U</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="n">not_imp_not</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">Hψ</span><span class="bp">.</span><span class="mi">2</span> <span class="n">HnQ</span><span class="o">),</span>
+  <span class="bp">λ</span> <span class="n">HnSQ</span><span class="o">,</span> <span class="n">not_imp_not</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">Hψ</span><span class="bp">.</span><span class="mi">1</span> <span class="o">((</span><span class="n">ultrafilter_iff_compl_mem_iff_not_mem</span><span class="bp">.</span><span class="n">mp</span> <span class="n">U</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="n">HnSQ</span><span class="o">)</span> <span class="bp">⟩</span><span class="o">],</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">apply</span> <span class="n">HImp</span><span class="o">]</span>
+</pre></div>
+
+
+<p>But if I write:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Q3</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_linear_ordered_field</span> <span class="n">α</span><span class="o">]:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">Q3</span> <span class="n">x</span> <span class="bp">↔</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="n">Q3</span> <span class="o">((</span><span class="n">quotient</span><span class="bp">.</span><span class="n">out&#39;</span> <span class="n">x</span><span class="o">)</span> <span class="n">n</span><span class="o">)}</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">hyperfilter</span> <span class="bp">ℕ</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span><span class="o">)</span> <span class="bp">→</span>
+  <span class="o">(</span><span class="bp">¬</span> <span class="n">Q3</span> <span class="n">x</span> <span class="bp">↔</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">|</span> <span class="bp">¬</span> <span class="n">Q3</span> <span class="o">((</span><span class="n">quotient</span><span class="bp">.</span><span class="n">out&#39;</span> <span class="n">x</span><span class="o">)</span> <span class="n">n</span><span class="o">)}</span> <span class="err">∈</span> <span class="o">(</span><span class="bp">@</span><span class="n">hyperfilter</span> <span class="bp">ℕ</span><span class="o">)</span><span class="bp">.</span><span class="n">sets</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span><span class="o">,</span>
+<span class="bp">@</span><span class="n">trans_not</span> <span class="n">x</span> <span class="n">Q3</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It tells me at the second-last line it can't synthesise the placeholder <code>Type ?</code> -- what placeholder does it need to synthesise? <code>trans_not</code> just needs a real number and a proposition, not a type.</p>
+
+<a name="167749504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactics%20for%20Los%27s%20theorem%20--%20can%27t%20synthesise%20placeholder/near/167749504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87368TacticsforLosstheoremcantsynthesiseplaceholder.html#167749504">Kenny Lau (Jun 10 2019 at 10:55)</a>:</h4>
+<p>looks like you're reaching another level of enlightenment! :P</p>
+
+<a name="167749579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactics%20for%20Los%27s%20theorem%20--%20can%27t%20synthesise%20placeholder/near/167749579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87368TacticsforLosstheoremcantsynthesiseplaceholder.html#167749579">Kenny Lau (Jun 10 2019 at 10:56)</a>:</h4>
+<p>what happens if you do it manually, i.e. substitute the content of your tactic?</p>
+
+<a name="167749602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Tactics%20for%20Los%27s%20theorem%20--%20can%27t%20synthesise%20placeholder/near/167749602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87368TacticsforLosstheoremcantsynthesiseplaceholder.html#167749602">Chris Hughes (Jun 10 2019 at 10:57)</a>:</h4>
+<p>It won't be an argument to <code>trans_not</code>, it will be something wrong inside <code>trans_not</code></p>
+
+
+{% endraw %}
