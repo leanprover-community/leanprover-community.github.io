@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (183 messages, latest: Jun 09 2019 at 12:31)
+* [HoTT](75424HoTT.html) (184 messages, latest: Jun 10 2019 at 02:35)
 
 * [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
 

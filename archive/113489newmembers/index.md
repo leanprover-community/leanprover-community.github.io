@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (4 messages, latest: Jun 10 2019 at 01:38)
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (9 messages, latest: Jun 10 2019 at 02:45)
 
 * [`where` clause in Lean?](31503whereclauseinLean.html) (11 messages, latest: Jun 10 2019 at 01:34)
 
