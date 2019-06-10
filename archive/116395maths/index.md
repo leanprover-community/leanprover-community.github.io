@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Sheaves](28656Sheaves.html) (2 messages, latest: Jun 10 2019 at 14:56)
+* [Sheaves](28656Sheaves.html) (7 messages, latest: Jun 10 2019 at 15:53)
 
 * [HoTT](75424HoTT.html) (184 messages, latest: Jun 10 2019 at 02:35)
 
