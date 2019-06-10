@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
+
 * [list.append_assoc defeq?](32447listappendassocdefeq.html) (50 messages, latest: Jun 10 2019 at 15:51)
 
 * [cast](61260cast.html) (5 messages, latest: Jun 10 2019 at 15:25)
@@ -17,8 +19,6 @@ permalink: archive/113488general/index.html
 * [heq hell again](32676heqhellagain.html) (41 messages, latest: Jun 10 2019 at 12:10)
 
 * [finsupp scalar diamond](88248finsuppscalardiamond.html) (1 message, latest: Jun 10 2019 at 11:12)
-
-* [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (4 messages, latest: Jun 10 2019 at 10:57)
 
 * [VScode extension](56578VScodeextension.html) (408 messages, latest: Jun 10 2019 at 02:05)
 
