@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (405 messages, latest: Jun 10 2019 at 01:59)
+
 * [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
 
 * [emacs users](44956emacsusers.html) (6 messages, latest: Jun 09 2019 at 06:42)
@@ -325,8 +327,6 @@ permalink: archive/113488general/index.html
 * [simple question](66563simplequestion.html) (37 messages, latest: Apr 24 2019 at 08:59)
 
 * [I don't get `simp`](99775Idontgetsimp.html) (22 messages, latest: Apr 23 2019 at 21:08)
-
-* [VScode extension](56578VScodeextension.html) (404 messages, latest: Apr 23 2019 at 14:30)
 
 * [option.retract](02493optionretract.html) (3 messages, latest: Apr 23 2019 at 12:49)
 

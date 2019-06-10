@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [`where` clause in Lean?](31503whereclauseinLean.html) (9 messages, latest: Jun 09 2019 at 23:50)
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (4 messages, latest: Jun 10 2019 at 01:38)
+
+* [`where` clause in Lean?](31503whereclauseinLean.html) (11 messages, latest: Jun 10 2019 at 01:34)
 
 * [dne in book](33978dneinbook.html) (27 messages, latest: Jun 09 2019 at 22:02)
 
