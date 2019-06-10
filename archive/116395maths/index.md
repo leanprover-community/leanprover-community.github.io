@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [group.lean in natural language](40846groupleaninnaturallanguage.html) (4 messages, latest: Jun 10 2019 at 21:58)
+
 * [Order on topologies](78527Orderontopologies.html) (33 messages, latest: Jun 10 2019 at 19:39)
 
 * [Sheaves](28656Sheaves.html) (38 messages, latest: Jun 10 2019 at 17:53)
