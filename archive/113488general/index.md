@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [heq hell again](32676heqhellagain.html) (40 messages, latest: Jun 10 2019 at 11:26)
+
+* [finsupp scalar diamond](88248finsuppscalardiamond.html) (1 message, latest: Jun 10 2019 at 11:12)
+
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (4 messages, latest: Jun 10 2019 at 10:57)
 
 * [list.append_assoc defeq?](32447listappendassocdefeq.html) (23 messages, latest: Jun 10 2019 at 10:01)
@@ -1691,8 +1695,6 @@ permalink: archive/113488general/index.html
 * [nat = int](66348natint.html) (68 messages, latest: Oct 09 2018 at 20:30)
 
 * [expr.is_internal_cnstr](88943exprisinternalcnstr.html) (7 messages, latest: Oct 09 2018 at 19:45)
-
-* [heq hell again](32676heqhellagain.html) (39 messages, latest: Oct 09 2018 at 19:21)
 
 * [option troubles](48938optiontroubles.html) (9 messages, latest: Oct 09 2018 at 18:38)
 

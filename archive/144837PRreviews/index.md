@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (27 messages, latest: Jun 10 2019 at 07:00)
+* [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (28 messages, latest: Jun 10 2019 at 11:17)
 
 * [#1118 Presented groups](966331118Presentedgroups.html) (1 message, latest: Jun 07 2019 at 04:26)
 
