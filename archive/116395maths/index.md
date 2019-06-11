@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (189 messages, latest: Jun 11 2019 at 11:55)
+* [HoTT](75424HoTT.html) (193 messages, latest: Jun 11 2019 at 12:59)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (14 messages, latest: Jun 11 2019 at 10:36)
 

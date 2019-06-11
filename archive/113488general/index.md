@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [chess](98839chess.html) (5 messages, latest: Jun 11 2019 at 11:58)
+* [chess](98839chess.html) (12 messages, latest: Jun 11 2019 at 12:55)
 
-* [100 theorems](37529100theorems.html) (86 messages, latest: Jun 11 2019 at 11:18)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (91 messages, latest: Jun 11 2019 at 12:53)
+
+* [100 theorems](37529100theorems.html) (87 messages, latest: Jun 11 2019 at 12:10)
 
 * [`match` is a weakling](31005matchisaweakling.html) (18 messages, latest: Jun 11 2019 at 10:13)
-
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (90 messages, latest: Jun 11 2019 at 10:07)
 
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
 

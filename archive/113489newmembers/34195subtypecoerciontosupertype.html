@@ -45,5 +45,36 @@ permalink: archive/113489newmembers/34195subtypecoerciontosupertype.html
 
 <p>Is this the best I can do? Is it the right thing to do? If so, shouldn't these kind of coercions be created automatically?</p>
 
+<a name="167846868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167846868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167846868">Kevin Buzzard (Jun 11 2019 at 12:55)</a>:</h4>
+<p>I guess that <code>short_list alpha</code> is a wrapper for subtype, so even if there was a coercion from subtype it wouldn't trigger for short_lists.</p>
+
+<a name="167847115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167847115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167847115">Kevin Buzzard (Jun 11 2019 at 12:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">subtype</span>
+
+<span class="n">def</span> <span class="n">short_list</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="bp">≤</span> <span class="mi">5</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="n">subtype_coe_thing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">has_coe</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">P</span> <span class="n">a</span><span class="o">}</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">sl</span> <span class="o">:</span> <span class="n">short_list</span> <span class="n">α</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">sl&#39;</span> <span class="o">:</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="bp">≤</span> <span class="mi">5</span><span class="o">})</span>
+
+<span class="c1">-- #check list.length (sl : list α) -- fails</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="o">(</span><span class="n">sl&#39;</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="167847247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167847247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167847247">Kevin Buzzard (Jun 11 2019 at 13:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">--instance short_list_to_list : has_coe (short_list α) (list α) := by apply_instance -- fails</span>
+
+<span class="kn">instance</span> <span class="n">short_list_to_list</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">short_list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">unfold</span> <span class="n">short_list</span><span class="bp">;</span> <span class="n">apply_instance</span> <span class="c1">-- works</span>
+</pre></div>
+
+
+<p>I could imagine that sometimes people make these wrapper definitions precisely to switch _off_ some automatic coercion!</p>
+
 
 {% endraw %}
