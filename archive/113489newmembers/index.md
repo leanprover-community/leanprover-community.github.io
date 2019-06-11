@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [exercise  2 on ch3](90246exercise2onch3.html) (1 message, latest: Jun 11 2019 at 02:38)
+
 * [noob question(s)](52075noobquestions.html) (647 messages, latest: Jun 10 2019 at 12:26)
 
 * [fin n to list](36011finntolist.html) (2 messages, latest: Jun 10 2019 at 09:25)
