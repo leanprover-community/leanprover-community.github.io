@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [100 theorems](37529100theorems.html) (74 messages, latest: Jun 11 2019 at 09:59)
+* [100 theorems](37529100theorems.html) (82 messages, latest: Jun 11 2019 at 10:25)
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (88 messages, latest: Jun 11 2019 at 09:59)
+* [`match` is a weakling](31005matchisaweakling.html) (18 messages, latest: Jun 11 2019 at 10:13)
 
-* [`match` is a weakling](31005matchisaweakling.html) (15 messages, latest: Jun 11 2019 at 08:32)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (90 messages, latest: Jun 11 2019 at 10:07)
 
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
 
