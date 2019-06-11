@@ -459,5 +459,126 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167850377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167850377">Reid Barton (Jun 11 2019 at 13:37)</a>:</h4>
 <p>If you have a semidecidable subset of <code>nat -&gt; bool</code> then it's the union of the sets accepted by countably many functions <code>(nat -&gt; bool) -&gt; bool</code> (given by "run the semidecision procedure for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">T</span></span></span></span> steps, and return true if it accepts, otherwise false") and so it's an open subset.</p>
 
+<a name="167885444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167885444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167885444">Mario Carneiro (Jun 11 2019 at 20:02)</a>:</h4>
+<p>This proof still works for <code>(nat -&gt; bool) -&gt; nat</code>, without any changes. It doesn't work for <code>(nat -&gt; bool) -&gt; (nat -&gt; bool)</code> because the values are now functions, which can delay the computation of <code>f</code> while still depending on infinitely many parts of it</p>
+
+<a name="167885575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167885575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167885575">Mario Carneiro (Jun 11 2019 at 20:03)</a>:</h4>
+<p>what you can say is that in any case, finitely many evaluations of <code>f</code> are performed before a value is produced</p>
+
+<a name="167886546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167886546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167886546">Kevin Buzzard (Jun 11 2019 at 20:16)</a>:</h4>
+<p>Sure in any run only finitely many evaluations occur. The question is whether there is a uniform bound independent of the function. Reid proved that this was true for functions to <code>bool</code>. What about functions to <code>nat</code>?</p>
+
+<a name="167886986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167886986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167886986">François G. Dorais (Jun 11 2019 at 20:22)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">enat</span> <span class="o">:=</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">bool</span> <span class="bp">//</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">tt</span> <span class="bp">→</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">enat</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">n</span> <span class="bp">≤</span> <span class="n">i</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">to_bool_iff</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_succ_of_le</span> <span class="err">$</span> <span class="o">(</span><span class="n">to_bool_iff</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>the inverse to <code>f</code> is noncomputable</p>
+</blockquote>
+<p>Except that this is not a bijection! The statement <code>function.surjective f</code> is equivalent to <code>∀ (p : nat → bool), (∃ n, p n = tt) ∨ (∀ n, p n = ff)</code> (provably in plain Lean) but the latter is a non-provable instance of the law of excluded middle. In fact, the inverse becomes definable in Lean with the (somewhat stronger) assumption <code>[decidable  (∃ n, p n = tt)]</code>.</p>
+<p>To return to <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>'s original question, what is missing from lean to prove that every bijection is invertible is the _Principle of Definite Description_, which is also known as the _Principle of Unique Choice_. In Lean, the Axiom of Choice is formulated as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>The Axiom of Unique Choice can be formulated as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">unique_choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">subsingleton</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>Given a function <code>f : α → β</code>, <code>function.injective f</code> yields <code>Π (y : β), subsingleton { x :  α // f x = y }</code> and <code>function.surjective f</code> yields <code>Π (y : β), nonempty { x :  α // f x = y }</code> and thus <code>unique_choice</code> can be used to define the inverse.</p>
+<p>Unlike <code>choice</code>, which gives classical logic by Diaconescu's Theorem and hence many noncomputable functions <code>nat → nat</code>, <code>unique_choice</code> has no consequence on the logic of Prop and cannot be used to prove the existence of a noncomputable function <code>nat → nat</code> in Lean. It does have interesting properties on the type structure of Lean. The main consequence is that <code>unique_choice</code> allows <code>Prop</code> to eliminate into <code>Type</code> and since <code>Prop</code> is impredicative, this makes the whole hierarchy of types impredicative as well. So the real problem for inverting bijections is with predicativity rather than computability. Assuming <code>unique_choice</code> every bijection has an inverse, but <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>'s example is still not invertible since it is not provably bijective.</p>
+
+<a name="167887052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167887052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167887052">Reid Barton (Jun 11 2019 at 20:23)</a>:</h4>
+<p>You can first prove that a computable function <code>(nat -&gt; bool) -&gt; nat</code> is bounded by the same kind of argument (otherwise we can construct an input for which the output exceeds N for every N).</p>
+
+<a name="167887327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167887327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167887327">Reid Barton (Jun 11 2019 at 20:27)</a>:</h4>
+<p>Or since we already proved that computable functions to bool are continuous, consider the open cover by the sets <code>{f | F f = i}</code> and take a finite subcover.</p>
+
+<a name="167888208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167888208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167888208">Kevin Buzzard (Jun 11 2019 at 20:38)</a>:</h4>
+<blockquote>
+<p>Except that this is not a bijection! </p>
+</blockquote>
+<p>I can switch on some maths settings and then prove that it is, which surely means that it can't "not [be] a bijection" before -- it was just not <em>provably</em> a bijection or something.</p>
+
+<a name="167888557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167888557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167888557">François G. Dorais (Jun 11 2019 at 20:42)</a>:</h4>
+<p>But, for most of these settings, if you switch on those settings you can also prove that every bijection has an inverse!</p>
+
+<a name="167889424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889424">Chris Hughes (Jun 11 2019 at 20:52)</a>:</h4>
+<p>em is weaker than full choice.</p>
+
+<a name="167889462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889462">Chris Hughes (Jun 11 2019 at 20:52)</a>:</h4>
+<p>I don't think em implies bijections have an inverse.</p>
+
+<a name="167889564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889564">Kevin Buzzard (Jun 11 2019 at 20:54)</a>:</h4>
+<p>Maths settings FTW</p>
+
+<a name="167889605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889605">Mario Carneiro (Jun 11 2019 at 20:54)</a>:</h4>
+<p>My claim has always been in the context of assume all classical axioms but not <code>noncomputable</code></p>
+
+<a name="167889669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889669">Kevin Buzzard (Jun 11 2019 at 20:55)</a>:</h4>
+<p>It's interesting. I always regard all of this non-maths stuff (computability, classicality) as just "non-maths stuff", but I am slowly beginning to be able to distinguish these various bogs from one another.</p>
+
+<a name="167889679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889679">Mario Carneiro (Jun 11 2019 at 20:55)</a>:</h4>
+<p>In constructive maths it is probably not possible, because a constructive proof that it is a bijection is basically an equiv</p>
+
+<a name="167889791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889791">Kevin Buzzard (Jun 11 2019 at 20:56)</a>:</h4>
+<p>I liked David Roberts' comment on my blog post -- if you think of functions as relations then one can prove that the inverse is a "functional relation" -- and yet it still doesn't arise from a function.</p>
+
+<a name="167889811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889811">Mario Carneiro (Jun 11 2019 at 20:56)</a>:</h4>
+<p>right, that's a good way to think about it</p>
+
+<a name="167889816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889816">Kevin Buzzard (Jun 11 2019 at 20:56)</a>:</h4>
+<p>In ZFC and classical first order logic is there a notion of computability?</p>
+
+<a name="167889838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889838">Kevin Buzzard (Jun 11 2019 at 20:56)</a>:</h4>
+<p>[indicating my still huge level of ignorance]</p>
+
+<a name="167889862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889862">Kevin Buzzard (Jun 11 2019 at 20:57)</a>:</h4>
+<p>because I thought that in ZFC a function was the same as a functional relation.</p>
+
+<a name="167889948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167889948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167889948">Mario Carneiro (Jun 11 2019 at 20:58)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>what you can say is that in any case, finitely many evaluations of <code>f</code> are performed before a value is produced</p>
+</blockquote>
+<p>Sure in any run only finitely many evaluations occur. The question is whether there is a uniform bound independent of the function. Reid proved that this was true for functions to <code>bool</code>. What about functions to <code>nat</code>?</p>
+</blockquote>
+<p>I mean that statement uniformly. For any computable closed term of <code>(nat -&gt; bool) -&gt; A</code>, there exists n such that the argument will be evaluated at most n times before the result becomes a value</p>
+
+<a name="167890005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890005">Kevin Buzzard (Jun 11 2019 at 20:59)</a>:</h4>
+<p>I see. But the value itself can depend on other arguments (e.g. <code>id</code> evaluates nothing and depends on everything)</p>
+
+<a name="167890056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890056">Mario Carneiro (Jun 11 2019 at 21:00)</a>:</h4>
+<p><code>id : (nat -&gt; bool) -&gt; (nat -&gt; bool)</code> does not evaluate the function <code>f</code> at all before returning <code>f</code></p>
+
 
 {% endraw %}
