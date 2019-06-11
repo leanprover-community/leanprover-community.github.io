@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cast](61260cast.html) (6 messages, latest: Jun 11 2019 at 16:55)
+
 * [finite sums](86088finitesums.html) (4 messages, latest: Jun 11 2019 at 14:47)
 
 * [`rfl` sadness](75638rflsadness.html) (26 messages, latest: Jun 11 2019 at 14:01)
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
 
 * [list.append_assoc defeq?](32447listappendassocdefeq.html) (50 messages, latest: Jun 10 2019 at 15:51)
-
-* [cast](61260cast.html) (5 messages, latest: Jun 10 2019 at 15:25)
 
 * [heq hell again](32676heqhellagain.html) (41 messages, latest: Jun 10 2019 at 12:10)
 

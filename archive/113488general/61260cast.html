@@ -33,5 +33,20 @@ permalink: archive/113488general/61260cast.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast/near/167768550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61260cast.html#167768550">Mario Carneiro (Jun 10 2019 at 15:25)</a>:</h4>
 <p>it's also not much different from <code>eq.rec</code></p>
 
+<a name="167868647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cast/near/167868647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61260cast.html#167868647">Wojciech Nawrocki (Jun 11 2019 at 16:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I run into <code>cast</code>s all the time, but I would like to not use them, in accordance with your "almost never". However, I don't see any way to do that. For example, as soon as I define a few simple things, <code>cast</code>s seem to become necessary really quickly:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">vector</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="kn">variable</span> <span class="n">mk_vec</span><span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">vector</span> <span class="n">n</span>
+<span class="kn">variable</span> <span class="n">consume_vec</span><span class="o">:</span> <span class="bp">Π</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">vector</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+
+<span class="c1">-- Of course, I could just swap the x,y arguments to consume_vec here but this</span>
+<span class="c1">-- doesn&#39;t seem to be possible very often with more complicated types.</span>
+<span class="n">def</span> <span class="n">something_useful</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">consume_vec</span> <span class="n">x</span> <span class="n">y</span> <span class="err">$</span> <span class="n">cast</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">)</span> <span class="o">(</span><span class="n">mk_vec</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">x</span><span class="o">))</span>
+
+<span class="c1">-- At what point does this go wrong? To me, it seems like</span>
+<span class="c1">-- it goes wrong as soon as `vector` is defined the way it is here.</span>
+</pre></div>
+
 
 {% endraw %}
