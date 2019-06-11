@@ -580,5 +580,161 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890056">Mario Carneiro (Jun 11 2019 at 21:00)</a>:</h4>
 <p><code>id : (nat -&gt; bool) -&gt; (nat -&gt; bool)</code> does not evaluate the function <code>f</code> at all before returning <code>f</code></p>
 
+<a name="167890130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890130">Mario Carneiro (Jun 11 2019 at 21:00)</a>:</h4>
+<p><code>f</code> is assumed to already be a value here (i.e. a lambda) since it was passed to <code>id</code></p>
+
+<a name="167890187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890187">Mario Carneiro (Jun 11 2019 at 21:01)</a>:</h4>
+<p>the difference is that the meaning of "value" depends on the type in question</p>
+
+<a name="167890198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890198">Mario Carneiro (Jun 11 2019 at 21:01)</a>:</h4>
+<p>for <code>nat -&gt; bool</code>, a value is something of the form <code>\lam x : nat, e</code></p>
+
+<a name="167890212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890212">Mario Carneiro (Jun 11 2019 at 21:01)</a>:</h4>
+<p>for <code>bool</code>, a value is either <code>tt</code> or <code>ff</code>, and for <code>nat</code> a value is <code>succ $ ... $ succ 0</code></p>
+
+<a name="167890229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890229">François G. Dorais (Jun 11 2019 at 21:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  To be more precise with this last comment, it's totally fine to assume the full law of excluded middle in Prop. Since Prop can't eliminate into Type, you won't get any noncomputable functions out of that. But then you get into this awful scenario where you can prove the _existence_ of noncomputable functions <code>nat → nat</code> but you can't produce a single one: every closed term <code>nat → nat</code> is still computable. I find that scenario rather bizarre but I also like bizarre stuff... By the way, for the same reason, your question has a different answer if you ask for the _existence_ of an inverse rather than an actual term for the inverse.</p>
+
+<a name="167890322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890322">Mario Carneiro (Jun 11 2019 at 21:03)</a>:</h4>
+<p>there are noncomputable closed terms, e.g. unguarded use of <code>choice</code></p>
+
+<a name="167890406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890406">François G. Dorais (Jun 11 2019 at 21:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>: Yes, that's my point. With <code>choice</code> every bijection has an inverse.</p>
+
+<a name="167890441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890441">Mario Carneiro (Jun 11 2019 at 21:04)</a>:</h4>
+<p>I'm talking about classical + computable though, where you are allowed to use <code>choice</code> but only to prove a proposition</p>
+
+<a name="167890490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890490">Mario Carneiro (Jun 11 2019 at 21:05)</a>:</h4>
+<p>in particular that means that if you only ask for existence of an inverse it's easy since you just use choice to construct a noncomputable function, and then the exists shields the noncomputability</p>
+
+<a name="167890494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890494">François G. Dorais (Jun 11 2019 at 21:05)</a>:</h4>
+<p>Yes, then you can prove the _existence_ of an inverse but you can't get to the inverse without eliminating the proposition.</p>
+
+<a name="167890640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890640">Mario Carneiro (Jun 11 2019 at 21:07)</a>:</h4>
+<blockquote>
+<p>In ZFC and classical first order logic is there a notion of computability?</p>
+</blockquote>
+<p>No, except of course for the deep embedding, a.k.a the usual notion of computability by math/cs using turing machines or whatever</p>
+
+<a name="167890720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890720">Kevin Buzzard (Jun 11 2019 at 21:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I don't know how to prove this constructively :-(</p>
+
+<a name="167890742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890742">Kevin Buzzard (Jun 11 2019 at 21:08)</a>:</h4>
+<p>The only constructor I know for exists is "just show me the function" and that's exactly what I can't do.</p>
+
+<a name="167890750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890750">Mario Carneiro (Jun 11 2019 at 21:08)</a>:</h4>
+<p>the proof uses <code>choice</code></p>
+
+<a name="167890792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890792">Mario Carneiro (Jun 11 2019 at 21:09)</a>:</h4>
+<p>or at least <code>unique_choice</code></p>
+
+<a name="167890800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167890800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167890800">Kevin Buzzard (Jun 11 2019 at 21:09)</a>:</h4>
+<p>oh I see, but it's still computable probably [goes to check]</p>
+
+<a name="167891429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167891429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167891429">Kevin Buzzard (Jun 11 2019 at 21:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="n">def</span> <span class="n">equiv_thing</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">choose</span> <span class="n">g</span> <span class="n">hg</span> <span class="kn">using</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">2</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">use</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span> <span class="n">swap</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hg</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span> <span class="n">apply</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hg</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I love that <code>choose</code> tactic; it makes that argument so much easier than it used to be.</p>
+
+<a name="167891515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167891515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167891515">Kenny Lau (Jun 11 2019 at 21:20)</a>:</h4>
+<p>you can eta-reduce <code>fun y, hf.2 y</code></p>
+
+<a name="167891935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167891935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167891935">Kevin Buzzard (Jun 11 2019 at 21:27)</a>:</h4>
+<p>Eta reduction is defeq for pi types but not for inductive tires</p>
+
+<a name="167891977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167891977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167891977">Mario Carneiro (Jun 11 2019 at 21:27)</a>:</h4>
+<p>did autocorrect change tyre to tire there?</p>
+
+<a name="167892057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892057">Kevin Buzzard (Jun 11 2019 at 21:28)</a>:</h4>
+<p>Maybe it's bed time, I seem to have spent all day thinking about type theory</p>
+
+<a name="167892112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892112">Mario Carneiro (Jun 11 2019 at 21:29)</a>:</h4>
+<p>eta reduction is defeq for inductive types, although sometimes lean gets confused</p>
+
+<a name="167892567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892567">Mario Carneiro (Jun 11 2019 at 21:35)</a>:</h4>
+<p>hey, a reasonable application of <code>axiom_of_choice</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">equiv_thing</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="n">hg</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">axiom_of_choice</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">2</span> <span class="k">in</span>
+<span class="bp">⟨</span><span class="n">g</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">1</span> <span class="o">(</span><span class="n">hg</span> <span class="bp">_</span><span class="o">),</span> <span class="n">hg</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="167892809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892809">Reid Barton (Jun 11 2019 at 21:38)</a>:</h4>
+<p>Personally I've always found <code>choice</code> philosophically dubious, and I'd much prefer to stick to <code>axiom_of_choice</code> plus <code>unique_choice</code> wherever possible</p>
+
+<a name="167892853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892853">Kevin Buzzard (Jun 11 2019 at 21:39)</a>:</h4>
+<blockquote>
+<p>Personally I've always found <code>choice</code> philosophically dubious, and I'd much prefer to stick to <code>axiom_of_choice</code> plus <code>unique_choice</code> wherever possible</p>
+</blockquote>
+<p>I put that sort of comment in the same box as "personally I find castling philosophically dubious in chess". Isn't it all a game?</p>
+
+<a name="167892945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892945">Reid Barton (Jun 11 2019 at 21:41)</a>:</h4>
+<p>It's another part of the "mathematicians' rules of conduct" I guess. We don't make definitions that depend on which element <code>choice</code>produces.</p>
+
+<a name="167892962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167892962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167892962">Kevin Buzzard (Jun 11 2019 at 21:41)</a>:</h4>
+<blockquote>
+<p>eta reduction is defeq for inductive types, although sometimes lean gets confused</p>
+</blockquote>
+<p>The proof of <code>complex.eta</code> is not <code>rfl</code>, it's <code>cases, rfl</code></p>
+
+<a name="167893023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167893023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167893023">Reid Barton (Jun 11 2019 at 21:42)</a>:</h4>
+<p>If you replace <code>choice</code> by <code>axiom_of_choice</code>+<code>unique_choice</code> then you're forced to prove, for example, that the dimension of a vector space does not depend on the choice of basis</p>
+
+<a name="167893689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167893689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167893689">Mario Carneiro (Jun 11 2019 at 21:52)</a>:</h4>
+<p>oh, right there are multiple things called eta</p>
+
+<a name="167893700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167893700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167893700">Mario Carneiro (Jun 11 2019 at 21:52)</a>:</h4>
+<p>I'm not sure what I thought you meant</p>
+
+<a name="167893748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167893748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167893748">Mario Carneiro (Jun 11 2019 at 21:53)</a>:</h4>
+<p><code>axiom_of_choice</code> + <code>unique_choice</code> makes type theory look basically like ZFC</p>
+
 
 {% endraw %}

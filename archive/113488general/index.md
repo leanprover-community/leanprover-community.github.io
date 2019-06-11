@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (129 messages, latest: Jun 11 2019 at 21:00)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (160 messages, latest: Jun 11 2019 at 21:53)
 
-* [transport and parametricity](74751transportandparametricity.html) (31 messages, latest: Jun 11 2019 at 20:33)
+* [transport and parametricity](74751transportandparametricity.html) (32 messages, latest: Jun 11 2019 at 21:29)
 
 * [cast](61260cast.html) (7 messages, latest: Jun 11 2019 at 20:10)
 
