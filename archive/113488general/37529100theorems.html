@@ -472,5 +472,22 @@ This was the first big project I've tried so fair to say, I learned a lot!</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/167837157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#167837157">Alex J. Best (Jun 11 2019 at 10:25)</a>:</h4>
 <p>Yeah I ended up sorrying and commenting a lot, and having a separate scratch section for running library search and building snippets of proof up... having to do "real work" while lean is compiling wasn't the worst thing ever though</p>
 
+<a name="167840186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/167840186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#167840186">Kevin Buzzard (Jun 11 2019 at 11:14)</a>:</h4>
+<p>There seems to be some sort of a problem around line 569 but it's particularly obscure.</p>
+<p>Inserting <code>sorry, end, sorry, end #exit</code> just after <code>rw one_fixed_i at mainn,</code> gets the proof compiling. However inserting <code>end, sorry, end #exit</code> instead, just after the next line <code>exact mainn</code> causes a deterministic time-out, even if the time-out variable is set to super-high (900000). We had this problem in the perfectoid project and it turned out to be a delicate issue with unification which was very hard to debug.</p>
+
+<a name="167840259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/167840259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#167840259">Kevin Buzzard (Jun 11 2019 at 11:14)</a>:</h4>
+<p>In short, our code was crummy in a way we had not really understood because the issue was not mathematical.</p>
+
+<a name="167840400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/167840400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#167840400">Kevin Buzzard (Jun 11 2019 at 11:16)</a>:</h4>
+<p>I would honestly recommend breaking up the proof into much smaller chunks so it's easier to find out what's going on. It's very frustrating to work with it as things stand.</p>
+
+<a name="167840490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/100%20theorems/near/167840490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37529100theorems.html#167840490">Kevin Buzzard (Jun 11 2019 at 11:18)</a>:</h4>
+<p>Other comments: indent 2 spaces not 4, and indent after the initial <code>begin</code> so that the entire proof is two spaces in (at least).</p>
+
 
 {% endraw %}

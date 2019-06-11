@@ -1,0 +1,49 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/34195subtypecoerciontosupertype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html">subtype coercion to supertype</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167842060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167842060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167842060">Kevin Kappelmann (Jun 11 2019 at 11:46)</a>:</h4>
+<p>I was wondering if I use subtypes (and coercions to their supertype) correctly. For example, let's define a subtype of lists of length, say, at most 5:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">short_list</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="bp">≤</span> <span class="mi">5</span><span class="o">}</span>
+</pre></div>
+
+
+<p>Now, given some <code>sl : short_list α</code>, I naturally would like to re-use functions from <code>list</code>. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">sl</span> <span class="o">:</span> <span class="n">short_list</span> <span class="n">α</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"> What I would like to have -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">sl</span> <span class="c1">-- error - expected list but got short_list</span>
+<span class="c">/-</span><span class="cm"> What also does not work -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="o">(</span><span class="n">sl</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="c1">-- error since no coercion to list is known</span>
+<span class="c">/-</span><span class="cm"> What works but is not what I want -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">sl</span><span class="bp">.</span><span class="n">val</span>
+</pre></div>
+
+
+<p>So what I ended up doing is this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">short_list_to_list</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">short_list</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">sl</span><span class="o">,</span> <span class="n">sl</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">elim_cast</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">coe_short_list</span> <span class="o">(</span><span class="n">sl</span> <span class="o">:</span> <span class="n">short_list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="n">sl</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">sl</span><span class="bp">.</span><span class="n">val</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">refl</span>
+
+<span class="c">/-</span><span class="cm"> Works -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="o">(</span><span class="n">sl</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"> Does not work -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">sl</span>
+</pre></div>
+
+
+<p>Is this the best I can do? Is it the right thing to do? If so, shouldn't these kind of coercions be created automatically?</p>
+
+
+{% endraw %}
