@@ -897,5 +897,31 @@ Here "internal homotopy type of X" means, for example, use the interpretation of
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167842570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167842570">Chris Hughes (Jun 11 2019 at 11:55)</a>:</h4>
 <p>Also the elaborator can never compute the motive for these funny ones.</p>
 
+<a name="167845678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167845678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167845678">Gabriel Ebner (Jun 11 2019 at 12:39)</a>:</h4>
+<p>Some tactics are available.  For example, <code>cases</code> (and the equations compiler) works as long as the type you match on is not dependent (i.e., unit, prod, list are fine.  sigma, eq is bad).  Floris wrote an <code>hinduction</code> tactic that does induction on equalities.  There is also an <code>hsimp</code> tactic that adapts the simplifier to work on <code>hott.eq</code>.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">hott</span><span class="o">]</span> <span class="n">def</span> <span class="n">ex2</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">),</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">x</span><span class="o">,</span> <span class="n">hinduction</span> <span class="n">x</span><span class="o">,</span> <span class="n">intro</span> <span class="n">y</span><span class="o">,</span> <span class="n">cases</span> <span class="n">a</span><span class="o">,</span>
+<span class="n">apply</span> <span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">unit</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">⟨⟩</span> <span class="n">h</span><span class="o">,</span> <span class="n">refl</span> <span class="bp">_</span> <span class="bp">=</span> <span class="n">h</span><span class="o">)</span> <span class="bp">_</span> <span class="n">y</span><span class="o">,</span>
+<span class="n">exact</span> <span class="n">rfl</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>(My HoTT is really rusty now.)  BTW, <code>@[hott]</code> doesn't work on examples.</p>
+
+<a name="167846809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167846809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167846809">Chris Hughes (Jun 11 2019 at 12:55)</a>:</h4>
+<p>How do I prove <code>0 \ne nat.succ n</code> in HoTT</p>
+
+<a name="167847047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167847047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167847047">Reid Barton (Jun 11 2019 at 12:57)</a>:</h4>
+<p>can't you do it the same way as usual?</p>
+
+<a name="167847199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167847199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167847199">Kenny Lau (Jun 11 2019 at 12:59)</a>:</h4>
+<p>spoilers: there's a proof in <code>hott.nat.basic</code></p>
+
 
 {% endraw %}
