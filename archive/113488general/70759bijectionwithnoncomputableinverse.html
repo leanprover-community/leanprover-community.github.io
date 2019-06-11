@@ -1,0 +1,306 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/70759bijectionwithnoncomputableinverse.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html">bijection with noncomputable inverse</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167825286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825286">Kevin Buzzard (Jun 11 2019 at 07:13)</a>:</h4>
+<p>There are some concepts which are obvious to computer scientists who have learnt some constructive logic but which are alien to mathematicians, and I am interested in explaining them to mathematicians.</p>
+<p>One of these concepts is the idea that there are types which don't have decidable equality. I think I've cracked this one. One can argue that the real numbers on either side of the equality at, say, <a href="https://mathoverflow.net/a/331385/1384" target="_blank" title="https://mathoverflow.net/a/331385/1384">this answer</a> are clearly "well-defined" or "computable to arbitrary accuracy" or however mathematicians would like to think of it, but mathematicians can just as easily see that there is no "one method" which will answer all questions of this nature (as evidenced by the fact that apparently there is no known method which will answer that one).</p>
+<p>I want to do the same for bijections. Mathematicians still find it jarring that the concept of "bijection" and "map with a two-sided inverse" are not "the same" in Lean. I'd like to give an example of a bijection from the reals to the reals which is defined by an algorithm but for which there is no obvious algorithm to define the inverse. I'm assuming such a function exists -- does it? I'm also assuming that this question can be made precise (where "real number" becomes something like "for all n, a rational number within 1/n of the real numbers" or whatever; I'm hoping there are no issues here).</p>
+
+<a name="167825398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825398">Mario Carneiro (Jun 11 2019 at 07:14)</a>:</h4>
+<p>an even simpler example of non-decidable equality is <code>nat -&gt; nat</code></p>
+
+<a name="167825431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825431">Kevin Buzzard (Jun 11 2019 at 07:15)</a>:</h4>
+<p>I think mathematicians will prefer the real example. I'm not sure they understand what a Turing machine is.</p>
+
+<a name="167825447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825447">Mario Carneiro (Jun 11 2019 at 07:15)</a>:</h4>
+<p>I am not talking about turing machines, I mean functions</p>
+
+<a name="167825489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825489">Kevin Buzzard (Jun 11 2019 at 07:16)</a>:</h4>
+<p>Mathematicians are typically not taught what a computable function is.</p>
+
+<a name="167825529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825529">Mario Carneiro (Jun 11 2019 at 07:16)</a>:</h4>
+<p>just regular functions</p>
+
+<a name="167825540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825540">Kevin Buzzard (Jun 11 2019 at 07:16)</a>:</h4>
+<p>Well fair enough.</p>
+
+<a name="167825545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825545">Mario Carneiro (Jun 11 2019 at 07:16)</a>:</h4>
+<p>to properly talk about decidability you need some notion of computing though</p>
+
+<a name="167825552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825552">Mario Carneiro (Jun 11 2019 at 07:16)</a>:</h4>
+<p>an informal sense is sufficient</p>
+
+<a name="167825567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825567">Kevin Buzzard (Jun 11 2019 at 07:17)</a>:</h4>
+<p>I know but this is the hard part for mathematicians. The example with the reals I think gets the point across for decidability.</p>
+
+<a name="167825570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825570">Kevin Buzzard (Jun 11 2019 at 07:17)</a>:</h4>
+<p>"if I can't decide it, how can a machine?"</p>
+
+<a name="167825637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825637">Kevin Buzzard (Jun 11 2019 at 07:18)</a>:</h4>
+<p>Maybe <code>nat -&gt; nat</code> is a place to look for computable bijections with a non-computable inverse?</p>
+
+<a name="167825642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825642">Mario Carneiro (Jun 11 2019 at 07:18)</a>:</h4>
+<p>really? I find the idea that real numbers are not decidable at least a bit weird, given that we generally picture them as completed entities, where 1 = 2 in real is no different from 1 = 2 in nat</p>
+
+<a name="167825657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825657">Mario Carneiro (Jun 11 2019 at 07:18)</a>:</h4>
+<p>plus I can ask my calculator if real numbers are equal no problem</p>
+
+<a name="167825662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825662">Kevin Buzzard (Jun 11 2019 at 07:18)</a>:</h4>
+<p>All I'm saying is that a mathematician will not even flinch when you say "conjecture: some stupid sum of binomial coefficients is pi^7"</p>
+
+<a name="167825683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825683">Kevin Buzzard (Jun 11 2019 at 07:19)</a>:</h4>
+<p>and then you can say "hah! But both sides are well-defined real numbers, and we can't figure out if they're equal."</p>
+
+<a name="167825686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825686">Mario Carneiro (Jun 11 2019 at 07:19)</a>:</h4>
+<p>conjecture: the function that maps all goldbach counterexamples to 1 and other stuff to 0 is the constant 0 function</p>
+
+<a name="167825694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825694">Kevin Buzzard (Jun 11 2019 at 07:19)</a>:</h4>
+<p>I believe you</p>
+
+<a name="167825759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825759">Mario Carneiro (Jun 11 2019 at 07:20)</a>:</h4>
+<p>I think it's easier to draw the parallel between Pi1 statements and equality of functions than equality of reals, but maybe that's the logician in me</p>
+
+<a name="167825762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825762">Kevin Buzzard (Jun 11 2019 at 07:20)</a>:</h4>
+<p>and I can use this to give noncomputable bijections with noncomputable inverses</p>
+
+<a name="167825780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825780">Kevin Buzzard (Jun 11 2019 at 07:21)</a>:</h4>
+<p>does Goldbach help with the noncomputable inverse thing?</p>
+
+<a name="167825791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825791">Mario Carneiro (Jun 11 2019 at 07:21)</a>:</h4>
+<p>I don't know whether I have a convincing example for the bijection problem</p>
+
+<a name="167825796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825796">Kevin Buzzard (Jun 11 2019 at 07:21)</a>:</h4>
+<p>Mathematicians don't know what a Pi1 statement is either.</p>
+
+<a name="167825804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825804">Mario Carneiro (Jun 11 2019 at 07:21)</a>:</h4>
+<p>obviously don't say that</p>
+
+<a name="167825807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825807">Mario Carneiro (Jun 11 2019 at 07:21)</a>:</h4>
+<p>say goldbach or RH or something</p>
+
+<a name="167825810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825810">Kevin Buzzard (Jun 11 2019 at 07:21)</a>:</h4>
+<p>We're so ignorant. Only the logicians know, and they're retiring and not being replaced.</p>
+
+<a name="167825815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825815">Kevin Buzzard (Jun 11 2019 at 07:21)</a>:</h4>
+<p>At least in the UK.</p>
+
+<a name="167825860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825860">Mario Carneiro (Jun 11 2019 at 07:22)</a>:</h4>
+<p>I mentioned the bijection between <code>option</code> and <code>roption</code> before, but I don't want to explain that one</p>
+
+<a name="167825871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825871">Kevin Buzzard (Jun 11 2019 at 07:22)</a>:</h4>
+<p>Yes, I looked at that comment and even wrote the code constructing the equiv afterwards</p>
+
+<a name="167825879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825879">Kevin Buzzard (Jun 11 2019 at 07:22)</a>:</h4>
+<p>I used your trick of subst to avoid heqs, IIRC</p>
+
+<a name="167825894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825894">Mario Carneiro (Jun 11 2019 at 07:23)</a>:</h4>
+<p>The problem is that you can't just use some simple type like <code>nat -&gt; nat</code> because you usually get obvious bijections, even if weird ones also exist</p>
+
+<a name="167825899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825899">Mario Carneiro (Jun 11 2019 at 07:23)</a>:</h4>
+<p>you have to put some strange subtype on the thing</p>
+
+<a name="167825913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825913">Mario Carneiro (Jun 11 2019 at 07:23)</a>:</h4>
+<p>you can embed <code>roption nat</code> in <code>nat -&gt; bool</code> as monotone sequences</p>
+
+<a name="167825978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825978">Mario Carneiro (Jun 11 2019 at 07:24)</a>:</h4>
+<p>and of course <code>option nat</code> is isomorphic to <code>nat</code></p>
+
+<a name="167825984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167825984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167825984">Mario Carneiro (Jun 11 2019 at 07:24)</a>:</h4>
+<p>so perhaps that's a solution</p>
+
+<a name="167826009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826009">Kevin Buzzard (Jun 11 2019 at 07:25)</a>:</h4>
+<p>Thanks for these comments; I'll think more.</p>
+
+<a name="167826176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826176">Mario Carneiro (Jun 11 2019 at 07:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">enat</span> <span class="o">:=</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">bool</span> <span class="bp">//</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">tt</span> <span class="bp">→</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">enat</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">n</span> <span class="bp">≤</span> <span class="n">i</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">to_bool_iff</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_succ_of_le</span> <span class="err">$</span> <span class="o">(</span><span class="n">to_bool_iff</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">1</span> <span class="n">h</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>the inverse to <code>f</code> is noncomputable</p>
+
+<a name="167826351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826351">Kevin Buzzard (Jun 11 2019 at 07:31)</a>:</h4>
+<p>Oh I like that!</p>
+
+<a name="167826419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826419">Kevin Buzzard (Jun 11 2019 at 07:32)</a>:</h4>
+<p>With the reals I was going round in circles thinking "I need to have some sort of discontinuity, where a and b are a long way apart but f(a) and f(b) are close -- and yet aren't all computable functions continuous or some such nonsense?"</p>
+
+<a name="167826455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826455">Kevin Buzzard (Jun 11 2019 at 07:33)</a>:</h4>
+<p>Here we have the discontinuity with f(1000000000000) and f(0) looking very close for the first gazillion entries, and yet f is still computable.</p>
+
+<a name="167826630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826630">Kevin Buzzard (Jun 11 2019 at 07:36)</a>:</h4>
+<p>I am quite good at "silly little maths puzzles" but I am much less good at these ones, because I have been brought up resolutely classical, so it's hard for me to tell the difference between option and roption. But because these are different things to you, you can tell which is which; they all just look like "some countable set" to me.</p>
+
+<a name="167826680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826680">Kevin Buzzard (Jun 11 2019 at 07:37)</a>:</h4>
+<p>This feels a bit like that embedding of nat into f : nat -&gt; nat from yesterday. These are somehow all implementation issues, computationally equivalent (but with different running times). I've never thought about these sorts of problems before in my life.</p>
+
+<a name="167826711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826711">Kevin Buzzard (Jun 11 2019 at 07:37)</a>:</h4>
+<p>I've spent 25 years living in a world where "computable" = "terminates instantly" and I had <code>noncomputable theory</code> at the top of the file anyway.</p>
+
+<a name="167826712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826712">Mario Carneiro (Jun 11 2019 at 07:38)</a>:</h4>
+<p>I think of it topologically - <code>roption</code> looks like the set {1/n...} \cup {0}</p>
+
+<a name="167826765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826765">Kevin Buzzard (Jun 11 2019 at 07:38)</a>:</h4>
+<p>It certainly does now.</p>
+
+<a name="167826792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826792">Mario Carneiro (Jun 11 2019 at 07:39)</a>:</h4>
+<p>so while there is an additional element, it isn't "apart" from the others, unlike <code>option</code> where it's a disjoint union</p>
+
+<a name="167826891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826891">Mario Carneiro (Jun 11 2019 at 07:40)</a>:</h4>
+<p>The <code>dint</code> example is actually computably isomorphic to <code>int</code>, because the constraint is that the functions are basically translations, so you don't get any of this "almost the same" business - you can just evaluate the function at any point to find out what it translates 0 to</p>
+
+<a name="167826979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826979">Kevin Buzzard (Jun 11 2019 at 07:42)</a>:</h4>
+<p>Right. My point is that given <code>dint</code> you know where to put it -- "it's the same as int". But your notion of "the same" is more refined than mine -- for me, option and roption are the same, and for things like enat you know whether it's option nat or roption nat.  For me, they're just all nat, because I've never been asked to think in this way.</p>
+
+<a name="167826989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167826989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167826989">Mario Carneiro (Jun 11 2019 at 07:42)</a>:</h4>
+<p>surely you have a notion of topological distinctness though</p>
+
+<a name="167827001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827001">Kevin Buzzard (Jun 11 2019 at 07:43)</a>:</h4>
+<p>Oh <em>definitely</em>. I can certainly see that topologically they're not the same. I thought this was just an analogy though.</p>
+
+<a name="167827013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827013">Mario Carneiro (Jun 11 2019 at 07:43)</a>:</h4>
+<p>like there are different topologies on the same underlying points</p>
+
+<a name="167827015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827015">Kevin Buzzard (Jun 11 2019 at 07:43)</a>:</h4>
+<p>Sure.</p>
+
+<a name="167827022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827022">Mario Carneiro (Jun 11 2019 at 07:43)</a>:</h4>
+<p>it's not an analogy at all, there is literally a topological structure</p>
+
+<a name="167827029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827029">Kevin Buzzard (Jun 11 2019 at 07:43)</a>:</h4>
+<p>If you'd asked me to give you a continuous bijection with a discontinuous inverse, between two countable sets, I would have given you this instantly.</p>
+
+<a name="167827093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827093">Kevin Buzzard (Jun 11 2019 at 07:44)</a>:</h4>
+<p>I could well have given you that exact example in fact. But I don't see what this has to do with computability.</p>
+
+<a name="167827094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827094">Mario Carneiro (Jun 11 2019 at 07:44)</a>:</h4>
+<p>Domain theory is the branch of computer science that deals with putting topologies on all these types, such that the computable functions are continuous</p>
+
+<a name="167827125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827125">Kevin Buzzard (Jun 11 2019 at 07:45)</a>:</h4>
+<p>So if I put the topology on nat so that the closed sets are nat and the finite sets, what does domain theory tell me about that?</p>
+
+<a name="167827146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827146">Kevin Buzzard (Jun 11 2019 at 07:45)</a>:</h4>
+<p>That horrible non-Hausdorff topology is called the Zariski topology.</p>
+
+<a name="167827152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827152">Kevin Buzzard (Jun 11 2019 at 07:45)</a>:</h4>
+<p>(sort-of)</p>
+
+<a name="167827327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827327">Mario Carneiro (Jun 11 2019 at 07:48)</a>:</h4>
+<p>I don't think you can obtain all topologies via domain theory; it's usually phrased in terms of monotone functions on a chain complete partial order</p>
+
+<a name="167827433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827433">Kevin Buzzard (Jun 11 2019 at 07:50)</a>:</h4>
+<p>So just these "orderish" ones like 0 union 1/n maybe.</p>
+
+<a name="167827445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827445">Mario Carneiro (Jun 11 2019 at 07:50)</a>:</h4>
+<p>that said I can believe that your zariski example is representable</p>
+
+<a name="167827465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827465">Kevin Buzzard (Jun 11 2019 at 07:51)</a>:</h4>
+<p>It's what the topology on Spec(Z) is.</p>
+
+<a name="167827542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827542">Kevin Buzzard (Jun 11 2019 at 07:52)</a>:</h4>
+<p>What about if I say every even number is less than every odd number, but on even numbers and on odd numbers it's the usual &lt;=?</p>
+
+<a name="167827548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827548">Kevin Buzzard (Jun 11 2019 at 07:52)</a>:</h4>
+<p>the disjoint union of nat and nat</p>
+
+<a name="167827553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827553">Kevin Buzzard (Jun 11 2019 at 07:52)</a>:</h4>
+<p>omega+omega</p>
+
+<a name="167827557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827557">Kevin Buzzard (Jun 11 2019 at 07:52)</a>:</h4>
+<p>with the order topology.</p>
+
+<a name="167827687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827687">Mario Carneiro (Jun 11 2019 at 07:55)</a>:</h4>
+<p>aha, you can do zariski</p>
+
+<a name="167827765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827765">Mario Carneiro (Jun 11 2019 at 07:56)</a>:</h4>
+<p>you can take the representative of n to be a function which has 1 at <code>a, a+n, a+2n, ...</code> quotient over all choices of <code>a</code></p>
+
+<a name="167827880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167827880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167827880">Mario Carneiro (Jun 11 2019 at 07:58)</a>:</h4>
+<p>the constraint is you should not ever be able to tell, given such a function, whether you actually have a representative of <code>n</code> or something else, but you can determine in finite time that two distinct elements are distinct</p>
+
+
+{% endraw %}
