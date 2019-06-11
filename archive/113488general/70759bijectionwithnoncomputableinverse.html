@@ -389,5 +389,75 @@ permalink: archive/113488general/70759bijectionwithnoncomputableinverse.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167846703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167846703">David Michael Roberts (Jun 11 2019 at 12:53)</a>:</h4>
 <p>I'm not sure if someone raised this above, but the space of infinite bit strings is the Cantor space 2^\mathbb{N} with the product topology (which probably coincides with the profinite topology). This is a metric space, and you should think of computable things as being <em>uniformly</em> continuous functions. IIRC there is no uniformly continuous function that picks out the streams that eventually have  a 1, as opposed to the ones that don't (or at least, this is the fable I tell myself in my head)</p>
 
+<a name="167847998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167847998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167847998">Kevin Buzzard (Jun 11 2019 at 13:08)</a>:</h4>
+<p>I'd just come back to this thread with some more questions and perhaps David has answered one. </p>
+<p>So yes by the profinite topology I meant the product topology. I am a bit confused about the metric space claim. sure I can put a metric space structure on it -- but I am equally sure that I can put two different metric space structures on it such that the uniformly continuous functions on one do not coincide with the uniformly continuous functions on the other. Is a product of uniform spaces a uniform space? Isn't a continuous function from a compact space automatically uniformly continuous anyway?</p>
+<p>Reid, I am a bit confused about the logic of things here. I don't want to start using compactness arguments or Konig's lemma yet -- they are mathsy things so they don't see the notion of computability; they might see the notion of continuity, but I thought that's what we were trying to prove.</p>
+<p>The claim washing around here seems to be that computable functions from <code>nat -&gt; bool</code> are continuous (or now we have this rival bid of uniformly continuous). So what about computable functions <code>(nat -&gt; bool) -&gt; nat</code>? What topology am I supposed to be putting on <code>nat</code> here? If the discrete topology, then continuous image of compact is compact so all continuous functions have finite image. Do all computable functions <code>(nat -&gt; bool) -&gt; nat</code>have finite image? </p>
+<p>The general theorem can't be that the target always has the discrete topology though, becuase the identity function is a continuous function from <code>nat -&gt; bool</code> which has infinite image. </p>
+<p>What is going on here?</p>
+
+<a name="167848256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167848256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167848256">David Michael Roberts (Jun 11 2019 at 13:11)</a>:</h4>
+<p>In computable land, things are not so easy: <a href="https://link.springer.com/chapter/10.1007/11494645_3" target="_blank" title="https://link.springer.com/chapter/10.1007/11494645_3">https://link.springer.com/chapter/10.1007/11494645_3</a></p>
+
+<a name="167848384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167848384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167848384">David Michael Roberts (Jun 11 2019 at 13:13)</a>:</h4>
+<p>Also, it might be something like not functions from Cantor space but functions from functionals on Cantor space. It's a bit too late here for me, so I should look up some references tomorrow. Certainly work of Andrej Bauer and of Martin Escardo is relevant here.</p>
+
+<a name="167848534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167848534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167848534">David Michael Roberts (Jun 11 2019 at 13:14)</a>:</h4>
+<p>One more potentially relevant reference and I may come back to this tomorrow: <a href="https://www.jstor.org/stable/27590306?seq=1#page_scan_tab_contents" target="_blank" title="https://www.jstor.org/stable/27590306?seq=1#page_scan_tab_contents">https://www.jstor.org/stable/27590306?seq=1#page_scan_tab_contents</a></p>
+
+<a name="167849040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849040">Reid Barton (Jun 11 2019 at 13:21)</a>:</h4>
+<p>So you asked whether every computable (total) function from <code>nat -&gt; bool</code> to <code>bool</code> can only depend on the value of its argument at finitely many natural numbers.</p>
+
+<a name="167849263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849263">Kevin Buzzard (Jun 11 2019 at 13:24)</a>:</h4>
+<p>Oh yes, that was a question I meant to flag up again. If I have a computable function <code>(nat -&gt; bool) -&gt; nat</code> then is there some <code>B</code> such that the computable function does not depend on the values of the function which are greater than <code>B</code>? Note that this is not true for <code>(nat -&gt; bool) -&gt; (nat -&gt; bool)</code> so I am a bit bewildered about what's going on here.</p>
+
+<a name="167849313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849313">Reid Barton (Jun 11 2019 at 13:25)</a>:</h4>
+<p>The argument is going to go something like this. Suppose <code>F : (nat -&gt; bool) -&gt; bool</code> is not of this form, that is, there is no N such that <code>F</code> is determined by the restriction of its argument <code>f</code> to numbers less than N. The only thing that <code>F</code> can do with <code>f</code> is evaluate it at various values. So suppose <code>F</code> starts out by evaluating <code>f</code> at some value <code>i</code>.</p>
+
+<a name="167849366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849366">Kevin Buzzard (Jun 11 2019 at 13:25)</a>:</h4>
+<p>Aah, so the target is now <code>bool</code>? Is that always the target for these questions?</p>
+
+<a name="167849481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849481">Reid Barton (Jun 11 2019 at 13:26)</a>:</h4>
+<p><code>f</code> is going to return either <code>tt</code> or <code>ff</code>. Now in at least one of these two cases, <code>F</code> must still have the property that the result depends on infinitely many more values of <code>f</code>. (Otherwise, we could get a bound for the maximum index that <code>F</code> depends on.)</p>
+
+<a name="167849618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849618">Reid Barton (Jun 11 2019 at 13:28)</a>:</h4>
+<p>Let's say it's <code>tt</code>, and then mentally set <code>f i = tt</code> and continue running the algorithm. It has to next check the value of <code>f</code> at a new index <code>j</code>.</p>
+
+<a name="167849670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849670">Reid Barton (Jun 11 2019 at 13:29)</a>:</h4>
+<p>and again we can partially specify <code>f</code> in a way to ensure that <code>F</code> depends on infinitely many more of its values. (This is basically the proof of Konig's lemma happening here.)</p>
+
+<a name="167849782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849782">Reid Barton (Jun 11 2019 at 13:30)</a>:</h4>
+<p>Furthermore we may as well assume <code>j</code> is different from <code>i</code> since evaluating <code>f</code> at <code>i</code> again doesn't help <code>F</code>.</p>
+
+<a name="167849865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849865">Reid Barton (Jun 11 2019 at 13:31)</a>:</h4>
+<p>In this way we get an infinite sequence of constraints <code>f i0 = b0</code>, <code>f i1 = b1</code>, <code>f i2 = b2</code> ...<br>
+Now choose a function <code>f</code> which satisfies all these constraints (this is a form of compactness), and run the algorithm for <code>F</code> on this <code>f</code>--it has to run forever, a contradiction because we assumed that the algorithm was total.</p>
+
+<a name="167849993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167849993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167849993">Reid Barton (Jun 11 2019 at 13:32)</a>:</h4>
+<p>If we removed random bits of the space <code>nat -&gt; bool</code>, we might not be able to do the step where we picked <code>f</code>. For example, <code>nat</code> can be embedded within <code>nat -&gt; bool</code> and then the argument would break down at that step</p>
+
+<a name="167850070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167850070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167850070">Kevin Buzzard (Jun 11 2019 at 13:33)</a>:</h4>
+<p>So if we stick to functions to <code>bool</code> we can guarantee they only query finitely many values, so they're continuous.</p>
+
+<a name="167850377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167850377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167850377">Reid Barton (Jun 11 2019 at 13:37)</a>:</h4>
+<p>If you have a semidecidable subset of <code>nat -&gt; bool</code> then it's the union of the sets accepted by countably many functions <code>(nat -&gt; bool) -&gt; bool</code> (given by "run the semidecision procedure for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi></mrow><annotation encoding="application/x-tex">T</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.68333em;"></span><span class="strut bottom" style="height:0.68333em;vertical-align:0em;"></span><span class="base"><span class="mord mathit" style="margin-right:0.13889em;">T</span></span></span></span> steps, and return true if it accepts, otherwise false") and so it's an open subset.</p>
+
 
 {% endraw %}

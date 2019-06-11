@@ -76,5 +76,32 @@ permalink: archive/113489newmembers/34195subtypecoerciontosupertype.html
 
 <p>I could imagine that sometimes people make these wrapper definitions precisely to switch _off_ some automatic coercion!</p>
 
+<a name="167849179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167849179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167849179">Kevin Kappelmann (Jun 11 2019 at 13:23)</a>:</h4>
+<p>Oh great, that's exactly what I was looking for - thanks a lot Kevin :)</p>
+
+<a name="167849277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167849277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167849277">Kevin Buzzard (Jun 11 2019 at 13:24)</a>:</h4>
+<p>I'm not sure it is :-(</p>
+
+<a name="167849296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167849296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167849296">Kevin Buzzard (Jun 11 2019 at 13:24)</a>:</h4>
+<p>I still had to coerce to <code>list alpha</code>.</p>
+
+<a name="167849799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167849799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167849799">Kevin Kappelmann (Jun 11 2019 at 13:30)</a>:</h4>
+<p>Hah, yeah - let me rephrase: the <code>subtype_coe_thing</code> part was exactly what I was having in my mind, that is a general coercion from subtypes to supertypes. The explicit coercion to <code>list</code> is still not "perfect".</p>
+
+<a name="167849974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion%20to%20supertype/near/167849974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34195subtypecoerciontosupertype.html#167849974">Kevin Kappelmann (Jun 11 2019 at 13:32)</a>:</h4>
+<p>Moreover, I'd be very interested why that kind of automatic coercion is not enabled/built in. On a similar note, one cannot cast datatypes if the carrier type has a coercion. For example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="o">(([</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">]</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="c1">-- fails</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">has_coe</span> <span class="n">β</span> <span class="n">γ</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="n">option_to_option</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">list</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">list</span>  <span class="n">γ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">l</span><span class="o">,</span> <span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="o">(</span><span class="err">↑</span><span class="n">b</span> <span class="o">:</span> <span class="n">γ</span><span class="o">))</span><span class="bp">⟩</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(([</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">]</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="c1">-- works</span>
+</pre></div>
+
 
 {% endraw %}

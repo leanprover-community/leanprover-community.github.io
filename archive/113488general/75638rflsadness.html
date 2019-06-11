@@ -1,0 +1,157 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/75638rflsadness.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html">`rfl` sadness</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167849183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849183">Keeley Hoek (Jun 11 2019 at 13:23)</a>:</h4>
+<p>Why isn't this lemma <code>rfl</code> :'(</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">inside_struct</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">dummy</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">foo</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">inside_struct</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span>
+
+<span class="n">def</span> <span class="n">foo</span><span class="bp">.</span><span class="n">v</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">inside_struct</span> <span class="n">foo</span> <span class="bp">|</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">intro</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span>
+
+<span class="kn">lemma</span> <span class="n">im_obvious</span> <span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">inside_struct</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">intro</span> <span class="n">val</span><span class="o">)</span><span class="bp">.</span><span class="n">v</span> <span class="bp">=</span> <span class="n">val</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="167849388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849388">Kenny Lau (Jun 11 2019 at 13:25)</a>:</h4>
+<p>because it's an eta right</p>
+
+<a name="167849450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849450">Keeley Hoek (Jun 11 2019 at 13:26)</a>:</h4>
+<p>How do you prove it then :'(<br>
+If you delete the inside struct then it's fine.</p>
+
+<a name="167849462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849462">Kevin Buzzard (Jun 11 2019 at 13:26)</a>:</h4>
+<p>This doesn't compile for me :-/ <code>invalid field notation, 'v' is not a valid "field" because environment does not contain 'foo.v'</code></p>
+
+<a name="167849514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849514">Keeley Hoek (Jun 11 2019 at 13:27)</a>:</h4>
+<p>Sorry Kevin, fixed it now</p>
+
+<a name="167849712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849712">Kevin Buzzard (Jun 11 2019 at 13:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">im_obvious</span> <span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">inside_struct</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">intro</span> <span class="n">val</span><span class="o">)</span><span class="bp">.</span><span class="n">v</span> <span class="bp">=</span> <span class="n">val</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">unfold</span> <span class="n">foo</span><span class="bp">.</span><span class="n">v</span>
+</pre></div>
+
+
+<p><em>shrug</em></p>
+
+<a name="167849809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167849809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167849809">Keeley Hoek (Jun 11 2019 at 13:30)</a>:</h4>
+<p>It not being a <code>rfl</code> lemma is really heartbreaking because it makes using that projection useless/not type correct :(</p>
+
+<a name="167850310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850310">Kevin Buzzard (Jun 11 2019 at 13:36)</a>:</h4>
+<p><code>unfold</code> must be applying <code>simp</code> I guess, if it's not definitional.</p>
+
+<a name="167850340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850340">Kenny Lau (Jun 11 2019 at 13:36)</a>:</h4>
+<p>wait this doesn't make sense, it isn't an eta, my reasoning is wrong</p>
+
+<a name="167850390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850390">Kenny Lau (Jun 11 2019 at 13:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">inside_struct</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">dummy</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span>
+
+<span class="kn">inductive</span> <span class="n">foo</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">inside_struct</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span>
+
+<span class="n">def</span> <span class="n">foo</span><span class="bp">.</span><span class="n">v</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">→</span> <span class="n">inside_struct</span> <span class="n">foo</span> <span class="bp">|</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">intro</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span>
+
+<span class="kn">lemma</span> <span class="n">im_obvious</span> <span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">inside_struct</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">intro</span> <span class="n">val</span><span class="o">)</span><span class="bp">.</span><span class="n">v</span> <span class="bp">=</span> <span class="n">val</span> <span class="o">:=</span>
+<span class="n">foo</span><span class="bp">.</span><span class="n">v</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="n">val</span>
+</pre></div>
+
+<a name="167850397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850397">Kenny Lau (Jun 11 2019 at 13:37)</a>:</h4>
+<p>it should be definitionally equal though...</p>
+
+<a name="167850412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850412">Keeley Hoek (Jun 11 2019 at 13:37)</a>:</h4>
+<p>I'm thinking a bug in lean?</p>
+
+<a name="167850498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850498">Gabriel Ebner (Jun 11 2019 at 13:38)</a>:</h4>
+<p>I don't think that this equality is definitionally equal.  The construction of the nested inductives pattern-matches on <code>val</code>, so it does not reduce (since we don't have eta for structures).</p>
+
+<a name="167850506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850506">Kevin Buzzard (Jun 11 2019 at 13:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">foo</span><span class="bp">.</span><span class="n">v</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">foo.v.equations._eqn_1 : ∀ (v : inside_struct foo), foo.v (foo.intro v) = v</span>
+<span class="cm">-/</span>
+
+<span class="kn">lemma</span> <span class="n">im_obvious</span> <span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">inside_struct</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">intro</span> <span class="n">val</span><span class="o">)</span><span class="bp">.</span><span class="n">v</span> <span class="bp">=</span> <span class="n">val</span> <span class="o">:=</span>
+<span class="n">foo</span><span class="bp">.</span><span class="n">v</span><span class="bp">.</span><span class="n">equations</span><span class="bp">._</span><span class="n">eqn_1</span> <span class="n">val</span>
+</pre></div>
+
+<a name="167850555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850555">Kenny Lau (Jun 11 2019 at 13:39)</a>:</h4>
+<blockquote>
+<p>I don't think that this equality is definitionally equal.  The construction of the nested inductives pattern-matches on <code>val</code>, so it does not reduce (since we don't have eta for structures).</p>
+</blockquote>
+<p>this isn't structure eta</p>
+
+<a name="167850653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850653">Kevin Buzzard (Jun 11 2019 at 13:40)</a>:</h4>
+<p>The <code>unfold</code> works because it's an automatically-generated equation lemma.</p>
+
+<a name="167850769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850769">Kenny Lau (Jun 11 2019 at 13:42)</a>:</h4>
+<p>wait the inductive type <code>foo</code> references <code>inside_struct foo</code></p>
+
+<a name="167850772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850772">Kenny Lau (Jun 11 2019 at 13:42)</a>:</h4>
+<p>how does this compile at all</p>
+
+<a name="167850812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167850812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167850812">Gabriel Ebner (Jun 11 2019 at 13:42)</a>:</h4>
+<p>It is [pattern-matching on val].  Nested inductives (that is, <code>foo</code> here) are simulated using mutual inductives (which in turn are simulated using the normal inductives).  In this construction, <code>foo.intro</code> is a definition that converts everything into the mutual inductive type--and this <code>foo.intro</code> function hence pattern-matches on <code>inside_struct</code>.</p>
+
+<a name="167851345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167851345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167851345">Kenny Lau (Jun 11 2019 at 13:48)</a>:</h4>
+<p>why doesn't this work?</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">A</span><span class="o">,</span> <span class="n">B</span>
+<span class="k">with</span> <span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">,</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">A</span> <span class="n">α</span>
+<span class="k">with</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">:</span> <span class="n">A</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">B</span>
+</pre></div>
+
+<a name="167851351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167851351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167851351">Kenny Lau (Jun 11 2019 at 13:48)</a>:</h4>
+<p>and what's the correct version?</p>
+
+<a name="167851421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167851421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167851421">Reid Barton (Jun 11 2019 at 13:49)</a>:</h4>
+<p>Probably moving the argument of <code>A</code> left of the colon would help</p>
+
+<a name="167851584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167851584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167851584">Reid Barton (Jun 11 2019 at 13:51)</a>:</h4>
+<p><code>A</code> needs to satisfy some syntactic conditions to appear where it does in <code>B</code> and it's probably hard for Lean to verify them when you've defined <code>A</code> as an inductive family</p>
+
+<a name="167851622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167851622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167851622">Reid Barton (Jun 11 2019 at 13:51)</a>:</h4>
+<p>If you put basically anything other than <code>α</code> as the index in the constructor <code>mk</code>, the definition of <code>B</code> is likely invalid</p>
+
+<a name="167851739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60rfl%60%20sadness/near/167851739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/75638rflsadness.html#167851739">Reid Barton (Jun 11 2019 at 13:53)</a>:</h4>
+<p>actually now that I try it I have no idea what the syntax should be though</p>
+
+
+{% endraw %}
