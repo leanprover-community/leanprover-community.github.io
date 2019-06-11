@@ -82,5 +82,57 @@ and therefore the multiplication <span class="katex"><span class="katex-mathml">
 </blockquote>
 <p>That's because <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>1</mn><mo>+</mo><mi>n</mi></mrow><annotation encoding="application/x-tex">1+n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathrm">1</span><span class="mbin">+</span><span class="mord mathit">n</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">n</span><span class="mbin">+</span><span class="mord mathrm">1</span></span></span></span> are the same.</p>
 
+<a name="167853480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167853480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167853480">Kevin Buzzard (Jun 11 2019 at 14:10)</a>:</h4>
+<p>(and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi><mo>+</mo><mn>1</mn></mrow><annotation encoding="application/x-tex">n+1</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.64444em;"></span><span class="strut bottom" style="height:0.72777em;vertical-align:-0.08333em;"></span><span class="base"><span class="mord mathit">n</span><span class="mbin">+</span><span class="mord mathrm">1</span></span></span></span> is the canonical form. )</p>
+
+<a name="167854450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167854450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167854450">Kevin Buzzard (Jun 11 2019 at 14:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">id&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="o">(</span><span class="n">j</span> <span class="bp">+</span> <span class="n">k</span><span class="o">))</span> <span class="bp">→</span> <span class="n">A</span> <span class="o">((</span><span class="n">i</span> <span class="bp">+</span> <span class="n">j</span><span class="o">)</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">add_assoc</span><span class="o">)</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>I don't really know what happens next. Does it get really horrible?</p>
+
+<a name="167854628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167854628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167854628">Kevin Buzzard (Jun 11 2019 at 14:22)</a>:</h4>
+<p>Aah, and now the game is to prove that <code>id' 0 = 0</code></p>
+
+<a name="167854840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167854840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167854840">Kevin Buzzard (Jun 11 2019 at 14:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">id&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">A</span> <span class="n">n</span><span class="o">)]</span>
+<span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="o">(</span><span class="n">j</span> <span class="bp">+</span> <span class="n">k</span><span class="o">))</span> <span class="bp">→</span> <span class="n">A</span> <span class="o">((</span><span class="n">i</span> <span class="bp">+</span> <span class="n">j</span><span class="o">)</span> <span class="bp">+</span> <span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">add_assoc</span><span class="o">)</span> <span class="n">x</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">has_zero</span> <span class="o">(</span><span class="n">A</span> <span class="n">n</span><span class="o">)]</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">id&#39;</span> <span class="n">A</span> <span class="n">i</span> <span class="n">j</span> <span class="n">k</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167855948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167855948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167855948">Johan Commelin (Jun 11 2019 at 14:36)</a>:</h4>
+<p>Kevin, this is certainly not what formalisation should impose on us.</p>
+
+<a name="167855990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167855990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167855990">Johan Commelin (Jun 11 2019 at 14:37)</a>:</h4>
+<p>The system needs fixing, not just another work around</p>
+
+<a name="167856267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/CDGAs/near/167856267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23907CDGAs.html#167856267">Neil Strickland (Jun 11 2019 at 14:39)</a>:</h4>
+<p>I think that this is the main thing that we need:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">A</span> <span class="n">n</span><span class="o">)]</span>
+
+<span class="kn">theorem</span> <span class="n">mp_hom</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">is_add_group_hom</span> <span class="o">((</span><span class="n">congr_arg</span> <span class="n">A</span> <span class="n">h</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span> <span class="o">:</span> <span class="n">A</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">A</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">is_add_group_hom</span> <span class="n">id</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="o">{</span><span class="n">map_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">rfl</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}

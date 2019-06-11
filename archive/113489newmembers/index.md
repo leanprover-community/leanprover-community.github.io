@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Hi!](77843Hi.html) (10 messages, latest: Jun 11 2019 at 14:58)
+
+* [Induction](51886Induction.html) (221 messages, latest: Jun 11 2019 at 14:28)
+
 * [subtype coercion to supertype](34195subtypecoerciontosupertype.html) (9 messages, latest: Jun 11 2019 at 13:32)
 
 * [exercise  2 on ch3](90246exercise2onch3.html) (5 messages, latest: Jun 11 2019 at 07:26)
@@ -37,8 +41,6 @@ permalink: archive/113489newmembers/index.html
 * [proving em from dne](93827provingemfromdne.html) (15 messages, latest: Jun 06 2019 at 21:00)
 
 * [computability](27079computability.html) (4 messages, latest: Jun 06 2019 at 09:14)
-
-* [Induction](51886Induction.html) (220 messages, latest: Jun 06 2019 at 02:57)
 
 * [gluing functions](66720gluingfunctions.html) (54 messages, latest: Jun 05 2019 at 22:48)
 
