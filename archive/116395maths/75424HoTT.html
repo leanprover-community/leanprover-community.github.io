@@ -873,5 +873,29 @@ Here "internal homotopy type of X" means, for example, use the interpretation of
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167728363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167728363">Floris van Doorn (Jun 10 2019 at 02:35)</a>:</h4>
 <p>With "large elimination" do you mean "singleton elimination" (the reason that <code>eq</code>, <code>acc</code>, <code>true</code> and similar inductive propositions/predicates can eliminate to <code>Type*</code> instead of just <code>Prop</code>)? Assuming you also remove choice and quotients, then I strongly suspect it is consistent, since in that case there is probably no way to go from <code>Prop</code> to <code>Type*</code>. In other words, if you can construct an element of a type, then I suspect you can construct that element without proving any proposition.</p>
 
+<a name="167842318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167842318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167842318">Chris Hughes (Jun 11 2019 at 11:51)</a>:</h4>
+<p>This took me forever. HoTT is weird.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">hott</span><span class="o">]</span> <span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">),</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">punit</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">a</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">y</span><span class="o">,</span> <span class="n">eq</span> <span class="n">h</span> <span class="n">y</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">$</span>
+  <span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">unit</span> <span class="o">()</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">punit</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">a</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">eq</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">())</span> <span class="n">h</span><span class="o">))</span> <span class="o">()</span> <span class="n">y</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
+
+<a name="167842429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167842429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167842429">Kenny Lau (Jun 11 2019 at 11:53)</a>:</h4>
+<p>are there no tactics in hott?</p>
+
+<a name="167842530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167842530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167842530">Chris Hughes (Jun 11 2019 at 11:54)</a>:</h4>
+<p>I haven't found any. <code>cases</code> gives the the error <code>not hott: uses large eliminator eq.rec</code></p>
+
+<a name="167842539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167842539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167842539">Kenny Lau (Jun 11 2019 at 11:54)</a>:</h4>
+<p><code>not hott</code> rhymes</p>
+
+<a name="167842570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/HoTT/near/167842570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75424HoTT.html#167842570">Chris Hughes (Jun 11 2019 at 11:55)</a>:</h4>
+<p>Also the elaborator can never compute the motive for these funny ones.</p>
+
 
 {% endraw %}

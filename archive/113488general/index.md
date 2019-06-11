@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [100 theorems](37529100theorems.html) (82 messages, latest: Jun 11 2019 at 10:25)
+* [chess](98839chess.html) (5 messages, latest: Jun 11 2019 at 11:58)
+
+* [100 theorems](37529100theorems.html) (86 messages, latest: Jun 11 2019 at 11:18)
 
 * [`match` is a weakling](31005matchisaweakling.html) (18 messages, latest: Jun 11 2019 at 10:13)
 

@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [subtype coercion to supertype](34195subtypecoerciontosupertype.html) (1 message, latest: Jun 11 2019 at 11:46)
+
 * [exercise  2 on ch3](90246exercise2onch3.html) (5 messages, latest: Jun 11 2019 at 07:26)
 
 * [noob question(s)](52075noobquestions.html) (647 messages, latest: Jun 10 2019 at 12:26)
