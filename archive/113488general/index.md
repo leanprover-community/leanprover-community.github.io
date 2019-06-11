@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`match` is a weakling](31005matchisaweakling.html) (7 messages, latest: Jun 11 2019 at 07:59)
+
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (70 messages, latest: Jun 11 2019 at 07:58)
+
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
 
 * [list.append_assoc defeq?](32447listappendassocdefeq.html) (50 messages, latest: Jun 10 2019 at 15:51)

@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/31005matchisaweakling.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html">`match` is a weakling</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167826068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167826068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167826068">Keeley Hoek (Jun 11 2019 at 07:26)</a>:</h4>
+<p>...oops... MWE was too minimal... one moment please</p>
+
+<a name="167826210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167826210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167826210">Kevin Buzzard (Jun 11 2019 at 07:29)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">my_func</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">foo</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="n">foo</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:=</span> <span class="s2">&quot;a zero&quot;</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">succ</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="s2">&quot;a successor&quot;</span>
+</pre></div>
+
+
+<p>darn where did the question go? ;-)</p>
+
+<a name="167826219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167826219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167826219">Keeley Hoek (Jun 11 2019 at 07:29)</a>:</h4>
+<p>Sorry, the real example is more interesting, I promise! (thanks though :) ) One moment please...</p>
+
+<a name="167826778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167826778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167826778">Keeley Hoek (Jun 11 2019 at 07:38)</a>:</h4>
+<p>How come the <code>match</code> compiler is such a weakling? e.g.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="n">foo</span> <span class="mi">0</span> <span class="n">X</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">a</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">n</span> <span class="n">S</span><span class="o">),</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">a</span>
+
+<span class="n">def</span> <span class="n">mul</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">hS</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">n</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">hT</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">m</span> <span class="n">T</span><span class="o">),</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="bp">×</span> <span class="n">T</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">zero</span> <span class="n">X</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>It seems that in a situation of cross-dependence like this the match compiler freaks out. Am I doing something wrong? Is there any way to get that first case to compile properly?</p>
+
+<a name="167827163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167827163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167827163">Keeley Hoek (Jun 11 2019 at 07:45)</a>:</h4>
+<p>(Sorry it's a bit complicated, but as my last attempt should attest, I broke it making it simpler!)</p>
+
+<a name="167827256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167827256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167827256">Kevin Buzzard (Jun 11 2019 at 07:47)</a>:</h4>
+<p>What happens if you fill in the sorrys? Presumably nothing changes?</p>
+
+<a name="167827928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%60match%60%20is%20a%20weakling/near/167827928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31005matchisaweakling.html#167827928">Kevin Buzzard (Jun 11 2019 at 07:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mul</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">S</span> <span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">hS</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">n</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">hT</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">m</span> <span class="n">T</span><span class="o">),</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="bp">×</span> <span class="n">T</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">foo</span><span class="bp">.</span><span class="n">zero</span> <span class="n">X</span><span class="o">)</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p><em>shrug</em></p>
+
+
+{% endraw %}
