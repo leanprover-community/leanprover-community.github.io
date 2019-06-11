@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [chess](98839chess.html) (12 messages, latest: Jun 11 2019 at 12:55)
+* [`rfl` sadness](75638rflsadness.html) (25 messages, latest: Jun 11 2019 at 13:53)
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (91 messages, latest: Jun 11 2019 at 12:53)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (107 messages, latest: Jun 11 2019 at 13:37)
+
+* [chess](98839chess.html) (12 messages, latest: Jun 11 2019 at 12:55)
 
 * [100 theorems](37529100theorems.html) (87 messages, latest: Jun 11 2019 at 12:10)
 
