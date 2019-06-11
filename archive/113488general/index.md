@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [cast](61260cast.html) (6 messages, latest: Jun 11 2019 at 16:55)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (129 messages, latest: Jun 11 2019 at 21:00)
+
+* [transport and parametricity](74751transportandparametricity.html) (31 messages, latest: Jun 11 2019 at 20:33)
+
+* [cast](61260cast.html) (7 messages, latest: Jun 11 2019 at 20:10)
 
 * [finite sums](86088finitesums.html) (4 messages, latest: Jun 11 2019 at 14:47)
 
 * [`rfl` sadness](75638rflsadness.html) (26 messages, latest: Jun 11 2019 at 14:01)
-
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (107 messages, latest: Jun 11 2019 at 13:37)
 
 * [chess](98839chess.html) (12 messages, latest: Jun 11 2019 at 12:55)
 
@@ -281,8 +283,6 @@ permalink: archive/113488general/index.html
 * [GNU Public License files](00448GNUPublicLicensefiles.html) (12 messages, latest: May 07 2019 at 00:02)
 
 * [mono: asserting side conditions](17251monoassertingsideconditions.html) (6 messages, latest: May 06 2019 at 22:16)
-
-* [transport and parametricity](74751transportandparametricity.html) (28 messages, latest: May 06 2019 at 22:14)
 
 * [olean-rs](28098oleanrs.html) (47 messages, latest: May 06 2019 at 21:11)
 
