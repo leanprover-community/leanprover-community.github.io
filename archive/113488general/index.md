@@ -10,9 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (160 messages, latest: Jun 11 2019 at 21:53)
+* [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 
-* [transport and parametricity](74751transportandparametricity.html) (32 messages, latest: Jun 11 2019 at 21:29)
+* [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (1 message, latest: Jun 11 2019 at 22:45)
+
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (164 messages, latest: Jun 11 2019 at 22:24)
+
+* [transport and parametricity](74751transportandparametricity.html) (33 messages, latest: Jun 11 2019 at 22:08)
 
 * [cast](61260cast.html) (7 messages, latest: Jun 11 2019 at 20:10)
 
@@ -21,8 +25,6 @@ permalink: archive/113488general/index.html
 * [`rfl` sadness](75638rflsadness.html) (26 messages, latest: Jun 11 2019 at 14:01)
 
 * [chess](98839chess.html) (12 messages, latest: Jun 11 2019 at 12:55)
-
-* [100 theorems](37529100theorems.html) (87 messages, latest: Jun 11 2019 at 12:10)
 
 * [`match` is a weakling](31005matchisaweakling.html) (18 messages, latest: Jun 11 2019 at 10:13)
 
