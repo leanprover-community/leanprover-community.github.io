@@ -10,15 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Hi!](77843Hi.html) (24 messages, latest: Jun 11 2019 at 21:52)
+* [noob question(s)](52075noobquestions.html) (648 messages, latest: Jun 11 2019 at 22:56)
+
+* [Hi!](77843Hi.html) (28 messages, latest: Jun 11 2019 at 22:46)
 
 * [exercise  2 on ch3](90246exercise2onch3.html) (36 messages, latest: Jun 11 2019 at 18:34)
 
 * [Induction](51886Induction.html) (221 messages, latest: Jun 11 2019 at 14:28)
 
 * [subtype coercion to supertype](34195subtypecoerciontosupertype.html) (9 messages, latest: Jun 11 2019 at 13:32)
-
-* [noob question(s)](52075noobquestions.html) (647 messages, latest: Jun 10 2019 at 12:26)
 
 * [fin n to list](36011finntolist.html) (2 messages, latest: Jun 10 2019 at 09:25)
 

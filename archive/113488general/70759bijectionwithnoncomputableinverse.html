@@ -736,5 +736,31 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167893748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167893748">Mario Carneiro (Jun 11 2019 at 21:53)</a>:</h4>
 <p><code>axiom_of_choice</code> + <code>unique_choice</code> makes type theory look basically like ZFC</p>
 
+<a name="167894615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167894615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167894615">Mario Carneiro (Jun 11 2019 at 22:05)</a>:</h4>
+<p>However, it doesn't really affect proofs very much, you can just have a long lived hypothesis <code>variable [has_choice]</code> and do this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+<span class="n">class</span> <span class="n">has_choice</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">,</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">unchoice</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">[</span><span class="n">has_choice</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}],</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="bp">⟨</span><span class="n">F</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">axiom_of_choice</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">,</span>
+  <span class="k">show</span> <span class="bp">∃</span> <span class="n">f</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">,</span> <span class="n">true</span><span class="o">,</span> <span class="k">from</span>
+  <span class="k">let</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">hf</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">axiom_of_choice</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">,</span>
+    <span class="n">exists_true_iff_nonempty</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">)</span> <span class="k">in</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="n">trivial</span><span class="bp">⟩</span><span class="o">)</span> <span class="k">in</span>
+<span class="bp">@</span><span class="n">H</span> <span class="bp">⟨</span><span class="n">F</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="167894735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167894735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167894735">Mario Carneiro (Jun 11 2019 at 22:07)</a>:</h4>
+<p>I think <code>choice</code> is the idea that since doing this is needless boilerplate we may as well just pick a global choice function</p>
+
+<a name="167895436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167895436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167895436">Reid Barton (Jun 11 2019 at 22:18)</a>:</h4>
+<p>It's harmless for proofs but not for definitions</p>
+
+<a name="167895787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167895787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167895787">Mario Carneiro (Jun 11 2019 at 22:24)</a>:</h4>
+<p>for definitions, you can just put <code>[has_choice]</code> in the arguments to the definition</p>
+
 
 {% endraw %}
