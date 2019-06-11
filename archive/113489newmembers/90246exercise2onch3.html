@@ -47,5 +47,226 @@ parameters, like h, are hypothesis.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167826066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167826066">Kevin Buzzard (Jun 11 2019 at 07:26)</a>:</h4>
 <p>Yes, you have been undone by the missing colon.</p>
 
+<a name="167874314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167874314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167874314">Dave (Jun 11 2019 at 18:03)</a>:</h4>
+<blockquote>
+<p>the proof felt like cheating because it was cheating - you assumed what you were trying to prove.<br>
+parameters, like h, are hypotheses.</p>
+</blockquote>
+<p>Precisely. Now I think I have proven it, but I don't understand how the <code> assume </code> tactic works.</p>
+<div class="codehilite"><pre><span></span> example : ¬(p ↔ ¬p) :=
+  begin
+    intro h,
+      cases h,
+        let hp: p, from h_mpr
+          (assume hp: p,
+          have hnp : ¬ p, from h_mp hp,
+          show false, from hnp hp),
+        show false , from (h_mp hp) hp,
+  end
+</pre></div>
+
+
+<p>I seems to work within the parenthesis and I can then apply h_mpr on what "resolves" to be <code> hp: p </code> . It seems that what is within parenthesis is the "construction" of such a hypothesis, but it looks very odd. Is this correct?</p>
+<p>Also why can't I use <code> assume </code> outside of the parentheses? I imagine it is something like a "namespace" issue, but maybe some elaboration would be helpful.</p>
+<p>Additionally, lean seems to complain whenever <code>assume</code> is used <em>outside</em> of these parentheses, saying it expected a <code>let</code> statement. I figure this is some of lean's advanced pattern matching at work, but it seems bizarre that it can guess what you should write, but still allows you to either fail or write things some alternate, equivalent way. I imagine an explanation of the <code>assume</code> question above will help explain this situation too.</p>
+<p>Thank you.</p>
+
+<a name="167874934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167874934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167874934">Kevin Buzzard (Jun 11 2019 at 18:09)</a>:</h4>
+<blockquote>
+<p>Is this correct?</p>
+</blockquote>
+<p>It compiles, so it's correct in that sense. I don't think I ever use <code>assume</code>. I rewrote your proof the way I would probably have written it.</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hp</span><span class="o">:</span> <span class="n">p</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">h_mpr</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">hp</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hnp</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">h_mp</span> <span class="n">hp</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hnp</span> <span class="n">hp</span>
+  <span class="o">},</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="n">h_mp</span> <span class="n">hp</span><span class="o">)</span> <span class="n">hp</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167874958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167874958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167874958">Kevin Buzzard (Jun 11 2019 at 18:09)</a>:</h4>
+<p>It's exactly the same proof, but I don't ever use <code>from</code> or <code>assume</code>.</p>
+
+<a name="167875062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875062">Kevin Buzzard (Jun 11 2019 at 18:10)</a>:</h4>
+<p>You use <code>let</code> at some point but that's for defining data (stuff whose type is in <code>Type</code>). You can use <code>have</code> to make proofs (stuff whose type is in <code>Prop</code>).</p>
+
+<a name="167875285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875285">Dave (Jun 11 2019 at 18:13)</a>:</h4>
+<blockquote>
+<p>You use <code>let</code> at some point but that's for defining data (stuff whose type is in <code>Type</code>). You can use <code>have</code> to make proofs (stuff whose type is in <code>Prop</code>).</p>
+</blockquote>
+<p>Thank you for this clarification and the rewritten proof. I was thinking of <code>let</code> as in the <em>let</em> of regular math proofs. Your proof is much nicer and uses tactics in the way I imagine one is supposed to.</p>
+
+<a name="167875289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875289">Kevin Buzzard (Jun 11 2019 at 18:13)</a>:</h4>
+<p>Here's the same proof again in term mode:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">h_mp</span><span class="o">,</span> <span class="n">h_mpr</span><span class="bp">⟩</span><span class="o">,</span> <span class="k">have</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">h_mpr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">h_mp</span> <span class="n">hp</span> <span class="n">hp</span><span class="o">),</span> <span class="n">h_mp</span> <span class="n">hp</span> <span class="n">hp</span>
+</pre></div>
+
+<a name="167875301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875301">Marc Huisinga (Jun 11 2019 at 18:13)</a>:</h4>
+<p>assume is not a tactic, afaik <code>assume a : b, c</code> is merely syntactic sugar for <code>λ a : b, c</code>, i.e. it is just syntax to define a function without a name (also known as anonymous function, or just "lambda") in term mode.<br>
+so to understand why your code doesn't work without the brackets, you need to understand how precedence works in lambda calculus (or at least its implementation in lean).<br>
+essentially, lambda terms always capture everything until the very end. i.e. <code>λ a, b c d e f g</code> will be read as <code>(λ a, b c d e f g)</code></p>
+
+<a name="167875419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875419">Kevin Buzzard (Jun 11 2019 at 18:14)</a>:</h4>
+<p>The whole "assume, from" stuff is some sort of half way house which I never came to terms with.</p>
+
+<a name="167875466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875466">Marc Huisinga (Jun 11 2019 at 18:15)</a>:</h4>
+<p>as far as i understand it it's really just a bunch of syntactic sugar for lambdas in term mode and their corresponding type annotations</p>
+
+<a name="167875487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875487">Kevin Buzzard (Jun 11 2019 at 18:15)</a>:</h4>
+<p>Yes I think you're right.</p>
+
+<a name="167875558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875558">Dave (Jun 11 2019 at 18:16)</a>:</h4>
+<blockquote>
+<p>assume is not a tactic, </p>
+</blockquote>
+<p>And here's the answer to my other doubt. Wonderful! So I should simply use <code>\lambda</code> whenever I would have used <code>assume</code>. This connection was very useful!</p>
+<p>Also it seems I more or less proved this by accident! How fortunate...</p>
+
+<a name="167875676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875676">Dave (Jun 11 2019 at 18:17)</a>:</h4>
+<blockquote>
+<p>The whole "assume, from" stuff is some sort of half way house which I never came to terms with.</p>
+</blockquote>
+<p>Again reassuring since it seems you've gotten quite far along the road without needing to!</p>
+
+<a name="167875781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875781">Kevin Buzzard (Jun 11 2019 at 18:18)</a>:</h4>
+<p>I did absolutely everything in tactic mode for ages, and then slowly got to grips with term mode. But I had a maths background and knew nothing about lambdas.</p>
+
+<a name="167875800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875800">Reid Barton (Jun 11 2019 at 18:19)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>The whole "assume, from" stuff is some sort of half way house which I never came to terms with.</p>
+</blockquote>
+<p>Again reassuring since it seems you've gotten quite far along the road without needing to!</p>
+</blockquote>
+<p>Yes, for example there is no such thing as "assume, from"</p>
+
+<a name="167875827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875827">Kevin Buzzard (Jun 11 2019 at 18:19)</a>:</h4>
+<p>ha ha, just shows you how little I know about it :-)</p>
+
+<a name="167875840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875840">Marc Huisinga (Jun 11 2019 at 18:19)</a>:</h4>
+<p>at this point it's maybe a good idea to post something some other people and i made at <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> 's institute for teaching untyped lambda calculus, maybe it helps a little.<br>
+<a href="https://pp.ipd.kit.edu/lehre/misc/lambda-ide/Wavelength.html" target="_blank" title="https://pp.ipd.kit.edu/lehre/misc/lambda-ide/Wavelength.html">https://pp.ipd.kit.edu/lehre/misc/lambda-ide/Wavelength.html</a></p>
+<p>you can reduce lambda terms and step through the reduction by yourself if you like.<br>
+there's no proper tutorial yet because i never got around to turning this into a full blown "tutorial on the lambda calculus", but it might be helpful for visualizing stuff and giving students something to play with. <br>
+some of the "exercises" are randomly generated, so don't take that too seriously.<br>
+edit: oh, also, the share button doesn't work because the institute didn't want to enable the corresponding database ;)</p>
+
+<a name="167875867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875867">Dave (Jun 11 2019 at 18:19)</a>:</h4>
+<blockquote>
+<p>I did absolutely everything in tactic mode for ages, and then slowly got to grips with term mode. But I had a maths background and knew nothing about lambdas.</p>
+</blockquote>
+<p>I share such a combination, so I'll likely keep asking you questions</p>
+
+<a name="167875994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167875994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167875994">Dave (Jun 11 2019 at 18:21)</a>:</h4>
+<blockquote>
+<p>at this point it's maybe a good idea to post something some other people and i made at <span class="user-mention silent" data-user-id="110024">Sebastian Ullrich</span> 's instute for teaching untyped lambda calculus, maybe it helps a little.</p>
+</blockquote>
+<p>I will look into this now!</p>
+
+<a name="167876029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167876029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167876029">Dave (Jun 11 2019 at 18:21)</a>:</h4>
+<p>and thanks again :) - hilarious bit about the share button. I like that you've kept it anyway</p>
+
+<a name="167876165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167876165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167876165">Kevin Buzzard (Jun 11 2019 at 18:23)</a>:</h4>
+<p>If you're a mathematician you can just do it this way:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">prop_decidable</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- p is true</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+  <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- p is false</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span>
+  <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167876477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167876477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167876477">Dave (Jun 11 2019 at 18:26)</a>:</h4>
+<blockquote>
+<p>If you're a mathematician you can just do it this way:</p>
+</blockquote>
+<p>I kept running into a wall because my brain is hardwired classically and that proof is what I kept trying to recreate. The exercise wanted us to try it otherwise though, which was kind of challenging.</p>
+
+<a name="167876543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167876543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167876543">Kevin Buzzard (Jun 11 2019 at 18:27)</a>:</h4>
+<p>Yeah. Figuring out all those constructive exercises is fun, interesting, difficult, kind of cool, and then it turns out that it's completely irrelevant because you just open classical anyway.</p>
+
+<a name="167876631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167876631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167876631">Dave (Jun 11 2019 at 18:28)</a>:</h4>
+<p>lol irl- I figured as much would be the case. <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span></p>
+
+<a name="167876709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167876709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167876709">Kevin Buzzard (Jun 11 2019 at 18:28)</a>:</h4>
+<p>(at least if you're formalising the sort of stuff I'm formalising -- YMMV)</p>
+
+<a name="167877025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877025">Dave (Jun 11 2019 at 18:31)</a>:</h4>
+<p>hmm, well I think you do number theory so not exactly, but do you know if there are computability things in lean? I'd like to see those and maybe get a better feel for lean through that. Otherwise I guess I have the task of formalizing it first...? (Or perhaps you just haven't heard of it and it's out there)</p>
+
+<a name="167877110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877110">Kevin Buzzard (Jun 11 2019 at 18:32)</a>:</h4>
+<p>I'm not the best person to talk to about computability.</p>
+
+<a name="167877146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877146">Marc Huisinga (Jun 11 2019 at 18:32)</a>:</h4>
+<p>there's this <a href="https://github.com/leanprover-community/mathlib/tree/master/src/computability" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/master/src/computability">https://github.com/leanprover-community/mathlib/tree/master/src/computability</a></p>
+
+<a name="167877237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877237">Dave (Jun 11 2019 at 18:33)</a>:</h4>
+<p>fair fair</p>
+
+<a name="167877270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877270">Bryan Gin-ge Chen (Jun 11 2019 at 18:33)</a>:</h4>
+<p>^ see also <a href="https://arxiv.org/abs/1810.08380" target="_blank" title="https://arxiv.org/abs/1810.08380">Mario's paper</a></p>
+
+<a name="167877280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877280">Dave (Jun 11 2019 at 18:33)</a>:</h4>
+<blockquote>
+<p>there's this <a href="https://github.com/leanprover-community/mathlib/tree/master/src/computability" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/master/src/computability">https://github.com/leanprover-community/mathlib/tree/master/src/computability</a></p>
+</blockquote>
+<p>wow thanks, this is awesome (and also recent!).<br>
+The turing machine file seems to be 1.7k lines of code... wow?</p>
+
+<a name="167877407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/exercise%20%202%20on%20ch3/near/167877407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90246exercise2onch3.html#167877407">Dave (Jun 11 2019 at 18:34)</a>:</h4>
+<blockquote>
+<p>^ see also <a href="https://arxiv.org/abs/1810.08380" target="_blank" title="https://arxiv.org/abs/1810.08380">Mario's paper</a></p>
+</blockquote>
+<p>oh thanks for this too! I have a lot of reading to do then :)</p>
+
 
 {% endraw %}
