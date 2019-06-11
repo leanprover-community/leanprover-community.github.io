@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`rfl` sadness](75638rflsadness.html) (25 messages, latest: Jun 11 2019 at 13:53)
+* [finite sums](86088finitesums.html) (4 messages, latest: Jun 11 2019 at 14:47)
+
+* [`rfl` sadness](75638rflsadness.html) (26 messages, latest: Jun 11 2019 at 14:01)
 
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (107 messages, latest: Jun 11 2019 at 13:37)
 

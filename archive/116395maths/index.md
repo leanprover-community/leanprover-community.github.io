@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [CDGAs](23907CDGAs.html) (13 messages, latest: Jun 11 2019 at 13:49)
+* [CDGAs](23907CDGAs.html) (20 messages, latest: Jun 11 2019 at 14:39)
 
 * [HoTT](75424HoTT.html) (195 messages, latest: Jun 11 2019 at 13:02)
 
