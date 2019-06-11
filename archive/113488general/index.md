@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`match` is a weakling](31005matchisaweakling.html) (15 messages, latest: Jun 11 2019 at 08:32)
+* [100 theorems](37529100theorems.html) (74 messages, latest: Jun 11 2019 at 09:59)
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (82 messages, latest: Jun 11 2019 at 08:22)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (88 messages, latest: Jun 11 2019 at 09:59)
+
+* [`match` is a weakling](31005matchisaweakling.html) (15 messages, latest: Jun 11 2019 at 08:32)
 
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
 
@@ -95,8 +97,6 @@ permalink: archive/113488general/index.html
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
 
 * [leaky option](90448leakyoption.html) (35 messages, latest: Jun 01 2019 at 09:11)
-
-* [100 theorems](37529100theorems.html) (69 messages, latest: Jun 01 2019 at 07:07)
 
 * [@\[class\]](49775class.html) (6 messages, latest: May 31 2019 at 21:58)
 
