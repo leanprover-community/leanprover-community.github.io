@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (14 messages, latest: Jun 11 2019 at 10:36)
+
 * [group.lean in natural language](40846groupleaninnaturallanguage.html) (11 messages, latest: Jun 11 2019 at 06:56)
 
 * [Sheaves](28656Sheaves.html) (47 messages, latest: Jun 11 2019 at 06:45)
-
-* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (6 messages, latest: Jun 11 2019 at 05:12)
 
 * [Order on topologies](78527Orderontopologies.html) (33 messages, latest: Jun 10 2019 at 19:39)
 
