@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (207 messages, latest: Jun 12 2019 at 01:58)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (226 messages, latest: Jun 12 2019 at 02:59)
 
 * [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
 
