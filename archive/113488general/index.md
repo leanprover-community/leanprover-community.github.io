@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (178 messages, latest: Jun 11 2019 at 23:53)
+
 * [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 
 * [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (1 message, latest: Jun 11 2019 at 22:45)
-
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (164 messages, latest: Jun 11 2019 at 22:24)
 
 * [transport and parametricity](74751transportandparametricity.html) (33 messages, latest: Jun 11 2019 at 22:08)
 
