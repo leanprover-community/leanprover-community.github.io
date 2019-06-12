@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Banff workshop proposal?](65930Banffworkshopproposal.html) (6 messages, latest: Jun 12 2019 at 04:48)
+
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (245 messages, latest: Jun 12 2019 at 03:09)
 
 * [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
-
-* [Banff workshop proposal?](65930Banffworkshopproposal.html) (5 messages, latest: Jun 12 2019 at 01:28)
 
 * [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 

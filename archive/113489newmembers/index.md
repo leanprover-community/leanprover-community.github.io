@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (648 messages, latest: Jun 11 2019 at 22:56)
+* [Hi!](77843Hi.html) (29 messages, latest: Jun 12 2019 at 04:50)
 
-* [Hi!](77843Hi.html) (28 messages, latest: Jun 11 2019 at 22:46)
+* [noob question(s)](52075noobquestions.html) (648 messages, latest: Jun 11 2019 at 22:56)
 
 * [exercise  2 on ch3](90246exercise2onch3.html) (36 messages, latest: Jun 11 2019 at 18:34)
 
