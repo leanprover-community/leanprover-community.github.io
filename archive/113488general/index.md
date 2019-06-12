@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (37 messages, latest: Jun 12 2019 at 07:21)
+* [transport and parametricity](74751transportandparametricity.html) (43 messages, latest: Jun 12 2019 at 08:19)
 
 * [Banff workshop proposal?](65930Banffworkshopproposal.html) (8 messages, latest: Jun 12 2019 at 07:04)
 
