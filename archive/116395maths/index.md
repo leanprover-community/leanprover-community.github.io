@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [CDGAs](23907CDGAs.html) (21 messages, latest: Jun 12 2019 at 02:48)
+* [CDGAs](23907CDGAs.html) (29 messages, latest: Jun 12 2019 at 08:41)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (15 messages, latest: Jun 12 2019 at 02:29)
 
