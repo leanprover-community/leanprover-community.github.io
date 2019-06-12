@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [noob question about pexpr](29841noobquestionaboutpexpr.html) (1 message, latest: Jun 12 2019 at 14:49)
+
+* [norm_cast](53959normcast.html) (2 messages, latest: Jun 12 2019 at 14:42)
+
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (3 messages, latest: Jun 12 2019 at 13:48)
 
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (255 messages, latest: Jun 12 2019 at 12:34)
@@ -47,8 +51,6 @@ permalink: archive/113488general/index.html
 * [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
 
 * [emacs users](44956emacsusers.html) (6 messages, latest: Jun 09 2019 at 06:42)
-
-* [norm_cast](53959normcast.html) (1 message, latest: Jun 08 2019 at 14:42)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
 
