@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (35 messages, latest: Jun 12 2019 at 06:46)
+* [transport and parametricity](74751transportandparametricity.html) (37 messages, latest: Jun 12 2019 at 07:21)
 
-* [Banff workshop proposal?](65930Banffworkshopproposal.html) (7 messages, latest: Jun 12 2019 at 06:05)
+* [Banff workshop proposal?](65930Banffworkshopproposal.html) (8 messages, latest: Jun 12 2019 at 07:04)
 
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (245 messages, latest: Jun 12 2019 at 03:09)
 
