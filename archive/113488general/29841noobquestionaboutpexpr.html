@@ -20,5 +20,29 @@ but then I don't get what the 'pexpr' is, since it's defined as 'expr ff'. so a
 but an 'expr' may already contain meta variables, so I don't understand what the 'elaborated' argument really means.</p>
 <p>could someone clarify this for me?</p>
 
+<a name="167968798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noob%20question%20about%20pexpr/near/167968798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29841noobquestionaboutpexpr.html#167968798">Floris van Doorn (Jun 12 2019 at 17:27)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="167969120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noob%20question%20about%20pexpr/near/167969120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29841noobquestionaboutpexpr.html#167969120">Floris van Doorn (Jun 12 2019 at 17:30)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="167969158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noob%20question%20about%20pexpr/near/167969158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29841noobquestionaboutpexpr.html#167969158">Floris van Doorn (Jun 12 2019 at 17:30)</a>:</h4>
+<p>What is the keyboard shortcut to send my message? I keep accidentally pressing it :/</p>
+
+<a name="167969636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noob%20question%20about%20pexpr/near/167969636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29841noobquestionaboutpexpr.html#167969636">Floris van Doorn (Jun 12 2019 at 17:36)</a>:</h4>
+<p><code>pexpr</code> are pre-expressions before elaboration, basically the terms you type.<br>
+<code>expr</code> are expressions after (and during) elaboration.<br>
+It is true that <code>pexpr</code>s often contain metavariables and <code>expr</code>s often don't, but that is not the main difference.<br>
+It is kind of a red herring that <code>pexpr</code> and <code>expr</code> are defined as the same structure in Lean, since they represent the same term very differently.</p>
+<p>Suppose I write <code>a = b</code>, or equivalently <code>eq a b</code> in Lean. As pexpr this will be represented as <code>app (app (const eq) (local_const a)) (local_const b)</code> (ignoring some arguments of <code>local_const</code>). Here <code>app</code>, <code>const</code> and <code>local_const</code> are constructors of the <code>expr</code> structure.  <br>
+However, <code>eq</code> also has an implicit argument (the type of <code>a</code> and <code>b</code>). After elaboration, the expression representing the same term has this implicit argument, so it becomes: <code>app (app (app (const eq) (local_const α)) (local_const a)) (local_const b)</code>.<br>
+So <code>a = b</code> as a pre-expression becomes <code>eq a b</code> (hiding the constructors) and as expression it becomes <code>eq α a b</code>. </p>
+<p>Another (related) difference is that <code>pexpr</code> has some additional operations exposed. For example there is a <code>mk_explicit</code>which represents the <code>@</code>. So if I write <code>@eq α a b</code> this is the expression <code>(mk_explicit eq) α a b</code>.</p>
+<p>I hope that clears things up.</p>
+
 
 {% endraw %}
