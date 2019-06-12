@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [unexpected occurrence of recursive function](17586unexpectedoccurrenceofrecursivefunction.html) (8 messages, latest: Jun 12 2019 at 11:40)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (255 messages, latest: Jun 12 2019 at 12:34)
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (247 messages, latest: Jun 12 2019 at 09:27)
+* [unexpected occurrence of recursive function](17586unexpectedoccurrenceofrecursivefunction.html) (8 messages, latest: Jun 12 2019 at 11:40)
 
 * [transport and parametricity](74751transportandparametricity.html) (43 messages, latest: Jun 12 2019 at 08:19)
 

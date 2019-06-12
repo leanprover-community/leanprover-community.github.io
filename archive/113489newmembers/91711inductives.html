@@ -31,5 +31,102 @@ permalink: archive/113489newmembers/91711inductives.html
 
 <p>called <code>foo</code> and <code>bar</code>, where <code>bar</code> is evidently isomorphic to <code>foo (fin 2)</code>. It seems like the <code>&lt;...&gt;.rec</code> generated for the former is considerably weaker than that for the latter. I think this has something to do with the way nesting inductives is done. Can anyone comment on whether that's what's going on. Is there a way to fix things, while keeping my gamma parameter?</p>
 
+<a name="167939713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167939713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167939713">Mario Carneiro (Jun 12 2019 at 12:08)</a>:</h4>
+<p>nested inductives in lean 3 are kind of garbage</p>
+
+<a name="167939763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167939763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167939763">Mario Carneiro (Jun 12 2019 at 12:09)</a>:</h4>
+<p>nested meta inductives aren't bad because lean just rolls with whatever you say, but regular nested inductives have a complicated and buggy compilation</p>
+
+<a name="167939928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167939928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167939928">Keeley Hoek (Jun 12 2019 at 12:11)</a>:</h4>
+<p>Yeah okay damn. This is really depressing. Since I suddenly care about them and haven't been listening prior, are they getting better in lean 4?</p>
+
+<a name="167940004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940004">Mario Carneiro (Jun 12 2019 at 12:12)</a>:</h4>
+<p>the correct equivalent of <code>foo</code> is</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">foo</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">α</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">foo</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span>
+</pre></div>
+
+<a name="167940036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940036">Mario Carneiro (Jun 12 2019 at 12:12)</a>:</h4>
+<p>I recommend just hand-unrolling any nested/mutual inductives you need into plain inductives</p>
+
+<a name="167940058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940058">Keeley Hoek (Jun 12 2019 at 12:13)</a>:</h4>
+<p>Ok dreams restored maybe</p>
+
+<a name="167940070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940070">Keeley Hoek (Jun 12 2019 at 12:13)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="167940092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940092">Mario Carneiro (Jun 12 2019 at 12:13)</a>:</h4>
+<p>I think they are being addressed in lean 4, but I don't know how successful it will be, we will see</p>
+
+<a name="167940312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940312">Keeley Hoek (Jun 12 2019 at 12:16)</a>:</h4>
+<p>ok.</p>
+
+<a name="167940327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940327">Keeley Hoek (Jun 12 2019 at 12:16)</a>:</h4>
+<p>EVERYTHING IS BETTER AND DEFINITIONALLY EQUAL NOW AND I LOVE IT</p>
+
+<a name="167940328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940328">Keeley Hoek (Jun 12 2019 at 12:16)</a>:</h4>
+<p>sorry</p>
+
+<a name="167940330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167940330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167940330">Keeley Hoek (Jun 12 2019 at 12:17)</a>:</h4>
+<p>:D</p>
+
+<a name="167941169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167941169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167941169">Keeley Hoek (Jun 12 2019 at 12:28)</a>:</h4>
+<p>Oooh, interesting, I still don't get that more powerful recursor using the unwrapped definition!...</p>
+
+<a name="167941331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167941331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167941331">Mario Carneiro (Jun 12 2019 at 12:30)</a>:</h4>
+<p>is the claim that <code>bar</code> is isomorphic to <code>foo (fin 2)</code>?</p>
+
+<a name="167941453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167941453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167941453">Mario Carneiro (Jun 12 2019 at 12:32)</a>:</h4>
+<p>the <code>.rec</code>s look alright to me</p>
+
+<a name="167943157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167943157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167943157">Keeley Hoek (Jun 12 2019 at 12:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> compare the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test2</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">bar</span><span class="o">)</span> <span class="o">:</span> <span class="n">bar</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">b</span> <span class="k">with</span> <span class="n">α</span> <span class="n">β</span> <span class="n">v</span> <span class="n">v2</span> <span class="n">Ihv</span> <span class="n">Ihv2</span><span class="o">,</span>
+  <span class="c1">-- I have Ihv and Ihv2</span>
+<span class="kn">end</span>
+
+<span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">foo</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">2</span><span class="o">))</span> <span class="o">:</span> <span class="n">foo</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">b</span> <span class="k">with</span> <span class="n">α</span> <span class="n">β</span> <span class="n">v</span> <span class="n">v2</span> <span class="n">Ihv</span> <span class="n">Ihv2</span><span class="o">,</span>
+  <span class="c1">-- I don&#39;t have Ihv and Ihv2</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167943258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167943258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167943258">Mario Carneiro (Jun 12 2019 at 12:56)</a>:</h4>
+<p>here are some improved names in the second case:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">test</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">bool</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">b</span> <span class="k">with</span> <span class="n">αβ</span> <span class="n">vv2</span> <span class="n">IhvIhv2</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">αβ</span> <span class="n">ff</span><span class="o">,</span> <span class="k">let</span> <span class="n">β</span> <span class="o">:=</span> <span class="n">αβ</span> <span class="n">tt</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">foo</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">vv2</span> <span class="n">ff</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v2</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">foo</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">vv2</span> <span class="n">tt</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">Ihv</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">foo</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">IhvIhv2</span> <span class="n">ff</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">Ihv2</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">foo</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">IhvIhv2</span> <span class="n">tt</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167943335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/inductives/near/167943335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91711inductives.html#167943335">Mario Carneiro (Jun 12 2019 at 12:56)</a>:</h4>
+<p>the parameters are mashed together</p>
+
 
 {% endraw %}

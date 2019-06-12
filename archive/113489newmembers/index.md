@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [inductives](91711inductives.html) (1 message, latest: Jun 12 2019 at 11:06)
+* [inductives](91711inductives.html) (19 messages, latest: Jun 12 2019 at 12:56)
 
 * [supremum](73663supremum.html) (8 messages, latest: Jun 12 2019 at 10:12)
 
