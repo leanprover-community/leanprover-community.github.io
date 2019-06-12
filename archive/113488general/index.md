@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (247 messages, latest: Jun 12 2019 at 09:27)
+
 * [transport and parametricity](74751transportandparametricity.html) (43 messages, latest: Jun 12 2019 at 08:19)
 
 * [Banff workshop proposal?](65930Banffworkshopproposal.html) (8 messages, latest: Jun 12 2019 at 07:04)
-
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (245 messages, latest: Jun 12 2019 at 03:09)
 
 * [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
 
