@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (210 messages, latest: Jun 12 2019 at 21:55)
+* [CDGAs](23907CDGAs.html) (80 messages, latest: Jun 12 2019 at 22:40)
 
-* [CDGAs](23907CDGAs.html) (71 messages, latest: Jun 12 2019 at 21:42)
+* [HoTT](75424HoTT.html) (210 messages, latest: Jun 12 2019 at 21:55)
 
 * [group.lean in natural language](40846groupleaninnaturallanguage.html) (15 messages, latest: Jun 12 2019 at 16:51)
 
