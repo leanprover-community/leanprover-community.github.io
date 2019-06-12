@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [supremum](73663supremum.html) (6 messages, latest: Jun 12 2019 at 09:59)
+* [supremum](73663supremum.html) (8 messages, latest: Jun 12 2019 at 10:12)
 
 * [Hi!](77843Hi.html) (29 messages, latest: Jun 12 2019 at 04:50)
 
