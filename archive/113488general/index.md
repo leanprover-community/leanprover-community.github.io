@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (197 messages, latest: Jun 12 2019 at 00:59)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (207 messages, latest: Jun 12 2019 at 01:58)
+
+* [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
+
+* [Banff workshop proposal?](65930Banffworkshopproposal.html) (5 messages, latest: Jun 12 2019 at 01:28)
 
 * [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 
@@ -25,8 +29,6 @@ permalink: archive/113488general/index.html
 * [`rfl` sadness](75638rflsadness.html) (26 messages, latest: Jun 11 2019 at 14:01)
 
 * [chess](98839chess.html) (12 messages, latest: Jun 11 2019 at 12:55)
-
-* [`match` is a weakling](31005matchisaweakling.html) (18 messages, latest: Jun 11 2019 at 10:13)
 
 * [Tactics for Los's theorem -- can't synthesise placeholder](87368TacticsforLosstheoremcantsynthesiseplaceholder.html) (9 messages, latest: Jun 10 2019 at 16:32)
 
