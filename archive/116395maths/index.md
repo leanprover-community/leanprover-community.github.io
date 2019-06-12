@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [group.lean in natural language](40846groupleaninnaturallanguage.html) (12 messages, latest: Jun 12 2019 at 15:56)
+* [HoTT](75424HoTT.html) (208 messages, latest: Jun 12 2019 at 16:56)
 
-* [HoTT](75424HoTT.html) (200 messages, latest: Jun 12 2019 at 15:50)
+* [group.lean in natural language](40846groupleaninnaturallanguage.html) (15 messages, latest: Jun 12 2019 at 16:51)
 
 * [CDGAs](23907CDGAs.html) (29 messages, latest: Jun 12 2019 at 08:41)
 

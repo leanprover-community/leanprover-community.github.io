@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (46 messages, latest: Jun 12 2019 at 15:56)
+* [transport and parametricity](74751transportandparametricity.html) (48 messages, latest: Jun 12 2019 at 16:50)
 
 * [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (2 messages, latest: Jun 12 2019 at 15:37)
 
