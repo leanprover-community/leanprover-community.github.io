@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (178 messages, latest: Jun 11 2019 at 23:53)
+* [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (197 messages, latest: Jun 12 2019 at 00:59)
 
 * [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 
