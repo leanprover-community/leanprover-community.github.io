@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Banff workshop proposal?](65930Banffworkshopproposal.html) (6 messages, latest: Jun 12 2019 at 04:48)
+* [transport and parametricity](74751transportandparametricity.html) (35 messages, latest: Jun 12 2019 at 06:46)
+
+* [Banff workshop proposal?](65930Banffworkshopproposal.html) (7 messages, latest: Jun 12 2019 at 06:05)
 
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (245 messages, latest: Jun 12 2019 at 03:09)
 
@@ -19,8 +21,6 @@ permalink: archive/113488general/index.html
 * [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 
 * [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (1 message, latest: Jun 11 2019 at 22:45)
-
-* [transport and parametricity](74751transportandparametricity.html) (33 messages, latest: Jun 11 2019 at 22:08)
 
 * [cast](61260cast.html) (7 messages, latest: Jun 11 2019 at 20:10)
 
