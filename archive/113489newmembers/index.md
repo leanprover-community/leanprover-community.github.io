@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Hi!](77843Hi.html) (30 messages, latest: Jun 12 2019 at 14:56)
+
 * [inductives](91711inductives.html) (19 messages, latest: Jun 12 2019 at 12:56)
 
 * [supremum](73663supremum.html) (8 messages, latest: Jun 12 2019 at 10:12)
-
-* [Hi!](77843Hi.html) (29 messages, latest: Jun 12 2019 at 04:50)
 
 * [noob question(s)](52075noobquestions.html) (648 messages, latest: Jun 11 2019 at 22:56)
 
