@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [noob question about pexpr](29841noobquestionaboutpexpr.html) (6 messages, latest: Jun 12 2019 at 22:18)
+
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (4 messages, latest: Jun 12 2019 at 21:52)
 
 * [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (4 messages, latest: Jun 12 2019 at 18:53)
 
 * [transport and parametricity](74751transportandparametricity.html) (59 messages, latest: Jun 12 2019 at 18:36)
-
-* [noob question about pexpr](29841noobquestionaboutpexpr.html) (5 messages, latest: Jun 12 2019 at 17:36)
 
 * [norm_cast](53959normcast.html) (4 messages, latest: Jun 12 2019 at 15:02)
 
