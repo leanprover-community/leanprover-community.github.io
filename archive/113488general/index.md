@@ -10,9 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [noob question about pexpr](29841noobquestionaboutpexpr.html) (1 message, latest: Jun 12 2019 at 14:49)
+* [transport and parametricity](74751transportandparametricity.html) (46 messages, latest: Jun 12 2019 at 15:56)
 
-* [norm_cast](53959normcast.html) (2 messages, latest: Jun 12 2019 at 14:42)
+* [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (2 messages, latest: Jun 12 2019 at 15:37)
+
+* [norm_cast](53959normcast.html) (4 messages, latest: Jun 12 2019 at 15:02)
+
+* [noob question about pexpr](29841noobquestionaboutpexpr.html) (1 message, latest: Jun 12 2019 at 14:49)
 
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (3 messages, latest: Jun 12 2019 at 13:48)
 
@@ -20,15 +24,11 @@ permalink: archive/113488general/index.html
 
 * [unexpected occurrence of recursive function](17586unexpectedoccurrenceofrecursivefunction.html) (8 messages, latest: Jun 12 2019 at 11:40)
 
-* [transport and parametricity](74751transportandparametricity.html) (43 messages, latest: Jun 12 2019 at 08:19)
-
 * [Banff workshop proposal?](65930Banffworkshopproposal.html) (8 messages, latest: Jun 12 2019 at 07:04)
 
 * [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
 
 * [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
-
-* [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (1 message, latest: Jun 11 2019 at 22:45)
 
 * [cast](61260cast.html) (7 messages, latest: Jun 11 2019 at 20:10)
 

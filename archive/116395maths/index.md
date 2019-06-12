@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [group.lean in natural language](40846groupleaninnaturallanguage.html) (12 messages, latest: Jun 12 2019 at 15:56)
+
+* [HoTT](75424HoTT.html) (200 messages, latest: Jun 12 2019 at 15:50)
+
 * [CDGAs](23907CDGAs.html) (29 messages, latest: Jun 12 2019 at 08:41)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (15 messages, latest: Jun 12 2019 at 02:29)
-
-* [HoTT](75424HoTT.html) (199 messages, latest: Jun 12 2019 at 02:07)
-
-* [group.lean in natural language](40846groupleaninnaturallanguage.html) (11 messages, latest: Jun 11 2019 at 06:56)
 
 * [Sheaves](28656Sheaves.html) (47 messages, latest: Jun 11 2019 at 06:45)
 
