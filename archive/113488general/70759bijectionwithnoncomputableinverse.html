@@ -762,5 +762,79 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167895787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167895787">Mario Carneiro (Jun 11 2019 at 22:24)</a>:</h4>
 <p>for definitions, you can just put <code>[has_choice]</code> in the arguments to the definition</p>
 
+<a name="167898728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167898728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167898728">François G. Dorais (Jun 11 2019 at 23:03)</a>:</h4>
+<blockquote>
+<p>em is weaker than full choice.</p>
+</blockquote>
+<p>Sorry <span class="user-mention" data-user-id="110044">@Chris Hughes</span>, I think an earlier reply was partly mistakenly written to Kevin instead of  you. You are totally right that EM for Prop is very weak and almost harmless. However, it becomes dangerous in combination with <code>unique_choice</code>, even locally!</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameter</span> <span class="n">unique_choice</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">subsingleton</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">nonempty_decidable_of_em</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">decidable</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="n">h</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">decidable</span><span class="bp">.</span><span class="n">is_true</span> <span class="n">h</span><span class="o">))</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="o">(</span><span class="n">decidable</span><span class="bp">.</span><span class="n">is_false</span> <span class="n">h</span><span class="o">))</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">decidable</span><span class="bp">.</span><span class="n">subsingleton</span> <span class="c1">-- show instance</span>
+
+<span class="n">def</span> <span class="n">decidable_of_em</span> <span class="o">:</span> <span class="n">decidable</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">unique_choice</span> <span class="o">(</span><span class="n">nonempty_decidable_of_em</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="167900106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167900106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167900106">Mario Carneiro (Jun 11 2019 at 23:23)</a>:</h4>
+<p>what's wrong with that? A mathematician would think that's fine</p>
+
+<a name="167900119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167900119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167900119">Mario Carneiro (Jun 11 2019 at 23:23)</a>:</h4>
+<p>it's basically saying that <code>if p then 1 else 0</code> exists</p>
+
+<a name="167900221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167900221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167900221">Mario Carneiro (Jun 11 2019 at 23:25)</a>:</h4>
+<p>which is a perfectly fine ZFC-ish thing to do</p>
+
+<a name="167900226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167900226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167900226">Mario Carneiro (Jun 11 2019 at 23:25)</a>:</h4>
+<p>it's just not computable</p>
+
+<a name="167900398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167900398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167900398">François G. Dorais (Jun 11 2019 at 23:28)</a>:</h4>
+<p>Yes, 100% of mathematicians (including me!) believe in Unique Choice. But this is not about mathematics, it's about the type theory of Lean. The problem is that it systematically breaks predicativity, even locally. So if Lean insists on predicativity of Type, Unique Choice is not an option.</p>
+
+<a name="167900593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167900593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167900593">François G. Dorais (Jun 11 2019 at 23:33)</a>:</h4>
+<p>For what it's worth, I think Lean should have an "impredicative mode" where Unique Choice is true (but not full choice). This mode would make a lot of universe issues wash away, but it may have other consequences where ignoring props would trickle up to ignoring some types... This option needs a deeper look but it would match better with mathematics where types are also occasionally ignored.</p>
+
+<a name="167901343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901343">François G. Dorais (Jun 11 2019 at 23:44)</a>:</h4>
+<p>This trickling, combined with simpler universe constraint calculations, might make typing undecidable. That's the main implementation issue.</p>
+
+<a name="167901557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901557">Mario Carneiro (Jun 11 2019 at 23:49)</a>:</h4>
+<p>Do you still want computability in your impredicative mode?</p>
+
+<a name="167901568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901568">Mario Carneiro (Jun 11 2019 at 23:49)</a>:</h4>
+<p>because that basically means you can't erase anything</p>
+
+<a name="167901644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901644">Mario Carneiro (Jun 11 2019 at 23:50)</a>:</h4>
+<p>so you lose the ability to have "programs with assertions"</p>
+
+<a name="167901680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901680">Mario Carneiro (Jun 11 2019 at 23:50)</a>:</h4>
+<p>This is what actually happens in most HoTT libraries, but I don't think it's particularly practical for computation</p>
+
+<a name="167901767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901767">Mario Carneiro (Jun 11 2019 at 23:52)</a>:</h4>
+<p><code>unique_choice</code> on its own doesn't make anything undecidable. But perhaps you want a computation rule such as <code>unique_choice _ _ &lt;a&gt; ~&gt; a</code></p>
+
+<a name="167901817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901817">Mario Carneiro (Jun 11 2019 at 23:53)</a>:</h4>
+<p>I don't see it fixing any universe issues, although computation may end up doing weird things with universes</p>
+
 
 {% endraw %}
