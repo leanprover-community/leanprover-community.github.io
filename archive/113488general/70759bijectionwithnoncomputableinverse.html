@@ -836,5 +836,86 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167901817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167901817">Mario Carneiro (Jun 11 2019 at 23:53)</a>:</h4>
 <p>I don't see it fixing any universe issues, although computation may end up doing weird things with universes</p>
 
+<a name="167902383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167902383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167902383">François G. Dorais (Jun 12 2019 at 00:04)</a>:</h4>
+<p>Yes, that mode is for mathematics only. To obtain a computation, we would need to remove the mode and resolve the predicativity issues manually. In theory, this is possible but with the impredicative mode, Lean could accept things that are actually beyond what plain Lean can handle, so there is no choice but to do this process manually.</p>
+
+<a name="167902418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167902418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167902418">Mario Carneiro (Jun 12 2019 at 00:05)</a>:</h4>
+<p>what are the impredicative constructions you envision?</p>
+
+<a name="167902461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167902461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167902461">Mario Carneiro (Jun 12 2019 at 00:06)</a>:</h4>
+<p>lean can already do impredicative stuff with Prop</p>
+
+<a name="167902488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167902488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167902488">Mario Carneiro (Jun 12 2019 at 00:07)</a>:</h4>
+<p>if you don't care about computation, then it seems like you can just have <code>choice</code>in Type and just ignore <code>noncomputable</code></p>
+
+<a name="167902984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167902984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167902984">François G. Dorais (Jun 12 2019 at 00:19)</a>:</h4>
+<p>That doesn't work because noncomputable can't be eliminated, any derived term in Type* is noncomputable as well and must be marked that way. This can be mitigated by using type classes, but that only covers standardized ways of eliminating noncomputable axioms whereas the full process requires some creativity.</p>
+
+<a name="167903262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167903262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167903262">François G. Dorais (Jun 12 2019 at 00:25)</a>:</h4>
+<p>The larger issue is that Math Computable and Lean Computable mean different things. In mathematics, computable is a computation that _happens_ to always terminate, but plain Lean requires more. The mode I'm proposing is an in-between, where some principles such as <code>unique choice</code> are accepted as rules (because they are admissible) but not necessarily as axioms. Then the admissible rules could be eliminated manually, if needed, to get a plain term.</p>
+
+<a name="167903786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167903786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167903786">Mario Carneiro (Jun 12 2019 at 00:32)</a>:</h4>
+<p>noncomputable can't be eliminated but it can be ignored</p>
+
+<a name="167903809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167903809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167903809">Mario Carneiro (Jun 12 2019 at 00:33)</a>:</h4>
+<p>actually you can trivially make noncomputable types computable</p>
+
+<a name="167903907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167903907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167903907">Mario Carneiro (Jun 12 2019 at 00:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">foo</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="n">def</span> <span class="n">foo&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">id</span> <span class="n">foo</span>
+</pre></div>
+
+<a name="167904097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904097">Mario Carneiro (Jun 12 2019 at 00:39)</a>:</h4>
+<blockquote>
+<p>The larger issue is that Math Computable and Lean Computable mean different things. In mathematics, computable is a computation that _happens_ to always terminate, but plain Lean requires more.</p>
+</blockquote>
+<p>Actually, I would argue that lean's (non)<code>noncomputable</code> + classical axioms matches math computable pretty well. Here "happens to terminate" is expressed as "classically proven to terminate", which is not exactly the same because of the gap between provability and truth, but it's indistinguishable from within the system</p>
+
+<a name="167904287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904287">Mario Carneiro (Jun 12 2019 at 00:43)</a>:</h4>
+<p><code>unique_choice</code> is not admissible as a computable axiom, without changing the interpretation of Prop, but it is admissible as a noncomputable axiom if you think ZF is reasonable. Even <code>choice</code> is admissible as a noncomputable axiom if you think ZFC + some universes is reasonable</p>
+
+<a name="167904750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904750">François G. Dorais (Jun 12 2019 at 00:52)</a>:</h4>
+<p>I think <code>unique_choice</code> might still be admissible as a _rule_. I still don't know how it plays with inductive construction, which is just another bunch of rules (if you want to think about them that way) but rules aren't necessarily compatible.</p>
+
+<a name="167904782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904782">Mario Carneiro (Jun 12 2019 at 00:53)</a>:</h4>
+<p>what do you mean by "as a rule"?</p>
+
+<a name="167904925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904925">François G. Dorais (Jun 12 2019 at 00:56)</a>:</h4>
+<p>A deduction rule rather than as an axiom (an actual constant).</p>
+
+<a name="167904947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904947">Mario Carneiro (Jun 12 2019 at 00:56)</a>:</h4>
+<p>I don't see any way that a term constructor could end up differing in any essential way from a constant given all the other stuff in DTT</p>
+
+<a name="167904991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167904991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167904991">Mario Carneiro (Jun 12 2019 at 00:57)</a>:</h4>
+<p>If you allow a context in your rule, then I will just lambda abstract and build the constant</p>
+
+<a name="167905027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167905027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167905027">François G. Dorais (Jun 12 2019 at 00:58)</a>:</h4>
+<p>Proofs are finite. Axioms are more powerful than rules.</p>
+
+<a name="167905056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167905056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167905056">Mario Carneiro (Jun 12 2019 at 00:58)</a>:</h4>
+<p>Unless you put an unusual constraint on the rule, it's equivalent</p>
+
+<a name="167905076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167905076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167905076">Mario Carneiro (Jun 12 2019 at 00:59)</a>:</h4>
+<p>so I'm asking what the constraint is</p>
+
 
 {% endraw %}
