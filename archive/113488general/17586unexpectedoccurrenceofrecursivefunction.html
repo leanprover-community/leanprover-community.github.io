@@ -1,0 +1,54 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html">unexpected occurrence of recursive function</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="167936797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167936797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167936797">Keeley Hoek (Jun 12 2019 at 11:27)</a>:</h4>
+<p>The following snippet does not compile: <code>unexpected occurrence of recursive function</code></p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">height</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">id</span> <span class="n">height</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>I am very disturbed!</p>
+
+<a name="167937146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937146">Neil Strickland (Jun 12 2019 at 11:33)</a>:</h4>
+<p>Did you mean <code>id height n</code> (which is <code>(id height) n</code>, of course) or <code>id (height n)</code>?  I am not surprised that the former fails.</p>
+
+<a name="167937362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937362">Keeley Hoek (Jun 12 2019 at 11:36)</a>:</h4>
+<p>I mean't the former---why is it expected that it fails?</p>
+
+<a name="167937423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937423">Reid Barton (Jun 12 2019 at 11:37)</a>:</h4>
+<p>It wouldn't be so great if you instead had <code>id' height n</code> where <code>id' f n := f (n+1)</code></p>
+
+<a name="167937512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937512">Reid Barton (Jun 12 2019 at 11:38)</a>:</h4>
+<p>So basically you're asking Lean to reduce the right hand side before attempting to determine whether it is syntactically a valid recursive call</p>
+
+<a name="167937549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937549">Keeley Hoek (Jun 12 2019 at 11:39)</a>:</h4>
+<p>Sure, but normally when this happens we get <code>could not prove recursive application is decreasing well-founded relation</code> (or something like that I'm just remembering), and instead this time it seems like lean just goes "nope not even trying this time".</p>
+
+<a name="167937564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937564">Reid Barton (Jun 12 2019 at 11:39)</a>:</h4>
+<p>Well because you don't even have an application of <code>height</code></p>
+
+<a name="167937644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unexpected%20occurrence%20of%20recursive%20function/near/167937644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17586unexpectedoccurrenceofrecursivefunction.html#167937644">Keeley Hoek (Jun 12 2019 at 11:40)</a>:</h4>
+<p>aha! ok. Thanks! :)</p>
+
+
+{% endraw %}
