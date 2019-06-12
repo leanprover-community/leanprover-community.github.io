@@ -957,5 +957,83 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907695">François G. Dorais (Jun 12 2019 at 01:58)</a>:</h4>
 <p>The predicative case is more complicated, it would probably need a hierarchy of Prop* that parallels Type* and what eliminates where would be complicated. This is probably not worth it, but unique choice might still work.</p>
 
+<a name="167908024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167908024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167908024">François G. Dorais (Jun 12 2019 at 02:05)</a>:</h4>
+<p>Because subsingletons (aka props) are judgments, they can be tracked much better even in the impredicative case, which makes it plausible to undo this addition and "manually" work out a plain Lean term from an extended one. It's plain that adding this is sound because of the set theoretic model. Computational soundness is less clear but not bad. The one thing that worries me a lot is quotients, which can be used to produce subsingletons out of nowhere...</p>
+
+<a name="167908094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167908094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167908094">François G. Dorais (Jun 12 2019 at 02:07)</a>:</h4>
+<p>Then again, subsingleton judgments might give a better way of defining quotients...<br>
+This all needs deeper thinking...</p>
+
+<a name="167909400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909400">Mario Carneiro (Jun 12 2019 at 02:35)</a>:</h4>
+<p>I'm still confused how (in the impredicative case) you have done anything different from renaming Prop to subsingleton</p>
+
+<a name="167909459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909459">Mario Carneiro (Jun 12 2019 at 02:36)</a>:</h4>
+<p>Lean's <code>subsingleton</code> would still have to exist as a separate thing, since there are things that are only proven to be subsingletons, and AFAICT this doesn't make that part any different</p>
+
+<a name="167909488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909488">François G. Dorais (Jun 12 2019 at 02:37)</a>:</h4>
+<p>Except for universe level computations and elimination into type?</p>
+
+<a name="167909493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909493">Mario Carneiro (Jun 12 2019 at 02:37)</a>:</h4>
+<p>universe level computation meaning what</p>
+
+<a name="167909552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909552">Mario Carneiro (Jun 12 2019 at 02:38)</a>:</h4>
+<p>I see, elimination into type meaning it's proof relevant?</p>
+
+<a name="167909562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909562">François G. Dorais (Jun 12 2019 at 02:38)</a>:</h4>
+<p>They disappear into subsingletons, which makes impredicativity happen and unique choice trivial.</p>
+
+<a name="167909658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909658">Mario Carneiro (Jun 12 2019 at 02:41)</a>:</h4>
+<p>Do you still expect em or axiom_of_choice?</p>
+
+<a name="167909738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909738">Mario Carneiro (Jun 12 2019 at 02:43)</a>:</h4>
+<p>as you have pointed out this lets you build a <code>decidable p</code>, which breaks canonicity (to be fair, it's already broken but this makes it even easier)</p>
+
+<a name="167909968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909968">Mario Carneiro (Jun 12 2019 at 02:49)</a>:</h4>
+<p>And actually this does break decidability of the typing relation as well, because if you have something like <code>X := if RH then 1 else 0</code> then if RH is provable we have <code>prop_decidable RH == of_true proof_of_RH</code> (defeq because <code>decidable</code> is a subsingleton, and we can set to be syntactically so) and hence <code>X == 1</code> definitionally</p>
+
+<a name="167909977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167909977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167909977">François G. Dorais (Jun 12 2019 at 02:49)</a>:</h4>
+<p>No, I don't. I expect terms that I can use but that other people can prove. If other people want AC, that's fine but I can't use their stuff for my work. Same goes for RH.</p>
+
+<a name="167910053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910053">Mario Carneiro (Jun 12 2019 at 02:51)</a>:</h4>
+<p>My point being that whether this term <code>X</code> is defeq to 1 or not actually depends on whether a proof of RH exists</p>
+
+<a name="167910060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910060">Mario Carneiro (Jun 12 2019 at 02:51)</a>:</h4>
+<p>I could write <code>theorem proof_of_RH : X = 1 := rfl</code> and lean has to go find me a proof of RH</p>
+
+<a name="167910200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910200">Mario Carneiro (Jun 12 2019 at 02:55)</a>:</h4>
+<p>yeah, I'm becoming increasingly convinced that <code>unique_choice</code> + definitional <code>subsingleton</code> will totally break the type system</p>
+
+<a name="167910256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910256">Mario Carneiro (Jun 12 2019 at 02:56)</a>:</h4>
+<p>unless you go full extensional, but lean needs more interaction modes for that</p>
+
+<a name="167910266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910266">François G. Dorais (Jun 12 2019 at 02:56)</a>:</h4>
+<p>Yes, that's the issue: at some point typeability becomes undecidable. This is almost unavoidable in an impredicative system. However, this is where the creativity I mentioned earlier comes into play. To make this into a computable term, I have to decide RH...<br>
+But the main point is that with a closed term in this impredicative system, I can isolate a finite number of proofs to resolve (with zero implication that I can).</p>
+
+<a name="167910375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910375">François G. Dorais (Jun 12 2019 at 02:59)</a>:</h4>
+<p>It's quite possible that my proposal goes too far close to extensional type theory. My main goal is to go as far as possible in that direction without breaking anything significant.</p>
+
+<a name="167910384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167910384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167910384">Mario Carneiro (Jun 12 2019 at 02:59)</a>:</h4>
+<p>The problem isn't merely that there are noncomputable things, it's the part where noncomputable things "infect" defeq so that you can't decide types</p>
+
 
 {% endraw %}

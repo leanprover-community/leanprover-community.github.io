@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [HoTT](75424HoTT.html) (197 messages, latest: Jun 12 2019 at 01:59)
+* [CDGAs](23907CDGAs.html) (21 messages, latest: Jun 12 2019 at 02:48)
 
-* [CDGAs](23907CDGAs.html) (20 messages, latest: Jun 11 2019 at 14:39)
+* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (15 messages, latest: Jun 12 2019 at 02:29)
 
-* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (14 messages, latest: Jun 11 2019 at 10:36)
+* [HoTT](75424HoTT.html) (199 messages, latest: Jun 12 2019 at 02:07)
 
 * [group.lean in natural language](40846groupleaninnaturallanguage.html) (11 messages, latest: Jun 11 2019 at 06:56)
 
