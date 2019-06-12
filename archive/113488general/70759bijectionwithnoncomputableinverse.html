@@ -917,5 +917,45 @@ Now choose a function <code>f</code> which satisfies all these constraints (this
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167905076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167905076">Mario Carneiro (Jun 12 2019 at 00:59)</a>:</h4>
 <p>so I'm asking what the constraint is</p>
 
+<a name="167905148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167905148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167905148">Mario Carneiro (Jun 12 2019 at 01:00)</a>:</h4>
+<p>like usually stuff like <code>and.left</code> and <code>or.elim</code> are done as rules, but because DTT has lambda and app it makes no difference to introduce them as constants instead</p>
+
+<a name="167906800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167906800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167906800">François G. Dorais (Jun 12 2019 at 01:36)</a>:</h4>
+<p>The actual rule for Unique Choice would require a new subsingleton judgment and the obvious accompanying rules (e.g. two elements of a subsingleton are definitionally equal, Pi's of subsingletons are subsingletons, and the unique choice rule). In plain Lean, these subsingletons could be universe ranked and all props would be automatic subsingletons. In the impredicative case, there could be a single subsingleton judgment, which would make unique choice work. I don't know if this is actually sound for Lean type theory. I think it would definitely make Lean less lean.</p>
+
+<a name="167907035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907035">Mario Carneiro (Jun 12 2019 at 01:42)</a>:</h4>
+<p>oh, you want an assumption of defeq?</p>
+
+<a name="167907046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907046">François G. Dorais (Jun 12 2019 at 01:43)</a>:</h4>
+<p>Yes, as it should be for mathematics...</p>
+
+<a name="167907057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907057">Mario Carneiro (Jun 12 2019 at 01:43)</a>:</h4>
+<p>Is it possible to prove something is a subsingleton, or is it a syntactic judgment?</p>
+
+<a name="167907073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907073">Mario Carneiro (Jun 12 2019 at 01:43)</a>:</h4>
+<p>because if you can prove it then this makes the whole theory extensional</p>
+
+<a name="167907126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907126">François G. Dorais (Jun 12 2019 at 01:44)</a>:</h4>
+<p>It's just syntactic, that's the whole point. That way it could be eliminated from proof terms with some creative work.</p>
+
+<a name="167907138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907138">Mario Carneiro (Jun 12 2019 at 01:44)</a>:</h4>
+<p>so then what is a subsingleton that isn't already a prop?</p>
+
+<a name="167907624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907624">François G. Dorais (Jun 12 2019 at 01:56)</a>:</h4>
+<p>Well, this is going into speculation since I haven't worked out whether any of this makes sense for lean type theory. From the front end point of view, in the impredicative case, the subsingleton judgment would take the place of Prop and (hopefully) universe levels of subsingletons would simply wash away entirely. That would make the Lean front end essentially the same except that Props would eliminate into Type automatically.</p>
+
+<a name="167907695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bijection%20with%20noncomputable%20inverse/near/167907695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70759bijectionwithnoncomputableinverse.html#167907695">François G. Dorais (Jun 12 2019 at 01:58)</a>:</h4>
+<p>The predicative case is more complicated, it would probably need a hierarchy of Prop* that parallels Type* and what eliminates where would be complicated. This is probably not worth it, but unique choice might still work.</p>
+
 
 {% endraw %}
