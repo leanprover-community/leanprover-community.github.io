@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (57 messages, latest: Jun 12 2019 at 17:49)
+* [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (4 messages, latest: Jun 12 2019 at 18:53)
+
+* [transport and parametricity](74751transportandparametricity.html) (59 messages, latest: Jun 12 2019 at 18:36)
 
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (5 messages, latest: Jun 12 2019 at 17:36)
-
-* [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (3 messages, latest: Jun 12 2019 at 17:19)
 
 * [norm_cast](53959normcast.html) (4 messages, latest: Jun 12 2019 at 15:02)
 
