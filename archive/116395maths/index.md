@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Order on topologies](78527Orderontopologies.html) (41 messages, latest: Jun 13 2019 at 17:41)
+* [witt vectors](84655wittvectors.html) (160 messages, latest: Jun 13 2019 at 18:49)
 
-* [witt vectors](84655wittvectors.html) (152 messages, latest: Jun 13 2019 at 17:38)
+* [Order on topologies](78527Orderontopologies.html) (41 messages, latest: Jun 13 2019 at 17:41)
 
 * [CDGAs](23907CDGAs.html) (119 messages, latest: Jun 13 2019 at 17:00)
 
