@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [noob question about pexpr](29841noobquestionaboutpexpr.html) (8 messages, latest: Jun 13 2019 at 09:40)
+
+* [Lean in the wild](43625Leaninthewild.html) (125 messages, latest: Jun 13 2019 at 09:32)
+
 * [Banff workshop proposal?](65930Banffworkshopproposal.html) (9 messages, latest: Jun 13 2019 at 08:46)
-
-* [Lean in the wild](43625Leaninthewild.html) (123 messages, latest: Jun 13 2019 at 08:29)
-
-* [noob question about pexpr](29841noobquestionaboutpexpr.html) (7 messages, latest: Jun 12 2019 at 23:10)
 
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (4 messages, latest: Jun 12 2019 at 21:52)
 
