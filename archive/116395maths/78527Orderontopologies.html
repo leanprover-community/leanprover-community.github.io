@@ -262,5 +262,130 @@ then you should use Patrick's order, with the discrete topology at the bottom an
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168067490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168067490">Johan Commelin (Jun 13 2019 at 17:41)</a>:</h4>
 <p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> I wrote it with help of Johannes. I think <code>copy</code> allows you to redefine the data parts of the structure, for better defeqs. But then you get proof obligations that the data is provably equal to what you get out of the duality. (That's what my memory tells me.) Maybe <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> can enlighten us.</p>
 
+<a name="168078138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078138">Patrick Massot (Jun 13 2019 at 19:35)</a>:</h4>
+<blockquote>
+<p>I think the galois insertion should be between <code>(topological_space α)</code> and <code>(order_dual $ set α)</code>, not <code>(order_dual $ topological_space α)</code> and <code>(set α)</code></p>
+</blockquote>
+<p>Isn't this ruining the <code>le_l_u</code> axiom of Galois insertions?</p>
+
+<a name="168078313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078313">Patrick Massot (Jun 13 2019 at 19:37)</a>:</h4>
+<p>This is really weird, it looks like, starting from a Galois insertion, if you switch order on both sides you don't get a Galois insertion in the other direction</p>
+
+<a name="168078321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078321">Patrick Massot (Jun 13 2019 at 19:37)</a>:</h4>
+<p>I must have messed up something</p>
+
+<a name="168078582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078582">Reid Barton (Jun 13 2019 at 19:40)</a>:</h4>
+<blockquote>
+<p>This is really weird, it looks like, starting from a Galois insertion, if you switch order on both sides you don't get a Galois insertion in the other direction</p>
+</blockquote>
+<p>I haven't been following today's discussion but this is indeed not the case</p>
+
+<a name="168078610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078610">Reid Barton (Jun 13 2019 at 19:40)</a>:</h4>
+<p>You get a Galois coinsertion (if that's a real word) instead</p>
+
+<a name="168078659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078659">Patrick Massot (Jun 13 2019 at 19:41)</a>:</h4>
+<p>Yes, it looks like a coinsertion</p>
+
+<a name="168078689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078689">Patrick Massot (Jun 13 2019 at 19:41)</a>:</h4>
+<p>You get <code>u l = id</code> instead of <code>l u = id</code></p>
+
+<a name="168078749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078749">Patrick Massot (Jun 13 2019 at 19:42)</a>:</h4>
+<p>But it should be enough to lift complete lattice instances</p>
+
+<a name="168078755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078755">Reid Barton (Jun 13 2019 at 19:42)</a>:</h4>
+<p>Yes</p>
+
+<a name="168078772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078772">Patrick Massot (Jun 13 2019 at 19:42)</a>:</h4>
+<p>This is all so silly. I simply want to reverse my partial order which is already known to be a complete lattice.</p>
+
+<a name="168078786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078786">Kevin Buzzard (Jun 13 2019 at 19:43)</a>:</h4>
+<p>You could use the fact that the dual is a Galois nnection.</p>
+
+<a name="168078812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168078812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168078812">Patrick Massot (Jun 13 2019 at 19:43)</a>:</h4>
+<p>Maybe I should keep the current Galois insertion as a local instance and then use <code>order_dual.complete_lattice</code> or something</p>
+
+<a name="168079905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168079905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168079905">Patrick Massot (Jun 13 2019 at 19:56)</a>:</h4>
+<p>import topology.basic</p>
+<p>open set filter lattice <br>
+universes u v w</p>
+<p>namespace topological_space<br>
+variables {α : Type u}</p>
+<p>/-- The least topology containing a collection of basic sets. -/<br>
+inductive generate_open (g : set (set α)) : set α → Prop<br>
+| basic  : ∀s∈g, generate_open s<br>
+| univ   : generate_open univ<br>
+| inter  : ∀s t, generate_open s → generate_open t → generate_open (s ∩ t)<br>
+| sUnion : ∀k, (∀s∈k, generate_open s) → generate_open (⋃₀ k)</p>
+<p>/-- The smallest topological space containing the collection <code>g</code> of basic sets -/<br>
+def generate_from (g : set (set α)) : topological_space α :=<br>
+{ is_open        := generate_open g,<br>
+  is_open_univ   := generate_open.univ g,<br>
+  is_open_inter  := generate_open.inter,<br>
+  is_open_sUnion := generate_open.sUnion  }</p>
+<p>section lattice</p>
+<p>def old_order : partial_order (topological_space α) :=<br>
+{ le          := λt s, t.is_open ≤ s.is_open,<br>
+  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₁ h₂,<br>
+  le_refl     := assume t, le_refl t.is_open,<br>
+  le_trans    := assume a b c h₁ h₂, @le_trans _ _ a.is_open b.is_open c.is_open h₁ h₂ }</p>
+<p>local attribute [instance] old_order</p>
+<p>lemma generate_from_le_iff_subset_is_open {g : set (set α)} {t : topological_space α} :<br>
+  topological_space.generate_from g ≤ t ↔ g ⊆ {s | t.is_open s} :=<br>
+iff.intro<br>
+  (assume ht s hs, ht _ $ topological_space.generate_open.basic s hs)<br>
+  (assume hg s hs, hs.rec_on (assume v hv, hg hv)<br>
+    t.is_open_univ (assume u v _ _, t.is_open_inter u v) (assume k _, t.is_open_sUnion k))</p>
+<p>protected def mk_of_closure (s : set (set α))<br>
+  (hs : {u | (topological_space.generate_from s).is_open u} = s) : topological_space α :=<br>
+{ is_open        := λu, u ∈ s,<br>
+  is_open_univ   := hs ▸ topological_space.generate_open.univ _,<br>
+  is_open_inter  := hs ▸ topological_space.generate_open.inter,<br>
+  is_open_sUnion := hs ▸ topological_space.generate_open.sUnion }</p>
+<p>lemma mk_of_closure_sets {s : set (set α)}<br>
+  {hs : {u | (topological_space.generate_from s).is_open u} = s} :<br>
+  topological_space.mk_of_closure s hs = topological_space.generate_from s :=<br>
+topological_space_eq hs.symm</p>
+<p>def gi_generate_from (α : Type*) :<br>
+  galois_insertion topological_space.generate_from (λt:topological_space α, {s | t.is_open s}) :=<br>
+{ gc        := assume g t, generate_from_le_iff_subset_is_open,<br>
+  le_l_u    := assume ts s hs, topological_space.generate_open.basic s hs,<br>
+  choice    := λg hg, topological_space.mk_of_closure g<br>
+    (subset.antisymm hg $ generate_from_le_iff_subset_is_open.1 $ le_refl _),<br>
+  choice_eq := assume s hs, mk_of_closure_sets }</p>
+<p>lemma generate_from_mono {α} {g₁ g₂ : set (set α)} (h : g₁ ⊆ g₂) :<br>
+  topological_space.generate_from g₁ ≤ topological_space.generate_from g₂ :=<br>
+(gi_generate_from _).gc.monotone_l h</p>
+<p>def old_complete_lattice {α : Type u} : complete_lattice (topological_space α) :=<br>
+(gi_generate_from α).lift_complete_lattice<br>
+end lattice</p>
+<p>instance : partial_order (topological_space α) :=<br>
+{ le          := λ t s, s.is_open ≤ t.is_open,<br>
+  le_antisymm := assume t s h₁ h₂, topological_space_eq $ le_antisymm h₂ h₁,<br>
+  le_refl     := assume t, le_refl t.is_open,<br>
+  le_trans    := assume a b c h₁ h₂, le_trans h₂ h₁ }</p>
+<p>instance : complete_lattice (topological_space α) :=<br>
+@order_dual.lattice.complete_lattice _ old_complete_lattice<br>
+end topological_space</p>
+<p>class discrete_topology (α : Type*) [t : topological_space α] : Prop :=<br>
+(eq_top : t = ⊥)</p>
+<p>@[simp] lemma is_open_discrete {α : Type*} [topological_space α] [discrete_topology α] (s : set α) :<br>
+  is_open s :=<br>
+(discrete_topology.eq_top α).symm ▸ trivial</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
 
 {% endraw %}

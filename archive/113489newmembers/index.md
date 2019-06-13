@@ -10,13 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Sequent calculus](39266Sequentcalculus.html) (2 messages, latest: Jun 13 2019 at 19:41)
+
+* [Directed/filtered categories](49705Directedfilteredcategories.html) (2 messages, latest: Jun 13 2019 at 19:18)
+
 * [What is a motive?](37413Whatisamotive.html) (32 messages, latest: Jun 13 2019 at 17:32)
 
 * [Category of Topological Spaces](99952CategoryofTopologicalSpaces.html) (4 messages, latest: Jun 13 2019 at 17:30)
 
 * [Hi!](77843Hi.html) (39 messages, latest: Jun 12 2019 at 20:18)
-
-* [Sequent calculus](39266Sequentcalculus.html) (1 message, latest: Jun 12 2019 at 18:37)
 
 * [inductives](91711inductives.html) (19 messages, latest: Jun 12 2019 at 12:56)
 
