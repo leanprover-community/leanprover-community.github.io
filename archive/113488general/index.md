@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Banff workshop proposal?](65930Banffworkshopproposal.html) (9 messages, latest: Jun 13 2019 at 08:46)
+
+* [Lean in the wild](43625Leaninthewild.html) (123 messages, latest: Jun 13 2019 at 08:29)
+
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (7 messages, latest: Jun 12 2019 at 23:10)
 
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (4 messages, latest: Jun 12 2019 at 21:52)
@@ -23,8 +27,6 @@ permalink: archive/113488general/index.html
 * [bijection with noncomputable inverse](70759bijectionwithnoncomputableinverse.html) (255 messages, latest: Jun 12 2019 at 12:34)
 
 * [unexpected occurrence of recursive function](17586unexpectedoccurrenceofrecursivefunction.html) (8 messages, latest: Jun 12 2019 at 11:40)
-
-* [Banff workshop proposal?](65930Banffworkshopproposal.html) (8 messages, latest: Jun 12 2019 at 07:04)
 
 * [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
 
@@ -53,8 +55,6 @@ permalink: archive/113488general/index.html
 * [emacs users](44956emacsusers.html) (6 messages, latest: Jun 09 2019 at 06:42)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
-
-* [Lean in the wild](43625Leaninthewild.html) (122 messages, latest: Jun 08 2019 at 07:22)
 
 * [VSCode Live Share](77256VSCodeLiveShare.html) (7 messages, latest: Jun 07 2019 at 22:00)
 
