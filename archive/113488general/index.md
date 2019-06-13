@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nat equalities](63354natequalities.html) (1 message, latest: Jun 13 2019 at 12:06)
+
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (8 messages, latest: Jun 13 2019 at 09:40)
 
 * [Lean in the wild](43625Leaninthewild.html) (125 messages, latest: Jun 13 2019 at 09:32)
