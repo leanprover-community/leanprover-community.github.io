@@ -190,5 +190,24 @@ permalink: archive/113489newmembers/37413Whatisamotive.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/166240757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#166240757">Mario Carneiro (May 22 2019 at 06:25)</a>:</h4>
 <p>I'm not exactly sure what <code>erw</code> does, but I think it's just the same as <code>rw</code> with some definitional unfolding</p>
 
+<a name="168066701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20a%20motive%3F/near/168066701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37413Whatisamotive.html#168066701">Wojciech Nawrocki (Jun 13 2019 at 17:32)</a>:</h4>
+<p>I'm not sure if this is the right thread, but I noticed that generally speaking rewriting seems to work better under binders like Mario mentioned here. For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span> <span class="n">α</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="n">b</span><span class="o">:</span> <span class="n">α</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="n">x</span><span class="o">))</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">a</span> <span class="bp">==</span> <span class="n">b</span><span class="o">):</span> <span class="n">true</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="c1">-- i want (h: a = b)</span>
+  <span class="c1">-- rw [nat.add_comm] at a, -- h still depends on old (a: α (x+y)) :&lt;</span>
+  <span class="c1">-- have h: a = b := eq_of_heq h, -- fail</span>
+  <span class="n">revert</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_comm</span><span class="o">],</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span><span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">eq_of_heq</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- good</span>
+
+  <span class="n">trivial</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is there a tactic to do this?</p>
+
 
 {% endraw %}

@@ -90,5 +90,10 @@ I am writing a tactic to revert all propositions in a theorem. </p>
 
 <p>then change <code>revert a,</code> to <code>revert a a'</code>,</p>
 
+<a name="168065255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/168065255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#168065255">Bryan Gin-ge Chen (Jun 13 2019 at 17:16)</a>:</h4>
+<p>I can reproduce this with 3.4.2 . It seems that it occurs the instant the file reads <code>revert a a</code>. If I paste <code>a'</code> instead of typing it then no crash occurs.  Similarly, I can easily type in <code>revert a' a</code> (though changing it to <code>revert a' a'</code> crashes).</p>
+<p>Curiously, I can't reproduce any of these crashes in the <a href="https://bryangingechen.github.io/lean/lean-web-editor/#code=universe%20u%0A%0Alemma%20segfault%20%7B%CE%B1%3A%20Type%20u%7D%20%7Ba%20a%27%3A%20%CE%B1%7D%20%28H%20%3A%20a%20%3D%20a%27%29%20%3A%20a%20%3D%20a%27%20%3A%3D%20begin%0A%20%20revert%20a%20a%2C%0Aend" target="_blank" title="https://bryangingechen.github.io/lean/lean-web-editor/#code=universe%20u%0A%0Alemma%20segfault%20%7B%CE%B1%3A%20Type%20u%7D%20%7Ba%20a%27%3A%20%CE%B1%7D%20%28H%20%3A%20a%20%3D%20a%27%29%20%3A%20a%20%3D%20a%27%20%3A%3D%20begin%0A%20%20revert%20a%20a%2C%0Aend">web editor</a>. (This version uses community Lean).</p>
+
 
 {% endraw %}
