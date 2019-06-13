@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [CDGAs](23907CDGAs.html) (116 messages, latest: Jun 13 2019 at 09:57)
+* [witt vectors](84655wittvectors.html) (146 messages, latest: Jun 13 2019 at 14:44)
+
+* [CDGAs](23907CDGAs.html) (117 messages, latest: Jun 13 2019 at 14:32)
 
 * [HoTT](75424HoTT.html) (210 messages, latest: Jun 12 2019 at 21:55)
 
@@ -737,8 +739,6 @@ permalink: archive/116395maths/index.html
 * [add_comm_group tactic](64217addcommgrouptactic.html) (34 messages, latest: Aug 08 2018 at 21:38)
 
 * [d \| a -> d \| (a * b)?](31786dadab.html) (2 messages, latest: Aug 08 2018 at 16:38)
-
-* [witt vectors](84655wittvectors.html) (136 messages, latest: Aug 08 2018 at 13:42)
 
 * [filter disease](14085filterdisease.html) (29 messages, latest: Aug 08 2018 at 11:21)
 

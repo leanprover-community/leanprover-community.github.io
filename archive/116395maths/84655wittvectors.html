@@ -748,5 +748,59 @@ H : ∀ (m : ℕ), m &lt; k → eval₂ C X_in_terms_of_W (witt_polynomial m) = 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/131109373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#131109373">Patrick Massot (Aug 08 2018 at 13:42)</a>:</h4>
 <p>I think we could have a tactic doing only this and unfolding composition (ie <code>rw comp_app</code>)</p>
 
+<a name="168051078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051078">Johan Commelin (Jun 13 2019 at 14:39)</a>:</h4>
+<p>After almost a year I took another look at this code. I've almost proven the fundamental theorem about witt polynomials: <a href="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean">https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean</a></p>
+
+<a name="168051161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051161">Johan Commelin (Jun 13 2019 at 14:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">witt_structure_int_exists_unique</span> <span class="o">(</span><span class="err">Φ</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">bool</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃!</span> <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">mv_polynomial</span> <span class="o">(</span><span class="n">bool</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">ℤ</span><span class="o">),</span>
+  <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="n">witt_polynomial</span> <span class="n">p</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">eval₂</span> <span class="n">C</span> <span class="n">φ</span> <span class="bp">=</span>
+<span class="err">Φ</span><span class="bp">.</span><span class="n">eval₂</span> <span class="n">C</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span> <span class="o">:</span> <span class="n">bool</span><span class="o">,</span> <span class="o">((</span><span class="n">witt_polynomial</span> <span class="n">p</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">rename</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span><span class="n">i</span><span class="o">))))</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="168051182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051182">Johan Commelin (Jun 13 2019 at 14:40)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L1199" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L1199">https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L1199</a></p>
+
+<a name="168051204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051204">Kevin Buzzard (Jun 13 2019 at 14:40)</a>:</h4>
+<p><a href="https://arxiv.org/abs/1906.03583" target="_blank" title="https://arxiv.org/abs/1906.03583">https://arxiv.org/abs/1906.03583</a></p>
+<p>If you want a goal which looks accessible ;-)</p>
+
+<a name="168051264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051264">Johan Commelin (Jun 13 2019 at 14:41)</a>:</h4>
+<p>The only sorry on which that proof depends is on <a href="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L921" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L921">https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L921</a> and it says:</p>
+<div class="codehilite"><pre><span></span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime</span> <span class="n">p</span><span class="o">,</span>
+<span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">ι</span><span class="o">,</span>
+<span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span>
+<span class="err">⊢</span> <span class="o">(</span><span class="n">C</span> <span class="n">n</span> <span class="n">modₑ</span> <span class="err">↑</span><span class="n">p</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">C</span> <span class="n">n</span> <span class="err">^</span> <span class="n">p</span> <span class="n">modₑ</span> <span class="err">↑</span><span class="n">p</span><span class="o">)</span>
+</pre></div>
+
+<a name="168051353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051353">Johan Commelin (Jun 13 2019 at 14:42)</a>:</h4>
+<p>In other words, I need little Fermat for integers that are viewed as constant polynomials in an arbitrary multi-variate polynomial ring over the integers.</p>
+
+<a name="168051408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051408">Johan Commelin (Jun 13 2019 at 14:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think it makes more sense to first show that Witt vectors form a ring (-;</p>
+
+<a name="168051423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051423">Johan Commelin (Jun 13 2019 at 14:42)</a>:</h4>
+<p>(And to clean up the file.)</p>
+
+<a name="168051468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051468">Johan Commelin (Jun 13 2019 at 14:43)</a>:</h4>
+<p>There are some extremely crazy things going on, where type class search completely messes up.</p>
+
+<a name="168051570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168051570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168051570">Johan Commelin (Jun 13 2019 at 14:44)</a>:</h4>
+<p>And what is annoying is that you can't even easily switch it off using <code>@</code>s. I wish I could tell Lean:<br>
+"Hey, I want to apply this lemma. Try to do that without caring about the type class instances. Just give them to me as goals."<br>
+But I'm not sure if it is easy to say that to Lean.</p>
+
 
 {% endraw %}
