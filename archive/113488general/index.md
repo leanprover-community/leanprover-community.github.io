@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean segfaulting](48154Leansegfaulting.html) (11 messages, latest: Jun 13 2019 at 16:35)
+
 * [Type theory of Lean](83571TypetheoryofLean.html) (25 messages, latest: Jun 13 2019 at 15:59)
 
 * [nat equalities](63354natequalities.html) (8 messages, latest: Jun 13 2019 at 14:37)
@@ -401,8 +403,6 @@ permalink: archive/113488general/index.html
 * [Interactive versions of tactics](16792Interactiveversionsoftactics.html) (3 messages, latest: Apr 19 2019 at 02:58)
 
 * [Lean tutorial broken](10454Leantutorialbroken.html) (9 messages, latest: Apr 19 2019 at 00:22)
-
-* [Lean segfaulting](48154Leansegfaulting.html) (10 messages, latest: Apr 18 2019 at 21:41)
 
 * [using_well_founded](47902usingwellfounded.html) (26 messages, latest: Apr 18 2019 at 18:07)
 

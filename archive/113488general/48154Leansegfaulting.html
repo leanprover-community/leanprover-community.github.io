@@ -79,5 +79,16 @@ I am writing a tactic to revert all propositions in a theorem. </p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/163693166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#163693166">Simon Hudon (Apr 18 2019 at 21:41)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> can you review and merge please?</p>
 
+<a name="168061695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20segfaulting/near/168061695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48154Leansegfaulting.html#168061695">Wojciech Nawrocki (Jun 13 2019 at 16:35)</a>:</h4>
+<p>Just ran into this in Lean community edition nightly. A consistent repro - start with this in an empty file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">segfault</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">a&#39;</span><span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a&#39;</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">a</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>then change <code>revert a,</code> to <code>revert a a'</code>,</p>
+
 
 {% endraw %}
