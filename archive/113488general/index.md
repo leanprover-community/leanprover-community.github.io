@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean segfaulting](48154Leansegfaulting.html) (11 messages, latest: Jun 13 2019 at 16:35)
+* [Lean segfaulting](48154Leansegfaulting.html) (12 messages, latest: Jun 13 2019 at 17:16)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (25 messages, latest: Jun 13 2019 at 15:59)
 

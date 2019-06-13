@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What is a motive?](37413Whatisamotive.html) (32 messages, latest: Jun 13 2019 at 17:32)
+
+* [Category of Topological Spaces](99952CategoryofTopologicalSpaces.html) (4 messages, latest: Jun 13 2019 at 17:30)
+
 * [Hi!](77843Hi.html) (39 messages, latest: Jun 12 2019 at 20:18)
 
 * [Sequent calculus](39266Sequentcalculus.html) (1 message, latest: Jun 12 2019 at 18:37)
@@ -73,8 +77,6 @@ permalink: archive/113489newmembers/index.html
 * [Math physics in Lean](24293MathphysicsinLean.html) (46 messages, latest: May 25 2019 at 01:38)
 
 * [Rewrite in lambda expr](04378Rewriteinlambdaexpr.html) (3 messages, latest: May 22 2019 at 12:11)
-
-* [What is a motive?](37413Whatisamotive.html) (31 messages, latest: May 22 2019 at 06:25)
 
 * [Tutorial Exercise](25037TutorialExercise.html) (60 messages, latest: May 21 2019 at 21:10)
 
