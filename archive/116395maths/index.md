@@ -10,9 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (146 messages, latest: Jun 13 2019 at 14:44)
+* [Order on topologies](78527Orderontopologies.html) (40 messages, latest: Jun 13 2019 at 15:51)
 
-* [CDGAs](23907CDGAs.html) (117 messages, latest: Jun 13 2019 at 14:32)
+* [witt vectors](84655wittvectors.html) (151 messages, latest: Jun 13 2019 at 15:40)
+
+* [CDGAs](23907CDGAs.html) (118 messages, latest: Jun 13 2019 at 15:36)
 
 * [HoTT](75424HoTT.html) (210 messages, latest: Jun 12 2019 at 21:55)
 
@@ -21,8 +23,6 @@ permalink: archive/116395maths/index.html
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (15 messages, latest: Jun 12 2019 at 02:29)
 
 * [Sheaves](28656Sheaves.html) (47 messages, latest: Jun 11 2019 at 06:45)
-
-* [Order on topologies](78527Orderontopologies.html) (33 messages, latest: Jun 10 2019 at 19:39)
 
 * [algorithms, Fraction in library](27913algorithmsFractioninlibrary.html) (13 messages, latest: Jun 08 2019 at 12:57)
 

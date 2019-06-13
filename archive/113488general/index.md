@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Type theory of Lean](83571TypetheoryofLean.html) (25 messages, latest: Jun 13 2019 at 15:59)
+
 * [nat equalities](63354natequalities.html) (8 messages, latest: Jun 13 2019 at 14:37)
 
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (8 messages, latest: Jun 13 2019 at 09:40)
@@ -345,8 +347,6 @@ permalink: archive/113488general/index.html
 * [Univalence axiom](96233Univalenceaxiom.html) (124 messages, latest: Apr 26 2019 at 22:14)
 
 * [ArXiv and `listings`](59627ArXivandlistings.html) (4 messages, latest: Apr 25 2019 at 17:21)
-
-* [Type theory of Lean](83571TypetheoryofLean.html) (16 messages, latest: Apr 25 2019 at 15:50)
 
 * [Simp bug](12440Simpbug.html) (3 messages, latest: Apr 25 2019 at 14:43)
 

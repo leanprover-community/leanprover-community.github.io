@@ -160,5 +160,103 @@ then you should use Patrick's order, with the discrete topology at the bottom an
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/167789433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#167789433">Kevin Buzzard (Jun 10 2019 at 19:39)</a>:</h4>
 <p>But don't do it on the subfields as well ;-)</p>
 
+<a name="168055681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168055681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168055681">Patrick Massot (Jun 13 2019 at 15:28)</a>:</h4>
+<p>I tried using <code>order_dual</code> to change the partial order on topologies but still have a Galois insertion, so that I can list the complete lattice instance from <code>set (set a)</code>.  But then of course the <code>has_top</code> instance is still the wrong one. Is this the issue the <code>copy</code> is meant to solve? I don't understand at all this copy thing in <code>order.fiilter.basic</code>. The beginning of the story looks like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">set</span> <span class="n">filter</span> <span class="n">lattice</span> <span class="n">classical</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">prop_decidable</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+
+<span class="kn">namespace</span> <span class="n">topological_space</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- The least topology containing a collection of basic sets. -/</span>
+<span class="kn">inductive</span> <span class="n">generate_open</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">basic</span>  <span class="o">:</span> <span class="bp">∀</span><span class="n">s</span><span class="err">∈</span><span class="n">g</span><span class="o">,</span> <span class="n">generate_open</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="n">univ</span>   <span class="o">:</span> <span class="n">generate_open</span> <span class="n">univ</span>
+<span class="bp">|</span> <span class="n">inter</span>  <span class="o">:</span> <span class="bp">∀</span><span class="n">s</span> <span class="n">t</span><span class="o">,</span> <span class="n">generate_open</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">generate_open</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">generate_open</span> <span class="o">(</span><span class="n">s</span> <span class="err">∩</span> <span class="n">t</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sUnion</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">k</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span><span class="n">s</span><span class="err">∈</span><span class="n">k</span><span class="o">,</span> <span class="n">generate_open</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="n">generate_open</span> <span class="o">(</span><span class="err">⋃₀</span> <span class="n">k</span><span class="o">)</span>
+
+<span class="c">/-</span><span class="cm">- The smallest topological space containing the collection `g` of basic sets -/</span>
+<span class="n">def</span> <span class="n">generate_from</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">is_open</span>        <span class="o">:=</span> <span class="n">generate_open</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">is_open_univ</span>   <span class="o">:=</span> <span class="n">generate_open</span><span class="bp">.</span><span class="n">univ</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">is_open_inter</span>  <span class="o">:=</span> <span class="n">generate_open</span><span class="bp">.</span><span class="n">inter</span><span class="o">,</span>
+  <span class="n">is_open_sUnion</span> <span class="o">:=</span> <span class="n">generate_open</span><span class="bp">.</span><span class="n">sUnion</span>  <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">topological_space</span>
+
+<span class="kn">section</span> <span class="n">lattice</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="o">(</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span>          <span class="o">:=</span> <span class="bp">λ</span> <span class="n">t</span> <span class="n">s</span><span class="o">,</span> <span class="n">s</span><span class="bp">.</span><span class="n">is_open</span> <span class="bp">≤</span> <span class="n">t</span><span class="bp">.</span><span class="n">is_open</span><span class="o">,</span>
+  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="k">assume</span> <span class="n">t</span> <span class="n">s</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">topological_space_eq</span> <span class="err">$</span> <span class="n">le_antisymm</span> <span class="n">h₂</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">le_refl</span>     <span class="o">:=</span> <span class="k">assume</span> <span class="n">t</span><span class="o">,</span> <span class="n">le_refl</span> <span class="n">t</span><span class="bp">.</span><span class="n">is_open</span><span class="o">,</span>
+  <span class="n">le_trans</span>    <span class="o">:=</span> <span class="k">assume</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">le_trans</span> <span class="n">h₂</span> <span class="n">h₁</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">le_generate_from_iff_subset_is_open</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)}</span> <span class="o">{</span><span class="n">t</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">t</span> <span class="bp">≤</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_from</span> <span class="n">g</span> <span class="bp">↔</span> <span class="n">g</span> <span class="err">⊆</span> <span class="o">{</span><span class="n">s</span> <span class="bp">|</span> <span class="n">t</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">s</span><span class="o">}</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">ht</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">ht</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_open</span><span class="bp">.</span><span class="n">basic</span> <span class="n">s</span> <span class="n">hs</span><span class="o">)</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">hg</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">hs</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="k">assume</span> <span class="n">v</span> <span class="n">hv</span><span class="o">,</span> <span class="n">hg</span> <span class="n">hv</span><span class="o">)</span>
+    <span class="n">t</span><span class="bp">.</span><span class="n">is_open_univ</span> <span class="o">(</span><span class="k">assume</span> <span class="n">u</span> <span class="n">v</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">t</span><span class="bp">.</span><span class="n">is_open_inter</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="k">assume</span> <span class="n">k</span> <span class="bp">_</span><span class="o">,</span> <span class="n">t</span><span class="bp">.</span><span class="n">is_open_sUnion</span> <span class="n">k</span><span class="o">))</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">mk_of_closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="o">{</span><span class="n">u</span> <span class="bp">|</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_from</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">u</span><span class="o">}</span> <span class="bp">=</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">is_open</span>        <span class="o">:=</span> <span class="bp">λ</span><span class="n">u</span><span class="o">,</span> <span class="n">u</span> <span class="err">∈</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">is_open_univ</span>   <span class="o">:=</span> <span class="n">hs</span> <span class="bp">▸</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_open</span><span class="bp">.</span><span class="n">univ</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">is_open_inter</span>  <span class="o">:=</span> <span class="n">hs</span> <span class="bp">▸</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_open</span><span class="bp">.</span><span class="n">inter</span><span class="o">,</span>
+  <span class="n">is_open_sUnion</span> <span class="o">:=</span> <span class="n">hs</span> <span class="bp">▸</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_open</span><span class="bp">.</span><span class="n">sUnion</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">mk_of_closure_sets</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)}</span>
+  <span class="o">{</span><span class="n">hs</span> <span class="o">:</span> <span class="o">{</span><span class="n">u</span> <span class="bp">|</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_from</span> <span class="n">s</span><span class="o">)</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">u</span><span class="o">}</span> <span class="bp">=</span> <span class="n">s</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">mk_of_closure</span> <span class="n">s</span> <span class="n">hs</span> <span class="bp">=</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_from</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">topological_space_eq</span> <span class="n">hs</span><span class="bp">.</span><span class="n">symm</span>
+
+<span class="n">def</span> <span class="n">gi_generate_from</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">galois_insertion</span> <span class="bp">_</span> <span class="o">(</span><span class="n">order_dual</span> <span class="err">$</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span>
+    <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_from</span> <span class="o">(</span><span class="bp">λ</span><span class="n">t</span><span class="o">:</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">,</span> <span class="o">{</span><span class="n">s</span> <span class="bp">|</span> <span class="n">t</span><span class="bp">.</span><span class="n">is_open</span> <span class="n">s</span><span class="o">}):=</span>
+<span class="o">{</span> <span class="n">gc</span>        <span class="o">:=</span> <span class="k">assume</span> <span class="n">t</span> <span class="n">g</span><span class="o">,</span> <span class="n">le_generate_from_iff_subset_is_open</span><span class="o">,</span>
+  <span class="n">le_l_u</span>    <span class="o">:=</span> <span class="k">assume</span> <span class="n">t</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_open</span><span class="bp">.</span><span class="n">basic</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+  <span class="n">choice</span>    <span class="o">:=</span> <span class="bp">λ</span><span class="n">g</span> <span class="n">hg</span><span class="o">,</span> <span class="n">mk_of_closure</span> <span class="n">g</span>
+    <span class="o">(</span><span class="n">subset</span><span class="bp">.</span><span class="n">antisymm</span> <span class="n">hg</span> <span class="err">$</span>  <span class="n">le_generate_from_iff_subset_is_open</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">le_refl</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">choice_eq</span> <span class="o">:=</span> <span class="k">assume</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">mk_of_closure_sets</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="o">(</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">gi_generate_from</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="n">lift_complete_lattice</span>
+</pre></div>
+
+
+<p>This is accepted by Lean, but then I still have the discrete topology at top. I'm sorry this conversation is very sparse, but I'm at a conference, with very little Lean time.</p>
+
+<a name="168055999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168055999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168055999">Johan Commelin (Jun 13 2019 at 15:31)</a>:</h4>
+<p>Maybe the definition of the lattice structure on <code>opens X</code> helps? It uses Galois insertions, dual, and copy.</p>
+
+<a name="168056422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168056422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168056422">Patrick Massot (Jun 13 2019 at 15:35)</a>:</h4>
+<p>Did you write that?</p>
+
+<a name="168056428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168056428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168056428">Patrick Massot (Jun 13 2019 at 15:35)</a>:</h4>
+<p>Do you understand what's going on?</p>
+
+<a name="168056546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168056546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168056546">Patrick Massot (Jun 13 2019 at 15:36)</a>:</h4>
+<p>I don't understand why it seems to involve additional proofs in <code>copy</code> on top of the Galois insertion. How can there be any mathematical content?</p>
+
+<a name="168056555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168056555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168056555">Patrick Massot (Jun 13 2019 at 15:36)</a>:</h4>
+<p>I only want to reverse the order</p>
+
+<a name="168057911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Order%20on%20topologies/near/168057911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/78527Orderontopologies.html#168057911">Mario Carneiro (Jun 13 2019 at 15:51)</a>:</h4>
+<p>I think the galois insertion should be between <code>(topological_space α)</code> and <code>(order_dual $ set α)</code>, not <code>(order_dual $ topological_space α)</code> and <code>(set α)</code></p>
+
 
 {% endraw %}
