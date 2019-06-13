@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nat equalities](63354natequalities.html) (1 message, latest: Jun 13 2019 at 12:06)
+* [nat equalities](63354natequalities.html) (3 messages, latest: Jun 13 2019 at 13:30)
 
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (8 messages, latest: Jun 13 2019 at 09:40)
 
