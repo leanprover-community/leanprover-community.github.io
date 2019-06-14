@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactic question](62193tacticquestion.html) (14 messages, latest: Jun 14 2019 at 16:45)
+* [ring of injective](46407ringofinjective.html) (26 messages, latest: Jun 14 2019 at 17:56)
 
-* [ring of injective](46407ringofinjective.html) (8 messages, latest: Jun 14 2019 at 16:41)
+* [computability](27079computability.html) (4 messages, latest: Jun 14 2019 at 17:41)
+
+* [ulift instances](91501uliftinstances.html) (13 messages, latest: Jun 14 2019 at 17:28)
+
+* [tactic question](62193tacticquestion.html) (15 messages, latest: Jun 14 2019 at 17:17)
 
 * [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
-
-* [ulift instances](91501uliftinstances.html) (7 messages, latest: Jun 14 2019 at 15:47)
 
 * [weird typechecking error](70244weirdtypecheckingerror.html) (5 messages, latest: Jun 14 2019 at 15:34)
 

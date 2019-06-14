@@ -1,0 +1,66 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/27079computability.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html">computability</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168155405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168155405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168155405">Kevin Buzzard (Jun 14 2019 at 17:34)</a>:</h4>
+<p>It's about time I understood what Lean means by computability.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="c1">-- lean forces me to write noncomputable</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">g</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">y</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">hf</span><span class="bp">.</span><span class="mi">2</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">choose</span> <span class="n">x</span> <span class="n">hx</span> <span class="kn">using</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">x</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">g</span> <span class="c1">-- it&#39;s supposed to be noncomputable but it looks like a computer program to me</span>
+
+<span class="c1">-- Here I don&#39;t need to write noncomputable</span>
+<span class="kn">theorem</span> <span class="n">g_property</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">bijective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">f</span> <span class="n">hf</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">hf</span><span class="bp">.</span><span class="mi">2</span> <span class="n">y</span><span class="o">)</span>
+<span class="kn">end</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="n">g_property</span> <span class="c1">-- classical.choice</span>
+<span class="c1">-- I used the axiom of choice but I&#39;m computable anyway.</span>
+
+<span class="c1">-- and this is computable</span>
+<span class="n">def</span> <span class="n">lem</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">P</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">em</span> <span class="n">P</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">axioms</span> <span class="n">lem</span> <span class="c1">-- all the axioms</span>
+</pre></div>
+
+
+<p>In the definition of <code>g</code>, I am forced to mark it as noncomputable, but what does that mean? I thought proofs were programs. Is my definition of <code>g </code>not a program? My proof of g_property uses the axiom of choice according to <code>#print axioms</code> -- and yet it's computable anyway (in the sense that I was not asked to mark it as noncomputable). And I was not asked to mark my definition of <code>lem</code> as computable, but that's a definition which apparently uses the axiom of choice too. What is going on? It all still looks totally random to me but I think I might understand things enough to actually begin to see what this <code>noncomputable</code> thing which I'm randomly asked to put in front of definitions and possibly theorems (does that happen?) actually means, if someone tries to explain it to me...</p>
+
+<a name="168155754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168155754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168155754">Kevin Buzzard (Jun 14 2019 at 17:38)</a>:</h4>
+<blockquote>
+<p>Lean’s standard library defines an additional axiom, propositional extensionality, and a quotient construction which in turn implies the principle of function extensionality. These extensions are used, for example, to develop theories of sets and finite sets. We will see below that using these theorems can block evaluation in Lean’s kernel, so that closed terms of type ℕ no longer evaluate to numerals. But Lean erases types and propositional information when compiling definitions to bytecode for its virtual machine evaluator, and since these axioms only add new propositions, they are compatible with that computational interpretation. Even computationally inclined users may wish to use the classical law of the excluded middle to reason about computation. This also blocks evaluation in the kernel, but it is compatible with compilation to bytecode.</p>
+</blockquote>
+<p>This is from TPIL and it's one of very few parts of the book which I still do not understand. But I don't understand this paragraph at all. I don't know what bytecode is or the virtual machine. I need to be told something easier first.</p>
+
+<a name="168155900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168155900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168155900">Kevin Buzzard (Jun 14 2019 at 17:40)</a>:</h4>
+<p>What I do understand is that there are conjectures I know such as Waring's problem, where there is a number which I regard as "well-defined", but for which no mathematician knows an algorithm for working them out. I can see that these aren't "computable". I guess I don't see why the other things are computable.</p>
+
+<a name="168155976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168155976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168155976">Kevin Buzzard (Jun 14 2019 at 17:41)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Waring%27s_problem" target="_blank" title="https://en.wikipedia.org/wiki/Waring%27s_problem">https://en.wikipedia.org/wiki/Waring%27s_problem</a></p>
+<p>It's known that <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>4</mn><mo>≤</mo><mi>G</mi><mo>(</mo><mn>3</mn><mo>)</mo><mo>≤</mo><mn>7</mn></mrow><annotation encoding="application/x-tex">4\leq G(3)\leq 7</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="strut" style="height:0.75em;"></span><span class="strut bottom" style="height:1em;vertical-align:-0.25em;"></span><span class="base"><span class="mord mathrm">4</span><span class="mrel">≤</span><span class="mord mathit">G</span><span class="mopen">(</span><span class="mord mathrm">3</span><span class="mclose">)</span><span class="mrel">≤</span><span class="mord mathrm">7</span></span></span></span>.</p>
+
+
+{% endraw %}
