@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nat equalities](63354natequalities.html) (16 messages, latest: Jun 13 2019 at 23:35)
+
 * [Lean segfaulting](48154Leansegfaulting.html) (19 messages, latest: Jun 13 2019 at 19:21)
 
 * [Type theory of Lean](83571TypetheoryofLean.html) (25 messages, latest: Jun 13 2019 at 15:59)
-
-* [nat equalities](63354natequalities.html) (8 messages, latest: Jun 13 2019 at 14:37)
 
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (8 messages, latest: Jun 13 2019 at 09:40)
 
