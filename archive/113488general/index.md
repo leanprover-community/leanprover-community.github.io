@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [leandoc](38167leandoc.html) (87 messages, latest: Jun 14 2019 at 03:54)
+
 * [nat equalities](63354natequalities.html) (16 messages, latest: Jun 13 2019 at 23:35)
 
 * [Lean segfaulting](48154Leansegfaulting.html) (19 messages, latest: Jun 13 2019 at 19:21)
@@ -301,8 +303,6 @@ permalink: archive/113488general/index.html
 * [mono: asserting side conditions](17251monoassertingsideconditions.html) (6 messages, latest: May 06 2019 at 22:16)
 
 * [olean-rs](28098oleanrs.html) (47 messages, latest: May 06 2019 at 21:11)
-
-* [leandoc](38167leandoc.html) (86 messages, latest: May 05 2019 at 21:29)
 
 * [3.4.2 tag](75058342tag.html) (1 message, latest: May 05 2019 at 18:59)
 
