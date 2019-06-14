@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ring of injective](46407ringofinjective.html) (30 messages, latest: Jun 14 2019 at 19:31)
+* [ring of injective](46407ringofinjective.html) (35 messages, latest: Jun 14 2019 at 20:58)
 
 * [computability](27079computability.html) (7 messages, latest: Jun 14 2019 at 18:04)
 
