@@ -35,5 +35,30 @@ permalink: archive/113488general/62193tacticquestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168136472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168136472">Johan Commelin (Jun 14 2019 at 13:51)</a>:</h4>
 <p>Otherwise <code>rcases</code> might generate the wrong name.</p>
 
+<a name="168137556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168137556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168137556">Kevin Kappelmann (Jun 14 2019 at 14:04)</a>:</h4>
+<p>I am a bit confused, by the way, about the <code>with rfl</code> part. I thought you'd need to write something like<br>
+<code>repeat {cases h}; rfl</code></p>
+
+<a name="168137617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168137617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168137617">Neil Strickland (Jun 14 2019 at 14:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  Yes, that was the problem, thanks</p>
+
+<a name="168137958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168137958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168137958">Neil Strickland (Jun 14 2019 at 14:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span>  If <code>h : i = j</code> then <code>rcases h with rfl</code> will "specialise to the case where <code>h</code> is <code>rfl : i = i</code>" and so will remove change <code>j</code> to <code>i</code> in all hypotheses and in the goal.  Similarly, if <code>h : i = j ∨ i = k</code> then  <code>rcases h with rfl | rfl</code> will give two new goals, one will all <code>j</code>'s changed to <code>i</code>, and one with all <code>k</code>'s changed to <code>i</code>.</p>
+
+<a name="168139042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168139042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168139042">Kevin Kappelmann (Jun 14 2019 at 14:22)</a>:</h4>
+<p>Ohhh, alright - thanks for explaining! :)</p>
+
+<a name="168139335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168139335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168139335">Wojciech Nawrocki (Jun 14 2019 at 14:26)</a>:</h4>
+<p>Hello! This is a question about tactics also - is <code>ring</code> the only tactic for resolving equalities in an algebraic structure? Would something similar for other structures be considered useful or is <code>simp</code> good enough?</p>
+
+<a name="168139879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168139879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168139879">Patrick Massot (Jun 14 2019 at 14:32)</a>:</h4>
+<p>There is also <code>abel</code>, and any other one would be very useful</p>
+
 
 {% endraw %}
