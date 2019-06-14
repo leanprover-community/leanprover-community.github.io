@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/62193tacticquestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html">tactic question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168134039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168134039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168134039">Neil Strickland (Jun 14 2019 at 13:19)</a>:</h4>
+<p>If I have <code>h : i = j ∨ k = l</code>, I might do <code>rcases h with rfl | rfl</code>.  If I have <code>h : i = j ∨ k = l  ∨ p = q</code>, I might do <code>rcases h with rfl | rfl | rfl</code>.  Now suppose I want to handle a large number of goals in parallel, each of which has an <code>h</code> as before, but with varying numbers of equations or'd together.  What is a tidy way to apply <code>rcases</code> with the right number of <code>rfl</code>'s in each goal?</p>
+
+<a name="168134972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168134972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168134972">Patrick Massot (Jun 14 2019 at 13:31)</a>:</h4>
+<p>Indeed it would be nice to have a more automatic <code>rcases</code></p>
+
+<a name="168135925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168135925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168135925">Kevin Kappelmann (Jun 14 2019 at 13:44)</a>:</h4>
+<p>Maybe use the <code>repeat</code> combinator?</p>
+
+<a name="168136437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168136437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168136437">Neil Strickland (Jun 14 2019 at 13:50)</a>:</h4>
+<p>I tried <code>repeat { rcases h with rfl | _ }</code> but that did not work.  Perhaps some other variant would work, but I could not find one.</p>
+
+<a name="168136463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168136463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168136463">Johan Commelin (Jun 14 2019 at 13:51)</a>:</h4>
+<p>You might have to explicitly call the second argument <code>h</code>, instead of <code>_</code>.</p>
+
+<a name="168136472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168136472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168136472">Johan Commelin (Jun 14 2019 at 13:51)</a>:</h4>
+<p>Otherwise <code>rcases</code> might generate the wrong name.</p>
+
+
+{% endraw %}
