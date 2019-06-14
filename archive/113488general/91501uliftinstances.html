@@ -51,5 +51,30 @@ permalink: archive/113488general/91501uliftinstances.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168146716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168146716">Kevin Buzzard (Jun 14 2019 at 15:47)</a>:</h4>
 <p>And in fact IIRC I spent a whole lot of time wrestling with a lemma which showed that any valuation on a ring taking values in a group in some random universe was equivalent to a valuation taking valuations in the same universe as the ring.</p>
 
+<a name="168153640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168153640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168153640">Chris Hughes (Jun 14 2019 at 17:10)</a>:</h4>
+<p>Would it have been easier to not use universes?</p>
+
+<a name="168154316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154316">Kevin Buzzard (Jun 14 2019 at 17:19)</a>:</h4>
+<p>If we had made a blanket decision to only use one universe, <em>or</em> if we had decided to ignore Mario, then we would have had to write strictly less code. We had some structure <code>valuation (R : Type u)</code> which had a field <code>Gamma : Type v</code> except that Mario said that we'd run into trouble if we did it like that, so we went for <code>Gamma : Type u</code> and then, at his suggestion, spent some time writing code which given a valuation on R (type u) taking values in Gamma (Type v) produced an equivalent valuation taking values in some other Gamma' (Type u). The type <code>Spv R</code> was equivalence classes of valuations, so doing it all this way we were truly universe-polymorphic. However we never needed this extra polymorphism power.</p>
+<p>What I am however unclear about is exactly how much was saved. Because I think that even if we'd stuck to Gamma : Type u we would have had issues with equivalence relations on things that "weren't sets" (in my model of this stuff) and might well have had to write some sort of code to fix this anyway (assuming that we wanted everything to live in Type u)</p>
+
+<a name="168154581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154581">Chris Hughes (Jun 14 2019 at 17:23)</a>:</h4>
+<p>But <code>valuation (R : Type u) : Type (u+1)</code>, so to actually not use universes you'd need to do more than stick to <code>Gamma : Type u</code></p>
+
+<a name="168154675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154675">Kevin Buzzard (Jun 14 2019 at 17:24)</a>:</h4>
+<p>Right but that just means that the class of all valuations isn't a set. I'm not bothered by that. I know what is a set and what is a class, and I don't need anything else. I won't be putting anything classy into a setty hole.</p>
+
+<a name="168154731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154731">Kevin Buzzard (Jun 14 2019 at 17:25)</a>:</h4>
+<p>My general point is that I am not interested in what computer scientists think mathematics is, I am interested in what mathematicians think mathematics is, and they know how to do everything with just one universe.</p>
+
+<a name="168154977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ulift%20instances/near/168154977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/91501uliftinstances.html#168154977">Chris Hughes (Jun 14 2019 at 17:28)</a>:</h4>
+<p>I don't know enough ZFC to be sure exactly what you can do with classes, but I think I remember a set of the form <code>{x | ∃ Γ : Type, p Γ x}</code>, which I don't think you can do in ZFC.</p>
+
 
 {% endraw %}
