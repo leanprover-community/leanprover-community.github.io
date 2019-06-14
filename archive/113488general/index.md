@@ -10,15 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [weird typechecking error](70244weirdtypecheckingerror.html) (1 message, latest: Jun 14 2019 at 14:49)
+* [ulift instances](91501uliftinstances.html) (7 messages, latest: Jun 14 2019 at 15:47)
 
-* [ulift instances](91501uliftinstances.html) (2 messages, latest: Jun 14 2019 at 14:42)
+* [ring of injective](46407ringofinjective.html) (6 messages, latest: Jun 14 2019 at 15:38)
 
-* [tactic question](62193tacticquestion.html) (12 messages, latest: Jun 14 2019 at 14:32)
+* [weird typechecking error](70244weirdtypecheckingerror.html) (5 messages, latest: Jun 14 2019 at 15:34)
+
+* [Lean in the wild](43625Leaninthewild.html) (126 messages, latest: Jun 14 2019 at 15:29)
+
+* [tactic question](62193tacticquestion.html) (13 messages, latest: Jun 14 2019 at 15:03)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (48 messages, latest: Jun 14 2019 at 13:09)
-
-* [ring of injective](46407ringofinjective.html) (5 messages, latest: Jun 14 2019 at 09:14)
 
 * [nat equalities](63354natequalities.html) (17 messages, latest: Jun 14 2019 at 05:03)
 
@@ -29,8 +31,6 @@ permalink: archive/113488general/index.html
 * [Type theory of Lean](83571TypetheoryofLean.html) (25 messages, latest: Jun 13 2019 at 15:59)
 
 * [noob question about pexpr](29841noobquestionaboutpexpr.html) (8 messages, latest: Jun 13 2019 at 09:40)
-
-* [Lean in the wild](43625Leaninthewild.html) (125 messages, latest: Jun 13 2019 at 09:32)
 
 * [Banff workshop proposal?](65930Banffworkshopproposal.html) (9 messages, latest: Jun 13 2019 at 08:46)
 
