@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Sequent calculus](39266Sequentcalculus.html) (2 messages, latest: Jun 13 2019 at 19:41)
+* [Directed/filtered categories](49705Directedfilteredcategories.html) (3 messages, latest: Jun 13 2019 at 23:12)
 
-* [Directed/filtered categories](49705Directedfilteredcategories.html) (2 messages, latest: Jun 13 2019 at 19:18)
+* [Sequent calculus](39266Sequentcalculus.html) (2 messages, latest: Jun 13 2019 at 19:41)
 
 * [What is a motive?](37413Whatisamotive.html) (32 messages, latest: Jun 13 2019 at 17:32)
 
