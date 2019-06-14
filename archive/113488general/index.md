@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [leandoc](38167leandoc.html) (87 messages, latest: Jun 14 2019 at 03:54)
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (9 messages, latest: Jun 14 2019 at 06:00)
 
-* [nat equalities](63354natequalities.html) (16 messages, latest: Jun 13 2019 at 23:35)
+* [nat equalities](63354natequalities.html) (17 messages, latest: Jun 14 2019 at 05:03)
+
+* [leandoc](38167leandoc.html) (87 messages, latest: Jun 14 2019 at 03:54)
 
 * [Lean segfaulting](48154Leansegfaulting.html) (19 messages, latest: Jun 13 2019 at 19:21)
 
