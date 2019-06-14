@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (46 messages, latest: Jun 14 2019 at 12:28)
+* [tactic question](62193tacticquestion.html) (6 messages, latest: Jun 14 2019 at 13:51)
+
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (48 messages, latest: Jun 14 2019 at 13:09)
 
 * [ring of injective](46407ringofinjective.html) (5 messages, latest: Jun 14 2019 at 09:14)
 
