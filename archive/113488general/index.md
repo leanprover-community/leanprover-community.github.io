@@ -10,15 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactic question](62193tacticquestion.html) (14 messages, latest: Jun 14 2019 at 16:45)
+
+* [ring of injective](46407ringofinjective.html) (8 messages, latest: Jun 14 2019 at 16:41)
+
+* [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
+
 * [ulift instances](91501uliftinstances.html) (7 messages, latest: Jun 14 2019 at 15:47)
 
-* [ring of injective](46407ringofinjective.html) (6 messages, latest: Jun 14 2019 at 15:38)
-
 * [weird typechecking error](70244weirdtypecheckingerror.html) (5 messages, latest: Jun 14 2019 at 15:34)
-
-* [Lean in the wild](43625Leaninthewild.html) (126 messages, latest: Jun 14 2019 at 15:29)
-
-* [tactic question](62193tacticquestion.html) (13 messages, latest: Jun 14 2019 at 15:03)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (48 messages, latest: Jun 14 2019 at 13:09)
 
