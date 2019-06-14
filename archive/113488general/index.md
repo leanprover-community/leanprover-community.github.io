@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactic question](62193tacticquestion.html) (6 messages, latest: Jun 14 2019 at 13:51)
+* [weird typechecking error](70244weirdtypecheckingerror.html) (1 message, latest: Jun 14 2019 at 14:49)
+
+* [ulift instances](91501uliftinstances.html) (2 messages, latest: Jun 14 2019 at 14:42)
+
+* [tactic question](62193tacticquestion.html) (12 messages, latest: Jun 14 2019 at 14:32)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (48 messages, latest: Jun 14 2019 at 13:09)
 
