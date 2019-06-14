@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ring of injective](46407ringofinjective.html) (26 messages, latest: Jun 14 2019 at 17:56)
+* [ring of injective](46407ringofinjective.html) (27 messages, latest: Jun 14 2019 at 18:21)
 
-* [computability](27079computability.html) (4 messages, latest: Jun 14 2019 at 17:41)
+* [computability](27079computability.html) (7 messages, latest: Jun 14 2019 at 18:04)
 
 * [ulift instances](91501uliftinstances.html) (13 messages, latest: Jun 14 2019 at 17:28)
 
