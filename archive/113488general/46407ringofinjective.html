@@ -227,5 +227,21 @@ permalink: archive/113488general/46407ringofinjective.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="168191443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring%20of%20injective/near/168191443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46407ringofinjective.html#168191443">Jesse Michael Han (Jun 15 2019 at 04:48)</a>:</h4>
+<blockquote>
+<p>I never could understand how <code>erw</code> is different from <code>rw</code>.</p>
+</blockquote>
+<p>The source is quite transparent about this:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">rewrite</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">rw_rules</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">rewrite_cfg</span> <span class="o">:=</span> <span class="o">{})</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">propagate_tags</span> <span class="o">(</span><span class="n">rw_core</span> <span class="n">q</span> <span class="n">l</span> <span class="n">cfg</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">erewrite</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">rw_rules</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">rewrite_cfg</span> <span class="o">:=</span> <span class="o">{</span><span class="n">md</span> <span class="o">:=</span> <span class="n">semireducible</span><span class="o">})</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">propagate_tags</span> <span class="o">(</span><span class="n">rw_core</span> <span class="n">q</span> <span class="n">l</span> <span class="n">cfg</span><span class="o">)</span>
+</pre></div>
+
+
+<p>The difference is that <code>rewrite_core</code> is allowed to peek into <code>semireducible</code> definitions, where <code>reducible</code> is the default. This means you need to do less explicit unfolding for your rewrites to succeed, but because more definitions are exposed and unification is expensive, <code>erw</code> can be an order of magnitude slower.</p>
+
 
 {% endraw %}
