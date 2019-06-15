@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computability](27079computability.html) (30 messages, latest: Jun 15 2019 at 08:59)
+* [computability](27079computability.html) (86 messages, latest: Jun 15 2019 at 09:50)
 
 * [unicode](95720unicode.html) (8 messages, latest: Jun 15 2019 at 08:31)
 
