@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Lean infering wrong induction hypothesis](64989Leaninferingwronginductionhypothesis.html) (16 messages, latest: Jun 15 2019 at 19:31)
+* [Lean infering wrong induction hypothesis](64989Leaninferingwronginductionhypothesis.html) (17 messages, latest: Jun 15 2019 at 20:02)
 
 * [products of sets](67209productsofsets.html) (42 messages, latest: Jun 15 2019 at 14:14)
 
