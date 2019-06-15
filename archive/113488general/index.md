@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unicode](95720unicode.html) (6 messages, latest: Jun 15 2019 at 05:36)
+
 * [ring of injective](46407ringofinjective.html) (36 messages, latest: Jun 15 2019 at 04:48)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (49 messages, latest: Jun 15 2019 at 00:06)
@@ -3397,8 +3399,6 @@ permalink: archive/113488general/index.html
 * [Complete lattice redundant parameter](09702Completelatticeredundantparameter.html) (2 messages, latest: Mar 31 2018 at 07:15)
 
 * [mathlib nightly](57153mathlibnightly.html) (8 messages, latest: Mar 31 2018 at 06:35)
-
-* [unicode](95720unicode.html) (3 messages, latest: Mar 31 2018 at 05:11)
 
 * [lean travis problems](39550leantravisproblems.html) (40 messages, latest: Mar 30 2018 at 22:48)
 
