@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computability](27079computability.html) (196 messages, latest: Jun 15 2019 at 15:30)
+* [computability](27079computability.html) (197 messages, latest: Jun 15 2019 at 17:27)
+
+* [unicode](95720unicode.html) (10 messages, latest: Jun 15 2019 at 17:21)
 
 * [nat equalities](63354natequalities.html) (22 messages, latest: Jun 15 2019 at 14:52)
-
-* [unicode](95720unicode.html) (8 messages, latest: Jun 15 2019 at 08:31)
 
 * [ring of injective](46407ringofinjective.html) (36 messages, latest: Jun 15 2019 at 04:48)
 
