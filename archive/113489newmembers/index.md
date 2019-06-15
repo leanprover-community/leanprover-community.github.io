@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [products of sets](67209productsofsets.html) (8 messages, latest: Jun 15 2019 at 10:18)
+
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (3 messages, latest: Jun 13 2019 at 23:12)
 
 * [Sequent calculus](39266Sequentcalculus.html) (2 messages, latest: Jun 13 2019 at 19:41)
