@@ -105,5 +105,25 @@ could not resolve import: tactic.omega
 
 <p>Maybe that tripped up <code>omega</code>?</p>
 
+<a name="168210301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20equalities/near/168210301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63354natequalities.html#168210301">Seul Baek (Jun 15 2019 at 14:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  I think so. Remember that <code>omega</code> handles goals in presburger arithmetic, which has a pretty restricted language. You can have <code>nat</code>/<code>int</code> constants and variables, addition, multiplication with constant, comparisons, plus a bit of syntactic sugar like subtraction which is eliminated during processing. It wouldn't know what to make of <code>weird_poly1</code> or <code>weird_poly2</code> if it contains any symbols other than these.</p>
+
+<a name="168210587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20equalities/near/168210587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63354natequalities.html#168210587">Johan Commelin (Jun 15 2019 at 14:48)</a>:</h4>
+<p>Maybe <code>omega</code> could be opportunistic, and clear assumptions that fall outside the language, before reverting assumptions on which the goal depends...</p>
+
+<a name="168210589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20equalities/near/168210589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63354natequalities.html#168210589">Johan Commelin (Jun 15 2019 at 14:48)</a>:</h4>
+<p>But I'm also fine with manual mode.</p>
+
+<a name="168210594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20equalities/near/168210594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63354natequalities.html#168210594">Johan Commelin (Jun 15 2019 at 14:48)</a>:</h4>
+<p>As long as I know how to use it <span aria-label="wink" class="emoji emoji-1f609" role="img" title="wink">:wink:</span></p>
+
+<a name="168210752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat%20equalities/near/168210752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63354natequalities.html#168210752">Seul Baek (Jun 15 2019 at 14:52)</a>:</h4>
+<p>Reviewing the code, I think I know what the problem is. The preprocessor for <code>omega</code> isn't very careful when choosing which hypotheses to revert - it just checks that its domain (e.g. <code>int</code> or <code>nat</code>) matches the domain of the goal. So it's possible that an hypothesis has the right domain but is not actually in the language of presburger arithmetic, and causes reification to fail.</p>
+
 
 {% endraw %}
