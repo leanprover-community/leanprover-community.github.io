@@ -944,5 +944,312 @@ permalink: archive/113488general/27079computability.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168208820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168208820">Mario Carneiro (Jun 15 2019 at 13:58)</a>:</h4>
 <p>and it has line numbers because there is a goto</p>
 
+<a name="168208913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168208913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168208913">Kevin Buzzard (Jun 15 2019 at 14:01)</a>:</h4>
+<p>\me remembers the old days</p>
+
+<a name="168208917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168208917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168208917">Kevin Buzzard (Jun 15 2019 at 14:01)</a>:</h4>
+<p>darn it, I'm sure some variant of that works</p>
+
+<a name="168208962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168208962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168208962">Kenny Lau (Jun 15 2019 at 14:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">compiler</span><span class="bp">.</span><span class="n">optimize_bytecode</span> <span class="n">true</span>
+
+<span class="kn">inductive</span> <span class="n">A</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">:</span> <span class="n">A</span>
+<span class="bp">|</span> <span class="n">b</span> <span class="o">:</span> <span class="n">A</span>
+
+<span class="kn">open</span> <span class="n">A</span>
+
+<span class="n">def</span> <span class="n">D1</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">[]</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  D1 0</span>
+<span class="cm">0: scnstr #0</span>
+<span class="cm">1: ret</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">D2</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  D2 0</span>
+<span class="cm">0: scnstr #0</span>
+<span class="cm">1: scnstr #0</span>
+<span class="cm">2: cnstr #1 2</span>
+<span class="cm">3: ret</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">D3</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">[</span><span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="o">]</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  D3 0</span>
+<span class="cm">0: scnstr #1</span>
+<span class="cm">1: scnstr #0</span>
+<span class="cm">2: scnstr #0</span>
+<span class="cm">3: cnstr #1 2</span>
+<span class="cm">4: cnstr #1 2</span>
+<span class="cm">5: ret</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">D4</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">[</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="o">]</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  D4 0</span>
+<span class="cm">0: scnstr #0</span>
+<span class="cm">1: scnstr #1</span>
+<span class="cm">2: scnstr #0</span>
+<span class="cm">3: scnstr #0</span>
+<span class="cm">4: cnstr #1 2</span>
+<span class="cm">5: cnstr #1 2</span>
+<span class="cm">6: cnstr #1 2</span>
+<span class="cm">7: ret</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="168208977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168208977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168208977">Kevin Buzzard (Jun 15 2019 at 14:03)</a>:</h4>
+<p>That makes it much clearer.</p>
+
+<a name="168208982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168208982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168208982">Kevin Buzzard (Jun 15 2019 at 14:03)</a>:</h4>
+<p>oh wait actually it does make it clearer.</p>
+
+<a name="168209024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209024">Kevin Buzzard (Jun 15 2019 at 14:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">D</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span> <span class="o">:=</span> <span class="o">[</span><span class="n">b</span><span class="o">,</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="o">]</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  D 0</span>
+<span class="cm">0: scnstr #1</span>
+<span class="cm">1: scnstr #1</span>
+<span class="cm">2: scnstr #0</span>
+<span class="cm">3: scnstr #0</span>
+<span class="cm">4: cnstr #1 2</span>
+<span class="cm">5: cnstr #1 2</span>
+<span class="cm">6: cnstr #1 2</span>
+<span class="cm">7: ret</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>The code is backwards or something.</p>
+
+<a name="168209025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209025">Mario Carneiro (Jun 15 2019 at 14:04)</a>:</h4>
+<p>It works like a stack machine. Here's what the stack looks like, pushing items from the right:</p>
+<div class="codehilite"><pre><span></span>   []
+0: [#0]
+1: [#0, #1]
+2: [#0, #1, #0]
+3: [#0, #1, #0, #0]
+4: [#0, #1, #1 #0 #0]
+5: [#0, #1 #1 (#1 #0 #0)]
+6: [#1 #0 (#1 #1 (#1 #0 #0))]
+</pre></div>
+
+
+<p>the final line returns the value on the stack, which is <code>#1 #0 (#1 #1 (#1 #0 #0))</code></p>
+
+<a name="168209035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209035">Mario Carneiro (Jun 15 2019 at 14:05)</a>:</h4>
+<p>if you squint, you can read <code>#0</code> and <code>#1</code> as the constructors of both list and A, and see <code>cons a (cons b (cons a nil))</code></p>
+
+<a name="168209039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209039">Kevin Buzzard (Jun 15 2019 at 14:05)</a>:</h4>
+<p>aah of course I'd forgotten about <code>list.nil</code></p>
+
+<a name="168209153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209153">Kevin Buzzard (Jun 15 2019 at 14:09)</a>:</h4>
+<p>So <code>cons</code> and <code>list</code> and stuff are all being turned into bytecode. And the point is that <code>choice</code> cannot be turned into bytecode. So here is a proof</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">g</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">hf</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">g_prop</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">hf</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">has_right_inverse_of_surjective</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">X</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">g</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">g</span> <span class="n">hf</span><span class="o">,</span> <span class="n">g_prop</span> <span class="n">hf</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>which cannot be made into a program and which is hence a counterexample to a completely naive interpretation of the Curry-Howard correspondence that "proofs equal programs".</p>
+
+<a name="168209268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209268">Kenny Lau (Jun 15 2019 at 14:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">compiler</span><span class="bp">.</span><span class="n">optimize_bytecode</span> <span class="n">true</span>
+
+<span class="kn">inductive</span> <span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">a</span> <span class="bp">|</span> <span class="n">b</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">E</span> <span class="o">:</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">.</span><span class="n">b</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">b</span> <span class="n">A</span><span class="bp">.</span><span class="n">a</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">F</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">G</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="mi">2</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">sandbox3.lean:5:0: information trace output</span>
+<span class="cm">[compiler.optimize_bytecode]  E 0</span>
+<span class="cm">0: scnstr #0</span>
+<span class="cm">1: cnstr #1 1</span>
+<span class="cm">2: cnstr #1 1</span>
+<span class="cm">3: ret</span>
+
+<span class="cm">sandbox3.lean:6:0: information trace output</span>
+<span class="cm">[compiler.optimize_bytecode]  F 0</span>
+<span class="cm">0: scnstr #1</span>
+<span class="cm">1: cfun nat.succ</span>
+<span class="cm">2: ret</span>
+
+<span class="cm">sandbox3.lean:7:0: information trace output</span>
+<span class="cm">[compiler.optimize_bytecode]  G 0</span>
+<span class="cm">0: scnstr #2</span>
+<span class="cm">1: ret</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="168209270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209270">Kenny Lau (Jun 15 2019 at 14:12)</a>:</h4>
+<p>why are F and G different?</p>
+
+<a name="168209280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209280">Mario Carneiro (Jun 15 2019 at 14:13)</a>:</h4>
+<p>for some reason <code>nat.succ</code> was not optimized away in <code>F</code></p>
+
+<a name="168209294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209294">Kenny Lau (Jun 15 2019 at 14:13)</a>:</h4>
+<p>why are all of them different?</p>
+
+<a name="168209314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209314">Mario Carneiro (Jun 15 2019 at 14:14)</a>:</h4>
+<p>Obviously the VM does not represent natural numbers as unary, so <code>succ (succ zero)</code> and <code>2</code> are not the same thing</p>
+
+<a name="168209349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209349">Mario Carneiro (Jun 15 2019 at 14:14)</a>:</h4>
+<p><code>2</code> is stored as a 2 in memory</p>
+
+<a name="168209354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209354">Kevin Buzzard (Jun 15 2019 at 14:14)</a>:</h4>
+<p>This <code>trace.compiler.optimize_bytecode</code> should win <code>set_option</code> option of the week.</p>
+
+<a name="168209357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209357">Mario Carneiro (Jun 15 2019 at 14:14)</a>:</h4>
+<p>lol</p>
+
+<a name="168209369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209369">Johan Commelin (Jun 15 2019 at 14:15)</a>:</h4>
+<blockquote>
+<p>\me remembers the old days</p>
+</blockquote>
+<p>In the old days it was <code>/me</code>...</p>
+
+<a name="168209373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209373">Mario Carneiro (Jun 15 2019 at 14:15)</a>:</h4>
+<p>/me thinks it still is</p>
+
+<a name="168209378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209378">Kenny Lau (Jun 15 2019 at 14:15)</a>:</h4>
+<p>why is E and F different at all?</p>
+
+<a name="168209379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209379">Kevin Buzzard (Jun 15 2019 at 14:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">N</span> <span class="o">:=</span> <span class="mi">100000000</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  N 0</span>
+<span class="cm">0: scnstr #100000000</span>
+<span class="cm">1: ret</span>
+<span class="cm">-/</span>
+<span class="n">def</span> <span class="n">M</span> <span class="o">:=</span> <span class="mi">10000000000</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">[compiler.optimize_bytecode]  M 0</span>
+<span class="cm">0: num 10000000000</span>
+<span class="cm">1: ret</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="168209428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209428">Mario Carneiro (Jun 15 2019 at 14:16)</a>:</h4>
+<p><code>num</code> is for really big numbers that don't fit in the size of a small nat</p>
+
+<a name="168209433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209433">Mario Carneiro (Jun 15 2019 at 14:16)</a>:</h4>
+<p>which is something like 2^30</p>
+
+<a name="168209434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209434">Johan Commelin (Jun 15 2019 at 14:16)</a>:</h4>
+<p>/me thinks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is from the old days...</p>
+
+<a name="168209443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209443">Mario Carneiro (Jun 15 2019 at 14:17)</a>:</h4>
+<p>/me doesn't know how to use status messages properly</p>
+
+<a name="168209446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209446">Johan Commelin (Jun 15 2019 at 14:18)</a>:</h4>
+<p>In the old days one used <code>.plan</code></p>
+
+<a name="168209489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209489">Kevin Buzzard (Jun 15 2019 at 14:18)</a>:</h4>
+<p><code>#help options</code></p>
+<p>So much still to learn!</p>
+
+<a name="168209494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209494">Kevin Buzzard (Jun 15 2019 at 14:18)</a>:</h4>
+<p>I remember disabling finger by creating a pipe called .plan somehow.</p>
+
+<a name="168209502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209502">Kevin Buzzard (Jun 15 2019 at 14:19)</a>:</h4>
+<p>In the old days you could see if your friend had read your email to them by just fingering them.</p>
+
+<a name="168209507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209507">Mario Carneiro (Jun 15 2019 at 14:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> E and F are different because lean has special support for the <code>nat</code> inductive type</p>
+
+<a name="168209556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209556">Kevin Buzzard (Jun 15 2019 at 14:20)</a>:</h4>
+<p>Can we see the state of the stack machine easily?</p>
+
+<a name="168209560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209560">Mario Carneiro (Jun 15 2019 at 14:20)</a>:</h4>
+<p>One of the ideas in 3.5c is to make such overrides more obvious</p>
+
+<a name="168209566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209566">Kevin Buzzard (Jun 15 2019 at 14:20)</a>:</h4>
+<p>[I mean, in the middle of some calculation]</p>
+
+<a name="168209568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209568">Mario Carneiro (Jun 15 2019 at 14:21)</a>:</h4>
+<p>I think there is a debugger but I've never used it</p>
+
+<a name="168209577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209577">Mario Carneiro (Jun 15 2019 at 14:21)</a>:</h4>
+<p>it's written in lean</p>
+
+<a name="168209579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209579">Kevin Buzzard (Jun 15 2019 at 14:21)</a>:</h4>
+<p>I thought you wrote some code which somehow "read" olean files? Oh -- olean files are yet another thing somehow?</p>
+
+<a name="168209583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209583">Kevin Buzzard (Jun 15 2019 at 14:21)</a>:</h4>
+<p>We're looking at the bytecode expressed in a far more sane way.</p>
+
+<a name="168209626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209626">Mario Carneiro (Jun 15 2019 at 14:22)</a>:</h4>
+<p>this is all actually somewhat unrelated to olean files</p>
+
+<a name="168209636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209636">Mario Carneiro (Jun 15 2019 at 14:23)</a>:</h4>
+<p>olean files are basically a compressed representation of everything that goes in a lean file and all the stuff that is generated as a result of running it</p>
+
+<a name="168209641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209641">Mario Carneiro (Jun 15 2019 at 14:23)</a>:</h4>
+<p>the idea is that you can read an olean file and it will be just as good as reading the lean file but without having to run all the tactics</p>
+
+<a name="168209646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209646">Olli (Jun 15 2019 at 14:24)</a>:</h4>
+<p>Wikipedia says that <a href="https://en.wikipedia.org/wiki/Lambda-mu_calculus" target="_blank" title="https://en.wikipedia.org/wiki/Lambda-mu_calculus">Lambda-mu</a> calculus has classical proofs as programs, where AoC and double-negation elimination map to continuations</p>
+
+<a name="168209692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168209692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168209692">Mario Carneiro (Jun 15 2019 at 14:24)</a>:</h4>
+<p>right, that's the "a bit weird" part I mentioned. Double negation elimination has a computational implementation</p>
+
+<a name="168210012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168210012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168210012">Olli (Jun 15 2019 at 14:33)</a>:</h4>
+<p>I know continuations are useful for implementing control flow / concurrency, so I suppose if a constructive proof describes an algorithm, then a classical proof is one that contains a step that says "yes, let me get back to you on that", in which case you could think of <code>sorry</code> as a type of continuation</p>
+
+<a name="168210379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168210379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168210379">Mario Carneiro (Jun 15 2019 at 14:42)</a>:</h4>
+<p>I like to think of call/cc for LEM via oracles and time travel. You ask the oracle "Is RH true?" and it says NO, and gives you a token that says RH -&gt; false. You celebrate the resolution of the long standing problem, until one day when someone finds that RH is actually true. But when you confront the oracle with your proof of falsity, it takes your proof of RH, destroys the universe and rewinds to the original question, and when asked "Is RH true?" it says YES and gives you a bloodstained proof of RH, and you celebrate the resolution of the long standing problem.</p>
+
 
 {% endraw %}

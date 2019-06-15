@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computability](27079computability.html) (150 messages, latest: Jun 15 2019 at 13:58)
+* [nat equalities](63354natequalities.html) (22 messages, latest: Jun 15 2019 at 14:52)
+
+* [computability](27079computability.html) (195 messages, latest: Jun 15 2019 at 14:42)
 
 * [unicode](95720unicode.html) (8 messages, latest: Jun 15 2019 at 08:31)
 
@@ -25,8 +27,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
 
 * [weird typechecking error](70244weirdtypecheckingerror.html) (5 messages, latest: Jun 14 2019 at 15:34)
-
-* [nat equalities](63354natequalities.html) (17 messages, latest: Jun 14 2019 at 05:03)
 
 * [leandoc](38167leandoc.html) (87 messages, latest: Jun 14 2019 at 03:54)
 
