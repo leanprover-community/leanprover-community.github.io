@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (49 messages, latest: Jun 15 2019 at 00:06)
+
 * [ring of injective](46407ringofinjective.html) (35 messages, latest: Jun 14 2019 at 20:58)
 
 * [computability](27079computability.html) (7 messages, latest: Jun 14 2019 at 18:04)
@@ -21,8 +23,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
 
 * [weird typechecking error](70244weirdtypecheckingerror.html) (5 messages, latest: Jun 14 2019 at 15:34)
-
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (48 messages, latest: Jun 14 2019 at 13:09)
 
 * [nat equalities](63354natequalities.html) (17 messages, latest: Jun 14 2019 at 05:03)
 
