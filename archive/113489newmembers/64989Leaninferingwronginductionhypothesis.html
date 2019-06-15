@@ -36,5 +36,123 @@ permalink: archive/113489newmembers/64989Leaninferingwronginductionhypothesis.ht
 <p>The definitions for <code>ty</code>, <code>tm</code>, <code>value</code>, and <code>has_type</code> can be found <a href="https://github.com/minhnhdo/programming-language-foundations-in-lean/blob/master/stlc.lean" target="_blank" title="https://github.com/minhnhdo/programming-language-foundations-in-lean/blob/master/stlc.lean">here</a>.</p>
 <p>Can anyone give me a hint on how to proceed?</p>
 
+<a name="168219288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219288">Kenny Lau (Jun 15 2019 at 19:01)</a>:</h4>
+<p>why is it wrong?</p>
+
+<a name="168219333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219333">Kenny Lau (Jun 15 2019 at 19:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">tm</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="n">string</span> <span class="bp">-&gt;</span> <span class="n">tm</span>
+<span class="bp">|</span> <span class="n">app</span> <span class="o">:</span> <span class="n">tm</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="bp">-&gt;</span> <span class="n">tm</span>
+<span class="bp">|</span> <span class="n">abs</span> <span class="o">:</span> <span class="n">string</span> <span class="bp">-&gt;</span> <span class="n">ty</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="bp">-&gt;</span> <span class="n">tm</span>
+<span class="bp">|</span> <span class="n">tru</span> <span class="o">:</span> <span class="n">tm</span>
+<span class="bp">|</span> <span class="n">fls</span> <span class="o">:</span> <span class="n">tm</span>
+<span class="bp">|</span> <span class="n">tst</span> <span class="o">:</span> <span class="n">tm</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="bp">-&gt;</span> <span class="n">tm</span> <span class="bp">-&gt;</span> <span class="n">tm</span>
+</pre></div>
+
+
+<p>in particular <code>| app : tm -&gt; tm -&gt; tm</code>, so <code>case tm.app</code> reads "<code>t</code> is now <code>tm.app t1 t2</code> where <code>t1</code> and <code>t2</code> satisfy the proposition, and we prove that <code>t</code> also satisfies the proposition"</p>
+
+<a name="168219340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219340">Kenny Lau (Jun 15 2019 at 19:03)</a>:</h4>
+<p>the proposition of course being <code>has_type context.empty t T -&gt; value t or exists t', t -+&gt; t'</code></p>
+
+<a name="168219386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219386">Do Nhat Minh (Jun 15 2019 at 19:04)</a>:</h4>
+<p>it should have type <code>has_type context.empty t₁ (arrow T₁ T₂) -&gt; value t₁ ∨ ∃t', t₁ -+&gt; t'</code></p>
+
+<a name="168219393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219393">Do Nhat Minh (Jun 15 2019 at 19:04)</a>:</h4>
+<p>how should I change the definition of <code>tm</code> to make that happen?</p>
+
+<a name="168219409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219409">Kenny Lau (Jun 15 2019 at 19:05)</a>:</h4>
+<p>you should induct on <code>ht</code> instead</p>
+
+<a name="168219463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219463">Do Nhat Minh (Jun 15 2019 at 19:06)</a>:</h4>
+<p>I'm translating the definition in Coq found <a href="https://softwarefoundations.cis.upenn.edu/plf-current/Stlc.html#lab204" target="_blank" title="https://softwarefoundations.cis.upenn.edu/plf-current/Stlc.html#lab204">here</a> to Lean and I'm not doing a good job at it</p>
+
+<a name="168219512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219512">Do Nhat Minh (Jun 15 2019 at 19:08)</a>:</h4>
+<p>induction on <code>ht</code> also gives me wrong hypotheses, such as a new <code>context</code> (named <code>ht_context</code>) for <code>case has_type.t_var</code></p>
+
+<a name="168219580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219580">Do Nhat Minh (Jun 15 2019 at 19:10)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="168219945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168219945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168219945">Kenny Lau (Jun 15 2019 at 19:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">progress</span> <span class="o">{</span><span class="n">t</span> <span class="n">T</span><span class="o">}</span> <span class="o">(</span><span class="n">ht</span> <span class="o">:</span> <span class="n">has_type</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="n">t</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">value</span> <span class="n">t</span> <span class="bp">∨</span> <span class="bp">∃</span><span class="n">t&#39;</span><span class="o">,</span> <span class="n">t</span> <span class="bp">-+&gt;</span> <span class="n">t&#39;</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">ht</span><span class="o">,</span> <span class="n">generalize</span> <span class="n">he</span> <span class="o">:</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="bp">=</span> <span class="n">e</span><span class="o">,</span> <span class="n">intro</span> <span class="n">ht</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">ht</span><span class="o">,</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_var</span> <span class="o">:</span> <span class="n">e</span> <span class="n">s</span> <span class="n">t</span> <span class="n">ht</span> <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">he</span> <span class="n">at</span> <span class="n">ht</span><span class="o">,</span> <span class="n">cases</span> <span class="n">ht</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_abs</span> <span class="o">:</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">constructor</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_app</span> <span class="o">:</span> <span class="n">e</span> <span class="n">t₁</span> <span class="n">t₂</span> <span class="n">m₁</span> <span class="n">m₂</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">h₃</span> <span class="n">h₄</span> <span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_tru</span> <span class="o">:</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">constructor</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_fls</span> <span class="o">:</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">constructor</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_tst</span> <span class="o">:</span> <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168220082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168220082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168220082">Do Nhat Minh (Jun 15 2019 at 19:25)</a>:</h4>
+<p>Could you please explain what revert and generalize does?</p>
+
+<a name="168220154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168220154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168220154">Marc Huisinga (Jun 15 2019 at 19:27)</a>:</h4>
+<p>revert and generalize are also explained here: <a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#basic-tactics" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#basic-tactics">https://leanprover.github.io/theorem_proving_in_lean/tactics.html#basic-tactics</a></p>
+
+<a name="168220279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168220279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168220279">Kenny Lau (Jun 15 2019 at 19:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="224162">@Do Nhat Minh</span> you can compare the state before and after those tactics</p>
+
+<a name="168220289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168220289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168220289">Kenny Lau (Jun 15 2019 at 19:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">progress</span> <span class="o">{</span><span class="n">t</span> <span class="n">T</span><span class="o">}</span> <span class="o">(</span><span class="n">ht</span> <span class="o">:</span> <span class="n">has_type</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="n">t</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">value</span> <span class="n">t</span> <span class="bp">∨</span> <span class="bp">∃</span><span class="n">t&#39;</span><span class="o">,</span> <span class="n">t</span> <span class="bp">-+&gt;</span> <span class="n">t&#39;</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="c">/-</span><span class="cm">  state 1 -/</span>
+  <span class="n">revert</span> <span class="n">ht</span><span class="o">,</span>  <span class="c">/-</span><span class="cm"> state 2 -/</span> <span class="n">generalize</span> <span class="n">he</span> <span class="o">:</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="bp">=</span> <span class="n">e</span><span class="o">,</span>  <span class="c">/-</span><span class="cm"> state 3 -/</span> <span class="n">intro</span> <span class="n">ht</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">ht</span><span class="o">,</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_var</span> <span class="o">:</span> <span class="n">e</span> <span class="n">s</span> <span class="n">t</span> <span class="n">ht</span> <span class="o">{</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">he</span> <span class="n">at</span> <span class="n">ht</span><span class="o">,</span> <span class="n">cases</span> <span class="n">ht</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_abs</span> <span class="o">:</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">constructor</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_app</span> <span class="o">:</span> <span class="n">e</span> <span class="n">t₁</span> <span class="n">t₂</span> <span class="n">m₁</span> <span class="n">m₂</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="n">h₃</span> <span class="n">h₄</span> <span class="o">{</span> <span class="n">sorry</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_tru</span> <span class="o">:</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">constructor</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_fls</span> <span class="o">:</span> <span class="o">{</span> <span class="n">left</span><span class="o">,</span> <span class="n">constructor</span> <span class="o">},</span>
+  <span class="n">case</span> <span class="n">has_type</span><span class="bp">.</span><span class="n">t_tst</span> <span class="o">:</span> <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168220300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168220300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168220300">Kenny Lau (Jun 15 2019 at 19:31)</a>:</h4>
+<p>state 1:</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">tm</span><span class="o">,</span>
+<span class="n">T</span> <span class="o">:</span> <span class="n">ty</span><span class="o">,</span>
+<span class="n">ht</span> <span class="o">:</span> <span class="n">has_type</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="n">t</span> <span class="n">T</span>
+<span class="err">⊢</span> <span class="n">value</span> <span class="n">t</span> <span class="bp">∨</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">t&#39;</span> <span class="o">:</span> <span class="n">tm</span><span class="o">),</span> <span class="n">t</span> <span class="bp">-+&gt;</span> <span class="n">t&#39;</span>
+</pre></div>
+
+
+<p>state 2:</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">tm</span><span class="o">,</span>
+<span class="n">T</span> <span class="o">:</span> <span class="n">ty</span>
+<span class="err">⊢</span> <span class="n">has_type</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="n">t</span> <span class="n">T</span> <span class="bp">→</span> <span class="o">(</span><span class="n">value</span> <span class="n">t</span> <span class="bp">∨</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">t&#39;</span> <span class="o">:</span> <span class="n">tm</span><span class="o">),</span> <span class="n">t</span> <span class="bp">-+&gt;</span> <span class="n">t&#39;</span><span class="o">)</span>
+</pre></div>
+
+
+<p>state 3:</p>
+<div class="codehilite"><pre><span></span><span class="mi">1</span> <span class="n">goal</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">tm</span><span class="o">,</span>
+<span class="n">T</span> <span class="o">:</span> <span class="n">ty</span><span class="o">,</span>
+<span class="n">e</span> <span class="o">:</span> <span class="kn">context</span><span class="o">,</span>
+<span class="n">he</span> <span class="o">:</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="bp">=</span> <span class="n">e</span>
+<span class="err">⊢</span> <span class="n">has_type</span> <span class="n">e</span> <span class="n">t</span> <span class="n">T</span> <span class="bp">→</span> <span class="o">(</span><span class="n">value</span> <span class="n">t</span> <span class="bp">∨</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">t&#39;</span> <span class="o">:</span> <span class="n">tm</span><span class="o">),</span> <span class="n">t</span> <span class="bp">-+&gt;</span> <span class="n">t&#39;</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}

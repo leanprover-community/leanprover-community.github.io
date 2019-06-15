@@ -1260,5 +1260,49 @@ permalink: archive/113488general/27079computability.html
 <p><a href="https://xenaproject.wordpress.com/2019/06/15/proofs-are-not-programs/" target="_blank" title="https://xenaproject.wordpress.com/2019/06/15/proofs-are-not-programs/">https://xenaproject.wordpress.com/2019/06/15/proofs-are-not-programs/</a></p>
 <p>Hopefully I haven't garbled too much of this conversation.</p>
 
+<a name="168219453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219453">Johan Commelin (Jun 15 2019 at 19:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think this is possible because of computable code:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">witt_add_zero</span> <span class="o">:</span> <span class="n">witt_add</span> <span class="n">p</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">X</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">+</span> <span class="n">X</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">witt_mul_zero</span> <span class="o">:</span> <span class="n">witt_mul</span> <span class="n">p</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">X</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">*</span> <span class="n">X</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+
+<a name="168219459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219459">Johan Commelin (Jun 15 2019 at 19:06)</a>:</h4>
+<p>Lean is computing the addition and multiplication on the zeroth truncation of Witt vectors</p>
+
+<a name="168219585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219585">Kevin Buzzard (Jun 15 2019 at 19:10)</a>:</h4>
+<p>Would rfl work?</p>
+
+<a name="168219641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219641">Johan Commelin (Jun 15 2019 at 19:12)</a>:</h4>
+<p>Let me try.</p>
+
+<a name="168219649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219649">Johan Commelin (Jun 15 2019 at 19:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span><span class="o">,</span> <span class="n">term</span>
+  <span class="n">rfl</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="err">?</span><span class="n">m_2</span> <span class="bp">=</span> <span class="err">?</span><span class="n">m_2</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">witt_add</span> <span class="n">p</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">X</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">+</span> <span class="n">X</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+</pre></div>
+
+<a name="168219654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219654">Johan Commelin (Jun 15 2019 at 19:13)</a>:</h4>
+<p>Nope (-;</p>
+
+<a name="168219667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219667">Johan Commelin (Jun 15 2019 at 19:13)</a>:</h4>
+<p>And that's not surprising. Because it isn't even close to being the definition of <code>witt_add</code>.</p>
+
+<a name="168219705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168219705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168219705">Johan Commelin (Jun 15 2019 at 19:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> This is one reason (quite small, I agree) to keep polynomials computable.</p>
+
 
 {% endraw %}
