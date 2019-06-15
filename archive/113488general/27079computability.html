@@ -170,5 +170,251 @@ permalink: archive/113488general/27079computability.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199663">Chris Hughes (Jun 15 2019 at 08:59)</a>:</h4>
 <p>I was thinking about this the other day</p>
 
+<a name="168199710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199710">Kevin Buzzard (Jun 15 2019 at 09:00)</a>:</h4>
+<p>Or maybe the Continuum Hypothesis would be a better example (something which is known not to be provable or disprovable from the axioms of maths)</p>
+
+<a name="168199717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199717">Chris Hughes (Jun 15 2019 at 09:00)</a>:</h4>
+<p>I think you can do this computably</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">S</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">α</span> <span class="n">i</span><span class="o">)]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">quotient</span> <span class="o">(</span><span class="n">S</span> <span class="n">i</span><span class="o">))</span> <span class="o">:</span> <span class="bp">@</span><span class="n">quotient</span> <span class="o">(</span><span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">α</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span><span class="o">)</span>
+</pre></div>
+
+<a name="168199726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199726">Kevin Buzzard (Jun 15 2019 at 09:01)</a>:</h4>
+<p>If I have <code>P : Prop</code> and then I have some Lean file which makes <code>hP : P</code>, is that <em>definitely</em> a program?</p>
+
+<a name="168199733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199733">Kevin Buzzard (Jun 15 2019 at 09:01)</a>:</h4>
+<p>Even if somewhere along the way, the construction of the term <code>hP</code> uses something <code>noncomputable</code>?</p>
+
+<a name="168199775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199775">Chris Hughes (Jun 15 2019 at 09:02)</a>:</h4>
+<p>In fact you could define this computably in <code>meta</code> using <code>quot.unquot</code> I think, and you would still have a function (even though you used <code>quot.unquot</code> which isn't a mathematical function</p>
+
+<a name="168199779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199779">Kevin Buzzard (Jun 15 2019 at 09:02)</a>:</h4>
+<p>There is something completely fundamental here which I don't understand. A <code>.lean</code> file looks to me like a program, because I can compile it using Lean on my computer. Does this have anything to do with computability though?</p>
+
+<a name="168199781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199781">Chris Hughes (Jun 15 2019 at 09:02)</a>:</h4>
+<p>And this is basically choice if all the quotients are true.</p>
+
+<a name="168199790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199790">Chris Hughes (Jun 15 2019 at 09:03)</a>:</h4>
+<p>I guess it depends what you mean by computable.</p>
+
+<a name="168199794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199794">Kevin Buzzard (Jun 15 2019 at 09:03)</a>:</h4>
+<p>Lean seems to have a perfectly well-defined notion of what it means for something to be computable.</p>
+
+<a name="168199836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199836">Chris Hughes (Jun 15 2019 at 09:04)</a>:</h4>
+<p><code>.lean</code> files aren't in the domain of that particular <code>computable</code> predicate.</p>
+
+<a name="168199857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199857">Kevin Buzzard (Jun 15 2019 at 09:05)</a>:</h4>
+<p>My understanding is that the initial interpretation of "proof = program" was that a proof was supposed to be interpreted as some sort of proof using only constructive logic or intuitionistic logic or whatever. As we all know, this is not what is going on maths departments across the world -- they have a more powerful notion of proof. Does this just <em>break</em> Curry-Howard, or is there a rigorous but wider interpretation of "program" which I can use which fixes it?</p>
+
+<a name="168199893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199893">Mario Carneiro (Jun 15 2019 at 09:06)</a>:</h4>
+<p>The quotient product example is one place where lean's syntactic notion of "computable" is overly restrictive</p>
+
+<a name="168199901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199901">Kenny Lau (Jun 15 2019 at 09:06)</a>:</h4>
+<p>just use Haskell's setoid-without-quotient philosophy</p>
+
+<a name="168199903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199903">Kenny Lau (Jun 15 2019 at 09:06)</a>:</h4>
+<p>then the quotient.choice is computable</p>
+
+<a name="168199904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199904">Mario Carneiro (Jun 15 2019 at 09:06)</a>:</h4>
+<p>aka setoid hell</p>
+
+<a name="168199909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199909">Kevin Buzzard (Jun 15 2019 at 09:06)</a>:</h4>
+<p>I learnt about that from Nicola Gambini last week.</p>
+
+<a name="168199917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199917">Mario Carneiro (Jun 15 2019 at 09:07)</a>:</h4>
+<p>There are curry howard interpretations of LEM but they are a bit weird</p>
+
+<a name="168199923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199923">Kevin Buzzard (Jun 15 2019 at 09:07)</a>:</h4>
+<p>So Curry-Howard is a lie?</p>
+
+<a name="168199964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199964">Mario Carneiro (Jun 15 2019 at 09:08)</a>:</h4>
+<p>Constructive proofs are programs</p>
+
+<a name="168199971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199971">Chris Hughes (Jun 15 2019 at 09:08)</a>:</h4>
+<p>What I don't quite get is if I have computable choice and computable univalence, shouldn't I be able to get computable em. Obviously I can't, but I don't see where the proof breaks down.</p>
+
+<a name="168199979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199979">Kevin Buzzard (Jun 15 2019 at 09:09)</a>:</h4>
+<p>C-H is pithy, alliterative, beautiful-looking, but not actually true in maths departments because we have a different definition of proof and there is no corresponding definition of program.</p>
+
+<a name="168199993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199993">Mario Carneiro (Jun 15 2019 at 09:09)</a>:</h4>
+<p>I have heard it argued that for most of history mathematics was constructive</p>
+
+<a name="168199996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199996">Kevin Buzzard (Jun 15 2019 at 09:10)</a>:</h4>
+<p>I don't live in the past.</p>
+
+<a name="168200042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200042">Mario Carneiro (Jun 15 2019 at 09:10)</a>:</h4>
+<p>it wasn't until dedekind and such that we started getting a more general notion of function that doesn't readily admit "execution"</p>
+
+<a name="168200055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200055">Mario Carneiro (Jun 15 2019 at 09:11)</a>:</h4>
+<p>You don't need to convince me that you don't see the point in constructivity</p>
+
+<a name="168200059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200059">Kevin Buzzard (Jun 15 2019 at 09:11)</a>:</h4>
+<p>Maybe we can say that the age of Curry-Howard is passed. What I am confused about is the fact that I can prove Tychonoff's theorem (or some other theorem equivalence to the mathematician's axiom of choice) in Lean and make a text file called <code>tykonov.lean</code> which looks to a mathematician like a computer program.</p>
+
+<a name="168200100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200100">Kevin Buzzard (Jun 15 2019 at 09:12)</a>:</h4>
+<p>Is it not a computer program?</p>
+
+<a name="168200104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200104">Mario Carneiro (Jun 15 2019 at 09:12)</a>:</h4>
+<p>It is not</p>
+
+<a name="168200105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200105">Kevin Buzzard (Jun 15 2019 at 09:12)</a>:</h4>
+<p>But I can compile it and it runs.</p>
+
+<a name="168200108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200108">Kevin Buzzard (Jun 15 2019 at 09:12)</a>:</h4>
+<p>It produces no output.</p>
+
+<a name="168200109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200109">Mario Carneiro (Jun 15 2019 at 09:12)</a>:</h4>
+<p>it is input to a computer program that analyzes the information in the file</p>
+
+<a name="168200119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200119">Mario Carneiro (Jun 15 2019 at 09:13)</a>:</h4>
+<p>There are many computer programs in the world, not all of them are compilers</p>
+
+<a name="168200120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200120">Kevin Buzzard (Jun 15 2019 at 09:13)</a>:</h4>
+<p>Aah, so Lean is the program, but my .lean file is not a program?</p>
+
+<a name="168200130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200130">Kevin Buzzard (Jun 15 2019 at 09:13)</a>:</h4>
+<p>I thought Lean compiled my .lean file into an .olean file</p>
+
+<a name="168200133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200133">Mario Carneiro (Jun 15 2019 at 09:13)</a>:</h4>
+<p>Just like when you write TeX code it's input to a program but it's not a program itself, it's just a data representation</p>
+
+<a name="168200177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200177">Mario Carneiro (Jun 15 2019 at 09:14)</a>:</h4>
+<p>unless you write esoteric TeX macros which would be analogous to lean metaprograms which are actually programs</p>
+
+<a name="168200193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200193">Mario Carneiro (Jun 15 2019 at 09:15)</a>:</h4>
+<p>But the key point is this: when you write a proof that is <code>computable</code> in lean, it is literally both a proof and a program</p>
+
+<a name="168200196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200196">Mario Carneiro (Jun 15 2019 at 09:15)</a>:</h4>
+<p>you can run it with <code>#eval</code></p>
+
+<a name="168200239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200239">Mario Carneiro (Jun 15 2019 at 09:16)</a>:</h4>
+<p>and that's the main idea behind the computability interpretation of intuitionistic math</p>
+
+<a name="168200248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200248">Kevin Buzzard (Jun 15 2019 at 09:16)</a>:</h4>
+<p>macros: I did this in my thesis, which was written in plain TeX (which has no theorem numbering macros); I wrote the macros myself. I think my confusion is now resolved. I don't want to lose track of Chris' question above about computable <code>em</code>, I know he's been thinking a lot about univalence recently. <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> do you know anything about </p>
+<blockquote>
+<p>What I don't quite get is if I have computable choice and computable univalence, shouldn't I be able to get computable em. Obviously I can't, but I don't see where the proof breaks down.</p>
+</blockquote>
+<p>Mario -- thanks as ever.</p>
+
+<a name="168200269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200269">Kevin Buzzard (Jun 15 2019 at 09:17)</a>:</h4>
+<p>Wait -- I thought the whole problem with HoTT was that univalence wasn't computable? And I have this vague idea that cubical type theory was an attempt to fix this.</p>
+
+<a name="168200315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200315">Mario Carneiro (Jun 15 2019 at 09:18)</a>:</h4>
+<p>that's right</p>
+
+<a name="168200319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200319">Kevin Buzzard (Jun 15 2019 at 09:18)</a>:</h4>
+<p>So Chris it seems to me that you have to become an expert in cubical type theory now.</p>
+
+<a name="168200329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200329">Mario Carneiro (Jun 15 2019 at 09:19)</a>:</h4>
+<p>univalence is not a nonconstructive principle, meaning that we have long believed that it has a constructive interpretation, but as defined in book HoTT it's an axiom, meaning that when you have to "call" it like a function you don't know what to do</p>
+
+<a name="168200382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200382">Mario Carneiro (Jun 15 2019 at 09:20)</a>:</h4>
+<p>In cubical type theory it's a theorem, so the implementation of that function (in terms of new primitives not in HoTT) is now known</p>
+
+<a name="168200393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200393">Mario Carneiro (Jun 15 2019 at 09:20)</a>:</h4>
+<p>Re: univalence and choice, I would try going through DIaconescu with a constructive mindset to see what happens</p>
+
+<a name="168200404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200404">Kevin Buzzard (Jun 15 2019 at 09:21)</a>:</h4>
+<p>I have this uncomfortable feeling about this (univalence axiom). When I was moaning about having built a bunch of structure on a ring R and then wanting to move it onto an isomorphic ring S,  people were saying "use HoTT". Now I wonder whether some of the terms I'd get out of this HoTT strategy would just be useless in practice because they have been created using an axiom. On the other hand I guess I make terms using the axiom of choice and seem to get away with it.</p>
+
+<a name="168200456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200456">Mario Carneiro (Jun 15 2019 at 09:22)</a>:</h4>
+<p>It is an open question whether all the consequences of univalence computability are provable in book HoTT. AFAIK it's true</p>
+
+<a name="168200467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200467">Mario Carneiro (Jun 15 2019 at 09:23)</a>:</h4>
+<p>So you wouldn't actually get stuck, but you would need to prove lemmas about how transport works on different structures</p>
+
+<a name="168200472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200472">Mario Carneiro (Jun 15 2019 at 09:23)</a>:</h4>
+<p>(transport is the function <code>a = b -&gt; P a -&gt; P b</code>)</p>
+
+<a name="168200733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168200733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168200733">Kevin Buzzard (Jun 15 2019 at 09:30)</a>:</h4>
+<blockquote>
+<p>But the key point is this: when you write a proof that is <code>computable</code> in lean, it is literally both a proof and a program</p>
+</blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">X</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">X</span> <span class="c1">-- #0</span>
+</pre></div>
+
+<a name="168201060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168201060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168201060">Kevin Buzzard (Jun 15 2019 at 09:41)</a>:</h4>
+<p>Wait, I am confused again. I thought every proof was computable in Lean, in the sense that you don't have to mark it noncomputable because it's a proof?</p>
+
+<a name="168201061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168201061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168201061">Alex J. Best (Jun 15 2019 at 09:41)</a>:</h4>
+<blockquote>
+<p>But the key point is this: when you write a proof that is <code>computable</code> in lean, it is literally both a proof and a program</p>
+</blockquote>
+<p>I'm still amazed by how fast</p>
+<div class="codehilite"><pre><span></span>import data.zmod.quadratic_reciprocity
+#eval (zmodp.legendre_sym 1111 3119 (by sorry))
+</pre></div>
+
+
+<p>runs.</p>
+
+<a name="168201168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168201168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168201168">Mario Carneiro (Jun 15 2019 at 09:44)</a>:</h4>
+<p>The caveat is that lean doesn't run what we normally call proofs, i.e. elements of elements of Prop. These are erased in the VM, so they are trivially computable</p>
+
+<a name="168201189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168201189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168201189">Mario Carneiro (Jun 15 2019 at 09:45)</a>:</h4>
+<p>It is possible to build a theorem prover such that these proofs are executable, and actually lean will reduce proofs if you use <code>#reduce</code>, but there are some efficiency problems with doing this at large scale</p>
+
+<a name="168201363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168201363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168201363">Kevin Buzzard (Jun 15 2019 at 09:50)</a>:</h4>
+<p>What about my proof that the noncomputable inverse of a bijection was indeed an inverse?</p>
+
 
 {% endraw %}
