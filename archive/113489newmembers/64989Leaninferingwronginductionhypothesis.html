@@ -1,0 +1,40 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html">Lean infering wrong induction hypothesis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168218890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Lean%20infering%20wrong%20induction%20hypothesis/near/168218890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/64989Leaninferingwronginductionhypothesis.html#168218890">Do Nhat Minh (Jun 15 2019 at 18:48)</a>:</h4>
+<p>I'm proving the following theorem in Lean.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">progress</span> <span class="o">{</span><span class="n">t</span> <span class="n">T</span><span class="o">}</span> <span class="o">(</span><span class="n">ht</span> <span class="o">:</span> <span class="n">has_type</span> <span class="kn">context</span><span class="bp">.</span><span class="n">empty</span> <span class="n">t</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">value</span> <span class="n">t</span> <span class="bp">∨</span> <span class="bp">∃</span><span class="n">t&#39;</span><span class="o">,</span> <span class="n">t</span> <span class="bp">-+&gt;</span> <span class="n">t&#39;</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">t</span><span class="o">,</span>
+    <span class="n">case</span> <span class="n">tm</span><span class="bp">.</span><span class="n">var</span><span class="o">:</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">var_not_has_type_empty_context</span> <span class="n">ht</span><span class="o">)</span> <span class="o">},</span>
+    <span class="n">case</span> <span class="n">tm</span><span class="bp">.</span><span class="n">abs</span><span class="o">:</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">v_abs</span> <span class="o">},</span>
+    <span class="n">case</span> <span class="n">tm</span><span class="bp">.</span><span class="n">app</span><span class="o">:</span> <span class="n">t₁</span> <span class="n">t₂</span> <span class="n">ih₁</span> <span class="n">ih₂</span> <span class="o">{</span>
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="o">},</span>
+    <span class="n">case</span> <span class="n">tm</span><span class="bp">.</span><span class="n">tru</span><span class="o">:</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">v_tru</span> <span class="o">},</span>
+    <span class="n">case</span> <span class="n">tm</span><span class="bp">.</span><span class="n">fls</span><span class="o">:</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">v_fls</span> <span class="o">},</span>
+    <span class="n">case</span> <span class="n">tm</span><span class="bp">.</span><span class="n">tst</span><span class="o">:</span> <span class="n">t₁</span> <span class="n">t₂</span> <span class="n">t₃</span> <span class="n">ih₁</span> <span class="n">ih₂</span> <span class="n">ih₃</span> <span class="o">{</span>
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>If I remove <code>sorry</code> in <code>case tm.app</code>, Lean tells me that <code>ih₁</code> has type <code>has_type context.empty t₁ T -&gt; value t₁ ∨ ∃t', t₁ -+&gt; t'</code>, which is wrong.</p>
+<p>The definitions for <code>ty</code>, <code>tm</code>, <code>value</code>, and <code>has_type</code> can be found <a href="https://github.com/minhnhdo/programming-language-foundations-in-lean/blob/master/stlc.lean" target="_blank" title="https://github.com/minhnhdo/programming-language-foundations-in-lean/blob/master/stlc.lean">here</a>.</p>
+<p>Can anyone give me a hint on how to proceed?</p>
+
+
+{% endraw %}

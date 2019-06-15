@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Lean infering wrong induction hypothesis](64989Leaninferingwronginductionhypothesis.html) (1 message, latest: Jun 15 2019 at 18:48)
+
 * [products of sets](67209productsofsets.html) (42 messages, latest: Jun 15 2019 at 14:14)
 
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (3 messages, latest: Jun 13 2019 at 23:12)
