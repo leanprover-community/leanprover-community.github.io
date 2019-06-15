@@ -77,5 +77,98 @@ permalink: archive/113488general/27079computability.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168157809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168157809">Reid Barton (Jun 14 2019 at 18:04)</a>:</h4>
 <p>Maybe I've confused myself and rule 1 is really two separate rules (type erasure and proof irrelevance), not sure.</p>
 
+<a name="168198303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198303">Kevin Buzzard (Jun 15 2019 at 08:13)</a>:</h4>
+<p>Ok so perhaps some examples of things which I might want to define are noncomputable <code>nat</code>s and noncomputable functions <code>f : X -&gt; Y</code>. So then my next, and I think my last, question is: what am I losing by having these things marked as noncomputable? Is the only difference that I am basically guaranteed not to be able to prove anything about these noncomputable gadgets using <code>rfl</code>? Is that it? I can just reason about these objects perfectly well using exactly the same sort of reasoning I would use in a maths paper. I would never want to use <code>rfl</code> on these objects anyway because I know they've been defined using some choice function.</p>
+<p>With things like the perfectoid project I would work constructively by default, and would just write <code>noncomputable</code> in front of a definition every time Lean told me to. I could instead have just written <code>noncomputable theory</code> at the top of every file. What would I have lost if I'd done that? I am struggling to find any reason at all why I would ever care about computability. Let's say my goal was to define a perfectoid space and then state Scholze's tilting correspondence (this is feasible but would take a fair bit more work), and then let's say my next goal was to prove it (this would take an unfeasibly large amount of work unless I had a big team). Would I ever care about computability ever?</p>
+
+<a name="168198845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198845">Mario Carneiro (Jun 15 2019 at 08:30)</a>:</h4>
+<p>Lean produces code for everything that's not marked <code>noncomputable</code></p>
+
+<a name="168198852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198852">Mario Carneiro (Jun 15 2019 at 08:30)</a>:</h4>
+<p>you can look at this code, although it's not very intelligible</p>
+
+<a name="168198880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198880">Mario Carneiro (Jun 15 2019 at 08:32)</a>:</h4>
+<p><code>noncomputable theory</code> has no downsides except that it makes computability less obvious (which itself may not be a downside depending on your POV). It actually means "please infer <code>noncomputable</code> for me"</p>
+
+<a name="168198921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198921">Mario Carneiro (Jun 15 2019 at 08:33)</a>:</h4>
+<p>As I'm sure you've noticed, lean knows perfectly well which definitions are computable and which aren't, and without <code>noncomputable theory</code> it nags you until you put the markings it knows you should put. <code>noncomputable theory</code>just says to do this automatically without user interaction</p>
+
+<a name="168198970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198970">Kevin Buzzard (Jun 15 2019 at 08:34)</a>:</h4>
+<p>I just don't get why computability is important to me if I just want to make mathematical objects and state and prove theorems about them.</p>
+
+<a name="168198977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198977">Mario Carneiro (Jun 15 2019 at 08:34)</a>:</h4>
+<p>It's not, unless you are Anrdej Bauer</p>
+
+<a name="168198995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168198995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168198995">Mario Carneiro (Jun 15 2019 at 08:35)</a>:</h4>
+<p>and we're already long past that point since <code>choice</code> appears as an axiom so early in the development that it's difficult to do without</p>
+
+<a name="168199051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199051">Mario Carneiro (Jun 15 2019 at 08:37)</a>:</h4>
+<p>You can still prove stuff about noncomputable gadgets using <code>rfl</code>, as long as you are doing some definition unfolding and such</p>
+
+<a name="168199094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199094">Mario Carneiro (Jun 15 2019 at 08:38)</a>:</h4>
+<p>you won't be able to do large scale rfl proofs like "compute the class number of this field", but I think you know when to use the word "compute" in this context</p>
+
+<a name="168199103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199103">Mario Carneiro (Jun 15 2019 at 08:39)</a>:</h4>
+<p>I think "noncomputable by default, computable for computations" is a reasonable stance for doing pure maths in lean</p>
+
+<a name="168199151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199151">Kevin Buzzard (Jun 15 2019 at 08:40)</a>:</h4>
+<p>I am not sure I know what "computations" mean. Kenny pointed out to me on Thursday at Xena that mathematicians and computer scientists use the term in two different ways.</p>
+
+<a name="168199155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199155">Kevin Buzzard (Jun 15 2019 at 08:40)</a>:</h4>
+<p>I think we use it incorrectly, and I think that the fact that I've been exposed to decades of incorrect usage of the term has clouded my thinking over the issue.</p>
+
+<a name="168199206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199206">Mario Carneiro (Jun 15 2019 at 08:42)</a>:</h4>
+<p>roughly speaking, if you would open up GAP or a CAS to do it</p>
+
+<a name="168199215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199215">Kenny Lau (Jun 15 2019 at 08:42)</a>:</h4>
+<p>then you need a computable model of say Q-bar</p>
+
+<a name="168199225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199225">Mario Carneiro (Jun 15 2019 at 08:43)</a>:</h4>
+<p>sure, that's what I mean by "computable for computations"</p>
+
+<a name="168199229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199229">Mario Carneiro (Jun 15 2019 at 08:43)</a>:</h4>
+<p>unless you need that, computability does you no favors</p>
+
+<a name="168199603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199603">Kevin Buzzard (Jun 15 2019 at 08:57)</a>:</h4>
+<p>The Curry-Howard correspondence says that "proofs are programs". Is there a program corresponding to the proof of the theorem that a product of non-empty sets is non-empty? What is a program? What language is this program supposed to be in?</p>
+
+<a name="168199646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199646">Chris Hughes (Jun 15 2019 at 08:58)</a>:</h4>
+<p>Yes. It's the program that returns (x,y), when x is the witness to X being nonempty, and y is the witness to Y being nonempty.</p>
+
+<a name="168199650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199650">Kevin Buzzard (Jun 15 2019 at 08:58)</a>:</h4>
+<p>infinite product!</p>
+
+<a name="168199654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199654">Kevin Buzzard (Jun 15 2019 at 08:58)</a>:</h4>
+<p>Then you want to give me a function.</p>
+
+<a name="168199659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199659">Kevin Buzzard (Jun 15 2019 at 08:59)</a>:</h4>
+<p>Is there a program corresponding to the proof of the theorem that the Riemann Hypothesis is either true or false?</p>
+
+<a name="168199663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/computability/near/168199663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27079computability.html#168199663">Chris Hughes (Jun 15 2019 at 08:59)</a>:</h4>
+<p>I was thinking about this the other day</p>
+
 
 {% endraw %}
