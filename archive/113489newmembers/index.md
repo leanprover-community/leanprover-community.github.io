@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [products of sets](67209productsofsets.html) (28 messages, latest: Jun 15 2019 at 12:46)
+* [products of sets](67209productsofsets.html) (41 messages, latest: Jun 15 2019 at 13:51)
 
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (3 messages, latest: Jun 13 2019 at 23:12)
 
