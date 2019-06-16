@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (1 message, latest: Jun 16 2019 at 00:55)
+
 * [witt vectors](84655wittvectors.html) (163 messages, latest: Jun 15 2019 at 18:32)
 
 * [Order on topologies](78527Orderontopologies.html) (56 messages, latest: Jun 14 2019 at 13:28)
