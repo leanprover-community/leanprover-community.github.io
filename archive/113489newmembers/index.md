@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [pattern matching exists in tactic mode](35678patternmatchingexistsintacticmode.html) (3 messages, latest: Jun 16 2019 at 16:50)
+
 * [Lean infering wrong induction hypothesis](64989Leaninferingwronginductionhypothesis.html) (23 messages, latest: Jun 16 2019 at 14:42)
 
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (4 messages, latest: Jun 16 2019 at 01:12)
