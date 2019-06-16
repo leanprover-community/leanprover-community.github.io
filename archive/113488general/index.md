@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ulift instances](91501uliftinstances.html) (15 messages, latest: Jun 16 2019 at 22:58)
+
+* [tactic question](62193tacticquestion.html) (16 messages, latest: Jun 16 2019 at 22:56)
+
 * [unicode](95720unicode.html) (13 messages, latest: Jun 16 2019 at 21:25)
 
 * [computability](27079computability.html) (205 messages, latest: Jun 15 2019 at 19:14)
@@ -19,10 +23,6 @@ permalink: archive/113488general/index.html
 * [ring of injective](46407ringofinjective.html) (36 messages, latest: Jun 15 2019 at 04:48)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (49 messages, latest: Jun 15 2019 at 00:06)
-
-* [ulift instances](91501uliftinstances.html) (13 messages, latest: Jun 14 2019 at 17:28)
-
-* [tactic question](62193tacticquestion.html) (15 messages, latest: Jun 14 2019 at 17:17)
 
 * [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
 
