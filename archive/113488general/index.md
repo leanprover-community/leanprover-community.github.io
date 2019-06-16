@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computability](27079computability.html) (205 messages, latest: Jun 15 2019 at 19:14)
+* [unicode](95720unicode.html) (13 messages, latest: Jun 16 2019 at 21:25)
 
-* [unicode](95720unicode.html) (10 messages, latest: Jun 15 2019 at 17:21)
+* [computability](27079computability.html) (205 messages, latest: Jun 15 2019 at 19:14)
 
 * [nat equalities](63354natequalities.html) (22 messages, latest: Jun 15 2019 at 14:52)
 
