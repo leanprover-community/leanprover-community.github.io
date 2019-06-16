@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#461 integral closure](12978461integralclosure.html) (21 messages, latest: Jun 16 2019 at 19:32)
+
 * [#1119 arrow_congr](019391119arrowcongr.html) (1 message, latest: Jun 11 2019 at 17:11)
 
 * [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (28 messages, latest: Jun 10 2019 at 11:17)
@@ -167,8 +169,6 @@ permalink: archive/144837PRreviews/index.html
 * [#665 lcm](90049665lcm.html) (9 messages, latest: Feb 01 2019 at 09:55)
 
 * [#658 multiplication of submodules](74189658multiplicationofsubmodules.html) (5 messages, latest: Jan 31 2019 at 22:18)
-
-* [#461 integral closure](12978461integralclosure.html) (19 messages, latest: Jan 30 2019 at 08:55)
 
 * [#528 splitting fields](13816528splittingfields.html) (4 messages, latest: Jan 29 2019 at 19:45)
 
