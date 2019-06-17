@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#943 lc refactor](96169943lcrefactor.html) (25 messages, latest: Jun 17 2019 at 15:23)
+
 * [#461 integral closure](12978461integralclosure.html) (21 messages, latest: Jun 16 2019 at 19:32)
 
 * [#1119 arrow_congr](019391119arrowcongr.html) (1 message, latest: Jun 11 2019 at 17:11)
@@ -17,8 +19,6 @@ permalink: archive/144837PRreviews/index.html
 * [#840 Hermitian inner product space](17738840Hermitianinnerproductspace.html) (28 messages, latest: Jun 10 2019 at 11:17)
 
 * [#1118 Presented groups](966331118Presentedgroups.html) (1 message, latest: Jun 07 2019 at 04:26)
-
-* [#943 lc refactor](96169943lcrefactor.html) (24 messages, latest: Jun 06 2019 at 10:10)
 
 * [#988 norm_cast](38579988normcast.html) (27 messages, latest: Jun 04 2019 at 11:27)
 
