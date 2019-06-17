@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (25 messages, latest: Jun 17 2019 at 20:54)
+* [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (28 messages, latest: Jun 17 2019 at 21:04)
 
 * [learn about macros](55827learnaboutmacros.html) (12 messages, latest: Jun 17 2019 at 15:55)
 
