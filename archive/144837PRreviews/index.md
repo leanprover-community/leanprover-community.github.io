@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#943 lc refactor](96169943lcrefactor.html) (25 messages, latest: Jun 17 2019 at 15:23)
+* [#943 lc refactor](96169943lcrefactor.html) (26 messages, latest: Jun 17 2019 at 16:19)
 
 * [#461 integral closure](12978461integralclosure.html) (21 messages, latest: Jun 16 2019 at 19:32)
 
