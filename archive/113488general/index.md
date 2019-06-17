@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [learn about macros](55827learnaboutmacros.html) (12 messages, latest: Jun 17 2019 at 15:55)
+* [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (25 messages, latest: Jun 17 2019 at 20:54)
 
-* [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (21 messages, latest: Jun 17 2019 at 13:24)
+* [learn about macros](55827learnaboutmacros.html) (12 messages, latest: Jun 17 2019 at 15:55)
 
 * [ulift instances](91501uliftinstances.html) (18 messages, latest: Jun 16 2019 at 23:16)
 

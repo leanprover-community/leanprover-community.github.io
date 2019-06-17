@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (44 messages, latest: Jun 17 2019 at 17:45)
+* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (45 messages, latest: Jun 17 2019 at 20:13)
 
 * [quotient_group.map_mk](38441quotientgroupmapmk.html) (4 messages, latest: Jun 17 2019 at 15:00)
 
