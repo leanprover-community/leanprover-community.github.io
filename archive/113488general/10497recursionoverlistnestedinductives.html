@@ -1,0 +1,27 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/10497recursionoverlistnestedinductives.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/10497recursionoverlistnestedinductives.html">recursion over list-nested inductives</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168305372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20over%20list-nested%20inductives/near/168305372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10497recursionoverlistnestedinductives.html#168305372">Sebastian Ullrich (Jun 17 2019 at 12:28)</a>:</h4>
+<p>I'm surprised that the lemma <a href="https://github.com/leanprover/lean/blob/master/tests/lean/run/term_app2.lean#L27" target="_blank" title="https://github.com/leanprover/lean/blob/master/tests/lean/run/term_app2.lean#L27">https://github.com/leanprover/lean/blob/master/tests/lean/run/term_app2.lean#L27</a> has never made it into mathlib (though <code>list.attach</code> has). Do people just avoid nested inductives in general in Lean 3? Is it ultimately easier to replace a nested occurrence <code>list t -&gt;</code> with <code>(n : nat) -&gt; (fin n -&gt; t) -&gt;</code>?</p>
+
+<a name="168307467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20over%20list-nested%20inductives/near/168307467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10497recursionoverlistnestedinductives.html#168307467">Chris Hughes (Jun 17 2019 at 12:56)</a>:</h4>
+<p>nested inductives don't give the best recursor right now, so I think people tend to avoid them. Also, I tend to use <code>list.length</code> instead of <code>sizeof</code> if I have to induct on a list in that way. I view <code>sizeof</code> as an internal thing. I don't actually know what the <code>sizeof</code> a list is defined to be, though I imagine it's the length.</p>
+
+<a name="168307668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20over%20list-nested%20inductives/near/168307668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10497recursionoverlistnestedinductives.html#168307668">Sebastian Ullrich (Jun 17 2019 at 12:59)</a>:</h4>
+<p>No, it's the sum of element sizes. You couldn't prove such recursions terminating otherwise.</p>
+
+
+{% endraw %}
