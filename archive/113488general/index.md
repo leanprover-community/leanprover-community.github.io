@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ulift instances](91501uliftinstances.html) (15 messages, latest: Jun 16 2019 at 22:58)
+* [ulift instances](91501uliftinstances.html) (18 messages, latest: Jun 16 2019 at 23:16)
 
 * [tactic question](62193tacticquestion.html) (16 messages, latest: Jun 16 2019 at 22:56)
 
