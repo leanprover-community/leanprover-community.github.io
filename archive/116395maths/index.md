@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [quotient_group.map_mk](38441quotientgroupmapmk.html) (2 messages, latest: Jun 17 2019 at 14:59)
+* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (8 messages, latest: Jun 17 2019 at 15:41)
 
-* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (7 messages, latest: Jun 17 2019 at 14:11)
+* [quotient_group.map_mk](38441quotientgroupmapmk.html) (4 messages, latest: Jun 17 2019 at 15:00)
 
 * [class of primes](04956classofprimes.html) (2 messages, latest: Jun 17 2019 at 11:06)
 
