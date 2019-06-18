@@ -1,0 +1,77 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/62547functoruniverse.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html">functor universe</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168405231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168405231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168405231">Patrick Massot (Jun 18 2019 at 14:19)</a>:</h4>
+<p>Is there any way to make the definition of <code>functor</code> more universe polymorphic? If I define</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">functor</span> <span class="n">topological_space</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span><span class="o">,</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Then I think I can use <code>f &lt;*&gt; T</code> only if the source and target of <code>f</code> live in the same universe.</p>
+
+<a name="168407145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407145">Mario Carneiro (Jun 18 2019 at 14:39)</a>:</h4>
+<p>unfortunately no</p>
+
+<a name="168407236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407236">Patrick Massot (Jun 18 2019 at 14:40)</a>:</h4>
+<p>Is it a limitation of the underlying type theory?</p>
+
+<a name="168407243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407243">Mario Carneiro (Jun 18 2019 at 14:40)</a>:</h4>
+<p>For it to be more universe polymorphic it has to be free-standing functions</p>
+
+<a name="168407244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407244">Mario Carneiro (Jun 18 2019 at 14:40)</a>:</h4>
+<p>yes</p>
+
+<a name="168407269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407269">Patrick Massot (Jun 18 2019 at 14:40)</a>:</h4>
+<p>What is a free-standing function?</p>
+
+<a name="168407297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407297">Mario Carneiro (Jun 18 2019 at 14:41)</a>:</h4>
+<p>i.e. <code>option.map</code> instead of the map component of <code>functor option</code></p>
+
+<a name="168407334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407334">Johan Commelin (Jun 18 2019 at 14:41)</a>:</h4>
+<p><code>s/i.e./e.g./</code></p>
+
+<a name="168407508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407508">Mario Carneiro (Jun 18 2019 at 14:43)</a>:</h4>
+<p>You can't hold a lemma that says that <code>map</code> is functorial as a hypothesis, because that statement involves quantifying over universes so it would be an existential universe variable if it was a hypothesis. But you can prove that every particular polymorphic map function is functorial polymorphically</p>
+
+<a name="168407559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407559">Patrick Massot (Jun 18 2019 at 14:44)</a>:</h4>
+<p>Ok, this is what I observed, but I wanted to make sure. Too bad</p>
+
+<a name="168407600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168407600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168407600">Patrick Massot (Jun 18 2019 at 14:44)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="168408737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168408737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168408737">Simon Hudon (Jun 18 2019 at 14:55)</a>:</h4>
+<p>Footnote: there is a way around this limitation but you need to formulate your functor as a relation between two functors e.g. <code>option.{v}</code> and <code>option.{u}</code></p>
+
+<a name="168408772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168408772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168408772">Simon Hudon (Jun 18 2019 at 14:55)</a>:</h4>
+<p>When you need it, it works but you're better off avoiding it if you can</p>
+
+<a name="168408851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/functor%20universe/near/168408851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62547functoruniverse.html#168408851">Patrick Massot (Jun 18 2019 at 14:56)</a>:</h4>
+<p>How would that look like in my example?</p>
+
+
+{% endraw %}

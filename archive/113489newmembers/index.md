@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Docstring on constructor](92753Docstringonconstructor.html) (3 messages, latest: Jun 18 2019 at 13:31)
+* [Docstring on constructor](92753Docstringonconstructor.html) (6 messages, latest: Jun 18 2019 at 14:53)
 
 * [pattern matching exists in tactic mode](35678patternmatchingexistsintacticmode.html) (3 messages, latest: Jun 16 2019 at 16:50)
 
