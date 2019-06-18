@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (259 messages, latest: Jun 18 2019 at 19:57)
+* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (22 messages, latest: Jun 18 2019 at 20:27)
 
-* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (21 messages, latest: Jun 18 2019 at 13:05)
+* [witt vectors](84655wittvectors.html) (260 messages, latest: Jun 18 2019 at 20:17)
 
 * [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (157 messages, latest: Jun 18 2019 at 08:50)
 

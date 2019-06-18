@@ -138,5 +138,130 @@ with aframe :
 <span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">apoint</span> <span class="bp">→</span> <span class="n">aframe</span>
 </pre></div>
 
+<a name="168450627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168450627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168450627">Kevin Sullivan (Jun 18 2019 at 20:07)</a>:</h4>
+<blockquote>
+<p>here is a simplified simplified version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">apoint</span><span class="o">,</span> <span class="n">aframe</span>
+<span class="k">with</span> <span class="n">apoint</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">apoint</span>
+<span class="k">with</span> <span class="n">aframe</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">apoint</span> <span class="bp">→</span> <span class="n">aframe</span>
+</pre></div>
+
+
+</blockquote>
+<p>I'm coming back to this.  I'm having another problem knowing what an error message means around mutually defined types. The context is that I'm defining an affine space. An affine space has points, vectors, frames. A point or a vector have coordinates and a frame in terms of which  coordinates have meaning. A frame in turn comprises a point (origin) and a set of vectors (a basis for the vector space). The problem that I'm having is that if I change the signature of the frame constructor from taking a point and a single vector to taking a point and a list of vectors, I get the following error at the top of the inductive definition: </p>
+<div class="codehilite"><pre><span></span>nested occurrence &#39;list.{1} (affine_vector s)&#39; contains variables that are not parameters
+</pre></div>
+
+
+<p>Here's the self-contained code (which I'll be putting in an open GitHub repo once it works).</p>
+<div class="codehilite"><pre><span></span>import algebra.module
+import data.vector
+
+-- for testing
+import data.real.basic
+set_option pp.notation false
+
+
+-- UNDERLYING REPRESENTATION
+
+--universe u
+
+/-
+Background: the &quot;vector&quot; type in the Lean standard library
+is a type whose values are really just tuples. We define
+a &quot;tuple&quot; type polymorphic as the type of tuples of length
+n over values of a type, K.
+-/
+def tuple
+    (n : ℕ)
+    (K : Type) :=
+        vector K n
+
+-- testing
+def aTuple : tuple 3 ℝ := ⟨[2,1,-1], rfl⟩
+def aTuple&#39; : tuple 1 ℝ := ⟨[2], rfl⟩
+
+/-
+With K a discrete field with zero and one values,
+we define a function to return tuples of length n
+over K with all elements equal to the field&#39;s zero
+element.
+-/
+def mk_zero_tuple :
+    ∀ (n : ℕ)
+    (K : Type)
+    [f : discrete_field K]
+    [z : has_zero K],
+        vector K n
+| 0 K f z := vector.nil
+| (nat.succ n&#39;) K f z := vector.cons (z.zero) (@mk_zero_tuple n&#39; K f z)
+
+-- testing
+def aReal3ZeroTuple : tuple 3 ℝ :=
+    subtype.mk [0,0,0] rfl
+def aReal4ZeroTuple : tuple 4 ℝ :=
+    subtype.mk [0,0,0,0] rfl
+
+
+structure space : Type 1 :=
+mk ::
+(name : string)
+(dim : ℕ)
+(field: Type)
+[isField : discrete_field field]
+[the_zero : has_zero field]
+[the_one : has_one field]
+
+-- testing
+
+def time : space :=         -- non-computable
+    space.mk &quot;time&quot; 1 ℝ
+
+def geometry : space :=
+    space.mk &quot;geometry&quot; 3 ℝ
+
+/-
+We define affine point, vector, and frame types.
+The space to which each such object belongs is a
+part of its type. The definitions are mutually
+recursive, because point and a vector are defined
+partly in terms of a frame (in terms of which its
+coordinates are interpreted), and a frame in turn
+is defined by a point (its origin) and a tuple of
+vectors (comprising a basis for its vector space).
+-/
+
+mutual inductive affine_point, affine_vector, affine_frame
+with affine_point : space → Type 1
+    | mk :
+        Π { s : space },
+        affine_frame s →
+        tuple s.dim s.field  → affine_point s
+    | mk_std :
+        Π { s : space },         -- std point, (1, 0, 0, ..., 0) wrt std_frame
+        affine_point s
+with affine_vector : space → Type 1
+    | mk :
+        Π {s : space},
+        affine_frame s →
+        tuple s.dim s.field →
+        affine_vector s
+    | mk_std :
+        Π { s : space },        -- std vector(0, 0, 0, ..., 0) wrt std_frame
+        affine_vector s
+with affine_frame : space → Type 1
+    | mk : Π { s : space }, affine_point s → list (affine_vector s) → affine_frame s -- stub
+    | mk_std : Π { s : space },  affine_frame s  -- std frame
+</pre></div>
+
+
+<p>I've tried with a universe variable, u, substituting Type (u+1), and also Type (u+2), for Type 1 where it appears in the mutual definition, to no avail. Thanks, all, for your ongoing help with this stuff.</p>
+<p>Kevin</p>
+
 
 {% endraw %}
