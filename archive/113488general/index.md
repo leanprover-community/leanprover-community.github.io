@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactic question](62193tacticquestion.html) (42 messages, latest: Jun 17 2019 at 23:57)
+
 * [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (28 messages, latest: Jun 17 2019 at 21:04)
 
 * [learn about macros](55827learnaboutmacros.html) (12 messages, latest: Jun 17 2019 at 15:55)
 
 * [ulift instances](91501uliftinstances.html) (18 messages, latest: Jun 16 2019 at 23:16)
-
-* [tactic question](62193tacticquestion.html) (16 messages, latest: Jun 16 2019 at 22:56)
 
 * [unicode](95720unicode.html) (13 messages, latest: Jun 16 2019 at 21:25)
 

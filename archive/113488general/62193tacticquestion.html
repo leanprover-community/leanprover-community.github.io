@@ -82,5 +82,109 @@ permalink: archive/113488general/62193tacticquestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168271152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168271152">Mario Carneiro (Jun 16 2019 at 22:56)</a>:</h4>
 <p>Generally speaking, the "smaller proof term" heuristic for complexity breaks down in the presence of "heavy rfls"</p>
 
+<a name="168356828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168356828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168356828">Wojciech Nawrocki (Jun 17 2019 at 23:28)</a>:</h4>
+<p>What do you mean by <em>heavy rfls</em>? Is it that the normalizing procedure over the reflected expression has to take many steps and so does the kernel to decide judgmental eq., or something else?</p>
+
+<a name="168356939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168356939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168356939">Mario Carneiro (Jun 17 2019 at 23:30)</a>:</h4>
+<p>Definitional equality is a large and complicated judgment. Normally we don't stress it too much, we just unfold a definition here or a beta reduction there. By "heavy rfl" I mean something with many steps of definitional reduction, comparable to the size of the entire rest of the proof term or even much much larger</p>
+
+<a name="168357022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357022">Wojciech Nawrocki (Jun 17 2019 at 23:32)</a>:</h4>
+<p>Okay, I think that's what I meant. So when you have that, you end up with a very small proof term which also happens to require a really large computation to typecheck, right?</p>
+
+<a name="168357029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357029">Mario Carneiro (Jun 17 2019 at 23:32)</a>:</h4>
+<p>right</p>
+
+<a name="168357039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357039">Mario Carneiro (Jun 17 2019 at 23:32)</a>:</h4>
+<p>and doing that computation in the kernel is not necessarily the best idea</p>
+
+<a name="168357062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357062">Wojciech Nawrocki (Jun 17 2019 at 23:33)</a>:</h4>
+<p>Okay, I think when saying ".. better for large expressions" I should've really said "better in terms of proof size", but not necessarily better in terms of <code>time lean --make</code>.</p>
+
+<a name="168357078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357078">Mario Carneiro (Jun 17 2019 at 23:33)</a>:</h4>
+<p>Most of the time, the length of the typing derivation is proportional to the size of the proof term, but heavy rfls break that comparison</p>
+
+<a name="168357128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357128">Mario Carneiro (Jun 17 2019 at 23:34)</a>:</h4>
+<p>In such cases it really is more accurate to measure the length of the typing derivation</p>
+
+<a name="168357172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357172">Mario Carneiro (Jun 17 2019 at 23:35)</a>:</h4>
+<p>To me, "proof size" means size of typing derivation, because that correlates to wall time</p>
+
+<a name="168357229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357229">Mario Carneiro (Jun 17 2019 at 23:36)</a>:</h4>
+<p>it is far too easy to write "short proofs" of every statement imaginable by doing a proof search in the kernel</p>
+
+<a name="168357240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357240">Wojciech Nawrocki (Jun 17 2019 at 23:36)</a>:</h4>
+<p>By typing derivation you mean the time it takes for the kernel to typecheck the term, but not elaboration/inference etc time?</p>
+
+<a name="168357242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357242">Mario Carneiro (Jun 17 2019 at 23:36)</a>:</h4>
+<p>yes</p>
+
+<a name="168357275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357275">Mario Carneiro (Jun 17 2019 at 23:37)</a>:</h4>
+<p>the other stuff is engineering challenges, and also it's a one time cost, at least in principle. The kernel typechecking is mandatory for correctness</p>
+
+<a name="168357420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357420">Wojciech Nawrocki (Jun 17 2019 at 23:40)</a>:</h4>
+<p>Right, but if a reflection tactic generates <em>heavy rfls</em> which take less time to check than an equivalent sequence of <code>eq.subst</code> or some such would, then it would still be preferrable?</p>
+
+<a name="168357425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357425">Mario Carneiro (Jun 17 2019 at 23:40)</a>:</h4>
+<p>yes</p>
+
+<a name="168357439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357439">Mario Carneiro (Jun 17 2019 at 23:41)</a>:</h4>
+<p>That's why I wrote <code>ring</code> and <code>ring2</code></p>
+
+<a name="168357444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357444">Mario Carneiro (Jun 17 2019 at 23:41)</a>:</h4>
+<p>because it wasn't obvious which method is faster in practice</p>
+
+<a name="168357503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357503">Mario Carneiro (Jun 17 2019 at 23:42)</a>:</h4>
+<p>but the kernel is not very optimized, in order to keep code size down, and it has to unfold many things because it doesn't exactly know where to go</p>
+
+<a name="168357509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357509">Mario Carneiro (Jun 17 2019 at 23:42)</a>:</h4>
+<p>with a proof term you can expose the kernel to only those things it needs to know</p>
+
+<a name="168357579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357579">Mario Carneiro (Jun 17 2019 at 23:44)</a>:</h4>
+<p>basically, you have a lot more control with a proof term than with a rfl proof</p>
+
+<a name="168357829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168357829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168357829">Wojciech Nawrocki (Jun 17 2019 at 23:50)</a>:</h4>
+<p>With a rfl proof, could you not write your decision procedure in a way that makes it easy to reduce for the kernel?</p>
+
+<a name="168358028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168358028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168358028">Mario Carneiro (Jun 17 2019 at 23:55)</a>:</h4>
+<p>yes you can, and it's pretty important that you do</p>
+
+<a name="168358033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168358033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168358033">Mario Carneiro (Jun 17 2019 at 23:55)</a>:</h4>
+<p>but there is still the matter of the O(1) constant</p>
+
+<a name="168358093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168358093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168358093">Mario Carneiro (Jun 17 2019 at 23:56)</a>:</h4>
+<p>and the only way to really find that out is to profile it</p>
+
+<a name="168358127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168358127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168358127">Mario Carneiro (Jun 17 2019 at 23:57)</a>:</h4>
+<p>I think even just using the equation compiler to define, say, functions on lists is bad for the kernel</p>
+
+<a name="168358139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168358139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168358139">Mario Carneiro (Jun 17 2019 at 23:57)</a>:</h4>
+<p>not that bad, but measurable</p>
+
 
 {% endraw %}
