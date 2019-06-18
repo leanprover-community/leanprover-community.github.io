@@ -1,0 +1,28 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/30241Elaborationoffunctiontypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/30241Elaborationoffunctiontypes.html">Elaboration of function types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168395778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Elaboration%20of%20function%20types/near/168395778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30241Elaborationoffunctiontypes.html#168395778">Wojciech Nawrocki (Jun 18 2019 at 12:36)</a>:</h4>
+<p>Is this behaviour of the elaborator expected/necessary or could it be improved so that the last two cases are also inferrable?</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="bp">λ</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span><span class="o">):</span> <span class="bp">_</span><span class="o">)</span> <span class="c1">-- good</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="bp">λ</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span><span class="o">):</span> <span class="o">(</span><span class="bp">_</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="c1">-- good</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="bp">λ</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span><span class="o">):</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">_</span><span class="o">))</span> <span class="c1">-- failed, sort expected ?m_1[a]</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="o">((</span><span class="bp">λ</span> <span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">n</span><span class="o">):</span> <span class="o">(</span><span class="bp">_</span> <span class="bp">→</span> <span class="bp">_</span><span class="o">))</span> <span class="c1">-- failed, sort expected ?m_1[a]</span>
+</pre></div>
+
+<a name="168396129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Elaboration%20of%20function%20types/near/168396129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30241Elaborationoffunctiontypes.html#168396129">Mario Carneiro (Jun 18 2019 at 12:40)</a>:</h4>
+<p>arguably this shouldn't happen with the arrow, which is supposed to be nondependent, but the parser turns the later two into <code>\forall _x:nat, _</code> which produces a metavariable <code>_x : nat |- ?m_1</code> and then the typing forces it to unify <code>?m_1[n] =?= nat</code>, and it doesn't like these sorts of unification problems so it delays, hoping that <code>?m_1</code> will be solved directly.</p>
+
+
+{% endraw %}
