@@ -10,13 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Directed/filtered categories](49705Directedfilteredcategories.html) (26 messages, latest: Jun 18 2019 at 21:58)
+
 * [leanpkg args](55408leanpkgargs.html) (1 message, latest: Jun 18 2019 at 20:39)
 
 * [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (10 messages, latest: Jun 18 2019 at 20:07)
 
 * [Docstring on constructor](92753Docstringonconstructor.html) (7 messages, latest: Jun 18 2019 at 17:20)
-
-* [Directed/filtered categories](49705Directedfilteredcategories.html) (20 messages, latest: Jun 18 2019 at 17:16)
 
 * [pattern matching exists in tactic mode](35678patternmatchingexistsintacticmode.html) (3 messages, latest: Jun 16 2019 at 16:50)
 
