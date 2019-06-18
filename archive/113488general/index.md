@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [integral rats](01873integralrats.html) (1 message, latest: Jun 18 2019 at 02:20)
+* [integral rats](01873integralrats.html) (2 messages, latest: Jun 18 2019 at 03:31)
 
 * [tactic question](62193tacticquestion.html) (43 messages, latest: Jun 18 2019 at 00:18)
 
