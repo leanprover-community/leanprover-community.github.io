@@ -10,7 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [integral rats](01873integralrats.html) (6 messages, latest: Jun 18 2019 at 13:40)
+* [functor universe](62547functoruniverse.html) (14 messages, latest: Jun 18 2019 at 14:56)
+
+* [online leanprover](19268onlineleanprover.html) (69 messages, latest: Jun 18 2019 at 14:42)
+
+* [integral rats](01873integralrats.html) (10 messages, latest: Jun 18 2019 at 14:13)
 
 * [Elaboration of function types](30241Elaborationoffunctiontypes.html) (2 messages, latest: Jun 18 2019 at 12:40)
 
@@ -129,8 +133,6 @@ permalink: archive/113488general/index.html
 * [Type classes again](90385Typeclassesagain.html) (84 messages, latest: Jun 05 2019 at 09:15)
 
 * [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
-
-* [online leanprover](19268onlineleanprover.html) (67 messages, latest: Jun 05 2019 at 03:43)
 
 * [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
 

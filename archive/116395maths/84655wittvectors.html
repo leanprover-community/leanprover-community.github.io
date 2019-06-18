@@ -1515,5 +1515,110 @@ int.euclidean_domain)))))))))
 <span class="k">by</span> <span class="n">try_for</span> <span class="mi">10000</span> <span class="o">{</span><span class="n">simp</span> <span class="n">only</span> <span class="n">at</span> <span class="n">hc</span><span class="o">}</span><span class="bp">;</span> <span class="n">sorry</span>
 </pre></div>
 
+<a name="168403526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168403526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168403526">Mario Carneiro (Jun 18 2019 at 14:00)</a>:</h4>
+<p>The profiler says all the time (about 22s) is spent in <code>mk_eq_mp</code>. Here's a minimized tactic from the core of <code>simp</code> that triggers the long running <code>mk_eq_mp</code>:</p>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="n">do</span>
+  <span class="n">h</span> <span class="err">←</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">hc</span><span class="o">,</span>
+  <span class="n">h_type</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">pr&#39;</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">[</span><span class="n">h_type</span><span class="o">],</span>
+  <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="n">pr</span><span class="o">)</span> <span class="err">←</span> <span class="n">simplify</span> <span class="n">simp_lemmas</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[]</span> <span class="n">h_type</span> <span class="o">{}</span> <span class="bp">`</span><span class="n">eq</span> <span class="n">failed</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="n">pr&#39;</span><span class="o">,</span> <span class="n">trace</span> <span class="n">pr</span><span class="o">,</span> <span class="n">trace</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">mk_eq_mp</span> <span class="n">pr</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>Replacing <code>pr</code> with the identical hand-rolled proof <code>pr'</code> takes no time at all. Perhaps metavariable instantiations are involved?</p>
+
+<a name="168404475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404475">Johan Commelin (Jun 18 2019 at 14:10)</a>:</h4>
+<p>I am totally lost at how you debug these things. The particular lemma that contains L301 seems very innocent. No weird universes or whatever.</p>
+
+<a name="168404522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404522">Mario Carneiro (Jun 18 2019 at 14:11)</a>:</h4>
+<p><code>mk_eq_mp</code> is defined in terms of <code>mk_app</code>, which is also slow along with <code>mk_mapp</code>. Even this is long running:</p>
+<div class="codehilite"><pre><span></span><span class="n">mk_mapp</span> <span class="bp">`</span><span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">[</span><span class="n">h_type</span><span class="o">,</span> <span class="n">h_type</span><span class="o">,</span> <span class="n">pr</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span>
+</pre></div>
+
+
+<p>It's not doing any inference! It's just typechecking</p>
+
+<a name="168404605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404605">Mario Carneiro (Jun 18 2019 at 14:12)</a>:</h4>
+<p>I debug this by finding the part that is slow and then delete everything that doesn't matter until almost nothing is left</p>
+
+<a name="168404676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404676">Johan Commelin (Jun 18 2019 at 14:13)</a>:</h4>
+<p>Is there an obvious code smell, if you look at that proof?</p>
+
+<a name="168404731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404731">Mario Carneiro (Jun 18 2019 at 14:14)</a>:</h4>
+<p>I'm still at the stage where I figure out why lean is stupid. Once I have that I can probably derive an appropriate code smell</p>
+
+<a name="168404814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404814">Mario Carneiro (Jun 18 2019 at 14:14)</a>:</h4>
+<p>I'm sure I've hit this bug before but I haven't investigated it in depth</p>
+
+<a name="168404851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404851">Mario Carneiro (Jun 18 2019 at 14:15)</a>:</h4>
+<p>the operative aspect here seems to be a slightly noncanonical typeclass path</p>
+
+<a name="168404870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404870">Johan Commelin (Jun 18 2019 at 14:15)</a>:</h4>
+<p>Thanks a lot for taking a look. I'm completely handicapped when it comes to debugging things like this. And I'm glad your thinking that Lean is stupid, instead of me being stupid <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="168404984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168404984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168404984">Johan Commelin (Jun 18 2019 at 14:16)</a>:</h4>
+<p>Feel free to push speed-ups upstream by the way.</p>
+
+<a name="168405056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168405056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168405056">Mario Carneiro (Jun 18 2019 at 14:17)</a>:</h4>
+<p>I don't know how useful adding workarounds on every line will be. I suspect that this issue comes up many many times in the file and that's the major problem</p>
+
+<a name="168405090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168405090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168405090">Johan Commelin (Jun 18 2019 at 14:17)</a>:</h4>
+<p>Ok</p>
+
+<a name="168405144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168405144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168405144">Johan Commelin (Jun 18 2019 at 14:18)</a>:</h4>
+<p>Feel free to push structural speed-ups upstream <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="168407094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168407094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168407094">Mario Carneiro (Jun 18 2019 at 14:39)</a>:</h4>
+<p>Okay, it's completely barebones now. The problem arises when <code>mk_app</code> and friends are passed a non-canonical instance and asked to unify the results. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Do you know what's happening here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">bar</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">bar</span> <span class="n">α</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">bar</span> <span class="n">α</span> <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span> <span class="n">α</span> <span class="bp">_</span><span class="o">))</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span>
+  <span class="n">h</span> <span class="err">←</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">h</span><span class="o">,</span>
+  <span class="n">ht</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+  <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">h1</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">h2</span><span class="o">)</span> <span class="err">←</span> <span class="n">return</span> <span class="n">ht</span><span class="o">,</span>
+  <span class="n">ht&#39;</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">h2</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">h2</span><span class="o">),</span>
+  <span class="n">pr</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">[</span><span class="n">ht</span><span class="o">],</span>
+  <span class="n">pr&#39;</span> <span class="err">←</span> <span class="n">mk_app</span> <span class="bp">`</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="o">[</span><span class="n">ht&#39;</span><span class="o">],</span>
+  <span class="n">trace</span> <span class="o">[</span><span class="n">ht</span><span class="o">,</span> <span class="n">ht</span><span class="o">,</span> <span class="n">pr&#39;</span><span class="o">,</span> <span class="n">h</span><span class="o">],</span>
+  <span class="n">mk_mapp</span> <span class="bp">`</span><span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">[</span><span class="n">ht</span><span class="o">,</span> <span class="n">ht</span><span class="o">,</span> <span class="n">pr&#39;</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span> <span class="c1">-- takes 23s</span>
+</pre></div>
+
+<a name="168407212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168407212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168407212">Johan Commelin (Jun 18 2019 at 14:40)</a>:</h4>
+<p>What is <code>P</code> doing in your example?</p>
+
+<a name="168407501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168407501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168407501">Johan Commelin (Jun 18 2019 at 14:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks a lot for stripping this down to a MWE. I would have never managed to do that.</p>
+
+<a name="168407546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168407546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168407546">Mario Carneiro (Jun 18 2019 at 14:43)</a>:</h4>
+<p>oops, don't need P</p>
+
+<a name="168408145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168408145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168408145">Sebastien Gouezel (Jun 18 2019 at 14:50)</a>:</h4>
+<p>Mario, if you're in a debugging mood, chasing stupid Lean behavior, you might have fun looking at <a href="https://github.com/leanprover-community/mathlib/blob/d8d25e9adb01c87c355ae1358bba431c1237e2eb/src/analysis/normed_space/operator_norm.lean#L211" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/d8d25e9adb01c87c355ae1358bba431c1237e2eb/src/analysis/normed_space/operator_norm.lean#L211">https://github.com/leanprover-community/mathlib/blob/d8d25e9adb01c87c355ae1358bba431c1237e2eb/src/analysis/normed_space/operator_norm.lean#L211</a> (that I already mentioned some time ago, but it was in a private branch then): it looks really strange to me that Lean is not able to infer the instance.</p>
+
 
 {% endraw %}
