@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactic question](62193tacticquestion.html) (42 messages, latest: Jun 17 2019 at 23:57)
+* [tactic question](62193tacticquestion.html) (43 messages, latest: Jun 18 2019 at 00:18)
 
 * [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (28 messages, latest: Jun 17 2019 at 21:04)
 
