@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [integral rats](01873integralrats.html) (11 messages, latest: Jun 18 2019 at 16:59)
+
 * [functor universe](62547functoruniverse.html) (14 messages, latest: Jun 18 2019 at 14:56)
 
 * [online leanprover](19268onlineleanprover.html) (69 messages, latest: Jun 18 2019 at 14:42)
-
-* [integral rats](01873integralrats.html) (10 messages, latest: Jun 18 2019 at 14:13)
 
 * [Elaboration of function types](30241Elaborationoffunctiontypes.html) (2 messages, latest: Jun 18 2019 at 12:40)
 

@@ -43,5 +43,60 @@ permalink: archive/113489newmembers/49705Directedfilteredcategories.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168413024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168413024">Reid Barton (Jun 18 2019 at 15:37)</a>:</h4>
 <p>Or perhaps more than one of these turns out to be useful</p>
 
+<a name="168417227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168417227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168417227">Calle Sönne (Jun 18 2019 at 16:24)</a>:</h4>
+<p>Thank you!</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">cocone_objs</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">),</span> <span class="bp">∃</span> <span class="n">Z</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">),</span> <span class="n">true</span><span class="o">)</span>
+</pre></div>
+
+
+<p><span class="user-mention" data-user-id="132893">@Ken Lee</span> this is a nice way to do the "filtered" criterion</p>
+
+<a name="168417371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168417371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168417371">Calle Sönne (Jun 18 2019 at 16:26)</a>:</h4>
+<p>Me and <span class="user-mention" data-user-id="132893">@Ken Lee</span> tried to define it ourselves, and ended up defining it as a category with additional structure (not sure if that is what you mean by subsingleton), what would be the main difference between that and prop? To me as a math student they seem to be the "same".</p>
+
+<a name="168417566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168417566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168417566">Reid Barton (Jun 18 2019 at 16:28)</a>:</h4>
+<p>To make it a subsingleton you would use <code>trunc</code> of a sigma type in place of an exists. Or make a structure which contains all the choices and take a <code>trunc</code> of the whole thing.</p>
+
+<a name="168417780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168417780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168417780">Chris Hughes (Jun 18 2019 at 16:31)</a>:</h4>
+<p>A good example of a subsingleton that isn't a prop is <code>fintype</code></p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">elems</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">complete</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">elems</span><span class="o">)</span>
+</pre></div>
+
+
+<p>The difference is that with this definition I can compute using the <code>finset</code> in question. For example <code>#eval fintype.elems bool</code> returns <code>{ff, tt}</code>, which I couldn't do with a mere proof that such a <code>finset</code> existed.</p>
+
+<a name="168418048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168418048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168418048">Reid Barton (Jun 18 2019 at 16:34)</a>:</h4>
+<p>Right, and the advantage of a Prop is that you never have to worry about having two different (as in non-definitionally equal) values of the Prop, or something else depending on the proof of that Prop.</p>
+
+<a name="168418181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168418181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168418181">Calle Sönne (Jun 18 2019 at 16:35)</a>:</h4>
+<blockquote>
+<p>To make it a subsingleton you would use <code>trunc</code> of a sigma type in place of an exists. Or make a structure which contains all the choices and take a <code>trunc</code> of the whole thing.</p>
+</blockquote>
+<p>What do you mean by trunc?</p>
+
+<a name="168418353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168418353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168418353">Chris Hughes (Jun 18 2019 at 16:37)</a>:</h4>
+<p><code>trunc</code> is quotient by the always true relation. This is a computable version of <code>nonempty</code>. It maintains some computability since you can turn any constant computable function <code>X -&gt; Y</code> into a function <code>trunc X -&gt; Y</code> computably.</p>
+
+<a name="168418640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168418640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168418640">Kevin Buzzard (Jun 18 2019 at 16:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="132603">@Calle Sönne</span> as you may well know, in Lean all proofs of <code>P</code> are the same. So if <code>P : Prop</code> and then <code>h1 : P</code> and <code>h2 : P</code> then we will have <code>h1 = h2</code> (and the proof will be <code>rfl</code>). However there are other types which have exactly one term, and then it might be a theorem that two terms of that type are equal rather than being true by definition. And furthermore the terms might somehow store data, whereas a proof in Lean is checked by the kernel and then instantly forgotten about (Lean basically just puts a tick by the proposition to say "this has been proved"). A subsingleton is a type T for which you can prove that if <code>a : T</code> and <code>b : T</code> then <code>a = b</code>. Examples are propositions, but there are other examples too.</p>
+
+<a name="168419221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168419221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168419221">Calle Sönne (Jun 18 2019 at 16:47)</a>:</h4>
+<p>So fintype, as <span class="user-mention" data-user-id="110044">@Chris Hughes</span> defined it, is a subsingleton since any two finite sets that contains exactly all terms of alpha are equal?</p>
+
+<a name="168419611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Directed/filtered%20categories/near/168419611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49705Directedfilteredcategories.html#168419611">Chris Hughes (Jun 18 2019 at 16:51)</a>:</h4>
+<p>Yes.</p>
+
 
 {% endraw %}

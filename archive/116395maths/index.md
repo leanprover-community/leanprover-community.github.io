@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (257 messages, latest: Jun 18 2019 at 14:50)
+* [witt vectors](84655wittvectors.html) (258 messages, latest: Jun 18 2019 at 16:00)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (21 messages, latest: Jun 18 2019 at 13:05)
 
