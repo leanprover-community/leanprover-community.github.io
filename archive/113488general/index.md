@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [integral rats](01873integralrats.html) (14 messages, latest: Jun 18 2019 at 18:59)
+* [integral rats](01873integralrats.html) (15 messages, latest: Jun 18 2019 at 19:01)
 
 * [norm_cast almost working](81944normcastalmostworking.html) (29 messages, latest: Jun 18 2019 at 17:58)
 
