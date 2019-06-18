@@ -10,17 +10,17 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (124 messages, latest: Jun 18 2019 at 07:58)
+* [witt vectors](84655wittvectors.html) (195 messages, latest: Jun 18 2019 at 08:56)
 
-* [witt vectors](84655wittvectors.html) (165 messages, latest: Jun 18 2019 at 07:43)
+* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (157 messages, latest: Jun 18 2019 at 08:50)
+
+* [Order on topologies](78527Orderontopologies.html) (57 messages, latest: Jun 18 2019 at 08:35)
 
 * [quotient_group.map_mk](38441quotientgroupmapmk.html) (4 messages, latest: Jun 17 2019 at 15:00)
 
 * [class of primes](04956classofprimes.html) (2 messages, latest: Jun 17 2019 at 11:06)
 
 * [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (2 messages, latest: Jun 16 2019 at 01:00)
-
-* [Order on topologies](78527Orderontopologies.html) (56 messages, latest: Jun 14 2019 at 13:28)
 
 * [CDGAs](23907CDGAs.html) (119 messages, latest: Jun 13 2019 at 17:00)
 

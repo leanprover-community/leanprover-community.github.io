@@ -131,5 +131,9 @@ permalink: archive/113488general/10497recursionoverlistnestedinductives.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20over%20list-nested%20inductives/near/168377421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10497recursionoverlistnestedinductives.html#168377421">Mario Carneiro (Jun 18 2019 at 07:51)</a>:</h4>
 <p>I think it is important to have them in the instances for sizeof so that the size passes through nested inductives (i.e. you wouldn't get the right answer with nested inductives like <code>list (list T) -&gt; T</code> unless the size of the inner list was represented in the size of the outer list), but it is otherwise undesirable to have parameters be counted in the size. I have had examples where this actually prevents some constructions; for example if you map a rose tree then the "size" should not change, but that's not true if the size of elements matter</p>
 
+<a name="168381401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursion%20over%20list-nested%20inductives/near/168381401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/10497recursionoverlistnestedinductives.html#168381401">Sebastian Ullrich (Jun 18 2019 at 08:54)</a>:</h4>
+<p>Ah, you want do a structure-preserving map over the children before recursing into them... in that case <code>sizeof</code> may not work and one should define their own measure, yes. But if this is not the case, I would still default to <code>sizeof</code>, personally.</p>
+
 
 {% endraw %}

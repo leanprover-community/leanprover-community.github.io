@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (30 messages, latest: Jun 18 2019 at 07:51)
+* [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (31 messages, latest: Jun 18 2019 at 08:54)
 
 * [integral rats](01873integralrats.html) (5 messages, latest: Jun 18 2019 at 05:56)
 
