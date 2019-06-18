@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Directed/filtered categories](49705Directedfilteredcategories.html) (8 messages, latest: Jun 18 2019 at 15:37)
+* [Directed/filtered categories](49705Directedfilteredcategories.html) (18 messages, latest: Jun 18 2019 at 16:51)
 
 * [Docstring on constructor](92753Docstringonconstructor.html) (6 messages, latest: Jun 18 2019 at 14:53)
 
