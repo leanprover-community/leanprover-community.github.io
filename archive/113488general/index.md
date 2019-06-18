@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [have rcases](77222havercases.html) (20 messages, latest: Jun 18 2019 at 20:59)
+* [have rcases](77222havercases.html) (27 messages, latest: Jun 18 2019 at 21:06)
 
 * [integral rats](01873integralrats.html) (17 messages, latest: Jun 18 2019 at 20:33)
 

@@ -117,5 +117,33 @@ permalink: archive/113488general/77222havercases.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168454800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168454800">Sebastian Ullrich (Jun 18 2019 at 20:59)</a>:</h4>
 <p>If by that you mean that they should do an indirection via an attribute when called, then that wouldn't help with changing their signature, which is encoded in the type, not the body, would it?</p>
 
+<a name="168454898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168454898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168454898">Mario Carneiro (Jun 18 2019 at 21:00)</a>:</h4>
+<p>That's true, but not entirely insurmountable in user code. You can have the tactic argument parser itself be a replacer</p>
+
+<a name="168454941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168454941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168454941">Mario Carneiro (Jun 18 2019 at 21:01)</a>:</h4>
+<p>Still, I'm thinking more along the lines of core lean support for a pattern like this</p>
+
+<a name="168454955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168454955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168454955">Sebastian Ullrich (Jun 18 2019 at 21:01)</a>:</h4>
+<p>Uhh... that doesn't sound like fun to implement</p>
+
+<a name="168455076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168455076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168455076">Mario Carneiro (Jun 18 2019 at 21:02)</a>:</h4>
+<p>I think you just have to tweak how reading <code>cases</code> in a tactic block translates to looking up the tactic <code>tactic.interactive.cases</code></p>
+
+<a name="168455127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168455127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168455127">Mario Carneiro (Jun 18 2019 at 21:03)</a>:</h4>
+<p>if that lookup mechanism was configurable, we could change it to point at some other definition with a different signature</p>
+
+<a name="168455330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168455330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168455330">Sebastian Ullrich (Jun 18 2019 at 21:05)</a>:</h4>
+<p>Sure, that sounds much more reasonable than doing the replacement inside the core tactics. I had a PR once that implemented something like that, but it never landed for Lean 3.</p>
+
+<a name="168455387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/have%20rcases/near/168455387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77222havercases.html#168455387">Mario Carneiro (Jun 18 2019 at 21:06)</a>:</h4>
+<p>the replacer approach is only for today's lean which doesn't give us any other options</p>
+
 
 {% endraw %}
