@@ -10,13 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [integral rats](01873integralrats.html) (6 messages, latest: Jun 18 2019 at 13:40)
+
 * [Elaboration of function types](30241Elaborationoffunctiontypes.html) (2 messages, latest: Jun 18 2019 at 12:40)
 
 * [big proof pdfs](40454bigproofpdfs.html) (1 message, latest: Jun 18 2019 at 10:53)
 
 * [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (31 messages, latest: Jun 18 2019 at 08:54)
-
-* [integral rats](01873integralrats.html) (5 messages, latest: Jun 18 2019 at 05:56)
 
 * [tactic question](62193tacticquestion.html) (43 messages, latest: Jun 18 2019 at 00:18)
 

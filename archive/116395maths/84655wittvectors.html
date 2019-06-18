@@ -1495,5 +1495,25 @@ int.euclidean_domain)))))))))
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168397524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168397524">Johan Commelin (Jun 18 2019 at 12:57)</a>:</h4>
 <p>But I also don't think <code>mod_e</code> is the main culprit. The code is also slow in parts where I don't use that.</p>
 
+<a name="168401087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168401087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168401087">Mario Carneiro (Jun 18 2019 at 13:36)</a>:</h4>
+<p>Okay, so here's a minimized version of the first suspiciously slow tactic, on <a href="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L301" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/witt-vectors/src/ring_theory/witt_vector.lean#L301">L301</a>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hc</span> <span class="o">:</span> <span class="n">P</span> <span class="o">(</span><span class="n">p</span> <span class="bp">*</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">coe</span> <span class="n">nat</span> <span class="n">α</span>
+      <span class="o">(</span><span class="bp">@</span><span class="n">coe_to_lift</span> <span class="n">nat</span> <span class="n">α</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">coe_base</span> <span class="n">nat</span> <span class="n">α</span>
+          <span class="o">(</span><span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_coe</span> <span class="n">α</span>
+            <span class="o">(</span><span class="bp">@</span><span class="n">mul_zero_class</span><span class="bp">.</span><span class="n">to_has_zero</span> <span class="n">α</span>
+              <span class="o">(</span><span class="bp">@</span><span class="n">semiring</span><span class="bp">.</span><span class="n">to_mul_zero_class</span> <span class="n">α</span>
+                  <span class="o">(</span><span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_semiring</span> <span class="n">α</span> <span class="bp">_</span><span class="o">)))</span>
+            <span class="bp">_</span> <span class="bp">_</span><span class="o">)))</span>
+      <span class="n">p</span><span class="o">)))</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">try_for</span> <span class="mi">10000</span> <span class="o">{</span><span class="n">simp</span> <span class="n">only</span> <span class="n">at</span> <span class="n">hc</span><span class="o">}</span><span class="bp">;</span> <span class="n">sorry</span>
+</pre></div>
+
 
 {% endraw %}
