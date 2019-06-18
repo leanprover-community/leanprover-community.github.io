@@ -10,6 +10,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [leanpkg args](55408leanpkgargs.html) (1 message, latest: Jun 18 2019 at 20:39)
+
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (10 messages, latest: Jun 18 2019 at 20:07)
+
 * [Docstring on constructor](92753Docstringonconstructor.html) (7 messages, latest: Jun 18 2019 at 17:20)
 
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (20 messages, latest: Jun 18 2019 at 17:16)
@@ -41,8 +45,6 @@ permalink: archive/113489newmembers/index.html
 * [subtype coercion to supertype](34195subtypecoerciontosupertype.html) (9 messages, latest: Jun 11 2019 at 13:32)
 
 * [fin n to list](36011finntolist.html) (2 messages, latest: Jun 10 2019 at 09:25)
-
-* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (9 messages, latest: Jun 10 2019 at 02:45)
 
 * [`where` clause in Lean?](31503whereclauseinLean.html) (11 messages, latest: Jun 10 2019 at 01:34)
 
