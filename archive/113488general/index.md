@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [norm_cast almost working](81944normcastalmostworking.html) (29 messages, latest: Jun 18 2019 at 17:58)
+
 * [integral rats](01873integralrats.html) (11 messages, latest: Jun 18 2019 at 16:59)
 
 * [functor universe](62547functoruniverse.html) (14 messages, latest: Jun 18 2019 at 14:56)
@@ -125,8 +127,6 @@ permalink: archive/113488general/index.html
 * [simplifier](47605simplifier.html) (6 messages, latest: Jun 05 2019 at 20:20)
 
 * [Structures in meta](37699Structuresinmeta.html) (15 messages, latest: Jun 05 2019 at 20:02)
-
-* [norm_cast almost working](81944normcastalmostworking.html) (23 messages, latest: Jun 05 2019 at 19:51)
 
 * [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
 

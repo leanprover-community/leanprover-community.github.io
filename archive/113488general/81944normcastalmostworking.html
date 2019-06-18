@@ -146,5 +146,31 @@ for instance if you try to use a rw rule that is already a norm_cast lemma</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/167424162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#167424162">Patrick Massot (Jun 05 2019 at 19:51)</a>:</h4>
 <p>I don't know enough context, but the first message in this thread contains a <code>coe_inj</code> which is successfully used by <code>norm_cast</code></p>
 
+<a name="168424116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/168424116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#168424116">Paul-Nicolas Madelaine (Jun 18 2019 at 17:22)</a>:</h4>
+<p>I fixed the handling of numerals, but there is something else going on in your example:<br>
+'coe_one' shouldn't be an elim_cast lemma</p>
+
+<a name="168424161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/168424161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#168424161">Paul-Nicolas Madelaine (Jun 18 2019 at 17:22)</a>:</h4>
+<p>it looks to be of the shape 'coe x'  = 'x',<br>
+but it's actually of the shape 'coe (@has_one.one alpha) = @has_one.one (with_zero alpha)'</p>
+
+<a name="168426232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/168426232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#168426232">Paul-Nicolas Madelaine (Jun 18 2019 at 17:24)</a>:</h4>
+<p>it should actually be a 'squash_cast' lema, but that's not clear either. I will try to clarify this in the documentation.</p>
+
+<a name="168438654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/168438654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#168438654">Paul-Nicolas Madelaine (Jun 18 2019 at 17:55)</a>:</h4>
+<p>I'm realizing that the labels are actually not as well defined as I hoped</p>
+
+<a name="168438921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/168438921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#168438921">Paul-Nicolas Madelaine (Jun 18 2019 at 17:57)</a>:</h4>
+<p>mainly the squash_cast label is an issue</p>
+
+<a name="168438997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20almost%20working/near/168438997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81944normcastalmostworking.html#168438997">Paul-Nicolas Madelaine (Jun 18 2019 at 17:58)</a>:</h4>
+<p>it's actually meant for every lemma that will "push the casts down" in some sense</p>
+
 
 {% endraw %}

@@ -45,5 +45,18 @@ permalink: archive/113489newmembers/92753Docstringonconstructor.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Docstring%20on%20constructor/near/168408477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92753Docstringonconstructor.html#168408477">Wojciech Nawrocki (Jun 18 2019 at 14:53)</a>:</h4>
 <p>I think as an excuse to learn the Lean sources a bit, I could give implementing this a stab.</p>
 
+<a name="168423968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Docstring%20on%20constructor/near/168423968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/92753Docstringonconstructor.html#168423968">Wojciech Nawrocki (Jun 18 2019 at 17:20)</a>:</h4>
+<p>This is a little more annoying than I thought, basically because in the following comment A applies to a ctr, but comment B applies to the next inductive, <code>bar</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">foo</span><span class="o">:</span> <span class="kt">Type</span>
+<span class="c">/-</span><span class="cm">- A -/</span>
+<span class="bp">|</span> <span class="n">mk_foo</span><span class="o">:</span> <span class="n">foo</span>
+<span class="c">/-</span><span class="cm">- B-/</span>
+<span class="kn">inductive</span> <span class="n">bar</span><span class="o">:</span> <span class="kt">Type</span>
+</pre></div>
+
+
+<p>Which means the parser has to do lookahead to determine what the doc-block applies to. Is it okay to do that?</p>
+
 
 {% endraw %}

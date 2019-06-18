@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Directed/filtered categories](49705Directedfilteredcategories.html) (18 messages, latest: Jun 18 2019 at 16:51)
+* [Docstring on constructor](92753Docstringonconstructor.html) (7 messages, latest: Jun 18 2019 at 17:20)
 
-* [Docstring on constructor](92753Docstringonconstructor.html) (6 messages, latest: Jun 18 2019 at 14:53)
+* [Directed/filtered categories](49705Directedfilteredcategories.html) (20 messages, latest: Jun 18 2019 at 17:16)
 
 * [pattern matching exists in tactic mode](35678patternmatchingexistsintacticmode.html) (3 messages, latest: Jun 16 2019 at 16:50)
 
