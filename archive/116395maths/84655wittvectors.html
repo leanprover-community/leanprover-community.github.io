@@ -1310,5 +1310,123 @@ int.euclidean_domain)))))))))
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168381567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168381567">Johan Commelin (Jun 18 2019 at 08:56)</a>:</h4>
 <p>You are right that the first one could be closed by <code>refl</code>. Which is weird, because it was produced by <code>congr</code>, I think.</p>
 
+<a name="168382302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382302">Johan Commelin (Jun 18 2019 at 09:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I feel like I'm bitten by having to work explicitly with integers. But that cannot be avoided. It's crucial to show that these polynomials are defined over <code>int</code>, because <code>int</code> is the initial object in <code>CommRing</code>. And one cannot simply write down these polynomials over an arbitrary ring. Their coefficients are rational numbers that after a lot of work turn out to actually be integers.</p>
+
+<a name="168382313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382313">Johan Commelin (Jun 18 2019 at 09:11)</a>:</h4>
+<p>I have no idea how to make the code faster, more well-behaved.</p>
+
+<a name="168382803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382803">Mario Carneiro (Jun 18 2019 at 09:19)</a>:</h4>
+<p><code>mod_e</code> should be a definition</p>
+
+<a name="168382881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382881">Johan Commelin (Jun 18 2019 at 09:20)</a>:</h4>
+<p>Can you explain why?</p>
+
+<a name="168382923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382923">Mario Carneiro (Jun 18 2019 at 09:21)</a>:</h4>
+<p>you should not make a notation for a very complex term. This increases the difference between what you see and what lean sees</p>
+
+<a name="168382925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382925">Johan Commelin (Jun 18 2019 at 09:21)</a>:</h4>
+<p>Do you think it is a reasonable "concept" or is there a better way to do "calculations modulo [ideal/element]"</p>
+
+<a name="168382944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168382944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168382944">Mario Carneiro (Jun 18 2019 at 09:21)</a>:</h4>
+<p>You could use an equivalence relation</p>
+
+<a name="168383010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383010">Mario Carneiro (Jun 18 2019 at 09:22)</a>:</h4>
+<p>but I don't know if I should tweak the mathematics aspects too heavily</p>
+
+<a name="168383022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383022">Mario Carneiro (Jun 18 2019 at 09:22)</a>:</h4>
+<p>if you need ideals, so be it</p>
+
+<a name="168383069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383069">Mario Carneiro (Jun 18 2019 at 09:23)</a>:</h4>
+<p>I think it should be a general definition though; <code>a = b [MOD n]</code> should be generalized</p>
+
+<a name="168383147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383147">Johan Commelin (Jun 18 2019 at 09:24)</a>:</h4>
+<blockquote>
+<p>I think it should be a general definition though; <code>a = b [MOD n]</code> should be generalized</p>
+</blockquote>
+<p>You mean from <code>ℤ</code> to an arbitrary ring?</p>
+
+<a name="168383169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383169">Mario Carneiro (Jun 18 2019 at 09:24)</a>:</h4>
+<p>yes</p>
+
+<a name="168383175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383175">Mario Carneiro (Jun 18 2019 at 09:24)</a>:</h4>
+<p>and possibly to ideals</p>
+
+<a name="168383189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383189">Mario Carneiro (Jun 18 2019 at 09:25)</a>:</h4>
+<p>I see you needed a few variations on this</p>
+
+<a name="168383270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383270">Johan Commelin (Jun 18 2019 at 09:26)</a>:</h4>
+<p>Do you think that <code>mod_e</code> is one of the reasons that the file is slow?</p>
+
+<a name="168383303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383303">Mario Carneiro (Jun 18 2019 at 09:26)</a>:</h4>
+<p>it's a factor in the huge pp.all terms</p>
+
+<a name="168383320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383320">Mario Carneiro (Jun 18 2019 at 09:26)</a>:</h4>
+<p>because <code>mod_e</code> hides an <code>ideal.span</code> and <code>quotient.mk</code> and each of these takes a bunch of typeclass args</p>
+
+<a name="168383329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383329">Johan Commelin (Jun 18 2019 at 09:27)</a>:</h4>
+<p>But <code>blur</code> doesn't even use it. And there the <code>rw this</code> still fails... <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="168383351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383351">Mario Carneiro (Jun 18 2019 at 09:27)</a>:</h4>
+<p>where do you start sensing problems?</p>
+
+<a name="168383373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383373">Johan Commelin (Jun 18 2019 at 09:27)</a>:</h4>
+<p>Should we also build <code>eval_c</code> which is <code>eval₂ C</code>? I'm using <code>eval₂ C</code> a lot.</p>
+
+<a name="168383435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383435">Mario Carneiro (Jun 18 2019 at 09:28)</a>:</h4>
+<p>I noticed</p>
+
+<a name="168383440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383440">Johan Commelin (Jun 18 2019 at 09:28)</a>:</h4>
+<p><code>witt_structure_rat_rec_aux</code> is slow</p>
+
+<a name="168383444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383444">Mario Carneiro (Jun 18 2019 at 09:28)</a>:</h4>
+<p>I thought that this was one of the eval functions</p>
+
+<a name="168383476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383476">Johan Commelin (Jun 18 2019 at 09:29)</a>:</h4>
+<p>And <code>dvd_sub_pow_of_dvd_sub</code> is also incredibly slow, but I think that's completely orthogonal to the others.</p>
+
+<a name="168383572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383572">Johan Commelin (Jun 18 2019 at 09:30)</a>:</h4>
+<p>Lines 554–735 are very slow. And that's exactly the part that is hard for mathematicians. The rest is all "math-trivial".</p>
+
+<a name="168383596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383596">Johan Commelin (Jun 18 2019 at 09:30)</a>:</h4>
+<p>It is the part where we show that the polynomials have integral coefficients. It takes most textbooks half a page <span aria-label="shock" class="emoji emoji-1f628" role="img" title="shock">:shock:</span></p>
+
+<a name="168383698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383698">Johan Commelin (Jun 18 2019 at 09:32)</a>:</h4>
+<blockquote>
+<p>I thought that this was one of the eval functions</p>
+</blockquote>
+<p>No, we don't have a wrapper for <code>eval₂ C</code>.</p>
+
+<a name="168383940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt%20vectors/near/168383940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/84655wittvectors.html#168383940">Chris Hughes (Jun 18 2019 at 09:35)</a>:</h4>
+<p>Is it the bind operation for mv_polynomial as a monad that you're using?</p>
+
 
 {% endraw %}
