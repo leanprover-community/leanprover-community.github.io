@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [big proof pdfs](40454bigproofpdfs.html) (1 message, latest: Jun 18 2019 at 10:53)
+
 * [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (31 messages, latest: Jun 18 2019 at 08:54)
 
 * [integral rats](01873integralrats.html) (5 messages, latest: Jun 18 2019 at 05:56)

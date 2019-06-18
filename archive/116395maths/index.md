@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (223 messages, latest: Jun 18 2019 at 09:35)
+* [witt vectors](84655wittvectors.html) (224 messages, latest: Jun 18 2019 at 10:01)
 
 * [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (157 messages, latest: Jun 18 2019 at 08:50)
 
