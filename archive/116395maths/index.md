@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (224 messages, latest: Jun 18 2019 at 10:01)
+* [witt vectors](84655wittvectors.html) (238 messages, latest: Jun 18 2019 at 12:57)
+
+* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (20 messages, latest: Jun 18 2019 at 12:53)
 
 * [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (157 messages, latest: Jun 18 2019 at 08:50)
 
@@ -27,8 +29,6 @@ permalink: archive/116395maths/index.html
 * [HoTT](75424HoTT.html) (210 messages, latest: Jun 12 2019 at 21:55)
 
 * [group.lean in natural language](40846groupleaninnaturallanguage.html) (15 messages, latest: Jun 12 2019 at 16:51)
-
-* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (15 messages, latest: Jun 12 2019 at 02:29)
 
 * [Sheaves](28656Sheaves.html) (47 messages, latest: Jun 11 2019 at 06:45)
 
