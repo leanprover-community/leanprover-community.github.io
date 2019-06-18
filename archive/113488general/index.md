@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [norm_cast almost working](81944normcastalmostworking.html) (29 messages, latest: Jun 18 2019 at 17:58)
+* [integral rats](01873integralrats.html) (14 messages, latest: Jun 18 2019 at 18:59)
 
-* [integral rats](01873integralrats.html) (11 messages, latest: Jun 18 2019 at 16:59)
+* [norm_cast almost working](81944normcastalmostworking.html) (29 messages, latest: Jun 18 2019 at 17:58)
 
 * [functor universe](62547functoruniverse.html) (14 messages, latest: Jun 18 2019 at 14:56)
 

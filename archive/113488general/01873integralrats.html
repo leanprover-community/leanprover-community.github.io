@@ -119,5 +119,17 @@ the reason is that norm_cast never tries to unfold coercions.</p>
 <span class="kn">end</span>
 </pre></div>
 
+<a name="168444623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444623">Kevin Buzzard (Jun 18 2019 at 18:56)</a>:</h4>
+<p>You are trying to rewrite the term <code>{num := r, denom := d, pos := r_pos, cop := r_cop}</code>. Here <code>r_cop</code> is a proof that <code>r</code> and <code>d</code> are coprime. Your <code>h</code> is a proof of <code>d=1</code> so if you do the naive rewrite then <code>denom</code> will become <code>1</code> but <code>r_cop</code> will still be a proof that <code>r</code> and <code>d</code> are coprime, so this term is no longer meaningful.</p>
+
+<a name="168444765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444765">Kevin Buzzard (Jun 18 2019 at 18:58)</a>:</h4>
+<p>The two standard tricks to fix this issue are <code>erw h</code> and <code>simp only [h]</code>, each of which may or may not work. Here <code>erw</code> does not but <code>simp only</code> does. Another cool trick, which works if <code>h</code> is of the form <code>variable = term</code>, is <code>subst h</code>; this also works in your case.</p>
+
+<a name="168444815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/integral%20rats/near/168444815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01873integralrats.html#168444815">Kevin Buzzard (Jun 18 2019 at 18:59)</a>:</h4>
+<p><code>subst</code> is very cool, it rewrites every occurrence of <code>d</code> in everything.</p>
+
 
 {% endraw %}
