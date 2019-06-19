@@ -10,6 +10,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1102 local rings](859421102localrings.html) (3 messages, latest: Jun 19 2019 at 09:59)
+
 * [#943 lc refactor](96169943lcrefactor.html) (32 messages, latest: Jun 18 2019 at 09:00)
 
 * [#461 integral closure](12978461integralclosure.html) (21 messages, latest: Jun 16 2019 at 19:32)
@@ -25,8 +27,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1085 topological modules](409681085topologicalmodules.html) (4 messages, latest: Jun 03 2019 at 19:47)
 
 * [#1073 pnat](351701073pnat.html) (2 messages, latest: Jun 03 2019 at 13:05)
-
-* [#1102 local rings](859421102localrings.html) (2 messages, latest: Jun 01 2019 at 19:47)
 
 * [#1067 open subgroups](826061067opensubgroups.html) (1 message, latest: May 30 2019 at 05:29)
 

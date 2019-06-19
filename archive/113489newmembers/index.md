@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (11 messages, latest: Jun 19 2019 at 09:59)
+
 * [leanpkg args](55408leanpkgargs.html) (4 messages, latest: Jun 19 2019 at 01:12)
 
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (26 messages, latest: Jun 18 2019 at 21:58)
-
-* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (10 messages, latest: Jun 18 2019 at 20:07)
 
 * [Docstring on constructor](92753Docstringonconstructor.html) (7 messages, latest: Jun 18 2019 at 17:20)
 
