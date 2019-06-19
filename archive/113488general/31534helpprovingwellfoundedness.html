@@ -1,0 +1,48 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/31534helpprovingwellfoundedness.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/31534helpprovingwellfoundedness.html">help proving well-foundedness</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168492105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20proving%20well-foundedness/near/168492105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31534helpprovingwellfoundedness.html#168492105">Scott Morrison (Jun 19 2019 at 09:44)</a>:</h4>
+<p>I am terrible at proving well-foundedness, apparently (or maybe just bad at telling when something is well-founded in the first place). Can anyone provide the proof of well-foundedness here:</p>
+<div class="codehilite"><pre><span></span>universe u
+
+inductive pgame : Type (u+1)
+| mk : ∀ α β : Type u, (α → pgame) → (β → pgame) → pgame
+
+namespace pgame
+
+def left_moves : pgame → Type u
+| (mk l _ _ _) := l
+def right_moves : pgame → Type u
+| (mk _ r _ _) := r
+
+def move_left : Π (g : pgame), left_moves g → pgame
+| (mk l _ L _) i := L i
+def move_right : Π (g : pgame), right_moves g → pgame
+| (mk _ r _ R) j := R j
+
+inductive r : pgame → pgame → Prop
+| left : Π (x : pgame) (i : x.left_moves), r (x.move_left i) x
+| right : Π (x : pgame) (j : x.right_moves), r (x.move_right j) x
+| trans : Π (x y z : pgame), r x y → r y z → r x z
+
+theorem wf_r : well_founded r :=
+begin
+  sorry
+end
+
+end pgame
+</pre></div>
+
+
+{% endraw %}

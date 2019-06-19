@@ -10,11 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [installing mathlib](12119installingmathlib.html) (39 messages, latest: Jun 19 2019 at 09:53)
+
+* [help proving well-foundedness](31534helpprovingwellfoundedness.html) (1 message, latest: Jun 19 2019 at 09:44)
+
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (58 messages, latest: Jun 19 2019 at 09:42)
+
+* [broke mathlib](30325brokemathlib.html) (1 message, latest: Jun 19 2019 at 09:36)
+
 * [coe mv_polynomial](39198coemvpolynomial.html) (10 messages, latest: Jun 19 2019 at 08:54)
-
-* [installing mathlib](12119installingmathlib.html) (29 messages, latest: Jun 19 2019 at 08:52)
-
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (55 messages, latest: Jun 19 2019 at 05:36)
 
 * [have rcases](77222havercases.html) (27 messages, latest: Jun 18 2019 at 21:06)
 
