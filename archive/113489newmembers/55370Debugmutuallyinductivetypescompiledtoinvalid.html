@@ -345,5 +345,79 @@ with Q : S -&gt; Set :=
 | mk&#39; : forall (s : S), list (P s) -&gt; Q s.
 </pre></div>
 
+<a name="168515045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168515045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168515045">Chris Hughes (Jun 19 2019 at 15:07)</a>:</h4>
+<p>You can see what your inductive type actually is with<code> #print affine_point</code></p>
+
+<a name="168515070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168515070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168515070">Kevin Sullivan (Jun 19 2019 at 15:07)</a>:</h4>
+<blockquote>
+<p>I've done a bunch of maths in Lean and I have never once had to use a mutually inductive type.</p>
+</blockquote>
+<p>Kevin B: Thanks. This is a good place for mutual inductive definitions. A point in an affine space can be given coordinates in terms of a frame. A vector can be given coordinates in the same way. A frame, in turn, comprises a point and a set of vectors constituting a basis for the vector space. These points and vectors, being points and vectors, in turn have coordinates in terms of some (possibly other) frame. It all bottoms out with the concept of a standard frame with a standard origin point and standard basis vectors. What this structure naturally supports is the situation where you have chains of changes in basis/coordinate-systems. This kind of situation arises frequently in domains like computer graphics and robotics.</p>
+
+<a name="168515257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168515257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168515257">Kevin Sullivan (Jun 19 2019 at 15:08)</a>:</h4>
+<blockquote>
+<p>You can see what your inductive type actually is with<code> #print affine_point</code></p>
+</blockquote>
+<p>Ok, that's easy. Thank you.</p>
+
+<a name="168515436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168515436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168515436">Kevin Sullivan (Jun 19 2019 at 15:09)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>You can see what your inductive type actually is with<code> #print affine_point</code></p>
+</blockquote>
+<p>Ok, that's easy. Thank you.</p>
+</blockquote>
+<p>Except that the definition isn't accepted, so affine_point isn't defined. Any way to see what Lean is trying to reduce the definition to?</p>
+
+<a name="168515804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168515804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168515804">Chris Hughes (Jun 19 2019 at 15:13)</a>:</h4>
+<p>This is mutual and nested, because you have <code>list (affine_vector s) </code> as a constructor. That might be the problem.</p>
+
+<a name="168516106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168516106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168516106">Andrew Ashworth (Jun 19 2019 at 15:17)</a>:</h4>
+<p>this example is given in  <a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types</a></p>
+
+<a name="168516123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168516123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168516123">Kevin Sullivan (Jun 19 2019 at 15:17)</a>:</h4>
+<blockquote>
+<p>This is mutual and nested, because you have <code>list (affine_vector s) </code> as a constructor. That might be the problem.</p>
+</blockquote>
+<p>Example <a href="https://github.com/leanprover-community/mathlib/issues/1" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1">#1</a> is mutual and nested but not polymorphic, and it works. Example <a href="https://github.com/leanprover-community/mathlib/issues/2" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/2">#2</a> is mutual and polymorphic but not nested, and it works. Example <a href="https://github.com/leanprover-community/mathlib/issues/3" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/3">#3</a> is mutual, polymorphic, and nested. That's where it breaks. Yet it works in Coq.</p>
+
+<a name="168516203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168516203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168516203">Andrew Ashworth (Jun 19 2019 at 15:18)</a>:</h4>
+<p>as a quick fix, you could try to redo it giving the specialization of <code>list</code> explicitly as another type</p>
+
+<a name="168516318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168516318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168516318">Andrew Ashworth (Jun 19 2019 at 15:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">P</span><span class="o">,</span> <span class="n">Q</span><span class="o">,</span> <span class="n">Q_list</span>  <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span>
+<span class="k">with</span> <span class="n">P</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">s</span>
+<span class="k">with</span> <span class="n">Q</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="n">mk&#39;</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">P</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="n">s</span>
+<span class="k">with</span> <span class="n">Q_list</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">{}</span> <span class="o">:</span>  <span class="n">Q_list</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">Q_list</span> <span class="bp">→</span> <span class="n">Q_list</span>
+</pre></div>
+
+<a name="168516346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168516346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168516346">Andrew Ashworth (Jun 19 2019 at 15:19)</a>:</h4>
+<p>I have no idea if this translates exactly to the semantics of what you want, though</p>
+
+<a name="168516630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168516630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168516630">Andrew Ashworth (Jun 19 2019 at 15:23)</a>:</h4>
+<p>interesting, your original example doesn't even need that </p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">S</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">P</span><span class="o">,</span> <span class="n">Q</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">S</span><span class="o">)</span>
+<span class="k">with</span> <span class="n">P</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">s</span>
+<span class="k">with</span> <span class="n">Q</span> <span class="o">:</span> <span class="n">S</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mk&#39;</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">P</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="n">s</span>
+</pre></div>
+
 
 {% endraw %}
