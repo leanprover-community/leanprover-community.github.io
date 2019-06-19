@@ -10,6 +10,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Bugs](04242Bugs.html) (1 message, latest: Jun 19 2019 at 14:58)
+
+* [downsets in orders](26462downsetsinorders.html) (4 messages, latest: Jun 19 2019 at 14:55)
+
+* [tactic question](62193tacticquestion.html) (44 messages, latest: Jun 19 2019 at 14:37)
+
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (75 messages, latest: Jun 19 2019 at 13:57)
 
 * [installing mathlib](12119installingmathlib.html) (43 messages, latest: Jun 19 2019 at 13:47)
@@ -17,8 +23,6 @@ permalink: archive/113488general/index.html
 * [bazout lemma](89218bazoutlemma.html) (2 messages, latest: Jun 19 2019 at 13:24)
 
 * [broke mathlib](30325brokemathlib.html) (2 messages, latest: Jun 19 2019 at 12:19)
-
-* [downsets in orders](26462downsetsinorders.html) (1 message, latest: Jun 19 2019 at 11:38)
 
 * [How to design math libraries](34835Howtodesignmathlibraries.html) (11 messages, latest: Jun 19 2019 at 10:57)
 
@@ -43,8 +47,6 @@ permalink: archive/113488general/index.html
 * [big proof pdfs](40454bigproofpdfs.html) (1 message, latest: Jun 18 2019 at 10:53)
 
 * [recursion over list-nested inductives](10497recursionoverlistnestedinductives.html) (31 messages, latest: Jun 18 2019 at 08:54)
-
-* [tactic question](62193tacticquestion.html) (43 messages, latest: Jun 18 2019 at 00:18)
 
 * [learn about macros](55827learnaboutmacros.html) (12 messages, latest: Jun 17 2019 at 15:55)
 
