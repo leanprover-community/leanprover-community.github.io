@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (11 messages, latest: Jun 19 2019 at 09:59)
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (12 messages, latest: Jun 19 2019 at 10:52)
 
 * [leanpkg args](55408leanpkgargs.html) (4 messages, latest: Jun 19 2019 at 01:12)
 

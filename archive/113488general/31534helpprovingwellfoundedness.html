@@ -44,5 +44,27 @@ end
 end pgame
 </pre></div>
 
+<a name="168492989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20proving%20well-foundedness/near/168492989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31534helpprovingwellfoundedness.html#168492989">Mario Carneiro (Jun 19 2019 at 10:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">wf_r</span> <span class="o">:</span> <span class="n">well_founded</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">x</span> <span class="k">with</span> <span class="n">l</span> <span class="n">r</span> <span class="n">L</span> <span class="n">R</span> <span class="n">IHl</span> <span class="n">IHr</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">y</span> <span class="n">h</span><span class="o">,</span> <span class="bp">_⟩</span><span class="o">,</span>
+  <span class="n">generalize_hyp</span> <span class="n">e</span> <span class="o">:</span> <span class="n">mk</span> <span class="n">l</span> <span class="n">r</span> <span class="n">L</span> <span class="n">R</span> <span class="bp">=</span> <span class="n">x</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">_</span> <span class="n">i</span> <span class="bp">_</span> <span class="n">j</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">_</span> <span class="n">h1</span> <span class="n">h2</span> <span class="n">IH1</span> <span class="n">IH2</span><span class="bp">;</span> <span class="n">subst</span> <span class="n">e</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">IHl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">IHr</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">acc</span><span class="bp">.</span><span class="n">inv</span> <span class="o">(</span><span class="n">IH2</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">h1</span> <span class="o">}</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="168493150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20proving%20well-foundedness/near/168493150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31534helpprovingwellfoundedness.html#168493150">Scott Morrison (Jun 19 2019 at 10:02)</a>:</h4>
+<p>Wow! Not trivial. I feel less bad failing to do that. :-)</p>
+
+<a name="168493190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20proving%20well-foundedness/near/168493190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31534helpprovingwellfoundedness.html#168493190">Mario Carneiro (Jun 19 2019 at 10:03)</a>:</h4>
+<p>the transitivity part is tricky. Usually I would have used the lemma that says the transitive closure of a wf relation is wf</p>
+
 
 {% endraw %}
