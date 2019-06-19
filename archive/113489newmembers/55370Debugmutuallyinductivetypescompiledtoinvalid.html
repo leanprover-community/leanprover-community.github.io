@@ -292,5 +292,58 @@ with affine_frame : space → Type 1
 </blockquote>
 <p>I guess my first question is whether my definition violates a fundamental constraint (e.g., positivity), or whether what I'm seeing is the just that Lean isn't yet capable of  dealing with such a definition. My second question is, where do I go for a complete definition of the unrolling method?</p>
 
+<a name="168512572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168512572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168512572">Kevin Sullivan (Jun 19 2019 at 14:39)</a>:</h4>
+<p>To help, I've abstracted from the affine space details and have reduced the problem instance to a very short piece of code. I give three versions here of almost the same definition. The first two work; the third is borked and isolates the problem.</p>
+<p>(1) Works: Two <em>non-polymorphic</em> mutually inductive types, the second taking a list of the first as an argument.<br>
+(2) Works: Two polymorphic mutually inductive types, the second taking only a single instance of the first as an argument.<br>
+(3) Borked: Two polymorphic mutually inductive types, the second taking a <em>list</em> of the first as an argument.</p>
+<div class="codehilite"><pre><span></span>-- a type argument
+axiom S : Type
+
+-- #1 [WORKS] (Note: s arguments are ignored)
+mutual inductive X, Y
+with X : Type
+    | mk : Π (s : S), Y → X
+with Y : Type
+    | mk&#39; : Π (s : S), list X  → Y
+
+-- #2 [WORKS]
+mutual inductive A, B
+with A : S → Type
+    | mk : Π (s : S), B s → A s
+with B : S → Type
+    | mk&#39; : Π (s : S), A s → B s
+
+-- #3 [BORKED]
+mutual inductive P, Q
+with P : S → Type
+    | mk : Π (s : S), Q s → P s
+with Q : S → Type
+    | mk&#39; : Π (s : S), list (P s) → Q s    -- putting list in front of (P s) breaks it
+</pre></div>
+
+
+<p>I should know the answer to this but I don't: Will Lean print out the unrolled definitions of P, Q?</p>
+
+<a name="168513922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168513922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168513922">Kevin Sullivan (Jun 19 2019 at 14:55)</a>:</h4>
+<div class="codehilite"><pre><span></span>-- #3 [BORKED]
+mutual inductive P, Q
+with P : S → Type
+    | mk : Π (s : S), Q s → P s
+with Q : S → Type
+    | mk&#39; : Π (s : S), list (P s) → Q s    -- putting list in front of (P s) breaks it
+</pre></div>
+
+
+<p>Works in Coq.</p>
+<div class="codehilite"><pre><span></span>Axiom S : Set.
+Inductive P : S -&gt; Set :=
+| mk : forall (s : S), Q s -&gt; P s
+with Q : S -&gt; Set :=
+| mk&#39; : forall (s : S), list (P s) -&gt; Q s.
+</pre></div>
+
 
 {% endraw %}

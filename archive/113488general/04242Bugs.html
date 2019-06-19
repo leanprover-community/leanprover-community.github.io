@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/04242Bugs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/04242Bugs.html">Bugs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168514210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bugs/near/168514210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04242Bugs.html#168514210">Sebastien Gouezel (Jun 19 2019 at 14:58)</a>:</h4>
+<p>I have the impression to meet more and more surprising behavior of Lean lately, and also that I am not the only one on this chat. Maybe because we are pushing Lean further than the way it has really been used before, and this is bound to uncover some suprises.</p>
+<p>Anyway, I just wanted to share with you the following funny fact (no MWE, this is deep inside a non-finished theory). I am not asking for help or whatever, as I have a workaround.</p>
+<div class="codehilite"><pre><span></span>      <span class="n">apply</span> <span class="n">mdifferentiable_at_atlas_to_fun</span> <span class="n">e&#39;_atlas</span><span class="o">,</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">local_homeomorph</span><span class="bp">.</span><span class="n">trans_source</span><span class="o">]</span> <span class="n">at</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">hx</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>works fine. But if I exchange the first two lines (which should commute because they don't touch the same objects),</p>
+<div class="codehilite"><pre><span></span>      <span class="n">simp</span> <span class="o">[</span><span class="n">local_homeomorph</span><span class="bp">.</span><span class="n">trans_source</span><span class="o">]</span> <span class="n">at</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">mdifferentiable_at_atlas_to_fun</span> <span class="n">e&#39;_atlas</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">hx</span><span class="bp">.</span><span class="mi">2</span>
+</pre></div>
+
+
+<p>fails with a complain on <code>apply</code> saying</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">apply</span> <span class="n">tactic</span><span class="o">,</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">unify</span>
+  <span class="n">mdifferentiable_at</span> <span class="n">k</span> <span class="o">((</span><span class="n">e&#39;</span><span class="bp">.</span><span class="n">to_local_equiv</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span> <span class="o">((</span><span class="n">e</span><span class="bp">.</span><span class="n">to_local_equiv</span><span class="o">)</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">x</span><span class="o">)</span>
+<span class="k">with</span>
+  <span class="n">mdifferentiable_at</span> <span class="err">?</span><span class="n">m_10</span> <span class="o">((</span><span class="n">e&#39;</span><span class="bp">.</span><span class="n">to_local_equiv</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span> <span class="err">?</span><span class="n">m_17</span>
+</pre></div>
+
+
+{% endraw %}

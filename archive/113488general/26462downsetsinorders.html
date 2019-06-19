@@ -15,5 +15,46 @@ permalink: archive/113488general/26462downsetsinorders.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/downsets%20in%20orders/near/168498260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26462downsetsinorders.html#168498260">Johan Commelin (Jun 19 2019 at 11:38)</a>:</h4>
 <p>Do we have notation for the set of all terms smaller than a given term?</p>
 
+<a name="168513899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/downsets%20in%20orders/near/168513899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26462downsetsinorders.html#168513899">Johan Commelin (Jun 19 2019 at 14:54)</a>:</h4>
+<p>I need to fill in the following <code>sorry</code>s:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finsupp</span> <span class="n">order</span><span class="bp">.</span><span class="n">complete_lattice</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span>
+
+<span class="kn">namespace</span> <span class="n">finsupp</span>
+<span class="kn">open</span> <span class="n">lattice</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">σ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">σ</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">g</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">s</span><span class="o">,</span> <span class="n">le_refl</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span> <span class="n">Hfg</span> <span class="n">Hgh</span> <span class="n">s</span><span class="o">,</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">Hfg</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">Hgh</span> <span class="n">s</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">partial_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">partial_order</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span> <span class="n">hfg</span> <span class="n">hgf</span><span class="o">,</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="n">le_antisymm</span> <span class="o">(</span><span class="n">hfg</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hgf</span> <span class="n">s</span><span class="o">),</span>
+  <span class="bp">..</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">preorder</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">canonically_ordered_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">order_bot</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">bot</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">bot_le</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">s</span><span class="o">,</span> <span class="n">zero_le</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="bp">..</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">partial_order</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">downset</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">nat_downset</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">nat_downset_eq_downset</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">nat_downset</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">))</span> <span class="bp">=</span> <span class="n">downset</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">end</span> <span class="n">finsupp</span>
+</pre></div>
+
+<a name="168513948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/downsets%20in%20orders/near/168513948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26462downsetsinorders.html#168513948">Johan Commelin (Jun 19 2019 at 14:55)</a>:</h4>
+<p>But this seems like I need to write some algorith that works on <code>list</code>s and <code>multiset</code>s, because those are used under the hood in the support of finitely supported functions.</p>
+
+<a name="168513967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/downsets%20in%20orders/near/168513967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26462downsetsinorders.html#168513967">Johan Commelin (Jun 19 2019 at 14:55)</a>:</h4>
+<p>Any hints (or complete implementations) very much appreciated.</p>
+
 
 {% endraw %}

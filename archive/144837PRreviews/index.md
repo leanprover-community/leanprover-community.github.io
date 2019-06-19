@@ -10,7 +10,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1103 fixing norm_cast](762761103fixingnormcast.html) (1 message, latest: Jun 19 2019 at 12:18)
+* [#1103 fixing norm_cast](762761103fixingnormcast.html) (2 messages, latest: Jun 19 2019 at 14:11)
 
 * [#1102 local rings](859421102localrings.html) (10 messages, latest: Jun 19 2019 at 11:29)
 
