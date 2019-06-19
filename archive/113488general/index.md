@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
+* [downsets in orders](26462downsetsinorders.html) (9 messages, latest: Jun 19 2019 at 17:57)
 
-* [downsets in orders](26462downsetsinorders.html) (5 messages, latest: Jun 19 2019 at 15:04)
+* [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
 
 * [tactic question](62193tacticquestion.html) (44 messages, latest: Jun 19 2019 at 14:37)
 
