@@ -419,5 +419,168 @@ with Q : S -&gt; Set :=
 <span class="bp">|</span> <span class="n">mk&#39;</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">P</span> <span class="n">s</span><span class="o">)</span> <span class="bp">→</span> <span class="n">Q</span> <span class="n">s</span>
 </pre></div>
 
+<a name="168527040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168527040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168527040">Kevin Sullivan (Jun 19 2019 at 17:25)</a>:</h4>
+<blockquote>
+<p>this example is given in  <a href="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types">https://leanprover.github.io/theorem_proving_in_lean/inductive_types.html#mutual-and-nested-inductive-types</a></p>
+</blockquote>
+<p>Andrew, thank you. Your pointer set me off in a direction that seems to be working. The problem appears to be (thus this thread being in the beginners section) that I had the type arguments in the wrong place.</p>
+<p>Here are type definitions that at least so far seem good. I have yet to prove that instances are actually affine spaces, formalized as torsors over vector spaces. I might run into problems when I try to do that, but at least I now have a path to try. </p>
+<p>Here are type definitions, followed in the second code block by working "test code".</p>
+<div class="codehilite"><pre><span></span>import algebra.module
+import data.vector
+
+universe u
+
+/-
+Tuples of length n over a type, K
+-/
+def tuple
+    (n : ℕ)
+    (K : Type u) : Type u :=
+        vector K n
+
+/-
+A type, space, values of which we will use to
+uniquely identify a given affine space, while
+characterizing its key attributes, namely its
+dimension and the field over in terms of which
+scalars and coordinate tuples are defined. Such
+a space has a name, allowing us to distinguish
+spaces with the same field and dimensionality.
+-/
+structure space
+(dim : ℕ)
+(K: Type)
+[isField : discrete_field K]
+[theZero : has_zero K]
+[theOne : has_one K]
+: Type :=
+mk :: (name : string)
+
+/-
+A mutual inductive definition of affine point,
+vector, and frame types. A point in an affine space
+is given coordinates in terms of a frame. A vector
+can be given coordinates in the same way. A frame,
+in turn, has a point, its origin, and a sequence of
+vectors, constituting a basis for the vector space.
+We are not yet specifying or enforcing the linear
+independence of the vectors. The points and vectors
+that make up a frame, being points and vectors, in
+turn have coordinates expressed in terms of some
+(possible other) frame. The recursion bottoms out
+with at a standard frame with a standard origin and
+standard basis vectors. This structure naturally
+supports situation where you have chains of changes
+in basis/coordinate-systems. This kind of situation
+arises frequently in domains like computer graphics
+and robotics.
+-/
+mutual inductive affine_point, affine_vector, affine_frame
+    { d : ℕ }
+    { K: Type }
+    { f : discrete_field K }
+    { z : has_zero K }
+    { o : has_one K }
+    (s : space d K)
+with affine_point : Type 1
+| mk_std : affine_point
+| mk : affine_frame → tuple d K → affine_point
+with affine_vector : Type 1
+| mk_std : affine_vector
+| mk : affine_frame → tuple d K → affine_vector
+with affine_frame : Type 1
+| mk_std : affine_frame
+| mk : affine_point → (list affine_vector) → affine_frame
+</pre></div>
+
+
+<p>Here's code giving the types a little test run.</p>
+<div class="codehilite"><pre><span></span>import .affine_space_new
+import data.real.basic
+
+
+-- Test tuple type
+def oneTuple : tuple 1 ℝ := ⟨ [2], rfl ⟩
+def aTuple : tuple 3 ℝ := ⟨[2,1,-1], rfl⟩
+def aTuple&#39; : tuple 1 ℝ := ⟨[2], rfl⟩
+def aReal3ZeroTuple : tuple 3 ℝ :=
+    subtype.mk [0,0,0] rfl
+def aReal4ZeroTuple : tuple 4 ℝ :=
+    ⟨ [0,0,0,0], rfl⟩
+
+
+-- Test space type
+def time : space 1 ℝ :=      -- non-computable
+    space.mk 1 ℝ &quot;time&quot;
+def geometry : space 3 ℝ :=  -- non-computable
+    space.mk 3 ℝ &quot;geometry&quot;
+#check time
+#check space 1 real
+
+
+/-
+Test affine point, vector, frame types.
+Time as an affine space.
+-/
+
+-- standard frame
+def timeFrame1 : affine_frame time :=
+    affine_frame.mk_std time
+
+-- standard point (t = 0)
+def timePoint1 : affine_point time :=
+    affine_point.mk_std time
+
+-- standard vector (interpret as 1 minute duration)
+def timeVector1 : affine_vector time :=
+    affine_vector.mk_std time
+
+-- point at 60 min (1 hr) wrt to std frame
+def timePoint2 : affine_point time :=
+    affine_point.mk timeFrame1 ⟨ [60], rfl ⟩
+
+-- a vector of length 1hr wrt std frame
+def timeVector2 : affine_vector time :=
+    affine_vector.mk timeFrame1 ⟨ [60], rfl ⟩
+
+-- new frame, origin at 1 hour and unit 1 hr, wrt std frame
+def timeFrame2 : affine_frame time :=
+    affine_frame.mk timePoint2 [timeVector2]
+
+-- Point @ 24 hours from (t = one hour) wrt std frame
+def timePoint3 := affine_point.mk timeFrame2 ⟨ [24], rfl ⟩
+
+/-
+Test affine point, vector, frame types.
+3D geometry as an affine space.
+-/
+
+-- std frame
+def geomFrame1 : affine_frame geometry :=
+    affine_frame.mk_std geometry
+
+-- std origin
+def geomPoint1 : affine_point geometry :=
+    affine_point.mk_std geometry
+
+-- std vector [one of them, anyway, need to enhance type]
+def geomVector1 : affine_vector geometry :=
+    affine_vector.mk_std geometry
+
+-- new point at [1,1,1] wrt std frame
+def geomPoint2 : affine_point geometry :=
+    affine_point.mk geomFrame1 ⟨ [1,1,1], rfl ⟩
+
+-- new vector at [-1,1,2] wrt std frame
+def geomVector2 : affine_vector geometry :=
+    affine_vector.mk geomFrame1 ⟨ [-1,1,2], rfl ⟩
+
+-- new frame with new basis vectors (need to add constraints here)
+def geomFrame2 : affine_frame geometry :=
+    affine_frame.mk geomPoint2 [geomVector1, geomVector2, geomVector1]
+</pre></div>
+
 
 {% endraw %}
