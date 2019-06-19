@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [installing mathlib](12119installingmathlib.html) (21 messages, latest: Jun 19 2019 at 07:56)
+* [coe mv_polynomial](39198coemvpolynomial.html) (10 messages, latest: Jun 19 2019 at 08:54)
+
+* [installing mathlib](12119installingmathlib.html) (29 messages, latest: Jun 19 2019 at 08:52)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (55 messages, latest: Jun 19 2019 at 05:36)
 

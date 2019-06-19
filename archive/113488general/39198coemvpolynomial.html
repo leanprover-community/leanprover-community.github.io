@@ -1,0 +1,55 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/39198coemvpolynomial.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html">coe mv_polynomial</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168487401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168487401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168487401">Johan Commelin (Jun 19 2019 at 08:28)</a>:</h4>
+<p>Why is <code>C</code> not a coercion <code>α → mv_polynomial σ α</code>? Is this somehow a bad coercion?</p>
+
+<a name="168488349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488349">Mario Carneiro (Jun 19 2019 at 08:42)</a>:</h4>
+<p>These coercions are possible but limited in scope</p>
+
+<a name="168488363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488363">Mario Carneiro (Jun 19 2019 at 08:43)</a>:</h4>
+<p>you have to use <code>has_coe_t</code></p>
+
+<a name="168488386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488386">Mario Carneiro (Jun 19 2019 at 08:43)</a>:</h4>
+<p>Also, aren't the terms big enough already? using <code>coe</code> will only make them bigger</p>
+
+<a name="168488531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488531">Johan Commelin (Jun 19 2019 at 08:45)</a>:</h4>
+<p>That's true. But now we have <code>↑n : mv_polynomial _ α</code> for <code>n : ℕ</code> and also <code>C (n : α)</code>.</p>
+
+<a name="168488580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488580">Johan Commelin (Jun 19 2019 at 08:46)</a>:</h4>
+<p>Maybe we can still tag the relevant lemmas with <code>norm_cast</code> even if it is not a coe?</p>
+
+<a name="168488593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488593">Johan Commelin (Jun 19 2019 at 08:46)</a>:</h4>
+<p>It would be nice to normalise these things. I don't yet know what the normal form should be.</p>
+
+<a name="168488722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488722">Mario Carneiro (Jun 19 2019 at 08:49)</a>:</h4>
+<p>those two are not comparable - you need a lemma to connect them</p>
+
+<a name="168488758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168488758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168488758">Mario Carneiro (Jun 19 2019 at 08:50)</a>:</h4>
+<p>I guess I would simp <code>C ↑n = ↑n</code> and possibly use this backwards sometimes</p>
+
+<a name="168489065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/coe%20mv_polynomial/near/168489065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/39198coemvpolynomial.html#168489065">Johan Commelin (Jun 19 2019 at 08:54)</a>:</h4>
+<p>Ok, thanks</p>
+
+
+{% endraw %}
