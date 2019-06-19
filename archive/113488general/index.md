@@ -10,15 +10,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [broke mathlib](30325brokemathlib.html) (2 messages, latest: Jun 19 2019 at 12:19)
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (75 messages, latest: Jun 19 2019 at 13:57)
 
-* [installing mathlib](12119installingmathlib.html) (41 messages, latest: Jun 19 2019 at 12:18)
+* [installing mathlib](12119installingmathlib.html) (43 messages, latest: Jun 19 2019 at 13:47)
+
+* [bazout lemma](89218bazoutlemma.html) (2 messages, latest: Jun 19 2019 at 13:24)
+
+* [broke mathlib](30325brokemathlib.html) (2 messages, latest: Jun 19 2019 at 12:19)
 
 * [downsets in orders](26462downsetsinorders.html) (1 message, latest: Jun 19 2019 at 11:38)
 
 * [How to design math libraries](34835Howtodesignmathlibraries.html) (11 messages, latest: Jun 19 2019 at 10:57)
-
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (73 messages, latest: Jun 19 2019 at 10:36)
 
 * [equality of multisets](81198equalityofmultisets.html) (12 messages, latest: Jun 19 2019 at 10:35)
 
