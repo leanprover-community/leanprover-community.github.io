@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [broke mathlib](30325brokemathlib.html) (2 messages, latest: Jun 19 2019 at 12:19)
+
+* [installing mathlib](12119installingmathlib.html) (41 messages, latest: Jun 19 2019 at 12:18)
+
 * [downsets in orders](26462downsetsinorders.html) (1 message, latest: Jun 19 2019 at 11:38)
 
 * [How to design math libraries](34835Howtodesignmathlibraries.html) (11 messages, latest: Jun 19 2019 at 10:57)
@@ -19,10 +23,6 @@ permalink: archive/113488general/index.html
 * [equality of multisets](81198equalityofmultisets.html) (12 messages, latest: Jun 19 2019 at 10:35)
 
 * [help proving well-foundedness](31534helpprovingwellfoundedness.html) (4 messages, latest: Jun 19 2019 at 10:03)
-
-* [installing mathlib](12119installingmathlib.html) (39 messages, latest: Jun 19 2019 at 09:53)
-
-* [broke mathlib](30325brokemathlib.html) (1 message, latest: Jun 19 2019 at 09:36)
 
 * [coe mv_polynomial](39198coemvpolynomial.html) (10 messages, latest: Jun 19 2019 at 08:54)
 
