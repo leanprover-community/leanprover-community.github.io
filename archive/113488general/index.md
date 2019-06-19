@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [downsets in orders](26462downsetsinorders.html) (9 messages, latest: Jun 19 2019 at 17:57)
+* [downsets in orders](26462downsetsinorders.html) (11 messages, latest: Jun 19 2019 at 19:36)
 
 * [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
 
