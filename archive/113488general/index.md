@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (51 messages, latest: Jun 19 2019 at 02:26)
+
 * [have rcases](77222havercases.html) (27 messages, latest: Jun 18 2019 at 21:06)
 
 * [integral rats](01873integralrats.html) (17 messages, latest: Jun 18 2019 at 20:33)
@@ -39,8 +41,6 @@ permalink: archive/113488general/index.html
 * [nat equalities](63354natequalities.html) (22 messages, latest: Jun 15 2019 at 14:52)
 
 * [ring of injective](46407ringofinjective.html) (36 messages, latest: Jun 15 2019 at 04:48)
-
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (49 messages, latest: Jun 15 2019 at 00:06)
 
 * [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
 
