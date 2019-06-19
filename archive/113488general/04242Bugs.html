@@ -35,5 +35,36 @@ permalink: archive/113488general/04242Bugs.html
   <span class="n">mdifferentiable_at</span> <span class="err">?</span><span class="n">m_10</span> <span class="o">((</span><span class="n">e&#39;</span><span class="bp">.</span><span class="n">to_local_equiv</span><span class="o">)</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">)</span> <span class="err">?</span><span class="n">m_17</span>
 </pre></div>
 
+<a name="168514470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bugs/near/168514470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04242Bugs.html#168514470">Johan Commelin (Jun 19 2019 at 15:01)</a>:</h4>
+<p>We might need to formalize the implementation of Lean and its tactics...</p>
+
+<a name="168514551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bugs/near/168514551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04242Bugs.html#168514551">Sebastien Gouezel (Jun 19 2019 at 15:02)</a>:</h4>
+<p>If I move the offending <code>simp</code> two lines before, it's OK :)</p>
+
+<a name="168515506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bugs/near/168515506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04242Bugs.html#168515506">Sebastien Gouezel (Jun 19 2019 at 15:10)</a>:</h4>
+<p>And I was just hit again by a <code>simp</code> bug by which it produces an incorrect proof, for which a MWE had been crafted by Rob Lewis as follows.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo_rec</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">k</span><span class="o">]</span>  <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">n</span> <span class="o">(</span><span class="n">true</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span><span class="n">n</span> <span class="n">rec</span><span class="o">,</span> <span class="n">true</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">stupid</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">k</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">foo_rec</span> <span class="n">n</span> <span class="n">k</span> <span class="bp">↔</span> <span class="n">foo_rec</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">nat_zero_eq_zero</span><span class="o">],</span>
+  <span class="n">admit</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">result</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I know I will also be able to work around it, by replacing some <code>simp</code> by a <code>rw</code> somewhere in the proof. Just have to find it, wish me luch :)</p>
+
+<a name="168516454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Bugs/near/168516454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/04242Bugs.html#168516454">Sebastien Gouezel (Jun 19 2019 at 15:20)</a>:</h4>
+<p>This is beginning to become very amusing: the offending <code>simp</code> creating an incorrect proof (in a 100 line proof) is right at the place where I mentioned the first bug (where two orthogonal lines could not be swapped). So these are certainly two instances of the same problem.</p>
+
 
 {% endraw %}
