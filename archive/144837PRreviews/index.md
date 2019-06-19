@@ -10,11 +10,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#943 lc refactor](96169943lcrefactor.html) (34 messages, latest: Jun 19 2019 at 18:55)
+
 * [#1103 fixing norm_cast](762761103fixingnormcast.html) (2 messages, latest: Jun 19 2019 at 14:11)
 
 * [#1102 local rings](859421102localrings.html) (10 messages, latest: Jun 19 2019 at 11:29)
-
-* [#943 lc refactor](96169943lcrefactor.html) (32 messages, latest: Jun 18 2019 at 09:00)
 
 * [#461 integral closure](12978461integralclosure.html) (21 messages, latest: Jun 16 2019 at 19:32)
 
