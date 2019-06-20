@@ -616,5 +616,35 @@ def geomFrame2 : affine_frame geometry :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168588661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168588661">Reid Barton (Jun 20 2019 at 11:56)</a>:</h4>
 <p>What you are trying to build looks more like a type of expressions which can be evaluated to yield a point of an affine space, according to certain rules of formation</p>
 
+<a name="168598447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168598447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168598447">Kevin Sullivan (Jun 20 2019 at 14:04)</a>:</h4>
+<blockquote>
+<p>What you are trying to build looks more like a type of expressions which can be evaluated to yield a point of an affine space, according to certain rules of formation</p>
+</blockquote>
+<p>Reid, Thank you. What I'm trying to build is a library for algebra/geometry:  more specifically one that accommodates different representations of the same points and vectors, in  coordinates expressed with respect to different frames. The idea will be that, as far as the user is concerned, coordinates are mostly hidden/abstracted behind information hiding interfaces once objects are built, so so the user will be able to write expressions involving these objects independent of the frames in terms of which their underlying coordinate-based representations are expressed.  The Lean terms representing a given mathematical point or vector with respect to different frames won't be equal, but they'll be equivalent as witnessed by their equality under change-of-frame operations that render their underlying coordinate-based representations with respect to a "standard frame" for a given space.</p>
+<p>It's also important in my application in any case that we distinguish the types of points and vectors that "live in different spaces", even if the dimensions and underlying field(s) are the same. In this way, we'll be able to represent, e.g., time and distance along some line both as 1-d real affine spaces, but the points and vectors in these spaces won't be compatible with respect to affine space operations. E.g., it won't make sense to subtract a point in time from a position in space.</p>
+<p>More generally, I'm being driven by a desire to hew as closely as I can to an elegant and traditional mathematical formalization, while also accommodating the demands of my application, which, for now, I can characterize as wanting to model mathematical physics in a type-safe manner.</p>
+<p>Kevin</p>
+
+<a name="168599302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168599302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168599302">Reid Barton (Jun 20 2019 at 14:14)</a>:</h4>
+<p>I don't understand why you want to use inductive types for this. It sounds like the standard math approach would be suitable. Have a type that represents a (possibly abstract) affine space, and functions that, given a frame for an affine space, convert between points of the space and their coordinate representations in that frame.</p>
+
+<a name="168599359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168599359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168599359">Reid Barton (Jun 20 2019 at 14:15)</a>:</h4>
+<p>With the inductive type you're basically making the function <code>(frame on an affine space, coordinates in that frame) -&gt; point in affine space</code> into a constructor, but it can just be an ordinary function.</p>
+
+<a name="168599378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168599378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168599378">Reid Barton (Jun 20 2019 at 14:15)</a>:</h4>
+<p>I think the sort of design for affine spaces that was being discussed a while ago would be a lot simpler.</p>
+
+<a name="168599851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168599851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168599851">Kevin Sullivan (Jun 20 2019 at 14:20)</a>:</h4>
+<blockquote>
+<p>I think the sort of design for affine spaces that was being discussed a while ago would be a lot simpler.</p>
+</blockquote>
+<p>I will think about that. At least in the application I have in mind, I need to be able to capture situations where, say, a point, p1, is represented in terms of a frame f1=(p2,(v_2_i)], where p2 and the vectors are expressed in terms of a frame f2=[p3,(v_3_i)], etc., to arbitrary depths. The mutual inductive type seems a reasonable way to get to that. I'm not controverting what you're saying. I'm listening and will think about it.</p>
+<p>Which other conversation did you have in mind?</p>
+
 
 {% endraw %}
