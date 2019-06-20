@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (2 messages, latest: Jun 20 2019 at 06:58)
+
 * [fin find](64959finfind.html) (5 messages, latest: Jun 20 2019 at 04:56)
 
 * [tactic question](62193tacticquestion.html) (46 messages, latest: Jun 19 2019 at 23:48)
