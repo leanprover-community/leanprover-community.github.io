@@ -10,11 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (158 messages, latest: Jun 20 2019 at 01:43)
+
 * [witt vectors](84655wittvectors.html) (266 messages, latest: Jun 19 2019 at 08:06)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (22 messages, latest: Jun 18 2019 at 20:27)
-
-* [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (157 messages, latest: Jun 18 2019 at 08:50)
 
 * [Order on topologies](78527Orderontopologies.html) (57 messages, latest: Jun 18 2019 at 08:35)
 
