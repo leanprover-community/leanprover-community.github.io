@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [fin find](64959finfind.html) (5 messages, latest: Jun 20 2019 at 04:56)
+
 * [tactic question](62193tacticquestion.html) (46 messages, latest: Jun 19 2019 at 23:48)
 
 * [downsets in orders](26462downsetsinorders.html) (12 messages, latest: Jun 19 2019 at 23:27)
