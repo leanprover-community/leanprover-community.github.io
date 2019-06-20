@@ -3608,5 +3608,46 @@ For example instead of this:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168565408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168565408">Luis Berlioz (Jun 20 2019 at 04:13)</a>:</h4>
 <p>Ok, that makes sense.</p>
 
+<a name="168583023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168583023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168583023">Adrian Chu (Jun 20 2019 at 10:14)</a>:</h4>
+<p>how to fix <br>
+<code>def y := [1,2,3] 
+#eval 4+y.nth 2</code> ? why can't I add?</p>
+
+<a name="168583185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168583185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168583185">Mario Carneiro (Jun 20 2019 at 10:16)</a>:</h4>
+<p>nth returns <code>option nat</code></p>
+
+<a name="168583205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168583205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168583205">Mario Carneiro (Jun 20 2019 at 10:17)</a>:</h4>
+<p>you should be able to use <code>y.nth_le 2 dec_trivial</code></p>
+
+<a name="168583631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168583631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168583631">Adrian Chu (Jun 20 2019 at 10:25)</a>:</h4>
+<p>oh it works, thanks! but what do .nth_le and dec_trivial means?</p>
+
+<a name="168583717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168583717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168583717">Mario Carneiro (Jun 20 2019 at 10:26)</a>:</h4>
+<p>no one wants an array out of bounds exception</p>
+
+<a name="168583726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168583726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168583726">Mario Carneiro (Jun 20 2019 at 10:26)</a>:</h4>
+<p>the dec_trivial is a proof that 2 &lt; 3</p>
+
+<a name="168584110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168584110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168584110">Adrian Chu (Jun 20 2019 at 10:32)</a>:</h4>
+<p>i see</p>
+
+<a name="168585134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168585134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168585134">Adrian Chu (Jun 20 2019 at 10:52)</a>:</h4>
+<p>How about </p>
+<div class="codehilite"><pre><span></span>def y := [1,2,3]
+def g (i : fin 3) : ℕ := y.nth_le i-1
+def f (i : fin 3) : ℕ := 4 + y.nth_le i-1 dec_trivial
+</pre></div>
+
+
+<p>? What's wrong?</p>
+
 
 {% endraw %}
