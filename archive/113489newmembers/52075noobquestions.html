@@ -3578,5 +3578,35 @@ foobar
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168538087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168538087">Kevin Buzzard (Jun 19 2019 at 19:27)</a>:</h4>
 <p>If you look through something like <code>data.list.basic</code> and take a look at just the names and the statements of the theorems, you can learn a lot about mathlib's naming conventions. The description above (breaking what you want down into small pieces) is I think how you're supposed to think about functional programming; the same sort of themes come up again and again; import <code>data.finset</code> and then use <code>#check</code> to look at the types of <code>list.map</code> and <code>multiset.map</code> and <code>finset.map</code> and it slowly dawns on you that <code>map</code> means a very specific thing in this game. Then try <code>list.range</code> and <code>multiset.range</code> and <code>finset.range</code>. It will slowly dawn on you by people are suggesting that you use <code>vector.map</code> and <code>vector.range</code> without even knowing if these functions are defined in Lean -- and if they're not then it's not hard to make them.</p>
 
+<a name="168565250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168565250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168565250">Luis Berlioz (Jun 20 2019 at 04:08)</a>:</h4>
+<p>Can I place a variable declaration in the middle of a proof? <br>
+For example instead of this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">→</span> <span class="o">(</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span>
+<span class="k">show</span> <span class="o">(</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">),</span> <span class="k">from</span>  <span class="bp">⟨</span> <span class="n">s</span><span class="o">,</span> <span class="n">hr</span> <span class="bp">⟩</span>
+</pre></div>
+
+
+<p>I want the variable <code>s : α </code> declared inside the proof, like:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">→</span> <span class="o">(</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">hr</span> <span class="o">:</span> <span class="n">r</span><span class="o">,</span>
+<span class="kn">variable</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span>
+<span class="k">show</span> <span class="o">(</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">),</span> <span class="k">from</span>  <span class="bp">⟨</span> <span class="n">s</span><span class="o">,</span> <span class="n">hr</span> <span class="bp">⟩</span>
+</pre></div>
+
+<a name="168565314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168565314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168565314">Johan Commelin (Jun 20 2019 at 04:10)</a>:</h4>
+<p>No, that's not possible. Maybe you mean <code>have</code> or <code>let</code>?</p>
+
+<a name="168565329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168565329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168565329">Johan Commelin (Jun 20 2019 at 04:11)</a>:</h4>
+<p>The goal is to prove that some <code>alpha</code> exists. You can't just grab it out of nowhere.</p>
+
+<a name="168565408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168565408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168565408">Luis Berlioz (Jun 20 2019 at 04:13)</a>:</h4>
+<p>Ok, that makes sense.</p>
+
 
 {% endraw %}
