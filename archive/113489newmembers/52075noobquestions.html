@@ -3657,5 +3657,32 @@ def f (i : fin 3) : ℕ := 4 + y.nth_le i-1 dec_trivial
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168588087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168588087">Wojciech Nawrocki (Jun 20 2019 at 11:45)</a>:</h4>
 <p>Yep, function application binds tighter than subtraction, so to express what you want you need to put parentheses around <code>i-1</code>. You're also missing a proof that <code>(i-i &lt; list.length y)</code> in <code>g</code> (no second argument is given).</p>
 
+<a name="168589081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168589081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168589081">Adrian Chu (Jun 20 2019 at 12:03)</a>:</h4>
+<blockquote>
+<p>Yep, function application binds tighter than subtraction, so to express what you want you need to put parentheses around <code>i-1</code>. You're also missing a proof that <code>(i-i &lt; list.length y)</code> in <code>g</code> (no second argument is given).</p>
+</blockquote>
+<p>How exactly should I give the proof then?</p>
+
+<a name="168589164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168589164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168589164">Mario Carneiro (Jun 20 2019 at 12:04)</a>:</h4>
+<p>You could use <code>fin.last</code> instead</p>
+
+<a name="168589276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168589276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168589276">Mario Carneiro (Jun 20 2019 at 12:06)</a>:</h4>
+<p>If you were doing this from scratch, you would be proving i-1 &lt; 3 given i &lt; 3. There are theorems in data.nat.basic to help with this</p>
+
+<a name="168589294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168589294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168589294">Mario Carneiro (Jun 20 2019 at 12:06)</a>:</h4>
+<p>alternatively, you can skip the proof and just handle the possibility of error using <code>nth</code></p>
+
+<a name="168589705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168589705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168589705">Wojciech Nawrocki (Jun 20 2019 at 12:14)</a>:</h4>
+<p>I'm kinda surprised that <code>forall (n m k: nat), n &lt; m -&gt; n-k &lt; m</code> isn't already in mathlib.</p>
+
+<a name="168590997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168590997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168590997">Mario Carneiro (Jun 20 2019 at 12:36)</a>:</h4>
+<p>it's just the composition of lt_of_le_of_lt and sub_le</p>
+
 
 {% endraw %}
