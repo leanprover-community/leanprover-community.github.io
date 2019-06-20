@@ -672,5 +672,51 @@ def geomFrame2 : affine_frame geometry :=
 Unless you later need access to the particular structure of that tree, you don't need to make those functions be constructors of inductive types.<br>
 More likely you want two different such representations of the same point to be equal.</p>
 
+<a name="168612184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168612184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168612184">Kevin Sullivan (Jun 20 2019 at 16:41)</a>:</h4>
+<blockquote>
+<p>One way to encode this is to say that a frame is an affine isomorphism from k^n to the affine space A (not assumed to have any coordinatization). A coordinatized affine space is one with a designated frame, called the "standard frame"; for example k^n itself is coordinatized. </p>
+</blockquote>
+<p>Yes,:where a frame comprises a point (the origin for that frame) and a basis for the vector space, which along with the origin induces a coordinatization on both the points and vectors of the affine space.  I have, at least so far, chosen to represent such isomorphisms by packaging ("hidden") frames and coordinates within each point and vector object. That might change at some point, but for now I'm trying to get at least to a first "working" specification. I think Reid is telling me I don't need to do all this work. I don't yet clearly see a much easier alternative that does everything I want. But I'm still open to a possible v.2 of this still nascent library.</p>
+<blockquote>
+<p>A coordinatized affine space is also a vector space.</p>
+</blockquote>
+<p>I'm formalizing an affine space as a torsor (of "points") over a vector space (of "translations" or "vectors", i.e., differences between points). Speaking in object-oriented terms, I'd say that an affine space "has" a vector space as a component rather than that is "is" a vector space. Not a deep point, but things are represented this way in the emerging library. See the definitions (not yet adequately developed) at the end of the file.</p>
+<blockquote>
+<p>Given a vector in k^n and an invertible matrix in k^(n x n), we can define an affine automorphism of k^n and so transform one frame to another via precomposition.</p>
+</blockquote>
+<p>Yes. I haven't yet specified the concept of an affine transform, but it is necessary and TBD. If you check out the material that I will post to GitHub, you'll see that this concept is missing. It's needed to enable proofs of affine-space properties for the coordinate tuples that I'm using to represent points and vectors. The idea will be that operations such as vector-vector addition will work by changes-of-frames of given arguments to standard frames followed by component-wise addition of coordinates, yielding results expressed in terms of the standard frame.</p>
+<blockquote>
+<p>And of course the frame itself provides functions for getting the point with given coordinates (the forward map) and getting the coordinates of a point (the reverse map).</p>
+</blockquote>
+<p>Yes. I've defined numerous functions to access different elements. More to come.</p>
+
+<a name="168612260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168612260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168612260">Kevin Sullivan (Jun 20 2019 at 16:42)</a>:</h4>
+<p>The code is here. Issues and suggestions are welcome.</p>
+<p><a href="https://github.com/kevinsullivan/phys/blob/master/src/algebra/affine_space.lean" target="_blank" title="https://github.com/kevinsullivan/phys/blob/master/src/algebra/affine_space.lean">https://github.com/kevinsullivan/phys/blob/master/src/algebra/affine_space.lean</a></p>
+
+<a name="168612740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168612740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168612740">Mario Carneiro (Jun 20 2019 at 16:49)</a>:</h4>
+<p>It is very easy to define an affine map and an affine isomorphism, probably easier than dealing with points and vectors as you are currently doing</p>
+
+<a name="168613042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168613042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168613042">Mario Carneiro (Jun 20 2019 at 16:53)</a>:</h4>
+<p>When I say a coordinatized affine space is a vector space, I mean that because a coordinatized affine space has a designated point (the one with coordinate 0), you can construct a vector space structure on top of the affine space (using differences from the designated point)</p>
+
+<a name="168613173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168613173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168613173">Kevin Sullivan (Jun 20 2019 at 16:55)</a>:</h4>
+<blockquote>
+<p>It is very easy to define an affine map and an affine isomorphism, probably easier than dealing with points and vectors as you are currently doing</p>
+</blockquote>
+<p>I will put this on the eval-to-do list for a possible refactoring.</p>
+
+<a name="168613202"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Debug%20%22mutually%20inductive%20types%20compiled%20to%20invalid%20...%22/near/168613202" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55370Debugmutuallyinductivetypescompiledtoinvalid.html#168613202">Kevin Sullivan (Jun 20 2019 at 16:55)</a>:</h4>
+<blockquote>
+<p>When I say a coordinatized affine space is a vector space, I mean that because a coordinatized affine space has a designated point (the one with coordinate 0), you can construct a vector space structure on top of the affine space (using differences from the designated point)</p>
+</blockquote>
+<p>Yes.</p>
+
 
 {% endraw %}
