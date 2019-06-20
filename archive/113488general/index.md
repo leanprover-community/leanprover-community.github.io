@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactic question](62193tacticquestion.html) (48 messages, latest: Jun 20 2019 at 17:35)
+
 * [determinant of groups](67057determinantofgroups.html) (1 message, latest: Jun 20 2019 at 16:49)
 
 * [Generate documentation](38342Generatedocumentation.html) (8 messages, latest: Jun 20 2019 at 15:55)
-
-* [tactic question](62193tacticquestion.html) (47 messages, latest: Jun 20 2019 at 15:55)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (26 messages, latest: Jun 20 2019 at 11:49)
 
