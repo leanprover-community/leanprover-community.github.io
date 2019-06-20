@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [determinant of groups](67057determinantofgroups.html) (1 message, latest: Jun 20 2019 at 16:49)
+
 * [Generate documentation](38342Generatedocumentation.html) (8 messages, latest: Jun 20 2019 at 15:55)
 
 * [tactic question](62193tacticquestion.html) (47 messages, latest: Jun 20 2019 at 15:55)
