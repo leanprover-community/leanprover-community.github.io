@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [downsets in orders](26462downsetsinorders.html) (11 messages, latest: Jun 19 2019 at 19:36)
+* [tactic question](62193tacticquestion.html) (46 messages, latest: Jun 19 2019 at 23:48)
+
+* [downsets in orders](26462downsetsinorders.html) (12 messages, latest: Jun 19 2019 at 23:27)
 
 * [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
-
-* [tactic question](62193tacticquestion.html) (44 messages, latest: Jun 19 2019 at 14:37)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (75 messages, latest: Jun 19 2019 at 13:57)
 
