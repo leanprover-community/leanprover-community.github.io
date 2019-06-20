@@ -194,5 +194,13 @@ permalink: archive/113488general/62193tacticquestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168512360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168512360">Wojciech Nawrocki (Jun 19 2019 at 14:37)</a>:</h4>
 <p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Is there any documentation/paper explaining what the purpose of <a href="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/abel.lean#L13" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/tactic/abel.lean#L13">the cache in abel</a> is?</p>
 
+<a name="168554009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168554009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168554009">Mario Carneiro (Jun 19 2019 at 23:22)</a>:</h4>
+<p>It's a bunch of info I want to inject into the proof term at various points without recomputing all the time. So I need the base type, the level of that type for constants, the zero constant because that comes up a lot, and the instance of either <code>add_comm_monoid</code> or <code>add_comm_group</code> (whichever it was able to find). This data can be calculated just from the type, which we find as soon as we start entering the term, and that means we can avoid almost all uses of <code>mk_app</code>, which tends to be unpredictably slow sometimes (see also the recent bug in <a href="#narrow/stream/116395-maths/topic/witt.20vectors" title="#narrow/stream/116395-maths/topic/witt.20vectors">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/witt.20vectors</a> ).</p>
+
+<a name="168555193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/168555193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#168555193">Wojciech Nawrocki (Jun 19 2019 at 23:48)</a>:</h4>
+<p>Thanks!</p>
+
 
 {% endraw %}

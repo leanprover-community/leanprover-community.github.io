@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (670 messages, latest: Jun 19 2019 at 19:27)
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (31 messages, latest: Jun 19 2019 at 23:26)
 
-* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (29 messages, latest: Jun 19 2019 at 17:25)
+* [noob question(s)](52075noobquestions.html) (670 messages, latest: Jun 19 2019 at 19:27)
 
 * [leanpkg args](55408leanpkgargs.html) (4 messages, latest: Jun 19 2019 at 01:12)
 
