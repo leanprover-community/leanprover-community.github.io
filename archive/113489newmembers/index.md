@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (41 messages, latest: Jun 20 2019 at 14:20)
+* [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (44 messages, latest: Jun 20 2019 at 15:29)
 
 * [noob question(s)](52075noobquestions.html) (690 messages, latest: Jun 20 2019 at 12:36)
 
