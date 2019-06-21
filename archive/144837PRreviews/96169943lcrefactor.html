@@ -506,5 +506,17 @@ def finsupp.total&#39; {α β} [discrete_field α] [add_comm_group β] [vector_s
 </blockquote>
 <p>This is just the tip of the iceberg. I had some very illuminating conversations with William Stein about this a few years ago, regarding implementation of linear algebra. I did some computations of modular forms in Sage a long time ago, and they were fast. I did some more, several years later, and they were much slower. Amongst the algorithms which go into all of this are basic linear algebra algorithms. I asked William what was going on, and he said that what happens in practice is that people observe that the linear algebra algorithms run slowly for the use case they have in mind, so they rip them out and implement "better" ones (e.g. perhaps from a newer paper) which run much better in their use case, but then they don't notice that there are other use cases which have degraded. There is no silver bullet for optimisation.</p>
 
+<a name="168669469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168669469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168669469">Reid Barton (Jun 21 2019 at 10:11)</a>:</h4>
+<p>Some recent discussions here as well as some talks at Big Proof 2 have led me to the following position regarding doing computer algebra in Lean. The foundational layer of definitions (for things like polynomials, or localizations of rings) should be the mathematical ones, fully general (e.g. without finiteness assumptions), and not necessarily efficient to compute with or even computable at all. On top of that one can then build representations which are good for computation in specific scenarios (e.g. polynomials in finitely many variables, or localization of a Euclidean domain), and use the underlying mathematical concepts to specify the semantics of the representations and algorithms and prove correctness of the algorithms.</p>
+
+<a name="168669624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168669624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168669624">Reid Barton (Jun 21 2019 at 10:14)</a>:</h4>
+<p>AFAIK all currently existing computer algebra systems have only this second layer--the foundational layer and the relationship between them exists only in the form of documentation and pen-and-paper proofs.</p>
+
+<a name="168670703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168670703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168670703">Johan Commelin (Jun 21 2019 at 10:37)</a>:</h4>
+<p>If I understand correctly, this would also make it more conceptual that one can swap out different computational overlays depending on application.</p>
+
 
 {% endraw %}
