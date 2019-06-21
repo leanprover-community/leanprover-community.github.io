@@ -10,9 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lifting functions](37863liftingfunctions.html) (2 messages, latest: Jun 21 2019 at 11:41)
+* [transport and parametricity](74751transportandparametricity.html) (61 messages, latest: Jun 21 2019 at 12:33)
 
-* [transport and parametricity](74751transportandparametricity.html) (60 messages, latest: Jun 21 2019 at 11:36)
+* [rsimp](01036rsimp.html) (5 messages, latest: Jun 21 2019 at 12:30)
+
+* [lifting functions](37863liftingfunctions.html) (2 messages, latest: Jun 21 2019 at 11:41)
 
 * [Generate documentation](38342Generatedocumentation.html) (10 messages, latest: Jun 21 2019 at 09:05)
 
@@ -273,8 +275,6 @@ permalink: archive/113488general/index.html
 * [coe nat enat](18531coenatenat.html) (44 messages, latest: May 19 2019 at 13:14)
 
 * [-T50000 challenge](87130T50000challenge.html) (181 messages, latest: May 19 2019 at 12:29)
-
-* [rsimp](01036rsimp.html) (3 messages, latest: May 19 2019 at 00:36)
 
 * [Integral of a constant](02999Integralofaconstant.html) (45 messages, latest: May 19 2019 at 00:11)
 
