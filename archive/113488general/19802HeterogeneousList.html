@@ -1,0 +1,44 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/19802HeterogeneousList.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/19802HeterogeneousList.html">Heterogeneous List</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168704562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Heterogeneous%20List/near/168704562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19802HeterogeneousList.html#168704562">Wojciech Nawrocki (Jun 21 2019 at 18:29)</a>:</h4>
+<p>Are there any attempts at heterogeneous lists in mathlib? These would be lists which admit elements of varying types, presumably with some constraint on the element types, otherwise you couldn't do much with such a thing. The use case I envision is to make using type classes more ergonomic, e.g. when I want to map a typeclass function over values of different types, all of which are in the class. For example, for pretty-printing:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Typeclass-requiring, heterogeneous list. -/</span>
+<span class="kn">inductive</span> <span class="n">thlist</span> <span class="o">(</span><span class="n">cl</span><span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">):</span> <span class="n">Sort</span> <span class="n">max</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">v</span>
+<span class="bp">|</span> <span class="n">nil</span><span class="o">:</span> <span class="n">thlist</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">cl</span> <span class="n">α</span><span class="o">]:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">thlist</span> <span class="bp">→</span> <span class="n">thlist</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">h</span><span class="o">[</span><span class="bp">`</span> <span class="n">l</span><span class="o">:(</span><span class="n">foldr</span> <span class="bp">`</span><span class="o">,</span> <span class="bp">`</span> <span class="o">(</span><span class="n">h</span> <span class="n">t</span><span class="o">,</span> <span class="n">thlist</span><span class="bp">.</span><span class="n">cons</span> <span class="n">h</span> <span class="n">t</span><span class="o">)</span> <span class="n">thlist</span><span class="bp">.</span><span class="n">nil</span> <span class="bp">_</span> <span class="bp">`</span><span class="o">]</span><span class="bp">`</span><span class="o">)</span> <span class="o">:=</span> <span class="n">l</span>
+<span class="kn">open</span> <span class="n">thlist</span>
+
+<span class="n">def</span> <span class="n">map</span> <span class="o">{</span><span class="n">cl</span><span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span><span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">cl</span> <span class="n">α</span><span class="o">],</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">thlist</span> <span class="n">cl</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nil</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="bp">@</span><span class="n">cons</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span> <span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">f</span> <span class="bp">_</span> <span class="n">h</span> <span class="n">a</span> <span class="bp">::</span> <span class="n">map</span> <span class="n">t</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">fmt_all</span> <span class="o">(</span><span class="n">l</span><span class="o">:</span> <span class="n">thlist</span> <span class="n">has_to_format</span><span class="o">):</span> <span class="n">list</span> <span class="n">format</span> <span class="o">:=</span>
+  <span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="bp">@</span><span class="n">has_to_format</span><span class="bp">.</span><span class="n">to_format</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="bp">`</span><span class="o">[</span><span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="err">$</span> <span class="n">fmt_all</span> <span class="n">h</span><span class="o">[</span><span class="s2">&quot;abc&quot;</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">)]],</span>
+  <span class="c">/-</span><span class="cm"> hlist.lean:24:2: information trace output</span>
+<span class="cm">  [abc, 2, (tt, ff)] -/</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168706919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Heterogeneous%20List/near/168706919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19802HeterogeneousList.html#168706919">Reid Barton (Jun 21 2019 at 18:58)</a>:</h4>
+<p>For this you could just use a <code>list</code> whose element type is a sigma type, right?</p>
+
+
+{% endraw %}

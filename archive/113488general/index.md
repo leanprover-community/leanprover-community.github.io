@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Heterogeneous List](19802HeterogeneousList.html) (2 messages, latest: Jun 21 2019 at 18:58)
+
 * [transport and parametricity](74751transportandparametricity.html) (61 messages, latest: Jun 21 2019 at 12:33)
 
 * [rsimp](01036rsimp.html) (5 messages, latest: Jun 21 2019 at 12:30)
