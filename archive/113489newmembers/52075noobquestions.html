@@ -3880,5 +3880,56 @@ def vec_exp2 (x : vector ℕ n) (y : vector ℕ n) : vector ℕ n :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168668701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168668701">Kevin Buzzard (Jun 21 2019 at 09:57)</a>:</h4>
 <p>Figuring out yourself what you want to do and then the types of the functions you want which will do them is a really good exercise for Lean beginners. It gets you thinking in the "functional programming" way.</p>
 
+<a name="168668956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168668956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168668956">Kevin Buzzard (Jun 21 2019 at 10:01)</a>:</h4>
+<p>I think you would be better off using <code>vector.map</code> than <code>list.map</code> because you're dealing with vectors. I see there is no <code>vector.range</code> though. It would be a good exercise to define <code>vector.range</code> first. Its type should be this:</p>
+<p><code>def vector.range : Π (n : ℕ), vector ℕ n := sorry</code></p>
+
+<a name="168670254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670254">Adrian Chu (Jun 21 2019 at 10:28)</a>:</h4>
+<blockquote>
+<p>If you hover over <code>vec_exp1</code> you can see it has type <code>vec_exp1 : Π {n : ℕ}, fin n → vector ℕ n → vector ℕ n → ℕ</code>. So it wants an input of type <code>fin n</code> and an input of type <code>vector ℕ n</code>. If you hover over <code>i</code> you see it has type <code>ℕ</code>. So now you can understand the error. How to fix it -- make the types correct ;-) Do you have a more specific question?</p>
+</blockquote>
+<p>yeah, i understand the error but just don't know what how to make i of type fin n. Should I use something like <code>max i n</code>? Also, why does <code>#check max 3 4</code> works while <code>#eval max 3 4</code> don't?</p>
+
+<a name="168670266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670266">Adrian Chu (Jun 21 2019 at 10:29)</a>:</h4>
+<blockquote>
+<p>I think you would be better off using <code>vector.map</code> than <code>list.map</code> because you're dealing with vectors. I see there is no <code>vector.range</code> though. It would be a good exercise to define <code>vector.range</code> first. Its type should be this:</p>
+<p><code>def vector.range : Π (n : ℕ), vector ℕ n := sorry</code></p>
+</blockquote>
+<p>OK! i will try...</p>
+
+<a name="168670605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670605">Johan Commelin (Jun 21 2019 at 10:35)</a>:</h4>
+<p>Actually... why do you want to work with <code>vector</code>s?</p>
+
+<a name="168670613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670613">Johan Commelin (Jun 21 2019 at 10:35)</a>:</h4>
+<p>That's the annoying thing: you have to choose a data representation.</p>
+
+<a name="168670617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670617">Johan Commelin (Jun 21 2019 at 10:35)</a>:</h4>
+<p>It could be <code>list</code>, or <code>vector</code> or maps from <code>fin n</code>.</p>
+
+<a name="168670620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670620">Johan Commelin (Jun 21 2019 at 10:35)</a>:</h4>
+<p>Possibly other choices.</p>
+
+<a name="168670630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670630">Johan Commelin (Jun 21 2019 at 10:36)</a>:</h4>
+<p>What is the end goal?</p>
+
+<a name="168670670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168670670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168670670">Johan Commelin (Jun 21 2019 at 10:36)</a>:</h4>
+<p>"Just goofing around" <em>is</em> a valid answer, in which case using <code>vector</code>s is totally fine.</p>
+
+<a name="168671100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168671100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168671100">Adrian Chu (Jun 21 2019 at 10:46)</a>:</h4>
+<blockquote>
+<p>What is the end goal?</p>
+</blockquote>
+<p>The goal is simply to have an n-tuple of numbers. Now you mention it, fin n \to \N does sounds a lot more simplier. I will use this....</p>
+
 
 {% endraw %}
