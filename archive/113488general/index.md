@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [downsets in orders](26462downsetsinorders.html) (18 messages, latest: Jun 21 2019 at 08:26)
+
+* [fin find](64959finfind.html) (6 messages, latest: Jun 21 2019 at 08:03)
+
 * [quanta article](72175quantaarticle.html) (11 messages, latest: Jun 21 2019 at 06:20)
 
 * [Generate documentation](38342Generatedocumentation.html) (9 messages, latest: Jun 20 2019 at 18:54)
@@ -19,10 +23,6 @@ permalink: archive/113488general/index.html
 * [determinant of groups](67057determinantofgroups.html) (1 message, latest: Jun 20 2019 at 16:49)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (26 messages, latest: Jun 20 2019 at 11:49)
-
-* [fin find](64959finfind.html) (5 messages, latest: Jun 20 2019 at 04:56)
-
-* [downsets in orders](26462downsetsinorders.html) (12 messages, latest: Jun 19 2019 at 23:27)
 
 * [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
 
