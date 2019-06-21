@@ -89,5 +89,157 @@ permalink: archive/116395maths/75037breakingequalitywithsheaves.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168705546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168705546">Sebastien Gouezel (Jun 21 2019 at 18:41)</a>:</h4>
 <p>I think it will be very interesting to hear how your proof of the glueing lemma goes.</p>
 
+<a name="168716480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168716480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168716480">Mario Carneiro (Jun 21 2019 at 21:03)</a>:</h4>
+<p>There is a way to recover equality while still using sheaves on X. There is a condition you can put on your sheaf such that pushing back to U and then forward to X recovers the same sheaf</p>
+
+<a name="168717921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168717921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168717921">Kevin Buzzard (Jun 21 2019 at 21:24)</a>:</h4>
+<p>Yes you're right; I discussed this privately with Kenny. The condition is that for all V open in X, the restriction map from F(V) to F(V intersect U) is an isomorphism (in the appropriate category). Here are several comments about this idea.</p>
+<p>Firstly, we have a restriction map from F(V) to F(V intersect U), but we have no inverse, so one would have to make a choice about either just saying it's a bijection, or demanding an inverse. This seemed a bit weird.</p>
+<p>Secondly, if we do this then sheaves on U are a subtype of sheaves on X, so we get the right equality but we'd have to constantly be carrying round and checking these proofs. </p>
+<p>Thirdly, I can see that my philosophy is wrong. If <code>x, y : T</code> with <code>T : Type u</code> then sometimes it's fine to talk about <code>x = y</code> (e.g. if T=nat). If <code>x, y : Type u</code> then in general I can see that it is not really the right thing to do in dependent type theory, and I am quite happy with the weaker concept of being isomorphic, although I still think that there should be a whole bunch of automation which is not currently in Lean which will enable me to rewrite along isomorphisms in certain cases, with auto-generated proofs. However I do see that equality of two types is a bit weird. With the sheaf setting, equality really does look weird, because here <code>x, y : T</code> and <code>T : Type u</code> but T is a structure which has a dependent type as a field, and equality of x and y would imply equality of those dependent functions, which by functional extensionality boils down to equality of types again. This does not seem to be a good idea in type theory. If we go with the philosophy that equality of types is to be avoided, then equality of these particular terms should also I think be avoided.</p>
+<p>Another way to recover equality is simply to quotient out by the correct notion. Whether this comes out nicer or more nastily than the subtype approach Mario is suggesting -- who knows. But currently my plan is to go with Kenny's crazy idea, because Sebastian and Assia seem to think that it's not so crazy after all, and I am open to the suggestion that losing the ability to rewrite will not hurt me. After all, if I have sheaves F_i on U_i and glue them together to get a sheaf F on X, the universal property really is <em>not</em> the statement that the restriction of F to U_i equals F_i, it is the data of an isomorphism.</p>
+
+<a name="168719290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719290">Mario Carneiro (Jun 21 2019 at 21:45)</a>:</h4>
+<p>I agree that equality of sheafs should be avoided. What I want to avoid is "random" data inside a sheaf</p>
+
+<a name="168719373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719373">Kevin Buzzard (Jun 21 2019 at 21:47)</a>:</h4>
+<p>So currently we have random data. I agree that there are several ways of getting rid of the randomness, including replacing sheaves on X by either a sub or a quotient. But each of these is more inconvenient to work with.</p>
+
+<a name="168719416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719416">Kevin Buzzard (Jun 21 2019 at 21:48)</a>:</h4>
+<p>I thought that randomness was everywhere in topology in Lean, with functions being randomly extended. Even 1/ 0  = 0 is a random choice.</p>
+
+<a name="168719417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719417">Mario Carneiro (Jun 21 2019 at 21:48)</a>:</h4>
+<p>A similar sort of example is subfilters. A filter on X is not the same as a filter on a subset S, but given a filter on a subset there is a canonical way to extend it to a filter, and restrict any filter to a subset, and the filters that are extended subset filters are exactly those such that <code>S \in F</code></p>
+
+<a name="168719486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719486">Mario Carneiro (Jun 21 2019 at 21:48)</a>:</h4>
+<p>random meaning not uniquely defined</p>
+
+<a name="168719552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719552">Kevin Buzzard (Jun 21 2019 at 21:49)</a>:</h4>
+<p>If I was buying into your idea I think I would go with the subtype. But then there's the question of how you say that the map F(V) -&gt; F(U intersect V) is an isomorphism. Do you just state that there exists an inverse, or do you give it?</p>
+
+<a name="168719630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719630">Kevin Buzzard (Jun 21 2019 at 21:50)</a>:</h4>
+<p>Another alternative is extension by zero. You just define F(V) to be zero if V is not a subset of U, or whatever the appropriate initial object is</p>
+
+<a name="168719664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719664">Mario Carneiro (Jun 21 2019 at 21:51)</a>:</h4>
+<p>You said there is a way to go from a sheaf on U to one on X and back. How does that work? what map F(V) -&gt; F(U \cap V) does it give you?</p>
+
+<a name="168719680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719680">Kevin Buzzard (Jun 21 2019 at 21:51)</a>:</h4>
+<p>There is more than one way.</p>
+
+<a name="168719688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719688">Kevin Buzzard (Jun 21 2019 at 21:51)</a>:</h4>
+<p>You don't know about the 6 functor formalism? ;-)</p>
+
+<a name="168719703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719703">Kevin Buzzard (Jun 21 2019 at 21:52)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Six_operations" target="_blank" title="https://en.wikipedia.org/wiki/Six_operations">https://en.wikipedia.org/wiki/Six_operations</a></p>
+
+<a name="168719748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719748">Mario Carneiro (Jun 21 2019 at 21:52)</a>:</h4>
+<p>mathematician naming at its best</p>
+
+<a name="168719754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719754">Kevin Buzzard (Jun 21 2019 at 21:52)</a>:</h4>
+<p>At least there are 6 of them.</p>
+
+<a name="168719769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719769">Kevin Buzzard (Jun 21 2019 at 21:52)</a>:</h4>
+<p>You can see how to get from a sheaf on X to a sheaf on U, right? This is just some kind of forgetful functor.</p>
+
+<a name="168719785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719785">Kevin Buzzard (Jun 21 2019 at 21:52)</a>:</h4>
+<p>Well guess what: in many situations this has both a left and a right adjoint, which typically do not agree.</p>
+
+<a name="168719816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719816">Mario Carneiro (Jun 21 2019 at 21:53)</a>:</h4>
+<p>If G is the sheaf on X, then it is defined by G(V) = F(U cap V), yes?</p>
+
+<a name="168719830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719830">Kevin Buzzard (Jun 21 2019 at 21:53)</a>:</h4>
+<p>That's one of the ways of going from sheaves on U to sheaves on X, yes.</p>
+
+<a name="168719849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719849">Mario Carneiro (Jun 21 2019 at 21:53)</a>:</h4>
+<p>oh it's backwards?</p>
+
+<a name="168719850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719850">Kevin Buzzard (Jun 21 2019 at 21:53)</a>:</h4>
+<p>The other way is G(V)=0 if V is not a subset of U, and G(V)=F(V)otherwise.</p>
+
+<a name="168719913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719913">Mario Carneiro (Jun 21 2019 at 21:54)</a>:</h4>
+<p>I want the original one you said, sheaf on U -&gt; sheaf on X</p>
+
+<a name="168719921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719921">Kevin Buzzard (Jun 21 2019 at 21:54)</a>:</h4>
+<p>That one is just G(V)=F(V)</p>
+
+<a name="168719930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719930">Kevin Buzzard (Jun 21 2019 at 21:55)</a>:</h4>
+<p>wait, notation</p>
+
+<a name="168719963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719963">Kevin Buzzard (Jun 21 2019 at 21:55)</a>:</h4>
+<p>There are two ways of going from U to X. There is one way of going from X to U. There are two theorems that say something is adjoint to something else.</p>
+
+<a name="168719975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719975">Kevin Buzzard (Jun 21 2019 at 21:55)</a>:</h4>
+<p>The trivial thing is going from X to U. U is a subset of X here.</p>
+
+<a name="168719978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168719978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168719978">Mario Carneiro (Jun 21 2019 at 21:55)</a>:</h4>
+<p>But if G is the newly defined sheaf on X, shouldn't it take an open set in X? so F(V) doesn't necessarily work</p>
+
+<a name="168720050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720050">Kevin Buzzard (Jun 21 2019 at 21:56)</a>:</h4>
+<p>The non-trivial things are going from sheaves on U to sheaves on X. One way is G(V)=F(V intersect U). The other way is G(V)=F(V) if this makes sense and 0 otherwise</p>
+
+<a name="168720073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720073">Kevin Buzzard (Jun 21 2019 at 21:57)</a>:</h4>
+<p>I am so used to thinking about etale sheaves, I am not even sure if this is right for sheaves on a top space.</p>
+
+<a name="168720077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720077">Kevin Buzzard (Jun 21 2019 at 21:57)</a>:</h4>
+<p>i might need to go and check the sheaf axiom. If it doesn't work, I might have to sheafify :-/</p>
+
+<a name="168720108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720108">Mario Carneiro (Jun 21 2019 at 21:58)</a>:</h4>
+<p>where 0 is an empty type?</p>
+
+<a name="168720142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720142">Kevin Buzzard (Jun 21 2019 at 21:58)</a>:</h4>
+<p>0 is an initial object.</p>
+
+<a name="168720149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720149">Kevin Buzzard (Jun 21 2019 at 21:58)</a>:</h4>
+<p>I'm thinking about sheaves taking values in some arbitrary category really.</p>
+
+<a name="168720156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720156">Mario Carneiro (Jun 21 2019 at 21:58)</a>:</h4>
+<p>so we can't really avoid some variation here</p>
+
+<a name="168720158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720158">Kevin Buzzard (Jun 21 2019 at 21:58)</a>:</h4>
+<p>I'm thinking about sheaves taking values in the category of abelian groups, truth be told.</p>
+
+<a name="168720200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720200">Kevin Buzzard (Jun 21 2019 at 21:59)</a>:</h4>
+<p>I think the extension by 0 is OK.</p>
+
+<a name="168720245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168720245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168720245">Kevin Buzzard (Jun 21 2019 at 22:00)</a>:</h4>
+<p>It looks like the sort of thing you computer scientist would really like. "Don't know the answer? Try zero!"</p>
+
 
 {% endraw %}
