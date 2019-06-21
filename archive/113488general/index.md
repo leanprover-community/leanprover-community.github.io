@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [quanta article](72175quantaarticle.html) (10 messages, latest: Jun 20 2019 at 23:47)
+
 * [Generate documentation](38342Generatedocumentation.html) (9 messages, latest: Jun 20 2019 at 18:54)
 
 * [tactic question](62193tacticquestion.html) (48 messages, latest: Jun 20 2019 at 17:35)
@@ -165,8 +167,6 @@ permalink: archive/113488general/index.html
 * [record stub](00190recordstub.html) (15 messages, latest: Jun 05 2019 at 02:01)
 
 * [libiconfig](19479libiconfig.html) (22 messages, latest: Jun 04 2019 at 13:44)
-
-* [quanta article](72175quantaarticle.html) (9 messages, latest: Jun 04 2019 at 06:39)
 
 * [simp and dedup](44927simpanddedup.html) (3 messages, latest: Jun 03 2019 at 12:04)
 
