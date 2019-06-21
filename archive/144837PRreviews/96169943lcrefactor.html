@@ -327,5 +327,177 @@ def finsupp.total&#39; {α β} [discrete_field α] [add_comm_group β] [vector_s
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660428">Mario Carneiro (Jun 21 2019 at 06:59)</a>:</h4>
 <p>actually I guess the function can be defined in more generality than "linear" can be</p>
 
+<a name="168660591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660591">Scott Morrison (Jun 21 2019 at 07:02)</a>:</h4>
+<p>Ugh, what is the deal with <code>fin_supp.zip_with</code>? It has explicitly <code>decidable_eq</code> arguments for the types \a and \b, but then summons mid-proof a classical instance of decidability for \b\1.</p>
+
+<a name="168660602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660602">Scott Morrison (Jun 21 2019 at 07:03)</a>:</h4>
+<p>Surely it should be all or none</p>
+
+<a name="168660656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660656">Scott Morrison (Jun 21 2019 at 07:04)</a>:</h4>
+<p>(Sorry, Alex, I am not complaining to you about these things --- I suspect they predate your helpful refactor. :-)</p>
+
+<a name="168660764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660764">Mario Carneiro (Jun 21 2019 at 07:07)</a>:</h4>
+<p>I want to kill all decidability args in finsupp, polynomial and mv_polynomial</p>
+
+<a name="168660767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660767">Scott Morrison (Jun 21 2019 at 07:07)</a>:</h4>
+<p>I am very much in favour. :-)</p>
+
+<a name="168660773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660773">Scott Morrison (Jun 21 2019 at 07:07)</a>:</h4>
+<p>Those files use classical everywhere already.</p>
+
+<a name="168660777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660777">Mario Carneiro (Jun 21 2019 at 07:07)</a>:</h4>
+<p>we are fooling ourselves to think these are actually computation-friendly</p>
+
+<a name="168660778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660778">Johan Commelin (Jun 21 2019 at 07:07)</a>:</h4>
+<blockquote>
+<p>I want to kill all decidability args in finsupp, polynomial and mv_polynomial</p>
+</blockquote>
+<p>Does that also kill computation?</p>
+
+<a name="168660817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660817">Scott Morrison (Jun 21 2019 at 07:08)</a>:</h4>
+<p>I think it was already dead.</p>
+
+<a name="168660825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660825">Mario Carneiro (Jun 21 2019 at 07:08)</a>:</h4>
+<p>if you actually want to compute with polynomials finsupp is a <em>terrible</em> representation</p>
+
+<a name="168660830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660830">Scott Morrison (Jun 21 2019 at 07:08)</a>:</h4>
+<p>/me is sad there is no parrot emoji.</p>
+
+<a name="168660842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660842">Kenny Lau (Jun 21 2019 at 07:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> which list is the best list computationally?</p>
+
+<a name="168660855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660855">Mario Carneiro (Jun 21 2019 at 07:09)</a>:</h4>
+<p>For polynomial, a list or array of coefficients</p>
+
+<a name="168660857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660857">Johan Commelin (Jun 21 2019 at 07:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I was positively surprised by the following reasonable fast proof in an otherwise very slow file:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">witt_add_zero</span> <span class="o">:</span> <span class="n">witt_add</span> <span class="n">p</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">X</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">+</span> <span class="n">X</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">witt_mul_zero</span> <span class="o">:</span> <span class="n">witt_mul</span> <span class="n">p</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">X</span> <span class="o">(</span><span class="n">tt</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">*</span> <span class="n">X</span> <span class="o">(</span><span class="n">ff</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">dec_trivial</span>
+</pre></div>
+
+<a name="168660863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660863">Scott Morrison (Jun 21 2019 at 07:09)</a>:</h4>
+<p>So, how shall we go about removing decidability arguments here? In Alex's PR? Separately?</p>
+
+<a name="168660866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660866">Kenny Lau (Jun 21 2019 at 07:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> is <code>list</code> better or is <code>array</code> better?</p>
+
+<a name="168660869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660869">Mario Carneiro (Jun 21 2019 at 07:09)</a>:</h4>
+<p>separately</p>
+
+<a name="168660878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660878">Mario Carneiro (Jun 21 2019 at 07:09)</a>:</h4>
+<p>we've made alex wait long enough, I think this is ready for merge</p>
+
+<a name="168660905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660905">Johan Commelin (Jun 21 2019 at 07:10)</a>:</h4>
+<p>If we go classical, you have to prove those statements by hand. But maybe that's a small offer to make.</p>
+
+<a name="168660927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660927">Mario Carneiro (Jun 21 2019 at 07:10)</a>:</h4>
+<p>array is more efficient in the VM</p>
+
+<a name="168660938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660938">Johan Commelin (Jun 21 2019 at 07:10)</a>:</h4>
+<blockquote>
+<p>we've made alex wait long enough, I think this is ready for merge</p>
+</blockquote>
+<p>I haven't had a chance to look at it, but I trust your judgement.</p>
+
+<a name="168660943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660943">Johan Commelin (Jun 21 2019 at 07:10)</a>:</h4>
+<p>Go for it!</p>
+
+<a name="168660944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660944">Mario Carneiro (Jun 21 2019 at 07:10)</a>:</h4>
+<p>you have to prove those statements by simp</p>
+
+<a name="168660971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660971">Kenny Lau (Jun 21 2019 at 07:11)</a>:</h4>
+<p>how is a function represented in VM?</p>
+
+<a name="168660984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660984">Mario Carneiro (Jun 21 2019 at 07:11)</a>:</h4>
+<p>an <code>array</code> is represented as an array in the VM, don't let the signature fool you</p>
+
+<a name="168660987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660987">Mario Carneiro (Jun 21 2019 at 07:11)</a>:</h4>
+<p>a function is a closure</p>
+
+<a name="168661442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168661442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168661442">Mario Carneiro (Jun 21 2019 at 07:22)</a>:</h4>
+<p>You are going to hate me for making this suggestion, but I notice that you are using the idiom <code>linear_independent α (λ x, x : s → β)</code> a lot. Maybe we should give this a name <code>linear_independent_set α s</code>, just to make the statements a bit nicer.</p>
+
+<a name="168662317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662317">Kenny Lau (Jun 21 2019 at 07:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> but you still need some decidability if you use arrays to make polynomials right</p>
+
+<a name="168662330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662330">Mario Carneiro (Jun 21 2019 at 07:44)</a>:</h4>
+<p>yes, but that's a problem for the computational interpretation only</p>
+
+<a name="168662338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662338">Mario Carneiro (Jun 21 2019 at 07:44)</a>:</h4>
+<p>it doesn't affect the definition or use of <code>polynomial</code></p>
+
+<a name="168662419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662419">Kenny Lau (Jun 21 2019 at 07:46)</a>:</h4>
+<p>you need decidability of zero already if you want to add two polynomials together</p>
+
+<a name="168662428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662428">Mario Carneiro (Jun 21 2019 at 07:46)</a>:</h4>
+<p>not if you don't trim zeros</p>
+
+<a name="168662436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662436">Kenny Lau (Jun 21 2019 at 07:46)</a>:</h4>
+<p>I thought quotients are bad for computation</p>
+
+<a name="168662448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662448">Mario Carneiro (Jun 21 2019 at 07:46)</a>:</h4>
+<p>depends on what you want to do</p>
+
+<a name="168662469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662469">Mario Carneiro (Jun 21 2019 at 07:47)</a>:</h4>
+<p>I am actually not proposing a computational implementation at all. I just want to remove decidability args from finsupp without changing the definition</p>
+
+<a name="168662471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662471">Kenny Lau (Jun 21 2019 at 07:47)</a>:</h4>
+<p>(0x+1)^100 is very inefficient whereas 1^100 is very efficient right</p>
+
+<a name="168662548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662548">Mario Carneiro (Jun 21 2019 at 07:48)</a>:</h4>
+<p>I think that we should revisit computational polynomials if and when we ever care to compute with them</p>
+
+<a name="168662570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662570">Mario Carneiro (Jun 21 2019 at 07:49)</a>:</h4>
+<p>Generally there are a lot of factors that go into efficient implementations; dropping the <code>noncomputable</code> is only the beginning</p>
+
+<a name="168662579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662579">Mario Carneiro (Jun 21 2019 at 07:49)</a>:</h4>
+<p>and without an application it's likely to be mis-optimized</p>
+
+<a name="168662639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168662639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168662639">Mario Carneiro (Jun 21 2019 at 07:50)</a>:</h4>
+<p>Compare this with computational real numbers vs <code>real</code> which is "computable" but basically useless</p>
+
 
 {% endraw %}
