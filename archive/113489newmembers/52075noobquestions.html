@@ -3712,5 +3712,48 @@ def f (i : fin 3) : ℕ := 4 + y.nth_le i-1 dec_trivial
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168643353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168643353">Scott Morrison (Jun 20 2019 at 23:27)</a>:</h4>
 <p>/me needs to get back to <code>back</code></p>
 
+<a name="168646368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646368">Tim Daly (Jun 21 2019 at 00:35)</a>:</h4>
+<p>There need not be a combinatorial explosion, nor does the naming convention have to be so baroque.</p>
+<p>It appears to me that Lean is using a flat namespace.  The naming convention makes it really hard to guess what you need.</p>
+<p>Farmer and Carette (McMaster U.) have the notion of "tiny theories" which intrioduce a single axiom or a single signature. These can be combined to form larger objects which inherit the axioms and signatures. So, for instance, there would be a "commutative" axiom which can be inherited everywhere it makes sense.</p>
+<p>This hierarchical organization enables re-use of axioms and signatures and allows the same name to occur in different paths in the inheritance graph.</p>
+
+<a name="168646462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646462">Mario Carneiro (Jun 21 2019 at 00:37)</a>:</h4>
+<p>Lean has namespaces, which are used to label the major components in the theorem, or the broad area in which it lives</p>
+
+<a name="168646544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646544">Mario Carneiro (Jun 21 2019 at 00:39)</a>:</h4>
+<p>The naming convention is designed to be easy to guess based on the statement, so you can think of a statement that you think is true and then search for the corresponding name. I'm curious how you would propose to improve on that scheme</p>
+
+<a name="168646671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646671">Mario Carneiro (Jun 21 2019 at 00:41)</a>:</h4>
+<p>The number of theorems does increase exponentially as the depth increases. If there are n theorems, then there are O(n^2) ways to compose two of them, O(n^3) ways to compose three, and so on. Even 2n theorems is a major increase; n^2 is totally intractable</p>
+
+<a name="168646829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646829">Tim Daly (Jun 21 2019 at 00:44)</a>:</h4>
+<p>Namespaces don't implement an inheritance graph in any generality. You'd like to state the commutative axiom in one place in the graph and have it available whereever it is used.  What you really want is genreal "name polymorphism" so that the name 'factor' can have different semantics in different contexts. Using 'dotted namespace notation' forces the user to manage the namespace. This doesn't scale.</p>
+
+<a name="168646851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646851">Scott Morrison (Jun 21 2019 at 00:45)</a>:</h4>
+<p>Well... only a fraction of those n^2 theorems actually make sense. I wish I had a better sense of what that fraction was. I guess this could be automated. :-)</p>
+
+<a name="168646874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646874">Scott Morrison (Jun 21 2019 at 00:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="223495">@Tim Daly</span>, of course Lean does state the commutative axiom only once.</p>
+
+<a name="168646924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168646924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168646924">Scott Morrison (Jun 21 2019 at 00:46)</a>:</h4>
+<p>(Okay, twice, once for "additive" structures and once for "multiplicative", which is lame, but still, it's only 2. :-)</p>
+
+<a name="168647408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168647408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168647408">Tim Daly (Jun 21 2019 at 00:58)</a>:</h4>
+<p>How does Lean handle a Lie algebra? Lie groups are skew-symmetric and they are non-associative. So</p>
+<p>x*y = -y * x and</p>
+<p>x * (y  * z) = (x * y) * z + y * (x * z)</p>
+<p>Do you have to "built it from nothing" using an odd naming convention for things like "algebra.lie.cross_product_skew_symmetric."?</p>
+<p>Axiom, which uses something similar to Farmer/Carette "tiny theories" has 10,000 functions but a much smaller set of names.</p>
+
 
 {% endraw %}
