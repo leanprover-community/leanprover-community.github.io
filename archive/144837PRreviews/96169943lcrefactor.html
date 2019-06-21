@@ -185,5 +185,147 @@ If you're going to do it using Zorn's lemma then you need to bring in sets at so
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168575298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168575298">Alexander Bentkamp (Jun 20 2019 at 08:15)</a>:</h4>
 <p>In an failed attempt to replace these lemmas based on sets by lemmas based on types, I added the section <code>sigma</code> on the bottom of <code>data/finsupp</code>. It is not used anywhere now, but I think it might be useful in the future. Let me know if you'd rather have it removed.</p>
 
+<a name="168659677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659677">Scott Morrison (Jun 21 2019 at 06:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="129120">@Alexander Bentkamp</span>, I just started having a look at your branch. I'm glad <code>lc</code> doesn't exist anymore, good riddance. :-)</p>
+<p>I'm still bamboozled by the basic thing I've been missing all along with the <code>lc</code> library. Where is the definition:</p>
+<div class="codehilite"><pre><span></span>def just_add_up_the_terms {α β} [discrete_field α] [add_comm_group β] [vector_space α β] (f : β →₀ α) : β := sorry
+</pre></div>
+
+<a name="168659697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659697">Mario Carneiro (Jun 21 2019 at 06:43)</a>:</h4>
+<p>isn't that <code>lc.total</code> (now <code>finsupp.total</code>)?</p>
+
+<a name="168659698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659698">Alexander Bentkamp (Jun 21 2019 at 06:43)</a>:</h4>
+<p>I guess you mean <code>finsupp.total</code>?</p>
+
+<a name="168659709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659709">Alexander Bentkamp (Jun 21 2019 at 06:43)</a>:</h4>
+<p>one second too slow :D</p>
+
+<a name="168659749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659749">Scott Morrison (Jun 21 2019 at 06:44)</a>:</h4>
+<p>How do I use that? I tried</p>
+<div class="codehilite"><pre><span></span>def just_add_up_the_terms {α β} [discrete_field α] [add_comm_group β] [vector_space α β] (f : β →₀ α) : β := (finsupp.total _ _ _ id).1 f
+</pre></div>
+
+<a name="168659752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659752">Alexander Bentkamp (Jun 21 2019 at 06:44)</a>:</h4>
+<p>It's hard to beat Mario :D</p>
+
+<a name="168659758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659758">Scott Morrison (Jun 21 2019 at 06:44)</a>:</h4>
+<p>(which already seems ... a bit long-winded ... for the basic operation)</p>
+
+<a name="168659774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659774">Scott Morrison (Jun 21 2019 at 06:44)</a>:</h4>
+<p>but get errors about not finding an <code>add_comm_group (β →₀ α)</code> instance</p>
+
+<a name="168659872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168659872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168659872">Scott Morrison (Jun 21 2019 at 06:46)</a>:</h4>
+<p>So I guess I'm down to two questions: <br>
+1. why don't we generate that instance, and <br>
+2. can we have a shorter name for this, that doesn't require me to put in the <code>_ _ _ id</code>?</p>
+
+<a name="168660000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660000">Mario Carneiro (Jun 21 2019 at 06:49)</a>:</h4>
+<p>I think Alex said something about how leaving those arguments out causes the tc inference to fail, which is why they are explicit in the first place</p>
+
+<a name="168660054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660054">Scott Morrison (Jun 21 2019 at 06:50)</a>:</h4>
+<p>But what if we specialise <code>v</code> to <code>id</code> first? Then the types are all determined by <code>f</code>, I think.</p>
+
+<a name="168660060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660060">Mario Carneiro (Jun 21 2019 at 06:50)</a>:</h4>
+<p>they are, I'm not exactly sure about the order of operations here. I was surprised by this as well</p>
+
+<a name="168660079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660079">Scott Morrison (Jun 21 2019 at 06:51)</a>:</h4>
+<p>I think my main complaint is that I want a function with <code>v</code> already specialised to <code>id</code>, as this seems like most peoples' main use case.</p>
+
+<a name="168660093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660093">Mario Carneiro (Jun 21 2019 at 06:51)</a>:</h4>
+<p>More precisely, I think that it won't be able to use <code>f</code> for type inference because that happens after the coercion is inserted, and it can't insert the coercion until it knows the type of the finsupp.total application</p>
+
+<a name="168660104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660104">Scott Morrison (Jun 21 2019 at 06:51)</a>:</h4>
+<p>Ok, the instance not being generated is just about decidability:</p>
+<div class="codehilite"><pre><span></span>import linear_algebra.finsupp
+
+local attribute [instance, priority 0] classical.prop_decidable
+noncomputable theory
+
+def finsupp.total&#39; {α β} [discrete_field α] [add_comm_group β] [vector_space α β] (f : β →₀ α) : β := (finsupp.total _ _ _ id).1 f
+</pre></div>
+
+<a name="168660160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660160">Scott Morrison (Jun 21 2019 at 06:52)</a>:</h4>
+<p>Which coercion?</p>
+
+<a name="168660162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660162">Mario Carneiro (Jun 21 2019 at 06:52)</a>:</h4>
+<p>rah rah kill decidability arguments</p>
+
+<a name="168660173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660173">Mario Carneiro (Jun 21 2019 at 06:52)</a>:</h4>
+<p>the coercion from -&gt;0 to -&gt;</p>
+
+<a name="168660189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660189">Scott Morrison (Jun 21 2019 at 06:53)</a>:</h4>
+<p>Sorry, I don't see where such a coercion is happening.</p>
+
+<a name="168660190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660190">Mario Carneiro (Jun 21 2019 at 06:53)</a>:</h4>
+<p>Or rather, the coercion from -&gt;l to -&gt;</p>
+
+<a name="168660192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660192">Scott Morrison (Jun 21 2019 at 06:53)</a>:</h4>
+<p>ah</p>
+
+<a name="168660193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660193">Mario Carneiro (Jun 21 2019 at 06:53)</a>:</h4>
+<p><code>finsupp.total</code> is a linear function</p>
+
+<a name="168660200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660200">Mario Carneiro (Jun 21 2019 at 06:53)</a>:</h4>
+<p>is the .1 supposed to be the coercion?</p>
+
+<a name="168660219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660219">Scott Morrison (Jun 21 2019 at 06:54)</a>:</h4>
+<p>yes</p>
+
+<a name="168660324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660324">Alexander Bentkamp (Jun 21 2019 at 06:56)</a>:</h4>
+<p>Maybe you could use <code>finsupp.sum</code> instead.</p>
+
+<a name="168660345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660345">Scott Morrison (Jun 21 2019 at 06:57)</a>:</h4>
+<p>but then I still need to provide the silly binary function doing scalar multiplication</p>
+
+<a name="168660351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660351">Mario Carneiro (Jun 21 2019 at 06:57)</a>:</h4>
+<p>isn't it just (\bu)?</p>
+
+<a name="168660352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660352">Scott Morrison (Jun 21 2019 at 06:57)</a>:</h4>
+<p>I just want to sum up a linear combination! :-)</p>
+
+<a name="168660363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660363">Mario Carneiro (Jun 21 2019 at 06:57)</a>:</h4>
+<p>I think it's reasonable to have this as a dedicated function. I guess it used to be there with <code>lc.total</code></p>
+
+<a name="168660364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660364">Scott Morrison (Jun 21 2019 at 06:57)</a>:</h4>
+<p>But I shouldn't need to say it at all, even if it is just (\bu), I think.</p>
+
+<a name="168660410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660410">Mario Carneiro (Jun 21 2019 at 06:58)</a>:</h4>
+<p>should it be linear?</p>
+
+<a name="168660428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168660428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168660428">Mario Carneiro (Jun 21 2019 at 06:59)</a>:</h4>
+<p>actually I guess the function can be defined in more generality than "linear" can be</p>
+
 
 {% endraw %}
