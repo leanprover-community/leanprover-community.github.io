@@ -1,0 +1,61 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/07369RFCopenimmersionembedding.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/07369RFCopenimmersionembedding.html">RFC: open immersion / embedding</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168666556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/RFC%3A%20open%20immersion%20/%20embedding/near/168666556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07369RFCopenimmersionembedding.html#168666556">Kevin Buzzard (Jun 21 2019 at 09:12)</a>:</h4>
+<p>I've asked here several times about whether Lean has open immersions a.k.a open embeddings a.k.a. injections X -&gt; Y of topological spaces which are isomorphic to the inclusion of an open subset. I don't think we do, and I feel confident enough nowadays to be able to PR them myself. I attempted to make a start and immediately ran into questions of (a) name (b) bundle/unbundle (c) notation. Does anyone have any comments on the below code?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">order</span>
+
+<span class="c1">-- An open immersion is a continuous injection of topological spaces which is also an open map.</span>
+<span class="c1">-- Or is it called open embedding?</span>
+
+<span class="kn">open</span> <span class="n">function</span> <span class="n">set</span>
+
+<span class="kn">structure</span> <span class="n">open_immersion</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">cts</span> <span class="o">:</span> <span class="n">continuous</span> <span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inj</span> <span class="o">:</span> <span class="n">injective</span> <span class="n">to_fun</span><span class="o">)</span>
+<span class="o">(</span><span class="n">is_open</span> <span class="o">:</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open</span> <span class="o">(</span><span class="n">range</span> <span class="n">to_fun</span><span class="o">))</span>
+
+<span class="n">def</span> <span class="n">is_open_immersion</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="o">[</span><span class="n">tα</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">tβ</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="bp">∧</span> <span class="n">tα</span> <span class="bp">=</span> <span class="n">tβ</span><span class="bp">.</span><span class="n">induced</span> <span class="n">f</span> <span class="bp">∧</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open</span> <span class="o">(</span><span class="n">range</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="err">↪₀</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">open_immersion</span>
+</pre></div>
+
+
+<p>I think algebraic geometers call them open immersions, and differential geometers call them open embeddings (what do I know, I'm a number theorist). I see from <code>topology/maps.lean</code> that we have things like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">embedding</span> <span class="o">[</span><span class="n">tα</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">tβ</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="n">f</span> <span class="bp">∧</span> <span class="n">tα</span> <span class="bp">=</span> <span class="n">tβ</span><span class="bp">.</span><span class="n">induced</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>but that might have been written before we came round to a "bundle morphisms" philosophy.</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+<a name="168666656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/RFC%3A%20open%20immersion%20/%20embedding/near/168666656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07369RFCopenimmersionembedding.html#168666656">Kevin Buzzard (Jun 21 2019 at 09:14)</a>:</h4>
+<p><a href="https://mathoverflow.net/questions/48527/why-open-immersion-rather-than-open-embedding" target="_blank" title="https://mathoverflow.net/questions/48527/why-open-immersion-rather-than-open-embedding">https://mathoverflow.net/questions/48527/why-open-immersion-rather-than-open-embedding</a> for example, to see a debate about the naming issue.</p>
+
+<a name="168666863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/RFC%3A%20open%20immersion%20/%20embedding/near/168666863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07369RFCopenimmersionembedding.html#168666863">Mario Carneiro (Jun 21 2019 at 09:19)</a>:</h4>
+<p>I think we should leave topological functions unbundled for now. Unlike linear maps, it's not like open immersions have a nice algebraic structure of their own</p>
+
+<a name="168667962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/RFC%3A%20open%20immersion%20/%20embedding/near/168667962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07369RFCopenimmersionembedding.html#168667962">Reid Barton (Jun 21 2019 at 09:42)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1059" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1059">#1059</a> adds open embeddings but now I remember it got caught up in some minor issue.</p>
+
+
+{% endraw %}

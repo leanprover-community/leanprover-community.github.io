@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [RFC: open immersion / embedding](07369RFCopenimmersionembedding.html) (4 messages, latest: Jun 21 2019 at 09:42)
+
 * [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (158 messages, latest: Jun 20 2019 at 01:43)
 
 * [witt vectors](84655wittvectors.html) (266 messages, latest: Jun 19 2019 at 08:06)
