@@ -53,5 +53,41 @@ permalink: archive/116395maths/75037breakingequalitywithsheaves.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168702163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168702163">Kevin Buzzard (Jun 21 2019 at 17:59)</a>:</h4>
 <p>I find this very surprising. Here we have an equality on a type which is literally not correct -- it is too weak</p>
 
+<a name="168702383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168702383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168702383">Kevin Buzzard (Jun 21 2019 at 18:02)</a>:</h4>
+<p>My rule of thumb was that <code>x = y</code> was not good if <code>x : Sort u</code> but <code>x = y</code> was OK if <code>x : T</code> with <code>T : Type u</code>. This is a counterexample.</p>
+
+<a name="168704673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168704673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168704673">Sebastien Gouezel (Jun 21 2019 at 18:30)</a>:</h4>
+<p>I encountered a similar situation with manifolds. The basic objects is charts, i.e., local homeomorphisms (defined on their source), that one keeps composing (thereby restricting the sources by taking the intersection of the source of the first guy and the preimage of the source of the second guy). There are (at least) three ways to formalize them:</p>
+<ul>
+<li>(1) use a homeomorphism defined on a subtype</li>
+<li>(2) use a map taking values in <code>option ...</code>, which is none outside of the source</li>
+<li>(3) use a map defined on all the space, that happens to be a homeomorphism on a subset of the space that you call <code>source</code>, and do not care about what this map does outside of <code>source</code>.</li>
+</ul>
+<p>(1) is a nightmare from the point of view of intersections of subtypes just as what you have for sheaves. (2) is a nightmare when you want to define regularity classes because you always need to distinguish between points in the genuine space and points in <code>option</code>. (3) looks crazy, but in fact it works very well. The only drawback is that you want to say that two local homeomorphisms are "equal" if they have the same source and coincide there. This is an <code>equiv</code>, that I introduced. But in fact it turns out that in 99% of the proofs I don't need to talk about equality of local homeomorphisms, I just need to compose them. So it works fine. And I think it more or less corresponds to Kenny's suggestion for sheaves.</p>
+<p>There was already a discussion on the chat where people told me to use (1) or (2) instead. And I agree that from a mathematical point of view this is the right thing to do, but from an implementation point of view (3) simply works better. Yesterday, I asked Assia Mahboubi , who has done way more formalization using DTT than anyone on this chat, about what to choose between (1), (2), (3), and her reaction was: (3) is clearly better.</p>
+
+<a name="168704742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168704742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168704742">Kevin Buzzard (Jun 21 2019 at 18:31)</a>:</h4>
+<p>OK I'm convinced :-)</p>
+
+<a name="168704862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168704862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168704862">Kevin Buzzard (Jun 21 2019 at 18:33)</a>:</h4>
+<p>In fact I was already half-convinced when I realised that I could formalise the glueing lemma and the statement of its universal property. I guess what I am half-worried about is rewriting. If we lose the true meaning of <code>=</code> then we lose the ability to rewrite.</p>
+<p>I will try and formalise the proof of the glueing lemma over the weekend, this will be a very good test case I think.</p>
+
+<a name="168705381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168705381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168705381">Sebastien Gouezel (Jun 21 2019 at 18:39)</a>:</h4>
+<p>Yes, you can not rewrite. But if you have enough lemmas saying that, under the assumption that two objects are "equivalent", then some property holds, then you can rewrite using these lemmas.</p>
+
+<a name="168705484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168705484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168705484">Kevin Buzzard (Jun 21 2019 at 18:40)</a>:</h4>
+<p>I do not yet have a feeling as to how much of a handicap this will be.</p>
+
+<a name="168705546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168705546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168705546">Sebastien Gouezel (Jun 21 2019 at 18:41)</a>:</h4>
+<p>I think it will be very interesting to hear how your proof of the glueing lemma goes.</p>
+
 
 {% endraw %}
