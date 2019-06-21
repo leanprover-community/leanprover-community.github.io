@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (53 messages, latest: Jun 21 2019 at 22:00)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (69 messages, latest: Jun 21 2019 at 22:52)
 
 * [RFC: open immersion / embedding](07369RFCopenimmersionembedding.html) (5 messages, latest: Jun 21 2019 at 10:12)
 
