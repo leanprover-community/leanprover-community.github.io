@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lifting functions](37863liftingfunctions.html) (2 messages, latest: Jun 21 2019 at 11:41)
+
+* [transport and parametricity](74751transportandparametricity.html) (60 messages, latest: Jun 21 2019 at 11:36)
+
 * [Generate documentation](38342Generatedocumentation.html) (10 messages, latest: Jun 21 2019 at 09:05)
 
 * [downsets in orders](26462downsetsinorders.html) (18 messages, latest: Jun 21 2019 at 08:26)
@@ -87,8 +91,6 @@ permalink: archive/113488general/index.html
 * [deterministic timeouts when file is opened](71768deterministictimeoutswhenfileisopened.html) (4 messages, latest: Jun 12 2019 at 21:52)
 
 * [Requirement for being @\[simp\]](49295Requirementforbeingsimp.html) (4 messages, latest: Jun 12 2019 at 18:53)
-
-* [transport and parametricity](74751transportandparametricity.html) (59 messages, latest: Jun 12 2019 at 18:36)
 
 * [norm_cast](53959normcast.html) (4 messages, latest: Jun 12 2019 at 15:02)
 
