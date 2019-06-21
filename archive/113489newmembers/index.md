@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (720 messages, latest: Jun 21 2019 at 01:32)
+* [noob question(s)](52075noobquestions.html) (727 messages, latest: Jun 21 2019 at 03:54)
 
 * [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (50 messages, latest: Jun 20 2019 at 16:55)
 
