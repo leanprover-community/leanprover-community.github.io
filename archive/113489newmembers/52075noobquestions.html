@@ -3839,5 +3839,46 @@ def f (i : fin 3) : ℕ := 4 + y.nth_le i-1 dec_trivial
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168653715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168653715">Mario Carneiro (Jun 21 2019 at 03:54)</a>:</h4>
 <p>If we can get any refactoring tools in lean 3.5c then it may make this a lot easier. There is a lot of silly busywork like changing the naming convention</p>
 
+<a name="168666562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168666562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168666562">Adrian Chu (Jun 21 2019 at 09:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>variable n : ℕ
+def vec_exp1 (i : fin n) (x : vector ℕ n) (y : vector ℕ n) : ℕ :=
+    (x.nth i)^(y.nth i)
+def vec_exp2 (x : vector ℕ n) (y : vector ℕ n) : vector ℕ n :=
+    ⟨(list.range n).map (λ i, vec_exp1 i x y), by simp⟩
+</pre></div>
+
+<a name="168666608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168666608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168666608">Adrian Chu (Jun 21 2019 at 09:13)</a>:</h4>
+<p>I am trying to compute the entry-wise exponential of two n-vector. but the last line has error: the term x has type vector N n but is expected to have type fin i. what is wrong??</p>
+
+<a name="168666669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168666669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168666669">Adrian Chu (Jun 21 2019 at 09:14)</a>:</h4>
+<p>btw if i change n to 3, it works</p>
+
+<a name="168666781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168666781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168666781">Mario Carneiro (Jun 21 2019 at 09:17)</a>:</h4>
+<p>the variable <code>n : N</code> is getting added to <code>vec_exp1</code>, so it actually takes four arguments</p>
+
+<a name="168666785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168666785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168666785">Mario Carneiro (Jun 21 2019 at 09:17)</a>:</h4>
+<p>you should make it implicit by writing it in braces</p>
+
+<a name="168667135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168667135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168667135">Adrian Chu (Jun 21 2019 at 09:24)</a>:</h4>
+<p>ah i see! but now I'm getting another error in the last line: vec_exp1 i, the term i has type \N but is expected to have type fin ?m_1. how can I fix it?</p>
+
+<a name="168668282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168668282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168668282">Kevin Buzzard (Jun 21 2019 at 09:48)</a>:</h4>
+<p>If you hover over <code>vec_exp1</code> you can see it has type <code>vec_exp1 : Π {n : ℕ}, fin n → vector ℕ n → vector ℕ n → ℕ</code>. So it wants an input of type <code>fin n</code> and an input of type <code>vector ℕ n</code>. If you hover over <code>i</code> you see it has type <code>ℕ</code>. So now you can understand the error. How to fix it -- make the types correct ;-) Do you have a more specific question?</p>
+
+<a name="168668574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168668574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168668574">Kevin Buzzard (Jun 21 2019 at 09:54)</a>:</h4>
+<p>Do you understand how to interpret <code>(list.range n).map</code>? Hover over <code>list.range</code>  to see it has type <code>ℕ → list ℕ</code>. So <code>list.range n</code> has type <code>list ℕ</code>. Now this clever <code>l.map</code> thing means <code>list.map l</code> and doing <code>#check list.map</code> you can see the type of that too. You can just unravel everything. Your code doesn't work because when you unravel it it doesn't make sense.</p>
+
+<a name="168668701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168668701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168668701">Kevin Buzzard (Jun 21 2019 at 09:57)</a>:</h4>
+<p>Figuring out yourself what you want to do and then the types of the functions you want which will do them is a really good exercise for Lean beginners. It gets you thinking in the "functional programming" way.</p>
+
 
 {% endraw %}
