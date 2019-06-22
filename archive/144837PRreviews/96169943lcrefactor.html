@@ -526,5 +526,78 @@ def finsupp.total&#39; {α β} [discrete_field α] [add_comm_group β] [vector_s
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168728110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168728110">Scott Morrison (Jun 22 2019 at 00:30)</a>:</h4>
 <p>I guess this is to be expected. Is there an easy work-around? Or do I have to think?</p>
 
+<a name="168733233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168733233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168733233">Mario Carneiro (Jun 22 2019 at 03:06)</a>:</h4>
+<p>it should be by unfold [relevant defs]</p>
+
+<a name="168734016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734016">Scott Morrison (Jun 22 2019 at 03:34)</a>:</h4>
+<p>Hmm --- I don't seem to be very good at this:</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma coeff_one_zero (n : ℕ) : coeff (1 : polynomial α) 0 = 1 :=
+begin
+  dsimp [coeff, has_one.one, single], split_ifs, refl, refl,
+end
+</pre></div>
+
+
+<p>Claims to finish the proof, which is already pretty strange: surely the second branch of the split_ifs should give the goal <code>0 = monoid.one α</code>. But then Lean says <code>invalid simplification lemma</code>.</p>
+
+<a name="168734091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734091">Scott Morrison (Jun 22 2019 at 03:37)</a>:</h4>
+<p>Same outcome with the slightly more reasonable</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma coeff_one_zero (n : ℕ) : coeff (1 : polynomial α) 0 = 1 :=
+begin
+  dsimp [coeff, has_one.one, single], rw if_pos, refl
+end
+</pre></div>
+
+<a name="168734145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734145">Mario Carneiro (Jun 22 2019 at 03:39)</a>:</h4>
+<p>the definition of <code>1</code> is <code>single 1 0</code> I assume? Why not something involving coeff_single?</p>
+
+<a name="168734255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734255">Scott Morrison (Jun 22 2019 at 03:42)</a>:</h4>
+<p>We haven't proved <code>coeff_single</code> yet, and it's another <code>rfl</code> lemma that is going to need redoing!</p>
+
+<a name="168734265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734265">Mario Carneiro (Jun 22 2019 at 03:43)</a>:</h4>
+<p>you should prove that instead</p>
+
+<a name="168734307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734307">Scott Morrison (Jun 22 2019 at 03:44)</a>:</h4>
+<div class="codehilite"><pre><span></span>lemma coeff_single : coeff (single n a) m = if n = m then a else 0 :=
+begin
+  dsimp [single], refl
+end
+</pre></div>
+
+
+<p>gives</p>
+<div class="codehilite"><pre><span></span>invalid apply tactic, failed to unify
+  ite (n = m) a 0 = ite (n = m) a 0
+with
+  ?m_2 = ?m_2
+</pre></div>
+
+
+<p>which is presumably about the decidability instances ...</p>
+
+<a name="168734324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734324">Mario Carneiro (Jun 22 2019 at 03:45)</a>:</h4>
+<p>use <code>congr</code> instead</p>
+
+<a name="168734443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734443">Scott Morrison (Jun 22 2019 at 03:48)</a>:</h4>
+<p>Ok, that fixes <code>coeff_single</code>.</p>
+
+<a name="168734450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%23943%20lc%20refactor/near/168734450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/96169943lcrefactor.html#168734450">Scott Morrison (Jun 22 2019 at 03:49)</a>:</h4>
+<p>But I still have <code>invalid simplification lemma</code> for</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma coeff_one_zero (n : ℕ) : coeff (1 : polynomial α) 0 = 1 :=
+begin
+  dsimp [has_one.one], rw [coeff_single, if_pos], refl
+end
+</pre></div>
+
 
 {% endraw %}
