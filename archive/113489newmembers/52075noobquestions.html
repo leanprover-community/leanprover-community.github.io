@@ -4165,5 +4165,56 @@ This is a crucial lemma in a theorem I wanna prove. Specifically, I need to prov
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168745519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168745519">Adrian Chu (Jun 22 2019 at 10:14)</a>:</h4>
 <p>What is the correct syntax to define such a function <code>def f (x : ℕ) : ℕ := if x &lt; 10 then x else f (x-3)</code> recursively? (since I don't want to use mod for some other reason)</p>
 
+<a name="168747175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747175">Kevin Buzzard (Jun 22 2019 at 11:11)</a>:</h4>
+<p>You will have to prove, somehow, that your function is well-defined. One thing you could do is just use the equation compiler, but that would stink a bit in this situation. You could define f zero = 0, f 1 = 1, ..., and then f (n+10) to be f(n+7). That might work.</p>
+
+<a name="168747238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747238">Mario Carneiro (Jun 22 2019 at 11:13)</a>:</h4>
+<p>you only have to go up to n+3</p>
+
+<a name="168747242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747242">Kevin Buzzard (Jun 22 2019 at 11:13)</a>:</h4>
+<p>I'm not so sure it's as easy as that, because f(7) is not f(4)</p>
+
+<a name="168747297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747297">Mario Carneiro (Jun 22 2019 at 11:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">x</span><span class="bp">@</span><span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">10</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">f</span> <span class="n">y</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">x</span>
+</pre></div>
+
+<a name="168747306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747306">Kevin Buzzard (Jun 22 2019 at 11:15)</a>:</h4>
+<p>Nice!</p>
+
+<a name="168747308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747308">Mario Carneiro (Jun 22 2019 at 11:15)</a>:</h4>
+<p>it still has 4 cases though</p>
+
+<a name="168747312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747312">Kevin Buzzard (Jun 22 2019 at 11:15)</a>:</h4>
+<p>I have never had to push the equation compiler to its limits, so I don't really know these tricks.</p>
+
+<a name="168747357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168747357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168747357">Mario Carneiro (Jun 22 2019 at 11:16)</a>:</h4>
+<p>try replacing <code>3</code> with <code>100</code></p>
+
+<a name="168748314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168748314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168748314">Adrian Chu (Jun 22 2019 at 11:48)</a>:</h4>
+<p>I see... Thanks.</p>
+
+<a name="168748654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168748654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168748654">Adrian Chu (Jun 22 2019 at 11:59)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">x</span><span class="bp">@</span><span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">10</span> <span class="k">then</span> <span class="n">x</span> <span class="k">else</span> <span class="n">f</span> <span class="n">y</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">x</span>
+</pre></div>
+
+
+</blockquote>
+<p>But can someone please explain a bit what does this means?</p>
+
 
 {% endraw %}
