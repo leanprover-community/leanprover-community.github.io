@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [kif](81211kif.html) (6 messages, latest: Jun 22 2019 at 03:10)
+* [noob question(s)](52075noobquestions.html) (785 messages, latest: Jun 22 2019 at 04:49)
 
-* [noob question(s)](52075noobquestions.html) (784 messages, latest: Jun 21 2019 at 18:11)
+* [kif](81211kif.html) (6 messages, latest: Jun 22 2019 at 03:10)
 
 * [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (50 messages, latest: Jun 20 2019 at 16:55)
 
