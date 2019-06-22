@@ -41,5 +41,31 @@ permalink: archive/113489newmembers/81211kif.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/kif/near/168722263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81211kif.html#168722263">Bryan Gin-ge Chen (Jun 21 2019 at 22:35)</a>:</h4>
 <p>What do you mean by  "translate it to Lean" exactly?</p>
 
+<a name="168733368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/kif/near/168733368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/81211kif.html#168733368">Alexandre Rademaker (Jun 22 2019 at 03:10)</a>:</h4>
+<p>Good question. I am still thinking about the details, but I am trying something like:</p>
+<p>R. Dapoigny and P. Barlatier, “Formalizing Context for Domain Ontologies in Coq,”, May 2014.</p>
+<p>The details are not clear yet, but all axioms could be encoded as variables, right? For example, the SUMO axiom (simplified):</p>
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nv">&lt;=&gt;</span>
+    <span class="p">(</span><span class="nv">partition</span> <span class="nv">?class</span> <span class="nv">?x</span> <span class="nv">?y</span><span class="p">)</span>
+    <span class="p">(</span><span class="nb">and</span>
+        <span class="p">(</span><span class="nv">exhaustiveDecomposition</span> <span class="nv">?class</span> <span class="nv">?x</span> <span class="nv">?y</span><span class="p">)</span>
+        <span class="p">(</span><span class="nv">disjointDecomposition</span> <span class="nv">?class</span> <span class="nv">?x</span> <span class="nv">?y</span><span class="p">)))</span>
+</pre></div>
+
+
+<p>could be encoded as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">Class</span> <span class="o">:</span> <span class="kt">Type</span>
+
+<span class="kn">constants</span> <span class="n">partition</span> <span class="n">exhaustiveDecomposition</span> <span class="n">disjointDecomposition</span> <span class="o">:</span>
+ <span class="n">Class</span> <span class="bp">→</span> <span class="n">Class</span> <span class="bp">→</span> <span class="n">Class</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">variable</span> <span class="n">AxPartition</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">Class</span><span class="o">,</span>
+ <span class="n">partition</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">↔</span> <span class="n">exhaustiveDecomposition</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">∧</span> <span class="n">disjointDecomposition</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span>
+</pre></div>
+
+
+<p>Does it make sense?</p>
+
 
 {% endraw %}
