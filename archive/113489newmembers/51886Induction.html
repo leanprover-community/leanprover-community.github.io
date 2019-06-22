@@ -1716,5 +1716,73 @@ Chris: What does the <code>h</code> in each case correspond to?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/167855171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#167855171">Patrick Thomas (Jun 11 2019 at 14:28)</a>:</h4>
 <p>Does this only use induction on <code>H</code> and no induction on <code>M</code>?</p>
 
+<a name="168757915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168757915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168757915">Patrick Thomas (Jun 22 2019 at 17:00)</a>:</h4>
+<p>What is the principle behind the induction on <code>H</code>? Would anyone have a recommendation for a resource describing this form of induction in general? How are the induction hypotheses determined?</p>
+
+<a name="168758204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758204">Kevin Buzzard (Jun 22 2019 at 17:10)</a>:</h4>
+<p>If H is an inductive type, then Lean reads off the so-called recursor from the constructors of the type.</p>
+
+<a name="168758216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758216">Kevin Buzzard (Jun 22 2019 at 17:11)</a>:</h4>
+<p>A good example to think about is nat. It's defined as: zero is a nat, the successor of a nat is a nat, and that's it. So the recursor is "if you can prove it for zero, and prove it for successors given a proof for all their inputs, you're done."</p>
+
+<a name="168758273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758273">Kevin Buzzard (Jun 22 2019 at 17:12)</a>:</h4>
+<p>Another good example is <code>false</code>, the inductive proposition with no constructors. Because there are no constructors, the inductive principle is "you don't have to check anything and you can get a map from false to P for free", i.e. the statement that false implies P for all propositions P.</p>
+
+<a name="168758274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758274">Kevin Buzzard (Jun 22 2019 at 17:12)</a>:</h4>
+<p>Maybe read TPIL, the chapter on inductive types?</p>
+
+<a name="168758289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758289">Kevin Buzzard (Jun 22 2019 at 17:13)</a>:</h4>
+<p>I was really excited when I realised that one could do induction on the reals in Lean! And then it turned out that the theorem was: "if you can prove it for all Cauchy sequences of rationals, you can deduce it for all reals"!</p>
+
+<a name="168758384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758384">Patrick Thomas (Jun 22 2019 at 17:16)</a>:</h4>
+<p>In this case <code>H</code> is not a type though right? It is a predicate?</p>
+
+<a name="168758628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758628">Kevin Buzzard (Jun 22 2019 at 17:25)</a>:</h4>
+<p>A predicate can be an inductive type</p>
+
+<a name="168758683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758683">Kevin Buzzard (Jun 22 2019 at 17:27)</a>:</h4>
+<p>I'm talking about the recursor attached to a general inductive type. You can do induction on an inductive type and the recursor is the function which does it for you</p>
+
+<a name="168758688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758688">Kevin Buzzard (Jun 22 2019 at 17:27)</a>:</h4>
+<p>I think you can also do induction on a quotient type, you just end up doing things on the bigger type and checking they're constant on equivalence classes</p>
+
+<a name="168758729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758729">Kevin Buzzard (Jun 22 2019 at 17:28)</a>:</h4>
+<p>You can't do induction on a pi type, and that's all the types there is</p>
+
+<a name="168758732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758732">Kevin Buzzard (Jun 22 2019 at 17:29)</a>:</h4>
+<p>Apart from universes, if you want to call theem types, and you can't do induction on them either</p>
+
+<a name="168758864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168758864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168758864">Patrick Thomas (Jun 22 2019 at 17:33)</a>:</h4>
+<p>What is the principle for the recursor for an inductive type that is a predicate, in non formal terms? Is there a simple example like nat, but for a predicate?</p>
+
+<a name="168759147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168759147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168759147">Kevin Buzzard (Jun 22 2019 at 17:43)</a>:</h4>
+<p>Just make a simple inductive predicates called X and then do #check @X.rec</p>
+
+<a name="168759152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168759152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168759152">Kevin Buzzard (Jun 22 2019 at 17:43)</a>:</h4>
+<p>And and or are good ones</p>
+
+<a name="168759199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168759199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168759199">Kevin Buzzard (Jun 22 2019 at 17:44)</a>:</h4>
+<p>I'm on a bus right now with no access to lean. Aren't these things talked about in TPIL? there's an interesting treatment of them in that coq book logical foundations</p>
+
+<a name="168759636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction/near/168759636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51886Induction.html#168759636">Patrick Thomas (Jun 22 2019 at 17:59)</a>:</h4>
+<p>I may have to go back through the section in TPIL. I was looking for other introductory resources as well.</p>
+
 
 {% endraw %}

@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Induction](51886Induction.html) (238 messages, latest: Jun 22 2019 at 17:59)
+
 * [noob question(s)](52075noobquestions.html) (809 messages, latest: Jun 22 2019 at 16:22)
 
 * [Map from intersection](23530Mapfromintersection.html) (3 messages, latest: Jun 22 2019 at 12:40)
@@ -43,8 +45,6 @@ permalink: archive/113489newmembers/index.html
 * [supremum](73663supremum.html) (8 messages, latest: Jun 12 2019 at 10:12)
 
 * [exercise  2 on ch3](90246exercise2onch3.html) (36 messages, latest: Jun 11 2019 at 18:34)
-
-* [Induction](51886Induction.html) (221 messages, latest: Jun 11 2019 at 14:28)
 
 * [subtype coercion to supertype](34195subtypecoerciontosupertype.html) (9 messages, latest: Jun 11 2019 at 13:32)
 
