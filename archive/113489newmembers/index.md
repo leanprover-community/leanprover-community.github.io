@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (808 messages, latest: Jun 22 2019 at 14:58)
+* [noob question(s)](52075noobquestions.html) (809 messages, latest: Jun 22 2019 at 16:22)
 
 * [Map from intersection](23530Mapfromintersection.html) (3 messages, latest: Jun 22 2019 at 12:40)
 
