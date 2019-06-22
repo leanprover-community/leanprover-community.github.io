@@ -10,13 +10,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (142 messages, latest: Jun 22 2019 at 19:08)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (145 messages, latest: Jun 22 2019 at 20:59)
+
+* [witt vectors](84655wittvectors.html) (267 messages, latest: Jun 22 2019 at 20:41)
 
 * [RFC: open immersion / embedding](07369RFCopenimmersionembedding.html) (5 messages, latest: Jun 21 2019 at 10:12)
 
 * [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (158 messages, latest: Jun 20 2019 at 01:43)
-
-* [witt vectors](84655wittvectors.html) (266 messages, latest: Jun 19 2019 at 08:06)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (22 messages, latest: Jun 18 2019 at 20:27)
 
