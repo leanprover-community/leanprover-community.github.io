@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (74 messages, latest: Jun 23 2019 at 02:59)
+
 * [Heterogeneous List](19802HeterogeneousList.html) (8 messages, latest: Jun 22 2019 at 14:08)
 
 * [transport and parametricity](74751transportandparametricity.html) (61 messages, latest: Jun 21 2019 at 12:33)
@@ -57,8 +59,6 @@ permalink: archive/113488general/index.html
 * [norm_cast almost working](81944normcastalmostworking.html) (29 messages, latest: Jun 18 2019 at 17:58)
 
 * [functor universe](62547functoruniverse.html) (14 messages, latest: Jun 18 2019 at 14:56)
-
-* [online leanprover](19268onlineleanprover.html) (69 messages, latest: Jun 18 2019 at 14:42)
 
 * [Elaboration of function types](30241Elaborationoffunctiontypes.html) (2 messages, latest: Jun 18 2019 at 12:40)
 
