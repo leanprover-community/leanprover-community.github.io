@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (302 messages, latest: Jun 23 2019 at 02:59)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (326 messages, latest: Jun 23 2019 at 03:39)
 
 * [category of discrete rings](76394categoryofdiscreterings.html) (4 messages, latest: Jun 22 2019 at 22:58)
 
