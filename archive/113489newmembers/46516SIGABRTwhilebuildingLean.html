@@ -117,5 +117,44 @@ permalink: archive/113489newmembers/46516SIGABRTwhilebuildingLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168798345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168798345">Bryan Gin-ge Chen (Jun 23 2019 at 15:50)</a>:</h4>
 <p>Yeah, as above, that looks like <code>lean</code> is crashing when trying to build the standard library.</p>
 
+<a name="168799660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168799660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168799660">Jean Lo (Jun 23 2019 at 16:34)</a>:</h4>
+<p>right.</p>
+<p>I didn't have <code>gdb</code> on this system when I set it up, so that took a while. And in honesty this is more digging than I'm really used to doing, especially that I don't really know how Lean works, so sorry for this being me getting confused and asking many silly questions.</p>
+<p>Anyways - here's the <code>bt</code> from the crash. (Would rebuilding with the <code>CMAKE_BUILD_TYPE</code> flag set to debug make this more informative?)</p>
+<div class="codehilite"><pre><span></span>#0  0x0000000800f1d45a in thr_kill () from /lib/libc.so.7
+#1  0x0000000800f1b844 in raise () from /lib/libc.so.7
+#2  0x0000000800e8e079 in abort () from /lib/libc.so.7
+#3  0x0000000800cea8ba in ?? () from /lib/libcxxrt.so.1
+#4  0x00000000004c876e in lean::get_exe_location() ()
+#5  0x00000000004cba6d in lean::get_builtin_search_path() ()
+#6  0x00000000004cc5a2 in lean::standard_search_path::standard_search_path() ()
+#7  0x000000000049807d in main ()
+</pre></div>
+
+<a name="168799728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168799728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168799728">Reid Barton (Jun 23 2019 at 16:37)</a>:</h4>
+<p>It's trying to use <code>snprintf(path, PATH_MAX, "/proc/%d/exe", pid);</code>--I assume BSD doesn't have <code>/proc</code></p>
+
+<a name="168799842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168799842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168799842">Bryan Gin-ge Chen (Jun 23 2019 at 16:41)</a>:</h4>
+<p>Wow, nice catch! That line is in <a href="https://github.com/leanprover/lean/blob/master/src/util/path.cpp#L85" target="_blank" title="https://github.com/leanprover/lean/blob/master/src/util/path.cpp#L85"><code>src/util/path.cpp</code></a>. So it looks like you'll need to write an <code>#elif</code> there with an appropriate path for FreeBSD.</p>
+
+<a name="168799888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168799888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168799888">Bryan Gin-ge Chen (Jun 23 2019 at 16:42)</a>:</h4>
+<p>Maybe something using <a href="https://www.freebsd.org/cgi/man.cgi?linprocfs(5)" target="_blank" title="https://www.freebsd.org/cgi/man.cgi?linprocfs(5)">linprocfs</a>? (This is just random googling on my part.)</p>
+
+<a name="168799920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168799920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168799920">Bryan Gin-ge Chen (Jun 23 2019 at 16:44)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="168800320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168800320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168800320">Bryan Gin-ge Chen (Jun 23 2019 at 16:57)</a>:</h4>
+<p>There are two suggestions for getting the current executable path in FreeBSD in <a href="https://stackoverflow.com/a/1024937" target="_blank" title="https://stackoverflow.com/a/1024937">this SO answer</a>: the first one links to a question with some C code that might work, the second one suggests that you might be able to just mount procfs to /proc before running lean (<a href="http://www.softwareprojects.com/resources/programming/t-how-to-mount-proc-on-freebsd-2006.html" target="_blank" title="http://www.softwareprojects.com/resources/programming/t-how-to-mount-proc-on-freebsd-2006.html">maybe this works?</a>)</p>
+
+<a name="168800363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168800363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168800363">Jean Lo (Jun 23 2019 at 16:58)</a>:</h4>
+<p>eh, I'm very very new to BSD as well. but did some random googling. Yeah, I suspect reading <code>/proc/curproc/file</code>would work if I have <code>procfs</code> mounted.</p>
+
 
 {% endraw %}
