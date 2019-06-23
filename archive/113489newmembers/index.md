@@ -10,9 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (13 messages, latest: Jun 23 2019 at 13:46)
+* [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (19 messages, latest: Jun 23 2019 at 14:53)
 
-* [noob question(s)](52075noobquestions.html) (835 messages, latest: Jun 23 2019 at 12:18)
+* [noob question(s)](52075noobquestions.html) (840 messages, latest: Jun 23 2019 at 14:51)
+
+* [namespace inside section](33823namespaceinsidesection.html) (2 messages, latest: Jun 23 2019 at 14:49)
 
 * [(no topic)](79918notopic.html) (197 messages, latest: Jun 23 2019 at 11:49)
 
