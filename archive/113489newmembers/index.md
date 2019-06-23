@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (196 messages, latest: Jun 23 2019 at 08:57)
+* [(no topic)](79918notopic.html) (197 messages, latest: Jun 23 2019 at 11:49)
 
-* [noob question(s)](52075noobquestions.html) (828 messages, latest: Jun 23 2019 at 05:04)
+* [noob question(s)](52075noobquestions.html) (833 messages, latest: Jun 23 2019 at 11:28)
 
 * [Induction](51886Induction.html) (239 messages, latest: Jun 22 2019 at 20:26)
 
