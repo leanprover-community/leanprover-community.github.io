@@ -1078,5 +1078,112 @@ permalink: archive/116395maths/75037breakingequalitywithsheaves.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168767773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168767773">Kevin Buzzard (Jun 22 2019 at 22:29)</a>:</h4>
 <p>I could even try and prove this!</p>
 
+<a name="168768695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168768695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168768695">Reid Barton (Jun 22 2019 at 23:00)</a>:</h4>
+<p>Not at a computer but is it just about being able to form sups of arbitrary families?</p>
+
+<a name="168768706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168768706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168768706">Reid Barton (Jun 22 2019 at 23:01)</a>:</h4>
+<p>Sounds like you just have a complete lattice</p>
+
+<a name="168768752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168768752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168768752">Kevin Buzzard (Jun 22 2019 at 23:02)</a>:</h4>
+<p>Yes I think that's it. Many thanks Reid. I should be able to literally check this in Lean in quite a formulaic way.</p>
+
+<a name="168769224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769224">Kevin Buzzard (Jun 22 2019 at 23:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> is there this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">Union</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">37</span><span class="o">},</span> <span class="o">(</span><span class="n">I</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="168769308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769308">Reid Barton (Jun 22 2019 at 23:20)</a>:</h4>
+<p>I don't know offhand whether it already exists, but you can define it as the sup of the <code>range</code> of the <code>(I → α)</code></p>
+
+<a name="168769322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769322">Kevin Buzzard (Jun 22 2019 at 23:21)</a>:</h4>
+<p>For glueing presheaves I really do not want to restrict myself to glueing on a set of subsets. I believe want to allow these more general unions. This is not a universe issue (at least as far as I'm concerned -- a topological space has a set of subsets). Before I press on, can I check that I have named this function correctly? <span class="user-mention" data-user-id="110064">@Kenny Lau</span> ?</p>
+
+<a name="168769363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769363">Kenny Lau (Jun 22 2019 at 23:22)</a>:</h4>
+<p>I'm not very sure what you want to do. Isn't this just supr?</p>
+
+<a name="168769364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769364">Kevin Buzzard (Jun 22 2019 at 23:22)</a>:</h4>
+<p>This is a situation where I would just let I and alpha be in the same universe.</p>
+
+<a name="168769365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769365">Kevin Buzzard (Jun 22 2019 at 23:22)</a>:</h4>
+<p>I don't know anything about lattices.</p>
+
+<a name="168769370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769370">Kevin Buzzard (Jun 22 2019 at 23:22)</a>:</h4>
+<p>The API is huge and I've never looked at it.</p>
+
+<a name="168769380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769380">Kevin Buzzard (Jun 22 2019 at 23:23)</a>:</h4>
+<p>Lattices are just weird computer science things that people like <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> enjoy. They're not proper maths ;-)</p>
+
+<a name="168769385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769385">Kevin Buzzard (Jun 22 2019 at 23:24)</a>:</h4>
+<p>That's why I'm happy to call my types <code>\alpha</code> in this development. I don't think a complete lattice deserves a name in maths mode -- a "maths name".</p>
+
+<a name="168769441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769441">Kevin Buzzard (Jun 22 2019 at 23:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> </p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">supr</span> <span class="c1">-- unknown</span>
+</pre></div>
+
+<a name="168769446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769446">Kenny Lau (Jun 22 2019 at 23:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">supr</span>
+</pre></div>
+
+<a name="168769488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769488">Kevin Buzzard (Jun 22 2019 at 23:26)</a>:</h4>
+<p>Is <code>complete_lattice.supr</code> a hole in mathlib? <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> ?</p>
+
+<a name="168769547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168769547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168769547">Kevin Buzzard (Jun 22 2019 at 23:28)</a>:</h4>
+<p>Just thinking abstractly about the concept of what setting we need in order to do glueing of sheaves, has led me to a type which has grown organically. It would be interesting if it was precisely <code>complete_lattice</code> or maybe it will be some other known type. It gives some sort of insight into the correct way to think about glueing sheaves. We throw in axioms as we need them and see what we end up growing.</p>
+
+<a name="168770164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770164">Kevin Buzzard (Jun 22 2019 at 23:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">lattice</span><span class="bp">.</span><span class="n">supr</span>
+<span class="n">supr</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u_2</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">has_Sup</span> <span class="n">α</span><span class="o">],</span> <span class="o">(</span><span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>Is that order preferred to</p>
+<div class="codehilite"><pre><span></span>supr : Π {α : Type u_1} [_inst_1 : has_Sup α] {ι : Sort u_2}, (ι → α) → α
+</pre></div>
+
+
+<p>? Is there some convention?</p>
+
+<a name="168770165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770165">Kevin Buzzard (Jun 22 2019 at 23:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
+
+<a name="168770367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770367">Kevin Buzzard (Jun 22 2019 at 23:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">supr</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">X</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+  <span class="bp">@</span><span class="n">lattice</span><span class="bp">.</span><span class="n">supr</span> <span class="n">α</span> <span class="n">I</span> <span class="bp">_</span> <span class="c1">-- Grumpy old mathematician observes that stupid polymorphism</span>
+                      <span class="c1">-- makes me have to fill in more stuff</span>
+
+<span class="kn">theorem</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">subset_Union</span> <span class="o">[</span><span class="n">X</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">),</span> <span class="n">s</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">supr</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>There's a conjecture for you complete_latticeists.</p>
+
+<a name="168770369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770369">Kevin Buzzard (Jun 22 2019 at 23:59)</a>:</h4>
+<p>I need to learn your language.</p>
+
 
 {% endraw %}
