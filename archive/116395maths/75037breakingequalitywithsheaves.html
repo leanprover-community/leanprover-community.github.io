@@ -2229,5 +2229,140 @@ invalid reference to undefined universe level parameter &#39;v&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168779729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168779729">Kevin Buzzard (Jun 23 2019 at 05:36)</a>:</h4>
 <p>In the <code>opens</code> case, not in the lattice case.</p>
 
+<a name="168780754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168780754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168780754">Kevin Buzzard (Jun 23 2019 at 06:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">has_sup</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">thing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_sup</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">sup</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="bp">@</span><span class="n">thing</span><span class="bp">.</span><span class="n">supr</span> <span class="n">α</span> <span class="n">Y</span> <span class="n">bool</span> <span class="o">(</span><span class="bp">@</span><span class="n">bool</span><span class="bp">.</span><span class="n">rec</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span><span class="o">)</span> <span class="n">a</span> <span class="n">b</span><span class="o">)}</span>
+</pre></div>
+
+
+<p>Will this instance never trigger?</p>
+
+<a name="168780795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168780795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168780795">Kevin Buzzard (Jun 23 2019 at 06:12)</a>:</h4>
+<p>I rolled my own <code>sup</code> from <code>supr</code></p>
+
+<a name="168780806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168780806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168780806">Kevin Buzzard (Jun 23 2019 at 06:13)</a>:</h4>
+<p>and now I have universe issues :-(</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  thing.has_sup α Y
+term
+  Y
+has type
+  thing.{u_1 u} α : Type (max u u_1)
+but is expected to have type
+  thing.{1 u} α : Type (max u 1)
+state:
+α : Type u,
+H : semilattice_inf α,
+Y : thing α
+⊢ Sort ?
+</pre></div>
+
+
+<p>stupid bool. Did I need a ubool or something?</p>
+
+<a name="168781098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781098">Mario Carneiro (Jun 23 2019 at 06:24)</a>:</h4>
+<p>you can use <code>ulift bool</code></p>
+
+<a name="168781099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781099">Kevin Buzzard (Jun 23 2019 at 06:24)</a>:</h4>
+<p>I don't understand the universe combinatorics well enough to know which universe I should be lifting to.</p>
+
+<a name="168781107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781107">Kevin Buzzard (Jun 23 2019 at 06:25)</a>:</h4>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  thing.has_sup α Y
+term
+  Y
+has type
+  thing.{u_1 u} α : Type (max u u_1)
+but is expected to have type
+  thing.{?l_1+1 u} α : Type (max u (?l_1+1))
+state:
+α : Type u,
+H : semilattice_inf α,
+Y : thing α
+⊢ Sort ?
+</pre></div>
+
+
+<p>I can't even solve the equations.</p>
+
+<a name="168781469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781469">Kevin Buzzard (Jun 23 2019 at 06:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="n">thing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">semilattice_inf</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">thing</span><span class="bp">.</span><span class="n">to_semilattice_inf</span> <span class="n">Y</span>
+<span class="c1">-- example (α : Type u) (Y : thing α) : semilattice_inf α := by apply_instance -- fails</span>
+</pre></div>
+
+
+<p>I can't get this instance to fire. Do I have to make <code>thing</code> a class to proceed more smoothly?</p>
+
+<a name="168781595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781595">Mario Carneiro (Jun 23 2019 at 06:42)</a>:</h4>
+<p>Why does <code>thing</code> still take two universe args?</p>
+
+<a name="168781599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781599">Kevin Buzzard (Jun 23 2019 at 06:42)</a>:</h4>
+<p>I'm scared Mario</p>
+
+<a name="168781607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781607">Mario Carneiro (Jun 23 2019 at 06:43)</a>:</h4>
+<p>I'm still not clear on exactly what the goal is</p>
+
+<a name="168781608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781608">Kevin Buzzard (Jun 23 2019 at 06:43)</a>:</h4>
+<p>I am not sure that sets are enough for glueing</p>
+
+<a name="168781611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781611">Mario Carneiro (Jun 23 2019 at 06:43)</a>:</h4>
+<p>You aren't using sets</p>
+
+<a name="168781614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781614">Mario Carneiro (Jun 23 2019 at 06:43)</a>:</h4>
+<p>I managed to prove that sheaf has a comap operation, will show</p>
+
+<a name="168781616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781616">Kevin Buzzard (Jun 23 2019 at 06:43)</a>:</h4>
+<p>I'll formalise the thing I'm not sure whether to believe.</p>
+
+<a name="168781661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781661">Mario Carneiro (Jun 23 2019 at 06:44)</a>:</h4>
+<p><a href="https://gist.github.com/digama0/2ee44987e8613b41c24536ddcde86d35" target="_blank" title="https://gist.github.com/digama0/2ee44987e8613b41c24536ddcde86d35">https://gist.github.com/digama0/2ee44987e8613b41c24536ddcde86d35</a></p>
+
+<a name="168781674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781674">Mario Carneiro (Jun 23 2019 at 06:45)</a>:</h4>
+<p>That's equivalent to the theorem that you can make a sheaf on a subset</p>
+
+<a name="168781779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781779">Kevin Buzzard (Jun 23 2019 at 06:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">infixr</span> <span class="bp">`</span> <span class="err">↪⊓⨆</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">semilattice_inf_lub_emb</span>
+</pre></div>
+
+
+<p>I'm liking that.</p>
+
+<a name="168781839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781839">Kevin Buzzard (Jun 23 2019 at 06:51)</a>:</h4>
+<p>I cannot formalise the "can sheaf glueing be done on subsets WLOG" goal until someone has ported Kenny's work on glueing to Mario's framework.</p>
+
+<a name="168781881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781881">Mario Carneiro (Jun 23 2019 at 06:52)</a>:</h4>
+<p>That's the goal</p>
+
+<a name="168781896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781896">Johan Commelin (Jun 23 2019 at 06:53)</a>:</h4>
+<p>It seems to me that half of that file is duplicating things that we have in <code>category_theory/</code> already...</p>
+
+<a name="168781938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168781938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168781938">Kevin Buzzard (Jun 23 2019 at 06:54)</a>:</h4>
+<p>It's normally <span class="user-mention" data-user-id="110087">@Scott Morrison</span> who says that. I don't know too much about the category theory library either.</p>
+
+<a name="168782067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782067">Johan Commelin (Jun 23 2019 at 06:59)</a>:</h4>
+<p>In fact, we already have the definition of presheaf in mathlib + a bunch of other abstract generalities. I think it would make a lot of sense to build the sheaf condition on top of that.</p>
+
 
 {% endraw %}
