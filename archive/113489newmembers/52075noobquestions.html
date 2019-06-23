@@ -4320,5 +4320,70 @@ h : prod.lex has_lt.lt has_lt.lt (y, z) (y + 3, z + 3)
 
 <p>As pointed before, we can use <code>gcd_a</code> and <code>gcd_b</code></p>
 
+<a name="168777157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168777157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168777157">Adrian Chu (Jun 23 2019 at 04:04)</a>:</h4>
+<p>but the trouble is gcd_a, gcd_b can be negative</p>
+
+<a name="168777167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168777167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168777167">Adrian Chu (Jun 23 2019 at 04:05)</a>:</h4>
+<p>so my plan is to keep adding multiples of a*b to <code>-gcd_a a b</code> and <code>gcd_b a b</code> repsectively until they are both &gt;= 0</p>
+
+<a name="168777217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168777217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168777217">Adrian Chu (Jun 23 2019 at 04:07)</a>:</h4>
+<p>But I run into 2 problems. First, (as an example,) given a recursive function like </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span>  <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">3</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">h</span><span class="o">:(</span><span class="n">y</span><span class="bp">+</span><span class="mi">3</span><span class="bp">&lt;</span><span class="mi">10</span><span class="o">)</span> <span class="k">then</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">3</span><span class="o">)</span> <span class="k">else</span> <span class="n">f</span> <span class="n">y</span>
+<span class="bp">|</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>how can we show that f x &lt; 10 for all x ?</p>
+
+<a name="168777283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168777283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168777283">Adrian Chu (Jun 23 2019 at 04:09)</a>:</h4>
+<p>second, given a function f from Z to Z and a proof that f x &gt;=0 for all x, how can we define a new function F from Z to N using f?</p>
+
+<a name="168778028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778028">Mario Carneiro (Jun 23 2019 at 04:35)</a>:</h4>
+<p>Rather than "repeatedly adding multiples of a*b", just add <code>k*a*b</code> for some k. This avoids all the mess of determining any well founded recursion, but it leaves the question - what is k?</p>
+
+<a name="168778068"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778068" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778068">Mario Carneiro (Jun 23 2019 at 04:36)</a>:</h4>
+<p>Also <code>baz</code> is really obviously false when <code>a = b = 0</code></p>
+
+<a name="168778069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778069">Mario Carneiro (Jun 23 2019 at 04:36)</a>:</h4>
+<p>or more generally when they aren't coprime</p>
+
+<a name="168778286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778286">Adrian Chu (Jun 23 2019 at 04:44)</a>:</h4>
+<blockquote>
+<p>Also <code>baz</code> is really obviously false when <code>a = b = 0</code></p>
+</blockquote>
+<p>oops, I carelessly left out the coprime condition. now fixed</p>
+
+<a name="168778336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778336">Mario Carneiro (Jun 23 2019 at 04:46)</a>:</h4>
+<p>If a and b are both nonzero, then <code>a*b</code> is also nonzero, so it is at least 1 and hence <code>k*a*b</code> is at least k. So you can pick k to be <code>gcd_a a b</code> and then <code>k*a*b - gcd_a a b</code> will be nonnegative</p>
+
+<a name="168778404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778404">Adrian Chu (Jun 23 2019 at 04:49)</a>:</h4>
+<blockquote>
+<p>Rather than "repeatedly adding multiples of a*b", just add <code>k*a*b</code> for some k. This avoids all the mess of determining any well founded recursion, but it leaves the question - what is k?</p>
+</blockquote>
+<p>Yes, I have thought of that, we can choose <code>k=max (nat_abs (nat.gcd_a x y)) (nat_abs (nat.gcd_b x y))</code></p>
+
+<a name="168778408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778408">Adrian Chu (Jun 23 2019 at 04:49)</a>:</h4>
+<p>yes yours is simpler!</p>
+
+<a name="168778449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778449">Mario Carneiro (Jun 23 2019 at 04:50)</a>:</h4>
+<p>You can use either <code>to_nat</code> or <code>nat_abs</code> to turn a nonnegative int into a nat</p>
+
+<a name="168778503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168778503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168778503">Adrian Chu (Jun 23 2019 at 04:52)</a>:</h4>
+<p>ok, let me try now</p>
+
 
 {% endraw %}

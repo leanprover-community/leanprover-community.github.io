@@ -1907,5 +1907,53 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168776460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168776460">Kevin Buzzard (Jun 23 2019 at 03:39)</a>:</h4>
 <p>All I know is that Lean wants me to prove <code>?m_1</code> etc</p>
 
+<a name="168777111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777111">Kevin Buzzard (Jun 23 2019 at 04:03)</a>:</h4>
+<div class="codehilite"><pre><span></span>1 goal
+α : Type u,
+_inst_2 : bounded_lattice α,
+_inst_3 : has_Sup α,
+_inst_4 : has_Inf α,
+X : complete_lattice α,
+_inst : has_inf α := semilattice_inf.to_has_inf α,
+_inst_1 : partial_order α := order_bot.to_partial_order α
+⊢ (∀ (a b c : α), a ≤ b → b ≤ c → a ≤ c) ↔ ∀ (a b c : α), a ≤ b → b ≤ c → a ≤ c
+</pre></div>
+
+
+<p><code>by refl</code> doesn't work. Presumably I have got my instances wrong?</p>
+
+<a name="168777155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777155">Kevin Buzzard (Jun 23 2019 at 04:04)</a>:</h4>
+<p>I genuinely don't know how I am supposed to make one of these lattice classes. I'm in all sorts of trouble.</p>
+
+<a name="168777271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777271">Kevin Buzzard (Jun 23 2019 at 04:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">semilattice_inf</span><span class="bp">.</span><span class="n">ext_inf</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">A</span><span class="bp">;</span> <span class="n">exact</span> <span class="o">(</span><span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span><span class="o">))</span> <span class="bp">=</span> <span class="n">x</span> <span class="err">⊓</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="n">eq_of_forall_le_iff</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">c</span><span class="o">,</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">le_inf_iff</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">H</span><span class="o">,</span> <span class="bp">@</span><span class="n">le_inf_iff</span> <span class="n">α</span> <span class="n">A</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="n">H</span><span class="o">]</span>
+</pre></div>
+
+
+<p>That's in mathlib, in <code>order/lattice.lean</code>. What's going on there?</p>
+
+<a name="168777448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777448">Kevin Buzzard (Jun 23 2019 at 04:14)</a>:</h4>
+<p>Oh I get it, I just look at the constructor <em>duh</em>. It would be cool if that hole command which spat out structure fields which need to be made, could take this sort of thing into account. I'm all for automation, I'm always using that hole command. Oh I'm back on track now.</p>
+
+<a name="168777932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777932">Mario Carneiro (Jun 23 2019 at 04:32)</a>:</h4>
+<p>This is what I mean by proving them one step at a time rather than all in one go</p>
+
+<a name="168777934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777934">Mario Carneiro (Jun 23 2019 at 04:32)</a>:</h4>
+<p>if you try to prove them in the wrong order, your goals make no sense</p>
+
+<a name="168777940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168777940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168777940">Mario Carneiro (Jun 23 2019 at 04:32)</a>:</h4>
+<p>but lean and the hole command make it look like order doesn't matter, which is only true after you are done proving everything</p>
+
 
 {% endraw %}
