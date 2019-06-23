@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (475 messages, latest: Jun 23 2019 at 09:58)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (483 messages, latest: Jun 23 2019 at 10:22)
 
 * [sheaves and sites](44395sheavesandsites.html) (585 messages, latest: Jun 23 2019 at 09:44)
 
