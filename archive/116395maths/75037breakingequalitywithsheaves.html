@@ -1185,5 +1185,127 @@ permalink: archive/116395maths/75037breakingequalitywithsheaves.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770369">Kevin Buzzard (Jun 22 2019 at 23:59)</a>:</h4>
 <p>I need to learn your language.</p>
 
+<a name="168770429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770429">Kevin Buzzard (Jun 23 2019 at 00:00)</a>:</h4>
+<p>Oh I guess I know exactly where to look in the mathlib API.</p>
+
+<a name="168770501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770501">Kevin Buzzard (Jun 23 2019 at 00:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">le_supr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="err">?</span><span class="n">M_2</span> <span class="bp">→</span> <span class="err">?</span><span class="n">M_1</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="err">?</span><span class="n">M_2</span><span class="o">),</span> <span class="n">s</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">supr</span> <span class="n">s</span>
+</pre></div>
+
+
+<p>Porting this code is really interesting. I'm trying to see if I can do it in a completely algorithmic way. I think I'm nearly there.</p>
+
+<a name="168770760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770760">Reid Barton (Jun 23 2019 at 00:13)</a>:</h4>
+<p>I think the order of implicit and type class arguments is usually arbitrary and depends on how it was convenient to organize the <code>variable</code> declarations</p>
+
+<a name="168770808"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168770808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168770808">Kevin Buzzard (Jun 23 2019 at 00:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_supr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span>
+  <span class="n">s</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">supr</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">α : Type u,</span>
+<span class="cm">ι : Sort v,</span>
+<span class="cm">_inst_1 : complete_lattice α,</span>
+<span class="cm">s : ι → α,</span>
+<span class="cm">i : ι</span>
+<span class="cm">⊢ has_le α</span>
+<span class="cm">sheaf_on_opens_total_glueing.lean:15:8: error</span>
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">α : Type u,</span>
+<span class="cm">ι : Sort v,</span>
+<span class="cm">_inst_1 : complete_lattice α,</span>
+<span class="cm">s : ι → α,</span>
+<span class="cm">i : ι</span>
+<span class="cm">⊢ has_Sup α</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>What have I done to deserve this??</p>
+
+<a name="168771022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771022">Kevin Buzzard (Jun 23 2019 at 00:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">complete_lattice</span>
+
+<span class="c1">-- #check lattice.le -- unknown identifier</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">le</span> <span class="c1">-- but this works??</span>
+</pre></div>
+
+
+<p>Is that a poorly-named function in mathlib?</p>
+
+<a name="168771223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771223">Kevin Buzzard (Jun 23 2019 at 00:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_le</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">failed to synthesize instance name, name should be provided explicitly</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>What should this be instance be called?</p>
+
+<a name="168771226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771226">Kevin Buzzard (Jun 23 2019 at 00:28)</a>:</h4>
+<p>Why is this happening?</p>
+
+<a name="168771614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771614">Kevin Buzzard (Jun 23 2019 at 00:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">complete_lattice</span>
+
+<span class="c1">-- #check lattice.le -- unknown identifier</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">le</span> <span class="c1">-- should this work?</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="n">def</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">lattice</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">le</span>
+
+<span class="kn">instance</span> <span class="n">I_DONT_KNOW_WHY_I_NEED_TO_NAME_THIS_INSTANCE</span>
+  <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_le</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">WHAT_IS_GOING_ON</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_Sup</span> <span class="n">α</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_supr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">ι</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">ι</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">ι</span><span class="o">),</span>
+  <span class="bp">@</span><span class="n">has_le</span><span class="bp">.</span><span class="n">le</span> <span class="n">α</span> <span class="o">(</span><span class="k">by</span> <span class="n">resetI</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">I_DONT_KNOW_WHY_I_NEED_TO_NAME_THIS_INSTANCE</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">supr</span> <span class="n">α</span> <span class="n">ι</span> <span class="o">(</span><span class="bp">@</span><span class="n">WHAT_IS_GOING_ON</span> <span class="n">α</span> <span class="o">(</span><span class="k">by</span> <span class="n">resetI</span><span class="bp">;</span> <span class="n">apply_instance</span><span class="o">)))</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="bp">#</span><span class="kn">exit</span>
+</pre></div>
+
+
+<p>This is not going well. What am I doing wrong?</p>
+
+<a name="168771739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771739">Reid Barton (Jun 23 2019 at 00:47)</a>:</h4>
+<p>You put the <code>[complete_lattice \a]</code> to the right of the colon</p>
+
+<a name="168771785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771785">Kevin Buzzard (Jun 23 2019 at 00:48)</a>:</h4>
+<p>bleurgh thanks. I am sort-of generating the code algorithmically, you're just finding bugs in my algorithm.</p>
+
+<a name="168771912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168771912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168771912">Kevin Buzzard (Jun 23 2019 at 00:53)</a>:</h4>
+<p>I am writing some completely mechanical code, made possible because of excellent naming conventions <span class="user-mention" data-user-id="110049">@Mario Carneiro</span></p>
+
+<a name="168772005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168772005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168772005">Kevin Buzzard (Jun 23 2019 at 00:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">complete_lattice</span><span class="bp">.</span><span class="n">subset_Union</span> <span class="o">[</span><span class="n">X</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">I</span><span class="o">)</span> <span class="o">:</span> <span class="n">s</span> <span class="n">i</span> <span class="bp">≤</span> <span class="n">supr</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="n">complete_lattice</span><span class="bp">.</span><span class="n">le_supr</span> <span class="n">s</span> <span class="n">i</span>
+</pre></div>
+
+
+<p>There's some sort of dictionary going between subset land and lattice land. <code>subset_Union</code> becomes <code>le_supr</code>.</p>
+
+<a name="168772012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168772012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168772012">Kevin Buzzard (Jun 23 2019 at 00:57)</a>:</h4>
+<p>When I manipulate terms of type <code>opens X</code>, is the canonical way to manipulate them using the language of complete lattices?</p>
+
+<a name="168772013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168772013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168772013">Kevin Buzzard (Jun 23 2019 at 00:57)</a>:</h4>
+<p>Is that the language that the <code>simp</code> lemmas will be in?</p>
+
 
 {% endraw %}
