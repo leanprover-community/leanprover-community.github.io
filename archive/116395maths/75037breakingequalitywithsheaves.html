@@ -2364,5 +2364,283 @@ Y : thing α
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782067">Johan Commelin (Jun 23 2019 at 06:59)</a>:</h4>
 <p>In fact, we already have the definition of presheaf in mathlib + a bunch of other abstract generalities. I think it would make a lot of sense to build the sheaf condition on top of that.</p>
 
+<a name="168782379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782379">Kevin Buzzard (Jun 23 2019 at 07:10)</a>:</h4>
+<p>But is it a presheaf over a complete lattice?</p>
+
+<a name="168782389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782389">Kevin Buzzard (Jun 23 2019 at 07:11)</a>:</h4>
+<p>Oh it's some category definition, right? It's a functor. I think it would be an interesting question to see how much fun it was to formalise sheaf glueing in that language. I think it would be more difficult than what Mario is doing.</p>
+
+<a name="168782441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782441">Mario Carneiro (Jun 23 2019 at 07:13)</a>:</h4>
+<p>One thing that the category formulation will give you is a much easier way to do this stuff</p>
+<div class="codehilite"><pre><span></span>  <span class="o">(</span><span class="n">φ</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="n">I</span><span class="o">),</span>
+    <span class="n">equiv</span> <span class="o">((</span><span class="n">F</span> <span class="n">i</span><span class="o">)</span><span class="bp">.</span><span class="n">res_subset</span> <span class="o">((</span><span class="n">S</span> <span class="n">i</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">j</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span> <span class="o">((</span><span class="n">F</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">res_subset</span> <span class="o">((</span><span class="n">S</span> <span class="n">i</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">j</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)))</span>
+  <span class="o">(</span><span class="n">Hφ1</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">φ</span> <span class="n">i</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="o">(</span><span class="n">F</span> <span class="n">i</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">Hφ2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span> <span class="n">k</span><span class="o">,</span>
+    <span class="o">((</span><span class="n">φ</span> <span class="n">i</span> <span class="n">j</span><span class="o">)</span><span class="bp">.</span><span class="n">res_subset</span> <span class="o">((</span><span class="n">S</span> <span class="n">i</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">j</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span><span class="bp">.</span><span class="n">trans</span>
+      <span class="o">((</span><span class="n">φ</span> <span class="n">j</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">res_subset</span> <span class="o">((</span><span class="n">S</span> <span class="n">i</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">j</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset_inter</span> <span class="o">(</span><span class="n">le_trans</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)))</span> <span class="bp">=</span>
+    <span class="o">(</span><span class="n">φ</span> <span class="n">i</span> <span class="n">k</span><span class="o">)</span><span class="bp">.</span><span class="n">res_subset</span> <span class="o">((</span><span class="n">S</span> <span class="n">i</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">j</span><span class="o">)</span> <span class="err">∩</span> <span class="o">(</span><span class="n">S</span> <span class="n">k</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset_inter</span> <span class="o">(</span><span class="n">le_trans</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">inter_subset_right</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)))</span> <span class="o">:</span>
+</pre></div>
+
+
+<p>with diagrams</p>
+
+<a name="168782445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782445">Johan Commelin (Jun 23 2019 at 07:13)</a>:</h4>
+<p>You can still just work over complete lattices.</p>
+
+<a name="168782446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782446">Johan Commelin (Jun 23 2019 at 07:13)</a>:</h4>
+<p>So do the sheafy part the way you've been doing it. But just use the existing presheaves, instead of rolling your own.</p>
+
+<a name="168782485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782485">Johan Commelin (Jun 23 2019 at 07:14)</a>:</h4>
+<p>The definition of presheaf and functor or defeq up to eta for records...</p>
+
+<a name="168782773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782773">Kevin Buzzard (Jun 23 2019 at 07:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">comap</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="err">⊓</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">presheaf</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">F</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+  <span class="n">res</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">h</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">res</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">mono</span> <span class="n">h</span><span class="o">),</span>
+  <span class="n">Hid</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">Hid</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">Hcomp</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">bc</span> <span class="n">ab</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">Hcomp</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>This is much harder for sheaves; one might need some extra assumptions on alpha to make it work.</p>
+
+<a name="168782775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782775">Kevin Buzzard (Jun 23 2019 at 07:25)</a>:</h4>
+<p>You have to "sheafify".</p>
+
+<a name="168782814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782814">Kevin Buzzard (Jun 23 2019 at 07:26)</a>:</h4>
+<p>Apply the adjoint functor to the forgetful functor from sheaves to presheaves.</p>
+
+<a name="168782822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782822">Mario Carneiro (Jun 23 2019 at 07:26)</a>:</h4>
+<p>Here's presheaves:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">Top</span><span class="bp">.</span><span class="n">presheaf</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">open</span> <span class="n">category_theory</span>
+<span class="kn">open</span> <span class="n">topological_space</span>
+<span class="kn">open</span> <span class="n">opposite</span>
+
+<span class="n">def</span> <span class="n">presheaf&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Top</span><span class="bp">.</span><span class="n">of</span> <span class="n">α</span><span class="o">)</span><span class="bp">.</span><span class="n">presheaf</span> <span class="n">C</span>
+
+<span class="kn">namespace</span> <span class="n">presheaf&#39;</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">presheaf&#39;</span> <span class="n">α</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">F</span> <span class="n">U</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span> <span class="n">U</span><span class="o">)</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">res</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf&#39;</span> <span class="n">α</span> <span class="n">C</span><span class="o">)</span> <span class="o">{</span><span class="n">U</span> <span class="n">V</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⟶</span> <span class="n">U</span><span class="o">)</span> <span class="o">:</span> <span class="n">F</span> <span class="n">U</span> <span class="err">⟶</span> <span class="n">F</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="bp">.</span><span class="n">op</span>
+
+<span class="kn">end</span> <span class="n">presheaf&#39;</span>
+</pre></div>
+
+
+<p>Not sure how to state the sheaf axioms without elements of the category</p>
+
+<a name="168782832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782832">Mario Carneiro (Jun 23 2019 at 07:27)</a>:</h4>
+<p>I don't know why <code>presheaf</code> is stated using a <code>Top</code> argument</p>
+
+<a name="168782834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782834">Kevin Buzzard (Jun 23 2019 at 07:27)</a>:</h4>
+<p>You can't make sheaves on an arbitrary category.</p>
+
+<a name="168782836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782836">Kevin Buzzard (Jun 23 2019 at 07:28)</a>:</h4>
+<p>You need a notion of covering. This is what a site is.</p>
+
+<a name="168782875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782875">Mario Carneiro (Jun 23 2019 at 07:28)</a>:</h4>
+<p>okay, how's that work?</p>
+
+<a name="168782877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782877">Kevin Buzzard (Jun 23 2019 at 07:28)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Grothendieck_topology" target="_blank" title="https://en.wikipedia.org/wiki/Grothendieck_topology">https://en.wikipedia.org/wiki/Grothendieck_topology</a></p>
+
+<a name="168782883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782883">Mario Carneiro (Jun 23 2019 at 07:29)</a>:</h4>
+<p>Wait, this is about the domain category</p>
+
+<a name="168782886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782886">Kevin Buzzard (Jun 23 2019 at 07:29)</a>:</h4>
+<p>If you work with categories then that is the correct thing to use.</p>
+
+<a name="168782887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782887">Mario Carneiro (Jun 23 2019 at 07:29)</a>:</h4>
+<p>mathlib presheaves are on top spaces</p>
+
+<a name="168782888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782888">Kevin Buzzard (Jun 23 2019 at 07:29)</a>:</h4>
+<p>To say what a sheaf is, you have to know what a covering of an open set by open sets is</p>
+
+<a name="168782889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782889">Mario Carneiro (Jun 23 2019 at 07:29)</a>:</h4>
+<p>The category here is the target, replacing Type</p>
+
+<a name="168782895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782895">Kevin Buzzard (Jun 23 2019 at 07:30)</a>:</h4>
+<p>If you want to define sheaves of types on an arbitrary category, you need the extra structure of a site on that category.</p>
+
+<a name="168782935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782935">Mario Carneiro (Jun 23 2019 at 07:30)</a>:</h4>
+<p>I don't</p>
+
+<a name="168782940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782940">Kevin Buzzard (Jun 23 2019 at 07:30)</a>:</h4>
+<p>No?</p>
+
+<a name="168782943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782943">Mario Carneiro (Jun 23 2019 at 07:30)</a>:</h4>
+<p>I'm just considering top spaces for now, because that's what mathlib presheaves are</p>
+
+<a name="168782944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782944">Mario Carneiro (Jun 23 2019 at 07:30)</a>:</h4>
+<p>I just want to know why it's bundled</p>
+
+<a name="168782953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782953">Mario Carneiro (Jun 23 2019 at 07:31)</a>:</h4>
+<p>mathlib presheaves could also be generalized to preorder categories, but that's work for another day</p>
+
+<a name="168782954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782954">Mario Carneiro (Jun 23 2019 at 07:31)</a>:</h4>
+<p>or general categories, and then you have this site business</p>
+
+<a name="168782999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168782999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168782999">Kevin Buzzard (Jun 23 2019 at 07:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">sheaf_on_opens</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="o">(</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">sheaf</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">v</span><span class="o">}</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>How are you going to port that line to your library?</p>
+
+<a name="168783004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783004">Kevin Buzzard (Jun 23 2019 at 07:32)</a>:</h4>
+<p>It might be best to do <code>presheaf_on_opens</code> first</p>
+
+<a name="168783005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783005">Mario Carneiro (Jun 23 2019 at 07:32)</a>:</h4>
+<p><code>sheaf_on_opens U := sheaf {V // V &lt;= U}</code></p>
+
+<a name="168783013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783013">Mario Carneiro (Jun 23 2019 at 07:33)</a>:</h4>
+<p>or more generally a sheaf on some object isomorphic to that</p>
+
+<a name="168783019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783019">Kevin Buzzard (Jun 23 2019 at 07:33)</a>:</h4>
+<p>So you really want to carry the subtype around?</p>
+
+<a name="168783022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783022">Mario Carneiro (Jun 23 2019 at 07:33)</a>:</h4>
+<p>That's why I defined <code>comap</code>, because <code>subtype.val</code> is an inf_sup_emb</p>
+
+<a name="168783074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783074">Mario Carneiro (Jun 23 2019 at 07:35)</a>:</h4>
+<p>But the theory starts to look very categorical at that point, because you need products in the category to replace intersection of subsets</p>
+
+<a name="168783080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783080">Kevin Buzzard (Jun 23 2019 at 07:35)</a>:</h4>
+<p>And you think that (a) this will make the gluing of presheaves go better and (b) you will be able to prove the universal property from a set-valued one.</p>
+
+<a name="168783126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783126">Kevin Buzzard (Jun 23 2019 at 07:36)</a>:</h4>
+<p>We can just stick to gluing of presheaves. I want to see this trick of going from the set to the parametrised set.</p>
+
+<a name="168783133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783133">Mario Carneiro (Jun 23 2019 at 07:37)</a>:</h4>
+<p>I'm not sure I want to actually define <code>sheaf_on_opens U := sheaf {V // V &lt;= U}</code> because then it won't apply cleanly to <code>opens</code>, since <code>opens U</code> (using U as a subset of the topological space as a top space in its own right) is isomorphic but not defeq to <code>{V : opens alpha // V &lt;= U}</code></p>
+
+<a name="168783183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783183">Mario Carneiro (Jun 23 2019 at 07:38)</a>:</h4>
+<p>So you can use something like <code>comap</code> to avoid having to prescribe a particular representation for the type, but at some point you just want to say "intersect these subsets and give me the result" without having to assume the result exists in the first place</p>
+
+<a name="168783193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783193">Mario Carneiro (Jun 23 2019 at 07:39)</a>:</h4>
+<p>And this is especially important for the gluing axiom, because it's kind of the whole point that you don't know the glued sheaf exists until you construct it</p>
+
+<a name="168783238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783238">Mario Carneiro (Jun 23 2019 at 07:40)</a>:</h4>
+<p>But I'm not sure how to state these axioms in the categorical presentation:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">locality</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf&#39;</span> <span class="n">α</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">{{</span><span class="n">U</span> <span class="n">S</span><span class="o">}},</span> <span class="n">is_lub</span> <span class="n">S</span> <span class="n">U</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">{{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">F</span> <span class="n">U</span><span class="o">}},</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">V</span> <span class="err">∈</span> <span class="n">S</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">res&#39;</span> <span class="n">V</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">F</span><span class="bp">.</span><span class="n">res&#39;</span> <span class="n">V</span> <span class="n">t</span><span class="o">)</span> <span class="bp">→</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">t</span>
+
+<span class="n">def</span> <span class="n">gluing</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">presheaf&#39;</span> <span class="n">α</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="o">{{</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">}}</span> <span class="o">{{</span><span class="n">S</span><span class="o">}},</span> <span class="n">is_lub</span> <span class="n">S</span> <span class="n">U</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">V</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">F</span> <span class="n">V</span><span class="o">),</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">V</span> <span class="n">W</span> <span class="o">:</span> <span class="n">S</span><span class="o">,</span> <span class="n">res&#39;</span> <span class="n">F</span> <span class="o">(</span><span class="n">V</span> <span class="err">⊓</span> <span class="n">W</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="n">V</span><span class="o">)</span> <span class="bp">=</span> <span class="n">res&#39;</span> <span class="n">F</span> <span class="o">(</span><span class="n">V</span> <span class="err">⊓</span> <span class="n">W</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="n">W</span><span class="o">))</span> <span class="bp">→</span>
+  <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">F</span> <span class="n">U</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">V</span><span class="o">:</span><span class="n">S</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">res&#39;</span> <span class="n">V</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">s</span> <span class="n">V</span>
+</pre></div>
+
+<a name="168783241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783241">Mario Carneiro (Jun 23 2019 at 07:40)</a>:</h4>
+<p>they are too pointed</p>
+
+<a name="168783416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783416">Kevin Buzzard (Jun 23 2019 at 07:46)</a>:</h4>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+α : Type u,
+_inst_1 : semilattice_inf α,
+U : α
+⊢ semilattice_inf {V // V ≤ U}
+</pre></div>
+
+<a name="168783428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783428">Kevin Buzzard (Jun 23 2019 at 07:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">presheaf_on_opens</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">presheaf</span> <span class="o">{</span><span class="n">V</span> <span class="bp">//</span> <span class="n">V</span> <span class="bp">&lt;=</span> <span class="n">U</span><span class="o">}</span>
+</pre></div>
+
+<a name="168783541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783541">Mario Carneiro (Jun 23 2019 at 07:51)</a>:</h4>
+<p>there's that too</p>
+
+<a name="168783606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783606">Kevin Buzzard (Jun 23 2019 at 07:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">semilattice_inf</span> <span class="o">{</span><span class="n">V</span> <span class="bp">//</span> <span class="n">V</span> <span class="bp">≤</span> <span class="n">U</span><span class="o">}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>:-(</p>
+
+<a name="168783710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783710">Mario Carneiro (Jun 23 2019 at 07:56)</a>:</h4>
+<p>it's not hard to prove</p>
+
+<a name="168783720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783720">Kevin Buzzard (Jun 23 2019 at 07:57)</a>:</h4>
+<p>I just thought it would happen by magic</p>
+
+<a name="168783721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783721">Kevin Buzzard (Jun 23 2019 at 07:57)</a>:</h4>
+<p>I am really not good at making any instances of anything with the word lattice in the name.</p>
+
+<a name="168783724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783724">Kevin Buzzard (Jun 23 2019 at 07:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">semilattice_inf</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">U</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">has_inf</span> <span class="o">{</span><span class="n">V</span> <span class="bp">//</span> <span class="n">V</span> <span class="bp">≤</span> <span class="n">U</span><span class="o">}</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="168783761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168783761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168783761">Kevin Buzzard (Jun 23 2019 at 07:58)</a>:</h4>
+<p>but <code>semilattice_inf</code> extends <code>has_inf</code></p>
+
 
 {% endraw %}
