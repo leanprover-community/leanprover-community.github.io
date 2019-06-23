@@ -70,5 +70,31 @@ permalink: archive/113489newmembers/46516SIGABRTwhilebuildingLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168794809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168794809">Jean Lo (Jun 23 2019 at 13:46)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> : no.</p>
 
+<a name="168795549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168795549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168795549">Bryan Gin-ge Chen (Jun 23 2019 at 14:14)</a>:</h4>
+<p>If <code>bin_lean</code> has been built, then usually the next thing <code>cmake</code> tries to do is to build the standard library (check the <code>standard_lib</code> target in <code>src/CMakeLists.txt</code>), which involves running the <code>lean</code> executable (you should be able to find it in <code>your_build_directory/shell/lean</code> and <code>bin/lean</code>). I suspect that that is what is crashing, so if you want to dig into this, you can try running <code>lean --make</code> (inside the <code>library</code> directory) from <code>gdb</code> or some other debugger and then looking at the stack trace when it crashes.</p>
+<p>I'm a little surprised that <code>lean</code> and <code>bin_lean</code> are being built at 68% though, usually they're among the last things being built. Out of curiosity, could you share a link to your full build log?</p>
+
+<a name="168795608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168795608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168795608">Mario Carneiro (Jun 23 2019 at 14:16)</a>:</h4>
+<p>I think if the test suite is getting built that would come after</p>
+
+<a name="168795611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168795611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168795611">Mario Carneiro (Jun 23 2019 at 14:16)</a>:</h4>
+<p>which is the default IIRC</p>
+
+<a name="168795624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168795624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168795624">Bryan Gin-ge Chen (Jun 23 2019 at 14:17)</a>:</h4>
+<p>That makes sense. I'm more used to seeing logs that look like <a href="https://travis-ci.org/leanprover/lean/jobs/517045222#L1158" target="_blank" title="https://travis-ci.org/leanprover/lean/jobs/517045222#L1158">this</a> though.</p>
+
+<a name="168796406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168796406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168796406">Bryan Gin-ge Chen (Jun 23 2019 at 14:44)</a>:</h4>
+<p>Ah, the difference is probably whether you run <code>make -j2</code> or just <code>make</code>.</p>
+
+<a name="168796722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168796722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168796722">Jean Lo (Jun 23 2019 at 14:53)</a>:</h4>
+<p>why would <code>make -j2</code> help in this case?</p>
+<p>also, sorry, was mucking around &amp; didn't have the logs anymore. Here's they are : <a href="https://pastebin.com/raw/DJLHdXCN" target="_blank" title="https://pastebin.com/raw/DJLHdXCN">https://pastebin.com/raw/DJLHdXCN</a> <a href="https://pastebin.com/raw/Nzts85BG" target="_blank" title="https://pastebin.com/raw/Nzts85BG">https://pastebin.com/raw/Nzts85BG</a> . The <code>stderr</code> is stupid huge but appears to just be warnings about the same thing every time it crops up?</p>
+
 
 {% endraw %}
