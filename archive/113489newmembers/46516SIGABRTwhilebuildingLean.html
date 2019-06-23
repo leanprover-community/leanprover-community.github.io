@@ -96,5 +96,26 @@ permalink: archive/113489newmembers/46516SIGABRTwhilebuildingLean.html
 <p>why would <code>make -j2</code> help in this case?</p>
 <p>also, sorry, was mucking around &amp; didn't have the logs anymore. Here's they are : <a href="https://pastebin.com/raw/DJLHdXCN" target="_blank" title="https://pastebin.com/raw/DJLHdXCN">https://pastebin.com/raw/DJLHdXCN</a> <a href="https://pastebin.com/raw/Nzts85BG" target="_blank" title="https://pastebin.com/raw/Nzts85BG">https://pastebin.com/raw/Nzts85BG</a> . The <code>stderr</code> is stupid huge but appears to just be warnings about the same thing every time it crops up?</p>
 
+<a name="168796987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168796987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168796987">Jean Lo (Jun 23 2019 at 15:02)</a>:</h4>
+<p>tried <code>make -j2</code>, it moved the errors down some. Now it's the linker that's dying instead: <a href="https://pastebin.com/raw/dawrJe76" target="_blank" title="https://pastebin.com/raw/dawrJe76">https://pastebin.com/raw/dawrJe76</a></p>
+
+<a name="168797794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168797794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168797794">Bryan Gin-ge Chen (Jun 23 2019 at 15:30)</a>:</h4>
+<p>Sorry, I didn't mean that <code>make -j2</code> would help with your problem. It would just explain the difference in build order.</p>
+
+<a name="168797917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168797917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168797917">Bryan Gin-ge Chen (Jun 23 2019 at 15:35)</a>:</h4>
+<p>Hmm, the final error log suggests that <code>-fPIC</code> is missing from the build flags. The culprit might be <a href="https://github.com/leanprover/lean/blob/master/src/CMakeLists.txt#L218" target="_blank" title="https://github.com/leanprover/lean/blob/master/src/CMakeLists.txt#L218">this overly-specific test</a>. You might want to go through that file and change some of the Linux conditionals to allow for FreeBSD and see if that helps.</p>
+
+<a name="168798110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168798110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168798110">Jean Lo (Jun 23 2019 at 15:42)</a>:</h4>
+<p>ah, okay.</p>
+<p>I just naively tried getting cmake to <code>-fPIC</code> <em>everything</em> by adding a line in the <code>CMakeLists.txt</code> because I didn't see your message yet &amp; didn't know about the test. The build process on that try has just concluded - it died at the very end with <code>Abort trap (core dumped)</code> after building <code>lean</code> and <code>bin_lean</code>.</p>
+
+<a name="168798345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/SIGABRT%20while%20building%20Lean/near/168798345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46516SIGABRTwhilebuildingLean.html#168798345">Bryan Gin-ge Chen (Jun 23 2019 at 15:50)</a>:</h4>
+<p>Yeah, as above, that looks like <code>lean</code> is crashing when trying to build the standard library.</p>
+
 
 {% endraw %}
