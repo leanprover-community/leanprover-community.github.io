@@ -10,9 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (492 messages, latest: Jun 23 2019 at 18:12)
+* [sheaves and sites](44395sheavesandsites.html) (586 messages, latest: Jun 23 2019 at 22:53)
 
-* [sheaves and sites](44395sheavesandsites.html) (585 messages, latest: Jun 23 2019 at 09:44)
+* [complete (distrib) lattice](53634completedistriblattice.html) (11 messages, latest: Jun 23 2019 at 22:45)
+
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (492 messages, latest: Jun 23 2019 at 18:12)
 
 * [category of discrete rings](76394categoryofdiscreterings.html) (4 messages, latest: Jun 22 2019 at 22:58)
 
