@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (461 messages, latest: Jun 23 2019 at 08:05)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (475 messages, latest: Jun 23 2019 at 09:58)
+
+* [sheaves and sites](44395sheavesandsites.html) (585 messages, latest: Jun 23 2019 at 09:44)
 
 * [category of discrete rings](76394categoryofdiscreterings.html) (4 messages, latest: Jun 22 2019 at 22:58)
 
@@ -347,8 +349,6 @@ permalink: archive/116395maths/index.html
 * [last digit challenge](66889lastdigitchallenge.html) (15 messages, latest: Jan 29 2019 at 23:52)
 
 * [Limits of product](74089Limitsofproduct.html) (15 messages, latest: Jan 29 2019 at 22:34)
-
-* [sheaves and sites](44395sheavesandsites.html) (584 messages, latest: Jan 29 2019 at 20:13)
 
 * [nonlinarith](25383nonlinarith.html) (22 messages, latest: Jan 29 2019 at 07:44)
 
