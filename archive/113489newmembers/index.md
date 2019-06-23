@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (196 messages, latest: Jun 23 2019 at 08:57)
+
 * [noob question(s)](52075noobquestions.html) (828 messages, latest: Jun 23 2019 at 05:04)
 
 * [Induction](51886Induction.html) (239 messages, latest: Jun 22 2019 at 20:26)
@@ -73,8 +75,6 @@ permalink: archive/113489newmembers/index.html
 * [working with sets of vectors](92728workingwithsetsofvectors.html) (50 messages, latest: Jun 05 2019 at 18:53)
 
 * [string equality](12294stringequality.html) (3 messages, latest: Jun 05 2019 at 03:55)
-
-* [(no topic)](79918notopic.html) (191 messages, latest: Jun 04 2019 at 22:46)
 
 * [Direct Sums](48548DirectSums.html) (10 messages, latest: Jun 01 2019 at 13:30)
 
