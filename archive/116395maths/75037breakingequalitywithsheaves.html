@@ -3125,5 +3125,76 @@ Also see "Relation to topological spaces", and Definition 4.9 and following.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168838505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168838505">Scott Morrison (Jun 24 2019 at 10:40)</a>:</h4>
 <p>The file we wrote that afternoon is <a href="https://github.com/leanprover-community/mathlib/blob/category-of-uniform-spaces/src/topology/uniform_space/UniformSpace.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/category-of-uniform-spaces/src/topology/uniform_space/UniformSpace.lean">here</a>.</p>
 
+<a name="168841185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841185">Kevin Buzzard (Jun 24 2019 at 11:30)</a>:</h4>
+<p>Patrick can be a bit cynical at times :-) But the point remains. The last time I talked to you about sheaves you said "we've got presheaves, I just need to figure out a neat way of doing the sheaf condition which is not ugly". But in this low-level approach here we just write stuff down and it works. There's a trick to finding out a good way to write it down, but once you have a good working basic set of definitions it's really good fun to build an API and then "prove some lemmas" (like the "lemma" that you can glue sheaves, which I would say to CS people was a definition, but I would call it a theorem to maths people) and watch the API become robust. I guess the theorem is that a universal object exists.</p>
+<p>I am still unclear about whether the problem is having Hom(X,Y) =  inductive type, or whether the problem is that Lean 3 is not very good at categories because of design decisions which we're having to fight against.</p>
+<p>I mentioned issues with categories to Tom Hales at AITP and he said "well as far as I know Coq doesn't have any issues with them, I believe they have a nice category theory library" (I'm paraphrasing but that's my memory of what he said). Is this true? Can they do things better than us here? Where is this library? There is all this talk of not knowing how best to implement diagrams -- how do they do it in Coq?</p>
+
+<a name="168841196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841196">Kevin Buzzard (Jun 24 2019 at 11:30)</a>:</h4>
+<p>This deserves a new thread really.</p>
+
+<a name="168841542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841542">Mario Carneiro (Jun 24 2019 at 11:36)</a>:</h4>
+<p>I don't think there are any fundamental issues with using categories any more than any other branch of maths</p>
+
+<a name="168841584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841584">Mario Carneiro (Jun 24 2019 at 11:37)</a>:</h4>
+<p>I think people just aren't doing it, because you and I prefer to work without them and Scott and Reid prefer to work on categories as the endpoint</p>
+
+<a name="168841709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841709">Mario Carneiro (Jun 24 2019 at 11:39)</a>:</h4>
+<p>stuff like proving that uniform spaces form a category is utterly uninteresting to me. Of course you can do it. It gets interesting when you prove something that's not a triviality in an area that's not category theory using this gigantic library that's being developed. If you can't do that then it just looks like a bridge to nowhere from my point of view</p>
+
+<a name="168841812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841812">Kevin Buzzard (Jun 24 2019 at 11:40)</a>:</h4>
+<p>Categories lead to questions about universes which are not there in other branches of maths (at least when maths is done by mathematicians), and one question is how well Lean solves those issues. </p>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> <span class="user-mention" data-user-id="110032">@Reid Barton</span> how would glueing <em>presheaves</em> on open subsets look in the category theory library? Already it was causing us problems down in the land where the objects were terms and the morphisms were in Prop, but we have this workaround now (analogous to what they did in the odd order repo when they worked with subgroups of a big ambient group because it was more convenient). I find this approach rather distasteful in some sense, but then again these CS people seem to prefer computational efficiency to the abstract approach.</p>
+
+<a name="168841932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841932">Kevin Buzzard (Jun 24 2019 at 11:42)</a>:</h4>
+<p>Kenny's code above</p>
+<p><a href="#narrow/stream/116395-maths/topic/breaking.20equality.20with.20sheaves/near/168794153" title="#narrow/stream/116395-maths/topic/breaking.20equality.20with.20sheaves/near/168794153">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking.20equality.20with.20sheaves/near/168794153</a></p>
+<p>is the definition of a glued presheaf, but he has not proved the universal property. <span class="user-mention" data-user-id="110064">@Kenny Lau</span> Can you formulate the universal property for a glued presheaf? That's what we have right now.</p>
+
+<a name="168841943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168841943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168841943">Kevin Buzzard (Jun 24 2019 at 11:43)</a>:</h4>
+<p>oh -- it is probably exactly the same as the universal property for a glued sheaf isn't it.</p>
+
+<a name="168842002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842002">Kevin Buzzard (Jun 24 2019 at 11:43)</a>:</h4>
+<p>Then we will have proved a theorem about glued presheaves, namely that there exists an object having the universal property for glued presheaves. This has turned out to be a great test of various foundational set-ups.</p>
+
+<a name="168842096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842096">Kevin Buzzard (Jun 24 2019 at 11:45)</a>:</h4>
+<p>People didn't see the nightmares I had because in the main I didn't post them. But I did hint about having to interpret U intersect V as an object of opens U, opens V, opens U intersect V and opens X. With the Kenny/Mario approach there is only one U intersect V. Can this trick be pulled off in the category theory set-up?</p>
+
+<a name="168842458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842458">Reid Barton (Jun 24 2019 at 11:50)</a>:</h4>
+<p>Just regarding the subject of using category theory. <a href="https://github.com/rwbarton/lean-homotopy-theory" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory">https://github.com/rwbarton/lean-homotopy-theory</a> is over 8000 lines and almost all of it is built on top of category theory: either to do homotopy theory in a general category (with additional structure) or to prove things about Top which are hard to even state without category theory (for example, the pushout of a closed embedding is a closed embedding). For context, it is larger than the amount of category theory in mathlib.</p>
+
+<a name="168842511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842511">Kevin Buzzard (Jun 24 2019 at 11:51)</a>:</h4>
+<p>Do you have any of presheaves, sheaves, glueing sheaves, sheafification? Or do you not need sheaves at all for this stuff?</p>
+
+<a name="168842513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842513">Mario Carneiro (Jun 24 2019 at 11:51)</a>:</h4>
+<p>You know how Kevin says everything is CS? That still sounds like category theory to me</p>
+
+<a name="168842745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842745">Reid Barton (Jun 24 2019 at 11:55)</a>:</h4>
+<blockquote>
+<p>Do you have any of presheaves, sheaves, glueing sheaves, sheafification? Or do you not need sheaves at all for this stuff?</p>
+</blockquote>
+<p>No, these didn't come up in what I was doing</p>
+
+<a name="168842972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168842972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168842972">Reid Barton (Jun 24 2019 at 11:59)</a>:</h4>
+<blockquote>
+<p>You know how Kevin says everything is CS? That still sounds like category theory to me</p>
+</blockquote>
+<p>This is kind of like saying algebraic geometry is not math but rather French, because EGA is written in French</p>
+
 
 {% endraw %}

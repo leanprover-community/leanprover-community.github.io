@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [sheaves and sites](44395sheavesandsites.html) (663 messages, latest: Jun 24 2019 at 10:57)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (528 messages, latest: Jun 24 2019 at 11:59)
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (513 messages, latest: Jun 24 2019 at 10:40)
+* [sheaves and sites](44395sheavesandsites.html) (672 messages, latest: Jun 24 2019 at 11:24)
 
 * [complete (distrib) lattice](53634completedistriblattice.html) (23 messages, latest: Jun 24 2019 at 07:53)
 
