@@ -5137,5 +5137,37 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168868375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168868375">Kevin Buzzard (Jun 24 2019 at 17:32)</a>:</h4>
 <p>For the next one you need the theorem that a &lt;= b implies c - b &lt;= c - a (note how I always stick with &lt;=, otherwise there would be lots of ways of saying inequalities; there is a "canonical form" for many expressions in Lean and it is only slowly dawning on me how important this is in practice). To find that theorem you see that the conclusion is of the form "a subtraction is less than or equal to a subtraction" so I type "apply sub_le_sub" and then I press ctrl-space in VS Code and see a list of all Lean's theorems that start <code>sub_le_sub</code> and all their types too, so it's easy to find the one I want. That's another way of finding out the right name for a theorem.</p>
 
+<a name="168875750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168875750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168875750">Patrick Massot (Jun 24 2019 at 18:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="218709">@Adrian Chu</span> I don't think you're going in the right direction. The first thing to understand is natural numbers are bad. You never noticed because real world always insert coercions to integers and all the coercion related lemmas. My advice is to first state and prove the integer version. Then we'll talk about deducing the evil version. Here is the exercise I propose:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span>
+  <span class="n">use</span> <span class="o">[</span><span class="bp">-</span><span class="n">u</span><span class="bp">+</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">k</span><span class="o">],</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">split</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="n">u</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">v</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">ring</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">suffices</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+    <span class="c1">-- now you can `calc`</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168875884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168875884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168875884">Patrick Massot (Jun 24 2019 at 18:58)</a>:</h4>
+<p>each <code>calc</code> block is 4 lines long</p>
+
+<a name="168875916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168875916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168875916">Patrick Massot (Jun 24 2019 at 18:59)</a>:</h4>
+<p>The first sorry is 20 characters (including spaces)</p>
+
 
 {% endraw %}
