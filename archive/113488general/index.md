@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [scrolling with lean --make on command line](54438scrollingwithleanmakeoncommandline.html) (5 messages, latest: Jun 23 2019 at 09:54)
+* [online leanprover](19268onlineleanprover.html) (75 messages, latest: Jun 24 2019 at 01:51)
 
-* [online leanprover](19268onlineleanprover.html) (74 messages, latest: Jun 23 2019 at 02:59)
+* [scrolling with lean --make on command line](54438scrollingwithleanmakeoncommandline.html) (5 messages, latest: Jun 23 2019 at 09:54)
 
 * [Heterogeneous List](19802HeterogeneousList.html) (8 messages, latest: Jun 22 2019 at 14:08)
 
