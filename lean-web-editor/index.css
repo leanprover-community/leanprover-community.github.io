@@ -1,0 +1,316 @@
+body {
+    margin: 0;
+}
+
+.code-block {
+    display: block;
+    font-family: monospace;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+    margin-top: 1em;
+    font-size: 110%;
+}
+
+.info-header {
+    border-bottom: 1px solid;
+    font-weight: bold;
+    font-family: sans-serif;
+}
+
+.running {
+    display: none;
+}
+
+.leanlink {
+    font-size: 80%;
+}
+
+.modalButton {
+    padding: .1em .5em;
+    color: #24a;
+    background: #aaf;
+    border: 2px solid #ccf;
+    border-radius: 1em;
+    cursor: pointer;
+    transition: background .15s ease-out;
+}
+
+.modalButton:hover {
+    background: #cdf;
+}
+
+.modalButton:focus {
+    outline: 0;
+    box-shadow: 0 0 4px currentColor;
+}
+
+.c-modal-cover {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    transform: translateZ(0);
+    background-color: rgba(0, 0, 0, 0.15);
+}
+
+.c-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    padding: 2.5em 1.5em 1.5em 1.5em;
+    background-color: #FFFFFF;
+    box-shadow: 0 0 10px 3px rgba(0, 0, 0, 0.1);
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (min-width: 500px) {
+    .c-modal {
+        left: 50%;
+        top: 50%;
+        height: calc(100% - 5em);
+        transform: translate(-50%, -50%);
+        max-width: 30em;
+        max-height: calc(100% - 2em);
+    }
+}
+
+.c-modal h1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: .25em .5em;
+    margin: 0;
+}
+
+.c-modal__close {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: .5em;
+    line-height: 1;
+    background: #f6f6f7;
+    border: 0;
+    box-shadow: 0;
+    cursor: pointer;
+}
+
+.c-modal__close-icon {
+    width: 25px;
+    height: 25px;
+    fill: transparent;
+    stroke: black;
+    stroke-linecap: round;
+    stroke-width: 2;
+}
+
+.c-modal__body {
+    padding-top: .25em;
+}
+
+.u-hide-visually {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin: -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important;
+    white-space: nowrap !important;
+}
+
+.leaneditorContainer {
+    height: 99vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.leanheader {
+    display: flex;
+}
+
+.headerContainer {
+    overflow: hidden;
+}
+
+.headerForms {
+    padding: 1em 1em 0.25em 1em;
+    flex-grow: 1;
+}
+
+.urlForm {
+    display: flex;
+}
+
+.urlForm form {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+}
+
+.urlForm input[type='text'] {
+    flex: 1;
+}
+
+.editorContainer {
+    flex: 1;
+    position: relative;
+    border-top: 1.5px dotted rgb(93, 101, 116);
+}
+
+.monacoContainer {
+    height: 98%;
+    width: 100%;
+    margin: 1ex 0em 1ex -1.5ex;
+    padding-right: 10px;
+    overflow: hidden;
+}
+
+.infoContainer {
+    margin: 1ex;
+}
+
+.infoview-buttons {
+    cursor: pointer;
+    margin-right: 1ex;
+    display: block;
+    float: right;
+}
+
+.toggleDoc {
+    margin-top: 1em;
+    cursor: pointer;
+    white-space: pre-wrap;
+}
+
+/* https://alligator.io/css/collapsible/ */
+.wrap-collabsible {
+    margin-bottom: 1.2rem 0;
+}
+
+input[type='checkbox']#collapsible  {
+    display: none;
+}
+
+.lbl-toggle {
+    display: block;
+    text-align: center;
+    color: #222;
+    cursor: pointer;
+    transition: all 0.25s ease-out;
+}
+
+.lbl-toggle:hover {
+    color: #44a;
+}
+
+.lbl-toggle::before {
+    content: ' ';
+    display: inline-block;
+
+    border-top: 5px solid transparent;
+    border-bottom: 5px solid transparent;
+    border-left: 5px solid currentColor;
+    vertical-align: middle;
+    margin-right: .7rem;
+    transform: translateY(-2px);
+
+    transition: transform .2s ease-out;
+}
+
+.toggle:checked + .lbl-toggle::before {
+    transform: rotate(90deg) translateX(-3px);
+}
+
+.collapsible-content {
+    max-height: 0px;
+    overflow: hidden;
+    transition: max-height .25s ease-in-out;
+}
+
+.toggle:checked  + .lbl-toggle + .collapsible-content {
+    max-height: 10em;
+}
+
+.toggle:checked + .lbl-toggle {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+@media screen and (max-width: 800px) {
+    .logo {
+        display: none;
+    }
+    .running {
+        display: inline;
+    }
+    .leanheader {
+        font-size: 80%;
+    }
+    .leanlink {
+        font-size: 110%;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .url {
+        display: none;
+    }
+}
+
+.Resizer {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #000;
+    opacity: .2;
+    z-index: 1;
+    -moz-background-clip: padding;
+    -webkit-background-clip: padding;
+    background-clip: padding-box;
+}
+
+.Resizer:hover {
+    -webkit-transition: all 2s ease;
+    transition: all 2s ease;
+}
+
+.Resizer.horizontal {
+    background-color: gray;
+    height: 11px;
+    margin: 5px 0;
+    border-top: 5px solid rgba(255, 255, 255, 0);
+    border-bottom: 5px solid rgba(255, 255, 255, 0);
+    cursor: row-resize;
+    width: 100%;
+}
+
+.Resizer.horizontal:hover {
+    border-top: 5px solid rgba(0, 0, 0, 0.5);
+    border-bottom: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Resizer.vertical {
+    background-color: gray;
+    width: 11px;
+    border-left: 5px solid rgba(255, 255, 255, 0);
+    border-right: 5px solid rgba(255, 255, 255, 0);
+    cursor: col-resize;
+}
+
+.Resizer.vertical:hover {
+    border-left: 5px solid rgba(0, 0, 0, 0.5);
+    border-right: 5px solid rgba(0, 0, 0, 0.5);
+}
+
+.Pane.horizontal.Pane2 {
+    border-top: 1px solid gray;
+}
+
+.Pane.vertical.Pane2 {
+    border-left: 1px solid gray;
+}
