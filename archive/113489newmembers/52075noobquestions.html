@@ -4696,5 +4696,131 @@ hy : y = ↑(nat_abs y)<br>
 
 <p>this time is about the 2nd and 3rd <code>sorry</code>. why dont those corresponding commands (which I commented above) work?</p>
 
+<a name="168841318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168841318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168841318">Kevin Buzzard (Jun 24 2019 at 11:32)</a>:</h4>
+<p>I insert my canonical remark. [It would be easier for people like me if you could just post fully working code. I need to open things, maybe import things, etc; can you do this part of the job for me please?].</p>
+
+<a name="168841441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168841441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168841441">Kevin Buzzard (Jun 24 2019 at 11:34)</a>:</h4>
+<p>But the answer to your question might be that the first sorry won't work because <code>simp</code> is designed to prove equalities, not inequalities, and the second proof should probably be <code>rfl</code> because it looks to me like it's true by definition.</p>
+
+<a name="168841553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168841553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168841553">Kevin Buzzard (Jun 24 2019 at 11:36)</a>:</h4>
+<p>All the simplifier does is that it proves things of the form X = Y by attempting to simplify both sides into a canonical form and then checking that they're true by definition. A simp lemma is of the form A = B, and if A is a sub-term in X then the simplifier will replace A by B; that's why simp lemmas should have (complicated) = (simpler) in that order.</p>
+
+<a name="168841913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168841913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168841913">Adrian Chu (Jun 24 2019 at 11:42)</a>:</h4>
+<blockquote>
+<p>I insert my canonical remark. [It would be easier for people like me if you could just post fully working code. I need to open things, maybe import things, etc; can you do this part of the job for me please?].</p>
+</blockquote>
+<p>ok sure!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">basic</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">gcd</span>
+<span class="kn">open</span> <span class="n">nat</span> <span class="n">int</span>
+
+<span class="kn">lemma</span> <span class="n">baz</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">max</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">))</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">)),</span>
+  <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="bp">-</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hxx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="o">:=</span>
+    <span class="k">calc</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="bp">-</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">sorry</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="bp">-</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="o">(</span><span class="n">max</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">))</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">)))</span> <span class="o">:</span> <span class="k">by</span> <span class="n">sorry</span> <span class="c1">--simp [le_max_left]</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="n">sorry</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">nat_abs</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">(</span><span class="n">nat_abs_of_nonneg</span> <span class="n">hxx</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">nat_abs</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">nat_abs</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">nat_abs</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj</span><span class="o">,</span>
+  <span class="k">calc</span>
+    <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="o">(</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hx</span><span class="bp">.</span><span class="n">symm</span><span class="o">]</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="bp">-</span> <span class="n">a</span><span class="bp">*</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="n">a</span><span class="bp">*</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">gcd_eq_gcd_ab</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">add_neg_self</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">]</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_assoc</span><span class="o">]</span>
+      <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="o">(</span><span class="n">nat_abs</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hy</span><span class="bp">.</span><span class="n">symm</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168842049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842049">Adrian Chu (Jun 24 2019 at 11:44)</a>:</h4>
+<p>for the 3rd sorry, rfl doesnt work...</p>
+
+<a name="168842067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842067">Adrian Chu (Jun 24 2019 at 11:44)</a>:</h4>
+<blockquote>
+<p>All the simplifier does is that it proves things of the form X = Y by attempting to simplify both sides into a canonical form and then checking that they're true by definition. A simp lemma is of the form A = B, and if A is a sub-term in X then the simplifier will replace A by B; that's why simp lemmas should have (complicated) = (simpler) in that order.</p>
+</blockquote>
+<p>ah, i see</p>
+
+<a name="168842238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842238">Kevin Buzzard (Jun 24 2019 at 11:47)</a>:</h4>
+<div class="codehilite"><pre><span></span>    <span class="k">calc</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="bp">-</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>a=1 and b=0 is a counterexample to this. This is the problem with skipping stuff -- even if your later two sorries are fixed the code might be unusable anyway.</p>
+
+<a name="168842349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842349">Adrian Chu (Jun 24 2019 at 11:49)</a>:</h4>
+<p>no, we cant have a=1, b=0 because of the hypothesis h</p>
+
+<a name="168842361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842361">Mario Carneiro (Jun 24 2019 at 11:49)</a>:</h4>
+<p>1 and 0 are coprime</p>
+
+<a name="168842365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842365">Kevin Buzzard (Jun 24 2019 at 11:49)</a>:</h4>
+<p>The problem with the final sorry is that <code>k</code> is defined using the max on nat, and the other max is on int.</p>
+
+<a name="168842427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842427">Adrian Chu (Jun 24 2019 at 11:50)</a>:</h4>
+<p>oh no! :(</p>
+
+<a name="168842449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842449">Adrian Chu (Jun 24 2019 at 11:50)</a>:</h4>
+<p>i need to add more hypothesis then</p>
+
+<a name="168842509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842509">Adrian Chu (Jun 24 2019 at 11:51)</a>:</h4>
+<blockquote>
+<p>The problem with the final sorry is that <code>k</code> is defined using the max on nat, and the other max is on int.</p>
+</blockquote>
+<p>how should I get around?</p>
+
+<a name="168842683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842683">Kevin Buzzard (Jun 24 2019 at 11:54)</a>:</h4>
+<p>There might be some magic tactic which does it, I've not tried those new cast tactics. If not, then you have to fix things up yourself. </p>
+<p>My recommendation would be to change every single variable into an int as soon as possible, make all the problems go away, and then just prove that various things are &gt;= 0 at the end and then cast them back to nats.</p>
+
+<a name="168842703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842703">Mario Carneiro (Jun 24 2019 at 11:54)</a>:</h4>
+<p>I would keep the max on nat, because that's the definition of k</p>
+
+<a name="168842707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842707">Kevin Buzzard (Jun 24 2019 at 11:54)</a>:</h4>
+<p>You're just in the typical nat/int hell which several of my students found themselves in over the summer. In my mind, if your proof uses ints, then why even use nats at all? Just use ints with a proof that they're &gt;= 0.</p>
+
+<a name="168842730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842730">Mario Carneiro (Jun 24 2019 at 11:55)</a>:</h4>
+<p>it might help to write some up arrows because it's important to know where they are</p>
+
+<a name="168842734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842734">Kevin Buzzard (Jun 24 2019 at 11:55)</a>:</h4>
+<p>Maybe this would be a great place to test out the cast tactics. Did they get written up in the tactics docs?</p>
+
+<a name="168842798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842798">Kevin Buzzard (Jun 24 2019 at 11:56)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md</a></p>
+<p>They're right at the bottom. Maybe these can help. I've never used them though.</p>
+
+<a name="168842833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842833">Mario Carneiro (Jun 24 2019 at 11:56)</a>:</h4>
+<p>to use the cast tactics, you have to actually have a specific goal that you can use them with</p>
+
+<a name="168842871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168842871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168842871">Mario Carneiro (Jun 24 2019 at 11:57)</a>:</h4>
+<p>distributing the arrows in this case is easily enough done by simp, that's already working in the example</p>
+
 
 {% endraw %}
