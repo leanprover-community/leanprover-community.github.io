@@ -5078,5 +5078,64 @@ but is expected to have type
 
 <p>shows you what the problem is. You now need to fill in those two holes, and the results you have are not good enough because they have the wrong type. Did I mention the idea of just using integers everywhere by the way?</p>
 
+<a name="168866030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168866030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168866030">Adrian Chu (Jun 24 2019 at 17:00)</a>:</h4>
+<blockquote>
+<p>Did I mention the idea of just using integers everywhere by the way?</p>
+</blockquote>
+<p>but gcd_a, gcd_b are defined for nat instead of int</p>
+
+<a name="168866043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168866043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168866043">Kevin Buzzard (Jun 24 2019 at 17:00)</a>:</h4>
+<p>But this issue is just a general pain in type theory. Do you understand how to use these new cast tactics? The first hole needs a resolution of this issue</p>
+<div class="codehilite"><pre><span></span>hb : 0 ≤ ↑b - 1
+⊢ 0 ≤ ↑b - 1
+</pre></div>
+
+
+<p>Here your hypothesis <code>hb</code> has an arrow in, which turns out to be a cast from <code>nat</code> to <code>nat</code>. You can see all the gory details of everything by <code>set_option pp.all true</code>. Setting this option will give you some real insight into how the computer is thinking about what you are doing. In particular you cannot cast from a nat to an int by just putting an up-arrow -- Lean doesn't know where you're casting to.</p>
+
+<a name="168866118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168866118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168866118">Kevin Buzzard (Jun 24 2019 at 17:01)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Did I mention the idea of just using integers everywhere by the way?</p>
+</blockquote>
+<p>but gcd_a, gcd_b are defined for nat instead of int</p>
+</blockquote>
+<p>Feed them absolute values of ints? I don't know if this is a feasible solution.</p>
+
+<a name="168866318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168866318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168866318">Adrian Chu (Jun 24 2019 at 17:04)</a>:</h4>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>Did I mention the idea of just using integers everywhere by the way?</p>
+</blockquote>
+<p>but gcd_a, gcd_b are defined for nat instead of int</p>
+</blockquote>
+<p>Feed them absolute values of ints? I don't know if this is a feasible solution.</p>
+</blockquote>
+<p>i will try tomorrow</p>
+
+<a name="168866850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168866850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168866850">Kevin Buzzard (Jun 24 2019 at 17:11)</a>:</h4>
+<p>I don't know if this is feasible. All I see when I look at your code though is a bunch of stuff about ints, with subtractions etc. You might well find the int analogue of the <code>gcd_a</code> functions in <code>data.int.basic</code> somewhere or maybe even in core.</p>
+
+<a name="168867991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168867991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168867991">Kevin Buzzard (Jun 24 2019 at 17:27)</a>:</h4>
+<p>Maybe now we have <code>norm_cast</code> you don't need to make everything an integer. This little lemma might be a nice test case. I just tried it on the first sorry and had positive results:</p>
+<div class="codehilite"><pre><span></span>    calc (0 : ℤ) = 0 * nat_abs (gcd_a a b) : by simp
+    ... ≤ (↑b - 1) * (nat_abs (gcd_a a b)) :
+        begin apply mul_le_mul_of_nonneg_right,
+          {norm_cast at hb ⊢, exact hb},
+          {norm_cast, simp}
+        end
+</pre></div>
+
+<a name="168868375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168868375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168868375">Kevin Buzzard (Jun 24 2019 at 17:32)</a>:</h4>
+<p>For the next one you need the theorem that a &lt;= b implies c - b &lt;= c - a (note how I always stick with &lt;=, otherwise there would be lots of ways of saying inequalities; there is a "canonical form" for many expressions in Lean and it is only slowly dawning on me how important this is in practice). To find that theorem you see that the conclusion is of the form "a subtraction is less than or equal to a subtraction" so I type "apply sub_le_sub" and then I press ctrl-space in VS Code and see a list of all Lean's theorems that start <code>sub_le_sub</code> and all their types too, so it's easy to find the one I want. That's another way of finding out the right name for a theorem.</p>
+
 
 {% endraw %}

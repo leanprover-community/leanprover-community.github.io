@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (910 messages, latest: Jun 24 2019 at 16:55)
+* [noob question(s)](52075noobquestions.html) (917 messages, latest: Jun 24 2019 at 17:32)
 
 * [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (40 messages, latest: Jun 24 2019 at 12:08)
 
