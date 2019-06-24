@@ -3036,5 +3036,23 @@ Also see "Relation to topological spaces", and Definition 4.9 and following.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168802864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168802864">Kevin Buzzard (Jun 23 2019 at 18:12)</a>:</h4>
 <p>That's quite some <code>calc</code> by the way!</p>
 
+<a name="168831876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168831876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168831876">Patrick Massot (Jun 24 2019 at 08:41)</a>:</h4>
+<p>I didn't read code in this thread, but I just want to tell Kevin: Johannes explained countless times why there are lattices all other mathlib. This is category theory that actually works and helps. Up to now nobody managed to make category theory usable in Lean. In Edinburgh I asked Scott and Reid to show me how to define the category of uniform spaces, the subcategory of complete separated uniform spaces, and the completion functor (all of this is already in mathlib, unbundled and without using category theory). They couldn't. Defining categories was ok, but then they hit the weirdest kinds of bugs, with Lean randomly unfolding things beyond recognition. </p>
+<p>Also when I changed the order on <code>topological_space</code> and <code>uniform_space</code> last week, I had to change 16 files. After setting up the change correctly in the first file it was a smooth ride all along except for <code>topology/Top/limits.lean</code> which got me amazingly confused, because the statements and intermediate goals were undecipherable to me. </p>
+<p>Now there is one kind of category that works in Lean: posets. Setting up is easy, functor work (monotone maps) adjunctions work (the Galois connection thing), limits and colimits work (<code>infi</code> and <code>supr</code>). And many many lemmas in <code>topology</code> are really proven in a categorical way using this trick. If you think complete lattices is computer science (as I also did before Johannes explained it) then category theory is computer science.</p>
+
+<a name="168831952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168831952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168831952">Kevin Buzzard (Jun 24 2019 at 08:42)</a>:</h4>
+<p><code>category theory is computer science.</code> I think that too, kind of.</p>
+
+<a name="168832144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168832144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168832144">Kevin Buzzard (Jun 24 2019 at 08:46)</a>:</h4>
+<p>So categories with general type-valued homs are hard to work with in dependent type theory, because the morphism isn't actually a function, so we lose some powerful flexibility. Types and morphisms between them (the category Type) are fine though because these are pi-type-valued homs. Patrick is saying that terms and Prop-valued homs are also a good fit for dependent type theory.</p>
+
+<a name="168832790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168832790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168832790">Kevin Buzzard (Jun 24 2019 at 08:57)</a>:</h4>
+<p>It's all beginning to make some sense to me. But in some sense this should just be an interface issue, right?</p>
+
 
 {% endraw %}
