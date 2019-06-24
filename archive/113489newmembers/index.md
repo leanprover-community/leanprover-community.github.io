@@ -10,15 +10,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (964 messages, latest: Jun 24 2019 at 21:57)
+* [Induction](51886Induction.html) (240 messages, latest: Jun 24 2019 at 22:57)
+
+* [noob question(s)](52075noobquestions.html) (974 messages, latest: Jun 24 2019 at 22:49)
 
 * [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (40 messages, latest: Jun 24 2019 at 12:08)
 
 * [namespace inside section](33823namespaceinsidesection.html) (4 messages, latest: Jun 23 2019 at 18:17)
 
 * [(no topic)](79918notopic.html) (197 messages, latest: Jun 23 2019 at 11:49)
-
-* [Induction](51886Induction.html) (239 messages, latest: Jun 22 2019 at 20:26)
 
 * [Map from intersection](23530Mapfromintersection.html) (3 messages, latest: Jun 22 2019 at 12:40)
 
