@@ -5251,5 +5251,170 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168879571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168879571">Patrick Massot (Jun 24 2019 at 19:51)</a>:</h4>
 <p>but the game is to use <code>euclidean_domain.gcd</code></p>
 
+<a name="168880379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168880379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168880379">Kevin Buzzard (Jun 24 2019 at 20:00)</a>:</h4>
+<div class="codehilite"><pre><span></span>#eval euclidean_domain.gcd (-1 : ℤ) (1 : ℤ) -- -1
+#eval int.gcd (-1 : ℤ) (1 : ℤ) -- +1
+</pre></div>
+
+
+<p>:-(</p>
+
+<a name="168881009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881009">Kevin Buzzard (Jun 24 2019 at 20:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">euclidean_domain</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">gcd</span><span class="bp">.</span><span class="n">induction</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span> <span class="n">rw</span> <span class="n">gcd_zero_left</span><span class="o">,</span> <span class="n">exact</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_zero_left</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hab</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">hab</span> <span class="kn">using</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">gcd_val</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="c1">-- ⊢ int.gcd a b = int.gcd (b % a) a</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This code (thanks, whoever wrote gcd.induction!) reduces the question to <code> int.gcd a b = int.gcd (b % a) a</code>.</p>
+
+<a name="168881093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881093">Kevin Buzzard (Jun 24 2019 at 20:09)</a>:</h4>
+<p>...which is almost a question about nat.gcd apart from the fact that one needs to relate |b%a| to |b|%|a|.</p>
+
+<a name="168881330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881330">Patrick Massot (Jun 24 2019 at 20:13)</a>:</h4>
+<p>What you are doing is not what I asked for</p>
+
+<a name="168881361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881361">Kevin Buzzard (Jun 24 2019 at 20:13)</a>:</h4>
+<p>why don't you formalise the question?</p>
+
+<a name="168881384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881384">Patrick Massot (Jun 24 2019 at 20:13)</a>:</h4>
+<p>I did!</p>
+
+<a name="168881432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881432">Kevin Buzzard (Jun 24 2019 at 20:14)</a>:</h4>
+<p>Oh -- I misunderstood the arrows.</p>
+
+<a name="168881435"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881435" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881435">Patrick Massot (Jun 24 2019 at 20:14)</a>:</h4>
+<blockquote>
+<p>Going from the int version of Adrian's lemma to the evil version is trivial except for:</p>
+<div class="codehilite"><pre><span></span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span>
+<span class="err">⊢</span> <span class="n">gcd</span> <span class="err">↑</span><span class="n">a</span> <span class="err">↑</span><span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span>
+</pre></div>
+
+
+</blockquote>
+
+<a name="168881438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881438">Kevin Buzzard (Jun 24 2019 at 20:14)</a>:</h4>
+<p>I thought I did that one.</p>
+
+<a name="168881460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881460">Kevin Buzzard (Jun 24 2019 at 20:14)</a>:</h4>
+<p>I have Lean code which looks like that on my screen right now, with int open :-)</p>
+
+<a name="168881482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881482">Patrick Massot (Jun 24 2019 at 20:14)</a>:</h4>
+<p>You need to open <code>euclidean_domain</code> instead</p>
+
+<a name="168881497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881497">Kevin Buzzard (Jun 24 2019 at 20:15)</a>:</h4>
+<p>you didn't post a MWE ;-)</p>
+
+<a name="168881523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881523">Patrick Massot (Jun 24 2019 at 20:15)</a>:</h4>
+<p>I did</p>
+
+<a name="168881530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881530">Patrick Massot (Jun 24 2019 at 20:15)</a>:</h4>
+<p>a few messages above</p>
+
+<a name="168881532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881532">Patrick Massot (Jun 24 2019 at 20:15)</a>:</h4>
+<p>anyway</p>
+
+<a name="168881548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881548">Kevin Buzzard (Jun 24 2019 at 20:15)</a>:</h4>
+<p>It was too minimal -- I guessed you'd opened the wrong thing :-)</p>
+<p>I still propose we prove the thing I said about int. You can't use the inductive predicate for euclidean_domain.gcd on nats.</p>
+
+<a name="168881620"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881620" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881620">Kevin Buzzard (Jun 24 2019 at 20:16)</a>:</h4>
+<p>So unless you want to get your hands dirty, we prove some statement which is valid for all ints (as I was in the middle of doing) and then deduce the nat thing via some dirty work.</p>
+
+<a name="168881622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881622">Patrick Massot (Jun 24 2019 at 20:16)</a>:</h4>
+<p>The context was my first message to Adrian, which included all imports and open</p>
+
+<a name="168881667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881667">Kevin Buzzard (Jun 24 2019 at 20:17)</a>:</h4>
+<p>And the best statement I could find which was true for all ints was the one I posted.</p>
+
+<a name="168881860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168881860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168881860">Kevin Buzzard (Jun 24 2019 at 20:20)</a>:</h4>
+<p>bleurgh we need (a b : int), both &gt;=0 implies euclidean_domain.gcd a b &gt;=0 :-/</p>
+
+<a name="168883133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168883133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168883133">Kevin Buzzard (Jun 24 2019 at 20:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">useful</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">b</span> <span class="err">%</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Meh.</p>
+
+<a name="168884494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168884494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168884494">Kevin Buzzard (Jun 24 2019 at 20:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span>
+
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="kn">theorem</span> <span class="n">useful</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">b</span> <span class="err">%</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">b</span><span class="o">)</span> <span class="err">%</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">useful2</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">euclidean_domain</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">theorem</span> <span class="n">abs_gcd_eq_int_gcd</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="o">(</span><span class="n">euclidean_domain</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">gcd</span><span class="bp">.</span><span class="n">induction</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">x</span><span class="o">,</span> <span class="n">rw</span> <span class="n">gcd_zero_left</span><span class="o">,</span> <span class="n">exact</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">gcd_zero_left</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">ha</span> <span class="n">hab</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">hab</span> <span class="kn">using</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">gcd_val</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="c1">--goal now : a ≠ 0 → int.gcd a b = int.gcd (b % a) a -- should be in mathlib</span>
+  <span class="n">unfold</span> <span class="n">int</span><span class="bp">.</span><span class="n">gcd</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">useful</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="o">(</span><span class="n">y</span> <span class="err">%</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">x</span> <span class="k">with</span> <span class="n">x</span><span class="o">,</span> <span class="n">revert</span> <span class="n">hx</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="c1">-- nat.gcd equation lemma</span>
+  <span class="o">},</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">h3</span><span class="o">,</span> <span class="n">ha</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">eq_zero_of_nat_abs_eq_zero</span> <span class="n">h3</span><span class="o">),</span> <span class="c1">-- missing a trick here</span>
+  <span class="n">generalize</span> <span class="n">h3</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">A</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">nat_abs</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">B</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span> <span class="n">rwa</span> <span class="err">←</span><span class="n">h3</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">patrick</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">euclidean_domain</span><span class="bp">.</span><span class="n">gcd</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">show</span> <span class="n">gcd</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="n">b</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">h</span><span class="o">,</span>
+  <span class="k">show</span> <span class="bp">_</span> <span class="bp">=</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="n">abs_gcd_eq_int_gcd</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat_nat_abs_eq_of_nonneg</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+  <span class="c1">-- ⊢ gcd ↑a ↑b ≥ 0</span>
+  <span class="n">apply</span> <span class="n">useful2</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat_nonneg</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Two sorries at the top. <span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what tricks am I missing?</p>
+
+<a name="168884513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168884513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168884513">Kevin Buzzard (Jun 24 2019 at 20:56)</a>:</h4>
+<p>The goal is to prove theorem <code>patrick</code>.</p>
+
 
 {% endraw %}
