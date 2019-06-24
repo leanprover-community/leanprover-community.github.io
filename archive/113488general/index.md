@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (2 messages, latest: Jun 24 2019 at 08:48)
+
 * [online leanprover](19268onlineleanprover.html) (75 messages, latest: Jun 24 2019 at 01:51)
 
 * [scrolling with lean --make on command line](54438scrollingwithleanmakeoncommandline.html) (5 messages, latest: Jun 23 2019 at 09:54)
