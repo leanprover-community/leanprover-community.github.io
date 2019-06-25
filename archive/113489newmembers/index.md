@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (5 messages, latest: Jun 25 2019 at 03:58)
+
 * [Induction](51886Induction.html) (240 messages, latest: Jun 24 2019 at 22:57)
 
 * [noob question(s)](52075noobquestions.html) (974 messages, latest: Jun 24 2019 at 22:49)
