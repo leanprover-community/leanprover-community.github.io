@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [witt vectors](84655wittvectors.html) (269 messages, latest: Jun 25 2019 at 17:30)
+
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (615 messages, latest: Jun 25 2019 at 11:49)
 
 * [sheaves and sites](44395sheavesandsites.html) (674 messages, latest: Jun 24 2019 at 12:51)
@@ -17,8 +19,6 @@ permalink: archive/116395maths/index.html
 * [complete (distrib) lattice](53634completedistriblattice.html) (23 messages, latest: Jun 24 2019 at 07:53)
 
 * [category of discrete rings](76394categoryofdiscreterings.html) (4 messages, latest: Jun 22 2019 at 22:58)
-
-* [witt vectors](84655wittvectors.html) (267 messages, latest: Jun 22 2019 at 20:41)
 
 * [RFC: open immersion / embedding](07369RFCopenimmersionembedding.html) (5 messages, latest: Jun 21 2019 at 10:12)
 
