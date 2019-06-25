@@ -5487,5 +5487,105 @@ A : ℕ,
 <span class="c1">-- [(1, 3), ...]</span>
 </pre></div>
 
+<a name="168947675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168947675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168947675">Adrian Chu (Jun 25 2019 at 15:14)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="218709">Adrian Chu</span> I don't think you're going in the right direction. The first thing to understand is natural numbers are bad. You never noticed because real world always insert coercions to integers and all the coercion related lemmas. My advice is to first state and prove the integer version. Then we'll talk about deducing the evil version. Here is the exercise I propose:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span>
+  <span class="n">use</span> <span class="o">[</span><span class="bp">-</span><span class="n">u</span><span class="bp">+</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">k</span><span class="o">],</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">split</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="n">u</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">v</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">ring</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">suffices</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+    <span class="c1">-- now you can `calc`</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>So i guess i should try finishing this version of my lemma, and forget everything about nat.gcd</p>
+
+<a name="168947873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168947873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168947873">Patrick Massot (Jun 25 2019 at 15:17)</a>:</h4>
+<p>If you can afford that then of course everything becomes much easier. I still think it's a problem that mathlib has at least three gcd with no lemmas relating them in the case of integers</p>
+
+<a name="168947884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168947884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168947884">Patrick Massot (Jun 25 2019 at 15:17)</a>:</h4>
+<p>Did you manage to fill in the sorries in my exercise?</p>
+
+<a name="168947953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168947953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168947953">Adrian Chu (Jun 25 2019 at 15:18)</a>:</h4>
+<p>I am working on them now</p>
+
+<a name="168948117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168948117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168948117">Patrick Massot (Jun 25 2019 at 15:20)</a>:</h4>
+<p>Ok, I hope I inserted them wisely. I first wrote the full proof and then removed it to help you getting better training. Don't hesitate to ask questions if it's still too painful</p>
+
+<a name="168950201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168950201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168950201">Adrian Chu (Jun 25 2019 at 15:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span>
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">hk</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">k</span> <span class="o">:=</span>
+    <span class="k">calc</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="n">u</span> <span class="o">:</span> <span class="n">abs_nonneg</span> <span class="n">u</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">le_max_left</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">k</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">[</span><span class="bp">-</span><span class="n">u</span><span class="bp">+</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">k</span><span class="o">],</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">split</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="n">u</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">v</span><span class="o">,</span> <span class="k">from</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">ring</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">suffices</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+    <span class="k">calc</span> <span class="n">u</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="n">u</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exact</span> <span class="n">le_max_left</span> <span class="n">u</span> <span class="o">(</span><span class="bp">-</span><span class="n">u</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">le_max_left</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exact</span> <span class="n">mul_le_mul_of_nonneg_right</span> <span class="n">hb</span> <span class="n">hk</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">suffices</span> <span class="o">:</span> <span class="bp">-</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+    <span class="k">calc</span> <span class="bp">-</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exact</span> <span class="n">le_max_left</span> <span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="bp">-</span><span class="o">(</span><span class="bp">-</span><span class="n">v</span><span class="o">))</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">abs</span> <span class="n">v</span> <span class="o">:</span> <span class="n">abs_neg</span> <span class="n">v</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">le_max_right</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">exact</span> <span class="n">mul_le_mul_of_nonneg_right</span> <span class="n">ha</span> <span class="n">hk</span><span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="168950242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168950242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168950242">Adrian Chu (Jun 25 2019 at 15:50)</a>:</h4>
+<p>I'm not able to figure out the first sorry (with 20 characters only). i know we need to use <code>gcd_eq_gcd_ab</code></p>
+
+<a name="168950598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168950598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168950598">Adrian Chu (Jun 25 2019 at 15:55)</a>:</h4>
+<blockquote>
+<p>Personally I would question why you want to prove that theorem?</p>
+</blockquote>
+<p>This is a crucial lemma in a theorem i want to prove</p>
+
+<a name="168950684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168950684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168950684">Kevin Buzzard (Jun 25 2019 at 15:57)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Personally I would question why you want to prove that theorem?</p>
+</blockquote>
+<p>This is a crucial lemma in a theorem i want to prove</p>
+</blockquote>
+<p>I think that "that theorem" might have referred to the compatibility of the various notions of <code>gcd</code> which we have in Lean.</p>
+
 
 {% endraw %}
