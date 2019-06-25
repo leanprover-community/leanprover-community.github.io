@@ -3639,5 +3639,116 @@ Also see "Relation to topological spaces", and Definition 4.9 and following.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168927345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168927345">Mario Carneiro (Jun 25 2019 at 10:59)</a>:</h4>
 <p>Unless of course we decide they aren't really the same thing but they are just "spelled the same in maths"</p>
 
+<a name="168927410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168927410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168927410">Mario Carneiro (Jun 25 2019 at 11:00)</a>:</h4>
+<p>Which TBH may very well be the conclusion, especially for the really abstract sheaves on sites</p>
+
+<a name="168928080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928080">Kevin Buzzard (Jun 25 2019 at 11:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Kenny has shown that it's possible to glue sheaves of types using a wicked trick which started this thread off. Before he did this, I had an absolutely miserable time trying to glue sheaves of types, because porting open sets from one subset to another was painful. Kenny has introduced the idea of defining a sheaf on a subset to be a sheaf on the whole space. Mario has introduced this total space idea which also made stuff easier. In my mind these two shortcuts are decisive; I had a nightmare working with this stuff before these two ideas, and it was much much easier working with them afterwards. They are distinct techniques -- Kenny's stops you from having to move from open set to open set, and Mario's fixes some possible type issues with U intersect V not being defeq to V intersect U.</p>
+<p>What I fear about the "full category theory approach" (a presheaf is a functor) is that there will not be an analogue of these tricks, and there will be inevitable pain in making and using the API.</p>
+<p>What I fear about the low-level approach is that we are now going to have to have glueing sheaves of groups extending glueing sheaves of types, then glueing sheaves of topological rings extending 5 other things, and so on. </p>
+<p>There might be a middle approach, where one defines a sheaf to be a map from a complete lattice (or whatever) to the objects of a category, plus some extra data, rather than a functor. If one wants to use functors the question is whether glueing is still viable. Maybe there's just a straightforward analogue of Kenny's trick? Mario's trick would I think involve being able to identify the <em>isomorphic</em> full subcategories <code>opens U \cap V</code> of <code>opens U</code> and <code>opens U \cap V</code> of <code>opens X</code>. I don't think an equivalence is enough. Do you believe me or have I made a slip? Maybe you shouldn't take some of these things too seriously. Someone is going to have to sit down and work this stuff out and see if it actually works, or whether Lean 3 is not actually up to the task.</p>
+<p>Given that I want sheaves of topological rings, this for me is an important issue.</p>
+
+<a name="168928216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928216">Mario Carneiro (Jun 25 2019 at 11:14)</a>:</h4>
+<p>My trick doesn't work if the homs aren't Props</p>
+
+<a name="168928266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928266">Mario Carneiro (Jun 25 2019 at 11:16)</a>:</h4>
+<p>and it's also a bit shaky on general target categories</p>
+
+<a name="168928327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928327">Mario Carneiro (Jun 25 2019 at 11:16)</a>:</h4>
+<p>If you have categories on the domain and codomain, I don't think there is a viable alternative to the category theory approach</p>
+
+<a name="168928358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928358">Kevin Buzzard (Jun 25 2019 at 11:18)</a>:</h4>
+<p>So glueing etale sheaves, which is super-important, will be interesting to do in Lean.</p>
+
+<a name="168928412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928412">Kevin Buzzard (Jun 25 2019 at 11:18)</a>:</h4>
+<p>There's an explicit section about this in Milne when he's dealing with DVRs. I'll dig it up later today.</p>
+
+<a name="168928447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928447">Kevin Buzzard (Jun 25 2019 at 11:19)</a>:</h4>
+<p>Although maybe there's a way to make the etale site work with Props? <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> what do you think?</p>
+
+<a name="168928533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928533">Mario Carneiro (Jun 25 2019 at 11:20)</a>:</h4>
+<p>The basic trick is, if there is only one hom between objects, you can typically avoid mentioning it at all (not even enforcing its existence) with the right choice of types</p>
+
+<a name="168928605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928605">Mario Carneiro (Jun 25 2019 at 11:22)</a>:</h4>
+<p>by comparison the category approach has you not mentioning anything except the homs, and leave the objects implicit</p>
+
+<a name="168928627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928627">Mario Carneiro (Jun 25 2019 at 11:22)</a>:</h4>
+<p>generally this tends to be shorter because the names are shorter (proof names are relatively longer than hom names)</p>
+
+<a name="168928640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928640">Mario Carneiro (Jun 25 2019 at 11:23)</a>:</h4>
+<p>and there are more operations with notation</p>
+
+<a name="168928970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928970">Kevin Buzzard (Jun 25 2019 at 11:29)</a>:</h4>
+<p>It will be much easier for me to understand if I work on examples. This is why I tried Reid's CDGA exercise and this is why I got a student to do group cohomology (she finished last night by the way, we have group cohomology done in the traditional "hands-on" way with cocycles and coboundaries plus the proof of the long exact sequence of terms of low degree in the Hochschild-Serre spectral sequence). I'm working up to homological algebra by taking baby steps. I think defining etale cohomology of schemes will be a stress-test for the system. There will be universe issues, there will be this perennial debate about how to do sheaves, there will be CDGA-like issues when doing cohomology, all this stuff that we half-understand and where the community sometimes has more than one opinion on the best way to proceed. This could very naturally turn into a multi-person project which might teach us quite interesting things about how easy it is to do stuff which is crucial to e.g. Deligne's proof of the Weil conjectures, in Lean.</p>
+
+<a name="168928993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168928993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168928993">Johan Commelin (Jun 25 2019 at 11:29)</a>:</h4>
+<blockquote>
+<p>Although maybe there's a way to make the etale site work with Props? <span class="user-mention silent" data-user-id="110032">Reid Barton</span> <span class="user-mention silent" data-user-id="112680">Johan Commelin</span> what do you think?</p>
+</blockquote>
+<p>My intuition says that it doesn't work. If <code>L/K</code> is a separable field extension, then you really don't want the hom-set <code>L → L</code> over <code>K</code> to be a <code>Prop</code>.</p>
+
+<a name="168929384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929384">Kevin Buzzard (Jun 25 2019 at 11:35)</a>:</h4>
+<p>Aah yes, I was wondering if there was some way to cheat and fix things, but this is a pretty convincing example.</p>
+
+<a name="168929522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929522">Kevin Buzzard (Jun 25 2019 at 11:37)</a>:</h4>
+<p>Does anyone here understand the pro-etale site?</p>
+
+<a name="168929544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929544">Kevin Buzzard (Jun 25 2019 at 11:37)</a>:</h4>
+<p>[this a new Scholze thing]</p>
+
+<a name="168929549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929549">Mario Carneiro (Jun 25 2019 at 11:37)</a>:</h4>
+<p>So if I understand it correctly you are talking about a "restriction map" that applies a field automorphism without changing the object?</p>
+
+<a name="168929618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929618">Kevin Buzzard (Jun 25 2019 at 11:38)</a>:</h4>
+<p>Yes I guess so.</p>
+
+<a name="168929653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929653">Kevin Buzzard (Jun 25 2019 at 11:38)</a>:</h4>
+<p>Spec(complexes) is a cover of Spec(reals); a cover of one object by one bigger object</p>
+
+<a name="168929689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929689">Kevin Buzzard (Jun 25 2019 at 11:39)</a>:</h4>
+<p>Aah that's not the point.</p>
+
+<a name="168929869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929869">Kevin Buzzard (Jun 25 2019 at 11:42)</a>:</h4>
+<p>The map Spec(complexes) -&gt; Spec(reals) is an etale map, so the analogue of an "open subset" in the etale site. And complex conjugation is a perfectly good map which one can restrict along. An example of an etale sheaf on Spec(reals) would be an abelian group A plus an action of Gal(complexes/reals). Its global sections would be the fixed points for the action, the sections on the "open set" Spec(complexes) would be A, and the restriction map corresponding to complex conjugation would be the map coming from the non-trivial element of the Galois group.</p>
+
+<a name="168929968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168929968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168929968">Kevin Buzzard (Jun 25 2019 at 11:44)</a>:</h4>
+<p>The sheaf axiom says that if I have an element of A which is fixed under complex conjugation then it's a global section, that's why the global sections are the invariants for the action.</p>
+
+<a name="168930016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168930016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168930016">Kevin Buzzard (Jun 25 2019 at 11:45)</a>:</h4>
+<p>Open sets having automorphism groups gives rise to their sections having automorphism groups acting on them.</p>
+
+<a name="168930036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168930036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168930036">Kevin Buzzard (Jun 25 2019 at 11:45)</a>:</h4>
+<p>An etale sheaf of abelian groups on Spec(Q) is the same as an abelian group with an action of Gal(Q-bar/Q).</p>
+
+<a name="168930278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/breaking%20equality%20with%20sheaves/near/168930278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/75037breakingequalitywithsheaves.html#168930278">Patrick Massot (Jun 25 2019 at 11:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> For the purpose of clarifying this discussion, I just pushed <a href="https://github.com/leanprover-community/mathlib/commit/e4308313b2b992d159d177771bc5ac581a20d331" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/e4308313b2b992d159d177771bc5ac581a20d331">https://github.com/leanprover-community/mathlib/commit/e4308313b2b992d159d177771bc5ac581a20d331</a> which removes the sorry in the completion adjunction. Is this what I was meant to do? Or should I skip the intermediate lemma I created in the category language?</p>
+
 
 {% endraw %}
