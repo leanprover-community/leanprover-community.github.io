@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean LaTeX utf8 v utf8x](13851LeanLaTeXutf8vutf8x.html) (1 message, latest: Jun 25 2019 at 15:14)
+* [Lean LaTeX utf8 v utf8x](13851LeanLaTeXutf8vutf8x.html) (2 messages, latest: Jun 25 2019 at 17:27)
 
 * [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (24 messages, latest: Jun 25 2019 at 14:20)
 

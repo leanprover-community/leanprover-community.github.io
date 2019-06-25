@@ -5640,5 +5640,36 @@ A : ℕ,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168955506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168955506">Adrian Chu (Jun 25 2019 at 16:54)</a>:</h4>
 <p>i will start to prove this lemma. is my formulation of definitions and the statement of lemma appropriate?</p>
 
+<a name="168956553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168956553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168956553">Kevin Buzzard (Jun 25 2019 at 17:07)</a>:</h4>
+<p>Why are you using maps <code>fin n -&gt; int</code> at all? You are carrying around the length of your list, but you could just read it off by looking at the length of the list.</p>
+
+<a name="168957099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168957099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168957099">Kevin Buzzard (Jun 25 2019 at 17:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="n">def</span> <span class="n">list</span><span class="bp">.</span><span class="n">lcm</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+  <span class="n">list</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">lcm</span> <span class="mi">1</span> <span class="n">x</span>
+
+<span class="kn">lemma</span> <span class="n">list</span><span class="bp">.</span><span class="n">lcm_coprime</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">x</span><span class="o">,</span> <span class="n">gcd</span> <span class="n">s</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">gcd</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">lcm</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+
+<p>No <code>n</code> in sight -- it's never needed.</p>
+
+<a name="168957196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168957196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168957196">Kevin Buzzard (Jun 25 2019 at 17:14)</a>:</h4>
+<p>Note also <code>x.lcm</code> for <code>list.lcm x</code>, it's a cool thing which I only recently understood.</p>
+
+<a name="168957270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168957270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168957270">Kevin Buzzard (Jun 25 2019 at 17:15)</a>:</h4>
+<p>The CS purists might even say that these should all be theorems about multisets not lists, because the lcm does not depend on the order, so why are you carrying that around?</p>
+
 
 {% endraw %}
