@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (199 messages, latest: Jun 25 2019 at 19:40)
+
 * [noob question(s)](52075noobquestions.html) (995 messages, latest: Jun 25 2019 at 17:15)
 
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (40 messages, latest: Jun 24 2019 at 12:08)
 
 * [namespace inside section](33823namespaceinsidesection.html) (4 messages, latest: Jun 23 2019 at 18:17)
-
-* [(no topic)](79918notopic.html) (197 messages, latest: Jun 23 2019 at 11:49)
 
 * [Map from intersection](23530Mapfromintersection.html) (3 messages, latest: Jun 22 2019 at 12:40)
 

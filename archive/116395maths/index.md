@@ -10,7 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (616 messages, latest: Jun 25 2019 at 18:59)
+* [Function product](34664Functionproduct.html) (10 messages, latest: Jun 25 2019 at 19:46)
+
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (623 messages, latest: Jun 25 2019 at 19:09)
 
 * [witt vectors](84655wittvectors.html) (269 messages, latest: Jun 25 2019 at 17:30)
 
