@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (269 messages, latest: Jun 25 2019 at 17:30)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (616 messages, latest: Jun 25 2019 at 18:59)
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (615 messages, latest: Jun 25 2019 at 11:49)
+* [witt vectors](84655wittvectors.html) (269 messages, latest: Jun 25 2019 at 17:30)
 
 * [sheaves and sites](44395sheavesandsites.html) (674 messages, latest: Jun 24 2019 at 12:51)
 
