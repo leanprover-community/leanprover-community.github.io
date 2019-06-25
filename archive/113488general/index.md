@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (22 messages, latest: Jun 25 2019 at 13:57)
+* [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (24 messages, latest: Jun 25 2019 at 14:20)
 
 * [mk_meta_var](24391mkmetavar.html) (5 messages, latest: Jun 25 2019 at 12:31)
 
