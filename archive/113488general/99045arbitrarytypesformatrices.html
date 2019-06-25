@@ -1,0 +1,90 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/99045arbitrarytypesformatrices.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html">arbitrary types for matrices</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168932362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168932362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168932362">Chris Hughes (Jun 25 2019 at 12:16)</a>:</h4>
+<p>Currently the columns and rows of matrices can be indexed by an arbitrary fintype. However, the following two definitions in data.matrix are less general.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">row</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">matrix</span> <span class="n">m</span> <span class="n">punit</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">w</span> <span class="n">x</span>
+
+<span class="n">def</span> <span class="n">col</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">matrix</span> <span class="n">punit</span> <span class="n">n</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">v</span> <span class="n">y</span>
+</pre></div>
+
+
+<p>I anticipate that it may be difficult to develop a more sophisticated matrix library in this generality, and that we should be generally be using <code>fin 1</code> instead of <code>punit</code> and <code>fin</code> as part of the library. For example, if I want to concatenate matrices, the output type of this should probably be <code>fin (m + n)</code> as opposed to <code>α ⊕ β</code> or some arbitrary type with a proof it has the correct cardinality.</p>
+<p>I also think the following two definitions should be made</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">cvec</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="n">m</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">1</span><span class="o">)</span> <span class="n">R</span>
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">rvec</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">matrix</span> <span class="o">(</span><span class="n">fin</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="n">R</span>
+</pre></div>
+
+
+<p>This is preferable to the current system where the canonical vectors are <code>fin n -&gt; R</code>, which aren't matrices, and can't be multiplied as easily.</p>
+<p>Any comments?</p>
+
+<a name="168932729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168932729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168932729">Mario Carneiro (Jun 25 2019 at 12:20)</a>:</h4>
+<p>you could take an arbitrary element in a type, or an inhabited type</p>
+
+<a name="168933330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168933330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168933330">Chris Hughes (Jun 25 2019 at 12:29)</a>:</h4>
+<p>I don't follow.</p>
+
+<a name="168933413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168933413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168933413">Mario Carneiro (Jun 25 2019 at 12:30)</a>:</h4>
+<p>Ah, actually inhabited isn't even necessary</p>
+
+<a name="168933436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168933436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168933436">Mario Carneiro (Jun 25 2019 at 12:31)</a>:</h4>
+<p>You could simply generalize the type signature of row/col</p>
+
+<a name="168933886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168933886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168933886">Chris Hughes (Jun 25 2019 at 12:37)</a>:</h4>
+<p>I still don't follow. Where should I use this inhabited type?</p>
+
+<a name="168934754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168934754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168934754">Mario Carneiro (Jun 25 2019 at 12:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">row</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">m</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">matrix</span> <span class="n">m</span> <span class="n">B</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">w</span> <span class="n">x</span>
+</pre></div>
+
+<a name="168934870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168934870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168934870">Mario Carneiro (Jun 25 2019 at 12:50)</a>:</h4>
+<p>You can use <code>unique</code> if you need to prove stuff about the sum of entries or something</p>
+
+<a name="168934874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168934874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168934874">Chris Hughes (Jun 25 2019 at 12:50)</a>:</h4>
+<p>Okay I could do that, but what about the more general question. Should I concatenate matrices on arbitrary types?</p>
+
+<a name="168934935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168934935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168934935">Mario Carneiro (Jun 25 2019 at 12:51)</a>:</h4>
+<p>That's tougher. I have serious reservations about doing anything nontrivial with dependent type families with nat args</p>
+
+<a name="168935000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168935000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168935000">Mario Carneiro (Jun 25 2019 at 12:52)</a>:</h4>
+<p>Something like the traditional type signature of vector append is DTT hell just waiting to happen</p>
+
+<a name="168935221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168935221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168935221">Keeley Hoek (Jun 25 2019 at 12:55)</a>:</h4>
+<p><code>vector (n + m) = vector (m + n)</code> and we're dead</p>
+
+<a name="168935559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168935559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168935559">Johan Commelin (Jun 25 2019 at 12:58)</a>:</h4>
+<p>One of the reasons why I pushed for matrices indexed by arbitrary types is so that we can have matrices indexed by a basis.</p>
+
+<a name="168935611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/arbitrary%20types%20for%20matrices/near/168935611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045arbitrarytypesformatrices.html#168935611">Johan Commelin (Jun 25 2019 at 12:59)</a>:</h4>
+<p>I think that might be a useful application to keep in mind when developing the library.</p>
+
+
+{% endraw %}

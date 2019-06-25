@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (14 messages, latest: Jun 25 2019 at 12:59)
+
+* [mk_meta_var](24391mkmetavar.html) (5 messages, latest: Jun 25 2019 at 12:31)
+
 * [cache olean no longer working](21801cacheoleannolongerworking.html) (6 messages, latest: Jun 24 2019 at 22:21)
 
 * [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (1 message, latest: Jun 24 2019 at 13:04)

@@ -1,0 +1,39 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/24391mkmetavar.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/24391mkmetavar.html">mk_meta_var</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="168932105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_meta_var/near/168932105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24391mkmetavar.html#168932105">Paul-Nicolas Madelaine (Jun 25 2019 at 12:13)</a>:</h4>
+<p>Hi everyone,</p>
+<p>I don't really understand how the mk_meta_var tactic works.<br>
+Sometimes it adds the meta variable to the list of goals, and sometimes it doesn't, and I don't understand when and why.<br>
+Can someone give me more details about its behaviour?</p>
+
+<a name="168932209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_meta_var/near/168932209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24391mkmetavar.html#168932209">Mario Carneiro (Jun 25 2019 at 12:14)</a>:</h4>
+<p>mk_meta_var just creates a metavariable, it doesn't add it to the goal list. Goals are controlled directly via <code>get_goals</code> and <code>set_goals</code></p>
+
+<a name="168933193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_meta_var/near/168933193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24391mkmetavar.html#168933193">Paul-Nicolas Madelaine (Jun 25 2019 at 12:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> indeed you're right, I played with my code a bit more, and it appears that they are not added if I just create them.<br>
+But if I use them to build another expression, sometimes they are added to the list of goals automatically, and sometimes not. Do you have an idea of what's happening there?</p>
+
+<a name="168933339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_meta_var/near/168933339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24391mkmetavar.html#168933339">Mario Carneiro (Jun 25 2019 at 12:29)</a>:</h4>
+<p>Many of the lean primitive tactics also add the metavars as goals; probably <code>to_expr</code> is responsible. There are flags to adjust what it does with the metavars</p>
+
+<a name="168933476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mk_meta_var/near/168933476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24391mkmetavar.html#168933476">Paul-Nicolas Madelaine (Jun 25 2019 at 12:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> that's what was happening, thank you!</p>
+
+
+{% endraw %}
