@@ -5587,5 +5587,58 @@ A : ℕ,
 </blockquote>
 <p>I think that "that theorem" might have referred to the compatibility of the various notions of <code>gcd</code> which we have in Lean.</p>
 
+<a name="168951452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168951452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168951452">Patrick Massot (Jun 25 2019 at 16:06)</a>:</h4>
+<p>You can shorten your first calc block to</p>
+<div class="codehilite"><pre><span></span><span class="k">calc</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="n">u</span> <span class="o">:</span> <span class="n">abs_nonneg</span> <span class="n">u</span>
+      <span class="bp">...</span> <span class="bp">≤</span> <span class="bp">_</span> <span class="o">:</span> <span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>(or of course you can say <code>have hk : 0 ≤ k, from le_trans (abs_nonneg u) (le_max_left _ _),</code>)</p>
+
+<a name="168951491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168951491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168951491">Patrick Massot (Jun 25 2019 at 16:06)</a>:</h4>
+<p>The sorry you couldn't do is <code>h ▸ gcd_eq_gcd_ab a b</code></p>
+
+<a name="168951572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168951572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168951572">Patrick Massot (Jun 25 2019 at 16:07)</a>:</h4>
+<p>I hope you've learn a couple of tricks (those are no so easy to document)</p>
+
+<a name="168951723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168951723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168951723">Adrian Chu (Jun 25 2019 at 16:09)</a>:</h4>
+<p>wow thanks a lot!</p>
+
+<a name="168951742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168951742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168951742">Adrian Chu (Jun 25 2019 at 16:09)</a>:</h4>
+<p>i can finally move one to the second lemma, and then my main theorem :)</p>
+
+<a name="168951744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168951744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168951744">Kevin Buzzard (Jun 25 2019 at 16:09)</a>:</h4>
+<p>The triangle is term mode's version of the rewrite tactic.</p>
+
+<a name="168955379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168955379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168955379">Adrian Chu (Jun 25 2019 at 16:53)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="n">def</span> <span class="n">fin_n_to_list</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="k">then</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">n_lcm</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+  <span class="n">list</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">lcm</span> <span class="mi">1</span> <span class="o">(</span><span class="n">fin_n_to_list</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">n_lcm_coprime</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">gcd</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">gcd</span> <span class="o">(</span><span class="n">n_lcm</span> <span class="n">x</span><span class="o">)</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="168955506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/168955506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#168955506">Adrian Chu (Jun 25 2019 at 16:54)</a>:</h4>
+<p>i will start to prove this lemma. is my formulation of definitions and the statement of lemma appropriate?</p>
+
 
 {% endraw %}
