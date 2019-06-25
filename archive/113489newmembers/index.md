@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (5 messages, latest: Jun 25 2019 at 03:58)
+* ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (6 messages, latest: Jun 25 2019 at 04:01)
 
 * [Induction](51886Induction.html) (240 messages, latest: Jun 24 2019 at 22:57)
 
