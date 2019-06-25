@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (983 messages, latest: Jun 25 2019 at 15:57)
+* [noob question(s)](52075noobquestions.html) (991 messages, latest: Jun 25 2019 at 16:54)
 
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 
