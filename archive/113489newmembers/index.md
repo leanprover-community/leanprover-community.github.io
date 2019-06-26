@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [INduction_](38413INduction.html) (8 messages, latest: Jun 26 2019 at 21:25)
+
 * [noob question(s)](52075noobquestions.html) (1154 messages, latest: Jun 26 2019 at 20:23)
 
 * [help with measurability proof](32743helpwithmeasurabilityproof.html) (1 message, latest: Jun 26 2019 at 19:20)
@@ -21,8 +23,6 @@ permalink: archive/113489newmembers/index.html
 * [easy questions](27038easyquestions.html) (21 messages, latest: Jun 26 2019 at 12:49)
 
 * [(no topic)](79918notopic.html) (204 messages, latest: Jun 26 2019 at 07:26)
-
-* [INduction_](38413INduction.html) (7 messages, latest: Jun 26 2019 at 01:03)
 
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 
