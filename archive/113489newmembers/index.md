@@ -10,11 +10,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1026 messages, latest: Jun 26 2019 at 06:11)
+* [noob question(s)](52075noobquestions.html) (1038 messages, latest: Jun 26 2019 at 07:47)
+
+* [(no topic)](79918notopic.html) (204 messages, latest: Jun 26 2019 at 07:26)
 
 * [INduction_](38413INduction.html) (7 messages, latest: Jun 26 2019 at 01:03)
-
-* [(no topic)](79918notopic.html) (200 messages, latest: Jun 25 2019 at 20:24)
 
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 

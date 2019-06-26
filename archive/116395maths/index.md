@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Function product](34664Functionproduct.html) (14 messages, latest: Jun 26 2019 at 06:48)
+* [Function product](34664Functionproduct.html) (15 messages, latest: Jun 26 2019 at 07:52)
 
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (626 messages, latest: Jun 26 2019 at 02:41)
 
