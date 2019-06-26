@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [induced neighborhoods](25416inducedneighborhoods.html) (7 messages, latest: Jun 26 2019 at 15:55)
+
 * [Function product](34664Functionproduct.html) (19 messages, latest: Jun 26 2019 at 10:33)
 
 * [complete (distrib) lattice](53634completedistriblattice.html) (24 messages, latest: Jun 26 2019 at 08:16)
