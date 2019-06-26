@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [induced neighborhoods](25416inducedneighborhoods.html) (7 messages, latest: Jun 26 2019 at 15:55)
+* [induced neighborhoods](25416inducedneighborhoods.html) (54 messages, latest: Jun 26 2019 at 16:48)
 
 * [Function product](34664Functionproduct.html) (19 messages, latest: Jun 26 2019 at 10:33)
 
