@@ -98,5 +98,26 @@ permalink: archive/116395maths/34664Functionproduct.html
 <span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span><span class="err">⨯</span><span class="bp">`</span><span class="o">:</span><span class="mi">90</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">map&#39;</span>
 </pre></div>
 
+<a name="169016698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Function%20product/near/169016698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/34664Functionproduct.html#169016698">Kevin Buzzard (Jun 26 2019 at 10:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="111433">@Alistair Tucker</span> </p>
+<blockquote>
+<p>I'm not sure what defeq means, but I remember that before I could use actually prod.map I had to write map_def:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/60efaec1b2bae0b6ff22ebd889f26606c8648924/src/data/prod.lean#L36" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/60efaec1b2bae0b6ff22ebd889f26606c8648924/src/data/prod.lean#L36">https://github.com/leanprover-community/mathlib/blob/60efaec1b2bae0b6ff22ebd889f26606c8648924/src/data/prod.lean#L36</a></p>
+</blockquote>
+<p>I could never follow these conversations about this sort of thing, for months and months. And the problem was precisely because I didn't know what definitional equality (defeq) meant. The idea is that sometimes you can prove <code>X = Y</code> by <code>rfl</code>, and sometimes you can't -- sometimes it's a theorem. For example if we define addition on the naturals by <code>a+0:=a</code> and <code>a+S(b):=S(a+b)</code> then <code>x+0=x</code> is true by definition, whereas to prove <code>0+x=x</code> you need to use induction on <code>x</code>. In the first example, if you simplify both things as much as you can, then you get <code>x=x</code>. Whereas <code>0+x</code> <em>cannot be simplified</em>; you have to split into the cases x=0 and x=successor before you can simplify the term further (so basically you have to apply the function <code>nat.rec</code>). So <code>0+x=x</code> but this is not true by definition; the terms are not defeq.</p>
+<p>Definitional equality is a super-powerful concept. I've proved [huge term] = [huge term] by <code>rfl</code> before. After a while it gets quite addictive -- if you make your definitions just right then there's more of a chance that <code>rfl</code> will work.</p>
+<p>The problem with </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="o">{</span><span class="n">u₁</span> <span class="n">u₂</span> <span class="n">v₁</span> <span class="n">v₂</span><span class="o">}</span> <span class="n">prod</span><span class="bp">.</span><span class="n">map</span> <span class="o">{</span><span class="n">α₁</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">}</span> <span class="o">{</span><span class="n">α₂</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">}</span> <span class="o">{</span><span class="n">β₁</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v₁</span><span class="o">}</span> <span class="o">{</span><span class="n">β₂</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v₂</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α₁</span> <span class="bp">→</span> <span class="n">α₂</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β₁</span> <span class="bp">→</span> <span class="n">β₂</span><span class="o">)</span> <span class="o">:</span> <span class="n">α₁</span> <span class="bp">×</span> <span class="n">β₁</span> <span class="bp">→</span> <span class="n">α₂</span> <span class="bp">×</span> <span class="n">β₂</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">,</span> <span class="n">g</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>is that the definition is by cases -- like the definition of <code>0 + x</code>. So <code>prod.map f g x</code> is never going to be defeq to anything other than more complicated things which reduce to it; you can't reduce it any further. The moment you say "well x has type alpha x beta so WLOG it's of the form (a,b)" you are applying a function, probably called something like prod.map.rec or prod.map.cases_on, and changing the term. <br>
+This can be avoided by defining <code>prod.map f g x</code> to be <code>(f x.fst, g x.snd)</code>. Now we don't have to do cases on <code>x</code>, these things are equal by definition. </p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
 
 {% endraw %}
