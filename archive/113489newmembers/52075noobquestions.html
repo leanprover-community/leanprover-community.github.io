@@ -5764,5 +5764,62 @@ A : ℕ,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002151">Adrian Chu (Jun 26 2019 at 05:49)</a>:</h4>
 <p>OK, fixed</p>
 
+<a name="169002570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002570">Adrian Chu (Jun 26 2019 at 06:01)</a>:</h4>
+<p>let x : list nat and I want to sum it. if for some reason I want to use <code>finset.univ.sum</code> instead of <code>x.sum</code>, what is the correct syntax?</p>
+
+<a name="169002693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002693">Adrian Chu (Jun 26 2019 at 06:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">variable</span> <span class="n">x</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">nth</span> <span class="n">i</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">x</span><span class="bp">.</span><span class="n">range</span><span class="o">,</span> <span class="n">x</span><span class="bp">.</span><span class="n">nth</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+
+<p>this doesnt work</p>
+
+<a name="169002715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002715">Johan Commelin (Jun 26 2019 at 06:05)</a>:</h4>
+<p>You need to <code>range</code> of the <code>length</code> of the list.</p>
+
+<a name="169002720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002720">Johan Commelin (Jun 26 2019 at 06:05)</a>:</h4>
+<p>Why do you want to use <code>finset.sum</code>?</p>
+
+<a name="169002725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002725">Johan Commelin (Jun 26 2019 at 06:05)</a>:</h4>
+<p>If so... shouldn't you be using <code>finset nat</code> instead of <code>list nat</code>?</p>
+
+<a name="169002853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002853">Adrian Chu (Jun 26 2019 at 06:09)</a>:</h4>
+<p>well I have <code>x : list nat</code> and <code>r : list nat</code>, lists of positive integers of the same length, and i want to sum (i-th term of x)^(i-th term of r) over i</p>
+
+<a name="169002866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002866">Adrian Chu (Jun 26 2019 at 06:09)</a>:</h4>
+<p>i thought using <code>finset.univ.sum</code> is the easiest</p>
+
+<a name="169002917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002917">Mario Carneiro (Jun 26 2019 at 06:10)</a>:</h4>
+<p>I would do something like <code>zip_with</code> to put the powers together and <code>list.sum</code> to add them up</p>
+
+<a name="169002928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002928">Johan Commelin (Jun 26 2019 at 06:10)</a>:</h4>
+<blockquote>
+<p>well I have <code>x : list nat</code> and <code>r : list nat</code>, lists of positive integers of the same length, and i want to sum (i-th term of x)^(i-th term of r) over i</p>
+</blockquote>
+<p>??? why are they of the same length?</p>
+
+<a name="169002949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169002949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169002949">Adrian Chu (Jun 26 2019 at 06:11)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>well I have <code>x : list nat</code> and <code>r : list nat</code>, lists of positive integers of the same length, and i want to sum (i-th term of x)^(i-th term of r) over i</p>
+</blockquote>
+<p>??? why are they of the same length?</p>
+</blockquote>
+<p>by assumption</p>
+
 
 {% endraw %}
