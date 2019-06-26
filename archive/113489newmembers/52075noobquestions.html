@@ -5953,5 +5953,278 @@ A : ℕ,
 
 <p>I don't think it's necessary to ban the use of nats as long as you are conscientious in your use of the up arrow. In particular if it makes you use more unusual functions with a worse interface then it's not worth it</p>
 
+<a name="169018155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018155">Patrick Massot (Jun 26 2019 at 11:00)</a>:</h4>
+<p>I think this is completely crazy. How can it be a good idea to have <code>nat.gcd</code>, <code>int.gcd</code> and <code>euclidean_domain.gcd</code> and not a single lemma relating those?</p>
+
+<a name="169018175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018175">Mario Carneiro (Jun 26 2019 at 11:00)</a>:</h4>
+<p>Of course there should be such lemmas</p>
+
+<a name="169018192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018192">Mario Carneiro (Jun 26 2019 at 11:01)</a>:</h4>
+<p>but we don't need the other gcds for this theorem</p>
+
+<a name="169018289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018289">Patrick Massot (Jun 26 2019 at 11:02)</a>:</h4>
+<p>The proof of this theorem is much nicer with <code>euclidean_domain.gcd</code>. Your proof is hideous, even if it could be nicer using <code>norm_cast</code></p>
+
+<a name="169018308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018308">Mario Carneiro (Jun 26 2019 at 11:02)</a>:</h4>
+<p>None of the proof has to do with gcd</p>
+
+<a name="169018357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018357">Mario Carneiro (Jun 26 2019 at 11:03)</a>:</h4>
+<p>It's quite possible that norm_cast can be used in a few places, but it's mostly about dealing with max and simple algebra</p>
+
+<a name="169018368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018368">Mario Carneiro (Jun 26 2019 at 11:03)</a>:</h4>
+<p>also I don't really care about calc blocks</p>
+
+<a name="169018490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018490">Mario Carneiro (Jun 26 2019 at 11:05)</a>:</h4>
+<p>Are you saying that there is a completely different proof that uses <code>euclidean_domain.gcd</code> with some different lemmas about it? I'm mostly following adrian's proof sketch here</p>
+
+<a name="169018544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018544">Kevin Buzzard (Jun 26 2019 at 11:06)</a>:</h4>
+<p>The fact that we have</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">gcd_eq_gcd_ab</span> <span class="o">:</span> <span class="o">(</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:=</span> <span class="bp">...</span>
+</pre></div>
+
+
+<p>and this proof is still nearly 30 lines is what is so jarring.</p>
+
+<a name="169018563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018563">Mario Carneiro (Jun 26 2019 at 11:06)</a>:</h4>
+<p>This theorem is proving something completely different</p>
+
+<a name="169018568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018568">Kevin Buzzard (Jun 26 2019 at 11:06)</a>:</h4>
+<p>Hmm, I guess gcd_a is probably an int, so there's some content getting all the signs right</p>
+
+<a name="169018581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018581">Mario Carneiro (Jun 26 2019 at 11:07)</a>:</h4>
+<p>The important part is the fact that you can shift around solutions by a multiple</p>
+
+<a name="169018586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018586">Kevin Buzzard (Jun 26 2019 at 11:07)</a>:</h4>
+<p>Right.</p>
+
+<a name="169018603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018603">Mario Carneiro (Jun 26 2019 at 11:07)</a>:</h4>
+<p>and then you have some inequalities to check</p>
+
+<a name="169018623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018623">Patrick Massot (Jun 26 2019 at 11:07)</a>:</h4>
+<p>I mean</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">gcd_a</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">gcd_b</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">hk</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">abs_nonneg</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">use</span> <span class="o">[</span><span class="bp">-</span><span class="n">u</span><span class="bp">+</span><span class="n">b</span><span class="bp">*</span><span class="n">k</span><span class="o">,</span> <span class="n">v</span> <span class="bp">+</span> <span class="n">a</span><span class="bp">*</span><span class="n">k</span><span class="o">],</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">split</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="k">show</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="n">u</span> <span class="bp">+</span> <span class="n">b</span><span class="bp">*</span><span class="n">v</span><span class="o">,</span> <span class="k">from</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">gcd_eq_gcd_ab</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">ring</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">suffices</span> <span class="o">:</span> <span class="n">u</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+    <span class="k">calc</span> <span class="n">u</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="n">u</span> <span class="o">:</span> <span class="n">le_abs_self</span> <span class="n">u</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">le_max_left</span> <span class="bp">_</span> <span class="bp">_</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span><span class="bp">*</span><span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">b</span><span class="bp">*</span><span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">mul_le_mul_of_nonneg_right</span> <span class="n">hb</span> <span class="n">hk</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">suffices</span> <span class="o">:</span> <span class="bp">-</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">),</span> <span class="k">by</span> <span class="n">linarith</span><span class="o">,</span>
+    <span class="k">calc</span> <span class="bp">-</span><span class="n">v</span> <span class="bp">≤</span> <span class="n">abs</span> <span class="n">v</span> <span class="o">:</span> <span class="n">neg_le_abs_self</span> <span class="bp">_</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">le_max_right</span> <span class="bp">_</span> <span class="bp">_</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="mi">1</span><span class="bp">*</span><span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">le_max_right</span> <span class="o">]</span>
+    <span class="bp">...</span> <span class="bp">≤</span> <span class="n">a</span><span class="bp">*</span><span class="n">max</span> <span class="o">(</span><span class="n">abs</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">abs</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span> <span class="n">mul_le_mul_of_nonneg_right</span> <span class="n">ha</span> <span class="n">hk</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169018666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018666">Kevin Buzzard (Jun 26 2019 at 11:08)</a>:</h4>
+<p>I think our views on the meaning of the phrase "completely different" might have diverged a bit but I do take your point that more needs to be said.</p>
+
+<a name="169018686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018686">Mario Carneiro (Jun 26 2019 at 11:08)</a>:</h4>
+<p>Ah, you linarith'd</p>
+
+<a name="169018701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018701">Patrick Massot (Jun 26 2019 at 11:08)</a>:</h4>
+<p>And then, modulo relating different versions of <code>gcd</code>, the proof of the <code>nat</code> version is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">baz</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">foo</span> <span class="n">a</span> <span class="n">b</span> <span class="o">(</span><span class="k">by</span> <span class="n">exact_mod_cast</span> <span class="n">ha</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">exact_mod_cast</span> <span class="n">hb</span><span class="o">)</span> <span class="n">sorry</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">use</span> <span class="o">[</span><span class="n">x</span><span class="bp">.</span><span class="n">to_nat</span><span class="o">,</span> <span class="n">y</span><span class="bp">.</span><span class="n">to_nat</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="k">show</span> <span class="n">x</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hx</span><span class="o">],</span>
+      <span class="k">show</span> <span class="n">y</span> <span class="bp">=</span> <span class="o">(</span><span class="n">y</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">hy</span><span class="o">]]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact_mod_cast</span> <span class="n">h</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169018705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018705">Kevin Buzzard (Jun 26 2019 at 11:08)</a>:</h4>
+<p>and he rung.</p>
+
+<a name="169018815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169018815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169018815">Patrick Massot (Jun 26 2019 at 11:10)</a>:</h4>
+<p>Of course I linarith, I ring, and norm_cast. I very strongly believe all this is essential for the future of proof assistants for mathematicians</p>
+
+<a name="169019121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169019121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169019121">Adrian Chu (Jun 26 2019 at 11:15)</a>:</h4>
+<p>million thanks. i am building up the framework of the proof of mythm currently.</p>
+
+<a name="169019829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169019829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169019829">Kevin Buzzard (Jun 26 2019 at 11:27)</a>:</h4>
+<blockquote>
+<p>It's quite possible that norm_cast can be used in a few places, but it's mostly about dealing with max and simple algebra</p>
+</blockquote>
+<p>This is just the metamath-mario trying to get out. You can see a proof from very low-level principles and so figure that this is a good way to do it. The mathematicians see the theorem for <code>int</code> and figure that the boring work is already done, and that we should just use that.</p>
+
+<a name="169019979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169019979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169019979">Mario Carneiro (Jun 26 2019 at 11:29)</a>:</h4>
+<p>I don't use a high level tactic until I understand very well how effective it is and in what circumstances it can be used. AKA "no magic"</p>
+
+<a name="169020048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020048">Kevin Buzzard (Jun 26 2019 at 11:30)</a>:</h4>
+<p>That's exactly what I'm saying. You were brought up on metamath and this has formed the way you think about how to solve goals.</p>
+
+<a name="169020049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020049">Mario Carneiro (Jun 26 2019 at 11:30)</a>:</h4>
+<p>That said there are also a few proof tricks in Patrick's proof that I missed</p>
+
+<a name="169020062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020062">Patrick Massot (Jun 26 2019 at 11:30)</a>:</h4>
+<p>We need both. We need Mario on one side, and we need Rob and Paul-Nicolas (and hopefully many more) on the other side</p>
+
+<a name="169020089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020089">Kevin Buzzard (Jun 26 2019 at 11:31)</a>:</h4>
+<p>Yes absolutely. I'm just saying that it's interesting.</p>
+
+<a name="169020136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020136">Kevin Buzzard (Jun 26 2019 at 11:32)</a>:</h4>
+<p>I think Mario wrote <code>ring</code> ;-)</p>
+
+<a name="169020231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020231">Mario Carneiro (Jun 26 2019 at 11:33)</a>:</h4>
+<p>The difference between us is I feel the pressure of the actual proof term at all times</p>
+
+<a name="169020262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020262">Mario Carneiro (Jun 26 2019 at 11:33)</a>:</h4>
+<p>If I use a complicated tactic that spews some gigantic... <em>thing</em>... in for my proof, I think it's a long and ugly proof</p>
+
+<a name="169020277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020277">Kevin Buzzard (Jun 26 2019 at 11:33)</a>:</h4>
+<p>That's an interesting comment. I have no concept of what proof terms look like.</p>
+
+<a name="169020285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020285">Mario Carneiro (Jun 26 2019 at 11:33)</a>:</h4>
+<p>even if the proof script is just <code>by magic</code></p>
+
+<a name="169020355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020355">Mario Carneiro (Jun 26 2019 at 11:34)</a>:</h4>
+<p>When I use <code>refine</code> and <code>apply</code> and <code>rw</code>, I know exactly what proof term is getting generated and how heavy that's going to be for the kernel</p>
+
+<a name="169020373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020373">Kevin Buzzard (Jun 26 2019 at 11:35)</a>:</h4>
+<p>With Olympiad training as a kid I was taught the importance of getting the solution out as quickly as possible, who cares about other stuff like elegance.</p>
+
+<a name="169020404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020404">Kevin Buzzard (Jun 26 2019 at 11:35)</a>:</h4>
+<p>I'm hoping that <code>refine</code> and <code>apply</code> don't add too much weight to the proof term! I know how to do them in term mode :-)</p>
+
+<a name="169020413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020413">Mario Carneiro (Jun 26 2019 at 11:35)</a>:</h4>
+<p>that's exactly the point</p>
+
+<a name="169020468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020468">Patrick Massot (Jun 26 2019 at 11:36)</a>:</h4>
+<p>Then we need more CS people working on the magic tactics, so that they produce nicer terms</p>
+
+<a name="169020473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020473">Mario Carneiro (Jun 26 2019 at 11:36)</a>:</h4>
+<p>You don't really need them - you could do them in term mode. They are just slight shorthands for building that proof term</p>
+
+<a name="169020493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020493">Kevin Buzzard (Jun 26 2019 at 11:37)</a>:</h4>
+<p>why do I care about the size of a proof term? It's immediately forgotten.</p>
+
+<a name="169020494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020494">Mario Carneiro (Jun 26 2019 at 11:37)</a>:</h4>
+<p>I wish that was a bigger concern in lean-land. I care about it very much, but lean fights me when it comes to proof optimization</p>
+
+<a name="169020507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020507">Mario Carneiro (Jun 26 2019 at 11:37)</a>:</h4>
+<p>It's not forgotten, it's stored and passed around and checked hundreds of time on travis and burns many CPU hours around the world</p>
+
+<a name="169020950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020950">Patrick Massot (Jun 26 2019 at 11:45)</a>:</h4>
+<p>I'm seriously thinking about buying a bigger CPU tonight</p>
+
+<a name="169020993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169020993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169020993">Patrick Massot (Jun 26 2019 at 11:46)</a>:</h4>
+<p>I think I want more cores and more RAM, right?</p>
+
+<a name="169021005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021005">Kevin Buzzard (Jun 26 2019 at 11:46)</a>:</h4>
+<p>gone are the days of more pixels. I remember wanting more colours once!</p>
+
+<a name="169021016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021016">Kevin Buzzard (Jun 26 2019 at 11:46)</a>:</h4>
+<p>I upgraded from 2 to 8</p>
+
+<a name="169021058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021058">Reid Barton (Jun 26 2019 at 11:47)</a>:</h4>
+<p>But some of the 8 colors were different on every other pixel so it was really more like... 12</p>
+
+<a name="169021059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021059">Patrick Massot (Jun 26 2019 at 11:47)</a>:</h4>
+<p>I think VScode doesn't use much more than 8 colors, so you should be fine now. Let's go for CPU cores instead</p>
+
+<a name="169021066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021066">Kevin Buzzard (Jun 26 2019 at 11:47)</a>:</h4>
+<p>Is a GPU of any use?</p>
+
+<a name="169021072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021072">Patrick Massot (Jun 26 2019 at 11:47)</a>:</h4>
+<p>Unfortunately no</p>
+
+<a name="169021131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021131">Patrick Massot (Jun 26 2019 at 11:48)</a>:</h4>
+<p>But wait until <span class="user-mention" data-user-id="110043">@Gabriel Ebner</span> starts working on Lean 4 on GPU</p>
+
+<a name="169021291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021291">Kevin Buzzard (Jun 26 2019 at 11:51)</a>:</h4>
+<p>This isn't really a noob question and probably deserves its own thread. My laptop has something like 4 cores and 16 gigs of ram and even if I compile mathlib I don't ever get close to those 16 gigs.</p>
+
+<a name="169021323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021323">Patrick Massot (Jun 26 2019 at 11:51)</a>:</h4>
+<p>I have RAM problems when I want to compile mathlib while using VScode on some other project</p>
+
+<a name="169021366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021366">Kevin Buzzard (Jun 26 2019 at 11:52)</a>:</h4>
+<p>In particular, I wonder whether somehow there's a theorem of the form "if you have x cores, then don't buy any more than c * x gigs of ram because Lean won't use that much" for some constant c.</p>
+
+<a name="169021394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021394">Kevin Buzzard (Jun 26 2019 at 11:53)</a>:</h4>
+<p>When I want to compile mathlib and do something else too, I see how much free ram I have and then compile from the command line with the -M flag. Occasionally the build just runs out of memory and stops, and then I just start it again.</p>
+
+<a name="169021429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021429">Johan Commelin (Jun 26 2019 at 11:54)</a>:</h4>
+<p>I haven't compile mathlib in the last 6 weeks. <code>cache-olean</code> is quite awesome.</p>
+
+<a name="169021474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021474">Kevin Buzzard (Jun 26 2019 at 11:54)</a>:</h4>
+<p>Using the M flag also stopped my desktop (which had no swap) from randomly crashing when Lean suddenly goes beserk and fills up all memory.</p>
+
+<a name="169021525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021525">Kevin Buzzard (Jun 26 2019 at 11:55)</a>:</h4>
+<p>IIRC it still didn't stop Lean going crazy when invoked via VS Code, so I added some swap anyway.</p>
+
+<a name="169021560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169021560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169021560">Patrick Massot (Jun 26 2019 at 11:55)</a>:</h4>
+<p>compiling mathlib is still required when working on mathlib</p>
+
 
 {% endraw %}
