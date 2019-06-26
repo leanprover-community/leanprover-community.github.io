@@ -33,5 +33,23 @@ permalink: archive/113488general/32743helpwithmeasurabilityproof.html
 
 <p>I have proven that <code>λ y, dirac (x,y)</code> is measurable for all <code>x</code> and also have that <code>bind</code> followed by <code>dirac</code> is <code>map</code>. But at this point, I am stuck...any suggestions?</p>
 
+<a name="169071696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169071696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169071696">Chris Hughes (Jun 26 2019 at 19:22)</a>:</h4>
+<p>I had a go. No idea if the sorry if even true or not, but I look like I made progress.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">inl_measurable_bind_ret&#39;</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">bind</span> <span class="n">w</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">y</span><span class="o">,</span> <span class="n">dirac</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">@</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">α</span> <span class="n">β</span> <span class="n">x</span><span class="o">),</span>
+  <span class="k">from</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">measurable_prod_mk</span> <span class="n">measurable_const</span> <span class="n">measurable_id</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">measure</span><span class="bp">.</span><span class="n">bind</span><span class="o">],</span>
+  <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="n">map</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">measure</span><span class="bp">.</span><span class="n">map_map</span> <span class="n">measurable_dirac</span> <span class="o">(</span><span class="n">this</span> <span class="n">x</span><span class="o">)]</span> <span class="o">},</span>
+  <span class="n">refine</span> <span class="n">measurable_join</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refine</span> <span class="n">measurable_map</span> <span class="bp">_</span> <span class="n">measurable_dirac</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">sorry</span> <span class="o">}</span>
+
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
