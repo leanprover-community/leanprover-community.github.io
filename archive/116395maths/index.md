@@ -10,15 +10,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Function product](34664Functionproduct.html) (15 messages, latest: Jun 26 2019 at 07:52)
+* [Function product](34664Functionproduct.html) (16 messages, latest: Jun 26 2019 at 08:19)
+
+* [complete (distrib) lattice](53634completedistriblattice.html) (24 messages, latest: Jun 26 2019 at 08:16)
 
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (626 messages, latest: Jun 26 2019 at 02:41)
 
 * [witt vectors](84655wittvectors.html) (269 messages, latest: Jun 25 2019 at 17:30)
 
 * [sheaves and sites](44395sheavesandsites.html) (674 messages, latest: Jun 24 2019 at 12:51)
-
-* [complete (distrib) lattice](53634completedistriblattice.html) (23 messages, latest: Jun 24 2019 at 07:53)
 
 * [category of discrete rings](76394categoryofdiscreterings.html) (4 messages, latest: Jun 22 2019 at 22:58)
 
