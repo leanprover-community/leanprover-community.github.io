@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [INduction_](38413INduction.html) (5 messages, latest: Jun 26 2019 at 00:57)
+* [INduction_](38413INduction.html) (7 messages, latest: Jun 26 2019 at 01:03)
 
 * [(no topic)](79918notopic.html) (200 messages, latest: Jun 25 2019 at 20:24)
 
