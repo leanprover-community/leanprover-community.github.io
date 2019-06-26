@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (128 messages, latest: Jun 26 2019 at 12:54)
+* [Lean in the wild](43625Leaninthewild.html) (130 messages, latest: Jun 26 2019 at 13:28)
 
 * [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (32 messages, latest: Jun 26 2019 at 10:58)
 
