@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [leanpkg args](55408leanpkgargs.html) (5 messages, latest: Jun 26 2019 at 18:51)
+
 * [Samuel Lelièvre](94598SamuelLelivre.html) (1 message, latest: Jun 26 2019 at 16:30)
 
 * [noob question(s)](52075noobquestions.html) (1110 messages, latest: Jun 26 2019 at 15:26)
@@ -35,8 +37,6 @@ permalink: archive/113489newmembers/index.html
 * [kif](81211kif.html) (6 messages, latest: Jun 22 2019 at 03:10)
 
 * [Debug "mutually inductive types compiled to invalid ..."](55370Debugmutuallyinductivetypescompiledtoinvalid.html) (50 messages, latest: Jun 20 2019 at 16:55)
-
-* [leanpkg args](55408leanpkgargs.html) (4 messages, latest: Jun 19 2019 at 01:12)
 
 * [Directed/filtered categories](49705Directedfilteredcategories.html) (26 messages, latest: Jun 18 2019 at 21:58)
 
