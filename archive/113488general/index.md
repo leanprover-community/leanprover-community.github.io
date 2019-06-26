@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (128 messages, latest: Jun 26 2019 at 12:54)
+
 * [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (32 messages, latest: Jun 26 2019 at 10:58)
 
 * [Lean LaTeX utf8 v utf8x](13851LeanLaTeXutf8vutf8x.html) (4 messages, latest: Jun 26 2019 at 10:42)
@@ -91,8 +93,6 @@ permalink: archive/113488general/index.html
 * [nat equalities](63354natequalities.html) (22 messages, latest: Jun 15 2019 at 14:52)
 
 * [ring of injective](46407ringofinjective.html) (36 messages, latest: Jun 15 2019 at 04:48)
-
-* [Lean in the wild](43625Leaninthewild.html) (127 messages, latest: Jun 14 2019 at 16:23)
 
 * [weird typechecking error](70244weirdtypecheckingerror.html) (5 messages, latest: Jun 14 2019 at 15:34)
 
