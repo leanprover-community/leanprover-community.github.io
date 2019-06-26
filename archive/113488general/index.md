@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [help with measurability proof](32743helpwithmeasurabilityproof.html) (5 messages, latest: Jun 26 2019 at 20:32)
+* [function on sums](48076functiononsums.html) (2 messages, latest: Jun 26 2019 at 21:59)
+
+* [help with measurability proof](32743helpwithmeasurabilityproof.html) (12 messages, latest: Jun 26 2019 at 21:59)
 
 * [Lean in the wild](43625Leaninthewild.html) (130 messages, latest: Jun 26 2019 at 13:28)
 
