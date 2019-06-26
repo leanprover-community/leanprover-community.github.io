@@ -5821,5 +5821,82 @@ A : ℕ,
 </blockquote>
 <p>by assumption</p>
 
+<a name="169005531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169005531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169005531">Scott Morrison (Jun 26 2019 at 07:13)</a>:</h4>
+<p>Can you arrange to have a <code>list (nat x nat)</code>?</p>
+
+<a name="169006265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006265">Adrian Chu (Jun 26 2019 at 07:29)</a>:</h4>
+<blockquote>
+<p>Can you arrange to have a <code>list (nat x nat)</code>?</p>
+</blockquote>
+<p>how will this help?</p>
+
+<a name="169006369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006369">Marc Huisinga (Jun 26 2019 at 07:31)</a>:</h4>
+<p>it ensures that you have two lists of the same size, but is this really the easiest way to do it? why not pass a proof that the lengths are equal instead?</p>
+
+<a name="169006384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006384">Mario Carneiro (Jun 26 2019 at 07:31)</a>:</h4>
+<p>it separates the information somewhat and generally makes the proofs harder</p>
+
+<a name="169006472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006472">Mario Carneiro (Jun 26 2019 at 07:32)</a>:</h4>
+<p>I don't know about the direction of this thread though. What is the actual goal? I think the encoding decisions are being made without a good idea of the target theorem and that's bad news</p>
+
+<a name="169006489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006489">Adrian Chu (Jun 26 2019 at 07:33)</a>:</h4>
+<p>okok, let me write out the complete thm</p>
+
+<a name="169006690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006690">Adrian Chu (Jun 26 2019 at 07:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">theorem</span> <span class="n">mythm</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">r</span> <span class="n">i</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">coprime</span> <span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">)</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+  <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span> <span class="n">y</span><span class="err">^</span><span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="169006696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006696">Adrian Chu (Jun 26 2019 at 07:37)</a>:</h4>
+<p>this is the original form of my theorem</p>
+
+<a name="169006759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006759">Adrian Chu (Jun 26 2019 at 07:38)</a>:</h4>
+<p>and we can discuss whether  (1) to use nat or int, and (2) to use fin n -&gt; nat or list nat</p>
+
+<a name="169006867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006867">Marc Huisinga (Jun 26 2019 at 07:40)</a>:</h4>
+<p>the only adv of fin n -&gt; nat i can think of is that fin n -&gt; nat can be handy when dealing with nested inductive types</p>
+
+<a name="169006962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169006962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169006962">Adrian Chu (Jun 26 2019 at 07:43)</a>:</h4>
+<p>and I will use these 2 lemmas</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">euclidean_domain</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>
+
+<span class="kn">open</span> <span class="n">euclidean_domain</span>
+
+<span class="n">def</span> <span class="n">fin_n_to_list</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="k">then</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">n_lcm</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+  <span class="n">list</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lcm</span> <span class="mi">1</span> <span class="o">(</span><span class="n">fin_n_to_list</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">n_lcm_coprime</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">coprime</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nat</span><span class="bp">.</span><span class="n">coprime</span> <span class="o">(</span><span class="n">n_lcm</span> <span class="n">x</span><span class="o">)</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- not yet proven</span>
+
+<span class="kn">lemma</span> <span class="n">bazout</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">a</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">*</span><span class="n">y</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">∧</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- already proven</span>
+</pre></div>
+
+<a name="169007185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169007185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169007185">Mario Carneiro (Jun 26 2019 at 07:47)</a>:</h4>
+<p>The statement of <code>mythm</code> looks fine, except that you can replace <code>fin n</code> with any fintype <code>A</code>, and the <code>0 &lt;= y</code> is redundant</p>
+
 
 {% endraw %}
