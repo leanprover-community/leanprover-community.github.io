@@ -6584,5 +6584,45 @@ h : n = nat.succ m
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169074794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169074794">Kevin Buzzard (Jun 26 2019 at 19:59)</a>:</h4>
 <p>But when it really is an induction, won't the inductive hypothesis end up contradicting another hypothesis most of the time?</p>
 
+<a name="169074938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169074938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169074938">Chris Hughes (Jun 26 2019 at 20:00)</a>:</h4>
+<p>I think all of the time, given the freely generated nature of inductive types.</p>
+
+<a name="169074961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169074961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169074961">Kevin Buzzard (Jun 26 2019 at 20:00)</a>:</h4>
+<p>Yeah, I'm just trying to prove <code>list.rec</code> with <code>induction h : l</code> and I don't think it can be done.</p>
+
+<a name="169075005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169075005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169075005">Chris Hughes (Jun 26 2019 at 20:01)</a>:</h4>
+<p>Maybe it would be useful for custom recursors when you do <code>induction ... using ...</code></p>
+
+<a name="169075178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169075178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169075178">Kevin Buzzard (Jun 26 2019 at 20:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- attempt to prove list.rec</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">},</span>
+    <span class="n">C</span> <span class="n">list</span><span class="bp">.</span><span class="n">nil</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">Π</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">tl</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span><span class="o">),</span> <span class="n">C</span> <span class="n">tl</span> <span class="bp">→</span> <span class="n">C</span> <span class="o">(</span><span class="n">hd</span> <span class="bp">::</span> <span class="n">tl</span><span class="o">))</span> <span class="bp">→</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">list</span> <span class="n">T</span><span class="o">),</span> <span class="n">C</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">T</span> <span class="n">C</span> <span class="n">hnil</span> <span class="n">hcons</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">h</span> <span class="o">:</span> <span class="n">l</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hnil</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">hcons</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="c1">-- dead</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169075340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169075340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169075340">Reid Barton (Jun 26 2019 at 20:05)</a>:</h4>
+<p>mathlib has a fair number of uses (<code>git grep '\binduction .*:'</code>) but I didn't check whether they could be replaced by <code>cases</code></p>
+
+<a name="169076380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169076380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169076380">Kevin Buzzard (Jun 26 2019 at 20:20)</a>:</h4>
+<p>Or just search <code>\binduction .*:</code> in VS Code but switch on the <code>.*</code> option (use regular expression)</p>
+
+<a name="169076591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/169076591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#169076591">Kevin Buzzard (Jun 26 2019 at 20:23)</a>:</h4>
+<p>All the ones I checked, could be replaced by <code>cases</code>. There are loads in <code>data/seq</code> and I didn't check any of them.</p>
+
 
 {% endraw %}
