@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (23 messages, latest: Jun 27 2019 at 05:55)
+
 * [induced neighborhoods](25416inducedneighborhoods.html) (55 messages, latest: Jun 26 2019 at 20:56)
 
 * [Function product](34664Functionproduct.html) (19 messages, latest: Jun 26 2019 at 10:33)
@@ -27,8 +29,6 @@ permalink: archive/116395maths/index.html
 * [RFC: open immersion / embedding](07369RFCopenimmersionembedding.html) (5 messages, latest: Jun 21 2019 at 10:12)
 
 * [Is the Langlands program a program?](43362IstheLanglandsprogramaprogram.html) (158 messages, latest: Jun 20 2019 at 01:43)
-
-* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (22 messages, latest: Jun 18 2019 at 20:27)
 
 * [Order on topologies](78527Orderontopologies.html) (57 messages, latest: Jun 18 2019 at 08:35)
 
