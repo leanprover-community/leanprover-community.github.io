@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [easy questions](27038easyquestions.html) (25 messages, latest: Jun 27 2019 at 11:51)
+* [easy questions](27038easyquestions.html) (31 messages, latest: Jun 27 2019 at 12:35)
 
 * [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (28 messages, latest: Jun 27 2019 at 11:25)
 

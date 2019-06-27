@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [witt vectors](84655wittvectors.html) (271 messages, latest: Jun 27 2019 at 11:14)
+* [witt vectors](84655wittvectors.html) (272 messages, latest: Jun 27 2019 at 12:08)
 
 * [induced neighborhoods](25416inducedneighborhoods.html) (103 messages, latest: Jun 27 2019 at 09:35)
 
