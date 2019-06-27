@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (2 messages, latest: Jun 27 2019 at 17:50)
+
 * [help with measurability proof](32743helpwithmeasurabilityproof.html) (58 messages, latest: Jun 27 2019 at 15:30)
 
 * [casts](47423casts.html) (34 messages, latest: Jun 27 2019 at 12:13)
@@ -29,8 +31,6 @@ permalink: archive/113488general/index.html
 * [mk_meta_var](24391mkmetavar.html) (5 messages, latest: Jun 25 2019 at 12:31)
 
 * [cache olean no longer working](21801cacheoleannolongerworking.html) (6 messages, latest: Jun 24 2019 at 22:21)
-
-* [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (1 message, latest: Jun 24 2019 at 13:04)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (2 messages, latest: Jun 24 2019 at 08:48)
 
