@@ -10,9 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (10 messages, latest: Jun 27 2019 at 07:58)
+* [noob question(s)](52075noobquestions.html) (1230 messages, latest: Jun 27 2019 at 08:54)
 
-* [noob question(s)](52075noobquestions.html) (1229 messages, latest: Jun 27 2019 at 07:37)
+* [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (13 messages, latest: Jun 27 2019 at 08:14)
 
 * [INduction_](38413INduction.html) (8 messages, latest: Jun 26 2019 at 21:25)
 
