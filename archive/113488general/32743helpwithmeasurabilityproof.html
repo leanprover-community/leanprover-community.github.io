@@ -388,5 +388,43 @@ permalink: archive/113488general/32743helpwithmeasurabilityproof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142546">Mario Carneiro (Jun 27 2019 at 15:00)</a>:</h4>
 <p>aka your <code>to_mathlib</code> collection</p>
 
+<a name="169142633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142633">Koundinya Vajjha (Jun 27 2019 at 15:00)</a>:</h4>
+<p>actually the stuff I need is a little specialized so its not general enough. but i'll PR it anyway so the maintainers can decide</p>
+
+<a name="169142840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169142840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169142840">Mario Carneiro (Jun 27 2019 at 15:02)</a>:</h4>
+<p>You can also make a [WIP] PR if you want to expose your current design decisions without making everything ready for merge</p>
+
+<a name="169145159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169145159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169145159">Koundinya Vajjha (Jun 27 2019 at 15:28)</a>:</h4>
+<p>Probably putting this question in context will help: I ran into this when I was trying to finish proving that the product measure as returned by the Giry monad has it's expected property: <code>(⇑doₐ (x : α) ←ₐ μ ; doₐ (y : β) ←ₐ ν ; ret (x, y)) (set.prod A B) = ⇑μ A * ⇑ν B</code> <br>
+I start off this proof by using a <code>bind_apply</code>. <br>
+Which reduces the goal to </p>
+<div class="codehilite"><pre><span></span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">μ</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">,</span>
+<span class="n">B</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">hA</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">A</span><span class="o">,</span>
+<span class="n">hB</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">B</span>
+<span class="err">⊢</span> <span class="o">(</span><span class="err">∫</span><span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="err">⇑</span><span class="n">doₐ</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="err">←ₐ</span> <span class="n">ν</span> <span class="bp">;</span> <span class="n">ret</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">y</span><span class="o">))</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">prod</span> <span class="n">A</span> <span class="n">B</span><span class="o">))</span><span class="err">ð</span><span class="n">μ</span><span class="o">)</span> <span class="bp">=</span> <span class="err">⇑</span><span class="n">μ</span> <span class="n">A</span> <span class="bp">*</span> <span class="err">⇑</span><span class="n">ν</span> <span class="n">B</span>
+</pre></div>
+
+
+<p>But with the additional goal that <code>⊢ measurable (λ (x : α), doₐ (y : β) ←ₐ ν ; ret (x, y))</code></p>
+
+<a name="169145200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169145200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169145200">Koundinya Vajjha (Jun 27 2019 at 15:29)</a>:</h4>
+<p>I was able to finish everything except for this final goal.</p>
+
+<a name="169145350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169145350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169145350">Koundinya Vajjha (Jun 27 2019 at 15:30)</a>:</h4>
+<p>I guess in hindsight sigma-finiteness <em>is</em> needed to prove this, but I'm not sure how exactly.</p>
+
 
 {% endraw %}
