@@ -331,5 +331,246 @@ protected def bool.topological_space : topological_space bool :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169115893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169115893">Kevin Buzzard (Jun 27 2019 at 08:59)</a>:</h4>
 <p>Are either of map o comap or comap o map the identity?</p>
 
+<a name="169115951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169115951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169115951">Kevin Buzzard (Jun 27 2019 at 09:00)</a>:</h4>
+<p>aah</p>
+
+<a name="169115959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169115959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169115959">Mario Carneiro (Jun 27 2019 at 09:00)</a>:</h4>
+<p>not in general, with these sort of galois connections things</p>
+
+<a name="169115976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169115976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169115976">Kevin Buzzard (Jun 27 2019 at 09:00)</a>:</h4>
+<p>I can just look in the library for theorems whose names contain <code>map_comap</code> etc, and see examples of conditions which force it. So I can see that neither is true in general (as I suspected).</p>
+
+<a name="169116018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116018">Kevin Buzzard (Jun 27 2019 at 09:01)</a>:</h4>
+<p>I think that for at least one of those theorems, it's true in general iff it's true for surjections, and perhaps for surjections you can do something.</p>
+
+<a name="169116111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116111">Kevin Buzzard (Jun 27 2019 at 09:02)</a>:</h4>
+<p>But this isn't my point. I just want to say to Lean "hey Lean, just go through your database of small topological spaces and find counterexamples for me please". The fact that there is a counterexample with alpha having three elements makes me think that this is possible. Your suggestion with <code>option Prop</code> is somehow not going in the way I want this to go.</p>
+
+<a name="169116163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116163">Kevin Buzzard (Jun 27 2019 at 09:03)</a>:</h4>
+<p>It also makes me have to learn what the topology on <code>option X</code> is</p>
+
+<a name="169116246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116246">Mario Carneiro (Jun 27 2019 at 09:04)</a>:</h4>
+<p>Turns out there isn't one yet</p>
+
+<a name="169116275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116275">Mario Carneiro (Jun 27 2019 at 09:05)</a>:</h4>
+<p>I'm trying to prove this too; here's my prelude so far</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">order</span>
+
+<span class="kn">open</span> <span class="n">filter</span>
+
+<span class="kn">namespace</span> <span class="n">topological_space</span>
+
+<span class="kn">instance</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">t</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="o">(</span><span class="n">option</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">coinduced</span> <span class="n">option</span><span class="bp">.</span><span class="n">some</span> <span class="n">t</span>
+
+<span class="kn">theorem</span> <span class="n">nhds_coinduced</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">@</span><span class="n">nhds</span> <span class="n">β</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">end</span> <span class="n">topological_space</span>
+
+<span class="n">def</span> <span class="n">sierp</span> <span class="o">:=</span> <span class="n">bool</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">sierp</span> <span class="o">:=</span> <span class="n">topological_space</span><span class="bp">.</span><span class="n">generate_from</span> <span class="o">{{</span><span class="n">tt</span><span class="o">}}</span>
+
+<span class="kn">theorem</span> <span class="n">is_open_sierp</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">sierp</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_open</span> <span class="n">s</span><span class="o">)</span> <span class="o">{</span><span class="n">a</span><span class="o">}</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">tt</span> <span class="err">∈</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">h</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rcases</span> <span class="n">h_H</span> <span class="k">with</span> <span class="n">rfl</span><span class="bp">|⟨⟨⟩⟩</span><span class="o">,</span> <span class="n">exact</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">rfl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">trivial</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">h_ih_a</span> <span class="n">ha</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h_ih_a_1</span> <span class="n">ha</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rcases</span> <span class="n">ha</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">h₂</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">h_ih</span> <span class="bp">_</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="bp">⟩</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169116672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116672">Mario Carneiro (Jun 27 2019 at 09:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">option</span> <span class="n">sierp</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">tt</span><span class="o">)</span> <span class="o">:=</span> <span class="n">tt</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">ff</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">le_of_eq</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">nhds_coinduced</span> <span class="n">f</span> <span class="n">none</span><span class="o">),</span>
+  <span class="n">replace</span> <span class="o">:=</span> <span class="bp">@</span><span class="n">this</span> <span class="o">{</span><span class="n">x</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">ff</span><span class="o">}</span> <span class="o">(</span><span class="n">mem_map</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">mem_nhds_sets_iff</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">this</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">h₃</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">is_open_coinduced</span><span class="o">,</span> <span class="n">is_open_coinduced</span><span class="o">]</span> <span class="n">at</span> <span class="n">h₂</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="n">h₁</span> <span class="o">(</span><span class="bp">@</span><span class="n">is_open_sierp</span> <span class="bp">_</span> <span class="n">h₂</span> <span class="n">ff</span> <span class="n">h₃</span><span class="o">)</span> <span class="o">},</span>
+  <span class="n">refine</span> <span class="n">mem_nhds_sets_iff</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">⟨</span><span class="o">{</span><span class="n">none</span><span class="o">},</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">_</span> <span class="o">(</span><span class="n">rfl</span><span class="bp">|⟨⟨⟩⟩</span><span class="o">),</span> <span class="n">exact</span> <span class="n">rfl</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">is_open_coinduced</span><span class="o">,</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">set</span><span class="bp">.</span><span class="n">eq_empty_iff_forall_not_mem</span> <span class="bp">_</span> <span class="o">(</span><span class="n">some</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="o">{</span><span class="n">none</span><span class="o">}))</span><span class="bp">.</span><span class="mi">2</span><span class="o">],</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="n">rintro</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">⟨⟨⟩⟩|⟨⟨⟩⟩</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169116970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169116970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169116970">Kevin Buzzard (Jun 27 2019 at 09:14)</a>:</h4>
+<p>I reduced the (false) theorem</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nhds_coinduced</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="bp">@</span><span class="n">nhds</span> <span class="n">β</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>to</p>
+<div class="codehilite"><pre><span></span>1 goal
+α β : Type,
+T : topological_space α,
+f : α → β,
+a : α,
+X : set α,
+hX : X ∈ (nhds a).sets
+⊢ ∃ (t : set β) (H : t ∈ nhds (f a)), f ⁻¹&#39; t ⊆ X
+</pre></div>
+
+<a name="169117133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117133">Mario Carneiro (Jun 27 2019 at 09:16)</a>:</h4>
+<p>reduced in what direction?</p>
+
+<a name="169117143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117143">Mario Carneiro (Jun 27 2019 at 09:17)</a>:</h4>
+<p>Are you saying that goal implies the theorem or vice versa?</p>
+
+<a name="169117155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117155">Kevin Buzzard (Jun 27 2019 at 09:17)</a>:</h4>
+<p>This seems to say that an arbitrary neighbourhood of a should be contained within a neighbourhood which is a preimage. Exactly the same false statement. In fact this should be perhaps thought of as the criterion under which one can deduce both of these theorems <span class="user-mention" data-user-id="110031">@Patrick Massot</span> ; it looks to me like it's equivalent. Does it have some more natural interpretation? I think the goal I just posted above, when considered as a hypothesis, is basically equivalent to both the theorems.</p>
+
+<a name="169117161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117161">Kevin Buzzard (Jun 27 2019 at 09:17)</a>:</h4>
+<p>I am saying that I started with the false theorem, tried to prove it, and that's where I'm stuck.</p>
+
+<a name="169117177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117177">Kevin Buzzard (Jun 27 2019 at 09:17)</a>:</h4>
+<p>However I am not sure I actually did anything non-reversible.</p>
+
+<a name="169117298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117298">Mario Carneiro (Jun 27 2019 at 09:19)</a>:</h4>
+<p>Here's a different question. What <em>is</em> an expression for <code>@nhds β (topological_space.coinduced f T) (f a)</code>?</p>
+
+<a name="169117322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117322">Kevin Buzzard (Jun 27 2019 at 09:20)</a>:</h4>
+<p>I've been thinking about it as some sort of sub-filter of  <code>nhds a</code></p>
+
+<a name="169117376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117376">Mario Carneiro (Jun 27 2019 at 09:20)</a>:</h4>
+<p>So there is at least one inequality that can be proved then</p>
+
+<a name="169117401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117401">Kevin Buzzard (Jun 27 2019 at 09:20)</a>:</h4>
+<p>It's not really a sub-filter, because it also contains a bunch of junk coming from points in beta which aren't in the image of f</p>
+
+<a name="169117414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117414">Kevin Buzzard (Jun 27 2019 at 09:21)</a>:</h4>
+<p>I don't really know how to think about filters.</p>
+
+<a name="169117416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117416">Mario Carneiro (Jun 27 2019 at 09:21)</a>:</h4>
+<p>You will notice that in the proof of false above the first thing I do is use <code>le_of_eq</code> on the false theorem, so maybe the other inequality holds</p>
+
+<a name="169117426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117426">Kevin Buzzard (Jun 27 2019 at 09:21)</a>:</h4>
+<p>Oh yeah, I proved inclusions for both false theorems</p>
+
+<a name="169117453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117453">Kevin Buzzard (Jun 27 2019 at 09:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nhds_coinduced</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="bp">@</span><span class="n">nhds</span> <span class="n">β</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">filter</span><span class="bp">.</span><span class="n">ext</span><span class="o">,</span>
+  <span class="n">dsimp</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">X</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">Y</span><span class="o">,</span> <span class="n">H</span><span class="o">,</span> <span class="n">hY</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_nhds_sets_iff</span> <span class="n">at</span> <span class="n">H</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">H</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">V</span><span class="o">,</span> <span class="n">HVY</span><span class="o">,</span> <span class="n">HV</span><span class="o">,</span> <span class="n">HaV</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">mem_nhds_sets_iff</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">V</span><span class="o">,</span>
+    <span class="n">existsi</span> <span class="o">(</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="bp">_</span> <span class="n">hY</span><span class="o">),</span>
+      <span class="n">split</span><span class="o">,</span>
+        <span class="n">exact</span> <span class="n">HV</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">HaV</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">exact</span> <span class="n">HVY</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="c1">-- bad way</span>
+  <span class="n">intro</span> <span class="n">hX</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_comap_sets</span><span class="o">,</span>
+  <span class="n">sorry</span> <span class="c1">--goal is false</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169117563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117563">Kevin Buzzard (Jun 27 2019 at 09:22)</a>:</h4>
+<p>I didn't formalise the other proof but it's equally easy.</p>
+
+<a name="169117598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117598">Kevin Buzzard (Jun 27 2019 at 09:23)</a>:</h4>
+<p>I have no feeling for what should go in the library (or whether something is already there).</p>
+
+<a name="169117616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169117616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169117616">Mario Carneiro (Jun 27 2019 at 09:23)</a>:</h4>
+<p>usually it is <code>comap f L' &lt;= L</code> and <code>L' &lt;= map f L</code> that are the strong/ false properties; the other inequalities <code>L &lt;= comap f L'</code> and <code>map f L &lt;= L'</code> are equivalent to each other (they are the adjunction) and are equivalent to a tendsto</p>
+
+<a name="169118157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118157">Mario Carneiro (Jun 27 2019 at 09:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nhds_coinduced_comap</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nhds</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">comap</span> <span class="n">f</span> <span class="o">(</span><span class="bp">@</span><span class="n">nhds</span> <span class="n">β</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">tendsto_iff_comap</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span>
+<span class="k">by</span> <span class="n">apply</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">tendsto</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">continuous_coinduced_rng</span>
+</pre></div>
+
+<a name="169118259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118259">Kevin Buzzard (Jun 27 2019 at 09:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nhds_coinduced</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="bp">≤</span> <span class="bp">@</span><span class="n">nhds</span> <span class="n">β</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">Y</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">HY</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_nhds_sets_iff</span> <span class="n">at</span> <span class="n">HY</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">HY</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">V</span><span class="o">,</span> <span class="n">HV</span><span class="o">,</span> <span class="n">HOV</span><span class="o">,</span> <span class="n">HaV</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_map</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mem_nhds_sets_iff</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">f</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">V</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="bp">_</span><span class="o">,</span> <span class="n">swap</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">apply</span> <span class="n">HV</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hx</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span> <span class="n">exact</span> <span class="n">HOV</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">HaV</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169118267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118267">Kevin Buzzard (Jun 27 2019 at 09:32)</a>:</h4>
+<p>Aah but you can just do that one with the Galois connection thing I guess.</p>
+
+<a name="169118296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118296">Kevin Buzzard (Jun 27 2019 at 09:32)</a>:</h4>
+<p>I'm assuming it works that way around :-)</p>
+
+<a name="169118320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118320">Mario Carneiro (Jun 27 2019 at 09:33)</a>:</h4>
+<p>yes, it's even easier because this is the definition of tendsto:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nhds_coinduced_map</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">T</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">map</span> <span class="n">f</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">a</span><span class="o">)</span> <span class="bp">≤</span> <span class="bp">@</span><span class="n">nhds</span> <span class="n">β</span> <span class="o">(</span><span class="n">topological_space</span><span class="bp">.</span><span class="n">coinduced</span> <span class="n">f</span> <span class="n">T</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">apply</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">tendsto</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">continuous_coinduced_rng</span>
+</pre></div>
+
+<a name="169118450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118450">Kevin Buzzard (Jun 27 2019 at 09:35)</a>:</h4>
+<p>So now the only question left is whether that goal I posted above is a sufficiently interesting precondition to get the other inequalities. I'm having trouble visualising it in some conceptual way. Once one has visualised it in a conceptual way, it might simply turn into literally the statement of the inequality in the other direction.</p>
+
+<a name="169118465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118465">Mario Carneiro (Jun 27 2019 at 09:35)</a>:</h4>
+<p>I suspect this has something to do with being a quotient map</p>
+
+<a name="169118484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/induced%20neighborhoods/near/169118484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/25416inducedneighborhoods.html#169118484">Mario Carneiro (Jun 27 2019 at 09:35)</a>:</h4>
+<p>because <code>topological_space.coinduced</code> is basically the quotient topology</p>
+
 
 {% endraw %}

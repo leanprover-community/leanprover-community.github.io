@@ -10,9 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [casts](47423casts.html) (26 messages, latest: Jun 27 2019 at 08:59)
+* [new achievement](16692newachievement.html) (9 messages, latest: Jun 27 2019 at 09:41)
 
-* [new achievement](16692newachievement.html) (8 messages, latest: Jun 27 2019 at 06:42)
+* [casts](47423casts.html) (27 messages, latest: Jun 27 2019 at 09:03)
 
 * [help with measurability proof](32743helpwithmeasurabilityproof.html) (41 messages, latest: Jun 26 2019 at 23:38)
 

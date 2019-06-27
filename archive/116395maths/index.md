@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [induced neighborhoods](25416inducedneighborhoods.html) (69 messages, latest: Jun 27 2019 at 08:59)
+* [induced neighborhoods](25416inducedneighborhoods.html) (103 messages, latest: Jun 27 2019 at 09:35)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (23 messages, latest: Jun 27 2019 at 05:55)
 
