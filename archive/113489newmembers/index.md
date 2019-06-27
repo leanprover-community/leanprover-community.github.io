@@ -10,6 +10,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Proof of function containing match statement](43374Proofoffunctioncontainingmatchstatement.html) (4 messages, latest: Jun 27 2019 at 21:45)
+
 * [easy questions](27038easyquestions.html) (33 messages, latest: Jun 27 2019 at 14:36)
 
 * [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (28 messages, latest: Jun 27 2019 at 11:25)
