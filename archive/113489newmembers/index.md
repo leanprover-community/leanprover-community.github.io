@@ -10,7 +10,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1165 messages, latest: Jun 27 2019 at 02:24)
+* [noob question(s)](52075noobquestions.html) (1182 messages, latest: Jun 27 2019 at 04:57)
 
 * [INduction_](38413INduction.html) (8 messages, latest: Jun 26 2019 at 21:25)
 
