@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [induced neighborhoods](25416inducedneighborhoods.html) (113 messages, latest: Jun 27 2019 at 16:54)
+* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (25 messages, latest: Jun 27 2019 at 18:23)
 
-* [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (24 messages, latest: Jun 27 2019 at 13:55)
+* [induced neighborhoods](25416inducedneighborhoods.html) (113 messages, latest: Jun 27 2019 at 16:54)
 
 * [witt vectors](84655wittvectors.html) (272 messages, latest: Jun 27 2019 at 12:08)
 
