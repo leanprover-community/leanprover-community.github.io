@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [help with measurability proof](32743helpwithmeasurabilityproof.html) (53 messages, latest: Jun 27 2019 at 15:00)
+* [help with measurability proof](32743helpwithmeasurabilityproof.html) (58 messages, latest: Jun 27 2019 at 15:30)
 
 * [casts](47423casts.html) (34 messages, latest: Jun 27 2019 at 12:13)
 
