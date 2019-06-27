@@ -1,0 +1,136 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/47423casts.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html">casts</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="169096020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096020">Scott Morrison (Jun 27 2019 at 01:25)</a>:</h4>
+<p>What is the canonical solution to:</p>
+<div class="codehilite"><pre><span></span>import data.polynomial
+
+open polynomial
+
+universe u
+
+variables {α : Type u} [integral_domain α] [decidable_eq α]
+
+example (n : ℕ) : degree (X^n : polynomial α) = n :=
+begin
+  simp,
+  -- We&#39;re left with `↑n = ↑n`
+  sorry
+end
+</pre></div>
+
+
+<p>Are we missing some lemmas? Should <code>norm_cast</code> be able to help here (it currently doesn't).</p>
+
+<a name="169096073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096073">Reid Barton (Jun 27 2019 at 01:26)</a>:</h4>
+<p>is it not <code>refl</code>?</p>
+
+<a name="169096076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096076">Scott Morrison (Jun 27 2019 at 01:26)</a>:</h4>
+<p>Unfortunately not</p>
+
+<a name="169096091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096091">Mario Carneiro (Jun 27 2019 at 01:27)</a>:</h4>
+<p>There is clearly a missing lemma. What are the coe instances involved?</p>
+
+<a name="169096094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096094">Scott Morrison (Jun 27 2019 at 01:27)</a>:</h4>
+<p>adding the lemma</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma nat.cast_with_bot_cast {α} [add_monoid α] [has_one α] : ∀ n : ℕ,
+  (n : with_bot α) = (n : α)
+| 0 := rfl
+| (n+1) := by simp [nat.cast_with_bot_cast n]
+
+example (n : ℕ) : degree (X^n : polynomial α) = n :=
+by simp
+</pre></div>
+
+
+<p>works</p>
+
+<a name="169096099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096099">Scott Morrison (Jun 27 2019 at 01:27)</a>:</h4>
+<p>But they don't feel like the right lemmas!</p>
+
+<a name="169096144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096144">Mario Carneiro (Jun 27 2019 at 01:28)</a>:</h4>
+<p>That looks right to me... I recall Johan mentioning this lemma</p>
+
+<a name="169096149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096149">Scott Morrison (Jun 27 2019 at 01:28)</a>:</h4>
+<p><del>Oh, actually the second one isn't necessary.</del> (removed it)</p>
+
+<a name="169096170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096170">Mario Carneiro (Jun 27 2019 at 01:29)</a>:</h4>
+<p>I'm not sure about the direction of the simp though. Isn't the RHS two up arrows?</p>
+
+<a name="169096171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096171">Scott Morrison (Jun 27 2019 at 01:29)</a>:</h4>
+<p>Can it be generalised in some useful way?</p>
+
+<a name="169096179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096179">Mario Carneiro (Jun 27 2019 at 01:29)</a>:</h4>
+<p>that looks already maximally generalized</p>
+
+<a name="169096231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096231">Scott Morrison (Jun 27 2019 at 01:30)</a>:</h4>
+<p>Okay. If I reverse the direction of the simp lemma, it no longer fixes my problem.</p>
+
+<a name="169096271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096271">Mario Carneiro (Jun 27 2019 at 01:31)</a>:</h4>
+<p>Eh, I guess it's fine the way you wrote it... There are more coes but they are simpler</p>
+
+<a name="169096316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096316">Mario Carneiro (Jun 27 2019 at 01:32)</a>:</h4>
+<p>and more likely to trigger with other stuff</p>
+
+<a name="169096346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096346">Scott Morrison (Jun 27 2019 at 01:33)</a>:</h4>
+<p>Okay. And this belongs in <code>src/order/bounded_lattice.lean</code>, right after the coercion is introduced?</p>
+
+<a name="169096352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096352">Mario Carneiro (Jun 27 2019 at 01:33)</a>:</h4>
+<p>is nat.cast in scope there?</p>
+
+<a name="169096396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096396">Scott Morrison (Jun 27 2019 at 01:34)</a>:</h4>
+<p>no...</p>
+
+<a name="169096418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096418">Mario Carneiro (Jun 27 2019 at 01:35)</a>:</h4>
+<p>what about the other way around, putting it in <code>data.nat.cast</code></p>
+
+<a name="169096477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096477">Scott Morrison (Jun 27 2019 at 01:36)</a>:</h4>
+<p>Seems to work.</p>
+
+<a name="169096479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096479">Scott Morrison (Jun 27 2019 at 01:36)</a>:</h4>
+<p>am I meant to mark this with <code>squash_cast</code>?</p>
+
+<a name="169096483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096483">Scott Morrison (Jun 27 2019 at 01:36)</a>:</h4>
+<p>even though it's actually unsquashing a cast? :-)</p>
+
+<a name="169096688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096688">Scott Morrison (Jun 27 2019 at 01:42)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1155" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1155">#1155</a></p>
+
+<a name="169096742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/casts/near/169096742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47423casts.html#169096742">Scott Morrison (Jun 27 2019 at 01:42)</a>:</h4>
+<p>(Going through abandoned pieces of students' work salvaging useful bits. :-)</p>
+
+
+{% endraw %}
