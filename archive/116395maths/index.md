@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [witt vectors](84655wittvectors.html) (271 messages, latest: Jun 27 2019 at 11:14)
+
 * [induced neighborhoods](25416inducedneighborhoods.html) (103 messages, latest: Jun 27 2019 at 09:35)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (23 messages, latest: Jun 27 2019 at 05:55)
@@ -19,8 +21,6 @@ permalink: archive/116395maths/index.html
 * [complete (distrib) lattice](53634completedistriblattice.html) (24 messages, latest: Jun 26 2019 at 08:16)
 
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (626 messages, latest: Jun 26 2019 at 02:41)
-
-* [witt vectors](84655wittvectors.html) (269 messages, latest: Jun 25 2019 at 17:30)
 
 * [sheaves and sites](44395sheavesandsites.html) (674 messages, latest: Jun 24 2019 at 12:51)
 
