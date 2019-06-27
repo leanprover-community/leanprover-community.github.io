@@ -124,5 +124,112 @@ permalink: archive/113488general/32743helpwithmeasurabilityproof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088060">Kenny Lau (Jun 26 2019 at 22:54)</a>:</h4>
 <p>let's extract a proof from Billingsley Ch.18</p>
 
+<a name="169088795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088795">Kenny Lau (Jun 26 2019 at 23:05)</a>:</h4>
+<p>which assumes sigma-finiteness of alpha and beta</p>
+
+<a name="169088798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088798">Johannes Hölzl (Jun 26 2019 at 23:05)</a>:</h4>
+<p>Yep, this only works for sigma-finite measures. In Isabelle, we first prove that the product measure is measurable: <code>(λx. f x ⨂⇩M g x) ∈ measurable M (subprob_algebra (N ⨂⇩M L))</code> <a href="http://isabelle.in.tum.de/dist/library/HOL/HOL-Probability/Giry_Monad.html" target="_blank" title="http://isabelle.in.tum.de/dist/library/HOL/HOL-Probability/Giry_Monad.html">http://isabelle.in.tum.de/dist/library/HOL/HOL-Probability/Giry_Monad.html</a> (lemma measurable_pair_measure). The proof can be generalized from subprobabilities to sigma-finite measures, it is even enough if one factor of the product is sigma-finite.</p>
+
+<a name="169088861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088861">Kenny Lau (Jun 26 2019 at 23:06)</a>:</h4>
+<p>does every measurable space have a sigma-finite measure?</p>
+
+<a name="169088869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169088869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169088869">Kenny Lau (Jun 26 2019 at 23:06)</a>:</h4>
+<p>and is there a counter-example to the claim <code>measurable (λ (x : α), map (prod.mk x) ν)</code>?</p>
+
+<a name="169089269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089269">Johannes Hölzl (Jun 26 2019 at 23:13)</a>:</h4>
+<p>it should boil down to the fact that <code>P s := measurable (fun x. (f x &lt;*&gt; g x) s)</code> (where <code>&lt;*&gt;</code> is the product of measures)  is closed under complement, i.e. <code>P s --&gt; P (set.univ - s)</code>. Now, when the product is finite it translates to <code>measurable (fun x. (f x) univ * (g x) univ - (f x &lt;*&gt; g x) s)</code></p>
+
+<a name="169089369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089369">Johannes Hölzl (Jun 26 2019 at 23:15)</a>:</h4>
+<p>We can cover a sigma-finite measure with finite measures, so this works out if both sides of the product are sigma-finite.</p>
+
+<a name="169089427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089427">Johannes Hölzl (Jun 26 2019 at 23:16)</a>:</h4>
+<p>I thought there was a trick where it is enough that one side is sigma-finite, but I don't remember it.</p>
+
+<a name="169089617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089617">Johannes Hölzl (Jun 26 2019 at 23:19)</a>:</h4>
+<p>every measurable space has a trivial sigma-finite measure (the null-measure). but we don't talk about measurable spaces, but measurable functions <code>A -&gt; measure B</code> (I guess one can call them Kleisli arrows in the Giry Monad?!)</p>
+
+<a name="169089681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089681">Kenny Lau (Jun 26 2019 at 23:20)</a>:</h4>
+<p>but in the claim above, alpha doesn't have a measure yet</p>
+
+<a name="169089723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089723">Johannes Hölzl (Jun 26 2019 at 23:21)</a>:</h4>
+<p>But there is <code>ν</code></p>
+
+<a name="169089736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089736">Kenny Lau (Jun 26 2019 at 23:21)</a>:</h4>
+<p>but that's just a measure on beta</p>
+
+<a name="169089782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089782">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>if every measurable space has a sigma-finite measure then you can use the trick you forgot</p>
+
+<a name="169089793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089793">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>by cooking up a sigma-finite measure on alpha, then let that "one side" be alpha</p>
+
+<a name="169089812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089812">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>but since every set has measure zero I dont see how your trick works</p>
+
+<a name="169089815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089815">Kenny Lau (Jun 26 2019 at 23:22)</a>:</h4>
+<p>maybe you need a non-zero measure</p>
+
+<a name="169089965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169089965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169089965">Kenny Lau (Jun 26 2019 at 23:25)</a>:</h4>
+<p>how is this not trivial</p>
+
+<a name="169090131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090131">Johannes Hölzl (Jun 26 2019 at 23:28)</a>:</h4>
+<p>Maybe a finite counterexample works: Let's assume in <code>A</code> is everything  measurable (top) and B is bottom (only univ and empty). And both are isomorphic to bool. Now <code>ν</code> maps each non-empty map to infinity. I'm too tired to figure out what the measurable set is, but I something like this might result in a counter example.</p>
+
+<a name="169090268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090268">Kenny Lau (Jun 26 2019 at 23:31)</a>:</h4>
+<p>well there are only 4 measurable sets</p>
+
+<a name="169090274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090274">Kenny Lau (Jun 26 2019 at 23:31)</a>:</h4>
+<p>and I'm sure none of them works</p>
+
+<a name="169090281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090281">Kenny Lau (Jun 26 2019 at 23:31)</a>:</h4>
+<p>since in A everything is measurable</p>
+
+<a name="169090322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090322">Kenny Lau (Jun 26 2019 at 23:32)</a>:</h4>
+<p>every function from A is automatically measurable</p>
+
+<a name="169090331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090331">Kenny Lau (Jun 26 2019 at 23:32)</a>:</h4>
+<p>(and if you swap A and B, still there are only 4 measurable sets and none of them works)</p>
+
+<a name="169090345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090345">Kenny Lau (Jun 26 2019 at 23:32)</a>:</h4>
+<p>also I'm quite sure there is no finite counter-example, since you can decompose each finite sigma algebra into a disjoint union of tops</p>
+
+<a name="169090643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/help%20with%20measurability%20proof/near/169090643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/32743helpwithmeasurabilityproof.html#169090643">Kenny Lau (Jun 26 2019 at 23:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">there</span> <span class="n">are</span> <span class="n">unsolved</span> <span class="n">goals</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">α</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">ν</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">β</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">),</span>
+<span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s</span><span class="o">,</span>
+<span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ennreal</span><span class="o">,</span>
+<span class="n">ht</span> <span class="o">:</span> <span class="n">t</span> <span class="err">∈</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ennreal</span> <span class="bp">|</span> <span class="n">is_open</span> <span class="n">s</span><span class="o">}</span>
+<span class="err">⊢</span> <span class="n">is_measurable</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">|</span> <span class="err">⇑</span><span class="o">(</span><span class="n">map</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">mk</span> <span class="n">x</span><span class="o">)</span> <span class="n">ν</span><span class="o">)</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">t</span><span class="o">}</span>
+</pre></div>
+
 
 {% endraw %}
