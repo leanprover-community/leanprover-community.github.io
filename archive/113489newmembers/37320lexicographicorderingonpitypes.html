@@ -69,5 +69,82 @@ This is the correct definition right? Maybe <code>r</code> should be some total 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169112920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169112920">Scott Morrison (Jun 27 2019 at 08:14)</a>:</h4>
 <p>No.</p>
 
+<a name="169124049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124049">Chris Hughes (Jun 27 2019 at 11:02)</a>:</h4>
+<p>This is actually more complicated than expected in the infinite case. The indexing type has to be well ordered to get a total order.</p>
+
+<a name="169124740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124740">Mario Carneiro (Jun 27 2019 at 11:14)</a>:</h4>
+<p>right</p>
+
+<a name="169124767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124767">Mario Carneiro (Jun 27 2019 at 11:14)</a>:</h4>
+<p>Of course lex order on Z -&gt; Z doesn't work</p>
+
+<a name="169124768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124768">Chris Hughes (Jun 27 2019 at 11:14)</a>:</h4>
+<p>And it's difficult to lift a preorder.</p>
+
+<a name="169124790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124790">Mario Carneiro (Jun 27 2019 at 11:15)</a>:</h4>
+<p>what do you mean?</p>
+
+<a name="169124802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124802">Mario Carneiro (Jun 27 2019 at 11:15)</a>:</h4>
+<p>there is a natural preorder / partial order on pi types, but it's not lex order</p>
+
+<a name="169124903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124903">Chris Hughes (Jun 27 2019 at 11:16)</a>:</h4>
+<p>I ccouldn't think of a natural lex preorder. <code>le</code> on <code>prod</code> is this. But I can't do this on <code>pi</code> without a greatest element.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">lex_has_le</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_le</span> <span class="o">(</span><span class="n">lex</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">lex</span> <span class="o">(</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+<a name="169124937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124937">Chris Hughes (Jun 27 2019 at 11:17)</a>:</h4>
+<p>So I did this for <code>lt</code></p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pi</span><span class="bp">.</span><span class="n">lex</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">i</span><span class="o">,</span> <span class="n">β</span> <span class="n">i</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∃</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">j</span><span class="o">,</span> <span class="n">r</span> <span class="n">j</span> <span class="n">i</span> <span class="bp">→</span> <span class="n">x</span> <span class="n">j</span> <span class="bp">=</span> <span class="n">y</span> <span class="n">j</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">s</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="n">i</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">pilex</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="bp">Π</span> <span class="n">a</span><span class="o">,</span> <span class="n">β</span> <span class="n">a</span>
+
+<span class="kn">instance</span> <span class="o">[</span><span class="n">has_lt</span> <span class="n">ι</span><span class="o">]</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="n">has_lt</span> <span class="o">(</span><span class="n">β</span> <span class="n">a</span><span class="o">)]</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="o">(</span><span class="n">pilex</span> <span class="n">ι</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">lt</span> <span class="o">:=</span> <span class="n">pi</span><span class="bp">.</span><span class="n">lex</span> <span class="o">(</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="o">(</span><span class="bp">&lt;</span><span class="o">))</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>And just defined le to be lt or equal</p>
+
+<a name="169124989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169124989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169124989">Chris Hughes (Jun 27 2019 at 11:18)</a>:</h4>
+<p>But that's not really right for preorders.</p>
+
+<a name="169125033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169125033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169125033">Chris Hughes (Jun 27 2019 at 11:19)</a>:</h4>
+<p>No idea if anyone wants lexicographic preorders.</p>
+
+<a name="169125066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169125066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169125066">Mario Carneiro (Jun 27 2019 at 11:19)</a>:</h4>
+<p>that sounds kind of contradictory to me TBH</p>
+
+<a name="169125116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169125116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169125116">Mario Carneiro (Jun 27 2019 at 11:20)</a>:</h4>
+<p>To me the whole point of lex order is to make it total</p>
+
+<a name="169125132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169125132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169125132">Mario Carneiro (Jun 27 2019 at 11:20)</a>:</h4>
+<p>If you want a preorder it's <code>\all i, f i &lt;= g i</code></p>
+
+<a name="169125170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169125170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169125170">Chris Hughes (Jun 27 2019 at 11:21)</a>:</h4>
+<p>That's what I thought.</p>
+
+<a name="169125386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lexicographic%20ordering%20on%20pi%20types/near/169125386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/37320lexicographicorderingonpitypes.html#169125386">Chris Hughes (Jun 27 2019 at 11:25)</a>:</h4>
+<blockquote>
+<p>To me the whole point of lex order is to make it total</p>
+</blockquote>
+<p>That's why dictionaries use it.</p>
+
 
 {% endraw %}
