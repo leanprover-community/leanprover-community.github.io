@@ -10,7 +10,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (62 messages, latest: Jun 28 2019 at 14:52)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (68 messages, latest: Jun 28 2019 at 15:59)
 
 * [order_dual disappointment](99857orderdualdisappointment.html) (1 message, latest: Jun 28 2019 at 14:24)
 
