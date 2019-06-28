@@ -1,0 +1,122 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113488general/03469modeltheory.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html">model theory</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="169247979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169247979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169247979">Johan Commelin (Jun 28 2019 at 18:04)</a>:</h4>
+<p>Model theory is a field of mathematics that I know very little about but that can sometimes have very surprising applications. I'm now actually learning some of this stuff because there are applications in Hodge theory.</p>
+<p>If I understand things correctly, the Flyspeck project must have formalised quite a bit of the basics of formal logic. On the other hand, we have <code>omega</code> which must also deal with first order formulas etc...</p>
+<p>Would it be worth it to generalise a bunch of stuff? If I understand things correctly, model theory can be used as a way to crank out a bunch of tactics that will help us prove stuff.</p>
+
+<a name="169248327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169248327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169248327">Jesse Michael Han (Jun 28 2019 at 18:08)</a>:</h4>
+<p>what sort of tactics do you have in mind?</p>
+<p>maybe a <code>first_order_transfer</code> sort of thing, e.g. proving something in the hyperreals, automatically constructing a reification of the proven theorem as a first-order sentence, and then re-interpreting it in the reals?</p>
+
+<a name="169248563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169248563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169248563">Johan Commelin (Jun 28 2019 at 18:12)</a>:</h4>
+<p>To give a concrete example: when developing the theory of Witt vectors you have a commutative ring <code>R</code> and a thing <code>W(R)</code> called "the Witt vectors of <code>R</code>", depending on a prime number <code>p</code>. Now there are a whole bunch of lemmas that you want to prove about <code>W(R)</code> that are usually proven as follows in math texts:<br>
+"It suffices to check this when <code>p</code> is invertible in the ring <code>R</code>, and then the statement is obvious."<br>
+(Whether or not the statement becomes obvious if <code>p</code> is invertible is not important. I'm interested in the first step of that proof.)<br>
+One example of such a lemma is "<code>W(R)</code> is a commutative ring". Most authors never explain why this strategy works, but I think that in almost all examples the claim in the lemma is a universal formula in the language of rings. Now <code>W(mv_polynomial int R)</code> surjects onto <code>W(R)</code> and <code>W(mv_polynomial int R)</code> injects into <code>W(mv_polynomial rat R)</code>. And <code>mv_polynomial rat R</code> is a ring where <code>p</code> is invertible. So model theory says that it suffices to check universal formulas for that special case (because of substructures and homomorphic maps and blah...)</p>
+<p>I would be very interested in knowing if it is conceivable that we could set up generic model theory so that it becomes easy to crank out little mini helper tactics that make the beginning of these proofs ("It suffices to check the statement when <code>p</code> is invertible in <code>R</code>") into one line steps in the Lean proofs.</p>
+
+<a name="169248589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169248589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169248589">Johan Commelin (Jun 28 2019 at 18:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> Yes, that sounds like a similar thing.</p>
+
+<a name="169248738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169248738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169248738">Johan Commelin (Jun 28 2019 at 18:14)</a>:</h4>
+<p>And instead of all such tactics requiring to set up a whole bunch of framework, I would want there to be some <code>lemma real_closed_fields_complete</code> or something like that. This lemma should not be <code>meta</code>, and then a generic tactic that turns this lemma into a mini-helper tactic that you can apply.</p>
+
+<a name="169248812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169248812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169248812">Johan Commelin (Jun 28 2019 at 18:15)</a>:</h4>
+<p>Of course if you have <code>lemma Presburger_complete</code> then this does not mean that you some can crank out <code>omega</code>. Because I guess <code>omega</code> does lots of smart things under the hood. (Instead of just enumerating sentences and checking if it produced a proof by chance.)</p>
+
+<a name="169248838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169248838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169248838">Johan Commelin (Jun 28 2019 at 18:15)</a>:</h4>
+<p>But there might still be room for a lot of shared framework.</p>
+
+<a name="169249350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169249350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169249350">Jesse Michael Han (Jun 28 2019 at 18:22)</a>:</h4>
+<blockquote>
+<p>So model theory says that it suffices to check universal formulas for that special case (because of substructures and homomorphic maps and blah...)</p>
+</blockquote>
+<p>this also gives a cute proof that to check non-singularity of a matrix one can compute its determinant in a larger ring of coefficients</p>
+
+<a name="169249653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169249653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169249653">François G. Dorais (Jun 28 2019 at 18:25)</a>:</h4>
+<p>The lemma <code>real_closed_fields_complete</code> is called the Tarski-Seidenberg Theorem. </p>
+<p><a href="https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem">https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem</a></p>
+<p>The details of the decision algorithm are in Jacobson's Basic Algebra, for example.</p>
+
+<a name="169249701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169249701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169249701">Jesse Michael Han (Jun 28 2019 at 18:26)</a>:</h4>
+<blockquote>
+<p>Of course if you have lemma Presburger_complete then this does not mean that you some can crank out omega.</p>
+</blockquote>
+<p>in principle, such a <code>lemma</code> would use a computable <code>def</code> where one describes the decision procedure, and one could conceive of a horrifyingly slow tactic where things in the scope of <code>omega</code> are reified to Presburger formulas and then processed by the decision procedure</p>
+
+<a name="169249912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169249912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169249912">Johan Commelin (Jun 28 2019 at 18:28)</a>:</h4>
+<p>Exactly... so for something like <code>omega</code> you still need other optimizations. But for the other applications you need a tactic that takes a language <code>L</code> and checks that the goal is a first order formula in <code>L</code> and then applies some lemma <code>model_theory.cool_lemma</code>.</p>
+
+<a name="169249979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169249979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169249979">Johan Commelin (Jun 28 2019 at 18:29)</a>:</h4>
+<p>There is necessarily some <code>meta</code> involved at some point. But I think it can be very little. Mostly the phase of "inspecting the goal to check that it is a first order formula". I don't think that you can avoid <code>meta</code> there.</p>
+
+<a name="169250315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250315">Johan Commelin (Jun 28 2019 at 18:32)</a>:</h4>
+<blockquote>
+<p>The lemma <code>real_closed_fields_complete</code> is called the Tarski-Seidenberg Theorem. </p>
+<p><a href="https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem" target="_blank" title="https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem">https://en.wikipedia.org/wiki/Tarski%E2%80%93Seidenberg_theorem</a></p>
+<p>The details of the decision algorithm are in Jacobson's Basic Algebra, for example.</p>
+</blockquote>
+<p>Right. So I wouldn't want to autogenerate a tactic that applies quantifier elimination. But I would like a tactic that allows me to transform <a href="https://en.wikipedia.org/wiki/Hilbert%27s_seventeenth_problem" target="_blank" title="https://en.wikipedia.org/wiki/Hilbert%27s_seventeenth_problem">https://en.wikipedia.org/wiki/Hilbert%27s_seventeenth_problem</a> for a certain non-negative polynomial <code>f</code> into the analogous claim over the real closed field that has a bunch of indeterminates adjoined. "And then the statement is obvious".</p>
+
+<a name="169250355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250355">Johan Commelin (Jun 28 2019 at 18:33)</a>:</h4>
+<p>And I feel like such a tactic can be autogenerated from <code>Tarski_Seidenberg</code> + <code>model_theory.structural_lemma_1</code> and <code>model_theory.structural_theorem_2</code> or something like that.</p>
+
+<a name="169250388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250388">Johan Commelin (Jun 28 2019 at 18:33)</a>:</h4>
+<p>But like I said... I actually know very little about model theory, and I would be very happy to hear opinions from some experts.</p>
+
+<a name="169250522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250522">Jesse Michael Han (Jun 28 2019 at 18:35)</a>:</h4>
+<blockquote>
+<p>Mostly the phase of "inspecting the goal to check that it is a first order formula".</p>
+</blockquote>
+<p>the "inspection" hides a bunch of computation, as usual: one would probably use typeclass resolution to infer a first-order structure on the type being quantified over and also on the type one wants to work in instead, and also construct the formula, re-interpret it in the other type, remove the syntactic clutter from the reinterpretation, and prompt the user for a proof of the transferred statement</p>
+
+<a name="169250624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250624">Johan Commelin (Jun 28 2019 at 18:36)</a>:</h4>
+<p>Exactly!</p>
+
+<a name="169250682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250682">Johan Commelin (Jun 28 2019 at 18:37)</a>:</h4>
+<p>But that sounds like a very generic thing to do. In my formalization of Witt vectors, I hand-rolled the statements that I need for rings. But I'dd rather just do it for all theories in one go and apply a meta-<code>meta</code> theorem wherever needed.</p>
+
+<a name="169250774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250774">Kevin Buzzard (Jun 28 2019 at 18:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="130500">@Abhimanyu Pallavi Sudhir</span> formalised the hyperreals in Lean recently, and I know that he was thinking about this transfer principle but I'm pretty sure he wasn't thinking about it in <code>meta</code> land. I see now that this is somehow what he could do next.</p>
+
+<a name="169250966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169250966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169250966">Jesse Michael Han (Jun 28 2019 at 18:40)</a>:</h4>
+<p>i was playing around with something like this in Flypitch a while ago; see <code>parse_formula.lean</code> (<a href="https://github.com/flypitch/flypitch/blob/master/src/parse_formula.lean" target="_blank" title="https://github.com/flypitch/flypitch/blob/master/src/parse_formula.lean">link</a>), where toy examples of Lean expressions are parsed into deeply-embedded FOL formulas</p>
+
+<a name="169251498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/model%20theory/near/169251498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/03469modeltheory.html#169251498">Jesse Michael Han (Jun 28 2019 at 18:46)</a>:</h4>
+<p>there's also a toy example of "reflection" for abelian groups worked out by hand <a href="https://github.com/flypitch/flypitch/blob/master/old/reflection.lean" target="_blank" title="https://github.com/flypitch/flypitch/blob/master/old/reflection.lean">here</a>. (this example is kind of stupid because the proof which i'm reflecting was generated by using the completeness theorem to turn a Lean proof into a FOL proof, so that I could turn it back into the same Lean proof, but in principle the starting Lean proof could be different from the ending Lean proof, as envisioned by Johan)</p>
+
+
+{% endraw %}
