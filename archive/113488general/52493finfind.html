@@ -22,5 +22,54 @@ permalink: archive/113488general/52493finfind.html
 
 <p>But then it occured to me, that this will be slower than necessary because it will be checking whether a bunch of natural numbers are <code>&lt; n</code> unnecessarily. What's the fastest way to write this?</p>
 
+<a name="169209523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209523">Kevin Buzzard (Jun 28 2019 at 09:10)</a>:</h4>
+<p>You sound like my son. He was complaining yesterday that <code>(a/hcf(a,b),b/hcf(a,b))</code> was slow in his home-made C++ rationals class because one had to evaluate the hcf twice (this was part of some C++ constructor syntax where you didn't have to space to evaluate the function and store the result, apparently). I'm like "why does anyone even care? Just reason about the objects, don't actually <em>compute</em> them!". But each to their own, I suppose.</p>
+
+<a name="169209562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209562">Kevin Buzzard (Jun 28 2019 at 09:11)</a>:</h4>
+<p>Chris, you're basically asking how to write a for loop in functional programming I guess.</p>
+
+<a name="169209638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209638">Kevin Buzzard (Jun 28 2019 at 09:12)</a>:</h4>
+<p>Coincidentally I just wrote another <code>fin</code> function:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">xfin</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">xfin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">xfin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">xfin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+<a name="169209746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209746">Chris Hughes (Jun 28 2019 at 09:14)</a>:</h4>
+<blockquote>
+<p>Coincidentally I just wrote another <code>fin</code> function:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">xfin</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">xfin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">xfin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">xfin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>Isn't that <code>fin2</code>?</p>
+
+<a name="169209773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209773">Kevin Buzzard (Jun 28 2019 at 09:15)</a>:</h4>
+<p>Oh maybe. I never think about these things; as far as I'm concerned we have a term of type <code>equiv (fin n) (xfin n)</code> so they're the same. I've never heard of <code>fin2</code> I don't think.</p>
+
+<a name="169209894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209894">Kevin Buzzard (Jun 28 2019 at 09:17)</a>:</h4>
+<p>Obviously <code>number_theory/dioph.lean</code> is the natural place to put that fundamental construction ;-)</p>
+
+<a name="169209915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169209915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169209915">Kevin Buzzard (Jun 28 2019 at 09:17)</a>:</h4>
+<p>I got the definition from Leroy's lecture.</p>
+
+<a name="169210937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169210937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169210937">Mario Carneiro (Jun 28 2019 at 09:34)</a>:</h4>
+<p>We should incorporate <code>fin2</code> and <code>vector2</code> in a better way. They are indeed rewritten every once in a while</p>
+
+<a name="169211245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fin.find/near/169211245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52493finfind.html#169211245">Mario Carneiro (Jun 28 2019 at 09:40)</a>:</h4>
+<p>Re: <code>fin.find</code>, I don't think there is a way to write it in terms of <code>nat.find</code> without the bounds check. You will probably have to write your own version, but actually it's a lot easier when you have an upper bound on the witness already</p>
+
 
 {% endraw %}
