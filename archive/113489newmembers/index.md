@@ -10,7 +10,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1233 messages, latest: Jun 28 2019 at 12:48)
+* [About my theorem](42006Aboutmytheorem.html) (2 messages, latest: Jun 28 2019 at 14:37)
+
+* [noob question(s)](52075noobquestions.html) (1237 messages, latest: Jun 28 2019 at 14:20)
 
 * [Proof of function containing match statement](43374Proofoffunctioncontainingmatchstatement.html) (9 messages, latest: Jun 27 2019 at 23:46)
 

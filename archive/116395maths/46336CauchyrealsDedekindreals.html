@@ -215,5 +215,61 @@ permalink: archive/116395maths/46336CauchyrealsDedekindreals.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169222287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169222287">Mario Carneiro (Jun 28 2019 at 13:01)</a>:</h4>
 <p>I am assuming the definition is as a predicate (not necessarily decidable) together with <em>proofs</em> (not data) that the predicate is neither always true or always false, and monotone (and with no maximum)</p>
 
+<a name="169229366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169229366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169229366">François G. Dorais (Jun 28 2019 at 14:29)</a>:</h4>
+<p>There are lots of choices here and the answers depend on these choices. This is very well studied, for example, see this paper by Jeff Hirst &lt;<a href="http://www.appstate.edu/~hirstjl/bib/pdf/rrepsproof.pdf" target="_blank" title="http://www.appstate.edu/~hirstjl/bib/pdf/rrepsproof.pdf">http://www.appstate.edu/~hirstjl/bib/pdf/rrepsproof.pdf</a>&gt; which discusses various representations from a very classical perspective, or Klaus Weihrauch's book on Computable Analysis &lt;<a href="https://www.springer.com/gp/book/9783540668176" target="_blank" title="https://www.springer.com/gp/book/9783540668176">https://www.springer.com/gp/book/9783540668176</a>&gt; for how to make judicious choices and prove things with them.</p>
+<p>First, assuming the Axiom of Choice, the equivalence of any two of the usual representations of real numbers are provably equivalent, regardless of choices made.</p>
+<p>What do you need to make a Dedekind cut for a real number x? All you need is to determine whether a rational number q is in the cut or not. That is you need to know whether or not q &lt; x (or q ≤ x, if your cuts can have a max). So if you have <code>has_lt</code> for your real number x, then you're set to compute the set { q : q &lt; x }. If your Dedekind cuts are also decidable (bool-valued instead of Prop-valued), then you need a decidable <code>has_lt</code> (or slightly less as discussed below).</p>
+<p>The problem with mathlib's Cauchy reals was spotted by <span class="user-mention" data-user-id="130308">@Neil Strickland</span>: there is no attached modulus of convergence. This is useless for computation. Even if I know my Cauchy sequence for a real number x starts 3.1, 3.14, 3.141, then I have no information about x whatsoever. It could be that x = π as one might expect, or the sequence could continue after the 10^42-nd term to become constant with value 42. With a modulus of convergence though, I do know something about my real number. If my modulus says that all terms are within 1/10 of the first term then I know that 3 ≤ x ≤ 3.2. In Computable Analysis, real numbers are equivalence classes of Cauchy sequences with an attached modulus of convergence.</p>
+<p>Even with a modulus of convergence, the ordering of reals is not computable. The Brouwerian counterexample to this is as follows. I might be thinking of a natural number, and I will definitely tell you if you're right when you guess correctly. From this, you can define the real number x which is the sum of the sequence (-1)^n a(n)/2^n where a(n) = 1 if n is my number and a(n) = 0 if n is not my number. Notice that there is an obvious Cauchy sequence for x given by partial sums and it has a predictable modulus of convergence regardless of my number. Also note that deciding x ≤ 0 or x ≥0 amounts to guessing whether my number is even or odd (with both answers correct if I wasn't thinking of a number at all), so this requires divination.</p>
+<p>The "most computable" version of Dedekind reals is to take all monotone non-constant functions <code>Q -&gt; bool</code> and take a quotient to merge the two different cuts corresponding to a rational number. To compute one of these for a real number x, I don't need to decide whether or not x &lt; q, I have the milder choice of deciding x ≤ q or x ≥ q, with both answers valid when x = q. Sadly this is still not computable for Cauchy sequences, even with a modulus, as the Brouwerian counterexample above shows. However, the decision process is much milder and  deciding x ≤ q or x ≥ q for all q is known equivalent to finding a path through an infinite computable binary tree rather than solving the halting problem.</p>
+
+<a name="169230203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169230203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169230203">Kevin Buzzard (Jun 28 2019 at 14:40)</a>:</h4>
+<p>So actually my problem is not well specified. I should formalise precisely what I mean by these notions I'm talking about, because the answer depends on the details.</p>
+
+<a name="169230509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169230509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169230509">Johan Commelin (Jun 28 2019 at 14:43)</a>:</h4>
+<p>Kevin, are you trying to make Lean (and its community) just as constructivistic as all the other theorem proving communities? <span aria-label="cold sweat" class="emoji emoji-1f630" role="img" title="cold sweat">:cold_sweat:</span></p>
+
+<a name="169230628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169230628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169230628">Kevin Buzzard (Jun 28 2019 at 14:44)</a>:</h4>
+<p>No, I'm just trying to understand it properly. I am writing an article about Lean for mathematicians and I want to make sure I don't say anything stupid.</p>
+
+<a name="169230954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169230954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169230954">Johan Commelin (Jun 28 2019 at 14:48)</a>:</h4>
+<p>Ok, that's fine.</p>
+
+<a name="169231053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231053">Johan Commelin (Jun 28 2019 at 14:49)</a>:</h4>
+<p>Will you explicitly say that the Lean community doesn't care about these issues?</p>
+
+<a name="169231113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231113">Kevin Buzzard (Jun 28 2019 at 14:50)</a>:</h4>
+<p>Yes</p>
+
+<a name="169231119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231119">Johan Commelin (Jun 28 2019 at 14:50)</a>:</h4>
+<p>Great!</p>
+
+<a name="169231145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231145">Kevin Buzzard (Jun 28 2019 at 14:50)</a>:</h4>
+<p>More precisely I'll say that Lean doesn't care about these issues.</p>
+
+<a name="169231207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231207">Johan Commelin (Jun 28 2019 at 14:51)</a>:</h4>
+<blockquote>
+<p>So actually my problem is not well specified. I should formalise precisely what I mean by these notions I'm talking about, because the answer depends on the details.</p>
+</blockquote>
+<p>It would be really great if Lean wouldn't even allow you to formalise precisely the constructively different notions that we've been talking about.</p>
+
+<a name="169231228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231228">Johan Commelin (Jun 28 2019 at 14:51)</a>:</h4>
+<p>But I'm afraid that you can still be very constructive in Lean if you want to.</p>
+
+<a name="169231356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169231356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169231356">Kevin Buzzard (Jun 28 2019 at 14:52)</a>:</h4>
+<p>I am sure that  Leo wants to cater to constructive people. But he wants to cater to mathematicians too.</p>
+
 
 {% endraw %}

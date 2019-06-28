@@ -1,0 +1,44 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/113489newmembers/42006Aboutmytheorem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/42006Aboutmytheorem.html">About my theorem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="169229800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/About%20my%20theorem/near/169229800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42006Aboutmytheorem.html#169229800">Adrian Chu (Jun 28 2019 at 14:35)</a>:</h4>
+<p>I am getting close to finishing proving my theorem </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mythm</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hr</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">r</span> <span class="n">i</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">coprime</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">gcd</span> <span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">)</span> <span class="n">s</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+    <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span> <span class="n">i</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="o">(</span><span class="n">r</span> <span class="n">i</span><span class="o">))</span> <span class="bp">=</span> <span class="n">y</span><span class="err">^</span><span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Now I have some lemmas remains to be proven. They all involves the recursive function n_lcm, as defined below.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">fin_n_to_list</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span><span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="k">then</span> <span class="n">x</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">n_lcm</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+    <span class="n">list</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">nat</span><span class="bp">.</span><span class="n">lcm</span> <span class="mi">1</span> <span class="o">(</span><span class="n">fin_n_to_list</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">n_lcm_geq_1</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">x</span> <span class="n">i</span> <span class="bp">≥</span> <span class="mi">1</span><span class="o">):</span>
+    <span class="n">n_lcm</span> <span class="n">x</span> <span class="bp">≥</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>I have read the chapter about induction TPIN a bit, but unfortunately have no idea on how to start proving the above lemma. Can anyone give some directions? Tganks</p>
+
+<a name="169229992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/About%20my%20theorem/near/169229992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/42006Aboutmytheorem.html#169229992">Kevin Buzzard (Jun 28 2019 at 14:37)</a>:</h4>
+<p>induction on n, and a proof for the n=2 case, will be the two ingredients that you need.</p>
+
+
+{% endraw %}
