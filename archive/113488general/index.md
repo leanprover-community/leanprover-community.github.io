@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [function on sums](48076functiononsums.html) (5 messages, latest: Jun 28 2019 at 20:20)
+
 * [model theory](03469modeltheory.html) (21 messages, latest: Jun 28 2019 at 18:46)
 
 * [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (6 messages, latest: Jun 28 2019 at 11:08)
@@ -27,8 +29,6 @@ permalink: archive/113488general/index.html
 * [new achievement](16692newachievement.html) (9 messages, latest: Jun 27 2019 at 09:41)
 
 * [online leanprover](19268onlineleanprover.html) (76 messages, latest: Jun 26 2019 at 22:08)
-
-* [function on sums](48076functiononsums.html) (4 messages, latest: Jun 26 2019 at 22:01)
 
 * [Lean in the wild](43625Leaninthewild.html) (130 messages, latest: Jun 26 2019 at 13:28)
 
