@@ -1,0 +1,45 @@
+---
+layout: page
+title: Lean Prover Zulip Chat Archive 
+permalink: archive/116395maths/52391Returntypeoffinsetsup.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html">Return type of `finset.sup`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+{% raw %}
+<a name="169221397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221397">Chris Hughes (Jun 28 2019 at 12:46)</a>:</h4>
+<p>Currently the type of <code>finset.sup</code> is </p>
+<div class="codehilite"><pre><span></span><span class="n">finset</span><span class="bp">.</span><span class="n">sup</span> <span class="o">:</span>
+  <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">semilattice_sup_bot</span> <span class="n">α</span><span class="o">],</span> <span class="n">finset</span> <span class="n">β</span> <span class="bp">→</span> <span class="o">(</span><span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>I think it would make more sense to return a <code>β</code>. There's no function that does this at the moment, and it would be useful.</p>
+
+<a name="169221520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221520">Chris Hughes (Jun 28 2019 at 12:49)</a>:</h4>
+<p>I guess the <code>β</code> is not unique though. In my application the function is injective.</p>
+
+<a name="169221617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221617">Reid Barton (Jun 28 2019 at 12:51)</a>:</h4>
+<p>The ordering on <code>\a</code> might not be total, in which there is no "corresponding" value of <code>\b</code> to return, if I understand what you want to do</p>
+
+<a name="169221649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221649">Mario Carneiro (Jun 28 2019 at 12:51)</a>:</h4>
+<p>You could write a trunc of a value that maps to the sup</p>
+
+<a name="169221696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221696">Mario Carneiro (Jun 28 2019 at 12:52)</a>:</h4>
+<p>and in the case where the function is injective you can get the value out</p>
+
+<a name="169221702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221702">Reid Barton (Jun 28 2019 at 12:52)</a>:</h4>
+<p>What you're looking for is usually called "argmax"</p>
+
+
+{% endraw %}
