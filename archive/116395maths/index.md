@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (72 messages, latest: Jun 28 2019 at 17:45)
+* [order_dual disappointment](99857orderdualdisappointment.html) (3 messages, latest: Jun 28 2019 at 18:57)
 
-* [order_dual disappointment](99857orderdualdisappointment.html) (1 message, latest: Jun 28 2019 at 14:24)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (76 messages, latest: Jun 28 2019 at 18:25)
 
 * [Return type of `finset.sup`](52391Returntypeoffinsetsup.html) (10 messages, latest: Jun 28 2019 at 13:08)
 
