@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [fin.find](52493finfind.html) (1 message, latest: Jun 28 2019 at 08:30)
+* [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (3 messages, latest: Jun 28 2019 at 09:47)
+
+* [fin.find](52493finfind.html) (10 messages, latest: Jun 28 2019 at 09:40)
 
 * [bug in congr'?](19157bugincongr.html) (2 messages, latest: Jun 27 2019 at 22:09)
 
