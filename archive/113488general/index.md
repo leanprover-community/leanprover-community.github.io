@@ -10,6 +10,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [fin.find](52493finfind.html) (1 message, latest: Jun 28 2019 at 08:30)
+
 * [bug in congr'?](19157bugincongr.html) (2 messages, latest: Jun 27 2019 at 22:09)
 
 * [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (2 messages, latest: Jun 27 2019 at 17:50)
