@@ -10,9 +10,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Return type of `finset.sup`](52391Returntypeoffinsetsup.html) (10 messages, latest: Jun 28 2019 at 13:08)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (62 messages, latest: Jun 28 2019 at 14:52)
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (50 messages, latest: Jun 28 2019 at 13:01)
+* [order_dual disappointment](99857orderdualdisappointment.html) (1 message, latest: Jun 28 2019 at 14:24)
+
+* [Return type of `finset.sup`](52391Returntypeoffinsetsup.html) (10 messages, latest: Jun 28 2019 at 13:08)
 
 * [induced neighborhoods](25416inducedneighborhoods.html) (114 messages, latest: Jun 27 2019 at 20:47)
 
