@@ -10,6 +10,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (49 messages, latest: Jun 28 2019 at 12:59)
+
+* [Return type of `finset.sup`](52391Returntypeoffinsetsup.html) (6 messages, latest: Jun 28 2019 at 12:52)
+
 * [induced neighborhoods](25416inducedneighborhoods.html) (114 messages, latest: Jun 27 2019 at 20:47)
 
 * [category_theory.category_struct.comp arguments](05372categorytheorycategorystructcomparguments.html) (25 messages, latest: Jun 27 2019 at 18:23)
