@@ -10,9 +10,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (49 messages, latest: Jun 28 2019 at 12:59)
+* [Return type of `finset.sup`](52391Returntypeoffinsetsup.html) (10 messages, latest: Jun 28 2019 at 13:08)
 
-* [Return type of `finset.sup`](52391Returntypeoffinsetsup.html) (6 messages, latest: Jun 28 2019 at 12:52)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (50 messages, latest: Jun 28 2019 at 13:01)
 
 * [induced neighborhoods](25416inducedneighborhoods.html) (114 messages, latest: Jun 27 2019 at 20:47)
 

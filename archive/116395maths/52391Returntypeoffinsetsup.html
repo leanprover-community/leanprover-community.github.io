@@ -41,5 +41,21 @@ permalink: archive/116395maths/52391Returntypeoffinsetsup.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169221702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169221702">Reid Barton (Jun 28 2019 at 12:52)</a>:</h4>
 <p>What you're looking for is usually called "argmax"</p>
 
+<a name="169222461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169222461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169222461">Chris Hughes (Jun 28 2019 at 13:03)</a>:</h4>
+<p>Okay, so I'm going to have to write this <code>argmax</code> function. We're kind of inconsistent at the moment with how we handle empty lists on the variants of <code>max</code> <code>list.maximum, finset.sup, finset.max</code>. What should argmax do?</p>
+
+<a name="169222655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169222655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169222655">Mario Carneiro (Jun 28 2019 at 13:05)</a>:</h4>
+<p>If it has a complex type like I suggested, then it's basically a proof procedure, so I think it should be fine to assume the input is nonempty</p>
+
+<a name="169222792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169222792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169222792">Mario Carneiro (Jun 28 2019 at 13:07)</a>:</h4>
+<p>We could also have a more weakly typed version that has some default behavior in that case</p>
+
+<a name="169222861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Return%20type%20of%20%60finset.sup%60/near/169222861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/52391Returntypeoffinsetsup.html#169222861">Mario Carneiro (Jun 28 2019 at 13:08)</a>:</h4>
+<p>just so you can write <code>argmax_(x \in S) f x</code> as a term in reasonable conditions</p>
+
 
 {% endraw %}
