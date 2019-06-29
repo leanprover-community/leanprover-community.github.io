@@ -10,11 +10,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (7 messages, latest: Jun 29 2019 at 21:35)
+
 * [model theory](03469modeltheory.html) (23 messages, latest: Jun 29 2019 at 20:54)
 
 * [function on sums](48076functiononsums.html) (5 messages, latest: Jun 28 2019 at 20:20)
-
-* [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (6 messages, latest: Jun 28 2019 at 11:08)
 
 * [fin.find](52493finfind.html) (10 messages, latest: Jun 28 2019 at 09:40)
 
