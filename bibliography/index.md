@@ -4,6 +4,8 @@ title: leanprover-community / bibliography
 permalink: bibliography/index.html
 ---
 
+---
+
 This is an incomplete collection of published papers that describe work based on mathlib or other
 leanprover-community projects. We also provide a [.bib file](lean.bib) which collects Lean-related
 papers. Please submit additions and updates via
