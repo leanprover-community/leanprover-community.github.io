@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [model theory](03469modeltheory.html) (22 messages, latest: Jun 29 2019 at 11:30)
+* [model theory](03469modeltheory.html) (23 messages, latest: Jun 29 2019 at 20:54)
 
 * [function on sums](48076functiononsums.html) (5 messages, latest: Jun 28 2019 at 20:20)
 
