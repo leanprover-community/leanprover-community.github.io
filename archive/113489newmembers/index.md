@@ -10,13 +10,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [easy questions](27038easyquestions.html) (36 messages, latest: Jun 29 2019 at 06:49)
+
 * [About my theorem](42006Aboutmytheorem.html) (2 messages, latest: Jun 28 2019 at 14:37)
 
 * [noob question(s)](52075noobquestions.html) (1237 messages, latest: Jun 28 2019 at 14:20)
 
 * [Proof of function containing match statement](43374Proofoffunctioncontainingmatchstatement.html) (9 messages, latest: Jun 27 2019 at 23:46)
-
-* [easy questions](27038easyquestions.html) (33 messages, latest: Jun 27 2019 at 14:36)
 
 * [lexicographic ordering on pi types](37320lexicographicorderingonpitypes.html) (28 messages, latest: Jun 27 2019 at 11:25)
 
