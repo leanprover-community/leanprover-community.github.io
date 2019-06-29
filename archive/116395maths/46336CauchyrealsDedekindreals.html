@@ -384,5 +384,30 @@ the most recent example of this i've seen was the twitter convo that resulted fr
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169281764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169281764">Mario Carneiro (Jun 29 2019 at 04:46)</a>:</h4>
 <p>The problem with your example is you didn't give <code>#eval</code> a complete term. You can't eval a metavariable</p>
 
+<a name="169299776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169299776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169299776">matt rice (Jun 29 2019 at 14:33)</a>:</h4>
+<p>Are you saying that I can replace the _ with e.g. some tactic (<code>repeat</code>?) which will build up an infinitely long term, and while the <code>#eval</code> never returns it computes each step of the construction?</p>
+
+<a name="169300334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169300334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169300334">Mario Carneiro (Jun 29 2019 at 14:47)</a>:</h4>
+<p>No. You can only <code>#eval</code> a finitely large term, because there is no such thing as an infinitely large term - elaboration would never terminate if you tried something like that so it would never get around to the evaluation part</p>
+
+<a name="169300340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169300340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169300340">Mario Carneiro (Jun 29 2019 at 14:47)</a>:</h4>
+<p>However, there are tricks for constructing general recursive terms to inhabit <code>Void</code></p>
+
+<a name="169300405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169300405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169300405">Mario Carneiro (Jun 29 2019 at 14:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">Void</span> <span class="o">:=</span> <span class="n">Void</span><span class="bp">.</span><span class="n">mk</span> <span class="n">foo</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">foo</span>
+</pre></div>
+
+
+<p>the evaluation of <code>foo</code> will not halt</p>
+
+<a name="169300579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Cauchy%20reals%20%3D%20Dedekind%20reals%3F/near/169300579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/46336CauchyrealsDedekindreals.html#169300579">matt rice (Jun 29 2019 at 14:53)</a>:</h4>
+<p>Thank you for clarifying.</p>
+
 
 {% endraw %}
