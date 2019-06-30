@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (8 messages, latest: Jun 30 2019 at 08:40)
+* [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (12 messages, latest: Jun 30 2019 at 18:21)
 
 * [model theory](03469modeltheory.html) (23 messages, latest: Jun 29 2019 at 20:54)
 
