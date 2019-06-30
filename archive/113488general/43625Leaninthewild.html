@@ -581,5 +581,44 @@ The concrete list:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169029058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169029058">Kevin Buzzard (Jun 26 2019 at 13:28)</a>:</h4>
 <p>I was thinking of talking about what makes a mathematician tick.</p>
 
+<a name="169356464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169356464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169356464">Kevin Buzzard (Jun 30 2019 at 22:22)</a>:</h4>
+<p><a href="https://twitter.com/derKha/status/1145412656632930304" target="_blank" title="https://twitter.com/derKha/status/1145412656632930304">https://twitter.com/derKha/status/1145412656632930304</a></p>
+<div class="inline-preview-twitter"><div class="twitter-tweet"><a href="https://twitter.com/derKha/status/1145412656632930304" target="_blank"><img class="twitter-avatar" src="https://pbs.twimg.com/profile_images/1112971062399074305/jRGHUc-f_normal.png"></a><p>the ideal lambda syntax is</p><span>- Sebastian Ullrich (@derKha)</span></div></div>
+
+<a name="169356856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169356856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169356856">Scott Morrison (Jun 30 2019 at 22:37)</a>:</h4>
+<p>I use \mapsto inside an expression.</p>
+
+<a name="169356947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169356947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169356947">Simon Hudon (Jun 30 2019 at 22:40)</a>:</h4>
+<p>I don't like the idea that there would be significant notational differences between  for all and lambda. I think we shouldn't have a completely different syntax for each binder. If we pick <code>.</code>, we should use it for <code>forall</code>, <code>exists</code>, etc</p>
+
+<a name="169356998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169356998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169356998">Jesse Michael Han (Jun 30 2019 at 22:42)</a>:</h4>
+<blockquote>
+<p>One of Lean's syntactic idiosyncrasies is the use of a comma separator in lambdas and other binders.</p>
+</blockquote>
+<p>one of my reviewers complained about this exact thing:</p>
+<div class="codehilite"><pre><span></span>How is this tuple parsed?  For me it looks like a 5-uple!
+  Apparently, Lean has some magic binding rules where the comma gets a
+  different binding strength if it was preceded by a λ!? ...
+  [What were the designers of Lean thinking here??]
+</pre></div>
+
+
+<p>in retrospect, it is indeed hilarious:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="kn">check</span> <span class="o">:</span> <span class="o">(</span><span class="n">pSet</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="bp">→</span> <span class="n">bSet</span> <span class="err">𝔹</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">α</span><span class="o">,</span><span class="n">A</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">α</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="kn">check</span> <span class="o">(</span><span class="n">A</span> <span class="n">a</span><span class="o">),</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="err">⊤</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="169357257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169357257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169357257">Reid Barton (Jun 30 2019 at 22:53)</a>:</h4>
+<p>Yeah, I also noticed how crazy/ambiguous-looking the <code>, , ,</code> syntax is when trying to explain some Lean code to a non-Lean user</p>
+
+<a name="169357297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20in%20the%20wild/near/169357297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/43625Leaninthewild.html#169357297">Reid Barton (Jun 30 2019 at 22:54)</a>:</h4>
+<p>But I don't have a Twitter account so I don't get a vote <span aria-label="not allowed" class="emoji emoji-1f6ab" role="img" title="not allowed">:not_allowed:</span> <span aria-label="bird" class="emoji emoji-1f426" role="img" title="bird">:bird:</span></p>
+
 
 {% endraw %}
