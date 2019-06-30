@@ -10,6 +10,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (136 messages, latest: Jun 30 2019 at 22:54)
+
+* [unknown local constant: _ffresh.0](29883unknownlocalconstantffresh0.html) (5 messages, latest: Jun 30 2019 at 22:45)
+
 * [vector exercise from Leroy's lectures](99308vectorexercisefromLeroyslectures.html) (12 messages, latest: Jun 30 2019 at 18:21)
 
 * [model theory](03469modeltheory.html) (23 messages, latest: Jun 29 2019 at 20:54)
@@ -29,8 +33,6 @@ permalink: archive/113488general/index.html
 * [new achievement](16692newachievement.html) (9 messages, latest: Jun 27 2019 at 09:41)
 
 * [online leanprover](19268onlineleanprover.html) (76 messages, latest: Jun 26 2019 at 22:08)
-
-* [Lean in the wild](43625Leaninthewild.html) (130 messages, latest: Jun 26 2019 at 13:28)
 
 * [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (32 messages, latest: Jun 26 2019 at 10:58)
 
