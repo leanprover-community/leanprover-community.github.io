@@ -10,6 +10,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [function extension](82180functionextension.html) (1 message, latest: Jul 01 2019 at 12:57)
+
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (3 messages, latest: Jul 01 2019 at 07:25)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (90 messages, latest: Jun 29 2019 at 14:53)
