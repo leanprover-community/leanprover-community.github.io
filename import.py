@@ -211,7 +211,7 @@ def write_topic(messages, stream_name, stream_id, topic_name, outfile):
 def write_topic_index(s_name, s):
     directory = md_root / Path(sanitize_stream(s_name, s['id']))
     outfile = open_outfile(directory, md_index, 'w+')
-    header = ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {2}/{1}/index.html\n---\n\n" +
+    header = ("---\nlayout: archive\ntitle: Lean Prover Zulip Chat Archive\npermalink: {2}/{1}/index.html\n---\n\n" +
             "## Stream: [{0}]({3}/index.html)\n\n---\n\n### Topics:\n\n").format(
                 s_name,
                 sanitize_stream(s_name, s['id']),
@@ -234,7 +234,7 @@ def write_topic_index(s_name, s):
 # `streams`: a dict mapping stream names to stream json objects as described in the header.
 def write_stream_index(streams):
     outfile = (md_root / md_index).open('w+', encoding='utf-8')
-    outfile.write("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive\npermalink: {}/index.html\n---\n\n---\n\n## Streams:\n\n".format(html_root))
+    outfile.write("---\nlayout: archive\ntitle: Lean Prover Zulip Chat Archive\npermalink: {}/index.html\n---\n\n---\n\n## Streams:\n\n".format(html_root))
     for s in sorted(streams, key=lambda s: len(streams[s]['topic_data']), reverse=True):
         num_topics = len(streams[s]['topic_data'])
         outfile.write("* [{0}]({1}/index.html) ({2} topic{3})\n\n".format(
@@ -247,7 +247,7 @@ def write_stream_index(streams):
 
 # formats the header for a topic page.
 def format_topic_header(stream_name, stream_id, topic_name):
-    return ("---\nlayout: page\ntitle: Lean Prover Zulip Chat Archive \npermalink: {4}/{2}/{3}.html\n---\n\n" +
+    return ("---\nlayout: archive\ntitle: Lean Prover Zulip Chat Archive \npermalink: {4}/{2}/{3}.html\n---\n\n" +
             '<h2>Stream: <a href="{5}/index.html">{0}</a>\n<h3>Topic: <a href="{5}/{3}.html">{1}</a></h3>\n\n<hr>\n\n<base href="https://leanprover.zulipchat.com">').format(
                 stream_name,
                 topic_name,
