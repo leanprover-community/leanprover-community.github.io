@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [big CPU](73403bigCPU.html) (1 message, latest: Jul 01 2019 at 13:28)
+* [big CPU](73403bigCPU.html) (2 messages, latest: Jul 01 2019 at 14:09)
 
 * [online leanprover](19268onlineleanprover.html) (103 messages, latest: Jul 01 2019 at 13:16)
 
