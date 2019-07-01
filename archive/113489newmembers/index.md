@@ -5,7 +5,6 @@ permalink: archive/113489newmembers/index.html
 ---
 
 ## Stream: [new members](https://leanprover-community.github.io/archive/113489newmembers/index.html)
-
 ---
 
 ### Topics:

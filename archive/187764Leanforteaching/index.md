@@ -5,7 +5,6 @@ permalink: archive/187764Leanforteaching/index.html
 ---
 
 ## Stream: [Lean for teaching](https://leanprover-community.github.io/archive/187764Leanforteaching/index.html)
-
 ---
 
 ### Topics:
