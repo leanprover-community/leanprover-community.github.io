@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (167 messages, latest: Jul 01 2019 at 19:28)
+
 * [big CPU](73403bigCPU.html) (2 messages, latest: Jul 01 2019 at 14:09)
 
 * [online leanprover](19268onlineleanprover.html) (103 messages, latest: Jul 01 2019 at 13:16)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [fin.find](52493finfind.html) (13 messages, latest: Jul 01 2019 at 12:32)
 
 * [Bug in Downloading](00204BuginDownloading.html) (3 messages, latest: Jul 01 2019 at 12:16)
-
-* [Lean in the wild](43625Leaninthewild.html) (165 messages, latest: Jul 01 2019 at 11:30)
 
 * [unknown local constant: _ffresh.0](29883unknownlocalconstantffresh0.html) (5 messages, latest: Jun 30 2019 at 22:45)
 
