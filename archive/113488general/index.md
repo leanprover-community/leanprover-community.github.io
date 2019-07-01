@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (167 messages, latest: Jul 01 2019 at 19:28)
+* [100 theorems](37529100theorems.html) (93 messages, latest: Jul 01 2019 at 20:48)
 
-* [big CPU](73403bigCPU.html) (2 messages, latest: Jul 01 2019 at 14:09)
+* [Lean in the wild](43625Leaninthewild.html) (175 messages, latest: Jul 01 2019 at 20:38)
+
+* [big CPU](73403bigCPU.html) (3 messages, latest: Jul 01 2019 at 20:03)
 
 * [online leanprover](19268onlineleanprover.html) (103 messages, latest: Jul 01 2019 at 13:16)
-
-* [100 theorems](37529100theorems.html) (92 messages, latest: Jul 01 2019 at 12:59)
 
 * [fin.find](52493finfind.html) (13 messages, latest: Jul 01 2019 at 12:32)
 
