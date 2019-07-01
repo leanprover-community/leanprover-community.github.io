@@ -10,7 +10,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (137 messages, latest: Jun 30 2019 at 23:53)
+* [Lean in the wild](43625Leaninthewild.html) (141 messages, latest: Jul 01 2019 at 00:48)
 
 * [unknown local constant: _ffresh.0](29883unknownlocalconstantffresh0.html) (5 messages, latest: Jun 30 2019 at 22:45)
 
