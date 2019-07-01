@@ -10,7 +10,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [online leanprover](19268onlineleanprover.html) (88 messages, latest: Jul 01 2019 at 13:00)
+* [big CPU](73403bigCPU.html) (1 message, latest: Jul 01 2019 at 13:28)
+
+* [online leanprover](19268onlineleanprover.html) (103 messages, latest: Jul 01 2019 at 13:16)
 
 * [100 theorems](37529100theorems.html) (92 messages, latest: Jul 01 2019 at 12:59)
 
