@@ -10,13 +10,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Bug in Downloading](00204BuginDownloading.html) (2 messages, latest: Jul 01 2019 at 11:59)
+* [online leanprover](19268onlineleanprover.html) (88 messages, latest: Jul 01 2019 at 13:00)
 
-* [100 theorems](37529100theorems.html) (91 messages, latest: Jul 01 2019 at 11:38)
+* [100 theorems](37529100theorems.html) (92 messages, latest: Jul 01 2019 at 12:59)
+
+* [fin.find](52493finfind.html) (13 messages, latest: Jul 01 2019 at 12:32)
+
+* [Bug in Downloading](00204BuginDownloading.html) (3 messages, latest: Jul 01 2019 at 12:16)
 
 * [Lean in the wild](43625Leaninthewild.html) (165 messages, latest: Jul 01 2019 at 11:30)
-
-* [fin.find](52493finfind.html) (11 messages, latest: Jul 01 2019 at 11:12)
 
 * [unknown local constant: _ffresh.0](29883unknownlocalconstantffresh0.html) (5 messages, latest: Jun 30 2019 at 22:45)
 
@@ -35,8 +37,6 @@ permalink: archive/113488general/index.html
 * [casts](47423casts.html) (34 messages, latest: Jun 27 2019 at 12:13)
 
 * [new achievement](16692newachievement.html) (9 messages, latest: Jun 27 2019 at 09:41)
-
-* [online leanprover](19268onlineleanprover.html) (76 messages, latest: Jun 26 2019 at 22:08)
 
 * [arbitrary types for matrices](99045arbitrarytypesformatrices.html) (32 messages, latest: Jun 26 2019 at 10:58)
 
