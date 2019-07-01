@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Lean Prover Zulip Chat Archive
 permalink: archive/index.html
 ---
@@ -8,7 +8,7 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (1903 topics)
+* [general](113488general/index.html) (1904 topics)
 
 * [maths](116395maths/index.html) (522 topics)
 

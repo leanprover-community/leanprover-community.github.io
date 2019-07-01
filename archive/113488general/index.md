@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Lean Prover Zulip Chat Archive
 permalink: archive/113488general/index.html
 ---
@@ -10,7 +10,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (163 messages, latest: Jul 01 2019 at 10:27)
+* [Bug in Downloading](00204BuginDownloading.html) (2 messages, latest: Jul 01 2019 at 11:59)
+
+* [100 theorems](37529100theorems.html) (91 messages, latest: Jul 01 2019 at 11:38)
+
+* [Lean in the wild](43625Leaninthewild.html) (165 messages, latest: Jul 01 2019 at 11:30)
+
+* [fin.find](52493finfind.html) (11 messages, latest: Jul 01 2019 at 11:12)
 
 * [unknown local constant: _ffresh.0](29883unknownlocalconstantffresh0.html) (5 messages, latest: Jun 30 2019 at 22:45)
 
@@ -19,8 +25,6 @@ permalink: archive/113488general/index.html
 * [model theory](03469modeltheory.html) (23 messages, latest: Jun 29 2019 at 20:54)
 
 * [function on sums](48076functiononsums.html) (5 messages, latest: Jun 28 2019 at 20:20)
-
-* [fin.find](52493finfind.html) (10 messages, latest: Jun 28 2019 at 09:40)
 
 * [bug in congr'?](19157bugincongr.html) (2 messages, latest: Jun 27 2019 at 22:09)
 
@@ -135,8 +139,6 @@ permalink: archive/113488general/index.html
 * [unexpected occurrence of recursive function](17586unexpectedoccurrenceofrecursivefunction.html) (8 messages, latest: Jun 12 2019 at 11:40)
 
 * [`match` is a weakling](31005matchisaweakling.html) (20 messages, latest: Jun 12 2019 at 01:41)
-
-* [100 theorems](37529100theorems.html) (90 messages, latest: Jun 11 2019 at 22:50)
 
 * [cast](61260cast.html) (7 messages, latest: Jun 11 2019 at 20:10)
 
