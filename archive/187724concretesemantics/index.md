@@ -5,7 +5,6 @@ permalink: archive/187724concretesemantics/index.html
 ---
 
 ## Stream: [concrete semantics](https://leanprover-community.github.io/archive/187724concretesemantics/index.html)
-
 ---
 
 ### Topics:

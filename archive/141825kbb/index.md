@@ -5,7 +5,6 @@ permalink: archive/141825kbb/index.html
 ---
 
 ## Stream: [kbb](https://leanprover-community.github.io/archive/141825kbb/index.html)
-
 ---
 
 ### Topics:

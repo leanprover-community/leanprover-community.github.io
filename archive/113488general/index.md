@@ -5,7 +5,6 @@ permalink: archive/113488general/index.html
 ---
 
 ## Stream: [general](https://leanprover-community.github.io/archive/113488general/index.html)
-
 ---
 
 ### Topics:
