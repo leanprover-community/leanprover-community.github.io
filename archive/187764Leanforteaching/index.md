@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: archive
 title: Lean Prover Zulip Chat Archive
 permalink: archive/187764Leanforteaching/index.html
 ---
