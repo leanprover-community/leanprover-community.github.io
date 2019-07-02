@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (630 messages, latest: Jul 02 2019 at 08:22)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (631 messages, latest: Jul 02 2019 at 10:06)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (91 messages, latest: Jul 02 2019 at 04:28)
 
