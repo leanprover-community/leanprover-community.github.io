@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (91 messages, latest: Jul 02 2019 at 04:28)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (628 messages, latest: Jul 02 2019 at 06:32)
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (627 messages, latest: Jul 02 2019 at 04:21)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (91 messages, latest: Jul 02 2019 at 04:28)
 
 * [function extension](82180functionextension.html) (3 messages, latest: Jul 01 2019 at 20:00)
 
