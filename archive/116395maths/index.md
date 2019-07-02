@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (631 messages, latest: Jul 02 2019 at 10:06)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (92 messages, latest: Jul 02 2019 at 13:30)
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (91 messages, latest: Jul 02 2019 at 04:28)
+* [function extension](82180functionextension.html) (4 messages, latest: Jul 02 2019 at 13:19)
 
-* [function extension](82180functionextension.html) (3 messages, latest: Jul 01 2019 at 20:00)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (632 messages, latest: Jul 02 2019 at 13:12)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (3 messages, latest: Jul 01 2019 at 07:25)
 
