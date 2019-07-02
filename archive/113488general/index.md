@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [online leanprover](19268onlineleanprover.html) (108 messages, latest: Jul 02 2019 at 13:48)
+* [online leanprover](19268onlineleanprover.html) (116 messages, latest: Jul 02 2019 at 14:55)
+
+* [Generate documentation](38342Generatedocumentation.html) (11 messages, latest: Jul 02 2019 at 14:01)
 
 * [Bug in Downloading](00204BuginDownloading.html) (9 messages, latest: Jul 02 2019 at 13:35)
 
@@ -60,8 +62,6 @@ permalink: archive/113488general/index.html
 * [rsimp](01036rsimp.html) (5 messages, latest: Jun 21 2019 at 12:30)
 
 * [lifting functions](37863liftingfunctions.html) (2 messages, latest: Jun 21 2019 at 11:41)
-
-* [Generate documentation](38342Generatedocumentation.html) (10 messages, latest: Jun 21 2019 at 09:05)
 
 * [downsets in orders](26462downsetsinorders.html) (18 messages, latest: Jun 21 2019 at 08:26)
 
