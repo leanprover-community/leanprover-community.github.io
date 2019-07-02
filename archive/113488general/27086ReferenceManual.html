@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/27086ReferenceManual.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html">Reference Manual</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169516382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reference%20Manual/near/169516382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html#169516382">Yasuaki MORITA (Jul 02 2019 at 20:27)</a>:</h4>
+<p>I saw The Lean Reference Manual and I found a description of inductive type declaration which I could not understand.</p>
+<p><a href="https://leanprover.github.io/reference/declarations.html#inductive-types" target="_blank" title="https://leanprover.github.io/reference/declarations.html#inductive-types">https://leanprover.github.io/reference/declarations.html#inductive-types</a></p>
+<p>This is a quote from 4.4 Inductive Types in the document.</p>
+<div class="codehilite"><pre><span></span>Suppose the telescope (b : βᵢ) is (b₁ : βᵢ₁) ... (bᵤ : βᵢᵤ). Each argument in the telescope is either nonrecursive or recursive.
+
+An argument (bⱼ : βᵢⱼ) is nonrecursive if βᵢⱼ does not refer to foo, the inductive type being defined. In that case, βᵢⱼ can be any type, so long as it does not refer to any nonrecursive arguments.
+An argument (bⱼ : βᵢⱼ) is recursive if it βᵢⱼ of the form Π (d : δ), foo where (d : δ) is a telescope which does not refer to foo or any nonrecursive arguments.
+</pre></div>
+
+
+<p>This description says that each argument in the telescope is either nonrecursive or recursive.<br>
+I can not get from the following statements even whether or not nonrecursive and recursive arguments are mutually exclusive.<br>
+My intuition tells <code>recursive argument</code> means that it refer to <code>foo</code> itself in some sense.<br>
+But these statements seem to say that none of the arguments refer to <code>foo</code>.</p>
+
+<a name="169516919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reference%20Manual/near/169516919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html#169516919">Mario Carneiro (Jul 02 2019 at 20:34)</a>:</h4>
+<p>nonrecursive and recursive are mutually exclusive and exhaustive of the arguments to a constructor</p>
+
+<a name="169516961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reference%20Manual/near/169516961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html#169516961">Mario Carneiro (Jul 02 2019 at 20:34)</a>:</h4>
+<p>Recursive means it has the form <code>Π (d : δ), foo</code>, so it clearly refers to <code>foo</code> and hence it cannot be nonrecursive</p>
+
+<a name="169517026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reference%20Manual/near/169517026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html#169517026">Mario Carneiro (Jul 02 2019 at 20:35)</a>:</h4>
+<p>If an argument fits neither description (neither nonrecursive nor recursive), for example <code>foo -&gt; foo</code>, then it is not allowed as a constructor argument at all</p>
+
+<a name="169517123"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reference%20Manual/near/169517123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html#169517123">Mario Carneiro (Jul 02 2019 at 20:37)</a>:</h4>
+<p>The rule says that <code>(d : δ)</code> is a telescope that does not refer to foo, so the only appearance of <code>foo</code> in <code>Π (d : δ), foo</code> is the one at the end</p>
+
+<a name="169517286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Reference%20Manual/near/169517286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27086ReferenceManual.html#169517286">Yasuaki MORITA (Jul 02 2019 at 20:39)</a>:</h4>
+<blockquote>
+<p>so the only appearance of foo in Π (d : δ), foo is the one at the end</p>
+</blockquote>
+<p>Oh, I have missed <code>foo</code> in <code>Π (d : δ), foo</code> . I understood. Thank you!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
