@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Bug in Downloading](00204BuginDownloading.html) (5 messages, latest: Jul 02 2019 at 11:14)
+
+* [monoid.mul appearing instead of has_mul.mul](00892monoidmulappearinginsteadofhasmulmul.html) (2 messages, latest: Jul 02 2019 at 11:03)
+
 * [100 theorems](37529100theorems.html) (93 messages, latest: Jul 01 2019 at 20:48)
 
 * [Lean in the wild](43625Leaninthewild.html) (175 messages, latest: Jul 01 2019 at 20:38)
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [online leanprover](19268onlineleanprover.html) (103 messages, latest: Jul 01 2019 at 13:16)
 
 * [fin.find](52493finfind.html) (13 messages, latest: Jul 01 2019 at 12:32)
-
-* [Bug in Downloading](00204BuginDownloading.html) (3 messages, latest: Jul 01 2019 at 12:16)
 
 * [unknown local constant: _ffresh.0](29883unknownlocalconstantffresh0.html) (5 messages, latest: Jun 30 2019 at 22:45)
 
