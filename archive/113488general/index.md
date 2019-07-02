@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Bug in Downloading](00204BuginDownloading.html) (5 messages, latest: Jul 02 2019 at 11:14)
+* [big CPU](73403bigCPU.html) (4 messages, latest: Jul 02 2019 at 12:54)
+
+* [Bug in Downloading](00204BuginDownloading.html) (8 messages, latest: Jul 02 2019 at 12:10)
 
 * [monoid.mul appearing instead of has_mul.mul](00892monoidmulappearinginsteadofhasmulmul.html) (2 messages, latest: Jul 02 2019 at 11:03)
 
 * [100 theorems](37529100theorems.html) (93 messages, latest: Jul 01 2019 at 20:48)
 
 * [Lean in the wild](43625Leaninthewild.html) (175 messages, latest: Jul 01 2019 at 20:38)
-
-* [big CPU](73403bigCPU.html) (3 messages, latest: Jul 01 2019 at 20:03)
 
 * [online leanprover](19268onlineleanprover.html) (103 messages, latest: Jul 01 2019 at 13:16)
 
