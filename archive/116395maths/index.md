@@ -9,11 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (91 messages, latest: Jul 02 2019 at 04:28)
+
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (627 messages, latest: Jul 02 2019 at 04:21)
+
 * [function extension](82180functionextension.html) (3 messages, latest: Jul 01 2019 at 20:00)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (3 messages, latest: Jul 01 2019 at 07:25)
-
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (90 messages, latest: Jun 29 2019 at 14:53)
 
 * [order_dual disappointment](99857orderdualdisappointment.html) (3 messages, latest: Jun 28 2019 at 18:57)
 
@@ -28,8 +30,6 @@ permalink: archive/116395maths/index.html
 * [Function product](34664Functionproduct.html) (19 messages, latest: Jun 26 2019 at 10:33)
 
 * [complete (distrib) lattice](53634completedistriblattice.html) (24 messages, latest: Jun 26 2019 at 08:16)
-
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (626 messages, latest: Jun 26 2019 at 02:41)
 
 * [sheaves and sites](44395sheavesandsites.html) (674 messages, latest: Jun 24 2019 at 12:51)
 
