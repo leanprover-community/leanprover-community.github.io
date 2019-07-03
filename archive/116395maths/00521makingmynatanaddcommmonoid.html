@@ -28,6 +28,50 @@ permalink: archive/116395maths/00521makingmynatanaddcommmonoid.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169539182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169539182">Keeley Hoek (Jul 03 2019 at 04:49)</a>:</h4>
 <p>I'll give it a go</p>
 
+<a name="169539788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169539788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169539788">Keeley Hoek (Jul 03 2019 at 05:07)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">...</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">replace_special_names</span> <span class="o">:</span> <span class="n">name</span> <span class="bp">→</span> <span class="n">name</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="n">add</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">n</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">common_sense</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span>
+   <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+   <span class="bp">|</span> <span class="n">expr</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">sn</span> <span class="bp">_</span><span class="o">)</span> <span class="n">e</span> <span class="o">:=</span>
+    <span class="k">match</span> <span class="n">env</span><span class="bp">.</span><span class="n">structure_fields</span> <span class="n">sn</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="n">some</span> <span class="n">l</span> <span class="o">:=</span>
+    <span class="n">do</span> <span class="n">n</span> <span class="bp">::</span> <span class="bp">_</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">open_namespaces</span><span class="o">,</span>
+       <span class="k">let</span> <span class="n">lf</span> <span class="o">:=</span> <span class="n">l</span><span class="bp">.</span><span class="n">map</span> <span class="n">replace_special_names</span><span class="o">,</span>
+       <span class="n">v</span> <span class="err">←</span> <span class="n">lf</span><span class="bp">.</span><span class="n">mmap</span> <span class="n">resolve_name</span><span class="o">,</span>
+       <span class="k">let</span> <span class="n">s</span> <span class="o">:</span> <span class="n">structure_instance_info</span> <span class="o">:=</span> <span class="o">{</span>
+           <span class="n">struct</span> <span class="o">:=</span> <span class="n">some</span> <span class="n">sn</span><span class="o">,</span>
+           <span class="n">field_names</span> <span class="o">:=</span> <span class="n">l</span><span class="o">,</span>
+           <span class="n">field_values</span> <span class="o">:=</span> <span class="n">v</span><span class="o">,</span>
+       <span class="o">},</span>
+       <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="err">$</span> <span class="n">pexpr</span><span class="bp">.</span><span class="n">mk_structure_instance</span> <span class="n">s</span><span class="o">,</span>
+       <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span> <span class="n">e</span>
+    <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;goal not a structure&quot;</span>
+    <span class="kn">end</span>
+   <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;unsupported goal&quot;</span>
+   <span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">add_monoid</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">common_sense</span>
+
+<span class="bp">...</span>
+</pre></div>
+
 
 {% endraw %}
 

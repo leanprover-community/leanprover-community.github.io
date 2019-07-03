@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (3 messages, latest: Jul 03 2019 at 04:49)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (4 messages, latest: Jul 03 2019 at 05:07)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (95 messages, latest: Jul 03 2019 at 04:45)
 
