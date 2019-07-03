@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Is this thing useful](31939Isthisthinguseful.html) (10 messages, latest: Jul 03 2019 at 15:56)
+* [Is this thing useful](31939Isthisthinguseful.html) (32 messages, latest: Jul 03 2019 at 16:41)
 
 * [transporting measurability proofs](76448transportingmeasurabilityproofs.html) (25 messages, latest: Jul 03 2019 at 15:45)
 

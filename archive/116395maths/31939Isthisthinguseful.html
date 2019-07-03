@@ -60,6 +60,113 @@ permalink: archive/116395maths/31939Isthisthinguseful.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578478">Alexander Bentkamp (Jul 03 2019 at 15:56)</a>:</h4>
 <p>Ok, very good.</p>
 
+<a name="169579489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169579489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169579489">Chris Hughes (Jul 03 2019 at 16:09)</a>:</h4>
+<p>Out of interest, could <code>pequiv</code> be done with an arbitrary monad, and not just <code>option</code> (do you still get composition). Do all <code>monads</code> have <code>mem</code>?</p>
+
+<a name="169579787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169579787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169579787">Mario Carneiro (Jul 03 2019 at 16:13)</a>:</h4>
+<p>You can define a mem via <code>a = pure b</code> on any applicative, but that doesn't necessarily make sense in a given monad</p>
+
+<a name="169580980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169580980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169580980">Chris Hughes (Jul 03 2019 at 16:28)</a>:</h4>
+<p>How about this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mem</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monad</span> <span class="n">m</span><span class="o">]</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">m</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">pure</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">mem</span> <span class="n">a</span> <span class="o">(</span><span class="n">pure</span> <span class="n">a</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">bind</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">m</span> <span class="n">β</span><span class="o">),</span>
+    <span class="n">mem</span> <span class="n">a</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">mem</span> <span class="n">b</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">→</span> <span class="n">mem</span> <span class="n">b</span> <span class="o">(</span><span class="n">bind</span> <span class="n">x</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+<a name="169581079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581079">Mario Carneiro (Jul 03 2019 at 16:29)</a>:</h4>
+<p>interesting</p>
+
+<a name="169581214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581214">Chris Hughes (Jul 03 2019 at 16:30)</a>:</h4>
+<p>or this</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mem</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">monad</span> <span class="n">m</span><span class="o">]</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">},</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">m</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">pure</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">mem</span> <span class="n">a</span> <span class="o">(</span><span class="n">pure</span> <span class="n">a</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">join</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">m</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">m</span> <span class="o">(</span><span class="n">m</span> <span class="n">α</span><span class="o">)),</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">mem</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span>
+  <span class="n">mem</span> <span class="n">a</span> <span class="o">(</span><span class="n">monad</span><span class="bp">.</span><span class="n">join</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+<a name="169581248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581248">Chris Hughes (Jul 03 2019 at 16:30)</a>:</h4>
+<p>I think they're the same.</p>
+
+<a name="169581250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581250">Mario Carneiro (Jul 03 2019 at 16:30)</a>:</h4>
+<p>clearly it's definable in any monad, and it's correct for <code>option</code>, <code>roption</code>, <code>list</code>, <code>multiset</code>, <code>computation</code>...</p>
+
+<a name="169581286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581286">Mario Carneiro (Jul 03 2019 at 16:31)</a>:</h4>
+<p>The pure/join version doesn't work for polymorphic monads</p>
+
+<a name="169581373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581373">Chris Hughes (Jul 03 2019 at 16:32)</a>:</h4>
+<p>Do you mean universe polymorphic?</p>
+
+<a name="169581379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581379">Mario Carneiro (Jul 03 2019 at 16:32)</a>:</h4>
+<p>yes</p>
+
+<a name="169581391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581391">Mario Carneiro (Jul 03 2019 at 16:32)</a>:</h4>
+<p><code>Type u -&gt; Type v</code> monads</p>
+
+<a name="169581401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581401">Kenny Lau (Jul 03 2019 at 16:32)</a>:</h4>
+<p>is it even well-founded</p>
+
+<a name="169581412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581412">Mario Carneiro (Jul 03 2019 at 16:33)</a>:</h4>
+<p>of course it is, it's an inductive</p>
+
+<a name="169581421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581421">Kenny Lau (Jul 03 2019 at 16:33)</a>:</h4>
+<p>I thought some inductives are not permissible</p>
+
+<a name="169581422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581422">Mario Carneiro (Jul 03 2019 at 16:33)</a>:</h4>
+<p>But I think there may be monads where the mem should not be well founded</p>
+
+<a name="169581512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581512">Mario Carneiro (Jul 03 2019 at 16:34)</a>:</h4>
+<p>I think it's more appropriate to say that some monads just have a mem relation, and the mem relation should satisfy <code>a \in pure b &lt;-&gt; a = b</code> and <code>a \in bind b f &lt;-&gt; \ex b, a \in f b</code></p>
+
+<a name="169581543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581543">Mario Carneiro (Jul 03 2019 at 16:35)</a>:</h4>
+<p>so that you get some class <code>monad_mem</code></p>
+
+<a name="169581558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581558">Mario Carneiro (Jul 03 2019 at 16:35)</a>:</h4>
+<p>By the way, this is one component of a QPF or BNF</p>
+
+<a name="169581708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581708">Kenny Lau (Jul 03 2019 at 16:37)</a>:</h4>
+<p>is every inductive to Prop permissible? even if the target is on the wrong side of the arrow in an argument?</p>
+
+<a name="169581715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581715">Mario Carneiro (Jul 03 2019 at 16:37)</a>:</h4>
+<p>With BNFs it's usually defined as a natural transformation <code>F =&gt; set</code> where <code>F : Type -&gt; Type</code> is the monad and <code>set : Type -&gt; Type</code> is the powerset functor</p>
+
+<a name="169581834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169581834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169581834">Chris Hughes (Jul 03 2019 at 16:38)</a>:</h4>
+<blockquote>
+<p>is every inductive to Prop permissible? even if the target is on the wrong side of the arrow in an argument?</p>
+</blockquote>
+<p>No</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">contradiction</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">},</span> <span class="o">(</span><span class="n">contradiction</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">contradiction</span> <span class="n">p</span>
+</pre></div>
+
+<a name="169582004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169582004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169582004">Mario Carneiro (Jul 03 2019 at 16:41)</a>:</h4>
+<p>that doesn't typecheck, maybe you mean</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">contradiction</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">mk</span> <span class="o">:</span> <span class="o">(</span><span class="n">contradiction</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">contradiction</span>
+</pre></div>
+
 
 {% endraw %}
 
