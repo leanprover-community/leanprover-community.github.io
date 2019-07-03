@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (1 message, latest: Jul 02 2019 at 23:21)
+
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (633 messages, latest: Jul 02 2019 at 16:52)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (92 messages, latest: Jul 02 2019 at 13:30)
