@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (7 messages, latest: Jul 03 2019 at 10:21)
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (6 messages, latest: Jul 03 2019 at 07:08)
+* [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (95 messages, latest: Jul 03 2019 at 04:45)
 
