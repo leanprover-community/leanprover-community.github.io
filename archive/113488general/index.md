@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [implicit variables](69365implicitvariables.html) (5 messages, latest: Jul 03 2019 at 18:28)
+
 * [local context names](27269localcontextnames.html) (5 messages, latest: Jul 03 2019 at 15:26)
 
 * [mem_preimage_eq](48382mempreimageeq.html) (23 messages, latest: Jul 03 2019 at 14:30)
