@@ -9,15 +9,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (7 messages, latest: Jul 03 2019 at 10:21)
+* [function extension](82180functionextension.html) (6 messages, latest: Jul 03 2019 at 11:45)
+
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (8 messages, latest: Jul 03 2019 at 11:34)
 
 * [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (95 messages, latest: Jul 03 2019 at 04:45)
 
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (633 messages, latest: Jul 02 2019 at 16:52)
-
-* [function extension](82180functionextension.html) (4 messages, latest: Jul 02 2019 at 13:19)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (3 messages, latest: Jul 01 2019 at 07:25)
 

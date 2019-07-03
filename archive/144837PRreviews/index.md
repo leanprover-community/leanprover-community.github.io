@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1160 fundamental groupoid](289321160fundamentalgroupoid.html) (5 messages, latest: Jul 01 2019 at 20:54)
+* [#943 lc refactor](96169943lcrefactor.html) (137 messages, latest: Jul 03 2019 at 11:37)
 
-* [#943 lc refactor](96169943lcrefactor.html) (134 messages, latest: Jun 24 2019 at 16:32)
+* [#1160 fundamental groupoid](289321160fundamentalgroupoid.html) (5 messages, latest: Jul 01 2019 at 20:54)
 
 * [#1103 fixing norm_cast](762761103fixingnormcast.html) (3 messages, latest: Jun 20 2019 at 14:37)
 

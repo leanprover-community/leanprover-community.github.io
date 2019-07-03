@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [defeq](70598defeq.html) (13 messages, latest: Jul 03 2019 at 10:53)
+* [defeq](70598defeq.html) (15 messages, latest: Jul 03 2019 at 11:31)
 
 * [Reference Manual](27086ReferenceManual.html) (6 messages, latest: Jul 02 2019 at 20:39)
 
