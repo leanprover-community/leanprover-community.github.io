@@ -655,6 +655,15 @@ I also worked around an issue where the cursor position was incorrectly placed a
 Thanks for all your work and help!</li>
 </ul>
 
+<a name="169567837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169567837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169567837">Patrick Massot (Jul 03 2019 at 13:51)</a>:</h4>
+<p>Next, I'll need to investigate <span class="user-mention" data-user-id="132175">@Mohammad Pedramfar</span>'s effort to integrate this with <code>format_lean</code>. I also have one more question: will I get a noticeable speed gain if I use a trimmed down mathlib? Or is it ignoring unneeded files in mathlib anyway?</p>
+
+<a name="169568583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169568583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169568583">Bryan Gin-ge Chen (Jul 03 2019 at 13:59)</a>:</h4>
+<p>Glad you got things working! And your writeup looks really helpful!  I didn't even realize you could use local paths in <code>leanpkg.toml</code> until now...</p>
+<p>There will be a speedup for the initial start of the web editor with a trimmed down mathlib. The dominant effect is due to shortening download times (though after the first run, the ZIP file is cached). A smaller ZIP file might also make a difference when the Emscripten loader sets up the file system, but this should be a much smaller effect. Once the web editor is initialized though, I think unused .olean files won't change the speed at which Lean processes files.</p>
+
 
 {% endraw %}
 

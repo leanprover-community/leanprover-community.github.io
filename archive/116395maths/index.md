@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [function extension](82180functionextension.html) (20 messages, latest: Jul 03 2019 at 12:36)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (10 messages, latest: Jul 03 2019 at 13:49)
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (8 messages, latest: Jul 03 2019 at 11:34)
+* [function extension](82180functionextension.html) (20 messages, latest: Jul 03 2019 at 12:36)
 
 * [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
 
