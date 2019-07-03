@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (93 messages, latest: Jul 03 2019 at 03:55)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (3 messages, latest: Jul 03 2019 at 04:49)
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (1 message, latest: Jul 02 2019 at 23:21)
+* [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (95 messages, latest: Jul 03 2019 at 04:45)
 
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (633 messages, latest: Jul 02 2019 at 16:52)
 
