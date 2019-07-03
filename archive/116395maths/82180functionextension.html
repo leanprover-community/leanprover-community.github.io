@@ -36,6 +36,62 @@ permalink: archive/116395maths/82180functionextension.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169558904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169558904">Patrick Massot (Jul 03 2019 at 11:45)</a>:</h4>
 <p>Another issue with the definition I linked to is it is stated as an <code>and</code> instead of a structure with two fields. And then we have <a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/maps.lean#L81-L82" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/maps.lean#L81-L82">https://github.com/leanprover-community/mathlib/blob/master/src/topology/maps.lean#L81-L82</a> which first complains it doesn't use the previous definition, and then is defined as a structure with three fields. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span>, <span class="user-mention" data-user-id="110032">@Reid Barton</span>, <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> how would you feel if we had a web of structures extending each other here? The bases would be structures with only one axiom, either the induced topology axiom or a density axiom, then structures combining them, with variants adding an injectivity assumption or not. And then variations with uniform structures. Note that I don't suggest making any of these classes, only structures in Prop. One thing that I like with this approach is that proofs can use fields names instead of anonymous <code>and</code> constructors, and using the various parts also goes through meaningful names like <code>hf.inj</code> instead of <code>hf.1</code>. The down-side is you get a bunch of <code>hf.to_something.some_property</code>, unless we restated <code>some_property</code> for every extending structure. Or should we use flat (aka "old") structures?</p>
 
+<a name="169560057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560057">Mario Carneiro (Jul 03 2019 at 12:03)</a>:</h4>
+<p>Actually lean does some magic so that <code>hf.some_property</code> means <code>hf.to_something.some_property</code></p>
+
+<a name="169560149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560149">Patrick Massot (Jul 03 2019 at 12:04)</a>:</h4>
+<p>Sorry I was unclear. I'm not only talking about <code>some_property</code> being a field of a parent structure, but also a lemma in the namespace of a parent structure</p>
+
+<a name="169560170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560170">Patrick Massot (Jul 03 2019 at 12:05)</a>:</h4>
+<p>I think the magic doesn't go that far</p>
+
+<a name="169560184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560184">Patrick Massot (Jul 03 2019 at 12:05)</a>:</h4>
+<p>and probably using old_structure would solve that</p>
+
+<a name="169560359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560359">Mario Carneiro (Jul 03 2019 at 12:07)</a>:</h4>
+<p>I don't think it would. You still have to insert a parent coercion before using it in a lemma</p>
+
+<a name="169560424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560424">Patrick Massot (Jul 03 2019 at 12:08)</a>:</h4>
+<p>So what do you think about my global question?</p>
+
+<a name="169560480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560480">Mario Carneiro (Jul 03 2019 at 12:09)</a>:</h4>
+<p>I'm fine with changing this to a structure</p>
+
+<a name="169560495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560495">Patrick Massot (Jul 03 2019 at 12:09)</a>:</h4>
+<p>New or old?</p>
+
+<a name="169560582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560582">Mario Carneiro (Jul 03 2019 at 12:10)</a>:</h4>
+<p>It doesn't really matter since it's a proof</p>
+
+<a name="169560614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169560614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169560614">Patrick Massot (Jul 03 2019 at 12:11)</a>:</h4>
+<p>Could you quickly recap when it does matter? I'm very fuzzy about this distinction</p>
+
+<a name="169561828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169561828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169561828">Mario Carneiro (Jul 03 2019 at 12:30)</a>:</h4>
+<p>When the structure is a proposition, all parent coercions and projections are just theorems, so it doesn't really matter how things get packed as long as the statements are the same. The only thing that is affected is the time it takes to compile the structure definition itself</p>
+
+<a name="169561902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169561902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169561902">Mario Carneiro (Jul 03 2019 at 12:31)</a>:</h4>
+<p>When the structure is data, structure instances will need to be unfolded to get at the projections. This is especially true for classes, which do this implicitly all over the place</p>
+
+<a name="169561953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169561953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169561953">Mario Carneiro (Jul 03 2019 at 12:32)</a>:</h4>
+<p>If those structure instances are huge then there is a performance penalty as a result</p>
+
+<a name="169562168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/function%20extension/near/169562168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/82180functionextension.html#169562168">Patrick Massot (Jul 03 2019 at 12:36)</a>:</h4>
+<p>Thanks</p>
+
 
 {% endraw %}
 

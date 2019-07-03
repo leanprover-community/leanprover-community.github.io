@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [function extension](82180functionextension.html) (6 messages, latest: Jul 03 2019 at 11:45)
+* [function extension](82180functionextension.html) (20 messages, latest: Jul 03 2019 at 12:36)
 
 * [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (8 messages, latest: Jul 03 2019 at 11:34)
 

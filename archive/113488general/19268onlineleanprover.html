@@ -619,6 +619,42 @@ I also worked around an issue where the cursor position was incorrectly placed a
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169493120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169493120">Bryan Gin-ge Chen (Jul 02 2019 at 16:00)</a>:</h4>
 <p>Right, that makes sense. It's even better for Emscripten Lean since the library/init files are bundled with library.zip. If someone wants to PR this, <a href="https://github.com/leanprover-community/lean/blob/master/src/CMakeLists.txt#L60" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/CMakeLists.txt#L60">here's the relevant line</a>.</p>
 
+<a name="169562150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169562150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169562150">Patrick Massot (Jul 03 2019 at 12:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> I managed to run lean-web-editor with a custom library build on top of mathlib. Thank you very much for your help! Here are my notes/issue list:</p>
+<ul>
+<li>I cloned mathlib, changed its <code>leanpkg.toml</code> so that it contains <code>lean_version = "leanprover-community-lean-nightly"</code></li>
+<li>I compiled mathlib, ignoring the lean version mismatch warning</li>
+<li>In my custom lib <code>leanpkg.toml</code>, I used the same <code>lean_version</code> line as above, and in the <code>[dependencies]</code> section, I used <code>mathlib = { path = "/home/pmassot/lean/mathlib_3.5" }</code> featuring the path to my version of mathlib compiled using community Lean.</li>
+<li>
+<p>I cloned <code>https://github.com/bryangingechen/lean-web-editor</code> and edited <code>combined_lib/leanpkg.toml</code> to contain <br>
+<code>
+    [package]
+    name = "combined_lib"
+    version = "3.5.0"
+    lean_version = "leanprover-community-lean-nightly"
+    [dependencies]
+    mathlib = {path = "/home/pmassot/lean/mathlib_3.5/"}
+    lib114 = {path = "/home/pmassot/lean/lib114/"}
+    </code><br>
+  where <code>lib114</code> is my custom lib built on top of mathlib. </p>
+</li>
+<li>
+<p>Then I first to run <code>mk_library.py</code>. On the first try it complained the directory <code>dist</code> did not exist. So I created it. Then it complained my custom lib had no GitHub url. So I edited <code>mk_library.py</code> to use empty <code>lib_info[lib_name]</code> when the regex looking for GitHub failed. Then the script succeeded.</p>
+</li>
+<li>Then I cloned <code>https://github.com/bryangingechen/bryangingechen.github.io</code>, copied the content of <code>lean/lean-web-editor</code> to my website, and copied the three files created by <code>mk_library.py</code> into that directory in place of <a href="https://github.com/bryangingechen/bryangingechen.github.io/blob/master/lean/lean-web-editor/libcore.olean_map.json" target="_blank" title="https://github.com/bryangingechen/bryangingechen.github.io/blob/master/lean/lean-web-editor/libcore.olean_map.json">https://github.com/bryangingechen/bryangingechen.github.io/blob/master/lean/lean-web-editor/libcore.olean_map.json</a> and its two friends.</li>
+</ul>
+<p>That's all! It could clear use some ironing, but it works. TODO list:</p>
+<ul>
+<li>solving the olean versionning check issue in Lean community</li>
+<li>providing mathlib nightly compiled by community Lean 3.5.0, with a corresponding <code>leanpkg.toml</code></li>
+<li>disentangling <code>combined_lib</code> from the <code>lean-web-editor</code> repository, so that we don't need to edit the git repository to use the tool.</li>
+<li>fix the non-existent <code>dist</code> folder and GitHub url check bugs in <code>mk_library.py</code></li>
+<li>make a user friendly script that download the precompiled website from <code>https://github.com/bryangingechen/bryangingechen.github.io</code> and move the output of <code>mk_library.py</code></li>
+<li>Document all that!<br>
+Thanks for all your work and help!</li>
+</ul>
+
 
 {% endraw %}
 
