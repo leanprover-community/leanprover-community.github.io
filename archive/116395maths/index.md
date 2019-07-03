@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (10 messages, latest: Jul 03 2019 at 13:49)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (17 messages, latest: Jul 03 2019 at 14:59)
+
+* [transporting measurability proofs](76448transportingmeasurabilityproofs.html) (3 messages, latest: Jul 03 2019 at 14:58)
 
 * [function extension](82180functionextension.html) (20 messages, latest: Jul 03 2019 at 12:36)
 

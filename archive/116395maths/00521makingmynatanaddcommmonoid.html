@@ -98,6 +98,80 @@ permalink: archive/116395maths/00521makingmynatanaddcommmonoid.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169567680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169567680">Patrick Massot (Jul 03 2019 at 13:49)</a>:</h4>
 <p>Nice! I hope mathlib's naming convention won't interfere with merging this useful tactic</p>
 
+<a name="169570909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169570909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169570909">Kevin Buzzard (Jul 03 2019 at 14:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> </p>
+<p>I can't make preorders because they have this weird <code>lt_iff_not_le</code> field.</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">auto_param</span><span class="bp">.</span><span class="n">check_exists</span> <span class="n">false</span>
+<span class="n">class</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_le</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_lt</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="bp">.</span> <span class="n">order_laws_tac</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I just want to not define <code>lt</code> or <code>lt_iff_le_not_le</code></p>
+<div class="codehilite"><pre><span></span><span class="c1">-- import the tactic</span>
+<span class="kn">inductive</span> <span class="n">mynat</span> <span class="o">:</span> <span class="kt">Type</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="n">def</span> <span class="n">le</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_le</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">le</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="c1">-- I think a,b,c should be implicit but Lean doesn&#39;t</span>
+<span class="n">def</span> <span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="c1">--instance : preorder mynat := by i_checked_all_teh_axioms -- fails</span>
+<span class="c1">-- unknown identifier &#39;lt&#39;</span>
+
+<span class="n">def</span> <span class="n">lt</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span>  <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span>
+
+<span class="c1">-- instance : preorder mynat := by i_checked_all_teh_axioms -- fails</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at field &#39;lt_iff_le_not_le&#39;</span>
+<span class="cm">  lt_iff_le_not_le</span>
+<span class="cm">has type</span>
+<span class="cm">  ?m_3 &lt; ?m_4 ↔ ?m_3 ≤ ?m_4 ∧ ¬?m_4 ≤ ?m_3</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  auto_param (∀ (a b : mynat), a &lt; b ↔ a ≤ b ∧ ¬b ≤ a) (name.mk_string &quot;order_laws_tac&quot; name.anonymous)</span>
+<span class="cm">-/</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">class preorder (α : Type u) extends has_le α, has_lt α :=</span>
+<span class="cm">(le_refl : ∀ a : α, a ≤ a)</span>
+<span class="cm">(le_trans : ∀ a b c : α, a ≤ b → b ≤ c → a ≤ c)</span>
+<span class="cm">(lt := λ a b, a ≤ b ∧ ¬ b ≤ a)</span>
+<span class="cm">(lt_iff_le_not_le : ∀ a b : α, a &lt; b ↔ (a ≤ b ∧ ¬ b ≤ a) . order_laws_tac)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="169571250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169571250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169571250">Scott Morrison (Jul 03 2019 at 14:30)</a>:</h4>
+<p>Ah, we'll have to add something that checks if a field is wrapped with <code>auto_param</code>, and then tries running the embedded tactic.</p>
+
+<a name="169571347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169571347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169571347">Mario Carneiro (Jul 03 2019 at 14:31)</a>:</h4>
+<p>or <code>opt_param</code> in the case of <code>lt</code></p>
+
+<a name="169572735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169572735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169572735">Andrew Ashworth (Jul 03 2019 at 14:47)</a>:</h4>
+<p>hmm, wasn't there a hole tactic that did this as well that I saw posted awhile back? I may be misremembering</p>
+
+<a name="169572917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169572917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169572917">Patrick Massot (Jul 03 2019 at 14:48)</a>:</h4>
+<p>Do you mean <a href="https://github.com/leanprover-community/mathlib/blob/d001abfd48d64ac27310590458132009f47c852d/src/tactic/core.lean#L718" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/d001abfd48d64ac27310590458132009f47c852d/src/tactic/core.lean#L718">https://github.com/leanprover-community/mathlib/blob/d001abfd48d64ac27310590458132009f47c852d/src/tactic/core.lean#L718</a>? It's slightly different</p>
+
+<a name="169573027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169573027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169573027">Andrew Ashworth (Jul 03 2019 at 14:50)</a>:</h4>
+<p>ah, I think that is what I was thinking of</p>
+
+<a name="169573853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169573853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169573853">Kevin Buzzard (Jul 03 2019 at 14:59)</a>:</h4>
+<p>I just want to not even bother defining <code>lt</code> and <code>lt_iff_le_not_le</code> here</p>
+
 
 {% endraw %}
 

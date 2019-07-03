@@ -16,6 +16,95 @@ permalink: archive/113488general/48382mempreimageeq.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169568623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169568623">Patrick Massot (Jul 03 2019 at 13:59)</a>:</h4>
 <p>Is there any reason why <a href="https://github.com/leanprover-community/mathlib/blob/d2c5309d0bc66bdf813b4510dfe0a1d7523cad0a/src/data/set/basic.lean#L775" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/d2c5309d0bc66bdf813b4510dfe0a1d7523cad0a/src/data/set/basic.lean#L775">mem_preimage_eq</a> is stated as an equality rather than an iff? It seems contrary to the mathlib way</p>
 
+<a name="169568916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169568916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169568916">Chris Hughes (Jul 03 2019 at 14:02)</a>:</h4>
+<p>My guess is because it's stronger in the world without <code>propext</code>.</p>
+
+<a name="169569130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169569130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169569130">Kenny Lau (Jul 03 2019 at 14:04)</a>:</h4>
+<p>you can <code>blame</code> it on commit <code>8f4327a</code> by digama0 on 15 Oct 2017:<br>
+<a href="https://github.com/leanprover-community/mathlib/commit/8f4327ae0c45ed36037beb1449f8285cae1ebe9c#diff-d076c0ad9beb03e207eb6ed5d354f5d5R497" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/8f4327ae0c45ed36037beb1449f8285cae1ebe9c#diff-d076c0ad9beb03e207eb6ed5d354f5d5R497">https://github.com/leanprover-community/mathlib/commit/8f4327ae0c45ed36037beb1449f8285cae1ebe9c#diff-d076c0ad9beb03e207eb6ed5d354f5d5R497</a></p>
+
+<a name="169569136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169569136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169569136">Kenny Lau (Jul 03 2019 at 14:04)</a>:</h4>
+<p>or, in other words, it's because the code is 2 years old</p>
+
+<a name="169569344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169569344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169569344">Chris Hughes (Jul 03 2019 at 14:07)</a>:</h4>
+<p>I guess it means <code>dsimp</code> will use it.</p>
+
+<a name="169569357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169569357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169569357">Chris Hughes (Jul 03 2019 at 14:07)</a>:</h4>
+<p>Which is handy</p>
+
+<a name="169569385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169569385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169569385">Patrick Massot (Jul 03 2019 at 14:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>?</p>
+
+<a name="169569991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169569991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169569991">Mario Carneiro (Jul 03 2019 at 14:14)</a>:</h4>
+<p>I think it just predates the mathlib convention</p>
+
+<a name="169570036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570036">Patrick Massot (Jul 03 2019 at 14:15)</a>:</h4>
+<p>Would you merge a PR changing this?</p>
+
+<a name="169570044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570044">Mario Carneiro (Jul 03 2019 at 14:15)</a>:</h4>
+<p>also <code>dsimp</code> doesn't use <code>iff.rfl</code> lemmas unfortunately</p>
+
+<a name="169570144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570144">Patrick Massot (Jul 03 2019 at 14:16)</a>:</h4>
+<p>Or maybe adding a  <code>mem_preimage_iff</code> lemma if that <code>dsimp</code> thing is important?</p>
+
+<a name="169570173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570173">Mario Carneiro (Jul 03 2019 at 14:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Actually that's not the origin; you can see it got moved in that commit but predates it</p>
+
+<a name="169570211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570211">Mario Carneiro (Jul 03 2019 at 14:17)</a>:</h4>
+<p>I would merge such a PR</p>
+
+<a name="169570242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570242">Mario Carneiro (Jul 03 2019 at 14:17)</a>:</h4>
+<p>I don't think the dsimp thing is a very big deal</p>
+
+<a name="169570244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570244">Patrick Massot (Jul 03 2019 at 14:17)</a>:</h4>
+<p>Which version? Changing the lemma or adding a new one?</p>
+
+<a name="169570360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570360">Mario Carneiro (Jul 03 2019 at 14:19)</a>:</h4>
+<p>changing the lemma</p>
+
+<a name="169570635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570635">Patrick Massot (Jul 03 2019 at 14:22)</a>:</h4>
+<p>Should the new name be <code>mem_preimage</code> or <code>mem_preimage_iff</code>?</p>
+
+<a name="169570866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570866">Mario Carneiro (Jul 03 2019 at 14:25)</a>:</h4>
+<p>I like <code>mem_preimage</code> if it's not already taken</p>
+
+<a name="169570981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169570981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169570981">Patrick Massot (Jul 03 2019 at 14:27)</a>:</h4>
+<p>It seems to exists in many namespaces but not the root one</p>
+
+<a name="169571011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169571011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169571011">Mario Carneiro (Jul 03 2019 at 14:27)</a>:</h4>
+<p>this one should be in the <code>set</code> namespace</p>
+
+<a name="169571088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169571088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169571088">Patrick Massot (Jul 03 2019 at 14:28)</a>:</h4>
+<p>actually it is</p>
+
+<a name="169571099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169571099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169571099">Patrick Massot (Jul 03 2019 at 14:28)</a>:</h4>
+<p>I didn't pay attention but this lemma is in the set namespace</p>
+
+<a name="169571258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mem_preimage_eq/near/169571258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/48382mempreimageeq.html#169571258">Patrick Massot (Jul 03 2019 at 14:30)</a>:</h4>
+<p>Ok, let's see what Travis thinks about <a href="https://github.com/leanprover-community/mathlib/pull/1174" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1174">https://github.com/leanprover-community/mathlib/pull/1174</a></p>
+
 
 {% endraw %}
 
