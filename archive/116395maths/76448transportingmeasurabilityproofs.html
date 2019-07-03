@@ -26,6 +26,166 @@ I guess the section on measurable equivalences was set up to solve goals like th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169573811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169573811">Mario Carneiro (Jul 03 2019 at 14:58)</a>:</h4>
 <p>I'm not sure what you mean about measurable equivalences. As always with this kind of thing, there are a hundred implicit arguments so that line is insufficient context</p>
 
+<a name="169573986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169573986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169573986">Koundinya Vajjha (Jul 03 2019 at 15:00)</a>:</h4>
+<p>Riight. I have a lot of implicit arguments and <code>measurable_id</code> doesn't work in the proof..</p>
+
+<a name="169574034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169574034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169574034">Mario Carneiro (Jul 03 2019 at 15:01)</a>:</h4>
+<p>well, MWE then</p>
+
+<a name="169574180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169574180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169574180">Mario Carneiro (Jul 03 2019 at 15:02)</a>:</h4>
+<p>I'm not sure how you expect me to know what the context is if there is something funky going on</p>
+
+<a name="169574431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169574431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169574431">Koundinya Vajjha (Jul 03 2019 at 15:05)</a>:</h4>
+<p>yes im working on a MWE, sorry i only realized about the implicit arguments after i posted the question</p>
+
+<a name="169574507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169574507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169574507">Mario Carneiro (Jul 03 2019 at 15:06)</a>:</h4>
+<p>you could also post your entire goal and/or the partial proof</p>
+
+<a name="169576089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576089">Koundinya Vajjha (Jul 03 2019 at 15:25)</a>:</h4>
+<p>Here's the MWE: </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">giry_monad</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">open</span> <span class="n">measure_theory</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span> <span class="n">set</span>
+
+
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">probability_measure</span> <span class="kn">extends</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">measure_univ</span> <span class="o">:</span> <span class="n">to_measure</span> <span class="n">univ</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">probability_measure</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ_</span><span class="o">,</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">nnreal</span><span class="o">,</span> <span class="bp">λ</span><span class="n">p</span> <span class="n">s</span><span class="o">,</span> <span class="n">ennreal</span><span class="bp">.</span><span class="n">to_nnreal</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">to_measure</span> <span class="n">s</span><span class="o">)</span><span class="bp">⟩</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">probability_measure</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">prob_diff</span> <span class="o">{</span><span class="n">s₁</span> <span class="n">s₂</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}(</span><span class="n">h</span> <span class="o">:</span> <span class="n">s₂</span> <span class="err">⊆</span> <span class="n">s₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s₁</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s₂</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">p</span> <span class="o">(</span><span class="n">s₁</span> <span class="err">\</span> <span class="n">s₂</span><span class="o">)</span> <span class="bp">=</span> <span class="n">p</span> <span class="n">s₁</span> <span class="bp">-</span> <span class="n">p</span> <span class="n">s₂</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">prob_univ</span> <span class="o">:</span> <span class="n">p</span> <span class="n">univ</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">sorry</span>
+
+
+<span class="kn">lemma</span> <span class="n">mwe</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">probability_measure</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+<span class="bp">∀</span> <span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">,</span> <span class="n">is_measurable</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">:</span><span class="n">α</span><span class="o">,(</span><span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="n">t</span><span class="o">)</span> <span class="bp">→</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">:</span><span class="n">α</span><span class="o">,(</span><span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="bp">-</span> <span class="n">t</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">t</span> <span class="n">ht</span> <span class="n">hA</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">compl_eq_univ_diff</span><span class="o">,</span>
+  <span class="n">conv</span><span class="o">{</span><span class="n">congr</span><span class="o">,</span> <span class="n">funext</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">prob_diff</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">subset_univ</span> <span class="bp">_</span><span class="o">)</span> <span class="n">is_measurable</span><span class="bp">.</span><span class="n">univ</span> <span class="n">ht</span><span class="o">]},</span> <span class="n">simp</span> <span class="o">[</span><span class="n">prob_univ</span><span class="o">],</span>
+  <span class="n">apply</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span> <span class="n">hA</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span><span class="o">,</span> <span class="n">apply</span> <span class="n">measurable_sub</span><span class="o">,</span> <span class="n">apply</span> <span class="n">measurable_const</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">measurable_subtype_val</span><span class="o">,</span> <span class="n">swap</span><span class="o">,</span> <span class="n">apply</span> <span class="n">measurable_of_continuous</span><span class="o">,</span> <span class="n">apply</span> <span class="n">nnreal</span><span class="bp">.</span><span class="n">continuous_of_real</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="bp">@</span><span class="n">measurable_id</span> <span class="n">nnreal</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169576258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576258">Mario Carneiro (Jul 03 2019 at 15:27)</a>:</h4>
+<p>did you try <code>exact measurable_id</code>?</p>
+
+<a name="169576271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576271">Mario Carneiro (Jul 03 2019 at 15:27)</a>:</h4>
+<p><code>apply measurable_id</code> probably won't work because of the apply bug</p>
+
+<a name="169576304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576304">Patrick Massot (Jul 03 2019 at 15:27)</a>:</h4>
+<p>Where is that "apply bug" emoticon again?</p>
+
+<a name="169576311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576311">Koundinya Vajjha (Jul 03 2019 at 15:28)</a>:</h4>
+<p>pp.all trace </p>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  @measurable.{?l_1 ?l_1} ?m_2 ?m_2 ?m_3 ?m_3 (@id.{?l_1+1} ?m_2)
+but is expected to have type
+  @measurable.{0 0} nnreal
+    (@subtype.{1} real
+       (λ (r : real),
+          @has_le.le.{0} real real.has_le
+            (@has_zero.zero.{0} real
+               (@no_zero_divisors.to_has_zero.{0} real (@domain.to_no_zero_divisors.{0} real real.domain)))
+            r))
+    (@measure_theory.borel.{0} nnreal nnreal.topological_space)
+    (@subtype.measurable_space.{0} real
+       (λ (r : real),
+          @has_le.le.{0} real real.has_le
+            (@has_zero.zero.{0} real
+               (@no_zero_divisors.to_has_zero.{0} real (@domain.to_no_zero_divisors.{0} real real.domain)))
+            r)
+       (@measure_theory.borel.{0} real
+          (@uniform_space.to_topological_space.{0} real
+             (@metric_space.to_uniform_space&#39;.{0} real (@normed_field.to_metric_space.{0} real real.normed_field)))))
+    (λ (a : nnreal), a)
+</pre></div>
+
+<a name="169576359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576359">Mario Carneiro (Jul 03 2019 at 15:28)</a>:</h4>
+<p>pp.all?</p>
+
+<a name="169576416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576416">Mario Carneiro (Jul 03 2019 at 15:29)</a>:</h4>
+<p>well why didn't you say so</p>
+
+<a name="169576423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576423">Mario Carneiro (Jul 03 2019 at 15:29)</a>:</h4>
+<p>it's not the same measure</p>
+
+<a name="169576450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576450">Mario Carneiro (Jul 03 2019 at 15:29)</a>:</h4>
+<p>your MWE doesn't work for me, it fails at the first <code>apply</code></p>
+
+<a name="169576554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576554">Koundinya Vajjha (Jul 03 2019 at 15:30)</a>:</h4>
+<p>what's not the same measure?</p>
+
+<a name="169576592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576592">Mario Carneiro (Jul 03 2019 at 15:30)</a>:</h4>
+<p>didn't <code>measurable.comp</code> recently get its arguments flipped? I'm not sure if you or I are out of date</p>
+
+<a name="169576613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576613">Koundinya Vajjha (Jul 03 2019 at 15:31)</a>:</h4>
+<p>I didn't update mathlib in a while</p>
+
+<a name="169576715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576715">Mario Carneiro (Jul 03 2019 at 15:32)</a>:</h4>
+<p><code>nnreal</code> is defined to be <code>{r : ℝ // 0 ≤ r}</code>, so it has a measurable space from <code>subtype</code> applied to the measure on <code>real</code></p>
+
+<a name="169576749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576749">Mario Carneiro (Jul 03 2019 at 15:32)</a>:</h4>
+<p>but it is also a topological space and so it gets the borel measurable space</p>
+
+<a name="169576841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169576841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169576841">Koundinya Vajjha (Jul 03 2019 at 15:34)</a>:</h4>
+<p>yes, which is why i thought I should use <code>ennreal_equiv_nnreal</code> and transport it somehow...</p>
+
+<a name="169577295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169577295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169577295">Mario Carneiro (Jul 03 2019 at 15:40)</a>:</h4>
+<p>this works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mwe</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">probability_measure</span> <span class="n">β</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">ht</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">t</span><span class="o">)</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="n">b</span> <span class="n">t</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">f</span> <span class="n">b</span> <span class="o">(</span><span class="bp">-</span> <span class="n">t</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">compl_eq_univ_diff</span><span class="o">,</span>
+  <span class="n">conv</span><span class="o">{</span><span class="n">congr</span><span class="o">,</span> <span class="n">funext</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">prob_diff</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">subset_univ</span> <span class="bp">_</span><span class="o">)</span> <span class="n">is_measurable</span><span class="bp">.</span><span class="n">univ</span> <span class="n">ht</span><span class="o">]},</span> <span class="n">simp</span> <span class="o">[</span><span class="n">prob_univ</span><span class="o">],</span>
+  <span class="n">refine</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="n">hA</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">measurable</span><span class="bp">.</span><span class="n">comp</span> <span class="bp">_</span> <span class="o">(</span><span class="n">measurable_sub</span> <span class="n">measurable_const</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">refine</span> <span class="n">measurable_of_continuous</span> <span class="n">nnreal</span><span class="bp">.</span><span class="n">continuous_of_real</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">measurable_of_continuous</span> <span class="n">nnreal</span><span class="bp">.</span><span class="n">continuous_coe</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169577664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/transporting%20measurability%20proofs/near/169577664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76448transportingmeasurabilityproofs.html#169577664">Koundinya Vajjha (Jul 03 2019 at 15:45)</a>:</h4>
+<p>worked with some modifications for me as well. Thanks mario!</p>
+
 
 {% endraw %}
 

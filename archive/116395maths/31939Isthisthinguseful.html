@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/31939Isthisthinguseful.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html">Is this thing useful</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169577429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169577429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169577429">Chris Hughes (Jul 03 2019 at 15:42)</a>:</h4>
+<p>Does this have a name. It came up because I conjecture it makes proving things about matrix minors easier. I can use it to define minors of the identity matrix (with extra zeros), and there's an equivalence of categories with matrices of this form I think.</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">inj_pfun</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv_fun</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inv</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">to_fun</span> <span class="n">a</span> <span class="bp">↔</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">inv_fun</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+<a name="169577509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169577509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169577509">Mario Carneiro (Jul 03 2019 at 15:43)</a>:</h4>
+<p>I would call it a partial equiv</p>
+
+<a name="169578113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578113">Chris Hughes (Jul 03 2019 at 15:51)</a>:</h4>
+<p>It's a <code>semilattice_inf_bot</code> with this order I believe. And then I have supremums on disjoint ones, which correspond to adding matrices.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_le</span> <span class="o">(</span><span class="n">inj_pfun</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span><span class="bp">.</span><span class="n">is_some</span> <span class="bp">→</span> <span class="n">f</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">a</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="169578273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578273">Mario Carneiro (Jul 03 2019 at 15:53)</a>:</h4>
+<p>I guess one way you could write that is <code>\all a b, b \in f a -&gt; b \in g a</code></p>
+
+<a name="169578329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578329">Chris Hughes (Jul 03 2019 at 15:54)</a>:</h4>
+<p>Nice.</p>
+
+<a name="169578342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578342">Mario Carneiro (Jul 03 2019 at 15:54)</a>:</h4>
+<p>might be nice to have a <code>has_subset</code> for option to say this</p>
+
+<a name="169578360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578360">Mario Carneiro (Jul 03 2019 at 15:55)</a>:</h4>
+<p>It could be a has_le but that's more likely to conflict with domain-specific orders</p>
+
+<a name="169578400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578400">Alexander Bentkamp (Jul 03 2019 at 15:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> What are you working on? Does it have anything to do with eigenvectors? I am working on a proof of the spectral theorem (stating that every normal linear operator/matrix is diagonalizable). Is there any overlap with what you are doing?</p>
+
+<a name="169578419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578419">Chris Hughes (Jul 03 2019 at 15:55)</a>:</h4>
+<p>There's no overlap.</p>
+
+<a name="169578478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Is%20this%20thing%20useful/near/169578478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/31939Isthisthinguseful.html#169578478">Alexander Bentkamp (Jul 03 2019 at 15:56)</a>:</h4>
+<p>Ok, very good.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
