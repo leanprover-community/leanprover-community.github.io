@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Is this thing useful](31939Isthisthinguseful.html) (32 messages, latest: Jul 03 2019 at 16:41)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (28 messages, latest: Jul 03 2019 at 17:55)
+
+* [Is this thing useful](31939Isthisthinguseful.html) (34 messages, latest: Jul 03 2019 at 17:08)
 
 * [transporting measurability proofs](76448transportingmeasurabilityproofs.html) (25 messages, latest: Jul 03 2019 at 15:45)
-
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (18 messages, latest: Jul 03 2019 at 15:11)
 
 * [function extension](82180functionextension.html) (20 messages, latest: Jul 03 2019 at 12:36)
 

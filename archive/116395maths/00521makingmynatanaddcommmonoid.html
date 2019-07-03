@@ -176,6 +176,172 @@ permalink: archive/116395maths/00521makingmynatanaddcommmonoid.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169574950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169574950">Scott Morrison (Jul 03 2019 at 15:11)</a>:</h4>
 <p>Yes, that's what we're proposing. Keeley's tactic should be able to identify <code>opt_param</code> or <code>auto_param</code> fields, and handle them automatically.</p>
 
+<a name="169584033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169584033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169584033">Keeley Hoek (Jul 03 2019 at 17:05)</a>:</h4>
+<p>I'm glad it helped! Yes this should be easy to fix...</p>
+
+<a name="169584426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169584426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169584426">Keeley Hoek (Jul 03 2019 at 17:10)</a>:</h4>
+<p>Oh hmm turns out it's a bit yuck...</p>
+
+<a name="169584457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169584457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169584457">Kevin Buzzard (Jul 03 2019 at 17:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">canonically_ordered_comm_semiring</span> <span class="n">mynat</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">+</span><span class="o">),</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">add_assoc</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">zero_add</span><span class="o">,</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">le</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">≤</span><span class="o">),</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="n">le_refl</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="n">le_trans</span><span class="o">,</span>
+  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="n">add_le_add_left</span> <span class="o">:=</span> <span class="n">add_le_add_left</span><span class="o">,</span>
+  <span class="n">lt_of_add_lt_add_left</span> <span class="o">:=</span> <span class="n">lt_if_add_lt_add_left</span><span class="o">,</span>
+  <span class="n">bot</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">bot_le</span> <span class="o">:=</span> <span class="n">bot_le</span><span class="o">,</span>
+  <span class="n">le_iff_exists_add</span> <span class="o">:=</span> <span class="n">le_iff_exists_add</span><span class="o">,</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="n">mul_assoc</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="n">one_mul</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="n">mul_one</span><span class="o">,</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="n">left_distrib</span><span class="o">,</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="n">right_distrib</span><span class="o">,</span>
+  <span class="n">zero_mul</span> <span class="o">:=</span> <span class="n">zero_mul</span><span class="o">,</span>
+  <span class="n">mul_zero</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_comm</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">zero_ne_one</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">mul_eq_zero_iff</span> <span class="o">:=</span> <span class="bp">_</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Also yuck.</p>
+
+<a name="169586591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169586591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169586591">Keeley Hoek (Jul 03 2019 at 17:37)</a>:</h4>
+<p>ha! its literally 3am where I am at the moment so I'm going to throw in the towel until morning---but just one last sorried function needs filling in:</p>
+
+<a name="169586596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169586596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169586596">Keeley Hoek (Jul 03 2019 at 17:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">replace_special_names</span> <span class="o">:</span> <span class="n">name</span> <span class="bp">→</span> <span class="n">name</span>
+<span class="bp">|</span> <span class="bp">`</span><span class="n">add</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">has_add</span><span class="bp">.</span><span class="n">add</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">n</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">get_type_of_nth_arg_core</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">expr</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">get_type_of_nth_arg</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="n">get_type_of_nth_arg_core</span> <span class="n">k</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">(</span><span class="n">resolve_name</span> <span class="n">n</span> <span class="bp">&gt;&gt;=</span> <span class="n">to_expr</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">run_tac</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">n</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="n">name</span> <span class="n">n</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">resolve_name</span> <span class="n">n</span> <span class="bp">&gt;&gt;=</span> <span class="n">to_expr</span><span class="o">,</span>
+   <span class="n">tac</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">)</span> <span class="n">e</span><span class="o">,</span>
+   <span class="n">tac</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">resolve_name_or_use_autoparam</span> <span class="o">(</span><span class="n">sn</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">name</span> <span class="bp">×</span> <span class="n">pexpr</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">pe</span> <span class="err">←</span> <span class="n">resolve_name</span> <span class="o">(</span><span class="n">replace_special_names</span> <span class="n">n</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+        <span class="n">do</span> <span class="o">{</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">get_type_of_nth_arg</span> <span class="o">(</span><span class="n">sn</span> <span class="bp">++</span> <span class="bp">`</span><span class="n">mk</span><span class="o">)</span> <span class="n">n</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+             <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+             <span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="n">auto_param</span> <span class="err">%%</span><span class="n">t</span> <span class="err">%%</span><span class="n">tac</span><span class="o">)</span> <span class="o">:=</span>
+               <span class="n">lock_tactic_state</span> <span class="err">$</span> <span class="n">do</span>
+                 <span class="n">m</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">t</span><span class="o">,</span>
+                 <span class="n">set_goals</span> <span class="o">[</span><span class="n">m</span><span class="o">],</span>
+                 <span class="n">run_tac</span> <span class="n">tac</span><span class="o">,</span>
+                 <span class="n">to_pexpr</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">instantiate_mvars</span> <span class="n">m</span>
+             <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">failed</span>
+             <span class="kn">end</span>
+           <span class="o">},</span>
+   <span class="n">return</span> <span class="o">(</span><span class="n">n</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">pe</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">i_checked_all_teh_axioms</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">t</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span>
+   <span class="k">match</span> <span class="n">t</span> <span class="k">with</span>
+   <span class="bp">|</span> <span class="n">expr</span><span class="bp">.</span><span class="n">app</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">sn</span> <span class="bp">_</span><span class="o">)</span> <span class="n">e</span> <span class="o">:=</span>
+    <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="o">(</span><span class="n">env</span><span class="bp">.</span><span class="n">structure_fields</span> <span class="n">sn</span><span class="o">)</span> <span class="bp">&gt;&gt;</span>
+    <span class="k">match</span> <span class="n">env</span><span class="bp">.</span><span class="n">structure_fields</span> <span class="n">sn</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="n">some</span> <span class="n">l</span> <span class="o">:=</span>
+    <span class="n">do</span> <span class="n">n</span> <span class="bp">::</span> <span class="bp">_</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">open_namespaces</span><span class="o">,</span>
+       <span class="k">let</span> <span class="n">l</span> <span class="o">:=</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span><span class="bp">.</span><span class="n">zip</span> <span class="n">l</span><span class="o">,</span>
+       <span class="n">v</span> <span class="err">←</span> <span class="n">l</span><span class="bp">.</span><span class="n">mfilter_map</span> <span class="err">$</span> <span class="n">resolve_name_or_use_autoparam</span> <span class="n">sn</span><span class="o">,</span>
+       <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">v</span><span class="o">,</span>
+       <span class="k">let</span> <span class="n">s</span> <span class="o">:</span> <span class="n">structure_instance_info</span> <span class="o">:=</span> <span class="o">{</span>
+           <span class="n">struct</span> <span class="o">:=</span> <span class="n">some</span> <span class="n">sn</span><span class="o">,</span>
+           <span class="n">field_names</span> <span class="o">:=</span> <span class="n">v</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">fst</span><span class="o">,</span>
+           <span class="n">field_values</span> <span class="o">:=</span> <span class="n">v</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">,</span>
+       <span class="o">},</span>
+       <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">v</span><span class="o">,</span>
+       <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="err">$</span> <span class="n">pexpr</span><span class="bp">.</span><span class="n">mk_structure_instance</span> <span class="n">s</span><span class="o">,</span>
+       <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span> <span class="n">e</span>
+    <span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;goal not a structure&quot;</span>
+    <span class="kn">end</span>
+   <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">fail</span> <span class="s2">&quot;unsupported goal&quot;</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+</pre></div>
+
+<a name="169586723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169586723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169586723">Keeley Hoek (Jul 03 2019 at 17:38)</a>:</h4>
+<p>haha funnily enough <code>run_tac</code> is equivalent to the ridiculous composite</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">run_tac&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tac</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="n">name</span> <span class="n">n</span> <span class="bp">&gt;&gt;=</span> <span class="n">resolve_name</span> <span class="bp">&gt;&gt;=</span> <span class="n">to_expr</span> <span class="bp">&gt;&gt;=</span> <span class="n">eval_expr</span> <span class="o">(</span><span class="n">tactic</span> <span class="n">unit</span><span class="o">),</span>
+   <span class="n">tac</span>
+</pre></div>
+
+<a name="169587709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169587709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169587709">Kevin Buzzard (Jul 03 2019 at 17:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">canonically_ordered_comm_semiring</span> <span class="n">mynat</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">+</span><span class="o">),</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">add_assoc</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">zero_add</span><span class="o">,</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">le</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">≤</span><span class="o">),</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="n">le_refl</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="n">le_trans</span><span class="o">,</span>
+  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="n">add_le_add_left</span> <span class="o">:=</span> <span class="n">add_le_add_left</span><span class="o">,</span>
+  <span class="n">lt_of_add_lt_add_left</span> <span class="o">:=</span> <span class="n">lt_if_add_lt_add_left</span><span class="o">,</span>
+  <span class="n">bot</span> <span class="o">:=</span> <span class="err">⊥</span><span class="o">,</span>
+  <span class="n">bot_le</span> <span class="o">:=</span> <span class="n">bot_le</span><span class="o">,</span>
+  <span class="n">le_iff_exists_add</span> <span class="o">:=</span> <span class="n">le_iff_exists_add</span><span class="o">,</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="n">mul_assoc</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="n">one_mul</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="n">mul_one</span><span class="o">,</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="n">left_distrib</span><span class="o">,</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="n">right_distrib</span><span class="o">,</span>
+  <span class="n">zero_mul</span> <span class="o">:=</span> <span class="n">zero_mul</span><span class="o">,</span>
+  <span class="n">mul_zero</span> <span class="o">:=</span> <span class="n">mul_zero</span><span class="o">,</span>
+  <span class="n">mul_comm</span> <span class="o">:=</span> <span class="n">mul_comm</span><span class="o">,</span>
+  <span class="n">zero_ne_one</span> <span class="o">:=</span> <span class="n">zero_ne_one</span><span class="o">,</span>
+  <span class="n">mul_eq_zero_iff</span> <span class="o">:=</span> <span class="n">mul_eq_zero_iff</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>I finished my proof.</p>
+
+<a name="169587982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169587982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169587982">Kenny Lau (Jul 03 2019 at 17:54)</a>:</h4>
+<p>how about decidable le?</p>
+
+<a name="169588007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169588007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169588007">Kevin Buzzard (Jul 03 2019 at 17:55)</a>:</h4>
+<p>Oh that's not maths, that's not in this game</p>
+
+<a name="169588028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169588028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169588028">Kevin Buzzard (Jul 03 2019 at 17:55)</a>:</h4>
+<p>That is generated without telling the user</p>
+
 
 {% endraw %}
 
