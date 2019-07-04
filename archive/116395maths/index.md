@@ -9,7 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (33 messages, latest: Jul 04 2019 at 10:48)
+* [Integration](83269Integration.html) (5 messages, latest: Jul 04 2019 at 11:51)
+
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (112 messages, latest: Jul 04 2019 at 11:38)
+
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (39 messages, latest: Jul 04 2019 at 11:25)
 
 * [Is this thing useful](31939Isthisthinguseful.html) (67 messages, latest: Jul 03 2019 at 20:53)
 
@@ -154,8 +158,6 @@ permalink: archive/116395maths/index.html
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
 
 * [what's the logic with to_additive?](79205whatsthelogicwithtoadditive.html) (12 messages, latest: Apr 18 2019 at 19:42)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (111 messages, latest: Apr 17 2019 at 12:45)
 
 * [A bunch of Lean files](73658AbunchofLeanfiles.html) (11 messages, latest: Apr 15 2019 at 02:13)
 
