@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [apply_fun](22895applyfun.html) (15 messages, latest: Jul 04 2019 at 14:34)
+* [apply_fun](22895applyfun.html) (18 messages, latest: Jul 04 2019 at 15:50)
+
+* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
+
+* [Generate documentation](38342Generatedocumentation.html) (27 messages, latest: Jul 04 2019 at 15:29)
 
 * [online leanprover](19268onlineleanprover.html) (160 messages, latest: Jul 04 2019 at 14:07)
-
-* [Generate documentation](38342Generatedocumentation.html) (19 messages, latest: Jul 04 2019 at 13:14)
 
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
 
@@ -68,8 +70,6 @@ permalink: archive/113488general/index.html
 * [mk_meta_var](24391mkmetavar.html) (5 messages, latest: Jun 25 2019 at 12:31)
 
 * [cache olean no longer working](21801cacheoleannolongerworking.html) (6 messages, latest: Jun 24 2019 at 22:21)
-
-* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (2 messages, latest: Jun 24 2019 at 08:48)
 
 * [scrolling with lean --make on command line](54438scrollingwithleanmakeoncommandline.html) (5 messages, latest: Jun 23 2019 at 09:54)
 

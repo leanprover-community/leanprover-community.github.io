@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (634 messages, latest: Jul 04 2019 at 15:39)
+
 * [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (59 messages, latest: Jul 04 2019 at 14:55)
 
 * [Integration](83269Integration.html) (5 messages, latest: Jul 04 2019 at 11:51)
@@ -24,8 +26,6 @@ permalink: archive/116395maths/index.html
 * [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (95 messages, latest: Jul 03 2019 at 04:45)
-
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (633 messages, latest: Jul 02 2019 at 16:52)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (3 messages, latest: Jul 01 2019 at 07:25)
 
