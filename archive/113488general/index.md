@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Generate documentation](38342Generatedocumentation.html) (28 messages, latest: Jul 04 2019 at 18:09)
+
 * [structure question](80074structurequestion.html) (4 messages, latest: Jul 04 2019 at 17:34)
 
 * [symmetry](60107symmetry.html) (3 messages, latest: Jul 04 2019 at 17:21)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [apply_fun](22895applyfun.html) (23 messages, latest: Jul 04 2019 at 16:57)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
-
-* [Generate documentation](38342Generatedocumentation.html) (27 messages, latest: Jul 04 2019 at 15:29)
 
 * [online leanprover](19268onlineleanprover.html) (160 messages, latest: Jul 04 2019 at 14:07)
 
