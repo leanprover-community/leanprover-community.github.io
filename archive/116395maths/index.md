@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (51 messages, latest: Jul 04 2019 at 13:58)
+
 * [Integration](83269Integration.html) (5 messages, latest: Jul 04 2019 at 11:51)
 
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (112 messages, latest: Jul 04 2019 at 11:38)
-
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (39 messages, latest: Jul 04 2019 at 11:25)
 
 * [Is this thing useful](31939Isthisthinguseful.html) (67 messages, latest: Jul 03 2019 at 20:53)
 

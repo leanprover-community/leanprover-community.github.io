@@ -92,6 +92,48 @@ warning: build failed, waiting for other jobs to finish...
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169496465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169496465">matt rice (Jul 02 2019 at 16:40)</a>:</h4>
 <p>Well, if that is wanted it should be a fairly small patch</p>
 
+<a name="169646547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169646547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169646547">Patrick Massot (Jul 04 2019 at 13:04)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="143402">@matt rice</span> installing <code>libharfbuzz-dev</code> was enough to compile <code>lumpy-leandoc</code>. I think it would help to add this to the <a href="https://github.com/ratmice/lumpy-leandoc/blob/master/README.md" target="_blank" title="https://github.com/ratmice/lumpy-leandoc/blob/master/README.md">README</a>. Then I tried to run this on the <a href="https://github.com/leanprover-community/lean-perfectoid-spaces" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces">perfectoid project</a> using this <code>Lumpy.toml</code>:</p>
+<div class="codehilite"><pre><span></span>[[documents]]
+title = &quot;Example&quot;
+file_name = &quot;examples&quot;
+authors = [&quot;Kevin Buzzard&quot;, &quot;Johan Commelin&quot;, &quot;Patrick Massot&quot;]
+src_dirs = [&quot;src/.&quot;]
+output_dir = &quot;docs_out/&quot;
+output_formats = [&quot;tex&quot;, &quot;pdf&quot;]
+comment_format = &quot;cmark&quot;
+</pre></div>
+
+
+<p>The result was that <code>lumpy-leandoc</code> displayed</p>
+<div class="codehilite"><pre><span></span>[2019-07-04T12:52:34Z INFO  lumpy_leandoc] Elapsed=921.888182ms, process lean
+[2019-07-04T12:52:34Z INFO  lumpy_leandoc] Elapsed=647.134µs, sorting, sections examples.tex
+[2019-07-04T12:52:34Z INFO  lumpy_leandoc] Elapsed=117.504µs, collating, sections examples.tex
+[2019-07-04T12:52:34Z INFO  lumpy_leandoc] Elapsed=120.497µs, writing, examples.tex
+</pre></div>
+
+
+<p>then hanged for a very long time, but created some <code>examples.tex</code>. And after a long time:</p>
+<div class="codehilite"><pre><span></span>[2019-07-04T13:00:37Z INFO  lumpy_leandoc] Elapsed=482.614324169s, generate, examples.pdf
+Error: Error(Msg(&quot;the LaTeX engine failed&quot;), State { next_error: Some(Error(EngineError(&quot;TeX&quot;), State { next_error: Some(Error(Msg(&quot;halted on potentially-recoverable error as specified&quot;), State { next_error: None, backtrace: InternalBacktrace { backtrace: None } })), backtrace: InternalBacktrace { backtrace: None } })), backtrace: InternalBacktrace { backtrace: None } })
+</pre></div>
+
+
+<p>Note that <code>examples.tex</code> is not correct because the author field was missing spaces after <code>\and</code>. After fixing this by hand, one can compile the tex file but it's almost empty: <a href="/user_uploads/3121/RT-3kzXBhFxwo57M17GawTvW/examples.pdf" target="_blank" title="examples.pdf">examples.pdf</a></p>
+
+<a name="169646924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169646924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169646924">Patrick Massot (Jul 04 2019 at 13:09)</a>:</h4>
+<p>Looking back at the example file in lumpy-leandoc, maybe the fact the output is almost empty is normal. I saw Lean code in the example, but that is actually also from the docstring. So we get only docstring in the output, right?</p>
+
+<a name="169647087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169647087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169647087">Patrick Massot (Jul 04 2019 at 13:11)</a>:</h4>
+<p>Is there any option to render also Lean code, at least definitions and statements?</p>
+
+<a name="169647288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169647288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169647288">Patrick Massot (Jul 04 2019 at 13:14)</a>:</h4>
+<p>Or maybe I completely misunderstood the project. I thought the idea was to get the analogue of <a href="http://math-comp.github.io/math-comp/htmldoc/mathcomp.field.galois.html" target="_blank" title="http://math-comp.github.io/math-comp/htmldoc/mathcomp.field.galois.html">math-comp.github.io/math-comp/htmldoc/mathcomp.field.galois.html</a></p>
+
 
 {% endraw %}
 

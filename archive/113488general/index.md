@@ -9,15 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [apply_fun](22895applyfun.html) (5 messages, latest: Jul 04 2019 at 12:55)
+* [online leanprover](19268onlineleanprover.html) (151 messages, latest: Jul 04 2019 at 13:59)
+
+* [apply_fun](22895applyfun.html) (11 messages, latest: Jul 04 2019 at 13:25)
+
+* [Generate documentation](38342Generatedocumentation.html) (19 messages, latest: Jul 04 2019 at 13:14)
 
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
 
 * [VScode extension](56578VScodeextension.html) (411 messages, latest: Jul 04 2019 at 11:19)
 
 * [notational leakage](11556notationalleakage.html) (23 messages, latest: Jul 04 2019 at 10:43)
-
-* [online leanprover](19268onlineleanprover.html) (150 messages, latest: Jul 03 2019 at 23:21)
 
 * [implicit variables](69365implicitvariables.html) (5 messages, latest: Jul 03 2019 at 18:28)
 
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [defeq](70598defeq.html) (15 messages, latest: Jul 03 2019 at 11:31)
 
 * [Reference Manual](27086ReferenceManual.html) (6 messages, latest: Jul 02 2019 at 20:39)
-
-* [Generate documentation](38342Generatedocumentation.html) (15 messages, latest: Jul 02 2019 at 16:40)
 
 * [Bug in Downloading](00204BuginDownloading.html) (9 messages, latest: Jul 02 2019 at 13:35)
 
