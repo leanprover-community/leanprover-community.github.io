@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [apply_fun](22895applyfun.html) (5 messages, latest: Jul 04 2019 at 12:55)
+
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
 
 * [VScode extension](56578VScodeextension.html) (411 messages, latest: Jul 04 2019 at 11:19)
