@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [apply_fun](22895applyfun.html) (18 messages, latest: Jul 04 2019 at 15:50)
+* [apply_fun](22895applyfun.html) (23 messages, latest: Jul 04 2019 at 16:57)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
 

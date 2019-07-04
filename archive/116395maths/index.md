@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (634 messages, latest: Jul 04 2019 at 15:39)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (82 messages, latest: Jul 04 2019 at 16:58)
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (59 messages, latest: Jul 04 2019 at 14:55)
+* [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (635 messages, latest: Jul 04 2019 at 16:13)
 
 * [Integration](83269Integration.html) (5 messages, latest: Jul 04 2019 at 11:51)
 

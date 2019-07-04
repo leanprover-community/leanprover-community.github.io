@@ -495,6 +495,114 @@ It does everything you want Kevin except for the <code>lt</code> problem.</p>
 <p>It appears that lean does not provide a way for lean to access the pre-set optional values of structures, eg. <code>lt</code> in this case.<br>
 I think I make it work but it'll be a little bit less robust than I had hoped</p>
 
+<a name="169658797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169658797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169658797">Keeley Hoek (Jul 04 2019 at 16:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Here is a link to something that works, at least on the two <code>add_monoid</code> and <code>preorder</code> examples I've seen! <a href="https://gist.github.com/khoek/cfb72fe41b0725269a14bf9196bb9c73" target="_blank" title="https://gist.github.com/khoek/cfb72fe41b0725269a14bf9196bb9c73">https://gist.github.com/khoek/cfb72fe41b0725269a14bf9196bb9c73</a></p>
+
+<a name="169659315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169659315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169659315">Keeley Hoek (Jul 04 2019 at 16:29)</a>:</h4>
+<p>Are you able to make a <code>canonically_ordered_comm_semiring</code> using it?</p>
+
+<a name="169659640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169659640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169659640">Kevin Buzzard (Jul 04 2019 at 16:34)</a>:</h4>
+<p>I'm now seeing all sorts of errors like</p>
+<div class="codehilite"><pre><span></span>type mismatch at field &#39;lt_of_add_lt_add_left&#39;
+  lt_of_add_lt_add_left
+has type
+  ?m_3 + ?m_4 &lt; ?m_3 + ?m_5 → ?m_4 &lt; ?m_5
+but is expected to have type
+  ∀ (a b c : mynat), a + b &lt; a + c → b &lt; c
+</pre></div>
+
+
+<p>but this is not your fault -- I have defined <code>lt_of_add_lt_add_left</code> with the inputs implicit but apparently Lean wants them explicit. Nearly there now, just fixing all of them.</p>
+
+<a name="169659728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169659728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169659728">Kevin Buzzard (Jul 04 2019 at 16:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">canonically_ordered_comm_semiring</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">structure_helper</span> <span class="c1">-- works!</span>
+</pre></div>
+
+<a name="169659758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169659758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169659758">Kevin Buzzard (Jul 04 2019 at 16:37)</a>:</h4>
+<p>How do I get a complete list of all the typeclasses <code>X</code> such that type class inference can find a term of type <code>X nat</code> ?</p>
+
+<a name="169659933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169659933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169659933">Kevin Buzzard (Jul 04 2019 at 16:40)</a>:</h4>
+<p>But it works :-) Many thanks Keeley!</p>
+
+<a name="169660220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660220">Kevin Buzzard (Jul 04 2019 at 16:46)</a>:</h4>
+<p>Ultimately I would rather <code>lt_of_add_lt_add_left : ∀ {a b c : mynat}, a + b &lt; a + c → b &lt; c := ...</code> because I believe that this is the idiomatic way to define this function, with a, b, c implicit. It stops the tactic working through. We can put that down to "further work if someone can be bothered".</p>
+
+<a name="169660436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660436">Kevin Buzzard (Jul 04 2019 at 16:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> you were talking about a bug in Lean. Can this  bug be easily fixed in 3.5.1? Would a consequence be that a whole bunch of <code>_</code>'s would need to be removed from mathlib? I feel like the definition of <code>canonically_ordered_comm_semiring.lt_of_add_lt_add_left</code> is "wrong".</p>
+<div class="codehilite"><pre><span></span>canonically_ordered_comm_semiring.lt_of_add_lt_add_left : ∀ (a b c : ?M_1), a + b &lt; a + c → b &lt; c
+</pre></div>
+
+
+<p>I want to write some sort of front end for Lean where the user just has to type in simple proofs in tactic mode and that's all they can do. For this project, I don't care about mathlib and I don't care if I'm running a non-standard Lean. On the other hand if people change the behaviour of core tactics like <code>induction</code> then it will break everything I guess.</p>
+
+<a name="169660461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660461">Mario Carneiro (Jul 04 2019 at 16:51)</a>:</h4>
+<p>You should just be using <code>lt_of_add_lt_add_left</code></p>
+
+<a name="169660463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660463">Mario Carneiro (Jul 04 2019 at 16:51)</a>:</h4>
+<p>which has the right binders</p>
+
+<a name="169660521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660521">Kevin Buzzard (Jul 04 2019 at 16:52)</a>:</h4>
+<p>ooh. <code>ordered_cancel_comm_monoid</code></p>
+
+<a name="169660533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660533">Kevin Buzzard (Jul 04 2019 at 16:53)</a>:</h4>
+<p>I love that there are just a gazillion really stupid-in-my-eyes classes which are just out there and I don't know the names of any of them.</p>
+
+<a name="169660548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660548">Kevin Buzzard (Jul 04 2019 at 16:53)</a>:</h4>
+<p>I don't want to use it, I want the user to prove it.</p>
+
+<a name="169660601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660601">Mario Carneiro (Jul 04 2019 at 16:54)</a>:</h4>
+<p>There is a tactic that does the restating automatically</p>
+
+<a name="169660619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660619">Kevin Buzzard (Jul 04 2019 at 16:55)</a>:</h4>
+<p>Yeah but I don't want to restate it, I want the user to prove it.</p>
+
+<a name="169660623"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660623" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660623">Kevin Buzzard (Jul 04 2019 at 16:55)</a>:</h4>
+<p>We're building nat from scratch.</p>
+
+<a name="169660632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660632">Mario Carneiro (Jul 04 2019 at 16:55)</a>:</h4>
+<p>The binders don't matter if you are proving it</p>
+
+<a name="169660634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660634">Mario Carneiro (Jul 04 2019 at 16:55)</a>:</h4>
+<p>it's lambda regardless</p>
+
+<a name="169660639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660639">Kevin Buzzard (Jul 04 2019 at 16:55)</a>:</h4>
+<p>I know, I just feel like I'm lying to the user.</p>
+
+<a name="169660704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660704">Mario Carneiro (Jul 04 2019 at 16:56)</a>:</h4>
+<p>In fact, it's usually better for the axiom to have all explicit or semi implicit binders when proving it</p>
+
+<a name="169660778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660778">Kevin Buzzard (Jul 04 2019 at 16:58)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> I would like an over-ride. I'd like to define <code>mynat.lt_of_add_lt_add_left</code>  with semi-implicit or implicit binders, and then define <code>mynat.lt_of_add_le_add_left'</code> to be the thing with the stupid binders and then tell your tactic to use the stupid version with the ' just for that field only.</p>
+
+<a name="169660780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660780">Mario Carneiro (Jul 04 2019 at 16:58)</a>:</h4>
+<p>For instance, you might have an assumption that says <code>∀ (a b c : A), a + b &lt; a + c → b &lt; c</code> and you want to pass it in; if the assumption is implicit then the arguments will get auto applied and it won't fit</p>
+
+<a name="169660796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169660796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169660796">Mario Carneiro (Jul 04 2019 at 16:58)</a>:</h4>
+<p>I would assume that for Keeley's tactic you can define the binders however you like</p>
+
 
 {% endraw %}
 
