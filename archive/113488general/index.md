@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (409 messages, latest: Jul 04 2019 at 06:25)
+
 * [online leanprover](19268onlineleanprover.html) (150 messages, latest: Jul 03 2019 at 23:21)
 
 * [implicit variables](69365implicitvariables.html) (5 messages, latest: Jul 03 2019 at 18:28)
@@ -168,8 +170,6 @@ permalink: archive/113488general/index.html
 * [heq hell again](32676heqhellagain.html) (41 messages, latest: Jun 10 2019 at 12:10)
 
 * [finsupp scalar diamond](88248finsuppscalardiamond.html) (1 message, latest: Jun 10 2019 at 11:12)
-
-* [VScode extension](56578VScodeextension.html) (408 messages, latest: Jun 10 2019 at 02:05)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
 
