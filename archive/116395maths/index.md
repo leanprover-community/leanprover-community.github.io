@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (29 messages, latest: Jul 04 2019 at 07:45)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (33 messages, latest: Jul 04 2019 at 10:48)
 
 * [Is this thing useful](31939Isthisthinguseful.html) (67 messages, latest: Jul 03 2019 at 20:53)
 

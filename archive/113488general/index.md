@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What is `abbreviation`?](30886Whatisabbreviation.html) (8 messages, latest: Jul 04 2019 at 10:47)
+
+* [notational leakage](11556notationalleakage.html) (23 messages, latest: Jul 04 2019 at 10:43)
+
 * [VScode extension](56578VScodeextension.html) (410 messages, latest: Jul 04 2019 at 08:07)
 
 * [online leanprover](19268onlineleanprover.html) (150 messages, latest: Jul 03 2019 at 23:21)
