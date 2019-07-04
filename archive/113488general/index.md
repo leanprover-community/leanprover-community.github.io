@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [structure question](80074structurequestion.html) (4 messages, latest: Jul 04 2019 at 17:34)
+
+* [symmetry](60107symmetry.html) (3 messages, latest: Jul 04 2019 at 17:21)
+
 * [apply_fun](22895applyfun.html) (23 messages, latest: Jul 04 2019 at 16:57)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
