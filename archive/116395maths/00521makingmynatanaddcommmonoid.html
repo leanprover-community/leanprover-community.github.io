@@ -342,6 +342,16 @@ permalink: archive/116395maths/00521makingmynatanaddcommmonoid.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169588028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169588028">Kevin Buzzard (Jul 03 2019 at 17:55)</a>:</h4>
 <p>That is generated without telling the user</p>
 
+<a name="169627375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169627375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169627375">Kevin Buzzard (Jul 04 2019 at 07:45)</a>:</h4>
+<blockquote>
+<p>how about decidable le?</p>
+</blockquote>
+<p><code>decidable le</code> uses recursion. I am trying to box off what is done by recursion, because mathematicians put it in a different box to induction.</p>
+<p>Example: one could present the natural numbers <code>mynat</code> as having two constants <code>mynat.zero</code> and <code>mynat.succ</code>, two axioms <code>mynat.zero_ne_succ</code> and <code>mynat.succ_inj</code>, and one key fact: you can use the <code>induction n</code> tactic if you have <code>n : mynat</code>. The two axioms are proved by Lean using recursion via <code>nat.rec</code>;  <code>succ_inj</code> can be proved easily using the completely artificial function <code>pred</code> which no mathematician has ever seen or uses (because it allows 0 as an input and gives the wrong answer), and <code>zero_ne_succ</code> can be proved by defining a function which sends 0 to <code>tt</code> and <code>succ n</code> to <code>ff</code>, again a function which can be defined by recursion but is of no use to us in practice.</p>
+<p>If you present nat this way and present addition similarly (<code>mynat.add</code> is a constant, we will always use the <code>+</code> notation, <code>add_zero</code> and <code>add_succ</code> are axioms, don't worry about how it was defined) then one can "prove" things like the "theorem" <code>add_monoid mynat</code> (because now it <em>is</em> a theorem -- all the data has been given to you and there's only a theorem left) purely within tactic mode, by supplying tactic proofs of each of the fields in whatever order you like.</p>
+<p>I am looking at what happens to <code>nat</code> if you try and isolate all the computational content and "proofs and data constructed via recursion" and just give the user an inductive principle which can only be used to construct proofs. One way of looking at it is you could say that I was trying to isolate "the bit which mathematicians like best".</p>
+
 
 {% endraw %}
 
