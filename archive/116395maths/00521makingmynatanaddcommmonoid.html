@@ -447,6 +447,54 @@ It does everything you want Kevin except for the <code>lt</code> problem.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169650546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169650546">Keeley Hoek (Jul 04 2019 at 13:58)</a>:</h4>
 <p>The constructor <code>preorder.mk</code> is the same; <code>auto_param</code> fields are replicated, the optional ones are dropped</p>
 
+<a name="169651364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169651364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169651364">Mario Carneiro (Jul 04 2019 at 14:11)</a>:</h4>
+<p>Oh, that's weird... I found a strange parsing issue while investigating this too</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">preorder1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">lt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">preorder2</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_le</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">lt</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="bp">.</span> <span class="n">order_laws_tac</span><span class="o">)</span>
+</pre></div>
+
+
+<p>The type of <code>lt_iff_le_not_le</code> is different in the two cases. <code>preorder2</code> is the right one. <code>preorder1.lt_iff_le_not_le</code> is trivial as evidenced by the <code>rfl</code> proof. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Are you aware of this? It looks like that thing you pointed out a while back where structures could define lets and notation and other crazy things. Somehow <code>lt</code> is treated as a notation for the purposes of <code>lt_iff_le_not_le</code>, but it is also an actual field...?</p>
+
+<a name="169651434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169651434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169651434">Keeley Hoek (Jul 04 2019 at 14:12)</a>:</h4>
+<p>:0</p>
+
+<a name="169651451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169651451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169651451">Mario Carneiro (Jul 04 2019 at 14:12)</a>:</h4>
+<p>The other weird thing about this is that <code>lt</code> is already defined in the case of <code>preorder</code>, in <code>has_lt</code>, and it's getting "redefined" with a new defeq type in <code>preorder</code></p>
+
+<a name="169651495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169651495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169651495">Mario Carneiro (Jul 04 2019 at 14:13)</a>:</h4>
+<p>I can already predict that the lean C++ code to make sense of all this is a rats nest</p>
+
+<a name="169651705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169651705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169651705">Sebastian Ullrich (Jul 04 2019 at 14:16)</a>:</h4>
+<p>Looks like a straight bug</p>
+
+<a name="169651739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169651739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169651739">Patrick Massot (Jul 04 2019 at 14:17)</a>:</h4>
+<p>Now is the time were Sebastian will paste that url to the commit which fixed that bug in Lean 4 months ago</p>
+
+<a name="169653555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169653555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169653555">Kevin Buzzard (Jul 04 2019 at 14:43)</a>:</h4>
+<p>I can make a preorder by just ignoring the <code>lt</code> and <code>lt_iff_whatever</code> fields completely. It's not possible to emulate that behaviour with a tactic?</p>
+
+<a name="169654365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/making%20mynat%20an%20add_comm_monoid/near/169654365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00521makingmynatanaddcommmonoid.html#169654365">Keeley Hoek (Jul 04 2019 at 14:55)</a>:</h4>
+<p>It appears that lean does not provide a way for lean to access the pre-set optional values of structures, eg. <code>lt</code> in this case.<br>
+I think I make it work but it'll be a little bit less robust than I had hoped</p>
+
 
 {% endraw %}
 

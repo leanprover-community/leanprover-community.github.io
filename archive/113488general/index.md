@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [online leanprover](19268onlineleanprover.html) (151 messages, latest: Jul 04 2019 at 13:59)
+* [apply_fun](22895applyfun.html) (15 messages, latest: Jul 04 2019 at 14:34)
 
-* [apply_fun](22895applyfun.html) (11 messages, latest: Jul 04 2019 at 13:25)
+* [online leanprover](19268onlineleanprover.html) (160 messages, latest: Jul 04 2019 at 14:07)
 
 * [Generate documentation](38342Generatedocumentation.html) (19 messages, latest: Jul 04 2019 at 13:14)
 

@@ -722,6 +722,42 @@ Thanks for all your work and help!</li>
 </blockquote>
 <p>What does "that" refers to in this sentence?</p>
 
+<a name="169650700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650700">Bryan Gin-ge Chen (Jul 04 2019 at 14:01)</a>:</h4>
+<p>Adding the line <code>path = "src"</code> in <code>leanpkg.toml</code> and then putting some Lean files of interest in that directory before running <code>mk_library</code>.</p>
+
+<a name="169650737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650737">Patrick Massot (Jul 04 2019 at 14:02)</a>:</h4>
+<p>which <code>leanpkg.toml</code>? The one in <code>combined_lib</code>?</p>
+
+<a name="169650783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650783">Bryan Gin-ge Chen (Jul 04 2019 at 14:02)</a>:</h4>
+<p>Yes.</p>
+
+<a name="169650852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650852">Bryan Gin-ge Chen (Jul 04 2019 at 14:03)</a>:</h4>
+<p>It relies on the fact that <code>leanpkg build</code> only builds the dependencies of the files in <code>src</code>.</p>
+
+<a name="169650869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650869">Patrick Massot (Jul 04 2019 at 14:03)</a>:</h4>
+<p>Oooh</p>
+
+<a name="169650872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650872">Patrick Massot (Jul 04 2019 at 14:03)</a>:</h4>
+<p>I need to try that</p>
+
+<a name="169650981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650981">Patrick Massot (Jul 04 2019 at 14:05)</a>:</h4>
+<p>But I'm confused. Is <code>mk_library.py</code> running <code>leanpkg build</code>? Or do you mean I should have mathlib in the dependencies of <code>combined_lib</code> as a git repo and run <code>leanpkg build</code> there and then <code>mk_library_build</code>?</p>
+
+<a name="169650999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169650999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169650999">Bryan Gin-ge Chen (Jul 04 2019 at 14:06)</a>:</h4>
+<p><code>mk_library.py</code> runs <code>leanpkg build</code></p>
+
+<a name="169651110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169651110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169651110">Bryan Gin-ge Chen (Jul 04 2019 at 14:07)</a>:</h4>
+<p>And then it blindly copies all <code>.olean</code> files that it can find by looking in the directories provided by <code>lean -p</code> into the ZIP file; that's why I said you have to delete the other olean files.</p>
+
 
 {% endraw %}
 
