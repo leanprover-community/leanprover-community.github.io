@@ -333,6 +333,40 @@ And then you call <code>induction n with d hd; dsimp</code>.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702763">Kevin Buzzard (Jul 05 2019 at 11:49)</a>:</h4>
 <p>That's strictly worse than <code>clear_up_leaks</code> because formally it's the same thing ("apply a tactic and then type something which you don't want") and secondly <code>simp</code> will close various goals, like <code>rfl</code> goals -- it does too much.</p>
 
+<a name="169705115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169705115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169705115">Mario Carneiro (Jul 05 2019 at 12:34)</a>:</h4>
+<p>using <code>change with</code> will not close any goals</p>
+
+<a name="169705204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169705204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169705204">Mario Carneiro (Jul 05 2019 at 12:34)</a>:</h4>
+<p>And I am talking about the definition of <code>induction'</code>, like Johan says</p>
+
+<a name="169706003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169706003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169706003">Mario Carneiro (Jul 05 2019 at 12:49)</a>:</h4>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">induction&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="n">hp</span> <span class="n">none</span> <span class="n">ids</span> <span class="n">none</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="bp">`</span><span class="o">[</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="k">with</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">},</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">le</span> <span class="k">with</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">},</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="bp">@</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="k">with</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">only</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}]</span>
+
+<span class="kn">theorem</span> <span class="n">zero_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">induction&#39;</span> <span class="n">x</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="c1">-- ⊢ 0 + 0 = 0</span>
+  <span class="c1">-- 0 + d = d ⊢ 0 + (d + 1) = d + 1</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Unfortunately <code>change with</code> does not support arguments in the lemmas, so I use some beta reduction at the end there. I don't think it will use <code>rfl</code> at the end though. Also <code>propagate_tags</code> undoes the work for some reason, so you can't use <code>case</code> with this</p>
+
+<a name="169706509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169706509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169706509">Kevin Buzzard (Jul 05 2019 at 12:56)</a>:</h4>
+<p>So this <code>induction'</code> thing, and <code>rw'</code> and also this <code>structure_helper</code> thing are all attempts to write more user-friendly ways of doing stuff. The idea is that we are shielding the users from Lean's weak spots here. And we're also shielding the user from definitions and recursion; I want to ask them to only prove theorems.</p>
+
 
 {% endraw %}
 

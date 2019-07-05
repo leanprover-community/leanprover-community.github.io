@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (32 messages, latest: Jul 05 2019 at 11:56)
+* [notational leakage](11556notationalleakage.html) (48 messages, latest: Jul 05 2019 at 12:56)
 
-* [notational leakage](11556notationalleakage.html) (44 messages, latest: Jul 05 2019 at 11:49)
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (33 messages, latest: Jul 05 2019 at 12:01)
 
 * [Euclidean domain and GCD domain](25564EuclideandomainandGCDdomain.html) (16 messages, latest: Jul 05 2019 at 09:16)
 
