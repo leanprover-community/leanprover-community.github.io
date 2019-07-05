@@ -264,6 +264,75 @@ permalink: archive/113488general/11556notationalleakage.html
 
 <p>Is this a silly way to do it? I just deleted one of the <code>&gt;&gt;</code> lines after <code>end</code> in <code>rw_core</code></p>
 
+<a name="169700707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169700707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169700707">Mario Carneiro (Jul 05 2019 at 11:04)</a>:</h4>
+<p>like I said, use <code>change with</code> instead of <code>rw</code></p>
+
+<a name="169700739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169700739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169700739">Kenny Lau (Jul 05 2019 at 11:04)</a>:</h4>
+<p>use <code>erw</code></p>
+
+<a name="169701636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169701636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169701636">Kevin Buzzard (Jul 05 2019 at 11:25)</a>:</h4>
+<p><code>change with</code> just looks more complicated than <code>rw</code>. I have a working <code>rw'</code>. I don't mind writing new tactics. To be honest I don't even mind modding core Lean for this project, it's a standalone thing.</p>
+
+<a name="169701647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169701647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169701647">Kevin Buzzard (Jul 05 2019 at 11:25)</a>:</h4>
+<p>Chris I'll try your induction code when I get back in front of Lean. Thanks!</p>
+
+<a name="169702257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702257">Johan Commelin (Jul 05 2019 at 11:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think Mario means that you should use <code>change with</code> inside <code>induction'</code> instead of using <code>rw</code> there.</p>
+
+<a name="169702285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702285">Kevin Buzzard (Jul 05 2019 at 11:39)</a>:</h4>
+<p>I just want one tactic which is simple to apply and which doesn't leak. I am not sure I understand what is being suggested.</p>
+
+<a name="169702334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702334">Kevin Buzzard (Jul 05 2019 at 11:40)</a>:</h4>
+<p>At the minute I am writing</p>
+<div class="codehilite"><pre><span></span><span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+<span class="n">clear_up_leaks</span><span class="o">,</span>
+<span class="o">{</span> <span class="bp">...</span> <span class="o">}</span> <span class="o">{</span> <span class="bp">...</span> <span class="o">}</span>
+</pre></div>
+
+<a name="169702353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702353">Kevin Buzzard (Jul 05 2019 at 11:40)</a>:</h4>
+<p>and I want to write </p>
+<div class="codehilite"><pre><span></span><span class="n">induction&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span>
+<span class="o">{</span> <span class="c1">-- no leaks here}</span>
+<span class="o">{</span> <span class="c1">-- or here}</span>
+</pre></div>
+
+<a name="169702611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702611">Johan Commelin (Jul 05 2019 at 11:46)</a>:</h4>
+<p>Right, and Mario says that <code>clear_up_leaks</code> should use <code>change</code> instead of <code>rw</code>.</p>
+
+<a name="169702649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702649">Johan Commelin (Jul 05 2019 at 11:47)</a>:</h4>
+<p>We might want an attribute <code>@antileak</code> or something like that, that will change terms into defeq terms that are more canonical.</p>
+
+<a name="169702654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702654">Johan Commelin (Jul 05 2019 at 11:47)</a>:</h4>
+<p>I guess we could also use <code>dsimp</code> for this?</p>
+
+<a name="169702725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702725">Johan Commelin (Jul 05 2019 at 11:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> what happens if you write a simp lemma (tagged with <code>@[simp]</code> that says <code>mynat.zero = 0 := rfl</code>.<br>
+And then you call <code>induction n with d hd; dsimp</code>.</p>
+
+<a name="169702749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702749">Johan Commelin (Jul 05 2019 at 11:49)</a>:</h4>
+<p>Similarly you will want <code>mynat.succ n = n + 1 := rfl</code>.</p>
+
+<a name="169702759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702759">Johan Commelin (Jul 05 2019 at 11:49)</a>:</h4>
+<p>Is that sufficient to clear up the leaks?</p>
+
+<a name="169702763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169702763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169702763">Kevin Buzzard (Jul 05 2019 at 11:49)</a>:</h4>
+<p>That's strictly worse than <code>clear_up_leaks</code> because formally it's the same thing ("apply a tactic and then type something which you don't want") and secondly <code>simp</code> will close various goals, like <code>rfl</code> goals -- it does too much.</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notational leakage](11556notationalleakage.html) (29 messages, latest: Jul 05 2019 at 10:49)
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (32 messages, latest: Jul 05 2019 at 11:56)
+
+* [notational leakage](11556notationalleakage.html) (44 messages, latest: Jul 05 2019 at 11:49)
 
 * [Euclidean domain and GCD domain](25564EuclideandomainandGCDdomain.html) (16 messages, latest: Jul 05 2019 at 09:16)
 
@@ -98,8 +100,6 @@ permalink: archive/113488general/index.html
 * [tactic question](62193tacticquestion.html) (48 messages, latest: Jun 20 2019 at 17:35)
 
 * [determinant of groups](67057determinantofgroups.html) (1 message, latest: Jun 20 2019 at 16:49)
-
-* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (26 messages, latest: Jun 20 2019 at 11:49)
 
 * [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
 
