@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (92 messages, latest: Jul 04 2019 at 17:35)
+* [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (99 messages, latest: Jul 05 2019 at 14:58)
+
+* [matrix inverse](16178matrixinverse.html) (23 messages, latest: Jul 05 2019 at 14:31)
 
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (635 messages, latest: Jul 04 2019 at 16:13)
 
