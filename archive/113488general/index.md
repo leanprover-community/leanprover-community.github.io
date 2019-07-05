@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [names](06165names.html) (49 messages, latest: Jul 05 2019 at 07:43)
+* [Euclidean domain and GCD domain](25564EuclideandomainandGCDdomain.html) (1 message, latest: Jul 05 2019 at 08:58)
+
+* [names](06165names.html) (50 messages, latest: Jul 05 2019 at 08:19)
 
 * [Generate documentation](38342Generatedocumentation.html) (28 messages, latest: Jul 04 2019 at 18:09)
 
