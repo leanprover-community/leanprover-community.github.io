@@ -20,6 +20,67 @@ I've been wondering if it's possible to prove that <code>euclidean_domain</code>
 <p>To prove that <code>euclidean_domain</code> is an instance of  <code>gcd_domain</code>,  we must prove that gcd is unique up to multiplication by units in <code>euclidean_domain</code>. To prove this, we need to first define fields such as <code>norm_unit</code> for <code>euclidean_domain</code>. And I can figure out a way to define the <code>norm_unit</code> such that I can prove that gcd is unique up to multiplication by units.</p>
 <p>Am I missing something?</p>
 
+<a name="169694678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169694678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169694678">Kenny Lau (Jul 05 2019 at 09:02)</a>:</h4>
+<p>in Lean you need a euclidean domain <strong>and</strong> a normalization domain to form a GCD domain, I believe</p>
+
+<a name="169694725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169694725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169694725">Mario Carneiro (Jul 05 2019 at 09:02)</a>:</h4>
+<p>I don't think it's possible. I recall discussing this with <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> - not every domain is a normalization_domain; even using choice, you can't necessarily define a coherent normalization across the whole ring</p>
+
+<a name="169694776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169694776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169694776">AHan (Jul 05 2019 at 09:03)</a>:</h4>
+<p>So is this contradict to the relation of ED and GCD domain in abstract algebra ?</p>
+
+<a name="169694779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169694779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169694779">Mario Carneiro (Jul 05 2019 at 09:03)</a>:</h4>
+<p>I think <code>gcd_domain</code> should actually be renamed, or it should lose its dependence on <code>normalization_domain</code>, because this constraint is not in the maths definition of the term, and indeed there are lots of examples of GCD domains that have no natural normalization</p>
+
+<a name="169694843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169694843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169694843">Mario Carneiro (Jul 05 2019 at 09:04)</a>:</h4>
+<p><code>int</code> is a normalization domain but I think it is an exception in this regard</p>
+
+<a name="169694969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169694969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169694969">AHan (Jul 05 2019 at 09:07)</a>:</h4>
+<p>If both <code>euclidean_domain</code> and <code>gcd_domain</code> are not depend on <code>normalization_domain</code>,<br>
+then is gcd still unique up to something?</p>
+
+<a name="169695031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695031">Mario Carneiro (Jul 05 2019 at 09:08)</a>:</h4>
+<p>if <code>gcd_domain</code> does not depend on <code>normalization_domain</code>, then <code>gcd</code> will not be a function, it will be an assertion that a gcd exists</p>
+
+<a name="169695064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695064">Mario Carneiro (Jul 05 2019 at 09:09)</a>:</h4>
+<p>lean's <code>gcd_domain</code> is more like "a domain where you can say <code>gcd a b</code> and mean something"</p>
+
+<a name="169695067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695067">Mario Carneiro (Jul 05 2019 at 09:09)</a>:</h4>
+<p>but the maths definition is more abstract than that</p>
+
+<a name="169695153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695153">Mario Carneiro (Jul 05 2019 at 09:11)</a>:</h4>
+<p>One way to say it is "<code>associates A</code> is a lattice"</p>
+
+<a name="169695210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695210">Chris Hughes (Jul 05 2019 at 09:12)</a>:</h4>
+<p>That has computational content</p>
+
+<a name="169695215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695215">Mario Carneiro (Jul 05 2019 at 09:12)</a>:</h4>
+<p>I'm not sure whether to give it content</p>
+
+<a name="169695230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695230">Mario Carneiro (Jul 05 2019 at 09:13)</a>:</h4>
+<p>I think we probably want those operations on associates, so that's one option</p>
+
+<a name="169695242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695242">Mario Carneiro (Jul 05 2019 at 09:13)</a>:</h4>
+<p>it can also be written <code>gcd : A -&gt; A -&gt; associates A</code></p>
+
+<a name="169695389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Euclidean%20domain%20and%20GCD%20domain/near/169695389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/25564EuclideandomainandGCDdomain.html#169695389">Mario Carneiro (Jul 05 2019 at 09:16)</a>:</h4>
+<p>But I think that <code>gcd_domain</code> was written for the more CSy goal of just unifying <code>int.gcd</code> and <code>nat.gcd</code>. I think this is a bad idea, I think we want these operations regardless and <code>gcd_domain</code> is not really generalizing these</p>
+
 
 {% endraw %}
 
