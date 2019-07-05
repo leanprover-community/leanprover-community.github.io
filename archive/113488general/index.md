@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [apply_fun](22895applyfun.html) (28 messages, latest: Jul 05 2019 at 21:45)
+
 * [Generate documentation](38342Generatedocumentation.html) (29 messages, latest: Jul 05 2019 at 20:53)
 
 * [Priorities of × and ≃](69563Prioritiesofand.html) (12 messages, latest: Jul 05 2019 at 20:49)
-
-* [apply_fun](22895applyfun.html) (24 messages, latest: Jul 05 2019 at 20:43)
 
 * [names](06165names.html) (53 messages, latest: Jul 05 2019 at 20:04)
 

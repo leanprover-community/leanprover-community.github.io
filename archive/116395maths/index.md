@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [One-object category](33573Oneobjectcategory.html) (12 messages, latest: Jul 05 2019 at 20:58)
+* [One-object category](33573Oneobjectcategory.html) (19 messages, latest: Jul 05 2019 at 21:23)
 
 * [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (41 messages, latest: Jul 05 2019 at 20:33)
 
