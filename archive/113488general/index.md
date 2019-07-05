@@ -9,6 +9,14 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Generate documentation](38342Generatedocumentation.html) (29 messages, latest: Jul 05 2019 at 20:53)
+
+* [Priorities of × and ≃](69563Prioritiesofand.html) (12 messages, latest: Jul 05 2019 at 20:49)
+
+* [apply_fun](22895applyfun.html) (24 messages, latest: Jul 05 2019 at 20:43)
+
+* [names](06165names.html) (53 messages, latest: Jul 05 2019 at 20:04)
+
 * [notational leakage](11556notationalleakage.html) (58 messages, latest: Jul 05 2019 at 19:55)
 
 * [working out where a typeclass instance is defined](60974workingoutwhereatypeclassinstanceisdefined.html) (27 messages, latest: Jul 05 2019 at 16:33)
@@ -21,15 +29,9 @@ permalink: archive/113488general/index.html
 
 * [Euclidean domain and GCD domain](25564EuclideandomainandGCDdomain.html) (16 messages, latest: Jul 05 2019 at 09:16)
 
-* [names](06165names.html) (50 messages, latest: Jul 05 2019 at 08:19)
-
-* [Generate documentation](38342Generatedocumentation.html) (28 messages, latest: Jul 04 2019 at 18:09)
-
 * [structure question](80074structurequestion.html) (4 messages, latest: Jul 04 2019 at 17:34)
 
 * [symmetry](60107symmetry.html) (3 messages, latest: Jul 04 2019 at 17:21)
-
-* [apply_fun](22895applyfun.html) (23 messages, latest: Jul 04 2019 at 16:57)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
 

@@ -181,6 +181,25 @@ BTW, I think that it's better to have a command or a user attr, not one loop for
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169728444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169728444">Johan Commelin (Jul 05 2019 at 18:44)</a>:</h4>
 <p>That shouldn't be too hard...</p>
 
+<a name="169733144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169733144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169733144">Scott Morrison (Jul 05 2019 at 20:11)</a>:</h4>
+<blockquote>
+<p>Mario Carneiro: While it might be nice to transport results from the category theory iso, I think we actually want a group_iso to have a particular definition as a structure<br>
+Mario Carneiro: because people will be constructing these with structure builders and such</p>
+</blockquote>
+<p>I'm not sure what the objection is here. <code>iso</code> is defined just like <code>equiv</code>, it's a structure you define like so:</p>
+<div class="codehilite"><pre><span></span>{ hom := ...,
+  inv := ... }
+</pre></div>
+
+
+<p>and each of those <code>...</code> is constructing say a <code>subtype is_group_hom</code>.</p>
+
+<a name="169734379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169734379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169734379">Yury G. Kudryashov (Jul 05 2019 at 20:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>  For many algebraic objects, with the current implementation you only need to prove that <code>hom</code> is an <code>is_group_hom</code>. Also, you don't need to use <code>ext</code> in proofs of <code>inv * hom = id</code> and <code>hom * inv = id</code>.<br>
+Of course, a method like <code>of_equiv_hom (e : equiv α β) [is_group_hom e.to_fun] : iso α β</code> would solve this issue.</p>
+
 
 {% endraw %}
 
