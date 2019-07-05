@@ -21,6 +21,51 @@ Do I understand correctly that there is no (simple) way to overcome this, becaus
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/168229718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#168229718">Scott Morrison (Jun 16 2019 at 01:00)</a>:</h4>
 <p>Yes.</p>
 
+<a name="169723241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723241">Yury G. Kudryashov (Jul 05 2019 at 17:13)</a>:</h4>
+<p>Hi again,<br>
+What do you think about the following alternative approach to dealing with multiple universes:<br>
+1. In most cases (may be, outside of <code>/category_theory</code>), use one universe.<br>
+2. If really needed, use <code>ulift</code><br>
+3. To make 2 possible, write a tactic that lifts properties/instances/... to <code>ulift</code>.<br>
+This way it would be possible to, e.g., directly apply various category theory facts to groups/rings/etc. I guess there should be something bad about this approach (I mean, you must've had some reason not to take this path), but I fail to guess what exactly is bad.</p>
+
+<a name="169723323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723323">Mario Carneiro (Jul 05 2019 at 17:14)</a>:</h4>
+<p>I think the main difference is that universes are mostly handled automatically by lean, while <code>ulift</code> makes its presence known whenever you deal with it</p>
+
+<a name="169723613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723613">Yury G. Kudryashov (Jul 05 2019 at 17:19)</a>:</h4>
+<p>How often somebody really needs more than one universe? My guess is that more rarely than someone needs to prove a lemma/def that can be stated for categories.</p>
+
+<a name="169723703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723703">Mario Carneiro (Jul 05 2019 at 17:21)</a>:</h4>
+<p>You would be surprised. A common one is if you have a ring <code>R</code> in <code>Type u</code> and then it interacts with a concrete structure like <code>int : Type 0</code></p>
+
+<a name="169723766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723766">Chris Hughes (Jul 05 2019 at 17:22)</a>:</h4>
+<p>When do you need a ring <code>R</code> in <code>Type u</code> and not <code>Type</code>?</p>
+
+<a name="169723785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723785">Mario Carneiro (Jul 05 2019 at 17:22)</a>:</h4>
+<p>as soon as you start doing enough category theory that ZFC isn't enough</p>
+
+<a name="169723800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723800">Kevin Buzzard (Jul 05 2019 at 17:22)</a>:</h4>
+<p>ZFC is always enough. It's just that sometimes it's a bit painful to show this</p>
+
+<a name="169723804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723804">Mario Carneiro (Jul 05 2019 at 17:23)</a>:</h4>
+<p>that's the kind of constraint you can't undo without a huge refactor</p>
+
+<a name="169723820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723820">Kevin Buzzard (Jul 05 2019 at 17:23)</a>:</h4>
+<p>The ZFC'ists would argue that a ring in Type u is not a ring, it's something weirder.</p>
+
+<a name="169723866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60category_theory%60%20results%20and%20universes/near/169723866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/65570categorytheoryresultsanduniverses.html#169723866">Mario Carneiro (Jul 05 2019 at 17:24)</a>:</h4>
+<p>a conglomer-ring</p>
+
 
 {% endraw %}
 

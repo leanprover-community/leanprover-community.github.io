@@ -379,6 +379,75 @@ And then you call <code>induction n with d hd; dsimp</code>.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169714973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169714973">Kevin Buzzard (Jul 05 2019 at 14:57)</a>:</h4>
 <p>Both Scott and I are speaking as mathematicians who have to deal with questions from undergrads of the form "why doesn't this rewrite work?" and we give technical answers involving <code>pp.all</code> but we'd rather the rewrite just worked ;-)</p>
 
+<a name="169724557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169724557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169724557">Kevin Buzzard (Jul 05 2019 at 17:37)</a>:</h4>
+<blockquote>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">induction&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="n">hp</span> <span class="n">none</span> <span class="n">ids</span> <span class="n">none</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="bp">`</span><span class="o">[</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="k">with</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">},</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">le</span> <span class="k">with</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">},</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="bp">@</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="k">with</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">only</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}]</span>
+</pre></div>
+
+
+</blockquote>
+<p>What do I need to open to make this compile? </p>
+<div class="codehilite"><pre><span></span>unknown identifier &#39;parse&#39;
+unknown identifier &#39;cases_arg_p&#39;
+unknown identifier &#39;parse&#39;
+unknown identifier &#39;with_ident_list&#39;
+</pre></div>
+
+
+<p>Regarding <code>succ</code>, are you suggesting that <code>n + 1</code> is the canonical way of writing <code>succ n</code>? I had assumed it was the other way around.</p>
+
+<a name="169725741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169725741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169725741">Mario Carneiro (Jul 05 2019 at 17:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+
+<span class="c1">-- I want to never see mynat.zero again</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="kn">definition</span> <span class="n">add</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">succ</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span> <span class="n">lean</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">tactic</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">induction&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="n">hp</span> <span class="n">none</span> <span class="n">ids</span> <span class="n">none</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="bp">`</span><span class="o">[</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="k">with</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">},</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">le</span> <span class="k">with</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">},</span>
+  <span class="n">try</span> <span class="o">{</span><span class="n">change</span> <span class="bp">@</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="k">with</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">only</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}]</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="kn">theorem</span> <span class="n">zero_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">induction&#39;</span> <span class="n">x</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="c1">-- ⊢ 0 + 0 = 0</span>
+  <span class="c1">-- 0 + d = d ⊢ 0 + (d + 1) = d + 1</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

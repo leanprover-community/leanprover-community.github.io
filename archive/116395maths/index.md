@@ -9,6 +9,12 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (21 messages, latest: Jul 05 2019 at 17:57)
+
+* [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (12 messages, latest: Jul 05 2019 at 17:24)
+
+* [Maps with bounded coboundaries](84269Mapswithboundedcoboundaries.html) (1 message, latest: Jul 05 2019 at 17:06)
+
 * [matrix inverse](16178matrixinverse.html) (76 messages, latest: Jul 05 2019 at 15:51)
 
 * [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (101 messages, latest: Jul 05 2019 at 15:29)
@@ -28,8 +34,6 @@ permalink: archive/116395maths/index.html
 * [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
 
 * [Cauchy reals = Dedekind reals?](46336CauchyrealsDedekindreals.html) (95 messages, latest: Jul 03 2019 at 04:45)
-
-* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (3 messages, latest: Jul 01 2019 at 07:25)
 
 * [order_dual disappointment](99857orderdualdisappointment.html) (3 messages, latest: Jun 28 2019 at 18:57)
 
@@ -58,8 +62,6 @@ permalink: archive/116395maths/index.html
 * [quotient_group.map_mk](38441quotientgroupmapmk.html) (4 messages, latest: Jun 17 2019 at 15:00)
 
 * [class of primes](04956classofprimes.html) (2 messages, latest: Jun 17 2019 at 11:06)
-
-* [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (2 messages, latest: Jun 16 2019 at 01:00)
 
 * [CDGAs](23907CDGAs.html) (119 messages, latest: Jun 13 2019 at 17:00)
 
