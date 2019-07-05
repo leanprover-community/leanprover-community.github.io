@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [notational leakage](11556notationalleakage.html) (29 messages, latest: Jul 05 2019 at 10:49)
+
 * [Euclidean domain and GCD domain](25564EuclideandomainandGCDdomain.html) (16 messages, latest: Jul 05 2019 at 09:16)
 
 * [names](06165names.html) (50 messages, latest: Jul 05 2019 at 08:19)
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
 
 * [VScode extension](56578VScodeextension.html) (411 messages, latest: Jul 04 2019 at 11:19)
-
-* [notational leakage](11556notationalleakage.html) (23 messages, latest: Jul 04 2019 at 10:43)
 
 * [implicit variables](69365implicitvariables.html) (5 messages, latest: Jul 03 2019 at 18:28)
 

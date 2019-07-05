@@ -157,6 +157,113 @@ permalink: archive/113488general/11556notationalleakage.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169637678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169637678">Johan Commelin (Jul 04 2019 at 10:43)</a>:</h4>
 <p>But if you want to write "beautiful, beginner-friendly proofs"...</p>
 
+<a name="169698599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169698599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169698599">Kevin Buzzard (Jul 05 2019 at 10:19)</a>:</h4>
+<p>What I need are non-leaky tactics, maybe called <code>induction'</code> and <code>cases'</code>, so that</p>
+<div class="codehilite"><pre><span></span><span class="n">induction&#39;</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+</pre></div>
+
+
+<p>is the same as</p>
+<div class="codehilite"><pre><span></span>  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">all_goals</span> <span class="o">{</span><span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">),</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}},</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">all_goals</span> <span class="o">{</span><span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">le</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">has_le</span><span class="bp">.</span><span class="n">le</span> <span class="n">mynat</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}},</span>
+</pre></div>
+
+
+<p>etc etc</p>
+<p>and <code>induction'</code> should fail iff <code>induction</code> fails.</p>
+<p>Are these trivial to write?</p>
+
+<a name="169698901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169698901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169698901">Kevin Buzzard (Jul 05 2019 at 10:25)</a>:</h4>
+<p>I also want a rewrite tactic which does <em>not</em> try <code>rfl</code> at the end. Is this already in Lean?</p>
+
+<a name="169698952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169698952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169698952">Chris Hughes (Jul 05 2019 at 10:26)</a>:</h4>
+<p>Does this work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span> <span class="n">lean</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">tactic</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">induction&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="n">hp</span> <span class="n">none</span> <span class="n">ids</span> <span class="n">none</span><span class="o">,</span>
+<span class="bp">`</span><span class="o">[</span><span class="n">repeat</span> <span class="o">{</span><span class="n">all_goals</span> <span class="o">{</span><span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">),</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}},</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">all_goals</span> <span class="o">{</span><span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">le</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">has_le</span><span class="bp">.</span><span class="n">le</span> <span class="n">mynat</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">}}]</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+</pre></div>
+
+<a name="169698965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169698965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169698965">Chris Hughes (Jul 05 2019 at 10:27)</a>:</h4>
+<p>You could also write a recursor using <code>has_zero.zero</code> and do <code>induction ... using</code></p>
+
+<a name="169699058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169699058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169699058">Mario Carneiro (Jul 05 2019 at 10:28)</a>:</h4>
+<p>It would be better to use <code>change mynat.zero with 0 at *</code> instead of <code>rw rfl</code> like that</p>
+
+<a name="169699986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169699986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169699986">Kevin Buzzard (Jul 05 2019 at 10:49)</a>:</h4>
+<p>For the rw with no refl I just copied a bunch of private defs from core and then deleted a random line and I think I got lucky:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">lean</span>
+<span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span>
+
+<span class="n">local</span> <span class="kn">postfix</span> <span class="bp">`</span><span class="err">?</span><span class="bp">`</span><span class="o">:</span><span class="mi">9001</span> <span class="o">:=</span> <span class="n">optional</span>
+<span class="n">local</span> <span class="kn">postfix</span> <span class="bp">*</span><span class="o">:</span><span class="mi">9001</span> <span class="o">:=</span> <span class="n">many</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">resolve_name&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="o">{</span>
+  <span class="n">p</span> <span class="err">←</span> <span class="n">resolve_name</span> <span class="n">n</span><span class="o">,</span>
+  <span class="k">match</span> <span class="n">p</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">expr</span><span class="bp">.</span><span class="n">const</span> <span class="n">n</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">mk_const</span> <span class="n">n</span> <span class="c1">-- create metavars for universe levels</span>
+  <span class="bp">|</span> <span class="bp">_</span>              <span class="o">:=</span> <span class="n">i_to_expr</span> <span class="n">p</span>
+  <span class="kn">end</span>
+<span class="o">}</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">rw_goal</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">rewrite_cfg</span><span class="o">)</span> <span class="o">(</span><span class="n">rs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rw_rule</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">rs</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">r</span><span class="o">,</span> <span class="n">do</span>
+ <span class="n">save_info</span> <span class="n">r</span><span class="bp">.</span><span class="n">pos</span><span class="o">,</span>
+ <span class="n">eq_lemmas</span> <span class="err">←</span> <span class="n">get_rule_eqn_lemmas</span> <span class="n">r</span><span class="o">,</span>
+ <span class="n">orelse&#39;</span>
+   <span class="o">(</span><span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr&#39;</span> <span class="n">r</span><span class="bp">.</span><span class="n">rule</span><span class="o">,</span> <span class="n">rewrite_target</span> <span class="n">e</span> <span class="o">{</span><span class="n">symm</span> <span class="o">:=</span> <span class="n">r</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">..</span><span class="n">cfg</span><span class="o">})</span>
+   <span class="o">(</span><span class="n">eq_lemmas</span><span class="bp">.</span><span class="n">mfirst</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">n</span><span class="o">,</span> <span class="n">rewrite_target</span> <span class="n">e</span> <span class="o">{</span><span class="n">symm</span> <span class="o">:=</span> <span class="n">r</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">..</span><span class="n">cfg</span><span class="o">})</span>
+   <span class="o">(</span><span class="n">eq_lemmas</span><span class="bp">.</span><span class="n">empty</span><span class="o">)</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">uses_hyp</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="n">e</span><span class="bp">.</span><span class="n">fold</span> <span class="n">ff</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">t</span> <span class="bp">_</span> <span class="n">r</span><span class="o">,</span> <span class="n">r</span> <span class="bp">||</span> <span class="n">to_bool</span> <span class="o">(</span><span class="n">t</span> <span class="bp">=</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">rw_hyp</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">rewrite_cfg</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rw_rule</span> <span class="bp">→</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="o">[]</span>      <span class="n">hyp</span> <span class="o">:=</span> <span class="n">skip</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">r</span><span class="bp">::</span><span class="n">rs</span><span class="o">)</span> <span class="n">hyp</span> <span class="o">:=</span> <span class="n">do</span>
+  <span class="n">save_info</span> <span class="n">r</span><span class="bp">.</span><span class="n">pos</span><span class="o">,</span>
+  <span class="n">eq_lemmas</span> <span class="err">←</span> <span class="n">get_rule_eqn_lemmas</span> <span class="n">r</span><span class="o">,</span>
+  <span class="n">orelse&#39;</span>
+    <span class="o">(</span><span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">to_expr&#39;</span> <span class="n">r</span><span class="bp">.</span><span class="n">rule</span><span class="o">,</span> <span class="n">when</span> <span class="o">(</span><span class="n">not</span> <span class="o">(</span><span class="n">uses_hyp</span> <span class="n">e</span> <span class="n">hyp</span><span class="o">))</span> <span class="err">$</span> <span class="n">rewrite_hyp</span> <span class="n">e</span> <span class="n">hyp</span> <span class="o">{</span><span class="n">symm</span> <span class="o">:=</span> <span class="n">r</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">..</span><span class="n">cfg</span><span class="o">}</span> <span class="bp">&gt;&gt;=</span> <span class="n">rw_hyp</span> <span class="n">rs</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">eq_lemmas</span><span class="bp">.</span><span class="n">mfirst</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">n</span><span class="o">,</span> <span class="n">rewrite_hyp</span> <span class="n">e</span> <span class="n">hyp</span> <span class="o">{</span><span class="n">symm</span> <span class="o">:=</span> <span class="n">r</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">..</span><span class="n">cfg</span><span class="o">}</span> <span class="bp">&gt;&gt;=</span> <span class="n">rw_hyp</span> <span class="n">rs</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">eq_lemmas</span><span class="bp">.</span><span class="n">empty</span><span class="o">)</span>
+
+<span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">rw_core</span> <span class="o">(</span><span class="n">rs</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">rw_rules</span><span class="o">)</span> <span class="o">(</span><span class="n">loca</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">rewrite_cfg</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="k">match</span> <span class="n">loca</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="n">loc</span><span class="bp">.</span><span class="n">wildcard</span> <span class="o">:=</span> <span class="n">loca</span><span class="bp">.</span><span class="n">try_apply</span> <span class="o">(</span><span class="n">rw_hyp</span> <span class="n">cfg</span> <span class="n">rs</span><span class="bp">.</span><span class="n">rules</span><span class="o">)</span> <span class="o">(</span><span class="n">rw_goal</span> <span class="n">cfg</span> <span class="n">rs</span><span class="bp">.</span><span class="n">rules</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">_</span>            <span class="o">:=</span> <span class="n">loca</span><span class="bp">.</span><span class="n">apply</span> <span class="o">(</span><span class="n">rw_hyp</span> <span class="n">cfg</span> <span class="n">rs</span><span class="bp">.</span><span class="n">rules</span><span class="o">)</span> <span class="o">(</span><span class="n">rw_goal</span> <span class="n">cfg</span> <span class="n">rs</span><span class="bp">.</span><span class="n">rules</span><span class="o">)</span>
+<span class="kn">end</span> <span class="bp">&gt;&gt;</span> <span class="o">(</span><span class="n">returnopt</span> <span class="n">rs</span><span class="bp">.</span><span class="n">end_pos</span> <span class="bp">&gt;&gt;=</span> <span class="n">save_info</span> <span class="bp">&lt;|&gt;</span> <span class="n">skip</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">rw&#39;</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">rw_rules</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">location</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">rewrite_cfg</span> <span class="o">:=</span> <span class="o">{})</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">propagate_tags</span> <span class="o">(</span><span class="n">rw_core</span> <span class="n">q</span> <span class="n">l</span> <span class="n">cfg</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+</pre></div>
+
+
+<p>Is this a silly way to do it? I just deleted one of the <code>&gt;&gt;</code> lines after <code>end</code> in <code>rw_core</code></p>
+
 
 {% endraw %}
 
