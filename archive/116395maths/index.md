@@ -9,9 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (21 messages, latest: Jul 05 2019 at 17:57)
+* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (24 messages, latest: Jul 05 2019 at 18:54)
 
-* [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (12 messages, latest: Jul 05 2019 at 17:24)
+* [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (39 messages, latest: Jul 05 2019 at 18:44)
+
+* [One-object category](33573Oneobjectcategory.html) (6 messages, latest: Jul 05 2019 at 18:36)
 
 * [Maps with bounded coboundaries](84269Mapswithboundedcoboundaries.html) (1 message, latest: Jul 05 2019 at 17:06)
 
