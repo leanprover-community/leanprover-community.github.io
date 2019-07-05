@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notational leakage](11556notationalleakage.html) (53 messages, latest: Jul 05 2019 at 17:58)
+* [notational leakage](11556notationalleakage.html) (58 messages, latest: Jul 05 2019 at 19:55)
 
 * [working out where a typeclass instance is defined](60974workingoutwhereatypeclassinstanceisdefined.html) (27 messages, latest: Jul 05 2019 at 16:33)
 
