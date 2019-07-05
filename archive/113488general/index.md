@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notational leakage](11556notationalleakage.html) (48 messages, latest: Jul 05 2019 at 12:56)
+* [notational leakage](11556notationalleakage.html) (49 messages, latest: Jul 05 2019 at 13:02)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (33 messages, latest: Jul 05 2019 at 12:01)
 
