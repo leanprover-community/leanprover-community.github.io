@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [working out where a typeclass instance is defined](60974workingoutwhereatypeclassinstanceisdefined.html) (27 messages, latest: Jul 05 2019 at 16:33)
+
 * [notational leakage](11556notationalleakage.html) (51 messages, latest: Jul 05 2019 at 14:57)
 
 * [1](768501.html) (8 messages, latest: Jul 05 2019 at 14:41)
