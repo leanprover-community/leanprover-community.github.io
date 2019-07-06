@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
+
+* [notational leakage](11556notationalleakage.html) (59 messages, latest: Jul 06 2019 at 04:18)
+
 * [apply_fun](22895applyfun.html) (31 messages, latest: Jul 05 2019 at 22:59)
 
 * [Generate documentation](38342Generatedocumentation.html) (29 messages, latest: Jul 05 2019 at 20:53)
@@ -16,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Priorities of × and ≃](69563Prioritiesofand.html) (12 messages, latest: Jul 05 2019 at 20:49)
 
 * [names](06165names.html) (53 messages, latest: Jul 05 2019 at 20:04)
-
-* [notational leakage](11556notationalleakage.html) (58 messages, latest: Jul 05 2019 at 19:55)
 
 * [working out where a typeclass instance is defined](60974workingoutwhereatypeclassinstanceisdefined.html) (27 messages, latest: Jul 05 2019 at 16:33)
 
