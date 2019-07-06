@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [head-based instance resolution](80776headbasedinstanceresolution.html) (2 messages, latest: Jul 06 2019 at 07:13)
+* [head-based instance resolution](80776headbasedinstanceresolution.html) (3 messages, latest: Jul 06 2019 at 08:10)
 
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
 
