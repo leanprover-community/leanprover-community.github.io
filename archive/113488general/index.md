@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [head-based instance resolution](80776headbasedinstanceresolution.html) (1 message, latest: Jul 06 2019 at 06:49)
+
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
 
 * [notational leakage](11556notationalleakage.html) (59 messages, latest: Jul 06 2019 at 04:18)
