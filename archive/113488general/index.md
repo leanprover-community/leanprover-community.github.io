@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [apply_fun](22895applyfun.html) (32 messages, latest: Jul 06 2019 at 13:47)
+
 * [head-based instance resolution](80776headbasedinstanceresolution.html) (3 messages, latest: Jul 06 2019 at 08:10)
 
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
 
 * [notational leakage](11556notationalleakage.html) (59 messages, latest: Jul 06 2019 at 04:18)
-
-* [apply_fun](22895applyfun.html) (31 messages, latest: Jul 05 2019 at 22:59)
 
 * [Generate documentation](38342Generatedocumentation.html) (29 messages, latest: Jul 05 2019 at 20:53)
 
