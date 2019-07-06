@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1136 tangent cone](056691136tangentcone.html) (1 message, latest: Jul 06 2019 at 09:49)
+* [#1176 monads](646291176monads.html) (18 messages, latest: Jul 06 2019 at 10:48)
 
-* [#1176 monads](646291176monads.html) (16 messages, latest: Jul 05 2019 at 20:05)
+* [#1136 tangent cone](056691136tangentcone.html) (1 message, latest: Jul 06 2019 at 09:49)
 
 * [#943 lc refactor](96169943lcrefactor.html) (137 messages, latest: Jul 03 2019 at 11:37)
 
