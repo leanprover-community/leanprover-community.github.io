@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ordered monoids](38431orderedmonoids.html) (27 messages, latest: Jul 06 2019 at 18:59)
+* [ordered monoids](38431orderedmonoids.html) (33 messages, latest: Jul 06 2019 at 19:35)
 
 * [head-based instance resolution](80776headbasedinstanceresolution.html) (4 messages, latest: Jul 06 2019 at 16:00)
 

@@ -166,6 +166,39 @@ invalid structure value { ... }, field &#39;bot_le&#39; was not provided
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778436">Mario Carneiro (Jul 06 2019 at 18:59)</a>:</h4>
 <p>I mean stick <code>(bot := 0)</code> in <code>canonically_ordered_monoid</code></p>
 
+<a name="169778514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778514">Mario Carneiro (Jul 06 2019 at 19:01)</a>:</h4>
+<p>I think having a custom constructor would solve a lot of problems, but lean magic only works on the builtin constructor which makes this unattractive</p>
+
+<a name="169778561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778561">Kevin Buzzard (Jul 06 2019 at 19:02)</a>:</h4>
+<p>lean magic includes <code>i_just_proved_all_teh_theorems</code> or whatever it's called now (<code>structure_helper</code> I think)</p>
+
+<a name="169778580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778580">Mario Carneiro (Jul 06 2019 at 19:03)</a>:</h4>
+<p>One way to recover the structure notation is to have an auxiliary class with the arguments. <code>nonneg_comm_group</code> was my attempt at this, but I think in practice it ends up just being one more class in the hierarchy</p>
+
+<a name="169778841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778841">Kevin Buzzard (Jul 06 2019 at 19:11)</a>:</h4>
+<blockquote>
+<p>I mean stick <code>(bot := 0)</code> in <code>canonically_ordered_monoid</code></p>
+</blockquote>
+<p>In <code>preorder</code> we see</p>
+<div class="codehilite"><pre><span></span><span class="o">(</span><span class="n">lt</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="bp">.</span> <span class="n">order_laws_tac</span><span class="o">)</span>
+</pre></div>
+
+
+<p>So the question is how to prove <code>bot_le</code>;  I can't even right click on <code>order_laws_tac</code> to see what it's doing.</p>
+
+<a name="169779588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169779588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169779588">Mario Carneiro (Jul 06 2019 at 19:35)</a>:</h4>
+<p>If clicking doesn't work you can always put it somewhere else, i.e. <code>#print order_laws_tac</code> and then click on it there</p>
+
+<a name="169779592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169779592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169779592">Mario Carneiro (Jul 06 2019 at 19:35)</a>:</h4>
+<p>it's basically <code>exact rfl</code></p>
+
 
 {% endraw %}
 
