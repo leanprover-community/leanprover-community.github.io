@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (35 messages, latest: Jul 06 2019 at 22:42)
+
 * [ordered monoids](38431orderedmonoids.html) (33 messages, latest: Jul 06 2019 at 19:35)
 
 * [head-based instance resolution](80776headbasedinstanceresolution.html) (4 messages, latest: Jul 06 2019 at 16:00)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [1](768501.html) (8 messages, latest: Jul 05 2019 at 14:41)
 
 * [should le_refl be @\[refl\]](25969shouldlereflberefl.html) (6 messages, latest: Jul 05 2019 at 14:35)
-
-* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (34 messages, latest: Jul 05 2019 at 14:10)
 
 * [Euclidean domain and GCD domain](25564EuclideandomainandGCDdomain.html) (16 messages, latest: Jul 05 2019 at 09:16)
 
