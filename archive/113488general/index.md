@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ordered monoids](38431orderedmonoids.html) (2 messages, latest: Jul 06 2019 at 14:57)
+* [ordered monoids](38431orderedmonoids.html) (16 messages, latest: Jul 06 2019 at 15:54)
 
 * [apply_fun](22895applyfun.html) (32 messages, latest: Jul 06 2019 at 13:47)
 
