@@ -78,6 +78,94 @@ permalink: archive/113488general/38431orderedmonoids.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169772019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169772019">Johan Commelin (Jul 06 2019 at 15:54)</a>:</h4>
 <p>You need the cancellative thing</p>
 
+<a name="169777878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169777878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169777878">Kevin Buzzard (Jul 06 2019 at 18:42)</a>:</h4>
+<p>Talking of canonically ordered monoids,</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">canonically_ordered_monoid</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">ordered_comm_monoid</span> <span class="n">α</span><span class="o">,</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">order_bot</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_iff_exists_add</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">a</span> <span class="n">b</span><span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">↔</span> <span class="bp">∃</span><span class="n">c</span><span class="o">,</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+
+<p>it occurred to me yesterday that this <code>le_iff_exists_add</code> axiom implies that that <code>0 ≤ b</code> for all <code>b</code>, which makes it surprising that Lean asks for the <code>lattice.order_bot</code>structure; it could be generated automatically, because one can prove that bot must be 0 from the other stuff.</p>
+
+<a name="169777958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169777958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169777958">Kevin Buzzard (Jul 06 2019 at 18:44)</a>:</h4>
+<p>I guess that I'm saying that instead of <code>canonically_ordered_monoid</code> extending <code>lattice.order_bot</code> it should not mention it at all, and then there should just be an instance making a lattice.order_bot from a canonically ordered monoid.</p>
+
+<a name="169777973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169777973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169777973">Mario Carneiro (Jul 06 2019 at 18:45)</a>:</h4>
+<p>That's true, but you still want the structure to have both a bot and a zero. What if the structure already has a bot and a zero? Granted it's pretty unlikely that they are not defeq, but this definition permits it</p>
+
+<a name="169778035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778035">Mario Carneiro (Jul 06 2019 at 18:47)</a>:</h4>
+<p>In any case I don't think that would be a very good instance - it is a kind of cross cutting thing, it will cause typeclass inference to get more complicated</p>
+
+<a name="169778039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778039">Mario Carneiro (Jul 06 2019 at 18:47)</a>:</h4>
+<p>Then again, it's already an instance with this definition <span aria-label="thinking" class="emoji emoji-1f914" role="img" title="thinking">:thinking:</span></p>
+
+<a name="169778093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778093">Kevin Buzzard (Jul 06 2019 at 18:49)</a>:</h4>
+<p>So it seems to me that it should be like the lt in a preorder: <code>canonically_ordered_monoid</code> should not extend <code>lattice.order_bot</code> but it should ask for three fields, <code>le_iff_exists_add</code> and then <code>bot</code> but with the <code>:=</code> thing so that the user can define it if they want but if they don't it defaults to <code>zero</code>, and then a tactic can autogenerate <code>bot_le</code> if the user wants it to.</p>
+
+<a name="169778225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778225">Mario Carneiro (Jul 06 2019 at 18:53)</a>:</h4>
+<p>it is already doing basically that</p>
+
+<a name="169778231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778231">Mario Carneiro (Jul 06 2019 at 18:53)</a>:</h4>
+<p>You can stick <code>(bot := 0)</code> at the end and I think it will work</p>
+
+<a name="169778373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778373">Kevin Buzzard (Jul 06 2019 at 18:57)</a>:</h4>
+<blockquote>
+<p>it is already doing basically that</p>
+</blockquote>
+<p>It's not, at least in the sense that if I write this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">canonically_ordered_comm_semiring</span> <span class="n">mynat</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">+</span><span class="o">),</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">add_assoc</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="n">zero_add</span><span class="o">,</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">le</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">≤</span><span class="o">),</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="n">le_refl</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="n">le_trans</span><span class="o">,</span>
+  <span class="n">le_antisymm</span> <span class="o">:=</span> <span class="n">le_antisymm</span><span class="o">,</span>
+  <span class="n">add_le_add_left</span> <span class="o">:=</span> <span class="n">add_le_add_left</span><span class="o">,</span>
+  <span class="n">lt_of_add_lt_add_left</span> <span class="o">:=</span> <span class="n">lt_of_add_lt_add_left</span><span class="o">,</span>
+<span class="c1">--  bot := ⊥,</span>
+<span class="c1">--  bot_le := bot_le,</span>
+  <span class="n">le_iff_exists_add</span> <span class="o">:=</span> <span class="n">le_iff_exists_add</span><span class="o">,</span>
+  <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="n">mul_assoc</span><span class="o">,</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="n">one_mul</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="n">mul_one</span><span class="o">,</span>
+  <span class="n">left_distrib</span> <span class="o">:=</span> <span class="n">left_distrib</span><span class="o">,</span>
+  <span class="n">right_distrib</span> <span class="o">:=</span> <span class="n">right_distrib</span><span class="o">,</span>
+  <span class="n">zero_mul</span> <span class="o">:=</span> <span class="n">zero_mul</span><span class="o">,</span>
+  <span class="n">mul_zero</span> <span class="o">:=</span> <span class="n">mul_zero</span><span class="o">,</span>
+  <span class="n">mul_comm</span> <span class="o">:=</span> <span class="n">mul_comm</span><span class="o">,</span>
+  <span class="n">zero_ne_one</span> <span class="o">:=</span> <span class="n">zero_ne_one</span><span class="o">,</span>
+  <span class="n">mul_eq_zero_iff</span> <span class="o">:=</span> <span class="n">mul_eq_zero_iff</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>then, unsurprisingly, it says</p>
+<div class="codehilite"><pre><span></span>invalid structure value { ... }, field &#39;bot&#39; was not provided
+invalid structure value { ... }, field &#39;bot_le&#39; was not provided
+</pre></div>
+
+<a name="169778419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778419">Kevin Buzzard (Jul 06 2019 at 18:58)</a>:</h4>
+<p>I don't want my player to have to worry about bot. I might just make another constructor.</p>
+
+<a name="169778436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered%20monoids/near/169778436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38431orderedmonoids.html#169778436">Mario Carneiro (Jul 06 2019 at 18:59)</a>:</h4>
+<p>I mean stick <code>(bot := 0)</code> in <code>canonically_ordered_monoid</code></p>
+
 
 {% endraw %}
 
