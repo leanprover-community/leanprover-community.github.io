@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Using `assoc_rw`](24712Usingassocrw.html) (3 messages, latest: Jul 07 2019 at 15:43)
+* [notational leakage](11556notationalleakage.html) (113 messages, latest: Jul 07 2019 at 16:29)
 
-* [notational leakage](11556notationalleakage.html) (111 messages, latest: Jul 07 2019 at 15:32)
+* [Using `assoc_rw`](24712Usingassocrw.html) (3 messages, latest: Jul 07 2019 at 15:43)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (35 messages, latest: Jul 06 2019 at 22:42)
 
