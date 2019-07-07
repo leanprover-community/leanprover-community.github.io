@@ -684,6 +684,223 @@ unknown identifier &#39;with_ident_list&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169806914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169806914">Kevin Buzzard (Jul 07 2019 at 10:57)</a>:</h4>
 <p>That's a WE</p>
 
+<a name="169807690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807690">Mario Carneiro (Jul 07 2019 at 11:22)</a>:</h4>
+<p>Aha, I found the problem. Here's a standalone tactic that does the same thing as the <code>change with</code> line, with irrelevant things removed:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">))</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- h : zero + x = x + 0</span>
+  <span class="o">(</span><span class="n">do</span> <span class="k">let</span> <span class="n">repl</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">replace</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span> <span class="n">n</span><span class="o">,</span>
+      <span class="k">if</span> <span class="n">a</span> <span class="bp">=</span> <span class="bp">`</span><span class="o">(</span><span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span> <span class="k">then</span> <span class="n">some</span> <span class="bp">`</span><span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="k">else</span> <span class="n">none</span><span class="o">),</span>
+    <span class="k">let</span> <span class="n">hyp_tac</span> <span class="o">(</span><span class="n">h</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">do</span>
+      <span class="n">e</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">num_reverted</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="err">←</span> <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+      <span class="n">tactic</span><span class="bp">.</span><span class="n">change</span> <span class="err">$</span> <span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="o">(</span><span class="n">repl</span> <span class="n">e</span><span class="o">)</span> <span class="n">b</span><span class="o">,</span>
+      <span class="n">intron</span> <span class="n">num_reverted</span><span class="o">),</span>
+    <span class="o">[</span><span class="n">x</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">local_context</span><span class="o">,</span>
+    <span class="n">tactic</span><span class="bp">.</span><span class="n">try_lst</span> <span class="err">$</span> <span class="o">[</span><span class="n">x</span><span class="o">,</span> <span class="c">/-</span><span class="cm"> &lt;- delete -/</span> <span class="n">h</span><span class="o">]</span><span class="bp">.</span><span class="n">map</span> <span class="n">hyp_tac</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="169807699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807699">Mario Carneiro (Jul 07 2019 at 11:22)</a>:</h4>
+<p>The tactic fails in this case, but if you remove the <code>x,</code> on the last line then it works</p>
+
+<a name="169807712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807712">Kenny Lau (Jul 07 2019 at 11:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">mk_simp_attr</span> <span class="bp">`</span><span class="n">leakage</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span> <span class="n">lean</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">tactic</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">induction&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="n">hp</span> <span class="n">none</span> <span class="n">ids</span> <span class="n">none</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span> <span class="n">dsimp</span> <span class="n">only</span> <span class="k">with</span> <span class="n">leakage</span> <span class="n">at</span> <span class="bp">*</span> <span class="o">}]</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+
+<span class="kn">inductive</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="c1">-- I want to never see mynat.zero again</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">leakage</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">mynat_zero_eq_zero</span> <span class="o">:</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="kn">definition</span> <span class="n">add</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">succ</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span>
+<span class="c1">-- I want to never see mynat.succ again</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">leakage</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">mynat_succ_eq_add_one</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">eq_zero_of_add_right_eq_self</span> <span class="o">{{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">}}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">induction&#39;</span> <span class="n">a</span> <span class="k">with</span> <span class="n">a</span> <span class="n">ha</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- no leakage</span>
+    <span class="c1">-- h : 0 + b = 0</span>
+    <span class="n">sorry</span>
+  <span class="o">},</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">+</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">))</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">4</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- h : zero + x = x + 0</span>
+    <span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="k">with</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+  <span class="c1">-- h : zero + x = x + 0</span>
+    <span class="n">change</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="k">with</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="c1">-- h : 0 + x = x + 0</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+</pre></div>
+
+<a name="169807763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807763">Kevin Buzzard (Jul 07 2019 at 11:24)</a>:</h4>
+<p>I like the look of this</p>
+
+<a name="169807817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807817">Johan Commelin (Jul 07 2019 at 11:26)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>We need formally verified tactics</p>
+</blockquote>
+<p>You joke, but...</p>
+</blockquote>
+<p>What makes you think that I'm joking <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="169807834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807834">Mario Carneiro (Jul 07 2019 at 11:27)</a>:</h4>
+<p>The reason it fails is because the <code>change ... at x</code>, while not doing anything to the type, changes the internal name of the local variable because it is reverted and re-introduced, and this also changes the variable <code>h</code> so that the old reference is dangling and fails to achieve the desired result</p>
+
+<a name="169807892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807892">Kevin Buzzard (Jul 07 2019 at 11:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> can you do me a <code>cases'</code> too?</p>
+
+<a name="169807899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807899">Kevin Buzzard (Jul 07 2019 at 11:29)</a>:</h4>
+<p>Currently I just cut and paste the cases tactic and then add stuff to the end</p>
+
+<a name="169807903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807903">Kevin Buzzard (Jul 07 2019 at 11:29)</a>:</h4>
+<p><code>do tactic.interactive.induction hp none ids none,</code> -- it's that line I need for <code>cases</code></p>
+
+<a name="169807960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807960">Mario Carneiro (Jul 07 2019 at 11:30)</a>:</h4>
+<p>Alternatively, if only the second line is a tactic, then you can write <code>cases foo, unleak</code></p>
+
+<a name="169807963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807963">Kenny Lau (Jul 07 2019 at 11:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">mk_simp_attr</span> <span class="bp">`</span><span class="n">leakage</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span> <span class="n">lean</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">tactic</span> <span class="n">interactive</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">induction&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="n">hp</span> <span class="n">none</span> <span class="n">ids</span> <span class="n">none</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span> <span class="n">dsimp</span> <span class="n">only</span> <span class="k">with</span> <span class="n">leakage</span> <span class="n">at</span> <span class="bp">*</span> <span class="o">}]</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">cases&#39;</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">cases_arg_p</span><span class="o">)</span> <span class="o">(</span><span class="n">ids</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">with_ident_list</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">cases</span> <span class="n">hp</span> <span class="n">ids</span><span class="o">,</span>
+<span class="n">all_goals</span> <span class="bp">`</span><span class="o">[</span><span class="n">try</span> <span class="o">{</span> <span class="n">dsimp</span> <span class="n">only</span> <span class="k">with</span> <span class="n">leakage</span> <span class="n">at</span> <span class="bp">*</span> <span class="o">}]</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+
+<span class="kn">inductive</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="c1">-- I want to never see mynat.zero again</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">leakage</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">mynat_zero_eq_zero</span> <span class="o">:</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="mi">0</span><span class="bp">⟩</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="kn">definition</span> <span class="n">add</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">succ</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">n</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span>
+<span class="c1">-- I want to never see mynat.succ again</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">leakage</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">mynat_succ_eq_add_one</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span><span class="bp">+</span><span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">eq_zero_of_add_right_eq_self</span> <span class="o">{{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">}}</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases&#39;</span> <span class="n">a</span> <span class="k">with</span> <span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="c1">-- no leakage</span>
+    <span class="c1">-- h : 0 + b = 0</span>
+    <span class="n">sorry</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="c1">-- no leakage</span>
+    <span class="c1">-- h : n + 1 + b = n + 1</span>
+    <span class="n">sorry</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+</pre></div>
+
+<a name="169807982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169807982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169807982">Mario Carneiro (Jul 07 2019 at 11:31)</a>:</h4>
+<p>I'm not sure I like this "duplicate every tactic" approach</p>
+
+<a name="169808031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808031">Kenny Lau (Jul 07 2019 at 11:32)</a>:</h4>
+<p>me neither</p>
+
+<a name="169808032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808032">Kenny Lau (Jul 07 2019 at 11:32)</a>:</h4>
+<p>unleak is good</p>
+
+<a name="169808043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808043">Kenny Lau (Jul 07 2019 at 11:32)</a>:</h4>
+<blockquote>
+<p>Alternatively, if only the second line is a tactic, then you can write <code>cases foo, unleak</code></p>
+</blockquote>
+<p><code>cases foo; unleak</code></p>
+
+<a name="169808049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808049">Mario Carneiro (Jul 07 2019 at 11:32)</a>:</h4>
+<p>your version unleaks everywhere so it's the same</p>
+
+<a name="169808060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808060">Mario Carneiro (Jul 07 2019 at 11:33)</a>:</h4>
+<p>but it's probably more idiomatic to drop the all_goals and use <code>;</code></p>
+
+<a name="169808277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808277">Rob Lewis (Jul 07 2019 at 11:39)</a>:</h4>
+<p>There's an (interactive) <code>change'</code> tactic that's supposted to deal with the naming issue in <code>change</code>. <a href="https://github.com/leanprover-community/mathlib/pull/712" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/712">https://github.com/leanprover-community/mathlib/pull/712</a></p>
+
+<a name="169808278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808278">Kenny Lau (Jul 07 2019 at 11:39)</a>:</h4>
+<p>or just write <code>dsimp only with leakage</code></p>
+
+<a name="169808281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808281">Kenny Lau (Jul 07 2019 at 11:40)</a>:</h4>
+<p>(accidental promotion of <code>simp</code> attributes)</p>
+
+<a name="169808330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808330">Kenny Lau (Jul 07 2019 at 11:40)</a>:</h4>
+<p>(I've always been adamant about the widespread use of <code>simp</code> attribute)</p>
+
+<a name="169808338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169808338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169808338">Keeley Hoek (Jul 07 2019 at 11:41)</a>:</h4>
+<p>Someone could add a little custom tactic hook so <code>unleak</code> gets run between every line when you write <code>begin [unleak] ... end</code></p>
+
 
 {% endraw %}
 

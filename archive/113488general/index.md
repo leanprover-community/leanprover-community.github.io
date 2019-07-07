@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [notational leakage](11556notationalleakage.html) (76 messages, latest: Jul 07 2019 at 10:57)
+* [notational leakage](11556notationalleakage.html) (98 messages, latest: Jul 07 2019 at 11:41)
 
 * [Using `assoc_rw`](24712Usingassocrw.html) (1 message, latest: Jul 07 2019 at 09:49)
 
