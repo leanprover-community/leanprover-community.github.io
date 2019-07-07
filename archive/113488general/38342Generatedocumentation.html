@@ -174,6 +174,22 @@ Error: Error(Msg(&quot;the LaTeX engine failed&quot;), State { next_error: Some(
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169735341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169735341">Wojciech Nawrocki (Jul 05 2019 at 20:53)</a>:</h4>
 <p>I looked at this today and it turned out that almost all doc-generation infrastructure for <code>--doc=</code> is already there in Lean. It was only missing a few parts, so I added them in <a href="https://github.com/leanprover-community/lean/pull/54" target="_blank" title="https://github.com/leanprover-community/lean/pull/54">a PR</a>. At the same time, I have no idea what I'm doing so this might well halt and catch fire (although it seems to work in my tests).</p>
 
+<a name="169826737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169826737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169826737">matt rice (Jul 07 2019 at 21:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> Sorry for delay in responding to this, i have been attempting to compile mathlib w/ your patches but haven't had much luck.  <code>leanpkg build -- --doc=doc.json</code> eventually uses up all my memory/swap and stops making any timely forward progress (completes without the --doc setting).  Currently trying something like <code>for file in $(find src -name "*.lean"); do lean --make $file --doc="$(basename $file .lean).leandoc_json"; done</code> which if i got that right might finish.</p>
+
+<a name="169826937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169826937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169826937">Wojciech Nawrocki (Jul 07 2019 at 21:19)</a>:</h4>
+<p>Thanks! I'll look into the memory consumption issue. For now I'd advise against spending a lot of time testing these patches, since I simply coded the first thing that worked for simple test cases. Instead, I will now try to better understand how <code>documentation_ext</code>/<code>module_ext</code> are supposed to work and write something to match that.</p>
+
+<a name="169827027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169827027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169827027">Wojciech Nawrocki (Jul 07 2019 at 21:22)</a>:</h4>
+<p>Oh and yeah, currently <code>lean --make --doc=doc.json</code> will put O(<code>n_docstrings_in_mathlib</code>*<code>n_modules_in_mathlib</code>) fields in one file, which is completely unnecessary - it should only output docs for each module once. This is what I am looking into now.</p>
+
+<a name="169827082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Generate%20documentation/near/169827082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38342Generatedocumentation.html#169827082">matt rice (Jul 07 2019 at 21:24)</a>:</h4>
+<p>Ahh, I am mainly trying with mathlib since it has the most real docstrings to parse.  Anyhow once i get some output to work with i'll try working on parsing the json in lumpy-leandoc</p>
+
 
 {% endraw %}
 

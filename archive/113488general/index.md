@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Generate documentation](38342Generatedocumentation.html) (33 messages, latest: Jul 07 2019 at 21:24)
+
 * [notational leakage](11556notationalleakage.html) (114 messages, latest: Jul 07 2019 at 19:49)
 
 * [Using `assoc_rw`](24712Usingassocrw.html) (3 messages, latest: Jul 07 2019 at 15:43)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [apply_fun](22895applyfun.html) (32 messages, latest: Jul 06 2019 at 13:47)
 
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
-
-* [Generate documentation](38342Generatedocumentation.html) (29 messages, latest: Jul 05 2019 at 20:53)
 
 * [Priorities of × and ≃](69563Prioritiesofand.html) (12 messages, latest: Jul 05 2019 at 20:49)
 
