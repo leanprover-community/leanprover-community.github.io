@@ -940,6 +940,41 @@ unknown identifier &#39;with_ident_list&#39;
 <p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md</a></p>
 <p>is invaluable.</p>
 
+<a name="169814881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169814881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169814881">Kevin Buzzard (Jul 07 2019 at 15:01)</a>:</h4>
+<blockquote>
+<p>I would rather fix the original tactics rather than inventing new variations on existing things, which is more stuff for the newcomer to learn. If the set of tactics becomes too large, that itself will present a learning curve penalty</p>
+</blockquote>
+<p>For this notational leakage issue I am making a standalone thing; ultimately I would like <code>induction</code> to actually run <code>induction'</code>. Fixing this sort of issue in general is a different question. I like the idea of a custom recursor written with the canonical notation which gets tagged somehow and then picked up by the tactic in general.</p>
+<p>So while I'm here, how can I actually override what happens when a user types <code>induction</code> in tactic mode? Editing core lean is fine. But the problem is that just changing the name of the <code>induction</code> tactic in core Lean will break everything, I would imagine. I'd rather have some other namespace open and with a higher priority.</p>
+
+<a name="169815059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169815059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169815059">Mario Carneiro (Jul 07 2019 at 15:07)</a>:</h4>
+<p>sadly lean interactive tactics don't work like that</p>
+
+<a name="169815065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169815065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169815065">Mario Carneiro (Jul 07 2019 at 15:08)</a>:</h4>
+<p>for it to get picked up you have to call it <code>tactic.interactive.induction</code>, and there can only be one of that</p>
+
+<a name="169815219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169815219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169815219">Kevin Buzzard (Jul 07 2019 at 15:13)</a>:</h4>
+<p>There are all sorts of ways I can work around this, e.g. processing user input before feeding it to Lean.</p>
+
+<a name="169815860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169815860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169815860">Johan Commelin (Jul 07 2019 at 15:32)</a>:</h4>
+<p>Can't one of <span class="user-mention" data-user-id="110111">@Keeley Hoek</span>'s</p>
+<div class="codehilite"><pre><span></span><span class="k">begin</span> <span class="o">[</span><span class="n">ninja</span><span class="bp">-</span><span class="n">mode</span><span class="o">]</span>
+  <span class="n">induction</span> <span class="n">n</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>make this work?</p>
+
+<a name="169815863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/notational%20leakage/near/169815863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11556notationalleakage.html#169815863">Mario Carneiro (Jul 07 2019 at 15:32)</a>:</h4>
+<p>yes, but that requires rewriting every tactic</p>
+
 
 {% endraw %}
 
