@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [notational leakage](11556notationalleakage.html) (76 messages, latest: Jul 07 2019 at 10:57)
+
 * [Using `assoc_rw`](24712Usingassocrw.html) (1 message, latest: Jul 07 2019 at 09:49)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (35 messages, latest: Jul 06 2019 at 22:42)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [apply_fun](22895applyfun.html) (32 messages, latest: Jul 06 2019 at 13:47)
 
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
-
-* [notational leakage](11556notationalleakage.html) (59 messages, latest: Jul 06 2019 at 04:18)
 
 * [Generate documentation](38342Generatedocumentation.html) (29 messages, latest: Jul 05 2019 at 20:53)
 
