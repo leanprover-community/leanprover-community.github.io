@@ -1,0 +1,52 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/99380idiomaticLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html">idiomatic Lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169886469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idiomatic%20Lean/near/169886469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html#169886469">Kevin Buzzard (Jul 08 2019 at 17:06)</a>:</h4>
+<p>I am slowly learning the importance of writing "idiomatic Lean". </p>
+<p>I want to develop a theory of rank 1 valuations on fields. I already have a theory of arbitrary valuations on rings:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">valuation</span><span class="bp">.</span><span class="n">is_valuation</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="err">Γ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">map_zero</span> <span class="o">:</span> <span class="n">v</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_one</span>  <span class="o">:</span> <span class="n">v</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">v</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">v</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">v</span> <span class="n">y</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_add</span>  <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">v</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">x</span> <span class="bp">∨</span> <span class="n">v</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">v</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c">/-</span><span class="cm">- Γ-valued valuations on R -/</span>
+<span class="n">def</span> <span class="n">valuation</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₀</span><span class="o">)</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="err">Γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_comm_group</span> <span class="err">Γ</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">v</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">→</span> <span class="n">with_zero</span> <span class="err">Γ</span> <span class="bp">//</span> <span class="n">valuation</span><span class="bp">.</span><span class="n">is_valuation</span> <span class="n">v</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>with more details at</p>
+<p><a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/basic.lean#L75" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/basic.lean#L75">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/basic.lean#L75</a></p>
+<p>I am now interested in the case where (1) R is a field, (2) Gamma is the group of positive reals and (3) there exists some r in R such that v(r) is neither 0 nor 1, or equivalently the group homomorphism R^* -&gt; Gamma is non-trivial, or equivalently the induced topology on R is not discrete, or any number of other equivalent things.</p>
+<p>I would like to formalise this definition "correctly". I am not very good at this. I would imagine there are good and bad ways to do this. For starters, even though <code>with_zero Gamma</code> is the non-negative reals, I can't find the positive reals in mathlib. Are they there and I missed them? There is a big theory of valuations taking values in the non-negative reals, but there is also a theory of valuations taking values in <code>with_zero Gamma</code> which we already set up in the perfectoid project and it's in some sense a shame that I am going to have to make another nnreal as <code>with_zero posreal</code>. </p>
+<p>As for the statement that the valuation is non-trivial, this seems a bit artificial however I do it. Aah! In practice the kind of thing people need is a "pseudouniformiser", namely an element of the field whose valuation is strictly between 0 and 1. Maybe I will just assert that a pseudouniformiser exists. Does that sound crazy?</p>
+
+<a name="169888283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idiomatic%20Lean/near/169888283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html#169888283">Johan Commelin (Jul 08 2019 at 17:28)</a>:</h4>
+<p>I am also quite interested in suggestions how to bridge the gap between the theory developed for valuations taking values in <code>with_zero Gamma</code> and valuations taking values in <code>nnreal</code>.</p>
+
+<a name="169890630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idiomatic%20Lean/near/169890630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html#169890630">Chris Hughes (Jul 08 2019 at 17:56)</a>:</h4>
+<p>I think the way is to define valuations on some class that doesn't exists yet instead of <code>with_zero</code></p>
+
+<a name="169890724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idiomatic%20Lean/near/169890724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html#169890724">Johan Commelin (Jul 08 2019 at 17:58)</a>:</h4>
+<p>O.o... major refactor of the entire perfectoid project...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

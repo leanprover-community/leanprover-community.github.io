@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [matrix inverse](16178matrixinverse.html) (78 messages, latest: Jul 08 2019 at 17:45)
+
 * [function extension](82180functionextension.html) (23 messages, latest: Jul 08 2019 at 16:04)
 
 * [groups (bundling etc)](00257groupsbundlingetc.html) (40 messages, latest: Jul 08 2019 at 14:07)
@@ -24,8 +26,6 @@ permalink: archive/116395maths/index.html
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (24 messages, latest: Jul 05 2019 at 18:54)
 
 * [Maps with bounded coboundaries](84269Mapswithboundedcoboundaries.html) (1 message, latest: Jul 05 2019 at 17:06)
-
-* [matrix inverse](16178matrixinverse.html) (76 messages, latest: Jul 05 2019 at 15:51)
 
 * [making mynat an add_comm_monoid](00521makingmynatanaddcommmonoid.html) (101 messages, latest: Jul 05 2019 at 15:29)
 
