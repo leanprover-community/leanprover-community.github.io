@@ -22,6 +22,24 @@ permalink: archive/113489newmembers/73313Troublewitheqreconeqreflaa.html
 <span class="n">this</span> <span class="n">α</span> <span class="n">a&#39;</span> <span class="n">h</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span>
 </pre></div>
 
+<a name="169835907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169835907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169835907">Mario Carneiro (Jul 08 2019 at 02:20)</a>:</h4>
+<p><code>eq.rec_on (eq.refl α) a</code> is defeq to <code>a</code> by the reduction rule for inductive types</p>
+
+<a name="169835977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169835977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169835977">Mario Carneiro (Jul 08 2019 at 02:24)</a>:</h4>
+<p>If you use </p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">eq_of_heq</span>
+</pre></div>
+
+
+<p>to view the implicit stuff, you will see that the motive in this case is just <code>(λ (_x : Sort u), _x)</code></p>
+
+<a name="169836090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169836090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169836090">Mario Carneiro (Jul 08 2019 at 02:26)</a>:</h4>
+<p>In other words, it is using the fact that <code>α = α</code> to transfer <code>a : α</code> to <code>α</code>. Because the proof is reflexivity (and it always is because of proof irrelevance), this is just an identity cast and the result is defeq to <code>a</code>.</p>
+
 
 {% endraw %}
 

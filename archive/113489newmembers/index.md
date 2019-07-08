@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (1 message, latest: Jul 08 2019 at 01:32)
+* [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (4 messages, latest: Jul 08 2019 at 02:26)
 
 * [About my theorem](42006Aboutmytheorem.html) (6 messages, latest: Jun 29 2019 at 18:50)
 
