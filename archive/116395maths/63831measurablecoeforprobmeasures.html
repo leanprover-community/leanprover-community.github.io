@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/63831measurablecoeforprobmeasures.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/63831measurablecoeforprobmeasures.html">measurable_coe for prob measures</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="169902150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/measurable_coe%20for%20prob%20measures/near/169902150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63831measurablecoeforprobmeasures.html#169902150">Koundinya Vajjha (Jul 08 2019 at 20:30)</a>:</h4>
+<p>I've been trying to port some of the results in <code>giry_monad.lean</code> over to probability measures, and i'm struggling with the first one. <br>
+Can someone help?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">giry_monad</span>
+<span class="kn">universe</span> <span class="n">u</span>
+<span class="kn">open</span> <span class="n">measure_theory</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span> <span class="n">set</span> <span class="n">lattice</span>
+
+
+<span class="kn">section</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">measurable_space</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">structure</span> <span class="n">probability_measure</span> <span class="kn">extends</span> <span class="n">measure_theory</span><span class="bp">.</span><span class="n">measure</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">measure_univ</span> <span class="o">:</span> <span class="n">to_measure</span> <span class="n">univ</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">measurable_space</span> <span class="o">(</span><span class="n">probability_measure</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measure</span><span class="bp">.</span><span class="n">measurable_space</span><span class="bp">.</span><span class="n">comap</span> <span class="n">probability_measure</span><span class="bp">.</span><span class="n">to_measure</span>
+
+<span class="kn">lemma</span> <span class="n">measurable_to_measure</span> <span class="o">:</span>
+  <span class="n">measurable</span> <span class="o">(</span><span class="bp">@</span><span class="n">probability_measure</span><span class="bp">.</span><span class="n">to_measure</span> <span class="n">α</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measurable_space</span><span class="bp">.</span><span class="n">le_map_comap</span>
+
+<span class="kn">instance</span> <span class="n">prob_measure_coe</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">probability_measure</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">measure</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">probability_measure</span><span class="bp">.</span><span class="n">to_measure</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">probability_measure</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ_</span><span class="o">,</span> <span class="n">set</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">nnreal</span><span class="o">,</span> <span class="bp">λ</span><span class="n">p</span> <span class="n">s</span><span class="o">,</span> <span class="n">ennreal</span><span class="bp">.</span><span class="n">to_nnreal</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">to_measure</span> <span class="n">s</span><span class="o">)</span><span class="bp">⟩</span>
+
+<span class="kn">lemma</span> <span class="n">measurable_coe</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span><span class="n">μ</span> <span class="o">:</span> <span class="n">measure</span> <span class="n">α</span><span class="o">,</span> <span class="n">μ</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measurable_space</span><span class="bp">.</span><span class="n">comap_le_iff_le_map</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span> <span class="n">le_supr_of_le</span> <span class="n">s</span> <span class="err">$</span> <span class="n">le_supr_of_le</span> <span class="n">hs</span> <span class="err">$</span> <span class="n">le_refl</span> <span class="bp">_</span>
+
+<span class="kn">lemma</span> <span class="n">measurable_coe&#39;</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">is_measurable</span> <span class="n">s</span><span class="o">)</span> <span class="o">:</span> <span class="n">measurable</span> <span class="o">(</span><span class="bp">λ</span><span class="n">μ</span> <span class="o">:</span> <span class="n">probability_measure</span> <span class="n">α</span><span class="o">,</span> <span class="n">μ</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">measurable_space</span><span class="bp">.</span><span class="n">comap_le_iff_le_map</span><span class="bp">.</span><span class="mi">1</span> <span class="err">$</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">probability_measure</span><span class="bp">.</span><span class="n">measurable_space</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">measurable_space</span><span class="bp">.</span><span class="n">comap_le_iff_le_map</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

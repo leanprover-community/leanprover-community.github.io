@@ -92,6 +92,121 @@ sorry
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169899507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169899507">Yury G. Kudryashov (Jul 08 2019 at 19:52)</a>:</h4>
 <p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Thank you for the explanation!</p>
 
+<a name="169900964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169900964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169900964">Johan Commelin (Jul 08 2019 at 20:13)</a>:</h4>
+<p>I do recall vaguely that <code>show</code> in data can cause little troubles down the road.</p>
+
+<a name="169901051"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169901051" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169901051">Johan Commelin (Jul 08 2019 at 20:14)</a>:</h4>
+<p>So even if it is more readable this way, I think that in practice the <code>@is_monoid_hom</code> version might be better for applications...</p>
+
+<a name="169901066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169901066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169901066">Johan Commelin (Jul 08 2019 at 20:14)</a>:</h4>
+<p>But I might very well be mistaken.</p>
+
+<a name="169901537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169901537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169901537">Floris van Doorn (Jul 08 2019 at 20:21)</a>:</h4>
+<blockquote>
+<p>I do recall vaguely that <code>show</code> in data can cause little troubles down the road.</p>
+</blockquote>
+<p>yeah, I wouldn't be surprised if the instance <code>is_monoid_hom (show End X → End (f.obj X), from functor.map f)</code> does not always apply when  <code>@is_monoid_hom ... (functor.map f)</code> does. The form <code>@is_monoid_hom ... (functor.map f)</code> feels safer indeed.</p>
+
+<a name="169902112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902112">Mario Carneiro (Jul 08 2019 at 20:29)</a>:</h4>
+<p>There is a tactic to fix this, I think it's called <code>clean</code></p>
+
+<a name="169902378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902378">Mario Carneiro (Jul 08 2019 at 20:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="mi">1</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">foo_eq</span> <span class="o">:</span> <span class="o">(</span><span class="k">show</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">from</span> <span class="n">foo</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo_eq</span> <span class="c1">-- theorem foo_eq : (show ℕ, from foo) = 1</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">foo_eq&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="k">by</span> <span class="n">clean</span> <span class="k">show</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">from</span> <span class="n">foo</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo_eq&#39;</span> <span class="c1">-- theorem foo_eq&#39; : foo = 1</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="169902513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902513">Kevin Buzzard (Jul 08 2019 at 20:34)</a>:</h4>
+<p>Aah -- a secret tactic! Not mentioned in any docs at all?</p>
+
+<a name="169902567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902567">Mario Carneiro (Jul 08 2019 at 20:35)</a>:</h4>
+<p>It's pretty specialized, to basically this exact situation</p>
+
+<a name="169902572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902572">Kevin Buzzard (Jul 08 2019 at 20:35)</a>:</h4>
+<p>At least it has a docstring.</p>
+
+<a name="169902583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902583">Mario Carneiro (Jul 08 2019 at 20:35)</a>:</h4>
+<p>it removes a bunch of things that are identity functions used for annotation</p>
+
+<a name="169902588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902588">Mario Carneiro (Jul 08 2019 at 20:35)</a>:</h4>
+<p>like <code>show</code></p>
+
+<a name="169902654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902654">Mario Carneiro (Jul 08 2019 at 20:36)</a>:</h4>
+<p>hm, this fails, but it looks like a lean bug:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">foo_eq&#39;&#39;</span> <span class="o">:</span> <span class="k">by</span> <span class="n">clean</span> <span class="o">(</span><span class="k">show</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">from</span> <span class="n">foo</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo_eq&#39;&#39;</span> <span class="c1">-- theorem foo_eq&#39;&#39; : foo = 1</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- fails</span>
+</pre></div>
+
+<a name="169902710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169902710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169902710">Mario Carneiro (Jul 08 2019 at 20:37)</a>:</h4>
+<p><code>rw foo_eq''</code> also fails with "can't find <code>foo</code>" which makes no sense since that's literally the statement</p>
+
+<a name="169903178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169903178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169903178">Mario Carneiro (Jul 08 2019 at 20:43)</a>:</h4>
+<p>Oh, these are not the same, but <code>pp.all</code> isn't enough to show the difference. (I changed <code>1</code> to <code>nat.zero</code> to make the super-pp-all not so big)</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span>
+
+<span class="kn">theorem</span> <span class="n">foo_eq₁</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">foo_eq₂</span> <span class="o">:</span> <span class="k">by</span> <span class="n">clean</span> <span class="o">(</span><span class="k">show</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">from</span> <span class="n">foo</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo_eq₁</span> <span class="c1">-- theorem foo_eq₁ : @eq.{1} nat foo nat.zero</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">foo_eq₂</span> <span class="c1">-- theorem foo_eq₂ : @eq.{1} nat foo nat.zero</span>
+
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">d</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">get_decl</span> <span class="bp">`</span><span class="n">foo_eq₁</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">d</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">to_raw_fmt</span>
+  <span class="c1">-- (app (app (app (const eq [1]) (const nat [])) (const foo [])) (const nat.zero []))</span>
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">d</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">get_decl</span> <span class="bp">`</span><span class="n">foo_eq₂</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">d</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">to_raw_fmt</span>
+  <span class="c1">-- (app (app (app (const eq [1]) (const nat [])) [macro annotation (const foo [])]) (const nat.zero []))</span>
+</pre></div>
+
+<a name="169903221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169903221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169903221">Mario Carneiro (Jul 08 2019 at 20:43)</a>:</h4>
+<p>damn you <code>macro annotation</code></p>
+
+<a name="169903271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169903271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169903271">Kevin Buzzard (Jul 08 2019 at 20:44)</a>:</h4>
+<p>that's not particularly well-documented either, as far as I know</p>
+
+<a name="169903340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169903340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169903340">Floris van Doorn (Jul 08 2019 at 20:45)</a>:</h4>
+<p>Where is the "understatement" emoji?</p>
+
+<a name="169903804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169903804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169903804">Mario Carneiro (Jul 08 2019 at 20:51)</a>:</h4>
+<p>by sheer luck, there is an API function <code>expr.is_annotation</code> that will allow us to destructure an annotation</p>
+
+<a name="169903814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169903814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169903814">Mario Carneiro (Jul 08 2019 at 20:51)</a>:</h4>
+<p>so <code>clean</code> can be fixed</p>
+
+<a name="169904052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169904052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169904052">Yury G. Kudryashov (Jul 08 2019 at 20:54)</a>:</h4>
+<p>I'll rewrite <a href="https://github.com/leanprover-community/mathlib/issues/1195" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1195">#1195</a> to use <code>@is_*_hom</code></p>
+
 
 {% endraw %}
 
