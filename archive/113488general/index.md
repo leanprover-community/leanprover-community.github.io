@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cheap Windows install](22596cheapWindowsinstall.html) (14 messages, latest: Jul 08 2019 at 14:16)
+
 * [Bug with let in pattern match](60898Bugwithletinpatternmatch.html) (11 messages, latest: Jul 08 2019 at 12:49)
 
 * [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (2 messages, latest: Jul 08 2019 at 11:46)
@@ -1160,8 +1162,6 @@ permalink: archive/113488general/index.html
 * [clean up old files](73211cleanupoldfiles.html) (2 messages, latest: Jan 24 2019 at 20:06)
 
 * [parsing question](94829parsingquestion.html) (9 messages, latest: Jan 24 2019 at 10:12)
-
-* [cheap Windows install](22596cheapWindowsinstall.html) (13 messages, latest: Jan 24 2019 at 09:52)
 
 * [lean hangs](79634leanhangs.html) (3 messages, latest: Jan 24 2019 at 08:46)
 
