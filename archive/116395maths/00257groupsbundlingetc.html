@@ -100,6 +100,84 @@ permalink: archive/116395maths/00257groupsbundlingetc.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169857853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169857853">Kevin Buzzard (Jul 08 2019 at 10:45)</a>:</h4>
 <p>I figured that the best way to get to the bottom of it was to get a summer student to do Zassenhaus in Lean.</p>
 
+<a name="169862382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862382">Kevin Buzzard (Jul 08 2019 at 12:07)</a>:</h4>
+<blockquote>
+<p>Hmmm... that feels like bad library design to me.</p>
+</blockquote>
+<p>I don't really understand this stuff. So there is already <code>is_subgroup</code>. I am proposing to make <code>subgroup</code>, using <code>is_subgroup</code>. Then we have the best of both worlds. Are you (<span class="user-mention" data-user-id="112680">@Johan Commelin</span> ) saying that if I were to bundle <code>subgroup</code> then <code>is_subgroup</code> should be completely removed from mathlib? But then I can't define <code>subgroup</code> using <code>is_subgroup</code>. So is my proposed definition not right?</p>
+
+<a name="169862462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862462">Chris Hughes (Jul 08 2019 at 12:08)</a>:</h4>
+<p>I'm in favour of bundling subgroups.</p>
+
+<a name="169862466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862466">Johan Commelin (Jul 08 2019 at 12:08)</a>:</h4>
+<p>There is no <code>is_submodule</code> either.</p>
+
+<a name="169862495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862495">Johan Commelin (Jul 08 2019 at 12:08)</a>:</h4>
+<p>The point is, you can't easily apply lemma's using one version in a setup using the other. So we should use only one of the two.</p>
+
+<a name="169862593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862593">Kevin Buzzard (Jul 08 2019 at 12:10)</a>:</h4>
+<p>So a better definition would just be to copy the definition of a subgroup to a bundled definition without using <code>is_subgroup</code>, and then to slowly remove every occurrence of <code>is_subgroup</code>?</p>
+
+<a name="169862695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862695">Kevin Buzzard (Jul 08 2019 at 12:11)</a>:</h4>
+<p>And can this be done slowly, i.e. make the bundled subgroups, leave <code>is_subgroup</code>, put a comment by it saying it's deprecated, and then over the course of the next few months remove all occurrences of it?</p>
+
+<a name="169862774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862774">Johan Commelin (Jul 08 2019 at 12:12)</a>:</h4>
+<p>I'm not sure if that will work... but I'm a refactor newbie</p>
+
+<a name="169862969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169862969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169862969">Kevin Buzzard (Jul 08 2019 at 12:15)</a>:</h4>
+<p>You're less of a newbie than me -- I've just regarded all this refactoring stuff as tedious implementation issues because I've not been able to learn everything at once. Give me a tonne of proofs to do in tactic mode and I'm in heaven. Give me a simple object to make and I need help.</p>
+
+<a name="169863085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863085">Kevin Buzzard (Jul 08 2019 at 12:16)</a>:</h4>
+<p>one reason we still don't know that Spa(perfectoid field) is a perfectoid space is that I keep looking at the maths definition of a perfectoid field and thinking "crap, I really don't know the best way to write this in Lean".</p>
+
+<a name="169863133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863133">Kevin Buzzard (Jul 08 2019 at 12:17)</a>:</h4>
+<p>I am really bad at making definitions. This is why I'm asking these dumb questions. I need to learn this stuff now and it's kind of getting to the top of the pile.</p>
+
+<a name="169863642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863642">Mario Carneiro (Jul 08 2019 at 12:24)</a>:</h4>
+<p>It can be done gradually, but that tends to be more total work than doing everything in one chunk</p>
+
+<a name="169863662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863662">Mario Carneiro (Jul 08 2019 at 12:24)</a>:</h4>
+<p>so I try to do refactors all in one go if I can budget the time</p>
+
+<a name="169863670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863670">Kevin Buzzard (Jul 08 2019 at 12:25)</a>:</h4>
+<p>So both Chris and Kenny think that subgroups should be bundled. And the longer they're not bundled, the harder it will be to bundle them. And <code>is_subgroup</code> extends <code>is_submonoid</code> so presumably submonoids should also be bundled.</p>
+
+<a name="169863691"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863691">Kevin Buzzard (Jul 08 2019 at 12:25)</a>:</h4>
+<blockquote>
+<p>so I try to do refactors all in one go if I can budget the time</p>
+</blockquote>
+<p>The thing about that approach is that then you end up with a huge PR which needs to be merged really quickly.</p>
+
+<a name="169863754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863754">Kevin Buzzard (Jul 08 2019 at 12:26)</a>:</h4>
+<p>I am trying to see a path to bundling subgroups. <span class="user-mention" data-user-id="228602">@Sian Carey</span> and I are going to try it this summer just to see how it works.</p>
+
+<a name="169863836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863836">Mario Carneiro (Jul 08 2019 at 12:28)</a>:</h4>
+<p>You are absolutely right. It requires a lot of global coordination in a short time, so this becomes less attractive the larger the project gets</p>
+
+<a name="169863966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169863966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169863966">Kevin Buzzard (Jul 08 2019 at 12:30)</a>:</h4>
+<p>So perhaps doing it slowly is a more viable solution for this particular case?</p>
+
+<a name="169864039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/groups%20%28bundling%20etc%29/near/169864039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00257groupsbundlingetc.html#169864039">Patrick Massot (Jul 08 2019 at 12:31)</a>:</h4>
+<p>Maybe you can setup a PR appointment? You ask Mario how much time he would need to review such a PR, and when he'll have that much time, and try to fire up the PR at that point in time</p>
+
 
 {% endraw %}
 

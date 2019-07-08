@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Bug with let in pattern match](60898Bugwithletinpatternmatch.html) (11 messages, latest: Jul 08 2019 at 12:49)
+
 * [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (2 messages, latest: Jul 08 2019 at 11:46)
 
 * [notational leakage](11556notationalleakage.html) (117 messages, latest: Jul 08 2019 at 10:28)

@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [groups (bundling etc)](00257groupsbundlingetc.html) (20 messages, latest: Jul 08 2019 at 10:45)
+* [groups (bundling etc)](00257groupsbundlingetc.html) (38 messages, latest: Jul 08 2019 at 12:31)
+
+* [presheafed space category](15170presheafedspacecategory.html) (17 messages, latest: Jul 08 2019 at 12:18)
 
 * [simple groups](91723simplegroups.html) (1 message, latest: Jul 08 2019 at 07:22)
 
