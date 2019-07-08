@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Generate documentation](38342Generatedocumentation.html) (33 messages, latest: Jul 07 2019 at 21:24)
+* [notational leakage](11556notationalleakage.html) (117 messages, latest: Jul 08 2019 at 10:28)
 
-* [notational leakage](11556notationalleakage.html) (114 messages, latest: Jul 07 2019 at 19:49)
+* [Generate documentation](38342Generatedocumentation.html) (33 messages, latest: Jul 07 2019 at 21:24)
 
 * [Using `assoc_rw`](24712Usingassocrw.html) (3 messages, latest: Jul 07 2019 at 15:43)
 
