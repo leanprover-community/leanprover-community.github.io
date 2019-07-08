@@ -758,6 +758,37 @@ Thanks for all your work and help!</li>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169651110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169651110">Bryan Gin-ge Chen (Jul 04 2019 at 14:07)</a>:</h4>
 <p>And then it blindly copies all <code>.olean</code> files that it can find by looking in the directories provided by <code>lean -p</code> into the ZIP file; that's why I said you have to delete the other olean files.</p>
 
+<a name="169884250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884250">Patrick Massot (Jul 08 2019 at 16:36)</a>:</h4>
+<p>I can confirm I successfully built a 5.7Mo library instead of 18Mo by removing every olean from mathlib and my small undergraduate lib, and then run <code>mk_library.py -i ~/lean/lib114/ -o dist114/library.zip</code> where <code>lib114</code> import not much from mathlib</p>
+
+<a name="169884382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884382">Johan Commelin (Jul 08 2019 at 16:38)</a>:</h4>
+<p>Otoh, this tree-shaking means that users can't import things from mathlib that they suddenly would like to use...</p>
+
+<a name="169884427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884427">Patrick Massot (Jul 08 2019 at 16:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> I can't open an issue in your fork, so let me continue using this thread. In the <a href="https://github.com/bryangingechen/lean-web-editor/blob/ui/README.md" target="_blank" title="https://github.com/bryangingechen/lean-web-editor/blob/ui/README.md">README</a>, last item you wrote "Run ./mk_library.py (requires Python 3.5 or greater)" is wrong. Your script requires python 3.7. I discovered that when running it on an old Ubuntu.</p>
+
+<a name="169884549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884549">Patrick Massot (Jul 08 2019 at 16:40)</a>:</h4>
+<p>From <a href="https://docs.python.org/3.7/library/subprocess.html#subprocess.run" target="_blank" title="https://docs.python.org/3.7/library/subprocess.html#subprocess.run">https://docs.python.org/3.7/library/subprocess.html#subprocess.run</a>:</p>
+<blockquote>
+<p>Changed in version 3.7: Added the capture_output parameter.</p>
+</blockquote>
+
+<a name="169884592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884592">Patrick Massot (Jul 08 2019 at 16:41)</a>:</h4>
+<p>On Ubuntu 18.04 (the latest LTS), python3 default to 3.6 but there is an official python 3.7. I only needed to use <code>python3.7 mk_library.py</code></p>
+
+<a name="169884684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884684">Patrick Massot (Jul 08 2019 at 16:42)</a>:</h4>
+<p>Johan: yes indeed. But in the context of my teaching students don't want to import surprising things from mathlib. Remember we're not talking about Kevin's elite students. <em>None</em> of my 50 students created a Zulip account for instance. That's how curious they are</p>
+
+<a name="169884720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/online%20leanprover/near/169884720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/19268onlineleanprover.html#169884720">Patrick Massot (Jul 08 2019 at 16:43)</a>:</h4>
+<p>None of them asked whether there was any lemma they could add to Lean's library (I'm not even talking about knowing the name mathlib)</p>
+
 
 {% endraw %}
 

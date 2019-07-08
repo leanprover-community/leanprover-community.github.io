@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (167 messages, latest: Jul 08 2019 at 16:43)
+
+* [apply_fun](22895applyfun.html) (33 messages, latest: Jul 08 2019 at 16:05)
+
 * [cheap Windows install](22596cheapWindowsinstall.html) (14 messages, latest: Jul 08 2019 at 14:16)
 
 * [Bug with let in pattern match](60898Bugwithletinpatternmatch.html) (11 messages, latest: Jul 08 2019 at 12:49)
@@ -26,8 +30,6 @@ permalink: archive/113488general/index.html
 * [ordered monoids](38431orderedmonoids.html) (33 messages, latest: Jul 06 2019 at 19:35)
 
 * [head-based instance resolution](80776headbasedinstanceresolution.html) (4 messages, latest: Jul 06 2019 at 16:00)
-
-* [apply_fun](22895applyfun.html) (32 messages, latest: Jul 06 2019 at 13:47)
 
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
 
@@ -48,8 +50,6 @@ permalink: archive/113488general/index.html
 * [symmetry](60107symmetry.html) (3 messages, latest: Jul 04 2019 at 17:21)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
-
-* [online leanprover](19268onlineleanprover.html) (160 messages, latest: Jul 04 2019 at 14:07)
 
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
 
