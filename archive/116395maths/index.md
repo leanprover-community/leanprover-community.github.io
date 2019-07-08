@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [groups (bundling etc)](00257groupsbundlingetc.html) (40 messages, latest: Jul 08 2019 at 14:07)
+* [function extension](82180functionextension.html) (22 messages, latest: Jul 08 2019 at 15:17)
 
-* [function extension](82180functionextension.html) (21 messages, latest: Jul 08 2019 at 13:49)
+* [groups (bundling etc)](00257groupsbundlingetc.html) (40 messages, latest: Jul 08 2019 at 14:07)
 
 * [presheafed space category](15170presheafedspacecategory.html) (17 messages, latest: Jul 08 2019 at 12:18)
 
