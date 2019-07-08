@@ -207,6 +207,36 @@ sorry
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169904052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169904052">Yury G. Kudryashov (Jul 08 2019 at 20:54)</a>:</h4>
 <p>I'll rewrite <a href="https://github.com/leanprover-community/mathlib/issues/1195" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1195">#1195</a> to use <code>@is_*_hom</code></p>
 
+<a name="169904572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169904572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169904572">Mario Carneiro (Jul 08 2019 at 21:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">tactic</span> <span class="n">interactive</span> <span class="n">expr</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">clean_aux</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">expr</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="o">(</span><span class="n">app</span> <span class="o">(</span><span class="n">const</span> <span class="n">n</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span> <span class="n">e&#39;</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">guard</span> <span class="o">(</span><span class="n">n</span> <span class="err">∈</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">clean_ids</span><span class="o">)</span> <span class="bp">&gt;&gt;</span>
+  <span class="o">(</span><span class="n">clean_aux</span> <span class="n">e&#39;</span><span class="o">)</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="n">e&#39;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="o">(</span><span class="n">lam</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">))</span> <span class="n">e&#39;</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">clean_aux</span> <span class="n">e&#39;</span><span class="o">)</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="n">e&#39;</span>
+<span class="bp">|</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">do</span>
+  <span class="n">e&#39;</span> <span class="err">←</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">expr</span><span class="bp">.</span><span class="n">is_annotation</span> <span class="n">e</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">clean_aux</span> <span class="n">e&#39;</span><span class="o">)</span><span class="bp">.</span><span class="n">get_or_else</span> <span class="n">e&#39;</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">clean&#39;</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tgt</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">i_to_expr_strict</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">q</span> <span class="o">:</span> <span class="err">%%</span><span class="n">tgt</span><span class="o">),</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span> <span class="err">$</span> <span class="n">e</span><span class="bp">.</span><span class="n">replace</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">e</span> <span class="n">n</span><span class="o">,</span> <span class="n">clean_aux</span> <span class="n">e</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">foo_eq₃</span> <span class="o">:</span> <span class="k">by</span> <span class="n">clean&#39;</span> <span class="o">(</span><span class="k">show</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="k">from</span> <span class="n">foo</span><span class="o">)</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">d</span> <span class="err">←</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">get_decl</span> <span class="bp">`</span><span class="n">foo_eq₃</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="n">d</span><span class="bp">.</span><span class="n">type</span><span class="bp">.</span><span class="n">to_raw_fmt</span>
+  <span class="c1">-- (app (app (app (const eq [1]) (const nat [])) (const foo [])) (const nat.zero []))</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">foo</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="c1">-- works</span>
+</pre></div>
+
 
 {% endraw %}
 
