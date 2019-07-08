@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [function extension](82180functionextension.html) (21 messages, latest: Jul 08 2019 at 13:49)
+
 * [groups (bundling etc)](00257groupsbundlingetc.html) (38 messages, latest: Jul 08 2019 at 12:31)
 
 * [presheafed space category](15170presheafedspacecategory.html) (17 messages, latest: Jul 08 2019 at 12:18)
@@ -36,8 +38,6 @@ permalink: archive/116395maths/index.html
 * [Is this thing useful](31939Isthisthinguseful.html) (67 messages, latest: Jul 03 2019 at 20:53)
 
 * [transporting measurability proofs](76448transportingmeasurabilityproofs.html) (25 messages, latest: Jul 03 2019 at 15:45)
-
-* [function extension](82180functionextension.html) (20 messages, latest: Jul 03 2019 at 12:36)
 
 * [categorical product](77152categoricalproduct.html) (35 messages, latest: Jul 03 2019 at 08:47)
 
