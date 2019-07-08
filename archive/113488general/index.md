@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [idiomatic Lean](99380idiomaticLean.html) (4 messages, latest: Jul 08 2019 at 17:58)
+* [Priorities of × and ≃](69563Prioritiesofand.html) (13 messages, latest: Jul 08 2019 at 18:58)
+
+* [idiomatic Lean](99380idiomaticLean.html) (6 messages, latest: Jul 08 2019 at 18:08)
 
 * [online leanprover](19268onlineleanprover.html) (168 messages, latest: Jul 08 2019 at 17:07)
 
@@ -34,8 +36,6 @@ permalink: archive/113488general/index.html
 * [head-based instance resolution](80776headbasedinstanceresolution.html) (4 messages, latest: Jul 06 2019 at 16:00)
 
 * [quotient.lift_on elaboration](97379quotientliftonelaboration.html) (3 messages, latest: Jul 06 2019 at 04:54)
-
-* [Priorities of × and ≃](69563Prioritiesofand.html) (12 messages, latest: Jul 05 2019 at 20:49)
 
 * [names](06165names.html) (53 messages, latest: Jul 05 2019 at 20:04)
 
