@@ -40,6 +40,61 @@ permalink: archive/113489newmembers/73313Troublewitheqreconeqreflaa.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169836090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169836090">Mario Carneiro (Jul 08 2019 at 02:26)</a>:</h4>
 <p>In other words, it is using the fact that <code>α = α</code> to transfer <code>a : α</code> to <code>α</code>. Because the proof is reflexivity (and it always is because of proof irrelevance), this is just an identity cast and the result is defeq to <code>a</code>.</p>
 
+<a name="169846401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169846401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169846401">garySebastian (Jul 08 2019 at 07:21)</a>:</h4>
+<blockquote>
+<p>it is using the fact that <code>α = α</code> to transfer <code>a : α</code> to <code>α</code>.</p>
+</blockquote>
+<p>Sorry I'm really struggling with this one. Isn't <code>a</code> already of type <code>α</code>, or is the point that you can use that for <code>(α = α')</code> to transfer <code>a : α</code> to <code>a : α'</code>? This might be part of my problem, but the variable names are going over my head. If the signature of eq.rec_on is :</p>
+<div class="codehilite"><pre><span></span>eq.rec_on : Π {β : Sort u} {b : β} {C : β → Sort l} {b_1 : β}, b = b_1 → C b → C b_1
+</pre></div>
+
+
+<p>then in line two, <code>(eq.rec_on (h2 : α = α') a : α') = a'</code>, is b |-&gt; α or b |-&gt; a?</p>
+<p>I think I understand the idea that the inferred family { C : α -&gt; Sort l } is <code>id</code> in this case, since the type checker seems to be okay with <code>show a = a'</code> instead of <code>show (eq.rec_on (eq.refl α) a : α) = a'</code> in line 4.</p>
+
+<a name="169846654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169846654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169846654">Kevin Buzzard (Jul 08 2019 at 07:27)</a>:</h4>
+<p><code>(eq.rec_on (h2 : α = α') a : α')</code> means "make the term <code>eq.rec_on (h2 : α = α') a</code> and make sure it has type <code>α'</code> while you're at it". This sort of information ("what type is this thing supposed to have?") is helpful for Lean's elaborator because <code>eq.rec_on</code> has got all these inputs in <code>{ }</code> brackets, which Lean is supposed to guess.</p>
+
+<a name="169846768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169846768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169846768">Kevin Buzzard (Jul 08 2019 at 07:29)</a>:</h4>
+<p>So now Lean looks at <code>eq.rec_on</code> and says "OK, the <code>{ }</code> stuff I'll have to deal with later, so I don't know beta or b or C or b_1, but I know that the next input is supposed to have type <code>b = b_1</code> and it actually has type <code>α = α'</code> so I'd best set <code>b = α</code> and <code>b_1 = α'</code>"</p>
+
+<a name="169846935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169846935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169846935">Kevin Buzzard (Jul 08 2019 at 07:32)</a>:</h4>
+<p>Oh, perhaps this is the trick you're missing: if <code>a</code> has type <code>alpha</code> and then I explicitly refer to <code>a</code> whilst assuring Lean it has type <code>beta</code> by writing <code>(a : beta)</code> then Lean will accept this, as long as it can convince itself that <code>alpha = beta</code> by definition.</p>
+
+<a name="169847080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169847080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169847080">Kevin Buzzard (Jul 08 2019 at 07:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="o">:=</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="c1">-- fails</span>
+
+<span class="n">def</span> <span class="n">fakebool</span> <span class="o">:=</span> <span class="n">bool</span> <span class="c1">-- true by definition</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">fakebool</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="c1">-- works</span>
+</pre></div>
+
+<a name="169847373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20%60%28eq.rec_on%20%28eq.refl%20%CE%B1%29%20a%20%3A%20%CE%B1%29%20%3D%20a%27%60/near/169847373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73313Troublewitheqreconeqreflaa.html#169847373">Kevin Buzzard (Jul 08 2019 at 07:41)</a>:</h4>
+<p>Here's the same proof in tactic mode (which I find far easier to use)</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">lemma</span> <span class="n">eq_of_heq&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">a&#39;</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">==</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a&#39;</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- intermediate lemma, called `this` in original.</span>
+  <span class="k">have</span> <span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">α&#39;</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">a&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">@</span><span class="n">heq</span> <span class="n">α</span> <span class="n">a</span> <span class="n">α&#39;</span> <span class="n">a&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">α&#39;</span><span class="o">),</span>
+             <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h₂</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a&#39;</span><span class="o">,</span>
+    <span class="c1">-- proof of intermediate lemma.</span>
+    <span class="n">exact</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">α&#39;</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">a&#39;</span> <span class="o">:</span> <span class="n">α&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">@</span><span class="n">heq</span> <span class="n">α</span> <span class="n">a</span> <span class="n">α&#39;</span> <span class="n">a&#39;</span><span class="o">),</span>
+          <span class="n">heq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="n">h₁</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">α</span><span class="o">,</span> <span class="n">rfl</span><span class="o">),</span>
+  <span class="c1">-- back to one goal now.</span>
+  <span class="c1">-- now change the goal to something definitionally equal</span>
+  <span class="k">show</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">rec_on</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a&#39;</span><span class="o">,</span>
+  <span class="c1">-- now prove it using H</span>
+  <span class="n">exact</span> <span class="n">H</span> <span class="n">α</span> <span class="n">a&#39;</span> <span class="n">h</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
