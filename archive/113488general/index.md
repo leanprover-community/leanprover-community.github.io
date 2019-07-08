@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (2 messages, latest: Jul 08 2019 at 11:46)
+
 * [notational leakage](11556notationalleakage.html) (117 messages, latest: Jul 08 2019 at 10:28)
 
 * [Generate documentation](38342Generatedocumentation.html) (33 messages, latest: Jul 07 2019 at 21:24)
