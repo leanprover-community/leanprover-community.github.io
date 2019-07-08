@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Trouble with instance resolution](86787Troublewithinstanceresolution.html) (1 message, latest: Jul 08 2019 at 18:31)
+* [Trouble with instance resolution](86787Troublewithinstanceresolution.html) (11 messages, latest: Jul 08 2019 at 19:52)
 
 * [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (10 messages, latest: Jul 08 2019 at 07:41)
 

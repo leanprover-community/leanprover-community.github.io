@@ -17,6 +17,81 @@ permalink: archive/113489newmembers/86787Troublewithinstanceresolution.html
 <p>Hi, I'm trying to prove some simple facts about <code>End</code> and <code>Aut</code>, see <a href="https://github.com/urkud/mathlib/blob/22ceb7d817a0f772a4ad9bb72eb3f282b4ebc920/src/category_theory/endomorphism.lean#L72" target="_blank" title="https://github.com/urkud/mathlib/blob/22ceb7d817a0f772a4ad9bb72eb3f282b4ebc920/src/category_theory/endomorphism.lean#L72">https://github.com/urkud/mathlib/blob/22ceb7d817a0f772a4ad9bb72eb3f282b4ebc920/src/category_theory/endomorphism.lean#L72</a><br>
 Could you please explain why Lean fails to find instances for <code>monoid (End X)</code> and <code>monoid (End (f.obj X))</code> here? It tries <code>End.monoid</code> but says that is_defeq failed.</p>
 
+<a name="169895763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169895763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169895763">Kevin Buzzard (Jul 08 2019 at 19:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_monoid_hom</span> <span class="o">(</span><span class="n">End</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">End</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">))</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">@</span><span class="n">functor</span><span class="bp">.</span><span class="n">map</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">f</span> <span class="n">X</span> <span class="n">X</span> <span class="o">:</span> <span class="n">End</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">End</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">))</span>
+</pre></div>
+
+
+<p>works.</p>
+<p>What I <em>think</em> is going on is that Lean is actually looking for instances for <code>monoid (X ⟶ X)</code> and <code>monoid (f.obj X ⟶ f.obj X)</code>. You tell Lean explicitly that you want the output of <code>functor.map</code> to have type <code>End X → End (f.obj X)</code> but I don't think Lean listens. It checks that the type is defeq to that but for some reason when the type class algorithm is running it has already decided that <code>monoid (X ⟶ X)</code> is what it should be looking for.</p>
+
+<a name="169896065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169896065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169896065">Kevin Buzzard (Jul 08 2019 at 19:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">monoid</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>fails, but</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">monoid</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="k">show</span> <span class="n">monoid</span> <span class="o">(</span><span class="n">End</span> <span class="n">X</span><span class="o">),</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">}</span>
+</pre></div>
+
+
+<p>works and starts to solve the issues. There might also be some clever way of getting Lean to do elaboration in some different way.</p>
+
+<a name="169896575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169896575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169896575">Yury G. Kudryashov (Jul 08 2019 at 19:16)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>! Indeed it was looking for <code>monoid (X ⟶ X)</code> instead of <code>monoid (End X)</code>. I wonder why <code>End.monoid</code> fails defeq anyway but at least now I have a workaround.</p>
+
+<a name="169896883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169896883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169896883">Floris van Doorn (Jul 08 2019 at 19:20)</a>:</h4>
+<p>Type class inference does not do full definitional equality checking, for performance reasons. It should work if you make <code>End</code> reducible.</p>
+<div class="codehilite"><pre><span></span>local attribute [reducible] End
+</pre></div>
+
+<a name="169897097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169897097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169897097">Kevin Buzzard (Jul 08 2019 at 19:23)</a>:</h4>
+<p>But <code>(@functor.map _ _ _ _ f X X : End X → End (f.obj X))</code> is supposed to have type <code>End X → End (f.obj X)</code> and that is what is fed to <code>is_monoid_hom</code>. I still don't quite understand what is going on here. Elaboration of that term is still spitting out something of type <code>(X ⟶ X) → (f.obj X ⟶ f.obj X)</code> despite Yury's pleas to do something else.</p>
+
+<a name="169897754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169897754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169897754">Yury G. Kudryashov (Jul 08 2019 at 19:32)</a>:</h4>
+<p>Is it possible to avoid at least one of the two <code>@</code>? I mean, <code>@is_monoid_hom (End X) (End $ f.obj X) _ _ f.map</code> doesn't work because term<br>
+<code>f.map</code><br>
+has type<br>
+<code>Π {X Y : C}, (X ⟶ Y) → (f.obj X ⟶ f.obj Y) : Type (max u v v')</code><br>
+but is expected to have type<br>
+<code>End X → End (f.obj X) : Type (max v v')</code><br>
+Is it about extra arguments, or about <code>End</code> not marked as <code>reducible</code>?</p>
+
+<a name="169898854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169898854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169898854">Floris van Doorn (Jul 08 2019 at 19:45)</a>:</h4>
+<blockquote>
+<p>But <code>(@functor.map _ _ _ _ f X X : End X → End (f.obj X))</code> is supposed to have type <code>End X → End (f.obj X)</code> and that is what is fed to <code>is_monoid_hom</code>. I still don't quite understand what is going on here. Elaboration of that term is still spitting out something of type <code>(X ⟶ X) → (f.obj X ⟶ f.obj X)</code> despite Yury's pleas to do something else.</p>
+</blockquote>
+<p>The notation <code>(t : T)</code> asks Lean to check (and enforce) that the type of <code>t</code> is definitionally equal to <code>T</code>. After Lean has done that, Lean will happily forget that you ever asked, and just continue with what it thought was the type of <code>t</code>. To enforce that Lean uses the type <code>T</code> for <code>t</code>, use <code>show T, from t</code>. </p>
+<p>This works:</p>
+<div class="codehilite"><pre><span></span>instance foo : is_monoid_hom (show End X → End (f.obj X), from functor.map f) :=
+sorry
+</pre></div>
+
+<a name="169898949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169898949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169898949">Floris van Doorn (Jul 08 2019 at 19:46)</a>:</h4>
+<p>Alternatively, if you don't like <code>show</code> and want to give implicit arguments, give them to <code>is_monoid_hom</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">foo</span> <span class="o">:</span> <span class="bp">@</span><span class="n">is_monoid_hom</span> <span class="o">(</span><span class="n">End</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">End</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">))</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
+<a name="169899271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169899271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169899271">Floris van Doorn (Jul 08 2019 at 19:49)</a>:</h4>
+<blockquote>
+<p><code>f.map</code></p>
+</blockquote>
+<p>This is a bug with the projection notation: the first argument of <code>functor.map</code> after the explicit argument is implicit, and the projection notation cannot deal with that if you don't apply it to another argument. In this case you just have to write <code>functor.map f</code>.</p>
+
+<a name="169899507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Trouble%20with%20instance%20resolution/near/169899507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86787Troublewithinstanceresolution.html#169899507">Yury G. Kudryashov (Jul 08 2019 at 19:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Thank you for the explanation!</p>
+
 
 {% endraw %}
 

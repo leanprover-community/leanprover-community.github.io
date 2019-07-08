@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Priorities of × and ≃](69563Prioritiesofand.html) (13 messages, latest: Jul 08 2019 at 18:58)
+* [Priorities of × and ≃](69563Prioritiesofand.html) (17 messages, latest: Jul 08 2019 at 19:25)
 
 * [idiomatic Lean](99380idiomaticLean.html) (6 messages, latest: Jul 08 2019 at 18:08)
 

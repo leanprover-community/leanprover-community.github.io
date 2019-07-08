@@ -65,6 +65,37 @@ permalink: archive/113488general/69563Prioritiesofand.html
 <p>There is no reason that <code>≃</code> has a precedence near <code>=</code>. <br>
 <code>≃</code> only acts on types, so it makes sense for it to have lower precedence than (some) type formers. This is not the case for <code>=</code>, which should (almost) never be used on types, so it should have a precedence higher than all type formers.</p>
 
+<a name="169895567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Priorities%20of%20%C3%97%20and%20%E2%89%83/near/169895567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69563Prioritiesofand.html#169895567">Floris van Doorn (Jul 08 2019 at 19:01)</a>:</h4>
+<p>In the Lean 2 HoTT library the precedence of <code>≃</code> was 25, compared to <code>×</code> having 35 and <code>=</code> having 50.<br>
+<a href="https://github.com/leanprover/lean2/blob/master/hott/init/equiv.hlean#L304" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/init/equiv.hlean#L304">https://github.com/leanprover/lean2/blob/master/hott/init/equiv.hlean#L304</a><br>
+<a href="https://github.com/leanprover/lean2/blob/master/hott/init/reserved_notation.hlean#L145-L208" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/init/reserved_notation.hlean#L145-L208">https://github.com/leanprover/lean2/blob/master/hott/init/reserved_notation.hlean#L145-L208</a></p>
+<p>This results in some nice statements, like</p>
+<div class="codehilite"><pre><span></span>definition prod_equiv_prod [constructor] (f : A ≃ A&#39;) (g : B ≃ B&#39;) : A × B ≃ A&#39; × B&#39;
+</pre></div>
+
+
+<p><a href="https://github.com/leanprover/lean2/blob/master/hott/types/prod.hlean#L215" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/types/prod.hlean#L215">https://github.com/leanprover/lean2/blob/master/hott/types/prod.hlean#L215</a></p>
+<p>I do not recall ever running into issues/confusion because of these conventions.</p>
+
+<a name="169895829"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Priorities%20of%20%C3%97%20and%20%E2%89%83/near/169895829" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69563Prioritiesofand.html#169895829">Floris van Doorn (Jul 08 2019 at 19:05)</a>:</h4>
+<p>Note: <code>→</code> did (and should) have a lower precedence than <code>≃</code>, and you still require parentheses for them. This can cause confusion, but that's no reason to have the (in my opinion) wrong order for <code>×</code> and <code>≃</code>. Example :</p>
+<div class="codehilite"><pre><span></span>definition arrow_equiv_arrow_right&#39; [constructor] (f1 : A → (B ≃ B&#39;)) : (A → B) ≃ (A → B&#39;)
+</pre></div>
+
+
+<p>(the parentheses in the type of <code>f1</code> are only for readability)<br>
+<a href="https://github.com/leanprover/lean2/blob/master/hott/types/arrow.hlean#L51" target="_blank" title="https://github.com/leanprover/lean2/blob/master/hott/types/arrow.hlean#L51">https://github.com/leanprover/lean2/blob/master/hott/types/arrow.hlean#L51</a></p>
+
+<a name="169896076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Priorities%20of%20%C3%97%20and%20%E2%89%83/near/169896076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69563Prioritiesofand.html#169896076">Floris van Doorn (Jul 08 2019 at 19:09)</a>:</h4>
+<p>I think we should change the precedence of <code>≃</code> to 25. I have also run against this issue before (maybe with two different tokens). This is only a mathlib change, not a core change.</p>
+
+<a name="169897230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Priorities%20of%20%C3%97%20and%20%E2%89%83/near/169897230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/69563Prioritiesofand.html#169897230">Mario Carneiro (Jul 08 2019 at 19:25)</a>:</h4>
+<p>Oh, if it's a mathlib-only change then go ahead. I agree that the precedence in equiv.lean feels consistently the wrong way around</p>
+
 
 {% endraw %}
 
