@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#768 jacobson radical](58792768jacobsonradical.html) (2 messages, latest: Jul 08 2019 at 06:47)
+
 * [#1176 monads](646291176monads.html) (18 messages, latest: Jul 06 2019 at 10:48)
 
 * [#1136 tangent cone](056691136tangentcone.html) (1 message, latest: Jul 06 2019 at 09:49)
