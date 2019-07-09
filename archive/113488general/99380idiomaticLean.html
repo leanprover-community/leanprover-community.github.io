@@ -58,6 +58,18 @@ permalink: archive/113488general/99380idiomaticLean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idiomatic%20Lean/near/170437011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html#170437011">Chris Hughes (Jul 09 2019 at 09:21)</a>:</h4>
 <p>The longer you leave it the worse it will get.</p>
 
+<a name="170490018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/idiomatic%20Lean/near/170490018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99380idiomaticLean.html#170490018">Kevin Buzzard (Jul 09 2019 at 20:56)</a>:</h4>
+<p>This would involve making a new class I think. Currently our class is <code>with_zero Gamma</code> with Gamma a totally ordered comm_group (group law <code>*</code>) and the group law extended to 0 by <code>0*x=0</code> and the order extended by letting <code>0</code> be <code>bot</code>. I have convinced myself this evening that we cannot go as general as totally ordered comm_monoids with 0 because then rings will start having extra valuations which we don't want (the adic spectrum of a ring is the equivalence classes of valuations and we definitely don't want that type to change up to anything more than an equiv). </p>
+<p>The two natural choices for a new class are (1) totally ordered comm_monoids with 0 and with the property that if you remove 0 then you get a group, or (2) totally ordered comm_monoids with 0 and with the property that if you remove 0 then you get a cancellative monoid (i.e. a submonoid of a group). The notion of equivalence, which we're always working with when it comes to valuations, means that we only really care about the image of the valuation. Two valuations are equivalent if their images in the respective with_zero Gamma's are isomorphic and the isomorphism commutes with the valuations.</p>
+<p>Somehow I am now coming to the conclusion that we just want to make a new mathematical object, a totally ordered comm_monoid with a 0 and with the property that everything non-zero cancels. </p>
+<blockquote>
+<p>It's probably not that major.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> the definition of a valuation is line 1 of the first file we import in the 10000+ line project. Can it really not be major? </p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
 
 {% endraw %}
 
