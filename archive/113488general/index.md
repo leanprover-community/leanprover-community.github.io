@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [online leanprover](19268onlineleanprover.html) (171 messages, latest: Jul 09 2019 at 12:04)
+* [online leanprover](19268onlineleanprover.html) (172 messages, latest: Jul 09 2019 at 13:10)
 
-* [-T50000 challenge](87130T50000challenge.html) (191 messages, latest: Jul 09 2019 at 11:41)
+* [-T50000 challenge](87130T50000challenge.html) (192 messages, latest: Jul 09 2019 at 13:08)
 
 * [idiomatic Lean](99380idiomaticLean.html) (7 messages, latest: Jul 09 2019 at 09:21)
 
