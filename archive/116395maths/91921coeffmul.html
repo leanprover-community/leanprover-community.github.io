@@ -39,6 +39,103 @@ permalink: archive/116395maths/91921coeffmul.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428168">Johan Commelin (Jul 09 2019 at 06:46)</a>:</h4>
 <p>Another option is to <code>sum</code> over a finset in the product, so that we are even closer to mimicking <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo>∑</mo><mrow><mi>i</mi><mo>+</mo><mi>j</mi><mo>=</mo><mi>n</mi></mrow></msub><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>c</mi><mi>j</mi></msub><mo stretchy="false">(</mo><mi>ψ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_{i + j = n} c_i(\phi) \cdot c_j(\psi)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.185818em;vertical-align:-0.43581800000000004em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">ϕ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="mclose">)</span></span></span></span>.</p>
 
+<a name="170428841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428841">Mario Carneiro (Jul 09 2019 at 07:02)</a>:</h4>
+<p>It already exists, it's called <code>multiset.diagonal</code> I think</p>
+
+<a name="170428881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428881">Mario Carneiro (Jul 09 2019 at 07:03)</a>:</h4>
+<p>(actually that's the subtraction free version - <code>nat_downset</code> is <code>multiset.powerset</code>)</p>
+
+<a name="170428959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428959">Mario Carneiro (Jul 09 2019 at 07:05)</a>:</h4>
+<p>Just like with <code>nat</code>, I recommend avoiding subtraction here and indeed I suggest using a finset over the product as you've indicated</p>
+
+<a name="170429624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170429624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170429624">Johan Commelin (Jul 09 2019 at 07:19)</a>:</h4>
+<p>Ok, but <code>multiset X</code> is not defeq to <code>finsupp X nat</code></p>
+
+<a name="170429751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170429751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170429751">Johan Commelin (Jul 09 2019 at 07:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think <code>multiset.diagonal</code> is very nice. But how should I apply it in the context of <code>mv_polynomial</code>? There is no obvious analogue for arbitrary <code>finsupp</code>s. Should I use glue between <code>multiset X</code> and <code>finsupp X nat</code>?</p>
+
+<a name="170429834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170429834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170429834">Mario Carneiro (Jul 09 2019 at 07:24)</a>:</h4>
+<p>The analogue I think is to axiomatize it</p>
+
+<a name="170429857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170429857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170429857">Mario Carneiro (Jul 09 2019 at 07:25)</a>:</h4>
+<p>there are other examples, but I don't know a better way to say it than "the set of all elements below x is finite"</p>
+
+<a name="170429936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170429936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170429936">Mario Carneiro (Jul 09 2019 at 07:26)</a>:</h4>
+<p>In the case of <code>finsupp X nat</code> specifically, I think I would just prove it by transferring from <code>multiset X</code></p>
+
+<a name="170429962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170429962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170429962">Johan Commelin (Jul 09 2019 at 07:27)</a>:</h4>
+<p>I'm still confused about what you would want the <em>statement</em> of <code>coeff_mul</code> to look like...</p>
+
+<a name="170430022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430022">Mario Carneiro (Jul 09 2019 at 07:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">coeff_mul</span> <span class="o">(</span><span class="n">φ</span> <span class="n">ψ</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">coeff</span> <span class="n">n</span> <span class="o">(</span><span class="n">φ</span> <span class="bp">*</span> <span class="n">ψ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">diagonal</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">coeff</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span> <span class="n">φ</span> <span class="bp">*</span> <span class="n">coeff</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span> <span class="n">ψ</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="170430153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430153">Mario Carneiro (Jul 09 2019 at 07:30)</a>:</h4>
+<p>here <code>finsupp.diagonal n</code> is something like <code>(multiset.diagonal n.support).map (prod.map f f)</code> where <code>f m = \lam x, count x m</code></p>
+
+<a name="170430228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430228">Mario Carneiro (Jul 09 2019 at 07:32)</a>:</h4>
+<p>and <code>f</code> is then shown to be one half of an order isomorphism, so that <code>mem_diagonal</code> holds also for finsupp</p>
+
+<a name="170430265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430265">Johan Commelin (Jul 09 2019 at 07:33)</a>:</h4>
+<p>Aha... thanks for the suggestions!</p>
+
+<a name="170430334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430334">Johan Commelin (Jul 09 2019 at 07:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> It's not a problem that <code>finsupp.diagonal</code> is only defined for <code>ℕ</code>?</p>
+
+<a name="170430368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430368">Mario Carneiro (Jul 09 2019 at 07:35)</a>:</h4>
+<p>The generalization, like I said, is to have a typeclass for types that have a <code>diagonal</code> function; this is the instance for <code>nat</code></p>
+
+<a name="170430546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430546">Mario Carneiro (Jul 09 2019 at 07:38)</a>:</h4>
+<p>Another example of a type with this property (let's say "downward finite") is <code>finsupp X A</code> itself, when A is downward finite</p>
+
+<a name="170430700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430700">Kenny Lau (Jul 09 2019 at 07:41)</a>:</h4>
+<blockquote>
+<p>Ok, but <code>multiset X</code> is not defeq to <code>finsupp X nat</code></p>
+</blockquote>
+<p>hey we have a natural isomorphism</p>
+
+<a name="170430821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430821">Mario Carneiro (Jul 09 2019 at 07:43)</a>:</h4>
+<p>I would have thought you would be the first to point out that it's not constructively provable</p>
+
+<a name="170430933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170430933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170430933">Kenny Lau (Jul 09 2019 at 07:45)</a>:</h4>
+<p>which direction?</p>
+
+<a name="170431015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170431015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170431015">Mario Carneiro (Jul 09 2019 at 07:46)</a>:</h4>
+<p>finsupp -&gt; multiset</p>
+
+<a name="170431080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170431080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170431080">Kenny Lau (Jul 09 2019 at 07:47)</a>:</h4>
+<p>but you have the support</p>
+
+<a name="170431163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170431163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170431163">Mario Carneiro (Jul 09 2019 at 07:48)</a>:</h4>
+<p>Oh you're right. As long as X is decidable both directions work</p>
+
+<a name="170431171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170431171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170431171">Kenny Lau (Jul 09 2019 at 07:48)</a>:</h4>
+<p>looks like I need to bring up my special category</p>
+
 
 {% endraw %}
 
