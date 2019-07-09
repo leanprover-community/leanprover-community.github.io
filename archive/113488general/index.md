@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (171 messages, latest: Jul 09 2019 at 12:04)
+
 * [-T50000 challenge](87130T50000challenge.html) (191 messages, latest: Jul 09 2019 at 11:41)
 
 * [idiomatic Lean](99380idiomaticLean.html) (7 messages, latest: Jul 09 2019 at 09:21)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [apply_fun](22895applyfun.html) (34 messages, latest: Jul 09 2019 at 00:24)
 
 * [Priorities of × and ≃](69563Prioritiesofand.html) (17 messages, latest: Jul 08 2019 at 19:25)
-
-* [online leanprover](19268onlineleanprover.html) (168 messages, latest: Jul 08 2019 at 17:07)
 
 * [cheap Windows install](22596cheapWindowsinstall.html) (14 messages, latest: Jul 08 2019 at 14:16)
 
