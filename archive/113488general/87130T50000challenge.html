@@ -1115,6 +1115,14 @@ I wonder if it might be possible to build a top-5 old_peak-get_peak_rss() delta,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170451124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170451124">Rob Lewis (Jul 09 2019 at 13:08)</a>:</h4>
 <p>To echo Bernie Sanders for a second: the top .18% of mathlib takes 13.5% of the build time. The <code>assoc'</code> field of <code>category_of_PresheafedSpaces</code> alone is taking around a minute. The proof that <code>tidy</code> finds still takes around a minute to check, and it's pretty innocent looking: <code>intros W X Y Z f g h, dsimp at *, simp at *, refl</code>. There's a bit of unnecessary work done (<code>intros, simp, refl</code> should be fine), but that simp call is crazy. I wonder what the simp set is here -- it changes <code>(f ≫ g) ≫ h = f ≫ g ≫ h</code> to something that looks much messier, but gets closed by <code>refl</code>. Replacing it with the output of <code>squeeze_simp</code> gives a different result, but it's closed by <code>split; refl</code>, thankfully very quickly.</p>
 
+<a name="170462716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170462716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170462716">Johan Commelin (Jul 09 2019 at 15:16)</a>:</h4>
+<p>I think Scott won't have much time for Lean the next two weeks... so we might need to fix things ourselves.</p>
+
+<a name="170463814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170463814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170463814">Rob Lewis (Jul 09 2019 at 15:29)</a>:</h4>
+<p>I have a commit on my office computer that shaves two minutes off of <code>presheafed_space</code>. But I had to leave early and didn't push it yet, and no way am I working on this on my laptop. It's a patch, not a real fix -- just getting the scripts from <code>tidy</code> and fixing the worst parts.</p>
+
 
 {% endraw %}
 
