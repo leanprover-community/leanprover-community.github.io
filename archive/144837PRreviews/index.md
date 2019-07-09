@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1076 powers mod n](145921076powersmodn.html) (36 messages, latest: Jul 09 2019 at 04:19)
+
 * [#1136 tangent cone](056691136tangentcone.html) (13 messages, latest: Jul 08 2019 at 15:27)
 
 * [#768 jacobson radical](58792768jacobsonradical.html) (2 messages, latest: Jul 08 2019 at 06:47)
@@ -46,8 +48,6 @@ permalink: archive/144837PRreviews/index.html
 * [#856 submodules of algebra form semiring](64575856submodulesofalgebraformsemiring.html) (8 messages, latest: May 27 2019 at 10:29)
 
 * [#1080 props of elements in rings](039491080propsofelementsinrings.html) (11 messages, latest: May 24 2019 at 14:45)
-
-* [#1076 powers mod n](145921076powersmodn.html) (35 messages, latest: May 23 2019 at 14:07)
 
 * [#1049 refactor CommRing adjunctions](075901049refactorCommRingadjunctions.html) (14 messages, latest: May 23 2019 at 06:19)
 
