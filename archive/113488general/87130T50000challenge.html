@@ -1071,6 +1071,22 @@ I wonder if it might be possible to build a top-5 old_peak-get_peak_rss() delta,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/166021401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#166021401">Rob Lewis (May 19 2019 at 12:29)</a>:</h4>
 <p>Yep. At the <code>linarith</code> call in the line <code> refine Hausdorff_dist_le_of_mem_dist  (by linarith) _ _</code>, the type of <code>δ0</code> has been instantiated. If you change this to <code>refine Hausdorff_dist_le_of_mem_dist _ _ _</code>, <code>linarith</code> fails on the first goal, because type of <code>δ0</code> is still an mvar.</p>
 
+<a name="170437677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170437677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170437677">Rob Lewis (Jul 09 2019 at 09:33)</a>:</h4>
+<p>I'm running the -T50000 test again for the fun of it. <code>category_theory/adjunction/limits.lean</code> fails in a number of places (and takes 60 seconds to compile on my fast desktop). This is presumably due to <code>tidy</code>, but it doesn't seem healthy. Similar issues in <code>algebraic_geometry/presheafed_space</code> (as noted at <a href="#narrow/stream/116395-maths/topic/presheafed.20space.20category" title="#narrow/stream/116395-maths/topic/presheafed.20space.20category">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/presheafed.20space.20category</a>), which takes a whopping 125 sec, mainly on line 64.</p>
+
+<a name="170437982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170437982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170437982">Rob Lewis (Jul 09 2019 at 09:38)</a>:</h4>
+<p>Also trouble with <code>card_nth_roots</code> at <code>data/polynomial.lean:1782</code>, but this one isn't related to <code>tidy</code>.</p>
+
+<a name="170438727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170438727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170438727">Rob Lewis (Jul 09 2019 at 09:50)</a>:</h4>
+<p>I see the issue with <code>card_nth_roots</code> came up last time we ran this test and I thought we fixed it. There's an easy enough workaround, although I'm not sure why it works.</p>
+
+<a name="170438882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/-T50000%20challenge/near/170438882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87130T50000challenge.html#170438882">Rob Lewis (Jul 09 2019 at 09:52)</a>:</h4>
+<p><code>algebra/CommRing/adjunctions.lean</code>, which Scott fixed last time, is failing again. It's not horribly slow so this might be just over the edge.</p>
+
 
 {% endraw %}
 

@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [-T50000 challenge](87130T50000challenge.html) (185 messages, latest: Jul 09 2019 at 09:52)
+
+* [idiomatic Lean](99380idiomaticLean.html) (7 messages, latest: Jul 09 2019 at 09:21)
+
 * [eq.lhs and eq.rhs](95504eqlhsandeqrhs.html) (2 messages, latest: Jul 09 2019 at 07:20)
 
 * [apply_fun](22895applyfun.html) (34 messages, latest: Jul 09 2019 at 00:24)
 
 * [Priorities of × and ≃](69563Prioritiesofand.html) (17 messages, latest: Jul 08 2019 at 19:25)
-
-* [idiomatic Lean](99380idiomaticLean.html) (6 messages, latest: Jul 08 2019 at 18:08)
 
 * [online leanprover](19268onlineleanprover.html) (168 messages, latest: Jul 08 2019 at 17:07)
 
@@ -360,8 +362,6 @@ permalink: archive/113488general/index.html
 * [linarith argument parsing](09683linarithargumentparsing.html) (12 messages, latest: May 19 2019 at 14:24)
 
 * [coe nat enat](18531coenatenat.html) (44 messages, latest: May 19 2019 at 13:14)
-
-* [-T50000 challenge](87130T50000challenge.html) (181 messages, latest: May 19 2019 at 12:29)
 
 * [Integral of a constant](02999Integralofaconstant.html) (45 messages, latest: May 19 2019 at 00:11)
 
