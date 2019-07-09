@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [apply_fun](22895applyfun.html) (34 messages, latest: Jul 09 2019 at 00:24)
+
 * [Priorities of × and ≃](69563Prioritiesofand.html) (17 messages, latest: Jul 08 2019 at 19:25)
 
 * [idiomatic Lean](99380idiomaticLean.html) (6 messages, latest: Jul 08 2019 at 18:08)
 
 * [online leanprover](19268onlineleanprover.html) (168 messages, latest: Jul 08 2019 at 17:07)
-
-* [apply_fun](22895applyfun.html) (33 messages, latest: Jul 08 2019 at 16:05)
 
 * [cheap Windows install](22596cheapWindowsinstall.html) (14 messages, latest: Jul 08 2019 at 14:16)
 
