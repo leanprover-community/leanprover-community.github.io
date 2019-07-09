@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [idiomatic Lean](99380idiomaticLean.html) (8 messages, latest: Jul 09 2019 at 20:56)
+* [idiomatic Lean](99380idiomaticLean.html) (16 messages, latest: Jul 09 2019 at 21:31)
 
 * [-T50000 challenge](87130T50000challenge.html) (197 messages, latest: Jul 09 2019 at 16:49)
 
