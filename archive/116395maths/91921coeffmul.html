@@ -1,0 +1,45 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/91921coeffmul.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html">coeff_mul</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170428019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428019">Johan Commelin (Jul 09 2019 at 06:42)</a>:</h4>
+<p>I have just finished the proof of <code>coeff_mul</code> for `mv_polynomial:<br>
+<a href="https://gist.github.com/jcommelin/add8c8df8b3479c435d3f5ac34cdb1f7#file-mv_polynomial_coeff_mul-lean-L189-L298" target="_blank" title="https://gist.github.com/jcommelin/add8c8df8b3479c435d3f5ac34cdb1f7#file-mv_polynomial_coeff_mul-lean-L189-L298">https://gist.github.com/jcommelin/add8c8df8b3479c435d3f5ac34cdb1f7#file-mv_polynomial_coeff_mul-lean-L189-L298</a></p>
+
+<a name="170428029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428029">Johan Commelin (Jul 09 2019 at 06:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">coeff_mul</span> <span class="o">(</span><span class="n">φ</span> <span class="n">ψ</span> <span class="o">:</span> <span class="n">mv_polynomial</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">coeff</span> <span class="n">n</span> <span class="o">(</span><span class="n">φ</span> <span class="bp">*</span> <span class="n">ψ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">nat_downset</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">coeff</span> <span class="n">m</span> <span class="n">φ</span> <span class="bp">*</span> <span class="n">coeff</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)</span> <span class="n">ψ</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="170428038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428038">Johan Commelin (Jul 09 2019 at 06:43)</a>:</h4>
+<p>I think this would fill a little gap in the API for polynomials.</p>
+
+<a name="170428087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428087">Johan Commelin (Jul 09 2019 at 06:44)</a>:</h4>
+<p>Question: what should <code>finsupp.nat_downset</code> be called? Does this somehow generalise? Is there something like "partial orders with downsets that are finsets"?</p>
+
+<a name="170428094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428094">Johan Commelin (Jul 09 2019 at 06:44)</a>:</h4>
+<p>Also... if people want a golfing challenge... currently the proof is a whopping 120 lines...</p>
+
+<a name="170428168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/coeff_mul/near/170428168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/91921coeffmul.html#170428168">Johan Commelin (Jul 09 2019 at 06:46)</a>:</h4>
+<p>Another option is to <code>sum</code> over a finset in the product, so that we are even closer to mimicking <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo>∑</mo><mrow><mi>i</mi><mo>+</mo><mi>j</mi><mo>=</mo><mi>n</mi></mrow></msub><msub><mi>c</mi><mi>i</mi></msub><mo stretchy="false">(</mo><mi>ϕ</mi><mo stretchy="false">)</mo><mo>⋅</mo><msub><mi>c</mi><mi>j</mi></msub><mo stretchy="false">(</mo><mi>ψ</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">\sum_{i + j = n} c_i(\phi) \cdot c_j(\psi)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.185818em;vertical-align:-0.43581800000000004em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.16195399999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">i</span><span class="mbin mtight">+</span><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span><span class="mrel mtight">=</span><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.43581800000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.31166399999999994em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">i</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault">ϕ</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1.036108em;vertical-align:-0.286108em;"></span><span class="mord"><span class="mord mathdefault">c</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.311664em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight" style="margin-right:0.05724em;">j</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.286108em;"><span></span></span></span></span></span></span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">ψ</span><span class="mclose">)</span></span></span></span>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
