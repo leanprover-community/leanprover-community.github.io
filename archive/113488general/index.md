@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (3 messages, latest: Jul 10 2019 at 14:11)
+
 * [bad coercion](45594badcoercion.html) (8 messages, latest: Jul 10 2019 at 11:13)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (6 messages, latest: Jul 10 2019 at 08:18)
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [cheap Windows install](22596cheapWindowsinstall.html) (14 messages, latest: Jul 08 2019 at 14:16)
 
 * [Bug with let in pattern match](60898Bugwithletinpatternmatch.html) (11 messages, latest: Jul 08 2019 at 12:49)
-
-* [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (2 messages, latest: Jul 08 2019 at 11:46)
 
 * [notational leakage](11556notationalleakage.html) (117 messages, latest: Jul 08 2019 at 10:28)
 
