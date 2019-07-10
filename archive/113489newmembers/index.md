@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Trouble with instance resolution](86787Troublewithinstanceresolution.html) (32 messages, latest: Jul 08 2019 at 21:01)
+* [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (11 messages, latest: Jul 10 2019 at 07:05)
 
-* [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (10 messages, latest: Jul 08 2019 at 07:41)
+* [Trouble with instance resolution](86787Troublewithinstanceresolution.html) (32 messages, latest: Jul 08 2019 at 21:01)
 
 * [About my theorem](42006Aboutmytheorem.html) (6 messages, latest: Jun 29 2019 at 18:50)
 

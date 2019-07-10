@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [bad coercion](45594badcoercion.html) (3 messages, latest: Jul 10 2019 at 07:49)
+
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (5 messages, latest: Jul 10 2019 at 05:38)
 
 * [idiomatic Lean](99380idiomaticLean.html) (16 messages, latest: Jul 09 2019 at 21:31)
