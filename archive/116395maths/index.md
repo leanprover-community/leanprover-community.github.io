@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [cache-olean instructions](43334cacheoleaninstructions.html) (1 message, latest: Jul 10 2019 at 12:33)
+* [cache-olean instructions](43334cacheoleaninstructions.html) (6 messages, latest: Jul 10 2019 at 15:19)
 
 * [coeff_mul](91921coeffmul.html) (45 messages, latest: Jul 09 2019 at 14:57)
 
