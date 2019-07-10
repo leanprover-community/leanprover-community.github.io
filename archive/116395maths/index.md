@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [has_mul instance for option?](18750hasmulinstanceforoption.html) (1 message, latest: Jul 10 2019 at 20:55)
+* [has_mul instance for option?](18750hasmulinstanceforoption.html) (4 messages, latest: Jul 10 2019 at 21:43)
 
 * [cache-olean instructions](43334cacheoleaninstructions.html) (10 messages, latest: Jul 10 2019 at 19:36)
 

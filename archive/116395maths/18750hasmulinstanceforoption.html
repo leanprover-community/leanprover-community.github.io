@@ -22,6 +22,30 @@ permalink: archive/116395maths/18750hasmulinstanceforoption.html
 
 <p>But after <code>cases</code> on both <code>a</code> and <code>b</code> I want to simplify the <code>none * some</code> term and the others, but I am stuck. Any suggetions?</p>
 
+<a name="170579915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_mul%20instance%20for%20option%3F/near/170579915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18750hasmulinstanceforoption.html#170579915">Chris Hughes (Jul 10 2019 at 21:09)</a>:</h4>
+<p><code>none</code> is defeq to <code>\top</code>, and there should be lemmas about that. Probably <code>rfl</code> will prove it. There might be a special version of <code>cases</code> for <code>ennreal</code></p>
+
+<a name="170580713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_mul%20instance%20for%20option%3F/near/170580713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18750hasmulinstanceforoption.html#170580713">Koundinya Vajjha (Jul 10 2019 at 21:21)</a>:</h4>
+<p>I'm stuck on <code>ennreal.to_nnreal (some a * some b) = a * b</code>.</p>
+
+<a name="170581925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_mul%20instance%20for%20option%3F/near/170581925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/18750hasmulinstanceforoption.html#170581925">Sebastien Gouezel (Jul 10 2019 at 21:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">to_nnreal_mul</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ennreal</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">ennreal</span><span class="bp">.</span><span class="n">to_nnreal</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">ennreal</span><span class="bp">.</span><span class="n">to_nnreal</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">ennreal</span><span class="bp">.</span><span class="n">to_nnreal</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">a</span><span class="bp">;</span> <span class="n">cases</span> <span class="n">b</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">none_eq_top</span><span class="o">]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">=</span> <span class="mi">0</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">none_eq_top</span><span class="o">,</span> <span class="n">some_eq_coe</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">top_mul</span><span class="o">]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">none_eq_top</span><span class="o">,</span> <span class="n">some_eq_coe</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">mul_top</span><span class="o">]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">some_eq_coe</span><span class="o">,</span> <span class="n">coe_mul</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="bp">-</span><span class="n">coe_mul</span><span class="o">]</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>We should probably add a <code>simp</code> attribute to <code>none_eq_top</code> and <code>some_eq_coe</code>, by the way.</p>
+
 
 {% endraw %}
 
