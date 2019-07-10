@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (5 messages, latest: Jul 10 2019 at 05:38)
+
 * [idiomatic Lean](99380idiomaticLean.html) (16 messages, latest: Jul 09 2019 at 21:31)
 
 * [-T50000 challenge](87130T50000challenge.html) (197 messages, latest: Jul 09 2019 at 16:49)
@@ -54,8 +56,6 @@ permalink: archive/113488general/index.html
 * [structure question](80074structurequestion.html) (4 messages, latest: Jul 04 2019 at 17:34)
 
 * [symmetry](60107symmetry.html) (3 messages, latest: Jul 04 2019 at 17:21)
-
-* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (3 messages, latest: Jul 04 2019 at 15:33)
 
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
 
