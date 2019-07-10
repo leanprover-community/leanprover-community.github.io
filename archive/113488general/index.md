@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [bad coercion](45594badcoercion.html) (6 messages, latest: Jul 10 2019 at 10:55)
+* [bad coercion](45594badcoercion.html) (8 messages, latest: Jul 10 2019 at 11:13)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (6 messages, latest: Jul 10 2019 at 08:18)
 
