@@ -1,0 +1,56 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06956unprovableequality.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html">unprovable equality?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170583846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170583846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170583846">Kevin Buzzard (Jul 10 2019 at 22:11)</a>:</h4>
+<p>Is it correct to say that if I define <code> posreal := {r : ℝ // 0 &lt; r}</code> then, remembering <code>nnreal := {r : ℝ // 0 ≤ r}</code>, am I right in thinking that it is impossible to prove <code>nnreal = with_zero posreal</code> in Lean?</p>
+
+<a name="170583953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170583953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170583953">Kevin Buzzard (Jul 10 2019 at 22:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> ? BTW -- nice to meet you today!</p>
+
+<a name="170584107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584107">Floris van Doorn (Jul 10 2019 at 22:14)</a>:</h4>
+<p>That is correct. You can prove that your types are equivalent, but you can (almost) never prove that two types are equal. Therefore, it is "evil" to work with equality between types (unless you're doing homotopy type theory, where this equality is an easy consequence of univalence).</p>
+
+<a name="170584312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584312">Kevin Buzzard (Jul 10 2019 at 22:17)</a>:</h4>
+<p>Well, the non-negative reals are equal to the disjoint union of zero and the positive reals, so how am I supposed to say this in Lean?</p>
+
+<a name="170584371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584371">Kevin Buzzard (Jul 10 2019 at 22:18)</a>:</h4>
+<p>Every theorem about the non-negative reals is also true for the disjoint union of zero and the positive reals.</p>
+
+<a name="170584379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584379">Kevin Buzzard (Jul 10 2019 at 22:18)</a>:</h4>
+<p>and vice versa</p>
+
+<a name="170584382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170584382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170584382">Kevin Buzzard (Jul 10 2019 at 22:18)</a>:</h4>
+<p>Ask any mathematician</p>
+
+<a name="170586696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170586696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170586696">Jesse Michael Han (Jul 10 2019 at 22:53)</a>:</h4>
+<p>you would have a better shot proving that <code>with_zero posreal</code> is equal to the positive <code>ennreal</code>s since both <code>with_zero</code> and <code>ennreal</code> reduce to <code>option _</code></p>
+<p>but then you're basically trying to prove</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">option</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">P</span> <span class="n">a</span><span class="o">})</span> <span class="bp">=</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">option</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="n">a</span> <span class="n">true</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">P</span> <span class="n">x</span><span class="o">)}</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>and i'm not sure if that's provable in Lean</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

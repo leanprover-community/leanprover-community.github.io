@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [zero ring](29201zeroring.html) (25 messages, latest: Jul 10 2019 at 22:50)
+
 * [has_mul instance for option?](18750hasmulinstanceforoption.html) (4 messages, latest: Jul 10 2019 at 21:43)
 
 * [cache-olean instructions](43334cacheoleaninstructions.html) (10 messages, latest: Jul 10 2019 at 19:36)
@@ -690,8 +692,6 @@ permalink: archive/116395maths/index.html
 * [modulo group action](14012modulogroupaction.html) (18 messages, latest: Sep 13 2018 at 20:27)
 
 * [connected categories](43130connectedcategories.html) (4 messages, latest: Sep 12 2018 at 17:43)
-
-* [zero ring](29201zeroring.html) (23 messages, latest: Sep 12 2018 at 17:10)
 
 * [Hensel's lemma](57510Henselslemma.html) (16 messages, latest: Sep 12 2018 at 09:09)
 

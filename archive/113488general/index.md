@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unprovable equality?](06956unprovableequality.html) (8 messages, latest: Jul 10 2019 at 22:53)
+
 * [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (3 messages, latest: Jul 10 2019 at 14:11)
 
 * [bad coercion](45594badcoercion.html) (8 messages, latest: Jul 10 2019 at 11:13)
