@@ -27,6 +27,26 @@ permalink: archive/113488general/45594badcoercion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170519920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170519920">Chris Hughes (Jul 10 2019 at 07:49)</a>:</h4>
 <p>I do, but then I write <code>.to_matrix</code> everywhere, and everything is long and unreadable.</p>
 
+<a name="170529332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170529332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170529332">Joe Hendrix (Jul 10 2019 at 10:22)</a>:</h4>
+<p>Can you make it a definition and add local instances where you find yourself frequently writing <code>to_matrix</code>?  The main question I have with coercision instances is whether you always want them to spread to modules that import the module that are in even indirectly.</p>
+
+<a name="170529857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170529857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170529857">Chris Hughes (Jul 10 2019 at 10:33)</a>:</h4>
+<p>The difficulty with that is I need all the theorems to be stated with whichever one I'm using.</p>
+
+<a name="170531122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/bad%20coercion/near/170531122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/45594badcoercion.html#170531122">Joe Hendrix (Jul 10 2019 at 10:55)</a>:</h4>
+<p>That's true, but you could still define the coe_t, just not make it an instance.</p>
+<p>What I had in mind was something like</p>
+<div class="codehilite"><pre><span></span>def to_mat_coe : coe_t (pequiv m n) (matrix m n R) := &lt;to_matrix&gt;
+local [instance] to_mat_coe
+</pre></div>
+
+
+<p>Then other modules that want the coercions just write <code>local [instance] to_mat_coe</code>.</p>
+<p>Note that the above syntax may not be exactly right, it's been a while since I used Lean 3.</p>
+
 
 {% endraw %}
 
