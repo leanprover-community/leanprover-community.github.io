@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode extension](56578VScodeextension.html) (414 messages, latest: Jul 11 2019 at 20:55)
+
 * [documentation](05083documentation.html) (2 messages, latest: Jul 11 2019 at 15:38)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (557 messages, latest: Jul 11 2019 at 14:38)
@@ -68,8 +70,6 @@ permalink: archive/113488general/index.html
 * [symmetry](60107symmetry.html) (3 messages, latest: Jul 04 2019 at 17:21)
 
 * [What is `abbreviation`?](30886Whatisabbreviation.html) (9 messages, latest: Jul 04 2019 at 11:57)
-
-* [VScode extension](56578VScodeextension.html) (411 messages, latest: Jul 04 2019 at 11:19)
 
 * [implicit variables](69365implicitvariables.html) (5 messages, latest: Jul 03 2019 at 18:28)
 
