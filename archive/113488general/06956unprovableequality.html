@@ -189,6 +189,23 @@ permalink: archive/113488general/06956unprovableequality.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170601261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170601261">Johan Commelin (Jul 11 2019 at 04:37)</a>:</h4>
 <p>[/troll]</p>
 
+<a name="170610286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170610286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170610286">Floris van Doorn (Jul 11 2019 at 07:51)</a>:</h4>
+<blockquote>
+<p>Well, the non-negative reals are equal to the disjoint union of zero and the positive reals, so how am I supposed to say this in Lean?</p>
+</blockquote>
+<p>Equality between types is evil, but equality between sets on a type is fine. You can prove in Lean that</p>
+<div class="codehilite"><pre><span></span><span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span> <span class="o">}</span> <span class="err">∪</span> <span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="bp">=</span> <span class="o">{</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">|</span> <span class="n">x</span> <span class="bp">≥</span> <span class="mi">0</span> <span class="o">}</span>
+</pre></div>
+
+<a name="170610575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170610575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170610575">Johan Commelin (Jul 11 2019 at 07:55)</a>:</h4>
+<p>Lean even knows that this implies that the corresponding subtypes are equiv.</p>
+
+<a name="170610672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170610672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170610672">Johan Commelin (Jul 11 2019 at 07:56)</a>:</h4>
+<p>But of course the LHS of Floris's equation is <em>not</em> <code>with_zero preal</code>. You can prove that it is the image of the <strong>obvious, canonical</strong> map <code>with_zero preal → ℝ</code>. But then... you might as well show that the RHS is the image, which is also obvious.</p>
+
 
 {% endraw %}
 
