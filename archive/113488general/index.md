@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [more type class inference issues](00919moretypeclassinferenceissues.html) (557 messages, latest: Jul 11 2019 at 14:38)
+* [documentation](05083documentation.html) (2 messages, latest: Jul 11 2019 at 15:38)
 
-* [documentation](05083documentation.html) (1 message, latest: Jul 11 2019 at 14:13)
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (557 messages, latest: Jul 11 2019 at 14:38)
 
 * [algebraic closure](74840algebraicclosure.html) (32 messages, latest: Jul 11 2019 at 12:26)
 
