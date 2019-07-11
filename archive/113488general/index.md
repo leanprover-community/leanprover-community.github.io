@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [unprovable equality?](06956unprovableequality.html) (16 messages, latest: Jul 10 2019 at 23:44)
+* [unprovable equality?](06956unprovableequality.html) (19 messages, latest: Jul 11 2019 at 01:48)
 
 * [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (3 messages, latest: Jul 10 2019 at 14:11)
 

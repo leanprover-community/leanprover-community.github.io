@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1259 messages, latest: Jul 11 2019 at 00:25)
+* [noob question(s)](52075noobquestions.html) (1262 messages, latest: Jul 11 2019 at 01:21)
 
 * [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (11 messages, latest: Jul 10 2019 at 07:05)
 
