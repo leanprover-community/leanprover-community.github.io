@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [zero ring](29201zeroring.html) (31 messages, latest: Jul 10 2019 at 23:59)
+* [Perfectoid spaces](04805Perfectoidspaces.html) (3092 messages, latest: Jul 11 2019 at 00:14)
+
+* [zero ring](29201zeroring.html) (33 messages, latest: Jul 11 2019 at 00:05)
 
 * [has_mul instance for option?](18750hasmulinstanceforoption.html) (4 messages, latest: Jul 10 2019 at 21:43)
 
@@ -134,8 +136,6 @@ permalink: archive/116395maths/index.html
 * [open subgroups](85789opensubgroups.html) (7 messages, latest: May 20 2019 at 20:18)
 
 * [←add_assoc](44346addassoc.html) (8 messages, latest: May 19 2019 at 08:04)
-
-* [Perfectoid spaces](04805Perfectoidspaces.html) (3090 messages, latest: May 18 2019 at 16:55)
 
 * [is_open {true}](82278isopentrue.html) (7 messages, latest: May 16 2019 at 20:05)
 
