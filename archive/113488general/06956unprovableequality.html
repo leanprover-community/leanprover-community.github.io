@@ -96,6 +96,79 @@ permalink: archive/113488general/06956unprovableequality.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170595391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170595391">Andrew Ashworth (Jul 11 2019 at 01:48)</a>:</h4>
 <p>I feel like there's an infinite number of dumb propositions that can distinguish between two isomorphic objects, and how is a computer supposed to infer what axioms must hold for each object? It's also true that there are an infinite number of dumb propositions that hold for two isomorphic objects. It's clearly a human problem to decide which ones are relevant, only humans can decide what makes a property "interesting", because math is done for the sake of human curiosity.</p>
 
+<a name="170595956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170595956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170595956">Andrew Ashworth (Jul 11 2019 at 02:05)</a>:</h4>
+<p>So I guess that I'm of the opinion that Q2 is false; and all you can say easily is that all theorems in the language of semirings hold for the non negative reals and the disjoint union of zero and the positive reals, and everything else must be proven.</p>
+
+<a name="170596088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596088">Mario Carneiro (Jul 11 2019 at 02:09)</a>:</h4>
+<p>One thing you can say is that any "property of rings" is preserved by ring isomorphism; but of course this leaves open the question of what a property of rings is, and I would define it as a property preserved by ring isomorphism</p>
+
+<a name="170596146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596146">Mario Carneiro (Jul 11 2019 at 02:11)</a>:</h4>
+<p>By the way, you can't prove that the proposition  "forall types, return true if types = cauchy sequence and false if types = dedekind cut" exists</p>
+
+<a name="170596154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596154">Andrew Ashworth (Jul 11 2019 at 02:11)</a>:</h4>
+<p>really? why?</p>
+
+<a name="170596213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596213">Mario Carneiro (Jul 11 2019 at 02:12)</a>:</h4>
+<p>You can define the proposition "X = cauchy reals" but you can't prove that this is false when X = dedekind reals because that's equivalent to cauchy reals != dedekind reals, and "cauchy reals = dedekind reals" is consistent with lean</p>
+
+<a name="170596396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596396">Andrew Ashworth (Jul 11 2019 at 02:18)</a>:</h4>
+<blockquote>
+<p>One thing you can say is that any "property of rings" is preserved by ring isomorphism; but of course this leaves open the question of what a property of rings is, and I would define it as a property preserved by ring isomorphism</p>
+</blockquote>
+<p>I can't even imagine what the algorithm would be to work backwards and figure out what additional properties of rings you would need to preserve in order to transfer a proposition between the cauchy and dedekind reals</p>
+
+<a name="170596680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596680">Andrew Ashworth (Jul 11 2019 at 02:26)</a>:</h4>
+<p>I guess what you could do is write a hole tactic, for which you provide two isomorphic types, a list of properties, and the proposition you want to transfer. Then the tactic will recursively parse the proposition and check that each term preserves the property axioms, maybe with some sort of automatic prover. Anything left over is spit out for the human to prove.</p>
+
+<a name="170596694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596694">Andrew Ashworth (Jul 11 2019 at 02:27)</a>:</h4>
+<p>I can already feel like there might be some problems with this but I spent about 30 seconds thinking about it.</p>
+
+<a name="170596977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170596977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170596977">Andrew Ashworth (Jul 11 2019 at 02:34)</a>:</h4>
+<p>Also suddenly your tactic is actually as complicated as an optimizing compiler</p>
+
+<a name="170597183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597183">Mario Carneiro (Jul 11 2019 at 02:40)</a>:</h4>
+<blockquote>
+<p>I can't even imagine what the algorithm would be to work backwards and figure out what additional properties of rings you would need to preserve in order to transfer a proposition between the cauchy and dedekind reals</p>
+</blockquote>
+<p>You don't need any additional properties - they are isomorphic as rings so any ring proposition will transfer</p>
+
+<a name="170597193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597193">Mario Carneiro (Jul 11 2019 at 02:41)</a>:</h4>
+<blockquote>
+<p>I guess what you could do is write a hole tactic, for which you provide two isomorphic types, a list of properties, and the proposition you want to transfer. Then the tactic will recursively parse the proposition and check that each term preserves the property axioms, maybe with some sort of automatic prover. Anything left over is spit out for the human to prove.</p>
+</blockquote>
+<p>This is basically what <code>transfer</code> does</p>
+
+<a name="170597306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597306">Andrew Ashworth (Jul 11 2019 at 02:44)</a>:</h4>
+<p>Yes, but I think Kevin was interested in transferring an arbitrary proposition; so we then have the task of deciding whether or not that proposition is in the set of properties that are shared by both cauchy reals and dekekind reals</p>
+
+<a name="170597377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597377">Andrew Ashworth (Jul 11 2019 at 02:47)</a>:</h4>
+<p>or  (union of zero and the positive reals) intersect (non negative reals), as he mentioned in q2</p>
+
+<a name="170597498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597498">Mario Carneiro (Jul 11 2019 at 02:50)</a>:</h4>
+<p>I am presuming that the isomorphism of rings is determined manually in advance</p>
+
+<a name="170597510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597510">Mario Carneiro (Jul 11 2019 at 02:51)</a>:</h4>
+<p>the transfer stuff won't help you with that proof</p>
+
+<a name="170597561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unprovable%20equality%3F/near/170597561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06956unprovableequality.html#170597561">Andrew Ashworth (Jul 11 2019 at 02:52)</a>:</h4>
+<p>yeah, but that's what he wants, because that's what you need to make q2 = true (I think). Automatic classification of an arbitrary proposition as "mathematical" or not, where mathematical is undefined but every mathematician knows it when they see it</p>
+
 
 {% endraw %}
 
