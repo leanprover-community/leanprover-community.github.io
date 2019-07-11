@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [presheafed space category](15170presheafedspacecategory.html) (19 messages, latest: Jul 11 2019 at 05:20)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3098 messages, latest: Jul 11 2019 at 04:29)
 
 * [zero ring](29201zeroring.html) (36 messages, latest: Jul 11 2019 at 04:26)
@@ -26,8 +28,6 @@ permalink: archive/116395maths/index.html
 * [function extension](82180functionextension.html) (23 messages, latest: Jul 08 2019 at 16:04)
 
 * [groups (bundling etc)](00257groupsbundlingetc.html) (40 messages, latest: Jul 08 2019 at 14:07)
-
-* [presheafed space category](15170presheafedspacecategory.html) (17 messages, latest: Jul 08 2019 at 12:18)
 
 * [simple groups](91723simplegroups.html) (1 message, latest: Jul 08 2019 at 07:22)
 
