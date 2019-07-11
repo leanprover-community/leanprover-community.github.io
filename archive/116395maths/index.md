@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [zero ring](29201zeroring.html) (25 messages, latest: Jul 10 2019 at 22:50)
+* [zero ring](29201zeroring.html) (31 messages, latest: Jul 10 2019 at 23:59)
 
 * [has_mul instance for option?](18750hasmulinstanceforoption.html) (4 messages, latest: Jul 10 2019 at 21:43)
 
