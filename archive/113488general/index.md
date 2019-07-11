@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (32 messages, latest: Jul 11 2019 at 12:26)
+
 * [unprovable equality?](06956unprovableequality.html) (45 messages, latest: Jul 11 2019 at 10:09)
 
 * [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (3 messages, latest: Jul 10 2019 at 14:11)
@@ -306,8 +308,6 @@ permalink: archive/113488general/index.html
 * [Reducibility, rewrite etc](12532Reducibilityrewriteetc.html) (9 messages, latest: May 27 2019 at 15:08)
 
 * [casting from Prop/bool to semiring](31291castingfromPropbooltosemiring.html) (3 messages, latest: May 27 2019 at 12:29)
-
-* [algebraic closure](74840algebraicclosure.html) (31 messages, latest: May 27 2019 at 11:26)
 
 * [auto-recompiling](02272autorecompiling.html) (7 messages, latest: May 27 2019 at 09:42)
 
