@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [more type class inference issues](00919moretypeclassinferenceissues.html) (557 messages, latest: Jul 11 2019 at 14:38)
+
+* [documentation](05083documentation.html) (1 message, latest: Jul 11 2019 at 14:13)
+
 * [algebraic closure](74840algebraicclosure.html) (32 messages, latest: Jul 11 2019 at 12:26)
 
 * [unprovable equality?](06956unprovableequality.html) (45 messages, latest: Jul 11 2019 at 10:09)
@@ -274,8 +278,6 @@ permalink: archive/113488general/index.html
 * [syntax](83688syntax.html) (78 messages, latest: Jun 02 2019 at 15:26)
 
 * [tactic writing for dummies](53080tacticwritingfordummies.html) (9 messages, latest: Jun 01 2019 at 21:36)
-
-* [more type class inference issues](00919moretypeclassinferenceissues.html) (554 messages, latest: Jun 01 2019 at 17:44)
 
 * [leaky option](90448leakyoption.html) (35 messages, latest: Jun 01 2019 at 09:11)
 

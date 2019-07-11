@@ -2829,6 +2829,40 @@ failed is_def_eq
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/167082487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#167082487">Chris Hughes (Jun 01 2019 at 17:44)</a>:</h4>
 <p>Use some hidden name that isn't the name we have to look at.</p>
 
+<a name="170638724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/170638724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#170638724">Wojciech Nawrocki (Jul 11 2019 at 14:33)</a>:</h4>
+<p>Why does searching for instances in the local context work with explicit arguments but not under a lambda?</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">myclass</span> <span class="o">(</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">foo</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">myclass</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span><span class="o">:</span> <span class="n">α</span><span class="o">):</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">a</span>
+
+<span class="n">def</span> <span class="n">bar</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">h</span><span class="o">:</span> <span class="n">myclass</span> <span class="bp">ℕ</span><span class="o">]:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="n">foo</span> <span class="n">n</span> <span class="c1">-- good</span>
+
+<span class="n">def</span> <span class="n">bar&#39;</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">myclass</span> <span class="bp">ℕ</span><span class="o">],</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="n">foo</span> <span class="n">n</span>
+<span class="c">/-</span><span class="cm"> failed to synthesize type class instance for</span>
+<span class="cm">n : ℕ,</span>
+<span class="cm">h : myclass ℕ</span>
+<span class="cm">⊢ myclass ℕ -/</span>
+</pre></div>
+
+<a name="170638952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/170638952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#170638952">Chris Hughes (Jul 11 2019 at 14:35)</a>:</h4>
+<p>Performance reasons I think. You can do </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bar&#39;</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">myclass</span> <span class="bp">ℕ</span><span class="o">],</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">exactI</span> <span class="n">foo</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">bar&#39;</span><span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">[</span><span class="n">myclass</span> <span class="bp">ℕ</span><span class="o">],</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">resetI</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">foo</span> <span class="n">n</span>
+</pre></div>
+
+<a name="170639240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more%20type%20class%20inference%20issues/near/170639240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00919moretypeclassinferenceissues.html#170639240">Wojciech Nawrocki (Jul 11 2019 at 14:38)</a>:</h4>
+<p>Ah indeed, local instances are "frozen". <code>unfreeze_local_instances</code> is the intrinsic for this. Thanks!</p>
+
 
 {% endraw %}
 
