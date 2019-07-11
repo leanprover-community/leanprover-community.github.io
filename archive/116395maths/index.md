@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [coeff_mul](91921coeffmul.html) (47 messages, latest: Jul 11 2019 at 09:19)
+
 * [cache-olean instructions](43334cacheoleaninstructions.html) (11 messages, latest: Jul 11 2019 at 07:08)
 
 * [presheafed space category](15170presheafedspacecategory.html) (20 messages, latest: Jul 11 2019 at 07:07)
@@ -18,8 +20,6 @@ permalink: archive/116395maths/index.html
 * [zero ring](29201zeroring.html) (36 messages, latest: Jul 11 2019 at 04:26)
 
 * [has_mul instance for option?](18750hasmulinstanceforoption.html) (4 messages, latest: Jul 10 2019 at 21:43)
-
-* [coeff_mul](91921coeffmul.html) (45 messages, latest: Jul 09 2019 at 14:57)
 
 * [measurable_coe for prob measures](63831measurablecoeforprobmeasures.html) (30 messages, latest: Jul 08 2019 at 21:39)
 
