@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (4 messages, latest: Jul 12 2019 at 09:01)
+
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (27 messages, latest: Jul 12 2019 at 08:55)
 
 * [universe max](74328universemax.html) (4 messages, latest: Jul 12 2019 at 08:54)
@@ -106,8 +108,6 @@ permalink: archive/113488general/index.html
 * [function on sums](48076functiononsums.html) (5 messages, latest: Jun 28 2019 at 20:20)
 
 * [bug in congr'?](19157bugincongr.html) (2 messages, latest: Jun 27 2019 at 22:09)
-
-* [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (2 messages, latest: Jun 27 2019 at 17:50)
 
 * [help with measurability proof](32743helpwithmeasurabilityproof.html) (58 messages, latest: Jun 27 2019 at 15:30)
 
