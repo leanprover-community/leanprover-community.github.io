@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [universe max](74328universemax.html) (3 messages, latest: Jul 12 2019 at 07:53)
+* [well_founded finsupp](29214wellfoundedfinsupp.html) (27 messages, latest: Jul 12 2019 at 08:55)
 
-* [well_founded finsupp](29214wellfoundedfinsupp.html) (15 messages, latest: Jul 12 2019 at 07:51)
+* [universe max](74328universemax.html) (4 messages, latest: Jul 12 2019 at 08:54)
 
 * [VScode extension](56578VScodeextension.html) (417 messages, latest: Jul 11 2019 at 21:20)
 

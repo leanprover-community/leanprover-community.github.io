@@ -83,6 +83,62 @@ is well founded in the case <code>α := ℕ</code></p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170702211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170702211">Kenny Lau (Jul 12 2019 at 07:51)</a>:</h4>
 <p>I think it is</p>
 
+<a name="170702969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170702969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170702969">Johan Commelin (Jul 12 2019 at 08:05)</a>:</h4>
+<p>I now have an order embedding into multiset. How do I pullback the wellfoundedness?</p>
+
+<a name="170703001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703001">Kenny Lau (Jul 12 2019 at 08:05)</a>:</h4>
+<p>subrel of wf is wf; inv_image of wf is wf</p>
+
+<a name="170703004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703004">Johan Commelin (Jul 12 2019 at 08:05)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">to_multiset_strict_mono</span> <span class="o">:</span> <span class="n">strict_mono</span> <span class="o">(</span><span class="bp">@</span><span class="n">to_multiset</span> <span class="n">σ</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">m</span> <span class="n">n</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">lt_iff_le_and_ne</span> <span class="n">at</span> <span class="n">h</span> <span class="err">⊢</span><span class="o">,</span> <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h₁</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">le_iff_count</span><span class="o">,</span> <span class="n">intro</span> <span class="n">s</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">count_to_multiset</span><span class="o">,</span> <span class="n">count_to_multiset</span><span class="o">],</span> <span class="n">exact</span> <span class="n">h₁</span> <span class="n">s</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">H</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">replace</span> <span class="n">H</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">to_finsupp</span> <span class="n">H</span><span class="o">,</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="170703067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703067">Chris Hughes (Jul 12 2019 at 08:06)</a>:</h4>
+<p><code>inv_image.wf</code></p>
+
+<a name="170703812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703812">Johan Commelin (Jul 12 2019 at 08:21)</a>:</h4>
+<p>Aah, but the well founded relation on multiset is not the subset relation, is it?</p>
+
+<a name="170703923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703923">Chris Hughes (Jul 12 2019 at 08:22)</a>:</h4>
+<p>It's strict subset.</p>
+
+<a name="170703946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703946">Chris Hughes (Jul 12 2019 at 08:23)</a>:</h4>
+<p>Both ssubset and <code>lt</code> are well founded.</p>
+
+<a name="170703954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703954">Johan Commelin (Jul 12 2019 at 08:23)</a>:</h4>
+<p>Is there a proof that <code>lt</code> is well founded?</p>
+
+<a name="170703958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703958">Johan Commelin (Jul 12 2019 at 08:23)</a>:</h4>
+<p>Because that is the one I want to pull back</p>
+
+<a name="170703965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170703965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170703965">Johan Commelin (Jul 12 2019 at 08:23)</a>:</h4>
+<p>But typeclass inference finds the other one</p>
+
+<a name="170704014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170704014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170704014">Chris Hughes (Jul 12 2019 at 08:24)</a>:</h4>
+<p>There's probably a proof it implies card &lt; card</p>
+
+<a name="170705862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170705862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170705862">Kevin Buzzard (Jul 12 2019 at 08:55)</a>:</h4>
+<p>I love the way that we mathematicians still don't properly understand the only induction we ever (explicitly) use.</p>
+
 
 {% endraw %}
 
