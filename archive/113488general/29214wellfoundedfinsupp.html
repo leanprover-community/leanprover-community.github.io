@@ -1,0 +1,89 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/29214wellfoundedfinsupp.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html">well_founded finsupp</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170701513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701513">Johan Commelin (Jul 12 2019 at 07:37)</a>:</h4>
+<p>Can someone explain to me how to prove that</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">[</span><span class="n">preorder</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">s</span><span class="o">,</span> <span class="n">f</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">g</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">le_refl</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">s</span><span class="o">,</span> <span class="n">le_refl</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">le_trans</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span> <span class="n">Hfg</span> <span class="n">Hgh</span> <span class="n">s</span><span class="o">,</span> <span class="n">le_trans</span> <span class="o">(</span><span class="n">Hfg</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">Hgh</span> <span class="n">s</span><span class="o">)</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>(see <a href="https://github.com/leanprover-community/mathlib/pull/1216/files#diff-af9f424915b54a36301c2cba4d92a12cR1447" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1216/files#diff-af9f424915b54a36301c2cba4d92a12cR1447">https://github.com/leanprover-community/mathlib/pull/1216/files#diff-af9f424915b54a36301c2cba4d92a12cR1447</a>)<br>
+is well founded in the case <code>α := ℕ</code></p>
+
+<a name="170701561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701561">Chris Hughes (Jul 12 2019 at 07:38)</a>:</h4>
+<p><code>measure_wf</code></p>
+
+<a name="170701580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701580">Chris Hughes (Jul 12 2019 at 07:39)</a>:</h4>
+<p>But you have to show that <code>lt = λ f g, ∀ s, f s &lt; g s</code></p>
+
+<a name="170701586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701586">Chris Hughes (Jul 12 2019 at 07:39)</a>:</h4>
+<p>And that isn't your definition, but maybe it should be.</p>
+
+<a name="170701742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701742">Kenny Lau (Jul 12 2019 at 07:42)</a>:</h4>
+<p>but it isn't</p>
+
+<a name="170701760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701760">Johan Commelin (Jul 12 2019 at 07:42)</a>:</h4>
+<p>No, that's not the definition I want</p>
+
+<a name="170701859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701859">Chris Hughes (Jul 12 2019 at 07:44)</a>:</h4>
+<p>Ah, it's actually much harder than I thought.</p>
+
+<a name="170701885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701885">Kenny Lau (Jul 12 2019 at 07:45)</a>:</h4>
+<p>show that the downset is finite</p>
+
+<a name="170701897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701897">Johan Commelin (Jul 12 2019 at 07:45)</a>:</h4>
+<p>Right, you did that.</p>
+
+<a name="170701908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701908">Johan Commelin (Jul 12 2019 at 07:45)</a>:</h4>
+<p>How do I turn that into a proof of <code>wf</code>?</p>
+
+<a name="170701967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701967">Kenny Lau (Jul 12 2019 at 07:46)</a>:</h4>
+<p>I don't know</p>
+
+<a name="170701973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701973">Kenny Lau (Jul 12 2019 at 07:46)</a>:</h4>
+<p>but that seems like an important lemma</p>
+
+<a name="170701994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170701994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170701994">Johan Commelin (Jul 12 2019 at 07:47)</a>:</h4>
+<p>I only ask you to prove important lemmas <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="170702124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170702124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170702124">Chris Hughes (Jul 12 2019 at 07:49)</a>:</h4>
+<p>This is provable right.</p>
+<div class="codehilite"><pre><span></span><span class="n">f</span> <span class="bp">&lt;</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">f</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">g</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span>
+</pre></div>
+
+<a name="170702211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170702211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170702211">Kenny Lau (Jul 12 2019 at 07:51)</a>:</h4>
+<p>I think it is</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
