@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [partial derivatives](29140partialderivatives.html) (2 messages, latest: Jul 12 2019 at 14:43)
+
+* [power series](15161powerseries.html) (19 messages, latest: Jul 12 2019 at 14:40)
+
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3116 messages, latest: Jul 11 2019 at 16:49)
 
 * [cache-olean instructions](43334cacheoleaninstructions.html) (14 messages, latest: Jul 11 2019 at 12:29)
@@ -404,8 +408,6 @@ permalink: archive/116395maths/index.html
 * [adding negative reals](76722addingnegativereals.html) (12 messages, latest: Jan 28 2019 at 16:58)
 
 * [adding positive reals](35794addingpositivereals.html) (64 messages, latest: Jan 28 2019 at 13:34)
-
-* [power series](15161powerseries.html) (17 messages, latest: Jan 26 2019 at 18:16)
 
 * [algebraic closure construction](91939algebraicclosureconstruction.html) (12 messages, latest: Jan 24 2019 at 18:19)
 
