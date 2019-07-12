@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [partial derivatives](29140partialderivatives.html) (2 messages, latest: Jul 12 2019 at 14:43)
+* [derivation](97398derivation.html) (5 messages, latest: Jul 12 2019 at 15:37)
+
+* [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)
 
 * [power series](15161powerseries.html) (19 messages, latest: Jul 12 2019 at 14:40)
 

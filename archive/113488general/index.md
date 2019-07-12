@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [universe max](74328universemax.html) (6 messages, latest: Jul 12 2019 at 15:07)
+
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (62 messages, latest: Jul 12 2019 at 12:34)
 
 * [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (4 messages, latest: Jul 12 2019 at 09:01)
-
-* [universe max](74328universemax.html) (4 messages, latest: Jul 12 2019 at 08:54)
 
 * [VScode extension](56578VScodeextension.html) (417 messages, latest: Jul 11 2019 at 21:20)
 
