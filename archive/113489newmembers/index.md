@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [universe levels](11613universelevels.html) (17 messages, latest: Jul 12 2019 at 06:54)
+
 * [noob question(s)](52075noobquestions.html) (1267 messages, latest: Jul 11 2019 at 14:15)
 
 * [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (11 messages, latest: Jul 10 2019 at 07:05)
@@ -198,8 +200,6 @@ permalink: archive/113489newmembers/index.html
 * [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (16 messages, latest: Apr 02 2019 at 18:40)
 
 * [help finding a lemma](30422helpfindingalemma.html) (174 messages, latest: Apr 02 2019 at 03:03)
-
-* [universe levels](11613universelevels.html) (12 messages, latest: Apr 01 2019 at 16:18)
 
 * ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (7 messages, latest: Mar 31 2019 at 09:17)
 
