@@ -9,11 +9,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [potential PR's](37613potentialPRs.html) (7 messages, latest: Jul 13 2019 at 22:12)
+
 * [#1222 provide `trace!` and `fail!` and allow tactic](286541222providetraceandfailandallowtactic.html) (2 messages, latest: Jul 13 2019 at 14:50)
 
 * [#1223 extend the API of `finmap`](280951223extendtheAPIoffinmap.html) (3 messages, latest: Jul 13 2019 at 01:25)
-
-* [potential PR's](37613potentialPRs.html) (4 messages, latest: Jul 12 2019 at 21:01)
 
 * [#1194 format! macro using `pp` instead of `to_fmt`](591311194formatmacrousingppinsteadoftofmt.html) (4 messages, latest: Jul 09 2019 at 15:49)
 

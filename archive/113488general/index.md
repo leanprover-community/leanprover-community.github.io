@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [performance issues](61263performanceissues.html) (15 messages, latest: Jul 13 2019 at 21:51)
+* [transport and parametricity](74751transportandparametricity.html) (97 messages, latest: Jul 13 2019 at 22:37)
 
-* [transport and parametricity](74751transportandparametricity.html) (95 messages, latest: Jul 13 2019 at 21:16)
+* [performance issues](61263performanceissues.html) (15 messages, latest: Jul 13 2019 at 21:51)
 
 * [computability](27079computability.html) (206 messages, latest: Jul 13 2019 at 21:09)
 
