@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [power series](15161powerseries.html) (22 messages, latest: Jul 13 2019 at 17:53)
+* [power series](15161powerseries.html) (29 messages, latest: Jul 13 2019 at 18:40)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (25 messages, latest: Jul 13 2019 at 17:47)
 
