@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (8 messages, latest: Jul 13 2019 at 19:36)
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (15 messages, latest: Jul 13 2019 at 20:26)
+
+* [universe max](74328universemax.html) (9 messages, latest: Jul 13 2019 at 20:05)
 
 * [transport and parametricity](74751transportandparametricity.html) (94 messages, latest: Jul 13 2019 at 18:35)
-
-* [universe max](74328universemax.html) (8 messages, latest: Jul 13 2019 at 18:20)
 
 * [on coding practices](71728oncodingpractices.html) (1 message, latest: Jul 13 2019 at 18:14)
 

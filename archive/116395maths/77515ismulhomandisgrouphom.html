@@ -194,6 +194,38 @@ I have a few choices:<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803093">Yury G. Kudryashov (Jul 13 2019 at 19:52)</a>:</h4>
 <p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Now I have just (in root namespace) <code>export is_mul_hom (map_mul)</code></p>
 
+<a name="170803637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803637">Kevin Buzzard (Jul 13 2019 at 20:10)</a>:</h4>
+<p>Module homomorphisms are bundled and this worked, so the plan is to bundle group homs, ring homs etc, but people seem to be of the opinion that it all needs to be done in one go which makes it a daunting task</p>
+
+<a name="170803881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803881">Yury G. Kudryashov (Jul 13 2019 at 20:19)</a>:</h4>
+<p>I see that <code>is_linear_map</code> is used in at least 7 files.</p>
+
+<a name="170803888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803888">Yury G. Kudryashov (Jul 13 2019 at 20:20)</a>:</h4>
+<p>And <code>linear_map</code> is used in at least 21 files.</p>
+
+<a name="170804165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170804165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170804165">Yury G. Kudryashov (Jul 13 2019 at 20:29)</a>:</h4>
+<p>How should people use these bundled versions for specific maps? E.g., now we have <code>instance : is_semiring_hom (coe : nat -&gt; α)</code>. What should be the bundled version of this?</p>
+
+<a name="170804221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170804221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170804221">Mario Carneiro (Jul 13 2019 at 20:30)</a>:</h4>
+<p><code>of_nat : semiring_hom nat A</code>, <code>of_nat_apply : of_nat a = \u a</code></p>
+
+<a name="170804502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170804502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170804502">Yury G. Kudryashov (Jul 13 2019 at 20:40)</a>:</h4>
+<p>So, we need <code>add_monoid.of_nat</code> and <code>semiring.of_nat</code>.</p>
+
+<a name="170804518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170804518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170804518">Yury G. Kudryashov (Jul 13 2019 at 20:41)</a>:</h4>
+<p>Another question: I have a theorem about <code>add_group_hom</code>. How should I apply it to a <code>ring_hom</code>? Explicit conversion? Some implicit coercion?</p>
+
+<a name="170804678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170804678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170804678">Yury G. Kudryashov (Jul 13 2019 at 20:47)</a>:</h4>
+<p>If this is going to be rewritten, I think that I'll switch from making <code>is_ring_hom</code> extend <code>is_monoid_hom</code> and <code>is_add_group_hom</code> to something more useful.</p>
+
 
 {% endraw %}
 

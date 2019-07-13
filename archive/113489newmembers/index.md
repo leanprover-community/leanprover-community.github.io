@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1279 messages, latest: Jul 13 2019 at 19:49)
+* ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (9 messages, latest: Jul 13 2019 at 20:33)
+
+* [noob question(s)](52075noobquestions.html) (1280 messages, latest: Jul 13 2019 at 20:00)
 
 * [rewriting only once](69539rewritingonlyonce.html) (4 messages, latest: Jul 13 2019 at 14:03)
 
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 
 * [Induction](51886Induction.html) (241 messages, latest: Jun 25 2019 at 06:25)
-
-* ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (8 messages, latest: Jun 25 2019 at 06:22)
 
 * [SIGABRT while building Lean](46516SIGABRTwhilebuildingLean.html) (40 messages, latest: Jun 24 2019 at 12:08)
 
