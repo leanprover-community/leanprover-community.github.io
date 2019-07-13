@@ -313,6 +313,90 @@ I'm a robot.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/168677105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#168677105">Simon Hudon (Jun 21 2019 at 12:33)</a>:</h4>
 <p>I didn't. I think it's at the same point it was before</p>
 
+<a name="170762941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170762941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170762941">Kevin Buzzard (Jul 12 2019 at 23:26)</a>:</h4>
+<p>OK so we have <a href="https://github.com/leanprover-community/mathlib/blob/5a48be3e29dacbb2f02071db4749dcdfa74fb79d/src/measure_theory/bochner_integration.lean#L83" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/5a48be3e29dacbb2f02071db4749dcdfa74fb79d/src/measure_theory/bochner_integration.lean#L83">Bochner integration in Lean</a>! This work has helped me to formalise a question which might be related to this transfer/transport stuff.</p>
+<p>Let's say I have a smart computer scientist undergrad who is intested in analysis and logic, and wants to do something cool in Lean. Say they read this thread and then say to me "This Bochner integral definition -- it mentions the real numbers, and in Lean the real numbers are defined to be the Cauchy reals. Do you think it would be interesting to port the entire Bochner integral definition over to the Dedekind reals? Here's my plan. First I write an interface with Dedekind reals at the back end, providing an interface to exactly those functions and definitions and other things that are in the <code>real</code> namespace the moment the real numbers are defined in Lean (as Cauchy reals). The proofs should then barely need modifying, and everything should just port over". And I say "sounds great, go ahead" and I think "I knew this transport stuff was easy". A week later the student comes back and says that they have run into trouble. Turns out that some of the maps between Cauchy and Dedekind reals were noncomputable, the API for the Cauchy reals built with the Dedekind reals as backend is also noncomputable, all the proofs have ported beautifully but then loads of them don't work because sometimes computer scientists used <code>simp</code> which used to work but didn't any more because of some computability issue. We then come onto the chat asking how we can fix the proof and deduce our Bochner integral thing for the Dedekind reals. We are fine if everything is noncomputable by the way -- we are mathematicians. Feel free to use all your axioms.</p>
+
+<a name="170763114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763114">Kevin Buzzard (Jul 12 2019 at 23:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> does the above post make any sense?</p>
+
+<a name="170763329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763329">Simon Hudon (Jul 12 2019 at 23:37)</a>:</h4>
+<p>I don't get why computability becomes an issue. I see why the transport might be non-computable but since you're accepting that, what's the problem?</p>
+
+<a name="170763488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763488">Kevin Buzzard (Jul 12 2019 at 23:40)</a>:</h4>
+<p>Could this approach actually work to port the Bochner stuff over to Dedekind reals?</p>
+
+<a name="170763574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763574">Kevin Buzzard (Jul 12 2019 at 23:43)</a>:</h4>
+<p>Surely some of the functions defined in the API for data.real.basic will allow some kind of computational reductions which the analogous objects in the Dedekind-backend reals would not satisfy, so some <code>rfl</code> proofs might break? Or am I talking nonsense?</p>
+
+<a name="170763598"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763598" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763598">Kevin Buzzard (Jul 12 2019 at 23:43)</a>:</h4>
+<p>I'm no logician</p>
+
+<a name="170763649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763649">Mario Carneiro (Jul 12 2019 at 23:44)</a>:</h4>
+<p>Your concern is theoretically justified, but you should replace <code>simp</code> in the example with <code>rfl</code> or <code>dsimp</code></p>
+
+<a name="170763670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763670">Mario Carneiro (Jul 12 2019 at 23:45)</a>:</h4>
+<p>The proofs that were going to break <em>did</em> break, and were fixed, when real was made irreducible</p>
+
+<a name="170763674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763674">Mario Carneiro (Jul 12 2019 at 23:45)</a>:</h4>
+<p>it basically makes it impossible to prove facts about real numbers by rfl</p>
+
+<a name="170763727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763727">Mario Carneiro (Jul 12 2019 at 23:46)</a>:</h4>
+<p>so now (in theory) you could completely swap out the definition of reals with something else and fix the API theorems and nothing further should break</p>
+
+<a name="170763729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763729">Kevin Buzzard (Jul 12 2019 at 23:46)</a>:</h4>
+<p>How do I know that some rogue proof didn't unfold <code>real</code>?</p>
+
+<a name="170763740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763740">Mario Carneiro (Jul 12 2019 at 23:47)</a>:</h4>
+<p>you have to write some really horrible looking tactic code to unfold real</p>
+
+<a name="170763744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763744">Kevin Buzzard (Jul 12 2019 at 23:47)</a>:</h4>
+<p>I'll get Chris onto it.</p>
+
+<a name="170763798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763798">Mario Carneiro (Jul 12 2019 at 23:48)</a>:</h4>
+<p>So it's not impossible, but a proof that does this is visibly ugly</p>
+
+<a name="170763800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763800">Kevin Buzzard (Jul 12 2019 at 23:48)</a>:</h4>
+<p>You have to write some really horrible looking maths to say anything about the real numbers for which the answer would be different for Dedekind cuts and Cauchy sequences.</p>
+
+<a name="170763809"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763809">Kevin Buzzard (Jul 12 2019 at 23:48)</a>:</h4>
+<p>A proof that did that would be visibly weird.</p>
+
+<a name="170763847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170763847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170763847">Kevin Buzzard (Jul 12 2019 at 23:49)</a>:</h4>
+<p>In fact a proof which used anything other than the Officially Mathematically Sanctioned Axioms For The Real Numbers, which is something about them being some complete archimedean field, would be visibly ugly.</p>
+
+<a name="170764043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170764043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170764043">Kevin Buzzard (Jul 12 2019 at 23:54)</a>:</h4>
+<blockquote>
+<p>So it's not impossible, but a proof that does this is visibly ugly</p>
+</blockquote>
+<p>I think that you should then replace <code>real</code> by a constant and just provide an API to the proof that they satisfy those complete archimedean field axioms.</p>
+
+<a name="170764056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170764056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170764056">Kevin Buzzard (Jul 12 2019 at 23:55)</a>:</h4>
+<p>Then you'd know that you could not fall off the straight and narrow.</p>
+
+<a name="170764149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170764149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170764149">Kevin Buzzard (Jul 12 2019 at 23:57)</a>:</h4>
+<p>Computer-generated tactics of the future might unfold <code>real</code></p>
+
 
 {% endraw %}
 

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [transport and parametricity](74751transportandparametricity.html) (81 messages, latest: Jul 12 2019 at 23:57)
+
 * [universe max](74328universemax.html) (6 messages, latest: Jul 12 2019 at 15:07)
 
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (62 messages, latest: Jul 12 2019 at 12:34)
@@ -126,8 +128,6 @@ permalink: archive/113488general/index.html
 * [scrolling with lean --make on command line](54438scrollingwithleanmakeoncommandline.html) (5 messages, latest: Jun 23 2019 at 09:54)
 
 * [Heterogeneous List](19802HeterogeneousList.html) (8 messages, latest: Jun 22 2019 at 14:08)
-
-* [transport and parametricity](74751transportandparametricity.html) (61 messages, latest: Jun 21 2019 at 12:33)
 
 * [rsimp](01036rsimp.html) (5 messages, latest: Jun 21 2019 at 12:30)
 
