@@ -48,6 +48,30 @@ permalink: archive/113488general/61263performanceissues.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170784002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170784002">Kenny Lau (Jul 13 2019 at 10:13)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> this is making me unable to do anything related to A^n</p>
 
+<a name="170785541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170785541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170785541">Kevin Buzzard (Jul 13 2019 at 11:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> is this anything to do with the timeouts I was having in Amsterdam?</p>
+
+<a name="170785610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170785610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170785610">Kevin Buzzard (Jul 13 2019 at 11:09)</a>:</h4>
+<p>Making instances for structures is an art and it definitely helps if you know how lean is filling in instances. Unification can struggle when presented with two defeq but not syntactically equal instances because it's defeq detector might not try hard enough. This means that if you make a new object like one forms or kaehler or whatever you want to call them, you should make sure that the instances that type class inference knows about are such that it has very little chance of getting into such a mess</p>
+
+<a name="170785653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170785653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170785653">Kevin Buzzard (Jul 13 2019 at 11:10)</a>:</h4>
+<p>Floris taught me this in Amsterdam but I don't know if it's your problem</p>
+
+<a name="170786393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170786393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170786393">Kevin Buzzard (Jul 13 2019 at 11:35)</a>:</h4>
+<p>I had more instances than I needed and this was messing things up. Floris fixed it by changing the priority of some of the easier ones to something lower than the default</p>
+
+<a name="170786547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170786547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170786547">Kevin Buzzard (Jul 13 2019 at 11:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> if you look at the type class trace can you see explicitly which instance is being found? Is it syntactically equal to the one you use when it's quick? In other words, is it taking a long time to find syntactically the right instance, or a short time to find a defeq but not syntactically equal instance?</p>
+
+<a name="170786560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170786560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170786560">Kevin Buzzard (Jul 13 2019 at 11:41)</a>:</h4>
+<p>If the latter then you can meddle with the instance priorities, or make some instances local instances, to change the behaviour</p>
+
 
 {% endraw %}
 

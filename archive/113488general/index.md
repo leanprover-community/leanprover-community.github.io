@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (88 messages, latest: Jul 13 2019 at 10:35)
+* [transport and parametricity](74751transportandparametricity.html) (90 messages, latest: Jul 13 2019 at 11:43)
 
-* [performance issues](61263performanceissues.html) (3 messages, latest: Jul 13 2019 at 10:13)
+* [performance issues](61263performanceissues.html) (9 messages, latest: Jul 13 2019 at 11:41)
+
+* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (7 messages, latest: Jul 13 2019 at 11:15)
 
 * [universe max](74328universemax.html) (7 messages, latest: Jul 13 2019 at 03:47)
 
@@ -32,8 +34,6 @@ permalink: archive/113488general/index.html
 * [unknown declaration which I just added](00075unknowndeclarationwhichIjustadded.html) (3 messages, latest: Jul 10 2019 at 14:11)
 
 * [bad coercion](45594badcoercion.html) (8 messages, latest: Jul 10 2019 at 11:13)
-
-* [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (6 messages, latest: Jul 10 2019 at 08:18)
 
 * [idiomatic Lean](99380idiomaticLean.html) (16 messages, latest: Jul 09 2019 at 21:31)
 
