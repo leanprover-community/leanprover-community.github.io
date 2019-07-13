@@ -119,6 +119,81 @@ I have a few choices:<br>
 3. Use <code>export (is_mul_hom) map_mul</code> etc. This way it should be possible to use <code>is_ring_hom.map_add</code> etc unless you want to provide <code>[is_ring_hom f]</code> argument explicitly; then you find out that you need <code>[is_add_hom f]</code>, not <code>[is_ring_hom f]</code>.<br>
 4. Manually export substituting arguments. I'd prefer to have a tactic for this but I never tried to write a Lean tactic and failed to find any docs on the <code>meta</code>-specific API (e.g., implemented monads).</p>
 
+<a name="170802312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802312">Yury G. Kudryashov (Jul 13 2019 at 19:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  Which approach would you prefer?</p>
+
+<a name="170802730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802730">Johan Commelin (Jul 13 2019 at 19:40)</a>:</h4>
+<p>The conflicts in (1) are unfortunate.</p>
+
+<a name="170802733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802733">Johan Commelin (Jul 13 2019 at 19:40)</a>:</h4>
+<p>Otherwise I would have very much preferred that one.</p>
+
+<a name="170802744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802744">Johan Commelin (Jul 13 2019 at 19:41)</a>:</h4>
+<p>But I would be happy to write <code>is_field_hom.map_inv</code> to avoid the conflict.</p>
+
+<a name="170802747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802747">Johan Commelin (Jul 13 2019 at 19:41)</a>:</h4>
+<p>So we could make <code>is_field_hom.map_inv</code> protected.</p>
+
+<a name="170802790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802790">Johan Commelin (Jul 13 2019 at 19:42)</a>:</h4>
+<p>(Btw, maybe that should be <code>is_division_ring_hom</code>?? But I don't know if that one exists <span aria-label="smiley" class="emoji emoji-1f603" role="img" title="smiley">:smiley:</span>)</p>
+
+<a name="170802795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802795">Johan Commelin (Jul 13 2019 at 19:43)</a>:</h4>
+<p>I don't really like (2). It's quite unfriendly to users and to refactors.</p>
+
+<a name="170802843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802843">Chris Hughes (Jul 13 2019 at 19:44)</a>:</h4>
+<p>There is a plan to bundle all of them at some point by the way. Someone just has to get around to doing it.</p>
+
+<a name="170802927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802927">Johan Commelin (Jul 13 2019 at 19:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> If we choose (1), this probably means that all the simp-lemmas <code>multiset.map_add</code> and <code>foobar.map_add</code>, etc..., should be made <code>protected</code>. I don't think that's a bad idea anyway.</p>
+
+<a name="170802973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802973">Yury G. Kudryashov (Jul 13 2019 at 19:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> What exactly do you want to have? Could you post some code, e.g, for the simplest case of semigroups?</p>
+
+<a name="170802975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170802975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170802975">Yury G. Kudryashov (Jul 13 2019 at 19:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> I'll try (1)</p>
+
+<a name="170803031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803031">Johan Commelin (Jul 13 2019 at 19:50)</a>:</h4>
+<p>I would just want something like</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- root namespace</span>
+<span class="kn">lemma</span> <span class="n">map_add</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">[</span><span class="n">is_add_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">is_add_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span> <span class="n">x</span> <span class="n">y</span>
+</pre></div>
+
+<a name="170803037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803037">Yury G. Kudryashov (Jul 13 2019 at 19:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Yes, this is what I have now (with α and β instead of X and Y)</p>
+
+<a name="170803042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803042">Johan Commelin (Jul 13 2019 at 19:51)</a>:</h4>
+<p>And similar for <code>map_mul</code>, <code>map_zero</code>, <code>map_one</code>, <code>map_sub</code>, <code>map_neg</code>, <code>map_inv</code>, <code>map_div</code>, and any others that I forgot...</p>
+
+<a name="170803045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803045">Yury G. Kudryashov (Jul 13 2019 at 19:51)</a>:</h4>
+<p>My question to <span class="user-mention" data-user-id="110044">@Chris Hughes</span>  is about bundling. What should be bundled and how should it look like.</p>
+
+<a name="170803089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803089">Johan Commelin (Jul 13 2019 at 19:52)</a>:</h4>
+<p>Ok, I understand.</p>
+
+<a name="170803091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803091">Johan Commelin (Jul 13 2019 at 19:52)</a>:</h4>
+<p>Need to go now. See you later!</p>
+
+<a name="170803093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170803093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170803093">Yury G. Kudryashov (Jul 13 2019 at 19:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Now I have just (in root namespace) <code>export is_mul_hom (map_mul)</code></p>
+
 
 {% endraw %}
 

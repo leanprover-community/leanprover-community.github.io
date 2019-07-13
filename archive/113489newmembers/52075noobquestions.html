@@ -7143,6 +7143,38 @@ it probably isn't a good idea to have tactics for use cases this concrete, and "
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170798201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170798201">Wojciech Nawrocki (Jul 13 2019 at 17:23)</a>:</h4>
 <p>Huh okay, that is kind of surprising - I thought they were all <code>refl</code>.  Thanks!</p>
 
+<a name="170801612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170801612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170801612">Mario Carneiro (Jul 13 2019 at 19:06)</a>:</h4>
+<p>The main time when they are not <code>rfl</code> is when well founded recursion is used. This has to do with why definitional equality is undecidable and lean's defeq is an underapproximation of the real thing</p>
+
+<a name="170802186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170802186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170802186">Wojciech Nawrocki (Jul 13 2019 at 19:23)</a>:</h4>
+<p>Oooh yeah it is recursive - it's transitivity that's missing, right? It seemed to me like it should still reduce but is what you're saying that the <code>has_well_founded</code>s prevent it from reducing?</p>
+
+<a name="170802295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170802295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170802295">Wojciech Nawrocki (Jul 13 2019 at 19:26)</a>:</h4>
+<p>I came across this while trying to write some reflection tactics a la <code>ring2</code>, where in <code>correctness</code> you have <code>(H : horner_expr.of_csexpr r₁ = horner_expr.of_csexpr r₂)</code> by <code>rfl</code>. <code>of_csexpr</code> is defined recursively but it seems to reduce just fine, however I have something more like <code>(of_csexpr r1).eval = (of_csexpr r2).eval</code>, where <code>eval</code> is also recursive and this breaks (needs <code>simp; refl</code>).</p>
+
+<a name="170802304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170802304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170802304">Wojciech Nawrocki (Jul 13 2019 at 19:26)</a>:</h4>
+<p>I can get rid of the <code>eval</code>s so this isn't really a problem, just confusing.</p>
+
+<a name="170802428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170802428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170802428">Mario Carneiro (Jul 13 2019 at 19:30)</a>:</h4>
+<p>Structural recursion is fine, it's just when you use well founded recursion, i.e. recursion on <code>acc</code> that it gets flaky</p>
+
+<a name="170802625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170802625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170802625">Wojciech Nawrocki (Jul 13 2019 at 19:37)</a>:</h4>
+<p>I see, I'm doing some reassociation which I think has to rely on <code>sizeof</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">reassoc</span><span class="o">:</span> <span class="n">Expr</span> <span class="bp">-&gt;</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Mul</span> <span class="o">(</span><span class="n">Mul</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Mul</span> <span class="o">(</span><span class="n">reassoc</span> <span class="n">a</span><span class="o">)</span> <span class="err">$</span> <span class="n">reassoc</span> <span class="o">(</span><span class="n">Mul</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">e</span>
+</pre></div>
+
+<a name="170802986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170802986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170802986">Mario Carneiro (Jul 13 2019 at 19:49)</a>:</h4>
+<p>Right, that's not a structural recursion, but you can rewrite it to be one</p>
+
 
 {% endraw %}
 

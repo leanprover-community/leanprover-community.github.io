@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (1 message, latest: Jul 13 2019 at 18:51)
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (8 messages, latest: Jul 13 2019 at 19:36)
 
 * [transport and parametricity](74751transportandparametricity.html) (94 messages, latest: Jul 13 2019 at 18:35)
 
