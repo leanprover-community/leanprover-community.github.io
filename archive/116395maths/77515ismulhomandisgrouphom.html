@@ -110,6 +110,15 @@ It's on the merge queue now.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/169729072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#169729072">Yury G. Kudryashov (Jul 05 2019 at 18:54)</a>:</h4>
 <p>Thanks!</p>
 
+<a name="170799026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170799026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170799026">Yury G. Kudryashov (Jul 13 2019 at 17:47)</a>:</h4>
+<p>Hi, I'm making <code>is_semiring_hom</code> and <code>is_ring_hom</code> extend <code>is_add_monoid_hom</code> etc.<br>
+I have a few choices:<br>
+1. Add <code>map_mul</code> and friends to the root namespace as <span class="user-mention" data-user-id="112680">@Johan Commelin</span>  suggested <a href="https://github.com/leanprover-community/mathlib/pull/1214#pullrequestreview-260461482" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1214#pullrequestreview-260461482">here</a>. This way <code>map_add</code> conflicts with <code>multiset.map_add</code> (so I have to explicitly add <code>_root_.map_add</code> or <code>multiset.map_add</code>) and <code>map_inv</code> conflicts with its version for fields.<br>
+2. Use <code>is_mul_hom.map_mul</code>, <code>is_monoid_hom.map_one</code>, <code>is_group_hom.map_inv</code>. This way users have to know which class defines <code>map_mul</code> etc.<br>
+3. Use <code>export (is_mul_hom) map_mul</code> etc. This way it should be possible to use <code>is_ring_hom.map_add</code> etc unless you want to provide <code>[is_ring_hom f]</code> argument explicitly; then you find out that you need <code>[is_add_hom f]</code>, not <code>[is_ring_hom f]</code>.<br>
+4. Manually export substituting arguments. I'd prefer to have a tactic for this but I never tried to write a Lean tactic and failed to find any docs on the <code>meta</code>-specific API (e.g., implemented monads).</p>
+
 
 {% endraw %}
 

@@ -50,6 +50,41 @@ according to <span class="user-mention" data-user-id="110024">@Sebastian Ullrich
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170791621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170791621">Wojciech Nawrocki (Jul 13 2019 at 14:19)</a>:</h4>
 <p>Ah okay, I see what you mean. There could be something like <code>maybe_uneval_to_string: maybe_uneval mytype -&gt; string</code> which would also have to handle cases where the value is a metavariable/let-binding/etc but with the current system, <code>to_string</code> expects the whole value to be well-defined. <code>to_format</code> is basically the same in this respect - it differs only in allowing finer control over the formatting.</p>
 
+<a name="170798606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170798606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170798606">Sebastian Ullrich (Jul 13 2019 at 17:33)</a>:</h4>
+<p>You most certainly do not want to evaluate things in the tactic state in order to print them; the most interesting parts in there usually are <em>not</em> constructors</p>
+
+<a name="170798650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170798650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170798650">Sebastian Ullrich (Jul 13 2019 at 17:34)</a>:</h4>
+<p>Apart from notations, the only customization Lean 3 gives you for tactic state reporting is overriding the <code>has_to_format tactic_state</code> instance - but then you'll have to format the whole goal yourself</p>
+
+<a name="170798885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170798885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170798885">Wojciech Nawrocki (Jul 13 2019 at 17:42)</a>:</h4>
+<p>I agree that evaluation is not the way to go, but I think there would still be a lot of value in pretty printers that can handle metavariables, local constants and so on. Thanks to notation commands we can get nice output like <code>|- x*(y*z) = x*y*z</code>, but notation is limited - for example, if I wanted to print a tree structure in some form within the goal:</p>
+<div class="codehilite"><pre><span></span>|-
++- root
+ +- left
+  +- leaf1
+  +- leaf2
+ +- right
+=
+some_other_tree
+</pre></div>
+
+<a name="170798960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170798960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170798960">Marc Huisinga (Jul 13 2019 at 17:45)</a>:</h4>
+<blockquote>
+<p>Apart from notations, the only customization Lean 3 gives you for tactic state reporting is overriding the <code>has_to_format tactic_state</code> instance - but then you'll have to format the whole goal yourself</p>
+</blockquote>
+<p>aha! i was getting really confused when i tried to implement has_to_format similar to other inductive types like list in format.lean and it wouldn't work.</p>
+
+<a name="170799288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170799288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170799288">Sebastian Ullrich (Jul 13 2019 at 17:55)</a>:</h4>
+<blockquote>
+<p>I agree that evaluation is not the way to go</p>
+</blockquote>
+<p>Right, so what you'd want instead is a reflected analog to <code>has_to_format</code> - for a given type (identified by its constant <code>name</code>), take a <em>term</em> (<code>expr</code>) of that type and return its <code>format</code>. That is how notations pretty-printing in Lean 3 works, it's just missing such a user hook.</p>
+
 
 {% endraw %}
 

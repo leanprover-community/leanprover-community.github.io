@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (92 messages, latest: Jul 13 2019 at 16:20)
+* [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (8 messages, latest: Jul 13 2019 at 17:55)
 
-* [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (3 messages, latest: Jul 13 2019 at 14:19)
+* [transport and parametricity](74751transportandparametricity.html) (92 messages, latest: Jul 13 2019 at 16:20)
 
 * [performance issues](61263performanceissues.html) (9 messages, latest: Jul 13 2019 at 11:41)
 

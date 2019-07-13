@@ -9,13 +9,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [power series](15161powerseries.html) (22 messages, latest: Jul 13 2019 at 17:53)
+
+* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (25 messages, latest: Jul 13 2019 at 17:47)
+
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (1 message, latest: Jul 13 2019 at 16:33)
 
 * [derivation](97398derivation.html) (39 messages, latest: Jul 13 2019 at 13:49)
 
 * [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)
-
-* [power series](15161powerseries.html) (19 messages, latest: Jul 12 2019 at 14:40)
 
 * [Perfectoid spaces](04805Perfectoidspaces.html) (3116 messages, latest: Jul 11 2019 at 16:49)
 
@@ -42,8 +44,6 @@ permalink: archive/116395maths/index.html
 * [One-object category](33573Oneobjectcategory.html) (19 messages, latest: Jul 05 2019 at 21:23)
 
 * [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (41 messages, latest: Jul 05 2019 at 20:33)
-
-* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (24 messages, latest: Jul 05 2019 at 18:54)
 
 * [Maps with bounded coboundaries](84269Mapswithboundedcoboundaries.html) (1 message, latest: Jul 05 2019 at 17:06)
 
