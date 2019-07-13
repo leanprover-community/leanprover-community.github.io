@@ -1,0 +1,45 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html">Making custom pretty-printers work in tactic mode</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170787830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Making%20custom%20pretty-printers%20work%20in%20tactic%20mode/near/170787830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71094Makingcustomprettyprintersworkintacticmode.html#170787830">Wojciech Nawrocki (Jul 13 2019 at 12:22)</a>:</h4>
+<p>How can I force Lean to use my pretty-printer when printing types/expressions in the tactic state? I defined all instances I could think of but it still insists on using the full constructor form. (I don't want to use <code>infix</code>/<code>notation</code> in this case).</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">Mul</span><span class="o">:</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">Expr</span>
+<span class="bp">|</span> <span class="n">Const</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">):</span> <span class="n">Expr</span>
+<span class="kn">open</span> <span class="n">Expr</span>
+
+<span class="n">def</span> <span class="n">Expr</span><span class="bp">.</span><span class="n">to_string</span><span class="o">:</span> <span class="n">Expr</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Mul</span> <span class="n">e1</span> <span class="n">e2</span><span class="o">)</span> <span class="o">:=</span> <span class="s2">&quot;(&quot;</span> <span class="bp">++</span> <span class="n">e1</span><span class="bp">.</span><span class="n">to_string</span> <span class="bp">++</span> <span class="s2">&quot;*&quot;</span> <span class="bp">++</span> <span class="n">e2</span><span class="bp">.</span><span class="n">to_string</span> <span class="bp">++</span> <span class="s2">&quot;)&quot;</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Const</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">has_to_string</span><span class="bp">.</span><span class="n">to_string</span> <span class="n">n</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_to_string</span> <span class="n">Expr</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">Expr</span><span class="bp">.</span><span class="n">to_string</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_repr</span> <span class="n">Expr</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">Expr</span><span class="bp">.</span><span class="n">to_string</span><span class="bp">⟩</span> <span class="c">/-</span><span class="cm"> NB this instance is invalid, eval (repr e) = e doesn&#39;t hold -/</span>
+<span class="n">meta</span> <span class="kn">instance</span> <span class="o">:</span> <span class="n">has_to_format</span> <span class="n">Expr</span> <span class="o">:=</span> <span class="bp">⟨λ</span><span class="n">e</span><span class="o">,</span> <span class="err">↑</span><span class="n">e</span><span class="bp">.</span><span class="n">to_string</span><span class="bp">⟩</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="o">(</span><span class="n">Mul</span> <span class="o">(</span><span class="n">Const</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">Const</span> <span class="mi">1</span><span class="o">))</span> <span class="c1">-- (0*1) :)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="o">(</span><span class="n">Mul</span> <span class="o">(</span><span class="n">Const</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">Const</span> <span class="mi">1</span><span class="o">)),</span>
+<span class="c">/-</span><span class="cm"> Tactic State:</span>
+<span class="cm">x : Expr := Mul (Const 0) (Const 1) -- :(</span>
+<span class="cm">⊢ true -/</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
