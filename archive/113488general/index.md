@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (87 messages, latest: Jul 13 2019 at 00:45)
+* [universe max](74328universemax.html) (7 messages, latest: Jul 13 2019 at 03:47)
 
-* [universe max](74328universemax.html) (6 messages, latest: Jul 12 2019 at 15:07)
+* [transport and parametricity](74751transportandparametricity.html) (87 messages, latest: Jul 13 2019 at 00:45)
 
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (62 messages, latest: Jul 12 2019 at 12:34)
 
