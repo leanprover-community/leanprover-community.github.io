@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [performance issues](61263performanceissues.html) (2 messages, latest: Jul 13 2019 at 09:38)
+* [transport and parametricity](74751transportandparametricity.html) (88 messages, latest: Jul 13 2019 at 10:35)
+
+* [performance issues](61263performanceissues.html) (3 messages, latest: Jul 13 2019 at 10:13)
 
 * [universe max](74328universemax.html) (7 messages, latest: Jul 13 2019 at 03:47)
-
-* [transport and parametricity](74751transportandparametricity.html) (87 messages, latest: Jul 13 2019 at 00:45)
 
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (62 messages, latest: Jul 12 2019 at 12:34)
 
