@@ -72,6 +72,39 @@ permalink: archive/113488general/61263performanceissues.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170786560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170786560">Kevin Buzzard (Jul 13 2019 at 11:41)</a>:</h4>
 <p>If the latter then you can meddle with the instance priorities, or make some instances local instances, to change the behaviour</p>
 
+<a name="170806368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170806368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170806368">Floris van Doorn (Jul 13 2019 at 21:45)</a>:</h4>
+<p>This might be the same problem. <br>
+My suspicion in the 5th <code>#check</code> maybe some implicit (type-class) arguments are different when doing the type-class search (compared to the first 4 checks), which causes trouble for Lean.</p>
+
+<a name="170806372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170806372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170806372">Floris van Doorn (Jul 13 2019 at 21:45)</a>:</h4>
+<p>The problem I had with Kevin in the Perfectoid Project was that we needed to synthesize that some function <code>f : α → β</code> in their project was a group homomorphism. There was an instance <code>f.is_group_hom</code> saying exactly that, except that the <em>instance</em> that <code>β</code> was a group was different in the instance and in the type class problem. In the existing instance it was <code>comm_group.to_group β.comm_group</code> and in the type class problem we had is was <code>comm_group.to_group (linear_ordered_comm_group.to_comm_group β.linear_ordered_comm_group)</code>. Here <code>linear_ordered_comm_group</code> is a new class in their project, extending <code>comm_group</code>, with the old structure command turned on. Now the instance of <code>β.linear_ordered_comm_group</code> was defined extending <code>β.comm_group</code>, which means that the equality <code>linear_ordered_comm_group.to_comm_group β.linear_ordered_comm_group = β.comm_group</code> holds definitionally. However, the only way to establish this definitional equality is to establish the definitional equality of all fields. I don't know exactly why, but this was really hard for Lean during type class resolution. It caused a deterministic time-out.</p>
+
+<a name="170806420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170806420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170806420">Floris van Doorn (Jul 13 2019 at 21:46)</a>:</h4>
+<p>The reasons I know/suspect that this was the problem:</p>
+<ul>
+<li>The timeout disappeared when we explicitly gave this (and only this) instance</li>
+<li>The type class trace showed that the instance <code>f.is_group_hom</code> is tried, but never said <code>failed is_def_eq</code>. I think that indicates the timeout happened while this instance was checked.</li>
+</ul>
+
+<a name="170806491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170806491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170806491">Floris van Doorn (Jul 13 2019 at 21:49)</a>:</h4>
+<p>Therefore I think we should adhere to the following guideline, if possible:</p>
+<blockquote>
+<p>If you prove <code>instA : classA X</code> and <code>instB : classB X</code> and <code>classB</code> extends <code>classA</code> then <code>instA</code> should not be an instance. If the <code>instA</code> instance is used, it can cause extra unnecessary unification work during type class inference (if those instances are used as <em>arguments</em> of other definitions/instances). This can cause (deterministic) timeouts. It is especially bad with the old structure command option, and it even happens when both possible instances of <code>classA</code> are definitionally equal.</p>
+</blockquote>
+<p>One problem is that this is not always possible: maybe <code>instA</code> needs fewer or weaker hypotheses. But we should be aware of this potential problem.</p>
+
+<a name="170806502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170806502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170806502">Floris van Doorn (Jul 13 2019 at 21:49)</a>:</h4>
+<p>This guideline is definitely violated for <code>mv_polynomial</code>, so maybe this is the same issue Kenny is facing.</p>
+
+<a name="170806569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/performance%20issues/near/170806569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61263performanceissues.html#170806569">Floris van Doorn (Jul 13 2019 at 21:51)</a>:</h4>
+<p>As an aside, the reason we were in this mess was that I advised Kevin to use the old structure command for <code>linear_ordered_comm_group</code>, to be more in the mathlib style, and this caused the problem. With the new structure command the issue didn't exist, presumably because the definitional equality <code>linear_ordered_comm_group.to_comm_group β.linear_ordered_comm_group = β.comm_group</code> is really easy in that case (since <code>linear_ordered_comm_group.to_comm_group</code> is then a field of the structure.</p>
+
 
 {% endraw %}
 

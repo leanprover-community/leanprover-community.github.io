@@ -9,17 +9,19 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [performance issues](61263performanceissues.html) (15 messages, latest: Jul 13 2019 at 21:51)
+
+* [transport and parametricity](74751transportandparametricity.html) (95 messages, latest: Jul 13 2019 at 21:16)
+
+* [computability](27079computability.html) (206 messages, latest: Jul 13 2019 at 21:09)
+
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (15 messages, latest: Jul 13 2019 at 20:26)
 
 * [universe max](74328universemax.html) (9 messages, latest: Jul 13 2019 at 20:05)
 
-* [transport and parametricity](74751transportandparametricity.html) (94 messages, latest: Jul 13 2019 at 18:35)
-
 * [on coding practices](71728oncodingpractices.html) (1 message, latest: Jul 13 2019 at 18:14)
 
 * [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (8 messages, latest: Jul 13 2019 at 17:55)
-
-* [performance issues](61263performanceissues.html) (9 messages, latest: Jul 13 2019 at 11:41)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (7 messages, latest: Jul 13 2019 at 11:15)
 
@@ -188,8 +190,6 @@ permalink: archive/113488general/index.html
 * [ulift instances](91501uliftinstances.html) (18 messages, latest: Jun 16 2019 at 23:16)
 
 * [unicode](95720unicode.html) (13 messages, latest: Jun 16 2019 at 21:25)
-
-* [computability](27079computability.html) (205 messages, latest: Jun 15 2019 at 19:14)
 
 * [nat equalities](63354natequalities.html) (22 messages, latest: Jun 15 2019 at 14:52)
 
