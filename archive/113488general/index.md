@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (1 message, latest: Jul 13 2019 at 12:22)
+* [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (2 messages, latest: Jul 13 2019 at 13:04)
 
 * [transport and parametricity](74751transportandparametricity.html) (90 messages, latest: Jul 13 2019 at 11:43)
 

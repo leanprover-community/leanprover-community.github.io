@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [derivation](97398derivation.html) (38 messages, latest: Jul 13 2019 at 09:58)
+* [derivation](97398derivation.html) (39 messages, latest: Jul 13 2019 at 13:49)
 
 * [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)
 
