@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1223 extend the API of `finmap`](280951223extendtheAPIoffinmap.html) (3 messages, latest: Jul 13 2019 at 01:25)
+* [#1222 provide `trace!` and `fail!` and allow tactic](286541222providetraceandfailandallowtactic.html) (2 messages, latest: Jul 13 2019 at 14:50)
 
-* [#1222 provide `trace!` and `fail!` and allow tactic](286541222providetraceandfailandallowtactic.html) (1 message, latest: Jul 13 2019 at 00:23)
+* [#1223 extend the API of `finmap`](280951223extendtheAPIoffinmap.html) (3 messages, latest: Jul 13 2019 at 01:25)
 
 * [potential PR's](37613potentialPRs.html) (4 messages, latest: Jul 12 2019 at 21:01)
 

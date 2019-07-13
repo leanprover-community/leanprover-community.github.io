@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rewriting only once](69539rewritingonlyonce.html) (1 message, latest: Jul 13 2019 at 13:52)
+* [noob question(s)](52075noobquestions.html) (1268 messages, latest: Jul 13 2019 at 14:29)
+
+* [rewriting only once](69539rewritingonlyonce.html) (4 messages, latest: Jul 13 2019 at 14:03)
 
 * [universe levels](11613universelevels.html) (21 messages, latest: Jul 12 2019 at 07:15)
-
-* [noob question(s)](52075noobquestions.html) (1267 messages, latest: Jul 11 2019 at 14:15)
 
 * [Trouble with `(eq.rec_on (eq.refl α) a : α) = a'`](73313Troublewitheqreconeqreflaa.html) (11 messages, latest: Jul 10 2019 at 07:05)
 
