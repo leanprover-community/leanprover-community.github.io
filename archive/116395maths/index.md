@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (1 message, latest: Jul 13 2019 at 16:33)
+
 * [derivation](97398derivation.html) (39 messages, latest: Jul 13 2019 at 13:49)
 
 * [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)

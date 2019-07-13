@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1269 messages, latest: Jul 13 2019 at 15:26)
+* [noob question(s)](52075noobquestions.html) (1271 messages, latest: Jul 13 2019 at 16:24)
 
 * [rewriting only once](69539rewritingonlyonce.html) (4 messages, latest: Jul 13 2019 at 14:03)
 
