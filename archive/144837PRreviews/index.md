@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1223 extend the API of `finmap`](280951223extendtheAPIoffinmap.html) (1 message, latest: Jul 13 2019 at 00:24)
+* [#1223 extend the API of `finmap`](280951223extendtheAPIoffinmap.html) (3 messages, latest: Jul 13 2019 at 01:25)
 
 * [#1222 provide `trace!` and `fail!` and allow tactic](286541222providetraceandfailandallowtactic.html) (1 message, latest: Jul 13 2019 at 00:23)
 
