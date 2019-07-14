@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (106 messages, latest: Jul 14 2019 at 19:42)
+* [transport and parametricity](74751transportandparametricity.html) (118 messages, latest: Jul 14 2019 at 20:50)
 
 * [documentation](05083documentation.html) (3 messages, latest: Jul 14 2019 at 17:03)
 
