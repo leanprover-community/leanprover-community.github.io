@@ -496,6 +496,17 @@ I'm a robot.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170836741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170836741">Kevin Buzzard (Jul 14 2019 at 14:48)</a>:</h4>
 <p>Here's another question. The Bochner integral is defined in Lean using the Cauchy reals. What if I want a version for Dedekind reals? The analogous function but in the Dedekind situation. Again this is a very precise question -- as far as I can see -- I would like to generate the term which would have been made if <code>real</code> had been defined using the Dedekind reals.</p>
 
+<a name="170838412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170838412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170838412">Mario Carneiro (Jul 14 2019 at 15:45)</a>:</h4>
+<blockquote>
+<p>If so, what is the proof?</p>
+</blockquote>
+<p>We can prove today that "BSD for cauchy reals holds iff BSD for dedekind reals holds", so if we get any proof, even an unreasonable one, of BSD for cauchy reals, by composing it with this we get a proof of BSD for dedekind reals.</p>
+<blockquote>
+<p>Here's another question. The Bochner integral is defined in Lean using the Cauchy reals. What if I want a version for Dedekind reals? The analogous function but in the Dedekind situation. Again this is a very precise question -- as far as I can see -- I would like to generate the term which would have been made if real had been defined using the Dedekind reals.</p>
+</blockquote>
+<p>There are a few kinds of definitions based on reals. Some of them don't actually depend on it being any kind of reals, for example you can replace "real is an ordered field" with "real' is an ordered field" reusing the same predicate "ordered field".  Other definitions have the reals embedded inside; for example the Bochner integral is defined for functions over a real vector space, and so you would need Bochner' integral defined for functions over a real' vector space. The only proofs that have to be translated are those that are involved in stating the theorem, and they can either be translated similarly by replacing real with real' everywhere, or they can be explicitly transferred by proving that all sub-formulas of the statement of the theorem hold for real' iff they hold of real.</p>
+
 
 {% endraw %}
 
