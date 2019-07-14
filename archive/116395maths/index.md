@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [derivation](97398derivation.html) (40 messages, latest: Jul 14 2019 at 22:03)
+
 * [One-object category](33573Oneobjectcategory.html) (25 messages, latest: Jul 14 2019 at 14:03)
 
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (53 messages, latest: Jul 14 2019 at 04:37)
 
 * [power series](15161powerseries.html) (29 messages, latest: Jul 13 2019 at 18:40)
-
-* [derivation](97398derivation.html) (39 messages, latest: Jul 13 2019 at 13:49)
 
 * [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)
 
