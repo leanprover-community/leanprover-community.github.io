@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (9 messages, latest: Jul 14 2019 at 05:04)
+* [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (53 messages, latest: Jul 14 2019 at 04:37)
 
