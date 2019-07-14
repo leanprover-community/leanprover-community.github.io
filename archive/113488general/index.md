@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [documentation](05083documentation.html) (3 messages, latest: Jul 14 2019 at 17:03)
+
 * [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (10 messages, latest: Jul 14 2019 at 15:49)
 
 * [transport and parametricity](74751transportandparametricity.html) (103 messages, latest: Jul 14 2019 at 15:45)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (4 messages, latest: Jul 12 2019 at 09:01)
 
 * [VScode extension](56578VScodeextension.html) (417 messages, latest: Jul 11 2019 at 21:20)
-
-* [documentation](05083documentation.html) (2 messages, latest: Jul 11 2019 at 15:38)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (557 messages, latest: Jul 11 2019 at 14:38)
 
