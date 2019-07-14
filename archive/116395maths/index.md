@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [One-object category](33573Oneobjectcategory.html) (20 messages, latest: Jul 14 2019 at 11:27)
+* [One-object category](33573Oneobjectcategory.html) (23 messages, latest: Jul 14 2019 at 12:32)
 
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
 
