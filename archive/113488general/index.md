@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (100 messages, latest: Jul 14 2019 at 01:48)
+* [transport and parametricity](74751transportandparametricity.html) (102 messages, latest: Jul 14 2019 at 14:48)
+
+* [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (9 messages, latest: Jul 14 2019 at 14:44)
 
 * [performance issues](61263performanceissues.html) (15 messages, latest: Jul 13 2019 at 21:51)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [universe max](74328universemax.html) (9 messages, latest: Jul 13 2019 at 20:05)
 
 * [on coding practices](71728oncodingpractices.html) (1 message, latest: Jul 13 2019 at 18:14)
-
-* [Making custom pretty-printers work in tactic mode](71094Makingcustomprettyprintersworkintacticmode.html) (8 messages, latest: Jul 13 2019 at 17:55)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (7 messages, latest: Jul 13 2019 at 11:15)
 
