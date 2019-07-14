@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [One-object category](33573Oneobjectcategory.html) (20 messages, latest: Jul 14 2019 at 11:27)
+
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (53 messages, latest: Jul 14 2019 at 04:37)
@@ -40,8 +42,6 @@ permalink: archive/116395maths/index.html
 * [groups (bundling etc)](00257groupsbundlingetc.html) (40 messages, latest: Jul 08 2019 at 14:07)
 
 * [simple groups](91723simplegroups.html) (1 message, latest: Jul 08 2019 at 07:22)
-
-* [One-object category](33573Oneobjectcategory.html) (19 messages, latest: Jul 05 2019 at 21:23)
 
 * [`category_theory` results and universes](65570categorytheoryresultsanduniverses.html) (41 messages, latest: Jul 05 2019 at 20:33)
 
