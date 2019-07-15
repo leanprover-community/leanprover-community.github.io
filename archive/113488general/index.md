@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (123 messages, latest: Jul 15 2019 at 15:46)
+* [transport and parametricity](74751transportandparametricity.html) (131 messages, latest: Jul 15 2019 at 16:52)
 
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (4 messages, latest: Jul 15 2019 at 13:23)
 

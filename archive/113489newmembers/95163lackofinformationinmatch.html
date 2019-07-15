@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/95163lackofinformationinmatch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html">lack of information in `match`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170909309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/170909309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#170909309">Gun Pinyo (Jul 15 2019 at 16:32)</a>:</h4>
+<p>Hi everyone, I have a problem with <code>match</code> expression. Given the following code</p>
+<div class="codehilite"><pre><span></span>def foo (α : Type) (n : ℕ) (i : fin n) : α :=
+  match n with
+  | nat.zero    := {! 1 !}
+  | nat.succ n&#39; := {! 2 !}
+  end
+</pre></div>
+
+
+<p>To complete the first goal, I should be able to put <code>fin.elim0 i</code><br>
+since <code>i : fin 0</code> and has no element.</p>
+<p>However, the problem is that Lean tells me that <code>i : fin n</code>. That's<br>
+fine since <code>n = 0</code> anyway but how can get such evidence that <code>n = 0</code> from match?</p>
+
+<a name="170909674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/170909674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#170909674">Kevin Buzzard (Jul 15 2019 at 16:37)</a>:</h4>
+<p>This should be in a FAQ; it comes up every couple of months. There's some clever trick to get round it which sometimes I remember but right now I don't.</p>
+
+<a name="170909767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/170909767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#170909767">Bryan Gin-ge Chen (Jul 15 2019 at 16:38)</a>:</h4>
+<p>For this example, you can use pattern-matching more directly like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">elim0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">f</span> <span class="o">:=</span> <span class="o">{</span><span class="bp">!</span> <span class="mi">2</span> <span class="bp">!</span><span class="o">}</span>
+</pre></div>
+
+<a name="170909835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/170909835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#170909835">Bryan Gin-ge Chen (Jul 15 2019 at 16:39)</a>:</h4>
+<p>I guess this works in match:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="n">n</span><span class="o">,</span> <span class="n">i</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span> <span class="n">i</span>   <span class="o">:=</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim0</span>
+  <span class="bp">|</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="n">i</span> <span class="o">:=</span> <span class="o">{</span><span class="bp">!</span> <span class="mi">2</span> <span class="bp">!</span><span class="o">}</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="170909946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/170909946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#170909946">Andrew Ashworth (Jul 15 2019 at 16:40)</a>:</h4>
+<p>in Lean you must explicitly list <code>i</code> as a parameter in <code>match</code>, since it participates in the function</p>
+
+<a name="170910000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/170910000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#170910000">Gun Pinyo (Jul 15 2019 at 16:41)</a>:</h4>
+<p>ah, thank you, everyone.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
