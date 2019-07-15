@@ -9,15 +9,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [ring to semiring](84658ringtosemiring.html) (3 messages, latest: Jul 15 2019 at 08:59)
+* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (56 messages, latest: Jul 15 2019 at 09:39)
+
+* [ring to semiring](84658ringtosemiring.html) (5 messages, latest: Jul 15 2019 at 09:02)
 
 * [derivation](97398derivation.html) (42 messages, latest: Jul 15 2019 at 07:08)
 
 * [One-object category](33573Oneobjectcategory.html) (25 messages, latest: Jul 14 2019 at 14:03)
 
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
-
-* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (53 messages, latest: Jul 14 2019 at 04:37)
 
 * [power series](15161powerseries.html) (29 messages, latest: Jul 13 2019 at 18:40)
 

@@ -237,6 +237,25 @@ I have a few choices:<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170818091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170818091">Johan Commelin (Jul 14 2019 at 04:37)</a>:</h4>
 <p>I think that your "export stuff in the root namespace" PR would hopefully not be too much work. So you could still just do that. I'm not sure if bundling of morphisms will happen in the near future...</p>
 
+<a name="170877290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170877290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170877290">Yury G. Kudryashov (Jul 15 2019 at 09:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> It takes more time&amp;effort than I expected. There are a few reasons:<br>
+1. Many namespaces have <code>map_mul</code>, <code>map_add</code> etc. I have to make all of them <code>protected</code>, then figure out where I need to add <code>namespace.</code><br>
+2. Sometimes class instance resolution fails to find <code>is_add_monoid_hom f</code> a few lines after <code>instance : is_ring_hom f</code>, and I don't know how to fix this but supplying the conversion explicitly (and this looks ugly).<br>
+So, I'm going to do the following:<br>
+1. Push current state to a branch (compile fails).<br>
+2. Submit PRs on various small fixes I made while trying to do this move.<br>
+3. Try to make <code>is_ring_hom</code> extend <code>is_add_group_hom</code> by "manually exporting" <code>map_add</code> etc into <code>is_ring_hom</code> namespace.<br>
+3b. Try to turn the "manual export" in (3) into a tactic, if I find some docs on writing tactics.</p>
+
+<a name="170877674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170877674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170877674">Johan Commelin (Jul 15 2019 at 09:39)</a>:</h4>
+<p>Hmmm, I'm sorry that it is so painful.</p>
+
+<a name="170877695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/is_mul_hom%20and%20is_group_hom/near/170877695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/77515ismulhomandisgrouphom.html#170877695">Johan Commelin (Jul 15 2019 at 09:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> Concerning writing tactics. Are you aware of <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md</a>?</p>
+
 
 {% endraw %}
 
