@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [trace.class_instances](60859traceclassinstances.html) (1 message, latest: Jul 15 2019 at 12:04)
+
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (3 messages, latest: Jul 15 2019 at 11:20)
 
 * [documentation requirements](33663documentationrequirements.html) (2 messages, latest: Jul 15 2019 at 11:07)
