@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/96650hascoetofunwithimplicitarguments.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/96650hascoetofunwithimplicitarguments.html">has_coe_to_fun with implicit arguments</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170881798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20with%20implicit%20arguments/near/170881798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96650hascoetofunwithimplicitarguments.html#170881798">Neil Strickland (Jul 15 2019 at 10:46)</a>:</h4>
+<p>I am having trouble getting <code>has_coe_to_fun</code> to work with implicit arguments in the way that I would like.  Consider the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span><span class="bp">.</span><span class="n">basic</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">ℚ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℚ</span><span class="o">]</span> <span class="n">V</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">v</span><span class="o">,</span>
+  <span class="n">add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">v</span> <span class="n">w</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">smul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">),</span> <span class="n">rfl</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">f1</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span> <span class="n">V</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℚ</span><span class="o">]</span> <span class="n">V</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">f2</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="o">:=</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℚ</span><span class="o">]</span> <span class="n">V</span><span class="o">)</span> <span class="n">v</span>
+<span class="n">def</span> <span class="n">f3</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">v</span>
+</pre></div>
+
+
+<p>Definitions <code>f1</code> and <code>f2</code> work (via the <code>has_coe_to_fun</code> instance for <code>linear_map</code>) but they are awkward.  Definition <code>f3</code> does not work: Lean says</p>
+<div class="codehilite"><pre><span></span><span class="n">function</span> <span class="n">expected</span> <span class="n">at</span>
+  <span class="n">f</span>
+<span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="err">?</span><span class="n">m_1</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℚ</span><span class="o">]</span> <span class="err">?</span><span class="n">m_1</span>
+<span class="n">Additional</span> <span class="n">information</span><span class="o">:</span>
+<span class="n">c</span><span class="o">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Neil</span> <span class="n">Strickland</span><span class="err">\</span><span class="n">Google</span> <span class="n">Drive</span><span class="err">\</span><span class="n">Lean</span><span class="err">\</span><span class="n">lib</span><span class="err">\</span><span class="n">src</span><span class="err">\</span><span class="n">algebra</span><span class="err">\</span><span class="n">linmap</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">10</span><span class="o">:</span><span class="mi">22</span><span class="o">:</span> <span class="kn">context</span><span class="o">:</span> <span class="n">switched</span> <span class="n">to</span> <span class="n">simple</span> <span class="n">application</span> <span class="n">elaboration</span> <span class="n">procedure</span> <span class="n">because</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">use</span> <span class="n">expected</span> <span class="n">type</span> <span class="n">to</span> <span class="n">elaborate</span> <span class="n">it</span><span class="o">,</span> <span class="n">error</span> <span class="n">message</span>
+  <span class="n">too</span> <span class="n">many</span> <span class="n">arguments</span>
+</pre></div>
+
+
+<p>I don't understand where "too many arguments" is coming from.  Is there a way around this?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

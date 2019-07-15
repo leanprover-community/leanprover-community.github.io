@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (56 messages, latest: Jul 15 2019 at 09:39)
+* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (58 messages, latest: Jul 15 2019 at 10:10)
 
 * [ring to semiring](84658ringtosemiring.html) (5 messages, latest: Jul 15 2019 at 09:02)
 
