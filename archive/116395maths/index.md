@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [derivation](97398derivation.html) (63 messages, latest: Jul 15 2019 at 15:55)
+* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (61 messages, latest: Jul 15 2019 at 18:46)
 
-* [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (60 messages, latest: Jul 15 2019 at 13:29)
+* [derivation](97398derivation.html) (63 messages, latest: Jul 15 2019 at 15:55)
 
 * [ring to semiring](84658ringtosemiring.html) (5 messages, latest: Jul 15 2019 at 09:02)
 
