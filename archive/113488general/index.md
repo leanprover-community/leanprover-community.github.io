@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (1 message, latest: Jul 15 2019 at 10:46)
+* [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (3 messages, latest: Jul 15 2019 at 11:20)
 
-* [documentation requirements](33663documentationrequirements.html) (1 message, latest: Jul 15 2019 at 09:43)
+* [documentation requirements](33663documentationrequirements.html) (2 messages, latest: Jul 15 2019 at 11:07)
 
 * [transport and parametricity](74751transportandparametricity.html) (122 messages, latest: Jul 15 2019 at 05:28)
 

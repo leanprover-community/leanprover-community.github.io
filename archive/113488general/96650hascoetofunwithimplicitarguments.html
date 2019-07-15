@@ -43,6 +43,22 @@ permalink: archive/113488general/96650hascoetofunwithimplicitarguments.html
 
 <p>I don't understand where "too many arguments" is coming from.  Is there a way around this?</p>
 
+<a name="170882873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20with%20implicit%20arguments/near/170882873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96650hascoetofunwithimplicitarguments.html#170882873">Chris Hughes (Jul 15 2019 at 11:06)</a>:</h4>
+<p>Too many arguments is because a term of type <code>V →ₗ[ℚ] V</code> takes no arguments before it is coerced, so one argument is too many. I think  <code>def f3 (v : V) : V := (f : V -&gt; V) v</code> should work.</p>
+
+<a name="170883678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/has_coe_to_fun%20with%20implicit%20arguments/near/170883678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/96650hascoetofunwithimplicitarguments.html#170883678">Neil Strickland (Jul 15 2019 at 11:20)</a>:</h4>
+<p>In fact <code>def f3 (v : V) : V := (f : V → V) v</code> gives</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">type</span> <span class="n">ascription</span><span class="o">,</span> <span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="err">?</span><span class="n">m_1</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℚ</span><span class="o">]</span> <span class="err">?</span><span class="n">m_1</span> <span class="o">:</span> <span class="kt">Type</span> <span class="err">?</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">V</span> <span class="bp">→</span> <span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span>
+</pre></div>
+
+
+<p>I'm not sure why that is.  Anyway, in the situation that led me to this minimal example, the term corresponding to <code>V</code> is rather large, so I want to avoid having to mention it if possible.</p>
+
 
 {% endraw %}
 
