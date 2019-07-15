@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [ring to semiring](84658ringtosemiring.html) (3 messages, latest: Jul 15 2019 at 08:59)
+
 * [derivation](97398derivation.html) (42 messages, latest: Jul 15 2019 at 07:08)
 
 * [One-object category](33573Oneobjectcategory.html) (25 messages, latest: Jul 14 2019 at 14:03)
