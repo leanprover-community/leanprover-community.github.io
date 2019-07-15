@@ -716,6 +716,71 @@ permalink: archive/116395maths/97398derivation.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170899638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170899638">Kevin Buzzard (Jul 15 2019 at 14:46)</a>:</h4>
 <p><span class="user-mention" data-user-id="116448">@Koundinya Vajjha</span></p>
 
+<a name="170902565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170902565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170902565">Jesse Michael Han (Jul 15 2019 at 15:18)</a>:</h4>
+<blockquote>
+<p>So far I have convinced myself that the following powerful principle stands a chance of being true. If P u is the predicate telling us if some term u : T is T-isomorphic to t, and we have a proposition Q u about all terms u of type T which satisfy P, and we have a proof of Q t, then we should be able to formally deduce that Q u is provable, even though it might be a pain trying to actually construct the proof.</p>
+</blockquote>
+<p>do you mean something like this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span>
+  <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">u</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">eqv</span> <span class="o">:</span> <span class="n">T</span> <span class="bp">→</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">H_equiv</span> <span class="o">:</span> <span class="n">is_equiv</span> <span class="bp">_</span> <span class="n">eqv</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">HP</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">u</span><span class="o">,</span> <span class="n">P</span> <span class="n">u</span> <span class="bp">→</span> <span class="n">eqv</span> <span class="n">t</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Q</span> <span class="o">:</span> <span class="n">T</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">HQ</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">u</span> <span class="o">(</span><span class="n">Hu</span> <span class="o">:</span> <span class="n">P</span> <span class="n">u</span><span class="o">),</span> <span class="n">Q</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">P_respect_iso</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">u</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">P</span> <span class="n">u</span><span class="o">)</span> <span class="n">t</span><span class="o">,</span> <span class="n">eqv</span> <span class="n">u</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">t</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Q_respect_iso</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">u</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">u</span><span class="o">)</span> <span class="n">t</span><span class="o">,</span> <span class="n">eqv</span> <span class="n">u</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">Q</span> <span class="n">t</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Ht</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">t</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">Hu</span> <span class="o">:</span> <span class="n">P</span> <span class="n">u</span><span class="o">)</span>
+  <span class="o">:</span> <span class="n">Q</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span><span class="bp">*</span>
+</pre></div>
+
+<a name="170902688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170902688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170902688">Kevin Buzzard (Jul 15 2019 at 15:19)</a>:</h4>
+<p>I don't know <code>HQ</code>. I only know <code>Q t</code></p>
+
+<a name="170902819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170902819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170902819">Kevin Buzzard (Jul 15 2019 at 15:20)</a>:</h4>
+<p>I don't think I know <code>Q_respect_iso</code> either.</p>
+
+<a name="170902874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170902874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170902874">Jesse Michael Han (Jul 15 2019 at 15:21)</a>:</h4>
+<p>oh, so you meant that<code>Q</code> is a predicate on the subtype of <code>P</code>?</p>
+
+<a name="170902882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170902882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170902882">Kevin Buzzard (Jul 15 2019 at 15:21)</a>:</h4>
+<p>You can figure it out for yourself. In mathlib there's a proof that a non-empty bounded-above set of Cauchy reals has a supremum. I want to prove that for the Dedekind reals, say.</p>
+
+<a name="170902955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170902955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170902955">Kevin Buzzard (Jul 15 2019 at 15:22)</a>:</h4>
+<p>Yes, Q could be thought of as a predicate on the subtype of T corresponding to P.</p>
+
+<a name="170903083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170903083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170903083">Kevin Buzzard (Jul 15 2019 at 15:23)</a>:</h4>
+<p>So here are the two steps involved in proving that a non-empty bounded-above set of Dedekind reals has a supremum. Firstly, beef up the statement that a non-empty bounded-above set of Cauchy reals has a supremum to the statement that a non-empty bounded-above subset of any complete ordered archimedean field has a supremum, and then secondly show that if you have a proof of this for the Cauchy reals then you can deduce one for the Dedekind reals.</p>
+
+<a name="170905943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170905943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170905943">Jesse Michael Han (Jul 15 2019 at 15:52)</a>:</h4>
+<p>first-order transfer fails here since adjoining a predicate symbol easily spoils the completeness of first-order theories</p>
+<p>but in this case you could just show that some second-order properties transfer across isomorphisms of ordered fields, like the supremum of a set or the property of being bounded</p>
+<p>maybe the idiomatic way to do it would be to have a complete ordered archimedean field typeclass and then prove as many higher-order properties you want, and then specialize</p>
+
+<a name="170905953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170905953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170905953">Jesse Michael Han (Jul 15 2019 at 15:53)</a>:</h4>
+<p>(i'm sure this has all been said before)</p>
+
+<a name="170906106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/derivation/near/170906106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/97398derivation.html#170906106">Kevin Buzzard (Jul 15 2019 at 15:55)</a>:</h4>
+<blockquote>
+<p>maybe the idiomatic way to do it would be to have a complete ordered archimedean field typeclass and then prove as many higher-order properties you want, and then specialize</p>
+</blockquote>
+<p>Right! But we don't! Mathematicians expect to be able to move between the Cauchy reals and the Dedekind reals immediately because they are "the same". On the other hand we are making lots and lots of constructions using only the Cauchy reals. This is not an issue for mathematicians though, because they know this general principle that one can rewrite anything sensible along a map saying that two things are the same, and it is perhaps not in anyone's interest to point out the subtleties here.</p>
+
 
 {% endraw %}
 

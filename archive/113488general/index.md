@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [transport and parametricity](74751transportandparametricity.html) (123 messages, latest: Jul 15 2019 at 15:46)
+
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (4 messages, latest: Jul 15 2019 at 13:23)
 
 * [trace.class_instances](60859traceclassinstances.html) (1 message, latest: Jul 15 2019 at 12:04)
 
 * [documentation requirements](33663documentationrequirements.html) (2 messages, latest: Jul 15 2019 at 11:07)
-
-* [transport and parametricity](74751transportandparametricity.html) (122 messages, latest: Jul 15 2019 at 05:28)
 
 * [documentation](05083documentation.html) (3 messages, latest: Jul 14 2019 at 17:03)
 
