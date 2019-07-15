@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [derivation](97398derivation.html) (40 messages, latest: Jul 14 2019 at 22:03)
+* [derivation](97398derivation.html) (41 messages, latest: Jul 15 2019 at 04:04)
 
 * [One-object category](33573Oneobjectcategory.html) (25 messages, latest: Jul 14 2019 at 14:03)
 
