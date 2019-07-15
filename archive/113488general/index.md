@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (133 messages, latest: Jul 15 2019 at 18:46)
+* [online leanprover](19268onlineleanprover.html) (181 messages, latest: Jul 15 2019 at 20:59)
+
+* [transport and parametricity](74751transportandparametricity.html) (140 messages, latest: Jul 15 2019 at 20:29)
 
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (4 messages, latest: Jul 15 2019 at 13:23)
 
@@ -52,8 +54,6 @@ permalink: archive/113488general/index.html
 * [idiomatic Lean](99380idiomaticLean.html) (16 messages, latest: Jul 09 2019 at 21:31)
 
 * [-T50000 challenge](87130T50000challenge.html) (197 messages, latest: Jul 09 2019 at 16:49)
-
-* [online leanprover](19268onlineleanprover.html) (178 messages, latest: Jul 09 2019 at 16:31)
 
 * [eq.lhs and eq.rhs](95504eqlhsandeqrhs.html) (2 messages, latest: Jul 09 2019 at 07:20)
 
