@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (20 messages, latest: Jul 16 2019 at 14:49)
+* [tactic question](62193tacticquestion.html) (49 messages, latest: Jul 16 2019 at 15:55)
 
-* [choose crashes Lean](49867choosecrashesLean.html) (9 messages, latest: Jul 16 2019 at 14:18)
+* [emacs users](44956emacsusers.html) (15 messages, latest: Jul 16 2019 at 15:54)
 
-* [emacs users](44956emacsusers.html) (14 messages, latest: Jul 16 2019 at 13:35)
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (22 messages, latest: Jul 16 2019 at 15:37)
+
+* [choose crashes Lean](49867choosecrashesLean.html) (10 messages, latest: Jul 16 2019 at 15:16)
 
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 
@@ -162,8 +164,6 @@ permalink: archive/113488general/index.html
 * [fin find](64959finfind.html) (6 messages, latest: Jun 21 2019 at 08:03)
 
 * [quanta article](72175quantaarticle.html) (11 messages, latest: Jun 21 2019 at 06:20)
-
-* [tactic question](62193tacticquestion.html) (48 messages, latest: Jun 20 2019 at 17:35)
 
 * [determinant of groups](67057determinantofgroups.html) (1 message, latest: Jun 20 2019 at 16:49)
 

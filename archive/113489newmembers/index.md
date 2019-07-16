@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Misbehavior of the termination checker?](31790Misbehavioroftheterminationchecker.html) (5 messages, latest: Jul 16 2019 at 14:14)
+* [Misbehavior of the termination checker?](31790Misbehavioroftheterminationchecker.html) (6 messages, latest: Jul 16 2019 at 15:02)
 
 * [lack of information in `match`](95163lackofinformationinmatch.html) (11 messages, latest: Jul 16 2019 at 08:45)
 
