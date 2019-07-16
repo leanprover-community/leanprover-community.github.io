@@ -92,6 +92,93 @@ h : true ∧ ∀ (i : ℕ), ∃ (j : ℕ), i ≠ j
 <span class="k">by</span> <span class="n">choose</span> <span class="n">c</span> <span class="kn">using</span> <span class="n">exists_eq_mul_right_of_dvd</span> <span class="n">h</span>
 </pre></div>
 
+<a name="171006105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006105">Patrick Massot (Jul 16 2019 at 17:03)</a>:</h4>
+<p>It's bad that Lean crashes, but <code>exists_eq_mul_right_of_dvd h</code> is not at all the kind of statement that <code>choose</code> is meant to consume.</p>
+
+<a name="171006360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006360">Amelia Livingston (Jul 16 2019 at 17:06)</a>:</h4>
+<p>Ah - I'm pretty new to this; what sort of statement is better suited to <code>choose</code>?</p>
+
+<a name="171006412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006412">Patrick Massot (Jul 16 2019 at 17:07)</a>:</h4>
+<p>"choose" is meant in the strong sense of "instantly make infinitely many choice", aka "use the axiom of choice".</p>
+
+<a name="171006484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006484">Kevin Buzzard (Jul 16 2019 at 17:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">blah</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">choose</span> <span class="n">c</span> <span class="n">h2</span> <span class="kn">using</span> <span class="o">(</span><span class="n">exists_eq_mul_right_of_dvd</span> <span class="n">h</span><span class="o">),</span>
+  <span class="n">exact</span> <span class="n">c</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>works for me</p>
+
+<a name="171006579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006579">Kevin Buzzard (Jul 16 2019 at 17:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">blah</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+  <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">exists_eq_mul_right_of_dvd</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
+
+
+<p>avoids the tactic completely.</p>
+
+<a name="171006627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006627">Patrick Massot (Jul 16 2019 at 17:10)</a>:</h4>
+<p>Oh, right, Amelia also forgot to name the property</p>
+
+<a name="171006670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006670">Kevin Buzzard (Jul 16 2019 at 17:10)</a>:</h4>
+<p>But this stops the crash :D</p>
+
+<a name="171006698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006698">Patrick Massot (Jul 16 2019 at 17:11)</a>:</h4>
+<p>Anyway, the idiomatic mathlib way is <code>rcases exists_eq_mul_right_of_dvd h with ⟨c, h2⟩,</code> or, since last week, the gorgeous </p>
+<div class="codehilite"><pre><span></span><span class="k">obtain</span> <span class="bp">⟨</span><span class="n">c</span><span class="o">,</span> <span class="n">h2</span><span class="bp">⟩</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">c</span><span class="o">,</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">*</span><span class="n">c</span><span class="o">,</span> <span class="k">from</span> <span class="n">exists_eq_mul_right_of_dvd</span> <span class="n">h</span><span class="o">,</span>
+</pre></div>
+
+<a name="171006813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006813">Amelia Livingston (Jul 16 2019 at 17:12)</a>:</h4>
+<p>Aha... that works for me too. Thank you. It's not so easy to notice user error when user error is crashing Lean.<br>
+Surely you can't use <code>rcases</code> in a definition though?</p>
+
+<a name="171006857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006857">Patrick Massot (Jul 16 2019 at 17:13)</a>:</h4>
+<p>What do you mean?</p>
+
+<a name="171006966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171006966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171006966">Amelia Livingston (Jul 16 2019 at 17:14)</a>:</h4>
+<p>Because of the <code>induction tactic failed, recursor 'Exists.dcases_on' can only eliminate into Prop</code> error</p>
+
+<a name="171007019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171007019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171007019">Patrick Massot (Jul 16 2019 at 17:15)</a>:</h4>
+<p>oh I see. Then you could use <code>choose</code> or, more traditionally, <code>classical.some</code> and its friends</p>
+
+<a name="171007085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171007085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171007085">Patrick Massot (Jul 16 2019 at 17:16)</a>:</h4>
+<p>We should really have a documentation file about these issues. Just like what Chris wrote about finite sets or well-founded recursion.</p>
+
+<a name="171007103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171007103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171007103">Patrick Massot (Jul 16 2019 at 17:16)</a>:</h4>
+<p>It would probably a very good exercise for you to write it.</p>
+
+<a name="171007208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171007208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171007208">Patrick Massot (Jul 16 2019 at 17:18)</a>:</h4>
+<p>It would be in mathlib's greatest documentation writing tradition. You prepare a list of examples that you can't do, or at least not without suffering. Then you ask here until you have nice and elegant solutions for all (or you people write a new helper tactic) and then you proudly put all the explanations in the docs folder.</p>
+
+<a name="171007269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171007269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171007269">Amelia Livingston (Jul 16 2019 at 17:19)</a>:</h4>
+<p>Thanks for the help. I would love to give that a go, yeah!</p>
+
+<a name="171007402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/choose%20crashes%20Lean/near/171007402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49867choosecrashesLean.html#171007402">Patrick Massot (Jul 16 2019 at 17:21)</a>:</h4>
+<p>All files in <a href="https://github.com/leanprover-community/mathlib/tree/master/docs/extras" target="_blank" title="https://github.com/leanprover-community/mathlib/tree/master/docs/extras">https://github.com/leanprover-community/mathlib/tree/master/docs/extras</a> were written using this strategy.</p>
+
 
 {% endraw %}
 

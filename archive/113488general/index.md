@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactic question](62193tacticquestion.html) (50 messages, latest: Jul 16 2019 at 17:58)
+
+* [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
+
 * [emacs users](44956emacsusers.html) (16 messages, latest: Jul 16 2019 at 16:10)
-
-* [choose crashes Lean](49867choosecrashesLean.html) (12 messages, latest: Jul 16 2019 at 16:01)
-
-* [tactic question](62193tacticquestion.html) (49 messages, latest: Jul 16 2019 at 15:55)
 
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (22 messages, latest: Jul 16 2019 at 15:37)
 
