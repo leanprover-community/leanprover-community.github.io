@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [lack of information in `match`](95163lackofinformationinmatch.html) (6 messages, latest: Jul 15 2019 at 16:41)
+* [lack of information in `match`](95163lackofinformationinmatch.html) (10 messages, latest: Jul 16 2019 at 04:51)
 
 * ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (9 messages, latest: Jul 13 2019 at 20:33)
 

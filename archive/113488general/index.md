@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [well_founded finsupp](29214wellfoundedfinsupp.html) (74 messages, latest: Jul 16 2019 at 04:36)
+
 * [transport and parametricity](74751transportandparametricity.html) (152 messages, latest: Jul 16 2019 at 03:21)
 
 * [online leanprover](19268onlineleanprover.html) (184 messages, latest: Jul 15 2019 at 21:13)
@@ -34,8 +36,6 @@ permalink: archive/113488general/index.html
 * [on coding practices](71728oncodingpractices.html) (1 message, latest: Jul 13 2019 at 18:14)
 
 * [July meeting in Amsterdam](09443JulymeetinginAmsterdam.html) (7 messages, latest: Jul 13 2019 at 11:15)
-
-* [well_founded finsupp](29214wellfoundedfinsupp.html) (62 messages, latest: Jul 12 2019 at 12:34)
 
 * [has_coe_to_fun lemmas](83356hascoetofunlemmas.html) (4 messages, latest: Jul 12 2019 at 09:01)
 

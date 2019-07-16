@@ -350,6 +350,54 @@ I get timeouts with both of these, so Lean doesn't tell me which one is correct.
 <span class="kn">end</span>
 </pre></div>
 
+<a name="170952546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952546">Johan Commelin (Jul 16 2019 at 04:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Should we also have <code>nat.diagonal</code>?</p>
+
+<a name="170952551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952551">Johan Commelin (Jul 16 2019 at 04:05)</a>:</h4>
+<p>Isomorphic to the special case <code>finsupp unit nat</code>...</p>
+
+<a name="170952555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952555">Johan Commelin (Jul 16 2019 at 04:05)</a>:</h4>
+<p>Or is it better to use <code>range n</code> and subtraction?</p>
+
+<a name="170952616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952616">Johan Commelin (Jul 16 2019 at 04:06)</a>:</h4>
+<p>Compare <code>coeff_mul</code> for <code>polynomial</code>: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/polynomial.lean#L169-L170" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/polynomial.lean#L169-L170">https://github.com/leanprover-community/mathlib/blob/master/src/data/polynomial.lean#L169-L170</a></p>
+
+<a name="170952617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952617">Mario Carneiro (Jul 16 2019 at 04:06)</a>:</h4>
+<p>sure. I guess it's not hard to prove that <code>(list.range (n+1)).map (\lam i, (i, n - i))</code>has the requisite property</p>
+
+<a name="170952650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952650">Johan Commelin (Jul 16 2019 at 04:07)</a>:</h4>
+<p>Also... shouldn't these things be called <code>antidiagonal</code>?</p>
+
+<a name="170952655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952655">Mario Carneiro (Jul 16 2019 at 04:07)</a>:</h4>
+<p>I've been thinking about that</p>
+
+<a name="170952708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952708">Mario Carneiro (Jul 16 2019 at 04:08)</a>:</h4>
+<p><code>simplex</code> might also work in the finsupp generalization</p>
+
+<a name="170952813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952813">Johan Commelin (Jul 16 2019 at 04:11)</a>:</h4>
+<p>Hmm, I would say <code>finsupp.simplex (a : \a)</code> is the set of <code>finsupp X \a</code> that sum up to <code>a</code>.</p>
+
+<a name="170952820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170952820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170952820">Johan Commelin (Jul 16 2019 at 04:11)</a>:</h4>
+<p>Or something like that.</p>
+
+<a name="170953757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170953757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170953757">Johan Commelin (Jul 16 2019 at 04:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Would you approve of a PR that changes all <code>diagonal</code>s to <code>antidiagonal</code>s?</p>
+
+<a name="170953767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/well_founded%20finsupp/near/170953767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29214wellfoundedfinsupp.html#170953767">Mario Carneiro (Jul 16 2019 at 04:36)</a>:</h4>
+<p>sure</p>
+
 
 {% endraw %}
 
