@@ -688,6 +688,29 @@ I'm a robot.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170943622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170943622">François G. Dorais (Jul 16 2019 at 00:19)</a>:</h4>
 <p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span>  Why is the typeclass hypothetical? It's easy to write down several variants.</p>
 
+<a name="170945462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170945462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170945462">Mario Carneiro (Jul 16 2019 at 01:00)</a>:</h4>
+<p>The typeclass approach isn't quite flexible enough, because of the need to deal with n-ary predicates with a variety of different relations between objects at the same time</p>
+
+<a name="170945476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170945476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170945476">Jesse Michael Han (Jul 16 2019 at 01:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="119741">@François G. Dorais</span>  it's hypothetical because i don't think anyone's PR'd it to <code>mathlib</code> yet :^)</p>
+<p>but indeed it shouldn't be difficult</p>
+
+<a name="170945495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170945495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170945495">Mario Carneiro (Jul 16 2019 at 01:01)</a>:</h4>
+<p>oops, spoke too soon. It's possible to have a typeclass for "real-like thing" but we are embedding it in definitions <em>exactly because</em> we are not anticipating to change the definition of the reals any time soon</p>
+
+<a name="170947169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/transport%20and%20parametricity/near/170947169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74751transportandparametricity.html#170947169">François G. Dorais (Jul 16 2019 at 01:42)</a>:</h4>
+<p>Ah, got it. In that case, let me record my favorite version: R is the terminal object in the category of archimedean ordered fields.</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">real_field</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">,</span> <span class="n">archimedean</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">term</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">linear_ordered_field</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">archimedean</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">),</span> <span class="n">is_field_hom</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+
+<p>It's a bit harder to get off the ground with this one, but it's very entertaining to see how it works. (The restriction to Type is not a typo. Archimedean ordered fields are so fantastically rigid, this is enough to ensure that this is a terminal object for all universe levels.)</p>
+
 
 {% endraw %}
 
