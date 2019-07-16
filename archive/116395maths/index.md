@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [\[reducible\] and \[irreducible\]](35357reducibleandirreducible.html) (6 messages, latest: Jul 16 2019 at 16:22)
+* [\[reducible\] and \[irreducible\]](35357reducibleandirreducible.html) (7 messages, latest: Jul 16 2019 at 18:00)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (61 messages, latest: Jul 15 2019 at 18:46)
 

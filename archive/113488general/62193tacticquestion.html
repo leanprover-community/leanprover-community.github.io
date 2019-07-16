@@ -229,6 +229,26 @@ permalink: archive/113488general/62193tacticquestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171010679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171010679">Mario Carneiro (Jul 16 2019 at 17:58)</a>:</h4>
 <p>The red-black tree implementation in core is broken,, so I try to use it as little as possible. Also it's important that the kernel compute with it well, so extraneous rebalancing code would be not good. All the rbnode handling happens in the VM, the kernel only sees <code>tree</code>.</p>
 
+<a name="171011090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171011090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171011090">Wojciech Nawrocki (Jul 16 2019 at 18:02)</a>:</h4>
+<p>Oh I see, in what way is it broken? I think w.r.t. rebalancing it would be fine, because the rebalancing only happens on tree modifications, but neither normalization in <code>of_csexpr</code>, nor <code>eval</code>/<code>cseval</code> modify the tree.</p>
+
+<a name="171011179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171011179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171011179">Mario Carneiro (Jul 16 2019 at 18:03)</a>:</h4>
+<p>It's still a more complicated recursive function since there are more cases</p>
+
+<a name="171011281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171011281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171011281">Mario Carneiro (Jul 16 2019 at 18:04)</a>:</h4>
+<p>You can't erase from an <code>rbtree</code></p>
+
+<a name="171011326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171011326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171011326">Mario Carneiro (Jul 16 2019 at 18:04)</a>:</h4>
+<p>because the red black invariant is wrong</p>
+
+<a name="171015269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171015269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171015269">Wojciech Nawrocki (Jul 16 2019 at 18:45)</a>:</h4>
+<p>?! Do you mean it doesn't maintain the invariant, or it maintains the wrong invariant, or ..?</p>
+
 
 {% endraw %}
 
