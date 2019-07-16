@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [functional analysis](41368functionalanalysis.html) (2 messages, latest: Jul 16 2019 at 18:55)
+* [functional analysis](41368functionalanalysis.html) (10 messages, latest: Jul 16 2019 at 19:54)
 
 * [Misbehavior of the termination checker?](31790Misbehavioroftheterminationchecker.html) (6 messages, latest: Jul 16 2019 at 15:02)
 
