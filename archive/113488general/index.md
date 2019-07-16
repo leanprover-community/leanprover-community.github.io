@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [online leanprover](19268onlineleanprover.html) (184 messages, latest: Jul 15 2019 at 21:13)
+* [transport and parametricity](74751transportandparametricity.html) (146 messages, latest: Jul 15 2019 at 23:44)
 
-* [transport and parametricity](74751transportandparametricity.html) (140 messages, latest: Jul 15 2019 at 20:29)
+* [online leanprover](19268onlineleanprover.html) (184 messages, latest: Jul 15 2019 at 21:13)
 
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (4 messages, latest: Jul 15 2019 at 13:23)
 
