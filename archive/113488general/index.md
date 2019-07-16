@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [transport and parametricity](74751transportandparametricity.html) (151 messages, latest: Jul 16 2019 at 01:42)
+* [transport and parametricity](74751transportandparametricity.html) (152 messages, latest: Jul 16 2019 at 03:21)
 
 * [online leanprover](19268onlineleanprover.html) (184 messages, latest: Jul 15 2019 at 21:13)
 
