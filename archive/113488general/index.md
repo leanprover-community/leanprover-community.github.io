@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
+
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (76 messages, latest: Jul 16 2019 at 07:01)
 
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (4 messages, latest: Jul 16 2019 at 05:38)
