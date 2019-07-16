@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (4 messages, latest: Jul 16 2019 at 05:38)
+
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (74 messages, latest: Jul 16 2019 at 04:36)
 
 * [transport and parametricity](74751transportandparametricity.html) (152 messages, latest: Jul 16 2019 at 03:21)
