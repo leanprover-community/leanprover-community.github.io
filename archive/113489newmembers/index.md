@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Misbehavior of the termination checker?](31790Misbehavioroftheterminationchecker.html) (5 messages, latest: Jul 16 2019 at 14:14)
+
 * [lack of information in `match`](95163lackofinformationinmatch.html) (11 messages, latest: Jul 16 2019 at 08:45)
 
 * ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (9 messages, latest: Jul 13 2019 at 20:33)

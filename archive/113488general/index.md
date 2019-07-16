@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (13 messages, latest: Jul 16 2019 at 13:57)
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (20 messages, latest: Jul 16 2019 at 14:49)
+
+* [choose crashes Lean](49867choosecrashesLean.html) (9 messages, latest: Jul 16 2019 at 14:18)
 
 * [emacs users](44956emacsusers.html) (14 messages, latest: Jul 16 2019 at 13:35)
 
@@ -258,8 +260,6 @@ permalink: archive/113488general/index.html
 * [`split_ifs`, and nested `dite`](62902splitifsandnesteddite.html) (4 messages, latest: Jun 07 2019 at 16:56)
 
 * [Lean crashing](25648Leancrashing.html) (3 messages, latest: Jun 07 2019 at 16:07)
-
-* [choose crashes Lean](49867choosecrashesLean.html) (8 messages, latest: Jun 07 2019 at 15:58)
 
 * [Mac fonts](51644Macfonts.html) (9 messages, latest: Jun 07 2019 at 14:42)
 

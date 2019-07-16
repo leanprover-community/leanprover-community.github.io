@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/31790Misbehavioroftheterminationchecker.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/31790Misbehavioroftheterminationchecker.html">Misbehavior of the termination checker?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="170988788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Misbehavior%20of%20the%20termination%20checker%3F/near/170988788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31790Misbehavioroftheterminationchecker.html#170988788">Jasmin Blanchette (Jul 16 2019 at 14:04)</a>:</h4>
+<p>I have stumbled on a strange case. The termination checker accepts the following code. I don't see why it should, since there's an infinite recursion.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">my_lemma</span> <span class="o">:</span>
+  <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">x</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="n">x_eq_y</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">let</span> <span class="n">z</span> <span class="o">:=</span> <span class="mi">200</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">z_eq_z</span> <span class="o">:</span> <span class="n">z</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">z</span> <span class="err">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">my_lemma</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">z_eq_z</span><span class="o">,</span>
+    <span class="n">sorry</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="170989327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Misbehavior%20of%20the%20termination%20checker%3F/near/170989327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31790Misbehavioroftheterminationchecker.html#170989327">Rob Lewis (Jul 16 2019 at 14:11)</a>:</h4>
+<p>If you <code>#print my_lemma</code> afterward, the recursive call doesn't appear. <code>have x : t := e, v</code> is more or less sugar for <code>(λ x : t, v) e</code> in term mode, and I guess it's the same in tactic mode. It's probably getting beta reduced away before the well-foundedness check happens.</p>
+
+<a name="170989390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Misbehavior%20of%20the%20termination%20checker%3F/near/170989390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31790Misbehavioroftheterminationchecker.html#170989390">Rob Lewis (Jul 16 2019 at 14:12)</a>:</h4>
+<p>Strange behavior though.</p>
+
+<a name="170989571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Misbehavior%20of%20the%20termination%20checker%3F/near/170989571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31790Misbehavioroftheterminationchecker.html#170989571">Chris Hughes (Jul 16 2019 at 14:14)</a>:</h4>
+<p>I think it's because in tactic mode, a <code>have</code> doesn't appear in the proof term unless it's used.</p>
+<p>This thing fails</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">lemma</span> <span class="n">my_lemma</span> <span class="o">:</span>
+  <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">x</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="n">x_eq_y</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">let</span> <span class="n">z</span> <span class="o">:=</span> <span class="mi">200</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">z_eq_z</span> <span class="o">:</span> <span class="n">z</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">z</span> <span class="err">^</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">absurd</span> <span class="o">(</span><span class="n">my_lemma</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">z_eq_z</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">z</span><span class="o">]</span><span class="bp">;</span> <span class="n">norm_num</span><span class="o">)</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="170989576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Misbehavior%20of%20the%20termination%20checker%3F/near/170989576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/31790Misbehavioroftheterminationchecker.html#170989576">Rob Lewis (Jul 16 2019 at 14:14)</a>:</h4>
+<p>Or, this is another instance of the badly behaving tactic <code>let</code> you showed me yesterday that wipes the <code>have</code>s from the context. I'm not sure if that was explainable in the same way.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
