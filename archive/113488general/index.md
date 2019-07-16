@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [emacs users](44956emacsusers.html) (7 messages, latest: Jul 16 2019 at 10:47)
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (6 messages, latest: Jul 16 2019 at 11:59)
+
+* [emacs users](44956emacsusers.html) (13 messages, latest: Jul 16 2019 at 11:55)
 
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (76 messages, latest: Jul 16 2019 at 07:01)
-
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (4 messages, latest: Jul 16 2019 at 05:38)
 
 * [transport and parametricity](74751transportandparametricity.html) (152 messages, latest: Jul 16 2019 at 03:21)
 
