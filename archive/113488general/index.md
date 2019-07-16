@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [emacs users](44956emacsusers.html) (7 messages, latest: Jul 16 2019 at 10:47)
+
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (76 messages, latest: Jul 16 2019 at 07:01)
@@ -246,8 +248,6 @@ permalink: archive/113488general/index.html
 * [finsupp scalar diamond](88248finsuppscalardiamond.html) (1 message, latest: Jun 10 2019 at 11:12)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
-
-* [emacs users](44956emacsusers.html) (6 messages, latest: Jun 09 2019 at 06:42)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
 
