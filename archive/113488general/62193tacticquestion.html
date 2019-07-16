@@ -253,6 +253,22 @@ permalink: archive/113488general/62193tacticquestion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171020547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171020547">Mario Carneiro (Jul 16 2019 at 19:44)</a>:</h4>
 <p>It maintains the wrong invariant. The actual red black invariant is not defined; instead it does the lazy thing and says "whatever you can get to by applying insert to empty" which is obviously sufficient to get insert and empty but basically nothing else</p>
 
+<a name="171023629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171023629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171023629">Wojciech Nawrocki (Jul 16 2019 at 20:21)</a>:</h4>
+<p>So it is not defined, but are you also saying that "being a red-black tree" is actually dynamically broken, e.g. a <code>red_node</code> appears directly as the child of a <code>red_node</code> or some such? Or just that it doesn't maintain a proof of the right "being red-black" proposition (since <code>well_formed</code> is defined as "either a leaf or the result of <code>insert</code> on a well-formed tree" rather than "meets all the rbtree requirements")?</p>
+
+<a name="171026496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171026496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171026496">Mario Carneiro (Jul 16 2019 at 20:54)</a>:</h4>
+<p>The red-black property is maintained, but this is not proven</p>
+
+<a name="171026562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171026562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171026562">Mario Carneiro (Jul 16 2019 at 20:55)</a>:</h4>
+<p>The current definition of <code>well_formed</code> is not equivalent to the red black property, but implies it</p>
+
+<a name="171026658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactic%20question/near/171026658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/62193tacticquestion.html#171026658">Mario Carneiro (Jul 16 2019 at 20:56)</a>:</h4>
+<p>But because of the over-strict well formedness predicate, you can't define anything on these red black trees other than insert and empty</p>
+
 
 {% endraw %}
 
