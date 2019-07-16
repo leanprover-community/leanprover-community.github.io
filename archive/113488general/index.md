@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (8 messages, latest: Jul 16 2019 at 12:56)
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (13 messages, latest: Jul 16 2019 at 13:57)
 
-* [emacs users](44956emacsusers.html) (13 messages, latest: Jul 16 2019 at 11:55)
+* [emacs users](44956emacsusers.html) (14 messages, latest: Jul 16 2019 at 13:35)
 
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 

@@ -57,6 +57,55 @@ trouble-shoot this situation?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20use%20lean%20via%20emacs/near/170982615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98103tryingtouseleanviaemacs.html#170982615">Kevin Buzzard (Jul 16 2019 at 12:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="228155">@jeremy</span> is there a reason that you are persevering with emacs rather than using VS Code? VS Code has far better support on this chat.</p>
 
+<a name="170983107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20use%20lean%20via%20emacs/near/170983107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98103tryingtouseleanviaemacs.html#170983107">Jesse Michael Han (Jul 16 2019 at 13:01)</a>:</h4>
+<blockquote>
+<p>there's some line you put in your init file to ensure melpa is queried for packages</p>
+</blockquote>
+<p>you should ensure that something like following is loaded in your init file:</p>
+<div class="codehilite"><pre><span></span><span class="p">(</span><span class="nb">require</span> <span class="ss">&#39;package</span><span class="p">)</span>
+<span class="p">(</span><span class="nv">add-to-list</span> <span class="ss">&#39;package-archives</span>
+         <span class="o">&#39;</span><span class="p">(</span><span class="s">&quot;melpa&quot;</span> <span class="o">.</span> <span class="s">&quot;http://melpa.org/packages/&quot;</span><span class="p">))</span>
+</pre></div>
+
+
+<p>melpa is queried separately from elpa</p>
+
+<a name="170986022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20use%20lean%20via%20emacs/near/170986022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98103tryingtouseleanviaemacs.html#170986022">Yury G. Kudryashov (Jul 16 2019 at 13:35)</a>:</h4>
+<p>I have</p>
+<div class="codehilite"><pre><span></span>(require &#39;package)
+(add-to-list &#39;package-archives
+             &#39;(&quot;melpa&quot; . &quot;https://melpa.org/packages/&quot;) t)
+(package-initialize)
+</pre></div>
+
+<a name="170987562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20use%20lean%20via%20emacs/near/170987562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98103tryingtouseleanviaemacs.html#170987562">jeremy (Jul 16 2019 at 13:51)</a>:</h4>
+<p>Hi,</p>
+<p>I created the file .emacs.d/init.el as indicated at<br>
+<a href="https://github.com/leanprover/lean-mode" target="_blank" title="https://github.com/leanprover/lean-mode">https://github.com/leanprover/lean-mode</a><br>
+and it's as follows</p>
+<p>[jeremy@hp2017 ~]$ cat .emacs.d/init.el </p>
+<p>;; see <a href="https://github.com/leanprover/lean-mode" target="_blank" title="https://github.com/leanprover/lean-mode">https://github.com/leanprover/lean-mode</a><br>
+(require 'package) <br>
+(add-to-list 'package-archives '("melpa" . "<a href="http://melpa.org/packages/" target="_blank" title="http://melpa.org/packages/">http://melpa.org/packages/</a>"))<br>
+(package-initialize) </p>
+<p>;; Trigger completion on Shift-Space<br>
+(global-set-key (kbd "S-SPC") #'company-complete)</p>
+<p>I tried to use emacs because I've some slight familiarity with it (I had to use it for a bit around 30 years ago), whereas I've never used VSCode.  Also it's installed on the system I use at work.</p>
+<p>Cheers,</p>
+<p>Jeremy</p>
+
+<a name="170988095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20use%20lean%20via%20emacs/near/170988095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98103tryingtouseleanviaemacs.html#170988095">Yury G. Kudryashov (Jul 16 2019 at 13:57)</a>:</h4>
+<p>Try <code>C-h v</code> <code>package-archives</code>. Does it show melpa?<br>
+BTW, did you run "Refresh package list" in <code>list-packages</code>?</p>
+
+<a name="170988111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/trying%20to%20use%20lean%20via%20emacs/near/170988111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98103tryingtouseleanviaemacs.html#170988111">Jesse Michael Han (Jul 16 2019 at 13:57)</a>:</h4>
+<p>that should work to install <code>lean-mode</code>. did you load the new init file?</p>
+
 
 {% endraw %}
 
