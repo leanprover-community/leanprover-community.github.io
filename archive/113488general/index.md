@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (6 messages, latest: Jul 16 2019 at 11:59)
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (8 messages, latest: Jul 16 2019 at 12:56)
 
 * [emacs users](44956emacsusers.html) (13 messages, latest: Jul 16 2019 at 11:55)
 
