@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [emacs users](44956emacsusers.html) (16 messages, latest: Jul 16 2019 at 16:10)
+
+* [choose crashes Lean](49867choosecrashesLean.html) (12 messages, latest: Jul 16 2019 at 16:01)
+
 * [tactic question](62193tacticquestion.html) (49 messages, latest: Jul 16 2019 at 15:55)
 
-* [emacs users](44956emacsusers.html) (15 messages, latest: Jul 16 2019 at 15:54)
-
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (22 messages, latest: Jul 16 2019 at 15:37)
-
-* [choose crashes Lean](49867choosecrashesLean.html) (10 messages, latest: Jul 16 2019 at 15:16)
 
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 
