@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactic question](62193tacticquestion.html) (60 messages, latest: Jul 16 2019 at 20:56)
+* [tactic question](62193tacticquestion.html) (61 messages, latest: Jul 17 2019 at 09:15)
 
 * [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
 

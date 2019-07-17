@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [lack of information in `match`](95163lackofinformationinmatch.html) (12 messages, latest: Jul 17 2019 at 09:59)
+
 * [functional analysis](41368functionalanalysis.html) (11 messages, latest: Jul 16 2019 at 20:02)
 
 * [Misbehavior of the termination checker?](31790Misbehavioroftheterminationchecker.html) (6 messages, latest: Jul 16 2019 at 15:02)
-
-* [lack of information in `match`](95163lackofinformationinmatch.html) (11 messages, latest: Jul 16 2019 at 08:45)
 
 * ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (9 messages, latest: Jul 13 2019 at 20:33)
 
