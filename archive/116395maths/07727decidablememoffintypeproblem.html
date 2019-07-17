@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/07727decidablememoffintypeproblem.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html">`decidable_mem_of_fintype` problem</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171067299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171067299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171067299">Kevin Buzzard (Jul 17 2019 at 10:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">basic</span> <span class="c1">-- for classical.decidable_linear_order</span>
+
+<span class="c1">-- the below import triggers a max class instance error below</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">finite</span>
+<span class="c1">-- This is because of line 78 of data.set.finite:</span>
+
+<span class="c1">-- instance decidable_mem_of_fintype [decidable_eq α] (s : set α) [fintype s] (a) : decidable (a ∈ s) :=</span>
+<span class="c1">-- decidable_of_iff _ mem_to_finset</span>
+
+<span class="c1">-- #print set.decidable_mem_of_fintype</span>
+
+<span class="c1">-- here is an attribute I want in my actual file</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+
+<span class="c1">-- and here is another one;</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">0</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">decidable_linear_order</span>
+<span class="c1">-- commenting it out fixes the error, but I</span>
+<span class="c1">-- would like the instance in my actual file</span>
+<span class="c1">-- (I&#39;m not fussed about what priority it has though)</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">T</span> <span class="o">:</span> <span class="n">set</span> <span class="n">R</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">T</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">maximum class-instance resolution depth has been reached</span>
+<span class="cm">...</span>
+<span class="cm">⊢ decidable (x ∈ T)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>I am refactoring the perfectoid project and ran into this issue. Is there a way we can change the definition of <code>decidable_mem_of_fintype</code> or other priorities to fix this? I don't quite understand what is going on here but I'm sure there are people here who will.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

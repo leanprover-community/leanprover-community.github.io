@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [lack of information in `match`](95163lackofinformationinmatch.html) (12 messages, latest: Jul 17 2019 at 09:59)
+* [lack of information in `match`](95163lackofinformationinmatch.html) (13 messages, latest: Jul 17 2019 at 10:15)
 
 * [functional analysis](41368functionalanalysis.html) (11 messages, latest: Jul 16 2019 at 20:02)
 

@@ -99,6 +99,12 @@ for the match syntax, you need some delimiter between the arguments to the match
 check failed, application type mismatch (use 'set_option trace.check true' for additional details)" </p>
 <p>So after seeing a trace from 'set_option trace.check true' I see that the problem comes from <code>y</code>so I fix it in <code>foo2</code>. However, it doesn't make any sense why I must pattern matching in <code>y</code> as it is not used in <code>rfl</code> at all. Anyone, please explain to me, please.</p>
 
+<a name="171064713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171064713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171064713">Gun Pinyo (Jul 17 2019 at 10:15)</a>:</h4>
+<p>Another thing that I notice is that, the old <code>y</code> in <code>foo2</code> outside <code>match</code> doesn't go away, I know this from the context of an error message when <code>rfl</code> is replaced by <code>_</code>, there are two <code>y</code> in the context. Well, this makes sense if <code>match</code> is just a syntactic sugar of the original pattern matching function.</p>
+<p>My concern is that, should I really use the same name for both <code>y</code>? I don't want to use the different name since it pollutes the context, but if I use the same name, I might run into another cryptic error message where  I have another variable that depends on the original <code>y</code> and I think that the variable depends on the new <code>y</code>. Moreover, I don't have evidence that the old and new <code>y</code> are equal (the same problem of my very first question). </p>
+<p>I try to think that is there a way <em>not</em> to introduce a new <code>y</code>? I try to use an inaccessible term by changing the inner <code>y</code> to be <code>.(y)</code>but I have an error message saying that "ill-formed match/equation expression". Doesn't an inaccessible term work in match expression?</p>
+
 
 {% endraw %}
 

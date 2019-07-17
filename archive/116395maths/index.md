@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`decidable_mem_of_fintype` problem](07727decidablememoffintypeproblem.html) (1 message, latest: Jul 17 2019 at 10:59)
+
 * [\[reducible\] and \[irreducible\]](35357reducibleandirreducible.html) (7 messages, latest: Jul 16 2019 at 18:00)
 
 * [is_mul_hom and is_group_hom](77515ismulhomandisgrouphom.html) (61 messages, latest: Jul 15 2019 at 18:46)
