@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (176 messages, latest: Jul 17 2019 at 11:34)
+
 * [tactic question](62193tacticquestion.html) (61 messages, latest: Jul 17 2019 at 09:15)
 
 * [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
@@ -122,8 +124,6 @@ permalink: archive/113488general/index.html
 * [monoid.mul appearing instead of has_mul.mul](00892monoidmulappearinginsteadofhasmulmul.html) (2 messages, latest: Jul 02 2019 at 11:03)
 
 * [100 theorems](37529100theorems.html) (93 messages, latest: Jul 01 2019 at 20:48)
-
-* [Lean in the wild](43625Leaninthewild.html) (175 messages, latest: Jul 01 2019 at 20:38)
 
 * [fin.find](52493finfind.html) (13 messages, latest: Jul 01 2019 at 12:32)
 

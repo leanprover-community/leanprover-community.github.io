@@ -49,6 +49,113 @@ permalink: archive/116395maths/07727decidablememoffintypeproblem.html
 
 <p>I am refactoring the perfectoid project and ran into this issue. Is there a way we can change the definition of <code>decidable_mem_of_fintype</code> or other priorities to fix this? I don't quite understand what is going on here but I'm sure there are people here who will.</p>
 
+<a name="171067970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171067970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171067970">Kevin Buzzard (Jul 17 2019 at 11:09)</a>:</h4>
+<p><code>#print set.decidable_mem_of_fintype</code> gives</p>
+<div class="codehilite"><pre><span></span>@[instance]
+protected def set.decidable_mem_of_fintype : Π {α : Type u} [_inst_1 : decidable_eq α] (s : set α) [_inst_2 : fintype ↥s] (a : α), decidable (a ∈ s) :=
+</pre></div>
+
+<a name="171068025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068025">Kevin Buzzard (Jul 17 2019 at 11:10)</a>:</h4>
+<p>(so default priority)</p>
+
+<a name="171068160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068160">Chris Hughes (Jul 17 2019 at 11:13)</a>:</h4>
+<p>Is there a cycle,? it searches for a<code> fintype</code> instance on <code>T</code>, which if it uses <code>subtype.fintype</code>, means it needs a <code>decidable_pred</code> instance on <code>T</code>, which means it looks for a <code>fintype</code> instance and so on.</p>
+
+<a name="171068357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068357">Kenny Lau (Jul 17 2019 at 11:16)</a>:</h4>
+<p><code>classical.decidable_linear_order</code> is causing a loop</p>
+
+<a name="171068465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068465">Kenny Lau (Jul 17 2019 at 11:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> there's a reason why <code>classical.decidable_linear_order</code> isn't an instance, I guess</p>
+
+<a name="171068473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068473">Kenny Lau (Jul 17 2019 at 11:18)</a>:</h4>
+<p>I don't see why you would need it to be an instance</p>
+
+<a name="171068508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068508">Kevin Buzzard (Jul 17 2019 at 11:19)</a>:</h4>
+<p>I'll try removing it. Thanks.</p>
+
+<a name="171068718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068718">Kevin Buzzard (Jul 17 2019 at 11:23)</a>:</h4>
+<p>Now I have a gazillion errors of the form</p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+M : Type u,
+_inst_1 : linear_ordered_cancel_comm_monoid_with_zero M,
+R : Type u₀,
+_inst_5 : ring R,
+v : valuation R M,
+x y : R
+⊢ decidable_linear_order M
+</pre></div>
+
+<a name="171068842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068842">Kenny Lau (Jul 17 2019 at 11:25)</a>:</h4>
+<p>hmm, this is not good</p>
+
+<a name="171068947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171068947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171068947">Kevin Buzzard (Jul 17 2019 at 11:26)</a>:</h4>
+<p>I would like to solve them by saying "stop hassling me about decidability please Lean". I have M, M1, M2, M3 and others as variables, plus plenty of theorems that explicitly mention <code>linear_ordered_cancel_comm_monoid_with_zero</code> stuff as inputs</p>
+
+<a name="171069087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069087">Kevin Buzzard (Jul 17 2019 at 11:28)</a>:</h4>
+<p>Is this like <code>discrete_field</code> ? Do you think I should put decidability as a structure field for <code>linear_ordered_cancel_comm_monoid_with_zero</code>? Maybe I should make an extension class <code>decidable_linear_ordered_cancel_comm_monoid_with_zero</code></p>
+
+<a name="171069097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069097">Kevin Buzzard (Jul 17 2019 at 11:28)</a>:</h4>
+<p>What will happen when my class name gets to over 100 characters?</p>
+
+<a name="171069102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069102">Kenny Lau (Jul 17 2019 at 11:29)</a>:</h4>
+<p>what if you had an instance that makes <code>decidable_linear_order</code> from <code>linear_ordered_cancel_comm_monoid_with_zero</code>?</p>
+
+<a name="171069115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069115">Kevin Buzzard (Jul 17 2019 at 11:29)</a>:</h4>
+<p>That's an interesting idea!</p>
+
+<a name="171069118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069118">Kenny Lau (Jul 17 2019 at 11:29)</a>:</h4>
+<blockquote>
+<p>What will happen when my class name gets to over 100 characters?</p>
+</blockquote>
+<p>a black hole will come and consume the universe</p>
+
+<a name="171069128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069128">Kevin Buzzard (Jul 17 2019 at 11:29)</a>:</h4>
+<p>I want to called them Massot monoids</p>
+
+<a name="171069145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069145">Kevin Buzzard (Jul 17 2019 at 11:29)</a>:</h4>
+<p>Patrick didn't have much to do with them, but it just sounds good</p>
+
+<a name="171069382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069382">Patrick Massot (Jul 17 2019 at 11:33)</a>:</h4>
+<p>Hey, I was already talking of defining these monoids months before you started to think about this (but I still don't want to call them Massot monoids).</p>
+
+<a name="171069442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069442">Kevin Buzzard (Jul 17 2019 at 11:34)</a>:</h4>
+<p>aah but now we have all the evidence we need to call them Massot monoids!</p>
+
+<a name="171069502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069502">Kevin Buzzard (Jul 17 2019 at 11:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> there is some moral here. You wrote that initial <code>valuation</code> code and your valuations took values in {0} union Gamma with Gamma a totally ordered group. In retrospect this design decision created issues further down the line, because the non-negative reals in Lean are not literally of this form.</p>
+
+<a name="171069557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069557">Kenny Lau (Jul 17 2019 at 11:36)</a>:</h4>
+<p>so we should stricklandize instead?</p>
+
+<a name="171069597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171069597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171069597">Marc Huisinga (Jul 17 2019 at 11:37)</a>:</h4>
+<p>at this rate lean will soon need its own vocabulary.md</p>
+
+<a name="171070034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%60decidable_mem_of_fintype%60%20problem/near/171070034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/07727decidablememoffintypeproblem.html#171070034">Kevin Buzzard (Jul 17 2019 at 11:43)</a>:</h4>
+<p>I guess that's what I'm doing. It's a major refactoring project. We want valuations taking values in what could mathematically be described as an arbitrary submonoid of {0} union Gamma which contains 0. A monoid embeds in a group iff it's cancellative (I hope) so really we want {0} union (cancellative monoid), however making such a structure using <code>with_zero</code> instantly means that we cannot plug in stuff like the non-negative reals without doing a lot of internal plumbing. So I have axiomatised what we need, so yes, this seems to be another example of a universal object, although the 0 and 1 and &lt; and * mean that it's not a predicate.</p>
+
 
 {% endraw %}
 
