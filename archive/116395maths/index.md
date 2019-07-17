@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [`decidable_mem_of_fintype` problem](07727decidablememoffintypeproblem.html) (29 messages, latest: Jul 17 2019 at 12:06)
+* [`decidable_mem_of_fintype` problem](07727decidablememoffintypeproblem.html) (30 messages, latest: Jul 17 2019 at 14:06)
 
 * [\[reducible\] and \[irreducible\]](35357reducibleandirreducible.html) (7 messages, latest: Jul 16 2019 at 18:00)
 
