@@ -105,6 +105,97 @@ check failed, application type mismatch (use 'set_option trace.check true' for a
 <p>My concern is that, should I really use the same name for both <code>y</code>? I don't want to use the different name since it pollutes the context, but if I use the same name, I might run into another cryptic error message where  I have another variable that depends on the original <code>y</code> and I think that the variable depends on the new <code>y</code>. Moreover, I don't have evidence that the old and new <code>y</code> are equal (the same problem of my very first question). </p>
 <p>I try to think that is there a way <em>not</em> to introduce a new <code>y</code>? I try to use an inaccessible term by changing the inner <code>y</code> to be <code>.(y)</code>but I have an error message saying that "ill-formed match/equation expression". Doesn't an inaccessible term work in match expression?</p>
 
+<a name="171105484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105484">Jesse Michael Han (Jul 17 2019 at 18:36)</a>:</h4>
+<p>Lean accepts <code>rfl</code> as a proof term for <code>foo1</code> (for me).</p>
+<p>You can replace the <code>y</code> in the <code>match</code>-expression in <code>foo2</code> with placeholder (<code>_</code>) to indicate that it doesn't really matter.</p>
+<p>There's a tactic for clearing away assumptions whose names begin with underscores.</p>
+
+<a name="171105655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105655">Kevin Buzzard (Jul 17 2019 at 18:38)</a>:</h4>
+<p>I guess the issue isn't proving <code>foo1</code>, it's why the match doesn't work. One could imagine a more complex situation where you need the case split</p>
+
+<a name="171105681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105681">Mario Carneiro (Jul 17 2019 at 18:39)</a>:</h4>
+<p>You can't <code>match x</code> in the first place there</p>
+
+<a name="171105700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105700">Kevin Buzzard (Jul 17 2019 at 18:39)</a>:</h4>
+<p>Why not?</p>
+
+<a name="171105810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105810">Kevin Buzzard (Jul 17 2019 at 18:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+  <span class="k">match</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="k">with</span>
+  <span class="bp">|</span> <span class="n">unit</span><span class="bp">.</span><span class="n">star</span> <span class="o">:=</span> <span class="o">(</span><span class="n">rfl</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span>
+  <span class="kn">end</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid match/convoy expression, user did not provide type for the expression, lean tried to infer one using expected type information, but result is not type correct</span>
+<span class="cm">nested exception message:</span>
+<span class="cm">check failed, application type mismatch (use &#39;set_option trace.check true&#39; for additional details)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="171105831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105831">Kevin Buzzard (Jul 17 2019 at 18:40)</a>:</h4>
+<p>dammit Lean I provided types for all the expressions</p>
+
+<a name="171105866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105866">Mario Carneiro (Jul 17 2019 at 18:41)</a>:</h4>
+<p>Think about this from first principles. The recursor says that if you want to prove <code>forall x : unit, C x</code> it suffices to prove it for <code>C star</code>. <code>match</code> is reverting <code>x</code>, then applying the recursor, but it's not possible to revert <em>only</em> <code>x</code> because <code>y</code> depends on <code>x</code></p>
+
+<a name="171105928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105928">Kevin Buzzard (Jul 17 2019 at 18:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I matched!</p>
+
+<a name="171105999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171105999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171105999">Mario Carneiro (Jul 17 2019 at 18:42)</a>:</h4>
+<p>when lean says "user did not provide type for the expression" it means you didn't write <code>match x : forall x : unit, y = y with ...</code></p>
+
+<a name="171106007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106007">Kevin Buzzard (Jul 17 2019 at 18:42)</a>:</h4>
+<p>Aah, I see your point now Mario. So <code>match</code> reverts <em>only</em> the stuff being matched, and then attempts to apply the recursor.</p>
+
+<a name="171106087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106087">Mario Carneiro (Jul 17 2019 at 18:43)</a>:</h4>
+<p><code>cases</code> will automatically revert and re-intro all dependent hypotheses like <code>y</code> here, so it has the same effect as putting <code>y</code> in the match and also in the pattern</p>
+
+<a name="171106164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106164">Mario Carneiro (Jul 17 2019 at 18:44)</a>:</h4>
+<p>It also removes the outer <code>y</code> if it can so you don't get confused</p>
+
+<a name="171106186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106186">Kevin Buzzard (Jul 17 2019 at 18:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo1</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">unit</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">punit</span><span class="bp">.</span><span class="n">rec</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="c1">-- refl will not work here</span>
+  <span class="n">intros</span><span class="o">,</span> <span class="n">refl</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="171106540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106540">Kevin Buzzard (Jul 17 2019 at 18:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="144193">@Gun Pinyo</span> the moral is that you shouldn't be matching terms when other terms depend on them. You have to match all the terms depending on them too.</p>
+
+<a name="171106594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106594">Mario Carneiro (Jul 17 2019 at 18:47)</a>:</h4>
+<p>If the type of a variable has to change, then it can't be the same variable</p>
+
+<a name="171106612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/lack%20of%20information%20in%20%60match%60/near/171106612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95163lackofinformationinmatch.html#171106612">Mario Carneiro (Jul 17 2019 at 18:47)</a>:</h4>
+<p>the old <code>y</code> had type <code>A x</code>, the new one has type <code>A star</code></p>
+
 
 {% endraw %}
 
