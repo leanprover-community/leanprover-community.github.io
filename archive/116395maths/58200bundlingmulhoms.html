@@ -386,6 +386,146 @@ permalink: archive/116395maths/58200bundlingmulhoms.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171164339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171164339">Chris Hughes (Jul 18 2019 at 12:27)</a>:</h4>
 <p>That way, simp lemmas you prove about <code>monoid_hom</code>s will work with group homs.</p>
 
+<a name="171195355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171195355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171195355">Kevin Buzzard (Jul 18 2019 at 18:15)</a>:</h4>
+<p>And should this be reducible too? [sorry for prime on mul_equiv, mathlib has a slightly more unbundled one]</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">monoid_equiv</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span> <span class="n">mul_equiv&#39;</span> <span class="n">M</span> <span class="n">N</span>
+</pre></div>
+
+<a name="171195654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171195654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171195654">Johan Commelin (Jul 18 2019 at 18:18)</a>:</h4>
+<p>Is it clear that making some of these definitions does not create leakage?</p>
+
+<a name="171195706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171195706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171195706">Kevin Buzzard (Jul 18 2019 at 18:19)</a>:</h4>
+<p>I am just experimenting. I will certainly report back.</p>
+
+<a name="171195897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171195897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171195897">Johan Commelin (Jul 18 2019 at 18:21)</a>:</h4>
+<p>Also, I think Lean is quite bad at dealing with situations like this:<br>
+I have <code>M1 M2 : Type</code> and <code>[monoid M1] [monoid M2]</code><br>
+I also have <code>f : monoid_hom M1 M2</code>.<br>
+Then, for some reason, it happens that I can actually prove that <code>M1</code> and <code>M2</code> are groups.<br>
+Now I need to work to turn <code>f</code> into a group hom. And if I don't do that, certain lemma's can't be applied, and <code>simp</code> gets stuck etc...</p>
+
+<a name="171195995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171195995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171195995">Kevin Buzzard (Jul 18 2019 at 18:22)</a>:</h4>
+<p>This won't happen with Chris' suggesting of defining <code>group_hom</code> to be equal to <code>monoid_hom</code></p>
+
+<a name="171196002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196002">Johan Commelin (Jul 18 2019 at 18:22)</a>:</h4>
+<p>I know it is not very beginner-friendly. But I'm becoming more and more of the opinion that we shouldn't have these "shadowing" classes. Like <code>vector_space</code> (and even <code>module</code>). And so, maybe we should also just get rid of <code>group_hom</code>s</p>
+
+<a name="171196013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196013">Johan Commelin (Jul 18 2019 at 18:22)</a>:</h4>
+<p>Nope, that's not true.</p>
+
+<a name="171196022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196022">Kevin Buzzard (Jul 18 2019 at 18:22)</a>:</h4>
+<p>and making it reducible</p>
+
+<a name="171196045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196045">Johan Commelin (Jul 18 2019 at 18:22)</a>:</h4>
+<p>If I have a module over a field, I can't apply linear algebra results.</p>
+
+<a name="171196071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196071">Johan Commelin (Jul 18 2019 at 18:23)</a>:</h4>
+<p>Even if <code>vector_space</code> is reducibly defined to be a module.</p>
+
+<a name="171196081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196081">Johan Commelin (Jul 18 2019 at 18:23)</a>:</h4>
+<p>This has bitten me several times.</p>
+
+<a name="171196137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196137">Kevin Buzzard (Jul 18 2019 at 18:24)</a>:</h4>
+<p>We need some way of being able to talk about group homomorphisms. What is your suggestion? Unbundled homs? I thought this had problems too?</p>
+
+<a name="171196206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196206">Johan Commelin (Jul 18 2019 at 18:24)</a>:</h4>
+<p>No, it's somewhat orthogonal to bundling, but it's very much related to refactoring.</p>
+
+<a name="171196222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196222">Johan Commelin (Jul 18 2019 at 18:24)</a>:</h4>
+<p>I want to propose/discuss just ditching <code>group_hom</code> altogether.</p>
+
+<a name="171196270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196270">Johan Commelin (Jul 18 2019 at 18:25)</a>:</h4>
+<p>Just write <code>monoid_hom.mk'</code> for the case that you construct monoid homs between groups.</p>
+
+<a name="171196299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196299">Johan Commelin (Jul 18 2019 at 18:25)</a>:</h4>
+<p>It doesn't look nice... but it is more flexible.</p>
+
+<a name="171196390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196390">Kevin Buzzard (Jul 18 2019 at 18:26)</a>:</h4>
+<blockquote>
+<p>This has bitten me several times.</p>
+</blockquote>
+<p>If you try to fix it by making the actual object you want from the object you have (e.g. the vector space over the field from the module), then you then have two objects which mathematicians find completely indistinguishable, but for which Lean finds it hard to port results about one object to results from the other. This sounds like a good place to try out a transfer tactic, no?</p>
+
+<a name="171196448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196448">Johan Commelin (Jul 18 2019 at 18:27)</a>:</h4>
+<p>Meh... I would rather let the problem go away.</p>
+
+<a name="171196468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196468">Johan Commelin (Jul 18 2019 at 18:27)</a>:</h4>
+<p>Maybe <code>group_hom</code> can be an <code>abbreviation</code>?? I still don't know what this does exactly.</p>
+
+<a name="171196531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196531">Johan Commelin (Jul 18 2019 at 18:28)</a>:</h4>
+<p>But it seems to be something like <code>hyper-super-duper-reducible</code>.</p>
+
+<a name="171196542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196542">Chris Hughes (Jul 18 2019 at 18:28)</a>:</h4>
+<blockquote>
+<p>And should this be reducible too? [sorry for prime on mul_equiv, mathlib has a slightly more unbundled one]</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">monoid_equiv</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span> <span class="n">mul_equiv&#39;</span> <span class="n">M</span> <span class="n">N</span>
+</pre></div>
+
+
+</blockquote>
+<p>That shouldn't exist</p>
+
+<a name="171196594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171196594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171196594">Johan Commelin (Jul 18 2019 at 18:29)</a>:</h4>
+<p>For the same reason that <code>vector_space</code> shouldn't exist?</p>
+
+<a name="171197093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171197093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171197093">Kevin Buzzard (Jul 18 2019 at 18:34)</a>:</h4>
+<blockquote>
+<p>I want to propose/discuss just ditching <code>group_hom</code> altogether.</p>
+</blockquote>
+<p>If we ditch <code>group_hom</code> altogether, what will be the canonical way of representing the concept of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo>:</mo><mi>G</mi><mo>→</mo><mi>H</mi></mrow><annotation encoding="application/x-tex">f:G\to H</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">:</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">G</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mi>y</mi><mo stretchy="false">)</mo><mo>=</mo><mi>f</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mi>f</mi><mo stretchy="false">(</mo><mi>y</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">f(xy)=f(x)f(y)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mord mathdefault" style="margin-right:0.10764em;">f</span><span class="mopen">(</span><span class="mord mathdefault" style="margin-right:0.03588em;">y</span><span class="mclose">)</span></span></span></span> with <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>G</mi></mrow><annotation encoding="application/x-tex">G</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault">G</span></span></span></span>, <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>H</mi></mrow><annotation encoding="application/x-tex">H</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> groups?</p>
+
+<a name="171197171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171197171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171197171">Kevin Buzzard (Jul 18 2019 at 18:35)</a>:</h4>
+<blockquote>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">monoid_equiv</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span> <span class="n">mul_equiv&#39;</span> <span class="n">M</span> <span class="n">N</span>
+</pre></div>
+
+
+</blockquote>
+<p>That shouldn't exist</p>
+</blockquote>
+<p>If that doesn't exist <em>at all</em>, then what happens to the poor newbie who shows up with their two monoids and wants to know where the equiv is?</p>
+
+<a name="171197298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171197298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171197298">Johan Commelin (Jul 18 2019 at 18:37)</a>:</h4>
+<p>We tell them to use <code>M1 =* M2</code>.</p>
+
+<a name="171197330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171197330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171197330">Johan Commelin (Jul 18 2019 at 18:37)</a>:</h4>
+<p>If we ditch <code>group_hom</code> you just write <code>f : G →m H</code></p>
+
+<a name="171197341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171197341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171197341">Johan Commelin (Jul 18 2019 at 18:37)</a>:</h4>
+<p>Or whatever the notation for monoid homs will be.</p>
+
+<a name="171197626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171197626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171197626">Chris Hughes (Jul 18 2019 at 18:41)</a>:</h4>
+<p>I started on <code>-&gt;1*</code>, but I propose <code>-&gt;*</code>, and screw mul homs notation.</p>
+
 
 {% endraw %}
 
