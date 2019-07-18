@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean Together 2020](04583LeanTogether2020.html) (6 messages, latest: Jul 18 2019 at 13:11)
+
 * [well foundness in the kernel](39459wellfoundnessinthekernel.html) (1 message, latest: Jul 18 2019 at 12:52)
 
 * [tactic question](62193tacticquestion.html) (62 messages, latest: Jul 18 2019 at 12:30)
@@ -894,8 +896,6 @@ permalink: archive/113488general/index.html
 * [popular tactics](67631populartactics.html) (9 messages, latest: Mar 01 2019 at 22:25)
 
 * [normalise subtype.val and coe](33650normalisesubtypevalandcoe.html) (3 messages, latest: Mar 01 2019 at 09:55)
-
-* [Lean Together 2020](04583LeanTogether2020.html) (5 messages, latest: Feb 28 2019 at 21:05)
 
 * [a wild `nat.add` appears](31896awildnataddappears.html) (7 messages, latest: Feb 28 2019 at 20:42)
 
