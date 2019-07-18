@@ -1,0 +1,146 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/58200bundlingmulhoms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html">bundling mul_homs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171137073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137073">Kevin Buzzard (Jul 18 2019 at 04:21)</a>:</h4>
+<p>Mathlib has the unbundled <code>is_mul_hom</code> class (a Prop), and then it has <code>mul_equiv</code> which references this unbundled <code>is_mul_hom</code>. If we were to bundle <code>mul_hom</code>s, how would we define <code>mul_equiv</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="o">[</span><span class="n">has_mul</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">P</span><span class="o">]</span>
+
+<span class="c">/-</span><span class="cm"> Mathlib:</span>
+
+<span class="cm">class is_mul_hom {α β : Type*} [has_mul α] [has_mul β] (f : α → β) : Prop :=</span>
+<span class="cm">(map_mul : ∀ x y, f (x * y) = f x * f y)</span>
+
+<span class="cm">structure mul_equiv (α β : Type*) [has_mul α] [has_mul β] extends α ≃ β :=</span>
+<span class="cm">(hom : is_mul_hom to_fun)</span>
+
+<span class="cm">notation ≃* for mul_equiv, proved to be reflexive, symmetric and transitive</span>
+
+<span class="cm">-- not yet found a use for this instance. Should `is_mul_hom` be a structure?</span>
+<span class="cm">instance (h : α ≃* β) : is_mul_hom h.to_equiv := h.hom</span>
+
+<span class="cm">-/</span>
+
+<span class="kn">namespace</span> <span class="n">mul</span>
+
+<span class="c">/-</span><span class="cm">- bundled homs FTW -/</span>
+<span class="kn">structure</span> <span class="n">hom</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- but now if I delete `is_mul_hom`, how do I define `mul_equiv`?</span>
+<span class="c1">-- notation for homs</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">→*</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">hom</span>
+</pre></div>
+
+<a name="171137127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137127">Mario Carneiro (Jul 18 2019 at 04:22)</a>:</h4>
+<p><code>mul_equiv A B extends equiv A B, mul_hom A B</code></p>
+
+<a name="171137144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137144">Kevin Buzzard (Jul 18 2019 at 04:23)</a>:</h4>
+<p>Should I be using old or new structures for these things?</p>
+
+<a name="171137148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137148">Mario Carneiro (Jul 18 2019 at 04:23)</a>:</h4>
+<p>old structures FTW</p>
+
+<a name="171137150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137150">Kevin Buzzard (Jul 18 2019 at 04:23)</a>:</h4>
+<p>Is what you call <code>mul_hom</code> what I called <code>mul.hom</code>?</p>
+
+<a name="171137154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137154">Kevin Buzzard (Jul 18 2019 at 04:23)</a>:</h4>
+<p>Did I name it wrong?</p>
+
+<a name="171137158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137158">Mario Carneiro (Jul 18 2019 at 04:23)</a>:</h4>
+<p>I don't think so</p>
+
+<a name="171137201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137201">Mario Carneiro (Jul 18 2019 at 04:24)</a>:</h4>
+<p><code>mul_hom A B</code> for me is the type of augmented functions from A to B</p>
+
+<a name="171137203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137203">Kevin Buzzard (Jul 18 2019 at 04:24)</a>:</h4>
+<p>but <code>mul.hom</code> has got a field <code>f</code> and <code>equiv</code> has got a field <code>to_fun</code> and these are supposed to be defeq and have the same name.</p>
+
+<a name="171137204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137204">Mario Carneiro (Jul 18 2019 at 04:24)</a>:</h4>
+<p>I don't see <code>mul.hom</code> in the example</p>
+
+<a name="171137215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137215">Mario Carneiro (Jul 18 2019 at 04:25)</a>:</h4>
+<p>Oh there it is</p>
+
+<a name="171137216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137216">Kevin Buzzard (Jul 18 2019 at 04:25)</a>:</h4>
+<p>I'm talking about my attempt to bundle homs.</p>
+
+<a name="171137218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137218">Mario Carneiro (Jul 18 2019 at 04:25)</a>:</h4>
+<p>I think that should be <code>mul_hom</code></p>
+
+<a name="171137219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137219">Mario Carneiro (Jul 18 2019 at 04:25)</a>:</h4>
+<p><code>mul</code> isn't a namespace</p>
+
+<a name="171137266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137266">Mario Carneiro (Jul 18 2019 at 04:26)</a>:</h4>
+<p><code>mul_hom</code> should have a field called <code>to_fun</code></p>
+
+<a name="171137267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137267">Mario Carneiro (Jul 18 2019 at 04:26)</a>:</h4>
+<p>so that <code>mul_equiv</code> works</p>
+
+<a name="171137396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137396">Kevin Buzzard (Jul 18 2019 at 04:31)</a>:</h4>
+<p><code>to_fun</code> is such a horrible name for a function. I guess its canonical name is the coercion so maybe it doesn't matter. Wait -- the map from <code>mul_equiv X Y</code> to <code>mul_hom X Y</code> -- that is no longer an instance, because <code>mul_hom</code> isn't a class. Is this still done with coercions somehow?</p>
+
+<a name="171137439"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137439" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137439">Mario Carneiro (Jul 18 2019 at 04:32)</a>:</h4>
+<p>it's a function called <code>to_mul_hom</code></p>
+
+<a name="171137444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137444">Mario Carneiro (Jul 18 2019 at 04:32)</a>:</h4>
+<p>You can try using a coercion but this one tends to trigger rarely</p>
+
+<a name="171137498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171137498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171137498">Mario Carneiro (Jul 18 2019 at 04:34)</a>:</h4>
+<p>given that the parent functions are always called <code>to_*</code>, <code>to_fun</code> seems to match that naming convention</p>
+
+<a name="171138143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138143">Kevin Buzzard (Jul 18 2019 at 04:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">mul_hom</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Should this have a coercion to fun?</p>
+
+<a name="171138188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138188">Mario Carneiro (Jul 18 2019 at 04:56)</a>:</h4>
+<p>yes</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
