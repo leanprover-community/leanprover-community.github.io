@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (24 messages, latest: Jul 18 2019 at 01:39)
+
 * [Lean in the wild](43625Leaninthewild.html) (178 messages, latest: Jul 17 2019 at 22:53)
 
 * [tactic question](62193tacticquestion.html) (61 messages, latest: Jul 17 2019 at 09:15)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
 
 * [emacs users](44956emacsusers.html) (16 messages, latest: Jul 16 2019 at 16:10)
-
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (22 messages, latest: Jul 16 2019 at 15:37)
 
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 
