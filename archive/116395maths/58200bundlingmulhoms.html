@@ -140,6 +140,190 @@ permalink: archive/116395maths/58200bundlingmulhoms.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138188">Mario Carneiro (Jul 18 2019 at 04:56)</a>:</h4>
 <p>yes</p>
 
+<a name="171138401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138401">Kevin Buzzard (Jul 18 2019 at 05:03)</a>:</h4>
+<p>My <code>map_mul</code> is crappy:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">true</span>
+
+<span class="c">/-</span><span class="cm">- bundled homs FTW -/</span>
+<span class="kn">structure</span> <span class="n">mul_hom</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- notation for homs</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">→*</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">mul_hom</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">}</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">map_mul</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">mul_hom.map_mul : ∀ (c : ?M_1 →* ?M_2) (x y : ?M_1), c.to_fun (x * y) = c.to_fun x * c.to_fun y</span>
+<span class="cm">-- yeah but I want it to be the coercion, not `c.to_fun`</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>It has come out non-canonically. Am I supposed to be doing this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">map_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">M</span><span class="o">),</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">map_mul</span>
+</pre></div>
+
+
+<p>?</p>
+
+<a name="171138447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138447">Mario Carneiro (Jul 18 2019 at 05:04)</a>:</h4>
+<p>with the primes inverted</p>
+
+<a name="171138449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138449">Kevin Buzzard (Jul 18 2019 at 05:04)</a>:</h4>
+<p>So you're saying I need to change mathlib</p>
+
+<a name="171138452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138452">Kevin Buzzard (Jul 18 2019 at 05:04)</a>:</h4>
+<p>no</p>
+
+<a name="171138456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138456">Kevin Buzzard (Jul 18 2019 at 05:05)</a>:</h4>
+<p>you're saying I need to change my structure field's name.</p>
+
+<a name="171138463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171138463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171138463">Mario Carneiro (Jul 18 2019 at 05:05)</a>:</h4>
+<p>yes</p>
+
+<a name="171139112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171139112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171139112">Kevin Buzzard (Jul 18 2019 at 05:25)</a>:</h4>
+<p>Should this</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">mul_equiv&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">B</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">equiv</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">mul_hom</span> <span class="n">A</span> <span class="n">B</span>
+</pre></div>
+
+
+<p>have a coercion to fun?</p>
+
+<a name="171139294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171139294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171139294">Mario Carneiro (Jul 18 2019 at 05:31)</a>:</h4>
+<p>yes</p>
+
+<a name="171140149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171140149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171140149">Kevin Buzzard (Jul 18 2019 at 05:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">γ</span><span class="o">]</span>
+<span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="o">[</span><span class="n">has_mul</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">N</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">P</span><span class="o">]</span>
+
+<span class="c1">-- Recall that the unbundled definition of a mul_hom</span>
+<span class="c1">-- and the definition of a mul_equiv, with notation ≃*, are in mathlib.</span>
+
+<span class="c">/-</span><span class="cm"> Mathlib:</span>
+
+<span class="cm">-- in root namespace</span>
+<span class="cm">class is_mul_hom {α β : Type*} [has_mul α] [has_mul β] (f : α → β) : Prop :=</span>
+<span class="cm">(map_mul : ∀ x y, f (x * y) = f x * f y)</span>
+
+<span class="cm">-- root namespace</span>
+<span class="cm">structure mul_equiv (α β : Type*) [has_mul α] [has_mul β] extends α ≃ β :=</span>
+<span class="cm">(hom : is_mul_hom to_fun)</span>
+
+<span class="cm">notation ≃*, proved to be reflexive, symmetric and transitive (note: it is not a Prop)</span>
+<span class="cm">-/</span>
+
+
+<span class="c1">--. We will define</span>
+<span class="c1">-- bundled homomorphisms of muls, with notation →*, and bundled</span>
+<span class="c1">-- equivs, with notation ≃*&#39;</span>
+
+
+<span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">true</span>
+
+<span class="c">/-</span><span class="cm">- bundled homs -/</span>
+<span class="kn">structure</span> <span class="n">mul_hom</span> <span class="o">(</span><span class="n">M</span> <span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="c1">-- notation for homs</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="bp">→*</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">mul_hom</span>
+
+<span class="c1">-- I want to think of a hom as a function sometimes</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- the statement that mul_homs preserve mul, in its canonical form -/</span>
+<span class="n">def</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→*</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">mul_hom</span><span class="bp">.</span><span class="n">map_mul&#39;</span>
+
+<span class="c1">-- for structures like this you need to prove `id` and `comp` next.</span>
+<span class="kn">namespace</span> <span class="n">mul_hom</span>
+
+<span class="c">/-</span><span class="cm">- the identity is a mul_hom-/</span>
+<span class="n">def</span> <span class="n">id</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→*</span> <span class="n">M</span> <span class="o">:=</span> <span class="o">{</span><span class="n">to_fun</span> <span class="o">:=</span> <span class="n">id</span><span class="o">,</span> <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- composite of mul_homs is a mul_hom -/</span>
+<span class="n">def</span> <span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→*</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→*</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→*</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">m</span><span class="o">,</span> <span class="n">g</span> <span class="o">(</span><span class="n">f</span> <span class="n">m</span><span class="o">),</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">map_mul</span> <span class="n">f</span><span class="o">,</span> <span class="n">map_mul</span> <span class="n">g</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">mul_hom</span>
+
+<span class="c">/-</span><span class="cm">- mul_equiv&#39; (bundled mul_equiv -- the name mul_equiv is currently nicked by unbundled mul_equiv) -/</span>
+<span class="kn">structure</span> <span class="n">mul_equiv&#39;</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">A</span><span class="o">]</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">B</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">equiv</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">mul_hom</span> <span class="n">A</span> <span class="n">B</span>
+
+<span class="c1">-- notation for mul_equiv&#39;</span>
+<span class="kn">infix</span> <span class="bp">`</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">mul_equiv&#39;</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">M</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">N</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">mul_equiv&#39;</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">mul_equiv&#39;</span><span class="bp">.</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">f</span> <span class="n">y</span>
+<span class="o">:=</span> <span class="n">mul_equiv&#39;</span><span class="bp">.</span><span class="n">map_mul&#39;</span>
+
+<span class="c1">-- now need reflexive, symmetric and transitive</span>
+
+<span class="kn">namespace</span> <span class="n">mul_equiv&#39;</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">refl</span><span class="o">]</span> <span class="n">def</span> <span class="n">refl</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">rfl</span><span class="o">,</span>
+<span class="bp">..</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">}</span>
+
+<span class="c1">-- this one did not go so well.</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">symm</span><span class="o">]</span> <span class="n">def</span> <span class="n">symm</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">n₁</span> <span class="n">n₂</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective_of_left_inverse</span> <span class="n">h</span><span class="bp">.</span><span class="n">left_inv</span> <span class="k">begin</span>
+    <span class="k">show</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="o">(</span><span class="n">n₁</span> <span class="bp">*</span> <span class="n">n₂</span><span class="o">))</span> <span class="bp">=</span>
+    <span class="n">h</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">n₁</span> <span class="bp">*</span> <span class="n">h</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">n₂</span><span class="o">),</span> <span class="c1">-- annoying to have to `show`</span>
+    <span class="n">rw</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">h</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">rfl</span><span class="o">,</span> <span class="c1">-- annoying to have to `convert`. This should surely just be rewrites.</span>
+      <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">right_inv</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">}</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="n">def</span> <span class="n">trans</span> <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">α</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+    <span class="k">show</span> <span class="n">h2</span> <span class="o">(</span><span class="n">h1</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">))</span> <span class="bp">=</span> <span class="n">h2</span> <span class="o">(</span><span class="n">h1</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">h2</span> <span class="o">(</span><span class="n">h1</span> <span class="n">y</span><span class="o">),</span>
+    <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h1</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">,</span> <span class="n">h2</span><span class="bp">.</span><span class="n">map_mul</span><span class="o">],</span>
+  <span class="bp">..</span><span class="n">equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h1</span><span class="bp">.</span><span class="n">to_equiv</span> <span class="n">h2</span><span class="bp">.</span><span class="n">to_equiv</span> <span class="o">}</span>
+
+<span class="c1">-- an ≃*&#39; is a hom</span>
+<span class="n">def</span> <span class="n">equiv&#39;</span><span class="bp">.</span><span class="n">to_hom</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">M</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→*</span> <span class="n">N</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">to_equiv</span><span class="o">,</span>
+    <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">map_mul&#39;</span>
+  <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">equiv&#39;</span><span class="bp">.</span><span class="n">inv_hom</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">M</span> <span class="err">≃</span><span class="bp">*</span><span class="err">&#39;</span> <span class="n">N</span><span class="o">)</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">→*</span> <span class="n">M</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_equiv</span><span class="o">,</span>
+  <span class="n">map_mul&#39;</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">map_mul</span>
+  <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">mul_equiv&#39;</span>
+</pre></div>
+
+
+<p><code>equiv'.symm</code> didn't go well but most of the other stuff looks OK to me</p>
+
 
 {% endraw %}
 
