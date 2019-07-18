@@ -364,6 +364,28 @@ permalink: archive/116395maths/58200bundlingmulhoms.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171161995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171161995">Kevin Buzzard (Jul 18 2019 at 11:50)</a>:</h4>
 <p>I think the last time we talked about this, you liked that idea.</p>
 
+<a name="171163113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171163113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171163113">Chris Hughes (Jul 18 2019 at 12:08)</a>:</h4>
+<p>Don't bother with <code>semigroup</code> stuff unless it's virtually no effort. I'd actually prefer <code>group_hom</code> and <code>monoid_hom</code> to be the same, since these are the two that are actually used. You could write a custom constructor without the unnecessary axiom.</p>
+<p>Same idea goes for <code>ring_hom</code> and <code>semiring_hom</code></p>
+
+<a name="171163615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171163615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171163615">Kevin Buzzard (Jul 18 2019 at 12:16)</a>:</h4>
+<p>so you're saying you want <code>group.hom</code> to be called <code>group_hom</code> and to demand that <code>f(1)=1</code>?</p>
+
+<a name="171163633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171163633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171163633">Kevin Buzzard (Jul 18 2019 at 12:16)</a>:</h4>
+<p>What should the custom constructor be called?</p>
+
+<a name="171164305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171164305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171164305">Chris Hughes (Jul 18 2019 at 12:26)</a>:</h4>
+<p>Yes <code>@[reducible] def group_hom := monoid_hom</code>. </p>
+<p><code>group_hom.mk</code></p>
+
+<a name="171164339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171164339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171164339">Chris Hughes (Jul 18 2019 at 12:27)</a>:</h4>
+<p>That way, simp lemmas you prove about <code>monoid_hom</code>s will work with group homs.</p>
+
 
 {% endraw %}
 

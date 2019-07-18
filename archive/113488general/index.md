@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [well foundness in the kernel](39459wellfoundnessinthekernel.html) (1 message, latest: Jul 18 2019 at 12:52)
+
+* [tactic question](62193tacticquestion.html) (62 messages, latest: Jul 18 2019 at 12:30)
+
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (27 messages, latest: Jul 18 2019 at 07:29)
 
 * [Lean in the wild](43625Leaninthewild.html) (178 messages, latest: Jul 17 2019 at 22:53)
-
-* [tactic question](62193tacticquestion.html) (61 messages, latest: Jul 17 2019 at 09:15)
 
 * [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
 
