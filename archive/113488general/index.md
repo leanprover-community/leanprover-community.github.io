@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (28 messages, latest: Jul 18 2019 at 15:27)
+
+* [well foundness in the kernel](39459wellfoundnessinthekernel.html) (2 messages, latest: Jul 18 2019 at 15:16)
+
 * [Lean Together 2020](04583LeanTogether2020.html) (6 messages, latest: Jul 18 2019 at 13:11)
 
-* [well foundness in the kernel](39459wellfoundnessinthekernel.html) (1 message, latest: Jul 18 2019 at 12:52)
-
 * [tactic question](62193tacticquestion.html) (62 messages, latest: Jul 18 2019 at 12:30)
-
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (27 messages, latest: Jul 18 2019 at 07:29)
 
 * [Lean in the wild](43625Leaninthewild.html) (178 messages, latest: Jul 17 2019 at 22:53)
 
