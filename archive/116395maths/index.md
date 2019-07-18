@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (192 messages, latest: Jul 18 2019 at 21:59)
+* [linear independence](18622linearindependence.html) (23 messages, latest: Jul 18 2019 at 22:47)
 
-* [linear independence](18622linearindependence.html) (4 messages, latest: Jul 18 2019 at 21:58)
+* [bundling mul_homs](58200bundlingmulhoms.html) (195 messages, latest: Jul 18 2019 at 22:11)
 
 * [The Hodge Conjecture](31867TheHodgeConjecture.html) (2 messages, latest: Jul 18 2019 at 21:25)
 
