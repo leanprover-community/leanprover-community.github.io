@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [match statement in decidable instance](70908matchstatementindecidableinstance.html) (5 messages, latest: Jul 19 2019 at 02:58)
+* [match statement in decidable instance](70908matchstatementindecidableinstance.html) (7 messages, latest: Jul 19 2019 at 03:02)
 
 * [lack of information in `match`](95163lackofinformationinmatch.html) (30 messages, latest: Jul 18 2019 at 11:01)
 
