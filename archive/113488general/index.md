@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type class failure](63937Typeclassfailure.html) (1 message, latest: Jul 19 2019 at 14:19)
+* [Type class failure](63937Typeclassfailure.html) (3 messages, latest: Jul 19 2019 at 15:52)
 
 * [auto_param](29002autoparam.html) (5 messages, latest: Jul 19 2019 at 14:04)
 
