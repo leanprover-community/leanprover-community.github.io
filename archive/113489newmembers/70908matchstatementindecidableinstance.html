@@ -1,0 +1,77 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/70908matchstatementindecidableinstance.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/70908matchstatementindecidableinstance.html">match statement in decidable instance</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171225878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/match%20statement%20in%20decidable%20instance/near/171225878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70908matchstatementindecidableinstance.html#171225878">Chris B (Jul 19 2019 at 02:53)</a>:</h4>
+<p>Does anyone know what the <code>decidable_eq ℕ</code> instance in core does that allows it to use the syntax <code>match decidable_eq x y with ...</code> in the recursive case? Trying to use it elsewhere gives me an error.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">not_nat</span>
+<span class="bp">|</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">not_nat</span>
+<span class="bp">|</span> <span class="n">S</span> <span class="o">:</span> <span class="n">not_nat</span> <span class="bp">→</span> <span class="n">not_nat</span>
+
+<span class="kn">open</span> <span class="n">not_nat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">not_nat</span>
+<span class="bp">|</span> <span class="n">Z</span>     <span class="n">Z</span>     <span class="o">:=</span> <span class="n">is_true</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="n">Z</span>       <span class="o">:=</span> <span class="n">is_false</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">not_nat</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">Z</span>     <span class="o">(</span><span class="n">S</span> <span class="n">y</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">is_false</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">not_nat</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">match</span> <span class="n">decidable_eq</span> <span class="n">x</span> <span class="n">y</span> <span class="k">with</span>
+  <span class="c1">--   ...</span>
+  <span class="c1">-- type mismatch at application</span>
+  <span class="c1">--   decidable_eq x</span>
+  <span class="c1">-- term</span>
+  <span class="c1">--   x</span>
+  <span class="c1">-- has type</span>
+  <span class="c1">--   not_nat : Type</span>
+  <span class="c1">-- but is expected to have type</span>
+  <span class="c1">--   Sort ? : Type ?</span>
+</pre></div>
+
+<a name="171225997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/match%20statement%20in%20decidable%20instance/near/171225997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70908matchstatementindecidableinstance.html#171225997">Mario Carneiro (Jul 19 2019 at 02:55)</a>:</h4>
+<p>If you look at the tactic state in the error message, you will see that <code>not_nat.decidable_eq</code> is what's in the context, so you have to write it like that</p>
+
+<a name="171226043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/match%20statement%20in%20decidable%20instance/near/171226043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70908matchstatementindecidableinstance.html#171226043">Mario Carneiro (Jul 19 2019 at 02:56)</a>:</h4>
+<p>It's not actually a global definition, it's actually a local constant in disguise (and actually it's not even that, it's a macro disguised as a local constant) so it doesn't work by the same rules w.r.t <code>open</code></p>
+
+<a name="171226095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/match%20statement%20in%20decidable%20instance/near/171226095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70908matchstatementindecidableinstance.html#171226095">Mario Carneiro (Jul 19 2019 at 02:58)</a>:</h4>
+<p>The difference between your example and <code>nat.decidable_eq</code> is that <code>nat.decidable_eq</code> was written inside <code>namespace nat</code> rather than merely with <code>nat</code> open</p>
+
+<a name="171226105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/match%20statement%20in%20decidable%20instance/near/171226105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70908matchstatementindecidableinstance.html#171226105">Mario Carneiro (Jul 19 2019 at 02:58)</a>:</h4>
+<p>this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">not_nat</span>
+<span class="bp">|</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">not_nat</span>
+<span class="bp">|</span> <span class="n">S</span> <span class="o">:</span> <span class="n">not_nat</span> <span class="bp">→</span> <span class="n">not_nat</span>
+
+<span class="kn">namespace</span> <span class="n">not_nat</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_eq</span> <span class="n">not_nat</span>
+<span class="bp">|</span> <span class="n">Z</span>     <span class="n">Z</span>     <span class="o">:=</span> <span class="n">is_true</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="n">Z</span>       <span class="o">:=</span> <span class="n">is_false</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">not_nat</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">Z</span>     <span class="o">(</span><span class="n">S</span> <span class="n">y</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">is_false</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">not_nat</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">S</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">match</span> <span class="n">decidable_eq</span> <span class="n">x</span> <span class="n">y</span> <span class="k">with</span>
+    <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">sorry</span>
+    <span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">not_nat</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

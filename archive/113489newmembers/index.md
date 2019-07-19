@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [match statement in decidable instance](70908matchstatementindecidableinstance.html) (5 messages, latest: Jul 19 2019 at 02:58)
+
 * [lack of information in `match`](95163lackofinformationinmatch.html) (30 messages, latest: Jul 18 2019 at 11:01)
 
 * [functional analysis](41368functionalanalysis.html) (11 messages, latest: Jul 16 2019 at 20:02)
