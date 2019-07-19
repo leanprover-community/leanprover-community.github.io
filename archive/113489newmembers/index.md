@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Pipe character "\|" not working to  denote divides](06744Pipecharacternotworkingtodenotedivides.html) (4 messages, latest: Jul 19 2019 at 19:14)
+
 * [match statement in decidable instance](70908matchstatementindecidableinstance.html) (7 messages, latest: Jul 19 2019 at 03:02)
 
 * [lack of information in `match`](95163lackofinformationinmatch.html) (30 messages, latest: Jul 18 2019 at 11:01)
