@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [The Hodge Conjecture](31867TheHodgeConjecture.html) (4 messages, latest: Jul 19 2019 at 06:35)
+
 * [bundling mul_homs](58200bundlingmulhoms.html) (197 messages, latest: Jul 18 2019 at 23:10)
 
 * [linear independence](18622linearindependence.html) (23 messages, latest: Jul 18 2019 at 22:47)
-
-* [The Hodge Conjecture](31867TheHodgeConjecture.html) (2 messages, latest: Jul 18 2019 at 21:25)
 
 * [conditionally complete linear order for nnreal](95057conditionallycompletelinearorderfornnreal.html) (3 messages, latest: Jul 18 2019 at 17:43)
 
