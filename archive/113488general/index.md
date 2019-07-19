@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [auto_param](29002autoparam.html) (2 messages, latest: Jul 19 2019 at 13:59)
+* [Type class failure](63937Typeclassfailure.html) (1 message, latest: Jul 19 2019 at 14:19)
+
+* [auto_param](29002autoparam.html) (5 messages, latest: Jul 19 2019 at 14:04)
 
 * [Lean in the wild](43625Leaninthewild.html) (180 messages, latest: Jul 19 2019 at 12:15)
 
