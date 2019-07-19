@@ -1041,6 +1041,26 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171247808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171247808">Andrew Ashworth (Jul 19 2019 at 10:57)</a>:</h4>
 <p>Maybe the old usage of  <code>transfer</code> to prove properties about ints-as-pairs-of-naturals should be the in mathlib docs, i.e. <a href="https://github.com/leanprover/lean/blob/6ab792733d09878d82ce98d88f6f476c8e0f34d8/library/init/data/int/basic.lean" target="_blank" title="https://github.com/leanprover/lean/blob/6ab792733d09878d82ce98d88f6f476c8e0f34d8/library/init/data/int/basic.lean">https://github.com/leanprover/lean/blob/6ab792733d09878d82ce98d88f6f476c8e0f34d8/library/init/data/int/basic.lean</a></p>
 
+<a name="171281201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171281201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171281201">Kevin Buzzard (Jul 19 2019 at 18:22)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">relator</span>
+
+<span class="n">def</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">rel</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">A</span> <span class="err">≃</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">e</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">A</span> <span class="err">≃</span> <span class="n">B</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">relator</span><span class="bp">.</span><span class="n">left_unique</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">rel</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a₁</span> <span class="n">b</span> <span class="n">a₂</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">injective</span> <span class="n">e</span> <span class="err">$</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h1</span> <span class="n">h2</span><span class="bp">.</span><span class="n">symm</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">relator</span><span class="bp">.</span><span class="n">right_unique</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">rel</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b₁</span> <span class="n">b₂</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h1</span><span class="bp">.</span><span class="n">symm</span> <span class="n">h2</span>
+</pre></div>
+
+
+<p>What next?</p>
+
+<a name="171281396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171281396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171281396">Mario Carneiro (Jul 19 2019 at 18:24)</a>:</h4>
+<p>pick a simple predicate or construction and try to prove its isomorphism theorem</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (198 messages, latest: Jul 19 2019 at 10:57)
+* [Increasing convergent subsequence](65378Increasingconvergentsubsequence.html) (21 messages, latest: Jul 19 2019 at 18:56)
+
+* [bundling mul_homs](58200bundlingmulhoms.html) (200 messages, latest: Jul 19 2019 at 18:24)
 
 * [The Hodge Conjecture](31867TheHodgeConjecture.html) (4 messages, latest: Jul 19 2019 at 06:35)
 
