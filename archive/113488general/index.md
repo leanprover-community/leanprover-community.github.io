@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [rfl better than refl](59647rflbetterthanrefl.html) (8 messages, latest: Jul 19 2019 at 10:57)
+
 * [Lean in the wild](43625Leaninthewild.html) (179 messages, latest: Jul 19 2019 at 08:16)
 
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (28 messages, latest: Jul 18 2019 at 15:27)

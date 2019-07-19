@@ -1,0 +1,57 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/59647rflbetterthanrefl.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html">rfl better than refl</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171247110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247110">Kevin Buzzard (Jul 19 2019 at 10:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">S</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x₁</span> <span class="n">x₂</span><span class="o">,</span> <span class="n">f</span> <span class="n">x₁</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x₂</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="o">(</span><span class="n">S</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">rfl</span> <span class="c1">-- works</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">reflexive</span> <span class="o">(</span><span class="n">S</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span> <span class="n">refl</span> <span class="kn">end</span> <span class="c1">-- fails!</span>
+</pre></div>
+
+
+<p>I was surprised that <code>refl</code> fails. It doesn't unfold <code>S</code>?</p>
+
+<a name="171247400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247400">Kevin Buzzard (Jul 19 2019 at 10:49)</a>:</h4>
+<p>I am trying to encourage learners away from the <code>unfold</code> tactic and am trying to get them to do the unfolding in their head, because "everything works when you unfold in your head". But <code>refl</code> doesn't? It's like <code>rw</code> -- it needs syntactic equality and I just never noticed this? I'm sure I've used <code>refl</code> to close all sorts of goals before.</p>
+
+<a name="171247493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247493">Chris Hughes (Jul 19 2019 at 10:51)</a>:</h4>
+<p>It is surprising. Looking at the definition of <code>refl</code> it seems like it should unfold semireducibles.</p>
+
+<a name="171247782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247782">Mario Carneiro (Jul 19 2019 at 10:56)</a>:</h4>
+<p><code>refl</code> uses the <code>@{refl]</code>attribute. It looks at the head of the expression, assuming it has the form <code>R x x</code>, to find the proof</p>
+
+<a name="171247791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247791">Kevin Buzzard (Jul 19 2019 at 10:56)</a>:</h4>
+<p>Oh, so it refuses to unfold because it has a better idea?</p>
+
+<a name="171247812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247812">Kevin Buzzard (Jul 19 2019 at 10:57)</a>:</h4>
+<p>It's like "aha, this must be asking for a proof of reflexivity of <code>S</code>, I'll just look it up in my database, oh dear it's not there"</p>
+
+<a name="171247819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247819">Mario Carneiro (Jul 19 2019 at 10:57)</a>:</h4>
+<p>more like it figured out the relevant definition, it's <code>S</code>, and it's complaining that this definition doesn't have a <code>@[refl]</code> declaration</p>
+
+<a name="171247828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rfl%20better%20than%20refl/near/171247828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59647rflbetterthanrefl.html#171247828">Mario Carneiro (Jul 19 2019 at 10:57)</a>:</h4>
+<p>right</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
