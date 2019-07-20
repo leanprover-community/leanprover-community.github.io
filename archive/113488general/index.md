@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (181 messages, latest: Jul 20 2019 at 13:03)
+
 * [has_sub](66406hassub.html) (1 message, latest: Jul 19 2019 at 23:19)
 
 * [Type class failure](63937Typeclassfailure.html) (3 messages, latest: Jul 19 2019 at 15:52)
 
 * [auto_param](29002autoparam.html) (5 messages, latest: Jul 19 2019 at 14:04)
-
-* [Lean in the wild](43625Leaninthewild.html) (180 messages, latest: Jul 19 2019 at 12:15)
 
 * [rfl better than refl](59647rflbetterthanrefl.html) (8 messages, latest: Jul 19 2019 at 10:57)
 
