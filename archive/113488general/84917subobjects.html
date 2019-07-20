@@ -1,0 +1,59 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84917subobjects.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html">subobjects</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171329872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171329872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171329872">Kevin Buzzard (Jul 20 2019 at 14:38)</a>:</h4>
+<p>This is the Lean proof that the open subsets of a topological space form a complete lattice.</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">complete_lattice</span> <span class="o">(</span><span class="n">opens</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">complete_lattice</span><span class="bp">.</span><span class="n">copy</span>
+<span class="o">(</span><span class="bp">@</span><span class="n">order_dual</span><span class="bp">.</span><span class="n">lattice</span><span class="bp">.</span><span class="n">complete_lattice</span> <span class="bp">_</span>
+  <span class="o">(</span><span class="bp">@</span><span class="n">galois_insertion</span><span class="bp">.</span><span class="n">lift_complete_lattice</span>
+    <span class="o">(</span><span class="n">order_dual</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">))</span> <span class="o">(</span><span class="n">order_dual</span> <span class="o">(</span><span class="n">opens</span> <span class="n">α</span><span class="o">))</span> <span class="bp">_</span> <span class="n">interior</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span> <span class="n">gi</span><span class="o">))</span>
+<span class="c">/-</span><span class="cm"> le  -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="err">⊆</span> <span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"> top -/</span> <span class="bp">⟨</span><span class="n">set</span><span class="bp">.</span><span class="n">univ</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_univ</span><span class="bp">⟩</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">interior_univ</span><span class="bp">.</span><span class="n">symm</span><span class="o">)</span>
+<span class="c">/-</span><span class="cm"> bot -/</span> <span class="bp">⟨</span><span class="err">∅</span><span class="o">,</span> <span class="n">is_open_empty</span><span class="bp">⟩</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"> sup -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∪</span> <span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_union</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">rfl</span>
+<span class="c">/-</span><span class="cm"> inf -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">U</span> <span class="n">V</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">U</span><span class="bp">.</span><span class="mi">1</span> <span class="err">∩</span> <span class="n">V</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_inter</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="bp">⟩</span><span class="o">)</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span><span class="o">,</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">interior_eq_of_open</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="o">(</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_inter</span> <span class="n">U</span><span class="bp">.</span><span class="mi">2</span> <span class="n">V</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span>
+<span class="kn">end</span>
+<span class="c">/-</span><span class="cm"> Sup -/</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">Us</span><span class="o">,</span> <span class="bp">⟨</span><span class="err">⋃₀</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="err">&#39;&#39;</span> <span class="n">Us</span><span class="o">),</span> <span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">is_open_sUnion</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">U</span> <span class="n">hU</span><span class="o">,</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">rcases</span> <span class="n">hU</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">V</span><span class="o">,</span> <span class="n">hV</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">h&#39;</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">at</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">subst</span> <span class="n">h&#39;</span><span class="o">,</span> <span class="n">exact</span> <span class="n">hV</span><span class="o">}</span><span class="bp">⟩</span><span class="o">)</span>
+<span class="k">begin</span>
+  <span class="n">funext</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">ext</span><span class="bp">.</span><span class="n">mpr</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">Sup_range</span><span class="o">],</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I was expecting the proof to look more like the following: "we all know that <code>set alpha</code> is a complete lattice, and open subsets are just a sublattice of this, so things like finite intersections and infinite unions will remain the same once it has been fed into the system that finite intersections and infinite unions of opens are open, which is the axioms for a topology, so we're done". It will be some sort of sub-infi-bot-hemi-sup-subcomplete-lattice or whatever. Are these kinds of sublattices already in mathlib? Then you get of the form a sub-infi-hemi-sublattice of a complete lattice is complete. Is this a thing? Can this be an instance? What is going on with this code? It looks on the face of it as bad as some of the code I write, and the authors of the file are Johannes and Mario. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> why did things turn out like that with all the <code>_copy</code> nonsense?</p>
+
+<a name="171330006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330006">Kevin Buzzard (Jul 20 2019 at 14:43)</a>:</h4>
+<p>Hey -- are sublattices in Lean bundled or unbundled?</p>
+
+<a name="171330069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330069">Kevin Buzzard (Jul 20 2019 at 14:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> I am learning to love lattices! What do you think about bundled sublattices?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

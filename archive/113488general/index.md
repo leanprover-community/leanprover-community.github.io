@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [subobjects](84917subobjects.html) (3 messages, latest: Jul 20 2019 at 14:45)
+
 * [Lean in the wild](43625Leaninthewild.html) (181 messages, latest: Jul 20 2019 at 13:03)
 
 * [has_sub](66406hassub.html) (1 message, latest: Jul 19 2019 at 23:19)
