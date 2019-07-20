@@ -1184,6 +1184,30 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <p>I didn't look at your work yet, I just thought I'd try and work out some concepts with this Cauchy / Dedekind reals thing.</p>
 <p>One could even play the same game with the Lau Rationals (the field of fractions of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span>) vs the computer science rationals in mathlib.</p>
 
+<a name="171302165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171302165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171302165">Kevin Buzzard (Jul 20 2019 at 00:02)</a>:</h4>
+<p>Is the idea that a tactic can generate instances of the <code>platonist_friendly</code> class, by induction on P somehow? There are no relators above so they are also clearly offering something which I've not yet understood. And finally there is this question which does not appear to be addressed by the above -- if I prove some theorem about some Bochner integral of some function being equal to pi, how do I mark this theorem with the "there is a version of me for Dedekind reals and indeed for all terms of type Reals" tag?</p>
+
+<a name="171302966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171302966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171302966">Mario Carneiro (Jul 20 2019 at 00:22)</a>:</h4>
+<p>What relators bring to the table is the ability to deal with n-ary predicates, with a variety of equivalences on the inputs (one type might be in bijection, the other is a module and there's a module iso, and then relative to the first equiv some elements a and b are related)</p>
+
+<a name="171302975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171302975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171302975">Mario Carneiro (Jul 20 2019 at 00:23)</a>:</h4>
+<p>This is necessary for making the "proof by induction" go through</p>
+
+<a name="171302977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171302977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171302977">Mario Carneiro (Jul 20 2019 at 00:23)</a>:</h4>
+<p>which is why I'm not supportive of the typeclass approach</p>
+
+<a name="171303040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171303040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171303040">Mario Carneiro (Jul 20 2019 at 00:25)</a>:</h4>
+<p>The relator way to write <code>platonist_friendly P</code> is <code>(e.rel =&gt; iff) P P</code> where <code>e</code> is an ordered field equiv</p>
+
+<a name="171303147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171303147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171303147">Mario Carneiro (Jul 20 2019 at 00:28)</a>:</h4>
+<p>well that's not quite accurate since you bundled <code>Reals</code>. Normally you would use some relation <code>R : Reals -&gt; Reals -&gt; Prop</code> asserting that the two elements of <code>Reals</code> are isomorphic, but in the case of <code>Reals</code> that's the trivially true relation</p>
+
 
 {% endraw %}
 
