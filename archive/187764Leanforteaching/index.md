@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [bachelor thesis subjects](55956bachelorthesissubjects.html) (1 message, latest: Jul 20 2019 at 06:07)
+
 * [`cases` isn't using my notation](02317casesisntusingmynotation.html) (32 messages, latest: May 28 2019 at 14:03)
 
 * [Patrick's course](67258Patrickscourse.html) (2 messages, latest: May 20 2019 at 00:20)
