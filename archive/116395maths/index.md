@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling mul_homs](58200bundlingmulhoms.html) (224 messages, latest: Jul 20 2019 at 08:55)
+
 * [power series](15161powerseries.html) (30 messages, latest: Jul 20 2019 at 05:26)
 
 * [Sheafification?](51005Sheafification.html) (23 messages, latest: Jul 20 2019 at 04:54)
-
-* [bundling mul_homs](58200bundlingmulhoms.html) (223 messages, latest: Jul 20 2019 at 00:28)
 
 * [Increasing convergent subsequence](65378Increasingconvergentsubsequence.html) (21 messages, latest: Jul 19 2019 at 18:56)
 
