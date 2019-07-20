@@ -53,6 +53,62 @@ permalink: archive/113488general/84917subobjects.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330069">Kevin Buzzard (Jul 20 2019 at 14:45)</a>:</h4>
 <p><span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> I am learning to love lattices! What do you think about bundled sublattices?</p>
 
+<a name="171330592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330592">Chris Hughes (Jul 20 2019 at 15:00)</a>:</h4>
+<p>I'm AFK. What do the two <code>begin... end</code> blocks prove?</p>
+
+<a name="171330600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330600">Chris Hughes (Jul 20 2019 at 15:00)</a>:</h4>
+<p>I guess the hard part is infinite sup and inf.</p>
+
+<a name="171330914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330914">Kevin Buzzard (Jul 20 2019 at 15:08)</a>:</h4>
+<div class="codehilite"><pre><span></span>structure subthing (K : Type) [thing K] :=
+(carrier : set K)
+(proof : is_subthing carrier)
+</pre></div>
+
+
+<p>Is <code>carrier</code> idiomatic Lean?</p>
+
+<a name="171330915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171330915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171330915">Kevin Buzzard (Jul 20 2019 at 15:08)</a>:</h4>
+<p>The first begin end block proves this:</p>
+<div class="codehilite"><pre><span></span>1 goal
+α : Type u_1,
+_inst_1 : topological_space α
+⊢ (λ (U V : opens α), ⟨U.val ∩ V.val, _⟩) = complete_lattice.inf
+</pre></div>
+
+
+<p>and the second proves this:</p>
+<div class="codehilite"><pre><span></span>1 goal
+α : Type u_1,
+_inst_1 : topological_space α
+⊢ (λ (Us : set (opens α)), ⟨⋃₀(subtype.val &#39;&#39; Us), _⟩) = complete_lattice.Sup
+</pre></div>
+
+<a name="171331005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331005">Chris Hughes (Jul 20 2019 at 15:11)</a>:</h4>
+<p>My guess is it's because  the definition given by the galois insertion would be <code>interior (a \cap b) </code>, but that's not the definition we want in this case.</p>
+
+<a name="171331367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331367">Kevin Buzzard (Jul 20 2019 at 15:21)</a>:</h4>
+<p>That's an interesting observation.</p>
+<p>Is there no notation for <code>has_Sup</code> or <code>has_Inf</code> like we have <code>⊔</code> and <code>⊓</code> for sup and inf? And this <code>supr</code> notation <code>⨆</code> -- is that notation which doesn't have a typeclass associated to it? Is that something which could change in Lean 4?</p>
+
+<a name="171331682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331682">Chris Hughes (Jul 20 2019 at 15:30)</a>:</h4>
+<p>It doesn't have a typeclass because of universe issues.</p>
+
+<a name="171331689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331689">Chris Hughes (Jul 20 2019 at 15:31)</a>:</h4>
+<p>The indexing type could be in any universe.</p>
+
+<a name="171331752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331752">Chris Hughes (Jul 20 2019 at 15:32)</a>:</h4>
+<p>It leads to a somewhat unnatural definition for cInf on Prop and set</p>
+
 
 {% endraw %}
 
