@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [bachelor thesis subjects](55956bachelorthesissubjects.html) (2 messages, latest: Jul 20 2019 at 09:42)
+* [bachelor thesis subjects](55956bachelorthesissubjects.html) (3 messages, latest: Jul 20 2019 at 17:23)
 
 * [`cases` isn't using my notation](02317casesisntusingmynotation.html) (32 messages, latest: May 28 2019 at 14:03)
 
