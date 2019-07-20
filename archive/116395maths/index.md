@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Sheafification?](51005Sheafification.html) (1 message, latest: Jul 20 2019 at 03:20)
+* [Sheafification?](51005Sheafification.html) (23 messages, latest: Jul 20 2019 at 04:54)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (223 messages, latest: Jul 20 2019 at 00:28)
 
