@@ -109,6 +109,53 @@ _inst_1 : topological_space α
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171331752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171331752">Chris Hughes (Jul 20 2019 at 15:32)</a>:</h4>
 <p>It leads to a somewhat unnatural definition for cInf on Prop and set</p>
 
+<a name="171332861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171332861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171332861">Kevin Buzzard (Jul 20 2019 at 16:05)</a>:</h4>
+<p>Is this a bug in <code>open</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">lattice</span>
+
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="kn">structure</span> <span class="n">lattice</span><span class="bp">.</span><span class="n">sublattice</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="n">sup_preserved</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">,</span> <span class="n">a</span> <span class="err">⊔</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+<span class="o">(</span><span class="n">inf_preserved</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">,</span> <span class="n">a</span> <span class="err">⊓</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">carrier</span><span class="o">)</span>
+
+<span class="c1">-- note that lattice is open.</span>
+<span class="c1">-- uncomment the next line to fix line 17:</span>
+<span class="c1">-- open lattice</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">sublattice</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">sublattice</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="171333955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171333955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171333955">Kevin Buzzard (Jul 20 2019 at 16:38)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">thing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">.</span> <span class="c1">-- insert data here</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="n">class</span> <span class="n">is_subthing</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">true</span> <span class="c1">-- insert proofs here</span>
+
+<span class="kn">structure</span> <span class="n">subthing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="k">proof</span> <span class="o">:</span> <span class="n">is_subthing</span> <span class="n">carrier</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">subthing</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">subthing</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">β</span><span class="o">,</span> <span class="n">β</span><span class="bp">.</span><span class="n">carrier</span><span class="o">}</span>
+</pre></div>
+
+
+<p>Which coercion should I be using?</p>
+
+<a name="171334282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/subobjects/near/171334282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84917subobjects.html#171334282">Chris Hughes (Jul 20 2019 at 16:49)</a>:</h4>
+<p>Probably the first two.</p>
+
 
 {% endraw %}
 
