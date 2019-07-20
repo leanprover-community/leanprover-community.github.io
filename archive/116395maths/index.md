@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [has_map_add type class](59162hasmapaddtypeclass.html) (2 messages, latest: Jul 20 2019 at 09:59)
+* [has_map_add type class](59162hasmapaddtypeclass.html) (3 messages, latest: Jul 20 2019 at 10:01)
 
 * [power series](15161powerseries.html) (31 messages, latest: Jul 20 2019 at 09:56)
 
