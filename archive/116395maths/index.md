@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [power series](15161powerseries.html) (30 messages, latest: Jul 20 2019 at 05:26)
+
 * [Sheafification?](51005Sheafification.html) (23 messages, latest: Jul 20 2019 at 04:54)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (223 messages, latest: Jul 20 2019 at 00:28)
@@ -36,8 +38,6 @@ permalink: archive/116395maths/index.html
 * [One-object category](33573Oneobjectcategory.html) (25 messages, latest: Jul 14 2019 at 14:03)
 
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
-
-* [power series](15161powerseries.html) (29 messages, latest: Jul 13 2019 at 18:40)
 
 * [partial derivatives](29140partialderivatives.html) (3 messages, latest: Jul 12 2019 at 15:03)
 
