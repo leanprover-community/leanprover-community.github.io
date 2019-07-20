@@ -7179,6 +7179,14 @@ it probably isn't a good idea to have tactics for use cases this concrete, and "
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/170803351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#170803351">Wojciech Nawrocki (Jul 13 2019 at 20:00)</a>:</h4>
 <p>Yup, <code>refl</code>s now, thanks!</p>
 
+<a name="171300969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/171300969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#171300969">Wojciech Nawrocki (Jul 19 2019 at 23:32)</a>:</h4>
+<p>Is this assumption correct: "after compiling <code>somefile.lean</code> with <code>lean --make</code>, forall theorems in <code>somefile</code>, the resulting <code>somefile.olean</code> contains the theorems' names and types, but because they are in <code>Prop</code> and have already been typechecked, the proof terms are discarded and Lean trusts previously built modules to have correctly-typechecked definitions"?</p>
+
+<a name="171301875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/171301875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#171301875">Wojciech Nawrocki (Jul 19 2019 at 23:54)</a>:</h4>
+<p>Okay, it's partly correct and partly not. Lean keeps the proof terms (i.e. the "values" of <code>theorem</code> definitions) in <code>.olean</code> files, but they're stored with a high "trust level" value, and I <em>think</em> that when a such a high-trust definition is imported, its value is <a href="https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.h#L93" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.h#L93">not typechecked again</a> and the type is trusted.</p>
+
 
 {% endraw %}
 

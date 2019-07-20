@@ -1131,6 +1131,59 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171285782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171285782">Kevin Buzzard (Jul 19 2019 at 19:13)</a>:</h4>
 <p>Each time this transfer conversation occurs I learn quite a lot about the idea, but I still have work to do.</p>
 
+<a name="171301894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171301894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171301894">Kevin Buzzard (Jul 19 2019 at 23:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">instance</span> <span class="kn">notation</span><span class="bp">.</span><span class="n">sub_eq_add_neg</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">has_neg</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">has_sub</span> <span class="n">X</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">b</span><span class="bp">⟩</span>
+
+<span class="n">class</span> <span class="n">has_field_notation</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_zero</span> <span class="n">X</span><span class="o">,</span> <span class="n">has_one</span> <span class="n">X</span><span class="o">,</span>
+<span class="n">has_mul</span> <span class="n">X</span><span class="o">,</span> <span class="n">has_add</span> <span class="n">X</span><span class="o">,</span> <span class="n">has_neg</span> <span class="n">X</span> <span class="c1">-- note: don&#39;t use has_sub</span>
+<span class="c1">-- because it might cause a diamond now</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_field_notation</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refine</span> <span class="o">{}</span><span class="bp">;</span><span class="n">apply_instance</span>
+
+<span class="n">class</span> <span class="n">complete_ordered_archimedean_field</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_field_notation</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">all_the_axioms</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">+</span> <span class="n">x</span><span class="o">)</span> <span class="c1">-- ...</span>
+<span class="o">(</span><span class="n">etc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">,</span> <span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="c1">-- boring proof omitted</span>
+<span class="kn">instance</span> <span class="n">cauchy_reals_are_complete</span> <span class="o">:</span> <span class="n">complete_ordered_archimedean_field</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">structure</span> <span class="n">Reals</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">has_field_notation</span> <span class="n">X</span><span class="o">]</span>
+<span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">complete_ordered_archimedean_field</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">CauchyReals</span> <span class="o">:</span> <span class="n">Reals</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">ℝ</span><span class="o">,</span>
+  <span class="n">h</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span>
+  <span class="n">e</span> <span class="o">:=</span> <span class="n">cauchy_reals_are_complete</span>
+<span class="o">}</span>
+
+<span class="kn">structure</span> <span class="n">ordered_field_equiv</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_field_notation</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">has_field_notation</span> <span class="n">Y</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">complete_ordered_archimedean_field</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_ordered_archimedean_field</span> <span class="n">Y</span><span class="o">]</span>
+  <span class="kn">extends</span> <span class="n">equiv</span> <span class="n">X</span> <span class="n">Y</span> <span class="c1">-- add extra axioms here</span>
+
+<span class="kn">theorem</span> <span class="n">all_reals_are_the_same</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_field_notation</span> <span class="n">X</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">complete_ordered_archimedean_field</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span>
+<span class="bp">∃</span> <span class="n">e</span> <span class="o">:</span> <span class="n">ordered_field_equiv</span> <span class="n">X</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">sorry</span> <span class="c1">-- boring proof omitted</span>
+
+<span class="n">class</span> <span class="n">platonist_friendly</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Reals</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">X</span> <span class="o">:</span> <span class="n">Reals</span><span class="o">,</span> <span class="n">P</span> <span class="n">X</span> <span class="bp">↔</span> <span class="n">P</span> <span class="n">CauchyReals</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="n">set</span> <span class="n">Reals</span><span class="o">)</span> <span class="o">[</span><span class="n">platonist_friendly</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">platonist_friendly</span> <span class="n">Q</span><span class="o">]</span> <span class="o">:</span>
+<span class="n">platonist_friendly</span> <span class="o">(</span><span class="n">P</span> <span class="err">∩</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">X</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="k">show</span> <span class="n">P</span> <span class="n">X</span> <span class="bp">∧</span> <span class="n">Q</span> <span class="n">X</span> <span class="bp">↔</span> <span class="n">P</span> <span class="n">CauchyReals</span> <span class="bp">∧</span> <span class="n">Q</span> <span class="n">CauchyReals</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span><span class="bp">.</span><span class="n">e</span><span class="o">,</span> <span class="bp">_</span><span class="n">inst_2</span><span class="bp">.</span><span class="n">e</span><span class="o">]</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>I didn't look at your work yet, I just thought I'd try and work out some concepts with this Cauchy / Dedekind reals thing.</p>
+<p>One could even play the same game with the Lau Rationals (the field of fractions of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">Z</mi></mrow><annotation encoding="application/x-tex">\mathbb{Z}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">Z</span></span></span></span></span>) vs the computer science rationals in mathlib.</p>
+
 
 {% endraw %}
 

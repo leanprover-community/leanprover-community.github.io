@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1282 messages, latest: Jul 19 2019 at 23:54)
+
 * [Pipe character "\|" not working to  denote divides](06744Pipecharacternotworkingtodenotedivides.html) (4 messages, latest: Jul 19 2019 at 19:14)
 
 * [match statement in decidable instance](70908matchstatementindecidableinstance.html) (7 messages, latest: Jul 19 2019 at 03:02)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [Misbehavior of the termination checker?](31790Misbehavioroftheterminationchecker.html) (6 messages, latest: Jul 16 2019 at 15:02)
 
 * ["Theorem Proving in Lean" Exercise 2.1](72222TheoremProvinginLeanExercise21.html) (9 messages, latest: Jul 13 2019 at 20:33)
-
-* [noob question(s)](52075noobquestions.html) (1280 messages, latest: Jul 13 2019 at 20:00)
 
 * [rewriting only once](69539rewritingonlyonce.html) (4 messages, latest: Jul 13 2019 at 14:03)
 
