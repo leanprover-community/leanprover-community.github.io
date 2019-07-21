@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [to_additive](21549toadditive.html) (2 messages, latest: Jul 21 2019 at 08:16)
+* [to_additive](21549toadditive.html) (3 messages, latest: Jul 21 2019 at 09:12)
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (263 messages, latest: Jul 21 2019 at 08:14)
+* [bundling mul_homs](58200bundlingmulhoms.html) (264 messages, latest: Jul 21 2019 at 09:10)
 
 * [has_map_add type class](59162hasmapaddtypeclass.html) (4 messages, latest: Jul 21 2019 at 07:49)
 
