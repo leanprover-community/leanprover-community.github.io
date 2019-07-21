@@ -9,11 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (260 messages, latest: Jul 21 2019 at 06:58)
+* [to_additive](21549toadditive.html) (1 message, latest: Jul 21 2019 at 07:52)
+
+* [has_map_add type class](59162hasmapaddtypeclass.html) (4 messages, latest: Jul 21 2019 at 07:49)
+
+* [bundling mul_homs](58200bundlingmulhoms.html) (262 messages, latest: Jul 21 2019 at 07:01)
 
 * [gluing functions](66720gluingfunctions.html) (1 message, latest: Jul 21 2019 at 06:50)
-
-* [has_map_add type class](59162hasmapaddtypeclass.html) (3 messages, latest: Jul 20 2019 at 10:01)
 
 * [power series](15161powerseries.html) (31 messages, latest: Jul 20 2019 at 09:56)
 
