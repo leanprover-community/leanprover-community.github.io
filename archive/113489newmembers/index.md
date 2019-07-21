@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1282 messages, latest: Jul 19 2019 at 23:54)
+* [Pipe character "\|" not working to  denote divides](06744Pipecharacternotworkingtodenotedivides.html) (7 messages, latest: Jul 21 2019 at 04:20)
 
-* [Pipe character "\|" not working to  denote divides](06744Pipecharacternotworkingtodenotedivides.html) (4 messages, latest: Jul 19 2019 at 19:14)
+* [noob question(s)](52075noobquestions.html) (1284 messages, latest: Jul 21 2019 at 04:09)
 
 * [match statement in decidable instance](70908matchstatementindecidableinstance.html) (7 messages, latest: Jul 19 2019 at 03:02)
 

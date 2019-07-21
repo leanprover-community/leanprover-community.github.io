@@ -7187,6 +7187,17 @@ it probably isn't a good idea to have tactics for use cases this concrete, and "
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/171301875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#171301875">Wojciech Nawrocki (Jul 19 2019 at 23:54)</a>:</h4>
 <p>Okay, it's partly correct and partly not. Lean keeps the proof terms (i.e. the "values" of <code>theorem</code> definitions) in <code>.olean</code> files, but they're stored with a high "trust level" value, and I <em>think</em> that when a such a high-trust definition is imported, its value is <a href="https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.h#L93" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.h#L93">not typechecked again</a> and the type is trusted.</p>
 
+<a name="171354736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/171354736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#171354736">Yury G. Kudryashov (Jul 21 2019 at 04:08)</a>:</h4>
+<p>From <code>lean --help</code>:</p>
+<div class="codehilite"><pre><span></span>  --trust=num -t     trust level (default: max) 0 means do not trust any macro,
+                     and type check all imported modules
+</pre></div>
+
+<a name="171354746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/171354746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#171354746">Yury G. Kudryashov (Jul 21 2019 at 04:09)</a>:</h4>
+<p>I think, by default Lean trusts that all <code>import</code>ed <code>.olean</code> files are correct but you can tell it to double-check them.</p>
+
 
 {% endraw %}
 

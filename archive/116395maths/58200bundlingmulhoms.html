@@ -1316,6 +1316,94 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171351888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171351888">Kevin Buzzard (Jul 21 2019 at 02:31)</a>:</h4>
 <p><span class="user-mention" data-user-id="228602">@Sian Carey</span></p>
 
+<a name="171354903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171354903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171354903">Kevin Buzzard (Jul 21 2019 at 04:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> my understanding is that you want bundled <code>monoid_hom</code> but no definition of <code>group_hom</code>. Could there still be a <code>group_hom</code> namespace though?</p>
+
+<a name="171355738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355738">Kevin Buzzard (Jul 21 2019 at 04:45)</a>:</h4>
+<p>I want to define field homomorphisms between $fields$ which I guess are called <code>discrete_field</code>. Chris / <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  -- what do you people want the bundled class to be called (<code>discrete_field_hom</code>, <code>field_hom</code>, <code>ring_hom</code>, <code>semiring_hom</code>...) and exactly what instances to you want Lean to ask for in the actual definition of the structure? (e.g. <code>map_zero</code> follows from <code>map_add</code> because everything is a field in my case of interest, so we don't need it, but I don't care if <code>map_zero</code> is a field or not, I just want to do it right).</p>
+
+<a name="171355785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355785">Mario Carneiro (Jul 21 2019 at 04:47)</a>:</h4>
+<p>Are <code>semiring_hom</code>, <code>ring_hom</code> and <code>field_hom</code> all the same?</p>
+
+<a name="171355790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355790">Kevin Buzzard (Jul 21 2019 at 04:47)</a>:</h4>
+<p>yes but I thought Chris was arguing that some of these things shouldn't even be tokens.</p>
+
+<a name="171355830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355830">Mario Carneiro (Jul 21 2019 at 04:48)</a>:</h4>
+<p>Of those <code>ring_hom</code> is my favorite</p>
+
+<a name="171355843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355843">Kevin Buzzard (Jul 21 2019 at 04:49)</a>:</h4>
+<p>I thought he suggested that <code>group_hom</code> be not defined, <code>-&gt;*</code> be notation for <code>monoid_hom</code> which also demands <code>map_one</code> and just tell the user to use the right notation for group homs which happens to coincide with the notation for monoid homs. They will never have to make one with their bare hands hopefully :-)</p>
+
+<a name="171355887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355887">Mario Carneiro (Jul 21 2019 at 04:50)</a>:</h4>
+<p>We can do the same thing with field homs - call it <code>ring_hom</code>, but it's really a semiring hom and you use it for semirings and fields too</p>
+
+<a name="171355889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355889">Kevin Buzzard (Jul 21 2019 at 04:50)</a>:</h4>
+<p>If <code>field_hom</code> is not even defined, can there still be a <code>field_hom</code> namespace? Does that ever happen in mathlib?</p>
+
+<a name="171355891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355891">Mario Carneiro (Jul 21 2019 at 04:50)</a>:</h4>
+<p>There can be a namespace</p>
+
+<a name="171355898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355898">Mario Carneiro (Jul 21 2019 at 04:51)</a>:</h4>
+<p>Although you will miss out on dot notation</p>
+
+<a name="171355940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355940">Kevin Buzzard (Jul 21 2019 at 04:52)</a>:</h4>
+<p>but theorems which are specific for fields, such as injectivity of the underlying map, naturally live there I think...oh, I see your point.</p>
+
+<a name="171355953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171355953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171355953">Kevin Buzzard (Jul 21 2019 at 04:53)</a>:</h4>
+<p>Is <code>-&gt;*+</code> horrible notation for a ring hom?</p>
+
+<a name="171356000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356000">Mario Carneiro (Jul 21 2019 at 04:54)</a>:</h4>
+<p>lgtm</p>
+
+<a name="171356004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356004">Kevin Buzzard (Jul 21 2019 at 04:54)</a>:</h4>
+<p>I want a LaTeX right-arrow with a + and a * floating over it when we're doing the controlled natural language thing; this notation is just a temporary thing</p>
+
+<a name="171356061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356061">Mario Carneiro (Jul 21 2019 at 04:56)</a>:</h4>
+<p>You don't have to convince me, I find this kind of notation more palatable than random selections from the unicode arrow palette</p>
+
+<a name="171356062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356062">Kevin Buzzard (Jul 21 2019 at 04:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> what is the categorification of <code>subring R</code>?</p>
+
+<a name="171356066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356066">Kenny Lau (Jul 21 2019 at 04:56)</a>:</h4>
+<p>mathematically?</p>
+
+<a name="171356071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356071">Kevin Buzzard (Jul 21 2019 at 04:57)</a>:</h4>
+<p>Is it <code>ring_hom A R</code> or <code>injective_ring_hom A R</code>?</p>
+
+<a name="171356077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356077">Kevin Buzzard (Jul 21 2019 at 04:57)</a>:</h4>
+<p>Is the question mathematically meaningful?</p>
+
+<a name="171356078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356078">Kenny Lau (Jul 21 2019 at 04:57)</a>:</h4>
+<p><a href="https://ncatlab.org/nlab/show/subobject" target="_blank" title="https://ncatlab.org/nlab/show/subobject">https://ncatlab.org/nlab/show/subobject</a></p>
+
+<a name="171356080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356080">Kenny Lau (Jul 21 2019 at 04:57)</a>:</h4>
+<p>it's an isomorphism class of monomorphisms</p>
+
+<a name="171356081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171356081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171356081">Kevin Buzzard (Jul 21 2019 at 04:57)</a>:</h4>
+<p>Thanks.</p>
+
 
 {% endraw %}
 
