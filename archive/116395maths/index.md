@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling mul_homs](58200bundlingmulhoms.html) (227 messages, latest: Jul 21 2019 at 02:31)
+
 * [has_map_add type class](59162hasmapaddtypeclass.html) (3 messages, latest: Jul 20 2019 at 10:01)
 
 * [power series](15161powerseries.html) (31 messages, latest: Jul 20 2019 at 09:56)
 
 * [Sheafification?](51005Sheafification.html) (24 messages, latest: Jul 20 2019 at 09:55)
-
-* [bundling mul_homs](58200bundlingmulhoms.html) (224 messages, latest: Jul 20 2019 at 08:55)
 
 * [Increasing convergent subsequence](65378Increasingconvergentsubsequence.html) (21 messages, latest: Jul 19 2019 at 18:56)
 

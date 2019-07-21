@@ -1212,6 +1212,110 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171318944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171318944">Kevin Buzzard (Jul 20 2019 at 08:55)</a>:</h4>
 <p>Yes, the reals are somehow an easier case, the universal predicate applies to types with field notation and is just the assertion that they're complete ordered Archimedean fields which is enough to make them "the same as" the platonic reals</p>
 
+<a name="171351722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171351722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171351722">Kevin Buzzard (Jul 21 2019 at 02:25)</a>:</h4>
+<p>I bundled subthings and morphisms of things!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">class</span> <span class="n">thing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">.</span> <span class="c1">-- insert data here (usually notation and some axioms)</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span><span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">thing</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">thing</span> <span class="n">γ</span><span class="o">]</span>
+
+<span class="n">class</span> <span class="n">is_subthing</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">true</span> <span class="c1">-- this class should not exist. Sometimes you see it in mathlib though.</span>
+
+<span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">true</span>
+
+<span class="kn">structure</span> <span class="n">subthing</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="o">(</span><span class="k">proof</span> <span class="o">:</span> <span class="n">is_subthing</span> <span class="n">carrier</span><span class="o">)</span> <span class="c1">-- replace with notation closure axioms e.g. one_mem, mul_mem etc. Note that is_subthing is never used again.</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_sort</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">subthing</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">subthing</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">subthing</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+
+<span class="c1">-- another deprecated class</span>
+<span class="n">def</span> <span class="n">is_thing_morphism</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">true</span> <span class="c1">-- this class should not exist. Sometimes you see it in mathlib though.</span>
+<span class="c1">-- I won&#39;t bother making it into a class. It&#39;s deprecated.</span>
+
+<span class="kn">structure</span> <span class="n">thing_morphism</span> <span class="n">α</span> <span class="n">β</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">thing</span> <span class="n">β</span><span class="o">]:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span>
+<span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_thing_morphism</span> <span class="n">to_fun</span><span class="o">)</span> <span class="c1">-- replace with notation-preserving axioms e.g. map_one, map_mul.... Note that `is_thing_morphism`  never occurs again</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="bp">→</span><span class="n">t</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">thing_morphism</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span><span class="n">t</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span>
+  <span class="n">coe</span> <span class="o">:=</span> <span class="n">thing_morphism</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">thing_morphism</span><span class="bp">.</span><span class="n">ext</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span><span class="n">t</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">rwa</span> <span class="n">thing_morphism</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="c1">-- bundled equivs using old structure command so no `to_fun` problems</span>
+<span class="kn">structure</span> <span class="n">thing_equiv</span> <span class="n">α</span> <span class="n">β</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">thing</span> <span class="n">β</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">,</span> <span class="n">thing_morphism</span> <span class="n">α</span> <span class="n">β</span>
+
+<span class="kn">infix</span> <span class="bp">`</span> <span class="err">≃</span><span class="n">t</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">thing_equiv</span>
+
+<span class="kn">namespace</span> <span class="n">thing_equiv</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">thing_equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">F</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">,</span> <span class="n">coe</span> <span class="o">:=</span> <span class="n">to_fun</span><span class="o">}</span>
+
+<span class="kn">theorem</span> <span class="n">ext</span> <span class="o">{</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">thing_equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">=</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">f</span><span class="o">,</span> <span class="n">cases</span> <span class="n">g</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">thing_equiv</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj</span> <span class="bp">_;</span><span class="n">try</span> <span class="o">{</span><span class="n">assumption</span><span class="o">},</span>
+  <span class="n">change</span> <span class="n">f_to_fun</span> <span class="bp">=</span> <span class="n">g_to_fun</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">ext</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">congr_fun</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">coe_inj</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="o">(</span><span class="n">thing_equiv</span><span class="bp">.</span><span class="n">to_equiv</span> <span class="o">:</span> <span class="n">thing_equiv</span> <span class="n">α</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">equiv</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">f</span> <span class="n">g</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">ext</span><span class="o">,</span>
+  <span class="c1">-- is this idiomatic?</span>
+  <span class="k">show</span> <span class="err">⇑</span><span class="o">(</span><span class="n">to_equiv</span> <span class="n">f</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">refl</span><span class="o">]</span> <span class="kn">protected</span> <span class="n">def</span> <span class="n">refl</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">t</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">trivial</span><span class="o">,</span><span class="bp">..</span><span class="n">equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">symm</span><span class="o">]</span> <span class="kn">protected</span> <span class="n">def</span> <span class="n">symm</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">t</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span><span class="n">t</span> <span class="n">α</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">trivial</span><span class="o">,</span><span class="bp">..</span><span class="n">e</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">symm</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">protected</span> <span class="n">def</span> <span class="n">trans</span> <span class="o">(</span><span class="n">e1</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span><span class="n">t</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">e2</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">t</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span><span class="n">t</span> <span class="n">γ</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">trivial</span><span class="o">,</span><span class="bp">..</span><span class="n">e2</span><span class="bp">.</span><span class="n">to_equiv</span><span class="bp">.</span><span class="n">trans</span> <span class="n">e1</span><span class="bp">.</span><span class="n">to_equiv</span><span class="o">}</span>
+
+<span class="c1">-- perms</span>
+<span class="n">def</span> <span class="n">perm</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">thing</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="n">thing_equiv</span> <span class="n">α</span> <span class="n">α</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="o">(</span><span class="n">perm</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">thing_equiv</span><span class="bp">.</span><span class="n">refl</span> <span class="n">α</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_mul</span> <span class="o">(</span><span class="n">perm</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">thing_equiv</span><span class="bp">.</span><span class="n">trans</span><span class="bp">⟩</span> <span class="c1">-- goodness knows if this is &quot;right&quot; or whether I should swap</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_inv</span> <span class="o">(</span><span class="n">perm</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">thing_equiv</span><span class="bp">.</span><span class="n">symm</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">group</span> <span class="o">(</span><span class="n">perm</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">*</span><span class="o">),</span>
+  <span class="n">one</span> <span class="o">:=</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">⁻¹</span><span class="o">,</span>
+  <span class="n">mul_assoc</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ext</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">one_mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ext</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">mul_one</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ext</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">mul_left_inv</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span><span class="o">,</span> <span class="n">ext</span> <span class="err">$</span> <span class="k">begin</span> <span class="n">funext</span> <span class="n">x</span><span class="o">,</span> <span class="n">exact</span> <span class="n">f</span><span class="bp">.</span><span class="n">left_inv</span> <span class="n">x</span> <span class="kn">end</span><span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">thing_equiv</span>
+</pre></div>
+
+
+<p>I got as far as the automorphism group of a thing.</p>
+
+<a name="171351886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171351886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171351886">Kevin Buzzard (Jul 21 2019 at 02:31)</a>:</h4>
+<p>Now someone can knock off a tactic and we can just bundle everything instantly.</p>
+
+<a name="171351888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171351888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171351888">Kevin Buzzard (Jul 21 2019 at 02:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="228602">@Sian Carey</span></p>
+
 
 {% endraw %}
 
