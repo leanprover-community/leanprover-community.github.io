@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [R^n and convex analysis](65865Rnandconvexanalysis.html) (3 messages, latest: Jul 21 2019 at 16:47)
+
 * [bundling mul_homs](58200bundlingmulhoms.html) (266 messages, latest: Jul 21 2019 at 15:43)
 
 * [to_additive](21549toadditive.html) (11 messages, latest: Jul 21 2019 at 14:52)

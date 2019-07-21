@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (33 messages, latest: Jul 21 2019 at 16:13)
+
 * [user_attribute.cache_cfg](12932userattributecachecfg.html) (6 messages, latest: Jul 21 2019 at 09:07)
 
 * [I love library_search](15882Ilovelibrarysearch.html) (3 messages, latest: Jul 21 2019 at 08:07)
@@ -72,8 +74,6 @@ permalink: archive/113488general/index.html
 * [VScode extension](56578VScodeextension.html) (417 messages, latest: Jul 11 2019 at 21:20)
 
 * [more type class inference issues](00919moretypeclassinferenceissues.html) (557 messages, latest: Jul 11 2019 at 14:38)
-
-* [algebraic closure](74840algebraicclosure.html) (32 messages, latest: Jul 11 2019 at 12:26)
 
 * [unprovable equality?](06956unprovableequality.html) (45 messages, latest: Jul 11 2019 at 10:09)
 
