@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (270 messages, latest: Jul 21 2019 at 20:13)
+* [bundling mul_homs](58200bundlingmulhoms.html) (271 messages, latest: Jul 21 2019 at 21:04)
 
 * [R^n and convex analysis](65865Rnandconvexanalysis.html) (5 messages, latest: Jul 21 2019 at 18:59)
 
