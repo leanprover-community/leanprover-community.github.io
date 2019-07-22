@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Help with a weird lambda](20899Helpwithaweirdlambda.html) (24 messages, latest: Jul 22 2019 at 01:02)
+* [Help with a weird lambda](20899Helpwithaweirdlambda.html) (25 messages, latest: Jul 22 2019 at 09:14)
 
 * [int.succ_ne_self](22723intsuccneself.html) (16 messages, latest: Jul 21 2019 at 23:36)
 
