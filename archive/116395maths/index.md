@@ -9,11 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (17 messages, latest: Jul 22 2019 at 05:56)
+* [power series](15161powerseries.html) (39 messages, latest: Jul 22 2019 at 06:49)
+
+* [abelian categories](41619abeliancategories.html) (1 message, latest: Jul 22 2019 at 06:11)
+
+* [gluing functions](66720gluingfunctions.html) (18 messages, latest: Jul 22 2019 at 06:11)
 
 * [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
-
-* [power series](15161powerseries.html) (32 messages, latest: Jul 22 2019 at 00:58)
 
 * [fancy inductive types and mathematics](17269fancyinductivetypesandmathematics.html) (1 message, latest: Jul 21 2019 at 23:52)
 

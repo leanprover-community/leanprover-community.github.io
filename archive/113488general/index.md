@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (34 messages, latest: Jul 22 2019 at 06:19)
+
 * [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (15 messages, latest: Jul 22 2019 at 02:13)
 
 * [Type class failure](63937Typeclassfailure.html) (5 messages, latest: Jul 22 2019 at 01:14)
 
 * [multiple dependencies](88820multipledependencies.html) (2 messages, latest: Jul 21 2019 at 23:02)
-
-* [algebraic closure](74840algebraicclosure.html) (33 messages, latest: Jul 21 2019 at 16:13)
 
 * [user_attribute.cache_cfg](12932userattributecachecfg.html) (6 messages, latest: Jul 21 2019 at 09:07)
 
