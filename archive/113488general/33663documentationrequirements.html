@@ -53,6 +53,57 @@ permalink: archive/113488general/33663documentationrequirements.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171445887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171445887">Wojciech Nawrocki (Jul 22 2019 at 16:34)</a>:</h4>
 <p>This is bordering on CNLs, but perhaps in the doc generation some documentation could be generated directly from Lean theorem names provided they stick to the conventions like <code>prop2_of_prop1</code>, <code>add_comm</code> etc.</p>
 
+<a name="171468844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171468844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171468844">Scott Morrison (Jul 22 2019 at 21:15)</a>:</h4>
+<p>I'm not sure how to address this, but for me a big problem with the readability of Lean files is that everything has to be in logical order, unlike in informal mathematics. In any decently written paper or book, the introduction states the major theorem(s). Then in each section, some text addresses the purpose of the section. Proofs are often longer, and incorporate many "Lean lemmas" directly into the body of the proof, so that they don't have to be state ahead of time, without clear motivation. And finally very often proofs of highly technical facts are deferred to appendixes (or even "forthcoming" other papers).</p>
+<p>I think it would be great if we could aspire to better section-level commenting. (And more use of <code>section</code>, especially using a name.) Or, for that matter, moving in the direction of splitting developments in more, smaller files.</p>
+<p>Awesome (but requiring lots of language support), would be something like a "deferred" keyword:</p>
+<div class="codehilite"><pre><span></span>theorem my_awesome_theorem : 196884 = 1 + 196883 := deferred
+
+... lots of lemmas and definitions here ...
+
+proof of my_awesome_theorem :=
+begin
+  ...
+end
+</pre></div>
+
+<a name="171469348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171469348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171469348">Mario Carneiro (Jul 22 2019 at 21:23)</a>:</h4>
+<p>The obvious solution is to not read lean files like you would a book</p>
+
+<a name="171469432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171469432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171469432">Mario Carneiro (Jul 22 2019 at 21:24)</a>:</h4>
+<p>You first read <code>my_awesome_theorem</code> because that's what you care about, then when you see an interesting lemma that seems to do most of the work you follow that, and so on until you believe the result</p>
+
+<a name="171469607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171469607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171469607">Mario Carneiro (Jul 22 2019 at 21:27)</a>:</h4>
+<p>Yes, this puts more power and responsibility on the reader to read lemmas in the right order, but I think that being able to follow links according to the reader's interest rather than having to determine this in advance as in a math textbook is a strength</p>
+
+<a name="171469729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171469729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171469729">Simon Hudon (Jul 22 2019 at 21:29)</a>:</h4>
+<p>I'm also in favor of documenting only important lemmas. A lot of the lemmas, especially <code>simp</code> lemmas, don't even need to be used explicitly. They might deserve an explanation but more as a set of lemma rather than individually. For instance, it might be worth explaining that they try to rewrite a formula into a canonical form and describe that form.</p>
+
+<a name="171469867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171469867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171469867">Simon Hudon (Jul 22 2019 at 21:30)</a>:</h4>
+<p>Also I don't think that more documentation is better than less. More documentation is more work to keep up to date and outdated documentation is worse than no documentation. Let's make sure that the comments we require have value</p>
+
+<a name="171469891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171469891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171469891">Scott Morrison (Jul 22 2019 at 21:31)</a>:</h4>
+<p>My usual problem when opening a Lean file is that I can't find <code>my_awesome_theorem</code> (or guess which are the awesome theorems I should be looking for...) Of course, good file-level comments solve this.</p>
+
+<a name="171470148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171470148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171470148">Simon Hudon (Jul 22 2019 at 21:34)</a>:</h4>
+<p>It might be worth adding a rule that the important theorems be listed at the beginning.</p>
+
+<a name="171471035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171471035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171471035">Kevin Buzzard (Jul 22 2019 at 21:49)</a>:</h4>
+<p>There still seems to be a big argument for some sort of overview of the file at the beginning. This could contain pointers to main sections and theorems.</p>
+
+<a name="171471430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/documentation%20requirements/near/171471430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33663documentationrequirements.html#171471430">Simon Hudon (Jul 22 2019 at 21:55)</a>:</h4>
+<p>A bit like the last paragraph of a paper's introduction?</p>
+
 
 {% endraw %}
 

@@ -62,6 +62,32 @@ I suspect that it is will have anything to do with namespace and tactic.</p>
 <p>Well, I am using it to make Lean namespace looks a little bit more like Agda's parameterised module. Please note that the code I posted earlier is the simplified version of the actual problem I see on my bigger project.</p>
 <p>Btw, does the error message that I got is the expected behaviour?</p>
 
+<a name="171467750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/weird%20interaction%20with%20namespace%2C%20parameter%2C%20and%20tactic/near/171467750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22569weirdinteractionwithnamespaceparameterandtactic.html#171467750">Wojciech Nawrocki (Jul 22 2019 at 21:01)</a>:</h4>
+<p>I really wish Lean had parametrised modules</p>
+
+<a name="171470517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/weird%20interaction%20with%20namespace%2C%20parameter%2C%20and%20tactic/near/171470517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22569weirdinteractionwithnamespaceparameterandtactic.html#171470517">Kevin Buzzard (Jul 22 2019 at 21:40)</a>:</h4>
+<p>I never use parameters and not many other people use them, so I don't really know how they work and apparently they don't work too well or other people would use them more. Note this before you experiment too much more with parameters :-) </p>
+<p>Your definition of foo', because of the parameter and include, is<br>
+<code>def foo' (b : bool) := foo b</code> because of the parameter. In the section the parameter is active so the #check doesn't print it out -- the parameter is an input to every single function in the section and Lean is not going to ever tell you this. Outside the section you can see what's going on.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">unit</span>
+<span class="kn">namespace</span> <span class="n">bar</span>
+<span class="kn">section</span>
+  <span class="kn">parameter</span> <span class="n">b</span> <span class="o">:</span> <span class="n">bool</span>
+  <span class="n">include</span> <span class="n">b</span>
+  <span class="n">def</span> <span class="n">foo&#39;</span> <span class="o">:=</span> <span class="n">foo</span> <span class="n">b</span>
+  <span class="bp">#</span><span class="kn">check</span> <span class="n">foo&#39;</span> <span class="c1">-- Type</span>
+  <span class="kn">example</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">exact</span> <span class="n">foo&#39;</span> <span class="c1">-- error here</span>
+<span class="kn">end</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">foo&#39;</span> <span class="c1">-- bool → Type</span>
+<span class="kn">end</span> <span class="n">bar</span>
+</pre></div>
+
+<a name="171471524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/weird%20interaction%20with%20namespace%2C%20parameter%2C%20and%20tactic/near/171471524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22569weirdinteractionwithnamespaceparameterandtactic.html#171471524">Gun Pinyo (Jul 22 2019 at 21:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I understand that <code>foo' :  bool → Type</code> outside the section. But inside the section, up to my understanding, every definition will silently insert the parameter in. But weirdly, it doesn't happen inside the tactic if it is under some namespace. Should I think this as a bug and should try to avoid using parameters?</p>
+
 
 {% endraw %}
 
