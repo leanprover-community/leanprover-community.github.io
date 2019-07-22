@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (2 messages, latest: Jul 22 2019 at 00:59)
+* [One-object category](33573Oneobjectcategory.html) (36 messages, latest: Jul 22 2019 at 01:42)
+
+* [gluing functions](66720gluingfunctions.html) (3 messages, latest: Jul 22 2019 at 01:01)
 
 * [power series](15161powerseries.html) (32 messages, latest: Jul 22 2019 at 00:58)
 
@@ -44,8 +46,6 @@ permalink: archive/116395maths/index.html
 * [derivation](97398derivation.html) (63 messages, latest: Jul 15 2019 at 15:55)
 
 * [ring to semiring](84658ringtosemiring.html) (5 messages, latest: Jul 15 2019 at 09:02)
-
-* [One-object category](33573Oneobjectcategory.html) (25 messages, latest: Jul 14 2019 at 14:03)
 
 * [Weak univalence implies choice](18865Weakunivalenceimplieschoice.html) (12 messages, latest: Jul 14 2019 at 10:42)
 

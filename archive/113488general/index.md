@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (10 messages, latest: Jul 22 2019 at 01:59)
+
+* [Type class failure](63937Typeclassfailure.html) (5 messages, latest: Jul 22 2019 at 01:14)
+
 * [multiple dependencies](88820multipledependencies.html) (2 messages, latest: Jul 21 2019 at 23:02)
 
 * [algebraic closure](74840algebraicclosure.html) (33 messages, latest: Jul 21 2019 at 16:13)
@@ -22,8 +26,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (181 messages, latest: Jul 20 2019 at 13:03)
 
 * [has_sub](66406hassub.html) (1 message, latest: Jul 19 2019 at 23:19)
-
-* [Type class failure](63937Typeclassfailure.html) (3 messages, latest: Jul 19 2019 at 15:52)
 
 * [auto_param](29002autoparam.html) (5 messages, latest: Jul 19 2019 at 14:04)
 

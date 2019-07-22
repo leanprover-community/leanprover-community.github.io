@@ -114,6 +114,50 @@ The main issue with the name "turtle" is that it seems to be neither a standard 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/170835326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#170835326">Jesse Michael Han (Jul 14 2019 at 14:03)</a>:</h4>
 <p>yeah that should be fine; for the case of monoid -&gt; one object category, it's hard to go wrong</p>
 
+<a name="171396149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396149">Johan Commelin (Jul 22 2019 at 01:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> What do you think about composition getting all messed up now that we try to mix category theory and the rest of the library?</p>
+
+<a name="171396158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396158">Johan Commelin (Jul 22 2019 at 01:27)</a>:</h4>
+<p>I know that there is only one right way to do compositions, and it is the one that is used in the category theory library.</p>
+
+<a name="171396164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396164">Johan Commelin (Jul 22 2019 at 01:27)</a>:</h4>
+<p>However, if I had to choose between converting the world to "the one right composition" or "formalisation of maths", then I would choose the latter.</p>
+
+<a name="171396207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396207">Johan Commelin (Jul 22 2019 at 01:28)</a>:</h4>
+<p>At the moment, I think this is actively confusing for people.</p>
+
+<a name="171396209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396209">Johan Commelin (Jul 22 2019 at 01:28)</a>:</h4>
+<p>Is the composition order in <code>category_theory</code> open for debate?</p>
+
+<a name="171396464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396464">Scott Morrison (Jul 22 2019 at 01:37)</a>:</h4>
+<p>Sure, of course.</p>
+
+<a name="171396507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396507">Scott Morrison (Jul 22 2019 at 01:38)</a>:</h4>
+<p>My suggestion would be to not change anything, just chose a new unicode symbol for morphism-composition that looks not entirely unlike \circ, and define two notations.</p>
+
+<a name="171396518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396518">Scott Morrison (Jul 22 2019 at 01:38)</a>:</h4>
+<p>One could later rip out use of the \gg notation if desired, but I don't think there's any need to change the underlying form of <code>category.comp</code>. Or is there?</p>
+
+<a name="171396526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396526">Scott Morrison (Jul 22 2019 at 01:39)</a>:</h4>
+<p>As far as I'm aware, this is purely a notational mismatch.</p>
+
+<a name="171396665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396665">Johan Commelin (Jul 22 2019 at 01:42)</a>:</h4>
+<p>I think technically it is a notational mismatch. But there is also a psychological component. Several people (mathematicians working in algebra/geometry) whom I've showed Lean/mathlib were quite confused by the convention.</p>
+
+<a name="171396671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/One-object%20category/near/171396671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/33573Oneobjectcategory.html#171396671">Johan Commelin (Jul 22 2019 at 01:42)</a>:</h4>
+<p>But have some circ-like symbol might be a good start.</p>
+
 
 {% endraw %}
 
