@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (20 messages, latest: Jul 22 2019 at 11:13)
+* [gluing functions](66720gluingfunctions.html) (30 messages, latest: Jul 22 2019 at 12:58)
+
+* [help with sequences](21714helpwithsequences.html) (14 messages, latest: Jul 22 2019 at 12:43)
 
 * [power series](15161powerseries.html) (47 messages, latest: Jul 22 2019 at 08:47)
 

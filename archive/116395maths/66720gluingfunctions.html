@@ -346,6 +346,49 @@ I'm fine with ignoring sites for the moment. There is loads of interesting stuff
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171421618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171421618">Johan Commelin (Jul 22 2019 at 11:13)</a>:</h4>
 <p>Kenny, you realise that presheaves and stalks are already in mathlib?</p>
 
+<a name="171426874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171426874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171426874">Kevin Buzzard (Jul 22 2019 at 12:46)</a>:</h4>
+<p>But are those presheaves usable? Kenny has <a href="https://github.com/ramonfmir/lean-scheme/blob/master/src/Kenny/sheaf_of_rings_on_opens.lean" target="_blank" title="https://github.com/ramonfmir/lean-scheme/blob/master/src/Kenny/sheaf_of_rings_on_opens.lean">glued sheaves of rings</a> and proved the universal property. Last time I talked to Scott he was still trying to work out the best way to define a sheaf. The schemes project has a definition of presheaf which is not the same as the one in mathlib but we are miles ahead of mathlib and it is my firm belief that because the mathlib definition is not the best way of doing sheaves in dependent type theory, that gap is only set to grow.</p>
+
+<a name="171426994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171426994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171426994">Kevin Buzzard (Jul 22 2019 at 12:48)</a>:</h4>
+<p>To define products of schemes we do it in the affine case and then glue the top space and glue the sheaves of rings. We need products and pullbacks etc to define cohomology. We have a system that works and is moving fast. You have a definition of a presheaf. Some serious decisions need to be made.</p>
+
+<a name="171427038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427038">Kevin Buzzard (Jul 22 2019 at 12:49)</a>:</h4>
+<p>I tried to <em>state</em> the construction of glueing presheaves of types using the mathlib language and it was a nightmare.</p>
+
+<a name="171427279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427279">Johan Commelin (Jul 22 2019 at 12:53)</a>:</h4>
+<p>I really don't understand this. Your definition of a presheaf is a special case of a contravariant functor. The mathlib definition is the same. I cannot see where the trouble lies.</p>
+
+<a name="171427298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427298">Johan Commelin (Jul 22 2019 at 12:53)</a>:</h4>
+<p>Sure, with the sheaf condition there might be trouble.</p>
+
+<a name="171427322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427322">Johan Commelin (Jul 22 2019 at 12:53)</a>:</h4>
+<p>I would very much like to see PR's going from the schemes project to mathlib. But I haven't seen any PR's apart from a 20 line thingy on kernels of ring morphisms.</p>
+
+<a name="171427461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427461">Johan Commelin (Jul 22 2019 at 12:55)</a>:</h4>
+<p>And I'm not saying that we have to use the category lib per se. But (i) avoiding duplication seems a good thing, and (ii) we'll need categorical machinery to build machines for cohomology theories. Unless we don't want those machines.</p>
+
+<a name="171427520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427520">Kevin Buzzard (Jul 22 2019 at 12:56)</a>:</h4>
+<p>I agree that we'll have to the the categorical language in the end.</p>
+
+<a name="171427532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427532">Kevin Buzzard (Jul 22 2019 at 12:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> are you going to PR glueing sheaves of rings?</p>
+
+<a name="171427656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171427656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171427656">Kevin Buzzard (Jul 22 2019 at 12:58)</a>:</h4>
+<blockquote>
+<p>Sure, with the sheaf condition there might be trouble.</p>
+</blockquote>
+<p>We had no trouble at all with the sheaf condition. What is the trouble you are having? You say your presheaves are "the same" as ours but then sheaves might be trouble for you, and not for us?</p>
+
 
 {% endraw %}
 

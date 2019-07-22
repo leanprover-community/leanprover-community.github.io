@@ -1,0 +1,94 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/21714helpwithsequences.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html">help with sequences</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171425766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171425766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171425766">Koundinya Vajjha (Jul 22 2019 at 12:28)</a>:</h4>
+<p>I am trying to prove that if a sequence <code>x</code> converges to <code>θ </code> then <code>inc_seq_of x</code> also converges to <code>θ </code>, where <code>inc_seq_of x</code> is as follows:</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="n">def</span> <span class="n">inc_seq_of</span>  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">nnreal</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">nnreal</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">x</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">max</span> <span class="o">(</span><span class="n">x</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">inc_seq_of</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I am stuck in a proof where the state is the following:</p>
+<div class="codehilite"><pre><span></span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">nnreal</span><span class="o">,</span>
+<span class="n">θ</span> <span class="o">:</span> <span class="n">nnreal</span><span class="o">,</span>
+<span class="n">hfs</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">x</span> <span class="n">n</span> <span class="bp">≤</span> <span class="n">θ</span><span class="o">,</span>
+<span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">nnreal</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">nnreal</span><span class="o">),</span> <span class="n">is_open</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">θ</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">b</span> <span class="bp">≥</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">x</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">s</span><span class="o">),</span>
+<span class="n">hs</span> <span class="o">:</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">set</span> <span class="n">nnreal</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">t</span> <span class="err">⊆</span> <span class="n">s</span><span class="o">),</span> <span class="n">is_open</span> <span class="n">t</span> <span class="bp">∧</span> <span class="n">θ</span> <span class="err">∈</span> <span class="n">t</span>
+<span class="err">⊢</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">b</span> <span class="bp">≥</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">inc_seq_of</span> <span class="n">x</span> <span class="n">b</span> <span class="err">∈</span> <span class="n">s</span>
+</pre></div>
+
+
+<p>I need to somehow pick an open interval around <code>θ</code> and work with that. Are there any lemmas saying something like this?  I can't seem to understand how to use the basic open sets of <code>nnreal</code> in a proof.</p>
+
+<a name="171425810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171425810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171425810">Kenny Lau (Jul 22 2019 at 12:29)</a>:</h4>
+<p>x = 1, 1/2, 1/3, 1/4, 1/5, ...<br>
+inc_seq_of x = 1, 1, 1, 1, 1, ...<br>
+?</p>
+
+<a name="171425958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171425958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171425958">Koundinya Vajjha (Jul 22 2019 at 12:31)</a>:</h4>
+<p>Sorry I should have mentioned that my sequence converges to a point which is bigger than or equal to every term</p>
+
+<a name="171425968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171425968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171425968">Koundinya Vajjha (Jul 22 2019 at 12:31)</a>:</h4>
+<p>See hypothesis <code>hfs</code>.</p>
+
+<a name="171426066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426066">Kenny Lau (Jul 22 2019 at 12:32)</a>:</h4>
+<p>hfs?</p>
+
+<a name="171426074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426074">Koundinya Vajjha (Jul 22 2019 at 12:32)</a>:</h4>
+<p>In the snippet.</p>
+
+<a name="171426433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426433">Kevin Buzzard (Jul 22 2019 at 12:39)</a>:</h4>
+<p>You know x n is a nnreal which is &lt;= 0? Just prove it's zero and then prove everything is zero.</p>
+
+<a name="171426453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426453">Koundinya Vajjha (Jul 22 2019 at 12:39)</a>:</h4>
+<p>hah no that's a theta not zero.</p>
+
+<a name="171426464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426464">Kevin Buzzard (Jul 22 2019 at 12:39)</a>:</h4>
+<p>ha ha I should put my glasses on :-)</p>
+
+<a name="171426584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426584">Kevin Buzzard (Jul 22 2019 at 12:41)</a>:</h4>
+<p>Why don't you just prove that x n &lt;= inc_Seq_of x n &lt;= theta and then use the sandwich theorem?</p>
+
+<a name="171426602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426602">Kevin Buzzard (Jul 22 2019 at 12:42)</a>:</h4>
+<p><a href="http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html">http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html</a></p>
+
+<a name="171426659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426659">Koundinya Vajjha (Jul 22 2019 at 12:42)</a>:</h4>
+<p>oh wow I didn't know we had the sandwich theorem!</p>
+
+<a name="171426677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426677">Kevin Buzzard (Jul 22 2019 at 12:43)</a>:</h4>
+<p>We have things like the definition of e^x as a power series; we will surely have oodles of lemmas about sequences and series converging.</p>
+
+<a name="171426692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/help%20with%20sequences/near/171426692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/21714helpwithsequences.html#171426692">Kevin Buzzard (Jul 22 2019 at 12:43)</a>:</h4>
+<p>But I don't know this part of mathlib at all.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
