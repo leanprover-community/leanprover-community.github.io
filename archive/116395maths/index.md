@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [gluing functions](66720gluingfunctions.html) (20 messages, latest: Jul 22 2019 at 11:13)
+
 * [power series](15161powerseries.html) (47 messages, latest: Jul 22 2019 at 08:47)
 
 * [abelian categories](41619abeliancategories.html) (11 messages, latest: Jul 22 2019 at 08:20)
-
-* [gluing functions](66720gluingfunctions.html) (18 messages, latest: Jul 22 2019 at 06:11)
 
 * [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
 
