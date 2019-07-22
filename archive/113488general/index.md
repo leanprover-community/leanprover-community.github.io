@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (10 messages, latest: Jul 22 2019 at 01:59)
+* [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (15 messages, latest: Jul 22 2019 at 02:13)
 
 * [Type class failure](63937Typeclassfailure.html) (5 messages, latest: Jul 22 2019 at 01:14)
 

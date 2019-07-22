@@ -53,6 +53,36 @@ permalink: archive/113488general/22370removingdecidabilityinstancesfrompolynomia
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/removing%20decidability%20instances%20from%20polynomials/near/171397386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22370removingdecidabilityinstancesfrompolynomials.html#171397386">Scott Morrison (Jul 22 2019 at 01:59)</a>:</h4>
 <p>There are still some problems in <code>src/linear_algebra/finsupp.lean</code> that I'm having trouble with.</p>
 
+<a name="171397456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/removing%20decidability%20instances%20from%20polynomials/near/171397456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22370removingdecidabilityinstancesfrompolynomials.html#171397456">Scott Morrison (Jul 22 2019 at 02:00)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="171397591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/removing%20decidability%20instances%20from%20polynomials/near/171397591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22370removingdecidabilityinstancesfrompolynomials.html#171397591">Scott Morrison (Jul 22 2019 at 02:05)</a>:</h4>
+<p>I'm getting strange errors like</p>
+<div class="codehilite"><pre><span></span>synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  finset.has_union
+inferred
+  finset.has_union
+</pre></div>
+
+<a name="171397596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/removing%20decidability%20instances%20from%20polynomials/near/171397596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22370removingdecidabilityinstancesfrompolynomials.html#171397596">Scott Morrison (Jul 22 2019 at 02:05)</a>:</h4>
+<p>which expands with <code>pp.all</code> to</p>
+<div class="codehilite"><pre><span></span>synthesized type class instance is not definitionally equal to expression inferred by typing rules, synthesized
+  @finset.has_union.{0} nat (λ (a b : nat), nat.decidable_eq a b)
+inferred
+  @finset.has_union.{0} nat (λ (a b : nat), classical.prop_decidable (@eq.{1} nat a b))
+</pre></div>
+
+<a name="171397640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/removing%20decidability%20instances%20from%20polynomials/near/171397640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22370removingdecidabilityinstancesfrompolynomials.html#171397640">Scott Morrison (Jul 22 2019 at 02:06)</a>:</h4>
+<p>But I don't know how to diagnose where <code>nat.decidable_eq</code> instances are creeping in.</p>
+
+<a name="171397851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/removing%20decidability%20instances%20from%20polynomials/near/171397851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22370removingdecidabilityinstancesfrompolynomials.html#171397851">Mario Carneiro (Jul 22 2019 at 02:13)</a>:</h4>
+<p>I think <code>convert</code> will fix those issues</p>
+
 
 {% endraw %}
 
