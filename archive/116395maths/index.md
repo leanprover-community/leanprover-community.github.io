@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (4 messages, latest: Jul 22 2019 at 04:21)
+* [gluing functions](66720gluingfunctions.html) (17 messages, latest: Jul 22 2019 at 05:56)
 
 * [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
 
