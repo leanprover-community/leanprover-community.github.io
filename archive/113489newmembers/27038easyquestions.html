@@ -259,6 +259,33 @@ permalink: archive/113489newmembers/27038easyquestions.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171380034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171380034">Chris Hughes (Jul 21 2019 at 17:05)</a>:</h4>
 <p>You could write <code>eq.rec_on (type_eq_of_heq (h : x == y)) x</code></p>
 
+<a name="171419680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171419680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171419680">Gun Pinyo (Jul 22 2019 at 10:34)</a>:</h4>
+<p>Hi, there. Can anyone tell me why the following example doesn't work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+  <span class="k">begin</span> <span class="n">rw</span> <span class="n">p</span><span class="o">,</span> <span class="n">reflexivity</span> <span class="kn">end</span>
+</pre></div>
+
+
+<p>after <code>rw p</code> the goal is <code>unit → β = unit → β</code> but <code>reflexivity</code> doesn't work.</p>
+
+<a name="171419725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171419725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171419725">Chris Hughes (Jul 22 2019 at 10:35)</a>:</h4>
+<p>Brackets</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">unit</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">unit</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span> <span class="n">rw</span> <span class="n">p</span> <span class="kn">end</span>
+</pre></div>
+
+<a name="171419787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171419787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171419787">Gun Pinyo (Jul 22 2019 at 10:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> wow, such a silly mistake. Thank you</p>
+
+<a name="171420094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171420094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171420094">Kenny Lau (Jul 22 2019 at 10:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">=</span> <span class="n">unit</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span>
+  <span class="k">begin</span> <span class="n">intros</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">p</span><span class="o">,</span> <span class="n">h</span><span class="o">],</span> <span class="n">exact</span> <span class="o">()</span> <span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

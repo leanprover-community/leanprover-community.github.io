@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (184 messages, latest: Jul 22 2019 at 10:57)
+
 * [algebraic closure](74840algebraicclosure.html) (34 messages, latest: Jul 22 2019 at 06:19)
 
 * [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (15 messages, latest: Jul 22 2019 at 02:13)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [I love library_search](15882Ilovelibrarysearch.html) (3 messages, latest: Jul 21 2019 at 08:07)
 
 * [subobjects](84917subobjects.html) (24 messages, latest: Jul 20 2019 at 23:05)
-
-* [Lean in the wild](43625Leaninthewild.html) (181 messages, latest: Jul 20 2019 at 13:03)
 
 * [has_sub](66406hassub.html) (1 message, latest: Jul 19 2019 at 23:19)
 

@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [easy questions](27038easyquestions.html) (47 messages, latest: Jul 22 2019 at 10:43)
+
 * [Help with a weird lambda](20899Helpwithaweirdlambda.html) (25 messages, latest: Jul 22 2019 at 09:14)
 
 * [int.succ_ne_self](22723intsuccneself.html) (16 messages, latest: Jul 21 2019 at 23:36)
-
-* [easy questions](27038easyquestions.html) (43 messages, latest: Jul 21 2019 at 17:05)
 
 * [Pipe character "\|" not working to  denote divides](06744Pipecharacternotworkingtodenotedivides.html) (7 messages, latest: Jul 21 2019 at 04:20)
 
