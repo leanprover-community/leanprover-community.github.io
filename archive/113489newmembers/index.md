@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [weird interaction with namespace, parameter, and tactic](22569weirdinteractionwithnamespaceparameterandtactic.html) (5 messages, latest: Jul 22 2019 at 20:50)
+
 * [easy questions](27038easyquestions.html) (52 messages, latest: Jul 22 2019 at 18:08)
 
 * [noob question(s)](52075noobquestions.html) (1295 messages, latest: Jul 22 2019 at 16:53)
