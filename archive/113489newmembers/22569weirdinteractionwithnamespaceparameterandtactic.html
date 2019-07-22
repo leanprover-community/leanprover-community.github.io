@@ -88,6 +88,19 @@ I suspect that it is will have anything to do with namespace and tactic.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/weird%20interaction%20with%20namespace%2C%20parameter%2C%20and%20tactic/near/171471524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22569weirdinteractionwithnamespaceparameterandtactic.html#171471524">Gun Pinyo (Jul 22 2019 at 21:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I understand that <code>foo' :  bool → Type</code> outside the section. But inside the section, up to my understanding, every definition will silently insert the parameter in. But weirdly, it doesn't happen inside the tactic if it is under some namespace. Should I think this as a bug and should try to avoid using parameters?</p>
 
+<a name="171472525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/weird%20interaction%20with%20namespace%2C%20parameter%2C%20and%20tactic/near/171472525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22569weirdinteractionwithnamespaceparameterandtactic.html#171472525">Jesse Michael Han (Jul 22 2019 at 22:11)</a>:</h4>
+<p>I think it is indeed a bug, since inside the section and outside of tactic mode,</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">foo&#39;</span>
+</pre></div>
+
+
+<p>works as intended (<code>b</code> is inserted as an argument).</p>
+
+<a name="171475724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/weird%20interaction%20with%20namespace%2C%20parameter%2C%20and%20tactic/near/171475724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22569weirdinteractionwithnamespaceparameterandtactic.html#171475724">Mario Carneiro (Jul 22 2019 at 22:59)</a>:</h4>
+<p>I don't know if it's a bug, but it is certainly abstraction leakage. Inside tactic mode it doesn't have a good grasp of what namespace and sections it's in, so it's hard to simulate parameters correctly</p>
+
 
 {% endraw %}
 
