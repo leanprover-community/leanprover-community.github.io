@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [gluing functions](66720gluingfunctions.html) (2 messages, latest: Jul 22 2019 at 00:59)
+
+* [power series](15161powerseries.html) (32 messages, latest: Jul 22 2019 at 00:58)
+
 * [fancy inductive types and mathematics](17269fancyinductivetypesandmathematics.html) (1 message, latest: Jul 21 2019 at 23:52)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (271 messages, latest: Jul 21 2019 at 21:04)
@@ -18,10 +22,6 @@ permalink: archive/116395maths/index.html
 * [to_additive](21549toadditive.html) (11 messages, latest: Jul 21 2019 at 14:52)
 
 * [has_map_add type class](59162hasmapaddtypeclass.html) (4 messages, latest: Jul 21 2019 at 07:49)
-
-* [gluing functions](66720gluingfunctions.html) (1 message, latest: Jul 21 2019 at 06:50)
-
-* [power series](15161powerseries.html) (31 messages, latest: Jul 20 2019 at 09:56)
 
 * [Sheafification?](51005Sheafification.html) (24 messages, latest: Jul 20 2019 at 09:55)
 
