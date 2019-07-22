@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
+* [gluing functions](66720gluingfunctions.html) (4 messages, latest: Jul 22 2019 at 04:21)
 
-* [gluing functions](66720gluingfunctions.html) (3 messages, latest: Jul 22 2019 at 01:01)
+* [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
 
 * [power series](15161powerseries.html) (32 messages, latest: Jul 22 2019 at 00:58)
 
