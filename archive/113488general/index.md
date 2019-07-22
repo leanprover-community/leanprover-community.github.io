@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [multiple dependencies](88820multipledependencies.html) (1 message, latest: Jul 21 2019 at 22:52)
+* [multiple dependencies](88820multipledependencies.html) (2 messages, latest: Jul 21 2019 at 23:02)
 
 * [algebraic closure](74840algebraicclosure.html) (33 messages, latest: Jul 21 2019 at 16:13)
 

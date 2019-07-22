@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [fancy inductive types and mathematics](17269fancyinductivetypesandmathematics.html) (1 message, latest: Jul 21 2019 at 23:52)
+
 * [bundling mul_homs](58200bundlingmulhoms.html) (271 messages, latest: Jul 21 2019 at 21:04)
 
 * [R^n and convex analysis](65865Rnandconvexanalysis.html) (5 messages, latest: Jul 21 2019 at 18:59)
