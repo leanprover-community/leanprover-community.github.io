@@ -409,6 +409,74 @@ I'm fine with ignoring sites for the moment. There is loads of interesting stuff
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171428255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171428255">Johan Commelin (Jul 22 2019 at 13:04)</a>:</h4>
 <p>Kenny and Mario did a wonderful job with the gluing of sheaves thing. Now it should go to mathlib, instead of rot away on a Zulip thread.</p>
 
+<a name="171433738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171433738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171433738">Kevin Buzzard (Jul 22 2019 at 14:10)</a>:</h4>
+<p>But they use a different definition of presheaf to the one in mathlib. I am not clear about how you want to take this forward.</p>
+
+<a name="171436657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171436657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171436657">Johan Commelin (Jul 22 2019 at 14:45)</a>:</h4>
+<p>Is it different from the one Kenny is using in this thread? Because the one in this thread is only syntactically different from the one in mathlib.</p>
+
+<a name="171436748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171436748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171436748">Kevin Buzzard (Jul 22 2019 at 14:46)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">presheaf</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">F</span>     <span class="o">:</span> <span class="n">opens</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="o">(</span><span class="n">res</span>   <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">HVU</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">),</span> <span class="n">F</span> <span class="n">U</span> <span class="bp">→</span> <span class="n">F</span> <span class="n">V</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Hid</span>   <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">U</span><span class="o">),</span> <span class="n">res</span> <span class="n">U</span> <span class="n">U</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">refl</span> <span class="n">U</span><span class="o">)</span> <span class="bp">=</span> <span class="n">id</span><span class="o">)</span>
+<span class="o">(</span><span class="n">Hcomp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">U</span> <span class="n">V</span> <span class="n">W</span><span class="o">)</span> <span class="o">(</span><span class="n">HWV</span> <span class="o">:</span> <span class="n">W</span> <span class="err">⊆</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">HVU</span> <span class="o">:</span> <span class="n">V</span> <span class="err">⊆</span> <span class="n">U</span><span class="o">),</span>
+  <span class="n">res</span> <span class="n">U</span> <span class="n">W</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">subset</span><span class="bp">.</span><span class="n">trans</span> <span class="n">HWV</span> <span class="n">HVU</span><span class="o">)</span> <span class="bp">=</span> <span class="n">res</span> <span class="n">V</span> <span class="n">W</span> <span class="n">HWV</span> <span class="err">∘</span> <span class="n">res</span> <span class="n">U</span> <span class="n">V</span> <span class="n">HVU</span><span class="o">)</span>
+</pre></div>
+
+<a name="171437001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437001">Kevin Buzzard (Jul 22 2019 at 14:49)</a>:</h4>
+<p>Mathlib:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">presheaf</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">Top</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">})</span> <span class="o">:=</span> <span class="o">(</span><span class="n">opens</span> <span class="n">X</span><span class="o">)</span><span class="err">ᵒᵖ</span> <span class="err">⥤</span> <span class="n">C</span>
+</pre></div>
+
+<a name="171437085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437085">Johan Commelin (Jul 22 2019 at 14:50)</a>:</h4>
+<p>But <code>⥤</code> expands to your <code>structure</code> (up to contravariance).</p>
+
+<a name="171437242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437242">Kevin Buzzard (Jul 22 2019 at 14:52)</a>:</h4>
+<p>so ours is slightly better for this use case because we don't have the <code>op</code> issues.</p>
+
+<a name="171437292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437292">Kevin Buzzard (Jul 22 2019 at 14:53)</a>:</h4>
+<p>I don't know how serious they are to deal with though, I have never used categories seriously.</p>
+
+<a name="171437418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437418">Kevin Buzzard (Jul 22 2019 at 14:54)</a>:</h4>
+<p>I can see Kenny's point of view though, he made what he needed in the simplest way and he knows how to work with it.</p>
+
+<a name="171437454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437454">Kevin Buzzard (Jul 22 2019 at 14:55)</a>:</h4>
+<p>The issue that was holding me back was another one, namely the question on how to define a sheaf on an open subset of X.</p>
+
+<a name="171437476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437476">Kevin Buzzard (Jul 22 2019 at 14:55)</a>:</h4>
+<p>Kenny just defined it to be a sheaf on X.</p>
+
+<a name="171437494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437494">Kevin Buzzard (Jul 22 2019 at 14:55)</a>:</h4>
+<p>and then never used <code>=</code></p>
+
+<a name="171437673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437673">Johan Commelin (Jul 22 2019 at 14:57)</a>:</h4>
+<p>Sure, but that is orthogonal to whether you use the category library.</p>
+
+<a name="171437748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437748">Kevin Buzzard (Jul 22 2019 at 14:58)</a>:</h4>
+<p>Kenny is just using the definition which is most convenient for doing what it is he wants to do</p>
+
+<a name="171437770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437770">Kevin Buzzard (Jul 22 2019 at 14:58)</a>:</h4>
+<p>The category theory library offers this slightly more bundled experience and the added inconvenience of the ops.</p>
+
+<a name="171437791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171437791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171437791">Kevin Buzzard (Jul 22 2019 at 14:59)</a>:</h4>
+<p>I can see why he's chosen to do it this way.</p>
+
 
 {% endraw %}
 
