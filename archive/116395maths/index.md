@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (50 messages, latest: Jul 22 2019 at 14:59)
+* [gluing functions](66720gluingfunctions.html) (59 messages, latest: Jul 22 2019 at 15:33)
 
 * [help with sequences](21714helpwithsequences.html) (14 messages, latest: Jul 22 2019 at 12:43)
 

@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [documentation requirements](33663documentationrequirements.html) (10 messages, latest: Jul 22 2019 at 16:34)
+
+* [github 500s](86284github500s.html) (2 messages, latest: Jul 22 2019 at 15:53)
+
 * [Lean in the wild](43625Leaninthewild.html) (184 messages, latest: Jul 22 2019 at 10:57)
 
 * [algebraic closure](74840algebraicclosure.html) (34 messages, latest: Jul 22 2019 at 06:19)
@@ -54,8 +58,6 @@ permalink: archive/113488general/index.html
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (4 messages, latest: Jul 15 2019 at 13:23)
 
 * [trace.class_instances](60859traceclassinstances.html) (1 message, latest: Jul 15 2019 at 12:04)
-
-* [documentation requirements](33663documentationrequirements.html) (2 messages, latest: Jul 15 2019 at 11:07)
 
 * [documentation](05083documentation.html) (3 messages, latest: Jul 14 2019 at 17:03)
 
