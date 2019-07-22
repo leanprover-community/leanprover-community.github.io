@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [power series](15161powerseries.html) (39 messages, latest: Jul 22 2019 at 06:49)
+* [abelian categories](41619abeliancategories.html) (3 messages, latest: Jul 22 2019 at 07:52)
 
-* [abelian categories](41619abeliancategories.html) (1 message, latest: Jul 22 2019 at 06:11)
+* [power series](15161powerseries.html) (39 messages, latest: Jul 22 2019 at 06:49)
 
 * [gluing functions](66720gluingfunctions.html) (18 messages, latest: Jul 22 2019 at 06:11)
 
