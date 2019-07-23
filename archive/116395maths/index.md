@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (68 messages, latest: Jul 23 2019 at 05:15)
+* [colimits in Top](44719colimitsinTop.html) (32 messages, latest: Jul 23 2019 at 09:59)
+
+* [gluing functions](66720gluingfunctions.html) (70 messages, latest: Jul 23 2019 at 09:59)
 
 * [help with sequences](21714helpwithsequences.html) (14 messages, latest: Jul 22 2019 at 12:43)
 
