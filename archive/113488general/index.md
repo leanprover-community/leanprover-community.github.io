@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [documentation requirements](33663documentationrequirements.html) (25 messages, latest: Jul 23 2019 at 15:21)
+
 * [generalize semicolon](37872generalizesemicolon.html) (14 messages, latest: Jul 23 2019 at 13:58)
 
 * [recursor_of "list" is none](34070recursoroflistisnone.html) (6 messages, latest: Jul 23 2019 at 13:17)
 
 * [anonymous hypotheses](97814anonymoushypotheses.html) (1 message, latest: Jul 23 2019 at 13:08)
-
-* [documentation requirements](33663documentationrequirements.html) (24 messages, latest: Jul 23 2019 at 08:56)
 
 * [quotient.mk_out](83831quotientmkout.html) (1 message, latest: Jul 23 2019 at 08:43)
 
