@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (185 messages, latest: Jul 23 2019 at 05:31)
+
 * [documentation requirements](33663documentationrequirements.html) (21 messages, latest: Jul 22 2019 at 22:22)
 
 * [user_attribute.cache_cfg](12932userattributecachecfg.html) (7 messages, latest: Jul 22 2019 at 21:39)
@@ -52,8 +54,6 @@ permalink: archive/113488general/index.html
 * [well_founded finsupp](29214wellfoundedfinsupp.html) (76 messages, latest: Jul 16 2019 at 07:01)
 
 * [transport and parametricity](74751transportandparametricity.html) (152 messages, latest: Jul 16 2019 at 03:21)
-
-* [online leanprover](19268onlineleanprover.html) (184 messages, latest: Jul 15 2019 at 21:13)
 
 * [has_coe_to_fun with implicit arguments](96650hascoetofunwithimplicitarguments.html) (4 messages, latest: Jul 15 2019 at 13:23)
 
