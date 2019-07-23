@@ -1,0 +1,39 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/34070recursoroflistisnone.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html">recursor_of "list" is none</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171513840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171513840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171513840">Cyril Cohen (Jul 23 2019 at 12:38)</a>:</h4>
+<p>Dear all, could someone tell me why the result of</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span> <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span> <span class="k">let</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">env</span><span class="bp">.</span><span class="n">recursor_of</span> <span class="s2">&quot;list&quot;</span><span class="o">,</span> <span class="n">trace</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>is <code>none</code>?</p>
+
+<a name="171514476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171514476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171514476">Chris Hughes (Jul 23 2019 at 12:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">do</span> <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span> <span class="k">let</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">env</span><span class="bp">.</span><span class="n">recursor_of</span> <span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">rec</span><span class="o">,</span> <span class="n">trace</span> <span class="n">r</span> <span class="c1">--(some list)</span>
+</pre></div>
+
+
+<p>Looks like it returns a type given a recursor.</p>
+
+<a name="171515311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171515311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171515311">Kenny Lau (Jul 23 2019 at 12:59)</a>:</h4>
+<p>from my experiments it looks like that if it returns none, then the recursor is X.rec</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
