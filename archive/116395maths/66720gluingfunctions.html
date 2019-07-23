@@ -994,6 +994,104 @@ c : C
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171542566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171542566">Johan Commelin (Jul 23 2019 at 18:02)</a>:</h4>
 <p>I guess we'll have to live with <code>uplift</code>... taking non-small limits comes with its own bucket of headaches.</p>
 
+<a name="171555088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171555088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171555088">Kevin Buzzard (Jul 23 2019 at 20:28)</a>:</h4>
+<p>I'm trying to prove that my homsets are subsingletons and Lean is asking me whether the left inclusion <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>U</mi><mo>∩</mo><mi>U</mi><mo>→</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">U\cap U\to U</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span></span></span></span> is equal to the right inclusion.</p>
+
+<a name="171555097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171555097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171555097">Kevin Buzzard (Jul 23 2019 at 20:29)</a>:</h4>
+<p>What am I supposed to say to that??</p>
+
+<a name="171555108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171555108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171555108">Kevin Buzzard (Jul 23 2019 at 20:29)</a>:</h4>
+<p>They're definitely the same :-/</p>
+
+<a name="171555228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171555228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171555228">Kevin Buzzard (Jul 23 2019 at 20:30)</a>:</h4>
+<p>I think I mustn't implement the hom sets as abstract types. I think I actually need to think about them as explicit functions and then I can extensionality.</p>
+
+<a name="171556026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171556026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171556026">Kevin Buzzard (Jul 23 2019 at 20:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> I don't know how to steer the category theory library. All I want to do is glue a bunch of unbundled top spaces together. I need to make the appropriate category. The objects I can make. For the morphisms I tried first making a partial order on the objects and then making the associated small category, and I was forever having to deal with goals like <code>plift (X or Y)</code> not being able to decompose easily. I'm now trying to build the morphisms but I can't prove that hom sets are subsingletons and I don't know whether I should be trying to do that or not.</p>
+
+<a name="171556497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171556497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171556497">Kevin Buzzard (Jul 23 2019 at 20:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">Top</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">instances</span><span class="bp">.</span><span class="n">real</span>
+
+<span class="c1">-- Want to create X from an open cover U_i, as a colimit.</span>
+<span class="c1">-- So we&#39;re given the U_i for i in an index type I, and</span>
+<span class="c1">-- also the &quot;glue&quot;</span>
+
+<span class="c1">-- unbundled data</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">i</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">i</span><span class="o">)</span> <span class="c1">-- index type</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">Ui</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span><span class="o">,</span> <span class="n">topological_space</span> <span class="o">(</span><span class="n">Ui</span> <span class="n">i</span><span class="o">)]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">Uij</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span><span class="o">,</span> <span class="n">topological_space</span> <span class="o">(</span><span class="n">Uij</span> <span class="n">i</span> <span class="n">j</span><span class="o">)]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">inc_l</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">i</span> <span class="n">j</span><span class="o">},</span> <span class="n">Uij</span> <span class="n">i</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">Ui</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">inc_l_cts</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">@</span><span class="n">inc_l</span> <span class="n">i</span> <span class="n">j</span><span class="o">))</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">inc_r</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">i</span> <span class="n">j</span><span class="o">},</span> <span class="n">Uij</span> <span class="n">i</span> <span class="n">j</span> <span class="bp">→</span> <span class="n">Ui</span> <span class="n">j</span><span class="o">)</span> <span class="o">(</span><span class="n">inc_r_cts</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="n">I</span><span class="o">,</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">@</span><span class="n">inc_r</span> <span class="n">i</span> <span class="n">j</span><span class="o">))</span>
+
+<span class="kn">inductive</span> <span class="n">J</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">i</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">of_I</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">J</span>
+<span class="bp">|</span> <span class="n">of_glue</span> <span class="o">:</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">J</span>
+
+<span class="kn">namespace</span> <span class="n">J</span>
+
+<span class="c1">-- In general, things are easier if homs are props.</span>
+<span class="c1">-- But in category theory I had problems defining maps</span>
+<span class="c1">-- from a proppyhom category because I was always having</span>
+<span class="c1">-- to solve goals of the form plift (X ∨ Y) -&gt; plift X ⊕ plift Y.</span>
+<span class="c1">-- So I gave up on</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">inductive le : J I → J I → Prop</span>
+<span class="cm">| refl (j : J I) : le j j</span>
+<span class="cm">| res_l (i₁ i₂ : I) : le (of_I i₁) (of_glue i₁ i₂)</span>
+<span class="cm">| res_r (i₁ i₂ : I) : le (of_I i₂) (of_glue i₁ i₂)</span>
+<span class="cm">-/</span>
+
+<span class="c1">-- and went for homs in Type u.</span>
+
+<span class="kn">inductive</span> <span class="n">hom</span> <span class="o">:</span> <span class="n">J</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">J</span> <span class="n">I</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">i</span>
+<span class="bp">|</span> <span class="n">id</span> <span class="o">(</span><span class="n">j</span> <span class="o">:</span> <span class="n">J</span> <span class="n">I</span><span class="o">)</span> <span class="o">:</span> <span class="n">hom</span> <span class="n">j</span> <span class="n">j</span>
+<span class="bp">|</span> <span class="n">res_l</span> <span class="o">(</span><span class="n">i₁</span> <span class="n">i₂</span> <span class="o">:</span> <span class="n">I</span><span class="o">)</span> <span class="o">:</span> <span class="n">hom</span> <span class="o">(</span><span class="n">of_I</span> <span class="n">i₁</span><span class="o">)</span> <span class="o">(</span><span class="n">of_glue</span> <span class="n">i₁</span> <span class="n">i₂</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">res_r</span> <span class="o">(</span><span class="n">i₁</span> <span class="n">i₂</span> <span class="o">:</span> <span class="n">I</span><span class="o">)</span> <span class="o">:</span> <span class="n">hom</span> <span class="o">(</span><span class="n">of_I</span> <span class="n">i₂</span><span class="o">)</span> <span class="o">(</span><span class="n">of_glue</span> <span class="n">i₁</span> <span class="n">i₂</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">hom</span>
+
+<span class="n">def</span> <span class="n">hom</span><span class="bp">.</span><span class="n">comp</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">J</span> <span class="n">I</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">hom</span> <span class="n">I</span> <span class="n">X</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">hom</span> <span class="n">I</span> <span class="n">Y</span> <span class="n">Z</span><span class="o">),</span> <span class="n">hom</span> <span class="n">I</span> <span class="n">X</span> <span class="n">Z</span>
+  <span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">id</span> <span class="bp">_</span><span class="o">)</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">h</span>
+  <span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span> <span class="o">(</span><span class="n">id</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">h</span>
+  <span class="c1">-- these next lines should match the line above, right?</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">of_I</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">of_glue</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">of_glue</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">res_l</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">of_glue</span> <span class="n">i₁</span> <span class="n">i₂</span><span class="o">))</span> <span class="o">:=</span> <span class="n">res_l</span> <span class="n">i₁</span> <span class="n">i₂</span>
+  <span class="bp">|</span> <span class="o">(</span><span class="n">of_I</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">of_glue</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">of_glue</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">res_r</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">id</span> <span class="o">(</span><span class="n">of_glue</span> <span class="n">i₁</span> <span class="n">i₂</span><span class="o">))</span> <span class="o">:=</span> <span class="n">res_r</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="kn">instance</span> <span class="n">category_struct</span> <span class="o">:</span> <span class="n">category_struct</span> <span class="o">(</span><span class="n">J</span> <span class="n">I</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span>  <span class="o">:=</span> <span class="n">hom</span> <span class="n">I</span><span class="o">,</span>
+  <span class="n">id</span>   <span class="o">:=</span> <span class="n">hom</span><span class="bp">.</span><span class="n">id</span><span class="o">,</span>
+  <span class="n">comp</span> <span class="o">:=</span> <span class="n">hom</span><span class="bp">.</span><span class="n">comp</span> <span class="n">I</span> <span class="o">}</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">J</span> <span class="n">I</span><span class="o">)</span> <span class="o">:</span> <span class="n">subsingleton</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">refl</span><span class="o">,</span>
+  <span class="c1">-- wait this might not actually be true. Is res_l i i equal to res_r i i?</span>
+  <span class="n">sorry</span><span class="o">,</span><span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Do I care about subsingletons?</p>
+
+<a name="171556531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20functions/near/171556531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/66720gluingfunctions.html#171556531">Kevin Buzzard (Jul 23 2019 at 20:47)</a>:</h4>
+<p>Is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>U</mi><mo>∩</mo><mi>U</mi><mo>=</mo><mi>U</mi></mrow><annotation encoding="application/x-tex">U\cap U=U</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">∩</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.10903em;">U</span></span></span></span> abstractly or not?</p>
+
 
 {% endraw %}
 
