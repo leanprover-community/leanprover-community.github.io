@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [weird interaction with namespace, parameter, and tactic](22569weirdinteractionwithnamespaceparameterandtactic.html) (10 messages, latest: Jul 22 2019 at 22:59)
+* [Having trouble with infi](39421Havingtroublewithinfi.html) (6 messages, latest: Jul 24 2019 at 07:55)
+
+* [weird interaction with namespace, parameter, and tactic](22569weirdinteractionwithnamespaceparameterandtactic.html) (12 messages, latest: Jul 24 2019 at 07:08)
 
 * [easy questions](27038easyquestions.html) (52 messages, latest: Jul 22 2019 at 18:08)
 
