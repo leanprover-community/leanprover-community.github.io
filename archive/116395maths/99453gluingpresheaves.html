@@ -1,0 +1,27 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/99453gluingpresheaves.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html">gluing presheaves</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171569887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/171569887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#171569887">Scott Morrison (Jul 24 2019 at 00:59)</a>:</h4>
+<p>Sorry I haven't been participating in the great sheaf-hunt. I had a think while walking the dog this morning about the "high-brow" way to do gluing of (pre)sheaves, and came up with the following. (IANAAG, so this may all be nonsense...)</p>
+<p>Instead of thinking about the special case of gluing (pre)sheaves on a pair of open sets, I'd be more general, and try to construct colimits in the category of (pre)sheaved spaces. (This should avoid all the mucking about with open sets in open sets in open sets ...)</p>
+<p>Given a diagram <code>F : J \func (PresheafedSpace C)</code>, you can compose with the forgetful functor to <code>Top</code> and get a diagram of topological spaces. Take the colimit of this, and call the resulting space <code>X</code>. You can now pushforward the presheaves <code>(F.obj j).𝒪</code> to get presheaves on <code>X</code>, and indeed you ... get a diagram <code>F' : J \func (X.presheaf C)</code>. As long as <code>C</code> has limits, <code>X.presheaf C</code> automatically has limits, so we just take the limit of <code>F'</code> to define our final presheaf <code>O</code> on <code>X</code>.</p>
+<p>There's a cocone on <code>F</code> with tip <code>(X, O)</code>. Its <code>j</code> component is just the pair consisting of the inclusion of <code>(F.obj j).to_Top</code> into <code>X</code>, and the component of the limit cone for <code>F'</code>.</p>
+<p>Presumably this cocone is actually universal, but I didn't think about it!</p>
+<p>Finally, we better check that if we glue presheaves which are actually sheaves, we end up with a sheaf. The sheaf condition on <code>G : (opens X)^op \func C</code> says that <code>G</code> preserves certain limits. (In particular, limits of the "pairwise intersections" diagrams for a cover, but I think you can also <a href="https://mathoverflow.net/questions/23268/geometric-intuition-for-limits/80767#comment48292_23276" target="_blank" title="https://mathoverflow.net/questions/23268/geometric-intuition-for-limits/80767#comment48292_23276">get away</a> with saying it preserves limits over arbitrary filtered (not cofiltered!) diagrams in <code>(opens X)^op</code>; doesn't matter either way.) Now there's just a general fact that if you have a diagram of functors, which all preserve limits of a certain shape, then the limit of that diagram of functors also preserves limits of that shape (this part is not in mathlib yet, but should be pretty easy; first prove the Fubini theorem for limits?), and this gives the result.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

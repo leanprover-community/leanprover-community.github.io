@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [gluing functions](66720gluingfunctions.html) (147 messages, latest: Jul 23 2019 at 22:19)
+* [gluing presheaves](99453gluingpresheaves.html) (1 message, latest: Jul 24 2019 at 00:59)
+
+* [gluing functions](66720gluingfunctions.html) (148 messages, latest: Jul 24 2019 at 00:36)
 
 * [colimits in Top](44719colimitsinTop.html) (66 messages, latest: Jul 23 2019 at 14:03)
 
