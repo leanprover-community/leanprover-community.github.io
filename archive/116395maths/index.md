@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [help with sequences](21714helpwithsequences.html) (15 messages, latest: Jul 24 2019 at 19:03)
+
 * [gluing functions](66720gluingfunctions.html) (149 messages, latest: Jul 24 2019 at 07:40)
 
 * [gluing presheaves](99453gluingpresheaves.html) (2 messages, latest: Jul 24 2019 at 04:31)
 
 * [colimits in Top](44719colimitsinTop.html) (66 messages, latest: Jul 23 2019 at 14:03)
-
-* [help with sequences](21714helpwithsequences.html) (14 messages, latest: Jul 22 2019 at 12:43)
 
 * [power series](15161powerseries.html) (47 messages, latest: Jul 22 2019 at 08:47)
 
