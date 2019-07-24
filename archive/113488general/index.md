@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [the apple monad](89187theapplemonad.html) (1 message, latest: Jul 24 2019 at 05:16)
+
 * [documentation requirements](33663documentationrequirements.html) (27 messages, latest: Jul 23 2019 at 21:19)
 
 * [generalize semicolon](37872generalizesemicolon.html) (14 messages, latest: Jul 23 2019 at 13:58)
