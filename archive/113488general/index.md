@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (48 messages, latest: Jul 24 2019 at 09:57)
+* [documentation requirements](33663documentationrequirements.html) (29 messages, latest: Jul 24 2019 at 10:53)
 
-* [recursor_of "list" is none](34070recursoroflistisnone.html) (29 messages, latest: Jul 24 2019 at 09:25)
+* [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (55 messages, latest: Jul 24 2019 at 10:38)
+
+* [recursor_of "list" is none](34070recursoroflistisnone.html) (30 messages, latest: Jul 24 2019 at 10:34)
 
 * [(no topic)](79918notopic.html) (52 messages, latest: Jul 24 2019 at 09:13)
 
 * [the apple monad](89187theapplemonad.html) (1 message, latest: Jul 24 2019 at 05:16)
-
-* [documentation requirements](33663documentationrequirements.html) (27 messages, latest: Jul 23 2019 at 21:19)
 
 * [generalize semicolon](37872generalizesemicolon.html) (14 messages, latest: Jul 23 2019 at 13:58)
 
