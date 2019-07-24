@@ -46,6 +46,37 @@ permalink: archive/113488general/34070recursoroflistisnone.html
 <p>C++ doc says: "If  n is the name of an elimination rule in env, then return the name of the inductive datatype D<br>
     s.t. n is an elimination rule of D. Otherwise, return none."</p>
 
+<a name="171586890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171586890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171586890">Cyril Cohen (Jul 24 2019 at 08:15)</a>:</h4>
+<blockquote>
+<p>C++ doc says: "If  n is the name of an elimination rule in env, then return the name of the inductive datatype D<br>
+    s.t. n is an elimination rule of D. Otherwise, return none."</p>
+</blockquote>
+<p>Thanks! Looks like the lean doc is wrong (<code>Return the recursor of the given inductive datatype</code>). Where can I find the C++ doc?</p>
+
+<a name="171587111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171587111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171587111">Cyril Cohen (Jul 24 2019 at 08:19)</a>:</h4>
+<blockquote>
+<p>Is there an inductive type whose recursor is not <code>X.rec</code>?</p>
+</blockquote>
+<p>Since <code>recursor_of</code> did not work, I am indeed using <code>X.rec</code>, but name-based meta-programming is not a very good practice in my experience.</p>
+
+<a name="171588820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171588820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171588820">Mario Carneiro (Jul 24 2019 at 08:51)</a>:</h4>
+<p>It's not always <code>rec</code> :/</p>
+
+<a name="171588868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171588868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171588868">Mario Carneiro (Jul 24 2019 at 08:52)</a>:</h4>
+<p>Sometimes it's <code>drec</code></p>
+
+<a name="171588889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171588889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171588889">Mario Carneiro (Jul 24 2019 at 08:52)</a>:</h4>
+<p>Or rather, I think <code>X.rec</code> always exists but it may not be primitive</p>
+
+<a name="171589124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171589124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171589124">Mario Carneiro (Jul 24 2019 at 08:56)</a>:</h4>
+<p>I don't see any docs, but from <a href="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm_environment.cpp#L183-L188" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm_environment.cpp#L183-L188">https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm_environment.cpp#L183-L188</a> it looks like Wojciech's description is correct</p>
+
 
 {% endraw %}
 
