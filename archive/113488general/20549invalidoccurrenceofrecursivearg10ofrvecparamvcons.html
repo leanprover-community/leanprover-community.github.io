@@ -431,6 +431,46 @@ This will be an incentive to write constructive functions and structures, since 
 <span class="kn">end</span>
 </pre></div>
 
+<a name="171599796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171599796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171599796">Cyril Cohen (Jul 24 2019 at 12:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> </p>
+<blockquote>
+<p>I think that this is a more important point than transferring weird inductive types. Large swaths of mathlib are nonconstructive</p>
+</blockquote>
+<p>I think the opposite: most of the statements are stated without classical features, but I should be able to translate any such statement, even if it contains a weird inductive predicate.</p>
+
+<a name="171600467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171600467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171600467">Mario Carneiro (Jul 24 2019 at 12:17)</a>:</h4>
+<p>I think it is important to be able to translate classical results that depend on other definitions that are classical but can be proven to be parametric by other means</p>
+
+<a name="171600837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171600837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171600837">Cyril Cohen (Jul 24 2019 at 12:22)</a>:</h4>
+<blockquote>
+<p>I think it is important to be able to translate classical results that depend on other definitions that are classical but can be proven to be parametric by other means</p>
+</blockquote>
+<p>Of course! but then you provide the parametricity proofs you depend on by hand. Most transfer result will be parametrized by isomorphisms  anyway (which are special cases of parametricity relations).</p>
+
+<a name="171600905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171600905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171600905">Cyril Cohen (Jul 24 2019 at 12:23)</a>:</h4>
+<p>Most of the time, the simplest way to prove something parametric will still be to give a constructive alternative definition <span aria-label="joy" class="emoji emoji-1f602" role="img" title="joy">:joy:</span></p>
+
+<a name="171601682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171601682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171601682">Mario Carneiro (Jul 24 2019 at 12:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">param</span>
+  <span class="o">(</span><span class="n">α0</span> <span class="n">α1</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">αR</span> <span class="o">:</span> <span class="n">α0</span> <span class="bp">→</span> <span class="n">α1</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nonempty</span> <span class="n">α0</span> <span class="bp">→</span> <span class="n">nonempty</span> <span class="n">α1</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">a0</span> <span class="o">:</span> <span class="n">α0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">α1</span><span class="o">)</span> <span class="o">(</span><span class="n">aR</span> <span class="o">:</span> <span class="n">αR</span> <span class="n">a0</span> <span class="n">a1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nonempty</span><span class="bp">.</span><span class="n">param</span> <span class="o">(</span><span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="n">a0</span><span class="o">)</span> <span class="o">(</span><span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="n">a1</span><span class="o">)</span>
+
+<span class="kn">axiom</span> <span class="n">choice</span><span class="bp">.</span><span class="n">param</span> <span class="o">(</span><span class="n">α0</span> <span class="n">α1</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">αR</span> <span class="o">:</span> <span class="n">α0</span> <span class="bp">→</span> <span class="n">α1</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">a0</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α1</span><span class="o">)</span> <span class="o">:</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">param</span> <span class="n">α0</span> <span class="n">α1</span> <span class="n">αR</span> <span class="n">a0</span> <span class="n">a1</span> <span class="bp">→</span>
+  <span class="n">αR</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">a0</span><span class="o">)</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">a1</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">param</span> <span class="n">bool</span> <span class="n">bool</span> <span class="o">(</span><span class="bp">≠</span><span class="o">)</span> <span class="k">in</span>
+<span class="n">choice</span><span class="bp">.</span><span class="n">param</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">bool</span><span class="bp">.</span><span class="n">ff_ne_tt</span><span class="bp">⟩</span> <span class="o">:</span> <span class="n">R</span> <span class="bp">⟨</span><span class="n">ff</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">tt</span><span class="bp">⟩</span><span class="o">)</span> <span class="n">rfl</span>
+</pre></div>
+
 
 {% endraw %}
 
