@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [the apple monad](89187theapplemonad.html) (5 messages, latest: Jul 24 2019 at 16:32)
+
 * [documentation requirements](33663documentationrequirements.html) (31 messages, latest: Jul 24 2019 at 14:57)
 
 * [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (65 messages, latest: Jul 24 2019 at 12:33)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [recursor_of "list" is none](34070recursoroflistisnone.html) (30 messages, latest: Jul 24 2019 at 10:34)
 
 * [(no topic)](79918notopic.html) (52 messages, latest: Jul 24 2019 at 09:13)
-
-* [the apple monad](89187theapplemonad.html) (1 message, latest: Jul 24 2019 at 05:16)
 
 * [generalize semicolon](37872generalizesemicolon.html) (14 messages, latest: Jul 23 2019 at 13:58)
 
