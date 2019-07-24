@@ -60,6 +60,265 @@ permalink: archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecpar
     <span class="n">rvecR</span> <span class="n">AR</span> <span class="o">(</span><span class="n">SR</span> <span class="n">nR</span><span class="o">)</span> <span class="o">(</span><span class="n">rvcons</span> <span class="n">vhd1</span> <span class="n">vtl1</span><span class="o">)</span> <span class="o">(</span><span class="n">rvcons</span> <span class="n">vhd1</span> <span class="n">vtl1</span><span class="o">).</span>
 </pre></div>
 
+<a name="171589502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589502">Mario Carneiro (Jul 24 2019 at 09:03)</a>:</h4>
+<p>Yes, lean cares about the order of arguments here</p>
+
+<a name="171589592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589592">Mario Carneiro (Jul 24 2019 at 09:04)</a>:</h4>
+<p>It's an arbitrary restriction, but it makes things easier since otherwise you have to worry about the <code>vhd</code> argument appearing somewhere weird in <code>wtl</code></p>
+
+<a name="171589644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589644">Mario Carneiro (Jul 24 2019 at 09:05)</a>:</h4>
+<p>It obviously makes no mathematical difference, as you can just reorder the arguments</p>
+
+<a name="171589783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589783">Cyril Cohen (Jul 24 2019 at 09:07)</a>:</h4>
+<blockquote>
+<p>It obviously makes no mathematical difference, as you can just reorder the arguments</p>
+</blockquote>
+<p>Since I am meta-programming a parametricity transformation, "reordering arguments" introduces the need to make additional wrappers here and there :-/</p>
+
+<a name="171589881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589881">Cyril Cohen (Jul 24 2019 at 09:09)</a>:</h4>
+<blockquote>
+<p>It's an arbitrary restriction, but it makes things easier since otherwise you have to worry about the <code>vhd</code> argument appearing somewhere weird in <code>wtl</code></p>
+</blockquote>
+<p>I still do not understand why it is working for <code>rvec</code> and not for <code>rvec.param</code> though...</p>
+
+<a name="171589936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589936">Mario Carneiro (Jul 24 2019 at 09:10)</a>:</h4>
+<p>Actually my judgment was premature. This used to not even be allowed in <code>rvec</code>, but the restriction was lifted at some point, apparently not enough</p>
+
+<a name="171589998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171589998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171589998">Mario Carneiro (Jul 24 2019 at 09:10)</a>:</h4>
+<p>I think the difference is that <code>vtl0</code> and <code>vtl1</code> appear in parameters in the return type</p>
+
+<a name="171590268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590268">Cyril Cohen (Jul 24 2019 at 09:15)</a>:</h4>
+<p>OK, then do you think I can safely ignore types such as <code>rvec</code> during my translation, for such types will not be in lean core or in mathlib?</p>
+
+<a name="171590322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590322">Mario Carneiro (Jul 24 2019 at 09:16)</a>:</h4>
+<p>What do you mean? What is the goal, are you translating Coq proofs to lean?</p>
+
+<a name="171590380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590380">Mario Carneiro (Jul 24 2019 at 09:16)</a>:</h4>
+<p>It is certainly true that <code>rvec</code> won't be in mathlib</p>
+
+<a name="171590411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590411">Mario Carneiro (Jul 24 2019 at 09:17)</a>:</h4>
+<p>Actually mathlib is pretty sparse on fancy inductive types, because mathematicians rule the roost around here and they don't see the point</p>
+
+<a name="171590416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590416">Cyril Cohen (Jul 24 2019 at 09:17)</a>:</h4>
+<blockquote>
+<p>What do you mean? What is the goal, are you translating Coq proofs to lean?</p>
+</blockquote>
+<p>no, I am writing a parametricity translation for lean, which might be run on any inductive type in existing libraries. So I am wondering if there will be real cases where the recursive argument of a constructor does not come last...</p>
+
+<a name="171590452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590452">Cyril Cohen (Jul 24 2019 at 09:17)</a>:</h4>
+<blockquote>
+<p>Actually mathlib is pretty sparse on fancy inductive types, because mathematicians rule the roost around here and they don't see the point</p>
+</blockquote>
+<p>Then I am lucky :D</p>
+
+<a name="171590554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590554">Mario Carneiro (Jul 24 2019 at 09:19)</a>:</h4>
+<p>I'm honestly drawing a blank on <em>any</em> inductive types other than really basic stuff like <code>sum</code> and <code>sigma</code> that are already defined in core. It's all structures</p>
+
+<a name="171590561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590561">Mario Carneiro (Jul 24 2019 at 09:19)</a>:</h4>
+<p>Inductive predicates are also fairly common</p>
+
+<a name="171590683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590683">Cyril Cohen (Jul 24 2019 at 09:21)</a>:</h4>
+<blockquote>
+<p>Inductive predicates are also fairly common</p>
+</blockquote>
+<p>could you give me examples?</p>
+
+<a name="171590963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171590963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171590963">Mario Carneiro (Jul 24 2019 at 09:26)</a>:</h4>
+<p>The inductive predicate <code>in_closure s a</code> defines the subgroup closure</p>
+
+<a name="171591065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591065">Mario Carneiro (Jul 24 2019 at 09:28)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472">https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472</a></p>
+
+<a name="171591091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591091">Cyril Cohen (Jul 24 2019 at 09:29)</a>:</h4>
+<blockquote>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472">https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472</a></p>
+</blockquote>
+<p>damn, I am probably going to run into trouble because of this one :(</p>
+
+<a name="171591228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591228">Mario Carneiro (Jul 24 2019 at 09:31)</a>:</h4>
+<p>Here's another example of a not completely trivial inductive predicate<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/list/defs.lean#L379-L381" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/list/defs.lean#L379-L381">https://github.com/leanprover-community/mathlib/blob/master/src/data/list/defs.lean#L379-L381</a></p>
+
+<a name="171591320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591320">Cyril Cohen (Jul 24 2019 at 09:33)</a>:</h4>
+<blockquote>
+<p>Here's another example of a not completely trivial inductive predicate<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/list/defs.lean#L379-L381" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/list/defs.lean#L379-L381">https://github.com/leanprover-community/mathlib/blob/master/src/data/list/defs.lean#L379-L381</a></p>
+</blockquote>
+<p>this one looks less problematic to me because the recursive argument comes last and only once. (parametricity introduces duplications and interleaving which causes the problem)</p>
+
+<a name="171591758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591758">Cyril Cohen (Jul 24 2019 at 09:41)</a>:</h4>
+<blockquote>
+<blockquote>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472">https://github.com/leanprover-community/mathlib/blob/master/src/group_theory/subgroup.lean#L468-L472</a></p>
+</blockquote>
+<p>damn, I am probably going to run into trouble because of this one :(</p>
+</blockquote>
+<p>Indeed...</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">in_closure</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">basic</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">mul</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">in_closure</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">in_closure</span> <span class="n">a</span>
+
+<span class="kn">inductive</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">param</span> <span class="o">(</span><span class="n">α0</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">α1</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">αR</span> <span class="o">:</span> <span class="n">α0</span> <span class="bp">-&gt;</span> <span class="n">α1</span> <span class="bp">-&gt;</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span>
+ <span class="bp">Π</span> <span class="o">(</span><span class="n">a0</span> <span class="o">:</span> <span class="n">α0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">α1</span><span class="o">)</span> <span class="o">(</span><span class="n">aR</span> <span class="o">:</span> <span class="n">αR</span> <span class="n">a0</span> <span class="n">a1</span><span class="o">)</span>
+   <span class="o">(</span><span class="n">x0</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">α0</span> <span class="n">a0</span><span class="o">)</span> <span class="o">(</span><span class="n">x1</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">α1</span> <span class="n">a1</span><span class="o">),</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">basic</span> <span class="o">(</span><span class="n">a0</span> <span class="o">:</span> <span class="n">α0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">α1</span><span class="o">)</span> <span class="o">(</span><span class="n">aR</span> <span class="o">:</span> <span class="n">αR</span> <span class="n">a0</span> <span class="n">a1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">param</span> <span class="n">a0</span> <span class="n">a1</span> <span class="n">aR</span> <span class="o">(</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">basic</span> <span class="n">a0</span><span class="o">)</span>
+   <span class="o">(</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">basic</span> <span class="n">a1</span><span class="o">))</span>
+<span class="bp">|</span> <span class="n">mul</span> <span class="o">(</span><span class="n">a0</span> <span class="o">:</span> <span class="n">α0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1</span> <span class="o">:</span> <span class="n">α1</span><span class="o">)</span> <span class="o">(</span><span class="n">aR</span> <span class="o">:</span> <span class="n">αR</span> <span class="n">a0</span> <span class="n">a1</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">a0_1</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">α0</span> <span class="n">a0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1_1</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">α1</span> <span class="n">a1</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">aR_1</span> <span class="o">:</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">param</span> <span class="n">a0</span> <span class="n">a1</span> <span class="n">aR</span> <span class="n">a0_1</span> <span class="n">a1_1</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">a0_2</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">α0</span> <span class="n">a0</span><span class="o">)</span> <span class="o">(</span><span class="n">a1_2</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">α1</span> <span class="n">a1</span><span class="o">)</span>
+      <span class="o">(</span><span class="n">aR_1</span> <span class="o">:</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">param</span> <span class="n">a0</span> <span class="n">a1</span> <span class="n">aR</span> <span class="n">a0_2</span> <span class="n">a1_2</span><span class="o">)</span> <span class="o">:</span>
+      <span class="o">(</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">param</span> <span class="n">a0</span> <span class="n">a1</span> <span class="n">aR</span>
+      <span class="o">(</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">mul</span> <span class="n">a0_1</span> <span class="n">a0_2</span><span class="o">)</span> <span class="o">(</span><span class="n">in_closure</span><span class="bp">.</span><span class="n">mul</span> <span class="n">a1_1</span> <span class="n">a1_2</span><span class="o">))</span>
+</pre></div>
+
+
+<p>does not go through... <span aria-label="dizzy" class="emoji emoji-1f635" role="img" title="dizzy">:dizzy:</span></p>
+
+<a name="171591814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591814">Mario Carneiro (Jul 24 2019 at 09:42)</a>:</h4>
+<p>Yeah, I think I see how the algorithm goes and you will only be able to handle one recursive arg which comes last</p>
+
+<a name="171591834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591834">Cyril Cohen (Jul 24 2019 at 09:42)</a>:</h4>
+<p>so I will have to perform reordering and wrap things around...</p>
+
+<a name="171591850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591850">Mario Carneiro (Jul 24 2019 at 09:43)</a>:</h4>
+<p>But you should be able to order the arguments as <code>[a0, a1, b0, b1, c0, c1, aR, bR, cR]</code></p>
+
+<a name="171591872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591872">Cyril Cohen (Jul 24 2019 at 09:43)</a>:</h4>
+<blockquote>
+<p>But you should be able to order the arguments as <code>[a0, a1, b0, b1, c0, c1, aR, bR, cR]</code></p>
+</blockquote>
+<p>Yes, that is what I will do,  but since it is not the "canonical" order, I will have to do wrappers</p>
+
+<a name="171591956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591956">Cyril Cohen (Jul 24 2019 at 09:44)</a>:</h4>
+<p>Actually I am going to do <code>[a0, b0, c0, a1, b1, c1, aR, bR, cR]</code></p>
+
+<a name="171591958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171591958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171591958">Mario Carneiro (Jul 24 2019 at 09:44)</a>:</h4>
+<p>or remember that this is a "funny order definition" and apply the reordering in the theorems</p>
+
+<a name="171592059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592059">Cyril Cohen (Jul 24 2019 at 09:46)</a>:</h4>
+<blockquote>
+<p>or remember that this is a "funny order definition" and apply the reordering in the theorems</p>
+</blockquote>
+<p>my intuition whispers to me is that it is better to precompute the reordering as wrappers rather than on each application. Thanks for your time and advice!</p>
+
+<a name="171592087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592087">Mario Carneiro (Jul 24 2019 at 09:47)</a>:</h4>
+<p>You will need the wrappers to be pretty transparent lest they break defeq stuff</p>
+
+<a name="171592164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592164">Mario Carneiro (Jul 24 2019 at 09:48)</a>:</h4>
+<p>Presumably you aren't writing tactic scripts with the metaprogramming so it may not be a big deal</p>
+
+<a name="171592172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592172">Cyril Cohen (Jul 24 2019 at 09:48)</a>:</h4>
+<blockquote>
+<p>You will need the wrappers to be pretty transparent lest they break defeq stuff</p>
+</blockquote>
+<p>I'm not sure I understand, but I don't think they should be transparent</p>
+
+<a name="171592263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592263">Mario Carneiro (Jul 24 2019 at 09:50)</a>:</h4>
+<p>wrappers have a tendency to change inference and break tactics that look at the expression</p>
+
+<a name="171592319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592319">Mario Carneiro (Jul 24 2019 at 09:51)</a>:</h4>
+<p>for pure proof terms you can get away with defeq but most of the time it matters when you have a constructor vs a definition that unfolds to a constructor</p>
+
+<a name="171592405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592405">Cyril Cohen (Jul 24 2019 at 09:52)</a>:</h4>
+<blockquote>
+<p>for pure proof terms you can get away with defeq but most of the time it matters when you have a constructor vs a definition that unfolds to a constructor</p>
+</blockquote>
+<p>I do not understand how a definition that unfolds to a constructor can break defeq...</p>
+
+<a name="171592417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592417">Mario Carneiro (Jul 24 2019 at 09:53)</a>:</h4>
+<p>It won't break defeq, it will break other things</p>
+
+<a name="171592428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592428">Mario Carneiro (Jul 24 2019 at 09:53)</a>:</h4>
+<p>feel free to ignore my ramblings</p>
+
+<a name="171592433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592433">Cyril Cohen (Jul 24 2019 at 09:53)</a>:</h4>
+<blockquote>
+<p>It won't break defeq, it will break other things</p>
+</blockquote>
+<p>Would you have examples in mind?</p>
+
+<a name="171592446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592446">Mario Carneiro (Jul 24 2019 at 09:53)</a>:</h4>
+<p>Stuff like <code>rw</code> will not like if you wrap a constructor</p>
+
+<a name="171592459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592459">Cyril Cohen (Jul 24 2019 at 09:54)</a>:</h4>
+<blockquote>
+<p>feel free to ignore my ramblings</p>
+</blockquote>
+<p>I'd rather not ignore them! I'd like to be aware if I will break something unintentionally...</p>
+
+<a name="171592515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592515">Cyril Cohen (Jul 24 2019 at 09:54)</a>:</h4>
+<blockquote>
+<p>Stuff like <code>rw</code> will not like if you wrap a constructor</p>
+</blockquote>
+<p>What specific use or <code>rw</code>?</p>
+
+<a name="171592527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592527">Mario Carneiro (Jul 24 2019 at 09:54)</a>:</h4>
+<p>Also you can't pattern match on a wrapped constructor</p>
+
+<a name="171592553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592553">Mario Carneiro (Jul 24 2019 at 09:54)</a>:</h4>
+<p>and cases and the inductive recursor will not re-wrap the constructor for you</p>
+
+<a name="171592588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592588">Mario Carneiro (Jul 24 2019 at 09:55)</a>:</h4>
+<p>there was a thread here last week about making proofs by induction show <code>0</code> in the base case instead of <code>my_nat.zero</code></p>
+
+<a name="171592592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592592">Cyril Cohen (Jul 24 2019 at 09:55)</a>:</h4>
+<p>I think <code>rw</code> and pattern matching are not a concern since the purpose of parametricity translations is mostly for automations... but I need to think twice</p>
+
+<a name="171592668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592668">Mario Carneiro (Jul 24 2019 at 09:56)</a>:</h4>
+<p>Like I said, carry on, you probably don't have to worry</p>
+
+<a name="171592700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/invalid%20occurrence%20of%20recursive%20arg%2310%20of%20%27rvec.param.vcons%27/near/171592700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html#171592700">Mario Carneiro (Jul 24 2019 at 09:57)</a>:</h4>
+<p>What does the parametricity translation do to <code>choice</code>?</p>
+
 
 {% endraw %}
 

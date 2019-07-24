@@ -77,6 +77,89 @@ permalink: archive/113488general/34070recursoroflistisnone.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171589124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171589124">Mario Carneiro (Jul 24 2019 at 08:56)</a>:</h4>
 <p>I don't see any docs, but from <a href="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm_environment.cpp#L183-L188" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm_environment.cpp#L183-L188">https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm_environment.cpp#L183-L188</a> it looks like Wojciech's description is correct</p>
 
+<a name="171589397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171589397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171589397">Mario Carneiro (Jul 24 2019 at 09:01)</a>:</h4>
+<p>Looks like the code actually does that "name based meta-programming" <a href="https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.cpp#L183-L186" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.cpp#L183-L186">https://github.com/leanprover-community/lean/blob/master/src/kernel/inductive/inductive.cpp#L183-L186</a></p>
+
+<a name="171589501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171589501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171589501">Cyril Cohen (Jul 24 2019 at 09:03)</a>:</h4>
+<blockquote>
+<p>Or rather, I think <code>X.rec</code> always exists but it may not be primitive</p>
+</blockquote>
+<p>Oww,... I'd say it's always a primitive but not always the most general one (e.g. <code>eq.rec</code> is primitive but not as general as <code>eq.drec</code>). What is the general rule about <code>rec</code> vs <code>drec</code>?</p>
+
+<a name="171589619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171589619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171589619">Cyril Cohen (Jul 24 2019 at 09:05)</a>:</h4>
+<p>I am wrong it looks like <code>eq.drec</code> is actually programmed using <code>eq.rec</code>... so I did not yet find a case where <code>drec</code> is primitive and <code>rec</code> isn't...</p>
+
+<a name="171590161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590161">Mario Carneiro (Jul 24 2019 at 09:13)</a>:</h4>
+<p>I got it confused. <code>rec</code> is always primitive, but it is dependent only if it doesn't eliminate to Prop. If it does eliminate to Prop then <code>drec</code> is the dependent one</p>
+
+<a name="171590514"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590514" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590514">Cyril Cohen (Jul 24 2019 at 09:18)</a>:</h4>
+<blockquote>
+<p>I got it confused. <code>rec</code> is always primitive, but it is dependent only if it doesn't eliminate to Prop. If it does eliminate to Prop then <code>drec</code> is the dependent one</p>
+</blockquote>
+<p>ok.... could you tell me the rationale?</p>
+
+<a name="171590633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590633">Mario Carneiro (Jul 24 2019 at 09:20)</a>:</h4>
+<p>No, this is me griping</p>
+
+<a name="171590635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590635">Cyril Cohen (Jul 24 2019 at 09:20)</a>:</h4>
+<blockquote>
+<p>I got it confused. <code>rec</code> is always primitive, but it is dependent only if it doesn't eliminate to Prop. If it does eliminate to Prop then <code>drec</code> is the dependent one</p>
+</blockquote>
+<p>I'm not sure I understood the rule... do you mean if it admits strong elimination? (i.e. elimination to Type of an inductive in Prop ?)</p>
+
+<a name="171590667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590667">Mario Carneiro (Jul 24 2019 at 09:21)</a>:</h4>
+<p>Ah, actually it's not strong elimination that is the deciding factor, it is whether the inductive itself is a prop</p>
+
+<a name="171590672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590672">Mario Carneiro (Jul 24 2019 at 09:21)</a>:</h4>
+<p>for example <code>or</code> and <code>eq</code> both have a <code>drec</code></p>
+
+<a name="171590679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590679">Mario Carneiro (Jul 24 2019 at 09:21)</a>:</h4>
+<p>but <code>nat</code> doesn't</p>
+
+<a name="171590751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590751">Cyril Cohen (Jul 24 2019 at 09:22)</a>:</h4>
+<p>ok, is it using proof irrelevance for prop to derive drec from rec? (because otherwise I do not see how it is possible)</p>
+
+<a name="171590754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590754">Mario Carneiro (Jul 24 2019 at 09:22)</a>:</h4>
+<p>yes</p>
+
+<a name="171590772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590772">Mario Carneiro (Jul 24 2019 at 09:23)</a>:</h4>
+<p>If I were king of lean I would make the dependent version always be called <code>rec</code> and always be primitive</p>
+
+<a name="171590783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590783">Cyril Cohen (Jul 24 2019 at 09:23)</a>:</h4>
+<blockquote>
+<p>yes</p>
+</blockquote>
+<p>ok, this will not make my life easy ^^'</p>
+
+<a name="171590791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590791">Mario Carneiro (Jul 24 2019 at 09:23)</a>:</h4>
+<p>The fact that you can derive it from the non-dependent version is a cute fact but not worth breaking the pattern</p>
+
+<a name="171590793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590793">Cyril Cohen (Jul 24 2019 at 09:23)</a>:</h4>
+<blockquote>
+<p>If I were king of lean I would make the dependent version always be called <code>rec</code> and always be primitive</p>
+</blockquote>
+<p>Now you make me wish you were the king of lean</p>
+
+<a name="171590894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/recursor_of%20%22list%22%20is%20none/near/171590894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/34070recursoroflistisnone.html#171590894">Cyril Cohen (Jul 24 2019 at 09:25)</a>:</h4>
+<p>Writing parametricity translation of inductive families is already difficult without having to take into account discrepancies in the patterns of primitives... :'(</p>
+
 
 {% endraw %}
 

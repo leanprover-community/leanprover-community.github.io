@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [recursor_of "list" is none](34070recursoroflistisnone.html) (12 messages, latest: Jul 24 2019 at 08:56)
+* [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (48 messages, latest: Jul 24 2019 at 09:57)
 
-* [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (1 message, latest: Jul 24 2019 at 08:54)
+* [recursor_of "list" is none](34070recursoroflistisnone.html) (29 messages, latest: Jul 24 2019 at 09:25)
+
+* [(no topic)](79918notopic.html) (52 messages, latest: Jul 24 2019 at 09:13)
 
 * [the apple monad](89187theapplemonad.html) (1 message, latest: Jul 24 2019 at 05:16)
 
@@ -420,8 +422,6 @@ permalink: archive/113488general/index.html
 * [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
 
 * [issues](89373issues.html) (24 messages, latest: May 20 2019 at 10:51)
-
-* [(no topic)](79918notopic.html) (51 messages, latest: May 20 2019 at 04:52)
 
 * [linarith argument parsing](09683linarithargumentparsing.html) (12 messages, latest: May 19 2019 at 14:24)
 
