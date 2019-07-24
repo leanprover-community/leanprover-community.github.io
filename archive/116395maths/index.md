@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [power series](15161powerseries.html) (56 messages, latest: Jul 24 2019 at 21:50)
+* [power series](15161powerseries.html) (57 messages, latest: Jul 24 2019 at 22:11)
 
 * [help with sequences](21714helpwithsequences.html) (15 messages, latest: Jul 24 2019 at 19:03)
 
