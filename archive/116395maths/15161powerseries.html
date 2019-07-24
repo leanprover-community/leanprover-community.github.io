@@ -213,6 +213,40 @@ But like you said, there are several approaches, and it's not clear to me which 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171640936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171640936">Yao Liu (Jul 24 2019 at 20:34)</a>:</h4>
 <p>Sorry if this is obvious: Does this implementation allow one to define a power series indexed by any monoid? Laurent series would be indexed by an additive group (lattice), "supported" in a cone. Not sure if that's good for proving anything, but one may regard Weyl's character formula as a formula in such a ring.</p>
 
+<a name="171645274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171645274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171645274">Jesse Michael Han (Jul 24 2019 at 21:36)</a>:</h4>
+<p>no , i don't think so---the "indexing" you're referring to is in the degrees, and I think the current implementation hard-codes those as being in the natural numbers</p>
+<p>however, the only structure enforced on sigma (the variables) in the definition is decidable_eq, so you can additionally put whatever structure you like on that</p>
+
+<a name="171645481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171645481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171645481">Yao Liu (Jul 24 2019 at 21:39)</a>:</h4>
+<p>that's what I meant, the terms (monomials) are indexed by points on a lattice. Thanks for the clarification</p>
+
+<a name="171645766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171645766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171645766">Kevin Buzzard (Jul 24 2019 at 21:43)</a>:</h4>
+<p>I guess in general you will need some sort of filter on your abelian group with some finiteness hypothesis involving how it interacts with the group law in order to define the object and to prove that multiplication of power series makes sense.</p>
+
+<a name="171645804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171645804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171645804">Jesse Michael Han (Jul 24 2019 at 21:43)</a>:</h4>
+<p>@Yao Liu you make a good point though---if we work with e.g. valued fields later, we'll need formal laurent series indexed by an arbitrary ordered abelian group, so why not generalize the definition and remove the hardcoded <code>nat</code> from <code>power_series.lean</code>?</p>
+<p>it might make a good exercise</p>
+
+<a name="171646136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171646136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171646136">Kevin Buzzard (Jul 24 2019 at 21:47)</a>:</h4>
+<p>You'll have to think about exactly what is allowed. You can't make formal power series <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mo>∑</mo><mrow><mi>n</mi><mo>∈</mo><mi mathvariant="double-struck">Z</mi></mrow></msub><msub><mi>a</mi><mi>n</mi></msub><msup><mi>z</mi><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">\sum_{n\in\mathbb{Z}}a_nz^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.07708em;vertical-align:-0.32708000000000004em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.18251299999999993em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">∈</span><span class="mord mtight"><span class="mord mathbb mtight">Z</span></span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.32708000000000004em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.04398em;">z</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span> because there are convergence issue when multiplying. You need to make sure that the series are zero on some set in some filter with some finiteness property wrt addition</p>
+
+<a name="171646245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171646245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171646245">Kevin Buzzard (Jul 24 2019 at 21:49)</a>:</h4>
+<p>For all I know, polynomials, Laurent series, formal power series, multivariate polynomials, multivariate power series etc are all special cases of some general notion about functions with support in or disjoint from some element of a filter</p>
+
+<a name="171646260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171646260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171646260">Kevin Buzzard (Jul 24 2019 at 21:49)</a>:</h4>
+<p>it might make a good exercise</p>
+
+<a name="171646328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/171646328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#171646328">Kevin Buzzard (Jul 24 2019 at 21:50)</a>:</h4>
+<p>but my point is that "indexed by an arbitrary ordered abelian group" needs some thought</p>
+
 
 {% endraw %}
 
