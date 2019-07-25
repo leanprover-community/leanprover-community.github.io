@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [easy questions](27038easyquestions.html) (56 messages, latest: Jul 25 2019 at 11:03)
+* [easy questions](27038easyquestions.html) (63 messages, latest: Jul 25 2019 at 13:35)
 
 * [ring tactic works at one place, fails at another](99356ringtacticworksatoneplacefailsatanother.html) (34 messages, latest: Jul 25 2019 at 06:49)
 

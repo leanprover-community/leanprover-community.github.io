@@ -356,6 +356,46 @@ Ps2. This is another question. If <code>refl</code> works, why <code>simp</code>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171681287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171681287">Chris Hughes (Jul 25 2019 at 11:03)</a>:</h4>
 <p>You can use <code>dunfold</code>. The reason <code>simp</code> doesn't work, is because <code>graph.srctrg</code> is a dependent function, so the expression after rewriting only typechecks because <code>cube_graph (n + 1) = prism_graph (cube_graph n)</code> is s definitional equality.</p>
 
+<a name="171690621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171690621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171690621">Gun Pinyo (Jul 25 2019 at 13:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  <span class="user-mention" data-user-id="110044">@Chris Hughes</span>  Thank you for introducing <code>dsimp</code> and <code>dunfold</code> to me.</p>
+<p>Another question, if I have two occurrences of the same<br>
+definition in a goal. <code>(d)unfold</code> once will affect the first<br>
+occurrence an not the second, if I want another way (i.e. affect the second<br>
+one and not the first one) what should I do?</p>
+
+<a name="171690749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171690749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171690749">Kevin Buzzard (Jul 25 2019 at 13:25)</a>:</h4>
+<p>Definitional unfolding is all defeq, so if your goal does not look like what you want it to look like, you can just write <code>change &lt;what you want the goal to look like&gt;</code> and if what you write is definitionally equal to what the goal is, the goal will change to what you write. Note that <code>show</code> is synonymous with <code>change</code>, although you can use <code>change</code> on hypotheses as well.</p>
+
+<a name="171690838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171690838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171690838">Kevin Buzzard (Jul 25 2019 at 13:26)</a>:</h4>
+<p>The other approach for zooming in on terms in goals is <code>conv</code> mode:  <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md</a></p>
+
+<a name="171690925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171690925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171690925">Kevin Buzzard (Jul 25 2019 at 13:27)</a>:</h4>
+<p>I don't know how much you know about definitional equality v all the other equalities, but here's something I wrote about definitional equality: <a href="https://xenaproject.wordpress.com/2019/05/21/equality-part-1-definitional-equality/" target="_blank" title="https://xenaproject.wordpress.com/2019/05/21/equality-part-1-definitional-equality/">https://xenaproject.wordpress.com/2019/05/21/equality-part-1-definitional-equality/</a></p>
+
+<a name="171691021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171691021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171691021">Chris Hughes (Jul 25 2019 at 13:28)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110031">Patrick Massot</span>  <span class="user-mention silent" data-user-id="110044">Chris Hughes</span>  Thank you for introducing <code>dsimp</code> and <code>dunfold</code> to me.</p>
+<p>Another question, if I have two occurrences of the same<br>
+definition in a goal. <code>(d)unfold</code> once will affect the first<br>
+occurrence an not the second, if I want another way (i.e. affect the second<br>
+one and not the first one) what should I do?</p>
+</blockquote>
+<p>Do you have an example of this. Usually I think it unfolds all occurrences, so it might be not unfolding the second one for some other reason.</p>
+
+<a name="171691194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171691194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171691194">Kevin Buzzard (Jul 25 2019 at 13:31)</a>:</h4>
+<p>Another thing you might want to know is that if you type <code>#print prefix cube_graph</code> then you can see all the stuff that Lean generated for you when you made <code>cube_graph</code>. Things called <code>cube_graph._equation.1</code> or something (I forget what they're exactly called) are the things which Lean tries to use when you run <code>unfold</code> -- that's what the tactic actually does.  Similarly <code>dsimp [cube_graph]</code> tries to simplify using those "hidden" equation lemmas.</p>
+
+<a name="171691501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171691501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171691501">Gun Pinyo (Jul 25 2019 at 13:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thank you for introducing <code>change</code> and <code>conv</code>. These what tactics that I have been looking for many days. It is also interesting to know that we can even unfold anonymous functions as well. </p>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  I have but it is in a long file and it can be the case that the second occurrence is not unfoldable at the moment so I miss understood the behaviour of <code>(d)unfold</code> .</p>
+
 
 {% endraw %}
 
