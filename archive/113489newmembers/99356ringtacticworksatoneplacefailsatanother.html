@@ -167,6 +167,46 @@ permalink: archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171664484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171664484">Joe (Jul 25 2019 at 05:18)</a>:</h4>
 <p>Thank you. It solves the problem.</p>
 
+<a name="171667549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667549">Johan Commelin (Jul 25 2019 at 06:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Is that the correct solution, or should in fact <code>normed_group</code> be refactored to not exten <code>add_comm_group</code>? The whole point of assuming <code>[add_comm_group A]</code> was to allow flexibility in the scalar ring. This now seems to become harder...</p>
+
+<a name="171667578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667578">Mario Carneiro (Jul 25 2019 at 06:43)</a>:</h4>
+<p>I don't follow. You don't get any extra flexibility either way</p>
+
+<a name="171667586"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667586" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667586">Mario Carneiro (Jul 25 2019 at 06:43)</a>:</h4>
+<p>Is a <code>normed_group</code> necessarily an <code>add_comm_group</code> or not? (in maths)</p>
+
+<a name="171667594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667594">Mario Carneiro (Jul 25 2019 at 06:43)</a>:</h4>
+<p>I think there is some argument for noncommutative groups with an appropriate norm</p>
+
+<a name="171667650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667650">Mario Carneiro (Jul 25 2019 at 06:44)</a>:</h4>
+<p>but regardless this changes nothing. If we want to refactor <code>normed_group</code> to depend on only <code>add_group</code> we can do that with either definition</p>
+
+<a name="171667750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667750">Mario Carneiro (Jul 25 2019 at 06:46)</a>:</h4>
+<p>The general rule is to use a parameter if the class involves more types than the parent (e.g. a module needs two types, but it depends on structures on the individual types). In this case <code>inner_product_space</code> is unary and depends on <code>add_comm_group</code> which is also unary, so it should inherit</p>
+
+<a name="171667773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667773">Johan Commelin (Jul 25 2019 at 06:47)</a>:</h4>
+<p>Aha, I see.</p>
+
+<a name="171667819"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667819" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667819">Johan Commelin (Jul 25 2019 at 06:48)</a>:</h4>
+<p>So this becomes an issue as soon as we want inner products over more general fields than the reals</p>
+
+<a name="171667850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667850">Mario Carneiro (Jul 25 2019 at 06:48)</a>:</h4>
+<p>An inner product over a more general field would not have the instance <code>inner_product_space_is_normed_group</code>, that would be a parameter</p>
+
+<a name="171667859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171667859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171667859">Johan Commelin (Jul 25 2019 at 06:49)</a>:</h4>
+<p>Thanks for bringing me back on track</p>
+
 
 {% endraw %}
 
