@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [ring tactic works at one place, fails at another](99356ringtacticworksatoneplacefailsatanother.html) (3 messages, latest: Jul 24 2019 at 23:21)
+
 * [Having trouble with infi](39421Havingtroublewithinfi.html) (6 messages, latest: Jul 24 2019 at 07:55)
 
 * [weird interaction with namespace, parameter, and tactic](22569weirdinteractionwithnamespaceparameterandtactic.html) (12 messages, latest: Jul 24 2019 at 07:08)
