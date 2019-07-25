@@ -107,6 +107,25 @@ permalink: archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.ht
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171688480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171688480">Mario Carneiro (Jul 25 2019 at 12:57)</a>:</h4>
 <p>Right now most people still use 3.4.2. We want to make it worth switching</p>
 
+<a name="171698559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171698559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171698559">Cyril Cohen (Jul 25 2019 at 14:55)</a>:</h4>
+<p>OK... now this makes my community lean master crash...</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="o">(</span><span class="n">do</span>
+  <span class="n">l</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">level</span><span class="bp">.</span><span class="n">param</span> <span class="n">l</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">params</span> <span class="o">:=</span> <span class="o">[(</span><span class="n">sort</span> <span class="n">u</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)],</span>
+  <span class="k">let</span> <span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">1</span><span class="o">)</span> <span class="err">$</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">ctorty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="bp">`</span><span class="n">myeq</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">var</span> <span class="mi">1</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">],</span>
+  <span class="k">let</span> <span class="n">inds</span> <span class="o">:=</span> <span class="o">[((</span><span class="bp">`</span><span class="n">myeq</span><span class="o">,</span> <span class="n">ty</span><span class="o">),</span>
+    <span class="o">[{</span><span class="n">environment</span><span class="bp">.</span><span class="n">intro_rule</span> <span class="bp">.</span> <span class="n">constr</span> <span class="o">:=</span> <span class="bp">`</span><span class="n">refl</span><span class="o">,</span> <span class="n">type</span> <span class="o">:=</span> <span class="n">ctorty</span><span class="o">}])],</span>
+  <span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">add_ginductive</span> <span class="kn">options</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="n">params</span> <span class="n">inds</span> <span class="n">ff</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 

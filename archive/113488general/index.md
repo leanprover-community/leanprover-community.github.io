@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (15 messages, latest: Jul 25 2019 at 12:57)
+* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (16 messages, latest: Jul 25 2019 at 14:55)
 
 * [online leanprover](19268onlineleanprover.html) (188 messages, latest: Jul 25 2019 at 11:55)
 
