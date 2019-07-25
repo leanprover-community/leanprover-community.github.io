@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [localized notation](28132localizednotation.html) (2 messages, latest: Jul 25 2019 at 15:23)
+
 * [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (16 messages, latest: Jul 25 2019 at 14:55)
 
 * [online leanprover](19268onlineleanprover.html) (188 messages, latest: Jul 25 2019 at 11:55)
