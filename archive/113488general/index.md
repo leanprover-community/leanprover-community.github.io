@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [documentation requirements](33663documentationrequirements.html) (33 messages, latest: Jul 25 2019 at 08:24)
+
 * [problems with structure notation](87870problemswithstructurenotation.html) (4 messages, latest: Jul 25 2019 at 03:13)
 
 * [HoTT meeting](37929HoTTmeeting.html) (1 message, latest: Jul 24 2019 at 22:32)
 
 * [the apple monad](89187theapplemonad.html) (6 messages, latest: Jul 24 2019 at 17:49)
-
-* [documentation requirements](33663documentationrequirements.html) (31 messages, latest: Jul 24 2019 at 14:57)
 
 * [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (65 messages, latest: Jul 24 2019 at 12:33)
 
