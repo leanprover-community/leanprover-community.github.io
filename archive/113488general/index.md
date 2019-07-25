@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [problems with structure notation](87870problemswithstructurenotation.html) (2 messages, latest: Jul 25 2019 at 02:05)
+* [problems with structure notation](87870problemswithstructurenotation.html) (4 messages, latest: Jul 25 2019 at 03:13)
 
 * [HoTT meeting](37929HoTTmeeting.html) (1 message, latest: Jul 24 2019 at 22:32)
 
