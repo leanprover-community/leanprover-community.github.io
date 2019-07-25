@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [online leanprover](19268onlineleanprover.html) (188 messages, latest: Jul 25 2019 at 11:55)
+* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (15 messages, latest: Jul 25 2019 at 12:57)
 
-* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (1 message, latest: Jul 25 2019 at 11:24)
+* [online leanprover](19268onlineleanprover.html) (188 messages, latest: Jul 25 2019 at 11:55)
 
 * [documentation requirements](33663documentationrequirements.html) (35 messages, latest: Jul 25 2019 at 09:56)
 
