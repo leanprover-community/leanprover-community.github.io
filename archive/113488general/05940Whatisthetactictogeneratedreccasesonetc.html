@@ -1,0 +1,51 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html">What is the tactic to generate`drec`, `cases_on`, etc?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171682415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171682415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171682415">Cyril Cohen (Jul 25 2019 at 11:24)</a>:</h4>
+<p>In interactive mode, <code>drec</code>, <code>cases_on</code>,... are generated at inductive declaration</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">myeq1</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">}</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">|</span> <span class="n">refl</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">myeq1</span> <span class="n">a</span> <span class="n">a</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq1</span><span class="bp">.</span><span class="n">drec</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span><span class="bp">.</span><span class="n">cases_on</span>
+</pre></div>
+
+
+<p>However in tactic mode,  they are not!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="o">(</span><span class="n">do</span>
+  <span class="n">l</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span> <span class="k">let</span> <span class="n">u</span> <span class="o">:=</span> <span class="n">level</span><span class="bp">.</span><span class="n">param</span> <span class="n">l</span><span class="o">,</span>
+  <span class="n">add_inductive</span> <span class="s2">&quot;myeq&quot;</span> <span class="o">[</span><span class="n">l</span><span class="o">]</span> <span class="mi">1</span>
+    <span class="o">(</span><span class="n">pi</span> <span class="s2">&quot;α&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="o">(</span><span class="n">sort</span> <span class="n">u</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">1</span><span class="o">)</span> <span class="err">$</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">)</span>
+   <span class="o">[((</span><span class="s2">&quot;myeq&quot;</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;refl&quot;</span><span class="o">,</span>
+    <span class="n">pi</span> <span class="s2">&quot;α&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">implicit</span> <span class="o">(</span><span class="n">sort</span> <span class="n">u</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">pi</span> <span class="s2">&quot;a&quot;</span> <span class="n">binder_info</span><span class="bp">.</span><span class="n">default</span> <span class="o">(</span><span class="n">var</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="err">$</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="s2">&quot;myeq&quot;</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">var</span> <span class="mi">1</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">,</span> <span class="n">var</span> <span class="mi">0</span><span class="o">])</span>
+   <span class="o">])</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span><span class="bp">.</span><span class="n">drec</span> <span class="c">/-</span><span class="cm"> not found -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">myeq</span><span class="bp">.</span><span class="n">cases_on</span> <span class="c">/-</span><span class="cm"> not found -/</span>
+</pre></div>
+
+
+<p>How to generate them or call a tactic that does?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

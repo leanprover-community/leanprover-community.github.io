@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [online leanprover](19268onlineleanprover.html) (188 messages, latest: Jul 25 2019 at 11:55)
+
+* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (1 message, latest: Jul 25 2019 at 11:24)
+
 * [documentation requirements](33663documentationrequirements.html) (35 messages, latest: Jul 25 2019 at 09:56)
 
 * [to_additive](21549toadditive.html) (41 messages, latest: Jul 25 2019 at 09:55)
@@ -30,8 +34,6 @@ permalink: archive/113488general/index.html
 * [anonymous hypotheses](97814anonymoushypotheses.html) (1 message, latest: Jul 23 2019 at 13:08)
 
 * [quotient.mk_out](83831quotientmkout.html) (1 message, latest: Jul 23 2019 at 08:43)
-
-* [online leanprover](19268onlineleanprover.html) (185 messages, latest: Jul 23 2019 at 05:31)
 
 * [user_attribute.cache_cfg](12932userattributecachecfg.html) (7 messages, latest: Jul 22 2019 at 21:39)
 
