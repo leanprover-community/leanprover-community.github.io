@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [ring tactic works at one place, fails at another](99356ringtacticworksatoneplacefailsatanother.html) (23 messages, latest: Jul 25 2019 at 02:31)
+* [ring tactic works at one place, fails at another](99356ringtacticworksatoneplacefailsatanother.html) (24 messages, latest: Jul 25 2019 at 05:18)
 
 * [Having trouble with infi](39421Havingtroublewithinfi.html) (6 messages, latest: Jul 24 2019 at 07:55)
 
