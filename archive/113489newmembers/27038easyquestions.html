@@ -311,6 +311,39 @@ permalink: archive/113489newmembers/27038easyquestions.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171453510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171453510">Gun Pinyo (Jul 22 2019 at 18:08)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> , thank you :)</p>
 
+<a name="171680724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/171680724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#171680724">Gun Pinyo (Jul 25 2019 at 10:52)</a>:</h4>
+<p>I have a problem with unfolding tactic. Considering the following code</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">graph</span> <span class="o">:=</span>
+  <span class="o">(</span><span class="n">nodes</span>  <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">edges</span>  <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">srctrg</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">edges</span> <span class="bp">→</span> <span class="n">nodes</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">prism_graph</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="n">graph</span><span class="o">)</span> <span class="o">:</span> <span class="n">graph</span> <span class="o">:=</span>
+  <span class="o">{</span> <span class="n">nodes</span>  <span class="o">:=</span> <span class="n">bool</span> <span class="bp">×</span> <span class="n">G</span><span class="bp">.</span><span class="n">nodes</span>
+  <span class="o">,</span> <span class="n">edges</span>  <span class="o">:=</span> <span class="o">(</span><span class="n">bool</span> <span class="bp">×</span> <span class="n">G</span><span class="bp">.</span><span class="n">edges</span><span class="o">)</span> <span class="err">⊕</span> <span class="n">G</span><span class="bp">.</span><span class="n">nodes</span>
+  <span class="o">,</span> <span class="n">srctrg</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">b</span> <span class="n">e</span><span class="o">,</span> <span class="k">match</span> <span class="n">e</span> <span class="k">with</span>
+                     <span class="bp">|</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inl</span> <span class="o">(</span><span class="n">b&#39;</span><span class="o">,</span> <span class="n">e</span><span class="o">))</span> <span class="o">:=</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">G</span><span class="bp">.</span><span class="n">srctrg</span> <span class="n">b&#39;</span> <span class="n">e</span><span class="o">)</span>
+                     <span class="bp">|</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="n">v</span><span class="o">)</span>       <span class="o">:=</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span>
+                     <span class="kn">end</span>
+  <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">cube_graph</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">graph</span>
+<span class="bp">|</span> <span class="mi">0</span>      <span class="o">:=</span> <span class="bp">⟨</span><span class="n">unit</span><span class="o">,</span> <span class="n">unit</span><span class="o">,</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="o">())</span><span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">prism_graph</span> <span class="o">(</span><span class="n">cube_graph</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="o">(</span><span class="n">cube_graph</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">nodes</span><span class="o">)</span> <span class="o">:</span>
+      <span class="o">(</span><span class="n">graph</span><span class="bp">.</span><span class="n">srctrg</span> <span class="o">(</span><span class="n">cube_graph</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="n">b</span> <span class="o">(</span><span class="n">sum</span><span class="bp">.</span><span class="n">inr</span> <span class="n">v</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">unfold</span> <span class="n">cube_graph</span><span class="o">,</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p>I don't understand why <code>unfold cube_graph</code> fails. Clearly, it should succeed with the goal become <code>(graph.srctrg (prism_graph (cube_graph n)) b (sum.inr v)) = (b, v)</code>.</p>
+<p>Ps. You might argue that I can close this tactic by <code>refl</code> but my point is to use <code>unfold</code>. The reason is that this is the simplified version of the actual problem that I am working and I can't just use <code>refl</code>.<br>
+Ps2. This is another question. If <code>refl</code> works, why <code>simp</code> doesn't. Isn't <code>simp</code> use <code>refl</code> at the end anyway?</p>
+
 
 {% endraw %}
 
