@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [documentation requirements](33663documentationrequirements.html) (33 messages, latest: Jul 25 2019 at 08:24)
+* [documentation requirements](33663documentationrequirements.html) (35 messages, latest: Jul 25 2019 at 09:56)
+
+* [to_additive](21549toadditive.html) (41 messages, latest: Jul 25 2019 at 09:55)
 
 * [problems with structure notation](87870problemswithstructurenotation.html) (4 messages, latest: Jul 25 2019 at 03:13)
 
@@ -326,8 +328,6 @@ permalink: archive/113488general/index.html
 * [simplifier](47605simplifier.html) (6 messages, latest: Jun 05 2019 at 20:20)
 
 * [Structures in meta](37699Structuresinmeta.html) (15 messages, latest: Jun 05 2019 at 20:02)
-
-* [to_additive](21549toadditive.html) (40 messages, latest: Jun 05 2019 at 12:29)
 
 * [Type classes again](90385Typeclassesagain.html) (84 messages, latest: Jun 05 2019 at 09:15)
 

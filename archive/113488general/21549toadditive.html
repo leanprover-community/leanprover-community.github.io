@@ -448,6 +448,68 @@ I can't write</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/167383041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#167383041">Mario Carneiro (Jun 05 2019 at 12:29)</a>:</h4>
 <p>You should be able to see the definition. Possibly the error is causing the theorem to not be generated in the first place</p>
 
+<a name="171677632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/171677632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#171677632">Kevin Buzzard (Jul 25 2019 at 09:55)</a>:</h4>
+<p>I think it would be great to have a <code>to_additive</code> thing. There has been some talk about this recently. The current system is a bore:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group</span><span class="bp">.</span><span class="n">to_additive</span>
+
+<span class="kn">structure</span> <span class="n">monoid_hom</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_one</span> <span class="o">:</span> <span class="n">to_fun</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="bp">→*</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">monoid_hom</span>
+
+<span class="kn">structure</span> <span class="n">add_monoid_hom</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">N</span><span class="o">]</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="n">N</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_zero</span> <span class="o">:</span> <span class="n">to_fun</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">to_fun</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">to_fun</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">to_fun</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="kn">infixr</span> <span class="bp">`</span> <span class="bp">→+</span> <span class="bp">`</span><span class="o">:</span><span class="mi">25</span> <span class="o">:=</span> <span class="n">add_monoid_hom</span>
+
+<span class="c1">-- #print prefix monoid_hom says this is everything (I think; it was generated manually)</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="o">]</span> <span class="n">monoid_hom</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">cases_on</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">cases_on</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">has_sizeof_inst</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">has_sizeof_inst</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">map_add</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">map_mul</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">map_zero</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">map_one</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">mk</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_arrow</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_arrow</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">inj_eq</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">sizeof_spec</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">mk</span><span class="bp">.</span><span class="n">sizeof_spec</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">no_confusion</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">no_confusion</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">no_confusion_type</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">no_confusion_type</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">rec</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">rec</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">rec_on</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">rec_on</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">sizeof</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">sizeof</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">]</span> <span class="n">monoid_hom</span><span class="bp">.</span><span class="n">to_fun</span>
+
+<span class="kn">namespace</span> <span class="n">monoid_hom</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">N</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">N</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">add_monoid_hom</span><span class="bp">.</span><span class="n">id</span><span class="o">]</span> <span class="c1">-- the line causing the problem</span>
+<span class="n">def</span> <span class="n">id</span> <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">monoid</span> <span class="n">M</span><span class="o">]</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→*</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="n">id</span><span class="o">,</span>
+  <span class="n">map_one</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+  <span class="n">map_mul</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span> <span class="o">}</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at application</span>
+<span class="cm">  id._proof_1 M _inst_3</span>
+<span class="cm">term</span>
+<span class="cm">  _inst_3</span>
+<span class="cm">has type</span>
+<span class="cm">  add_monoid M</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  monoid M</span>
+<span class="cm">-/</span>
+
+  <span class="kn">end</span> <span class="n">monoid_hom</span>
+</pre></div>
+
+
+<p>Can I just not expect definitions to work automatically? I don't know how to debug the error. Does it just say "you can't do this -- you're going to have to make that definition manually and then do another bunch of <code>to_additive </code>stuff"?</p>
+
 
 {% endraw %}
 
