@@ -81,6 +81,88 @@ permalink: archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657428">Johan Commelin (Jul 25 2019 at 01:57)</a>:</h4>
 <p>/me has <em>not</em> read the structure parser</p>
 
+<a name="171657542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657542">Mario Carneiro (Jul 25 2019 at 02:00)</a>:</h4>
+<p>I am assuming the above is valid lean from its presence in the example</p>
+
+<a name="171657562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657562">Mario Carneiro (Jul 25 2019 at 02:01)</a>:</h4>
+<p>If it was garbage, then <code>inner_product_space</code> would not have been defined and the rest of the example would be errors everywhere</p>
+
+<a name="171657769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657769">Mario Carneiro (Jul 25 2019 at 02:06)</a>:</h4>
+<p>I put the example in lean, and indeed that line is invalid. But apparently the parser doesn't give up completely, and treats it as</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">inner_product_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">]</span> <span class="kn">extends</span> <span class="n">has_inner</span> <span class="n">α</span>
+</pre></div>
+
+<a name="171657820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657820">Mario Carneiro (Jul 25 2019 at 02:08)</a>:</h4>
+<p>As for the actual question, I think the problem is all the <code>sorry</code>s</p>
+
+<a name="171657831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657831">Johan Commelin (Jul 25 2019 at 02:09)</a>:</h4>
+<p><code>sorry</code> is an unreliable tactic <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="171657909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171657909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171657909">Mario Carneiro (Jul 25 2019 at 02:11)</a>:</h4>
+<p>I don't see why <code>normed_group real</code> is derivable here atm, but it is probably breaking the interpretation of + vs *</p>
+
+<a name="171658098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658098">Mario Carneiro (Jul 25 2019 at 02:16)</a>:</h4>
+<p><code>ring</code> infers a <code>comm_semiring</code> instance once and for all and gets the operations from that. So <code>real -&gt; comm_semiring -&gt; has_add</code> should infer defeq to <code>real -&gt; has_add</code></p>
+
+<a name="171658105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658105">Mario Carneiro (Jul 25 2019 at 02:16)</a>:</h4>
+<p>In this case I think the new instance, which is defined as <code>sorry</code> and so has no useful defeqs, is breaking this</p>
+
+<a name="171658162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658162">Johan Commelin (Jul 25 2019 at 02:18)</a>:</h4>
+<p>Does that mean that the example works again if you change <code>real</code> to <code>rat</code>?</p>
+
+<a name="171658168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658168">Mario Carneiro (Jul 25 2019 at 02:18)</a>:</h4>
+<p>I don't know, my mind is working faster than lean right now</p>
+
+<a name="171658279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658279">Mario Carneiro (Jul 25 2019 at 02:21)</a>:</h4>
+<p>My theory doesn't work. both the initial goal and the inference of <code>comm_ring real</code> and <code>comm_semiring real</code> are unchanged by the instance</p>
+
+<a name="171658546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658546">Mario Carneiro (Jul 25 2019 at 02:29)</a>:</h4>
+<p>Aha, here's a relevant minimized version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+
+<span class="kn">constant</span> <span class="n">real</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">notation</span> <span class="bp">`</span><span class="n">ℝ</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">real</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="n">class</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">add_comm_group</span> <span class="n">α</span>
+
+<span class="n">class</span> <span class="n">inner_product_space</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">inner_product_space</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="mi">2</span> <span class="bp">*</span> <span class="o">((</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">))</span> <span class="bp">-</span> <span class="mi">4</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">8</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">4</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">ring</span> <span class="c1">-- goals accomplished</span>
+
+<span class="kn">instance</span> <span class="n">inner_product_space_is_normed_group</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">bar</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span> <span class="c1">-- instance loop</span>
+  <span class="mi">2</span> <span class="bp">*</span> <span class="o">((</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">))</span> <span class="bp">-</span> <span class="mi">4</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">8</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">4</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">ring</span>
+</pre></div>
+
+<a name="171658600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658600">Mario Carneiro (Jul 25 2019 at 02:30)</a>:</h4>
+<p>The problem is that <code>inner_product_space_is_normed_group</code> introduces an instance loop, because <code>add_comm_group + inner_product_space -&gt; normed_group -&gt; add_comm_group</code></p>
+
+<a name="171658618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/ring%20tactic%20works%20at%20one%20place%2C%20fails%20at%20another/near/171658618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99356ringtacticworksatoneplacefailsatanother.html#171658618">Mario Carneiro (Jul 25 2019 at 02:31)</a>:</h4>
+<p>The solution is to have <code>inner_product_space A</code> extend <code>add_comm_group A</code> rather than taking it as a parameter</p>
+
 
 {% endraw %}
 

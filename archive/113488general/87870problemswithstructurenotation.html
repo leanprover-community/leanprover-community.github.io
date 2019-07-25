@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/87870problemswithstructurenotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/87870problemswithstructurenotation.html">problems with structure notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171657612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/problems%20with%20structure%20notation/near/171657612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87870problemswithstructurenotation.html#171657612">Johan Commelin (Jul 25 2019 at 02:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> In <a href="https://github.com/leanprover-community/mathlib/pull/1259#issuecomment-514792526" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1259#issuecomment-514792526">https://github.com/leanprover-community/mathlib/pull/1259#issuecomment-514792526</a> there are some problems mentioned (by Johannes) with structure notation. I have had these problems as well.<br>
+Will those be fixed in Lean 4? Currently this is quite painful, even though structure notation produces more readable code than the anonymous version.<br>
+Quotes:</p>
+<blockquote>
+<p>jcommelin:<br>
+I personally find the "named constructor"-version slightly more readable than the anonymous version.</p>
+<p>johoelzl:<br>
+True, but there are two problems:</p>
+<div class="codehilite"><pre><span></span>Lean was crashing when writing down the structure syntax (some assertions), and
+the auto-parameters took ages to fail
+</pre></div>
+
+
+<p>I can use the structure syntax again.</p>
+<p>semorrison:<br>
+I tend to:</p>
+<p>1. Write out all the fields, filled in with sorry (including the auto_param fields).<br>
+ 2. Fill in the meaningful data fields.<br>
+ 3. Try removing the auto_param fields one by one, to see which ones the tactic can handle.<br>
+ 4. Write any remaining proofs.<br>
+It's certainly an unfortunate problem that while the data fields are incomplete or broken, Lean wastes a lot of time running auto_param tactics.</p>
+<p>johoelzl:<br>
+A third problem I have with the structure notation:<br>
+Sometimes I write down {field1 := _, field2 := _ }, but instead of showing me the type of field1, I get a type error at field2. I don't remember if there was a solution to this, was this related to the meta-universe problem?</p>
+</blockquote>
+
+<a name="171657707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/problems%20with%20structure%20notation/near/171657707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/87870problemswithstructurenotation.html#171657707">Mario Carneiro (Jul 25 2019 at 02:05)</a>:</h4>
+<p>The structure notation parser is one of the hackiest and messiest parts of the lean 3 parser, and it is responsible for a lot of bug reports. My guess is it's been completely rewritten, and with any luck it's more reasonable now in lean 4</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

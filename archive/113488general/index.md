@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [problems with structure notation](87870problemswithstructurenotation.html) (2 messages, latest: Jul 25 2019 at 02:05)
+
 * [HoTT meeting](37929HoTTmeeting.html) (1 message, latest: Jul 24 2019 at 22:32)
 
 * [the apple monad](89187theapplemonad.html) (6 messages, latest: Jul 24 2019 at 17:49)
