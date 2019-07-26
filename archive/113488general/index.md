@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Inner product space](42698Innerproductspace.html) (9 messages, latest: Jul 26 2019 at 04:09)
+* [Inner product space](42698Innerproductspace.html) (11 messages, latest: Jul 26 2019 at 06:15)
 
 * [localized notation](28132localizednotation.html) (5 messages, latest: Jul 26 2019 at 02:38)
 
