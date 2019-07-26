@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`symmetry at h`](35944symmetryath.html) (5 messages, latest: Jul 26 2019 at 19:29)
+* [`symmetry at h`](35944symmetryath.html) (8 messages, latest: Jul 26 2019 at 20:38)
 
-* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (26 messages, latest: Jul 26 2019 at 17:28)
+* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (29 messages, latest: Jul 26 2019 at 20:33)
 
-* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (21 messages, latest: Jul 26 2019 at 17:08)
+* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (23 messages, latest: Jul 26 2019 at 20:19)
 
 * [Inner product space](42698Innerproductspace.html) (17 messages, latest: Jul 26 2019 at 14:47)
 
