@@ -130,6 +130,35 @@ permalink: archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.ht
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171707642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171707642">Bryan Gin-ge Chen (Jul 25 2019 at 16:59)</a>:</h4>
 <p>My debug build says that <a href="https://github.com/leanprover-community/lean/blob/master/src/kernel/abstract.cpp#L33" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/kernel/abstract.cpp#L33">this assert</a> is failing before it crashes.</p>
 
+<a name="171757994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20the%20tactic%20to%20generate%60drec%60%2C%20%60cases_on%60%2C%20etc%3F/near/171757994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/05940Whatisthetactictogeneratedreccasesonetc.html#171757994">Cyril Cohen (Jul 26 2019 at 08:53)</a>:</h4>
+<p>I reduced the crash to this,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span>
+  <span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span>
+    <span class="n">e</span><span class="bp">.</span><span class="n">add_ginductive</span> <span class="kn">options</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[]</span> <span class="o">[</span><span class="n">ty</span><span class="o">]</span> <span class="o">[((</span><span class="s2">&quot;test&quot;</span><span class="o">,</span> <span class="n">ty</span><span class="o">),</span> <span class="o">[])]</span> <span class="n">ff</span>
+</pre></div>
+
+
+<p>This goes through</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">expr</span> <span class="n">native</span> <span class="n">tactic</span>
+
+<span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">ty</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">sort</span> <span class="n">level</span><span class="bp">.</span><span class="n">zero</span><span class="o">,</span>
+  <span class="n">updateex_env</span> <span class="err">$</span> <span class="bp">λ</span><span class="n">e</span><span class="o">,</span>
+    <span class="n">e</span><span class="bp">.</span><span class="n">add_ginductive</span> <span class="kn">options</span><span class="bp">.</span><span class="n">mk</span> <span class="o">[]</span> <span class="o">[]</span> <span class="o">[((</span><span class="s2">&quot;test&quot;</span><span class="o">,</span> <span class="n">ty</span><span class="o">),</span> <span class="o">[])]</span> <span class="n">ff</span> <span class="c">/-</span><span class="cm"> removed parameter ty -/</span>
+</pre></div>
+
+
+<p>but I have this strange debug/warning/error looping in the output buffer:</p>
+<div class="codehilite"><pre><span></span>cannot parse: foo bar
+cannot parse: bar foo bar
+</pre></div>
+
 
 {% endraw %}
 

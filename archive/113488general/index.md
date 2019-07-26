@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Inner product space](42698Innerproductspace.html) (11 messages, latest: Jul 26 2019 at 06:15)
+* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (18 messages, latest: Jul 26 2019 at 08:53)
+
+* [Inner product space](42698Innerproductspace.html) (14 messages, latest: Jul 26 2019 at 08:47)
 
 * [localized notation](28132localizednotation.html) (5 messages, latest: Jul 26 2019 at 02:38)
 
 * [online leanprover](19268onlineleanprover.html) (189 messages, latest: Jul 26 2019 at 02:37)
-
-* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (17 messages, latest: Jul 25 2019 at 16:59)
 
 * [documentation requirements](33663documentationrequirements.html) (35 messages, latest: Jul 25 2019 at 09:56)
 
