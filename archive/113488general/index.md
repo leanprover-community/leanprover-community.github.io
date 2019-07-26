@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Inner product space](42698Innerproductspace.html) (16 messages, latest: Jul 26 2019 at 10:44)
+* [Inner product space](42698Innerproductspace.html) (17 messages, latest: Jul 26 2019 at 14:47)
 
 * [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (19 messages, latest: Jul 26 2019 at 09:03)
 
