@@ -1,0 +1,69 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/52419noleanmessagesoutputinhackedmode.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html">no lean messages output in hacked mode</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171789075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171789075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171789075">Kevin Buzzard (Jul 26 2019 at 16:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> made me a new "mode", it looks a bit like this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- lots of stuff omitted</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">kevin</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="o">:</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">cases_arg_p</span> <span class="bp">→</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span><span class="bp">.</span><span class="n">using_ident</span> <span class="bp">→</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span><span class="bp">.</span><span class="n">with_ident_list</span> <span class="bp">→</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="o">(</span><span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">tk</span> <span class="s2">&quot;generalizing&quot;</span> <span class="bp">*&gt;</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">many</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">ident</span><span class="o">))</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span>
+
+<span class="n">run_cmd</span> <span class="n">copy_decls</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="o">[</span><span class="n">kevin</span><span class="o">]</span>
+  <span class="n">induction</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>so I can have my hacked version of induction just by writing <code>induction</code>, as long as the user writes <code>begin [kevin]</code>. But there is no output on the Lean Messages screen in VS Code! I think this is because Rob didn't know how to turn this on. <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> do you know how to turn this on?</p>
+
+<a name="171789203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171789203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171789203">Kevin Buzzard (Jul 26 2019 at 16:52)</a>:</h4>
+<p><a href="https://gist.github.com/kbuzzard/a91012b1ab7a255990a1ec9045820f4b" target="_blank" title="https://gist.github.com/kbuzzard/a91012b1ab7a255990a1ec9045820f4b">https://gist.github.com/kbuzzard/a91012b1ab7a255990a1ec9045820f4b</a></p>
+
+<a name="171789515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171789515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171789515">Simon Hudon (Jul 26 2019 at 16:56)</a>:</h4>
+<p>You can look at <a href="https://github.com/unitb/temporal-logic/blob/master/src/temporal_logic/tactic.lean" target="_blank" title="https://github.com/unitb/temporal-logic/blob/master/src/temporal_logic/tactic.lean">https://github.com/unitb/temporal-logic/blob/master/src/temporal_logic/tactic.lean</a> to see how to make that work. I copied a comment by Leo in the file</p>
+
+<a name="171789600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171789600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171789600">Simon Hudon (Jul 26 2019 at 16:57)</a>:</h4>
+<p>Actually, here is the comment:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"></span>
+<span class="cm">   The auto quotation currently supports two classes of tactics: tactic and smt_tactic.</span>
+<span class="cm">   To add a new class Tac, we have to</span>
+<span class="cm">   1) Make sure it is a monad. That is, we have an instance for (monad Tac)</span>
+<span class="cm">   2) There is a namespace Tac.interactive</span>
+<span class="cm">   3) There is a definition: Tac.step {α : Type} (t : Tac α) : Tac unit</span>
+<span class="cm">   4) (Optional) Tac.istep {α : Type} (line0 col0 : nat) (line col : nat) (tac : Tac α) : Tac unit</span>
+<span class="cm">      Similar to step but it should scope trace messages at the given line/col,</span>
+<span class="cm">      and ensure that the exception position is after (line0, col0)</span>
+<span class="cm">   6) There is a definition Tac.save_info (line col : nat) : Tac unit</span>
+<span class="cm">   7) There is a definition Tac.execute (tac : Tac unit) : tactic unit</span>
+<span class="cm">   8) There is a definition Tac.execute_with (cfg : config) (tac : Tac unit) : tactic unit</span>
+<span class="cm">      where config is an arbitrary type.</span>
+<span class="cm">   TODO(Leo): improve the &quot;recipe&quot; above. It is too ad hoc.</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
