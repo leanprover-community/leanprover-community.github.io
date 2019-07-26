@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Inner product space](42698Innerproductspace.html) (9 messages, latest: Jul 26 2019 at 04:09)
+
 * [localized notation](28132localizednotation.html) (5 messages, latest: Jul 26 2019 at 02:38)
 
 * [online leanprover](19268onlineleanprover.html) (189 messages, latest: Jul 26 2019 at 02:37)
