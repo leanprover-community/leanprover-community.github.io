@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (18 messages, latest: Jul 26 2019 at 08:53)
+* [Inner product space](42698Innerproductspace.html) (15 messages, latest: Jul 26 2019 at 09:32)
 
-* [Inner product space](42698Innerproductspace.html) (14 messages, latest: Jul 26 2019 at 08:47)
+* [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (19 messages, latest: Jul 26 2019 at 09:03)
 
 * [localized notation](28132localizednotation.html) (5 messages, latest: Jul 26 2019 at 02:38)
 
