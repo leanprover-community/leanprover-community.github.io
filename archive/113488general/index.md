@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`symmetry at h`](35944symmetryath.html) (8 messages, latest: Jul 26 2019 at 20:38)
+* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (30 messages, latest: Jul 26 2019 at 21:54)
 
-* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (29 messages, latest: Jul 26 2019 at 20:33)
+* [`symmetry at h`](35944symmetryath.html) (8 messages, latest: Jul 26 2019 at 20:38)
 
 * [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (23 messages, latest: Jul 26 2019 at 20:19)
 
