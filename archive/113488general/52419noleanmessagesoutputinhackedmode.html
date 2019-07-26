@@ -63,6 +63,153 @@ permalink: archive/113488general/52419noleanmessagesoutputinhackedmode.html
 <span class="cm">-/</span>
 </pre></div>
 
+<a name="171790055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790055">Kevin Buzzard (Jul 26 2019 at 17:02)</a>:</h4>
+<p>I want to rewrite the defintions of tactics which are already there</p>
+
+<a name="171790090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790090">Rob Lewis (Jul 26 2019 at 17:02)</a>:</h4>
+<p>Oh, I thought I fixed this while you were here. Change the definition of <code>save_info</code>: <code>meta def save_info := tactic.save_info</code></p>
+
+<a name="171790172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790172">Kevin Buzzard (Jul 26 2019 at 17:03)</a>:</h4>
+<p>Doesn't work for me</p>
+
+<a name="171790223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790223">Kevin Buzzard (Jul 26 2019 at 17:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">copy_decl</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">add_decl</span> <span class="err">$</span> <span class="n">d</span><span class="bp">.</span><span class="n">update_name</span> <span class="err">$</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span><span class="bp">.</span><span class="n">update_prefix</span> <span class="bp">`</span><span class="n">kevin</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">filter</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">:</span> <span class="n">bool</span> <span class="o">:=</span>
+<span class="n">d</span><span class="bp">.</span><span class="n">to_name</span> <span class="err">∉</span> <span class="o">[</span><span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span><span class="o">]</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">copy_decls</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">env</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">ls</span> <span class="o">:=</span> <span class="n">env</span><span class="bp">.</span><span class="n">fold</span> <span class="o">[]</span> <span class="n">list</span><span class="bp">.</span><span class="n">cons</span><span class="o">,</span>
+  <span class="n">ls</span><span class="bp">.</span><span class="n">mmap&#39;</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">dec</span><span class="o">,</span> <span class="n">when</span> <span class="o">(</span><span class="n">dec</span><span class="bp">.</span><span class="n">to_name</span><span class="bp">.</span><span class="n">get_prefix</span> <span class="bp">=</span> <span class="bp">`</span><span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="bp">∧</span> <span class="n">filter</span> <span class="n">dec</span><span class="o">)</span> <span class="o">(</span><span class="n">copy_decl</span> <span class="n">dec</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">kevin</span> <span class="o">:=</span> <span class="n">tactic</span>
+
+<span class="kn">namespace</span> <span class="n">kevin</span>
+
+<span class="c1">--meta instance : monad kevin := by delta kevin; apply_instance</span>
+
+<span class="c1">--meta instance : alternative kevin := by delta kevin; apply_instance</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">step</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">kevin</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">kevin</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">c</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="o">()</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">save_info</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">save_info</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">execute</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">kevin</span> <span class="n">unit</span><span class="o">)</span> <span class="o">:</span> <span class="n">kevin</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">c</span>
+
+<span class="c1">--meta def trace_state {α : Type}</span>
+
+<span class="kn">end</span> <span class="n">kevin</span>
+
+<span class="c1">--#check tactic.interactive.induction</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">kevin</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span> <span class="o">:</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">cases_arg_p</span> <span class="bp">→</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span><span class="bp">.</span><span class="n">using_ident</span> <span class="bp">→</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span><span class="bp">.</span><span class="n">with_ident_list</span> <span class="bp">→</span>
+  <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="o">(</span><span class="n">optional</span> <span class="o">(</span><span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">tk</span> <span class="s2">&quot;generalizing&quot;</span> <span class="bp">*&gt;</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">many</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span><span class="bp">.</span><span class="n">ident</span><span class="o">))</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span>
+<span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span><span class="bp">.</span><span class="n">induction</span>
+
+<span class="n">run_cmd</span> <span class="n">copy_decls</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span> <span class="o">[</span><span class="n">kevin</span><span class="o">]</span>
+  <span class="n">induction</span> <span class="n">n</span><span class="o">,</span>
+  <span class="c1">-- no output in Lean window</span>
+    <span class="n">sorry</span><span class="o">,</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="171790273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790273">Kevin Buzzard (Jul 26 2019 at 17:05)</a>:</h4>
+<p><code>trace_state</code> indicates that the goals are fine, I just can't see them.</p>
+
+<a name="171790360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790360">Kevin Buzzard (Jul 26 2019 at 17:06)</a>:</h4>
+<div class="codehilite"><pre><span></span> 4) (Optional) Tac.istep {α : Type} (line0 col0 : nat) (line col : nat) (tac : Tac α) : Tac unit
+      Similar to step but it should scope trace messages at the given line/col,
+</pre></div>
+
+
+<p>That's what Sebastian is referring to perhaps.</p>
+
+<a name="171790400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790400">Rob Lewis (Jul 26 2019 at 17:07)</a>:</h4>
+<p>Oh, that's weird, changing <code>save_info</code> fixes it in the "display goal" view but not in "display messages."</p>
+
+<a name="171790519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790519">Kevin Buzzard (Jul 26 2019 at 17:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">istep</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">},</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">istep</span>
+</pre></div>
+
+<a name="171790524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790524">Kevin Buzzard (Jul 26 2019 at 17:08)</a>:</h4>
+<p>This does it.</p>
+
+<a name="171790551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790551">Kevin Buzzard (Jul 26 2019 at 17:09)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="171790580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790580">Kevin Buzzard (Jul 26 2019 at 17:09)</a>:</h4>
+<p>aargh no it doesn't; my trace_state was still left in</p>
+
+<a name="171790730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790730">Simon Hudon (Jul 26 2019 at 17:11)</a>:</h4>
+<p>If the only benefit is having <code>induction</code> behave in a specific way, this solution is overkill. You're going to need to explicitly bring every tactic that you want available in your proof language. You're much better off calling your tactic <code>my_induction</code> or <code>induction'</code> or <code>kevin_induction</code> and staying in <code>tactic.interactive</code></p>
+
+<a name="171790834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790834">Kevin Buzzard (Jul 26 2019 at 17:12)</a>:</h4>
+<p>I've finally got it working :-) Thanks.</p>
+
+<a name="171790837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790837">Rob Lewis (Jul 26 2019 at 17:12)</a>:</h4>
+<p>Wait, there are sorrys there, there shouldn't be anything displaying in "display messages." It works perfectly fine for me with <code>save_info</code> changed.</p>
+
+<a name="171790883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790883">Kevin Buzzard (Jul 26 2019 at 17:13)</a>:</h4>
+<p>I was in the other mode :-/ I wish they won't both called "Lean messages" in VS Code.</p>
+
+<a name="171790969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790969">Kevin Buzzard (Jul 26 2019 at 17:14)</a>:</h4>
+<p>In CoCalc it's "all messages" and "info at cursor"</p>
+
+<a name="171790986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171790986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171790986">Kevin Buzzard (Jul 26 2019 at 17:14)</a>:</h4>
+<p>This is brilliant, thanks Rob and Sebastian.</p>
+
+<a name="171791047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171791047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171791047">Kevin Buzzard (Jul 26 2019 at 17:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> this is for some standalone project where the user won't see the [kevin] nonsense but will want to be using familiar Lean tactics.</p>
+
+<a name="171791186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171791186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171791186">Koundinya Vajjha (Jul 26 2019 at 17:17)</a>:</h4>
+<p>When a tactic class like this is defined, are all the <code>interactive</code> tactics available by default or should they be manually lifted to the <code>[kevin]</code> tactic class?</p>
+
+<a name="171791210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171791210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171791210">Koundinya Vajjha (Jul 26 2019 at 17:17)</a>:</h4>
+<p>Oh sorry Simon already answered this</p>
+
+<a name="171791271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171791271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171791271">Rob Lewis (Jul 26 2019 at 17:18)</a>:</h4>
+<p>In Kevin's file, there's a command that copies everything in <code>tactic.interactive</code> to <code>kevin.interactive</code>.</p>
+
+<a name="171791979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/no%20lean%20messages%20output%20in%20hacked%20mode/near/171791979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/52419noleanmessagesoutputinhackedmode.html#171791979">Sebastian Ullrich (Jul 26 2019 at 17:28)</a>:</h4>
+<blockquote>
+<p>This is brilliant, thanks Rob and Sebastian.</p>
+</blockquote>
+<p>Uh, you're welcome...?</p>
+
 
 {% endraw %}
 
