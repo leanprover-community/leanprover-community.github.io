@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [image factorization to functor](15333imagefactorizationtofunctor.html) (3 messages, latest: Jul 27 2019 at 19:41)
+* [tactic question](62193tacticquestion.html) (64 messages, latest: Jul 27 2019 at 20:45)
+
+* [image factorization to functor](15333imagefactorizationtofunctor.html) (4 messages, latest: Jul 27 2019 at 20:11)
 
 * [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (41 messages, latest: Jul 27 2019 at 16:39)
 
@@ -80,8 +82,6 @@ permalink: archive/113488general/index.html
 * [well foundness in the kernel](39459wellfoundnessinthekernel.html) (2 messages, latest: Jul 18 2019 at 15:16)
 
 * [Lean Together 2020](04583LeanTogether2020.html) (6 messages, latest: Jul 18 2019 at 13:11)
-
-* [tactic question](62193tacticquestion.html) (62 messages, latest: Jul 18 2019 at 12:30)
 
 * [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
 
