@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactic question](62193tacticquestion.html) (64 messages, latest: Jul 27 2019 at 20:45)
+* [tactic question](62193tacticquestion.html) (65 messages, latest: Jul 27 2019 at 21:45)
 
 * [image factorization to functor](15333imagefactorizationtofunctor.html) (4 messages, latest: Jul 27 2019 at 20:11)
 
