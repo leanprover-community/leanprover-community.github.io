@@ -1,0 +1,87 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/22036applyto.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html">apply ... to</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171844940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171844940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171844940">Kevin Buzzard (Jul 27 2019 at 13:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> were you talking about a similar thing recently? I have <code>hpq : P -&gt; Q</code> and I have <code>h : P</code> and I just want to write <code>apply hpq to h</code>. These are important things for maths beginners who often reason forwards. Currently I have to write <code>replace h with hpq h</code> which is somehow less ideal.</p>
+
+<a name="171844945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171844945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171844945">Kenny Lau (Jul 27 2019 at 13:14)</a>:</h4>
+<p><code>specialize hpq h</code></p>
+
+<a name="171844946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171844946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171844946">Kevin Buzzard (Jul 27 2019 at 13:14)</a>:</h4>
+<p>I am fixing all of this stuff in a modded version of Lean tactic mode.</p>
+
+<a name="171844961"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171844961" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171844961">Kevin Buzzard (Jul 27 2019 at 13:15)</a>:</h4>
+<p><code>apply hpq to h</code> still looks easier to understand</p>
+
+<a name="171844970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171844970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171844970">Kevin Buzzard (Jul 27 2019 at 13:15)</a>:</h4>
+<p>can you write me an <code>apply'</code> tactic which does this all automatically?</p>
+
+<a name="171844972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171844972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171844972">Kevin Buzzard (Jul 27 2019 at 13:15)</a>:</h4>
+<p>Or else I might have to learn about parsers</p>
+
+<a name="171845269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171845269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171845269">Kenny Lau (Jul 27 2019 at 13:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span>
+<span class="kn">namespace</span> <span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">apply&#39;</span> <span class="o">(</span><span class="n">source</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">ident</span><span class="o">)</span> <span class="o">(</span><span class="n">target</span> <span class="o">:</span> <span class="n">parse</span> <span class="err">$</span> <span class="n">tk</span> <span class="s2">&quot;at&quot;</span> <span class="bp">*&gt;</span> <span class="n">ident</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">e1</span> <span class="err">←</span> <span class="n">get_local</span> <span class="n">source</span><span class="o">,</span>
+   <span class="n">e2</span> <span class="err">←</span> <span class="n">get_local</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">replace</span> <span class="n">target</span> <span class="n">none</span> <span class="o">(</span><span class="n">some</span> <span class="err">$</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">e1</span> <span class="err">%%</span><span class="n">e2</span><span class="o">))</span>
+
+<span class="kn">end</span> <span class="n">interactive</span>
+<span class="kn">end</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">hpq</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply&#39;</span> <span class="n">hpq</span> <span class="n">at</span> <span class="n">hp</span><span class="o">,</span>
+  <span class="n">guard_hyp</span> <span class="n">hpq</span> <span class="o">:=</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">,</span> <span class="n">guard_hyp</span> <span class="n">hp</span> <span class="o">:=</span> <span class="n">q</span><span class="o">,</span>
+  <span class="n">trivial</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="171845315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171845315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171845315">Patrick Massot (Jul 27 2019 at 13:26)</a>:</h4>
+<p><code>specialize</code> sounds good when the assumption is a forall, but not so much when it's an implication. But in any case I think you can't completely avoid the idea that <code>hpq h</code> is a thing</p>
+
+<a name="171846272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171846272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171846272">Kevin Buzzard (Jul 27 2019 at 13:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> thanks! The coolest thing would be if <code>apply'</code> did everything <code>apply</code> did too.</p>
+
+<a name="171846290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171846290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171846290">Kenny Lau (Jul 27 2019 at 13:55)</a>:</h4>
+<p><code>apply</code> works backwards right</p>
+
+<a name="171846331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171846331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171846331">Kenny Lau (Jul 27 2019 at 13:56)</a>:</h4>
+<p><code>apply (hpq : p -&gt; q)</code> turns the goal from <code>q</code> to <code>p</code></p>
+
+<a name="171846332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/apply%20...%20to/near/171846332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/22036applyto.html#171846332">Kenny Lau (Jul 27 2019 at 13:56)</a>:</h4>
+<p>so I'm not sure what you mean by "everything <code>apply</code> did"</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
