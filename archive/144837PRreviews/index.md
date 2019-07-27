@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1269 apply symmetry on assumptions](912091269applysymmetryonassumptions.html) (1 message, latest: Jul 27 2019 at 16:39)
+
 * [potential PR's](37613potentialPRs.html) (8 messages, latest: Jul 14 2019 at 15:32)
 
 * [#1222 provide `trace!` and `fail!` and allow tactic](286541222providetraceandfailandallowtactic.html) (2 messages, latest: Jul 13 2019 at 14:50)
