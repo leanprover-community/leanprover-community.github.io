@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [image factorization to functor](15333imagefactorizationtofunctor.html) (3 messages, latest: Jul 27 2019 at 19:41)
+
 * [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (41 messages, latest: Jul 27 2019 at 16:39)
 
 * [apply ... to](22036applyto.html) (45 messages, latest: Jul 27 2019 at 15:37)
