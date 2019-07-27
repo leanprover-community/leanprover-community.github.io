@@ -20,7 +20,7 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (8 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (9 topics)
 
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 

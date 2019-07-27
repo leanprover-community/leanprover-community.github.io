@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Are freshmen ripe for formal proofs?](23649Arefreshmenripeforformalproofs.html) (1 message, latest: Jul 27 2019 at 17:40)
+
 * [bachelor thesis subjects](55956bachelorthesissubjects.html) (3 messages, latest: Jul 20 2019 at 17:23)
 
 * [`cases` isn't using my notation](02317casesisntusingmynotation.html) (32 messages, latest: May 28 2019 at 14:03)
