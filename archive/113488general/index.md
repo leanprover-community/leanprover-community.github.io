@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (37 messages, latest: Jul 27 2019 at 11:36)
+
 * [Maximum Class-Instance Resolution Depth Reached](92908MaximumClassInstanceResolutionDepthReached.html) (56 messages, latest: Jul 27 2019 at 10:53)
 
 * [Maximum Class-Instance Resolution Depth Reach](70883MaximumClassInstanceResolutionDepthReach.html) (1 message, latest: Jul 27 2019 at 07:51)
-
-* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (36 messages, latest: Jul 27 2019 at 07:29)
 
 * [Inner product space](42698Innerproductspace.html) (19 messages, latest: Jul 27 2019 at 00:10)
 
