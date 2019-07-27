@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [gluing presheaves](99453gluingpresheaves.html) (4 messages, latest: Jul 27 2019 at 00:18)
+
 * [order topology](42234ordertopology.html) (1 message, latest: Jul 26 2019 at 12:13)
 
 * [manifolds](86782manifolds.html) (3 messages, latest: Jul 25 2019 at 21:20)
@@ -18,8 +20,6 @@ permalink: archive/116395maths/index.html
 * [help with sequences](21714helpwithsequences.html) (15 messages, latest: Jul 24 2019 at 19:03)
 
 * [gluing functions](66720gluingfunctions.html) (149 messages, latest: Jul 24 2019 at 07:40)
-
-* [gluing presheaves](99453gluingpresheaves.html) (2 messages, latest: Jul 24 2019 at 04:31)
 
 * [colimits in Top](44719colimitsinTop.html) (66 messages, latest: Jul 23 2019 at 14:03)
 
