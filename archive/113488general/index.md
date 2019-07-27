@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Maximum Class-Instance Resolution Depth Reach](70883MaximumClassInstanceResolutionDepthReach.html) (1 message, latest: Jul 27 2019 at 07:51)
+
+* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (36 messages, latest: Jul 27 2019 at 07:29)
+
 * [Inner product space](42698Innerproductspace.html) (19 messages, latest: Jul 27 2019 at 00:10)
 
 * [`symmetry at h`](35944symmetryath.html) (9 messages, latest: Jul 26 2019 at 22:28)
-
-* [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (31 messages, latest: Jul 26 2019 at 22:27)
 
 * [What is the tactic to generate`drec`, `cases_on`, etc?](05940Whatisthetactictogeneratedreccasesonetc.html) (23 messages, latest: Jul 26 2019 at 20:19)
 
