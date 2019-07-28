@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [presheafed space category](15170presheafedspacecategory.html) (21 messages, latest: Jul 28 2019 at 02:52)
+* [presheafed space category](15170presheafedspacecategory.html) (22 messages, latest: Jul 28 2019 at 10:56)
 
 * [gluing presheaves](99453gluingpresheaves.html) (4 messages, latest: Jul 27 2019 at 00:18)
 

@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Are freshmen ripe for formal proofs?](23649Arefreshmenripeforformalproofs.html) (5 messages, latest: Jul 28 2019 at 04:44)
+* [Are freshmen ripe for formal proofs?](23649Arefreshmenripeforformalproofs.html) (8 messages, latest: Jul 28 2019 at 10:54)
 
 * [bachelor thesis subjects](55956bachelorthesissubjects.html) (3 messages, latest: Jul 20 2019 at 17:23)
 
