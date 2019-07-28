@@ -1545,6 +1545,46 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171901907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171901907">Andrew Ashworth (Jul 28 2019 at 19:57)</a>:</h4>
 <p>you should keep them that way. after all, they are faster</p>
 
+<a name="171902046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902046">Andrew Ashworth (Jul 28 2019 at 20:01)</a>:</h4>
+<p>maybe a better rule of thumb is: use a new structure, unless you get annoyed with always having to write <code>to_equiv</code></p>
+
+<a name="171902101"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902101">Andrew Ashworth (Jul 28 2019 at 20:03)</a>:</h4>
+<p>the most important difference is new structures can't have duplicate fields</p>
+
+<a name="171902184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902184">Chris Hughes (Jul 28 2019 at 20:05)</a>:</h4>
+<p>It's just a pain to use the constructor for new structures.</p>
+
+<a name="171902230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902230">Andrew Ashworth (Jul 28 2019 at 20:06)</a>:</h4>
+<p>yes, in the original description of new structures, Leo assumed a bunch of the tactics would be updated to transparently handle it all. Well, it didn't</p>
+
+<a name="171902238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902238">Kevin Buzzard (Jul 28 2019 at 20:07)</a>:</h4>
+<p>We never really ran into these issues as far as I remember -- our main goal was a definition, and our structures just got bigger and bigger but we were lucky not to ever run into duplicate substructures.</p>
+
+<a name="171902243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902243">Kevin Buzzard (Jul 28 2019 at 20:07)</a>:</h4>
+<p>The tactics didn't get updated, or they couldn't be updated?</p>
+
+<a name="171902244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902244">Andrew Ashworth (Jul 28 2019 at 20:07)</a>:</h4>
+<p>didn't get updated</p>
+
+<a name="171902303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902303">Andrew Ashworth (Jul 28 2019 at 20:09)</a>:</h4>
+<p>I guess also since we have no idea what's happening in Lean 4, maybe prefer and start with new structures and hope they are easier to work with whenever the new version gets released</p>
+
+<a name="171902365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902365">Andrew Ashworth (Jul 28 2019 at 20:10)</a>:</h4>
+<p>ahh, so you see, in my last three paras I've given completely contradictory advise</p>
+
+<a name="171902371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902371">Andrew Ashworth (Jul 28 2019 at 20:11)</a>:</h4>
+<p>I suppose I don't know which one to prefer either :)</p>
+
 
 {% endraw %}
 
