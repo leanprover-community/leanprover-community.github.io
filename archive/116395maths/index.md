@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling mul_homs](58200bundlingmulhoms.html) (272 messages, latest: Jul 28 2019 at 18:42)
+
 * [presheafed space category](15170presheafedspacecategory.html) (22 messages, latest: Jul 28 2019 at 10:56)
 
 * [gluing presheaves](99453gluingpresheaves.html) (4 messages, latest: Jul 27 2019 at 00:18)
@@ -30,8 +32,6 @@ permalink: archive/116395maths/index.html
 * [One-object category](33573Oneobjectcategory.html) (39 messages, latest: Jul 22 2019 at 02:13)
 
 * [fancy inductive types and mathematics](17269fancyinductivetypesandmathematics.html) (1 message, latest: Jul 21 2019 at 23:52)
-
-* [bundling mul_homs](58200bundlingmulhoms.html) (271 messages, latest: Jul 21 2019 at 21:04)
 
 * [R^n and convex analysis](65865Rnandconvexanalysis.html) (5 messages, latest: Jul 21 2019 at 18:59)
 
