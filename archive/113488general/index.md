@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AI and theorem proving](41431AIandtheoremproving.html) (18 messages, latest: Jul 28 2019 at 13:14)
+
 * [tactic question](62193tacticquestion.html) (65 messages, latest: Jul 27 2019 at 21:45)
 
 * [image factorization to functor](15333imagefactorizationtofunctor.html) (4 messages, latest: Jul 27 2019 at 20:11)
@@ -310,8 +312,6 @@ permalink: archive/113488general/index.html
 * [heq hell again](32676heqhellagain.html) (41 messages, latest: Jun 10 2019 at 12:10)
 
 * [finsupp scalar diamond](88248finsuppscalardiamond.html) (1 message, latest: Jun 10 2019 at 11:12)
-
-* [AI and theorem proving](41431AIandtheoremproving.html) (17 messages, latest: Jun 09 2019 at 11:41)
 
 * [Proving Axiom Sane](39467ProvingAxiomSane.html) (10 messages, latest: Jun 08 2019 at 08:59)
 
