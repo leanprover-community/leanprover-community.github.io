@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [presheafed space category](15170presheafedspacecategory.html) (21 messages, latest: Jul 28 2019 at 02:52)
+
 * [gluing presheaves](99453gluingpresheaves.html) (4 messages, latest: Jul 27 2019 at 00:18)
 
 * [order topology](42234ordertopology.html) (1 message, latest: Jul 26 2019 at 12:13)
@@ -68,8 +70,6 @@ permalink: archive/116395maths/index.html
 * [cache-olean instructions](43334cacheoleaninstructions.html) (14 messages, latest: Jul 11 2019 at 12:29)
 
 * [coeff_mul](91921coeffmul.html) (47 messages, latest: Jul 11 2019 at 09:19)
-
-* [presheafed space category](15170presheafedspacecategory.html) (20 messages, latest: Jul 11 2019 at 07:07)
 
 * [zero ring](29201zeroring.html) (36 messages, latest: Jul 11 2019 at 04:26)
 
