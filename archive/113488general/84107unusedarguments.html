@@ -1,0 +1,75 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84107unusedarguments.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html">unused arguments</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="171988563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171988563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171988563">Floris van Doorn (Jul 29 2019 at 22:14)</a>:</h4>
+<p>I created a script that prints all declarations with unused arguments:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/sanity_check/src/tactic/sanity_check.lean#L97" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sanity_check/src/tactic/sanity_check.lean#L97">https://github.com/leanprover-community/mathlib/blob/sanity_check/src/tactic/sanity_check.lean#L97</a></p>
+<p>The output of this command is here:<br>
+<a href="https://gist.github.com/fpvandoorn/04837ea7f20479bcac9a99539d2c17b3" target="_blank" title="https://gist.github.com/fpvandoorn/04837ea7f20479bcac9a99539d2c17b3">https://gist.github.com/fpvandoorn/04837ea7f20479bcac9a99539d2c17b3</a></p>
+<p>Many of these declarations are "wrong" in some way: maybe a type class argument occurs more than once, maybe a declaration is given with unnecessary assumptions (which is not always bad, but sometimes it is), maybe a declaration should really be in a different theory (e.g. <a href="https://github.com/leanprover-community/mathlib/blob/132bc5677b17b6e4ea0f1c6fec5d4b2c6003a777/src/topology/constructions.lean#L238" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/132bc5677b17b6e4ea0f1c6fec5d4b2c6003a777/src/topology/constructions.lean#L238">this</a> should probably be proven for an arbitrary type, not an arbitrary topological space)</p>
+<p>Is anyone interested in going through this list and cleaning stuff up? If not, I'll do it at some point, but that will probably take a while.</p>
+
+<a name="171988768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171988768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171988768">Floris van Doorn (Jul 29 2019 at 22:17)</a>:</h4>
+<p>There is some noise in this list: there are some automatically generated declarations and there are some declarations where you really want an unused argument (for example a user command with argument <code>(meta_info : decl_meta_info)</code>).</p>
+
+<a name="171989235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171989235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171989235">Floris van Doorn (Jul 29 2019 at 22:24)</a>:</h4>
+<p>There are 653 declarations in mathlib that have unused arguments. This is after removing all declarations that are "internal" and most (but not all) automatically generated declarations.</p>
+
+<a name="171989236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171989236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171989236">Rob Lewis (Jul 29 2019 at 22:24)</a>:</h4>
+<p>Could you post an issue on GitHub with that list of declarations? I can imagine it will take a while to get it all fixed -- it would be easier to track incremental progress there.</p>
+
+<a name="171989253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171989253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171989253">Rob Lewis (Jul 29 2019 at 22:24)</a>:</h4>
+<p>I wonder what percentage are unnecessary type class arguments?</p>
+
+<a name="171989271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171989271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171989271">Floris van Doorn (Jul 29 2019 at 22:25)</a>:</h4>
+<p>From looking manually at a bunch of them: most of them are.</p>
+
+<a name="171989813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171989813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171989813">Simon Hudon (Jul 29 2019 at 22:35)</a>:</h4>
+<p>Any way for your tool to check lemmas that have too many or too few implicit arguments?</p>
+
+<a name="171990941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171990941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171990941">Kevin Buzzard (Jul 29 2019 at 22:57)</a>:</h4>
+<p>Looking at the algebra ones I think it's difficult to argue that these are "incorrect"; in fact for some of them I don't understand the output at all. </p>
+<div class="codehilite"><pre><span></span><span class="c1">-- ring_theory\ideals.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">is_coprime_self</span> <span class="c1">-- [2, 5]</span>
+<span class="bp">``</span>
+
+<span class="n">what</span> <span class="n">does</span> <span class="o">[</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">]</span> <span class="n">mean</span> <span class="n">here</span><span class="err">?</span> <span class="n">The</span> <span class="kn">theorem</span> <span class="n">is</span> <span class="n">about</span> <span class="n">x</span> <span class="n">being</span> <span class="n">coprime</span> <span class="n">to</span> <span class="n">x</span> <span class="n">and</span> <span class="n">this</span> <span class="n">is</span> <span class="n">surely</span> <span class="n">meaningless</span> <span class="n">unless</span> <span class="n">x</span> <span class="n">is</span> <span class="k">in</span> <span class="n">an</span> <span class="n">algebraic</span> <span class="kn">structure</span> <span class="n">like</span> <span class="n">a</span> <span class="n">commutative</span> <span class="n">ring</span><span class="bp">.</span> <span class="n">The</span> <span class="o">[</span><span class="mi">2</span><span class="o">]</span> <span class="n">seems</span> <span class="n">to</span> <span class="n">point</span> <span class="n">to</span> <span class="n">comm_ring</span> <span class="n">and</span> <span class="n">the</span> <span class="mi">5</span> <span class="n">to</span> <span class="n">the</span> <span class="n">coprime</span> <span class="n">thing</span><span class="bp">.</span> <span class="n">I</span> <span class="n">am</span> <span class="n">confused</span><span class="bp">.</span>
+
+<span class="bp">```</span><span class="n">lean</span>
+<span class="c1">-- ring_theory\localization.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">localization</span><span class="bp">.</span><span class="n">r</span> <span class="c1">-- [4]</span>
+</pre></div>
+
+
+<p>This one is saying that you don't need a submonoid to define a certain relation. This is like saying that if we have a group G and a subgroup H then we can define a binary relation on G by g1 R g2 iff g1/g2 is in H, but ha ha, we don't strictly speaking need that H is a subgroup -- it's just that we will never use this relation unless H is a subgroup. </p>
+<p>Similar story here, and probably for a lot of other algebra stuff:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- ring_theory\ideal_operations.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">map</span> <span class="c1">-- [6]</span>
+</pre></div>
+
+
+<p>if you have a map between rings then you can push ideals forward, and yes, strictly speaking, it doesn't have to be an unbundled ring hom, but when everything is bundled do we want this map between rings to be a ring hom or a random map of sets? It will always be a ring hom. Is there still some CS-related justification for removing the assumption?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
