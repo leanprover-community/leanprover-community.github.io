@@ -1585,6 +1585,36 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171902371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171902371">Andrew Ashworth (Jul 28 2019 at 20:11)</a>:</h4>
 <p>I suppose I don't know which one to prefer either :)</p>
 
+<a name="171957333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957333">Kevin Buzzard (Jul 29 2019 at 15:46)</a>:</h4>
+<p>Here's a question about <code>mul_equiv</code>s. I really don't know how to set these up. So far I have gone for the old structure command, extending <code>equiv</code> and adding a field <code>map_mul</code>. The problem is with proving things like symmetry. I have goals like</p>
+<div class="codehilite"><pre><span></span><span class="n">h</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">((</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">to_equiv</span> <span class="n">h</span><span class="o">))</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">(</span><span class="n">n₁</span> <span class="bp">*</span> <span class="n">n₂</span><span class="o">))</span> <span class="bp">=</span>
+    <span class="n">h</span><span class="bp">.</span><span class="n">to_fun</span> <span class="o">((</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">to_equiv</span> <span class="n">h</span><span class="o">))</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">n₁</span> <span class="bp">*</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">to_equiv</span> <span class="n">h</span><span class="o">))</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">n₂</span><span class="o">)</span>
+</pre></div>
+
+
+<p>which I really just want to put into a canonical form and then rewrite/simp to death. But the problem is that the canonical form of <code>h.inv_fun</code> seems to be <code>h.symm</code> when <code>h</code> is an <code>equiv</code>, and if I define <code>symm</code> on <code>mul_equiv</code> then I have to reprove stuff like <code>symm_apply_apply</code> in this situation.</p>
+
+<a name="171957542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957542">Kenny Lau (Jul 29 2019 at 15:48)</a>:</h4>
+<p>yeah but the proof is just <code>equiv.symm_apply_apply</code></p>
+
+<a name="171957569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957569">Kevin Buzzard (Jul 29 2019 at 15:48)</a>:</h4>
+<p>but I can't rewrite it</p>
+
+<a name="171957626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957626">Kevin Buzzard (Jul 29 2019 at 15:49)</a>:</h4>
+<p>In fact my first question is what the canonical notation for the inverse bijection should be with <code>h : mul_equiv G H</code></p>
+
+<a name="171957789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957789">Chris Hughes (Jul 29 2019 at 15:51)</a>:</h4>
+<p>Prove that <code>f.symm.to_equiv = f.to_equiv.symm</code> and make it <code>simp</code></p>
+
+<a name="171957872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957872">Kevin Buzzard (Jul 29 2019 at 15:51)</a>:</h4>
+<p>I think my issue is that I am in the middle of defining <code>mul_equiv.symm</code> and I am complaining about not being able to use the canonical notation <code>h.symm</code> when stating some intermediate result, but this is spurious because <code>h.symm</code> is in the process of being defined.</p>
+
 
 {% endraw %}
 
