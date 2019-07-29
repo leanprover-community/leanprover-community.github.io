@@ -31,6 +31,18 @@ permalink: archive/113488general/18425whereshouldtheselemmasgo.html
 
 <p>Thank you :)</p>
 
+<a name="171965537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/171965537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#171965537">Kevin Buzzard (Jul 29 2019 at 17:23)</a>:</h4>
+<p>So let me say first that I have had very little experience of PR'ing to mathlib and you will want to get some more experienced voices before doing anything. But here's my two cents:</p>
+<p>I would instinctively say "put stuff like this in <code>data.rat.basic</code>" but that file is already over 1000 lines long. Maybe it's time to split it into more than one file? We have the directory data/rat now. </p>
+<p>Actually, looking at it a bit closer, maybe it should be reformulated a bit. My instinct is that one should prove <code>⌊ q ⌋ = q.num / q.denom</code> (which seems like a cleaner statement, there are no n's and d's involved, and <code>library_search</code> doesn't seem to find this) and then the first lemma follows from this and the second lemma, which makes me wonder whether the first lemma is needed at all. I'm wondering whether it's best to include just the second lemma and this <code>⌊ q ⌋ = q.num / q.denom</code> statement because they are both quite succinct, and I could imagine that they could both go in data.rat.basic or data.rat.basic2 if it gets split.</p>
+<p>The third lemma is an easy consequence of the second lemma and <code>int.mod_add_div</code> I guess, so my instinct is that the natural results are there and the user can put them together if they want the 3rd result. Similarly the 4th result is not really a result about rationals, if you use the second statement then it becomes an assertion about integers which could go in data.int.gcd or something, if it's not already there.</p>
+<p>PS while writing this answer I discovered that <code>data.int.basic</code> imports <code>algebra.field</code>. Not what I would have guessed.</p>
+
+<a name="171965846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/171965846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#171965846">Kevin Buzzard (Jul 29 2019 at 17:27)</a>:</h4>
+<p>Hmm, I see that I suggested that some lemmas involving floors could go in data.rat.basic but that's no good because the floor stuff is defined in algebra/archimedean.lean which imports data.rat.basic. So the floor rational stuff would have go to in there I guess.</p>
+
 
 {% endraw %}
 
