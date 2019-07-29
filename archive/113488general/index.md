@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [debug symbols](92497debugsymbols.html) (4 messages, latest: Jul 29 2019 at 16:38)
+
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (1 message, latest: Jul 29 2019 at 16:27)
+
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (8 messages, latest: Jul 29 2019 at 15:28)
 
 * [Recommended Lean version](98858RecommendedLeanversion.html) (1 message, latest: Jul 29 2019 at 01:17)

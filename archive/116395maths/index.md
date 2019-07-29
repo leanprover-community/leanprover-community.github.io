@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (296 messages, latest: Jul 29 2019 at 15:51)
+* [`0 < n` or `n ≠ 0`?](424360norn0.html) (7 messages, latest: Jul 29 2019 at 16:19)
 
-* [`0 < n` or `n ≠ 0`?](424360norn0.html) (2 messages, latest: Jul 29 2019 at 15:04)
+* [bundling mul_homs](58200bundlingmulhoms.html) (296 messages, latest: Jul 29 2019 at 15:51)
 
 * [presheafed space category](15170presheafedspacecategory.html) (22 messages, latest: Jul 28 2019 at 10:56)
 
