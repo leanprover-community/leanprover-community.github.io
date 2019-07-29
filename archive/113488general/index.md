@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [import all files](00808importallfiles.html) (7 messages, latest: Jul 29 2019 at 19:44)
+* [missing lemmas for inf?](63101missinglemmasforinf.html) (4 messages, latest: Jul 29 2019 at 20:34)
 
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (3 messages, latest: Jul 29 2019 at 17:27)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (4 messages, latest: Jul 29 2019 at 20:16)
+
+* [import all files](00808importallfiles.html) (8 messages, latest: Jul 29 2019 at 20:06)
 
 * [debug symbols](92497debugsymbols.html) (5 messages, latest: Jul 29 2019 at 17:12)
 

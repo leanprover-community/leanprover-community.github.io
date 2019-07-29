@@ -43,6 +43,16 @@ permalink: archive/113488general/18425whereshouldtheselemmasgo.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/171965846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#171965846">Kevin Buzzard (Jul 29 2019 at 17:27)</a>:</h4>
 <p>Hmm, I see that I suggested that some lemmas involving floors could go in data.rat.basic but that's no good because the floor stuff is defined in algebra/archimedean.lean which imports data.rat.basic. So the floor rational stuff would have go to in there I guess.</p>
 
+<a name="171979719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/171979719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#171979719">Kevin Kappelmann (Jul 29 2019 at 20:16)</a>:</h4>
+<p>Alright, thanks for the pointers. I'll pick my best guess from the mentioned folders then and be prepared for some PR discussion :p </p>
+<p><code>rat.floor</code> is actually defined as <code>q.num / q.denom</code>, so that's pretty simple:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">}</span> <span class="o">:</span> <span class="err">⌊</span><span class="n">q</span><span class="err">⌋</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="n">num</span> <span class="bp">/</span> <span class="n">q</span><span class="bp">.</span><span class="n">denom</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">cases</span> <span class="n">q</span><span class="o">,</span> <span class="n">refl</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>however, it does not hold that <code>(rat.mk n d).num = n</code> (and similar for <code>.denom</code>) since <code>rat.mk</code> has to create a coprime pair <code>(num : int , denom : nat)</code>. But it still holds that <code>(rat.mk n d).num / (rat.mk n d).denom = n / d</code>, which is my first lemma.</p>
+
 
 {% endraw %}
 
