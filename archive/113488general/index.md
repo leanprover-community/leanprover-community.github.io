@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unused arguments](84107unusedarguments.html) (25 messages, latest: Jul 29 2019 at 23:58)
+
+* [missing lemmas for inf?](63101missinglemmasforinf.html) (5 messages, latest: Jul 29 2019 at 23:01)
+
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (7 messages, latest: Jul 29 2019 at 22:59)
 
-* [unused arguments](84107unusedarguments.html) (8 messages, latest: Jul 29 2019 at 22:57)
-
 * [import all files](00808importallfiles.html) (16 messages, latest: Jul 29 2019 at 22:17)
-
-* [missing lemmas for inf?](63101missinglemmasforinf.html) (4 messages, latest: Jul 29 2019 at 20:34)
 
 * [debug symbols](92497debugsymbols.html) (5 messages, latest: Jul 29 2019 at 17:12)
 

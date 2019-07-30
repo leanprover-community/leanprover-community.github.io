@@ -69,6 +69,86 @@ permalink: archive/113488general/84107unusedarguments.html
 
 <p>if you have a map between rings then you can push ideals forward, and yes, strictly speaking, it doesn't have to be an unbundled ring hom, but when everything is bundled do we want this map between rings to be a ring hom or a random map of sets? It will always be a ring hom. Is there still some CS-related justification for removing the assumption?</p>
 
+<a name="171991346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991346">Mario Carneiro (Jul 29 2019 at 23:04)</a>:</h4>
+<p>It makes all theorems using the definition shorter, and it proves for free that the choice of witness to H being a subgroup doesn't matter</p>
+
+<a name="171991402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991402">Mario Carneiro (Jul 29 2019 at 23:05)</a>:</h4>
+<p>So I would definitely try to avoid "hygiene arguments" that are there only because that's the area of math we are interested in today</p>
+
+<a name="171991467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991467">Mario Carneiro (Jul 29 2019 at 23:07)</a>:</h4>
+<p><code>ideal.is_coprime_self</code> takes an <code>x</code> and a <code>y</code> and proves <code>x</code> is coprime to <code>x</code> iff <code>x</code> is a unit. That's pretty clear cut</p>
+
+<a name="171991535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991535">Mario Carneiro (Jul 29 2019 at 23:08)</a>:</h4>
+<p>it also has two <code>comm_ring</code> assumptions</p>
+
+<a name="171991577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991577">Kevin Buzzard (Jul 29 2019 at 23:09)</a>:</h4>
+<p>aah I had misunderstood [2,5]</p>
+
+<a name="171991581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991581">Kevin Buzzard (Jul 29 2019 at 23:09)</a>:</h4>
+<p>I don't see the two <code>comm_ring</code> assumptions</p>
+
+<a name="171991621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991621">Kevin Buzzard (Jul 29 2019 at 23:10)</a>:</h4>
+<p>so maybe I'm miscounting instead</p>
+
+<a name="171991625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991625">Mario Carneiro (Jul 29 2019 at 23:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">is_coprime_self</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">is_coprime</span> <span class="n">x</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">is_unit</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="171991647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991647">Kevin Buzzard (Jul 29 2019 at 23:10)</a>:</h4>
+<p>I still don't see it :-/</p>
+
+<a name="171991651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991651">Mario Carneiro (Jul 29 2019 at 23:10)</a>:</h4>
+<p><code>[_inst_1 : comm_ring α] [_inst_2 : comm_ring α]</code></p>
+
+<a name="171991724"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991724">Mario Carneiro (Jul 29 2019 at 23:12)</a>:</h4>
+<p>If you are asking why it acquired a duplicate assumption, it's probably because one is explicitly in the statement and the other is a <code>variable</code> in the section</p>
+
+<a name="171991734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991734">Mario Carneiro (Jul 29 2019 at 23:12)</a>:</h4>
+<p>it's on line 15</p>
+
+<a name="171991769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171991769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171991769">Mario Carneiro (Jul 29 2019 at 23:13)</a>:</h4>
+<p>I can see that <code>mem_span_pair</code>, <code>is_coprime_def</code>, <code>is_coprime_self</code> all make the same mistake of writing <code>[comm_ring α]</code> even though it's already included</p>
+
+<a name="171993246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171993246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171993246">Floris van Doorn (Jul 29 2019 at 23:41)</a>:</h4>
+<blockquote>
+<p>what does [2,5] mean here? </p>
+</blockquote>
+<p>From the Gist:</p>
+<blockquote>
+<p>The list after each declaration gives all the positions of the unused arguments (starting at 1). E.g. [2] means that the second argument is unused.</p>
+</blockquote>
+
+<a name="171993407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171993407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171993407">Jeremy Avigad (Jul 29 2019 at 23:45)</a>:</h4>
+<p>Nice job, Floris. The list is really striking.</p>
+
+<a name="171993465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171993465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171993465">Floris van Doorn (Jul 29 2019 at 23:46)</a>:</h4>
+<blockquote>
+<p>This one is saying that you don't need a submonoid to define a certain relation. This is like saying that if we have a group G and a subgroup H then we can define a binary relation on G by g1 R g2 iff g1/g2 is in H, but ha ha, we don't strictly speaking need that H is a subgroup -- it's just that we will never use this relation unless H is a subgroup.</p>
+</blockquote>
+<p>I'm ambivalent about this issue myself. I relate with both your and Mario's argument. If we're going through this list, we don't have to remove <em>all</em> the unused arguments.</p>
+
+<a name="171994022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171994022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171994022">Jeremy Avigad (Jul 29 2019 at 23:58)</a>:</h4>
+<p>Actually, Georges got a lot of mileage in the math components library by defining things in greater generality than you might think you would need. For example, you can take quotients G / H even if H is not a normal subgroup (maybe not even a subgroup?). IIRC it is defined as N_G(H) / H, where N_G(H) is the normalizer of H in G. So the construction makes sense and coincides with the usual one when H is normal in G. But doing things in greater generality meant that there were often less side conditions to check when writing proofs. </p>
+<p>I am not saying that deleting unused arguments will be genuinely helpful in all cases on Floris' list, only that you might be surprised.</p>
+
 
 {% endraw %}
 
