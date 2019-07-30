@@ -76,6 +76,56 @@ permalink: archive/113488general/18425whereshouldtheselemmasgo.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172018665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172018665">Mario Carneiro (Jul 30 2019 at 09:01)</a>:</h4>
 <p>I agree. Notice that if <code>⌊rat.mk n d⌋ = n / d</code> and <code>q.num / q.denom = ⌊q⌋</code> are both simp lemmas, then <code>(rat.mk n d).num / (rat.mk n d).denom = n / d</code> is proven by simp</p>
 
+<a name="172028769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172028769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172028769">Kevin Kappelmann (Jul 30 2019 at 11:36)</a>:</h4>
+<blockquote>
+<p>I would instinctively say "put stuff like this in <code>data.rat.basic</code>" but that file is already over 1000 lines long. Maybe it's time to split it into more than one file? We have the directory data/rat now. </p>
+</blockquote>
+<p>I think it is time. I made a <a href="https://github.com/leanprover-community/mathlib/pull/1284" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1284">PR to split it</a>.</p>
+
+<a name="172029199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029199">Johan Commelin (Jul 30 2019 at 11:43)</a>:</h4>
+<p>You can use <code>default.lean</code> to export a "default" set of files. (Which can then be imported using <code>import data.rat</code>.)</p>
+
+<a name="172029259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029259">Johan Commelin (Jul 30 2019 at 11:44)</a>:</h4>
+<p>I guess a next (and tedious) step, is to minimize the <code>import data.rat.*</code> in the rest of the library. But <code>olean-rs</code> might be able to help with that.</p>
+
+<a name="172029322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029322">Kevin Kappelmann (Jul 30 2019 at 11:45)</a>:</h4>
+<p>Yeah, I was a bit afraid of changing <code>basic.lean</code> to <code>default.lean</code> since every <code>rat.basic</code> import then needs to be changed. Should I create <code>default.lean</code> that just imports <code>basic.lean</code> for now?</p>
+
+<a name="172029401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029401">Chris Hughes (Jul 30 2019 at 11:46)</a>:</h4>
+<p>I would at least import <code>basic</code> and <code>order</code>.</p>
+
+<a name="172029654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029654">Johan Commelin (Jul 30 2019 at 11:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> I find it hard to say, atm. I think you said there was some sort of (almost) import loop? What was it exactly?</p>
+
+<a name="172029668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029668">Johan Commelin (Jul 30 2019 at 11:51)</a>:</h4>
+<p>Because that might help in determining how to structure things.</p>
+
+<a name="172029962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172029962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172029962">Kevin Kappelmann (Jul 30 2019 at 11:55)</a>:</h4>
+<p>Imports where OK; just Kevin B. noticed:</p>
+<blockquote>
+<p>PS while writing this answer I discovered that data.int.basic imports algebra.field. Not what I would have guessed.</p>
+<p>Hmm, I see that I suggested that some lemmas involving floors could go in data.rat.basic but that's no good because the floor stuff is defined in algebra/archimedean.lean which imports data.rat.basic. So the floor rational stuff would have go to in there I guess.</p>
+</blockquote>
+<p>My idea was:<br>
+- <code>data.rat.field</code> defines the field structure<br>
+- <code>data.rat.order</code> defines the order and related functions<br>
+- <code>data.rat.cast</code> defines the casts<br>
+- <code>data.rat.floor_ceil</code> defines floor and ceil functions<br>
+- <code>data.rat.basic</code> imports the previous four.</p>
+<p>If we want to have <code>data.rat.default</code>, my proposal is to just import <code>data.rat.basic</code> from <code>data.rat.default</code> for now and in a different PR update the <code>data.rat.basic</code> and <code>data.rat.*</code> imports.</p>
+
+<a name="172030195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172030195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172030195">Chris Hughes (Jul 30 2019 at 11:58)</a>:</h4>
+<p>If you don't want to break anything, isn't it best to import all of them from default at the moment, and change imports from <code>data.rat.basic</code> to <code>data.rat.default</code> and then minimise the imports in a separate PR.</p>
+
 
 {% endraw %}
 

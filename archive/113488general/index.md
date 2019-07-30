@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [unused arguments](84107unusedarguments.html) (36 messages, latest: Jul 30 2019 at 10:38)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (18 messages, latest: Jul 30 2019 at 11:58)
 
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (9 messages, latest: Jul 30 2019 at 09:01)
+* [debug symbols](92497debugsymbols.html) (6 messages, latest: Jul 30 2019 at 11:20)
+
+* [unused arguments](84107unusedarguments.html) (37 messages, latest: Jul 30 2019 at 11:03)
 
 * [Proving for Fun](94070ProvingforFun.html) (2 messages, latest: Jul 30 2019 at 08:08)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [missing lemmas for inf?](63101missinglemmasforinf.html) (5 messages, latest: Jul 29 2019 at 23:01)
 
 * [import all files](00808importallfiles.html) (16 messages, latest: Jul 29 2019 at 22:17)
-
-* [debug symbols](92497debugsymbols.html) (5 messages, latest: Jul 29 2019 at 17:12)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (8 messages, latest: Jul 29 2019 at 15:28)
 
