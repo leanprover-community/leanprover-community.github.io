@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving for Fun](94070ProvingforFun.html) (6 messages, latest: Jul 30 2019 at 19:53)
+
 * [unused arguments](84107unusedarguments.html) (66 messages, latest: Jul 30 2019 at 15:04)
 
 * [debug symbols](92497debugsymbols.html) (7 messages, latest: Jul 30 2019 at 13:58)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (41 messages, latest: Jul 30 2019 at 13:24)
-
-* [Proving for Fun](94070ProvingforFun.html) (2 messages, latest: Jul 30 2019 at 08:08)
 
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (30 messages, latest: Jul 30 2019 at 04:52)
 
