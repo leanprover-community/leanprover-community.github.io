@@ -158,6 +158,83 @@ permalink: archive/113488general/18425whereshouldtheselemmasgo.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172034894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172034894">Mario Carneiro (Jul 30 2019 at 12:58)</a>:</h4>
 <p>and obviously <code>rat</code> is a field and that's pretty integral to the definition. We aren't so bootstrapped that we need to separate the type rat from the field rat</p>
 
+<a name="172035071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035071">Chris Hughes (Jul 30 2019 at 13:00)</a>:</h4>
+<p>That's why I suggested <code>data/rat/field</code> should be called <code>data/rat/basic</code>. Just looking, this hasn't actually been done yet.</p>
+
+<a name="172035167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035167">Chris Hughes (Jul 30 2019 at 13:01)</a>:</h4>
+<p>Especially since that file also contains the definition of <code>rat</code></p>
+
+<a name="172035335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035335">Kevin Kappelmann (Jul 30 2019 at 13:03)</a>:</h4>
+<p>So everyone agrees I should rename <code>rat.field</code> to <code>rat.basic</code> - is that right?</p>
+
+<a name="172035366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035366">Chris Hughes (Jul 30 2019 at 13:03)</a>:</h4>
+<p>I think so.</p>
+
+<a name="172035486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035486">Mario Carneiro (Jul 30 2019 at 13:04)</a>:</h4>
+<p>I am not sure I see the argument for splitting the file, but the name suggestions seem alright</p>
+
+<a name="172035560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035560">Chris Hughes (Jul 30 2019 at 13:05)</a>:</h4>
+<p>I think the argument is that <code>floor</code> will be able to import <code>algebra.archimedean</code></p>
+
+<a name="172035885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035885">Chris Hughes (Jul 30 2019 at 13:08)</a>:</h4>
+<p>Personally I would actually state the lemma <code>@[simp]
+lemma rat.floor_eq_num_div_denom (n : ℤ) (d : ℕ) : ⌊rat.mk n d⌋ = n / d := sorry</code> differently. I would just add a <code>simp</code> lemma turning <code>rat.mk n d</code> into <code>(n : rat) / d</code> and then a lemma turning <code>⌊n / d⌋ = (n : int) / d</code> in any ordered field. I'm not sure why you'd want to use <code>rat.mk</code> instead of division.</p>
+
+<a name="172035963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172035963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172035963">Kevin Kappelmann (Jul 30 2019 at 13:09)</a>:</h4>
+<blockquote>
+<p>So everyone agrees I should rename <code>rat.field</code> to <code>rat.basic</code> - is that right?</p>
+</blockquote>
+<p>updated the PR with this</p>
+
+<a name="172036058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172036058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172036058">Kevin Kappelmann (Jul 30 2019 at 13:10)</a>:</h4>
+<blockquote>
+<p>I am not sure I see the argument for splitting the file, but the name suggestions seem alright</p>
+</blockquote>
+<p>I was about to add lemmas to data.rat.basic and the sequence of statements in data.rat.basic made it non-trivial to integrate them. Making smaller, coherent files makes adding changes way easier + it is easier to find and document things.</p>
+
+<a name="172036275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172036275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172036275">Mario Carneiro (Jul 30 2019 at 13:13)</a>:</h4>
+<p>the current file is stated in a logical order, with subheadings. Could you be more specific?</p>
+
+<a name="172036333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172036333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172036333">Mario Carneiro (Jul 30 2019 at 13:14)</a>:</h4>
+<p>It predates the new doc requirements though</p>
+
+<a name="172036451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172036451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172036451">Mario Carneiro (Jul 30 2019 at 13:15)</a>:</h4>
+<p>My point is mostly that making more files with the same content does not on its own make anything better. It's just trading one organizational scheme for another, and you can be equally convoluted either way</p>
+
+<a name="172036607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172036607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172036607">Mario Carneiro (Jul 30 2019 at 13:17)</a>:</h4>
+<p>The biggest thing you lose with moving to mini files is the explicit dependency order. Filesystems just show the files in alphabetical order, and you can't see what comes first anymore</p>
+
+<a name="172036910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172036910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172036910">Kevin Kappelmann (Jul 30 2019 at 13:21)</a>:</h4>
+<p>For example, things like </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">num_denom_mk</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">hn</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">qdf</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">/.</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span>
+      <span class="bp">∃</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">q</span><span class="bp">.</span><span class="n">num</span> <span class="bp">∧</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">q</span><span class="bp">.</span><span class="n">denom</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>were not stated at the top where <a href="http://rat.mk" target="_blank" title="http://rat.mk">rat.mk</a> is defined, but somewhere at the bottom, sections of coercions, floor functions, etc in-between, making it really difficult to find the lemma.<br>
+Another example: there was a section about coercions randomly appearing between the <code>ceil</code> and <code>nat_ceil</code> section, obfuscating the connection.</p>
+
+<a name="172037158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172037158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172037158">Kevin Kappelmann (Jul 30 2019 at 13:24)</a>:</h4>
+<blockquote>
+<p>The biggest thing you lose with moving to mini files is the explicit dependency order. Filesystems just show the files in alphabetical order, and you can't see what comes first anymore</p>
+</blockquote>
+<p>My take is that If that's the main thing you miss, then that should be fixed by, e.g. a tactic outputting dependency graphs rather than giving up on easier maintenance of smaller files.</p>
+
 
 {% endraw %}
 

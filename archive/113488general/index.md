@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (26 messages, latest: Jul 30 2019 at 12:58)
+* [debug symbols](92497debugsymbols.html) (7 messages, latest: Jul 30 2019 at 13:58)
 
-* [debug symbols](92497debugsymbols.html) (6 messages, latest: Jul 30 2019 at 11:20)
+* [unused arguments](84107unusedarguments.html) (40 messages, latest: Jul 30 2019 at 13:56)
 
-* [unused arguments](84107unusedarguments.html) (37 messages, latest: Jul 30 2019 at 11:03)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (41 messages, latest: Jul 30 2019 at 13:24)
 
 * [Proving for Fun](94070ProvingforFun.html) (2 messages, latest: Jul 30 2019 at 08:08)
 

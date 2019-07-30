@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [power series](15161powerseries.html) (71 messages, latest: Jul 30 2019 at 13:54)
+
 * [`0 < n` or `n ≠ 0`?](424360norn0.html) (7 messages, latest: Jul 29 2019 at 16:19)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (296 messages, latest: Jul 29 2019 at 15:51)
@@ -20,8 +22,6 @@ permalink: archive/116395maths/index.html
 * [order topology](42234ordertopology.html) (1 message, latest: Jul 26 2019 at 12:13)
 
 * [manifolds](86782manifolds.html) (3 messages, latest: Jul 25 2019 at 21:20)
-
-* [power series](15161powerseries.html) (58 messages, latest: Jul 25 2019 at 01:50)
 
 * [help with sequences](21714helpwithsequences.html) (15 messages, latest: Jul 24 2019 at 19:03)
 

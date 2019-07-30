@@ -256,6 +256,58 @@ But like you said, there are several approaches, and it's not clear to me which 
 <p>Right, there are all sorts of generalisations, but I didn't know the "one generalisation that rules them all".<br>
 Also, in real world math, you just wave your hands and say "the sum is finite". In Lean that's quite a subtle thing to do, and so even plain old formal Laurent series are non-trivial to write down. (That is, if you want to write them as a series. Of course I can just define them as the field of fractions of power series, but that is "cheating".)</p>
 
+<a name="172038279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038279">Chris Hughes (Jul 30 2019 at 13:39)</a>:</h4>
+<p>Is there a nice way of adding together infinitely many power series, such that the corresponding sum for each coefficient is finite? Is there some topology that makes this work?</p>
+
+<a name="172038349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038349">Kenny Lau (Jul 30 2019 at 13:40)</a>:</h4>
+<p>yes, the p-adic topology!</p>
+
+<a name="172038366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038366">Kenny Lau (Jul 30 2019 at 13:40)</a>:</h4>
+<p>R[[X]] is the X-adic completion of R[X]</p>
+
+<a name="172038525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038525">Chris Hughes (Jul 30 2019 at 13:42)</a>:</h4>
+<p>I see. Explain further. So you need a topology on R[X] to start with? And then how do you extend this topology? Is this a uniform space completion?</p>
+
+<a name="172038804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038804">Kenny Lau (Jul 30 2019 at 13:46)</a>:</h4>
+<p>you define a norm on R[X] that assigns 2^-deg(p) to p</p>
+
+<a name="172038842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038842">Kenny Lau (Jul 30 2019 at 13:47)</a>:</h4>
+<p>and then take the Cauchy sequences blah blah blah</p>
+
+<a name="172038855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038855">Kenny Lau (Jul 30 2019 at 13:47)</a>:</h4>
+<p>just like how you construct the p-adic integers</p>
+
+<a name="172038875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038875">Kenny Lau (Jul 30 2019 at 13:47)</a>:</h4>
+<p>this is an ultrametric</p>
+
+<a name="172038931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172038931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172038931">Kenny Lau (Jul 30 2019 at 13:48)</a>:</h4>
+<p>so an is summable iff an -&gt; 0</p>
+
+<a name="172039033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172039033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172039033">Patrick Massot (Jul 30 2019 at 13:49)</a>:</h4>
+<p>Why do you want a norm? You can simply use the adic topology</p>
+
+<a name="172039348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172039348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172039348">Kenny Lau (Jul 30 2019 at 13:53)</a>:</h4>
+<p>oh right, the local basis is <code>I^n</code> right</p>
+
+<a name="172039352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172039352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172039352">Kenny Lau (Jul 30 2019 at 13:53)</a>:</h4>
+<p>at 0</p>
+
+<a name="172039421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/power%20series/near/172039421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15161powerseries.html#172039421">Kenny Lau (Jul 30 2019 at 13:54)</a>:</h4>
+<p><code>I</code> being the ideal <code>(X)</code></p>
+
 
 {% endraw %}
 
