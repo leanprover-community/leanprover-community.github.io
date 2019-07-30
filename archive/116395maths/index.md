@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [power series](15161powerseries.html) (71 messages, latest: Jul 30 2019 at 13:54)
+* [power series](15161powerseries.html) (93 messages, latest: Jul 30 2019 at 14:42)
 
 * [`0 < n` or `n ≠ 0`?](424360norn0.html) (7 messages, latest: Jul 29 2019 at 16:19)
 

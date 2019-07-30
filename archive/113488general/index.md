@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [debug symbols](92497debugsymbols.html) (7 messages, latest: Jul 30 2019 at 13:58)
+* [unused arguments](84107unusedarguments.html) (65 messages, latest: Jul 30 2019 at 14:54)
 
-* [unused arguments](84107unusedarguments.html) (40 messages, latest: Jul 30 2019 at 13:56)
+* [debug symbols](92497debugsymbols.html) (7 messages, latest: Jul 30 2019 at 13:58)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (41 messages, latest: Jul 30 2019 at 13:24)
 

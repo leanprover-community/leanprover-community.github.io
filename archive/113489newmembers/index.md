@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Is this a bug?](74867Isthisabug.html) (6 messages, latest: Jul 30 2019 at 09:15)
+* [Is this a bug?](74867Isthisabug.html) (8 messages, latest: Jul 30 2019 at 14:14)
+
+* [Coercion from a submodule to its underlying set](22648Coercionfromasubmoduletoitsunderlyingset.html) (1 message, latest: Jul 30 2019 at 14:13)
 
 * [easy questions](27038easyquestions.html) (74 messages, latest: Jul 27 2019 at 13:48)
 

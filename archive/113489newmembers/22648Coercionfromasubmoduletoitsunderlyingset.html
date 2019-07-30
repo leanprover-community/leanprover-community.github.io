@@ -1,0 +1,44 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/22648Coercionfromasubmoduletoitsunderlyingset.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/22648Coercionfromasubmoduletoitsunderlyingset.html">Coercion from a submodule to its underlying set</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172041258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Coercion%20from%20a%20submodule%20to%20its%20underlying%20set/near/172041258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22648Coercionfromasubmoduletoitsunderlyingset.html#172041258">Joe (Jul 30 2019 at 14:13)</a>:</h4>
+<p>A coercion from a submodule to its underlying set is defined in <code>algebra/module</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">α</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">submodule</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>However, the type inference system doesn't seem to use it. Instead, it is looking for <code>has_coe_to_fun (submodule α β)</code>. This sometimes results in a timeout. See the following example. </p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="c1">-- (deterministic) timeout</span>
+<span class="c1">-- [class_instances] (0) ?x_3 : has_coe_to_fun</span>
+  <span class="c1">-- (@submodule ℝ α (@normed_ring.to_ring ℝ (@normed_field.to_normed_ring ℝ real.normed_field)) _inst_1</span>
+    <span class="c1">-- (@vector_space.to_module ℝ α (@normed_field.to_discrete_field ℝ real.normed_field) _inst_1 _inst_2))</span>
+    <span class="c1">-- ...</span>
+</pre></div>
+
+
+<p>Does that mean we need to add the following instance?</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

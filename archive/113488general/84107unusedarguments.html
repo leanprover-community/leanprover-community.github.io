@@ -233,6 +233,112 @@ Does Johannes like to use implicit arguments in identities so that he can call <
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172039567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172039567">Floris van Doorn (Jul 30 2019 at 13:56)</a>:</h4>
 <p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> That's good to know. I always copy-pasted it thinking it was necessary. In that case, when cleaning up this list, we can also go through these arguments.</p>
 
+<a name="172042404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172042404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172042404">Kevin Buzzard (Jul 30 2019 at 14:24)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span>  On the March version of that declaration my output would probably be <code>[4]</code>, since there is still a erroneous second argument of type <code>α</code> in the lemma.</p>
+</blockquote>
+<p>Yes exactly. That's why I was totally confused earlier :-)</p>
+
+<a name="172042926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172042926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172042926">Kevin Buzzard (Jul 30 2019 at 14:28)</a>:</h4>
+<p>Re: the argument that in the odd order project they worked with more generality. It would not surprise me if, after removing the condition that S be a submonoid in the definition of localisation R S, one found several other lemmas which happened not to use the fact that S was a submonoid. I can see that this is a change which gets computer scientists excited, but after The Big Refactor, when submonoids are bundled, one will just end up bundling S back into being a submonoid -- either that or one will have a lot of coercions from submonoid to set (and some other thread started today seemed to indicate that there might be problems here, although they might be specific to submodules, I'm not sure).</p>
+
+<a name="172043400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043400">Johan Commelin (Jul 30 2019 at 14:33)</a>:</h4>
+<p>On the other hand, in that example we do use that <code>R</code> is a ring, but we shouldn't. Because now we can't localise monoids )-;</p>
+
+<a name="172043524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043524">Kevin Buzzard (Jul 30 2019 at 14:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="118107">@Amelia Livingston</span> is working on localising monoids as we speak! She's preparing a PR for mathlib which localises a monoid at a submonoid.</p>
+
+<a name="172043551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043551">Kevin Buzzard (Jul 30 2019 at 14:34)</a>:</h4>
+<p>She has everything working, we're just trying to figure out what a good universal predicate should be.</p>
+
+<a name="172043583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043583">Kevin Buzzard (Jul 30 2019 at 14:35)</a>:</h4>
+<p>Our initial guess, using kernels, was wrong, because a surjective morphism of monoids is not determined by its kernel, in contrast to groups.</p>
+
+<a name="172043807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043807">Kevin Buzzard (Jul 30 2019 at 14:37)</a>:</h4>
+<p>We need this for the perfectoid project :-)</p>
+
+<a name="172043889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043889">Chris Hughes (Jul 30 2019 at 14:38)</a>:</h4>
+<p>Can we have a generic theory of congruence relations on monoids. I don't think it would be very long. But I think you can quotient by the smallest congruence relation such that everything that's meant to have an inverse in the quotient has an inverse in the quotient.</p>
+
+<a name="172043970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172043970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172043970">Kevin Buzzard (Jul 30 2019 at 14:39)</a>:</h4>
+<p>The fact that cosets of submonoids can be quite badly behaved (they can have non-trivial intersection) makes things a bit more delicate than you might think, but if you think about stuff the right way it all seems to work.</p>
+
+<a name="172044100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044100">Chris Hughes (Jul 30 2019 at 14:40)</a>:</h4>
+<p>That's why you need to talk about congruence relations instead of submonoids. But a congruence relation is just a submonoid of the product, that's also an equivalence relation.</p>
+
+<a name="172044107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044107">Kevin Buzzard (Jul 30 2019 at 14:40)</a>:</h4>
+<p>Here's a terrifying example; the map from (nat,+) to (Z/2Z),* sending 0 to 1 and everything else to 0 is a monoid hom.</p>
+
+<a name="172044247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044247">Kevin Buzzard (Jul 30 2019 at 14:42)</a>:</h4>
+<p>and it has trivial kernel :-) We don't have the target of the map in the localisation story, we just have a monoid and a submonoid.</p>
+
+<a name="172044365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044365">Chris Hughes (Jul 30 2019 at 14:42)</a>:</h4>
+<p>Congruence relations form a complete lattice.</p>
+
+<a name="172044403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044403">Kevin Buzzard (Jul 30 2019 at 14:43)</a>:</h4>
+<p>but all I have is a monoid and a submonoid. I don't have the target.</p>
+
+<a name="172044450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044450">Chris Hughes (Jul 30 2019 at 14:43)</a>:</h4>
+<p>What do you mean?</p>
+
+<a name="172044476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044476">Kevin Buzzard (Jul 30 2019 at 14:44)</a>:</h4>
+<blockquote>
+<p>But a congruence relation is just a submonoid of the product,</p>
+</blockquote>
+<p>What product?</p>
+
+<a name="172044584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044584">Chris Hughes (Jul 30 2019 at 14:45)</a>:</h4>
+<p>For localisation of <code>M</code> by a submonoid <code>S</code> it will be <code>(M /times S) \times (M \times S)</code></p>
+
+<a name="172044716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044716">Kevin Buzzard (Jul 30 2019 at 14:46)</a>:</h4>
+<p>Aah I see, so a congruence relation is a way of taking a quotient of a general monoid perhaps, and M[1/S] is a quotient of M x S</p>
+
+<a name="172044779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044779">Chris Hughes (Jul 30 2019 at 14:46)</a>:</h4>
+<p>And the relation is easy to find, because it's the smallest one that gives you inverses.</p>
+
+<a name="172044917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044917">Kevin Buzzard (Jul 30 2019 at 14:48)</a>:</h4>
+<p>In contrast to groups, where we just remember the things which get mapped to 1, here we need to keep track of the things which get mapped to the same thing.</p>
+
+<a name="172044973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044973">Kevin Buzzard (Jul 30 2019 at 14:48)</a>:</h4>
+<p>So that's called a congruence relation?</p>
+
+<a name="172044982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172044982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172044982">Chris Hughes (Jul 30 2019 at 14:48)</a>:</h4>
+<p>Yes.</p>
+
+<a name="172045168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172045168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172045168">Johan Commelin (Jul 30 2019 at 14:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Is she refactoring the file for rings?</p>
+
+<a name="172045189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172045189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172045189">Johan Commelin (Jul 30 2019 at 14:51)</a>:</h4>
+<p>I don't think we need/want two separate files, right?</p>
+
+<a name="172045543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/172045543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#172045543">Amelia Livingston (Jul 30 2019 at 14:54)</a>:</h4>
+<p>Not currently but what I've got so far would make it fairly easy to do so I think</p>
+
 
 {% endraw %}
 
