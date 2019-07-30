@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (8 messages, latest: Jul 30 2019 at 08:41)
+* [unused arguments](84107unusedarguments.html) (35 messages, latest: Jul 30 2019 at 09:31)
+
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (9 messages, latest: Jul 30 2019 at 09:01)
 
 * [Proving for Fun](94070ProvingforFun.html) (2 messages, latest: Jul 30 2019 at 08:08)
-
-* [unused arguments](84107unusedarguments.html) (33 messages, latest: Jul 30 2019 at 06:44)
 
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (30 messages, latest: Jul 30 2019 at 04:52)
 
