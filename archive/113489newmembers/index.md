@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Is this a bug?](74867Isthisabug.html) (4 messages, latest: Jul 30 2019 at 07:52)
+* [Is this a bug?](74867Isthisabug.html) (5 messages, latest: Jul 30 2019 at 08:04)
 
 * [easy questions](27038easyquestions.html) (74 messages, latest: Jul 27 2019 at 13:48)
 

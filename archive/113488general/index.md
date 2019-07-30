@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (1 message, latest: Jul 30 2019 at 07:05)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (8 messages, latest: Jul 30 2019 at 08:41)
+
+* [Proving for Fun](94070ProvingforFun.html) (2 messages, latest: Jul 30 2019 at 08:08)
 
 * [unused arguments](84107unusedarguments.html) (33 messages, latest: Jul 30 2019 at 06:44)
 
 * [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (30 messages, latest: Jul 30 2019 at 04:52)
 
 * [missing lemmas for inf?](63101missinglemmasforinf.html) (5 messages, latest: Jul 29 2019 at 23:01)
-
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (7 messages, latest: Jul 29 2019 at 22:59)
 
 * [import all files](00808importallfiles.html) (16 messages, latest: Jul 29 2019 at 22:17)
 
