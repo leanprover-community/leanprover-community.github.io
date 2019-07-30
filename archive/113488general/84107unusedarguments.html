@@ -149,6 +149,37 @@ permalink: archive/113488general/84107unusedarguments.html
 <p>Actually, Georges got a lot of mileage in the math components library by defining things in greater generality than you might think you would need. For example, you can take quotients G / H even if H is not a normal subgroup (maybe not even a subgroup?). IIRC it is defined as N_G(H) / H, where N_G(H) is the normalizer of H in G. So the construction makes sense and coincides with the usual one when H is normal in G. But doing things in greater generality meant that there were often less side conditions to check when writing proofs. </p>
 <p>I am not saying that deleting unused arguments will be genuinely helpful in all cases on Floris' list, only that you might be surprised.</p>
 
+<a name="171994292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171994292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171994292">Floris van Doorn (Jul 30 2019 at 00:04)</a>:</h4>
+<blockquote>
+<p>Any way for your tool to check lemmas that have too many or too few implicit arguments?</p>
+</blockquote>
+<p>I can try that next. The main problem is that we don't have universal rules for which arguments should be implicit, and it's hard to say which decisions are "mistakes". For example, we treat declarations proving <code>iff</code> different than declarations prove <code>eq</code>:</p>
+<div class="codehilite"><pre><span></span>lemma sub_right_comm (a b c : α) : a - b - c = a - c - b
+theorem inv_eq_one {a : α} : a⁻¹ = 1 ↔ a = 1
+theorem mul_left_inj [left_cancel_semigroup α] (a : α) {b c : α} : a * b = a * c ↔ b = c
+</pre></div>
+
+
+<p>I can try to write a tactic that finds choices that are "obviously wrong". If you have ideas to decide which kinds of choices are wrong, then please tell me.</p>
+
+<a name="171995564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171995564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171995564">Mario Carneiro (Jul 30 2019 at 00:35)</a>:</h4>
+<p>The rule is that if it's an iff then it should be implicit if it appears on both sides of the iff. That is, iffs are treated as a pair of implications, and are implicit if they would be implicit in both one-directional versions</p>
+
+<a name="171995705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171995705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171995705">Mario Carneiro (Jul 30 2019 at 00:38)</a>:</h4>
+<p>However, there are a lot of equalities that have all implicit args as well - I think Johannes likes this style as it appears a lot in topology and lattices - and I don't know if we should take a stance for or against it</p>
+
+<a name="171995735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171995735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171995735">Mario Carneiro (Jul 30 2019 at 00:39)</a>:</h4>
+<p>stuff like <code>inf_le_left</code> are almost always used with inferred arguments, but the standard rule would have them take explicit args</p>
+
+<a name="171996255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unused%20arguments/near/171996255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84107unusedarguments.html#171996255">Jeremy Avigad (Jul 30 2019 at 00:52)</a>:</h4>
+<p>I have also sometimes been surprised by choices regarding implicit / explicit variables in the library. I am curious to know if others think we should adopt more rigid policies.<br>
+Does Johannes like to use implicit arguments in identities so that he can call <code>simp</code> with <code>foo.symm</code>? Or write <code>foo.trans bar</code>? Or is there some other reason?</p>
+
 
 {% endraw %}
 
