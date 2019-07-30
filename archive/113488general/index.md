@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (30 messages, latest: Jul 30 2019 at 04:52)
+* [unused arguments](84107unusedarguments.html) (33 messages, latest: Jul 30 2019 at 06:44)
 
-* [unused arguments](84107unusedarguments.html) (30 messages, latest: Jul 30 2019 at 00:52)
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (30 messages, latest: Jul 30 2019 at 04:52)
 
 * [missing lemmas for inf?](63101missinglemmasforinf.html) (5 messages, latest: Jul 29 2019 at 23:01)
 
