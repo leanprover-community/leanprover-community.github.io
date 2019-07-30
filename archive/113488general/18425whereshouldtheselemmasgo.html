@@ -126,6 +126,38 @@ permalink: archive/113488general/18425whereshouldtheselemmasgo.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172030195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172030195">Chris Hughes (Jul 30 2019 at 11:58)</a>:</h4>
 <p>If you don't want to break anything, isn't it best to import all of them from default at the moment, and change imports from <code>data.rat.basic</code> to <code>data.rat.default</code> and then minimise the imports in a separate PR.</p>
 
+<a name="172030423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172030423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172030423">Kevin Kappelmann (Jul 30 2019 at 12:01)</a>:</h4>
+<p>OK, doing some quick search, I think fixing the imports shouldn't be difficult. Gimme a few mins.</p>
+
+<a name="172030536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172030536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172030536">Johan Commelin (Jul 30 2019 at 12:02)</a>:</h4>
+<p>Does this help removing <code>algebra.field</code> as import from <code>data.int.basic</code>?</p>
+
+<a name="172031077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172031077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172031077">Kevin Kappelmann (Jul 30 2019 at 12:08)</a>:</h4>
+<p>Nope, that's unrelated to this PR</p>
+
+<a name="172031677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172031677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172031677">Johan Commelin (Jul 30 2019 at 12:17)</a>:</h4>
+<p>Ok, I see.</p>
+
+<a name="172031806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172031806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172031806">Kevin Kappelmann (Jul 30 2019 at 12:18)</a>:</h4>
+<p>I changed <code>basic</code> to <code>default</code> and <code>floor_ceil</code> to <code>floor</code> now in the new version.</p>
+
+<a name="172033010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172033010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172033010">Johan Commelin (Jul 30 2019 at 12:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> We're still in the process of figuring out what exactly we want to document. We just had a change in policy. My apologies for confusing questions/remarks on your PR. It's a bit of a playground/testing ground.</p>
+
+<a name="172034795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172034795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172034795">Mario Carneiro (Jul 30 2019 at 12:57)</a>:</h4>
+<p>I don't see why we need to remove the <code>algebra.field</code> import. That's basically the definition of <code>field</code> as a structure (or would be if it wasn't in core already)</p>
+
+<a name="172034894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172034894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172034894">Mario Carneiro (Jul 30 2019 at 12:58)</a>:</h4>
+<p>and obviously <code>rat</code> is a field and that's pretty integral to the definition. We aren't so bootstrapped that we need to separate the type rat from the field rat</p>
+
 
 {% endraw %}
 
