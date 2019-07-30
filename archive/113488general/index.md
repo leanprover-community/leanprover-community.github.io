@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (30 messages, latest: Jul 30 2019 at 04:52)
+
 * [unused arguments](84107unusedarguments.html) (30 messages, latest: Jul 30 2019 at 00:52)
 
 * [missing lemmas for inf?](63101missinglemmasforinf.html) (5 messages, latest: Jul 29 2019 at 23:01)
@@ -92,8 +94,6 @@ permalink: archive/113488general/index.html
 * [auto_param](29002autoparam.html) (5 messages, latest: Jul 19 2019 at 14:04)
 
 * [rfl better than refl](59647rflbetterthanrefl.html) (8 messages, latest: Jul 19 2019 at 10:57)
-
-* [trying to use lean via emacs](98103tryingtouseleanviaemacs.html) (28 messages, latest: Jul 18 2019 at 15:27)
 
 * [well foundness in the kernel](39459wellfoundnessinthekernel.html) (2 messages, latest: Jul 18 2019 at 15:16)
 
