@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Is this a bug?](74867Isthisabug.html) (4 messages, latest: Jul 30 2019 at 07:52)
+
 * [easy questions](27038easyquestions.html) (74 messages, latest: Jul 27 2019 at 13:48)
 
 * [ring tactic works at one place, fails at another](99356ringtacticworksatoneplacefailsatanother.html) (34 messages, latest: Jul 25 2019 at 06:49)
