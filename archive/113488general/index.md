@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (12 messages, latest: Jul 31 2019 at 18:28)
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (19 messages, latest: Jul 31 2019 at 19:33)
 
 * [Proving for Fun](94070ProvingforFun.html) (27 messages, latest: Jul 31 2019 at 16:21)
 
