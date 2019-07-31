@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (12 messages, latest: Jul 31 2019 at 18:28)
+
 * [Proving for Fun](94070ProvingforFun.html) (27 messages, latest: Jul 31 2019 at 16:21)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (37 messages, latest: Jul 31 2019 at 12:48)
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [missing lemmas for inf?](63101missinglemmasforinf.html) (5 messages, latest: Jul 29 2019 at 23:01)
 
 * [import all files](00808importallfiles.html) (16 messages, latest: Jul 29 2019 at 22:17)
-
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (8 messages, latest: Jul 29 2019 at 15:28)
 
 * [Recommended Lean version](98858RecommendedLeanversion.html) (1 message, latest: Jul 29 2019 at 01:17)
 
