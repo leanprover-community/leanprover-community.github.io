@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling ring_equiv](35917bundlingringequiv.html) (5 messages, latest: Jul 30 2019 at 19:27)
+* [power series](15161powerseries.html) (96 messages, latest: Jul 31 2019 at 14:59)
 
-* [power series](15161powerseries.html) (93 messages, latest: Jul 30 2019 at 14:42)
+* [bundling ring_equiv](35917bundlingringequiv.html) (5 messages, latest: Jul 30 2019 at 19:27)
 
 * [`0 < n` or `n ≠ 0`?](424360norn0.html) (7 messages, latest: Jul 29 2019 at 16:19)
 
