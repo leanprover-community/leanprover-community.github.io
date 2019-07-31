@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (37 messages, latest: Jul 31 2019 at 12:48)
+* [Proving for Fun](94070ProvingforFun.html) (27 messages, latest: Jul 31 2019 at 16:21)
 
-* [Proving for Fun](94070ProvingforFun.html) (21 messages, latest: Jul 31 2019 at 08:52)
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (37 messages, latest: Jul 31 2019 at 12:48)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (43 messages, latest: Jul 30 2019 at 23:03)
 
