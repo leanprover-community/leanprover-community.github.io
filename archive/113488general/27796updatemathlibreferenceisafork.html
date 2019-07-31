@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/27796updatemathlibreferenceisafork.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html">update-mathlib "reference is a fork"</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172172108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/update-mathlib%20%22reference%20is%20a%20fork%22/near/172172108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html#172172108">Scott Morrison (Jul 31 2019 at 22:26)</a>:</h4>
+<p>A student (<span class="user-mention" data-user-id="232317">@Ainsley Pahljina</span>) cloned mathlib from git@github.com:leanprover-community/mathlib.git, installed <code>update-mathlib</code> via <code>curl https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/remote-install-update-mathlib.sh -sSf | bash</code>, restarted to get paths right, then ran <code>update-mathlib</code> and received an error message saying "reference is a fork".</p>
+<p>What's going on? (Can we have a more helpful error message, that explains the fix?)</p>
+
+<a name="172172342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/update-mathlib%20%22reference%20is%20a%20fork%22/near/172172342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html#172172342">Floris van Doorn (Jul 31 2019 at 22:30)</a>:</h4>
+<p>From looking at the <a href="https://github.com/leanprover-community/mathlib-tools/blob/master/scripts/update-mathlib.py#L39-L54" target="_blank" title="https://github.com/leanprover-community/mathlib-tools/blob/master/scripts/update-mathlib.py#L39-L54">source code</a> it seems that this means that the dependency specified in <code>leanpkg.toml</code> is a fork of mathlib</p>
+
+<a name="172172499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/update-mathlib%20%22reference%20is%20a%20fork%22/near/172172499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html#172172499">Floris van Doorn (Jul 31 2019 at 22:32)</a>:</h4>
+<p>I'm not sure why that wouldn't be allowed, since forks share the same revision sha's, right? So as long as the revision has a corresponding compiled version to download, that seems fine.</p>
+
+<a name="172172553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/update-mathlib%20%22reference%20is%20a%20fork%22/near/172172553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html#172172553">Scott Morrison (Jul 31 2019 at 22:33)</a>:</h4>
+<p>As far as I can tell Ainsley didn't add a fork, in any case. <span class="user-mention" data-user-id="232317">@Ainsley Pahljina</span>, would you mind posting the contents of your <code>leanpkg.toml</code> file here for us? (If you surround blocks of code with triple backticks it typesets nicely.)</p>
+
+<a name="172172667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/update-mathlib%20%22reference%20is%20a%20fork%22/near/172172667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html#172172667">Floris van Doorn (Jul 31 2019 at 22:35)</a>:</h4>
+<p>Was the error message indeed <code>Error: mathlib reference is a fork</code>?</p>
+
+<a name="172173016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/update-mathlib%20%22reference%20is%20a%20fork%22/near/172173016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/27796updatemathlibreferenceisafork.html#172173016">Scott Morrison (Jul 31 2019 at 22:40)</a>:</h4>
+<p>I'm pretty sure it was, but I didn't write it down exactly when looking at her computer. She hadn't added any other dependencies, certainly, besides mathlib.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (42 messages, latest: Jul 31 2019 at 21:55)
+* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (6 messages, latest: Jul 31 2019 at 22:40)
+
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (46 messages, latest: Jul 31 2019 at 22:18)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (20 messages, latest: Jul 31 2019 at 21:21)
 
