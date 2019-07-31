@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (43 messages, latest: Jul 30 2019 at 23:03)
+* [Proving for Fun](94070ProvingforFun.html) (21 messages, latest: Jul 31 2019 at 08:52)
 
-* [Proving for Fun](94070ProvingforFun.html) (6 messages, latest: Jul 30 2019 at 19:53)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (43 messages, latest: Jul 30 2019 at 23:03)
 
 * [unused arguments](84107unusedarguments.html) (66 messages, latest: Jul 30 2019 at 15:04)
 
