@@ -166,6 +166,181 @@ permalink: archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172123531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172123531">Kevin Kappelmann (Jul 31 2019 at 12:48)</a>:</h4>
 <p>I think I got it: <a href="https://github.com/leanprover-community/mathlib-nightly/releases" target="_blank" title="https://github.com/leanprover-community/mathlib-nightly/releases">https://github.com/leanprover-community/mathlib-nightly/releases</a></p>
 
+<a name="172169210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172169210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172169210">Floris van Doorn (Jul 31 2019 at 21:48)</a>:</h4>
+<p>I'm having these problems now myself. I downloaded today's archive - file name <code>mathlib-olean-nightly-2019-07-31.tar.gz</code>. However, if I make a single file, it seems to recompile a large chunk of the library.</p>
+<p>In more detail:</p>
+<ul>
+<li>I extract the archive I downloaded earlier today:</li>
+</ul>
+<div class="codehilite"><pre><span></span>Floris@MSI MINGW64 /d/projects/mathlib ((badeb48b...))
+$ cache-olean --fetch
+Info: No github section found in &#39;git config&#39;, we will use GitHub with no authentication
+Querying GitHub...
+Reusing cached olean archive
+... successfully extracted olean archive.
+</pre></div>
+
+
+<ul>
+<li>I check in more detail what's in the <code>algebra</code> folder:</li>
+</ul>
+<div class="codehilite"><pre><span></span>Floris@MSI MINGW64 /d/projects/mathlib ((badeb48b...))
+$ ls src/algebra/ -alt --time-style=full-iso
+total 3973
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 05:24:01.000000000 -0400 ./
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 05:24:01.000000000 -0400 CommRing/
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 05:24:01.000000000 -0400 Mon/
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 05:23:59.000000000 -0400 group/
+-rw-r--r-- 1 Floris 197121 470882 2019-07-31 05:14:21.000000000 -0400 direct_limit.olean
+-rw-r--r-- 1 Floris 197121  48982 2019-07-30 03:28:45.000000000 -0400 direct_sum.olean
+-rw-r--r-- 1 Floris 197121 240420 2019-07-30 03:25:53.000000000 -0400 pi_instances.olean
+-rw-r--r-- 1 Floris 197121  23435 2019-07-30 03:24:39.000000000 -0400 punit_instances.olean
+-rw-r--r-- 1 Floris 197121  46890 2019-07-30 03:22:47.000000000 -0400 char_p.olean
+-rw-r--r-- 1 Floris 197121   2195 2019-07-30 03:22:01.000000000 -0400 default.olean
+-rw-r--r-- 1 Floris 197121 194740 2019-07-30 03:22:00.000000000 -0400 module.olean
+-rw-r--r-- 1 Floris 197121 115308 2019-07-30 03:20:25.000000000 -0400 pointwise.olean
+-rw-r--r-- 1 Floris 197121 267084 2019-07-30 03:08:50.000000000 -0400 big_operators.olean
+-rw-r--r-- 1 Floris 197121 228629 2019-07-30 03:07:36.000000000 -0400 gcd_domain.olean
+-rw-r--r-- 1 Floris 197121 190155 2019-07-30 03:06:20.000000000 -0400 associated.olean
+-rw-r--r-- 1 Floris 197121 144643 2019-07-30 03:05:46.000000000 -0400 archimedean.olean
+-rw-r--r-- 1 Floris 197121  51843 2019-07-30 03:02:00.000000000 -0400 field_power.olean
+-rw-r--r-- 1 Floris 197121 168299 2019-07-30 03:01:50.000000000 -0400 group_power.olean
+-rw-r--r-- 1 Floris 197121 110312 2019-07-30 03:01:26.000000000 -0400 euclidean_domain.olean
+-rw-r--r-- 1 Floris 197121  45067 2019-07-30 03:00:16.000000000 -0400 ordered_field.olean
+-rw-r--r-- 1 Floris 197121  17108 2019-07-30 03:00:12.000000000 -0400 char_zero.olean
+-rw-r--r-- 1 Floris 197121  51115 2019-07-30 03:00:10.000000000 -0400 field.olean
+-rw-r--r-- 1 Floris 197121   8777 2019-07-30 03:00:05.000000000 -0400 field.lean
+-rw-r--r-- 1 Floris 197121  27526 2019-07-30 03:00:05.000000000 -0400 group_power.lean
+-rw-r--r-- 1 Floris 197121   9130 2019-07-30 03:00:05.000000000 -0400 ordered_field.lean
+-rw-r--r-- 1 Floris 197121 306809 2019-07-29 12:26:57.000000000 -0400 ordered_ring.olean
+-rw-r--r-- 1 Floris 197121  47613 2019-07-29 12:25:06.000000000 -0400 order_functions.olean
+-rw-r--r-- 1 Floris 197121 298623 2019-07-29 12:25:05.000000000 -0400 ordered_group.olean
+-rw-r--r-- 1 Floris 197121 269333 2019-07-29 12:22:18.000000000 -0400 free.olean
+-rw-r--r-- 1 Floris 197121 180370 2019-07-29 12:21:26.000000000 -0400 ring.olean
+-rw-r--r-- 1 Floris 197121  45015 2019-07-29 12:18:42.000000000 -0400 opposites.olean
+-rw-r--r-- 1 Floris 197121  15325 2019-07-19 10:40:32.000000000 -0400 free.lean
+-rw-r--r-- 1 Floris 197121  18757 2019-07-18 11:19:45.000000000 -0400 pi_instances.lean
+-rw-r--r-- 1 Floris 197121  10353 2019-07-18 11:19:45.000000000 -0400 pointwise.lean
+drwxr-xr-x 1 Floris 197121      0 2019-07-12 17:47:57.000000000 -0400 ../
+-rw-r--r-- 1 Floris 197121  26082 2019-07-11 09:59:06.000000000 -0400 gcd_domain.lean
+-rw-r--r-- 1 Floris 197121  30949 2019-07-11 06:13:21.000000000 -0400 big_operators.lean
+-rw-r--r-- 1 Floris 197121  25098 2019-07-11 06:13:21.000000000 -0400 direct_limit.lean
+-rw-r--r-- 1 Floris 197121   6126 2019-07-11 06:13:21.000000000 -0400 direct_sum.lean
+-rw-r--r-- 1 Floris 197121  14904 2019-07-11 06:13:21.000000000 -0400 module.lean
+-rw-r--r-- 1 Floris 197121   3561 2019-07-11 06:13:21.000000000 -0400 punit_instances.lean
+-rw-r--r-- 1 Floris 197121  11805 2019-07-11 06:13:21.000000000 -0400 ring.lean
+-rw-r--r-- 1 Floris 197121  18067 2019-07-11 00:19:32.000000000 -0400 ordered_ring.lean
+-rw-r--r-- 1 Floris 197121  25188 2019-07-04 15:49:44.000000000 -0400 ordered_group.lean
+-rw-r--r-- 1 Floris 197121  10197 2019-07-04 12:48:24.000000000 -0400 order_functions.lean
+-rw-r--r-- 1 Floris 197121  15761 2019-06-14 21:30:47.000000000 -0400 archimedean.lean
+-rw-r--r-- 1 Floris 197121  32748 2019-06-14 09:37:10.000000000 -0400 order.olean
+-rw-r--r-- 1 Floris 197121  25505 2019-06-14 09:36:49.000000000 -0400 associated.lean
+-rw-r--r-- 1 Floris 197121   8715 2019-06-14 09:36:49.000000000 -0400 char_p.lean
+-rw-r--r-- 1 Floris 197121   3118 2019-06-14 09:36:49.000000000 -0400 char_zero.lean
+-rw-r--r-- 1 Floris 197121    182 2019-06-14 09:36:49.000000000 -0400 default.lean
+-rw-r--r-- 1 Floris 197121  13472 2019-06-14 09:36:49.000000000 -0400 euclidean_domain.lean
+-rw-r--r-- 1 Floris 197121   6236 2019-06-14 09:36:49.000000000 -0400 field_power.lean
+-rw-r--r-- 1 Floris 197121   4862 2019-06-14 09:36:49.000000000 -0400 opposites.lean
+-rw-r--r-- 1 Floris 197121   9155 2019-06-14 09:36:49.000000000 -0400 order.lean
+</pre></div>
+
+
+<ul>
+<li>I build an arbitrary file, which seems to take longer than I would expect from compiling a single file:</li>
+</ul>
+<div class="codehilite"><pre><span></span>Floris@MSI MINGW64 /d/projects/mathlib ((badeb48b...))
+$ lean --make src/algebra/ring.lean
+</pre></div>
+
+
+<p>(continued in next message)</p>
+
+<a name="172169237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172169237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172169237">Floris van Doorn (Jul 31 2019 at 21:49)</a>:</h4>
+<ul>
+<li>I check the algebra folder again:</li>
+</ul>
+<div class="codehilite"><pre><span></span>Floris@MSI MINGW64 /d/projects/mathlib ((badeb48b...))
+$ ls src/algebra/ -alt --time-style=full-iso
+total 3973
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 17:36:48.436140600 -0400 ./
+-rw-r--r-- 1 Floris 197121 180253 2019-07-31 17:36:48.435177800 -0400 ring.olean
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 17:36:45.694285600 -0400 group/
+-rw-r--r-- 1 Floris 197121  32746 2019-07-31 17:36:17.927331700 -0400 order.olean
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 05:24:01.000000000 -0400 CommRing/
+drwxr-xr-x 1 Floris 197121      0 2019-07-31 05:24:01.000000000 -0400 Mon/
+-rw-r--r-- 1 Floris 197121 470882 2019-07-31 05:14:21.000000000 -0400 direct_limit.olean
+-rw-r--r-- 1 Floris 197121  48982 2019-07-30 03:28:45.000000000 -0400 direct_sum.olean
+-rw-r--r-- 1 Floris 197121 240420 2019-07-30 03:25:53.000000000 -0400 pi_instances.olean
+-rw-r--r-- 1 Floris 197121  23435 2019-07-30 03:24:39.000000000 -0400 punit_instances.olean
+-rw-r--r-- 1 Floris 197121  46890 2019-07-30 03:22:47.000000000 -0400 char_p.olean
+-rw-r--r-- 1 Floris 197121   2195 2019-07-30 03:22:01.000000000 -0400 default.olean
+-rw-r--r-- 1 Floris 197121 194740 2019-07-30 03:22:00.000000000 -0400 module.olean
+-rw-r--r-- 1 Floris 197121 115308 2019-07-30 03:20:25.000000000 -0400 pointwise.olean
+-rw-r--r-- 1 Floris 197121 267084 2019-07-30 03:08:50.000000000 -0400 big_operators.olean
+-rw-r--r-- 1 Floris 197121 228629 2019-07-30 03:07:36.000000000 -0400 gcd_domain.olean
+-rw-r--r-- 1 Floris 197121 190155 2019-07-30 03:06:20.000000000 -0400 associated.olean
+-rw-r--r-- 1 Floris 197121 144643 2019-07-30 03:05:46.000000000 -0400 archimedean.olean
+-rw-r--r-- 1 Floris 197121  51843 2019-07-30 03:02:00.000000000 -0400 field_power.olean
+-rw-r--r-- 1 Floris 197121 168299 2019-07-30 03:01:50.000000000 -0400 group_power.olean
+-rw-r--r-- 1 Floris 197121 110312 2019-07-30 03:01:26.000000000 -0400 euclidean_domain.olean
+-rw-r--r-- 1 Floris 197121  45067 2019-07-30 03:00:16.000000000 -0400 ordered_field.olean
+-rw-r--r-- 1 Floris 197121  17108 2019-07-30 03:00:12.000000000 -0400 char_zero.olean
+-rw-r--r-- 1 Floris 197121  51115 2019-07-30 03:00:10.000000000 -0400 field.olean
+-rw-r--r-- 1 Floris 197121   8777 2019-07-30 03:00:05.000000000 -0400 field.lean
+-rw-r--r-- 1 Floris 197121  27526 2019-07-30 03:00:05.000000000 -0400 group_power.lean
+-rw-r--r-- 1 Floris 197121   9130 2019-07-30 03:00:05.000000000 -0400 ordered_field.lean
+-rw-r--r-- 1 Floris 197121 306809 2019-07-29 12:26:57.000000000 -0400 ordered_ring.olean
+-rw-r--r-- 1 Floris 197121  47613 2019-07-29 12:25:06.000000000 -0400 order_functions.olean
+-rw-r--r-- 1 Floris 197121 298623 2019-07-29 12:25:05.000000000 -0400 ordered_group.olean
+-rw-r--r-- 1 Floris 197121 269333 2019-07-29 12:22:18.000000000 -0400 free.olean
+-rw-r--r-- 1 Floris 197121  45015 2019-07-29 12:18:42.000000000 -0400 opposites.olean
+-rw-r--r-- 1 Floris 197121  15325 2019-07-19 10:40:32.000000000 -0400 free.lean
+-rw-r--r-- 1 Floris 197121  18757 2019-07-18 11:19:45.000000000 -0400 pi_instances.lean
+-rw-r--r-- 1 Floris 197121  10353 2019-07-18 11:19:45.000000000 -0400 pointwise.lean
+drwxr-xr-x 1 Floris 197121      0 2019-07-12 17:47:57.000000000 -0400 ../
+-rw-r--r-- 1 Floris 197121  26082 2019-07-11 09:59:06.000000000 -0400 gcd_domain.lean
+-rw-r--r-- 1 Floris 197121  30949 2019-07-11 06:13:21.000000000 -0400 big_operators.lean
+-rw-r--r-- 1 Floris 197121  25098 2019-07-11 06:13:21.000000000 -0400 direct_limit.lean
+-rw-r--r-- 1 Floris 197121   6126 2019-07-11 06:13:21.000000000 -0400 direct_sum.lean
+-rw-r--r-- 1 Floris 197121  14904 2019-07-11 06:13:21.000000000 -0400 module.lean
+-rw-r--r-- 1 Floris 197121   3561 2019-07-11 06:13:21.000000000 -0400 punit_instances.lean
+-rw-r--r-- 1 Floris 197121  11805 2019-07-11 06:13:21.000000000 -0400 ring.lean
+-rw-r--r-- 1 Floris 197121  18067 2019-07-11 00:19:32.000000000 -0400 ordered_ring.lean
+-rw-r--r-- 1 Floris 197121  25188 2019-07-04 15:49:44.000000000 -0400 ordered_group.lean
+-rw-r--r-- 1 Floris 197121  10197 2019-07-04 12:48:24.000000000 -0400 order_functions.lean
+-rw-r--r-- 1 Floris 197121  15761 2019-06-14 21:30:47.000000000 -0400 archimedean.lean
+-rw-r--r-- 1 Floris 197121  25505 2019-06-14 09:36:49.000000000 -0400 associated.lean
+-rw-r--r-- 1 Floris 197121   8715 2019-06-14 09:36:49.000000000 -0400 char_p.lean
+-rw-r--r-- 1 Floris 197121   3118 2019-06-14 09:36:49.000000000 -0400 char_zero.lean
+-rw-r--r-- 1 Floris 197121    182 2019-06-14 09:36:49.000000000 -0400 default.lean
+-rw-r--r-- 1 Floris 197121  13472 2019-06-14 09:36:49.000000000 -0400 euclidean_domain.lean
+-rw-r--r-- 1 Floris 197121   6236 2019-06-14 09:36:49.000000000 -0400 field_power.lean
+-rw-r--r-- 1 Floris 197121   4862 2019-06-14 09:36:49.000000000 -0400 opposites.lean
+-rw-r--r-- 1 Floris 197121   9155 2019-06-14 09:36:49.000000000 -0400 order.lean
+</pre></div>
+
+<a name="172169453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172169453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172169453">Floris van Doorn (Jul 31 2019 at 21:51)</a>:</h4>
+<p>The interesting observations here are:</p>
+<ul>
+<li>It did create a new compiled file <code>ring.olean</code>, so that's good</li>
+<li>It also created a new compiled file <code>order.olean</code>, but not for any other files imported by <code>ring.lean</code> (<code>ring.lean</code> does indeed import <code>order.olean</code> via (among others) <code>group.to_additive</code> and <code>tactic.push_neg</code>)</li>
+</ul>
+
+<a name="172169563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172169563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172169563">Floris van Doorn (Jul 31 2019 at 21:52)</a>:</h4>
+<p>The compiled file <code>order.olean</code> is indeed different (e.g. it has 2 fewer bytes).</p>
+
+<a name="172169707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172169707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172169707">Floris van Doorn (Jul 31 2019 at 21:55)</a>:</h4>
+<p>So what does this mean? </p>
+<ul>
+<li>Did Lean decide it had to re-generate <code>order.olean</code>, and therefore also had to compile all other files which imported <code>order.lean</code>? If so, why did this happen?</li>
+<li>Is it expected that Lean doesn't generate <code>olean</code> files for the other intermediate files, even though <code>order.olean</code> changed? (Making <code>ring.lean</code> another time is almost immediate, so this seems fine.)</li>
+</ul>
+
 
 {% endraw %}
 
