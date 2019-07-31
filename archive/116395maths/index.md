@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [power series](15161powerseries.html) (102 messages, latest: Jul 31 2019 at 15:15)
+* [power series](15161powerseries.html) (103 messages, latest: Jul 31 2019 at 17:42)
 
 * [bundling ring_equiv](35917bundlingringequiv.html) (5 messages, latest: Jul 30 2019 at 19:27)
 
