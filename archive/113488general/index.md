@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (37 messages, latest: Jul 31 2019 at 12:48)
+
 * [Proving for Fun](94070ProvingforFun.html) (21 messages, latest: Jul 31 2019 at 08:52)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (43 messages, latest: Jul 30 2019 at 23:03)
@@ -162,8 +164,6 @@ permalink: archive/113488general/index.html
 * [Generate documentation](38342Generatedocumentation.html) (33 messages, latest: Jul 07 2019 at 21:24)
 
 * [Using `assoc_rw`](24712Usingassocrw.html) (3 messages, latest: Jul 07 2019 at 15:43)
-
-* [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (35 messages, latest: Jul 06 2019 at 22:42)
 
 * [ordered monoids](38431orderedmonoids.html) (33 messages, latest: Jul 06 2019 at 19:35)
 
