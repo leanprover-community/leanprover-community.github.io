@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (39 messages, latest: Aug 01 2019 at 22:45)
+
 * [contrapose and push_neg](40171contraposeandpushneg.html) (2 messages, latest: Aug 01 2019 at 21:14)
 
 * [I love library_search](15882Ilovelibrarysearch.html) (49 messages, latest: Aug 01 2019 at 19:38)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [norm_num and nat.fact](97326normnumandnatfact.html) (8 messages, latest: Aug 01 2019 at 19:14)
 
 * [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (20 messages, latest: Aug 01 2019 at 14:14)
-
-* [algebraic closure](74840algebraicclosure.html) (37 messages, latest: Aug 01 2019 at 13:55)
 
 * [Proving for Fun](94070ProvingforFun.html) (29 messages, latest: Aug 01 2019 at 08:41)
 

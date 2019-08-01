@@ -253,6 +253,25 @@ Thanks for your updates. I also don't have a lot of time to delve into.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/172222344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#172222344">Casper Putz (Aug 01 2019 at 13:55)</a>:</h4>
 <p>For the things I am doing it seemed more natural to not carry around an algebraic closure when talking about algebraic field extensions. So I am now working with field homs now. But of course we still need the algebraic at some point.</p>
 
+<a name="172266239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/172266239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#172266239">Scott Morrison (Aug 01 2019 at 22:14)</a>:</h4>
+<p>Can you explain about the size of the indexing type? (I don't know how you're doing algebraic closure.)</p>
+
+<a name="172268193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/172268193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#172268193">Chris Hughes (Aug 01 2019 at 22:45)</a>:</h4>
+<p>I had this type, and took the maximal element of this type using zorn. I had to use direct limit to prove the condition for Zorn's lemma. The indexing type was <code>extension K</code>. I would then prove the type was isomorphic to something in <code>Type u</code> and transfer the field structure</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">extension</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">carrier</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span>
+<span class="o">[</span><span class="n">field</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="n">carrier</span><span class="o">]</span>
+<span class="o">(</span><span class="n">embedding</span> <span class="o">:</span> <span class="n">carrier</span> <span class="err">↪</span> <span class="n">big_type</span> <span class="n">K</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lift</span> <span class="o">:</span> <span class="n">K</span> <span class="bp">→</span> <span class="n">carrier</span><span class="o">)</span>
+<span class="o">[</span><span class="n">is_field_hom</span> <span class="o">:</span> <span class="n">is_field_hom</span> <span class="n">lift</span><span class="o">]</span>
+<span class="o">(</span><span class="n">algebraic</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">algebraic</span> <span class="n">lift</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I'm not following this approach any more, I'll just use a smaller type for extension, where the field structure has to be on a subset of <code>big_type : Type u</code>. This involves slightly more transferring field structures across isomorphisms, but shouldn't be that much more effort, if at all.</p>
+
 
 {% endraw %}
 
