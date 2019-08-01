@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (9 messages, latest: Aug 01 2019 at 06:47)
+* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (13 messages, latest: Aug 01 2019 at 08:42)
+
+* [Proving for Fun](94070ProvingforFun.html) (29 messages, latest: Aug 01 2019 at 08:41)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (47 messages, latest: Aug 01 2019 at 06:45)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (20 messages, latest: Jul 31 2019 at 21:21)
-
-* [Proving for Fun](94070ProvingforFun.html) (27 messages, latest: Jul 31 2019 at 16:21)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (43 messages, latest: Jul 30 2019 at 23:03)
 
