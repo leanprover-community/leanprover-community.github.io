@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/14668Gettingunificationinfofromlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/14668Gettingunificationinfofromlean.html">Getting unification info from lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172175070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20unification%20info%20from%20lean/near/172175070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14668Gettingunificationinfofromlean.html#172175070">Chris B (Jul 31 2019 at 23:15)</a>:</h4>
+<p>If I try to define nat.succ_add as it is in core for some arbitrary type with the same shape as nat (or using anything with the <code>congr_arg succ _</code> pattern), Lean isn't able to unify the successor case as it is with nat. Is there any way to get Lean to say what it's using behind the scenes to solve the unification problem? None of the definitions in core or init that are tagged with attributes jumped out as an obvious culprit.</p>
+
+<a name="172175389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20unification%20info%20from%20lean/near/172175389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14668Gettingunificationinfofromlean.html#172175389">Floris van Doorn (Jul 31 2019 at 23:21)</a>:</h4>
+<p>I think this attribute is the culprit: <a href="https://github.com/leanprover-community/lean/blob/master/library/init/core.lean#L417" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/core.lean#L417">https://github.com/leanprover-community/lean/blob/master/library/init/core.lean#L417</a></p>
+
+<a name="172175401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20unification%20info%20from%20lean/near/172175401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14668Gettingunificationinfofromlean.html#172175401">Floris van Doorn (Jul 31 2019 at 23:21)</a>:</h4>
+<p>This works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">:</span> <span class="n">mynat</span>
+
+<span class="kn">namespace</span> <span class="n">mynat</span>
+
+<span class="kn">protected</span> <span class="n">def</span> <span class="n">add</span> <span class="o">:</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span> <span class="bp">→</span> <span class="n">mynat</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">zero</span>     <span class="o">:=</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">succ</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">add</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_zero</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_one</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">zero</span><span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_add</span> <span class="n">mynat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">mynat</span><span class="bp">.</span><span class="n">add</span><span class="bp">⟩</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">add</span> <span class="n">mynat</span><span class="bp">.</span><span class="n">add</span><span class="bp">._</span><span class="n">main</span>
+
+<span class="kn">lemma</span> <span class="n">succ_add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="n">m</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">,</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="n">m</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">m</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="n">succ</span> <span class="o">(</span><span class="n">succ_add</span> <span class="n">n</span> <span class="n">m</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+</pre></div>
+
+<a name="172175566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20unification%20info%20from%20lean/near/172175566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14668Gettingunificationinfofromlean.html#172175566">Floris van Doorn (Jul 31 2019 at 23:24)</a>:</h4>
+<p>Oh, actually, when I remove the <code>[pattern]</code> attribute this example still works...</p>
+
+<a name="172177543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20unification%20info%20from%20lean/near/172177543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14668Gettingunificationinfofromlean.html#172177543">Chris B (Jul 31 2019 at 23:57)</a>:</h4>
+<p>Thank you, you're a hundred percent right! I made a completely stupid mistake and defined add as <code>add ((succ a) b)</code> and proceeded to totally ignore it while putting everything else under the microscope. My apologies.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

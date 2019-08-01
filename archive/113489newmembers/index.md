@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [finishing from false](88383finishingfromfalse.html) (3 messages, latest: Jul 31 2019 at 22:59)
+* [Getting unification info from lean](14668Gettingunificationinfofromlean.html) (5 messages, latest: Jul 31 2019 at 23:57)
+
+* [Is this a bug?](74867Isthisabug.html) (10 messages, latest: Jul 31 2019 at 23:29)
+
+* [finishing from false](88383finishingfromfalse.html) (16 messages, latest: Jul 31 2019 at 23:23)
 
 * [Coercion from a submodule to its underlying set](22648Coercionfromasubmoduletoitsunderlyingset.html) (2 messages, latest: Jul 30 2019 at 23:08)
-
-* [Is this a bug?](74867Isthisabug.html) (9 messages, latest: Jul 30 2019 at 23:06)
 
 * [easy questions](27038easyquestions.html) (74 messages, latest: Jul 27 2019 at 13:48)
 

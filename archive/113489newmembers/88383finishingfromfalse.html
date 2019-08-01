@@ -24,6 +24,87 @@ permalink: archive/113489newmembers/88383finishingfromfalse.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174145">Vlad Firoiu (Jul 31 2019 at 22:59)</a>:</h4>
 <p><a href="/user_uploads/3121/cvO-OhfeHsoLSPey1sl3WsYT/cantor.lean" target="_blank" title="cantor.lean">cantor.lean</a></p>
 
+<a name="172174260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174260">Floris van Doorn (Jul 31 2019 at 23:00)</a>:</h4>
+<p>Somehow the <code>apply flip_neq</code> tactic corrupted your goal, and whatever you do afterwards fails. (even <code>sorry</code>)</p>
+
+<a name="172174357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174357">Floris van Doorn (Jul 31 2019 at 23:02)</a>:</h4>
+<p>No, the problem is already earlier.</p>
+
+<a name="172174363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174363">Floris van Doorn (Jul 31 2019 at 23:02)</a>:</h4>
+<p>Here is a working version of your proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">cantor</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">-&gt;</span> <span class="n">pow_nat</span><span class="o">}</span> <span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">intro</span> <span class="n">H</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">g</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="n">flip_bool</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">x</span><span class="o">),</span>
+<span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">H</span> <span class="n">g</span><span class="o">,</span>
+
+<span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">asd</span> <span class="o">:</span> <span class="n">f</span> <span class="n">h_w</span> <span class="n">h_w</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">h_w</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">h_h</span><span class="o">,</span>
+
+<span class="k">have</span> <span class="n">gh</span> <span class="o">:</span> <span class="n">g</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">flip_bool</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">x</span><span class="o">)),</span>
+<span class="n">refl</span><span class="o">,</span>
+
+<span class="k">have</span> <span class="n">not_asd</span> <span class="o">:</span> <span class="n">not</span> <span class="o">(</span><span class="n">f</span> <span class="n">h_w</span> <span class="n">h_w</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">h_w</span><span class="o">),</span>
+<span class="n">rw</span> <span class="n">gh</span><span class="o">,</span>
+<span class="n">simp</span><span class="o">,</span>
+<span class="n">apply</span> <span class="n">flip_neq</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">h_false</span> <span class="o">:=</span> <span class="n">not_asd</span> <span class="n">asd</span><span class="o">,</span>
+<span class="c1">--sorry,</span>
+<span class="n">cases</span> <span class="n">h_false</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172174385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174385">Vlad Firoiu (Jul 31 2019 at 23:03)</a>:</h4>
+<p>I think the goal gets weird when I do <code>cases h</code></p>
+
+<a name="172174390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174390">Floris van Doorn (Jul 31 2019 at 23:03)</a>:</h4>
+<p>I just changed two of your <code>let</code> with <code>have</code>. In general you should use <code>let</code> for definitions and <code>have</code> for proofs.</p>
+
+<a name="172174458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174458">Floris van Doorn (Jul 31 2019 at 23:04)</a>:</h4>
+<p>Yes, that is correct, the problem is with <code>let h := ..., cases h</code>. Apparently the <code>cases</code> tactic does not work for local constants that have a body (i.e. are introduced with a <code>let</code>)</p>
+
+<a name="172174572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174572">Vlad Firoiu (Jul 31 2019 at 23:06)</a>:</h4>
+<p>Ah ok, I'll keep that in mind.</p>
+
+<a name="172174600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174600">Vlad Firoiu (Jul 31 2019 at 23:07)</a>:</h4>
+<p>Is there a way to get rid of <code>gh</code>? I first tried to <code>unfold g</code> but it didn't work.</p>
+
+<a name="172174609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174609">Vlad Firoiu (Jul 31 2019 at 23:07)</a>:</h4>
+<p>Maybe because <code>g</code> is defined with <code>let</code>?</p>
+
+<a name="172174834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174834">Floris van Doorn (Jul 31 2019 at 23:10)</a>:</h4>
+<p>Yes, you can do <code>dsimp [g]</code> (or a variant: <code>dsimp only [g]</code>, <code>simp [g]</code>, <code>simp only [g]</code>).</p>
+
+<a name="172174964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172174964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172174964">Floris van Doorn (Jul 31 2019 at 23:13)</a>:</h4>
+<p>Also, you can just do:</p>
+<div class="codehilite"><pre><span></span>have not_asd : not (f h_w h_w = g h_w),
+apply flip_neq
+</pre></div>
+
+
+<p><code>apply</code> (and many other tactics, like <code>exact</code>) will automatically unfold definitions for you (and variables introduced by <code>let</code>)</p>
+
+<a name="172175155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172175155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172175155">Vlad Firoiu (Jul 31 2019 at 23:16)</a>:</h4>
+<p>Ah that makes my proof much simpler! Thank you!</p>
+
+<a name="172175504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/finishing%20from%20false/near/172175504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/88383finishingfromfalse.html#172175504">Floris van Doorn (Jul 31 2019 at 23:23)</a>:</h4>
+<p>However, tactics like <code>rw</code> and <code>simp</code> generally don't unfold definitions for you.</p>
+
 
 {% endraw %}
 
