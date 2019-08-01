@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [IMO2019](14898IMO2019.html) (7 messages, latest: Aug 01 2019 at 19:56)
+* [IMO2019](14898IMO2019.html) (12 messages, latest: Aug 01 2019 at 21:47)
 
 * [power series](15161powerseries.html) (107 messages, latest: Aug 01 2019 at 06:49)
 
