@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Getting unification info from lean](14668Gettingunificationinfofromlean.html) (6 messages, latest: Aug 01 2019 at 00:38)
+* [Is this a bug?](74867Isthisabug.html) (11 messages, latest: Aug 01 2019 at 06:50)
 
-* [Is this a bug?](74867Isthisabug.html) (10 messages, latest: Jul 31 2019 at 23:29)
+* [Getting unification info from lean](14668Gettingunificationinfofromlean.html) (6 messages, latest: Aug 01 2019 at 00:38)
 
 * [finishing from false](88383finishingfromfalse.html) (16 messages, latest: Jul 31 2019 at 23:23)
 
