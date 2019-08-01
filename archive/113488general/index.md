@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (13 messages, latest: Aug 01 2019 at 08:42)
+* [I love library_search](15882Ilovelibrarysearch.html) (7 messages, latest: Aug 01 2019 at 09:55)
+
+* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (15 messages, latest: Aug 01 2019 at 09:26)
 
 * [Proving for Fun](94070ProvingforFun.html) (29 messages, latest: Aug 01 2019 at 08:41)
 
@@ -90,8 +92,6 @@ permalink: archive/113488general/index.html
 * [Type class failure](63937Typeclassfailure.html) (5 messages, latest: Jul 22 2019 at 01:14)
 
 * [multiple dependencies](88820multipledependencies.html) (2 messages, latest: Jul 21 2019 at 23:02)
-
-* [I love library_search](15882Ilovelibrarysearch.html) (3 messages, latest: Jul 21 2019 at 08:07)
 
 * [subobjects](84917subobjects.html) (24 messages, latest: Jul 20 2019 at 23:05)
 
