@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/97326normnumandnatfact.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html">norm_num and nat.fact</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172250440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172250440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172250440">Reid Barton (Aug 01 2019 at 19:01)</a>:</h4>
+<p><code>norm_num</code> doesn't seem to know what to do with <code>nat.succ</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">fact</span> <span class="mi">5</span> <span class="bp">=</span> <span class="mi">120</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">norm_num</span><span class="o">,</span>
+  <span class="c1">-- ⊢ nat.succ 4 * (nat.succ 3 * (nat.succ 2 * nat.succ 1)) = 120</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172250473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172250473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172250473">Reid Barton (Aug 01 2019 at 19:01)</a>:</h4>
+<p>But when I try a simpler example like <code>nat.succ 5 = 6</code>, it does work for some reason</p>
+
+<a name="172250644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172250644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172250644">Kevin Buzzard (Aug 01 2019 at 19:03)</a>:</h4>
+<p>You clearly need to use more powerful automation like <code>rfl</code></p>
+
+<a name="172251107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172251107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172251107">Floris van Doorn (Aug 01 2019 at 19:07)</a>:</h4>
+<p>Ah, I'm not the only one doing IMO 2019-4 :)</p>
+
+<a name="172251126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172251126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172251126">Floris van Doorn (Aug 01 2019 at 19:07)</a>:</h4>
+<p>I used <code>norm_num [finset.range_succ, nat.pow_succ, nat.mul_succ]</code> for the easy direction.</p>
+
+<a name="172251373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172251373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172251373">Floris van Doorn (Aug 01 2019 at 19:10)</a>:</h4>
+<p>I'm stuck on <code>prime (2 : ℤ)</code> (the definition of <code>prime</code> for rings :) )</p>
+
+<a name="172251422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172251422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172251422">Johan Commelin (Aug 01 2019 at 19:10)</a>:</h4>
+<p>Didn't Chris prove that primes in nat are primes in int?</p>
+
+<a name="172251827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20nat.fact/near/172251827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97326normnumandnatfact.html#172251827">Floris van Doorn (Aug 01 2019 at 19:14)</a>:</h4>
+<p>Is it in mathlib? I cannot find it.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

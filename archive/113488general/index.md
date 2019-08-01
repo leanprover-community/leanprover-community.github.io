@@ -9,7 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [I love library_search](15882Ilovelibrarysearch.html) (40 messages, latest: Aug 01 2019 at 18:54)
+* [I love library_search](15882Ilovelibrarysearch.html) (49 messages, latest: Aug 01 2019 at 19:38)
+
+* [norm_num and exponentiation](29268normnumandexponentiation.html) (4 messages, latest: Aug 01 2019 at 19:15)
+
+* [norm_num and nat.fact](97326normnumandnatfact.html) (8 messages, latest: Aug 01 2019 at 19:14)
+
+* [contrapose and push_neg](40171contraposeandpushneg.html) (1 message, latest: Aug 01 2019 at 19:09)
 
 * [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (20 messages, latest: Aug 01 2019 at 14:14)
 

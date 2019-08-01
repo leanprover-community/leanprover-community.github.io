@@ -8,9 +8,9 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (1980 topics)
+* [general](113488general/index.html) (1983 topics)
 
-* [maths](116395maths/index.html) (564 topics)
+* [maths](116395maths/index.html) (565 topics)
 
 * [new members](113489newmembers/index.html) (465 topics)
 

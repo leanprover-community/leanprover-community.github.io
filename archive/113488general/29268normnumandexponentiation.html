@@ -1,0 +1,40 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/29268normnumandexponentiation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/29268normnumandexponentiation.html">norm_num and exponentiation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172250816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20exponentiation/near/172250816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29268normnumandexponentiation.html#172250816">Reid Barton (Aug 01 2019 at 19:04)</a>:</h4>
+<p>This is very slow without the <code>change</code>, and fast (~1s) with it. I don't really understand <code>norm_num</code> so I'm at a loss as to why.<br>
+The slow version finishes the tactic quickly, but then it seems that the resulting proof is expensive to check.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span><span class="err">^</span><span class="mi">36</span> <span class="bp">=</span> <span class="mi">68719476736</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="c1">-- change 1*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2*2 = _,</span>
+  <span class="n">norm_num</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172251417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20exponentiation/near/172251417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29268normnumandexponentiation.html#172251417">Rob Lewis (Aug 01 2019 at 19:10)</a>:</h4>
+<p>It's doing kernel computation when it shouldn't -- it's instant if you do it in an arbitrary ring instead of <code>nat</code>. Not sure why.</p>
+
+<a name="172251599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20exponentiation/near/172251599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29268normnumandexponentiation.html#172251599">Chris Hughes (Aug 01 2019 at 19:12)</a>:</h4>
+<p>No support for <code>nat.pow</code> I guess. The <code>pow</code>instance for nat is not <code>monoid.pow</code></p>
+
+<a name="172251918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_num%20and%20exponentiation/near/172251918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/29268normnumandexponentiation.html#172251918">Rob Lewis (Aug 01 2019 at 19:15)</a>:</h4>
+<p>I don't think that's it. <code>norm_num</code> finds the same proof for both <code>nat</code> and the arbitrary ring.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
