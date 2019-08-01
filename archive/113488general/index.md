@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (16 messages, latest: Aug 01 2019 at 11:55)
+* [algebraic closure](74840algebraicclosure.html) (35 messages, latest: Aug 01 2019 at 12:59)
+
+* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (17 messages, latest: Aug 01 2019 at 12:05)
 
 * [I love library_search](15882Ilovelibrarysearch.html) (10 messages, latest: Aug 01 2019 at 11:51)
 
@@ -84,8 +86,6 @@ permalink: archive/113488general/index.html
 * [github 500s](86284github500s.html) (2 messages, latest: Jul 22 2019 at 15:53)
 
 * [Lean in the wild](43625Leaninthewild.html) (184 messages, latest: Jul 22 2019 at 10:57)
-
-* [algebraic closure](74840algebraicclosure.html) (34 messages, latest: Jul 22 2019 at 06:19)
 
 * [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (15 messages, latest: Jul 22 2019 at 02:13)
 
