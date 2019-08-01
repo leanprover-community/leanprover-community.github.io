@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (35 messages, latest: Aug 01 2019 at 12:59)
+* [I love library_search](15882Ilovelibrarysearch.html) (16 messages, latest: Aug 01 2019 at 13:58)
+
+* [algebraic closure](74840algebraicclosure.html) (37 messages, latest: Aug 01 2019 at 13:55)
 
 * [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (17 messages, latest: Aug 01 2019 at 12:05)
-
-* [I love library_search](15882Ilovelibrarysearch.html) (10 messages, latest: Aug 01 2019 at 11:51)
 
 * [Proving for Fun](94070ProvingforFun.html) (29 messages, latest: Aug 01 2019 at 08:41)
 
