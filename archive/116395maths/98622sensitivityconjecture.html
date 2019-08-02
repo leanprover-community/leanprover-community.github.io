@@ -567,6 +567,63 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172324222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172324222">Johan Commelin (Aug 02 2019 at 16:54)</a>:</h4>
 <p>Huh, there is no <code>has_xor</code> typeclass??</p>
 
+<a name="172327065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172327065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172327065">Johan Commelin (Aug 02 2019 at 17:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">Q</span>
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">fintype</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">delta</span> <span class="n">Q</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">xor</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">bxor</span> <span class="o">(</span><span class="n">x</span> <span class="n">i</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span> <span class="n">i</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">symm</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">xor_comm</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">xor</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">xor</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">funext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">bool</span><span class="bp">.</span><span class="n">bxor_comm</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="c">/-</span><span class="cm">- The distance between two vertices of the hypercube.-/</span>
+<span class="n">def</span> <span class="n">dist</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span><span class="bp">.</span><span class="n">sum</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">cond</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="n">xor</span> <span class="n">y</span> <span class="n">i</span><span class="o">)</span> <span class="mi">1</span>  <span class="mi">0</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">dist_self</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">dist</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">sum_eq_zero</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">i</span> <span class="n">hi</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">xor</span><span class="o">,</span> <span class="n">bxor_self</span><span class="o">,</span> <span class="n">bool</span><span class="bp">.</span><span class="n">cond_ff</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">symm</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">dist_symm</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span><span class="bp">.</span><span class="n">dist</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span><span class="bp">.</span><span class="n">dist</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="n">congr_arg</span> <span class="o">((</span><span class="n">finset</span><span class="bp">.</span><span class="n">univ</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">))</span><span class="bp">.</span><span class="n">sum</span><span class="o">)</span> <span class="err">$</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">funext</span> <span class="n">i</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">xor_comm</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="c">/-</span><span class="cm">- Two vertices of the hypercube are adjacent if their distance is 1.-/</span>
+<span class="n">def</span> <span class="n">adjacent</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">x</span><span class="bp">.</span><span class="n">dist</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span>
+
+<span class="c">/-</span><span class="cm">- The set of n-/</span>
+<span class="n">def</span> <span class="n">neighbours</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span><span class="n">y</span> <span class="bp">|</span> <span class="n">x</span><span class="bp">.</span><span class="n">adjacent</span> <span class="n">y</span><span class="o">}</span>
+
+<span class="kn">variable</span> <span class="o">(</span><span class="n">n</span><span class="o">)</span>
+
+<span class="c">/-</span><span class="cm">- The cardinality of the hypercube.-/</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">card</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_fun</span>
+   <span class="bp">...</span> <span class="bp">=</span> <span class="bp">_</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card_fin</span><span class="o">,</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_bool</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">sensitivity</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">real</span><span class="bp">.</span><span class="n">sqrt</span> <span class="n">n</span> <span class="bp">≤</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="o">(</span><span class="n">H</span> <span class="err">∩</span> <span class="o">(</span><span class="n">neighbours</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+
+<span class="kn">end</span> <span class="n">Q</span>
+</pre></div>
+
+
+<p>Lean isn't yet happy with the theorem statement</p>
+
+<a name="172328677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172328677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172328677">Johan Commelin (Aug 02 2019 at 17:54)</a>:</h4>
+<p>Voila: that's a statement that Lean likes:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">sensitivity</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">real</span><span class="bp">.</span><span class="n">sqrt</span> <span class="n">n</span> <span class="bp">≤</span> <span class="o">(</span><span class="n">H</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="n">neighbours</span> <span class="n">x</span><span class="o">))</span><span class="bp">.</span><span class="n">card</span> <span class="o">:=</span>
+<span class="n">sorry</span>
+</pre></div>
+
 
 {% endraw %}
 
