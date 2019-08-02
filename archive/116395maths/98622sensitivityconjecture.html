@@ -139,6 +139,97 @@ This is another example where it's natural to consider a matrix with rows and co
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172308485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172308485">Reid Barton (Aug 02 2019 at 13:32)</a>:</h4>
 <p>I guess I'll just start typing and see at what point I get stuck.</p>
 
+<a name="172313175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172313175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172313175">Johan Commelin (Aug 02 2019 at 14:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> How are things going so far? I finally have time to look at this</p>
+
+<a name="172313340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172313340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172313340">Reid Barton (Aug 02 2019 at 14:32)</a>:</h4>
+<p>So far I created a new repository and did other things while building mathlib <span aria-label="slight smile" class="emoji emoji-1f642" role="img" title="slight smile">:slight_smile:</span></p>
+
+<a name="172313359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172313359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172313359">Reid Barton (Aug 02 2019 at 14:33)</a>:</h4>
+<p>I was about to get started actually</p>
+
+<a name="172313459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172313459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172313459">Johan Commelin (Aug 02 2019 at 14:34)</a>:</h4>
+<p>Why do you build mathlib?</p>
+
+<a name="172313471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172313471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172313471">Johan Commelin (Aug 02 2019 at 14:34)</a>:</h4>
+<p>I haven't built mathlib in 3 months</p>
+
+<a name="172313488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172313488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172313488">Reid Barton (Aug 02 2019 at 14:34)</a>:</h4>
+<p>I haven't been indoctrinated in the new ways yet and I had other things to do anyways</p>
+
+<a name="172314588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172314588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172314588">Reid Barton (Aug 02 2019 at 14:48)</a>:</h4>
+<p>Does this look sensible so far?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">dimension</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="c">/-</span><span class="cm">- The free vector space on vertices of a hypercube, defined inductively. -/</span>
+<span class="n">def</span> <span class="n">V</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">ℝ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">V</span> <span class="n">n</span> <span class="bp">×</span> <span class="n">V</span> <span class="n">n</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">add_comm_group</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">dunfold</span> <span class="n">V</span><span class="o">,</span> <span class="n">apply_instance</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">introsI</span> <span class="n">n</span> <span class="n">IH</span><span class="o">,</span> <span class="n">dunfold</span> <span class="n">V</span><span class="o">,</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">vector_space</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">rec</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">dunfold</span> <span class="n">V</span><span class="o">,</span> <span class="n">apply_instance</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">introsI</span> <span class="n">n</span> <span class="n">IH</span><span class="o">,</span> <span class="n">dunfold</span> <span class="n">V</span><span class="o">,</span> <span class="n">apply_instance</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">dim_V</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">vector_space</span><span class="bp">.</span><span class="n">dim</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">dim_of_field</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">dunfold</span> <span class="n">V</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">dim_prod</span><span class="o">,</span> <span class="n">IH</span><span class="o">,</span> <span class="n">pow_succ</span><span class="o">,</span> <span class="n">two_mul</span><span class="o">]</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="c">/-</span><span class="cm">- The linear operator f_n corresponding to Huang&#39;s matrix A_n. -/</span>
+<span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">V</span> <span class="n">n</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℝ</span><span class="o">]</span> <span class="n">V</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="172314746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172314746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172314746">Reid Barton (Aug 02 2019 at 14:50)</a>:</h4>
+<p>And is there any special support for linear maps into/out of binary direct sums?</p>
+
+<a name="172314905"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172314905" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172314905">Rob Lewis (Aug 02 2019 at 14:52)</a>:</h4>
+<p>Heh, I just started playing around with this and got to exactly the same place. Not that I saw (at a quick glance).</p>
+
+<a name="172314931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172314931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172314931">Reid Barton (Aug 02 2019 at 14:52)</a>:</h4>
+<p>Ah yes, <code>linear_map.fst/snd/prod</code></p>
+
+<a name="172315261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172315261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172315261">Reid Barton (Aug 02 2019 at 14:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The linear operator f_n corresponding to Huang&#39;s matrix A_n. -/</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">V</span> <span class="n">n</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℝ</span><span class="o">]</span> <span class="n">V</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">linear_map</span><span class="bp">.</span><span class="n">pair</span>
+    <span class="o">(</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">copair</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">copair</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span> <span class="o">(</span><span class="bp">-</span><span class="n">f</span> <span class="n">n</span><span class="o">))</span>
+</pre></div>
+
+
+<p>This definition needs an explicit <code>noncomputable</code> even though I have <code>noncomputable theory</code> at the top, is that supposed to happen?</p>
+
 
 {% endraw %}
 
