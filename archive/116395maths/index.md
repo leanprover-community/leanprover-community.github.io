@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [IMO2019](14898IMO2019.html) (21 messages, latest: Aug 02 2019 at 01:04)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (1 message, latest: Aug 02 2019 at 05:54)
+
+* [IMO2019](14898IMO2019.html) (22 messages, latest: Aug 02 2019 at 05:44)
 
 * [power series](15161powerseries.html) (107 messages, latest: Aug 01 2019 at 06:49)
 
