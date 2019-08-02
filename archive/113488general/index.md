@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (21 messages, latest: Aug 02 2019 at 18:11)
+
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (61 messages, latest: Aug 02 2019 at 15:42)
 
 * [codomain of expr](50047codomainofexpr.html) (7 messages, latest: Aug 02 2019 at 15:31)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [norm_num and exponentiation](29268normnumandexponentiation.html) (4 messages, latest: Aug 01 2019 at 19:15)
 
 * [norm_num and nat.fact](97326normnumandnatfact.html) (8 messages, latest: Aug 01 2019 at 19:14)
-
-* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (20 messages, latest: Aug 01 2019 at 14:14)
 
 * [Proving for Fun](94070ProvingforFun.html) (29 messages, latest: Aug 01 2019 at 08:41)
 
