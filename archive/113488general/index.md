@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contrapose and push_neg](40171contraposeandpushneg.html) (3 messages, latest: Aug 02 2019 at 07:50)
+* [algebraic closure](74840algebraicclosure.html) (40 messages, latest: Aug 02 2019 at 09:26)
 
-* [algebraic closure](74840algebraicclosure.html) (39 messages, latest: Aug 01 2019 at 22:45)
+* [contrapose and push_neg](40171contraposeandpushneg.html) (3 messages, latest: Aug 02 2019 at 07:50)
 
 * [I love library_search](15882Ilovelibrarysearch.html) (49 messages, latest: Aug 01 2019 at 19:38)
 
