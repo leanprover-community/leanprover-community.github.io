@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (21 messages, latest: Aug 02 2019 at 18:11)
+* [fintype.card](33192fintypecard.html) (7 messages, latest: Aug 02 2019 at 19:57)
+
+* [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (24 messages, latest: Aug 02 2019 at 19:17)
 
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (61 messages, latest: Aug 02 2019 at 15:42)
 

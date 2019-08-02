@@ -736,6 +736,234 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172333627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172333627">Reid Barton (Aug 02 2019 at 19:00)</a>:</h4>
 <p>I was intending that we'd add a lemma to mathlib that says that the dual basis element on <code>inl i</code> is given by projecting to the first factor, then applying the dual basis of the original basis</p>
 
+<a name="172333699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172333699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172333699">Johan Commelin (Aug 02 2019 at 19:00)</a>:</h4>
+<p>With this definition:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The basis of V indexed by the hypercube.-/</span>
+<span class="n">def</span> <span class="n">e</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">V</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">cond</span> <span class="o">(</span><span class="n">v</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="n">n</span> <span class="o">(</span><span class="n">v</span> <span class="err">∘</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">e</span> <span class="n">n</span> <span class="o">(</span><span class="n">v</span> <span class="err">∘</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span>
+</pre></div>
+
+
+<p>I can't make <code>{n}</code> implicit...</p>
+
+<a name="172333749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172333749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172333749">Johan Commelin (Aug 02 2019 at 19:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Done, although I guess you also have admin rights by default...</p>
+
+<a name="172333760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172333760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172333760">Johan Commelin (Aug 02 2019 at 19:01)</a>:</h4>
+<p>Since you are admin of leanprover-community, right?</p>
+
+<a name="172333846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172333846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172333846">Reid Barton (Aug 02 2019 at 19:02)</a>:</h4>
+<p>Gah, I keep running into "maximum class-instance resolution depth has been reached" issues, I think they are related to <code>decidable_eq</code> somehow...</p>
+
+<a name="172333864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172333864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172333864">Rob Lewis (Aug 02 2019 at 19:02)</a>:</h4>
+<p>Oh, maybe. But thanks anyway!</p>
+
+<a name="172334034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334034">Rob Lewis (Aug 02 2019 at 19:05)</a>:</h4>
+<blockquote>
+<p>I can't make <code>{n}</code> implicit...</p>
+</blockquote>
+<p>Why not? </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">e</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">V</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">v</span><span class="o">,</span> <span class="n">cond</span> <span class="o">(</span><span class="n">v</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">(</span><span class="n">v</span> <span class="err">∘</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span><span class="o">),</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="mi">0</span><span class="o">,</span> <span class="n">e</span> <span class="o">(</span><span class="n">v</span> <span class="err">∘</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span><span class="o">))</span>
+</pre></div>
+
+<a name="172334052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334052">Reid Barton (Aug 02 2019 at 19:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> That proof will depend on the definition of <code>Q</code> and <code>e</code>, though</p>
+
+<a name="172334182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334182">Reid Barton (Aug 02 2019 at 19:07)</a>:</h4>
+<p>I pushed another commit about <code>g</code></p>
+
+<a name="172334229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334229">Patrick Massot (Aug 02 2019 at 19:07)</a>:</h4>
+<p>I'm using the definition of e that Rob just pasted</p>
+
+<a name="172334284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334284">Patrick Massot (Aug 02 2019 at 19:08)</a>:</h4>
+<p>(which I indeed modified from Johan's message)</p>
+
+<a name="172334489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334489">Jesse Michael Han (Aug 02 2019 at 19:11)</a>:</h4>
+<p>i'm also happy to contribute</p>
+<p>what needs to be done besides the two <code>sorry</code>s Reid just pushed?</p>
+
+<a name="172334511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334511">Reid Barton (Aug 02 2019 at 19:11)</a>:</h4>
+<p>Oh dang, <code>H</code> is not a great name</p>
+
+<a name="172334652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334652">Reid Barton (Aug 02 2019 at 19:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> I'll be pushing a couple more <code>sorry</code>s soon to complete the proof outline</p>
+
+<a name="172334939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172334939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172334939">Johan Commelin (Aug 02 2019 at 19:17)</a>:</h4>
+<p>I'm inductively proving that <code>e</code> is a basis.</p>
+
+<a name="172335014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335014">Johan Commelin (Aug 02 2019 at 19:18)</a>:</h4>
+<p>See the <code>jmc</code> branch</p>
+
+<a name="172335308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335308">Patrick Massot (Aug 02 2019 at 19:22)</a>:</h4>
+<p>As I wrote earlier, I'm inductively calculating epsilon q e p</p>
+
+<a name="172335317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335317">Patrick Massot (Aug 02 2019 at 19:22)</a>:</h4>
+<p>I guess it should prove that e is a basis right?</p>
+
+<a name="172335401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335401">Reid Barton (Aug 02 2019 at 19:24)</a>:</h4>
+<blockquote>
+<p>Lean isn't yet happy with the theorem statement</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> were you having trouble with type classes?</p>
+
+<a name="172335429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335429">Johan Commelin (Aug 02 2019 at 19:24)</a>:</h4>
+<p>Well, sets weren't finsets and such</p>
+
+<a name="172335434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335434">Johan Commelin (Aug 02 2019 at 19:25)</a>:</h4>
+<p>There is a working statement on the <code>jmc</code> branch</p>
+
+<a name="172335445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335445">Johan Commelin (Aug 02 2019 at 19:25)</a>:</h4>
+<p>I'm almost done with the proof that <code>e</code> is a basis</p>
+
+<a name="172335641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335641">Reid Barton (Aug 02 2019 at 19:28)</a>:</h4>
+<p>Okay, I pushed a couple more bits (theorem statement adapted from your Johan--but it should be an exists)</p>
+
+<a name="172335705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172335705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172335705">Reid Barton (Aug 02 2019 at 19:29)</a>:</h4>
+<p>Not sure if the next-to-last statement is phrased optimally</p>
+
+<a name="172336115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336115">Patrick Massot (Aug 02 2019 at 19:34)</a>:</h4>
+<p>In those terms, I'm working on <code>f_matrix_adjacent</code> and <code>f_matrix_nonadjacent</code></p>
+
+<a name="172336158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336158">Jesse Michael Han (Aug 02 2019 at 19:35)</a>:</h4>
+<p><code>g_injective</code> was easy:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">g_injective</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">injective</span> <span class="o">(</span><span class="n">g</span> <span class="n">m</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span><span class="o">[</span><span class="n">g</span><span class="o">],</span> <span class="n">intros</span> <span class="n">x₁</span> <span class="n">x₂</span> <span class="n">H_eq</span><span class="o">,</span> <span class="n">simp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">exact</span> <span class="n">H_eq</span><span class="bp">.</span><span class="n">right</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172336162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336162">Reid Barton (Aug 02 2019 at 19:35)</a>:</h4>
+<p>I'm going to tackle the inequality that's the last sentence of the PDF I posted</p>
+
+<a name="172336204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336204">Reid Barton (Aug 02 2019 at 19:35)</a>:</h4>
+<p>that leaves <code>f_image_g</code> and <code>exists_eigenvalue</code></p>
+
+<a name="172336258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336258">Johan Commelin (Aug 02 2019 at 19:36)</a>:</h4>
+<p>I'll push what I have now.</p>
+
+<a name="172336424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336424">Johan Commelin (Aug 02 2019 at 19:38)</a>:</h4>
+<p>Ok, I pushed</p>
+
+<a name="172336438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336438">Johan Commelin (Aug 02 2019 at 19:38)</a>:</h4>
+<p>It does contain a <code>sorry</code>. Will work on that soon.</p>
+
+<a name="172336444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336444">Jesse Michael Han (Aug 02 2019 at 19:38)</a>:</h4>
+<p>i doubt <code>f_image_g</code> will be as easy but i can start on that. <span class="user-mention" data-user-id="112680">@Johan Commelin</span>  could i get push access as well?</p>
+
+<a name="172336483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336483">Johan Commelin (Aug 02 2019 at 19:39)</a>:</h4>
+<p>afk</p>
+
+<a name="172336769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336769">Reid Barton (Aug 02 2019 at 19:42)</a>:</h4>
+<p>What's your github username again?</p>
+
+<a name="172336779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336779">Jesse Michael Han (Aug 02 2019 at 19:42)</a>:</h4>
+<p><code>jesse-michael-han</code></p>
+
+<a name="172336805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172336805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172336805">Reid Barton (Aug 02 2019 at 19:42)</a>:</h4>
+<p>Cool, added</p>
+
+<a name="172337072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337072">Patrick Massot (Aug 02 2019 at 19:46)</a>:</h4>
+<p>Do we have a nice way to define the two injections from <code>fin n  -&gt; bool</code> to <code>fin n+1 -&gt; bool</code>  that differ on the zeroth element of <code>fin n+1</code>?</p>
+
+<a name="172337105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337105">Patrick Massot (Aug 02 2019 at 19:46)</a>:</h4>
+<p>I guess I should use pattern matching</p>
+
+<a name="172337137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337137">Johan Commelin (Aug 02 2019 at 19:47)</a>:</h4>
+<p>Check what I did</p>
+
+<a name="172337165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337165">Johan Commelin (Aug 02 2019 at 19:47)</a>:</h4>
+<p>I've used <code>cond (x 0)</code> stuff</p>
+
+<a name="172337233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337233">Patrick Massot (Aug 02 2019 at 19:48)</a>:</h4>
+<p>This is not quite the same question, is it?</p>
+
+<a name="172337261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337261">Johan Commelin (Aug 02 2019 at 19:48)</a>:</h4>
+<p>Maybe not</p>
+
+<a name="172337285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337285">Patrick Massot (Aug 02 2019 at 19:48)</a>:</h4>
+<p>You're going i the easier direction (decreasing n)</p>
+
+<a name="172337296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337296">Johan Commelin (Aug 02 2019 at 19:49)</a>:</h4>
+<p>Right, I was too fast... sorry</p>
+
+<a name="172337548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337548">Reid Barton (Aug 02 2019 at 19:52)</a>:</h4>
+<p>In principle I like building the equivalence <code>Q (n+1) ≃ Q n ⊕ Q n</code> out of stuff in <code>data.equiv.basic</code>/<code>data.equiv.fin</code> though it would be kind of verbose</p>
+
+<a name="172337577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337577">Patrick Massot (Aug 02 2019 at 19:53)</a>:</h4>
+<p>I found the library bit I was missing</p>
+
+<a name="172337582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337582">Patrick Massot (Aug 02 2019 at 19:53)</a>:</h4>
+<p>I can now write <code>Q n → Q (n+1) := λ p, λ k, if h : k = 0 then tt else p (k.pred h)</code></p>
+
+<a name="172337588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337588">Johan Commelin (Aug 02 2019 at 19:53)</a>:</h4>
+<p>That's what I used</p>
+
+<a name="172337590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337590">Patrick Massot (Aug 02 2019 at 19:53)</a>:</h4>
+<p>I was missing pred</p>
+
+<a name="172337595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337595">Johan Commelin (Aug 02 2019 at 19:53)</a>:</h4>
+<p>I already pushed that equiv <span class="user-mention" data-user-id="110032">@Reid Barton</span></p>
+
+<a name="172337663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337663">Patrick Massot (Aug 02 2019 at 19:54)</a>:</h4>
+<p>Sorry Johan, I focused on your <code>cond</code> and missed <code>pred</code></p>
+
+<a name="172337678"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337678">Reid Barton (Aug 02 2019 at 19:54)</a>:</h4>
+<p>Oh I see, just defined manually yeah</p>
+
 
 {% endraw %}
 
