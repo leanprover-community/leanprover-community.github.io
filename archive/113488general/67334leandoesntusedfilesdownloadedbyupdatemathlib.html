@@ -370,6 +370,62 @@ drwxr-xr-x 1 Floris 197121      0 2019-07-12 17:47:57.000000000 -0400 ../
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172196039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172196039">Kevin Buzzard (Aug 01 2019 at 06:45)</a>:</h4>
 <p>There has never been any output in Windows and I agree it's frustrating. Yes you can see both file and line number in Linux (at least in Ubuntu)</p>
 
+<a name="172317728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172317728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172317728">Floris van Doorn (Aug 02 2019 at 15:24)</a>:</h4>
+<p>I still have the same problem: Lean doesn't use the <code>olean</code> files downloaded from <code>cache-olean --fetch</code>. Any suggestions <span class="user-mention" data-user-id="110026">@Simon Hudon</span> <span class="user-mention" data-user-id="110087">@Scott Morrison</span>?</p>
+
+<a name="172317868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172317868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172317868">Johan Commelin (Aug 02 2019 at 15:26)</a>:</h4>
+<p>I use <code>find</code> to <code>touch</code> all the olean files</p>
+
+<a name="172317886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172317886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172317886">Johan Commelin (Aug 02 2019 at 15:26)</a>:</h4>
+<p>That updates the time stamps, and solves the problem for me.</p>
+
+<a name="172317958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172317958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172317958">Floris van Doorn (Aug 02 2019 at 15:27)</a>:</h4>
+<p>I'll try that.</p>
+
+<a name="172318083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318083">Floris van Doorn (Aug 02 2019 at 15:29)</a>:</h4>
+<p>The time stamp problem is when an olean file is not newer than the corresponding lean file? I did try to search for such an olean file before, but couldn't find one. I'll try it anyway.</p>
+
+<a name="172318779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318779">Kevin Buzzard (Aug 02 2019 at 15:37)</a>:</h4>
+<p>I am certainly not an expert here but I thought that Sebastian once told us that there would also be issues if an olean file relies on another olean file whose timestamp indicated that it had been created later on. In particular I thought that using <code>find</code> to <code>touch</code> all the olean files was risky business.</p>
+
+<a name="172318862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318862">Johan Commelin (Aug 02 2019 at 15:38)</a>:</h4>
+<p>Well, it's been solving my issues so far.</p>
+
+<a name="172318875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318875">Kevin Buzzard (Aug 02 2019 at 15:38)</a>:</h4>
+<p>I might be wrong.</p>
+
+<a name="172318886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318886">Floris van Doorn (Aug 02 2019 at 15:38)</a>:</h4>
+<p>Thanks, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>, this fixes my issues like a charm!</p>
+
+<a name="172318951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318951">Kevin Buzzard (Aug 02 2019 at 15:39)</a>:</h4>
+<p>I am clearly wrong :-)</p>
+
+<a name="172318957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172318957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172318957">Johan Commelin (Aug 02 2019 at 15:39)</a>:</h4>
+<p>Well, you <code>xargs</code> it to <code>touch</code>, and so I think all <code>olean</code> files will have exactly the same timestamp.</p>
+
+<a name="172319016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172319016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172319016">Johan Commelin (Aug 02 2019 at 15:40)</a>:</h4>
+<p>Maybe that's just on the right side of risky (-;</p>
+
+<a name="172319058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172319058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172319058">Kevin Buzzard (Aug 02 2019 at 15:40)</a>:</h4>
+<p>They don't end up with time stamps which are like 0.01 second apart or something? The reason I've always avoided this is that I didn't know how to touch them in the right order :-)</p>
+
+<a name="172319188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20doesn%27t%20used%20files%20downloaded%20by%20update-mathlib/near/172319188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67334leandoesntusedfilesdownloadedbyupdatemathlib.html#172319188">Floris van Doorn (Aug 02 2019 at 15:42)</a>:</h4>
+<p>I used <code>find src/ -name '*.olean' -exec touch {} +</code> and my timestamps are not the same (but within the same second). That didn't cause problems when importing files deep into mathlib...</p>
+
 
 {% endraw %}
 

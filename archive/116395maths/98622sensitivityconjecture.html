@@ -230,6 +230,134 @@ This is another example where it's natural to consider a matrix with rows and co
 
 <p>This definition needs an explicit <code>noncomputable</code> even though I have <code>noncomputable theory</code> at the top, is that supposed to happen?</p>
 
+<a name="172315559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172315559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172315559">Chris Hughes (Aug 02 2019 at 15:00)</a>:</h4>
+<p>Is noncomputable theory inside a section?</p>
+
+<a name="172315569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172315569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172315569">Rob Lewis (Aug 02 2019 at 15:00)</a>:</h4>
+<p><code>noncomputable theory</code> doesn't always propogate to aux decls.</p>
+
+<a name="172318371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172318371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172318371">Reid Barton (Aug 02 2019 at 15:32)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The linear operator f_n corresponding to Huang&#39;s matrix A_n. -/</span>
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span><span class="o">,</span> <span class="n">V</span> <span class="n">n</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">ℝ</span><span class="o">]</span> <span class="n">V</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">linear_map</span><span class="bp">.</span><span class="n">pair</span>
+    <span class="o">(</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">copair</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">linear_map</span><span class="bp">.</span><span class="n">copair</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">id</span> <span class="o">(</span><span class="bp">-</span><span class="n">f</span> <span class="n">n</span><span class="o">))</span>
+
+<span class="kn">lemma</span> <span class="n">f_squared</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">v</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">•</span> <span class="n">v</span> <span class="o">:=</span>
+<span class="c1">-- The (n : ℝ) is necessary since `n • v` refers to the multiplication defined</span>
+<span class="c1">-- using only the addition of V.</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">IH</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">v</span><span class="o">,</span> <span class="n">dunfold</span> <span class="n">f</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">v&#39;</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">ext</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">dunfold</span> <span class="n">f</span> <span class="n">V</span><span class="o">,</span>
+      <span class="n">conv_rhs</span> <span class="o">{</span> <span class="n">change</span> <span class="o">((</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="err">•</span> <span class="n">v</span><span class="o">,</span> <span class="n">rw</span> <span class="n">add_smul</span> <span class="o">},</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">IH</span><span class="o">]</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">dunfold</span> <span class="n">f</span> <span class="n">V</span><span class="o">,</span>
+      <span class="n">conv_rhs</span> <span class="o">{</span> <span class="n">change</span> <span class="o">((</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="err">•</span> <span class="n">v&#39;</span><span class="o">,</span> <span class="n">rw</span> <span class="n">add_smul</span> <span class="o">},</span>
+      <span class="k">have</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">V</span> <span class="n">n</span><span class="o">),</span> <span class="bp">-</span><span class="n">x</span> <span class="bp">+</span> <span class="o">(</span><span class="n">y</span> <span class="bp">+</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">abel</span> <span class="o">},</span> <span class="c1">-- ugh</span>
+      <span class="n">simp</span> <span class="o">[</span><span class="n">IH</span><span class="o">,</span> <span class="n">this</span><span class="o">]</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172318396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172318396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172318396">Reid Barton (Aug 02 2019 at 15:32)</a>:</h4>
+<p>Maybe I'll put up a repository under leanprover-community?</p>
+
+<a name="172318813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172318813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172318813">Rob Lewis (Aug 02 2019 at 15:37)</a>:</h4>
+<p>This was weirdly hard to make it go through, I got caught on the <code>(n : R)</code> thing too for a bit.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">fn2</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="n">v</span><span class="o">,</span> <span class="n">f</span> <span class="n">n</span> <span class="o">(</span><span class="n">f</span> <span class="n">n</span> <span class="n">v</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">•</span> <span class="n">v</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">v</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">rw</span> <span class="o">(</span><span class="k">show</span> <span class="n">f</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">),</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">refl</span> <span class="o">}</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">⟨</span><span class="n">v1</span><span class="o">,</span> <span class="n">v2</span><span class="bp">⟩</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">f</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_add</span><span class="o">,</span> <span class="n">add_smul</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">fn2</span><span class="o">],</span> <span class="n">rw</span> <span class="o">[</span><span class="n">add_comm</span><span class="o">],</span>
+  <span class="n">convert</span> <span class="n">add_sub_cancel</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172318902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172318902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172318902">Reid Barton (Aug 02 2019 at 15:38)</a>:</h4>
+<p>Okay, I made <a href="https://github.com/leanprover-community/lean-sensitivity" target="_blank" title="https://github.com/leanprover-community/lean-sensitivity">https://github.com/leanprover-community/lean-sensitivity</a>. I don't know how the permissions work by default, but anyone who can add collaborators should feel free to do so.</p>
+
+<a name="172319524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172319524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172319524">Floris van Doorn (Aug 02 2019 at 15:46)</a>:</h4>
+<p>My gut feeling says that defining <code>V n := (fin n -&gt; bool) -&gt; real</code> would be nicer to work with. Then <code>V</code> is defined directly instead of recursively. You can use the following to go between <code>fin n</code> and <code>fin (n+1)</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="kn">variable</span> <span class="n">u</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+<span class="n">def</span> <span class="n">tail</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">p</span> <span class="n">i</span><span class="bp">.</span><span class="n">succ</span>
+<span class="n">def</span> <span class="n">cons</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">j</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">cases</span> <span class="n">x</span> <span class="n">v</span> <span class="n">j</span>
+</pre></div>
+
+<a name="172319871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172319871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172319871">Reid Barton (Aug 02 2019 at 15:51)</a>:</h4>
+<p>I thought defining <code>V</code> recursively would be more convenient for defining and proving things about <code>f</code> and <code>g</code>--and it seems pretty convenient so far. I was thinking of defining the hypercube as <code>fin n -&gt; bool</code> though (in part because it seems a bit cheating to define it recursively).</p>
+
+<a name="172319978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172319978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172319978">Rob Lewis (Aug 02 2019 at 15:52)</a>:</h4>
+<p>I've started with the hypercube as <code>fin n -&gt; bool</code> but I'm not sure about the cleanest way to define the basis of <code>e_p</code>s.</p>
+
+<a name="172319996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172319996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172319996">Floris van Doorn (Aug 02 2019 at 15:53)</a>:</h4>
+<p>Ok. Maybe that's right. Why do you say it feels like cheating?</p>
+
+<a name="172320024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320024">Johan Commelin (Aug 02 2019 at 15:53)</a>:</h4>
+<blockquote>
+<p>I thought defining <code>V</code> recursively would be more convenient for defining and proving things about <code>f</code> and <code>g</code>--and it seems pretty convenient so far. I was thinking of defining the hypercube as <code>fin n -&gt; bool</code> though (in part because it seems a bit cheating to define it recursively).</p>
+</blockquote>
+<p>Why would that be cheating?</p>
+
+<a name="172320047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320047">Johan Commelin (Aug 02 2019 at 15:54)</a>:</h4>
+<blockquote>
+<p>I've started with the hypercube as <code>fin n -&gt; bool</code> but I'm not sure about the cleanest way to define the basis of <code>e_p</code>s.</p>
+</blockquote>
+<p>Dual basis is in mathlib</p>
+
+<a name="172320151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320151">Reid Barton (Aug 02 2019 at 15:55)</a>:</h4>
+<p>Well just because it's part of the "interface" of the overall theorem and <code>fin n -&gt; bool</code> feels a bit more canonical. For example if the hypercube is defined recursively then it's not obvious how to construct the action of the symmetric group.</p>
+
+<a name="172320156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320156">Floris van Doorn (Aug 02 2019 at 15:55)</a>:</h4>
+<p>Isn't the basis <code>e</code> just</p>
+<div class="codehilite"><pre><span></span>def V (n : ℕ) : Type := (fin n → bool) → ℝ
+def e (p : fin n → bool) : V n := λ q, if q = p then 1 else 0
+</pre></div>
+
+<a name="172320160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320160">Reid Barton (Aug 02 2019 at 15:55)</a>:</h4>
+<p>I agree it's not cheating by much.</p>
+
+<a name="172320253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320253">Johan Commelin (Aug 02 2019 at 15:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> But you changed the definition of <code>V</code></p>
+
+<a name="172320331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320331">Reid Barton (Aug 02 2019 at 15:58)</a>:</h4>
+<p>If you assume that the hypercube must be represented by <code>fin n -&gt; bool</code>, then at some point you have to make a recursive decomposition of building something for n+1 out of two somethings for n. I suggest doing that when we define the basis <code>e</code></p>
+
+<a name="172320344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320344">Reid Barton (Aug 02 2019 at 15:58)</a>:</h4>
+<p>Which is I think what Rob was going to do</p>
+
+<a name="172320347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320347">Floris van Doorn (Aug 02 2019 at 15:58)</a>:</h4>
+<p>I was responding to Rob, who said (as I understood it) that he was interested in the basis using this definition of <code>V</code></p>
+
+<a name="172320408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172320408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172320408">Reid Barton (Aug 02 2019 at 15:59)</a>:</h4>
+<p>Probably it doesn't matter very much where you do it</p>
+
 
 {% endraw %}
 

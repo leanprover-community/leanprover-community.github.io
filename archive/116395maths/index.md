@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [IMO2019](14898IMO2019.html) (59 messages, latest: Aug 02 2019 at 14:57)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (62 messages, latest: Aug 02 2019 at 15:59)
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (42 messages, latest: Aug 02 2019 at 14:56)
+* [IMO2019](14898IMO2019.html) (59 messages, latest: Aug 02 2019 at 14:57)
 
 * [number fields in lean?](68407numberfieldsinlean.html) (24 messages, latest: Aug 02 2019 at 09:57)
 
