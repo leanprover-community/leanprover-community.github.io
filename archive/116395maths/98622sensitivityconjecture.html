@@ -964,6 +964,61 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172337678" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172337678">Reid Barton (Aug 02 2019 at 19:54)</a>:</h4>
 <p>Oh I see, just defined manually yeah</p>
 
+<a name="172338602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172338602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172338602">Reid Barton (Aug 02 2019 at 20:09)</a>:</h4>
+<p>I changed <code>H</code> from a <code>finset</code> back to a <code>set</code> though I'm not yet entirely sure whether it was a good idea</p>
+
+<a name="172339342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172339342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172339342">Johan Commelin (Aug 02 2019 at 20:18)</a>:</h4>
+<p>Ooh, you should also feel free to refactor <code>Q.equiv_sum</code></p>
+
+<a name="172339357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172339357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172339357">Johan Commelin (Aug 02 2019 at 20:19)</a>:</h4>
+<p>If you want to use more fancy library functions (-;</p>
+
+<a name="172339627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172339627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172339627">Chris Hughes (Aug 02 2019 at 20:23)</a>:</h4>
+<p>finsets ftw.</p>
+
+<a name="172340338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172340338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172340338">Floris van Doorn (Aug 02 2019 at 20:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>: I would suggest</p>
+<div class="codehilite"><pre><span></span>def cons (x : α) (v : fin n → α) : fin (n+1) → α :=
+λ j, fin.cases x v j
+</pre></div>
+
+<a name="172340436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172340436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172340436">Patrick Massot (Aug 02 2019 at 20:34)</a>:</h4>
+<p>What is that?</p>
+
+<a name="172340552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172340552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172340552">Floris van Doorn (Aug 02 2019 at 20:36)</a>:</h4>
+<p>To define the maps <code>Q n → Q (n+1)</code>, <code>fin.cases</code> is there exactly for that purpose.</p>
+
+<a name="172340604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172340604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172340604">Patrick Massot (Aug 02 2019 at 20:37)</a>:</h4>
+<p>Oh I see</p>
+
+<a name="172340844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172340844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172340844">Patrick Massot (Aug 02 2019 at 20:41)</a>:</h4>
+<p>It's still totally mysterious to me that your definition cannot be rewritten as <code>fin.cases x v</code></p>
+
+<a name="172341742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172341742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172341742">Floris van Doorn (Aug 02 2019 at 20:56)</a>:</h4>
+<p>Lean is pretty bad at these kind of unification problems, unless it uses the <code>[elab_as_eliminator]</code> attribute. With that attribute it is hardcoded to look at the third explicit argument of <code>fin.cases</code>, and then figure out what to do using the type of the third argument. If you don't give it 3 arguments, it will do the standard unification procedure, which fails.</p>
+
+<a name="172341760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172341760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172341760">Patrick Massot (Aug 02 2019 at 20:57)</a>:</h4>
+<p>What do you get from using this definition rather than mine?</p>
+
+<a name="172341767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172341767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172341767">Patrick Massot (Aug 02 2019 at 20:57)</a>:</h4>
+<p>It seems harder to prove lemmas about it</p>
+
+<a name="172341771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172341771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172341771">Patrick Massot (Aug 02 2019 at 20:57)</a>:</h4>
+<p>but probably I'm missing library lemmas</p>
+
 
 {% endraw %}
 
