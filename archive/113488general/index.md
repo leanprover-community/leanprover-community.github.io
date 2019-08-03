@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (41 messages, latest: Aug 03 2019 at 20:55)
+
 * [What is a parent structure?](26604Whatisaparentstructure.html) (5 messages, latest: Aug 03 2019 at 19:16)
 
 * [fintype.card](33192fintypecard.html) (7 messages, latest: Aug 02 2019 at 19:57)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [lean doesn't used files downloaded by update-mathlib](67334leandoesntusedfilesdownloadedbyupdatemathlib.html) (61 messages, latest: Aug 02 2019 at 15:42)
 
 * [codomain of expr](50047codomainofexpr.html) (7 messages, latest: Aug 02 2019 at 15:31)
-
-* [algebraic closure](74840algebraicclosure.html) (40 messages, latest: Aug 02 2019 at 09:26)
 
 * [contrapose and push_neg](40171contraposeandpushneg.html) (3 messages, latest: Aug 02 2019 at 07:50)
 
