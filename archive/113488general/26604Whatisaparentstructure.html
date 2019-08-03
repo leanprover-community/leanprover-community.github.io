@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/26604Whatisaparentstructure.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/26604Whatisaparentstructure.html">What is a parent structure?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172417059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20a%20parent%20structure%3F/near/172417059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26604Whatisaparentstructure.html#172417059">Chris Hughes (Aug 03 2019 at 18:50)</a>:</h4>
+<p>Why doesn't this work</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">structure</span> <span class="n">alg_equiv</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">γ</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">algebra</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="kn">extends</span> <span class="bp">@</span><span class="n">alg_hom</span> <span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span>
+<span class="c1">--invalid &#39;structure&#39;, expression must be a &#39;parent&#39; structure</span>
+</pre></div>
+
+<a name="172417287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20a%20parent%20structure%3F/near/172417287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26604Whatisaparentstructure.html#172417287">Kevin Buzzard (Aug 03 2019 at 18:58)</a>:</h4>
+<p>That's a bit annoying isn't it! My impression is that Lean chokes on the @ symbol and doesn't go any further. </p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">hello_mum</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">bar</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="bp">@</span><span class="n">foo</span> <span class="n">α</span> <span class="o">:=</span> <span class="c1">-- same error</span>
+<span class="o">(</span><span class="n">hello_world</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+</pre></div>
+
+<a name="172417297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/What%20is%20a%20parent%20structure%3F/near/172417297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/26604Whatisaparentstructure.html#172417297">Kevin Buzzard (Aug 03 2019 at 18:59)</a>:</h4>
+<p>You could of course just work around it by putting the fields in and making the projection yourself. Are there any serious disadvantages to this other than it being a bore?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

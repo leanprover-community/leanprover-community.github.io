@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What is a parent structure?](26604Whatisaparentstructure.html) (3 messages, latest: Aug 03 2019 at 18:59)
+
 * [fintype.card](33192fintypecard.html) (7 messages, latest: Aug 02 2019 at 19:57)
 
 * [update-mathlib "reference is a fork"](27796updatemathlibreferenceisafork.html) (24 messages, latest: Aug 02 2019 at 19:17)
