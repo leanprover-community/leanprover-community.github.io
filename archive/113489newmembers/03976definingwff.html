@@ -1,0 +1,67 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/03976definingwff.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html">defining wff</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172382723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172382723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172382723">Patrick Thomas (Aug 03 2019 at 00:11)</a>:</h4>
+<p>I was wondering if the following definition can be formalized in Lean, and if so, how. I am thinking that a propositional variable might be defined as a natural number, but I am not sure how to introduce the connectives.</p>
+<p>DEFINITION. The set of wffs is the intersection of all sets S of formulas such<br>
+that:</p>
+<p>(i) p ∈ S for each propositional variable p.<br>
+(ii) For each formula A, if A ∈ S, then ~A ∈ S.<br>
+(iii) For all formulas A and B, if A ∈ S and B ∈ S, then [A ∨ B] ∈ S.</p>
+<p>A wff is a member of the set of wffs.</p>
+<p>I would like to use this definition in a formal proof of the following exercise:</p>
+<p>Using the definition of the set of wffs, show that:</p>
+<p>(a) Every formula consisting of a propositional variable standing alone is<br>
+a wff.<br>
+(b) If A is a wff, then ~A is a wff.<br>
+(c) If A and B are wffs, then [A ∨ B] is a wff.</p>
+
+<a name="172383273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172383273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172383273">Mario Carneiro (Aug 03 2019 at 00:27)</a>:</h4>
+<p>While it is possible to define wffs in this set-theoretic way, the much easier approach is to use an inductive type - this is what they are designed for. With that the theorem is trivial, as it is just the constructors of the inductive type</p>
+
+<a name="172383399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172383399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172383399">Floris van Doorn (Aug 03 2019 at 00:31)</a>:</h4>
+<p>Here is an example of using inductive types for this:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- α is the type of propositional variables</span>
+<span class="kn">inductive</span> <span class="n">wff</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">var</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">wff</span>
+<span class="bp">|</span> <span class="n">neg</span> <span class="o">:</span> <span class="n">wff</span> <span class="bp">→</span> <span class="n">wff</span>
+<span class="bp">|</span> <span class="n">or</span> <span class="o">:</span> <span class="n">wff</span> <span class="bp">→</span> <span class="n">wff</span> <span class="bp">→</span> <span class="n">wff</span>
+
+<span class="n">local</span> <span class="kn">prefix</span> <span class="bp">`#`</span> <span class="o">:=</span> <span class="n">wff</span><span class="bp">.</span><span class="n">var</span>
+<span class="n">local</span> <span class="kn">prefix</span> <span class="bp">`~`</span> <span class="o">:=</span> <span class="n">wff</span><span class="bp">.</span><span class="n">neg</span>
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span> <span class="bp">∨</span> <span class="bp">`</span> <span class="o">:=</span> <span class="n">wff</span><span class="bp">.</span><span class="n">or</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">wff</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">#</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">~</span> <span class="bp">#</span><span class="n">q</span>
+</pre></div>
+
+<a name="172383726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172383726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172383726">Patrick Thomas (Aug 03 2019 at 00:40)</a>:</h4>
+<p>Thank you. I would still be interested in seeing how it might be done in the set-theoretic way, if you have a chance.</p>
+
+<a name="172384054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172384054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172384054">Floris van Doorn (Aug 03 2019 at 00:49)</a>:</h4>
+<p>In that case, I would define a character as a propositional variable or one of the 4 special characters (<code>~ [ ] ∨</code>) and then define <code>S</code> to be a set on the type of list of characters (<code>S</code> is the intersection of all sets satisfying ...)</p>
+
+<a name="172384401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172384401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172384401">Patrick Thomas (Aug 03 2019 at 00:58)</a>:</h4>
+<p>I'm sorry, I'm not sure I understand.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
