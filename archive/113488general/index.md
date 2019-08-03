@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What is a parent structure?](26604Whatisaparentstructure.html) (3 messages, latest: Aug 03 2019 at 18:59)
+* [What is a parent structure?](26604Whatisaparentstructure.html) (5 messages, latest: Aug 03 2019 at 19:16)
 
 * [fintype.card](33192fintypecard.html) (7 messages, latest: Aug 02 2019 at 19:57)
 
