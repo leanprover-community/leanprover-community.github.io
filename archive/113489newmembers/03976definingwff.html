@@ -61,6 +61,38 @@ a wff.<br>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172384401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172384401">Patrick Thomas (Aug 03 2019 at 00:58)</a>:</h4>
 <p>I'm sorry, I'm not sure I understand.</p>
 
+<a name="172385003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172385003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172385003">Andrew Ashworth (Aug 03 2019 at 01:16)</a>:</h4>
+<p>It's a much more raw interpretation. Your formulas are sequences of <code>[ ] ~ \/ 1 2 3 4 5 6 7 8 9</code>. Step 1 is to turn a sequence of digits into a var. Step 2 is to come up with a prop describing 1, 2, 3 in terms of this raw list of characters.</p>
+
+<a name="172385022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172385022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172385022">Floris van Doorn (Aug 03 2019 at 01:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>import data.set.lattice
+
+noncomputable theory
+open sum
+-- Var is the type of propositional variables
+constant Var : Type
+def character := Var ⊕ fin 4
+def lbracket : character := inr 0
+def rbracket : character := inr 1
+def neg : character := inr 2
+def disj : character := inr 3
+
+local notation `⟦` := lbracket
+local notation `⟧` := rbracket
+local notation `~` := neg
+local notation `∨` := disj
+
+def wff : set (list character) :=
+⋂₀ { S | (∀(p : Var), [inl p] ∈ S) ∧ (∀(A ∈ S), [ ~ ] ++ A ∈ S) ∧
+  ∀(A B ∈ S), [ ⟦ ] ++ A ++ [ ∨ ] ++ B ++ [ ⟧ ]  ∈ S }
+</pre></div>
+
+<a name="172385227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/defining%20wff/near/172385227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03976definingwff.html#172385227">Patrick Thomas (Aug 03 2019 at 01:24)</a>:</h4>
+<p>It might take me a bit to go through this, but thank you!</p>
+
 
 {% endraw %}
 
