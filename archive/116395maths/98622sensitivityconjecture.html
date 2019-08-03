@@ -1098,6 +1098,55 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172400077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172400077">Patrick Massot (Aug 03 2019 at 09:51)</a>:</h4>
 <p>Nice trick! I tried <code>by_cases hp : x p = tt</code> but this gave an inconvenient second case. I'm a bit disappointed that the proof wasn't finished while I slept. I'll be again away from Lean for the next 9 hours, so maybe this will be enough. Otherwise I'll play again tonight. Have fun!</p>
 
+<a name="172415077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415077">Patrick Massot (Aug 03 2019 at 17:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> I think you have slightly too much love for <code>tidy</code>. What about </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">f_image_g&#39;</span> <span class="o">{</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">w</span> <span class="o">:</span> <span class="n">V</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">hv</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">w</span> <span class="bp">=</span> <span class="n">g</span> <span class="n">m</span> <span class="n">v</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">V</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="n">V</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="n">w</span> <span class="bp">=</span> <span class="n">real</span><span class="bp">.</span><span class="n">sqrt</span> <span class="o">(</span><span class="n">m</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="err">•</span> <span class="n">w</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">hv</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">dsimp</span> <span class="o">[</span><span class="n">g</span><span class="o">],</span>
+  <span class="n">erw</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">f_squared</span><span class="o">],</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">smul_add</span><span class="o">,</span> <span class="n">smul_smul</span><span class="o">,</span> <span class="n">real</span><span class="bp">.</span><span class="n">mul_self_sqrt</span> <span class="o">(</span><span class="k">by</span> <span class="n">exact_mod_cast</span> <span class="n">zero_le</span> <span class="bp">_</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">+</span> <span class="n">m</span><span class="o">),</span> <span class="n">add_smul</span><span class="o">,</span> <span class="n">one_smul</span><span class="o">],</span>
+  <span class="n">abel</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172415092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415092">Patrick Massot (Aug 03 2019 at 17:49)</a>:</h4>
+<p>Do you mind if I replace your proof by this one? I looks closer to the paper proof</p>
+
+<a name="172415163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415163">Jesse Michael Han (Aug 03 2019 at 17:50)</a>:</h4>
+<p>oh, i didn't see <code>f_squared</code></p>
+<p>yeah that looks much better</p>
+
+<a name="172415171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415171">Patrick Massot (Aug 03 2019 at 17:51)</a>:</h4>
+<p>Did you look at the pdf proof?</p>
+
+<a name="172415236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415236">Jesse Michael Han (Aug 03 2019 at 17:53)</a>:</h4>
+<p>yes, but i took a longer route in proving the left-side equality (because i essentially rederived <code>f_squared</code>)</p>
+
+<a name="172415282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415282">Patrick Massot (Aug 03 2019 at 17:54)</a>:</h4>
+<p>Anyway,  is anybody working on the next lemma?</p>
+
+<a name="172415284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415284">Patrick Massot (Aug 03 2019 at 17:54)</a>:</h4>
+<p>I mean <code>exists_eigenvalue</code></p>
+
+<a name="172415296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415296">Patrick Massot (Aug 03 2019 at 17:55)</a>:</h4>
+<p>I know nothing about dimension in mathlib, but it looks like a good opportunity to learn</p>
+
+<a name="172415346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172415346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172415346">Jesse Michael Han (Aug 03 2019 at 17:56)</a>:</h4>
+<p>i'm not working on it</p>
+<p>i was going to wait to hear back from reid</p>
+
 
 {% endraw %}
 
