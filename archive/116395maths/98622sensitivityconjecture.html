@@ -1197,6 +1197,58 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 
 <p>Where at least some of this stuff is in cardinals</p>
 
+<a name="172421297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172421297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172421297">Patrick Massot (Aug 03 2019 at 21:05)</a>:</h4>
+<p>I won't do more tonight.</p>
+
+<a name="172421556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172421556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172421556">Jesse Michael Han (Aug 03 2019 at 21:14)</a>:</h4>
+<p>OK, <code>leanpkg test</code> succeeds at my commit, but indeed times out after the merge. <del>i'll fix it</del> i fixed it</p>
+
+<a name="172421739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172421739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172421739">Chris Hughes (Aug 03 2019 at 21:21)</a>:</h4>
+<p>If you know everything is finite dimensional, you probably shouldn't be using cardinals. Everything about infinite dimension should be transferred to <code>findim</code> really, or you have to faff with coercions</p>
+
+<a name="172422087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422087">Patrick Massot (Aug 03 2019 at 21:32)</a>:</h4>
+<p>Chris, the problem is we seem to have a <em>lot</em> more  lemmas about <code>dim</code> than <code>findim</code></p>
+
+<a name="172422156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422156">Patrick Massot (Aug 03 2019 at 21:35)</a>:</h4>
+<p>For instance, do you have <a href="https://github.com/leanprover-community/mathlib/blob/a33315d594731876aa780bb12fc79b3e67198302/src/linear_algebra/dimension.lean#L275" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/a33315d594731876aa780bb12fc79b3e67198302/src/linear_algebra/dimension.lean#L275">dim_sup_add_dim_inf_eq</a> for <code>findim</code>?</p>
+
+<a name="172422196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422196">Patrick Massot (Aug 03 2019 at 21:36)</a>:</h4>
+<p>Or do you have a nice way to import such theorems into the finite dimensional world?</p>
+
+<a name="172422205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422205">Chris Hughes (Aug 03 2019 at 21:37)</a>:</h4>
+<p>I have virtually nothing. I guess when transfer comes along it will be easier. But they'll just be <code>simp [nat.cast_add]</code> or something.</p>
+
+<a name="172422257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422257">Patrick Massot (Aug 03 2019 at 21:39)</a>:</h4>
+<p>Was this mirroring discussed with <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>? It seems a bit sad to duplicate all this, but we really want to be able to use finite dimensions as natural numbers</p>
+
+<a name="172422308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422308">Mario Carneiro (Aug 03 2019 at 21:40)</a>:</h4>
+<p>most facts about numbers being equivalent to finite cardinals are proven</p>
+
+<a name="172422316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422316">Patrick Massot (Aug 03 2019 at 21:41)</a>:</h4>
+<p>what do you mean?</p>
+
+<a name="172422363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422363">Chris Hughes (Aug 03 2019 at 21:43)</a>:</h4>
+<p>Like cast is monotonic <code>etc</code>. Unfortunately, cardinals are not an ordered semiring, so the generic lemmas don't work.</p>
+
+<a name="172422368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422368">Patrick Massot (Aug 03 2019 at 21:43)</a>:</h4>
+<p>Are they tagged for use by <code>norm_cast</code>?</p>
+
+<a name="172422411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422411">Patrick Massot (Aug 03 2019 at 21:44)</a>:</h4>
+<p>For instance <code>attribute [elim_cast] cardinal.nat_cast_in</code> seems to be missing</p>
+
 
 {% endraw %}
 
