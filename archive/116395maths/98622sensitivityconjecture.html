@@ -1249,6 +1249,80 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172422411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172422411">Patrick Massot (Aug 03 2019 at 21:44)</a>:</h4>
 <p>For instance <code>attribute [elim_cast] cardinal.nat_cast_in</code> seems to be missing</p>
 
+<a name="172423082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423082">Jesse Michael Han (Aug 03 2019 at 22:06)</a>:</h4>
+<p>i think the version of <code>2^n &lt; omega</code> you stated is parsed by Lean as <code>monoid.pow</code>, which is more annoying to deal with</p>
+<p>but if you ensure it's the cardinal pow of casted nats, it's 2 lemmas away:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">cardinal</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="err">↑</span><span class="mi">2</span><span class="o">)</span> <span class="err">^</span> <span class="o">(</span><span class="err">↑</span><span class="n">n</span> <span class="o">:</span> <span class="n">cardinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="bp">&lt;</span> <span class="o">(</span><span class="n">cardinal</span><span class="bp">.</span><span class="n">omega</span> <span class="o">:</span> <span class="n">cardinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:=</span>
+ <span class="k">by</span> <span class="n">rw</span><span class="o">[</span><span class="bp">&lt;-</span><span class="n">cardinal</span><span class="bp">.</span><span class="n">nat_cast_pow</span><span class="o">]</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">nat_lt_omega</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="172423357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423357">Patrick Massot (Aug 03 2019 at 22:15)</a>:</h4>
+<p>Do we know that the restriction of linear_independent family to a subtype is linear_independent?</p>
+
+<a name="172423644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423644">Patrick Massot (Aug 03 2019 at 22:24)</a>:</h4>
+<p>Anyway, I said I would stop more than one hour ago, so I should really stop now</p>
+
+<a name="172423655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423655">Patrick Massot (Aug 03 2019 at 22:25)</a>:</h4>
+<p>Modulo the restriction thing, the proof of the dimension argument is reduced to these 2^n &lt; omega things</p>
+
+<a name="172423706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423706">Patrick Massot (Aug 03 2019 at 22:26)</a>:</h4>
+<p>see <a href="https://github.com/leanprover-community/lean-sensitivity/commit/af0e391f1d39d5448e3aff901f1dbe7eb10d3e32" target="_blank" title="https://github.com/leanprover-community/lean-sensitivity/commit/af0e391f1d39d5448e3aff901f1dbe7eb10d3e32">https://github.com/leanprover-community/lean-sensitivity/commit/af0e391f1d39d5448e3aff901f1dbe7eb10d3e32</a></p>
+
+<a name="172423709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423709">Jesse Michael Han (Aug 03 2019 at 22:26)</a>:</h4>
+<p>the <code>monoid.pow</code> is annoying because you have to do an induction, but it's not bad:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:</span> <span class="n">cardinal</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="err">↑</span><span class="n">n</span> <span class="o">:</span> <span class="n">cardinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:</span> <span class="n">cardinal</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">})</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+    <span class="o">{</span><span class="n">simp</span><span class="o">},</span>
+    <span class="o">{</span><span class="n">rw</span><span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_succ</span><span class="o">,</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">power_add</span><span class="o">,</span> <span class="bp">&lt;-</span><span class="n">ih</span><span class="o">,</span> <span class="n">cardinal</span><span class="bp">.</span><span class="n">power_one</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">],</span> <span class="n">refl</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>you can get the first one from this one, i believe</p>
+
+<a name="172423716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423716">Patrick Massot (Aug 03 2019 at 22:27)</a>:</h4>
+<p>I followed Chris's advice to get rid of <code>dim</code> as soon as I applied the lemmas</p>
+
+<a name="172423758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423758">Patrick Massot (Aug 03 2019 at 22:28)</a>:</h4>
+<p>Nice, feel free to remove those sorries and push. I'll go to bed</p>
+
+<a name="172423770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423770">Patrick Massot (Aug 03 2019 at 22:29)</a>:</h4>
+<p>Maybe you can even finish the whole thing while I sleep</p>
+
+<a name="172423823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423823">Patrick Massot (Aug 03 2019 at 22:30)</a>:</h4>
+<p>Or maybe <span class="user-mention" data-user-id="110032">@Reid Barton</span> will come back and cross the finish line for us</p>
+
+<a name="172423834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423834">Patrick Massot (Aug 03 2019 at 22:31)</a>:</h4>
+<p>Zulip says his local time is 6:30pm</p>
+
+<a name="172423836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423836">Patrick Massot (Aug 03 2019 at 22:31)</a>:</h4>
+<p>This leaves him the whole evening and night</p>
+
+<a name="172423839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423839">Patrick Massot (Aug 03 2019 at 22:31)</a>:</h4>
+<p>and same for you!</p>
+
+<a name="172423882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172423882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172423882">Patrick Massot (Aug 03 2019 at 22:32)</a>:</h4>
+<p>Have fun!</p>
+
 
 {% endraw %}
 

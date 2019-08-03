@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (41 messages, latest: Aug 03 2019 at 20:55)
+* [What is a parent structure?](26604Whatisaparentstructure.html) (6 messages, latest: Aug 03 2019 at 22:05)
 
-* [What is a parent structure?](26604Whatisaparentstructure.html) (5 messages, latest: Aug 03 2019 at 19:16)
+* [algebraic closure](74840algebraicclosure.html) (41 messages, latest: Aug 03 2019 at 20:55)
 
 * [fintype.card](33192fintypecard.html) (7 messages, latest: Aug 02 2019 at 19:57)
 
