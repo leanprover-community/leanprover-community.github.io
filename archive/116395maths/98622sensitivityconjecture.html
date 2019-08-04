@@ -1328,6 +1328,38 @@ def tuple (x : α) (v : α → (fin n → α) → β) : (fin (n+1) → α) → �
 <p>As a spectator, I was looking around and found (via Terry Tao's blog post) this interpretation <a href="https://arxiv.org/abs/1907.11175" target="_blank" title="https://arxiv.org/abs/1907.11175">https://arxiv.org/abs/1907.11175</a><br>
 namely, the <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mn>2</mn><mi>n</mi></msup></mrow><annotation encoding="application/x-tex">2^n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.664392em;vertical-align:0em;"></span><span class="mord"><span class="mord">2</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span></span></span></span>-dimensional space ought to be the exterior algebra (or Clifford algebra) of an <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>n</mi></mrow><annotation encoding="application/x-tex">n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault">n</span></span></span></span>-dimensional vector space.</p>
 
+<a name="172464141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464141">Jesse Michael Han (Aug 04 2019 at 21:07)</a>:</h4>
+<p>i'm trying to import <code>analysis.normed_space.basic</code> to use the triangle inequality, but this causes Lean on both my machines to start complaining about "equation compiler failed to generate bytecode for <code>e._main</code>", and something not being a <code>rfl</code> lemma, etc. the errors appear iff i have that import.</p>
+<p>does anyone know why this would happen?</p>
+
+<a name="172464303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464303">Kevin Buzzard (Aug 04 2019 at 21:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>equation compiler failed to generate bytecode for &#39;e._main&#39;
+nested exception message:
+code generation failed, VM does not have code for &#39;real.normed_field&#39;
+</pre></div>
+
+<a name="172464431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464431">Kevin Buzzard (Aug 04 2019 at 21:16)</a>:</h4>
+<p>The entire file <code>analysis.normed_space.basic</code> is marked <code>noncomputable</code> so maybe it's no surprise the VM doesn't have code for <code>real.normed_field</code></p>
+
+<a name="172464444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464444">Kevin Buzzard (Aug 04 2019 at 21:17)</a>:</h4>
+<p>If you mark <code>e</code> noncomputable then most of the errors go away</p>
+
+<a name="172464492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464492">Jesse Michael Han (Aug 04 2019 at 21:19)</a>:</h4>
+<p>indeed, but i was alarmed that previous proofs which were <code>by refl</code> were somehow no longer so after adding <code>noncomputable</code></p>
+
+<a name="172464493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464493">Jesse Michael Han (Aug 04 2019 at 21:19)</a>:</h4>
+<p>but that error can be fixed by changing <code>rfl</code> to <code>by rw e</code>...</p>
+
+<a name="172464539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172464539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172464539">Kevin Buzzard (Aug 04 2019 at 21:20)</a>:</h4>
+<p>you golfed me, I just found <code>by unfold e</code> :-)</p>
+
 
 {% endraw %}
 
