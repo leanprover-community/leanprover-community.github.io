@@ -62,6 +62,45 @@ permalink: archive/116395maths/35255bundlingsubmonoids.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172495182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172495182">Chris Hughes (Aug 05 2019 at 10:59)</a>:</h4>
 <p>Good docs.</p>
 
+<a name="172507663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172507663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172507663">Kevin Buzzard (Aug 05 2019 at 14:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">in_closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">M</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">basic</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">in_closure</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">mul</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">M</span><span class="o">}</span> <span class="o">:</span> <span class="n">in_closure</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">in_closure</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">in_closure</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">closure</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">submonoid</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">carrier</span> <span class="o">:=</span> <span class="n">in_closure</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">one_mem&#39;</span> <span class="o">:=</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">one</span> <span class="n">s</span><span class="o">,</span>
+  <span class="n">mul_mem&#39;</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="n">in_closure</span><span class="bp">.</span><span class="n">mul</span><span class="o">}</span>
+</pre></div>
+
+
+<p>There are two ways to do monoid closure of a subset. One is this inductive prop way, and the other is just taking the Inf of all the submonoids containing s. Should both be in mathlib? If not, which one?</p>
+
+<a name="172507972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172507972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172507972">Chris Hughes (Aug 05 2019 at 14:20)</a>:</h4>
+<p>It doesn't matter so long as you prove they're equivalent. You definitely want to define the recursor if you use the Inf definition.</p>
+
+<a name="172507993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172507993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172507993">Johan Commelin (Aug 05 2019 at 14:21)</a>:</h4>
+<p>Does it matter? The API should make sure that the user can not find out what the definition is (-;</p>
+
+<a name="172508024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172508024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172508024">Kevin Buzzard (Aug 05 2019 at 14:21)</a>:</h4>
+<p>I don't know if it matters. I just noted that for submonoids we had the inductive prop and for submodules we had the Inf</p>
+
+<a name="172508114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172508114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172508114">Kevin Buzzard (Aug 05 2019 at 14:22)</a>:</h4>
+<blockquote>
+<p>Does it matter? The API should make sure that the user can not find out what the definition is (-;</p>
+</blockquote>
+<p>Oh right! I'll go back and mark everything as irreducible :-)</p>
+
+<a name="172508177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172508177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172508177">Johan Commelin (Aug 05 2019 at 14:23)</a>:</h4>
+<p>I wouldn't mind if mathlib would experiment more with this (-;</p>
+
 
 {% endraw %}
 

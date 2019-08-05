@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [missing transitivity tags](04612missingtransitivitytags.html) (1 message, latest: Aug 05 2019 at 14:54)
+
 * [iff eq cancel left](53213iffeqcancelleft.html) (14 messages, latest: Aug 05 2019 at 11:42)
 
 * [What is a parent structure?](26604Whatisaparentstructure.html) (6 messages, latest: Aug 03 2019 at 22:05)
