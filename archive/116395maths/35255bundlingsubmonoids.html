@@ -1,0 +1,68 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/35255bundlingsubmonoids.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html">bundling submonoids</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172494027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494027">Kevin Buzzard (Aug 05 2019 at 10:33)</a>:</h4>
+<p>I've embarked on a refactor changing <code>is_submonoid</code> to <code>submonoid</code>. Do people have opinions about whether we should have</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_le</span> <span class="o">(</span><span class="n">submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">S</span> <span class="n">T</span><span class="o">,</span> <span class="n">S</span><span class="bp">.</span><span class="n">carrier</span> <span class="err">⊆</span> <span class="n">T</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_subset</span> <span class="o">(</span><span class="n">submonoid</span> <span class="n">M</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">S</span> <span class="n">T</span><span class="o">,</span> <span class="n">S</span><span class="bp">.</span><span class="n">carrier</span> <span class="err">⊆</span> <span class="n">T</span><span class="bp">.</span><span class="n">carrier</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>or both?</p>
+
+<a name="172494452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494452">Chris Hughes (Aug 05 2019 at 10:42)</a>:</h4>
+<p><code>le</code></p>
+
+<a name="172494457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494457">Kevin Buzzard (Aug 05 2019 at 10:42)</a>:</h4>
+<p>what have you become, Hughes?</p>
+
+<a name="172494465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494465">Chris Hughes (Aug 05 2019 at 10:43)</a>:</h4>
+<p>Also, we shouldn't have <code>subset</code> for sets, just <code>le</code></p>
+
+<a name="172494474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494474">Kevin Buzzard (Aug 05 2019 at 10:43)</a>:</h4>
+<p>Oh wow!</p>
+
+<a name="172494481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494481">Kevin Buzzard (Aug 05 2019 at 10:43)</a>:</h4>
+<p>Having learnt something about lattices, I am beginning to understand this point of view.</p>
+
+<a name="172494525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494525">Kevin Buzzard (Aug 05 2019 at 10:44)</a>:</h4>
+<p>One might wonder about a "mathematician's interface" to Lean though.</p>
+
+<a name="172494706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494706">Chris Hughes (Aug 05 2019 at 10:48)</a>:</h4>
+<p>I think it's almost always easier to learn some slightly different notation, than to force Lean into doing something that doesn't work very well in Lean. It's really not that hard to use <code>le</code> instead of <code>subset</code>.</p>
+
+<a name="172494721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172494721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172494721">Kevin Buzzard (Aug 05 2019 at 10:49)</a>:</h4>
+<p>I agree. But I am currently being an "engineer", editing mathlib. What about the undergraduate mathematician who doesn't care about the details but wants the interface that they expect?</p>
+
+<a name="172495182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/172495182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#172495182">Chris Hughes (Aug 05 2019 at 10:59)</a>:</h4>
+<p>Good docs.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
