@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (185 messages, latest: Aug 05 2019 at 20:43)
+
 * [contrapose](82079contrapose.html) (16 messages, latest: Aug 05 2019 at 19:44)
 
 * [missing transitivity tags](04612missingtransitivitytags.html) (2 messages, latest: Aug 05 2019 at 15:45)
@@ -102,8 +104,6 @@ permalink: archive/113488general/index.html
 * [user_attribute.cache_cfg](12932userattributecachecfg.html) (7 messages, latest: Jul 22 2019 at 21:39)
 
 * [github 500s](86284github500s.html) (2 messages, latest: Jul 22 2019 at 15:53)
-
-* [Lean in the wild](43625Leaninthewild.html) (184 messages, latest: Jul 22 2019 at 10:57)
 
 * [removing decidability instances from polynomials](22370removingdecidabilityinstancesfrompolynomials.html) (15 messages, latest: Jul 22 2019 at 02:13)
 
