@@ -23,6 +23,54 @@ permalink: archive/113488general/53213iffeqcancelleft.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172486715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172486715">Kevin Buzzard (Aug 05 2019 at 08:14)</a>:</h4>
 <p>Does <code>simp [h]</code> do it? If so you could look and see how</p>
 
+<a name="172496005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172496005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172496005">Chris Hughes (Aug 05 2019 at 11:14)</a>:</h4>
+<p><code>rw h</code> does it.</p>
+
+<a name="172496367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172496367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172496367">Kevin Buzzard (Aug 05 2019 at 11:21)</a>:</h4>
+<p>yeah but that doesn't tell us if it's in the library :-)</p>
+
+<a name="172496418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172496418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172496418">Kevin Buzzard (Aug 05 2019 at 11:22)</a>:</h4>
+<p>It looks like it should be in equiv, it follows from symm and trans</p>
+
+<a name="172496984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172496984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172496984">Chris Hughes (Aug 05 2019 at 11:32)</a>:</h4>
+<p>Why would it be in the library when it's one <code>rw</code>?</p>
+
+<a name="172497134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497134">Johan Commelin (Aug 05 2019 at 11:35)</a>:</h4>
+<p>Because you might want to <code>apply</code> it</p>
+
+<a name="172497193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497193">Johan Commelin (Aug 05 2019 at 11:36)</a>:</h4>
+<p>If I have <code>complicated_foo = 1 ↔ complicated_bar = 1</code>...</p>
+
+<a name="172497270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497270">Chris Hughes (Aug 05 2019 at 11:37)</a>:</h4>
+<p>I would prefer <code>suffices</code> in that situation. More readable.</p>
+
+<a name="172497375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497375">Kevin Buzzard (Aug 05 2019 at 11:39)</a>:</h4>
+<p>This from the man who thinks <code>le</code> is more readable than <code>subset</code> ;-)</p>
+
+<a name="172497386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497386">Johan Commelin (Aug 05 2019 at 11:39)</a>:</h4>
+<p>Sometimes that would mean adding 15 type ascriptions while telling Lean what suffices.</p>
+
+<a name="172497451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497451">Johan Commelin (Aug 05 2019 at 11:40)</a>:</h4>
+<p>And <code>complicated_foo = 1</code> suddenly becomes <code>(very : complicated) (why : am_I_writing_this) (horrible : long_goal) foo = 1</code></p>
+
+<a name="172497499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497499">Reid Barton (Aug 05 2019 at 11:41)</a>:</h4>
+<p>It would be nice if you could use <code>congr</code> to take care of the iff</p>
+
+<a name="172497560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/iff%20eq%20cancel%20left/near/172497560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53213iffeqcancelleft.html#172497560">Chris Hughes (Aug 05 2019 at 11:42)</a>:</h4>
+<p>How about <code>apply iff_of_eq (congr_arg _ h)</code></p>
+
 
 {% endraw %}
 

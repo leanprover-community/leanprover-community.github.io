@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling submonoids](35255bundlingsubmonoids.html) (10 messages, latest: Aug 05 2019 at 10:59)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (313 messages, latest: Aug 05 2019 at 11:47)
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (312 messages, latest: Aug 05 2019 at 10:33)
+* [bundling submonoids](35255bundlingsubmonoids.html) (10 messages, latest: Aug 05 2019 at 10:59)
 
 * [IMO2019](14898IMO2019.html) (63 messages, latest: Aug 02 2019 at 23:07)
 
