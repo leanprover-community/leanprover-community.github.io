@@ -1715,6 +1715,139 @@ code generation failed, VM does not have code for &#39;real.normed_field&#39;
 </blockquote>
 <p>I noticed it was very slow, but wasn't sure whether it was because I'm using my laptop. Anyway, I was doing the usual sorry dance (every <code>have</code> that is proved is replaced by a commented out proof and sorry).</p>
 
+<a name="172502139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502139">Patrick Massot (Aug 05 2019 at 13:00)</a>:</h4>
+<p>I'd love to help refactoring but I'm on beach duty</p>
+
+<a name="172502349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502349">Reid Barton (Aug 05 2019 at 13:03)</a>:</h4>
+<p>I found out how to increase the default memory limit for lean in emacs, so now I can load the whole file again</p>
+
+<a name="172502395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502395">Johan Commelin (Aug 05 2019 at 13:04)</a>:</h4>
+<p>Why does Lean not understand what I mean when I write</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">RQ_equiv_V</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">ℝ</span><span class="o">)</span> <span class="err">≃ₗ</span><span class="o">[</span><span class="n">ℝ</span><span class="o">]</span> <span class="n">V</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="bp">_</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="172502442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502442">Johan Commelin (Aug 05 2019 at 13:04)</a>:</h4>
+<p>It takes ages to parse/elaborate/tc this</p>
+
+<a name="172502469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502469">Johan Commelin (Aug 05 2019 at 13:04)</a>:</h4>
+<p>Result: 4 deterministic timeouts</p>
+
+<a name="172502491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502491">Rob Lewis (Aug 05 2019 at 13:04)</a>:</h4>
+<p>Does adding this before help?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Vn_module</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">module</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">acg</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">add_comm_semigroup</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">acm</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">hsr</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="n">def</span> <span class="n">hav</span> <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">100000</span><span class="o">]</span> <span class="n">acg</span> <span class="n">acm</span> <span class="n">hsr</span> <span class="n">hav</span> <span class="n">Vn_module</span>
+</pre></div>
+
+<a name="172502513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502513">Rob Lewis (Aug 05 2019 at 13:05)</a>:</h4>
+<p>I'm timing right now, but it feels like a very significant speedup on the whole file.</p>
+
+<a name="172502538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502538">Rob Lewis (Aug 05 2019 at 13:05)</a>:</h4>
+<p>Yeah, those short circuits reduce the compile time by more than 50%.</p>
+
+<a name="172502547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502547">Johan Commelin (Aug 05 2019 at 13:05)</a>:</h4>
+<p>Doesn't help for this thing <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="172502615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502615">Johan Commelin (Aug 05 2019 at 13:06)</a>:</h4>
+<p>Btw, should we even use real numbers?</p>
+
+<a name="172502635"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502635" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502635">Johan Commelin (Aug 05 2019 at 13:06)</a>:</h4>
+<p>For this problem <code>nat.sqrt</code> is just as good as <code>real.sqrt</code>, isn't it?</p>
+
+<a name="172502671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502671">Johan Commelin (Aug 05 2019 at 13:07)</a>:</h4>
+<p>So we could do the whole thing with <code>ℤ</code>-modules</p>
+
+<a name="172502701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502701">Johan Commelin (Aug 05 2019 at 13:07)</a>:</h4>
+<p>Anyway, I don't mind using <code>real</code>.</p>
+
+<a name="172502793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172502793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172502793">Johan Commelin (Aug 05 2019 at 13:08)</a>:</h4>
+<p>Without this <code>RQ_equiv_V</code> I don't think we can get very far with "transfer"-like techniques.</p>
+
+<a name="172503971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172503971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172503971">Johan Commelin (Aug 05 2019 at 13:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> Have your problems gone away?</p>
+
+<a name="172503985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172503985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172503985">Reid Barton (Aug 05 2019 at 13:25)</a>:</h4>
+<p>Some of them</p>
+
+<a name="172504136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504136">Rob Lewis (Aug 05 2019 at 13:27)</a>:</h4>
+<p>Do you have local changes that are causing this? It compiles with <code>-T20000</code> for me, so there shouldn't be any memory issues.</p>
+
+<a name="172504285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504285">Jesse Michael Han (Aug 05 2019 at 13:29)</a>:</h4>
+<blockquote>
+<p>I don't understand how anyone could have written any of this interactively.</p>
+</blockquote>
+<p>in the case of <code>degree_theorem</code>, very painfully...</p>
+<p>what is this "insert no-op code" magic? do i put a <code>.</code> or <code>run_cmd tactic.skip</code> above the current declaration i'm working on to stop recompilation of previous theorems?</p>
+
+<a name="172504317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504317">Rob Lewis (Aug 05 2019 at 13:29)</a>:</h4>
+<p>The only suspicious thing I see in the profiling is that <code>simp</code> is spending a long time in <code>tactic.join_user_simp_lemmas</code>.</p>
+
+<a name="172504381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504381">Johan Commelin (Aug 05 2019 at 13:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> Yes. <code>.</code> is gold.</p>
+
+<a name="172504848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504848">Reid Barton (Aug 05 2019 at 13:37)</a>:</h4>
+<p>I used to have some local changes but I still had problems when I got rid of them</p>
+
+<a name="172504853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504853">Reid Barton (Aug 05 2019 at 13:37)</a>:</h4>
+<p>Is the default memory limit different in VS code maybe?</p>
+
+<a name="172504866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504866">Kevin Buzzard (Aug 05 2019 at 13:38)</a>:</h4>
+<p>It's 100000 in VS Code I believe</p>
+
+<a name="172504922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172504922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172504922">Kevin Buzzard (Aug 05 2019 at 13:38)</a>:</h4>
+<p>The T50000 challenge was what happened when I halved it</p>
+
+<a name="172505257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172505257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172505257">Reid Barton (Aug 05 2019 at 13:44)</a>:</h4>
+<p>That's the "time" limit I thought</p>
+
+<a name="172505325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172505325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172505325">Kevin Buzzard (Aug 05 2019 at 13:44)</a>:</h4>
+<p>oh apologies. Memory limit is...</p>
+
+<a name="172505346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172505346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172505346">Kevin Buzzard (Aug 05 2019 at 13:45)</a>:</h4>
+<p>4096 megs</p>
+
+<a name="172505416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172505416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172505416">Reid Barton (Aug 05 2019 at 13:46)</a>:</h4>
+<p>Ah okay, that explains some things. In emacs it's 1024 megs</p>
+
+<a name="172505851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172505851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172505851">Jesse Michael Han (Aug 05 2019 at 13:52)</a>:</h4>
+<p>looks like something we should patch in the community version of <code>lean-mode</code></p>
+<p>4096 megs and constantly swapping</p>
+
 
 {% endraw %}
 
