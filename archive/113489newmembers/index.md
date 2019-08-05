@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1320 messages, latest: Aug 05 2019 at 16:43)
+
 * [defining wff](03976definingwff.html) (9 messages, latest: Aug 03 2019 at 01:24)
 
 * [inner product in a normed space](30535innerproductinanormedspace.html) (3 messages, latest: Aug 01 2019 at 11:24)
@@ -28,8 +30,6 @@ permalink: archive/113489newmembers/index.html
 * [Having trouble with infi](39421Havingtroublewithinfi.html) (6 messages, latest: Jul 24 2019 at 07:55)
 
 * [weird interaction with namespace, parameter, and tactic](22569weirdinteractionwithnamespaceparameterandtactic.html) (12 messages, latest: Jul 24 2019 at 07:08)
-
-* [noob question(s)](52075noobquestions.html) (1295 messages, latest: Jul 22 2019 at 16:53)
 
 * [Help with a weird lambda](20899Helpwithaweirdlambda.html) (25 messages, latest: Jul 22 2019 at 09:14)
 
