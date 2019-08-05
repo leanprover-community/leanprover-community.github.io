@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contrapose](82079contrapose.html) (4 messages, latest: Aug 05 2019 at 18:57)
+* [contrapose](82079contrapose.html) (16 messages, latest: Aug 05 2019 at 19:44)
 
 * [missing transitivity tags](04612missingtransitivitytags.html) (2 messages, latest: Aug 05 2019 at 15:45)
 
