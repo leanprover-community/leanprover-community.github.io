@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [IMO2019](14898IMO2019.html) (68 messages, latest: Aug 06 2019 at 18:25)
+* [IMO2019](14898IMO2019.html) (69 messages, latest: Aug 06 2019 at 19:32)
 
 * [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (33 messages, latest: Aug 06 2019 at 17:27)
 

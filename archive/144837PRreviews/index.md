@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1292 order of power series](790351292orderofpowerseries.html) (1 message, latest: Aug 06 2019 at 07:05)
+* [#1295 archive](035751295archive.html) (14 messages, latest: Aug 06 2019 at 19:58)
 
-* [#1295 archive](035751295archive.html) (12 messages, latest: Aug 03 2019 at 17:39)
+* [#1292 order of power series](790351292orderofpowerseries.html) (1 message, latest: Aug 06 2019 at 07:05)
 
 * [#1269 apply symmetry on assumptions](912091269applysymmetryonassumptions.html) (1 message, latest: Jul 27 2019 at 16:39)
 
