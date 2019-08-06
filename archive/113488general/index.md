@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [norm_num on fields](29952normnumonfields.html) (1 message, latest: Aug 06 2019 at 09:22)
+* [Ring tactic](18025Ringtactic.html) (5 messages, latest: Aug 06 2019 at 10:04)
 
-* [Ring tactic](18025Ringtactic.html) (4 messages, latest: Aug 06 2019 at 08:59)
+* [norm_num on fields](29952normnumonfields.html) (1 message, latest: Aug 06 2019 at 09:22)
 
 * [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (2 messages, latest: Aug 06 2019 at 08:28)
 
