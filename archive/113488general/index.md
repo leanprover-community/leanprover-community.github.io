@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (6 messages, latest: Aug 06 2019 at 14:54)
+* [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (7 messages, latest: Aug 06 2019 at 15:05)
 
 * [Ring tactic](18025Ringtactic.html) (5 messages, latest: Aug 06 2019 at 10:04)
 
