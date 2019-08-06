@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [100 theorems](37529100theorems.html) (94 messages, latest: Aug 06 2019 at 21:40)
+
 * [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (7 messages, latest: Aug 06 2019 at 15:05)
 
 * [Ring tactic](18025Ringtactic.html) (5 messages, latest: Aug 06 2019 at 10:04)
@@ -230,8 +232,6 @@ permalink: archive/113488general/index.html
 * [big CPU](73403bigCPU.html) (4 messages, latest: Jul 02 2019 at 12:54)
 
 * [monoid.mul appearing instead of has_mul.mul](00892monoidmulappearinginsteadofhasmulmul.html) (2 messages, latest: Jul 02 2019 at 11:03)
-
-* [100 theorems](37529100theorems.html) (93 messages, latest: Jul 01 2019 at 20:48)
 
 * [fin.find](52493finfind.html) (13 messages, latest: Jul 01 2019 at 12:32)
 
