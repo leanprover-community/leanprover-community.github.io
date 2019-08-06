@@ -2173,6 +2173,68 @@ code generation failed, VM does not have code for &#39;real.normed_field&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172536361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172536361">Floris van Doorn (Aug 05 2019 at 20:41)</a>:</h4>
 <p>(deleted - wrong topic)</p>
 
+<a name="172548535"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548535" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548535">Patrick Massot (Aug 05 2019 at 23:53)</a>:</h4>
+<p>Who could try to add the following lines after the definition of epsilon, and see if the commented lines timeout?</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span> <span class="n">n</span><span class="o">)</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="err">Ψ</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">equiv_fun_on_fintype</span><span class="bp">.</span><span class="n">inv_fun</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">This following fails with `by apply_instance`, but defining it doesn&#39;t seem to help.</span>
+<span class="cm">instance tata : vector_space ℝ (Q n →₀ ℝ) :=</span>
+<span class="cm">{..finsupp.module (Q n) ℝ, .. }</span>
+<span class="cm"> -/</span>
+
+<span class="n">def</span> <span class="n">coeffs</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span> <span class="bp">→</span><span class="err">₀</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="err">Ψ</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">,</span> <span class="n">ε</span> <span class="n">p</span> <span class="n">v</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">somme</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:=</span> <span class="o">(</span><span class="n">finsupp</span><span class="bp">.</span><span class="n">total</span> <span class="o">(</span><span class="n">Q</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="n">ℝ</span> <span class="n">e</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">coeffs</span> <span class="n">v</span> <span class="c1">-- coeffs v : Q n →₀ ℝ</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">somme</span> <span class="n">n</span>  <span class="c1">-- somme : (Q n →₀ ℝ) →ₗ[ℝ] V n</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">linear_map</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">somme</span>  <span class="c1">-- somme.to_fun : (Q ?M_1 →₀ ℝ) → V ?M_1</span>
+
+<span class="c1">-- The following lines timeout</span>
+<span class="c1">--#check linear_map.to_fun somme (coeffs v)</span>
+<span class="c1">--#check linear_map.to_fun (@somme n)</span>
+<span class="c1">--#check (Q n →₀ ℝ) →ₗ[ℝ] V n</span>
+</pre></div>
+
+<a name="172548714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548714">Patrick Massot (Aug 05 2019 at 23:57)</a>:</h4>
+<p>Independently of this, I still think that the way we prove <code>e</code> is a basis is not optimal. What we really care about is the decomposition of vectors <code>v : V n</code> as a sum over <code>p</code> in <code>Q n</code> of <code>(ε p v) • (e p)</code> (the issues above were met while trying to write down this formula using the linear algebra library). In our current proof of the main theorem, this formula is somewhat hidden, because we use the fact <code>e</code> is  a basis to get a mysterious sequence of coefficients unrelated to <code>ε</code>. One improvement could be to prove <code>ε</code> is equal to <code>dual_basis e</code> and use stuff in <code>dual.lean</code>. But we could just as well directly prove the decomposition formula</p>
+
+<a name="172548715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548715">Patrick Massot (Aug 05 2019 at 23:57)</a>:</h4>
+<p>The key is:</p>
+
+<a name="172548728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548728">Patrick Massot (Aug 05 2019 at 23:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">epsilon_total</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">v</span> <span class="o">:</span> <span class="n">V</span> <span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">p</span> <span class="o">:</span> <span class="n">Q</span> <span class="n">n</span><span class="o">,</span> <span class="o">(</span><span class="n">ε</span> <span class="n">p</span><span class="o">)</span> <span class="n">v</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">v</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">dsimp</span> <span class="o">[</span><span class="n">ε</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">tt</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">v</span> <span class="k">with</span> <span class="n">v₁</span> <span class="n">v₂</span><span class="o">,</span>
+    <span class="n">ext</span> <span class="bp">;</span> <span class="n">change</span> <span class="bp">_</span> <span class="bp">=</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">V</span> <span class="n">n</span><span class="o">)</span> <span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[]</span> <span class="bp">;</span> <span class="n">apply</span> <span class="n">ih</span> <span class="bp">;</span> <span class="n">intro</span> <span class="n">p</span> <span class="bp">;</span>
+    <span class="o">[</span> <span class="k">let</span> <span class="n">q</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">tt</span> <span class="k">else</span> <span class="n">p</span> <span class="o">(</span><span class="n">i</span><span class="bp">.</span><span class="n">pred</span> <span class="n">h</span><span class="o">),</span>
+      <span class="k">let</span> <span class="n">q</span> <span class="o">:</span> <span class="n">Q</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">i</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="n">ff</span> <span class="k">else</span> <span class="n">p</span> <span class="o">(</span><span class="n">i</span><span class="bp">.</span><span class="n">pred</span> <span class="n">h</span><span class="o">)],</span>
+    <span class="n">all_goals</span> <span class="o">{</span>
+      <span class="n">specialize</span> <span class="n">h</span> <span class="n">q</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">ε</span><span class="o">,</span> <span class="k">show</span> <span class="n">q</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">tt</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">cond_tt</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span> <span class="bp">&lt;|&gt;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ε</span><span class="o">,</span> <span class="k">show</span> <span class="n">q</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">ff</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span> <span class="n">cond_ff</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">rwa</span> <span class="k">show</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">q</span> <span class="err">∘</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span><span class="o">,</span> <span class="k">by</span> <span class="o">{</span> <span class="n">ext</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">q</span><span class="o">,</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ_ne_zero</span><span class="o">]</span> <span class="o">}</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172548788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548788">Patrick Massot (Aug 05 2019 at 23:58)</a>:</h4>
+<p>Which we can apply to a vector minus its intended decomposition (using the duality lemma).</p>
+
+<a name="172548821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548821">Patrick Massot (Aug 05 2019 at 23:59)</a>:</h4>
+<p>If we insist on keeping that <code>e</code> is a basis then the above lemma (together with the duality lemma) reproves it</p>
+
+<a name="172548827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/172548827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#172548827">Patrick Massot (Aug 05 2019 at 23:59)</a>:</h4>
+<p>(this is all assuming we can use lemmas about sums over finsupp...)</p>
+
 
 {% endraw %}
 
