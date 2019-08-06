@@ -9,15 +9,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (486 messages, latest: Aug 06 2019 at 16:35)
+* [IMO2019](14898IMO2019.html) (66 messages, latest: Aug 06 2019 at 17:33)
 
-* [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (15 messages, latest: Aug 06 2019 at 15:28)
+* [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (33 messages, latest: Aug 06 2019 at 17:27)
+
+* [sensitivity conjecture](98622sensitivityconjecture.html) (486 messages, latest: Aug 06 2019 at 16:35)
 
 * [bundling normal subgroups](38055bundlingnormalsubgroups.html) (20 messages, latest: Aug 06 2019 at 15:04)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (16 messages, latest: Aug 05 2019 at 14:23)
-
-* [IMO2019](14898IMO2019.html) (63 messages, latest: Aug 02 2019 at 23:07)
 
 * [number fields in lean?](68407numberfieldsinlean.html) (24 messages, latest: Aug 02 2019 at 09:57)
 

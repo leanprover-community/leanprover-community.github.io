@@ -77,6 +77,81 @@ permalink: archive/116395maths/17166instancesemiringsemiringwithzero.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172599165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172599165">Kevin Buzzard (Aug 06 2019 at 15:28)</a>:</h4>
 <p>The fact that the instance is not used in mathlib is evidence that the instance is useless</p>
 
+<a name="172608841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172608841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172608841">Mario Carneiro (Aug 06 2019 at 17:20)</a>:</h4>
+<p>The instance isn't used because no one cares about the theory of semirings</p>
+
+<a name="172608900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172608900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172608900">Kevin Buzzard (Aug 06 2019 at 17:21)</a>:</h4>
+<p>But could it be the case that it leads type class inference the wrong way sometimes? If so then it should go</p>
+
+<a name="172609003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609003">Kevin Buzzard (Aug 06 2019 at 17:22)</a>:</h4>
+<blockquote>
+<p>The instance isn't used because no one cares about the theory of semirings</p>
+</blockquote>
+<p>I think this is too weak. People care about the theory of rings, and a semiring is a ring, but the instance isn't used anyway. The point is that people don't care about adding 0 to something which already has a 0.</p>
+
+<a name="172609044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609044">Mario Carneiro (Aug 06 2019 at 17:22)</a>:</h4>
+<p>I don't disagree with this line of argument though. It shouldn't affect too much, unless you are inferring things on with_zero a lot - most types are not of the form <code>with_zero A</code> so it shouldn't lead typeclass significantly astray</p>
+
+<a name="172609156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609156">Mario Carneiro (Aug 06 2019 at 17:23)</a>:</h4>
+<p>It would be difficult and probably inadvisable to define a type operator that only adds a zero if there isn't already one there</p>
+
+<a name="172609181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609181">Kevin Buzzard (Aug 06 2019 at 17:23)</a>:</h4>
+<p>That is not the case for this instance though!</p>
+
+<a name="172609239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609239">Kevin Buzzard (Aug 06 2019 at 17:24)</a>:</h4>
+<p>It would be very easy to modify this instance so that it only added a zero if there isn't one already there.</p>
+
+<a name="172609246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609246">Mario Carneiro (Aug 06 2019 at 17:24)</a>:</h4>
+<p>it's easier to reason about an operator that always adds exactly one new element</p>
+
+<a name="172609251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609251">Kevin Buzzard (Aug 06 2019 at 17:24)</a>:</h4>
+<p>By deleting it.</p>
+
+<a name="172609335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609335">Mario Carneiro (Aug 06 2019 at 17:25)</a>:</h4>
+<p>The reason this instance exists is because it's completing the cartesian product of all concepts in mathlib interacting with all others</p>
+
+<a name="172609381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609381">Mario Carneiro (Aug 06 2019 at 17:25)</a>:</h4>
+<p>We think <code>with_zero A</code> is a useful operator, hence it exists, hence we need all applicable instances because users shouldn't need to define those themselves</p>
+
+<a name="172609434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609434">Kevin Buzzard (Aug 06 2019 at 17:26)</a>:</h4>
+<p>That would be the case if we were dealing with an object which was an add_comm_semigroup and a monoid, but that's not what a semiring is.</p>
+
+<a name="172609502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609502">Kevin Buzzard (Aug 06 2019 at 17:26)</a>:</h4>
+<p>What could concievably be useful is adding a zero to pnat, but I don't know what kind of an object pnat is. It's not a semiring :-/</p>
+
+<a name="172609510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609510">Mario Carneiro (Aug 06 2019 at 17:26)</a>:</h4>
+<p>Actually you need a distrib add_comm_semigroup monoid</p>
+
+<a name="172609536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609536">Kevin Buzzard (Aug 06 2019 at 17:27)</a>:</h4>
+<p>Like pnat!</p>
+
+<a name="172609549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609549">Kevin Buzzard (Aug 06 2019 at 17:27)</a>:</h4>
+<p><code>demisemiring</code>?</p>
+
+<a name="172609573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609573">Mario Carneiro (Aug 06 2019 at 17:27)</a>:</h4>
+<p>semirig?</p>
+
+<a name="172609597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/instance%20%5Bsemiring%20%CE%B1%5D%20%3A%20semiring%20%28with_zero%20%CE%B1%29/near/172609597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/17166instancesemiringsemiringwithzero.html#172609597">Mario Carneiro (Aug 06 2019 at 17:27)</a>:</h4>
+<p>you can't spell ring without z</p>
+
 
 {% endraw %}
 
