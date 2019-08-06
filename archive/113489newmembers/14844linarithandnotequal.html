@@ -1,0 +1,85 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/14844linarithandnotequal.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html">linarith and "not equal"</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172569296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172569296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172569296">Joe (Aug 06 2019 at 08:27)</a>:</h4>
+<p><code>linarith</code> works properly when the goal is of the form <code>¬ a = b</code>, but it will fail if the goal is <code>a ≠ b</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">foo1</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- succeed</span>
+
+<span class="kn">lemma</span> <span class="n">foo2</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- failed</span>
+</pre></div>
+
+
+<p>I think this can be fixed easily by adding a corresponding pattern to <code>get_contr_lemma_name</code>:</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="bp">`</span><span class="o">(</span><span class="err">%%</span><span class="n">a</span> <span class="bp">≠</span> <span class="err">%%</span><span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="bp">`</span><span class="n">not</span><span class="bp">.</span><span class="n">intro</span>
+</pre></div>
+
+<a name="172569361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172569361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172569361">Joe (Aug 06 2019 at 08:28)</a>:</h4>
+<p>However, if <code>a ≠ b</code> or <code>¬ a = b</code> are hypotheses, <code>linarith</code> will fail in both cases:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">bar1</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- failed</span>
+
+<span class="kn">lemma</span> <span class="n">bar2</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span> <span class="c1">-- failed</span>
+</pre></div>
+
+
+<p>I think I can add support for this, but I'm not sure if this is intended.</p>
+
+<a name="172569562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172569562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172569562">Joe (Aug 06 2019 at 08:31)</a>:</h4>
+<p>It will make <code>linarith</code> exponential, since  each <code>≠</code> will split into two goals. <span class="user-mention" data-user-id="110596">@Rob Lewis</span></p>
+
+<a name="172569903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172569903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172569903">Rob Lewis (Aug 06 2019 at 08:37)</a>:</h4>
+<p>Huh. Failing on <code>≠</code> goals is definitely an oversight, I'll fix that. Thanks for pointing that out!</p>
+
+<a name="172569926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172569926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172569926">Rob Lewis (Aug 06 2019 at 08:37)</a>:</h4>
+<p>Not using <code>≠</code> hypotheses is intentional. <code>linarith</code> shouldn't have that kind of exponential behavior.</p>
+
+<a name="172570226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172570226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172570226">Johan Commelin (Aug 06 2019 at 08:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Can  you explain why <code>bar2</code> in the example should fail?</p>
+
+<a name="172570279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172570279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172570279">Johan Commelin (Aug 06 2019 at 08:44)</a>:</h4>
+<p>I don't understand enough of the algorithm I guess.</p>
+
+<a name="172570291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172570291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172570291">Johan Commelin (Aug 06 2019 at 08:44)</a>:</h4>
+<p>Is it just that inequality in hypothesis is generally bad?</p>
+
+<a name="172570522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172570522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172570522">Joe (Aug 06 2019 at 08:49)</a>:</h4>
+<p>I think <code>linarith</code> proves <code>a ≠ b → goal</code> by proving <code>a &lt; b → goal</code> and <code>b &lt; a → goal</code>.</p>
+
+<a name="172570550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172570550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172570550">Rob Lewis (Aug 06 2019 at 08:49)</a>:</h4>
+<p>I think the algorithm can be adjusted to use <code>≠</code> hypotheses "natively," and this should probably be done at some point. But disequalities don't quite fit into the same framework as (in)equalities.</p>
+
+<a name="172570633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/linarith%20and%20%22not%20equal%22/near/172570633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14844linarithandnotequal.html#172570633">Rob Lewis (Aug 06 2019 at 08:50)</a>:</h4>
+<blockquote>
+<p>I think <code>linarith</code> proves <code>a ≠ b → goal</code> by proving <code>a &lt; b → goal</code> and <code>b &lt; a → goal</code>.</p>
+</blockquote>
+<p><code>linarith</code> doesn't prove this at all right now, but it's the "cheap" way to do it. Cheap in implementation time, not in runtime.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

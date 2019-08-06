@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [converting a `finset` to a `Type`](40496convertingafinsettoaType.html) (12 messages, latest: Aug 06 2019 at 07:41)
+* [Ring tactic](18025Ringtactic.html) (4 messages, latest: Aug 06 2019 at 08:59)
+
+* [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (2 messages, latest: Aug 06 2019 at 08:28)
+
+* [converting a `finset` to a `Type`](40496convertingafinsettoaType.html) (13 messages, latest: Aug 06 2019 at 08:04)
 
 * [Lean in the wild](43625Leaninthewild.html) (185 messages, latest: Aug 05 2019 at 20:43)
 

@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/18025Ringtactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/18025Ringtactic.html">Ring tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172570556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ring%20tactic/near/172570556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18025Ringtactic.html#172570556">Kevin Kappelmann (Aug 06 2019 at 08:50)</a>:</h4>
+<p>Hi, I am writing a tutorial for computations in Lean, and I was surprised that <code>ring</code> fails in this case:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">ring</span> <span class="c1">-- fails</span>
+
+<span class="c1">-- this works</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">rw</span> <span class="n">mul_add</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">add_mul</span><span class="o">,</span>
+<span class="n">rw</span> <span class="n">add_mul</span><span class="o">,</span>
+<span class="n">rw</span> <span class="err">←</span><span class="n">add_assoc</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is that something to expect or is that also surprising to someone else?</p>
+
+<a name="172570768"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ring%20tactic/near/172570768" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18025Ringtactic.html#172570768">Johan Commelin (Aug 06 2019 at 08:53)</a>:</h4>
+<p>Does it work for <code>comm_ring</code>?</p>
+
+<a name="172570773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ring%20tactic/near/172570773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18025Ringtactic.html#172570773">Johan Commelin (Aug 06 2019 at 08:53)</a>:</h4>
+<p>I think the ring tactic only works in the commutative case.</p>
+
+<a name="172571053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Ring%20tactic/near/172571053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18025Ringtactic.html#172571053">Kevin Kappelmann (Aug 06 2019 at 08:59)</a>:</h4>
+<p>Yep, it does work for <code>comm_ring</code>. In fact, <code>ring</code> already fails for this example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span> <span class="c1">-- fails</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">add_comm</span>
+</pre></div>
+
+
+<p>So I suppose you are right that <code>tactic.ring</code> is actually more like <code>tactic.comm_ring</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
