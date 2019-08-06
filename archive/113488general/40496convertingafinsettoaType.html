@@ -1,0 +1,80 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/40496convertingafinsettoaType.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html">converting a `finset` to a `Type`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172566084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566084">Scott Morrison (Aug 06 2019 at 07:24)</a>:</h4>
+<p>Is it possible to convert a <code>finset</code> into a type in an arbitrary (possibly smaller) universe, in the following sense:</p>
+<div class="codehilite"><pre><span></span>universes u v
+
+def finset.index_type {α : Type u} (s : finset α) : Type v := sorry
+def finset.index_equiv {α : Type u} (s : finset α) : s.index_type ≃ { a // a ∈ s } := sorry
+</pre></div>
+
+
+<p>If we replace the return type with <code>Type u</code> it is of course possible:</p>
+<div class="codehilite"><pre><span></span>def finset.index_type {α : Type u} (s : finset α) : Type u := { a // a ∈ s }
+def finset.index_equiv {α : Type u} (s : finset α) : s.index_type ≃ { a // a ∈ s } := by refl
+</pre></div>
+
+
+<p>But my intuition is that since we know <code>s</code> is finite, we should be able to change universes willy-nilly. Any ideas?</p>
+
+<a name="172566183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566183">Scott Morrison (Aug 06 2019 at 07:26)</a>:</h4>
+<p>I want to do something like define <code>index_type</code> as <code>fin n</code> for the appropriate <code>n</code>, but then ....  use <code>trunc</code> in some clever way to allow defining the equivalence.</p>
+
+<a name="172566213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566213">Johan Commelin (Aug 06 2019 at 07:27)</a>:</h4>
+<p>Can't you make an inductive type?</p>
+
+<a name="172566215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566215">Johan Commelin (Aug 06 2019 at 07:27)</a>:</h4>
+<p>Let me try</p>
+
+<a name="172566370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566370">Johan Commelin (Aug 06 2019 at 07:30)</a>:</h4>
+<p>Hmm, no, that will always land in <code>Type (max u v)</code> I guess</p>
+
+<a name="172566380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566380">Johan Commelin (Aug 06 2019 at 07:30)</a>:</h4>
+<p>So why don't you define it as <code>fin s.card</code>?</p>
+
+<a name="172566491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566491">Chris Hughes (Aug 06 2019 at 07:33)</a>:</h4>
+<p><code>fin s.card</code>?</p>
+
+<a name="172566581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566581">Johan Commelin (Aug 06 2019 at 07:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Should the equivalence be somehow "canonical"? Or do you just want to choose one and work with it?</p>
+
+<a name="172566784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566784">Johan Commelin (Aug 06 2019 at 07:39)</a>:</h4>
+<p>I guess, if you are allowed to choose a well ordering of <code>α</code> then it is possible.</p>
+
+<a name="172566791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566791">Johan Commelin (Aug 06 2019 at 07:39)</a>:</h4>
+<p>Otherwise I don't really see how to do this.</p>
+
+<a name="172566795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566795">Chris Hughes (Aug 06 2019 at 07:40)</a>:</h4>
+<p>It would be nice if it was computable. The defeq-ness might be handy</p>
+
+<a name="172566899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/converting%20a%20%60finset%60%20to%20a%20%60Type%60/near/172566899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40496convertingafinsettoaType.html#172566899">Chris Hughes (Aug 06 2019 at 07:41)</a>:</h4>
+<p><code>fintype.equiv_fin</code> will help to define the bijection for <code>s.card</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

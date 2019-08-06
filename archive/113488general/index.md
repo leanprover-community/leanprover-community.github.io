@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [converting a `finset` to a `Type`](40496convertingafinsettoaType.html) (12 messages, latest: Aug 06 2019 at 07:41)
+
 * [Lean in the wild](43625Leaninthewild.html) (185 messages, latest: Aug 05 2019 at 20:43)
 
 * [contrapose](82079contrapose.html) (16 messages, latest: Aug 05 2019 at 19:44)
