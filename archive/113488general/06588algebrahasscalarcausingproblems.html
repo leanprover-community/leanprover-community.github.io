@@ -26,6 +26,30 @@ permalink: archive/113488general/06588algebrahasscalarcausingproblems.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra.has_scalar%20causing%20problems/near/172569349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06588algebrahasscalarcausingproblems.html#172569349">Chris Hughes (Aug 06 2019 at 08:28)</a>:</h4>
 <p>I think perhaps it might be a good idea to split files up a bit more, to avoid too many imports. Every now and then, there's a lemma that doesn't belong anywhere, so an import gets added to a file. I personally wouldn't mind just making a new file for that lemma, if it means reducing unnecessary imports, which slow down type class inference.</p>
 
+<a name="172593456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra.has_scalar%20causing%20problems/near/172593456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06588algebrahasscalarcausingproblems.html#172593456">Floris van Doorn (Aug 06 2019 at 14:27)</a>:</h4>
+<p>I don't like the idea of having to be careful with imports because otherwise type class inference will fail. If type class inference fails because we have to many instances, we need to declare fewer instances. Your suggestion is also just postponing the problem: at some point we want to import enough files to cause a problem anyway.</p>
+
+<a name="172593565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra.has_scalar%20causing%20problems/near/172593565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06588algebrahasscalarcausingproblems.html#172593565">Floris van Doorn (Aug 06 2019 at 14:28)</a>:</h4>
+<p>I am generally happy to be careful with imports for other reasons (e.g. unnecessary recompilations after you change a basic file), but I don't like files with just 1 or 2 lemmas: it will also make it harder to find these lemmas.</p>
+
+<a name="172593886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra.has_scalar%20causing%20problems/near/172593886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06588algebrahasscalarcausingproblems.html#172593886">Floris van Doorn (Aug 06 2019 at 14:32)</a>:</h4>
+<p>As a concrete example, PR <a href="https://github.com/leanprover-community/mathlib/issues/1294" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1294">#1294</a> adds the lemma stating that the multiplicity of prime <code>p</code> in a finite product of numbers is the sum of the multiplicities. </p>
+<div class="codehilite"><pre><span></span>lemma finset.prod {β : Type*} [decidable_eq β] {p : α} (hp : prime p) (s : finset β) (f : β → α) :
+  multiplicity p (s.prod f) = s.sum (λ x, multiplicity p (f x))
+</pre></div>
+
+
+<p>Should that be in a file other than <code>multiplicity</code>, so that <code>multiplicity</code>doesn't have to import <code>big_operators</code>? I'm still quite often searching for lemmas in the old-fashioned way of scrolling (and <code>ctrl+F</code>-ing) through files, and it will make it harder to find that.</p>
+<p>I also added some other imports on <a href="https://github.com/leanprover-community/mathlib/issues/1294" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1294">#1294</a> for which I feel a lot less strongly about. Please review that PR with suggestions of how to do it otherwise.</p>
+
+<a name="172595989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebra.has_scalar%20causing%20problems/near/172595989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06588algebrahasscalarcausingproblems.html#172595989">Chris Hughes (Aug 06 2019 at 14:54)</a>:</h4>
+<p>That I'm okay with, since most of the stuff using prime numbers will also using big operators.</p>
+<p>Stuff like <code>ring_theory.algebra</code> importing tensor products, complex numbers, and multivariate polynomials, which are then imported by finite dimensional vector spaces is a bit much. I need all this just to prove <code>A * B = 1 -&gt; B * A = 1</code> for rational matrices.</p>
+
 
 {% endraw %}
 

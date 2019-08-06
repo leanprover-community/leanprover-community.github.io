@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (6 messages, latest: Aug 06 2019 at 13:58)
+* [bundling normal subgroups](38055bundlingnormalsubgroups.html) (10 messages, latest: Aug 06 2019 at 14:59)
 
-* [bundling normal subgroups](38055bundlingnormalsubgroups.html) (9 messages, latest: Aug 06 2019 at 13:50)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (454 messages, latest: Aug 06 2019 at 14:55)
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (441 messages, latest: Aug 06 2019 at 13:08)
+* [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (8 messages, latest: Aug 06 2019 at 14:35)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (16 messages, latest: Aug 05 2019 at 14:23)
 

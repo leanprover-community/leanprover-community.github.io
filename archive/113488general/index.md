@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (6 messages, latest: Aug 06 2019 at 14:54)
+
 * [Ring tactic](18025Ringtactic.html) (5 messages, latest: Aug 06 2019 at 10:04)
 
 * [norm_num on fields](29952normnumonfields.html) (1 message, latest: Aug 06 2019 at 09:22)
-
-* [algebra.has_scalar causing problems](06588algebrahasscalarcausingproblems.html) (2 messages, latest: Aug 06 2019 at 08:28)
 
 * [converting a `finset` to a `Type`](40496convertingafinsettoaType.html) (13 messages, latest: Aug 06 2019 at 08:04)
 
