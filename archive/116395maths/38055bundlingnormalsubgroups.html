@@ -19,6 +19,44 @@ permalink: archive/116395maths/38055bundlingnormalsubgroups.html
 <p>But we're venturing into quotients so we need the notion of a normal subgroup. If we also bundle these as <code>normal_subgroup' G</code> then we have the issue that a normal subgroup of G is now not a subgroup. We can put a coercion to subgroups, but then there's sometimes a coercion from subgroups to subsets, and we are ending up with double coercions and things just don't look good.</p>
 <p>Thinking about how to solve this made me realise that I don't really understand what's going on. Are we bundling subgroups because they just seem to work better? Is the idea that we bundled submodules and they worked really well? Is there an argument for making normal subgroups a typeclass on subgroups? This feels similar to making subgroups a typeclass on subsets  -- which is what the community decided to move away from. What are the disadvantages of letting normal subgroups be a typeclass on bundled subgroups?</p>
 
+<a name="172589063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589063">Kevin Buzzard (Aug 06 2019 at 13:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> do you have an opinion about this? Sorry to bother you.</p>
+
+<a name="172589463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589463">Chris Hughes (Aug 06 2019 at 13:46)</a>:</h4>
+<p>I think that probably bundling normal subgroups will be best. There'll be type class inference problems otherwise with quotient groups. A lot of these decisions depend on what happens in Lean4. Hopefully we'll have unification hints that work nicely.</p>
+
+<a name="172589529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589529">Kevin Buzzard (Aug 06 2019 at 13:46)</a>:</h4>
+<p>Then should there be coercions from normal subgroups to subgroups, and from subgroups to subsets, and from normal subgroups to subsets?</p>
+
+<a name="172589708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589708">Chris Hughes (Aug 06 2019 at 13:48)</a>:</h4>
+<p>Yes, but then there should probably be mem on all of this stuff as well.</p>
+
+<a name="172589734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589734">Kevin Buzzard (Aug 06 2019 at 13:48)</a>:</h4>
+<p>I guess <code>ideal R</code> is bundled ideals and <code>Spec R</code> is bundled prime ideals.</p>
+
+<a name="172589817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589817">Kevin Buzzard (Aug 06 2019 at 13:49)</a>:</h4>
+<p>Oh wow Amelia just pointed out</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">def</span> <span class="n">is_prime</span> <span class="o">(</span><span class="n">I</span> <span class="o">:</span> <span class="n">ideal</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">I</span> <span class="bp">≠</span> <span class="err">⊤</span> <span class="bp">∧</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">},</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">I</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">I</span> <span class="bp">∨</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">I</span>
+</pre></div>
+
+
+<p>What's going on there? I don't even understand how a definition which isn't a structure can be tagged as a class.</p>
+
+<a name="172589841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589841">Kevin Buzzard (Aug 06 2019 at 13:49)</a>:</h4>
+<p>Is that another way of doing normal subgroups?</p>
+
+<a name="172589946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20normal%20subgroups/near/172589946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/38055bundlingnormalsubgroups.html#172589946">Chris Hughes (Aug 06 2019 at 13:50)</a>:</h4>
+<p>It's possible but a bad idea, but I can't remember why. Something to do with it being semireducible.</p>
+
 
 {% endraw %}
 
