@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [easy questions](27038easyquestions.html) (89 messages, latest: Aug 07 2019 at 14:29)
+
 * [linarith and "not equal"](14844linarithandnotequal.html) (13 messages, latest: Aug 06 2019 at 10:10)
 
 * [noob question(s)](52075noobquestions.html) (1322 messages, latest: Aug 05 2019 at 21:56)
@@ -24,8 +26,6 @@ permalink: archive/113489newmembers/index.html
 * [finishing from false](88383finishingfromfalse.html) (16 messages, latest: Jul 31 2019 at 23:23)
 
 * [Coercion from a submodule to its underlying set](22648Coercionfromasubmoduletoitsunderlyingset.html) (2 messages, latest: Jul 30 2019 at 23:08)
-
-* [easy questions](27038easyquestions.html) (74 messages, latest: Jul 27 2019 at 13:48)
 
 * [ring tactic works at one place, fails at another](99356ringtacticworksatoneplacefailsatanother.html) (34 messages, latest: Jul 25 2019 at 06:49)
 
