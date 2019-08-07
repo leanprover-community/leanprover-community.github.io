@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [IMO problems](23946IMOproblems.html) (26 messages, latest: Aug 07 2019 at 19:59)
+* [IMO problems](23946IMOproblems.html) (36 messages, latest: Aug 07 2019 at 20:57)
+
+* [characteristic predicate](27003characteristicpredicate.html) (3 messages, latest: Aug 07 2019 at 20:48)
 
 * [sensitivity conjecture](98622sensitivityconjecture.html) (490 messages, latest: Aug 07 2019 at 10:42)
 
