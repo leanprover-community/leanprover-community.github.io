@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Arend — HoTT ITP](16525ArendHoTTITP.html) (4 messages, latest: Aug 07 2019 at 06:59)
+* [Arend — HoTT ITP](16525ArendHoTTITP.html) (20 messages, latest: Aug 07 2019 at 07:31)
 
 * [100 theorems](37529100theorems.html) (96 messages, latest: Aug 06 2019 at 23:06)
 
