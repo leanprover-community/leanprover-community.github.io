@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Category theory](24026Categorytheory.html) (439 messages, latest: Aug 07 2019 at 21:54)
+
 * [IMO problems](23946IMOproblems.html) (36 messages, latest: Aug 07 2019 at 20:57)
 
 * [characteristic predicate](27003characteristicpredicate.html) (3 messages, latest: Aug 07 2019 at 20:48)
@@ -520,8 +522,6 @@ permalink: archive/116395maths/index.html
 * [category theory documentation](35860categorytheorydocumentation.html) (50 messages, latest: Jan 01 2019 at 20:47)
 
 * [Q dense in R](14314QdenseinR.html) (21 messages, latest: Dec 29 2018 at 10:01)
-
-* [Category theory](24026Categorytheory.html) (421 messages, latest: Dec 23 2018 at 19:05)
 
 * [comment in functor.lean](52026commentinfunctorlean.html) (3 messages, latest: Dec 22 2018 at 06:49)
 

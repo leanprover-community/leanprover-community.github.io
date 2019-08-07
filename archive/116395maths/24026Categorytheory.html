@@ -1986,6 +1986,80 @@ I thought I understood <code>rfl</code> by now. But apparently this is not <code
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/152438280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#152438280">Ramon Fernandez Mir (Dec 23 2018 at 19:05)</a>:</h4>
 <p><span class="user-mention" data-user-id="110032">@Reid Barton</span> sorry I just saw this. I was playing with that code a few days ago and I didn't manage to make it work with forget. What is the "C" argument meant to be?</p>
 
+<a name="172717348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172717348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172717348">Gun Pinyo (Aug 07 2019 at 21:23)</a>:</h4>
+<p>In <a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/category.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/category.lean">https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/category.lean</a>,<br>
+Could anyone tells me why objects are not a field but a parameter to the definition of <code>category</code>? What is the advantage of it? Also, why the definition of a category is a class rather than an ordinary structure?</p>
+
+<a name="172717412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172717412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172717412">Kenny Lau (Aug 07 2019 at 21:24)</a>:</h4>
+<p>It allows us to say that the "set" of all groups have a category structure on it</p>
+
+<a name="172717451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172717451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172717451">Kenny Lau (Aug 07 2019 at 21:24)</a>:</h4>
+<p>so given two groups <code>G</code> and <code>H</code>, Lean can infer what <code>G \hom H</code> means</p>
+
+<a name="172717474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172717474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172717474">Kenny Lau (Aug 07 2019 at 21:25)</a>:</h4>
+<p>structure instances can't be automatically inferred</p>
+
+<a name="172717820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172717820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172717820">Gun Pinyo (Aug 07 2019 at 21:30)</a>:</h4>
+<p>Ok, but what if want to say something like "let C be a category" I need to explicitly state its object and become "let C be a category that has objects as blah". I find this quite wired.</p>
+<p>I know that this can be solved using <code>Σ obj : Type*, category obj</code> but this is a little bit ad-hoc, does mathlib has a definition for this?</p>
+
+<a name="172717942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172717942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172717942">Kenny Lau (Aug 07 2019 at 21:31)</a>:</h4>
+<p>Let X be a type that has a category structure C on it</p>
+
+<a name="172718443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172718443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172718443">Gun Pinyo (Aug 07 2019 at 21:38)</a>:</h4>
+<p>This way of defining a category really see a category as an underlining structure of some type. However, many interesting categories focus more on the morphism whereas object carries almost no information e.g. the category of simplexes in which I believe that it has type as <code>category ℕ</code>.</p>
+
+<a name="172718495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172718495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172718495">Kenny Lau (Aug 07 2019 at 21:39)</a>:</h4>
+<p>This is an interesting example.</p>
+
+<a name="172718560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172718560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172718560">Kenny Lau (Aug 07 2019 at 21:40)</a>:</h4>
+<p>I don't know what to do with it.</p>
+
+<a name="172719065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719065">Scott Morrison (Aug 07 2019 at 21:49)</a>:</h4>
+<p>You just do something like <code>def \Delta := \nat</code>, and then <code>instance : category \Delta</code>. This is what type synonyms are for.</p>
+
+<a name="172719072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719072">Scott Morrison (Aug 07 2019 at 21:49)</a>:</h4>
+<p>But yes, my initial starts on the category theory library did use bundled categories.</p>
+
+<a name="172719150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719150">Scott Morrison (Aug 07 2019 at 21:50)</a>:</h4>
+<p>The payoff, which has not yet been realised in mathlib, of using unbundled categories is that it would allow us to use uniform notation <code>\iso</code>, <code>\hom</code>, <code>\otimes</code> etc across all examples.</p>
+
+<a name="172719172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719172">Scott Morrison (Aug 07 2019 at 21:51)</a>:</h4>
+<p>Mostly this hasn't happened because the category theoretic notion of <code>iso</code> between rings, say, would only allow talking about isomorphisms between rings in the same universe.</p>
+
+<a name="172719184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719184">Scott Morrison (Aug 07 2019 at 21:51)</a>:</h4>
+<p>This distinction matters, I think for <code>equiv</code> (rather than just using <code>iso</code> in <code>category Type</code>), where it's pretty common to want to shift universes.</p>
+
+<a name="172719255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719255">Scott Morrison (Aug 07 2019 at 21:52)</a>:</h4>
+<p>On the other hand it's rare that one deals with isomorphisms of rings in different universes.</p>
+
+<a name="172719262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719262">Scott Morrison (Aug 07 2019 at 21:52)</a>:</h4>
+<p>(but it does happen, sure)</p>
+
+<a name="172719294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719294">Scott Morrison (Aug 07 2019 at 21:53)</a>:</h4>
+<p>If I were king, I'd use <code>iso</code> instead of <code>mul_equiv</code>, <code>algebra_equiv</code>, <code>homeomorphism</code>, etc. etc., and even use <code>iso</code> in <code>Type</code>, adding an extra <code>pequiv</code> for talking about equivalences that cross universe levels.</p>
+
+<a name="172719397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172719397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172719397">Scott Morrison (Aug 07 2019 at 21:54)</a>:</h4>
+<p><span class="user-mention" data-user-id="144193">@Gun Pinyo</span>, there is <a href="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/Cat.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/category_theory/Cat.lean"><code>src/category_theory/Cat.lean</code></a>, which defines bundled categories in mathlib, although doesn't do very much with them.</p>
+
 
 {% endraw %}
 
