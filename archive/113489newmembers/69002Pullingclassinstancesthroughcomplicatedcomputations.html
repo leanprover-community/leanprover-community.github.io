@@ -422,6 +422,30 @@ h : factors R M F ≠ list.nil
 <span class="bp">∀</span> <span class="n">p</span> <span class="err">∈</span> <span class="n">F</span><span class="bp">.</span><span class="n">factors</span><span class="o">,</span> <span class="n">module</span><span class="bp">.</span><span class="n">is_simple</span> <span class="n">α</span> <span class="o">(</span><span class="n">subquotient</span> <span class="n">p</span><span class="o">)</span>
 </pre></div>
 
+<a name="172774026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172774026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172774026">Robert Spencer (Aug 08 2019 at 15:14)</a>:</h4>
+<p>I'll have to take some time to look at that solution and wrap my head around it, and how <code>transit</code> is really different from a <code>list</code> with a <code>chain'</code> (in particular, I think one could replace <code>transit.factors</code> with some sort of <code>chain'_factors (l : list \a) [chain' &lt;= l] : list (le_pair \a)</code> and get a similar result.</p>
+
+<a name="172774041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172774041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172774041">Robert Spencer (Aug 08 2019 at 15:14)</a>:</h4>
+<p>Thanks for the pointers though</p>
+
+<a name="172774122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172774122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172774122">Robert Spencer (Aug 08 2019 at 15:15)</a>:</h4>
+<p>I think for now I'll just treat sub quotients as these <code>le_pairs</code> until something better comes around</p>
+
+<a name="172776682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172776682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172776682">Mario Carneiro (Aug 08 2019 at 15:46)</a>:</h4>
+<p>You can still use list and chain; the key point here is that you don't put types in a list, you put the data from which you generate the types</p>
+
+<a name="172776791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172776791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172776791">Mario Carneiro (Aug 08 2019 at 15:47)</a>:</h4>
+<p>But I think it would be better to use structures that encode the relevant invariants, so that for example it's not possible to have an empty factors list, rather than having a predicate on the side to assert this</p>
+
+<a name="172776951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172776951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172776951">Mario Carneiro (Aug 08 2019 at 15:49)</a>:</h4>
+<p>You can also avoid the reassociation problem by structuring the inductive type a little differently so that it's all associated one way (this is basically what the <code>list</code> representation gives you), but this has different defeq simplifications and introduces a bias for one kind of association over the other. Whether this matters one way or another depends on details of the application</p>
+
 
 {% endraw %}
 
