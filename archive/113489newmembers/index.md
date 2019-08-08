@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Pulling class instances through "complicated" computations](69002Pullingclassinstancesthroughcomplicatedcomputations.html) (66 messages, latest: Aug 08 2019 at 15:49)
+* [Pulling class instances through "complicated" computations](69002Pullingclassinstancesthroughcomplicatedcomputations.html) (67 messages, latest: Aug 08 2019 at 16:15)
 
 * [easy questions](27038easyquestions.html) (91 messages, latest: Aug 07 2019 at 16:23)
 
