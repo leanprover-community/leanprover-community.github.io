@@ -2094,6 +2094,30 @@ Could anyone tells me why objects are not a field but a parameter to the definit
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172727984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172727984">Gun Pinyo (Aug 08 2019 at 00:26)</a>:</h4>
 <p><span class="user-mention" data-user-id="110087">@Scott Morrison</span>  If the advantage of unbundled categories couldn't be used in practice, should we go back and use bundled one (as the main def) as before?</p>
 
+<a name="172730778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172730778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172730778">Scott Morrison (Aug 08 2019 at 01:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="144193">@Gun Pinyo</span>, I don't think you should think of that as abuse of notation. It is used all over mathlib, and is just part of how typeclasses are used in dependent type theory. After building the API for <code>\Delta</code> or for <code>\square</code>, one should then mark <code>\Delta</code> as <code>[irreducible]</code>, preventing people from seeing the implementation detail that it is definitionally equal to <code>nat</code>.</p>
+
+<a name="172730792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172730792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172730792">Scott Morrison (Aug 08 2019 at 01:35)</a>:</h4>
+<p>I don't think that the advantages of unbundled categories <em>can't</em> be used in practice, we're just not there yet. :-)</p>
+
+<a name="172730841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172730841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172730841">Scott Morrison (Aug 08 2019 at 01:36)</a>:</h4>
+<p>The algebraists are currently busy bundling ring homs and similar gadgets, and this actually makes it easier to use the uniform notions provided by the the category theory library.</p>
+
+<a name="172730865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172730865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172730865">Scott Morrison (Aug 08 2019 at 01:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<blockquote>
+<p>Why do you say this? In maths I never leave <code>Type</code>. </p>
+</blockquote>
+<p>So let's get rid of <code>ring_equiv</code> and friends... :-) If you're happy not being able to change universe levels across a <code>ring_equiv</code>, there's not much advantage over just using the uniform <code>iso</code>.</p>
+
+<a name="172730925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Category%20theory/near/172730925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/24026Categorytheory.html#172730925">Scott Morrison (Aug 08 2019 at 01:39)</a>:</h4>
+<p>There is the point that in an <code>iso</code> you need to explicitly say that both directions are ring homomorphisms, while the default constructor of <code>ring_equiv</code> only asks that you prove this in one direction, but solving this is just a tiny bit of plumbing. (i.e. we can provide an alternative constructor for isomorphisms of rings, etc)</p>
+
 
 {% endraw %}
 
