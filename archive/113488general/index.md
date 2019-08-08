@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [HoTT question](95800HoTTquestion.html) (5 messages, latest: Aug 08 2019 at 22:59)
+
 * [inductionI?](87574inductionI.html) (3 messages, latest: Aug 08 2019 at 21:23)
 
 * [Generate homomorphism types for algebraic structures](63016Generatehomomorphismtypesforalgebraicstructures.html) (4 messages, latest: Aug 07 2019 at 15:24)

@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/95800HoTTquestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/95800HoTTquestion.html">HoTT question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="172809524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20question/near/172809524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95800HoTTquestion.html#172809524">Kevin Buzzard (Aug 08 2019 at 22:41)</a>:</h4>
+<p>I've been chatting to Martin Escudo, someone who knows a lot more about univalence than me. My understanding of one of his claims was that it was impossible to define (in Lean) a predicate P on types such that P(nat) was provably true and P(int) was provably false. His argument seemed to be that a sufficiently large part of univalence was consistent with Lean. However he said that for functions from Type to Type one could find such functions P in the presence of global choice. My understanding of his claim is that he's saying the following is provable in Lean:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">equiv</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="o">(</span><span class="n">nonempty</span> <span class="n">X</span><span class="o">)</span> <span class="bp">→</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">X</span> <span class="n">Y</span><span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">P</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">X</span> <span class="err">≃</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span><span class="o">(</span><span class="n">Y</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>In words: in the presence of what he calls "global choice" (c) one can find P : Type -&gt; Type such that P(X) is inhabited but P(Y) isn't, for some isomorphic X and Y. Have I understood him correctly?</p>
+
+<a name="172809932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20question/near/172809932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95800HoTTquestion.html#172809932">Mario Carneiro (Aug 08 2019 at 22:48)</a>:</h4>
+<p>Your formal statement is certainly false, since you are claiming that this property holds of all P</p>
+
+<a name="172809967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20question/near/172809967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95800HoTTquestion.html#172809967">Mario Carneiro (Aug 08 2019 at 22:49)</a>:</h4>
+<p>I don't think the claim you attribute to Martin is true either though; even in the presence of global choice it's still possible that <code>nat</code> and <code>int</code> are literally different names for the same underlying type</p>
+
+<a name="172810078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20question/near/172810078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95800HoTTquestion.html#172810078">Mario Carneiro (Aug 08 2019 at 22:51)</a>:</h4>
+<blockquote>
+<p>it was impossible to define (in Lean) a predicate P on types such that P(nat) was provably true and P(int) was provably false</p>
+</blockquote>
+<p>I agree with this</p>
+<blockquote>
+<p>However he said that for functions from Type to Type one could find such functions P in the presence of global choice. </p>
+</blockquote>
+<p>I disagree with this unless "find" is meant in a sense other than "there is a definable lean term P such that P(X) is provably true and P(Y) is provably false and X ~= Y is provable"</p>
+
+<a name="172810538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/HoTT%20question/near/172810538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95800HoTTquestion.html#172810538">Kevin Buzzard (Aug 08 2019 at 22:59)</a>:</h4>
+<p>Aren't I claiming that if univalence holds for all P then we have a contradiction?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
