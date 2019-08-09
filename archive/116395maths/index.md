@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Category theory](24026Categorytheory.html) (452 messages, latest: Aug 08 2019 at 05:20)
+* [IMO problems](23946IMOproblems.html) (45 messages, latest: Aug 09 2019 at 11:14)
 
-* [IMO problems](23946IMOproblems.html) (39 messages, latest: Aug 08 2019 at 00:03)
+* [Category theory](24026Categorytheory.html) (452 messages, latest: Aug 08 2019 at 05:20)
 
 * [characteristic predicate](27003characteristicpredicate.html) (3 messages, latest: Aug 07 2019 at 20:48)
 

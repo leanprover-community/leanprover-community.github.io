@@ -936,6 +936,84 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172726778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172726778">Johan Commelin (Aug 08 2019 at 00:03)</a>:</h4>
 <p>But Kevin didn't provide a formalisation. So I will say that I completed the problem (-;</p>
 
+<a name="172842543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172842543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172842543">Johan Commelin (Aug 09 2019 at 11:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Voila:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="err">∣</span> <span class="n">a</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="mi">3</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span> <span class="bp">=</span> <span class="n">a</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="n">b</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span> <span class="n">hk</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">3</span><span class="o">,</span> <span class="o">{</span> <span class="n">simp</span> <span class="bp">*</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="n">ring</span><span class="o">,</span> <span class="o">},</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">pow_two</span><span class="o">]</span> <span class="n">at</span> <span class="n">hk</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">constant_descent_vieta_jumping</span> <span class="n">a</span> <span class="n">b</span> <span class="n">hk</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="bp">*</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">≤</span> <span class="mi">1</span><span class="o">),</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">apply</span> <span class="n">eq_iff_eq_cancel_left</span><span class="o">,</span> <span class="n">ring</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">dsimp</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_inj&#39;</span><span class="o">,</span> <span class="err">←</span> <span class="n">sub_eq_zero</span><span class="o">],</span>
+    <span class="n">apply</span> <span class="n">eq_iff_eq_cancel_right</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span> <span class="n">ring</span><span class="o">,</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">clear</span> <span class="n">hk</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">x_sq_dvd</span> <span class="o">:</span> <span class="n">x</span><span class="bp">*</span><span class="n">x</span> <span class="err">∣</span> <span class="n">x</span><span class="bp">*</span><span class="n">x</span><span class="bp">*</span><span class="n">k</span> <span class="o">:=</span> <span class="n">dvd_mul_right</span> <span class="o">(</span><span class="n">x</span><span class="bp">*</span><span class="n">x</span><span class="o">)</span> <span class="n">k</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span> <span class="n">hx</span> <span class="n">at</span> <span class="n">x_sq_dvd</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">dvd_add_self_left</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">]</span> <span class="n">at</span> <span class="n">x_sq_dvd</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">x_sq_dvd</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">eq_comm</span> <span class="n">at</span> <span class="n">hy</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">mul_eq_one_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">hy</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">hy</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">rfl</span><span class="o">,</span><span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">hx</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">clear</span> <span class="n">hk</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">x_lt_y</span> <span class="n">hx</span> <span class="n">h_base</span> <span class="n">h</span> <span class="n">z</span> <span class="n">h_root</span> <span class="n">hV₁</span> <span class="n">hV₀</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="k">have</span> <span class="n">zy_pos</span> <span class="o">:</span> <span class="n">z</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">rw</span> <span class="n">hV₀</span><span class="o">,</span> <span class="n">exact_mod_cast</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">zero_le</span> <span class="bp">_</span><span class="o">)</span> <span class="o">},</span>
+      <span class="n">apply</span> <span class="n">nonneg_of_mul_nonneg_right</span> <span class="n">zy_pos</span><span class="o">,</span>
+      <span class="n">linarith</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">contrapose</span><span class="bp">!</span> <span class="n">hV₀</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">ne_of_gt</span><span class="o">,</span>
+      <span class="n">push_neg</span> <span class="n">at</span> <span class="n">h_base</span><span class="o">,</span>
+      <span class="k">calc</span> <span class="n">z</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span>       <span class="o">:</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">mul_lt_mul_of_pos_right</span><span class="bp">;</span> <span class="n">linarith</span>
+             <span class="bp">...</span> <span class="bp">≥</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">apply</span> <span class="n">mul_le_mul</span><span class="bp">;</span> <span class="n">linarith</span>
+             <span class="bp">...</span> <span class="bp">&gt;</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>   <span class="o">:</span>
+        <span class="k">begin</span>
+          <span class="n">rw</span> <span class="o">[</span><span class="n">mul_add</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">],</span>
+          <span class="n">apply</span> <span class="n">add_lt_add_left</span><span class="o">,</span>
+          <span class="n">assumption_mod_cast</span>
+        <span class="kn">end</span><span class="o">,</span> <span class="o">}</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">y</span> <span class="n">h</span> <span class="n">h_base</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_one_cases</span> <span class="n">x</span> <span class="n">h_base</span> <span class="k">with</span> <span class="n">rfl</span><span class="bp">|</span><span class="n">rfl</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">contradiction</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">y_dvd</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∣</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">k</span> <span class="o">:=</span> <span class="n">dvd_mul_right</span> <span class="n">y</span> <span class="n">k</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">h</span><span class="o">,</span> <span class="err">←</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">dvd_add_left</span> <span class="o">(</span><span class="n">dvd_mul_left</span> <span class="n">y</span> <span class="n">y</span><span class="o">)]</span> <span class="n">at</span> <span class="n">y_dvd</span><span class="o">,</span>
+      <span class="k">have</span> <span class="n">y_eq</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">prime_two</span><span class="bp">.</span><span class="mi">2</span> <span class="n">y</span> <span class="n">y_dvd</span><span class="o">,</span>
+      <span class="n">rcases</span> <span class="n">y_eq</span> <span class="k">with</span> <span class="n">rfl</span><span class="bp">|</span><span class="n">rfl</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">replace</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">2</span> <span class="bp">*</span> <span class="mi">3</span> <span class="o">:=</span> <span class="n">h</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+        <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">eq_of_mul_eq_mul_left</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span>
+        <span class="n">exact</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_pos</span> <span class="bp">_</span><span class="o">),</span> <span class="o">}</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="172842556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172842556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172842556">Johan Commelin (Aug 09 2019 at 11:11)</a>:</h4>
+<p>I'm quite satisfied with how this turned out</p>
+
+<a name="172842566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172842566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172842566">Johan Commelin (Aug 09 2019 at 11:11)</a>:</h4>
+<p>All the magic happens in <code>apply constant_descent_vieta_jumping</code></p>
+
+<a name="172842627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172842627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172842627">Johan Commelin (Aug 09 2019 at 11:12)</a>:</h4>
+<p>Here's a gist with the full code: <a href="https://gist.github.com/jcommelin/619d66ccb3dcf534017051b0a1263f6f" target="_blank" title="https://gist.github.com/jcommelin/619d66ccb3dcf534017051b0a1263f6f">https://gist.github.com/jcommelin/619d66ccb3dcf534017051b0a1263f6f</a></p>
+
+<a name="172842648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172842648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172842648">Johan Commelin (Aug 09 2019 at 11:13)</a>:</h4>
+<p>I didn't try to golf, on purpose. I want to run this through Patrick's formatter now.</p>
+
+<a name="172842698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/IMO%20problems/near/172842698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/23946IMOproblems.html#172842698">Johan Commelin (Aug 09 2019 at 11:14)</a>:</h4>
+<p>I hoped that <code>omega</code> would discharge some of the easier goals... but it didn't want to, see the other thread.</p>
+
 
 {% endraw %}
 
