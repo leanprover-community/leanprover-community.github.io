@@ -1679,6 +1679,34 @@ Another idea is to have <code>@[bundled_hom]</code> user attr that defines <code
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879418">Kevin Buzzard (Aug 09 2019 at 18:58)</a>:</h4>
 <p>Bundling group and monoid and ring stuff (subthings, homs and isomorphisms) is just a one-off job which needs to be done once. The reason I am motivated to do it now is because I think it makes it easier for mathematicians -- but I am not sure about this. Other people also believe it's best to do things like bundle homs and subobjects, for other reasons. What became clear to me was that the task of actually <em>removing</em> unbundled homs and replacing them with bundled ones is a vast task, because is_submonoid appears 200 times in the library and one of the appearances is in the definition of <code>is_subgroup</code> which appears 200 more times, and then <code>is_subring</code> uses both of these etc etc.</p>
 
+<a name="172879696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879696">Kevin Buzzard (Aug 09 2019 at 19:01)</a>:</h4>
+<p>Furthermore, the switch would be one huge PR which would take a very long time to write and would have to constantly be playing catch-up with the library. This sounded very unappealing. So my plan is to bundle stuff, leave the unbundled stuff in for now (but mention that it is deprecated in docstrings) and then start changing leaf nodes to see if things work. Amelia changed <code>localisation.lean</code> and it worked fine. But changing stuff deeper in mathlib is painful. So our plan is to work from the outside in. The disadvantage of our approach is that ultimately it will in some sense be more work, probably. The advantage is that we can access bundled homs immediately, which is what I wanted really.</p>
+
+<a name="172883788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172883788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172883788">Patrick Massot (Aug 09 2019 at 19:54)</a>:</h4>
+<p>I'm very worried about this thread. For the sensitivity conjecture project, I worked seriously with linear maps for the first time. They are bundled, and it simply does not work. The coercion to function works completely randomly, and there are instance search timeout all over the place. It's extremely time-consuming and frustrating to fight that</p>
+
+<a name="172884037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172884037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172884037">Mario Carneiro (Aug 09 2019 at 19:57)</a>:</h4>
+<p>Bundled maps have much <em>lower</em> pressure on the typeclass system, because you aren't inferring the fact that the function is a hom anymore</p>
+
+<a name="172884116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172884116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172884116">Mario Carneiro (Aug 09 2019 at 19:58)</a>:</h4>
+<p>I can believe that the coercion is problematic sometimes though. The alternative is to write <code>.to_fun</code></p>
+
+<a name="172884125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172884125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172884125">Patrick Massot (Aug 09 2019 at 19:58)</a>:</h4>
+<p>but coercions are part of the type class system</p>
+
+<a name="172884141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172884141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172884141">Patrick Massot (Aug 09 2019 at 19:58)</a>:</h4>
+<p>The alternative doesn't work, because lemmas are stated without <code>.to_fun</code></p>
+
+<a name="172884226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172884226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172884226">Mario Carneiro (Aug 09 2019 at 19:59)</a>:</h4>
+<p>Personally, I would happily live with <code>to_fun</code> everywhere. I put the coercions in because you guys are always going on about nice looking notation and lean 3 provides few other opportunities for this kind of thing</p>
+
 
 {% endraw %}
 
