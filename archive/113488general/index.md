@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [apply ... to](22036applyto.html) (54 messages, latest: Aug 09 2019 at 19:54)
+* [tactics for numbers](46415tacticsfornumbers.html) (11 messages, latest: Aug 09 2019 at 21:37)
 
-* [tactics for numbers](46415tacticsfornumbers.html) (9 messages, latest: Aug 09 2019 at 18:22)
+* [apply ... to](22036applyto.html) (54 messages, latest: Aug 09 2019 at 19:54)
 
 * [inductionI?](87574inductionI.html) (4 messages, latest: Aug 09 2019 at 17:55)
 
