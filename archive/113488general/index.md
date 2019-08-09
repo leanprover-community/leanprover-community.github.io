@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [HoTT question](95800HoTTquestion.html) (16 messages, latest: Aug 08 2019 at 23:33)
+* [HoTT question](95800HoTTquestion.html) (18 messages, latest: Aug 09 2019 at 06:54)
 
 * [inductionI?](87574inductionI.html) (3 messages, latest: Aug 08 2019 at 21:23)
 
