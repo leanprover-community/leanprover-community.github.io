@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [obtain rfl](02050obtainrfl.html) (3 messages, latest: Aug 09 2019 at 16:21)
+
 * [apply ... to](22036applyto.html) (53 messages, latest: Aug 09 2019 at 15:17)
 
 * [HoTT question](95800HoTTquestion.html) (21 messages, latest: Aug 09 2019 at 15:07)
-
-* [obtain rfl](02050obtainrfl.html) (2 messages, latest: Aug 09 2019 at 15:03)
 
 * [tactics for numbers](46415tacticsfornumbers.html) (7 messages, latest: Aug 09 2019 at 14:24)
 
