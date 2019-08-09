@@ -87,6 +87,38 @@ Mario is right that it's basically just <code>cases</code> on an appropriate the
 ⟨coe, λ n, n ≥ 0, λ n hn, ⟨n.nat_abs, int.nat_abs_of_nonneg hn⟩⟩
 </pre></div>
 
+<a name="172895197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics%20for%20numbers/near/172895197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46415tacticsfornumbers.html#172895197">Floris van Doorn (Aug 09 2019 at 22:41)</a>:</h4>
+<p>What is the canonical way to make an expression application in tactic mode?</p>
+<ul>
+<li>If I do</li>
+</ul>
+<div class="codehilite"><pre><span></span>my_expr ← mk_app `can_lift.prf [new_tp, old_tp, inst, e, prf]
+</pre></div>
+
+
+<p>then I get an error, saying it cannot unify the type of <code>prf</code> with the expected type. It seems that <code>mk_app</code> is doing this unification in the "wrong order", because it doesn't seem to know the other arguments to <code>can_lift.prf</code> yet (which it needs to do the unification).</p>
+<ul>
+<li>If I do</li>
+</ul>
+<div class="codehilite"><pre><span></span>let my_expr := `(@can_lift.prf.{0 0} %%new_tp %%old_tp %%inst %%e %%prf),
+</pre></div>
+
+
+<p>I have to manually check that this type-checks (which is fine, I guess). I also need to figure out the universe levels myself (is there an easier way than doing <code>infer_type</code> on my types, and then match the result with <code>expr.sort u</code>?)</p>
+
+<a name="172895345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics%20for%20numbers/near/172895345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46415tacticsfornumbers.html#172895345">Floris van Doorn (Aug 09 2019 at 22:43)</a>:</h4>
+<p>My mostly complete tactic is here: <a href="https://github.com/leanprover-community/mathlib/blob/lift_to/src/tactic/lift_to.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/lift_to/src/tactic/lift_to.lean">https://github.com/leanprover-community/mathlib/blob/lift_to/src/tactic/lift_to.lean</a></p>
+
+<a name="172896025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics%20for%20numbers/near/172896025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46415tacticsfornumbers.html#172896025">Kevin Buzzard (Aug 09 2019 at 22:54)</a>:</h4>
+<p>I don't think Johan will be looking at the chat for about two weeks :-) But I'm sure he'll be very grateful! I love the way that people just do stuff for other people here.</p>
+
+<a name="172896086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/tactics%20for%20numbers/near/172896086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46415tacticsfornumbers.html#172896086">Kevin Buzzard (Aug 09 2019 at 22:55)</a>:</h4>
+<p>I guess it's because lean is fun. The Imperial guy seemed very impressed with the community's efforts on the 1988 IMO problem, although I don't know how much he understood...</p>
+
 
 {% endraw %}
 
