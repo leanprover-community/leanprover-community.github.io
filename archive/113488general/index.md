@@ -9,17 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactics for numbers](46415tacticsfornumbers.html) (7 messages, latest: Aug 09 2019 at 14:24)
+* [apply ... to](22036applyto.html) (53 messages, latest: Aug 09 2019 at 15:17)
 
-* [apply ... to](22036applyto.html) (52 messages, latest: Aug 09 2019 at 14:11)
+* [HoTT question](95800HoTTquestion.html) (21 messages, latest: Aug 09 2019 at 15:07)
+
+* [obtain rfl](02050obtainrfl.html) (2 messages, latest: Aug 09 2019 at 15:03)
+
+* [tactics for numbers](46415tacticsfornumbers.html) (7 messages, latest: Aug 09 2019 at 14:24)
 
 * [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
 
 * [understanding omega](37152understandingomega.html) (2 messages, latest: Aug 09 2019 at 10:42)
-
-* [HoTT question](95800HoTTquestion.html) (20 messages, latest: Aug 09 2019 at 07:49)
-
-* [obtain rfl](02050obtainrfl.html) (1 message, latest: Aug 09 2019 at 07:11)
 
 * [inductionI?](87574inductionI.html) (3 messages, latest: Aug 08 2019 at 21:23)
 
