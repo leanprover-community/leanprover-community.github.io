@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [to_additive and tags](84431toadditiveandtags.html) (43 messages, latest: Aug 09 2019 at 12:55)
+* [apply ... to](22036applyto.html) (48 messages, latest: Aug 09 2019 at 13:57)
+
+* [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
 
 * [understanding omega](37152understandingomega.html) (2 messages, latest: Aug 09 2019 at 10:42)
 
@@ -86,8 +88,6 @@ permalink: archive/113488general/index.html
 * [image factorization to functor](15333imagefactorizationtofunctor.html) (4 messages, latest: Jul 27 2019 at 20:11)
 
 * [no lean messages output in hacked mode](52419noleanmessagesoutputinhackedmode.html) (41 messages, latest: Jul 27 2019 at 16:39)
-
-* [apply ... to](22036applyto.html) (45 messages, latest: Jul 27 2019 at 15:37)
 
 * [Maximum Class-Instance Resolution Depth Reached](92908MaximumClassInstanceResolutionDepthReached.html) (56 messages, latest: Jul 27 2019 at 10:53)
 
