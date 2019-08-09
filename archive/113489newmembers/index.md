@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [hoogle/search](37540hooglesearch.html) (9 messages, latest: Aug 09 2019 at 03:58)
+* [hoogle/search](37540hooglesearch.html) (12 messages, latest: Aug 09 2019 at 04:26)
 
 * [Pulling class instances through "complicated" computations](69002Pullingclassinstancesthroughcomplicatedcomputations.html) (67 messages, latest: Aug 08 2019 at 16:15)
 
