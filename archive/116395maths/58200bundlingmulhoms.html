@@ -1615,6 +1615,70 @@ Now I need to work to turn <code>f</code> into a group hom. And if I don't do th
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/171957872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#171957872">Kevin Buzzard (Jul 29 2019 at 15:51)</a>:</h4>
 <p>I think my issue is that I am in the middle of defining <code>mul_equiv.symm</code> and I am complaining about not being able to use the canonical notation <code>h.symm</code> when stating some intermediate result, but this is spurious because <code>h.symm</code> is in the process of being defined.</p>
 
+<a name="172877572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172877572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172877572">Yury G. Kudryashov (Aug 09 2019 at 18:40)</a>:</h4>
+<p>Hi, I was away for some time. It seems that <code>monoid_hom</code> and <code>add_monoid_hom</code> are already bundled. I have a few questions about the implementation:<br>
+1. Why do we repeat all the proofs instead of using <code>to_additive</code>? My guess is “to provide docstrings” but we can use <code>tactic.add_doc_string</code>. Actually, the new docstring can be turned into the second optional argument to <code>to_additive</code>.<br>
+2. I see that <code>M</code>, <code>N</code>, <code>G</code>, <code>H</code> is used for monoids/groups. Doesn't it break the naming conventions? I'm trying to understand how strict is the style guide w.r.t. naming convention.<br>
+3. If I want to migrate, say, <code>polynomial.C</code> to <code>monoid_hom</code>, the definition will look like <code>def C {α} ... : α →* polynomial α</code>, and <code>C (1 : α)</code> fails to coerce <code>C</code> to a function. It works, if I make <code>α</code> a mandatory argument but this is not convenient.</p>
+
+<a name="172877963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172877963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172877963">Kevin Buzzard (Aug 09 2019 at 18:43)</a>:</h4>
+<p>1. because I only really worked out the full power of <code>to_additive</code> today (see a thread in #general). <br>
+2. Yes it breaks the naming conventions. Computer scientists get a lot of things right about names, but I believe that one of very few exceptions is here. If a computer scientist wants to a call a group alpha and a normal subgroup beta and then some auxiliary set gamma then that's fine by me, but if we call the group G and the normal subgroup N and the auxiliary set S then it is much easier to see at a glance what is happening, especially if variables are being used and the definitions of alpha and beta are 150 lines up. <br>
+3. Probably <span class="user-mention" data-user-id="110044">@Chris Hughes</span> will have something to say on the matter.</p>
+
+<a name="172878140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172878140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172878140">Kevin Buzzard (Aug 09 2019 at 18:44)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/to_additive.20and.20tags" title="#narrow/stream/113488-general/topic/to_additive.20and.20tags">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive.20and.20tags</a></p>
+
+<a name="172878257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172878257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172878257">Kevin Buzzard (Aug 09 2019 at 18:45)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/blob/659533e1dc63074d3386ffb8b2fbed50151dd34c/src/group_theory/submonoid.lean#L344" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/659533e1dc63074d3386ffb8b2fbed50151dd34c/src/group_theory/submonoid.lean#L344">https://github.com/leanprover-community/mathlib/blob/659533e1dc63074d3386ffb8b2fbed50151dd34c/src/group_theory/submonoid.lean#L344</a> for the kind of code I am writing now. I think this is better -- I repeat almost nothing.</p>
+
+<a name="172878506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172878506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172878506">Yury G. Kudryashov (Aug 09 2019 at 18:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thanks for explanations. I'd like to help with migrating to bundled hom. What can I work on to avoid duplication of effort?</p>
+
+<a name="172878798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172878798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172878798">Kevin Buzzard (Aug 09 2019 at 18:50)</a>:</h4>
+<p>You would be more than welcome to help <span class="user-mention" data-user-id="118107">@Amelia Livingston</span>  and me with all the to_additive stuff. As you can see we got up to line 569. Amelia also refactored <code>localisation.lean</code> in that branch, to see how things look with the changes, and they seemed fine. We did not think about polynomials though.</p>
+
+<a name="172878881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172878881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172878881">Yury G. Kudryashov (Aug 09 2019 at 18:51)</a>:</h4>
+<p>E.g., I can rewrite <code>algebra/group/hom</code> using <code>to_additive</code>. Is it OK?</p>
+
+<a name="172878892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172878892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172878892">Kevin Buzzard (Aug 09 2019 at 18:51)</a>:</h4>
+<p>Here's a message I sent Amelia earlier today:</p>
+<blockquote>
+<p>So what I currently believe is this. Say you have made 10 definitions and proved 20 lemmas in the namespace submonoid and you want to get additive versions in add_submonoid. The one thing which can almost always be avoided is having to write out a proof twice, once in the multiplicative and once in the additive case.</p>
+<p>The best possible scenario is when defining a lemma; in this case you can use @[to_additive add_submonoid.foo] and that might be almost all you need to do; this will hopefully generate the proof automatically. Unfortunately it doesn't generate the docstring automatically and you have to add it with this run_cmd which which I don't really understand. There are plenty of examples in the commit I pushed today (all in this bundled_submodules branch of mathlib).</p>
+<p>More complicated is a definition. I have been writing definition submonoid.foo ..., getting it working, and then writing #print prefix submonoid.foo (note that you need submonoid even if you're in the submonoid namespace). You then see submonoid.foo but also perhaps submonoid.foo.match_1 or submonoid.foo.equations_eqn3 or something. For structures you see loads of things. After the definition you can write to_additive [add_submonoid.foo.proof_3] submonoid.foo.proof_3 and this needs to be done for everything in the output. However it all has to be done in the right order. If you get red squiggles under a to_additive then look at the error, see if it mentions add_submonoid.foo.equation_2 and then move the corresponding to_additive line above the line with the error. In all cases I got this to work. And don't forget the docstring. Note that in one case the errors I got were errors involving functions which I had not defined -- other people had missed out the to_additive tags on other functions, so I had to add those in (they should probably be moved to the correct part of mathlib at some point).</p>
+<p>Even more complicated is a structure. I have been defining the additive ones by hand. And there are some lemmas or definitions which don't port, for example those involving powers x^n turn into ones involving smultiples n \bub x and because the order got switched to_additive sometimes can't handle it. In these cases I leave the submonoid namespace immediately, define the additive one by hand (i.e. write the same code again), do all the to_additive tags and the docstring, and then go back into the submonoid namespace. You then have to re-input all the variables which you had open in that namespace. Variables outside a namespace survive inside it, but variables inside a namespace die once the namespace is closed, even if you go back in.</p>
+</blockquote>
+
+<a name="172879013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879013">Kevin Buzzard (Aug 09 2019 at 18:53)</a>:</h4>
+<p>Everything we have done is in the <code>bundled_submonoids</code> branch of mathlib and our plan was to finish <code>submonoid.lean</code> and then make a PR.</p>
+
+<a name="172879187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879187">Kevin Buzzard (Aug 09 2019 at 18:55)</a>:</h4>
+<p>We didn't touch the <code>hom</code> file so it will be OK.</p>
+
+<a name="172879215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879215">Yury G. Kudryashov (Aug 09 2019 at 18:55)</a>:</h4>
+<p>Probably, one of us should learn more about Lean tactic language, and let <code>to_additive</code> handle <code>mydef._proof_n</code> and all those <code>mystruct.cases_on</code> etc.<br>
+Another idea is to have <code>@[bundled_hom]</code> user attr that defines <code>has_coe_to_fun</code> and restates all axioms using <code>coe</code> instead of <code>f.to_fun</code>.</p>
+
+<a name="172879305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879305">Yury G. Kudryashov (Aug 09 2019 at 18:57)</a>:</h4>
+<p>OK, then I'll go through <code>hom</code>, then I'll try to migrate concrete categories (<code>Mon</code> etc.) to bundled homs.</p>
+
+<a name="172879418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/172879418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#172879418">Kevin Buzzard (Aug 09 2019 at 18:58)</a>:</h4>
+<p>Bundling group and monoid and ring stuff (subthings, homs and isomorphisms) is just a one-off job which needs to be done once. The reason I am motivated to do it now is because I think it makes it easier for mathematicians -- but I am not sure about this. Other people also believe it's best to do things like bundle homs and subobjects, for other reasons. What became clear to me was that the task of actually <em>removing</em> unbundled homs and replacing them with bundled ones is a vast task, because is_submonoid appears 200 times in the library and one of the appearances is in the definition of <code>is_subgroup</code> which appears 200 more times, and then <code>is_subring</code> uses both of these etc etc.</p>
+
 
 {% endraw %}
 

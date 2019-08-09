@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactics for numbers](46415tacticsfornumbers.html) (9 messages, latest: Aug 09 2019 at 18:22)
+
 * [inductionI?](87574inductionI.html) (4 messages, latest: Aug 09 2019 at 17:55)
 
 * [obtain rfl](02050obtainrfl.html) (3 messages, latest: Aug 09 2019 at 16:21)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [apply ... to](22036applyto.html) (53 messages, latest: Aug 09 2019 at 15:17)
 
 * [HoTT question](95800HoTTquestion.html) (21 messages, latest: Aug 09 2019 at 15:07)
-
-* [tactics for numbers](46415tacticsfornumbers.html) (7 messages, latest: Aug 09 2019 at 14:24)
 
 * [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
 

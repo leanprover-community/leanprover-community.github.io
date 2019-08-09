@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling mul_homs](58200bundlingmulhoms.html) (309 messages, latest: Aug 09 2019 at 18:58)
+
 * [IMO problems](23946IMOproblems.html) (45 messages, latest: Aug 09 2019 at 11:14)
 
 * [Category theory](24026Categorytheory.html) (452 messages, latest: Aug 08 2019 at 05:20)
@@ -32,8 +34,6 @@ permalink: archive/116395maths/index.html
 * [bundling ring_equiv](35917bundlingringequiv.html) (5 messages, latest: Jul 30 2019 at 19:27)
 
 * [`0 < n` or `n ≠ 0`?](424360norn0.html) (7 messages, latest: Jul 29 2019 at 16:19)
-
-* [bundling mul_homs](58200bundlingmulhoms.html) (296 messages, latest: Jul 29 2019 at 15:51)
 
 * [presheafed space category](15170presheafedspacecategory.html) (22 messages, latest: Jul 28 2019 at 10:56)
 
