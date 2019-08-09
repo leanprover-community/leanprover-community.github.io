@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [HoTT question](95800HoTTquestion.html) (18 messages, latest: Aug 09 2019 at 06:54)
+* [HoTT question](95800HoTTquestion.html) (20 messages, latest: Aug 09 2019 at 07:49)
+
+* [obtain rfl](02050obtainrfl.html) (1 message, latest: Aug 09 2019 at 07:11)
 
 * [inductionI?](87574inductionI.html) (3 messages, latest: Aug 08 2019 at 21:23)
 
