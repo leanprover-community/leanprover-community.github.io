@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [inductionI?](87574inductionI.html) (4 messages, latest: Aug 09 2019 at 17:55)
+
 * [obtain rfl](02050obtainrfl.html) (3 messages, latest: Aug 09 2019 at 16:21)
 
 * [apply ... to](22036applyto.html) (53 messages, latest: Aug 09 2019 at 15:17)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
 
 * [understanding omega](37152understandingomega.html) (2 messages, latest: Aug 09 2019 at 10:42)
-
-* [inductionI?](87574inductionI.html) (3 messages, latest: Aug 08 2019 at 21:23)
 
 * [Generate homomorphism types for algebraic structures](63016Generatehomomorphismtypesforalgebraicstructures.html) (4 messages, latest: Aug 07 2019 at 15:24)
 
