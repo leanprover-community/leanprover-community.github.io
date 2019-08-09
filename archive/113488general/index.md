@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [apply ... to](22036applyto.html) (48 messages, latest: Aug 09 2019 at 13:57)
+* [tactics for numbers](46415tacticsfornumbers.html) (7 messages, latest: Aug 09 2019 at 14:24)
+
+* [apply ... to](22036applyto.html) (52 messages, latest: Aug 09 2019 at 14:11)
 
 * [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
 
