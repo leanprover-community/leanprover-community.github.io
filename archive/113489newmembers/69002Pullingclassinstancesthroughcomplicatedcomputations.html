@@ -551,6 +551,63 @@ h : factors R M F ≠ list.nil
 <p>There are many ugly bits, mostly due to my ignorance (e.g. stating a object in a category is isomorphic to another), but it works.  At last.  I think.<br>
 <a href="https://github.com/rspencer01/lean_representation_theory/tree/master/src" target="_blank" title="https://github.com/rspencer01/lean_representation_theory/tree/master/src">https://github.com/rspencer01/lean_representation_theory/tree/master/src</a></p>
 
+<a name="172922487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922487">Mario Carneiro (Aug 10 2019 at 12:08)</a>:</h4>
+<p>What's up with the remark on <code>submodule</code> not inferring <code>add_comm_group</code>?</p>
+
+<a name="172922495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922495">Mario Carneiro (Aug 10 2019 at 12:09)</a>:</h4>
+<p>I think the issue might be in the definition of <code>Module</code></p>
+
+<a name="172922553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922553">Mario Carneiro (Aug 10 2019 at 12:10)</a>:</h4>
+<p><code>r_mod</code> is a bad idea</p>
+
+<a name="172922610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922610">Robert Spencer (Aug 10 2019 at 12:12)</a>:</h4>
+<p>I'm very happy to suggestions/corrections.  I defined <code>r_mod</code> because <code>bundled</code> only works on a single class.</p>
+
+<a name="172922611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922611">Mario Carneiro (Aug 10 2019 at 12:12)</a>:</h4>
+<p>You should probably define <code>Module</code> directly rather than using <code>bundled</code></p>
+
+<a name="172922621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922621">Mario Carneiro (Aug 10 2019 at 12:13)</a>:</h4>
+<p>I don't think it's actually saving you that much work, you still have to associate the right category structure</p>
+
+<a name="172922625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922625">Mario Carneiro (Aug 10 2019 at 12:13)</a>:</h4>
+<p>and don't make it <code>reducible</code></p>
+
+<a name="172922668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922668">Robert Spencer (Aug 10 2019 at 12:14)</a>:</h4>
+<p>Ah.</p>
+<p>I was basically copying <code>mathlib</code>'s <code>group_theory.category</code></p>
+
+<a name="172922869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172922869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172922869">Robert Spencer (Aug 10 2019 at 12:21)</a>:</h4>
+<p>I still am not certain what is up with <code>submodule</code> and <code>add_comm_group</code>.  Here is an example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">filtration</span><span class="bp">.</span><span class="n">le_pair</span> <span class="o">(</span><span class="n">submodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">p</span><span class="bp">.</span><span class="n">b</span>
+<span class="c">/-</span><span class="cm"> p.b : submodule R ↥M -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">comap</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">add_comm_group</span> <span class="n">p</span><span class="bp">.</span><span class="n">b</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">p</span><span class="bp">.</span><span class="n">b</span><span class="bp">.</span><span class="n">subtype</span> <span class="n">p</span><span class="bp">.</span><span class="n">a</span>
+<span class="c">/-</span><span class="cm"> submodule.comap (submodule.subtype (p.b)) (p.a) : submodule R ↥(p.b) -/</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">comap</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span>                              <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">p</span><span class="bp">.</span><span class="n">b</span><span class="bp">.</span><span class="n">subtype</span> <span class="n">p</span><span class="bp">.</span><span class="n">a</span>
+<span class="c">/-</span><span class="cm"> maximum class-instance resolution depth has been reached (the limit can be increased by setting option &#39;class.instance_max_depth&#39;) (the class-instance resolution trace can be visualized by setting option &#39;trace.class_instances&#39;)-/</span>
+</pre></div>
+
+
+<p>which seems to indicate that it can't find an instance of <code>add_comm_group</code> for <code>p.b</code>, an honest <code>submodule R ↥M</code>.</p>
+<p>To me this feels like a problem in <code>submodule</code>, rather than <code>Module</code>.</p>
+
+<a name="172923102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172923102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172923102">Robert Spencer (Aug 10 2019 at 12:29)</a>:</h4>
+<p>In fact, the same happens if I replace <code>M : Module R</code> with <code>(N : Type) [add_comm_group N] [module R N]</code></p>
+
+<a name="172923578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pulling%20class%20instances%20through%20%22complicated%22%20computations/near/172923578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69002Pullingclassinstancesthroughcomplicatedcomputations.html#172923578">Robert Spencer (Aug 10 2019 at 12:45)</a>:</h4>
+<p>Whoops.  Nevermind.  I retract that.  Its only a problem when I <code>import Module</code>.</p>
+
 
 {% endraw %}
 
