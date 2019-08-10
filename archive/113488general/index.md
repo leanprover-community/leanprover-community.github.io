@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [subdirs](71997subdirs.html) (3 messages, latest: Aug 10 2019 at 16:22)
+* [subdirs](71997subdirs.html) (4 messages, latest: Aug 10 2019 at 17:37)
 
 * [custom docstring](81257customdocstring.html) (2 messages, latest: Aug 10 2019 at 06:34)
 
