@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (337 messages, latest: Aug 10 2019 at 09:12)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (495 messages, latest: Aug 10 2019 at 10:46)
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (492 messages, latest: Aug 09 2019 at 21:23)
+* [bundling mul_homs](58200bundlingmulhoms.html) (337 messages, latest: Aug 10 2019 at 09:12)
 
 * [IMO problems](23946IMOproblems.html) (45 messages, latest: Aug 09 2019 at 11:14)
 
