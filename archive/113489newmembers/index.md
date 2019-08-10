@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [easy questions](27038easyquestions.html) (92 messages, latest: Aug 10 2019 at 15:57)
+
 * [Pulling class instances through "complicated" computations](69002Pullingclassinstancesthroughcomplicatedcomputations.html) (88 messages, latest: Aug 10 2019 at 12:45)
 
 * [hoogle/search](37540hooglesearch.html) (12 messages, latest: Aug 09 2019 at 04:26)
-
-* [easy questions](27038easyquestions.html) (91 messages, latest: Aug 07 2019 at 16:23)
 
 * [linarith and "not equal"](14844linarithandnotequal.html) (13 messages, latest: Aug 06 2019 at 10:10)
 
