@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [tactics for numbers](46415tacticsfornumbers.html) (17 messages, latest: Aug 10 2019 at 19:41)
+* [subdirs](71997subdirs.html) (5 messages, latest: Aug 11 2019 at 00:20)
 
-* [subdirs](71997subdirs.html) (4 messages, latest: Aug 10 2019 at 17:37)
+* [tactics for numbers](46415tacticsfornumbers.html) (17 messages, latest: Aug 10 2019 at 19:41)
 
 * [custom docstring](81257customdocstring.html) (2 messages, latest: Aug 10 2019 at 06:34)
 
