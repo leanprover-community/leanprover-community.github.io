@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [custom docstring](81257customdocstring.html) (3 messages, latest: Aug 11 2019 at 12:44)
+
 * [tactics for numbers](46415tacticsfornumbers.html) (18 messages, latest: Aug 11 2019 at 02:09)
 
 * [subdirs](71997subdirs.html) (5 messages, latest: Aug 11 2019 at 00:20)
-
-* [custom docstring](81257customdocstring.html) (2 messages, latest: Aug 10 2019 at 06:34)
 
 * [apply ... to](22036applyto.html) (54 messages, latest: Aug 09 2019 at 19:54)
 
