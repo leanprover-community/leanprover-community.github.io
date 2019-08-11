@@ -33,6 +33,58 @@ permalink: archive/116395maths/99453gluingpresheaves.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/171821079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#171821079">Scott Morrison (Jul 27 2019 at 00:18)</a>:</h4>
 <p>I suspect the best way to do that is to do sheafification first, which shows sheaves are a reflective subcategory of presheaves. Then a little more work would show sheafed-spaces are a reflective subcategory of presheafed-spaces, and then the general nonsense I proved recently about reflective subcategories would give you filtered colimits (in particular, pushouts) of sheafed-spaces.</p>
 
+<a name="172964904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964904">Scott Morrison (Aug 11 2019 at 11:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>, I did a little more work on sheaves this afternoon. I haven't got to the interesting things (sheafification and gluing sheaves), but it seems to be going fairly smoothly so far. The only thing I've actually proved so far is that the pushforward of a sheaf is a sheaf.</p>
+
+<a name="172964907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964907">Scott Morrison (Aug 11 2019 at 11:21)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/blob/sheaves/src/topology/Top/sheaf.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/sheaves/src/topology/Top/sheaf.lean">https://github.com/leanprover-community/mathlib/blob/sheaves/src/topology/Top/sheaf.lean</a></p>
+
+<a name="172964947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964947">Scott Morrison (Aug 11 2019 at 11:22)</a>:</h4>
+<p>The highlights are:</p>
+<div class="codehilite"><pre><span></span>def sheaf_condition := Π (c : cover.{v} X), preserves_limit c.diagram F
+
+/--
+A sheaf is a presheaf satisfying the sheaf condition.
+-/
+structure sheaf : Type (max (v+1) u) :=
+(F : X.presheaf C)
+(condition : F.sheaf_condition)
+
+/--
+Morphisms of sheaves are just morphisms of the underlying presheaves, so we
+transfer the category structure using `induced_category.category`.
+-/
+instance category_sheaf (X : Top.{v}) : category (sheaf.{v} C X) :=
+induced_category.category sheaf.F
+
+/--
+The pushforward of a sheaf is still a sheaf.
+-/
+def pushforward {X Y : Top.{v}} (f : X ⟶ Y) (ℱ : sheaf.{v} C X) : sheaf.{v} C Y :=
+{ F := f _* ℱ.F,
+  condition := λ c, by { dsimp [presheaf.pushforward], apply_instance } }
+</pre></div>
+
+<a name="172964955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172964955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172964955">Scott Morrison (Aug 11 2019 at 11:23)</a>:</h4>
+<p>There are still a few underlying sorries in other files, but they are boring general things about preserving limits.</p>
+
+<a name="172965057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172965057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172965057">Kevin Buzzard (Aug 11 2019 at 11:26)</a>:</h4>
+<p>It's great to hear it's going well so far! </p>
+<p>Ramon broke down the sheaf condition into two parts -- "locality" and "gluing", which for rings and groups boiled down to the assertion that to say a map was bijective was the same as saying it was injective and surjective. In general category-theoretic terms one probably cannot do this though.</p>
+
+<a name="172965664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172965664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172965664">David Michael Roberts (Aug 11 2019 at 11:45)</a>:</h4>
+<p>Reminds me of the Grothendieck +-construction on presheaves that first constructs a separated presheaf from a presheaf, then a sheaf from a separated presheaf.</p>
+
+<a name="172965723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/gluing%20presheaves/near/172965723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99453gluingpresheaves.html#172965723">Kevin Buzzard (Aug 11 2019 at 11:46)</a>:</h4>
+<p>Yes exactly; this is why I mentioned it. For Grothendieck the distinction was important in the construction of sheafification of a presheaf. On the other hand because a general isomorphism is more than a monomorphism which is an epimorphism I am slightly confused about what one should do in this generality.</p>
+
 
 {% endraw %}
 

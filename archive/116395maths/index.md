@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [gluing presheaves](99453gluingpresheaves.html) (11 messages, latest: Aug 11 2019 at 11:46)
+
 * [sensitivity conjecture](98622sensitivityconjecture.html) (498 messages, latest: Aug 10 2019 at 14:13)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (337 messages, latest: Aug 10 2019 at 09:12)
@@ -36,8 +38,6 @@ permalink: archive/116395maths/index.html
 * [`0 < n` or `n ≠ 0`?](424360norn0.html) (7 messages, latest: Jul 29 2019 at 16:19)
 
 * [presheafed space category](15170presheafedspacecategory.html) (22 messages, latest: Jul 28 2019 at 10:56)
-
-* [gluing presheaves](99453gluingpresheaves.html) (4 messages, latest: Jul 27 2019 at 00:18)
 
 * [order topology](42234ordertopology.html) (1 message, latest: Jul 26 2019 at 12:13)
 
