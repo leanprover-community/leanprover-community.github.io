@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [nat.cast_smul](61981natcastsmul.html) (1 message, latest: Aug 12 2019 at 13:50)
+
 * [Cast weirdness](76608Castweirdness.html) (11 messages, latest: Aug 12 2019 at 02:02)
 
 * [easy questions](27038easyquestions.html) (103 messages, latest: Aug 11 2019 at 17:52)

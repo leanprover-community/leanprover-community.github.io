@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving for Fun](94070ProvingforFun.html) (33 messages, latest: Aug 12 2019 at 13:50)
+
 * [custom docstring](81257customdocstring.html) (5 messages, latest: Aug 11 2019 at 23:46)
 
 * [tactics for numbers](46415tacticsfornumbers.html) (18 messages, latest: Aug 11 2019 at 02:09)
@@ -68,8 +70,6 @@ permalink: archive/113488general/index.html
 * [norm_num and exponentiation](29268normnumandexponentiation.html) (4 messages, latest: Aug 01 2019 at 19:15)
 
 * [norm_num and nat.fact](97326normnumandnatfact.html) (8 messages, latest: Aug 01 2019 at 19:14)
-
-* [Proving for Fun](94070ProvingforFun.html) (29 messages, latest: Aug 01 2019 at 08:41)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (20 messages, latest: Jul 31 2019 at 21:21)
 
