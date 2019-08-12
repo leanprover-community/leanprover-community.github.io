@@ -81,6 +81,32 @@ permalink: archive/113489newmembers/76608Castweirdness.html
 <span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≥</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">linarith</span>
 </pre></div>
 
+<a name="172987968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cast%20weirdness/near/172987968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76608Castweirdness.html#172987968">Gun Pinyo (Aug 11 2019 at 23:29)</a>:</h4>
+<p>Hi there, I have a question regarding coercion. Consider the following code: </p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+  <span class="kn">variables</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span>
+
+  <span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">))</span>                                  <span class="c1">-- ↑i : fin (n +1)</span>
+  <span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">infer_instance</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="o">(</span><span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)))</span>  <span class="c1">-- error</span>
+
+  <span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">))</span>                                 <span class="c1">-- nat.cast (i.val)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I want to cast <code>i</code> from <code>fin n</code> to <code>fin (n +1)</code>. This is fine using <code>(i : fin (n +1))</code>.<br>
+The <code>#check</code> mention <code>↑</code> in which I believe it is something to <code>has_coe</code> class so I dig deeper to understand the function behind it, however, it fails to find such an instance. At this point, I am really confused so I change <code>#check</code> to <code>#reduce</code> and get <code>nat.cast (i.val)</code>.</p>
+<p>My question is that why <code>#reduce</code> successfully find the instance but <code>infer_instance</code> doesn't. Is there another way to cast things without using <code>has_coe/has_lift</code>?</p>
+
+<a name="172988625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cast%20weirdness/near/172988625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76608Castweirdness.html#172988625">Kevin Buzzard (Aug 11 2019 at 23:52)</a>:</h4>
+<p>What's the definition of nat.cast? Just right click on it in vs code and go to the definition, and it might give some insight into what's going on</p>
+
+<a name="172988681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Cast%20weirdness/near/172988681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/76608Castweirdness.html#172988681">Kevin Buzzard (Aug 11 2019 at 23:54)</a>:</h4>
+<p>Oh! Isn't this the function which defines a map from nat to any structure with zero and one and add or something? So maybe the cast is going via nat and isn'ta direct coercion</p>
+
 
 {% endraw %}
 

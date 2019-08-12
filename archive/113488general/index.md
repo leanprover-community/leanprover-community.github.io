@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [custom docstring](81257customdocstring.html) (4 messages, latest: Aug 11 2019 at 13:56)
+* [custom docstring](81257customdocstring.html) (5 messages, latest: Aug 11 2019 at 23:46)
 
 * [tactics for numbers](46415tacticsfornumbers.html) (18 messages, latest: Aug 11 2019 at 02:09)
 
