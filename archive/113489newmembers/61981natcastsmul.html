@@ -29,6 +29,52 @@ namespace nat
 end nat
 </pre></div>
 
+<a name="173025727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173025727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173025727">Mario Carneiro (Aug 12 2019 at 14:01)</a>:</h4>
+<p>looks good to me</p>
+
+<a name="173025863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173025863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173025863">Mario Carneiro (Aug 12 2019 at 14:03)</a>:</h4>
+<p>what is the smul on the right? Is that the one from group_power?</p>
+
+<a name="173025959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173025959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173025959">Reid Barton (Aug 12 2019 at 14:04)</a>:</h4>
+<p>The one on the left is from <code>semimodule</code></p>
+
+<a name="173026142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173026142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173026142">Reid Barton (Aug 12 2019 at 14:06)</a>:</h4>
+<p>For the one on the right I think any <code>add_comm_monoid</code> gets a <code>semimodule nat</code> instance--that name sounds plausible</p>
+
+<a name="173026207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173026207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173026207">Mario Carneiro (Aug 12 2019 at 14:07)</a>:</h4>
+<p>do we have a <code>semimodule nat B</code> instance? The group_power file defines a <code>has_scalar</code> instance directly</p>
+
+<a name="173026261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173026261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173026261">Mario Carneiro (Aug 12 2019 at 14:07)</a>:</h4>
+<p>but it may have upgraded it to a semimodule for an appropriate structure on B</p>
+
+<a name="173026264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173026264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173026264">Reid Barton (Aug 12 2019 at 14:07)</a>:</h4>
+<p>I wonder whether this should really be a simp lemma. In the sensitivity conjecture formalization we specifically needed the one on the left, and it was already slightly nonobvious how to write it</p>
+
+<a name="173026381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173026381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173026381">Reid Barton (Aug 12 2019 at 14:08)</a>:</h4>
+<p>Ah, I don't know whether that <code>semimodule nat</code> instance actually exists in mathlib</p>
+
+<a name="173026414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173026414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173026414">Mario Carneiro (Aug 12 2019 at 14:09)</a>:</h4>
+<p>I think these are usually simp lemmas; the cast tactic is supposed to handle "fighting simp" in these sorts of cases</p>
+
+<a name="173028213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nat.cast_smul/near/173028213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61981natcastsmul.html#173028213">Joe (Aug 12 2019 at 14:29)</a>:</h4>
+<p>I found <code>add_comm_monoid.semimodule</code> in the library. It shows <code>semimodule ℕ β</code>.<br>
+So maybe it is useful to add another <code>cast_smul</code>?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">cast_smul&#39;</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">n</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span><span class="n">α</span><span class="o">)</span> <span class="err">•</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul</span> <span class="n">n</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>where <code>add_monoid.smul</code>is the smul from group_power file.</p>
+
 
 {% endraw %}
 

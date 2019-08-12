@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [nat.cast_smul](61981natcastsmul.html) (1 message, latest: Aug 12 2019 at 13:50)
+* [nat.cast_smul](61981natcastsmul.html) (11 messages, latest: Aug 12 2019 at 14:29)
 
 * [Cast weirdness](76608Castweirdness.html) (11 messages, latest: Aug 12 2019 at 02:02)
 

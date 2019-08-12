@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [plus construction](02096plusconstruction.html) (6 messages, latest: Aug 12 2019 at 14:13)
+
 * [list.maximum should return option](56145listmaximumshouldreturnoption.html) (6 messages, latest: Aug 12 2019 at 08:42)
 
 * [gluing presheaves](99453gluingpresheaves.html) (11 messages, latest: Aug 11 2019 at 11:46)
