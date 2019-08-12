@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [list.maximum should return option](56145listmaximumshouldreturnoption.html) (3 messages, latest: Aug 12 2019 at 06:50)
+* [list.maximum should return option](56145listmaximumshouldreturnoption.html) (6 messages, latest: Aug 12 2019 at 08:42)
 
 * [gluing presheaves](99453gluingpresheaves.html) (11 messages, latest: Aug 11 2019 at 11:46)
 
