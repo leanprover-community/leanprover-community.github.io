@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (51 messages, latest: Aug 13 2019 at 12:48)
+* [Proving for Fun](94070ProvingforFun.html) (53 messages, latest: Aug 13 2019 at 13:15)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (7 messages, latest: Aug 13 2019 at 12:15)
 
