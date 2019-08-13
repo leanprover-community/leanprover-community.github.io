@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Calclulational proofs](18082Calclulationalproofs.html) (4 messages, latest: Aug 13 2019 at 09:59)
+
 * [nat.cast_smul](61981natcastsmul.html) (11 messages, latest: Aug 12 2019 at 14:29)
 
 * [Cast weirdness](76608Castweirdness.html) (11 messages, latest: Aug 12 2019 at 02:02)
