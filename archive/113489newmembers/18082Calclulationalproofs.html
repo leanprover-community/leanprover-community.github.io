@@ -63,6 +63,28 @@ Why is that? Is there a rule-of-thumb for when I can omit <code>eq.symm</code> a
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173100504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173100504">Patrick Massot (Aug 13 2019 at 10:02)</a>:</h4>
 <p>This will get rid of eq.symm everywhere</p>
 
+<a name="173105550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173105550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173105550">Daniel (Aug 13 2019 at 11:40)</a>:</h4>
+<p>This is clear to me, but I don't see, why <code>rw</code> rewrites the statement as it did.<br>
+Maybe the following (failing example) makes my question clearer:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">real</span><span class="o">}</span> <span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">(</span><span class="n">hy</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">log</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="n">log</span><span class="o">(</span><span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span> <span class="bp">*</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">))</span> <span class="o">:=</span>
+    <span class="k">have</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">),</span> <span class="k">from</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">exp_log_eq</span> <span class="n">hx</span><span class="o">),</span>
+    <span class="k">have</span> <span class="n">hb</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">exp</span> <span class="o">(</span><span class="n">log</span> <span class="n">y</span><span class="o">),</span> <span class="k">from</span> <span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">(</span><span class="n">exp_log_eq</span> <span class="n">hy</span><span class="o">),</span>
+    <span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">ha</span><span class="o">,</span> <span class="n">hb</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Why doesn't <code>rw</code> replace the <code>x</code> on the left side of the equality with <code>exp (log x)</code>? (and similarly <code>y</code> with <code>exp (log y)</code>) Even though there is only a single <code>x</code> to be encountered (and replaced) on the left side of the expression <code>log (x * y)</code>?</p>
+
+<a name="173105791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173105791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173105791">Daniel (Aug 13 2019 at 11:44)</a>:</h4>
+<p>My <em>expectation</em> would be that <code>log(x * y) = log(exp(log x) * exp (log y))</code> just by applying the equalities <code>x = exp (log x)</code> and <code>y = exp (log y)</code>, since applying <code>exp</code> to equal arguments must result in equal results.</p>
+
+<a name="173106278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173106278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173106278">Reid Barton (Aug 13 2019 at 11:54)</a>:</h4>
+<p>It does replace that <code>x</code>, it just also replaces the <code>x</code> on the right hand side of the equation as well, leaving you no closer to being finished</p>
+
 
 {% endraw %}
 
