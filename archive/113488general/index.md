@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [incorrect def/lemma](54132incorrectdeflemma.html) (3 messages, latest: Aug 13 2019 at 07:12)
+* [incorrect def/lemma](54132incorrectdeflemma.html) (6 messages, latest: Aug 13 2019 at 08:56)
 
 * [Isabelle Zulip?](86325IsabelleZulip.html) (3 messages, latest: Aug 13 2019 at 06:42)
 
