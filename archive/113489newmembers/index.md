@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Calclulational proofs](18082Calclulationalproofs.html) (9 messages, latest: Aug 13 2019 at 11:54)
+* [Calclulational proofs](18082Calclulationalproofs.html) (12 messages, latest: Aug 13 2019 at 14:23)
 
 * [nat.cast_smul](61981natcastsmul.html) (11 messages, latest: Aug 12 2019 at 14:29)
 

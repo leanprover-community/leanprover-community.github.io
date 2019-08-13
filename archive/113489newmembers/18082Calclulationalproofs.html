@@ -85,6 +85,23 @@ Maybe the following (failing example) makes my question clearer:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173106278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173106278">Reid Barton (Aug 13 2019 at 11:54)</a>:</h4>
 <p>It does replace that <code>x</code>, it just also replaces the <code>x</code> on the right hand side of the equation as well, leaving you no closer to being finished</p>
 
+<a name="173115400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173115400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173115400">Floris van Doorn (Aug 13 2019 at 14:01)</a>:</h4>
+<p>As was said before, the <code>rw</code> tactic rewrites both the left hand side and the right hand side of an equation.</p>
+<p>If you want to rewrite only the left-hand side, you can use the following tactic: (which is a proof of your first <code>calc</code>-step)</p>
+<div class="codehilite"><pre><span></span>by conv_lhs { rw [← exp_log_eq hx, ← exp_log_eq hy] }
+</pre></div>
+
+<a name="173117215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173117215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173117215">Daniel (Aug 13 2019 at 14:19)</a>:</h4>
+<p>Nice. So I can just use ← and it works as I expect it to :)<br>
+Replacing in both sides seemed a bit counterintuitive to me, since I want to show a particular equality in this step, namely that the left / previous term is equal to the current lines' term.<br>
+But I guess it is more useful when combining multiple steps in one <code>rw</code> command.</p>
+
+<a name="173117660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Calclulational%20proofs/near/173117660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/18082Calclulationalproofs.html#173117660">Kevin Buzzard (Aug 13 2019 at 14:23)</a>:</h4>
+<p>The way it works by default is that lean finds the first match, and then replaces every occurrence of the thing that matched exactly. There is a file called conv.md in mathlib which is a write-up of how to do more sophisticated rewrites.</p>
+
 
 {% endraw %}
 
