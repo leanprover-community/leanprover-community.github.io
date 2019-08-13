@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving for Fun](94070ProvingforFun.html) (59 messages, latest: Aug 13 2019 at 22:56)
+
+* [incorrect def/lemma](54132incorrectdeflemma.html) (15 messages, latest: Aug 13 2019 at 22:41)
+
 * [Isabelle Zulip?](86325IsabelleZulip.html) (4 messages, latest: Aug 13 2019 at 19:53)
-
-* [incorrect def/lemma](54132incorrectdeflemma.html) (14 messages, latest: Aug 13 2019 at 17:27)
-
-* [Proving for Fun](94070ProvingforFun.html) (54 messages, latest: Aug 13 2019 at 14:42)
 
 * [custom docstring](81257customdocstring.html) (5 messages, latest: Aug 11 2019 at 23:46)
 
