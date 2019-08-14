@@ -482,6 +482,31 @@ theorem yesitstrue : statement := theproof
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173192758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173192758">Rob Lewis (Aug 14 2019 at 11:00)</a>:</h4>
 <p><a href="https://github.com/leanprover/lean/issues/1781" target="_blank" title="https://github.com/leanprover/lean/issues/1781">https://github.com/leanprover/lean/issues/1781</a></p>
 
+<a name="173211569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173211569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173211569">Mario Carneiro (Aug 14 2019 at 15:10)</a>:</h4>
+<p>The regex looks very fragile to me. I think this is still possible:</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">open</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">user_command</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">evil_cmd</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">parse</span> <span class="err">$</span> <span class="n">tk</span> <span class="s2">&quot;evil&quot;</span><span class="o">)</span> <span class="o">:</span> <span class="n">lean</span><span class="bp">.</span><span class="n">parser</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">with_input</span> <span class="n">command_like</span> <span class="o">(</span><span class="s2">&quot;nota&quot;</span> <span class="bp">++</span> <span class="s2">&quot;tion `false` := 0 = 0&quot;</span><span class="o">)</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="o">()</span>
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="n">evil</span>
+
+<span class="kn">theorem</span> <span class="n">contradiction</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="173212140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173212140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173212140">Kevin Kappelmann (Aug 14 2019 at 15:17)</a>:</h4>
+<p>I'd say, just try it out! and if it works, please hide the solution :')</p>
+
+<a name="173214964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173214964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173214964">Sebastian Ullrich (Aug 14 2019 at 15:46)</a>:</h4>
+<p>I had forgotten that we allow whitespace inside tokens... to be honest, there probably is no simpler bullet-proof solution than parsing the export format. If you put the theorem statement in a separate import, you "just" have to check that the type of the exported definition is a constant expression of the statement type's name.</p>
+
+<a name="173215369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173215369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173215369">Alex J. Best (Aug 14 2019 at 15:50)</a>:</h4>
+<p>Yeah maybe that is easier, from my experiments yesterday breaking it (sorry <span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> ), regex is hard to get perfect and esp. with lean's syntactic complexity ruling out all the edge cases sounds like it might take a little while, maybe the internal format is the way to go.</p>
+
 
 {% endraw %}
 
