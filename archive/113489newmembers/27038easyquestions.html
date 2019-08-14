@@ -594,6 +594,27 @@ type. So I want to refactor the following code:</p>
 <p><code>vector.insert_nth_zero'</code> is the same as <code>vector.insert_nth_zero</code><br>
 except that <code>fin.zero</code> is changed to <code>0</code>. Everything should be fine, however, I don't know there to replace <code>fin.zero</code> in <code>simp</code> tactic now. Does anyone know how to fix this?</p>
 
+<a name="173221599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/173221599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#173221599">Joe (Aug 14 2019 at 17:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">vector</span><span class="bp">.</span><span class="n">insert_nth_zero&#39;</span> <span class="o">:</span> <span class="n">v</span><span class="bp">.</span><span class="n">insert_nth</span> <span class="n">a</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">::</span> <span class="n">v</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">v</span> <span class="k">with</span> <span class="n">l</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">vector</span><span class="bp">.</span><span class="n">insert_nth</span><span class="o">],</span> <span class="n">norm_cast</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="173221946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/173221946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#173221946">Joe (Aug 14 2019 at 17:05)</a>:</h4>
+<p>or maybe this</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">vector</span><span class="bp">.</span><span class="n">insert_nth_zero&#39;</span> <span class="o">:</span> <span class="n">v</span><span class="bp">.</span><span class="n">insert_nth</span> <span class="n">a</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">::</span> <span class="n">v</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">v</span> <span class="k">with</span> <span class="n">l</span> <span class="n">p</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">vector</span><span class="bp">.</span><span class="n">insert_nth</span><span class="o">,</span> <span class="n">vector</span><span class="bp">.</span><span class="n">cons</span><span class="o">,</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">mk_eq_mk</span><span class="o">],</span>
+    <span class="k">show</span> <span class="n">list</span><span class="bp">.</span><span class="n">insert_nth</span> <span class="mi">0</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">::</span> <span class="n">l</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">insert_nth</span><span class="o">]</span>
+  <span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

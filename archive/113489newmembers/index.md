@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [easy questions](27038easyquestions.html) (104 messages, latest: Aug 14 2019 at 16:06)
+* [easy questions](27038easyquestions.html) (106 messages, latest: Aug 14 2019 at 17:05)
 
 * [Calclulational proofs](18082Calclulationalproofs.html) (12 messages, latest: Aug 13 2019 at 14:23)
 
