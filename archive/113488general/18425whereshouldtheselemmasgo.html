@@ -257,6 +257,12 @@ Another example: there was a section about coercions randomly appearing between 
 
 <p>Maybe this is also related to <a href="https://github.com/leanprover-community/mathlib/pull/1276/files#diff-69913e770559c1df859d4767801aa0e0R292" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1276/files#diff-69913e770559c1df859d4767801aa0e0R292">this issue</a> that Patrick and I ran into a few weeks ago. Any idea what's going on here?</p>
 
+<a name="173227734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/173227734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#173227734">Floris van Doorn (Aug 14 2019 at 18:13)</a>:</h4>
+<p>The problem here is that <code>⌊ ... ⌋</code> means <code>floor_ring.floor</code>, but <code>rat.floor_def</code> is defined using <code>rat.floor</code>. These two functions are definitionally equal, but you will have to unfold some instances (namely, <code>floor_ring ℚ</code>) to figure that out.<br>
+<code>rw</code> will do (almost) no unfolding of definitions, so on the first line, it cannot match <code>rat.floor</code> with <code>floor_ring.floor</code>. On the second line, you proof an equality involving <code>floor_ring.floor</code> (the proof works, since the two definitions are definitionally equal), and then rewrite is happy, because the equality you're rewriting with now only involves <code>floor_ring.floor</code>.</p>
+<p>This issue is avoided in other situations by defining the instance <code>floor_ring.floor</code> as quickly as possible after <code>rat.floor</code>, and from then on only using <code>floor_ring.floor</code> and never <code>rat.floor</code>. An uglier work-around is to reprove <code>rat.floor_def</code> after the instance is declared using <code>floor_ring.floor</code>.</p>
+
 
 {% endraw %}
 

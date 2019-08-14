@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (45 messages, latest: Aug 14 2019 at 18:13)
+
 * [Proving for Fun](94070ProvingforFun.html) (93 messages, latest: Aug 14 2019 at 15:50)
 
 * [timeout when working with ideal over polynomial ring](78086timeoutwhenworkingwithidealoverpolynomialring.html) (1 message, latest: Aug 14 2019 at 14:17)
-
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (44 messages, latest: Aug 14 2019 at 14:05)
 
 * [obtain](04670obtain.html) (15 messages, latest: Aug 14 2019 at 13:35)
 
