@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (74 messages, latest: Aug 14 2019 at 08:59)
+* [Proving for Fun](94070ProvingforFun.html) (85 messages, latest: Aug 14 2019 at 09:42)
 
-* [obtain](04670obtain.html) (9 messages, latest: Aug 14 2019 at 08:11)
+* [obtain](04670obtain.html) (12 messages, latest: Aug 14 2019 at 09:09)
 
 * [Isabelle Zulip?](86325IsabelleZulip.html) (5 messages, latest: Aug 13 2019 at 23:59)
 
