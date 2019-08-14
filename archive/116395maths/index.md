@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [plus construction](02096plusconstruction.html) (17 messages, latest: Aug 14 2019 at 10:08)
+* [plus construction](02096plusconstruction.html) (18 messages, latest: Aug 14 2019 at 13:18)
 
 * [list.maximum should return option](56145listmaximumshouldreturnoption.html) (6 messages, latest: Aug 12 2019 at 08:42)
 
