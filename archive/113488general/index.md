@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Isabelle Zulip?](86325IsabelleZulip.html) (5 messages, latest: Aug 13 2019 at 23:59)
+* [Proving for Fun](94070ProvingforFun.html) (74 messages, latest: Aug 14 2019 at 08:59)
 
-* [Proving for Fun](94070ProvingforFun.html) (62 messages, latest: Aug 13 2019 at 23:00)
+* [obtain](04670obtain.html) (9 messages, latest: Aug 14 2019 at 08:11)
+
+* [Isabelle Zulip?](86325IsabelleZulip.html) (5 messages, latest: Aug 13 2019 at 23:59)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (15 messages, latest: Aug 13 2019 at 22:41)
 
@@ -1792,8 +1794,6 @@ permalink: archive/113488general/index.html
 * [find supr](73964findsupr.html) (3 messages, latest: Nov 09 2018 at 13:46)
 
 * [timeout](17192timeout.html) (12 messages, latest: Nov 09 2018 at 12:24)
-
-* [obtain](04670obtain.html) (7 messages, latest: Nov 09 2018 at 05:34)
 
 * [Import HOL theorems](95366ImportHOLtheorems.html) (9 messages, latest: Nov 08 2018 at 13:13)
 
