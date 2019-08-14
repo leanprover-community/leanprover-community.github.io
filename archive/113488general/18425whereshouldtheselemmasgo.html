@@ -243,6 +243,20 @@ Another example: there was a section about coercions randomly appearing between 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/172084171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#172084171">Mario Carneiro (Jul 30 2019 at 23:03)</a>:</h4>
 <p>When I originally wrote the file I didn't say much about <a href="http://rat.mk" target="_blank" title="http://rat.mk">rat.mk</a> beyond the basics because it's supposed to be an implementation detail. I'm not sure why all these lemmas are exposing it</p>
 
+<a name="173205755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/173205755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#173205755">Kevin Kappelmann (Aug 14 2019 at 14:05)</a>:</h4>
+<p>I finally came back to fix these lemmas and ran into the following rewriting issue:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">floor_div_eq_div</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">{</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="err">⌊</span><span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">d</span><span class="err">⌋</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">/</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- rw [rat.floor_def], -- this fails</span>
+  <span class="n">rw</span> <span class="o">[(</span><span class="k">show</span> <span class="err">⌊</span><span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">d</span><span class="err">⌋</span> <span class="bp">=</span> <span class="bp">_</span><span class="o">,</span> <span class="k">from</span> <span class="n">rat</span><span class="bp">.</span><span class="n">floor_def</span><span class="o">)],</span> <span class="c1">-- this works</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Maybe this is also related to <a href="https://github.com/leanprover-community/mathlib/pull/1276/files#diff-69913e770559c1df859d4767801aa0e0R292" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1276/files#diff-69913e770559c1df859d4767801aa0e0R292">this issue</a> that Patrick and I ran into a few weeks ago. Any idea what's going on here?</p>
+
 
 {% endraw %}
 

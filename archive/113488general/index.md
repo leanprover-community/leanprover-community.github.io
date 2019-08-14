@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [timeout when working with ideal over polynomial ring](78086timeoutwhenworkingwithidealoverpolynomialring.html) (1 message, latest: Aug 14 2019 at 14:17)
+
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (44 messages, latest: Aug 14 2019 at 14:05)
+
 * [obtain](04670obtain.html) (15 messages, latest: Aug 14 2019 at 13:35)
 
 * [Proving for Fun](94070ProvingforFun.html) (89 messages, latest: Aug 14 2019 at 11:00)
@@ -78,8 +82,6 @@ permalink: archive/113488general/index.html
 * [norm_num and nat.fact](97326normnumandnatfact.html) (8 messages, latest: Aug 01 2019 at 19:14)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (20 messages, latest: Jul 31 2019 at 21:21)
-
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (43 messages, latest: Jul 30 2019 at 23:03)
 
 * [unused arguments](84107unusedarguments.html) (66 messages, latest: Jul 30 2019 at 15:04)
 
