@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [easy questions](27038easyquestions.html) (104 messages, latest: Aug 14 2019 at 16:06)
+
 * [Calclulational proofs](18082Calclulationalproofs.html) (12 messages, latest: Aug 13 2019 at 14:23)
 
 * [nat.cast_smul](61981natcastsmul.html) (11 messages, latest: Aug 12 2019 at 14:29)
 
 * [Cast weirdness](76608Castweirdness.html) (11 messages, latest: Aug 12 2019 at 02:02)
-
-* [easy questions](27038easyquestions.html) (103 messages, latest: Aug 11 2019 at 17:52)
 
 * [Pulling class instances through "complicated" computations](69002Pullingclassinstancesthroughcomplicatedcomputations.html) (88 messages, latest: Aug 10 2019 at 12:45)
 
