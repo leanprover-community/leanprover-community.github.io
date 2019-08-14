@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (87 messages, latest: Aug 14 2019 at 10:50)
+* [Proving for Fun](94070ProvingforFun.html) (89 messages, latest: Aug 14 2019 at 11:00)
 
 * [obtain](04670obtain.html) (12 messages, latest: Aug 14 2019 at 09:09)
 
