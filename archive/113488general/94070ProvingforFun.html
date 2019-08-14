@@ -507,6 +507,32 @@ theorem yesitstrue : statement := theproof
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173215369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173215369">Alex J. Best (Aug 14 2019 at 15:50)</a>:</h4>
 <p>Yeah maybe that is easier, from my experiments yesterday breaking it (sorry <span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span> ), regex is hard to get perfect and esp. with lean's syntactic complexity ruling out all the edge cases sounds like it might take a little while, maybe the internal format is the way to go.</p>
 
+<a name="173231853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173231853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173231853">Floris van Doorn (Aug 14 2019 at 19:01)</a>:</h4>
+<p>I've been also thinking how to make this robust. Maybe this works:<br>
+As <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> suggested have a separate file <code>statement.lean</code>, which contains the statement, but does <em>not</em> import <code>submission.lean</code>. To make it robust, how about we generate a random name with 16 random letters (different for every time someone submits), and then:</p>
+<p>statement.lean</p>
+<div class="codehilite"><pre><span></span>def &lt;random_name&gt; := false
+</pre></div>
+
+
+<p>check.lean</p>
+<div class="codehilite"><pre><span></span>import .statement .submission
+
+theorem yesitstrue : &lt;random_name&gt; := soundness_bug
+</pre></div>
+
+
+<p>Does anyone know an attack against that?</p>
+
+<a name="173236079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173236079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173236079">Rob Lewis (Aug 14 2019 at 19:53)</a>:</h4>
+<p><code>.submission</code> could have a metaprogram that reads the file <code>statement.lean</code> and tries to parse the name.</p>
+
+<a name="173236572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Proving%20for%20Fun/near/173236572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94070ProvingforFun.html#173236572">Kevin Kappelmann (Aug 14 2019 at 19:59)</a>:</h4>
+<p>If I understand correctly, in Isabelle, they save the statement context in a local file and then load that file in  <code>.submission</code> - see <a href="https://www21.in.tum.de/~haslbema/documents/Haslbeck_Wimmer-Competitive_Proving_for_Fun.pdf" target="_blank" title="https://www21.in.tum.de/~haslbema/documents/Haslbeck_Wimmer-Competitive_Proving_for_Fun.pdf">here</a> page 4</p>
+
 
 {% endraw %}
 
