@@ -1,0 +1,30 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html">timeout when working with ideal of polynomial ring</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173238255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/173238255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#173238255">Rob Lewis (Aug 14 2019 at 20:20)</a>:</h4>
+<p>This is yet another type class issue. The temporary fix: <code>instance mpp : module (polynomial α) (polynomial α) := by apply_instance</code></p>
+
+<a name="173239753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/173239753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#173239753">Kevin Buzzard (Aug 14 2019 at 20:36)</a>:</h4>
+<p>So what is happening here? Making <code>mpp</code> an instance makes type class inference behave differently? Basically it finds it earlier? Could one use priorities to somehow fix this?</p>
+
+<a name="173240725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/173240725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#173240725">Rob Lewis (Aug 14 2019 at 20:46)</a>:</h4>
+<p>The logs are migraine inducing, so I don't have an exact answer. But basically yeah, if <code>mpp</code> is the last instance added it's the first one tried, and the resolution path avoids some very costly search path. It's possible a local priority change could fix this instance, and I don't think we ever systematically adopted this idea from Floris (which we should): <a href="#narrow/stream/113488-general/topic/more.20type.20class.20inference.20issues/near/167026105" title="#narrow/stream/113488-general/topic/more.20type.20class.20inference.20issues/near/167026105">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more.20type.20class.20inference.20issues/near/167026105</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

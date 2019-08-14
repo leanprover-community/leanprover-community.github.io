@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (96 messages, latest: Aug 14 2019 at 19:59)
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (3 messages, latest: Aug 14 2019 at 20:46)
+
+* [Proving for Fun](94070ProvingforFun.html) (100 messages, latest: Aug 14 2019 at 20:11)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (46 messages, latest: Aug 14 2019 at 19:53)
 
