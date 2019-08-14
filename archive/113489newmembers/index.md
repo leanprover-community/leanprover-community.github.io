@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1325 messages, latest: Aug 14 2019 at 21:53)
+
 * [easy questions](27038easyquestions.html) (106 messages, latest: Aug 14 2019 at 17:05)
 
 * [Calclulational proofs](18082Calclulationalproofs.html) (12 messages, latest: Aug 13 2019 at 14:23)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [hoogle/search](37540hooglesearch.html) (12 messages, latest: Aug 09 2019 at 04:26)
 
 * [linarith and "not equal"](14844linarithandnotequal.html) (13 messages, latest: Aug 06 2019 at 10:10)
-
-* [noob question(s)](52075noobquestions.html) (1322 messages, latest: Aug 05 2019 at 21:56)
 
 * [defining wff](03976definingwff.html) (9 messages, latest: Aug 03 2019 at 01:24)
 

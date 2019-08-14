@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (3 messages, latest: Aug 14 2019 at 20:46)
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (7 messages, latest: Aug 14 2019 at 21:55)
 
 * [Proving for Fun](94070ProvingforFun.html) (100 messages, latest: Aug 14 2019 at 20:11)
 
