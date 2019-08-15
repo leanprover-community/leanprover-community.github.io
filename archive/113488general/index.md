@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (1 message, latest: Aug 15 2019 at 09:29)
+* [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (3 messages, latest: Aug 15 2019 at 17:51)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
 

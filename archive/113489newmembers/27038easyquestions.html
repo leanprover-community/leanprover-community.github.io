@@ -663,6 +663,36 @@ fin_is_even' : Π (n : ℕ), fin n → bool
 <span class="c1">--| (n +1) x := bnot (fin_is_even&#39; n i)</span>
 </pre></div>
 
+<a name="173308047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/173308047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#173308047">Gun Pinyo (Aug 15 2019 at 17:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> , thank you, now I can see why fin.succ doesn't work. Anyway, is there any other that allow us use something like fin.zero and fin.succ in pattern matching? I really miss the following alternative definition of <code>fin</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">fin&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">fin&#39;</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">succ</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">fin&#39;</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">fin&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But I use this definition, it is incompatible with the standard library.</p>
+<blockquote>
+<p>I think the <code>pattern</code> attribute only works for things that are definitionally equal to a constructor</p>
+</blockquote>
+<p>How about this following code in <code>data.vector</code>? Is this definitionally equal to any constructor? I fact, I haven't seen any code using pattern matching on <code>vector</code></p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">def</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">vector</span> <span class="n">α</span> <span class="mi">0</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">[],</span>  <span class="n">rfl</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">def</span> <span class="n">cons</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="bp">⟨</span> <span class="n">v</span><span class="o">,</span> <span class="n">h</span> <span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="n">a</span><span class="bp">::</span><span class="n">v</span><span class="o">,</span> <span class="n">congr_arg</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">h</span> <span class="bp">⟩</span>
+</pre></div>
+
+<a name="173309108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/173309108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#173309108">Chris Hughes (Aug 15 2019 at 17:46)</a>:</h4>
+<p><code>nil</code> definitely is. <code>cons</code> definitely isn't.</p>
+<p>Actually it depends on the vector you're trying to match with. If your vector is a variable then it won't work. If you do</p>
+<div class="codehilite"><pre><span></span><span class="k">match</span> <span class="n">vector</span><span class="bp">.</span><span class="n">mk</span> <span class="n">l</span> <span class="n">rfl</span> <span class="k">with</span><span class="bp">...</span>
+</pre></div>
+
+
+<p>Then it has a better chance of working, but I think the prood of equality would have to be rfl.</p>
+
 
 {% endraw %}
 

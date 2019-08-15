@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling mul_homs](58200bundlingmulhoms.html) (344 messages, latest: Aug 15 2019 at 17:55)
+
 * [plus construction](02096plusconstruction.html) (19 messages, latest: Aug 14 2019 at 21:30)
 
 * [list.maximum should return option](56145listmaximumshouldreturnoption.html) (6 messages, latest: Aug 12 2019 at 08:42)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [gluing presheaves](99453gluingpresheaves.html) (11 messages, latest: Aug 11 2019 at 11:46)
 
 * [sensitivity conjecture](98622sensitivityconjecture.html) (498 messages, latest: Aug 10 2019 at 14:13)
-
-* [bundling mul_homs](58200bundlingmulhoms.html) (337 messages, latest: Aug 10 2019 at 09:12)
 
 * [IMO problems](23946IMOproblems.html) (45 messages, latest: Aug 09 2019 at 11:14)
 
