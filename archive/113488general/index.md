@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (1 message, latest: Aug 15 2019 at 09:29)
+
 * [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (8 messages, latest: Aug 15 2019 at 08:38)
