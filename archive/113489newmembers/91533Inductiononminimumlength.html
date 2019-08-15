@@ -26,6 +26,50 @@ permalink: archive/113489newmembers/91533Inductiononminimumlength.html
 <p>In maths parlance, I would say "Suppose <code>b</code> is an element of <code>foo a</code> of minimal length.  We will induct on this minimal length..." and then I can induct.  How do I set this up in lean.  Are there any docs that I can read about this that aren't just uncommented code?</p>
 <p>As an aside rant, am I doing something wrong in that I'm finding lean a really difficult language/framework to pick up?  Simply finding the lemmas I need (or working out that they don't exist) is a huge pain, and <code>#find</code> in the mathlib doesn't seem to ever work for me.  I feel as if I need to memorize what is where in the mathlib, and it is becoming quite a chore.  I also find myself wishing for much more "the beginner's guide to proving stuff in mathlib about {lattices | rings | finite things | lists }"-like documentation.  Ok.  <code>&lt;/rant&gt;</code>  Any advice would be useful.</p>
 
+<a name="173293005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173293005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173293005">Kevin Kappelmann (Aug 15 2019 at 14:04)</a>:</h4>
+<p>I am pretty much a noob myself, but here is my almost surely way too complicated first attempt:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">P</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">s</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">set</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="o">{</span> <span class="n">n</span> <span class="bp">|</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">foo</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">length</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">},</span>
+  <span class="k">have</span> <span class="n">is_min</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">m</span><span class="o">,</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="err">∈</span> <span class="n">s</span> <span class="n">a</span><span class="o">),</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">has_min</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span><span class="o">,</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">is_min</span> <span class="n">a</span> <span class="n">m</span><span class="o">,</span> <span class="k">by</span> <span class="n">sorry</span><span class="o">,</span> <span class="c1">-- show that there is a minimum</span>
+  <span class="c1">-- you might use prop_deciable to remove the next sorry</span>
+  <span class="k">have</span> <span class="n">min_of</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">find</span> <span class="o">(</span><span class="n">is_min</span> <span class="n">a</span><span class="o">)</span> <span class="n">sorry</span> <span class="o">(</span><span class="n">has_min</span> <span class="n">a</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">a&#39;</span><span class="o">,</span> <span class="n">min_of</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">min_of</span> <span class="n">a&#39;</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="n">well_founded</span> <span class="n">r</span><span class="o">,</span> <span class="k">by</span> <span class="n">sorry</span><span class="o">,</span> <span class="c1">-- show that r is well_founded</span>
+  <span class="k">assume</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">well_founded</span><span class="bp">.</span><span class="n">induction</span> <span class="n">this</span> <span class="n">a</span>
+  <span class="o">(</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hyp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">r</span> <span class="n">y</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">y</span><span class="o">),</span>
+    <span class="k">begin</span>
+      <span class="k">show</span> <span class="n">P</span> <span class="n">x</span><span class="o">,</span> <span class="n">sorry</span>
+    <span class="kn">end</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>edit: fix <code>le</code> to <code>lt</code></p>
+
+<a name="173293033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173293033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173293033">Chris Hughes (Aug 15 2019 at 14:04)</a>:</h4>
+<p>These docs might help with the induction. <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+
+<a name="173295489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173295489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173295489">Chris Hughes (Aug 15 2019 at 14:37)</a>:</h4>
+<p>I think most people found Lean a very difficult language to pick up. Finding lemmas becomes easier once you learn the naming conventions, and eventually you end up just knowing the most used lemmas. Beginner's guides to proving stuff about rings etc is also definitely needed. I'm never quite sure what should go into these things,  there is a file called <code>theories</code> in the <code>docs</code> folder right now, but I don't think it's that helpful at the moment.</p>
+
+<a name="173295541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173295541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173295541">Chris Hughes (Aug 15 2019 at 14:38)</a>:</h4>
+<p>Most people learn by asking questions here.</p>
+
+<a name="173296340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173296340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173296340">Robert Spencer (Aug 15 2019 at 14:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="198376">@Kevin Kappelmann</span>: cheers for that.  I'll take a look.  I think <code>well_founded.induction</code> is what I was really looking for (which isn't mentioned in the mathlib docs as far as I can see?)</p>
+
+<a name="173296536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173296536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173296536">Robert Spencer (Aug 15 2019 at 14:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Yes, but I worry I am asking too many silly questions!</p>
+
 
 {% endraw %}
 

@@ -615,6 +615,40 @@ except that <code>fin.zero</code> is changed to <code>0</code>. Everything shoul
   <span class="kn">end</span>
 </pre></div>
 
+<a name="173292870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/173292870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#173292870">Gun Pinyo (Aug 15 2019 at 14:02)</a>:</h4>
+<p>I still have another question regarding <code>fin</code>.  Sometimes, I want to use pattern matching on <code>i : fin n</code> in the same way as one will do in <code>ℕ</code> but since the inductive part is in <code>i.val</code> so I need to do as follows:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">fin_is_even</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>      <span class="n">i</span>                        <span class="o">:=</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span>    <span class="bp">_⟩</span>                <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">⟨</span><span class="n">i_val</span> <span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">succ_i_is_lt</span><span class="bp">⟩</span> <span class="o">:=</span>
+     <span class="k">let</span> <span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">i_val</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pred_le_pred</span> <span class="n">succ_i_is_lt</span><span class="bp">⟩</span>
+      <span class="k">in</span> <span class="n">bnot</span> <span class="o">(</span><span class="n">fin_is_even</span> <span class="n">n</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Ok it works, but in practice, I find it quite annoying to write <code>let i : fin n := ⟨i_val, nat.pred_le_pred succ_i_is_lt⟩</code> every time whereas <code>i</code> should be obtained directly from something like <code>fin.succ i</code>. Therefore, I try to use <code>@[pattern]</code> to help me with this as follows:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">pattern</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_lt_succ</span> <span class="n">n</span><span class="bp">⟩</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="n">def</span> <span class="n">fin_is_even&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>      <span class="n">i</span>            <span class="o">:=</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span>     <span class="o">:=</span> <span class="n">true</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">succ</span> <span class="n">i</span><span class="o">)</span> <span class="o">:=</span> <span class="n">bnot</span> <span class="o">(</span><span class="n">fin_is_even&#39;</span> <span class="n">n</span> <span class="n">i</span><span class="o">)</span>
+</pre></div>
+
+
+<p>However I get an error, what is wrong with my code?  Did I misunderstand anything about <code>@[pattern]</code>?</p>
+<p>err msg1:<br>
+<code>invalid function application in pattern, it cannot be reduced to a constructor (possible solution, mark term as inaccessible using '.( )')</code><br>
+err msg2:<br>
+<code>don't know how to synthesize placeholder
+context:
+fin_is_even' : Π (n : ℕ), fin n → bool
+⊢ fin n</code></p>
+
 
 {% endraw %}
 
