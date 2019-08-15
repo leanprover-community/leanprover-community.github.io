@@ -649,6 +649,20 @@ context:
 fin_is_even' : Π (n : ℕ), fin n → bool
 ⊢ fin n</code></p>
 
+<a name="173297330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/easy%20questions/near/173297330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27038easyquestions.html#173297330">Chris Hughes (Aug 15 2019 at 15:03)</a>:</h4>
+<p>You're basically expecting the equation compiler to determine whether an element of <code>fin n</code> is in the image of <code>fin.succ</code> or not, and if it is what the element that maps to it is. This is very hard in general. I think the <code>pattern</code> attribute only works for things that are definitionally equal to a constructor. for example <code>λ x, x + 2 = λ x, nat.succ (nat.succ x)</code>, by definition, so marking add with the pattern attribute works. Incidentall changing your definition of <code>fin.zero</code> also works - it also wanted to reduce the proof to a constructor, but it's probably not a desirable change.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">pattern</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">fin</span><span class="bp">.</span><span class="n">zero</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span><span class="o">):</span> <span class="n">fin</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">pattern</span><span class="o">]</span> <span class="n">fin</span><span class="bp">.</span><span class="n">succ</span>
+
+<span class="n">def</span> <span class="n">fin_is_even&#39;</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="mi">0</span>      <span class="n">i</span>            <span class="o">:=</span> <span class="n">i</span><span class="bp">.</span><span class="n">elim0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">fin</span><span class="bp">.</span><span class="n">zero</span> <span class="n">h</span><span class="o">)</span>     <span class="o">:=</span> <span class="n">true</span>
+<span class="c1">--| (n +1) x := bnot (fin_is_even&#39; n i)</span>
+</pre></div>
+
 
 {% endraw %}
 

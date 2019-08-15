@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction on minimum "length"](91533Inductiononminimumlength.html) (7 messages, latest: Aug 15 2019 at 14:52)
+* [easy questions](27038easyquestions.html) (108 messages, latest: Aug 15 2019 at 15:03)
 
-* [easy questions](27038easyquestions.html) (107 messages, latest: Aug 15 2019 at 14:02)
+* [Induction on minimum "length"](91533Inductiononminimumlength.html) (8 messages, latest: Aug 15 2019 at 15:01)
 
 * [noob question(s)](52075noobquestions.html) (1325 messages, latest: Aug 14 2019 at 21:53)
 

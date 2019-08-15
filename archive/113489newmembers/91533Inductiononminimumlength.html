@@ -70,6 +70,23 @@ permalink: archive/113489newmembers/91533Inductiononminimumlength.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173296536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173296536">Robert Spencer (Aug 15 2019 at 14:52)</a>:</h4>
 <p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Yes, but I worry I am asking too many silly questions!</p>
 
+<a name="173297198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173297198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173297198">Floris van Doorn (Aug 15 2019 at 15:01)</a>:</h4>
+<p>You can use this lemma, which should be added to mathlib:</p>
+<div class="codehilite"><pre><span></span>import data.set.basic tactic.localized
+
+open set
+open_locale classical
+lemma find_min {α} (f : α → ℕ) (s : set α) (h : ∃ x, x ∈ s) :
+  ∃(x ∈ s), ∀(y ∈ s), f x ≤ f y :=
+begin
+  cases h with x hx,
+  have hn : ∃ n, n ∈ f &#39;&#39; s := ⟨f x, set.mem_image_of_mem f hx⟩,
+  have := nat.find_spec hn, rw [mem_image] at this, rcases this with ⟨x&#39;, h1x&#39;, h2x&#39;⟩,
+  refine ⟨x&#39;, h1x&#39;, _⟩, intros y hy, rw [h2x&#39;], exact nat.find_min&#39; hn (mem_image_of_mem f hy)
+end
+</pre></div>
+
 
 {% endraw %}
 
