@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (7 messages, latest: Aug 14 2019 at 21:55)
+* [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
+
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (8 messages, latest: Aug 15 2019 at 08:38)
 
 * [Proving for Fun](94070ProvingforFun.html) (100 messages, latest: Aug 14 2019 at 20:11)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [obtain](04670obtain.html) (15 messages, latest: Aug 14 2019 at 13:35)
 
 * [Isabelle Zulip?](86325IsabelleZulip.html) (5 messages, latest: Aug 13 2019 at 23:59)
-
-* [incorrect def/lemma](54132incorrectdeflemma.html) (15 messages, latest: Aug 13 2019 at 22:41)
 
 * [custom docstring](81257customdocstring.html) (5 messages, latest: Aug 11 2019 at 23:46)
 
