@@ -102,6 +102,27 @@ My issues are not reallyproblems I can't solve, but things that could be massive
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173393838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173393838">Floris van Doorn (Aug 16 2019 at 17:59)</a>:</h4>
 <p>I agree that <code>is_group_hom.map_mul</code> should exist. What is the argument against it? We already have both <code>is_mul_hom.map_mul</code> and <code>is_monoid_hom.map_mul</code>. I understand that generally we don't want to state the same lemma twice, but for the sake of projection notation, it seems useful.</p>
 
+<a name="173398978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173398978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173398978">Sebastien Gouezel (Aug 16 2019 at 19:04)</a>:</h4>
+<blockquote>
+<p>I don't understand what the problem with code duplication is. Who cares?</p>
+</blockquote>
+<p>Suppose I have developed a theory of <code>local_equiv</code>s (partially defined bijections), with 50 lemmas on how the source and target of a local equiv interact with composition, restriction, and so on. And then I want to build local homeomorphisms. With a new style structure, I need to write <code>e.to_local_equiv</code>everywhere. With the old style structure, I need to copy my 50 lemmas to the new setting. And then when I improve local equivs by adding a lemma, or changing the order of parameters, or renaming the lemmas, then I need to update also the local homeomorphisms file, as otherwise things are not coherent any more. In both cases, this is very frustrating.</p>
+<p>I started with new style, then I got tired of all this <code>to_local_equiv</code>, so I switched to old style, but this is becoming a maintenance nightmare, so I am considering to move back to new style. Not to mention that I started without coercions, then I realized that coercions are used everywhere with respect to equivs, so I switched to coercions, but this is creating problems down the hill (coercions need the type to be fully elaborated, so I have to add a lot of annotations). So I am considering removing the coercions again... This is really hard to get right. After experimenting with everything, it seems that I will end with new style structure, and no coercion. Unless someone here convinces me to switch again :)</p>
+
+<a name="173399955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173399955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173399955">Andrew Ashworth (Aug 16 2019 at 19:16)</a>:</h4>
+<p>Sounds like we should add something to vscode so that autocomplete will work such that you could type foo.tle (key combination) and have it be expanded out to foo.to_local_equiv</p>
+
+<a name="173400855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173400855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173400855">Sebastien Gouezel (Aug 16 2019 at 19:29)</a>:</h4>
+<p>Sounds like we should add something to the parser so that, if it sees <code>e.foo</code> for <code>e</code>of type <code>local_homeomorph</code> and there is no <code>local_homeomorph.foo</code>, then it goes down the line of inheritance for <code>local_homeomorph</code> (exploring the ancestors either breadth-first or depth first or something more complicated as in Python, I don't mind) looking for somehting named <code>foo</code> in one of these namespaces, and uses the first one it finds.</p>
+<p>Except that "we" doesn't mean "me" because this is way above my league, so I don't see this done any time soon: people who could do it have more important things to do!</p>
+
+<a name="173401841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173401841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173401841">Chris Hughes (Aug 16 2019 at 19:42)</a>:</h4>
+<p>How about just <code>map_mul</code> instead of <code>group_hom.map_mul</code>? And the docstribg should mention it doesn't work for <code>semiring_hom</code>, which should be renamed <code>ring_hom</code></p>
+
 
 {% endraw %}
 
