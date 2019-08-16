@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (72 messages, latest: Aug 16 2019 at 10:27)
+
 * [protected and add_decl](26846protectedandadddecl.html) (13 messages, latest: Aug 16 2019 at 08:41)
 
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (4 messages, latest: Aug 15 2019 at 18:05)
@@ -636,8 +638,6 @@ permalink: archive/113488general/index.html
 * [alternate notation for nat.cast?](16271alternatenotationfornatcast.html) (30 messages, latest: May 01 2019 at 13:19)
 
 * [Trying to run update-mathlib](90727Tryingtorunupdatemathlib.html) (28 messages, latest: Apr 30 2019 at 18:20)
-
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (71 messages, latest: Apr 29 2019 at 19:07)
 
 * [Assumptions about data produced by `classical.choice`](21205Assumptionsaboutdataproducedbyclassicalchoice.html) (9 messages, latest: Apr 29 2019 at 18:27)
 
