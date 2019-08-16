@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Induction on minimum "length"](91533Inductiononminimumlength.html) (23 messages, latest: Aug 16 2019 at 15:52)
+* [cases on mutually recursive types](94871casesonmutuallyrecursivetypes.html) (1 message, latest: Aug 16 2019 at 16:40)
+
+* [Induction on minimum "length"](91533Inductiononminimumlength.html) (24 messages, latest: Aug 16 2019 at 16:31)
 
 * [easy questions](27038easyquestions.html) (111 messages, latest: Aug 16 2019 at 07:17)
 

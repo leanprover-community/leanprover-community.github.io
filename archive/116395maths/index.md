@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling mul_homs](58200bundlingmulhoms.html) (351 messages, latest: Aug 16 2019 at 15:51)
+* [bundling mul_homs](58200bundlingmulhoms.html) (352 messages, latest: Aug 16 2019 at 16:58)
 
 * [plus construction](02096plusconstruction.html) (19 messages, latest: Aug 14 2019 at 21:30)
 

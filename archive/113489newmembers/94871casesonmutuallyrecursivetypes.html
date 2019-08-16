@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/94871casesonmutuallyrecursivetypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/94871casesonmutuallyrecursivetypes.html">cases on mutually recursive types</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173388108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20on%20mutually%20recursive%20types/near/173388108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94871casesonmutuallyrecursivetypes.html#173388108">Jonathan Coates (Aug 16 2019 at 16:40)</a>:</h4>
+<p>Sorry if this is the wrong place to ask this - just wanted to double check a couple of things before flying off to the issue tracker. I've been trying to use the <code>cases</code> tactic on mutually-recursive types, and hit a bit of a wall. Basically, consider the (somewhat absurd) type:</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">inductive</span> <span class="n">mut</span><span class="o">,</span> <span class="n">aux</span>
+<span class="k">with</span> <span class="n">mut</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">mono</span> <span class="o">:</span> <span class="n">mut</span> <span class="bp">→</span> <span class="n">mut</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="n">mut</span> <span class="bp">→</span> <span class="n">mut</span> <span class="bp">→</span> <span class="n">mut</span>
+<span class="k">with</span> <span class="n">aux</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="n">aux</span>
+</pre></div>
+
+
+<p>I'm trying to use it as follows:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">mut</span> <span class="bp">→</span> <span class="n">aux</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">intro</span> <span class="n">xs</span><span class="o">,</span> <span class="n">cases</span> <span class="n">xs</span><span class="o">,</span>
+    <span class="n">case</span> <span class="n">mut</span><span class="bp">.</span><span class="n">mono</span> <span class="o">:</span> <span class="n">x</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">x</span> <span class="o">},</span>
+    <span class="n">case</span> <span class="n">mut</span><span class="bp">.</span><span class="n">cons</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">_</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">x</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p><em>However</em>, while this looks like it should work, it fails to check - <code>mut.mono</code> and <code>mut.cons</code> are not actually constructors.</p>
+<p>Using <code>#print</code> shows that <code>mut.mono</code> is in fact an alias to the actual constructor (<code>@[pattern] def mut.mono : mut → mut := mut._mut_.mono_0</code>). Just wondering - is this expected behaviour, and if so, is there a suitable workaround?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
