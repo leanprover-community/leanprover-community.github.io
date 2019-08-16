@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (72 messages, latest: Aug 16 2019 at 10:27)
+* [protected and add_decl](26846protectedandadddecl.html) (14 messages, latest: Aug 16 2019 at 14:25)
 
-* [protected and add_decl](26846protectedandadddecl.html) (13 messages, latest: Aug 16 2019 at 08:41)
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (72 messages, latest: Aug 16 2019 at 10:27)
 
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (4 messages, latest: Aug 15 2019 at 18:05)
 
