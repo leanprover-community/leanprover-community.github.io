@@ -35,6 +35,23 @@ permalink: archive/113489newmembers/94871casesonmutuallyrecursivetypes.html
 <p><em>However</em>, while this looks like it should work, it fails to check - <code>mut.mono</code> and <code>mut.cons</code> are not actually constructors.</p>
 <p>Using <code>#print</code> shows that <code>mut.mono</code> is in fact an alias to the actual constructor (<code>@[pattern] def mut.mono : mut → mut := mut._mut_.mono_0</code>). Just wondering - is this expected behaviour, and if so, is there a suitable workaround?</p>
 
+<a name="173389753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20on%20mutually%20recursive%20types/near/173389753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94871casesonmutuallyrecursivetypes.html#173389753">Mario Carneiro (Aug 16 2019 at 17:03)</a>:</h4>
+<p>This is expected behavior. <code>cases</code> and <code>induction</code> only currently work on <em>actual</em> inductive types, which limits their usefulness when applied to mutual and nested inductives, which are compiled to simple inductive types. Try using the equation compiler instead, which respects these fake inductives</p>
+
+<a name="173389862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20on%20mutually%20recursive%20types/near/173389862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94871casesonmutuallyrecursivetypes.html#173389862">Mario Carneiro (Aug 16 2019 at 17:04)</a>:</h4>
+<p>But the real answer is that nested and mutual inductives are buggy and unstable so we avoid them when possible</p>
+
+<a name="173390324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20on%20mutually%20recursive%20types/near/173390324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94871casesonmutuallyrecursivetypes.html#173390324">Jonathan Coates (Aug 16 2019 at 17:11)</a>:</h4>
+<p>Ah that's good to know, thank you!</p>
+<p>I was originally using the equation compiler/<code>match</code> expressions, and then found myself rather wanting the constructor hypothesis that <code>cases</code> provides.</p>
+
+<a name="173391821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cases%20on%20mutually%20recursive%20types/near/173391821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/94871casesonmutuallyrecursivetypes.html#173391821">Mario Carneiro (Aug 16 2019 at 17:31)</a>:</h4>
+<p>you can get the hypothesis by doing the same trick that cases does: use <code>match t, rfl : \forall x : T, x = t -&gt; _ with ...</code></p>
+
 
 {% endraw %}
 

@@ -52,6 +52,56 @@ permalink: archive/113488general/11825dotnotationandinheritance.html
 <p>I don't think there is a good structured way to do this. </p>
 <p>A hackish way that might help a bit with (2): you could do something like <code>local postfix </code>↟<code>:max := extended.to_basic</code>.</p>
 
+<a name="173391414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391414">Kevin Buzzard (Aug 16 2019 at 17:25)</a>:</h4>
+<p>A related issue is that <code>group_hom.map_mul</code>doesn't exist even though this is what a mathematician would guess it was called. I just want to make more fields to fix it but I am told by the CS guys that instead I have to write good docs</p>
+
+<a name="173391509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391509">Kevin Buzzard (Aug 16 2019 at 17:27)</a>:</h4>
+<p>The docs are supposed to contain a dictionary between what you want to call it and what you have to call it</p>
+
+<a name="173391513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391513">Sebastien Gouezel (Aug 16 2019 at 17:27)</a>:</h4>
+<p>Well, what prevents you from defining it (as a lemma, I mean, not as a field)?</p>
+
+<a name="173391532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391532">Kevin Buzzard (Aug 16 2019 at 17:27)</a>:</h4>
+<p>Apparently they don't even want the namespace to exist</p>
+
+<a name="173391612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391612">Kevin Buzzard (Aug 16 2019 at 17:28)</a>:</h4>
+<p>I don't understand why. You can fix your issues by just defining some stuff, right? Or is it worse than that?</p>
+
+<a name="173391666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391666">Kevin Buzzard (Aug 16 2019 at 17:29)</a>:</h4>
+<p>Use the old structure command and just hack things out. That solves your problems right?</p>
+
+<a name="173391751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173391751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173391751">Kevin Buzzard (Aug 16 2019 at 17:30)</a>:</h4>
+<p>I'm sorry I can't check, I'm away from Lean</p>
+
+<a name="173392106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173392106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173392106">Sebastien Gouezel (Aug 16 2019 at 17:35)</a>:</h4>
+<p>You don't need the namespace to exist, you can define the lemma <code>group_hom.map_mul</code> if you like.<br>
+My issues are not reallyproblems I can't solve, but things that could be massively improved. Maybe in Lean 4. </p>
+<p>The old structure command is not really a solution, as it means you need to restate all your lemmas in the new namespace. What I would like to avoid is code duplication, and clutter in the proofs.</p>
+
+<a name="173392479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173392479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173392479">Kevin Buzzard (Aug 16 2019 at 17:40)</a>:</h4>
+<p>I don't understand what the problem with code duplication is. Who cares?</p>
+
+<a name="173392715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173392715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173392715">Kevin Buzzard (Aug 16 2019 at 17:44)</a>:</h4>
+<p>Mathematicians want <code>group_hom.map_mul </code> because it's what it's called. I couldn't care less if the parser just ate <code>group_hom</code> and replaced it with <code>monoid_hom</code> -- as far as I am concerned these two tokens are syntactically equal but I want to be able to tell lean's pretty printer what I want to see because mathematicians simply do not care about monoids and it makes the software more intimidating</p>
+
+<a name="173392765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173392765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173392765">Kevin Buzzard (Aug 16 2019 at 17:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="228602">@Sian Carey</span> has taught me a lot of things about how a good mathematician who is a complete beginner in Lean still has to wrestle with group homomorphisms</p>
+
+<a name="173393838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173393838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173393838">Floris van Doorn (Aug 16 2019 at 17:59)</a>:</h4>
+<p>I agree that <code>is_group_hom.map_mul</code> should exist. What is the argument against it? We already have both <code>is_mul_hom.map_mul</code> and <code>is_monoid_hom.map_mul</code>. I understand that generally we don't want to state the same lemma twice, but for the sake of projection notation, it seems useful.</p>
+
 
 {% endraw %}
 

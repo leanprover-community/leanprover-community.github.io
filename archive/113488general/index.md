@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [dot notation and inheritance](11825dotnotationandinheritance.html) (4 messages, latest: Aug 16 2019 at 16:42)
+* [dot notation and inheritance](11825dotnotationandinheritance.html) (16 messages, latest: Aug 16 2019 at 17:59)
 
 * [protected and add_decl](26846protectedandadddecl.html) (14 messages, latest: Aug 16 2019 at 14:25)
 
