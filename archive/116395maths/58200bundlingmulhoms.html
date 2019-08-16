@@ -1845,6 +1845,32 @@ It automates:</p>
 <li>mapping of <code>name.cases_on</code> by mapping prefixes instead of names.</li>
 </ul>
 
+<a name="173380631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/173380631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#173380631">Yury G. Kudryashov (Aug 16 2019 at 15:03)</a>:</h4>
+<p>Other items I want to add before making a PR:</p>
+<ul>
+<li>take docstring as an optional argument; alternative is to use <code>run_cmd add_doc_string</code> after each definition;</li>
+<li>autogenerate target namespace using <code>to_additive_attr.get_param src.get_prefix</code>; ask for the suffix only;</li>
+<li>make “target name” argument optional;<ul>
+<li>simple: use the same suffix as in the source name, e.g. <code>monoid_hom.comp</code> → <code>add_monoid_hom.comp</code>;</li>
+<li>advanced: parse suffix replacing <code>mul→add</code>, <code>one→zero</code>, <code>prod→sum</code> (what else?).</li>
+</ul>
+</li>
+<li>automatically create <code>target.equations._eqn_1</code>.</li>
+</ul>
+
+<a name="173381636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/173381636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#173381636">Yury G. Kudryashov (Aug 16 2019 at 15:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> what is responsible for creating <code>my_name.equations._eqn_1</code>? Is it intentional that this thing is called after normal <code>def</code>s but not after <code>add_decl</code>s?</p>
+
+<a name="173383070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/173383070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#173383070">Floris van Doorn (Aug 16 2019 at 15:35)</a>:</h4>
+<p>I think it's the equation compiler who adds those equalities. <code>add_decl</code> (and its relatives, like <code>add_inductive</code>) indeed doesn't have the same side effects (like creating auxiliary definitions) as adding a declaration normally. It's probably useful to have both the version with and without side-effects, and it was suggested previously to expose versions with side effects in the community fork of Lean.</p>
+
+<a name="173384538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20mul_homs/near/173384538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58200bundlingmulhoms.html#173384538">Yury G. Kudryashov (Aug 16 2019 at 15:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Then I'll postpone automatic handling of equations till we have <code>add_decl_with_side_effects</code>.</p>
+
 
 {% endraw %}
 

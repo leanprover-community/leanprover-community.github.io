@@ -105,6 +105,64 @@ end
 <p>Don't let it be said I am a DenverCoder9<br>
 (<a href="https://xkcd.com/979/" target="_blank" title="https://xkcd.com/979/">https://xkcd.com/979/</a>)</p>
 
+<a name="173381093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173381093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173381093">Floris van Doorn (Aug 16 2019 at 15:09)</a>:</h4>
+<p>Oh, after I started writing some Lean code, I forgot what you asked for, and solved a different problem. I'm glad that my lemma was still useful.</p>
+
+<a name="173381221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173381221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173381221">Floris van Doorn (Aug 16 2019 at 15:11)</a>:</h4>
+<p>Is this the induction principle you are looking for? I'm mostly posting this to show that you don't have to get into the gritty details with <code>measure_wf</code> or anything: (it uses the previous <code>find_min</code> lemma)</p>
+<div class="codehilite"><pre><span></span>lemma length_strong_induction {α β} (P :α → Prop) (f : α → set β) (hf : ∀ x, ∃ y, y ∈ f x)
+  (l : β → ℕ) : let Q := λ n, ∀ x, (∃ y ∈ f x, l y = n ∧ ∀ y&#39; ∈ f x, l y ≤ l y&#39;) → P x in
+    ∀(h_ind : ∀ n, (∀ m &lt; n, Q m) → Q n) (x : α), P x :=
+begin
+  intros, have : ∀ n, Q n := λ n, nat.strong_induction_on n h_ind,
+  rcases find_min l (f x) (hf x) with ⟨y, h1y, h2y⟩, exact this (l y) x ⟨y, h1y, rfl, h2y⟩
+end
+</pre></div>
+
+
+<p>(edit: simplified code)</p>
+
+<a name="173381330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173381330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173381330">Floris van Doorn (Aug 16 2019 at 15:12)</a>:</h4>
+<p>This is the "strong induction" version, of course you can also prove a "simple induction" version.</p>
+
+<a name="173381975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173381975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173381975">Kevin Buzzard (Aug 16 2019 at 15:20)</a>:</h4>
+<p>Oh! You were at my CMS talk? That's great to hear! Do you know Ed Ayers?</p>
+
+<a name="173382080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173382080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173382080">Kevin Buzzard (Aug 16 2019 at 15:22)</a>:</h4>
+<p>I disagree that it's not ready for mathematians. I have supervised many Lean projects done by undergraduate mathematicians. You just have to teach them how to use Lean.</p>
+
+<a name="173382098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173382098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173382098">Kevin Buzzard (Aug 16 2019 at 15:22)</a>:</h4>
+<p>It's as simple as that</p>
+
+<a name="173382137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173382137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173382137">Kevin Buzzard (Aug 16 2019 at 15:23)</a>:</h4>
+<p>Once they can start formalising the problems they have, the computer scientists start fixing them</p>
+
+<a name="173382221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173382221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173382221">Kevin Buzzard (Aug 16 2019 at 15:24)</a>:</h4>
+<p>Just work on a project. Try to define a random hard thing and when you get stuck just ask loads of questions here</p>
+
+<a name="173383209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173383209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173383209">Robert Spencer (Aug 16 2019 at 15:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Uhhh, possibly? That looks useful.  Thanks. The gritty thing in my particular problem (which I watered down a bunch here) is that beta is actually dependent on alpha, so I can't copy paste your code, and don't feel like rewriting it to work in my case: sorry.  Now I know though.</p>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I don't think I know Ed Ayers... sorry.  I understand your sentiment, and all opinions I make at the moment should be tempered by the understanding that I am currently quite frustrated, and so being a bit biased.  I understand that it is a matter of learning the language, and perhaps my issue is with the amount of boilerplate I find myself writing.  The disconnect is between me thinking "pick an X of minimum Y", which is "easy to conceptualize" and coding it.  Granted, there is a lot in that statement (existence of an order on Y, realizable infema of sets of Y etc etc), but the lack of examples I can find (let alone commented code) means I can't even work out what I need to prove and what has been done for me in the allpowerful mathlib.</p>
+<p>And as for your last advice, that is what I am doing (Jordan Holder for modules is my goal atm).  Perhaps I should be more liberal in my admitting defeat and asking for help.</p>
+
+<a name="173384273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173384273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173384273">Floris van Doorn (Aug 16 2019 at 15:48)</a>:</h4>
+<p>Do you mean that <code>β</code> is defined in terms of <code>α</code>, or that you actually have <code>β : α → Type</code>? In the first case, you can still apply my induction principle (but if you have working code, I understand that you don't want to change it).</p>
+
+<a name="173384611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Induction%20on%20minimum%20%22length%22/near/173384611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91533Inductiononminimumlength.html#173384611">Robert Spencer (Aug 16 2019 at 15:52)</a>:</h4>
+<p><code>β : α → Type</code></p>
+<p>Its still good to see this code.  Thanks.  May I ask where it comes from?</p>
+
 
 {% endraw %}
 

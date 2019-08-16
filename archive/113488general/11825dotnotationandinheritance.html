@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/11825dotnotationandinheritance.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html">dot notation and inheritance</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173384558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173384558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173384558">Sebastien Gouezel (Aug 16 2019 at 15:51)</a>:</h4>
+<p>I find dot notation extremely useful. However, it has some shortcomings. I would like to know if there are ways to avoid them, or if I will have to live with them. Here is a basic example, with a simple class <code>basic</code>, and another class <code>extended</code> that extends it. If <code>basic</code> has a field <code>n</code>, then <code>a.n</code> works for <code>a : basic</code>, and <code>b.n</code> works for <code>b : extended</code> (I guess by some parser trickery) but it is displayed as <code>b.to_basic.n</code> in a proof state (in tactic mode). Let me know define a function <code>basic.foo</code> doing whatever. Then <code>a.foo</code> works, as well as <code>b.to_basic.foo</code>, but <code>b.foo</code> doesn't (because the parser (?) is looking for a function <code>extended.foo</code> as <code>b</code> has type extended).</p>
+
+<a name="173384641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173384641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173384641">Sebastien Gouezel (Aug 16 2019 at 15:52)</a>:</h4>
+<p>Working example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">basic</span> <span class="o">:=</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">structure</span> <span class="n">extended</span> <span class="kn">extends</span> <span class="n">basic</span>
+
+<span class="kn">lemma</span> <span class="n">basic</span><span class="bp">.</span><span class="n">foo</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">basic</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">.</span><span class="n">n</span> <span class="bp">=</span> <span class="n">a</span><span class="bp">.</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- goal is a.n = a.n</span>
+  <span class="n">refl</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">foo_ext</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">extended</span><span class="o">)</span> <span class="o">:</span> <span class="n">b</span><span class="bp">.</span><span class="n">n</span> <span class="bp">=</span> <span class="n">b</span><span class="bp">.</span><span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- goal is (b.to_basic).n = (b.to_basic).n</span>
+  <span class="c1">-- refl -- works</span>
+  <span class="n">exact</span> <span class="n">b</span><span class="bp">.</span><span class="n">to_basic</span><span class="bp">.</span><span class="n">foo</span> <span class="c1">-- works</span>
+  <span class="c1">-- exact b.foo -- doesn&#39;t work</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="173384887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dot%20notation%20and%20inheritance/near/173384887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11825dotnotationandinheritance.html#173384887">Sebastien Gouezel (Aug 16 2019 at 15:55)</a>:</h4>
+<p>In python, there is a mechanism by which, if a class doesn't have some attribute, then the system will look for the attribute in classes it inherits from. So, in the above example, it would find <code>b.foo</code>. I have two questions:</p>
+<ul>
+<li>is there a way to make this work in Lean?</li>
+<li>In the proof state, is there a way to display <code>b.n</code> instead of <code>b.to_basic.n</code>?</li>
+</ul>
+<p>A positive answer to any of these questions would improve the situation a lot for me, as proofs with nested structures become very messy otherwise. This is all for new style structures, by the way.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
