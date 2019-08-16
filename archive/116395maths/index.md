@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Formally verified factoring](24690Formallyverifiedfactoring.html) (6 messages, latest: Aug 16 2019 at 21:22)
+* [Formally verified factoring](24690Formallyverifiedfactoring.html) (9 messages, latest: Aug 16 2019 at 22:35)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (352 messages, latest: Aug 16 2019 at 16:58)
 
