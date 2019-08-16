@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [dot notation and inheritance](11825dotnotationandinheritance.html) (20 messages, latest: Aug 16 2019 at 19:42)
+* [Proving for Fun](94070ProvingforFun.html) (102 messages, latest: Aug 16 2019 at 21:29)
+
+* [dot notation and inheritance](11825dotnotationandinheritance.html) (21 messages, latest: Aug 16 2019 at 21:07)
 
 * [protected and add_decl](26846protectedandadddecl.html) (14 messages, latest: Aug 16 2019 at 14:25)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (8 messages, latest: Aug 15 2019 at 08:38)
-
-* [Proving for Fun](94070ProvingforFun.html) (100 messages, latest: Aug 14 2019 at 20:11)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (46 messages, latest: Aug 14 2019 at 19:53)
 
