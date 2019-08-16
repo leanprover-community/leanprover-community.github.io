@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [protected and add_decl](26846protectedandadddecl.html) (13 messages, latest: Aug 16 2019 at 08:41)
+
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (4 messages, latest: Aug 15 2019 at 18:05)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
