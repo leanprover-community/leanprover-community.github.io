@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (102 messages, latest: Aug 16 2019 at 21:29)
+* [Proving for Fun](94070ProvingforFun.html) (103 messages, latest: Aug 17 2019 at 00:32)
 
 * [dot notation and inheritance](11825dotnotationandinheritance.html) (21 messages, latest: Aug 16 2019 at 21:07)
 
