@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [dot notation and inheritance](11825dotnotationandinheritance.html) (22 messages, latest: Aug 17 2019 at 08:34)
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (74 messages, latest: Aug 17 2019 at 20:33)
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (73 messages, latest: Aug 17 2019 at 02:08)
+* [understanding omega](37152understandingomega.html) (3 messages, latest: Aug 17 2019 at 20:03)
+
+* [dot notation and inheritance](11825dotnotationandinheritance.html) (22 messages, latest: Aug 17 2019 at 08:34)
 
 * [Proving for Fun](94070ProvingforFun.html) (103 messages, latest: Aug 17 2019 at 00:32)
 
@@ -46,8 +48,6 @@ permalink: archive/113488general/index.html
 * [HoTT question](95800HoTTquestion.html) (21 messages, latest: Aug 09 2019 at 15:07)
 
 * [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
-
-* [understanding omega](37152understandingomega.html) (2 messages, latest: Aug 09 2019 at 10:42)
 
 * [Generate homomorphism types for algebraic structures](63016Generatehomomorphismtypesforalgebraicstructures.html) (4 messages, latest: Aug 07 2019 at 15:24)
 
