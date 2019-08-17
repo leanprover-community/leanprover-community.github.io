@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [dot notation and inheritance](11825dotnotationandinheritance.html) (22 messages, latest: Aug 17 2019 at 08:34)
+
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (73 messages, latest: Aug 17 2019 at 02:08)
 
 * [Proving for Fun](94070ProvingforFun.html) (103 messages, latest: Aug 17 2019 at 00:32)
-
-* [dot notation and inheritance](11825dotnotationandinheritance.html) (21 messages, latest: Aug 16 2019 at 21:07)
 
 * [protected and add_decl](26846protectedandadddecl.html) (14 messages, latest: Aug 16 2019 at 14:25)
 
