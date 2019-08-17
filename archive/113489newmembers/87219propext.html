@@ -1,0 +1,74 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/87219propext.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html">propext</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173435119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435119">Daniel Fabian (Aug 17 2019 at 09:42)</a>:</h4>
+<p>Good morning, I'm working my way through the tutorial and I've stumbled across something I don't get. <br>
+In chapter 11.2, you are encouraged to prove a certain theorem without propext, or more specifically, to prove that it's equivalent to the axiom.</p>
+<p>Here's the proof:</p>
+<div class="codehilite"><pre><span></span>  theorem thm₃ : ((a ↔ b) → p a → p b) ↔ ((a ↔ b) → a = b) :=
+  begin
+    apply iff.intro,
+    intros h hab,
+    rw [hab],
+    intros ax h hpa,
+    from ax h ▸ hpa
+  end
+</pre></div>
+
+
+<p>I'm fairly confident, I don't use propext anywhere (it's being added as an assumption in of the two iff branches. But </p>
+<div class="codehilite"><pre><span></span>  #print axioms thm₃
+</pre></div>
+
+
+<p>claims I'm using propext. And when I drill down into it, it looks like using substitution is what causes the message.</p>
+<p>Any explanation?</p>
+
+<a name="173435423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435423">Joe (Aug 17 2019 at 09:53)</a>:</h4>
+<p>You can prove <code>propext</code> directly using rewrite, so I guess <code>rw</code> must assume <code>propext</code>.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">propext&#39;</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">h</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">h</span>
+</pre></div>
+
+<a name="173435425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435425">Joe (Aug 17 2019 at 09:53)</a>:</h4>
+<p>Also the theorem you want to prove should be</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">thm₃</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">),</span> <span class="o">(</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">b</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">((</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="173435531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435531">Joe (Aug 17 2019 at 09:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">thm₃</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">},</span> <span class="o">(</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">b</span><span class="o">)</span> <span class="bp">↔</span> <span class="o">((</span><span class="n">a</span> <span class="bp">↔</span> <span class="n">b</span><span class="o">)</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">iff</span><span class="bp">.</span><span class="n">intro</span>
+  <span class="o">(</span><span class="bp">λ</span><span class="n">h</span> <span class="n">hab</span><span class="o">,</span> <span class="n">h</span> <span class="n">hab</span> <span class="n">rfl</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span><span class="n">h</span> <span class="n">p</span> <span class="n">hab</span> <span class="n">ha</span><span class="o">,</span> <span class="o">(</span><span class="n">h</span> <span class="n">hab</span><span class="o">)</span> <span class="bp">▸</span> <span class="n">ha</span><span class="o">)</span>
+</pre></div>
+
+<a name="173435584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435584">Daniel Fabian (Aug 17 2019 at 09:58)</a>:</h4>
+<p>well, I have a <code>variable p : Prop -&gt; Prop</code></p>
+
+<a name="173435591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435591">Mario Carneiro (Aug 17 2019 at 09:59)</a>:</h4>
+<p>the version you stated isn't true</p>
+
+<a name="173435593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435593">Mario Carneiro (Aug 17 2019 at 09:59)</a>:</h4>
+<p>if <code>p</code> is always true then the LHS is trivial</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

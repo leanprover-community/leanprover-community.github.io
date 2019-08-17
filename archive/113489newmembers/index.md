@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [propext](87219propext.html) (7 messages, latest: Aug 17 2019 at 09:59)
+
 * [cases on mutually recursive types](94871casesonmutuallyrecursivetypes.html) (6 messages, latest: Aug 16 2019 at 19:07)
 
 * [Induction on minimum "length"](91533Inductiononminimumlength.html) (28 messages, latest: Aug 16 2019 at 17:43)
