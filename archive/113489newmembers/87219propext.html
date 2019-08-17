@@ -68,6 +68,61 @@ In chapter 11.2, you are encouraged to prove a certain theorem without propext, 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435593">Mario Carneiro (Aug 17 2019 at 09:59)</a>:</h4>
 <p>if <code>p</code> is always true then the LHS is trivial</p>
 
+<a name="173435638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435638">Mario Carneiro (Aug 17 2019 at 10:00)</a>:</h4>
+<p>it is important that the quantifier appear on the LHS as in Joe's version</p>
+
+<a name="173435653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435653">Daniel Fabian (Aug 17 2019 at 10:01)</a>:</h4>
+<p>this is the full code:</p>
+<div class="codehilite"><pre><span></span>section
+  variables a b c d e : Prop
+  variable p : Prop → Prop
+
+  theorem thm₁ (h : a ↔ b) : (c ∧ a ∧ d → e) ↔ (c ∧ b ∧ d → e) :=
+  propext h ▸ iff.refl _
+
+  theorem thm₂ (h : a ↔ b) (h₁ : p a) : p b :=
+  propext h ▸ h₁
+
+  theorem thm₃ : ((a ↔ b) → p a → p b) ↔ ((a ↔ b) → a = b) :=
+
+  begin
+    apply iff.intro,
+    intros h hab,
+    rw [hab],
+    intros ax h hpa,
+    from ax h ▸ hpa
+  end
+
+  #print axioms thm₃
+end
+</pre></div>
+
+<a name="173435696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435696">Daniel Fabian (Aug 17 2019 at 10:02)</a>:</h4>
+<p>from what I understand about the syntax, <code>p</code> from the section is passed as an argument to thm_3, correct?</p>
+
+<a name="173435697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435697">Mario Carneiro (Aug 17 2019 at 10:02)</a>:</h4>
+<p>it is</p>
+
+<a name="173435702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435702">Mario Carneiro (Aug 17 2019 at 10:02)</a>:</h4>
+<p>but it is quantified at the top level, rather than on the LHS of the iff only</p>
+
+<a name="173435703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435703">Daniel Fabian (Aug 17 2019 at 10:03)</a>:</h4>
+<p>i see</p>
+
+<a name="173435757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173435757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173435757">Daniel Fabian (Aug 17 2019 at 10:04)</a>:</h4>
+<p>i'm re-trying the proof with that different quantification, now</p>
+
+<a name="173436259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/propext/near/173436259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/87219propext.html#173436259">Daniel Fabian (Aug 17 2019 at 10:23)</a>:</h4>
+<p>thanks, got it working!</p>
+
 
 {% endraw %}
 

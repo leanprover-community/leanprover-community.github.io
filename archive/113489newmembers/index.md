@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [propext](87219propext.html) (7 messages, latest: Aug 17 2019 at 09:59)
+* [propext](87219propext.html) (15 messages, latest: Aug 17 2019 at 10:23)
 
 * [cases on mutually recursive types](94871casesonmutuallyrecursivetypes.html) (6 messages, latest: Aug 16 2019 at 19:07)
 
