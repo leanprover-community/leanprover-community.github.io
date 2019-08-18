@@ -1,0 +1,37 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/49841attributesnamemapwithnondefkeys.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html">attributes, name_map with non-def keys</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173479967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173479967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173479967">Yury G. Kudryashov (Aug 18 2019 at 09:50)</a>:</h4>
+<p>Hi,<br>
+Is there any way to store a <code>name_map name</code> other than <code>user_attr</code>?<br>
+For my rewrite of <code>to_additive</code>, I want to store a <code>name_map name</code> of prefixes used to automatically map names from multiplicative to additive. Sometimes (e.g., for <code>quotient_group</code>), the key is not a <code>def</code> but a namespace. I see two ways of dealing with this:</p>
+<p>1. Define a dummy <code>@[to_additive quotient_add_group] def quotient_group : bool := tt</code>.<br>
+2. Store all <code>(src, tgt)</code> pairs as a <code>list (name × name)</code> attribute on a single <code>def</code>.<br>
+3. Explicitly specify <code>@[to_additive quotient_add_group.lemma_name] def lemma_name := sorry</code> every time.<br>
+4. Something else?<br>
+The second approach fails with “error: deep recursion was detected at 'live variable analysis'” once we have sufficiently many items in the list. Any suggestions?</p>
+
+<a name="173480187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480187">Mario Carneiro (Aug 18 2019 at 09:58)</a>:</h4>
+<p>I can't think of any way which isn't a horrible hack</p>
+
+<a name="173480203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480203">Mario Carneiro (Aug 18 2019 at 09:59)</a>:</h4>
+<p>You could do something similar to the <code>replacer</code> tactic. You store the data, reflected as an expr, as the content of a definition, and smuggle the data around via tactics triggered by an attribute</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [using lean via vscode](84683usingleanviavscode.html) (4 messages, latest: Aug 18 2019 at 07:25)
+* [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (3 messages, latest: Aug 18 2019 at 09:59)
+
+* [using lean via vscode](84683usingleanviavscode.html) (5 messages, latest: Aug 18 2019 at 09:53)
 
 * [Proving for Fun](94070ProvingforFun.html) (104 messages, latest: Aug 18 2019 at 02:15)
 
