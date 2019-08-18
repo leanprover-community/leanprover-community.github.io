@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [using lean via vscode](84683usingleanviavscode.html) (4 messages, latest: Aug 18 2019 at 07:25)
+
 * [Proving for Fun](94070ProvingforFun.html) (104 messages, latest: Aug 18 2019 at 02:15)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (74 messages, latest: Aug 17 2019 at 20:33)
