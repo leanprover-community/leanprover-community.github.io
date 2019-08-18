@@ -31,6 +31,26 @@ The second approach fails with “error: deep recursion was detected at 'live va
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480203">Mario Carneiro (Aug 18 2019 at 09:59)</a>:</h4>
 <p>You could do something similar to the <code>replacer</code> tactic. You store the data, reflected as an expr, as the content of a definition, and smuggle the data around via tactics triggered by an attribute</p>
 
+<a name="173480262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480262">Mario Carneiro (Aug 18 2019 at 10:00)</a>:</h4>
+<p>Or maybe just use IO to open up a program with actual memory access</p>
+
+<a name="173480817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480817">Yury G. Kudryashov (Aug 18 2019 at 10:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I think, I'll define a dummy <code>def quotient_group</code>. This is a hack but other options require too much work to deal with one or two exceptions.</p>
+
+<a name="173480830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480830">Mario Carneiro (Aug 18 2019 at 10:15)</a>:</h4>
+<p>A variation on (1) is to call the dummy <code>quotient_group._namespace</code> to avoid using the real name</p>
+
+<a name="173480885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173480885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173480885">Mario Carneiro (Aug 18 2019 at 10:16)</a>:</h4>
+<p>assuming of course you know you are looking for a namespace, not a def, and so know to adjust the lookup</p>
+
+<a name="173481164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/attributes%2C%20name_map%20with%20non-def%20keys/near/173481164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/49841attributesnamemapwithnondefkeys.html#173481164">Yury G. Kudryashov (Aug 18 2019 at 10:25)</a>:</h4>
+<p>I use <code>attr.get_cache : tactic (name_map name)</code> as a set of prefix mappings, and <code>quotient_group._namespace</code> is not a prefix of <code>quotient_group.my_lemma</code>.</p>
+
 
 {% endraw %}
 
