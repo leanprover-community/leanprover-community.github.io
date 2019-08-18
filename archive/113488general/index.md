@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Indexing Zulip](45931IndexingZulip.html) (95 messages, latest: Aug 18 2019 at 21:10)
+
 * [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (24 messages, latest: Aug 18 2019 at 17:07)
 
 * [Proving for Fun](94070ProvingforFun.html) (105 messages, latest: Aug 18 2019 at 14:18)
@@ -810,8 +812,6 @@ permalink: archive/113488general/index.html
 * [Joint maths/CS positions tenure track positions at the ANU](90873JointmathsCSpositionstenuretrackpositionsattheANU.html) (6 messages, latest: Apr 04 2019 at 19:00)
 
 * [setup-update-mathlib.sh](81401setupupdatemathlibsh.html) (70 messages, latest: Apr 04 2019 at 12:27)
-
-* [Indexing Zulip](45931IndexingZulip.html) (92 messages, latest: Apr 04 2019 at 12:25)
 
 * [library_search has been merged](13909librarysearchhasbeenmerged.html) (7 messages, latest: Apr 03 2019 at 20:20)
 
