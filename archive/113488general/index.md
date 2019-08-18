@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (9 messages, latest: Aug 18 2019 at 12:16)
+* [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (10 messages, latest: Aug 18 2019 at 14:21)
+
+* [Proving for Fun](94070ProvingforFun.html) (105 messages, latest: Aug 18 2019 at 14:18)
 
 * [using lean via vscode](84683usingleanviavscode.html) (6 messages, latest: Aug 18 2019 at 11:36)
-
-* [Proving for Fun](94070ProvingforFun.html) (104 messages, latest: Aug 18 2019 at 02:15)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (74 messages, latest: Aug 17 2019 at 20:33)
 
