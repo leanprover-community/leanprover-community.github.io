@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/01963universeunification.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html">universe unification</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173535931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173535931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173535931">Cyril Cohen (Aug 19 2019 at 11:24)</a>:</h4>
+<p>Dear all (and in particular meta-programming experts <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> , <span class="user-mention" data-user-id="110596">@Rob Lewis</span> , <span class="user-mention" data-user-id="110026">@Simon Hudon</span> , <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>, and whoever I might have forgotten ), I am still writing the so called parametricity tactic, and I am facing the following problem.</p>
+<p>Since parametricity translations  generate new relations, I end up generating new universes. The best way I found to do so is to create lots of meta universes. When I am facing a definition, I simply unify the inferred type of the translation of the body with the translation of the type, and then I turn all remaining meta-universes into parameter universe, and I am done.</p>
+<p>When doing the same for inductive types, what I would like to do is<br>
+1. I compute the translated type for the inductive, and replace every remaining meta universes by parameter universes<br>
+2. in each constructor type replace the translated <code>const</code> of my new inductive name (which does not belong to the current environment yet) by a <code>local_const</code> representing the translated inductive type.<br>
+3. I launch typechecking in order to unify redundant meta-universes<br>
+4. I fix the return sort of the inductive type by computing max + 1 of the sort of the type of every constructor.<br>
+Unfortunately I am stuck at step 3... I tried many things: <code>type_check</code>, <code>infer_type</code> followed by <code>unify</code>, <code>to_expr (pexpr.of_expr e)</code>, first making a lambda out of my ad-hock inductive <code>local_const</code>, every time followed by <code>instatiate_mvars</code>... And so far I am still stuck...</p>
+<p>Would you know of a primitive, already-written meta function, technique or methodology that would ease my pain?<br>
+Best wishes!</p>
+
+<a name="173536715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173536715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173536715">Cyril Cohen (Aug 19 2019 at 11:37)</a>:</h4>
+<p>I think I just managed, but at the price of exploring the return type of every constructor by hand, picking the list of arguments to the inductive type and performing individual type-checking with the list of abstract parameters, doing all the substitutions by hand... which seems to me redundant with what lean elaborate is capable of...</p>
+
+<a name="173537461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173537461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173537461">Cyril Cohen (Aug 19 2019 at 11:51)</a>:</h4>
+<p>and my manual check is so slow that I timeout on the translation of <code>list</code>...</p>
+
+<a name="173537638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173537638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173537638">Simon Hudon (Aug 19 2019 at 11:55)</a>:</h4>
+<p>Is it possible to have a look at your code? That would make things a bit easier to follow</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

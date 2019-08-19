@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1341 produce associativity-friendly lemmas in category the](755941341produceassociativityfriendlylemmasincategorythe.html) (1 message, latest: Aug 19 2019 at 11:57)
+
 * [#1326 parse ematch lemmas with `finish using ...`](100891326parseematchlemmaswithfinishusing.html) (13 messages, latest: Aug 14 2019 at 15:42)
 
 * [#1295 archive](035751295archive.html) (15 messages, latest: Aug 06 2019 at 20:39)
