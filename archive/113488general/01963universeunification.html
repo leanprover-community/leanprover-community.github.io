@@ -88,6 +88,20 @@ Best wishes!</p>
   <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
 </pre></div>
 
+<a name="173548729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173548729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173548729">Rob Lewis (Aug 19 2019 at 14:37)</a>:</h4>
+<p>This is trickier than I expected. If you can build enough of the <code>pexpr</code> structure of <code>t</code>, you can use that to force the universe levels to unify.</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">u</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="o">(</span><span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">punit</span> <span class="o">[</span><span class="n">v</span><span class="o">]],</span>
+  <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="bp">&gt;&gt;=</span> <span class="n">unify</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
+</pre></div>
+
+
+<p>But this does feel like a gap in the API.</p>
+
 
 {% endraw %}
 

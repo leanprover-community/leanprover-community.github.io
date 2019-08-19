@@ -267,6 +267,28 @@ Another example: there was a section about coercions randomly appearing between 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/173236050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#173236050">Kevin Kappelmann (Aug 14 2019 at 19:53)</a>:</h4>
 <p>Thanks, that does make a lot of sense! :)</p>
 
+<a name="173547515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/173547515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#173547515">Kevin Kappelmann (Aug 19 2019 at 14:22)</a>:</h4>
+<p>So now I have these three lemmas:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">inv_def&#39;</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">}</span> <span class="o">:</span> <span class="n">q</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="o">(</span><span class="n">q</span><span class="bp">.</span><span class="n">denom</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">q</span><span class="bp">.</span><span class="n">num</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">div_lt_div_iff_mul_lt_mul</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">b_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">d_pos</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="n">b</span> <span class="bp">&lt;</span> <span class="n">c</span> <span class="bp">/</span> <span class="n">d</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">&lt;</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_own_denom_eq_num</span> <span class="o">{</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">}</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">*</span> <span class="n">q</span><span class="bp">.</span><span class="n">denom</span> <span class="bp">=</span> <span class="n">q</span><span class="bp">.</span><span class="n">num</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>All the proofs are quite simple if one imports <code>data.rat.cast</code>.  Semantically, however, they obviously should not live in <code>data.rat.cast</code>. Are these lemmas good candidates for <code>data.rat.default</code> or should that file stay completely empty besides a list of imports?</p>
+
+<a name="173548865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/173548865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#173548865">Floris van Doorn (Aug 19 2019 at 14:39)</a>:</h4>
+<p>I would suggest moving properties about coercions into <code>rat</code> (from <code>int</code> and <code>nat</code> to <code>rat.basic</code>) and then just add these lemmas there. Then <code>rat.cast</code> is only about the cast from the rationals to other types. I would expect these kind of lemmas, which are basic equational rules, to be in <code>rat.basic</code>.</p>
+
+<a name="173549814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20should%20these%20lemmas%20go/near/173549814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18425whereshouldtheselemmasgo.html#173549814">Kevin Kappelmann (Aug 19 2019 at 14:51)</a>:</h4>
+<p>That sounds sensible. I'll give it a shot. Cheers :)</p>
+
 
 {% endraw %}
 

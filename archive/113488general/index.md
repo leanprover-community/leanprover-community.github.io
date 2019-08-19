@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [using lean via vscode](84683usingleanviavscode.html) (7 messages, latest: Aug 19 2019 at 13:28)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (49 messages, latest: Aug 19 2019 at 14:51)
 
-* [universe unification](01963universeunification.html) (11 messages, latest: Aug 19 2019 at 13:23)
+* [universe unification](01963universeunification.html) (12 messages, latest: Aug 19 2019 at 14:37)
+
+* [using lean via vscode](84683usingleanviavscode.html) (7 messages, latest: Aug 19 2019 at 13:28)
 
 * [Indexing Zulip](45931IndexingZulip.html) (95 messages, latest: Aug 18 2019 at 21:10)
 
@@ -32,8 +34,6 @@ permalink: archive/113488general/index.html
 * [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (8 messages, latest: Aug 15 2019 at 08:38)
-
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (46 messages, latest: Aug 14 2019 at 19:53)
 
 * [timeout when working with ideal over polynomial ring](78086timeoutwhenworkingwithidealoverpolynomialring.html) (1 message, latest: Aug 14 2019 at 14:17)
 
