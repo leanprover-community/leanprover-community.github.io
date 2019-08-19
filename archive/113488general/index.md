@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (49 messages, latest: Aug 19 2019 at 14:51)
+* [universe unification](01963universeunification.html) (26 messages, latest: Aug 19 2019 at 15:58)
 
-* [universe unification](01963universeunification.html) (12 messages, latest: Aug 19 2019 at 14:37)
+* [where should these lemmas go](18425whereshouldtheselemmasgo.html) (49 messages, latest: Aug 19 2019 at 14:51)
 
 * [using lean via vscode](84683usingleanviavscode.html) (7 messages, latest: Aug 19 2019 at 13:28)
 
