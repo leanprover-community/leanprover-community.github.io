@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [universe unification](01963universeunification.html) (10 messages, latest: Aug 19 2019 at 12:29)
+* [using lean via vscode](84683usingleanviavscode.html) (7 messages, latest: Aug 19 2019 at 13:28)
+
+* [universe unification](01963universeunification.html) (11 messages, latest: Aug 19 2019 at 13:23)
 
 * [Indexing Zulip](45931IndexingZulip.html) (95 messages, latest: Aug 18 2019 at 21:10)
 
 * [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (24 messages, latest: Aug 18 2019 at 17:07)
 
 * [Proving for Fun](94070ProvingforFun.html) (105 messages, latest: Aug 18 2019 at 14:18)
-
-* [using lean via vscode](84683usingleanviavscode.html) (6 messages, latest: Aug 18 2019 at 11:36)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (74 messages, latest: Aug 17 2019 at 20:33)
 

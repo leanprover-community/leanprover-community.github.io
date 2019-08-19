@@ -77,6 +77,17 @@ Best wishes!</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173539699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173539699">Simon Hudon (Aug 19 2019 at 12:29)</a>:</h4>
 <p>I've had trouble with type check in the past where I would <code>type_check</code> just before adding a declaration, <code>type_check</code> would succeed but the declaration would fail for typing reason (if I remember correctly, some meta vars had not been unified yet)</p>
 
+<a name="173543055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/universe%20unification/near/173543055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/01963universeunification.html#173543055">Cyril Cohen (Aug 19 2019 at 13:23)</a>:</h4>
+<p>here is a self contained example:</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="n">u</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span> <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_univ</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">t</span> <span class="o">:</span> <span class="n">expr</span> <span class="o">:=</span> <span class="n">mk_app</span> <span class="o">(</span><span class="n">const</span> <span class="o">(</span><span class="bp">`</span><span class="n">list</span><span class="bp">.</span><span class="n">nil</span><span class="o">)</span> <span class="o">[</span><span class="n">u</span><span class="o">])</span> <span class="o">[</span><span class="n">const</span> <span class="bp">`</span><span class="n">punit</span> <span class="o">[</span><span class="n">v</span><span class="o">]],</span>
+  <span class="c">/-</span><span class="cm"> fill in with some stuff here to trigger universe meta variable unification -/</span>
+  <span class="n">t</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">t</span><span class="o">,</span>
+  <span class="n">trace</span> <span class="err">$</span> <span class="n">to_raw_fmt</span> <span class="n">t</span>
+</pre></div>
+
 
 {% endraw %}
 
