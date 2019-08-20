@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (3 messages, latest: Aug 20 2019 at 08:41)
+* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (4 messages, latest: Aug 20 2019 at 11:40)
 
 * [universe unification](01963universeunification.html) (28 messages, latest: Aug 20 2019 at 06:18)
 

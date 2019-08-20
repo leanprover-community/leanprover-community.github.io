@@ -36,6 +36,35 @@ permalink: archive/113488general/90404unifyfailsinthepresenceofbinders.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173638918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173638918">Rob Lewis (Aug 20 2019 at 08:41)</a>:</h4>
 <p>I'll look into this when I have a minute.</p>
 
+<a name="173649746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173649746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173649746">Rob Lewis (Aug 20 2019 at 11:40)</a>:</h4>
+<p>I'm not sure what's going on. Does the elaborator use a special method for constants defined using the equation compiler? What's the relevant difference between <code>n_id</code> and <code>n_id2</code> here?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">n_id</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">k</span><span class="bp">+</span><span class="mi">1</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">n_id</span> <span class="c1">-- n_id._main</span>
+
+<span class="n">def</span> <span class="n">n_id2</span> <span class="o">:=</span> <span class="n">n_id</span><span class="bp">._</span><span class="n">main</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">n_id</span> <span class="bp">=</span> <span class="n">n_id2</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- succeeds</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">n_id</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n_id</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- fails</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">n_id</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n_id</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="n">dsimp</span><span class="o">,</span> <span class="n">refl</span><span class="o">}</span> <span class="c1">-- succeeds</span>
+<span class="c1">-- proof term:</span>
+<span class="c1">-- @id.{0} (@eq.{1} (nat → nat) n_id (λ (n : nat), n_id n)) (@eq.refl.{1} (nat → nat) n_id)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">n_id</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n_id</span> <span class="n">n</span> <span class="o">:=</span> <span class="c1">-- fails</span>
+<span class="bp">@</span><span class="n">id</span><span class="bp">.</span><span class="o">{</span><span class="mi">0</span><span class="o">}</span> <span class="o">(</span><span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span><span class="o">)</span> <span class="n">n_id</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">),</span> <span class="n">n_id</span> <span class="n">n</span><span class="o">))</span> <span class="o">(</span><span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span><span class="bp">.</span><span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span><span class="o">)</span> <span class="n">n_id</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">n_id2</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n_id2</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- succeeds</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">n_id</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n_id2</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span> <span class="c1">-- succeeds</span>
+</pre></div>
+
 
 {% endraw %}
 
