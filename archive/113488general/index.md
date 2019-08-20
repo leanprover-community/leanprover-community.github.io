@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [universe unification](01963universeunification.html) (26 messages, latest: Aug 19 2019 at 15:58)
+* [universe unification](01963universeunification.html) (28 messages, latest: Aug 20 2019 at 06:18)
+
+* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (1 message, latest: Aug 20 2019 at 06:18)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (49 messages, latest: Aug 19 2019 at 14:51)
 

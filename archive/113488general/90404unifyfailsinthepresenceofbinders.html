@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/90404unifyfailsinthepresenceofbinders.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html">unify fails in the presence of binders</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173632081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173632081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173632081">Cyril Cohen (Aug 20 2019 at 06:18)</a>:</h4>
+<p>I encountered the following problem: <code>nat.pred</code> and <code>nat.pred._main</code> unify well, but if I eta-expant them, unification fails! Does someone have an explanation?</p>
+<div class="codehilite"><pre><span></span><span class="n">run_cmd</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">trace_unify</span> <span class="o">(</span><span class="n">e1</span> <span class="n">e2</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="o">(</span><span class="n">do</span>
+    <span class="n">trace</span> <span class="err">$</span> <span class="s2">&quot;try to unify &quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">e1</span> <span class="bp">++</span> <span class="s2">&quot; with &quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">e2</span><span class="o">,</span>
+    <span class="n">unify</span> <span class="n">e1</span> <span class="n">e2</span> <span class="n">transparency</span><span class="bp">.</span><span class="n">all</span><span class="o">,</span>
+    <span class="n">trace</span> <span class="err">$</span> <span class="s2">&quot;unify successful between &quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">e1</span> <span class="bp">++</span> <span class="s2">&quot; with &quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">e2</span><span class="o">),</span>
+  <span class="k">let</span> <span class="n">c1</span> <span class="o">:</span> <span class="n">expr</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">const</span> <span class="bp">`</span><span class="n">nat</span><span class="bp">.</span><span class="n">pred</span> <span class="o">[],</span>
+  <span class="k">let</span> <span class="n">c2</span> <span class="o">:</span> <span class="n">expr</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">const</span> <span class="bp">`</span><span class="n">nat</span><span class="bp">.</span><span class="n">pred</span><span class="bp">._</span><span class="n">main</span> <span class="o">[],</span>
+  <span class="n">trace_unify</span> <span class="n">c1</span> <span class="n">c2</span><span class="o">,</span> <span class="c1">-- success</span>
+  <span class="n">trace</span> <span class="s2">&quot;&quot;</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">eta_nat</span> <span class="n">t</span> <span class="o">:=</span> <span class="n">lam</span> <span class="bp">`</span><span class="n">n</span> <span class="n">bid</span> <span class="o">(</span><span class="n">const</span> <span class="bp">`</span><span class="n">nat</span> <span class="o">[])</span> <span class="err">$</span> <span class="n">mk_app</span> <span class="n">t</span> <span class="o">[</span><span class="n">var</span> <span class="mi">0</span><span class="o">],</span>
+  <span class="n">trace_unify</span> <span class="o">(</span><span class="n">eta_nat</span> <span class="n">c1</span><span class="o">)</span> <span class="o">(</span><span class="n">eta_nat</span> <span class="n">c2</span><span class="o">)</span> <span class="c1">-- failure!</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
