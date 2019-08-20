@@ -149,6 +149,29 @@ permalink: archive/113488general/90404unifyfailsinthepresenceofbinders.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173658916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173658916">Cyril Cohen (Aug 20 2019 at 13:45)</a>:</h4>
 <p>(and in my real example it is not a λ but a Π)</p>
 
+<a name="173662881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173662881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173662881">Floris van Doorn (Aug 20 2019 at 14:29)</a>:</h4>
+<p>This lemma is actually tricky to prove just using tactics:</p>
+<div class="codehilite"><pre><span></span>def n_id : ℕ → ℕ
+| 0 := 0
+| (k+1) := k+1
+
+example : (∀ n, n_id n = 0) = (∀ n, n_id._main n = 0) :=
+sorry
+</pre></div>
+
+
+<p><code>refl</code>, <code>simp</code>, <code>dsimp</code>, <code>unfold</code>, <code>dunfold</code> all fail, even when given arguments (unless you do something like <code>by simp [show n_id = n_id._main, from rfl]</code>). The only reasonable way I know how to do it is <code>delta n_id, refl</code>. Presumably that doesn't help Cyril's case...</p>
+
+<a name="173664822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173664822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173664822">Cyril Cohen (Aug 20 2019 at 14:49)</a>:</h4>
+<p>well, maybe I could use this and unfold every definition <code>d</code> such that a <code>d._main</code> exists... it sounds horribly unstable, but unless someone comes up with an API that does the job, or a better hack, I might as well try that</p>
+
+<a name="173665372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unify%20fails%20in%20the%20presence%20of%20binders/near/173665372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90404unifyfailsinthepresenceofbinders.html#173665372">Floris van Doorn (Aug 20 2019 at 14:54)</a>:</h4>
+<p>That sounds like it could work...<br>
+And it's not like we have no other tactics that depends on hacks...</p>
+
 
 {% endraw %}
 
