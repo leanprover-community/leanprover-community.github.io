@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Another Lean type checker](57705AnotherLeantypechecker.html) (28 messages, latest: Aug 21 2019 at 16:31)
+
 * [ordered_comm_group](40829orderedcommgroup.html) (6 messages, latest: Aug 21 2019 at 15:39)
 
 * [definition of `equiv`](66185definitionofequiv.html) (24 messages, latest: Aug 21 2019 at 14:46)
 
 * [Noether Normalization/Nullstellensatz](72416NoetherNormalizationNullstellensatz.html) (6 messages, latest: Aug 21 2019 at 11:57)
-
-* [Another Lean type checker](57705AnotherLeantypechecker.html) (27 messages, latest: Aug 21 2019 at 11:49)
 
 * [universe unification](01963universeunification.html) (30 messages, latest: Aug 20 2019 at 15:39)
 
