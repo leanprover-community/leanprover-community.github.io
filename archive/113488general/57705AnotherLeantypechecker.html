@@ -64,6 +64,42 @@ Going forward I'll be trying to add features aimed at exposing the internals in 
 </blockquote>
 <p>Could you be more specific about this? If you are talking about repeated information that's not a problem, as it can be backreferenced, but if you are generating huge terms during reduction from small inputs that's actually what I care to capture. I assume that doesn't happen very often in lean proofs though</p>
 
+<a name="173773110"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173773110" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173773110">Chris B (Aug 21 2019 at 08:07)</a>:</h4>
+<p>I guess it depends on whether you plan on using an export file type deal or if you want to connect the tools directly. The terms aren't large in terms of memory consumption since the trees are mostly pointers, but the expressions themselves are frequently large in terms of the number of nodes/leaves and they go through a lot of steps in the checker, so if you try to put all that information somewhere persistent like text, then the history can get really big. When I was first trying to figure out why some things worked the way they do I was just doing naive logging and would get these runaway 300 MB log files.</p>
+
+<a name="173774410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173774410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173774410">Mario Carneiro (Aug 21 2019 at 08:30)</a>:</h4>
+<p>Right, the problem with pp.all style printing is it ignores subterm duplication, which can cause exponential blowup at the printing stage</p>
+
+<a name="173774536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173774536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173774536">Mario Carneiro (Aug 21 2019 at 08:32)</a>:</h4>
+<p>Any method that explicitly represents subterm duplication should be able to address this problem. The export file format uses numbered backreferences, or in human readable printing you can insert <code>let</code>s, or you can just do a memory dump (although this is tricky to set up reliably)</p>
+
+<a name="173774689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173774689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173774689">Mario Carneiro (Aug 21 2019 at 08:35)</a>:</h4>
+<p>I usually find the easiest thing to implement is numbered backreferences. You just keep a hashmap of exprs you've printed so far, and every time you see one you have printed before you print a reference to it rather than printing the whole term again</p>
+
+<a name="173774738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173774738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173774738">Mario Carneiro (Aug 21 2019 at 08:36)</a>:</h4>
+<p>That's basically what the export format printer does too</p>
+
+<a name="173774884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173774884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173774884">Mario Carneiro (Aug 21 2019 at 08:38)</a>:</h4>
+<p>I have a program I want to pipe this into but it would probably be easiest to communicate using some intermediate file format rather than via RPC (plus the intermediate file format has independent interest as a more-explicit lean export format)</p>
+
+<a name="173775168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173775168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173775168">Chris B (Aug 21 2019 at 08:43)</a>:</h4>
+<p>Some back of the envelope numbers, in checking mathlib, <code>infer</code> gets called 44.3 million times, <code>def_eq</code> 4.7 million.</p>
+
+<a name="173775224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173775224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173775224">Chris B (Aug 21 2019 at 08:44)</a>:</h4>
+<p>Are you targeting single definitions or like all of mathlib at once deal?</p>
+
+<a name="173775927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173775927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173775927">Chris B (Aug 21 2019 at 08:57)</a>:</h4>
+<p>I'll check later how much that goes down by if the caches for inference/definitional equality checks are reused globally.</p>
+
 
 {% endraw %}
 
