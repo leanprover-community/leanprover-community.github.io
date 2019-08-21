@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1295 archive](035751295archive.html) (20 messages, latest: Aug 21 2019 at 11:31)
+
 * [#1340 finite products give a monoidal structure](062231340finiteproductsgiveamonoidalstructure.html) (1 message, latest: Aug 20 2019 at 20:24)
 
 * [#1346 remove simp lemmas for eq_to_hom](329541346removesimplemmasforeqtohom.html) (1 message, latest: Aug 20 2019 at 11:00)
@@ -16,8 +18,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1341 produce associativity-friendly lemmas in category the](755941341produceassociativityfriendlylemmasincategorythe.html) (4 messages, latest: Aug 19 2019 at 13:10)
 
 * [#1326 parse ematch lemmas with `finish using ...`](100891326parseematchlemmaswithfinishusing.html) (13 messages, latest: Aug 14 2019 at 15:42)
-
-* [#1295 archive](035751295archive.html) (15 messages, latest: Aug 06 2019 at 20:39)
 
 * [#1292 order of power series](790351292orderofpowerseries.html) (1 message, latest: Aug 06 2019 at 07:05)
 
