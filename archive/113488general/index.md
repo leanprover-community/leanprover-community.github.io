@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Another Lean type checker](57705AnotherLeantypechecker.html) (1 message, latest: Aug 21 2019 at 05:43)
+
 * [universe unification](01963universeunification.html) (30 messages, latest: Aug 20 2019 at 15:39)
 
 * [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (23 messages, latest: Aug 20 2019 at 15:24)
