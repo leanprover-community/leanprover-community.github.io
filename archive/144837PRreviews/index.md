@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1234 apply'](798991234apply.html) (2 messages, latest: Aug 21 2019 at 18:57)
+
 * [#1295 archive](035751295archive.html) (28 messages, latest: Aug 21 2019 at 17:33)
 
 * [#1340 finite products give a monoidal structure](062231340finiteproductsgiveamonoidalstructure.html) (1 message, latest: Aug 20 2019 at 20:24)
