@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Another Lean type checker](57705AnotherLeantypechecker.html) (1 message, latest: Aug 21 2019 at 05:43)
+* [Another Lean type checker](57705AnotherLeantypechecker.html) (8 messages, latest: Aug 21 2019 at 06:48)
 
 * [universe unification](01963universeunification.html) (30 messages, latest: Aug 20 2019 at 15:39)
 

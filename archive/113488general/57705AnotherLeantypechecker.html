@@ -17,6 +17,34 @@ permalink: archive/113488general/57705AnotherLeantypechecker.html
 <p>I'd like to share something I've been working on for a while in an attempt to learn more about Lean's internals and how the gears of dependent types turn (I think I remember seeing a few Rust fans here too). <a href="https://github.com/ammkrn/nanoda.git" target="_blank" title="https://github.com/ammkrn/nanoda.git">https://github.com/ammkrn/nanoda.git</a>  <br>
 Going forward I'll be trying to add features aimed at exposing the internals in an informative way and expanding the documentation until (hopefully) the whole thing is annotated.</p>
 
+<a name="173767741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173767741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173767741">Mario Carneiro (Aug 21 2019 at 06:16)</a>:</h4>
+<p>awesome</p>
+
+<a name="173767818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173767818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173767818">Mario Carneiro (Aug 21 2019 at 06:18)</a>:</h4>
+<p>I wonder if we can hook this up with olean-rs to get typechecking straight from olean files</p>
+
+<a name="173767936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173767936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173767936">Mario Carneiro (Aug 21 2019 at 06:21)</a>:</h4>
+<p>Is there any chance of modifying it to be proof-producing? Specifically, I would like a record of how definitional equalities are proven so that it can be consumed by a much less intelligent verifier</p>
+
+<a name="173768209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173768209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173768209">Chris B (Aug 21 2019 at 06:28)</a>:</h4>
+<p>Sure, I can put in an option to output the intermediate states of two terms as they go through reduction/inference during the definitional equality checking if that's what you mean.</p>
+
+<a name="173768541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173768541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173768541">Mario Carneiro (Aug 21 2019 at 06:34)</a>:</h4>
+<p>Yes, that's the idea. I've been wanting to translate lean proofs into other languages for a while now, and the main blocker is that lean proofs leave a lot of work unfinished to be cleaned up by the typechecker.</p>
+
+<a name="173768748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173768748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173768748">Mario Carneiro (Aug 21 2019 at 06:38)</a>:</h4>
+<p>The other big thing I guess is inductive types, although I'm not sure how useful you can make the trace. Ideally I would want a record of why the typechecker thinks an inductive definition is permitted, and how it built the intro and recursion rules and the computation rule</p>
+
+<a name="173769171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173769171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173769171">Chris B (Aug 21 2019 at 06:48)</a>:</h4>
+<p>Construction of the intro/elim/reduction rules for inductive types is fairly procedural and they're built from components that exist separately earlier in the module so that shouldn't be hard. wrt to why the typechecker gives any particular definition the thumbs up you might have to narrow down what parts of the 'history' you need since some of the steps produce really large amounts of intermediate info.</p>
+
 
 {% endraw %}
 
