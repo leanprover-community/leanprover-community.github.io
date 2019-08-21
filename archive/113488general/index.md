@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [definition of `equiv`](66185definitionofequiv.html) (26 messages, latest: Aug 21 2019 at 21:47)
+
 * [building lean on arch fails](74681buildingleanonarchfails.html) (3 messages, latest: Aug 21 2019 at 19:33)
 
 * [Another Lean type checker](57705AnotherLeantypechecker.html) (28 messages, latest: Aug 21 2019 at 16:31)
 
 * [ordered_comm_group](40829orderedcommgroup.html) (6 messages, latest: Aug 21 2019 at 15:39)
-
-* [definition of `equiv`](66185definitionofequiv.html) (24 messages, latest: Aug 21 2019 at 14:46)
 
 * [Noether Normalization/Nullstellensatz](72416NoetherNormalizationNullstellensatz.html) (6 messages, latest: Aug 21 2019 at 11:57)
 
