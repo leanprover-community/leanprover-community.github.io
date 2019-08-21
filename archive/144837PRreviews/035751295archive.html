@@ -142,6 +142,12 @@ It makes a good case that structured proofs with automation are more useful (and
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173807603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173807603">Patrick Massot (Aug 21 2019 at 15:59)</a>:</h4>
 <p>And I also love the structured proof style. The reason we can't have quite it in Lean is poor automation.</p>
 
+<a name="173815422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173815422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173815422">Jeremy Avigad (Aug 21 2019 at 17:33)</a>:</h4>
+<p>O.k., you have shamed me into fixing the problem. The gist should now work with today's <code>mathlib</code>. In fact, deleting a single character fixed the problem: I had stated an auxiliary simplification lemma in terms of a value cast from <code>pnat</code>, but with a recent change,  the simplifier reduced it to a <code>nat</code>.</p>
+<p>In my defense, most of the nonterminal <code>simp</code>s are things that automation should have gotten. <code>finish</code> gets one of them but freezes on some others. The instance of <code>simp; rw [foo]; simp</code> should have been <code>simp [foo]</code> but for some reason, <code>simp</code> couldn't match <code>foo</code> and <code>rw</code> could. </p>
+<p>Oh, and I used one instance of <code>simp, show ...</code>. It could easily be rewritten to a <code>suffices</code> followed by a terminal <code>simp</code>, but rewriting the proof this way makes it less natural. (I guess I am arguing that <code>simp, show ...</code> should count as a terminal <code>simp</code>).</p>
+
 
 {% endraw %}
 
