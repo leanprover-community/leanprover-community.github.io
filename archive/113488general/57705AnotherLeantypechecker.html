@@ -45,6 +45,25 @@ Going forward I'll be trying to add features aimed at exposing the internals in 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173769171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173769171">Chris B (Aug 21 2019 at 06:48)</a>:</h4>
 <p>Construction of the intro/elim/reduction rules for inductive types is fairly procedural and they're built from components that exist separately earlier in the module so that shouldn't be hard. wrt to why the typechecker gives any particular definition the thumbs up you might have to narrow down what parts of the 'history' you need since some of the steps produce really large amounts of intermediate info.</p>
 
+<a name="173771667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173771667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173771667">Mario Carneiro (Aug 21 2019 at 07:44)</a>:</h4>
+<p>the short answer is "all of it"</p>
+
+<a name="173771688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173771688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173771688">Mario Carneiro (Aug 21 2019 at 07:45)</a>:</h4>
+<p>but it's possible I can reconstruct the rest from a reasonable amount of tracing data</p>
+
+<a name="173771773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173771773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173771773">Mario Carneiro (Aug 21 2019 at 07:46)</a>:</h4>
+<p>One way to describe the problem is that I want a trace that does not require knowledge of the rules of dependent type theory to verify</p>
+
+<a name="173771887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Another%20Lean%20type%20checker/near/173771887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/57705AnotherLeantypechecker.html#173771887">Mario Carneiro (Aug 21 2019 at 07:49)</a>:</h4>
+<blockquote>
+<p>really large amounts of intermediate info</p>
+</blockquote>
+<p>Could you be more specific about this? If you are talking about repeated information that's not a problem, as it can be backreferenced, but if you are generating huge terms during reduction from small inputs that's actually what I care to capture. I assume that doesn't happen very often in lean proofs though</p>
+
 
 {% endraw %}
 
