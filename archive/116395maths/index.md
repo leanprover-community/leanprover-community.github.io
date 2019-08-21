@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [sensitivity conjecture](98622sensitivityconjecture.html) (500 messages, latest: Aug 21 2019 at 09:54)
+
 * [bundling mul_homs](58200bundlingmulhoms.html) (353 messages, latest: Aug 18 2019 at 15:42)
 
 * [Formally verified factoring](24690Formallyverifiedfactoring.html) (9 messages, latest: Aug 16 2019 at 22:35)
@@ -18,8 +20,6 @@ permalink: archive/116395maths/index.html
 * [list.maximum should return option](56145listmaximumshouldreturnoption.html) (6 messages, latest: Aug 12 2019 at 08:42)
 
 * [gluing presheaves](99453gluingpresheaves.html) (11 messages, latest: Aug 11 2019 at 11:46)
-
-* [sensitivity conjecture](98622sensitivityconjecture.html) (498 messages, latest: Aug 10 2019 at 14:13)
 
 * [IMO problems](23946IMOproblems.html) (45 messages, latest: Aug 09 2019 at 11:14)
 
