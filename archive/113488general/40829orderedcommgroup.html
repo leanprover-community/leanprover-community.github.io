@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/40829orderedcommgroup.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html">ordered_comm_group</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="173803066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_group/near/173803066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html#173803066">Reid Barton (Aug 21 2019 at 15:11)</a>:</h4>
+<p><code>ordered_comm_group</code> is defined in core and it has two fields:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">ordered_comm_group</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">add_comm_group</span> <span class="n">α</span><span class="o">,</span> <span class="n">partial_order</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">add_le_add_left</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span>
+<span class="o">(</span><span class="n">add_lt_add_left</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Am I really confused or does the second one follow from the first? If <code>c + a &gt;= c + b</code>, then add <code>-c</code> to both sides.</p>
+
+<a name="173803208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_group/near/173803208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html#173803208">Reid Barton (Aug 21 2019 at 15:13)</a>:</h4>
+<p>In fact it looks like this was already noticed for <code>ordered_cancel_comm_monoid</code></p>
+
+<a name="173805272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_group/near/173805272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html#173805272">Floris van Doorn (Aug 21 2019 at 15:33)</a>:</h4>
+<p>Yeah, that's right (it's actually the first lemma below the definition). But it's in core...</p>
+
+<a name="173805470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_group/near/173805470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html#173805470">Chris Hughes (Aug 21 2019 at 15:35)</a>:</h4>
+<p>There are tons of unneceassary axioms in core. <code>field</code> for example asks for proof of left inverses and right inverse.</p>
+
+<a name="173805574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_group/near/173805574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html#173805574">Reid Barton (Aug 21 2019 at 15:37)</a>:</h4>
+<p>Is that because it extends <code>division_ring</code> or something?</p>
+
+<a name="173805747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ordered_comm_group/near/173805747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/40829orderedcommgroup.html#173805747">Chris Hughes (Aug 21 2019 at 15:39)</a>:</h4>
+<p>Yes.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -110,6 +110,38 @@ permalink: archive/144837PRreviews/035751295archive.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173784796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173784796">Kevin Buzzard (Aug 21 2019 at 11:31)</a>:</h4>
 <p>We solved it by <span class="user-mention" data-user-id="110596">@Rob Lewis</span> saying "which version of the Lean LaTeX thing we you using? The publicly available one in the GitHub repo? Don't use that, use this one which is much newer and circulates informally"</p>
 
+<a name="173804560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173804560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173804560">Jeremy Avigad (Aug 21 2019 at 15:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Thanks for this information and for the tip. I am traveling now but I'll update the notes and the proof soon and add it to the archive folder.<br>
+Regarding maintainability of proofs that use automation: Isabelle's library provides strong empirical evidence that it can be done. The library is hundreds of thousands of lines long, and automation is used everywhere. Moreover, the archive of formal proofs has over 2.2 million lines. <br>
+This is not to say that automation doesn't raise maintainability issues or introduce tradeoffs, but we should take the Isabelle experience into account.</p>
+
+<a name="173805436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173805436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173805436">Reid Barton (Aug 21 2019 at 15:35)</a>:</h4>
+<p>Isabelle favors a very <code>have</code>-heavy proof style, right?</p>
+
+<a name="173805554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173805554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173805554">Jeremy Avigad (Aug 21 2019 at 15:36)</a>:</h4>
+<p>P.S. I just found this very nice talk by Larry Paulson: <br>
+<a href="http://cpp2017.mpi-sws.org/Paulson.pdf" target="_blank" title="http://cpp2017.mpi-sws.org/Paulson.pdf">http://cpp2017.mpi-sws.org/Paulson.pdf</a><br>
+It makes a good case that structured proofs with automation are more useful (and maybe even maintainable?) than unreadable tactic proofs.</p>
+
+<a name="173805863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173805863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173805863">Rob Lewis (Aug 21 2019 at 15:40)</a>:</h4>
+<p>I think the issue here is that the proofs in the mutilated chessboard proof aren't structured for automation. I see a bunch of nonterminal simp calls, which are very hard to maintain.</p>
+
+<a name="173805947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173805947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173805947">Rob Lewis (Aug 21 2019 at 15:41)</a>:</h4>
+<p>(At least, they look nonterminal at a glance. I didn't open the file in VSCode.)</p>
+
+<a name="173807530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173807530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173807530">Patrick Massot (Aug 21 2019 at 15:58)</a>:</h4>
+<p>Rob, I guess that's exactly what broke but, in order to check, I would need to find the version of mathlib that used to make this code to work. Indeed in a proof like <code>by { simp, rw [...], simp }</code> that no longer succeeds, I have to way to tell whether the first of second (or both) simp do something different than what they used to do.</p>
+
+<a name="173807603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231295%20archive/near/173807603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/035751295archive.html#173807603">Patrick Massot (Aug 21 2019 at 15:59)</a>:</h4>
+<p>And I also love the structured proof style. The reason we can't have quite it in Lean is poor automation.</p>
+
 
 {% endraw %}
 
