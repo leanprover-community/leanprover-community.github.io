@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [building lean on arch fails](74681buildingleanonarchfails.html) (1 message, latest: Aug 21 2019 at 18:49)
+* [building lean on arch fails](74681buildingleanonarchfails.html) (3 messages, latest: Aug 21 2019 at 19:33)
 
 * [Another Lean type checker](57705AnotherLeantypechecker.html) (28 messages, latest: Aug 21 2019 at 16:31)
 
