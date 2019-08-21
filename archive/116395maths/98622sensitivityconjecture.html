@@ -2784,6 +2784,33 @@ code generation failed, VM does not have code for &#39;real.normed_field&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173795751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173795751">Rob Lewis (Aug 21 2019 at 13:52)</a>:</h4>
 <p>It's all kind of ironic since <code>V</code> definitely isn't decidable. There are non-defeq ways to pretend that it is.</p>
 
+<a name="173801473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173801473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173801473">Patrick Massot (Aug 21 2019 at 14:54)</a>:</h4>
+<p>Yes, it looks good. I'm happy you found it easy. I'm so upset by those kinds of problems that my mind refuse to work on them.</p>
+
+<a name="173801521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173801521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173801521">Patrick Massot (Aug 21 2019 at 14:54)</a>:</h4>
+<p>What is the point of getting <code>calc_lemma</code> out of the theorem proof?</p>
+
+<a name="173801531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173801531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173801531">Kevin Buzzard (Aug 21 2019 at 14:54)</a>:</h4>
+<p>We mathematicians just instinctively deny that such (decidability) issues can exist, because we've been ignoring them for centuries.</p>
+
+<a name="173801593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173801593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173801593">Patrick Massot (Aug 21 2019 at 14:55)</a>:</h4>
+<p>I think <a href="https://github.com/leanprover-community/lean-sensitivity/blob/a4b69d68217b7b8319a03f3406f4fba6147b2f91/src/sensitivity.lean#L194-L202" target="_blank" title="https://github.com/leanprover-community/lean-sensitivity/blob/a4b69d68217b7b8319a03f3406f4fba6147b2f91/src/sensitivity.lean#L194-L202">https://github.com/leanprover-community/lean-sensitivity/blob/a4b69d68217b7b8319a03f3406f4fba6147b2f91/src/sensitivity.lean#L194-L202</a> are not needed, we can use their proofs where we need them</p>
+
+<a name="173801811"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173801811" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173801811">Patrick Massot (Aug 21 2019 at 14:57)</a>:</h4>
+<p>And we still have that silly dimension computation. We should have a mathlib lemma stating that if <code>V</code> has a basis index by a finite type then its <code>findim</code> is the cardinal of this finite type, and of course a lemma computing the cardinal of <code>fin n to bool</code></p>
+
+<a name="173801971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/173801971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#173801971">Rob Lewis (Aug 21 2019 at 14:59)</a>:</h4>
+<blockquote>
+<p>What is the point of getting <code>calc_lemma</code> out of the theorem proof?</p>
+</blockquote>
+<p>That calc block is a memory hog. I moved it out to make it easier to fix, it doesn't have to stay out. Also gave me a chance to try <code>extract_goal</code>, which stumbles a bit with <code>let</code> statements.</p>
+
 
 {% endraw %}
 

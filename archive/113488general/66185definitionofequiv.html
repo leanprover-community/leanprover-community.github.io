@@ -99,6 +99,37 @@ permalink: archive/113488general/66185definitionofequiv.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173790744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173790744">Reid Barton (Aug 21 2019 at 12:55)</a>:</h4>
 <p>I just remember that the first law (<code>left_inv</code>) wants an argument which is the same type as the first function (<code>to_fun</code>) and then the same for the second law/function</p>
 
+<a name="173796971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173796971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173796971">Kevin Buzzard (Aug 21 2019 at 14:06)</a>:</h4>
+<p>In <code>data.equiv.basic</code> there is</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">trans</span><span class="o">]</span> <span class="kn">protected</span> <span class="n">def</span> <span class="n">trans</span> <span class="o">(</span><span class="n">e₁</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">e₂</span> <span class="o">:</span> <span class="n">β</span> <span class="err">≃</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="err">≃</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">e₂</span><span class="bp">.</span><span class="n">to_fun</span> <span class="err">∘</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">to_fun</span><span class="o">,</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="err">∘</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">inv_fun</span><span class="o">,</span>
+  <span class="n">e₂</span><span class="bp">.</span><span class="n">left_inv</span><span class="bp">.</span><span class="n">comp</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">left_inv</span><span class="o">,</span> <span class="n">e₂</span><span class="bp">.</span><span class="n">right_inv</span><span class="bp">.</span><span class="n">comp</span> <span class="n">e₁</span><span class="bp">.</span><span class="n">right_inv</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>and the proofs would not typecheck if one used the more low-level definitions. Here it seems to work because there is a function called <code>function.left_inverse.comp</code></p>
+
+<a name="173797665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173797665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173797665">Simon Hudon (Aug 21 2019 at 14:14)</a>:</h4>
+<p>There's an attribute <code>higher_order</code> if, from the post-ext formulation, you want to create the pre-ext formulation of a lemma</p>
+
+<a name="173799743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173799743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173799743">Floris van Doorn (Aug 21 2019 at 14:37)</a>:</h4>
+<p>I remember left-inverse/right-inverse as follows: if you have <code>g ∘ f = id</code> in the equation <code>g</code> is on the left, so it is a left-inverse of <code>f</code>, and <code>f</code> is on the right, so it is a right-inverse of <code>g</code>.</p>
+
+<a name="173799907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173799907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173799907">Kevin Buzzard (Aug 21 2019 at 14:38)</a>:</h4>
+<p>Yeah, this is just the sort of idea that I find really hard to remember like that. Because on other days I might figure that <code>g</code> is on the left, so <code>f</code> is a left-inverse of <code>g</code>.</p>
+
+<a name="173799987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173799987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173799987">Kevin Buzzard (Aug 21 2019 at 14:39)</a>:</h4>
+<p>The only reason I can remember what a left <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span>-module is ("<span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>R</mi></mrow><annotation encoding="application/x-tex">R</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.00773em;">R</span></span></span></span> goes on the left" as opposed to "the module goes on the left") is that this comes up time and time again in the stuff I read.</p>
+
+<a name="173800688"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/definition%20of%20%60equiv%60/near/173800688" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/66185definitionofequiv.html#173800688">Floris van Doorn (Aug 21 2019 at 14:46)</a>:</h4>
+<p>Makes sense. I get confused myself about most other left/right distinctions (in <code>left_distrib</code> and <code>add_le_add_left</code>, or the direction of <code>assoc</code>), just not this one.</p>
+
 
 {% endraw %}
 
