@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (24 messages, latest: Aug 22 2019 at 14:34)
+
+* [donating olean files](57431donatingoleanfiles.html) (6 messages, latest: Aug 22 2019 at 14:14)
+
 * [Indexing Zulip](45931IndexingZulip.html) (96 messages, latest: Aug 22 2019 at 13:18)
 
 * [building lean on arch fails](74681buildingleanonarchfails.html) (7 messages, latest: Aug 22 2019 at 12:53)
 
 * [C API (and its tests)](99045CAPIanditstests.html) (9 messages, latest: Aug 22 2019 at 12:44)
-
-* [donating olean files](57431donatingoleanfiles.html) (5 messages, latest: Aug 22 2019 at 09:16)
 
 * [definition of `equiv`](66185definitionofequiv.html) (26 messages, latest: Aug 21 2019 at 21:47)
 
@@ -26,8 +28,6 @@ permalink: archive/113488general/index.html
 * [Noether Normalization/Nullstellensatz](72416NoetherNormalizationNullstellensatz.html) (6 messages, latest: Aug 21 2019 at 11:57)
 
 * [universe unification](01963universeunification.html) (30 messages, latest: Aug 20 2019 at 15:39)
-
-* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (23 messages, latest: Aug 20 2019 at 15:24)
 
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (49 messages, latest: Aug 19 2019 at 14:51)
 
