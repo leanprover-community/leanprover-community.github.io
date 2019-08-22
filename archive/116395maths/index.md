@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [category_theory/groupoid and category_theory/Groupoid](51988categorytheorygroupoidandcategorytheoryGroupoid.html) (2 messages, latest: Aug 22 2019 at 06:52)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (526 messages, latest: Aug 22 2019 at 15:32)
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (523 messages, latest: Aug 21 2019 at 23:26)
+* [category_theory/groupoid and category_theory/Groupoid](51988categorytheorygroupoidandcategorytheoryGroupoid.html) (2 messages, latest: Aug 22 2019 at 06:52)
 
 * [bundling mul_homs](58200bundlingmulhoms.html) (353 messages, latest: Aug 18 2019 at 15:42)
 

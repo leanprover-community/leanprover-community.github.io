@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (24 messages, latest: Aug 22 2019 at 14:34)
+* [donating olean files](57431donatingoleanfiles.html) (7 messages, latest: Aug 22 2019 at 15:34)
 
-* [donating olean files](57431donatingoleanfiles.html) (6 messages, latest: Aug 22 2019 at 14:14)
+* [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (24 messages, latest: Aug 22 2019 at 14:34)
 
 * [Indexing Zulip](45931IndexingZulip.html) (96 messages, latest: Aug 22 2019 at 13:18)
 
