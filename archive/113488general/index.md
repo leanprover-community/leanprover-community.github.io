@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Indexing Zulip](45931IndexingZulip.html) (96 messages, latest: Aug 22 2019 at 13:18)
+
 * [building lean on arch fails](74681buildingleanonarchfails.html) (7 messages, latest: Aug 22 2019 at 12:53)
 
 * [C API (and its tests)](99045CAPIanditstests.html) (9 messages, latest: Aug 22 2019 at 12:44)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [where should these lemmas go](18425whereshouldtheselemmasgo.html) (49 messages, latest: Aug 19 2019 at 14:51)
 
 * [using lean via vscode](84683usingleanviavscode.html) (7 messages, latest: Aug 19 2019 at 13:28)
-
-* [Indexing Zulip](45931IndexingZulip.html) (95 messages, latest: Aug 18 2019 at 21:10)
 
 * [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (24 messages, latest: Aug 18 2019 at 17:07)
 
