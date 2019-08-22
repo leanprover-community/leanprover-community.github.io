@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (6 messages, latest: Aug 22 2019 at 19:35)
+* [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (7 messages, latest: Aug 22 2019 at 21:51)
 
 * [donating olean files](57431donatingoleanfiles.html) (9 messages, latest: Aug 22 2019 at 16:19)
 
