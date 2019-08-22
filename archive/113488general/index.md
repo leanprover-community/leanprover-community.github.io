@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [C API (and its tests)](99045CAPIanditstests.html) (6 messages, latest: Aug 22 2019 at 10:14)
+* [building lean on arch fails](74681buildingleanonarchfails.html) (7 messages, latest: Aug 22 2019 at 12:53)
+
+* [C API (and its tests)](99045CAPIanditstests.html) (9 messages, latest: Aug 22 2019 at 12:44)
 
 * [donating olean files](57431donatingoleanfiles.html) (5 messages, latest: Aug 22 2019 at 09:16)
 
 * [definition of `equiv`](66185definitionofequiv.html) (26 messages, latest: Aug 21 2019 at 21:47)
-
-* [building lean on arch fails](74681buildingleanonarchfails.html) (3 messages, latest: Aug 21 2019 at 19:33)
 
 * [Another Lean type checker](57705AnotherLeantypechecker.html) (28 messages, latest: Aug 21 2019 at 16:31)
 
