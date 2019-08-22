@@ -8,7 +8,7 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (2021 topics)
+* [general](113488general/index.html) (2022 topics)
 
 * [maths](116395maths/index.html) (576 topics)
 
