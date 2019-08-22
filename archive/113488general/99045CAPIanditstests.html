@@ -26,6 +26,33 @@ Looking at env.c for instance it has "import standard open nat definition double
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/C%20API%20%28and%20its%20tests%29/near/173863737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045CAPIanditstests.html#173863737">Kevin Buzzard (Aug 22 2019 at 08:46)</a>:</h4>
 <p>This old blog post <a href="https://homotopytypetheory.org/2015/12/02/the-proof-assistant-lean/" target="_blank" title="https://homotopytypetheory.org/2015/12/02/the-proof-assistant-lean/">https://homotopytypetheory.org/2015/12/02/the-proof-assistant-lean/</a> seems to indicate that in Lean 1 or 2, <code>#check</code> was indeed <code>check</code>. So it seems like you're looking at super-old code which has not been brought up to date with Lean 3.</p>
 
+<a name="173866178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/C%20API%20%28and%20its%20tests%29/near/173866178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045CAPIanditstests.html#173866178">Utz-Uwe Haus (Aug 22 2019 at 09:29)</a>:</h4>
+<p>That is what I guessed.<br>
+Still, reading the C api headers it seems that</p>
+<div class="codehilite"><pre><span></span>  <span class="n">lean_exception</span> <span class="n">ex</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+  <span class="n">lean_env</span> <span class="n">env</span><span class="p">;</span>
+  <span class="n">lean_options</span> <span class="n">o</span><span class="p">;</span>
+  <span class="n">lean_ios</span> <span class="n">ios</span><span class="p">;</span>
+
+  <span class="n">check</span><span class="p">(</span><span class="n">lean_options_mk_empty</span><span class="p">(</span><span class="o">&amp;</span><span class="n">o</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ex</span><span class="p">));</span>
+  <span class="n">check</span><span class="p">(</span><span class="n">lean_ios_mk_std</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ios</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ex</span><span class="p">));</span>
+  <span class="n">check</span><span class="p">(</span><span class="n">lean_env_mk_std</span><span class="p">(</span><span class="n">LEAN_TRUST_HIGH</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">env</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ex</span><span class="p">));</span>
+  <span class="n">lean_env</span> <span class="n">new_env</span><span class="p">;</span>
+  <span class="n">lean_ios</span> <span class="n">new_ios</span><span class="p">;</span>
+  <span class="n">check</span><span class="p">(</span><span class="n">lean_parse_commands</span><span class="p">(</span><span class="n">env</span><span class="p">,</span> <span class="n">ios</span><span class="p">,</span>
+                            <span class="s">&quot;import init&quot;</span><span class="p">,</span>
+                            <span class="o">&amp;</span><span class="n">new_env</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">new_ios</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">ex</span><span class="p">));</span>
+</pre></div>
+
+
+<p>should not give me a "no log tree in scope" exception.<br>
+What am I missing?</p>
+
+<a name="173866841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/C%20API%20%28and%20its%20tests%29/near/173866841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99045CAPIanditstests.html#173866841">Patrick Massot (Aug 22 2019 at 09:38)</a>:</h4>
+<p>My guess is you are missing Lean 4...</p>
+
 
 {% endraw %}
 
