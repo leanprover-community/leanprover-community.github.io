@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (23 messages, latest: Aug 23 2019 at 14:59)
+
 * [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (8 messages, latest: Aug 23 2019 at 12:52)
 
 * [VM code](77503VMcode.html) (1 message, latest: Aug 23 2019 at 12:11)
@@ -120,8 +122,6 @@ permalink: archive/113488general/index.html
 * [norm_num and exponentiation](29268normnumandexponentiation.html) (4 messages, latest: Aug 01 2019 at 19:15)
 
 * [norm_num and nat.fact](97326normnumandnatfact.html) (8 messages, latest: Aug 01 2019 at 19:14)
-
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (20 messages, latest: Jul 31 2019 at 21:21)
 
 * [unused arguments](84107unusedarguments.html) (66 messages, latest: Jul 30 2019 at 15:04)
 
