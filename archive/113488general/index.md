@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (23 messages, latest: Aug 23 2019 at 14:59)
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (34 messages, latest: Aug 23 2019 at 15:08)
 
 * [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (8 messages, latest: Aug 23 2019 at 12:52)
 
