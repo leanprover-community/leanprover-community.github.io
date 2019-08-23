@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (546 messages, latest: Aug 23 2019 at 08:55)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (547 messages, latest: Aug 23 2019 at 09:31)
 
 * [category_theory/groupoid and category_theory/Groupoid](51988categorytheorygroupoidandcategorytheoryGroupoid.html) (4 messages, latest: Aug 22 2019 at 20:09)
 
