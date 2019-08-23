@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (75 messages, latest: Aug 23 2019 at 16:28)
+
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (34 messages, latest: Aug 23 2019 at 15:08)
 
 * [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (8 messages, latest: Aug 23 2019 at 12:52)
@@ -44,8 +46,6 @@ permalink: archive/113488general/index.html
 * [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (24 messages, latest: Aug 18 2019 at 17:07)
 
 * [Proving for Fun](94070ProvingforFun.html) (105 messages, latest: Aug 18 2019 at 14:18)
-
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (74 messages, latest: Aug 17 2019 at 20:33)
 
 * [understanding omega](37152understandingomega.html) (3 messages, latest: Aug 17 2019 at 20:03)
 
