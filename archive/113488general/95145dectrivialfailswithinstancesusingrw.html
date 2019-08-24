@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/95145dectrivialfailswithinstancesusingrw.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html">dec_trivial fails with instances using `rw`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174019102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174019102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174019102">Scott Morrison (Aug 24 2019 at 02:32)</a>:</h4>
+<p>Observe the following two <code>decidable</code> instances, one of which uses a rewrite, and fails on most inputs, and one which avoids using the rewrite, and works just fine.</p>
+<div class="codehilite"><pre><span></span>inductive T : ℕ → Prop
+| t : Π {L : ℕ}, T L
+
+def good : decidable_pred T
+| L := decidable.is_true T.t
+
+lemma T_iff (L : ℕ) : T L ↔ true :=
+⟨λ h, trivial, λ h, T.t⟩
+
+def bad : decidable_pred T
+| L := by { rw T_iff, apply_instance, }
+
+section good
+local attribute [instance] good
+
+example : T 0 := dec_trivial
+end good
+
+section bad
+local attribute [instance] bad
+
+example : T 0 := dec_trivial  -- FAILS
+end bad
+</pre></div>
+
+<a name="174019115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174019115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174019115">Scott Morrison (Aug 24 2019 at 02:33)</a>:</h4>
+<p>I suspect that this, rather than any timeout issues, is actually the root cause of most of the failures I see in trying to use <code>dec_trivial</code>.</p>
+
+<a name="174019116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174019116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174019116">Scott Morrison (Aug 24 2019 at 02:33)</a>:</h4>
+<p>Can someone explain what is going on?</p>
+
+<a name="174019897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174019897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174019897">Scott Morrison (Aug 24 2019 at 02:59)</a>:</h4>
+<p>(Obviously this is a minimised example; I hit this problem "in the wild", with a decidability instance where it was more painful to avoid using rewrite.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
