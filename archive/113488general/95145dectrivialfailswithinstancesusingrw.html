@@ -289,6 +289,78 @@ The second one proves that what we are deciding is the same as just deciding tru
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027209">Mario Carneiro (Aug 24 2019 at 06:59)</a>:</h4>
 <p>If it is successful, you will get a term that starts with <code>decidable.of_true</code>. Otherwise, you should look for the "active" part of the term; that's the head of the term unless it's a recursor, in which case you should look at the active part of the major premise, and recurse until you find something that's not a recursor</p>
 
+<a name="174027265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027265">Mario Carneiro (Aug 24 2019 at 07:00)</a>:</h4>
+<p>In this case we have a recursor, <code>decidable.rec</code>, applied to <code>fintype.decidable_forall_fintype</code> in the major premise (at the end)</p>
+
+<a name="174027275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027275">Mario Carneiro (Aug 24 2019 at 07:01)</a>:</h4>
+<p>so the question is, why isn't that reducing? You may need to turn on pp.implicit</p>
+
+<a name="174027377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027377">Scott Morrison (Aug 24 2019 at 07:05)</a>:</h4>
+<p><code>pp.implicit</code> and <code>pp.max_steps</code> gives me: (message too long, truncated at 262144 characters)</p>
+
+<a name="174027423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027423">Scott Morrison (Aug 24 2019 at 07:06)</a>:</h4>
+<p>I guess that's what the command line is for.</p>
+
+<a name="174027425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027425">Mario Carneiro (Aug 24 2019 at 07:06)</a>:</h4>
+<p>I weep for lean</p>
+
+<a name="174027488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027488">Keeley Hoek (Aug 24 2019 at 07:08)</a>:</h4>
+<p>Mario, you mean <code>is_true</code> and <code>is_false</code> in your comment up there right?</p>
+
+<a name="174027552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027552">Mario Carneiro (Aug 24 2019 at 07:11)</a>:</h4>
+<p>yes, I always forget the names</p>
+
+<a name="174027559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027559">Scott Morrison (Aug 24 2019 at 07:11)</a>:</h4>
+<p>Hmm, the full output with <code>pp.implicit</code> is now at <a href="https://gist.github.com/semorrison/56f6f878a3d60d8aaee93184146fff08" target="_blank" title="https://gist.github.com/semorrison/56f6f878a3d60d8aaee93184146fff08">https://gist.github.com/semorrison/56f6f878a3d60d8aaee93184146fff08</a></p>
+
+<a name="174027599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027599">Scott Morrison (Aug 24 2019 at 07:12)</a>:</h4>
+<p>but I can't find the "active part" anymore.</p>
+
+<a name="174027601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027601">Scott Morrison (Aug 24 2019 at 07:12)</a>:</h4>
+<p>Unfortunately there are now 6 different appearances of <code>fintype.decidable_forall_fintype</code></p>
+
+<a name="174027730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027730">Scott Morrison (Aug 24 2019 at 07:16)</a>:</h4>
+<p>counting brackets tells me it's now at line 7590. :-)</p>
+
+<a name="174027734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027734">Keeley Hoek (Aug 24 2019 at 07:16)</a>:</h4>
+<p>This is the <del>worst</del> __most fun__ thing ever</p>
+
+<a name="174027743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027743">Mario Carneiro (Aug 24 2019 at 07:17)</a>:</h4>
+<p>The way I would analyze this is by manipulating the expr from lean, i.e. get the 6th subterm of the decidable.rec application, and print it</p>
+
+<a name="174028299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174028299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174028299">Mario Carneiro (Aug 24 2019 at 07:33)</a>:</h4>
+<p>Even without knowing the arguments to <code>fintype.decidable_forall_fintype</code>, it's strange to me that this would be the active term, because it's a definition. It should have unfolded</p>
+
+<a name="174028366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174028366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174028366">Scott Morrison (Aug 24 2019 at 07:36)</a>:</h4>
+<p>Curiously, the output has exactly four instances of <code>eq.mpr</code>. I think I know how to get rid of them.</p>
+
+<a name="174028409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174028409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174028409">Mario Carneiro (Aug 24 2019 at 07:36)</a>:</h4>
+<p>The very last thing printed is an underscore, though, suggesting that it may be stuck on a proof</p>
+
+<a name="174028531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174028531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174028531">Scott Morrison (Aug 24 2019 at 07:40)</a>:</h4>
+<p>Hmm, got rid of the <code>eq.mpr</code>s, but that didn't help. Now trying <code>pp.proofs</code>...</p>
+
+<a name="174028658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174028658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174028658">Scott Morrison (Aug 24 2019 at 07:45)</a>:</h4>
+<p>Interestingly, shrinking the domineering board to a single cell causes it to reduce to <code>is_true</code>.</p>
+
 
 {% endraw %}
 

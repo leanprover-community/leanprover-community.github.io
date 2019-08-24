@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [dec_trivial fails with instances using `rw`](95145dectrivialfailswithinstancesusingrw.html) (56 messages, latest: Aug 24 2019 at 06:59)
+* [dec_trivial fails with instances using `rw`](95145dectrivialfailswithinstancesusingrw.html) (74 messages, latest: Aug 24 2019 at 07:45)
 
 * [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (9 messages, latest: Aug 24 2019 at 01:23)
 
