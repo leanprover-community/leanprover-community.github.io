@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (9 messages, latest: Aug 24 2019 at 01:23)
+
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (75 messages, latest: Aug 23 2019 at 16:28)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (34 messages, latest: Aug 23 2019 at 15:08)
-
-* [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (8 messages, latest: Aug 23 2019 at 12:52)
 
 * [VM code](77503VMcode.html) (1 message, latest: Aug 23 2019 at 12:11)
 
