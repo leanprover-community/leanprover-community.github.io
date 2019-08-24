@@ -99,6 +99,196 @@ The second one proves that what we are deciding is the same as just deciding tru
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174021318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174021318">Keeley Hoek (Aug 24 2019 at 03:46)</a>:</h4>
 <p>Interestingly, if I replace the <code>ite</code> with its definition in either of those lines, both fail.</p>
 
+<a name="174025527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174025527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174025527">Scott Morrison (Aug 24 2019 at 06:03)</a>:</h4>
+<p>It turns out this problem is the underlying cause of <code>decidable</code> instances for combinatorial games not working.</p>
+
+<a name="174025571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174025571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174025571">Scott Morrison (Aug 24 2019 at 06:04)</a>:</h4>
+<p>I could fix the <code>decidable</code> instances for the integer-valued games, but domineering seems to intrinsically involve non-definitional equations in the construction of <code>short</code> instances, so <code>dec_trivial</code> is still broken there.</p>
+
+<a name="174025976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174025976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174025976">Chris Hughes (Aug 24 2019 at 06:18)</a>:</h4>
+<p>It's to do with the fact that the proof of equality uses <code>propext</code>, and isn't a definitional equality, so the <code>eq.rec</code> application can't be iota reduced because the resulting expression won't type check.</p>
+
+<a name="174025992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174025992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174025992">Mario Carneiro (Aug 24 2019 at 06:19)</a>:</h4>
+<p>the moral of the story is to always use <code>decidable_of_iff</code> instead of <code>rw</code> to prove decidable instances. (It doesn't matter how you prove the iff)</p>
+
+<a name="174026047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026047">Scott Morrison (Aug 24 2019 at 06:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, I think it's worse than that. I've been investigating the decidability instances in the combinatorial games PR. By carefully avoiding <code>rw</code> I can now prove <code>(0 : pgame) &lt; 1 := dec_trivial</code>, but <code>dec_trivial</code> still fails on everything involving domineering.</p>
+
+<a name="174026095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026095">Scott Morrison (Aug 24 2019 at 06:23)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/surreal/src/set_theory/game/domineering.lean#L131" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/surreal/src/set_theory/game/domineering.lean#L131">https://github.com/leanprover-community/mathlib/blob/surreal/src/set_theory/game/domineering.lean#L131</a></p>
+
+<a name="174026137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026137">Mario Carneiro (Aug 24 2019 at 06:24)</a>:</h4>
+<p>The other problem I think you will run into with surreals and games is the use of well founded recursion</p>
+
+<a name="174026151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026151">Mario Carneiro (Aug 24 2019 at 06:25)</a>:</h4>
+<p>You may be able to make it compute, but everything in the proof of well foundedness needs to be able to reduce, i.e. it can't be marked <code>theorem</code> even if it's a proof</p>
+
+<a name="174026199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026199">Scott Morrison (Aug 24 2019 at 06:26)</a>:</h4>
+<p>ooh, I never knew that defining something propositional using <code>def</code> was any different from defining it using <code>theorem</code>!</p>
+
+<a name="174026253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026253">Mario Carneiro (Aug 24 2019 at 06:28)</a>:</h4>
+<p>You rewrote in a proof of <code>short</code>? This is a bad idea and there is even a comment that says as much</p>
+
+<a name="174026266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026266">Scott Morrison (Aug 24 2019 at 06:29)</a>:</h4>
+<p>You mean the <code>unfold domineering {single_pass:=tt}</code>?</p>
+
+<a name="174026269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026269">Mario Carneiro (Aug 24 2019 at 06:29)</a>:</h4>
+<p>yes</p>
+
+<a name="174026273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026273">Mario Carneiro (Aug 24 2019 at 06:29)</a>:</h4>
+<p>It's not clear to me why <code>short</code> is not a proposition</p>
+
+<a name="174026320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026320">Mario Carneiro (Aug 24 2019 at 06:30)</a>:</h4>
+<p>at the very least you should prove it's a subsingleton</p>
+
+<a name="174026323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026323">Scott Morrison (Aug 24 2019 at 06:30)</a>:</h4>
+<p>I need to get the <code>fintype</code>s back out of it at various points, I think.</p>
+
+<a name="174026326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026326">Scott Morrison (Aug 24 2019 at 06:30)</a>:</h4>
+<p>And if I make it a <code>Prop</code> I can't eliminate anymore.</p>
+
+<a name="174026400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026400">Mario Carneiro (Aug 24 2019 at 06:32)</a>:</h4>
+<p>is it preserved by equivalence?</p>
+
+<a name="174026510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026510">Scott Morrison (Aug 24 2019 at 06:36)</a>:</h4>
+<p>Yes</p>
+
+<a name="174026511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026511">Scott Morrison (Aug 24 2019 at 06:36)</a>:</h4>
+<p>oh ...</p>
+
+<a name="174026512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026512">Scott Morrison (Aug 24 2019 at 06:36)</a>:</h4>
+<p>not obviously</p>
+
+<a name="174026518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026518">Scott Morrison (Aug 24 2019 at 06:37)</a>:</h4>
+<p>sorry, no, it's not preserved under equivalence, I think!</p>
+
+<a name="174026519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026519">Scott Morrison (Aug 24 2019 at 06:37)</a>:</h4>
+<p>You can just add infinitely many irrelevant options</p>
+
+<a name="174026525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026525">Mario Carneiro (Aug 24 2019 at 06:37)</a>:</h4>
+<p>Oh but I see you have <code>relabelling</code> for this</p>
+
+<a name="174026567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026567">Mario Carneiro (Aug 24 2019 at 06:38)</a>:</h4>
+<p>and possibly <code>restriction</code> too</p>
+
+<a name="174026570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026570">Mario Carneiro (Aug 24 2019 at 06:39)</a>:</h4>
+<p>so you may be able to prove <code>restriction x y -&gt; short y -&gt; short x</code></p>
+
+<a name="174026630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026630">Mario Carneiro (Aug 24 2019 at 06:40)</a>:</h4>
+<p>wait no, <code>restriction</code> does a different thing on the left and right</p>
+
+<a name="174026653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026653">Scott Morrison (Aug 24 2019 at 06:41)</a>:</h4>
+<p>restriction says that things are better for Left, and worse for Right</p>
+
+<a name="174026655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026655">Scott Morrison (Aug 24 2019 at 06:41)</a>:</h4>
+<p>(err, maybe other way round)</p>
+
+<a name="174026663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026663">Scott Morrison (Aug 24 2019 at 06:41)</a>:</h4>
+<p>I proved <code>short</code> is a subsingleton.</p>
+
+<a name="174026703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026703">Scott Morrison (Aug 24 2019 at 06:42)</a>:</h4>
+<p>Why is it that you're interested in whether <code>short</code> is preserved by equivalence?</p>
+
+<a name="174026711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026711">Scott Morrison (Aug 24 2019 at 06:42)</a>:</h4>
+<p>I think it really doesn't descend to the quotient; you could define <code>short</code> on the quotient by asking that there exists a <code>pgame</code> representative that is <code>short</code>.</p>
+
+<a name="174026967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026967">Scott Morrison (Aug 24 2019 at 06:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, do you have any advice on diagnosing non-computable problems in <code>dec_trivial</code>? I don't even know how to track down "the proof that is blocking reduction" in any example. (That is, all I know how to do is read everything that might be involved and look for bad smells.)</p>
+
+<a name="174026976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174026976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174026976">Mario Carneiro (Aug 24 2019 at 06:51)</a>:</h4>
+<p>You can use <code>#reduce</code> to find out what you got that isn't <code>of_true ...</code> or <code>of_false ...</code></p>
+
+<a name="174027023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027023">Mario Carneiro (Aug 24 2019 at 06:52)</a>:</h4>
+<p>In the literature they call this "canonicity", and lean doesn't have it because of axioms and irreducible proofs</p>
+
+<a name="174027037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027037">Mario Carneiro (Aug 24 2019 at 06:53)</a>:</h4>
+<p>irreducible proofs aren't usually a problem because of proof irrelevance, but subsingleton eliminators like <code>acc</code> use a proof as their major premise, so we have to be able to reduce that proof to a constructor</p>
+
+<a name="174027079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027079">Mario Carneiro (Aug 24 2019 at 06:54)</a>:</h4>
+<p>In fact <code>whnf</code> is sufficient, in case <code>#reduce</code> times out</p>
+
+<a name="174027094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027094">Scott Morrison (Aug 24 2019 at 06:55)</a>:</h4>
+<p>What is it that I should be passing to <code>whnf</code>?</p>
+
+<a name="174027096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027096">Scott Morrison (Aug 24 2019 at 06:55)</a>:</h4>
+<p><code>run_cmd tactic.whnf `(domineering.L ≤ 1) &gt;&gt;= tactic.trace</code></p>
+
+<a name="174027098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027098">Scott Morrison (Aug 24 2019 at 06:55)</a>:</h4>
+<p>I'm missing a ...?</p>
+
+<a name="174027100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027100">Mario Carneiro (Aug 24 2019 at 06:55)</a>:</h4>
+<p>the proof of <code>decidable (domineering.L ≤ 1)</code></p>
+
+<a name="174027148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027148">Scott Morrison (Aug 24 2019 at 06:57)</a>:</h4>
+<p>So</p>
+<div class="codehilite"><pre><span></span>run_cmd tactic.whnf `(by apply_instance : decidable (domineering.L ≤ 1)) &gt;&gt;= tactic.trace
+</pre></div>
+
+<a name="174027149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027149">Scott Morrison (Aug 24 2019 at 06:57)</a>:</h4>
+<p>?</p>
+
+<a name="174027150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027150">Mario Carneiro (Aug 24 2019 at 06:57)</a>:</h4>
+<p>yes, I think that should work</p>
+
+<a name="174027151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027151">Mario Carneiro (Aug 24 2019 at 06:57)</a>:</h4>
+<p>does it?</p>
+
+<a name="174027194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027194">Scott Morrison (Aug 24 2019 at 06:58)</a>:</h4>
+<p>Yes</p>
+
+<a name="174027196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027196">Scott Morrison (Aug 24 2019 at 06:58)</a>:</h4>
+<p><a href="https://gist.github.com/semorrison/2ab6ff0c68a69cc657752ef16145b031" target="_blank" title="https://gist.github.com/semorrison/2ab6ff0c68a69cc657752ef16145b031">it's a little long</a></p>
+
+<a name="174027209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174027209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174027209">Mario Carneiro (Aug 24 2019 at 06:59)</a>:</h4>
+<p>If it is successful, you will get a term that starts with <code>decidable.of_true</code>. Otherwise, you should look for the "active" part of the term; that's the head of the term unless it's a recursor, in which case you should look at the active part of the major premise, and recurse until you find something that's not a recursor</p>
+
 
 {% endraw %}
 
