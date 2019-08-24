@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [VScode: way to not auto put in `)` ?](46517VScodewaytonotautoputin.html) (4 messages, latest: Aug 24 2019 at 18:46)
+
 * [Propagate proof state in match?](80910Propagateproofstateinmatch.html) (9 messages, latest: Aug 24 2019 at 14:14)
 
 * [How to use VSCode Extension?](66271HowtouseVSCodeExtension.html) (94 messages, latest: Aug 24 2019 at 10:36)
