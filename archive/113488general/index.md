@@ -9,6 +9,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (5 messages, latest: Aug 24 2019 at 15:12)
+
+* [incorrect def/lemma](54132incorrectdeflemma.html) (17 messages, latest: Aug 24 2019 at 15:11)
+
+* [Proving for Fun](94070ProvingforFun.html) (106 messages, latest: Aug 24 2019 at 15:03)
+
 * [tactics for numbers](46415tacticsfornumbers.html) (21 messages, latest: Aug 24 2019 at 14:56)
 
 * [2000](439072000.html) (10 messages, latest: Aug 24 2019 at 12:24)
@@ -49,17 +55,11 @@ permalink: archive/113488general/index.html
 
 * [attributes, name_map with non-def keys](49841attributesnamemapwithnondefkeys.html) (24 messages, latest: Aug 18 2019 at 17:07)
 
-* [Proving for Fun](94070ProvingforFun.html) (105 messages, latest: Aug 18 2019 at 14:18)
-
 * [understanding omega](37152understandingomega.html) (3 messages, latest: Aug 17 2019 at 20:03)
 
 * [dot notation and inheritance](11825dotnotationandinheritance.html) (22 messages, latest: Aug 17 2019 at 08:34)
 
 * [protected and add_decl](26846protectedandadddecl.html) (14 messages, latest: Aug 16 2019 at 14:25)
-
-* [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (4 messages, latest: Aug 15 2019 at 18:05)
-
-* [incorrect def/lemma](54132incorrectdeflemma.html) (16 messages, latest: Aug 15 2019 at 08:46)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (8 messages, latest: Aug 15 2019 at 08:38)
 
