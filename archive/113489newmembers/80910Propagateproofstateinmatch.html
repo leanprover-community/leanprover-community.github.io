@@ -1,0 +1,82 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/80910Propagateproofstateinmatch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html">Propagate proof state in match?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174035346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174035346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174035346">Daniel Fabian (Aug 24 2019 at 11:26)</a>:</h4>
+<p>As an exercise, I'm working on an red-black-tree. And I'm trying to show, that the re-balancing doesn't change the interpretation as a set. </p>
+<div class="codehilite"><pre><span></span>universes u
+variables α : Type u
+
+inductive color
+| red
+| black
+
+inductive node (α)
+| leaf {} : node
+| tree {} (color : color) (left : node) (val : α) (right : node) : node
+
+def to_set {α} : node α → set α
+| node.leaf := ∅
+| (node.tree _ l y r) := to_set l ∪ {y} ∪ to_set r
+
+instance node_to_set_coe : has_coe (node α) (set α) := ⟨to_set⟩
+
+def balance {α} : color → node α → α → node α → node α
+| color.black (node.tree color.red (node.tree color.red a x b) y c) z d :=
+    node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+| color.black (node.tree color.red a x (node.tree color.red b y c)) z d :=
+    node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+| color.black a x (node.tree color.red (node.tree color.red b y c) z d) :=
+    node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+| color.black a x (node.tree color.red b y (node.tree color.red c z d)) :=
+    node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+| color a x b := node.tree color a x b
+
+lemma balance_mem {α} :
+∀ c l (v : α) r, (node.tree c l v r : set α) = (balance c l v r : set α) :=
+begin
+    intros,
+    from match c, l, v, r with
+    | color.black, node.tree color.red (node.tree color.red a x b) y c, z, d :=
+        begin
+            unfold balance,
+            sorry
+        end
+    | color.black, node.tree color.red a x (node.tree color.red b y c), z, d := begin sorry end
+    | color.black, a, x, node.tree color.red (node.tree color.red b y c) z d := begin sorry end
+    | color.black, a, x, node.tree color.red b y (node.tree color.red c z d) := begin sorry end
+    | _, _, _, _ := begin sorry end
+    end
+end
+</pre></div>
+
+
+<p>Initially, I was thinking to just do it using <code>cases</code> by each variable, but it turns into 100s of cases and doesn't scale at all. What I really want to do is pattern match exactly the right cases and then unfold the definition of balance.</p>
+<p>I'm a bit confused here. The goal inside the <code>begin</code> looks right, it wants me to prove </p>
+<div class="codehilite"><pre><span></span>⊢ ↑(node.tree color.black (node.tree color.red (node.tree color.red a x b) y c) z d) =
+    ↑(balance color.black (node.tree color.red (node.tree color.red a x b) y c) z d)
+</pre></div>
+
+
+<p>so balance should be happy to unfold into:</p>
+<div class="codehilite"><pre><span></span>node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+</pre></div>
+
+
+<p>However the tactic fails, any idea what I'm doing wrong?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean 4 is going public](14276Lean4isgoingpublic.html) (77 messages, latest: Aug 24 2019 at 10:36)
+* [Lean 4 is going public](14276Lean4isgoingpublic.html) (78 messages, latest: Aug 24 2019 at 11:09)
 
 * [dec_trivial fails with instances using `rw`](95145dectrivialfailswithinstancesusingrw.html) (74 messages, latest: Aug 24 2019 at 07:45)
 
