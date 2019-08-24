@@ -52,6 +52,53 @@ end bad
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174019897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174019897">Scott Morrison (Aug 24 2019 at 02:59)</a>:</h4>
 <p>(Obviously this is a minimised example; I hit this problem "in the wild", with a decidability instance where it was more painful to avoid using rewrite.)</p>
 
+<a name="174019981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174019981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174019981">Keeley Hoek (Aug 24 2019 at 03:01)</a>:</h4>
+<p>If you print them, you get</p>
+<div class="codehilite"><pre><span></span>def good._main : @decidable_pred nat T :=
+λ (a : nat), id_rhs (decidable (T a)) (@decidable.is_true (T a) (@T.t a))
+</pre></div>
+
+
+<p>vs</p>
+<div class="codehilite"><pre><span></span>def bad._main : @decidable_pred nat T :=
+λ (a : nat), id_rhs (decidable (T a))
+    (@eq.mpr (decidable (T a)) (decidable true)
+       (@id (@eq Type (decidable (T a)) (decidable true))
+          (@eq.rec Prop (T a) (λ (_a : Prop), @eq Type (decidable (T a)) (decidable _a))
+             (@eq.refl Type (decidable (T a)))
+             true
+             (@propext (T a) true (T_iff a))))
+       decidable.true)
+</pre></div>
+
+<a name="174020116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174020116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174020116">Keeley Hoek (Aug 24 2019 at 03:05)</a>:</h4>
+<p>The first one gives an <code>is_true</code> of the right type, along with a proof.<br>
+The second one proves that what we are deciding is the same as just deciding true, and then just says "true".</p>
+
+<a name="174020164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174020164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174020164">Keeley Hoek (Aug 24 2019 at 03:06)</a>:</h4>
+<p>Of course, both actually decide the question...</p>
+
+<a name="174020812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174020812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174020812">Keeley Hoek (Aug 24 2019 at 03:29)</a>:</h4>
+<p>The underlying problem is that</p>
+<div class="codehilite"><pre><span></span>example : @ite _ (good 0) _ true false := trivial
+</pre></div>
+
+
+<p>but</p>
+<div class="codehilite"><pre><span></span>example : @ite _ (bad 0)  _ true false := trivial
+</pre></div>
+
+
+<p>doesn't. I don't know if that's really any simpler, since an <code>ite</code> is just a <code>rec</code> on <code>decidable</code>.</p>
+
+<a name="174021318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dec_trivial%20fails%20with%20instances%20using%20%60rw%60/near/174021318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/95145dectrivialfailswithinstancesusingrw.html#174021318">Keeley Hoek (Aug 24 2019 at 03:46)</a>:</h4>
+<p>Interestingly, if I replace the <code>ite</code> with its definition in either of those lines, both fail.</p>
+
 
 {% endraw %}
 
