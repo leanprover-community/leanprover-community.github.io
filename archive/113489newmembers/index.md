@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to use VSCode Extension?](66271HowtouseVSCodeExtension.html) (6 messages, latest: Aug 24 2019 at 08:54)
+
+* [CD editor with Lean proof logic](92415CDeditorwithLeanprooflogic.html) (21 messages, latest: Aug 24 2019 at 08:26)
+
 * [I want to DLLize Lean](76459IwanttoDLLizeLean.html) (44 messages, latest: Aug 24 2019 at 07:56)
 
 * [Custom induction](40361Custominduction.html) (3 messages, latest: Aug 20 2019 at 19:40)
