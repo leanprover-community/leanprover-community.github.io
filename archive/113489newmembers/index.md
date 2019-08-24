@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to use VSCode Extension?](66271HowtouseVSCodeExtension.html) (6 messages, latest: Aug 24 2019 at 08:54)
+* [How to use VSCode Extension?](66271HowtouseVSCodeExtension.html) (22 messages, latest: Aug 24 2019 at 09:59)
+
+* [(no topic)](79918notopic.html) (205 messages, latest: Aug 24 2019 at 09:29)
 
 * [CD editor with Lean proof logic](92415CDeditorwithLeanprooflogic.html) (21 messages, latest: Aug 24 2019 at 08:26)
 
@@ -96,8 +98,6 @@ permalink: archive/113489newmembers/index.html
 * [leanpkg args](55408leanpkgargs.html) (5 messages, latest: Jun 26 2019 at 18:51)
 
 * [Samuel Lelièvre](94598SamuelLelivre.html) (1 message, latest: Jun 26 2019 at 16:30)
-
-* [(no topic)](79918notopic.html) (204 messages, latest: Jun 26 2019 at 07:26)
 
 * [tactic failed, result contains meta-variables](97429tacticfailedresultcontainsmetavariables.html) (3 messages, latest: Jun 25 2019 at 08:15)
 
