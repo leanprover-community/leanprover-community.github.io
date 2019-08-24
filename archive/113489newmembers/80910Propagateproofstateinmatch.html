@@ -76,6 +76,26 @@ end
 
 <p>However the tactic fails, any idea what I'm doing wrong?</p>
 
+<a name="174036754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174036754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174036754">Mario Carneiro (Aug 24 2019 at 12:12)</a>:</h4>
+<p>Use <code>#print prefix balance</code> and look for the <code>_eqn_*</code> theorems to see the actual equations lean will rewrite with</p>
+
+<a name="174036761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174036761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174036761">Mario Carneiro (Aug 24 2019 at 12:13)</a>:</h4>
+<p>Most likely, lean has done an additional case split on one of the other variables, and you will have to do that same split in the proof of properties of it</p>
+
+<a name="174036832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174036832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174036832">Mario Carneiro (Aug 24 2019 at 12:15)</a>:</h4>
+<p>looks like lean did quite a lot of case splitting - there are 122 equations for the definition</p>
+
+<a name="174036885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174036885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174036885">Mario Carneiro (Aug 24 2019 at 12:16)</a>:</h4>
+<p>I suggest rewriting <code>balance</code> with explicit <code>cases</code> applications so that you don't get so many superfluous splits</p>
+
+<a name="174036889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174036889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174036889">Mario Carneiro (Aug 24 2019 at 12:16)</a>:</h4>
+<p>Or make an intermediate definition or two</p>
+
 
 {% endraw %}
 

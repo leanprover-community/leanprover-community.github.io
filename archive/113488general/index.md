@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [2000](439072000.html) (10 messages, latest: Aug 24 2019 at 12:24)
+
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (78 messages, latest: Aug 24 2019 at 11:09)
 
 * [dec_trivial fails with instances using `rw`](95145dectrivialfailswithinstancesusingrw.html) (74 messages, latest: Aug 24 2019 at 07:45)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (34 messages, latest: Aug 23 2019 at 15:08)
 
 * [VM code](77503VMcode.html) (1 message, latest: Aug 23 2019 at 12:11)
-
-* [2000](439072000.html) (9 messages, latest: Aug 23 2019 at 09:43)
 
 * [donating olean files](57431donatingoleanfiles.html) (9 messages, latest: Aug 22 2019 at 16:19)
 
