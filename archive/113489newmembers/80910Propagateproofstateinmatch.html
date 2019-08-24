@@ -100,6 +100,43 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174039902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174039902">Daniel Fabian (Aug 24 2019 at 13:48)</a>:</h4>
 <p>oh wow, that's a lot of equations. I'll look into reducing the number of them by the strategy suggested.</p>
 
+<a name="174040304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174040304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174040304">Daniel Fabian (Aug 24 2019 at 14:01)</a>:</h4>
+<p>this is interesting: when I change the definition of <code>balance</code> to one w.r.t. to <code>match</code>, it's much happier. Consider these two (I believe) equivalent formulations</p>
+<div class="codehilite"><pre><span></span>def balance {α} : color → node α → α → node α → node α
+:=
+begin
+    intros c l v r,
+    from match c, l, v, r with
+    | color.black, node.tree color.red (node.tree color.red a x b) y c, z, d :=
+        node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+    | color.black, node.tree color.red a x (node.tree color.red b y c), z, d :=
+        node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+    | color.black, a, x, node.tree color.red (node.tree color.red b y c) z d :=
+        node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+    | color.black, a, x, node.tree color.red b y (node.tree color.red c z d) :=
+        node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+    | color, a, x, b := node.tree color a x b
+    end
+end
+-- | color.black (node.tree color.red (node.tree color.red a x b) y c) z d :=
+--     node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+-- | color.black (node.tree color.red a x (node.tree color.red b y c)) z d :=
+--     node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+-- | color.black a x (node.tree color.red (node.tree color.red b y c) z d) :=
+--     node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+-- | color.black a x (node.tree color.red b y (node.tree color.red c z d)) :=
+--     node.tree color.red (node.tree color.black a x b) y (node.tree color.black c z d)
+-- | color a x b := node.tree color a x b
+</pre></div>
+
+
+<p>the first one works fine and the second one has the problem. Is this some kind of subtlety of the equation compiler here?</p>
+
+<a name="174040682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Propagate%20proof%20state%20in%20match%3F/near/174040682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80910Propagateproofstateinmatch.html#174040682">Daniel Fabian (Aug 24 2019 at 14:14)</a>:</h4>
+<p>upon further investigation, the second version has about twice as many equations as the first one...</p>
+
 
 {% endraw %}
 

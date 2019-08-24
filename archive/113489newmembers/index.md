@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Propagate proof state in match?](80910Propagateproofstateinmatch.html) (7 messages, latest: Aug 24 2019 at 13:48)
+* [Propagate proof state in match?](80910Propagateproofstateinmatch.html) (9 messages, latest: Aug 24 2019 at 14:14)
 
 * [How to use VSCode Extension?](66271HowtouseVSCodeExtension.html) (94 messages, latest: Aug 24 2019 at 10:36)
 

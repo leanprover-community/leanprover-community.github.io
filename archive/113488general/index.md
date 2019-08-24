@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [tactics for numbers](46415tacticsfornumbers.html) (21 messages, latest: Aug 24 2019 at 14:56)
+
 * [2000](439072000.html) (10 messages, latest: Aug 24 2019 at 12:24)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (78 messages, latest: Aug 24 2019 at 11:09)
@@ -68,8 +70,6 @@ permalink: archive/113488general/index.html
 * [Isabelle Zulip?](86325IsabelleZulip.html) (5 messages, latest: Aug 13 2019 at 23:59)
 
 * [custom docstring](81257customdocstring.html) (5 messages, latest: Aug 11 2019 at 23:46)
-
-* [tactics for numbers](46415tacticsfornumbers.html) (18 messages, latest: Aug 11 2019 at 02:09)
 
 * [subdirs](71997subdirs.html) (5 messages, latest: Aug 11 2019 at 00:20)
 
