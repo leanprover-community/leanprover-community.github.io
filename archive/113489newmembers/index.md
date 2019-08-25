@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Does Lean list choices?](79045DoesLeanlistchoices.html) (8 messages, latest: Aug 25 2019 at 15:23)
+
 * [VScode: way to not auto put in `)` ?](46517VScodewaytonotautoputin.html) (4 messages, latest: Aug 24 2019 at 18:46)
 
 * [Propagate proof state in match?](80910Propagateproofstateinmatch.html) (9 messages, latest: Aug 24 2019 at 14:14)
