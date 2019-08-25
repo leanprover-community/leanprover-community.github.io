@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1274 combinatorial games](829791274combinatorialgames.html) (4 messages, latest: Aug 25 2019 at 14:08)
+
 * [#1295 archive](035751295archive.html) (37 messages, latest: Aug 24 2019 at 21:45)
 
 * [#1234 apply'](798991234apply.html) (9 messages, latest: Aug 21 2019 at 20:51)
