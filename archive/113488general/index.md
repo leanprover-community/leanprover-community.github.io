@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [2000](439072000.html) (11 messages, latest: Aug 25 2019 at 09:03)
+
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (5 messages, latest: Aug 24 2019 at 15:12)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (17 messages, latest: Aug 24 2019 at 15:11)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Proving for Fun](94070ProvingforFun.html) (106 messages, latest: Aug 24 2019 at 15:03)
 
 * [tactics for numbers](46415tacticsfornumbers.html) (21 messages, latest: Aug 24 2019 at 14:56)
-
-* [2000](439072000.html) (10 messages, latest: Aug 24 2019 at 12:24)
 
 * [Lean 4 is going public](14276Lean4isgoingpublic.html) (78 messages, latest: Aug 24 2019 at 11:09)
 
