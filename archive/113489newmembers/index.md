@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [TPIL question, lambda defs](27745TPILquestionlambdadefs.html) (15 messages, latest: Aug 26 2019 at 11:55)
+* [TPIL question, lambda defs](27745TPILquestionlambdadefs.html) (16 messages, latest: Aug 26 2019 at 12:10)
 
 * [Question in first_proofs.lean](67486Questioninfirstproofslean.html) (11 messages, latest: Aug 25 2019 at 21:50)
 

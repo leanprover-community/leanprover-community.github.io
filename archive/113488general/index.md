@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (5 messages, latest: Aug 26 2019 at 11:21)
+* [algebraic closure](74840algebraicclosure.html) (54 messages, latest: Aug 26 2019 at 12:55)
 
-* [algebraic closure](74840algebraicclosure.html) (50 messages, latest: Aug 26 2019 at 07:40)
+* [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (6 messages, latest: Aug 26 2019 at 12:53)
 
 * [Statement / Definition keyword list.](03037StatementDefinitionkeywordlist.html) (8 messages, latest: Aug 25 2019 at 21:24)
 
