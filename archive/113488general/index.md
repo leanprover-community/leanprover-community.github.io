@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean solver](47804leansolver.html) (37 messages, latest: Aug 26 2019 at 19:59)
+* [algebraic closure](74840algebraicclosure.html) (63 messages, latest: Aug 26 2019 at 20:40)
 
-* [algebraic closure](74840algebraicclosure.html) (62 messages, latest: Aug 26 2019 at 16:04)
+* [lean solver](47804leansolver.html) (37 messages, latest: Aug 26 2019 at 19:59)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (11 messages, latest: Aug 26 2019 at 14:48)
 
