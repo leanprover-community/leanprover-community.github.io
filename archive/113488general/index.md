@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (50 messages, latest: Aug 26 2019 at 07:40)
+
 * [Statement / Definition keyword list.](03037StatementDefinitionkeywordlist.html) (8 messages, latest: Aug 25 2019 at 21:24)
 
 * [2000](439072000.html) (11 messages, latest: Aug 25 2019 at 09:03)
@@ -108,8 +110,6 @@ permalink: archive/113488general/index.html
 * [iff eq cancel left](53213iffeqcancelleft.html) (14 messages, latest: Aug 05 2019 at 11:42)
 
 * [What is a parent structure?](26604Whatisaparentstructure.html) (6 messages, latest: Aug 03 2019 at 22:05)
-
-* [algebraic closure](74840algebraicclosure.html) (41 messages, latest: Aug 03 2019 at 20:55)
 
 * [fintype.card](33192fintypecard.html) (7 messages, latest: Aug 02 2019 at 19:57)
 
