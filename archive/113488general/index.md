@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (8 messages, latest: Aug 26 2019 at 13:58)
+* [lean solver](47804leansolver.html) (3 messages, latest: Aug 26 2019 at 14:59)
+
+* [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (11 messages, latest: Aug 26 2019 at 14:48)
 
 * [algebraic closure](74840algebraicclosure.html) (60 messages, latest: Aug 26 2019 at 13:56)
 
