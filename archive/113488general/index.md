@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean solver](47804leansolver.html) (3 messages, latest: Aug 26 2019 at 14:59)
+* [lean solver](47804leansolver.html) (28 messages, latest: Aug 26 2019 at 15:57)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (11 messages, latest: Aug 26 2019 at 14:48)
 
