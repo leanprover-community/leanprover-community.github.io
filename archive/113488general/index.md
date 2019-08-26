@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean solver](47804leansolver.html) (36 messages, latest: Aug 26 2019 at 16:10)
+* [lean solver](47804leansolver.html) (37 messages, latest: Aug 26 2019 at 19:59)
 
 * [algebraic closure](74840algebraicclosure.html) (62 messages, latest: Aug 26 2019 at 16:04)
 

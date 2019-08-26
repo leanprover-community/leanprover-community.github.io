@@ -195,6 +195,19 @@ simplify tactic failed to simplify</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174155150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174155150">Patrick Massot (Aug 26 2019 at 16:10)</a>:</h4>
 <p>Maybe you can find some help in the conversation at <a href="#narrow/stream/113489-new-members/topic/How.20to.20use.20VSCode.20Extension.3F" title="#narrow/stream/113489-new-members/topic/How.20to.20use.20VSCode.20Extension.3F">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/How.20to.20use.20VSCode.20Extension.3F</a></p>
 
+<a name="174171970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174171970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174171970">Jeremy Avigad (Aug 26 2019 at 19:59)</a>:</h4>
+<p>For the record, here a nicer proof:</p>
+<div class="codehilite"><pre><span></span>import data.nat.parity tactic.norm_num
+
+theorem test_ind (n : nat) : (3^n -1) % 2 = 0 :=
+have 3^n ≥ 1, by { apply nat.succ_le_of_lt, apply nat.pow_pos, norm_num },
+by { rw [←nat.even_iff], simp * with parity_simps }
+</pre></div>
+
+
+<p>The <code>rw</code> command changes the goal to <code>even (3^n-1)</code>. The simplifier should have been able to show <code>3^n ≥ 1</code>, in which case it would have been an easy one-liner. (The sticking point is that it can't show <code>3 &gt; 0</code>.) In fact, <code>parity_simps</code> should include <code>←nat.even_iff</code>, so the proof <em>should</em> have been <code>simp with parity_simps</code>.)</p>
+
 
 {% endraw %}
 
