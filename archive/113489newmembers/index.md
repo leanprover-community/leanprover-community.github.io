@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [TPIL question, lambda defs](27745TPILquestionlambdadefs.html) (14 messages, latest: Aug 26 2019 at 04:55)
+
 * [Question in first_proofs.lean](67486Questioninfirstproofslean.html) (11 messages, latest: Aug 25 2019 at 21:50)
 
 * [BananaCats - diagram edit & chase](65535BananaCatsdiagrameditchase.html) (1 message, latest: Aug 25 2019 at 17:26)

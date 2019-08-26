@@ -1,0 +1,88 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/27745TPILquestionlambdadefs.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html">TPIL question, lambda defs</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174113366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174113366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174113366">EnjoysMath (Aug 26 2019 at 04:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">double</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">double</span> <span class="mi">3</span>    <span class="c1">-- 6</span>
+
+<span class="n">def</span> <span class="n">do_twice</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">do_twice</span> <span class="n">double</span> <span class="mi">2</span>    <span class="c1">-- 8</span>
+<span class="c1">-- These definitions are equivalent to the following:</span>
+
+<span class="n">def</span> <span class="n">double</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">x</span>
+<span class="n">def</span> <span class="n">do_twice</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I'm not getting how the second <code>do_twice</code> definition is equvalent to the first since the second is of type <code>(\nat \to \nat) \to (\nat \to \nat)</code> via right associativity.  In other words it should "return" function from nat to nat, however when you do reduce it, it equals a natural number which is not of the same type as nat to nat.   Where is my reasoning stuck?</p>
+<p>P.S. how do I do inline <code>lean</code>?</p>
+
+<a name="174114254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114254">Keeley Hoek (Aug 26 2019 at 04:36)</a>:</h4>
+<p>It should evaluate to a function form nat to nat if you only pass it one argument. But you pass it two, further evaluating the function from nat to nat at a fixed nat.</p>
+
+<a name="174114332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114332">EnjoysMath (Aug 26 2019 at 04:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>  I get it now! Thank you, friend.</p>
+
+<a name="174114403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114403">EnjoysMath (Aug 26 2019 at 04:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>  okay, now I don't get it (again).  Because of the type of <code>do_twice</code> is a map from maps to maps.  So... I'm lost again</p>
+
+<a name="174114409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114409">EnjoysMath (Aug 26 2019 at 04:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>  I edited my post, not sure if you get a ping for that hence this.</p>
+
+<a name="174114458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114458">EnjoysMath (Aug 26 2019 at 04:42)</a>:</h4>
+<p>oh, I think I get it now</p>
+
+<a name="174114476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114476">EnjoysMath (Aug 26 2019 at 04:43)</a>:</h4>
+<p><code>#reduce do_twice double 2</code> is returning <code>nat -&gt; nat</code> when called on double, but evaluated is 8.  Now I get it, finallly!  Thank you!</p>
+
+<a name="174114525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114525">EnjoysMath (Aug 26 2019 at 04:44)</a>:</h4>
+<p><code>#reduce do_twice double</code> would show the <code>nat -&gt; nat</code> result</p>
+
+<a name="174114533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114533">EnjoysMath (Aug 26 2019 at 04:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>  you look like Collin Hanks (an actor, Tom Hanks' son)</p>
+
+<a name="174114538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114538">EnjoysMath (Aug 26 2019 at 04:46)</a>:</h4>
+<p>:) in your avatar, but I didn't click on it</p>
+
+<a name="174114578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114578">Keeley Hoek (Aug 26 2019 at 04:46)</a>:</h4>
+<p>You probably know this already, but this is a simple instance of <a href="https://en.wikipedia.org/wiki/Currying" target="_blank" title="https://en.wikipedia.org/wiki/Currying">https://en.wikipedia.org/wiki/Currying</a></p>
+
+<a name="174114582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114582">EnjoysMath (Aug 26 2019 at 04:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>  I'll read that article anyway to absorb some more of the formal thought about it</p>
+
+<a name="174114632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114632">EnjoysMath (Aug 26 2019 at 04:48)</a>:</h4>
+<p>Yes, currying seems very valuable in this setting, as functions are first-class data objects in Lean.  Not to mention they're verifiable, they're beyond first-class!</p>
+
+<a name="174114814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%20question%2C%20lambda%20defs/near/174114814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/27745TPILquestionlambdadefs.html#174114814">EnjoysMath (Aug 26 2019 at 04:55)</a>:</h4>
+<p>This is exciting.  We're doing math and coding at the same time. :)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
