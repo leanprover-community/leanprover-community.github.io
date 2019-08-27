@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Notation for fields](10955Notationforfields.html) (12 messages, latest: Aug 27 2019 at 19:01)
+
 * [emacs users](44956emacsusers.html) (17 messages, latest: Aug 27 2019 at 18:07)
 
 * [lean solver](47804leansolver.html) (49 messages, latest: Aug 27 2019 at 16:11)
 
 * [simp lemmas](46585simplemmas.html) (4 messages, latest: Aug 27 2019 at 15:51)
-
-* [Notation for fields](10955Notationforfields.html) (11 messages, latest: Aug 27 2019 at 15:24)
 
 * [cleaning iff](37335cleaningiff.html) (35 messages, latest: Aug 27 2019 at 15:21)
 
