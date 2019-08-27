@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (81 messages, latest: Aug 27 2019 at 11:50)
+* [algebraic closure](74840algebraicclosure.html) (86 messages, latest: Aug 27 2019 at 12:31)
 
 * [simp lemmas](46585simplemmas.html) (2 messages, latest: Aug 27 2019 at 11:42)
 
