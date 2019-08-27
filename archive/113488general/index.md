@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp lemmas](46585simplemmas.html) (1 message, latest: Aug 27 2019 at 07:58)
+
+* [deriving instances](14561derivinginstances.html) (3 messages, latest: Aug 27 2019 at 07:51)
+
 * [lean solver](47804leansolver.html) (43 messages, latest: Aug 27 2019 at 01:00)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)

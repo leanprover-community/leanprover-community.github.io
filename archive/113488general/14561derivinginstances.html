@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/14561derivinginstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html">deriving instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174203334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174203334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174203334">Johan Commelin (Aug 27 2019 at 07:32)</a>:</h4>
+<p>Now and again, we define a wrapper type. (Just because we can, right?) And afterwards we have a bunch of lines reading</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">my_wrapper</span> <span class="o">:=</span> <span class="n">something</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">my_wrapper</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">delta</span> <span class="n">my_wrapper</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">my_wrapper</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">delta</span> <span class="n">my_wrapper</span><span class="bp">;</span> <span class="n">apply_instance</span>
+<span class="c1">-- ... etc ...</span>
+</pre></div>
+
+
+<p>It would be cute if we could just write</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">comm_ring</span> <span class="n">topological_space</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">my_wrapper</span> <span class="o">:=</span> <span class="n">something</span>
+</pre></div>
+
+<a name="174203346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174203346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174203346">Johan Commelin (Aug 27 2019 at 07:32)</a>:</h4>
+<p>For an example, see <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/big-clean-up/src/Huber_ring/localization.lean#L71-L77" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/big-clean-up/src/Huber_ring/localization.lean#L71-L77">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/big-clean-up/src/Huber_ring/localization.lean#L71-L77</a> where <span class="user-mention" data-user-id="110031">@Patrick Massot</span> wrote</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Topological localization A(T/s) -/</span>
+<span class="n">def</span> <span class="n">rational_open_data</span><span class="bp">.</span><span class="n">top_loc</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">rational_open_data</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="n">away</span> <span class="n">r</span><span class="bp">.</span><span class="n">s</span>
+
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="n">A</span><span class="err">⟮</span><span class="n">T</span><span class="bp">/</span><span class="n">s</span><span class="err">⟯</span><span class="bp">`</span> <span class="o">:=</span> <span class="n">r</span><span class="bp">.</span><span class="n">top_loc</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">find_inst</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">delta</span> <span class="n">rational_open_data</span><span class="bp">.</span><span class="n">top_loc</span> <span class="n">away</span><span class="bp">;</span> <span class="n">apply_instance</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">A</span><span class="err">⟮</span><span class="n">T</span><span class="bp">/</span><span class="n">s</span><span class="err">⟯</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">find_inst</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">module</span> <span class="n">A</span> <span class="n">A</span><span class="err">⟮</span><span class="n">T</span><span class="bp">/</span><span class="n">s</span><span class="err">⟯</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">find_inst</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">A</span> <span class="n">A</span><span class="err">⟮</span><span class="n">T</span><span class="bp">/</span><span class="n">s</span><span class="err">⟯</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">find_inst</span>
+</pre></div>
+
+<a name="174204428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174204428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174204428">Sebastian Ullrich (Aug 27 2019 at 07:51)</a>:</h4>
+<p>You should be able to define a single <code>derive_handler</code> that does this</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
