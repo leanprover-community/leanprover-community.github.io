@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (68 messages, latest: Aug 27 2019 at 10:52)
+* [algebraic closure](74840algebraicclosure.html) (81 messages, latest: Aug 27 2019 at 11:50)
+
+* [simp lemmas](46585simplemmas.html) (2 messages, latest: Aug 27 2019 at 11:42)
 
 * [usability bug in squeeze_simp](01414usabilitybuginsqueezesimp.html) (4 messages, latest: Aug 27 2019 at 10:12)
 
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [lean solver](47804leansolver.html) (44 messages, latest: Aug 27 2019 at 09:43)
 
 * [deriving instances](14561derivinginstances.html) (9 messages, latest: Aug 27 2019 at 08:24)
-
-* [simp lemmas](46585simplemmas.html) (1 message, latest: Aug 27 2019 at 07:58)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)
 
