@@ -3053,6 +3053,32 @@ I'll add these notes to the documentation as soon as I am done with the report.<
 <li>Be more restrictive with marking declarations as <code>simp</code>. Maybe not every simplification should be a simp-lemma. This will probably not make a big enough impact, since most simp-lemmas should remain simp-lemmas.</li>
 </ul>
 
+<a name="174247923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174247923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174247923">Rob Lewis (Aug 27 2019 at 16:53)</a>:</h4>
+<blockquote>
+<p>Can we write a user command at the top of a file that generates and caches the standard simp set, which all declarations in that file can then use? (Potentially modifying them a little bit, since some new simp-lemmas might be added).</p>
+</blockquote>
+<p>And define a new tactic <code>simp'</code> to use our cache? That would probably be doable. I'm not sure how efficiently we can generate a cache compared to the built in methods. And I think it's pretty common to progressively prove a bunch of simp lemmas in a file, which may use each other, and then a lot of theorems that use these simp rules right after. We'd have to modify a lot of proofs and/or regenerate the cache a bunch of times per file.</p>
+
+<a name="174247994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174247994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174247994">Rob Lewis (Aug 27 2019 at 16:54)</a>:</h4>
+<blockquote>
+<p>I wonder if we should also be using <code>local attribute [simp]</code> more, or custom simp sets.</p>
+</blockquote>
+<p>This seems like the most effective way to speed things up, and also a huge pain.</p>
+
+<a name="174248029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174248029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174248029">Rob Lewis (Aug 27 2019 at 16:54)</a>:</h4>
+<p>The alternative, of course, is to not change anything for now and see how things look in <span aria-label="four leaf clover" class="emoji emoji-1f340" role="img" title="four leaf clover">:four_leaf_clover:</span> .</p>
+
+<a name="174248367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174248367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174248367">Rob Lewis (Aug 27 2019 at 16:58)</a>:</h4>
+<p>There are some simp sets that are pretty self-contained. I'm thinking of all the rules for making sense of filters. That would be a pretty natural thing to factor out of the default simp set.</p>
+
+<a name="174248403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174248403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174248403">Johan Commelin (Aug 27 2019 at 16:59)</a>:</h4>
+<p>Why is this not an issue in Isabelle?</p>
+
 
 {% endraw %}
 

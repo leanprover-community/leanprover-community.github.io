@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp lemmas](46585simplemmas.html) (4 messages, latest: Aug 27 2019 at 15:51)
+* [lean solver](47804leansolver.html) (49 messages, latest: Aug 27 2019 at 16:11)
 
-* [lean solver](47804leansolver.html) (46 messages, latest: Aug 27 2019 at 15:44)
+* [simp lemmas](46585simplemmas.html) (4 messages, latest: Aug 27 2019 at 15:51)
 
 * [Notation for fields](10955Notationforfields.html) (11 messages, latest: Aug 27 2019 at 15:24)
 
