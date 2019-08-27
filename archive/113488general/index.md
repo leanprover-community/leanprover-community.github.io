@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (105 messages, latest: Aug 27 2019 at 20:32)
+* [algebraic closure](74840algebraicclosure.html) (110 messages, latest: Aug 27 2019 at 21:37)
 
 * [lean solver](47804leansolver.html) (50 messages, latest: Aug 27 2019 at 20:24)
 
