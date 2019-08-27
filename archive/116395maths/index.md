@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [gluing presheaves](99453gluingpresheaves.html) (15 messages, latest: Aug 27 2019 at 00:15)
+
 * [Travis okays sorry](72032Travisokayssorry.html) (2 messages, latest: Aug 26 2019 at 14:54)
 
 * [sensitivity conjecture](98622sensitivityconjecture.html) (560 messages, latest: Aug 24 2019 at 23:34)
 
 * [quotient_group._to_additive axiom](41949quotientgrouptoadditiveaxiom.html) (1 message, latest: Aug 24 2019 at 15:55)
-
-* [gluing presheaves](99453gluingpresheaves.html) (12 messages, latest: Aug 24 2019 at 14:57)
 
 * [category_theory/groupoid and category_theory/Groupoid](51988categorytheorygroupoidandcategorytheoryGroupoid.html) (5 messages, latest: Aug 23 2019 at 12:46)
 

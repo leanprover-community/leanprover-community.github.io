@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean solver](47804leansolver.html) (42 messages, latest: Aug 27 2019 at 00:59)
+
+* [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)
+
 * [algebraic closure](74840algebraicclosure.html) (63 messages, latest: Aug 26 2019 at 20:40)
-
-* [lean solver](47804leansolver.html) (37 messages, latest: Aug 26 2019 at 19:59)
-
-* [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (11 messages, latest: Aug 26 2019 at 14:48)
 
 * [Statement / Definition keyword list.](03037StatementDefinitionkeywordlist.html) (8 messages, latest: Aug 25 2019 at 21:24)
 

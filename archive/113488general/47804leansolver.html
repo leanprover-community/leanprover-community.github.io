@@ -208,6 +208,29 @@ by { rw [←nat.even_iff], simp * with parity_simps }
 
 <p>The <code>rw</code> command changes the goal to <code>even (3^n-1)</code>. The simplifier should have been able to show <code>3^n ≥ 1</code>, in which case it would have been an easy one-liner. (The sticking point is that it can't show <code>3 &gt; 0</code>.) In fact, <code>parity_simps</code> should include <code>←nat.even_iff</code>, so the proof <em>should</em> have been <code>simp with parity_simps</code>.)</p>
 
+<a name="174186862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174186862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174186862">Scott Morrison (Aug 27 2019 at 00:21)</a>:</h4>
+<p>Can we use this as an opportunity to make <code>simp with parity_simps</code> work?</p>
+
+<a name="174186932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174186932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174186932">Scott Morrison (Aug 27 2019 at 00:23)</a>:</h4>
+<p>I’m not near a copy of Lean yet, but does <code>@[simp] lemma foo (n k : nat) : (n+1)^k \ge 1 \iff true := sorry</code> handle the first <code>have</code>?</p>
+
+<a name="174188269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174188269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174188269">Scott Morrison (Aug 27 2019 at 00:54)</a>:</h4>
+<p>(Found a copy of Lean) It does work. We should definitely add it. It is so much nicer if crap like this could be solved with <code>simp with parity_simps</code>. And indeed even nicer if <code>simp</code>, or a friend, could look at the goal and realize for itself that it should clearly be using <code>parity_simps</code>.</p>
+
+<a name="174188318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174188318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174188318">Scott Morrison (Aug 27 2019 at 00:56)</a>:</h4>
+<p>Does someone want to do this? We’d need:</p>
+
+<a name="174188464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174188464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174188464">Scott Morrison (Aug 27 2019 at 00:59)</a>:</h4>
+<p>1. Prove the lemma <code>foo</code> I wrote above, give it a name, and a home in <code>data.nat.basic</code>.<br>
+2. In <code>data.nat.parity</code>, add a lemma which is just the reverse of the existing nat.even_iff, and mark it as @[parity_simps].<br>
+3. Add an example somewhere <code>example (n : nat) : (3^n - 1) % 2 = 0 := by simp with parity_simps</code> to verify it works.<br>
+4. Make your first PR to mathlib. :-)</p>
+
 
 {% endraw %}
 
