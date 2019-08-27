@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [cleaning iff](37335cleaningiff.html) (5 messages, latest: Aug 27 2019 at 09:53)
+
+* [lean solver](47804leansolver.html) (44 messages, latest: Aug 27 2019 at 09:43)
+
 * [deriving instances](14561derivinginstances.html) (9 messages, latest: Aug 27 2019 at 08:24)
 
 * [simp lemmas](46585simplemmas.html) (1 message, latest: Aug 27 2019 at 07:58)
-
-* [lean solver](47804leansolver.html) (43 messages, latest: Aug 27 2019 at 01:00)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)
 

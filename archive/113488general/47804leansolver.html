@@ -235,6 +235,16 @@ by { rw [←nat.even_iff], simp * with parity_simps }
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174188536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174188536">Scott Morrison (Aug 27 2019 at 01:00)</a>:</h4>
 <p><span class="user-mention" data-user-id="236802">@John Rowan</span> , <span class="user-mention" data-user-id="232317">@Ainsley Pahljina</span>, <span class="user-mention" data-user-id="232998">@Eamon Barrett</span>?</p>
 
+<a name="174212079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174212079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174212079">Patrick Massot (Aug 27 2019 at 09:43)</a>:</h4>
+<p>This is all very cute, but would fail with more complicated examples, or the same kind of result with <code>% 3</code> instead of <code>%2</code>. I think we must keep in mind the larger goal of making calculations more convenient, especially with natural numbers. We really need more tactics to escape nat subtraction hell. Note that </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="mi">3</span><span class="err">^</span><span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">2</span><span class="bp">*</span><span class="mi">3</span><span class="err">^</span><span class="n">n</span> <span class="bp">+</span> <span class="o">(</span><span class="mi">3</span><span class="err">^</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">ring</span>
+</pre></div>
+
+
+<p>works. So we only need a tactic to turn the nat version into that version, with side conditions like <code>1 &lt;= 3^n</code> (and tactics discharging as many such goals as possible). I know Floris has some preliminary work in the direction. This would allow writing the exact same proof we would write on paper.</p>
+
 
 {% endraw %}
 
