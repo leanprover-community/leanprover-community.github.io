@@ -3044,6 +3044,15 @@ I'll add these notes to the documentation as soon as I am done with the report.<
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174209480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174209480">Scott Morrison (Aug 27 2019 at 09:03)</a>:</h4>
 <p>I wonder if we should also be using <code>local attribute [simp]</code> more, or custom simp sets.</p>
 
+<a name="174240665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174240665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174240665">Floris van Doorn (Aug 27 2019 at 15:35)</a>:</h4>
+<p>I was always wondering whether the amount of <code>simp</code> declarations would cause performance issues. Limiting the number of imports might help a bit, but that is not a sustainable solution. Other potential solutions:</p>
+<ul>
+<li>Can we write a user command at the top of a file that generates and caches the standard simp set, which all declarations in that file can then use? (Potentially modifying them a little bit, since some new simp-lemmas might be added).</li>
+<li>As Scott said, make extensive use of simp-sets: instead of marking everything with <code>@[simp]</code> we mark things as <code>topology_simp</code> and <code>linear_algebra_simp</code> and with <code>simp with topology_simp</code>. Obviously this is a less nice user experience.</li>
+<li>Be more restrictive with marking declarations as <code>simp</code>. Maybe not every simplification should be a simp-lemma. This will probably not make a big enough impact, since most simp-lemmas should remain simp-lemmas.</li>
+</ul>
+
 
 {% endraw %}
 

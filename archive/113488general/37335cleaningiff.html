@@ -128,6 +128,65 @@ permalink: archive/113488general/37335cleaningiff.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237166">Sebastian Ullrich (Aug 27 2019 at 14:59)</a>:</h4>
 <p>no</p>
 
+<a name="174237242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237242">Johan Commelin (Aug 27 2019 at 15:00)</a>:</h4>
+<p>Great!</p>
+
+<a name="174237270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237270">Patrick Massot (Aug 27 2019 at 15:00)</a>:</h4>
+<p>I'm pretty sure you have thought about all that. I was honestly asking why things are not that simple.</p>
+
+<a name="174237344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237344">Sebastian Ullrich (Aug 27 2019 at 15:01)</a>:</h4>
+<p>But generally speaking, it's not immediately clear how exactly the index should work: Does it only index a single parameter of the class? Is it always the first one? Or does this need to be customizable, by an attribute on the class?</p>
+
+<a name="174237465"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237465" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237465">Sebastian Ullrich (Aug 27 2019 at 15:02)</a>:</h4>
+<p>I'm sure there are some examples in mathlib where indexing by the first parameter would not be optimal</p>
+
+<a name="174237508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237508">Patrick Massot (Aug 27 2019 at 15:03)</a>:</h4>
+<p>I guess that using the first parameter would already cover a lot of cases. You don't have to cover all cases since you can always fall back to a more general arguments. It even looks to me like this part of the procedure should be stupid enough to fail very quickly when it fails</p>
+
+<a name="174237879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237879">Sebastian Ullrich (Aug 27 2019 at 15:07)</a>:</h4>
+<p>Sure, it's a single lookup of the head constant name in a hopefully fast data structure for deciding which algorithm to follow. The big issue in Lean 3 is where to build and store this data structure - this is exactly the issue with <code>simp</code> constantly rebuilding its simpset. This will work completely differently in Lean 4.</p>
+
+<a name="174238228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238228">Reid Barton (Aug 27 2019 at 15:10)</a>:</h4>
+<p>I know GHC has an index on the head type constructor for ordinary type classes (although it also supports instances that aren't of the Haskell 98 form which specify only the head). I don't remember what it does for multiparameter type classes, I could check at some point.</p>
+
+<a name="174238286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238286">Patrick Massot (Aug 27 2019 at 15:11)</a>:</h4>
+<p>And what about my even stupider idea of a local indexing by name of variable?</p>
+
+<a name="174238295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238295">Reid Barton (Aug 27 2019 at 15:11)</a>:</h4>
+<p>My guess is that it's usually best to index the last type argument</p>
+
+<a name="174238296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238296">Sebastian Ullrich (Aug 27 2019 at 15:11)</a>:</h4>
+<p>It's much easier if you're not an interactive compiler :)</p>
+
+<a name="174238464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238464">Sebastian Ullrich (Aug 27 2019 at 15:13)</a>:</h4>
+<p>(Also Haskell does not have priorities. Should a head matching always be prioritized over a unification match? Is that intuitive?)</p>
+
+<a name="174238782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238782">Simon Hudon (Aug 27 2019 at 15:17)</a>:</h4>
+<p>I think I'd be happy if head matching were prioritized. I always feel a bit queasy when I see an instance where the whole type is one variable. It does not use any specific knowledge of the type we're creating an instance for. I think specific insight should be prioritized</p>
+
+<a name="174238911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174238911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174238911">Sebastian Ullrich (Aug 27 2019 at 15:18)</a>:</h4>
+<blockquote>
+<p>And what about my even stupider idea of a local indexing by name of variable?</p>
+</blockquote>
+<p>It would probably help, but I wouldn't hold my breath for such a hack being included in Lean proper. The head index should be strictly better.</p>
+
+<a name="174239258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174239258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174239258">Patrick Massot (Aug 27 2019 at 15:21)</a>:</h4>
+<p>They cover different cases (at least the way I dream of it)</p>
+
 
 {% endraw %}
 
