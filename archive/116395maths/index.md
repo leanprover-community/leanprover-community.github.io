@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [sensitivity conjecture](98622sensitivityconjecture.html) (571 messages, latest: Aug 27 2019 at 09:03)
+* [gluing presheaves](99453gluingpresheaves.html) (16 messages, latest: Aug 27 2019 at 10:23)
 
-* [gluing presheaves](99453gluingpresheaves.html) (15 messages, latest: Aug 27 2019 at 00:15)
+* [sensitivity conjecture](98622sensitivityconjecture.html) (571 messages, latest: Aug 27 2019 at 09:03)
 
 * [Travis okays sorry](72032Travisokayssorry.html) (2 messages, latest: Aug 26 2019 at 14:54)
 

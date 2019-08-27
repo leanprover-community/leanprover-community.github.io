@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [cleaning iff](37335cleaningiff.html) (5 messages, latest: Aug 27 2019 at 09:53)
+* [algebraic closure](74840algebraicclosure.html) (68 messages, latest: Aug 27 2019 at 10:52)
+
+* [usability bug in squeeze_simp](01414usabilitybuginsqueezesimp.html) (4 messages, latest: Aug 27 2019 at 10:12)
+
+* [cleaning iff](37335cleaningiff.html) (6 messages, latest: Aug 27 2019 at 10:04)
 
 * [lean solver](47804leansolver.html) (44 messages, latest: Aug 27 2019 at 09:43)
 
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [simp lemmas](46585simplemmas.html) (1 message, latest: Aug 27 2019 at 07:58)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)
-
-* [algebraic closure](74840algebraicclosure.html) (63 messages, latest: Aug 26 2019 at 20:40)
 
 * [Statement / Definition keyword list.](03037StatementDefinitionkeywordlist.html) (8 messages, latest: Aug 25 2019 at 21:24)
 
