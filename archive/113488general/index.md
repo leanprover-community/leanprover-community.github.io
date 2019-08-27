@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [cleaning iff](37335cleaningiff.html) (11 messages, latest: Aug 27 2019 at 13:58)
+* [cleaning iff](37335cleaningiff.html) (21 messages, latest: Aug 27 2019 at 14:59)
+
+* [algebraic closure](74840algebraicclosure.html) (96 messages, latest: Aug 27 2019 at 14:59)
 
 * [lean solver](47804leansolver.html) (45 messages, latest: Aug 27 2019 at 13:55)
-
-* [algebraic closure](74840algebraicclosure.html) (87 messages, latest: Aug 27 2019 at 13:36)
 
 * [simp lemmas](46585simplemmas.html) (2 messages, latest: Aug 27 2019 at 11:42)
 

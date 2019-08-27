@@ -470,6 +470,71 @@ Thanks for your updates. I also don't have a lot of time to delve into.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174229293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174229293">Johan Commelin (Aug 27 2019 at 13:36)</a>:</h4>
 <p>That being an algebraic extension is transitive.</p>
 
+<a name="174235526"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174235526" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174235526">Johan Commelin (Aug 27 2019 at 14:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> Do we have anything of the form <code>M/L</code> is fg and <code>L/K</code> is fg, hence <code>M/K</code> is fg?</p>
+
+<a name="174235595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174235595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174235595">Johan Commelin (Aug 27 2019 at 14:42)</a>:</h4>
+<p>Where <code>M/L/K</code> is a tower of algebras (or subalgebras)...</p>
+
+<a name="174235617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174235617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174235617">Kenny Lau (Aug 27 2019 at 14:42)</a>:</h4>
+<p>I think so</p>
+
+<a name="174236562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174236562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174236562">Patrick Massot (Aug 27 2019 at 14:52)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="174236576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174236576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174236576">Patrick Massot (Aug 27 2019 at 14:52)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="174236595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174236595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174236595">Patrick Massot (Aug 27 2019 at 14:52)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="174237082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174237082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174237082">Johan Commelin (Aug 27 2019 at 14:58)</a>:</h4>
+<p>Here is what I have now:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">adjoin_root</span><span class="bp">.</span><span class="n">algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">is_integral</span> <span class="n">K</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rcases</span> <span class="n">adjoin_root</span><span class="bp">.</span><span class="n">is_integral</span> <span class="n">hif</span><span class="bp">.</span><span class="n">ne_zero</span> <span class="n">x</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">p</span><span class="o">,</span> <span class="n">pmonic</span><span class="o">,</span> <span class="n">hp</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="err">↑</span><span class="o">((</span><span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">nat_degree</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="n">image</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">coeff</span> <span class="n">i</span> <span class="o">:</span> <span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)))</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)),</span>
+  <span class="k">let</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">adjoin</span> <span class="n">K</span> <span class="n">S</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">Bfg</span> <span class="o">:</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">fg</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">submodule</span> <span class="n">K</span> <span class="o">(</span><span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)),</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">fg_adjoin_of_finite</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">finite_to_set</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">intros</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_coe</span><span class="o">,</span> <span class="n">finset</span><span class="bp">.</span><span class="n">mem_image</span><span class="o">]</span> <span class="n">at</span> <span class="n">hx</span><span class="o">,</span>
+      <span class="n">rcases</span> <span class="n">hx</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">i</span><span class="o">,</span> <span class="n">hi</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">rcases</span> <span class="n">L</span><span class="bp">.</span><span class="n">algebraic</span> <span class="o">(</span><span class="n">f</span><span class="bp">.</span><span class="n">coeff</span> <span class="n">i</span><span class="o">)</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">q</span><span class="o">,</span> <span class="n">qmonic</span><span class="o">,</span> <span class="n">hq</span><span class="bp">⟩</span><span class="o">,</span>
+      <span class="n">use</span> <span class="o">[</span><span class="n">q</span><span class="o">,</span> <span class="n">qmonic</span><span class="o">],</span>
+      <span class="n">replace</span> <span class="n">hq</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="n">coe</span> <span class="o">:</span> <span class="n">L</span><span class="bp">.</span><span class="n">carrier</span> <span class="bp">→</span> <span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)</span> <span class="n">hq</span><span class="o">,</span>
+      <span class="n">convert</span> <span class="n">hq</span> <span class="kn">using</span> <span class="mi">1</span><span class="o">,</span>
+      <span class="o">{</span> <span class="n">symmetry</span><span class="o">,</span> <span class="n">exact</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">hom_eval₂</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">},</span>
+      <span class="o">{</span> <span class="n">symmetry</span><span class="o">,</span> <span class="n">exact</span> <span class="n">is_ring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="bp">_</span> <span class="o">}</span> <span class="o">}</span> <span class="o">},</span>
+
+  <span class="c1">-- (1) we know that x is integral over L, by adjoin_root.is_integral</span>
+  <span class="c1">-- (2) we know that B is fg over K</span>
+  <span class="c1">-- (3) we want to say that adjoin B {x} is fg over B, because (1)</span>
+  <span class="c1">-- (4) hence adjoin B {x} is fg over K</span>
+  <span class="c1">-- (5) and then we are done by is_integral_of_mem_of_fg</span>
+
+  <span class="c1">-- refine is_integral_of_mem_of_fg (algebra.adjoin K S) _ x (algebra.subset_adjoin $ mem_insert _ _),</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="174237111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174237111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174237111">Johan Commelin (Aug 27 2019 at 14:59)</a>:</h4>
+<p>Any help with removing this sorry is very much appreciated.</p>
+
+<a name="174237120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174237120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174237120">Johan Commelin (Aug 27 2019 at 14:59)</a>:</h4>
+<p>I need to start moving to a train now</p>
+
 
 {% endraw %}
 

@@ -83,6 +83,51 @@ permalink: archive/113488general/37335cleaningiff.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174231499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174231499">Jeremy Avigad (Aug 27 2019 at 13:58)</a>:</h4>
 <p>Thanks! I really am taking notes and gathering all the comments I received.</p>
 
+<a name="174231785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174231785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174231785">Patrick Massot (Aug 27 2019 at 14:02)</a>:</h4>
+<p>I would have never guessed that when I started Lean and everything was confusing, but today it's clear that elaboration is by far the most important aspect. I spend most of my wasted time fighting the elaborator (and parser maybe).</p>
+
+<a name="174231906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174231906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174231906">Johan Commelin (Aug 27 2019 at 14:03)</a>:</h4>
+<p>With good-old-paper-maths you could offload those fights to the reader (-;</p>
+
+<a name="174231930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174231930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174231930">Patrick Massot (Aug 27 2019 at 14:03)</a>:</h4>
+<p>This and so many other boring details</p>
+
+<a name="174231934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174231934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174231934">Johan Commelin (Aug 27 2019 at 14:03)</a>:</h4>
+<p>The elaborator is the formalisation of "left as an exercise for the reader" <span aria-label="stuck out tongue wink" class="emoji emoji-1f61c" role="img" title="stuck out tongue wink">:stuck_out_tongue_wink:</span></p>
+
+<a name="174232508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174232508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174232508">Jeremy Avigad (Aug 27 2019 at 14:09)</a>:</h4>
+<p>One important question is what should be done by the elaborator and what should be done by automation at a later stage. The elaborator should be focused on filling in information that is absolutely essential to make sense of an expression. It may be putting too much of a burden on the elaborator to expect it to prove that an operation is commutative or a set is finite. Maybe that is best done by another process later on, that acts when all the implicit data has been inferred.</p>
+
+<a name="174233034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174233034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174233034">Patrick Massot (Aug 27 2019 at 14:14)</a>:</h4>
+<p>Let me prove once more that I have no idea how type classes work, and ask: why is it stupid to insert the following two mechanisms into type class search:</p>
+<ul>
+<li>allow to write <code>instance_for `X my_class := explicit_instance or by apply_instance</code> where, as usual, <code> `X </code> is a name. Then every type Lean wants to infer an instance for <code>my_type X</code> use the database created by that line. </li>
+<li>If the previous method fails,  class search <code>[my_class X Y Z...]</code> by a search by name head_symbol_of_X.class_name</li>
+</ul>
+<p>If both fail then use the current algorithm. To me it sounds like this would solve most of the cases where Lean fails or take forever to find an instance. For instance we have files in the perfectoid space where <code>K</code> denotes a field, and it does so for 1000 lines.  And each proof involves Lean searching at least twice for <code>comm_ring K</code>. It sounds like looking at a hash table under key <code>K</code> would be much faster.</p>
+
+<a name="174233591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174233591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174233591">Patrick Massot (Aug 27 2019 at 14:20)</a>:</h4>
+<p>I don't think I want to put a burden on the elaborator. I only want coercions and type class search to do their jobs. And also, I'd like the elaborator to stop thinking every numeral is in nat</p>
+
+<a name="174237114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237114">Sebastian Ullrich (Aug 27 2019 at 14:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Adding a head index (i.e. exactly what <code>simp</code> uses) to the instance search is definitely something we have been thinking about. Though I believe Leo already has new plans for the whole algorithm we haven't talked about yet, so I won't speculate any further for now.</p>
+
+<a name="174237153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237153">Johan Commelin (Aug 27 2019 at 14:59)</a>:</h4>
+<p>Does that mean it will only become as slow as <code>simp</code> is? (See the other thread...)</p>
+
+<a name="174237166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/cleaning%20iff/near/174237166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37335cleaningiff.html#174237166">Sebastian Ullrich (Aug 27 2019 at 14:59)</a>:</h4>
+<p>no</p>
+
 
 {% endraw %}
 
