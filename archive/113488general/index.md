@@ -9,17 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (105 messages, latest: Aug 27 2019 at 20:32)
+
+* [lean solver](47804leansolver.html) (50 messages, latest: Aug 27 2019 at 20:24)
+
 * [Notation for fields](10955Notationforfields.html) (12 messages, latest: Aug 27 2019 at 19:01)
 
 * [emacs users](44956emacsusers.html) (17 messages, latest: Aug 27 2019 at 18:07)
 
-* [lean solver](47804leansolver.html) (49 messages, latest: Aug 27 2019 at 16:11)
-
 * [simp lemmas](46585simplemmas.html) (4 messages, latest: Aug 27 2019 at 15:51)
 
 * [cleaning iff](37335cleaningiff.html) (35 messages, latest: Aug 27 2019 at 15:21)
-
-* [algebraic closure](74840algebraicclosure.html) (98 messages, latest: Aug 27 2019 at 15:17)
 
 * [usability bug in squeeze_simp](01414usabilitybuginsqueezesimp.html) (4 messages, latest: Aug 27 2019 at 10:12)
 
