@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [emacs users](44956emacsusers.html) (17 messages, latest: Aug 27 2019 at 18:07)
+
 * [lean solver](47804leansolver.html) (49 messages, latest: Aug 27 2019 at 16:11)
 
 * [simp lemmas](46585simplemmas.html) (4 messages, latest: Aug 27 2019 at 15:51)
@@ -220,8 +222,6 @@ permalink: archive/113488general/index.html
 * [Lean Together 2020](04583LeanTogether2020.html) (6 messages, latest: Jul 18 2019 at 13:11)
 
 * [choose crashes Lean](49867choosecrashesLean.html) (29 messages, latest: Jul 16 2019 at 17:21)
-
-* [emacs users](44956emacsusers.html) (16 messages, latest: Jul 16 2019 at 16:10)
 
 * [Lean being stubborn with class instances](32239Leanbeingstubbornwithclassinstances.html) (5 messages, latest: Jul 16 2019 at 08:43)
 
