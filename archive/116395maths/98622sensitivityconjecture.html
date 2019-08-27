@@ -3009,6 +3009,37 @@ I'll add these notes to the documentation as soon as I am done with the report.<
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174203447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174203447">Johan Commelin (Aug 27 2019 at 07:35)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> In how many different languages do you know the word “Schadenfreude”?</p>
 
+<a name="174206467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174206467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174206467">Scott Morrison (Aug 27 2019 at 08:20)</a>:</h4>
+<p>Wow, that’s really bad.</p>
+
+<a name="174206484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174206484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174206484">Scott Morrison (Aug 27 2019 at 08:20)</a>:</h4>
+<p>Like, maybe this enterprise is actually doomed, bad. :-)</p>
+
+<a name="174207036"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174207036" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174207036">Chris Hughes (Aug 27 2019 at 08:28)</a>:</h4>
+<p>I think this is maybe a case for being careful about minimising imports. It won't improve speed for everyone, but certainly it will improve speed a lot of the time. I think there were a lot of unnecessary imports for that proof.</p>
+
+<a name="174208113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174208113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174208113">Johan Commelin (Aug 27 2019 at 08:41)</a>:</h4>
+<blockquote>
+<p>[…] building the default <code>simp</code> set at the beginning of <code>for_mathlib.lean</code> takes 1.5 sec (on my laptop, 1 sec on my desktop). This happens once in every declaration that uses <code>simp</code> without <code>only</code>.</p>
+</blockquote>
+<p>Isn't this something that can be cached?</p>
+
+<a name="174208681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174208681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174208681">Rob Lewis (Aug 27 2019 at 08:51)</a>:</h4>
+<p>It's not like it's an inherent problem -- I don't think Isabelle has the same behavior. Caching the simp set is probably pretty complicated because of multithreading. There's maybe something to be done there, but definitely not doable from mathlib.</p>
+
+<a name="174208759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174208759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174208759">Rob Lewis (Aug 27 2019 at 08:52)</a>:</h4>
+<p>It's the best case I've heard yet for minimizing imports. But I'm not sure how much it will really buy in the end. Maybe it helps this specific proof, but it will be a recurring issue.</p>
+
+<a name="174208864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20conjecture/near/174208864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/98622sensitivityconjecture.html#174208864">Rob Lewis (Aug 27 2019 at 08:54)</a>:</h4>
+<p>It's fairly slow even just importing <code>analysis.normed_space.basic</code>.</p>
+
 
 {% endraw %}
 

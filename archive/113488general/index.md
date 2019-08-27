@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp lemmas](46585simplemmas.html) (1 message, latest: Aug 27 2019 at 07:58)
+* [deriving instances](14561derivinginstances.html) (9 messages, latest: Aug 27 2019 at 08:24)
 
-* [deriving instances](14561derivinginstances.html) (3 messages, latest: Aug 27 2019 at 07:51)
+* [simp lemmas](46585simplemmas.html) (1 message, latest: Aug 27 2019 at 07:58)
 
 * [lean solver](47804leansolver.html) (43 messages, latest: Aug 27 2019 at 01:00)
 

@@ -48,6 +48,47 @@ permalink: archive/113488general/14561derivinginstances.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174204428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174204428">Sebastian Ullrich (Aug 27 2019 at 07:51)</a>:</h4>
 <p>You should be able to define a single <code>derive_handler</code> that does this</p>
 
+<a name="174206395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174206395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174206395">Scott Morrison (Aug 27 2019 at 08:19)</a>:</h4>
+<p>This does  seem like a good idea! We really need to keep track of things like this. :-)</p>
+
+<a name="174206498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174206498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174206498">Rob Lewis (Aug 27 2019 at 08:21)</a>:</h4>
+<p>I don't have time right now to clean this up, but if someone feels like doing it, here's a working start:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive_handler</span><span class="o">]</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">delta_instance</span> <span class="o">:</span> <span class="n">derive_handler</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">cls</span> <span class="n">tp</span><span class="o">,</span>
+<span class="o">(</span><span class="n">do</span> <span class="n">tp&#39;</span> <span class="err">←</span> <span class="n">mk_const</span> <span class="n">tp</span><span class="o">,</span>
+   <span class="n">tgt</span> <span class="err">←</span> <span class="n">to_expr</span> <span class="bp">``</span><span class="o">(</span><span class="err">%%</span><span class="n">cls</span> <span class="err">%%</span><span class="n">tp&#39;</span><span class="o">),</span>
+   <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="err">←</span> <span class="n">solve_aux</span> <span class="n">tgt</span> <span class="o">(</span><span class="n">delta_target</span> <span class="o">[</span><span class="n">tp</span><span class="o">]</span> <span class="bp">&gt;&gt;</span> <span class="n">apply_instance</span> <span class="bp">&gt;&gt;</span> <span class="n">done</span><span class="o">),</span>
+   <span class="n">v</span> <span class="err">←</span> <span class="n">instantiate_mvars</span> <span class="n">v</span><span class="o">,</span>
+   <span class="n">nm</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span>
+   <span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">defn</span> <span class="n">nm</span> <span class="o">[]</span> <span class="n">tgt</span> <span class="n">v</span> <span class="n">reducibility_hints</span><span class="bp">.</span><span class="n">abbrev</span> <span class="n">tt</span><span class="o">,</span>
+   <span class="n">set_basic_attribute</span> <span class="bp">`</span><span class="kn">instance</span> <span class="n">nm</span> <span class="n">tt</span><span class="o">,</span>
+   <span class="n">return</span> <span class="n">tt</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">return</span> <span class="n">ff</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="o">[</span><span class="n">monoid</span><span class="o">,</span> <span class="n">semiring</span><span class="o">]]</span> <span class="n">def</span> <span class="n">T</span> <span class="o">:=</span> <span class="bp">ℕ</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">T</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="174206640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174206640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174206640">Johan Commelin (Aug 27 2019 at 08:23)</a>:</h4>
+<p>Awesome! Thanks for starting this.</p>
+
+<a name="174206659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174206659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174206659">Scott Morrison (Aug 27 2019 at 08:23)</a>:</h4>
+<p>Looks lovely. Is there actually anything to do except go through the library and see where it could be used, and seeing if there are any unexpected failures?</p>
+
+<a name="174206690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174206690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174206690">Rob Lewis (Aug 27 2019 at 08:23)</a>:</h4>
+<p>If nothing else, it should generate better names for the instances.</p>
+
+<a name="174206760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/174206760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#174206760">Rob Lewis (Aug 27 2019 at 08:24)</a>:</h4>
+<p>I'm not sure why the <code>instantiate_mvars</code> is necessary but it fails without it.</p>
+
 
 {% endraw %}
 
