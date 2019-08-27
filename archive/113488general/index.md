@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (86 messages, latest: Aug 27 2019 at 12:31)
+* [cleaning iff](37335cleaningiff.html) (11 messages, latest: Aug 27 2019 at 13:58)
+
+* [lean solver](47804leansolver.html) (45 messages, latest: Aug 27 2019 at 13:55)
+
+* [algebraic closure](74840algebraicclosure.html) (87 messages, latest: Aug 27 2019 at 13:36)
 
 * [simp lemmas](46585simplemmas.html) (2 messages, latest: Aug 27 2019 at 11:42)
 
 * [usability bug in squeeze_simp](01414usabilitybuginsqueezesimp.html) (4 messages, latest: Aug 27 2019 at 10:12)
-
-* [cleaning iff](37335cleaningiff.html) (6 messages, latest: Aug 27 2019 at 10:04)
-
-* [lean solver](47804leansolver.html) (44 messages, latest: Aug 27 2019 at 09:43)
 
 * [deriving instances](14561derivinginstances.html) (9 messages, latest: Aug 27 2019 at 08:24)
 

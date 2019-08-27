@@ -245,6 +245,35 @@ by { rw [←nat.even_iff], simp * with parity_simps }
 
 <p>works. So we only need a tactic to turn the nat version into that version, with side conditions like <code>1 &lt;= 3^n</code> (and tactics discharging as many such goals as possible). I know Floris has some preliminary work in the direction. This would allow writing the exact same proof we would write on paper.</p>
 
+<a name="174231223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/lean%20solver/near/174231223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/47804leansolver.html#174231223">Jeremy Avigad (Aug 27 2019 at 13:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I didn't think of the <code>n+1</code> trick. That is a good solution. It will let the simpilfier solve some trivial &lt;= goals.<br>
+There is another annoyance with the &lt;= / &gt;= notation:</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma foo (n k : nat) : (n+1)^k ≥ 1 ↔ true := sorry
+
+example (n : nat) : 3^n ≥ 1 := by simp
+
+-- fails
+example (n : nat) : 1 ≤ 3^n := by simp
+</pre></div>
+
+
+<p>We should probably have the simplifier replace &gt;= by &lt;=. Also, the simplifier doesn't need the "iff true" part.</p>
+<div class="codehilite"><pre><span></span>@[simp] lemma bar (m n : nat) : m ≥ n ↔ n ≤ m :=
+iff.rfl
+
+@[simp] lemma foo (n k : nat) : 1 ≤ (n+1)^k :=
+by { apply nat.succ_le_of_lt, apply nat.pow_pos, apply nat.succ_pos }
+
+example (n : nat) : 3^n ≥ 1 := by simp
+
+example (n : nat) : 1 ≤ 3^n := by simp
+</pre></div>
+
+
+<p>Also, we should probably have the corresponding theorems for the version of <code>pow</code> in <code>algebra.group_power</code>.</p>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> The point is well taken. We need better support for calculation on <code>nat</code>.</p>
+
 
 {% endraw %}
 
