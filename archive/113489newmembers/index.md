@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How do you set the Lean exec?](11856HowdoyousettheLeanexec.html) (31 messages, latest: Aug 28 2019 at 06:00)
+* [How do you set the Lean exec?](11856HowdoyousettheLeanexec.html) (37 messages, latest: Aug 28 2019 at 06:02)
 
 * [What is type A->B called?](23685WhatistypeABcalled.html) (3 messages, latest: Aug 28 2019 at 05:35)
 

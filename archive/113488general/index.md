@@ -9,7 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (113 messages, latest: Aug 28 2019 at 05:21)
+* [deterministic craziness](67975deterministiccraziness.html) (4 messages, latest: Aug 28 2019 at 06:36)
+
+* [Recommend TypeScript editor](47033RecommendTypeScripteditor.html) (1 message, latest: Aug 28 2019 at 06:17)
+
+* [How to open VSCode-Lean files?](58855HowtoopenVSCodeLeanfiles.html) (2 messages, latest: Aug 28 2019 at 06:11)
+
+* [algebraic closure](74840algebraicclosure.html) (118 messages, latest: Aug 28 2019 at 06:11)
 
 * [lean solver](47804leansolver.html) (50 messages, latest: Aug 27 2019 at 20:24)
 

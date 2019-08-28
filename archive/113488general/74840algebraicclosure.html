@@ -611,6 +611,38 @@ Thanks for your updates. I also don't have a lot of time to delve into.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174333547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174333547">Johan Commelin (Aug 28 2019 at 05:21)</a>:</h4>
 <p>Maybe it's not actually bundled homs that we need, but bundled algebras</p>
 
+<a name="174335297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174335297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174335297">Johan Commelin (Aug 28 2019 at 06:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Do you remember why you need these instances for <code>adjoin_root</code>?<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/f3620a68e9e1913ba42fa2951c44e70c63b37785/src/field_theory/algebraic_closure.lean#L586" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/f3620a68e9e1913ba42fa2951c44e70c63b37785/src/field_theory/algebraic_closure.lean#L586">https://github.com/leanprover-community/mathlib/blob/f3620a68e9e1913ba42fa2951c44e70c63b37785/src/field_theory/algebraic_closure.lean#L586</a></p>
+
+<a name="174335307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174335307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174335307">Johan Commelin (Aug 28 2019 at 06:02)</a>:</h4>
+<p>Is this something with putting them at the top of the stack, so that they are found faster?</p>
+
+<a name="174335312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174335312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174335312">Johan Commelin (Aug 28 2019 at 06:03)</a>:</h4>
+<p>Because those instances already exist, right...</p>
+
+<a name="174335394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174335394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174335394">Chris Hughes (Aug 28 2019 at 06:06)</a>:</h4>
+<p>I guess it must be just so that they are found faster, or at all. At some point I was going to go through the file and make all the instances local, since they're about private defs anyway.</p>
+
+<a name="174335611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174335611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174335611">Johan Commelin (Aug 28 2019 at 06:11)</a>:</h4>
+<blockquote>
+<p>Another data point:</p>
+<div class="codehilite"><pre><span></span><span class="n">function</span> <span class="n">expected</span> <span class="n">at</span>
+  <span class="n">aeval</span> <span class="err">↥</span><span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">carrier</span><span class="o">)</span> <span class="o">(</span><span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)</span> <span class="n">x</span>
+<span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="n">polynomial</span> <span class="err">↥</span><span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">carrier</span><span class="o">)</span> <span class="bp">→</span><span class="err">ₐ</span><span class="o">[</span><span class="err">↥</span><span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="n">carrier</span><span class="o">)]</span> <span class="n">adjoin_root</span> <span class="n">f</span>
+</pre></div>
+
+
+<p>Stupid Lean!!! If you expect a function, why don't you try to see if you can coerce the stupid thing??</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you have any idea why these things happen?</p>
+
 
 {% endraw %}
 

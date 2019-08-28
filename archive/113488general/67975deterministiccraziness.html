@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/67975deterministiccraziness.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/67975deterministiccraziness.html">deterministic craziness</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174336705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20craziness/near/174336705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67975deterministiccraziness.html#174336705">Johan Commelin (Aug 28 2019 at 06:33)</a>:</h4>
+<p>Consider the following example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">adjoin_root</span>
+<span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">integral_closure</span>
+
+<span class="kn">open</span> <span class="n">algebra</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">k</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">L</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">L</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">L_alg</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">L</span><span class="o">,</span> <span class="n">is_integral</span> <span class="n">k</span> <span class="n">x</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">L</span><span class="o">)</span> <span class="o">(</span><span class="n">hif</span> <span class="o">:</span> <span class="kn">irreducible</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">L</span> <span class="o">(</span><span class="n">adjoin_root</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">algebra</span><span class="bp">.</span><span class="n">of_ring_hom</span> <span class="n">coe</span> <span class="err">$</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">include</span> <span class="n">L_alg</span> <span class="c1">--hif</span>
+
+<span class="kn">lemma</span> <span class="n">alg_trans</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">comap</span> <span class="n">k</span> <span class="n">L</span> <span class="o">(</span><span class="n">adjoin_root</span> <span class="n">f</span><span class="o">))</span> <span class="o">:</span> <span class="n">is_integral</span> <span class="n">k</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">_</span>
+</pre></div>
+
+
+<p>If you remove the <code>--</code> in the include statement, you get a timeout.</p>
+
+<a name="174336717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20craziness/near/174336717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67975deterministiccraziness.html#174336717">Johan Commelin (Aug 28 2019 at 06:33)</a>:</h4>
+<p>I have zero understanding of why. Adding the assumption that <code>f</code> is irreducible seems completely harmless.</p>
+
+<a name="174336802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20craziness/near/174336802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67975deterministiccraziness.html#174336802">Johan Commelin (Aug 28 2019 at 06:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> Why can the mere adding of an assumption cause timeouts?</p>
+
+<a name="174336862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deterministic%20craziness/near/174336862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67975deterministiccraziness.html#174336862">Chris Hughes (Aug 28 2019 at 06:36)</a>:</h4>
+<p>The instance saying <code>adjoin_root</code> is a field depends on <code>irreducible f</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
