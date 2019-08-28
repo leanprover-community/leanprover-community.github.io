@@ -29,6 +29,34 @@ permalink: archive/113488general/46585simplemmas.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas/near/174242238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46585simplemmas.html#174242238">Alex J. Best (Aug 27 2019 at 15:51)</a>:</h4>
 <p>Will do. Okay succ_pos was what I was thinking of also w.r.t. non-equality, but it seems like such lemmas marked simp are rare.</p>
 
+<a name="174373126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simp%20lemmas/near/174373126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46585simplemmas.html#174373126">Jeremy Avigad (Aug 28 2019 at 15:23)</a>:</h4>
+<p>I don't see any reason to limit <code>simp</code> to equations. In Isabelle, <code>simp</code> is often used to prove simple facts. Here is an example:</p>
+<div class="codehilite"><pre><span></span>import data.nat.prime
+open nat
+
+attribute [simp] nat.prime.ge_two
+
+example (p : nat) (h : prime p) : p ≥ 2 :=
+by simp *
+</pre></div>
+
+
+<p>Better examples are that <code>abs (x^2)</code> and <code>abs (exp x)</code> should simplify to<code>x^2</code> and <code>exp x</code>, respectively, because the simplifier can show that these are nonnegative. In Isabelle, the simplifier is really good at proving theorems of the form <code>finite t</code>, where <code>t</code> is a subset of an arbitrary type, and this is really useful for conditional rewrites with sums and products. (It will also call <code>linarith</code> to dispel side conditions, which means that it can simplify <code>abs(x^2 + exp x + 7)</code>.)</p>
+<p>By the way, <code>library_search</code> fails on the example above because of the annoying issue with &gt;= and &lt;=. We should probably get in the habit of expressing all our theorems in the &lt;= form, in which case <code>library_search</code> works.</p>
+<div class="codehilite"><pre><span></span>import data.nat.prime
+open nat
+
+@[simp] theorem nat.prime.two_le (p : nat) (h : prime p) : 2 ≤ p :=
+nat.prime.ge_two h
+
+example (p : nat) (h : prime p) : p ≥ 2 :=
+by library_search
+</pre></div>
+
+
+<p>But this doesn't replace the utility of using <code>simp</code> to do similar things. The point is that <code>simp</code> is a conditional simplifier, and so it is useful if it can show <code>p ≥ 2</code> when it is simplifying something like <code>p - 2 + 2</code> on <code>nat</code>.</p>
+
 
 {% endraw %}
 

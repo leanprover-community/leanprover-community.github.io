@@ -9,13 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (34 messages, latest: Aug 28 2019 at 15:58)
+
+* [algebraic closure](74840algebraicclosure.html) (165 messages, latest: Aug 28 2019 at 15:56)
+
+* [simp lemmas](46585simplemmas.html) (5 messages, latest: Aug 28 2019 at 15:23)
+
 * [lean solver](47804leansolver.html) (51 messages, latest: Aug 28 2019 at 14:38)
 
 * [sanity check](33847sanitycheck.html) (6 messages, latest: Aug 28 2019 at 14:27)
 
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (26 messages, latest: Aug 28 2019 at 14:04)
-
-* [algebraic closure](74840algebraicclosure.html) (164 messages, latest: Aug 28 2019 at 13:36)
 
 * [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
 
@@ -28,8 +32,6 @@ permalink: archive/113488general/index.html
 * [Notation for fields](10955Notationforfields.html) (12 messages, latest: Aug 27 2019 at 19:01)
 
 * [emacs users](44956emacsusers.html) (17 messages, latest: Aug 27 2019 at 18:07)
-
-* [simp lemmas](46585simplemmas.html) (4 messages, latest: Aug 27 2019 at 15:51)
 
 * [cleaning iff](37335cleaningiff.html) (35 messages, latest: Aug 27 2019 at 15:21)
 
