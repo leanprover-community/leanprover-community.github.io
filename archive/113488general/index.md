@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [List categories def'd in lib?](80394Listcategoriesdefdinlib.html) (15 messages, latest: Aug 28 2019 at 19:59)
+
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (31 messages, latest: Aug 28 2019 at 18:39)
 
 * [algebraic closure](74840algebraicclosure.html) (167 messages, latest: Aug 28 2019 at 18:24)
