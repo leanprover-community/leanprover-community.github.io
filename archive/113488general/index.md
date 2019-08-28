@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (34 messages, latest: Aug 28 2019 at 15:58)
+* [Way to get fresh variable?](84818Waytogetfreshvariable.html) (3 messages, latest: Aug 28 2019 at 16:14)
 
-* [algebraic closure](74840algebraicclosure.html) (165 messages, latest: Aug 28 2019 at 15:56)
+* [algebraic closure](74840algebraicclosure.html) (166 messages, latest: Aug 28 2019 at 16:05)
+
+* [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (34 messages, latest: Aug 28 2019 at 15:58)
 
 * [simp lemmas](46585simplemmas.html) (5 messages, latest: Aug 28 2019 at 15:23)
 
