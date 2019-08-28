@@ -170,6 +170,55 @@ The <code>vm_obj_cell::dealloc</code> code has a <a href="https://github.com/lea
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174400348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174400348">Simon Hudon (Aug 28 2019 at 20:54)</a>:</h4>
 <p>You might want to create a custom <code>.lean</code> file and add one ingredient at a time from <code>hole_command.lean</code> to see what does it</p>
 
+<a name="174407303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174407303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174407303">Mario Carneiro (Aug 28 2019 at 22:36)</a>:</h4>
+<p>I don't think the issue is with that line of code exactly, and AFAICT it's not UB, but the general type-punning scheme implemented with <code>LEAN_VM_IS_PTR</code> is implementation-defined. According to <a href="https://timsong-cpp.github.io/cppwp/n4659/expr.reinterpret.cast#5" target="_blank" title="https://timsong-cpp.github.io/cppwp/n4659/expr.reinterpret.cast#5">the standard</a>, casting <code>uintptr_t -&gt; T* -&gt; uintptr_t</code> is not guaranteed to be the identity, and in particular GCC is allowed to assume that every element of the type <code>T*</code> is aligned, which may have something to do with this optimization</p>
+
+<a name="174408531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174408531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174408531">Wojciech Nawrocki (Aug 28 2019 at 22:58)</a>:</h4>
+<p>I just posted an update on the GitHub issue, but the gist of is that the following code, derived directly from bits of <code>vm.cpp</code> doesn't do what it should when compiled by GCC 9.1.0 with at least <code>-O2</code>:</p>
+<div class="codehilite"><pre><span></span><span class="cp">#include</span> <span class="cpf">&lt;cstddef&gt;</span><span class="cp"></span>
+<span class="cp">#include</span> <span class="cpf">&lt;cstdint&gt;</span><span class="cp"></span>
+
+<span class="k">enum</span> <span class="k">class</span> <span class="nc">foo_kind</span> <span class="p">{</span> <span class="n">A</span><span class="p">,</span> <span class="n">B</span><span class="p">,</span> <span class="n">C</span> <span class="p">};</span>
+
+<span class="k">struct</span> <span class="nf">alignas</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="n">foo</span> <span class="p">{</span>
+    <span class="n">foo_kind</span> <span class="n">m_kind</span><span class="p">;</span>
+<span class="p">};</span>
+
+<span class="n">foo_kind</span> <span class="nf">kind_</span><span class="p">(</span><span class="n">foo</span> <span class="o">*</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">((</span><span class="k">reinterpret_cast</span><span class="o">&lt;</span><span class="n">std</span><span class="o">::</span><span class="kt">uintptr_t</span><span class="o">&gt;</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mi">1</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">o</span><span class="o">-&gt;</span><span class="n">m_kind</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="k">return</span> <span class="n">foo_kind</span><span class="o">::</span><span class="n">A</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="kt">bool</span> <span class="nf">is_bc</span><span class="p">(</span><span class="n">foo</span> <span class="o">*</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span> <span class="k">return</span> <span class="n">kind_</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="o">==</span> <span class="n">foo_kind</span><span class="o">::</span><span class="n">B</span> <span class="o">||</span> <span class="n">kind_</span><span class="p">(</span><span class="n">o</span><span class="p">)</span> <span class="o">==</span> <span class="n">foo_kind</span><span class="o">::</span><span class="n">C</span><span class="p">;</span> <span class="p">}</span>
+
+<span class="kt">void</span> <span class="nf">loop</span><span class="p">(</span><span class="n">foo</span> <span class="o">*</span> <span class="n">o</span><span class="p">);</span>
+
+<span class="n">__attribute__</span><span class="p">((</span><span class="n">always_inline</span><span class="p">))</span> <span class="kr">inline</span> <span class="kt">void</span> <span class="n">loop_if_bc</span><span class="p">(</span><span class="n">foo</span> <span class="o">*</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">__builtin_expect</span><span class="p">(</span><span class="o">!</span><span class="n">is_bc</span><span class="p">(</span><span class="n">o</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="k">throw</span> <span class="s">&quot;what&quot;</span><span class="p">;</span> <span class="c1">// Should never be thrown if loop_if_bc is called only with B/C kind foos.</span>
+                      <span class="c1">// But with GCC, it&#39;s *always* thrown.</span>
+    <span class="n">loop</span><span class="p">(</span><span class="n">o</span><span class="p">);</span>
+<span class="p">}</span>
+
+<span class="kt">void</span> <span class="n">loop</span><span class="p">(</span><span class="n">foo</span> <span class="o">*</span> <span class="n">o</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">switch</span> <span class="p">(</span><span class="n">o</span><span class="o">-&gt;</span><span class="n">m_kind</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">case</span> <span class="n">foo_kind</span><span class="o">::</span><span class="nl">A</span><span class="p">:</span> <span class="k">return</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">foo_kind</span><span class="o">::</span><span class="nl">B</span><span class="p">:</span> <span class="n">loop_if_bc</span><span class="p">(</span><span class="n">o</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+    <span class="k">case</span> <span class="n">foo_kind</span><span class="o">::</span><span class="nl">C</span><span class="p">:</span> <span class="n">loop_if_bc</span><span class="p">(</span><span class="n">o</span><span class="p">);</span> <span class="k">break</span><span class="p">;</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="kt">int</span> <span class="n">main</span><span class="p">(</span><span class="kt">int</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span><span class="p">,</span> <span class="kt">char</span><span class="o">**</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">foo</span> <span class="n">obj</span> <span class="p">{</span> <span class="n">foo_kind</span><span class="o">::</span><span class="n">C</span> <span class="p">};</span>
+    <span class="n">loop</span><span class="p">(</span><span class="o">&amp;</span><span class="n">obj</span><span class="p">);</span>
+    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+
 
 {% endraw %}
 

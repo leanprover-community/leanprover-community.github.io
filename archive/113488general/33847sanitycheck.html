@@ -44,6 +44,40 @@ permalink: archive/113488general/33847sanitycheck.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174403421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174403421">Floris van Doorn (Aug 28 2019 at 21:38)</a>:</h4>
 <p>Added all feature requests (except the self-sustaining cycle of cleanup/sanity_check improvements) in <a href="https://github.com/leanprover-community/mathlib/issues/1369" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1369">#1369</a>.</p>
 
+<a name="174405436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174405436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174405436">Floris van Doorn (Aug 28 2019 at 22:07)</a>:</h4>
+<p>The unused argument command will now return something like</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- tactic\core.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">symmetry_hyp</span> <span class="c">/-</span><span class="cm"> argument 2: (md : opt_param transparency transparency.semireducible) -/</span>
+
+<span class="c1">-- meta\rb_map.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">native</span><span class="bp">.</span><span class="n">rb_map</span><span class="bp">.</span><span class="n">find_def</span> <span class="c">/-</span><span class="cm"> argument 4: [_inst_2 : decidable_rel has_lt.lt] -/</span>
+
+<span class="c1">-- logic\basic.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">imp_intro</span> <span class="c">/-</span><span class="cm"> argument 4: (h₂ : β) -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">not_iff</span> <span class="c">/-</span><span class="cm"> argument 3: [_inst_1 : decidable a] -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">ball_of_forall</span> <span class="c">/-</span><span class="cm"> argument 6: (_x : q x) -/</span>
+
+<span class="c1">-- data\list\defs.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">list</span><span class="bp">.</span><span class="n">func</span><span class="bp">.</span><span class="n">neg</span> <span class="c">/-</span><span class="cm"> argument 2: [_inst_1 : inhabited α] -/</span>
+
+<span class="c1">-- category\basic.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">map_seq</span> <span class="c">/-</span><span class="cm"> argument 6: [_inst_2 : is_lawful_applicative F] (duplicate) -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">seq_map_assoc</span> <span class="c">/-</span><span class="cm"> argument 6: [_inst_2 : is_lawful_applicative F] (duplicate) -/</span>
+</pre></div>
+
+<a name="174405553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174405553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174405553">Floris van Doorn (Aug 28 2019 at 22:08)</a>:</h4>
+<p>I also added a new check: whether a namespace occurs twice in the name:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- tactic\core.lean</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tactic</span><span class="bp">.</span><span class="n">has_to_tactic_format</span> <span class="c">/-</span><span class="cm"> The namespace tactic is duplicated in the name -/</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tactic</span><span class="bp">.</span><span class="n">use</span> <span class="c">/-</span><span class="cm"> The namespace tactic is duplicated in the name -/</span>
+</pre></div>
+
+<a name="174405699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174405699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174405699">Floris van Doorn (Aug 28 2019 at 22:10)</a>:</h4>
+<p>Fun fact: for this improvement I had to <a href="https://github.com/leanprover-community/mathlib/pull/1369/files#diff-59de0008ca25270e4603707014bf0ba1R398" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1369/files#diff-59de0008ca25270e4603707014bf0ba1R398">remove an unused argument</a> from the instance <code>list.decidable_chain'</code> <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
 
 {% endraw %}
 
