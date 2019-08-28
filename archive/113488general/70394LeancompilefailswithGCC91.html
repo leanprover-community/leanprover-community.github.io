@@ -129,6 +129,31 @@ More precisely, the code compiles with many warnings, then crashes every time.</
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174382100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174382100">Sebastian Ullrich (Aug 28 2019 at 17:04)</a>:</h4>
 <p>I don't know about GCC, but LLVM 8 is known to miscompile Lean due to <a href="https://bugs.llvm.org/show_bug.cgi?id=40044" target="_blank" title="https://bugs.llvm.org/show_bug.cgi?id=40044">https://bugs.llvm.org/show_bug.cgi?id=40044</a></p>
 
+<a name="174388922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174388922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174388922">Wojciech Nawrocki (Aug 28 2019 at 18:29)</a>:</h4>
+<p>This was a little ridiculous to debug since minute changes like adding print statements make the code compile correctly, but the bug is this:<br>
+The <code>vm_obj_cell::dealloc</code> code has a <a href="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm.cpp#L301" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm.cpp#L301">switch statement</a> which calls the right function to <code>dealloc</code> a <code>vm_obj_cell</code> depending on its kind. Two of these kinds are together called "composites":  <code>inline bool is_composite(vm_obj_cell const * o) { return is_constructor(o) || is_closure(o); }</code> and are both deallocated with <code>to_composite(it)-&gt;dealloc(todo)</code>. The code looks correct to me, but it gets compiled to:</p>
+<div class="codehilite"><pre><span></span>      <span class="k">case</span> <span class="mi">1</span><span class="o">:</span> <span class="c1">// vm_obj_kind::Constructor</span>
+        <span class="k">if</span> <span class="p">(</span> <span class="p">(</span><span class="kt">unsigned</span> <span class="kr">__int8</span><span class="p">)</span><span class="n">o</span> <span class="o">&amp;</span> <span class="mi">1</span> <span class="p">)</span>
+          <span class="n">lean</span><span class="o">::</span><span class="n">vm_check_failed</span><span class="p">(</span><span class="s">&quot;to_composite: is_composite(o)&quot;</span><span class="p">);</span>
+        <span class="n">lean</span><span class="o">::</span><span class="n">vm_composite</span><span class="o">::</span><span class="n">dealloc</span><span class="p">(</span><span class="n">o</span><span class="p">,</span> <span class="p">(</span><span class="n">lean</span><span class="o">::</span><span class="n">buffer</span><span class="o">&lt;</span><span class="n">lean</span><span class="o">::</span><span class="n">vm_obj_cell</span><span class="o">*</span><span class="p">,</span><span class="mi">16</span><span class="o">&gt;</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">todo</span><span class="p">);</span>
+        <span class="k">break</span><span class="p">;</span>
+      <span class="k">case</span> <span class="mi">2</span><span class="o">:</span> <span class="c1">// vm_obj_kind::Closure</span>
+        <span class="n">lean</span><span class="o">::</span><span class="n">vm_check_failed</span><span class="p">(</span><span class="s">&quot;to_composite: is_composite(o)&quot;</span><span class="p">);</span>
+        <span class="k">return</span> <span class="n">result</span><span class="p">;</span>
+</pre></div>
+
+
+<p>where the <code>Closure</code> branch incorrectly goes straight to failure without checking the <a href="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm.h#L51" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/library/vm/vm.h#L51"><code>LEAN_VM_IS_PTR</code></a> tag on the <code>vm_obj_cell* o</code> pointer. I tried adding <code>alignas(2)</code> to <code>class vm_obj_cell</code> but no dice. At this point I'm not sure if Lean is abusing the pointer-int conversions (which are sometimes UB) or if some optimization in GCC incorrectly figures that  <code>o</code> is always odd.</p>
+
+<a name="174389540"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174389540" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174389540">Simon Hudon (Aug 28 2019 at 18:37)</a>:</h4>
+<p>Although it crashes there, the problem might appear earlier. I suggest you try addressing the warnings first and see if anything gets fixed. Because of the new features of C++11 and so on, I wouldn't be surprised if misusing them in subtle ways would result in code whose behavior varies between compilers</p>
+
+<a name="174389725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174389725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174389725">Wojciech Nawrocki (Aug 28 2019 at 18:39)</a>:</h4>
+<p>Yeah, I agree. I've started looking through the warnings.</p>
+
 
 {% endraw %}
 

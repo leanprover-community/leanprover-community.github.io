@@ -9,19 +9,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (31 messages, latest: Aug 28 2019 at 18:39)
+
+* [algebraic closure](74840algebraicclosure.html) (167 messages, latest: Aug 28 2019 at 18:24)
+
+* [Check whether variable exists](93116Checkwhethervariableexists.html) (9 messages, latest: Aug 28 2019 at 18:16)
+
+* [sanity check](33847sanitycheck.html) (7 messages, latest: Aug 28 2019 at 18:03)
+
 * [lean solver](47804leansolver.html) (52 messages, latest: Aug 28 2019 at 17:25)
 
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (28 messages, latest: Aug 28 2019 at 17:04)
-
 * [Way to get fresh variable?](84818Waytogetfreshvariable.html) (3 messages, latest: Aug 28 2019 at 16:14)
-
-* [algebraic closure](74840algebraicclosure.html) (166 messages, latest: Aug 28 2019 at 16:05)
 
 * [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (34 messages, latest: Aug 28 2019 at 15:58)
 
 * [simp lemmas](46585simplemmas.html) (5 messages, latest: Aug 28 2019 at 15:23)
-
-* [sanity check](33847sanitycheck.html) (6 messages, latest: Aug 28 2019 at 14:27)
 
 * [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
 
