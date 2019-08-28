@@ -25,6 +25,202 @@ permalink: archive/144837PRreviews/12382Manifolds.html
 *<code>geometry/manifold/mderiv.lean</code>: the differential of a map between manifolds, as a map between tangent spaces. Follows the API for derivatives (and is defeq to the standard derivative when the manifold is a vector space, as it should be -- to get this was an important guidance in the choice of definitions).</li>
 </ul>
 
+<a name="174364959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174364959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174364959">Patrick Massot (Aug 28 2019 at 14:00)</a>:</h4>
+<p>This is glorious. Actual maths are about to enter the world of proof assistants!</p>
+
+<a name="174365145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365145">Patrick Massot (Aug 28 2019 at 14:02)</a>:</h4>
+<p>About names (which are important for navigation):</p>
+<ul>
+<li>don't you want to rename <code>fiber_bundle</code> to <code>topological_fiber_bundle</code>? </li>
+<li>In <code>smooth_manifold_with_boundary</code>, do I understand correct that you include corners? If yes then the name is a bit misleading. You could either make it longer (including "corners") or shorter (dropping "with_boundary")</li>
+</ul>
+
+<a name="174365314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365314">Patrick Massot (Aug 28 2019 at 14:04)</a>:</h4>
+<p>In <code>mderiv</code>, it's a bit sad to see continuity as requirement for differentiability. Can't you check differentiability in nicely related charts (with the image of the source chart contained in the target chart)? Is this related to your defeq constraint?</p>
+
+<a name="174365339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365339">Sebastien Gouezel (Aug 28 2019 at 14:04)</a>:</h4>
+<p>I guess I will get some complaints here on Zulip about definitions such as</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">smooth_manifold_with_boundary</span> <span class="o">(</span><span class="err">𝕂</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="err">𝕂</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">normed_space</span> <span class="err">𝕂</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">topological_space</span> <span class="n">H</span><span class="o">]</span> <span class="o">[</span><span class="n">I</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="n">model_with_boundary</span> <span class="err">𝕂</span> <span class="n">E</span> <span class="n">H</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">manifold</span> <span class="n">H</span> <span class="n">M</span><span class="o">]</span> <span class="kn">extends</span>
+  <span class="n">has_groupoid</span> <span class="n">H</span> <span class="n">M</span> <span class="o">(</span><span class="n">times_cont_diff_groupoid</span> <span class="err">⊤</span> <span class="err">𝕂</span> <span class="n">E</span> <span class="n">H</span><span class="o">)</span>
+</pre></div>
+
+
+<p>If there are tricks to get a better API or a better use of typeclasses, I will be happy to hear about them!</p>
+
+<a name="174365480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365480">Sebastien Gouezel (Aug 28 2019 at 14:06)</a>:</h4>
+<p>All the <code>out_param</code> are here so that you can just talk about the <code>k</code>-derivative of <code>f : M -&gt; M'</code> and Lean will find all by itself the smooth manifold structures on <code>M</code> and <code>M'</code>...</p>
+
+<a name="174365481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365481">Patrick Massot (Aug 28 2019 at 14:06)</a>:</h4>
+<p>This looks like a very general class that could have less hairy specializations making people happier</p>
+
+<a name="174365553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365553">Patrick Massot (Aug 28 2019 at 14:07)</a>:</h4>
+<p><code>out_param</code> magic is a difficult dark art where success can be asserted only after a lot of API usage</p>
+
+<a name="174365670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365670">Sebastien Gouezel (Aug 28 2019 at 14:08)</a>:</h4>
+<blockquote>
+<p>In <code>mderiv</code>, it's a bit sad to see continuity as requirement for differentiability. Can't you check differentiability in nicely related charts (with the image of the source chart contained in the target chart)? Is this related to your defeq constraint?</p>
+</blockquote>
+<p>There is really something tricky going on here: if your function is not continuous, then its image will typically not be contained in a chart. So you really need continuity if you want to be able to define differentiability. In the Isabelle paper on manifolds, they face the same issue, and they also have to include continuity in the definition of differentiability. And I guess any precise enough mathbook should also do it!</p>
+
+<a name="174365878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365878">Patrick Massot (Aug 28 2019 at 14:10)</a>:</h4>
+<p>The definition I had in mind was: f is differentiable at x if there is a chart domain U containing x and a chart domain V containing the image of U such that the obvious composition is differentiable at the chart image of x. Is it junk?</p>
+
+<a name="174365936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174365936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174365936">Sebastien Gouezel (Aug 28 2019 at 14:11)</a>:</h4>
+<blockquote>
+<p>This looks like a very general class that could have less hairy specializations making people happier</p>
+</blockquote>
+<p>Yes, there should be a specialization <code>smooth_manifold k E M</code> where <code>H = E</code>. With a notation, everything is fine. With a class extending the previous one, I don't know how to get instances right.</p>
+
+<a name="174366096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174366096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174366096">Sebastien Gouezel (Aug 28 2019 at 14:12)</a>:</h4>
+<blockquote>
+<p>The definition I had in mind was: f is differentiable at x if there is a chart domain U containing x and a chart domain V containing the image of U such that the obvious composition is differentiable at the chart image of x. Is it junk?</p>
+</blockquote>
+<p>It's clearly equivalent, but this definition is more complicated to work with (you need to construct your <code>V</code> when you check differentiability, at least when you build the API)</p>
+
+<a name="174366274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174366274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174366274">Sebastien Gouezel (Aug 28 2019 at 14:14)</a>:</h4>
+<blockquote>
+<ul>
+<li>don't you want to rename <code>fiber_bundle</code> to <code>topological_fiber_bundle</code>? </li>
+</ul>
+</blockquote>
+<p>No strong opinion on this. According to wikipedia, a fiber bundle is by default a topological one, but I agree that most often we think of a smooth one.</p>
+
+<a name="174366389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174366389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174366389">Patrick Massot (Aug 28 2019 at 14:15)</a>:</h4>
+<p>Anyway, this definition is clearly part of the private API. What matters is that the definition matches the classical definition on open subsets of the model space and that a function on a submanifold is differentiable iff it extends as a differentiable function on a neighborhood (this covers in particular smooth functions on submanifolds of the model space).</p>
+
+<a name="174366492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174366492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174366492">Patrick Massot (Aug 28 2019 at 14:16)</a>:</h4>
+<p>About fiber bundle, I think adding "topological" avoids confusion for very little cost</p>
+
+<a name="174366509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174366509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174366509">Patrick Massot (Aug 28 2019 at 14:16)</a>:</h4>
+<p>At least in the file name</p>
+
+<a name="174366539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174366539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174366539">Sebastien Gouezel (Aug 28 2019 at 14:16)</a>:</h4>
+<blockquote>
+<ul>
+<li>In <code>smooth_manifold_with_boundary</code>, do I understand correct that you include corners? If yes then the name is a bit misleading. You could either make it longer (including "corners") or shorter (dropping "with_boundary")</li>
+</ul>
+</blockquote>
+<p>Yes, I include corners. In the beginning, I had the shorter version, but then I decided I wanted to keep it for the boundaryless version. I agree that <code>smooth_manifold_with_corners</code> is better, but it might look frightening. Or <code>extended_smooth_manifold</code> (less scary, but less precise as one doesn't know what the extension refers to). I guess I'll go for <code>smooth_manifold_with_corners</code>, less ambiguity is better.</p>
+
+<a name="174367047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367047">Patrick Massot (Aug 28 2019 at 14:22)</a>:</h4>
+<p><a href="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/mderiv.lean#L709-L710" target="_blank" title="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/mderiv.lean#L709-L710">https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/mderiv.lean#L709-L710</a> may be the first statement that I can recognize, but I like it.</p>
+
+<a name="174367153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367153">Sebastien Gouezel (Aug 28 2019 at 14:23)</a>:</h4>
+<p>Functoriality is beautiful, especially when it hides all the mess of the definitions.</p>
+
+<a name="174367275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367275">Patrick Massot (Aug 28 2019 at 14:24)</a>:</h4>
+<p>Funny you say that, I was thinking about the tangent functor. It's a big weird that the construction of the tangent bundle and mderiv are in separate file. A file <code>tangent_functor.lean</code> would be easier to find (but may be 2000 lines long...)</p>
+
+<a name="174367413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367413">Patrick Massot (Aug 28 2019 at 14:26)</a>:</h4>
+<blockquote>
+<p>the differential of a map between manifolds, as a map between tangent spaces. Follows the API for derivatives (and is defeq to the standard derivative when the manifold is a vector space, as it should be -- to get this was an important guidance in the choice of definitions).</p>
+</blockquote>
+<p>Why do the last few lemmas of mderiv.lean suggest this is not a defeq?</p>
+
+<a name="174367569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367569">Sebastien Gouezel (Aug 28 2019 at 14:27)</a>:</h4>
+<p>Funny you say that: at the beginning, it was the other way around, with first the construction of <code>mderiv</code>and then deriving the tangent bundle from it. But the construction was a little bit ad hoc, and I would have needed to redo everything to construct differential forms or riemannian metrics. I decided that to get a general machinery would be more efficient (and indeed the general machinery is not really longer than the direct construction using <code>mderiv</code>, surprisingly).</p>
+
+<a name="174367728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367728">Patrick Massot (Aug 28 2019 at 14:29)</a>:</h4>
+<p>I meant you could end the first file at <a href="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/basic_smooth_bundle.lean#L255" target="_blank" title="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/basic_smooth_bundle.lean#L255">https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/basic_smooth_bundle.lean#L255</a></p>
+
+<a name="174367780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367780">Patrick Massot (Aug 28 2019 at 14:29)</a>:</h4>
+<p>and move the end to <code>mderiv.lean</code>, renamed <code>tangent_functor.lean</code></p>
+
+<a name="174367794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367794">Sebastien Gouezel (Aug 28 2019 at 14:30)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>the differential of a map between manifolds, as a map between tangent spaces. Follows the API for derivatives (and is defeq to the standard derivative when the manifold is a vector space, as it should be -- to get this was an important guidance in the choice of definitions).</p>
+</blockquote>
+<p>Why do the last few lemmas of mderiv.lean suggest this is not a defeq?</p>
+</blockquote>
+<p>You are right, it's not a defeq. But it's the same map, and in particular the domain of definition of the linear map is the same space (i.e., not the vector space for the first one and a crazy quotient or a crazy space of derivations for the second one).</p>
+
+<a name="174367923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367923">Patrick Massot (Aug 28 2019 at 14:31)</a>:</h4>
+<p>The crazy space of derivation is crazy algebraic geometry bullshit anyway. And you didn't restrict to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>C</mi><mi mathvariant="normal">∞</mi></msup></mrow><annotation encoding="application/x-tex">C^\infty</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">∞</span></span></span></span></span></span></span></span></span></span></span> anyway, right?</p>
+
+<a name="174367964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174367964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174367964">Sebastien Gouezel (Aug 28 2019 at 14:31)</a>:</h4>
+<blockquote>
+<p>I meant you could end the first file at <a href="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/basic_smooth_bundle.lean#L255" target="_blank" title="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/basic_smooth_bundle.lean#L255">https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/basic_smooth_bundle.lean#L255</a></p>
+</blockquote>
+<p>Yes I could, but the file would become super-long. I was more planning of including the other constructions (differential forms, metrics) also in <code>basic_smooth_bundle</code> .</p>
+
+<a name="174368057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368057">Patrick Massot (Aug 28 2019 at 14:32)</a>:</h4>
+<p>I guess crazy quotient refer to space of smooth curves modulo the same speed relation? This is a nice relation but indeed you only get a isomorphism in the vector space case</p>
+
+<a name="174368098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368098">Patrick Massot (Aug 28 2019 at 14:33)</a>:</h4>
+<p>You'll need to split off tensor bundles in all cases</p>
+
+<a name="174368234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368234">Patrick Massot (Aug 28 2019 at 14:34)</a>:</h4>
+<p>I'd like to read more about how you avoided those definitions of the tangent bundle but still remained functorial</p>
+
+<a name="174368297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368297">Sebastien Gouezel (Aug 28 2019 at 14:35)</a>:</h4>
+<blockquote>
+<p>The crazy space of derivation is crazy algebraic geometry bullshit anyway. And you didn't restrict to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msup><mi>C</mi><mi mathvariant="normal">∞</mi></msup></mrow><annotation encoding="application/x-tex">C^\infty</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord"><span class="mord mathdefault" style="margin-right:0.07153em;">C</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight">∞</span></span></span></span></span></span></span></span></span></span></span> anyway, right?</p>
+</blockquote>
+<p>Well, it works perfectly well in any smoothness, but typeclass inference doesn't like it when there is an additional unspecified parameter of smoothness. And if you want to talk about <code>C^k</code> functions on a <code>C^r</code> manifold, then you would need to infer automatically inequalities like <code>k &lt;= r</code>, which looks like a daunting task. So I only give the definition for <code>C^oo</code> manifolds for simplicity.</p>
+
+<a name="174368374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368374">Sebastien Gouezel (Aug 28 2019 at 14:36)</a>:</h4>
+<blockquote>
+<p>I guess crazy quotient refer to space of smooth curves modulo the same speed relation? This is a nice relation but indeed you only get a isomorphism in the vector space case</p>
+</blockquote>
+<p>Yes, that's the most intuitive definition but not the easiest to work with in a formal way.</p>
+
+<a name="174368476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368476">Patrick Massot (Aug 28 2019 at 14:37)</a>:</h4>
+<p>I'm confused about the smoothness answer. I think there are different discussions. Defining the tangent space using derivations does <em>not</em> work in finite regularity, you get infinite dimensional tangent space in all cases. Then you say you used a definition that could work in the finite differentiability case, except that Lean would make it harder?</p>
+
+<a name="174368582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368582">Sebastien Gouezel (Aug 28 2019 at 14:39)</a>:</h4>
+<blockquote>
+<p>I'd like to read more about how you avoided those definitions of the tangent bundle but still remained functorial</p>
+</blockquote>
+<p>It's just a hack, that should make both computer scientists and mathematicians crazy. It's explained in the docstring of <a href="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/fiber_bundle.lean" target="_blank" title="https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/fiber_bundle.lean">https://github.com/sgouezel/mathlib/blob/manifold9/src/geometry/manifold/fiber_bundle.lean</a></p>
+
+<a name="174368700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174368700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174368700">Sebastien Gouezel (Aug 28 2019 at 14:40)</a>:</h4>
+<blockquote>
+<p>Then you say you used a definition that could work in the finite differentiability case, except that Lean would make it harder?</p>
+</blockquote>
+<p>Yes, that's it. My definition works in any smoothness, but it's easier to use for Lean in infinite smoothness.</p>
+
+<a name="174369474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/Manifolds/near/174369474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/12382Manifolds.html#174369474">Patrick Massot (Aug 28 2019 at 14:48)</a>:</h4>
+<p>This fiber bundle hack is really shocking. I'll need time to stomach it</p>
+
 
 {% endraw %}
 

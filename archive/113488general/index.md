@@ -9,21 +9,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (24 messages, latest: Aug 28 2019 at 13:51)
+* [lean solver](47804leansolver.html) (51 messages, latest: Aug 28 2019 at 14:38)
+
+* [sanity check](33847sanitycheck.html) (6 messages, latest: Aug 28 2019 at 14:27)
+
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (26 messages, latest: Aug 28 2019 at 14:04)
 
 * [algebraic closure](74840algebraicclosure.html) (164 messages, latest: Aug 28 2019 at 13:36)
 
 * [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
-
-* [sanity check](33847sanitycheck.html) (3 messages, latest: Aug 28 2019 at 08:35)
 
 * [deterministic craziness](67975deterministiccraziness.html) (7 messages, latest: Aug 28 2019 at 07:31)
 
 * [Recommend TypeScript editor](47033RecommendTypeScripteditor.html) (1 message, latest: Aug 28 2019 at 06:17)
 
 * [How to open VSCode-Lean files?](58855HowtoopenVSCodeLeanfiles.html) (2 messages, latest: Aug 28 2019 at 06:11)
-
-* [lean solver](47804leansolver.html) (50 messages, latest: Aug 27 2019 at 20:24)
 
 * [Notation for fields](10955Notationforfields.html) (12 messages, latest: Aug 27 2019 at 19:01)
 
