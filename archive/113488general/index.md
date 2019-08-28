@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (16 messages, latest: Aug 28 2019 at 10:58)
+
 * [algebraic closure](74840algebraicclosure.html) (122 messages, latest: Aug 28 2019 at 09:11)
 
 * [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
@@ -248,8 +250,6 @@ permalink: archive/113488general/index.html
 * [performance issues](61263performanceissues.html) (15 messages, latest: Jul 13 2019 at 21:51)
 
 * [computability](27079computability.html) (206 messages, latest: Jul 13 2019 at 21:09)
-
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (15 messages, latest: Jul 13 2019 at 20:26)
 
 * [universe max](74328universemax.html) (9 messages, latest: Jul 13 2019 at 20:05)
 
