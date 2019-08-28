@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (9 messages, latest: Aug 28 2019 at 12:19)
+* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (10 messages, latest: Aug 28 2019 at 21:45)
 
 * [How do you set the Lean exec?](11856HowdoyousettheLeanexec.html) (37 messages, latest: Aug 28 2019 at 06:02)
 

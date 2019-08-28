@@ -9,17 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [sanity check](33847sanitycheck.html) (8 messages, latest: Aug 28 2019 at 21:38)
+
+* [algebraic closure](74840algebraicclosure.html) (169 messages, latest: Aug 28 2019 at 21:22)
+
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (35 messages, latest: Aug 28 2019 at 20:54)
 
 * [Error creating new project](62105Errorcreatingnewproject.html) (9 messages, latest: Aug 28 2019 at 20:36)
 
 * [List categories def'd in lib?](80394Listcategoriesdefdinlib.html) (17 messages, latest: Aug 28 2019 at 20:23)
 
-* [algebraic closure](74840algebraicclosure.html) (167 messages, latest: Aug 28 2019 at 18:24)
-
 * [Check whether variable exists](93116Checkwhethervariableexists.html) (9 messages, latest: Aug 28 2019 at 18:16)
-
-* [sanity check](33847sanitycheck.html) (7 messages, latest: Aug 28 2019 at 18:03)
 
 * [lean solver](47804leansolver.html) (52 messages, latest: Aug 28 2019 at 17:25)
 
