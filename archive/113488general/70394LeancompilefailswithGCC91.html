@@ -85,6 +85,34 @@ More precisely, the code compiles with many warnings, then crashes every time.</
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174354617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174354617">Simon Hudon (Aug 28 2019 at 11:58)</a>:</h4>
 <p>Can you guys setup a travis build that will reproduce the problem? Is it specific to Linux or will it crash also on Mac and Windows?</p>
 
+<a name="174362662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174362662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174362662">Wojciech Nawrocki (Aug 28 2019 at 13:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> It already fails in the AppVeyor MinGW build, for example <a href="https://ci.appveyor.com/project/cipher1024/lean-e5aoi/builds/27002887/job/pkp6cl1q3t4wf5xk" target="_blank" title="https://ci.appveyor.com/project/cipher1024/lean-e5aoi/builds/27002887/job/pkp6cl1q3t4wf5xk">https://ci.appveyor.com/project/cipher1024/lean-e5aoi/builds/27002887/job/pkp6cl1q3t4wf5xk</a></p>
+
+<a name="174363031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174363031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174363031">Simon Hudon (Aug 28 2019 at 13:40)</a>:</h4>
+<p>Ok but there are changes in that branch. Without the changes, I think it's still working</p>
+
+<a name="174363438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174363438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174363438">Wojciech Nawrocki (Aug 28 2019 at 13:45)</a>:</h4>
+<p>There are changes, but your own PR from 24 days ago <a href="https://ci.appveyor.com/project/cipher1024/lean-e5aoi/builds/26836597/job/a0p7ulnskt0e1arb" target="_blank" title="https://ci.appveyor.com/project/cipher1024/lean-e5aoi/builds/26836597/job/a0p7ulnskt0e1arb">fails with the same error</a> despite changing completely different things. In the bug report I also mention that I get this error on a fresh <code>master</code>.  This makes me semi-confident that new GCC (which MinGW also uses) started doing something Lean doesn't like. Either it's UB in Lean, or an incorrect optimization in GCC. I will also try clang++ on my laptop and see if it works</p>
+
+<a name="174363645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174363645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174363645">Simon Hudon (Aug 28 2019 at 13:47)</a>:</h4>
+<p>what's UB?</p>
+
+<a name="174363774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174363774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174363774">Bryan Gin-ge Chen (Aug 28 2019 at 13:48)</a>:</h4>
+<p>undefined behavior</p>
+
+<a name="174363955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174363955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174363955">Simon Hudon (Aug 28 2019 at 13:50)</a>:</h4>
+<p>Ok, I'll see what happens when I revert my changes and then we can start looking at removing the warnings</p>
+
+<a name="174364087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174364087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174364087">Wojciech Nawrocki (Aug 28 2019 at 13:51)</a>:</h4>
+<p>Note this is probably a bug in Lean proper, and not the community fork, because I also reliably see it when building <a href="http://github.com/leanprover/lean" target="_blank" title="http://github.com/leanprover/lean">github.com/leanprover/lean</a> . (See <a href="https://ci.appveyor.com/project/leodemoura/lean/build/job/jmxe5g5ywklbaofr" target="_blank" title="https://ci.appveyor.com/project/leodemoura/lean/build/job/jmxe5g5ywklbaofr">https://ci.appveyor.com/project/leodemoura/lean/build/job/jmxe5g5ywklbaofr</a> )</p>
+
 
 {% endraw %}
 
