@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
+
+* [sanity check](33847sanitycheck.html) (3 messages, latest: Aug 28 2019 at 08:35)
+
 * [deterministic craziness](67975deterministiccraziness.html) (7 messages, latest: Aug 28 2019 at 07:31)
 
 * [Recommend TypeScript editor](47033RecommendTypeScripteditor.html) (1 message, latest: Aug 28 2019 at 06:17)
@@ -28,8 +32,6 @@ permalink: archive/113488general/index.html
 * [cleaning iff](37335cleaningiff.html) (35 messages, latest: Aug 27 2019 at 15:21)
 
 * [usability bug in squeeze_simp](01414usabilitybuginsqueezesimp.html) (4 messages, latest: Aug 27 2019 at 10:12)
-
-* [deriving instances](14561derivinginstances.html) (9 messages, latest: Aug 27 2019 at 08:24)
 
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)
 
