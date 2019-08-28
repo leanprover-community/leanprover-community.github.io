@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean solver](47804leansolver.html) (52 messages, latest: Aug 28 2019 at 17:25)
+
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (28 messages, latest: Aug 28 2019 at 17:04)
+
 * [Way to get fresh variable?](84818Waytogetfreshvariable.html) (3 messages, latest: Aug 28 2019 at 16:14)
 
 * [algebraic closure](74840algebraicclosure.html) (166 messages, latest: Aug 28 2019 at 16:05)
@@ -17,11 +21,7 @@ permalink: archive/113488general/index.html
 
 * [simp lemmas](46585simplemmas.html) (5 messages, latest: Aug 28 2019 at 15:23)
 
-* [lean solver](47804leansolver.html) (51 messages, latest: Aug 28 2019 at 14:38)
-
 * [sanity check](33847sanitycheck.html) (6 messages, latest: Aug 28 2019 at 14:27)
-
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (26 messages, latest: Aug 28 2019 at 14:04)
 
 * [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
 
