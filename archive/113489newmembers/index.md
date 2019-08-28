@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (7 messages, latest: Aug 28 2019 at 11:50)
+
 * [How do you set the Lean exec?](11856HowdoyousettheLeanexec.html) (37 messages, latest: Aug 28 2019 at 06:02)
 
 * [What is type A->B called?](23685WhatistypeABcalled.html) (3 messages, latest: Aug 28 2019 at 05:35)
