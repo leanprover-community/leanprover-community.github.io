@@ -1,0 +1,143 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/11856HowdoyousettheLeanexec.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html">How do you set the Lean exec?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174334160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334160">EnjoysMath (Aug 28 2019 at 05:36)</a>:</h4>
+<p>I'm working on BananaCats and figured I would reverse engineer the protocol for talking to Lean that VSCode uses.  I will do this by replacing the lean.exe with my own, and forwarding commands to the real lean.  So where does "elan" install Lean, and how do I specify a custom exe path?</p>
+<p>EDIT: found the Executable path in settings.  Would it be best if my app installed VSCode for the user too, so that I don't have to make any sort of Lean editor?  I think so...  It will have one lean file per app instance maybe, or should it be per diagram?  I think per app instance, so you can have many BanCats open, and one VSCode / Lean.  VSCode / Lean is much more processor intensive than my GUI code.</p>
+
+<a name="174334472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334472">EnjoysMath (Aug 28 2019 at 05:44)</a>:</h4>
+<p>Thinks will be drag / droppable, so maybe if I'm dragging to the application lean.exe I can convert the objects in question into Lean data statements</p>
+
+<a name="174334566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334566">Andrew Ashworth (Aug 28 2019 at 05:47)</a>:</h4>
+<p>you do not need to reverse engineer it</p>
+
+<a name="174334613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334613">Andrew Ashworth (Aug 28 2019 at 05:48)</a>:</h4>
+<p>the base protocol is documented at <a href="https://github.com/Microsoft/language-server-protocol" target="_blank" title="https://github.com/Microsoft/language-server-protocol">https://github.com/Microsoft/language-server-protocol</a></p>
+
+<a name="174334630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334630">Mario Carneiro (Aug 28 2019 at 05:48)</a>:</h4>
+<p>I don't think lean is based on LSP</p>
+
+<a name="174334670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334670">Mario Carneiro (Aug 28 2019 at 05:49)</a>:</h4>
+<p>I would suggest modifying the vscode extension to log all JSON packets</p>
+
+<a name="174334672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334672">Andrew Ashworth (Aug 28 2019 at 05:49)</a>:</h4>
+<p>ahh, there is a dummy lsp implementation then at <a href="https://github.com/leanprover/lean-client-js/tree/master/lean-language-server" target="_blank" title="https://github.com/leanprover/lean-client-js/tree/master/lean-language-server">https://github.com/leanprover/lean-client-js/tree/master/lean-language-server</a></p>
+
+<a name="174334677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334677">Andrew Ashworth (Aug 28 2019 at 05:50)</a>:</h4>
+<p>which i guess is nonfunctional? idk</p>
+
+<a name="174334736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334736">EnjoysMath (Aug 28 2019 at 05:50)</a>:</h4>
+<p>Thx</p>
+
+<a name="174334810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334810">Mario Carneiro (Aug 28 2019 at 05:52)</a>:</h4>
+<p>actually it probably is pretty easy to modify the extension to call <code>lean --server | tee lean.log</code> instead of <code>lean --server</code></p>
+
+<a name="174334843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334843">EnjoysMath (Aug 28 2019 at 05:52)</a>:</h4>
+<p>Yes, I don't mean rev engineering.  If I just hooked up an EXE between them, I could even maybe do the final version that way (a middle man).  Well doing the EXE between and you just print the JSON...</p>
+
+<a name="174334912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334912">EnjoysMath (Aug 28 2019 at 05:54)</a>:</h4>
+<p>In fact, a Lean EXE can only connect to one thing at a time, so I'd have to be the middle man anyway.  There's logically no other way to do it</p>
+
+<a name="174334925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334925">EnjoysMath (Aug 28 2019 at 05:54)</a>:</h4>
+<p>Lean &lt;-&gt; BanCats &lt;-&gt; VSCode</p>
+
+<a name="174334929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334929">Mario Carneiro (Aug 28 2019 at 05:54)</a>:</h4>
+<p>Presumably there is no need for vscode in the "final version" though?</p>
+
+<a name="174334933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334933">EnjoysMath (Aug 28 2019 at 05:54)</a>:</h4>
+<p>Lean &lt;--&gt; VSCode -&gt; LogFile,  BanCats -&gt; ?</p>
+
+<a name="174334943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334943">EnjoysMath (Aug 28 2019 at 05:55)</a>:</h4>
+<p>There's no way I'm writing an IDE as good as VSCode</p>
+
+<a name="174334960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334960">Mario Carneiro (Aug 28 2019 at 05:55)</a>:</h4>
+<p>but that's not the goal, right? You just need lean to act as backend for your theorem goals</p>
+
+<a name="174334963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334963">EnjoysMath (Aug 28 2019 at 05:55)</a>:</h4>
+<p>I'm going to use it in version 1.0 so that I will create a VSCode + Lean installer for us too.  On OSX / Linux, I will need help on getting the VSCode equivalents (to Windows 10)</p>
+
+<a name="174334970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174334970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174334970">Mario Carneiro (Aug 28 2019 at 05:56)</a>:</h4>
+<p>unless you are doing the text editor whole nine yards</p>
+
+<a name="174335014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335014">EnjoysMath (Aug 28 2019 at 05:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I want the user to be able to extend the system and be part of the Lean community as well</p>
+
+<a name="174335025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335025">Mario Carneiro (Aug 28 2019 at 05:56)</a>:</h4>
+<p>I'm not sure I follow. How do you envision the interaction?</p>
+
+<a name="174335032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335032">EnjoysMath (Aug 28 2019 at 05:57)</a>:</h4>
+<p>So if there's something missing, like some new math area, then my system can support it by adding Lean support</p>
+
+<a name="174335047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335047">Mario Carneiro (Aug 28 2019 at 05:57)</a>:</h4>
+<p>Is the user using your tool to edit lean files? Or are they using VSCode?</p>
+
+<a name="174335115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335115">EnjoysMath (Aug 28 2019 at 05:58)</a>:</h4>
+<p>They're using my tool 100% graphically (2D graphics) to create lean code on-the-fly.  This gets sent to Lean, and somehow I'd have to make VSCode update, not sure how.</p>
+
+<a name="174335126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335126">EnjoysMath (Aug 28 2019 at 05:58)</a>:</h4>
+<p>But optionally they can go into VSCode to add in their custom "perfectoid spaces of the future"</p>
+
+<a name="174335131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335131">Mario Carneiro (Aug 28 2019 at 05:59)</a>:</h4>
+<p>I would guess that the easiest way to intervene is to make VSCode interact with your program by writing your own extension extending vscode-lean</p>
+
+<a name="174335141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335141">Mario Carneiro (Aug 28 2019 at 05:59)</a>:</h4>
+<p>i.e. Lean &lt;-&gt; VSCode &lt;-&gt; BanCats</p>
+
+<a name="174335143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335143">EnjoysMath (Aug 28 2019 at 05:59)</a>:</h4>
+<p>The language of categories won't change, so there's less to extend with BanCats, and more so with Lean</p>
+
+<a name="174335144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335144">Mario Carneiro (Aug 28 2019 at 05:59)</a>:</h4>
+<p>that way you can set the protocol on the BanCats side</p>
+
+<a name="174335152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335152">EnjoysMath (Aug 28 2019 at 05:59)</a>:</h4>
+<p>Interesting!</p>
+
+<a name="174335163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20you%20set%20the%20Lean%20exec%3F/near/174335163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/11856HowdoyousettheLeanexec.html#174335163">EnjoysMath (Aug 28 2019 at 06:00)</a>:</h4>
+<p>So I'll look at that plugin.  Thank you!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

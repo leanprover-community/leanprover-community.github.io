@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How do you set the Lean exec?](11856HowdoyousettheLeanexec.html) (31 messages, latest: Aug 28 2019 at 06:00)
+
+* [What is type A->B called?](23685WhatistypeABcalled.html) (3 messages, latest: Aug 28 2019 at 05:35)
+
 * [TPIL question, lambda defs](27745TPILquestionlambdadefs.html) (17 messages, latest: Aug 27 2019 at 10:43)
 
 * [BananaCats - diagram edit & chase](65535BananaCatsdiagrameditchase.html) (3 messages, latest: Aug 27 2019 at 04:52)
