@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (122 messages, latest: Aug 28 2019 at 09:11)
+
 * [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
 
 * [sanity check](33847sanitycheck.html) (3 messages, latest: Aug 28 2019 at 08:35)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Recommend TypeScript editor](47033RecommendTypeScripteditor.html) (1 message, latest: Aug 28 2019 at 06:17)
 
 * [How to open VSCode-Lean files?](58855HowtoopenVSCodeLeanfiles.html) (2 messages, latest: Aug 28 2019 at 06:11)
-
-* [algebraic closure](74840algebraicclosure.html) (118 messages, latest: Aug 28 2019 at 06:11)
 
 * [lean solver](47804leansolver.html) (50 messages, latest: Aug 27 2019 at 20:24)
 
