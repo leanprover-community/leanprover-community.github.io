@@ -154,6 +154,22 @@ The <code>vm_obj_cell::dealloc</code> code has a <a href="https://github.com/lea
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174389725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174389725">Wojciech Nawrocki (Aug 28 2019 at 18:39)</a>:</h4>
 <p>Yeah, I agree. I've started looking through the warnings.</p>
 
+<a name="174399481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174399481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174399481">Wojciech Nawrocki (Aug 28 2019 at 20:43)</a>:</h4>
+<p>Sadly nothing useful comes out of <code>-Wall -Wextra -Wpedantic</code>, I'll try making an MWE.</p>
+
+<a name="174399577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174399577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174399577">Simon Hudon (Aug 28 2019 at 20:44)</a>:</h4>
+<p>It would be nice to know which test or which file in <code>library/</code> makes Lean fail and which ones do not</p>
+
+<a name="174400004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174400004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174400004">Wojciech Nawrocki (Aug 28 2019 at 20:50)</a>:</h4>
+<p>It fails on <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/hole_command.lean" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/hole_command.lean">init/meta/hole_command.lean</a>, but I think that's probably just the first place in the library that exercises deallocation on closures.</p>
+
+<a name="174400348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20compile%20fails%20with%20GCC%209.1/near/174400348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70394LeancompilefailswithGCC91.html#174400348">Simon Hudon (Aug 28 2019 at 20:54)</a>:</h4>
+<p>You might want to create a custom <code>.lean</code> file and add one ingredient at a time from <code>hole_command.lean</code> to see what does it</p>
+
 
 {% endraw %}
 
