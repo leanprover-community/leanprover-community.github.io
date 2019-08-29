@@ -1,0 +1,36 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/28140Findingdeterministictimeout.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/28140Findingdeterministictimeout.html">Finding (deterministic) timeout</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174471163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finding%20%28deterministic%29%20timeout/near/174471163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28140Findingdeterministictimeout.html#174471163">Floris van Doorn (Aug 29 2019 at 16:48)</a>:</h4>
+<p>I made a change that created a (deterministic) timeout in PR <a href="https://github.com/leanprover-community/mathlib/issues/1319" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1319">#1319</a>. Lean is not very good reporting this error message:</p>
+<ul>
+<li>Travis failed with the error <code>/home/travis/scripts/travis_long: fork: Cannot allocate memory</code>. This was almost certainly because it ran across the timeout</li>
+<li>When running <code>lean --make src/</code> the deterministic timeout failed silently. The first error message I received was in a file <em>importing</em> the file with the deterministic timeout (it did not create a <code>.olean</code> file for the file with the timeout).</li>
+<li>Suppose <code>A.lean</code> has a deterministic timeout and you open <code>B.lean</code> in VSCode. <code>B.lean</code> does not raise any errors, not even <code>imported file uses sorry</code>.</li>
+</ul>
+<p>This made it tricky to find the file with the deterministic timeout. This post is mostly a cautionary tale. But if anyone knows a good way to find which file has the timeout, I'm happy to hear it. (on Windows <code>lean</code> doesn't report which file it is currently compiling, that might help)</p>
+
+<a name="174471771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finding%20%28deterministic%29%20timeout/near/174471771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28140Findingdeterministictimeout.html#174471771">Simon Hudon (Aug 29 2019 at 16:57)</a>:</h4>
+<p>Using a Makefile to build mathlib might help</p>
+
+<a name="174471788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Finding%20%28deterministic%29%20timeout/near/174471788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28140Findingdeterministictimeout.html#174471788">Simon Hudon (Aug 29 2019 at 16:57)</a>:</h4>
+<p>I have a Makefile for it somewhere on my drive</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
