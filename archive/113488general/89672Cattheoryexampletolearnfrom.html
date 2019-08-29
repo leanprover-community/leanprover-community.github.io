@@ -162,6 +162,32 @@ permalink: archive/113488general/89672Cattheoryexampletolearnfrom.html
 <span class="kn">variables</span> <span class="o">{{{</span><span class="n">decl</span><span class="o">[</span><span class="err">&#39;</span><span class="n">name&#39;</span><span class="o">]}}</span> <span class="o">:</span> <span class="o">{{</span><span class="n">decl</span><span class="o">[</span><span class="err">&#39;</span><span class="n">type&#39;</span><span class="o">]}}}</span> <span class="o">[</span><span class="n">category</span> <span class="o">{{</span><span class="n">decl</span><span class="o">[</span><span class="err">&#39;</span><span class="n">name&#39;</span><span class="o">]}}]</span>
 </pre></div>
 
+<a name="174410428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cat%20theory%20example%20to%20learn%20from%3F/near/174410428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89672Cattheoryexampletolearnfrom.html#174410428">Scott Morrison (Aug 28 2019 at 23:33)</a>:</h4>
+<p>If universe polymorphism doesn't matter to you (this is pretty much synonymous with "you're not trying to write library code"), then I'd recommend:</p>
+<div class="codehilite"><pre><span></span>import category_theory.category
+
+open category_theory
+
+variables {C : Type} [small_category C] (X : C)
+</pre></div>
+
+<a name="174410531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cat%20theory%20example%20to%20learn%20from%3F/near/174410531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89672Cattheoryexampletolearnfrom.html#174410531">Scott Morrison (Aug 28 2019 at 23:34)</a>:</h4>
+<p>If universe polymorphism does matter to you, and you want the most general case (which in "real maths" means that you either have a small category, where the objects and morphisms live in the same universe, or a large category, where the objects live in a universe one higher than the morphisms, but in "Lean math", because we can't specify this dichotomy, the objects and morphisms just live in two entirely independent universes, I'd recommend:</p>
+<div class="codehilite"><pre><span></span>import category_theory.category
+
+universes v u
+open category_theory
+
+variables {C : Type u} [𝒞 : category.{v} C] (X : C)
+include 𝒞
+</pre></div>
+
+<a name="174410698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cat%20theory%20example%20to%20learn%20from%3F/near/174410698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/89672Cattheoryexampletolearnfrom.html#174410698">Scott Morrison (Aug 28 2019 at 23:37)</a>:</h4>
+<p>Here we need <code>include𝒞</code>because Lean's typeclass inference algorithm is not willing to pull in the instance <code>C</code> until it is sure that the universe parameter <code>v</code> is the desired one, and often it can't tell this without explicit universe annotations everywhere --- instead we just tell Lean to include <code>𝒞</code> as an argument to every definition that follows. This is a little dangerous, as you need to be careful to then explicitly <code>omit</code> it again if you write any functions that don't refer to <code>C</code>. (Such functions probably belong higher in the file, or in another file, in any case...)</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (37 messages, latest: Aug 28 2019 at 22:58)
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (39 messages, latest: Aug 28 2019 at 23:39)
+
+* [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (37 messages, latest: Aug 28 2019 at 23:37)
+
+* [List categories def'd in lib?](80394Listcategoriesdefdinlib.html) (18 messages, latest: Aug 28 2019 at 23:30)
 
 * [sanity check](33847sanitycheck.html) (11 messages, latest: Aug 28 2019 at 22:10)
 
@@ -17,15 +21,11 @@ permalink: archive/113488general/index.html
 
 * [Error creating new project](62105Errorcreatingnewproject.html) (9 messages, latest: Aug 28 2019 at 20:36)
 
-* [List categories def'd in lib?](80394Listcategoriesdefdinlib.html) (17 messages, latest: Aug 28 2019 at 20:23)
-
 * [Check whether variable exists](93116Checkwhethervariableexists.html) (9 messages, latest: Aug 28 2019 at 18:16)
 
 * [lean solver](47804leansolver.html) (52 messages, latest: Aug 28 2019 at 17:25)
 
 * [Way to get fresh variable?](84818Waytogetfreshvariable.html) (3 messages, latest: Aug 28 2019 at 16:14)
-
-* [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (34 messages, latest: Aug 28 2019 at 15:58)
 
 * [simp lemmas](46585simplemmas.html) (5 messages, latest: Aug 28 2019 at 15:23)
 

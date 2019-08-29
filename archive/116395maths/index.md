@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Category of categories?](80729Categoryofcategories.html) (10 messages, latest: Aug 28 2019 at 17:27)
+* [Category of categories?](80729Categoryofcategories.html) (13 messages, latest: Aug 28 2019 at 23:41)
 
 * [gluing presheaves](99453gluingpresheaves.html) (21 messages, latest: Aug 28 2019 at 04:53)
 
