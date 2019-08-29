@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (194 messages, latest: Aug 29 2019 at 08:05)
+* [algebraic closure](74840algebraicclosure.html) (198 messages, latest: Aug 29 2019 at 10:46)
 
 * [global `mk_fresh_name`?](62080globalmkfreshname.html) (21 messages, latest: Aug 29 2019 at 07:55)
 
