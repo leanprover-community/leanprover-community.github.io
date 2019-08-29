@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Category of categories?](80729Categoryofcategories.html) (13 messages, latest: Aug 28 2019 at 23:41)
+* [gluing presheaves](99453gluingpresheaves.html) (22 messages, latest: Aug 29 2019 at 00:00)
 
-* [gluing presheaves](99453gluingpresheaves.html) (21 messages, latest: Aug 28 2019 at 04:53)
+* [Category of categories?](80729Categoryofcategories.html) (13 messages, latest: Aug 28 2019 at 23:41)
 
 * [sensitivity conjecture](98622sensitivityconjecture.html) (580 messages, latest: Aug 27 2019 at 17:45)
 

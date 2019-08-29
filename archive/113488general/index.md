@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Category of U-Sets listed?](30393CategoryofUSetslisted.html) (13 messages, latest: Aug 29 2019 at 00:58)
+
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (39 messages, latest: Aug 28 2019 at 23:39)
 
 * [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (37 messages, latest: Aug 28 2019 at 23:37)
