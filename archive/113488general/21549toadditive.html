@@ -510,6 +510,60 @@ I can't write</p>
 
 <p>Can I just not expect definitions to work automatically? I don't know how to debug the error. Does it just say "you can't do this -- you're going to have to make that definition manually and then do another bunch of <code>to_additive </code>stuff"?</p>
 
+<a name="174455045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174455045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174455045">Johan Commelin (Aug 29 2019 at 13:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> Thanks for you amazing work. One little issue:<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/c5128756d54f1f5207da88c6509647bbf1c57c2c/src/topology/algebra/open_subgroup.lean#L122" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/c5128756d54f1f5207da88c6509647bbf1c57c2c/src/topology/algebra/open_subgroup.lean#L122">https://github.com/leanprover-community/mathlib/blob/c5128756d54f1f5207da88c6509647bbf1c57c2c/src/topology/algebra/open_subgroup.lean#L122</a><br>
+When I write <code>V.prod</code>, it says</p>
+<div class="codehilite"><pre><span></span>/home/jmc/data/math/lean-perfectoid-spaces/src/for_mathlib/nonarchimedean/basic.lean:101:10: error:
+invalid field notation, &#39;prod&#39; is not a valid &quot;field&quot; because environment does not contain &#39;open_add_subgroup.prod&#39;
+</pre></div>
+
+<a name="174455436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174455436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174455436">Johan Commelin (Aug 29 2019 at 13:49)</a>:</h4>
+<p>I'm not sure where <code>open_add_subgroup.prod</code> went.</p>
+
+<a name="174455472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174455472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174455472">Johan Commelin (Aug 29 2019 at 13:50)</a>:</h4>
+<p>Aaah! The auto-naming turned <code>prod</code> into <code>sum</code>.</p>
+
+<a name="174455522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174455522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174455522">Johan Commelin (Aug 29 2019 at 13:50)</a>:</h4>
+<p>I'm not sure if that is what we want here.</p>
+
+<a name="174455601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174455601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174455601">Patrick Massot (Aug 29 2019 at 13:51)</a>:</h4>
+<p>Can't you state by hand the additive translation and tag it afterwards?</p>
+
+<a name="174455636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174455636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174455636">Patrick Massot (Aug 29 2019 at 13:51)</a>:</h4>
+<p>I sometimes do that when <code>to_additive</code> transform <code>x*y⁻¹</code> into <code>x + -y</code> instead of <code>x-y</code></p>
+
+<a name="174456064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174456064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174456064">Johan Commelin (Aug 29 2019 at 13:56)</a>:</h4>
+<p>I need to relearn how to use it (-;</p>
+
+<a name="174456076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174456076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174456076">Johan Commelin (Aug 29 2019 at 13:56)</a>:</h4>
+<p>How do I pass it a name nowadays?</p>
+
+<a name="174456270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174456270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174456270">Johan Commelin (Aug 29 2019 at 13:58)</a>:</h4>
+<p>If I just type something after <code>to_additive</code> I get the following warning:</p>
+<div class="codehilite"><pre><span></span>`to_additive topological_group.nhds_translation_mul_inv_left`: remove `name` argument
+</pre></div>
+
+<a name="174456291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174456291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174456291">Johan Commelin (Aug 29 2019 at 13:58)</a>:</h4>
+<p>Coming from the following code:</p>
+<div class="codehilite"><pre><span></span>@[to_additive nhds_translation_add_neg_left]
+lemma nhds_translation_mul_inv_left (g : G) :
+</pre></div>
+
+<a name="174456339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/to_additive/near/174456339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/21549toadditive.html#174456339">Patrick Massot (Aug 29 2019 at 13:59)</a>:</h4>
+<p>The commit message from <a href="https://github.com/leanprover-community/mathlib/commit/c5128756d54f1f5207da88c6509647bbf1c57c2c" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/c5128756d54f1f5207da88c6509647bbf1c57c2c">https://github.com/leanprover-community/mathlib/commit/c5128756d54f1f5207da88c6509647bbf1c57c2c</a> is not very encouraging</p>
+
 
 {% endraw %}
 

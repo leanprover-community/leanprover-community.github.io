@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [to_additive](21549toadditive.html) (52 messages, latest: Aug 29 2019 at 13:59)
+
 * [sanity check](33847sanitycheck.html) (12 messages, latest: Aug 29 2019 at 12:10)
 
 * [algebraic closure](74840algebraicclosure.html) (198 messages, latest: Aug 29 2019 at 10:46)
@@ -206,8 +208,6 @@ permalink: archive/113488general/index.html
 * [online leanprover](19268onlineleanprover.html) (189 messages, latest: Jul 26 2019 at 02:37)
 
 * [documentation requirements](33663documentationrequirements.html) (35 messages, latest: Jul 25 2019 at 09:56)
-
-* [to_additive](21549toadditive.html) (41 messages, latest: Jul 25 2019 at 09:55)
 
 * [problems with structure notation](87870problemswithstructurenotation.html) (4 messages, latest: Jul 25 2019 at 03:13)
 
