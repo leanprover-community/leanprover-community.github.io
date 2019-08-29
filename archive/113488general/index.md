@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (194 messages, latest: Aug 29 2019 at 08:05)
+
 * [global `mk_fresh_name`?](62080globalmkfreshname.html) (21 messages, latest: Aug 29 2019 at 07:55)
 
 * [Category of U-Sets listed?](30393CategoryofUSetslisted.html) (15 messages, latest: Aug 29 2019 at 07:52)
-
-* [algebraic closure](74840algebraicclosure.html) (190 messages, latest: Aug 29 2019 at 07:39)
 
 * [Print mk_fresh_name result?](61979Printmkfreshnameresult.html) (102 messages, latest: Aug 29 2019 at 04:14)
 
