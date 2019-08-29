@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Category of U-Sets listed?](30393CategoryofUSetslisted.html) (13 messages, latest: Aug 29 2019 at 00:58)
+* [global `mk_fresh_name`?](62080globalmkfreshname.html) (20 messages, latest: Aug 29 2019 at 02:45)
+
+* [Category of U-Sets listed?](30393CategoryofUSetslisted.html) (14 messages, latest: Aug 29 2019 at 02:06)
 
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (39 messages, latest: Aug 28 2019 at 23:39)
 

@@ -45,6 +45,130 @@ permalink: archive/113489newmembers/02901applytimeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174417271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174417271">Joe (Aug 29 2019 at 01:56)</a>:</h4>
 <p>Also <code>apply</code> failed successfully. I thought the point of <code>apply'</code> is to not unfold definitions.</p>
 
+<a name="174418679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174418679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174418679">Simon Hudon (Aug 29 2019 at 02:36)</a>:</h4>
+<p>That's curious. By defaut, <code>whnf</code> uses <code>semireducible</code> as a setting. I would think that would do it</p>
+
+<a name="174418795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174418795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174418795">Joe (Aug 29 2019 at 02:40)</a>:</h4>
+<p>I think the problem is with <code>exact e</code> on the fourth line of <code>retry_apply_aux</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">private</span> <span class="n">meta</span> <span class="n">def</span> <span class="n">retry_apply_aux</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">cfg</span> <span class="o">:</span> <span class="n">apply_cfg</span><span class="o">),</span> <span class="n">list</span> <span class="o">(</span><span class="n">bool</span> <span class="bp">×</span> <span class="n">name</span> <span class="bp">×</span>  <span class="n">expr</span><span class="o">)</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="o">(</span><span class="n">list</span> <span class="o">(</span><span class="n">name</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">))</span>
+<span class="bp">|</span> <span class="n">e</span> <span class="n">cfg</span> <span class="n">gs</span> <span class="o">:=</span>
+<span class="n">focus1</span> <span class="o">(</span><span class="n">do</span> <span class="o">{</span>
+     <span class="n">exact</span> <span class="n">e</span><span class="o">,</span>
+     <span class="n">gs&#39;</span> <span class="err">←</span> <span class="n">get_goals</span><span class="o">,</span>
+     <span class="k">let</span> <span class="n">r</span> <span class="o">:=</span> <span class="n">reorder_goals</span> <span class="n">gs</span> <span class="n">cfg</span><span class="bp">.</span><span class="n">new_goals</span><span class="o">,</span>
+     <span class="n">set_goals</span> <span class="o">(</span><span class="n">gs&#39;</span> <span class="bp">++</span> <span class="n">r</span><span class="bp">.</span><span class="n">map</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">),</span>
+     <span class="n">return</span> <span class="n">r</span> <span class="o">})</span> <span class="bp">&lt;|&gt;</span>
+<span class="n">do</span> <span class="o">(</span><span class="n">expr</span><span class="bp">.</span><span class="n">pi</span> <span class="n">n</span> <span class="n">bi</span> <span class="n">d</span> <span class="n">b</span><span class="o">)</span> <span class="err">←</span> <span class="n">infer_type</span> <span class="n">e</span> <span class="bp">&gt;&gt;=</span> <span class="n">whnf</span> <span class="bp">|</span> <span class="n">apply_core</span> <span class="n">e</span> <span class="n">cfg</span><span class="o">,</span>
+   <span class="n">v</span> <span class="err">←</span> <span class="n">mk_meta_var</span> <span class="n">d</span><span class="o">,</span>
+   <span class="k">let</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">b</span><span class="bp">.</span><span class="n">has_var</span><span class="o">,</span>
+   <span class="n">e</span> <span class="err">←</span> <span class="n">head_beta</span> <span class="err">$</span> <span class="n">e</span> <span class="n">v</span><span class="o">,</span>
+   <span class="n">retry_apply_aux</span> <span class="n">e</span> <span class="n">cfg</span> <span class="o">((</span><span class="n">b</span><span class="o">,</span> <span class="n">n</span><span class="o">,</span> <span class="n">v</span><span class="o">)</span> <span class="bp">::</span> <span class="n">gs</span><span class="o">)</span>
+</pre></div>
+
+<a name="174418799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174418799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174418799">Joe (Aug 29 2019 at 02:40)</a>:</h4>
+<p>It never stops.</p>
+
+<a name="174418863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174418863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174418863">Joe (Aug 29 2019 at 02:42)</a>:</h4>
+<p>Here is an example of <code>exact</code> not stopping</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply</span>
+
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="kn">namespace</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">interactive</span> <span class="n">interactive</span><span class="bp">.</span><span class="n">types</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">exact&#39;</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tgt</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">i_to_expr_for_apply</span> <span class="n">q</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">exact</span>
+<span class="c1">-- i_to_expr_strict ``(%%q : %%tgt) &gt;&gt;= tactic.exact</span>
+
+<span class="kn">end</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">namespace</span> <span class="n">real</span>
+
+<span class="kn">lemma</span> <span class="n">continuous_sin_sin</span> <span class="o">:</span> <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact&#39;</span> <span class="n">continuous_sin</span><span class="o">,</span>
+
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">real</span>
+</pre></div>
+
+<a name="174419013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419013">Simon Hudon (Aug 29 2019 at 02:47)</a>:</h4>
+<p>if you uncomment the line with <code> ``(%%q : %%tgt)</code> does that make a difference?</p>
+
+<a name="174419059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419059">Joe (Aug 29 2019 at 02:48)</a>:</h4>
+<p>Yes, that would work.</p>
+
+<a name="174419073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419073">Simon Hudon (Aug 29 2019 at 02:49)</a>:</h4>
+<p>That's curious. What about </p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">exact&#39;</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">parse</span> <span class="n">texpr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">tgt</span> <span class="o">:</span> <span class="n">expr</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+   <span class="n">e</span> <span class="bp">&lt;-</span> <span class="n">i_to_expr_for_apply</span> <span class="n">q</span><span class="o">,</span>
+   <span class="n">t</span> <span class="bp">&lt;-</span> <span class="n">infer_type</span> <span class="n">e</span><span class="o">,</span>
+   <span class="n">unify</span> <span class="n">t</span> <span class="n">tgt</span><span class="o">,</span>
+   <span class="n">exact</span> <span class="n">e</span>
+</pre></div>
+
+<a name="174419143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419143">Joe (Aug 29 2019 at 02:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">unify</span> <span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">unify</span>
+  <span class="n">continuous</span> <span class="n">sin</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="n">and</span>
+  <span class="n">continuous</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">),</span> <span class="n">sin</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">))</span> <span class="o">:</span> <span class="kt">Prop</span>
+</pre></div>
+
+<a name="174419188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419188">Mario Carneiro (Aug 29 2019 at 02:52)</a>:</h4>
+<p>that's the desired behavior, right?</p>
+
+<a name="174419196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419196">Joe (Aug 29 2019 at 02:52)</a>:</h4>
+<p>Yes, should fail</p>
+
+<a name="174419206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419206">Mario Carneiro (Aug 29 2019 at 02:53)</a>:</h4>
+<p>geez, it's not good when even <code>exact</code> isn't reliable</p>
+
+<a name="174419208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419208">Simon Hudon (Aug 29 2019 at 02:53)</a>:</h4>
+<p>So we should prefix that <code>exact</code> with a <code>unify</code>. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>, what does <code>exact</code> do if it's not <code>unify</code>?</p>
+
+<a name="174419213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419213">Mario Carneiro (Aug 29 2019 at 02:53)</a>:</h4>
+<p>I would have guessed it did exactly that</p>
+
+<a name="174419219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419219">Mario Carneiro (Aug 29 2019 at 02:54)</a>:</h4>
+<p>actually, I think <code>exact</code> will try quite a bit harder than <code>unify</code> to make things match</p>
+
+<a name="174419280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419280">Mario Carneiro (Aug 29 2019 at 02:55)</a>:</h4>
+<p><code>unify</code> has a reducibility setting (default semireducible) whereas <code>exact</code> is implicitly reducibility all</p>
+
+<a name="174419301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419301">Joe (Aug 29 2019 at 02:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="kn">constant</span> <span class="n">exact</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">md</span> <span class="o">:=</span> <span class="n">semireducible</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span>
+</pre></div>
+
+<a name="174419342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419342">Mario Carneiro (Aug 29 2019 at 02:56)</a>:</h4>
+<p>I stand corrected</p>
+
+<a name="174419345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%60apply%27%60timeout/near/174419345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02901applytimeout.html#174419345">Joe (Aug 29 2019 at 02:56)</a>:</h4>
+<p>(deleted)</p>
+
 
 {% endraw %}
 
