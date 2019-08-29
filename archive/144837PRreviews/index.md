@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1339 special shapes of limits](272961339specialshapesoflimits.html) (1 message, latest: Aug 29 2019 at 11:00)
+
 * [Manifolds](12382Manifolds.html) (49 messages, latest: Aug 29 2019 at 08:05)
 
 * [#1274 combinatorial games](829791274combinatorialgames.html) (4 messages, latest: Aug 25 2019 at 14:08)
