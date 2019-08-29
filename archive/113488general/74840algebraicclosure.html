@@ -926,6 +926,56 @@ Thanks for your updates. I also don't have a lot of time to delve into.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174427932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174427932">Chris Hughes (Aug 29 2019 at 06:36)</a>:</h4>
 <p>Maybe I'm trying too hard to save lines.</p>
 
+<a name="174430701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430701">Johan Commelin (Aug 29 2019 at 07:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Do you have any clue why I get red squiglly lines under <code>E</code> in the type?</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">subalgebra</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">L</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">L</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">K</span> <span class="n">L</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">L_alg</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">:</span><span class="n">L</span><span class="o">,</span> <span class="n">is_integral</span> <span class="n">K</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="n">subalgebra</span> <span class="n">K</span> <span class="n">L</span><span class="o">)</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+
+<span class="kn">end</span> <span class="n">subalgebra</span>
+</pre></div>
+
+<a name="174430703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430703">Johan Commelin (Aug 29 2019 at 07:36)</a>:</h4>
+<p>It says max type class depth error</p>
+
+<a name="174430710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430710">Johan Commelin (Aug 29 2019 at 07:36)</a>:</h4>
+<p>But it should just coerce it to type... and I don't see what other type class search might be going on</p>
+
+<a name="174430796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430796">Chris Hughes (Aug 29 2019 at 07:38)</a>:</h4>
+<p>There's no <code>has_coe_to_sort</code> instance for subalgbra.</p>
+
+<a name="174430805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430805">Johan Commelin (Aug 29 2019 at 07:38)</a>:</h4>
+<p>This line doesn't give errors:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="n">subalgebra</span> <span class="n">K</span> <span class="n">L</span><span class="o">)</span> <span class="o">:</span> <span class="n">discrete_field</span> <span class="o">(</span><span class="n">subtype</span> <span class="n">E</span><span class="bp">.</span><span class="n">carrier</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="174430816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430816">Johan Commelin (Aug 29 2019 at 07:38)</a>:</h4>
+<p>Aha... that's weird. Because I've been using it all over the place</p>
+
+<a name="174430827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430827">Johan Commelin (Aug 29 2019 at 07:38)</a>:</h4>
+<p>It can coerce to <code>set</code>, and then <code>subtype</code>. Both coercions exist. Why doesn't it chain them?</p>
+
+<a name="174430844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430844">Chris Hughes (Aug 29 2019 at 07:39)</a>:</h4>
+<p>No idea.</p>
+
+<a name="174430851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430851">Johan Commelin (Aug 29 2019 at 07:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Any clue?</p>
+
+<a name="174430855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20closure/near/174430855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/74840algebraicclosure.html#174430855">Johan Commelin (Aug 29 2019 at 07:39)</a>:</h4>
+<p>I'm still mystified by things like this</p>
+
 
 {% endraw %}
 
