@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (180 messages, latest: Aug 29 2019 at 06:36)
+
 * [Print mk_fresh_name result?](61979Printmkfreshnameresult.html) (102 messages, latest: Aug 29 2019 at 04:14)
 
 * [(no topic)](79918notopic.html) (53 messages, latest: Aug 29 2019 at 03:06)
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [List categories def'd in lib?](80394Listcategoriesdefdinlib.html) (18 messages, latest: Aug 28 2019 at 23:30)
 
 * [sanity check](33847sanitycheck.html) (11 messages, latest: Aug 28 2019 at 22:10)
-
-* [algebraic closure](74840algebraicclosure.html) (169 messages, latest: Aug 28 2019 at 21:22)
 
 * [Error creating new project](62105Errorcreatingnewproject.html) (9 messages, latest: Aug 28 2019 at 20:36)
 
