@@ -330,6 +330,140 @@ Almost got it, but not quite.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421618">Mario Carneiro (Aug 29 2019 at 03:58)</a>:</h4>
 <p>the point about using auto variable names is more a code style thing; from an implementation perspective I think it should be fine to let the user refer to them if they really want to</p>
 
+<a name="174421687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421687">Daniel Donnelly (Aug 29 2019 at 04:00)</a>:</h4>
+<p>Right, that's what I do, except with dictionary when it's within app.  Bancats also supports auto-indexing in a very simple and smart way.  If you name an arrow <code>f</code> and check auto-indexing.  It will go to <code>g</code>.  But also understands any index-like thing in the symbol, e.g. $\text{Hom}_C(A_1, B_2)$ has several indexables, and you get to choose the one you want.  Neat, eh?</p>
+
+<a name="174421705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421705">Mario Carneiro (Aug 29 2019 at 04:01)</a>:</h4>
+<p>as in you might be calling that <code>f_12</code>?</p>
+
+<a name="174421713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421713">Mario Carneiro (Aug 29 2019 at 04:01)</a>:</h4>
+<p>or <code>f_1</code> or <code>f_2</code></p>
+
+<a name="174421723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421723">Daniel Donnelly (Aug 29 2019 at 04:01)</a>:</h4>
+<p>? not sure</p>
+
+<a name="174421769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421769">Mario Carneiro (Aug 29 2019 at 04:02)</a>:</h4>
+<p>Seems like it would be tricky to preserve all this information in the lean file without special annotation</p>
+
+<a name="174421777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421777">Daniel Donnelly (Aug 29 2019 at 04:02)</a>:</h4>
+<p>Yes, that's one of the ways to auto-index, but as it is now, you need to have $f_1$ made as an arrow first, then it will know what to do. Or you could start at $f_i$ and it will go to $f_j, f_k, f_l, ...$</p>
+
+<a name="174421786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421786">Daniel Donnelly (Aug 29 2019 at 04:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I don't do that</p>
+
+<a name="174421789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421789">Daniel Donnelly (Aug 29 2019 at 04:03)</a>:</h4>
+<p>The Bancats system is to have lean files mixed with .bancats files</p>
+
+<a name="174421796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421796">Daniel Donnelly (Aug 29 2019 at 04:03)</a>:</h4>
+<p>They go together</p>
+
+<a name="174421800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421800">Mario Carneiro (Aug 29 2019 at 04:03)</a>:</h4>
+<p>so the bancats file sources all the autogenerated data in the lean file?</p>
+
+<a name="174421801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421801">Daniel Donnelly (Aug 29 2019 at 04:03)</a>:</h4>
+<p>You cannot open the bancats file by double clicking it, unless we can somehow get that to trigger VSCode to open instead</p>
+
+<a name="174421803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421803">Daniel Donnelly (Aug 29 2019 at 04:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  yes, most likely</p>
+
+<a name="174421806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421806">Mario Carneiro (Aug 29 2019 at 04:04)</a>:</h4>
+<p>why can't you do your own variable name tracking then?</p>
+
+<a name="174421843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421843">Daniel Donnelly (Aug 29 2019 at 04:04)</a>:</h4>
+<p>And the lean files provide the formal proof, but also the bancats diagrams show visually the steps in the proof</p>
+
+<a name="174421852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421852">Mario Carneiro (Aug 29 2019 at 04:04)</a>:</h4>
+<p>are you worried about user variables polluting your namespace?</p>
+
+<a name="174421853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421853">Daniel Donnelly (Aug 29 2019 at 04:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I can do both actually, and that will provide benefits in places</p>
+
+<a name="174421870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421870">Daniel Donnelly (Aug 29 2019 at 04:05)</a>:</h4>
+<p>Well, there's only one bancats window per file, but that window could have 50 diagrams in it say</p>
+
+<a name="174421879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421879">Daniel Donnelly (Aug 29 2019 at 04:05)</a>:</h4>
+<p>But they all point to the same lean file</p>
+
+<a name="174421880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421880">Mario Carneiro (Aug 29 2019 at 04:05)</a>:</h4>
+<p>if you generate a complete lean file then you will know all the variable declarations in it, so you can avoid any collisions</p>
+
+<a name="174421886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421886">Daniel Donnelly (Aug 29 2019 at 04:05)</a>:</h4>
+<p>Then if you need multiple leans, you pop open another bancats window</p>
+
+<a name="174421899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421899">Daniel Donnelly (Aug 29 2019 at 04:05)</a>:</h4>
+<p>The entire scope of dissertation is one bancats instance -&gt; they don't communicate between instances of bancats</p>
+
+<a name="174421903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421903">Daniel Donnelly (Aug 29 2019 at 04:05)</a>:</h4>
+<p>*scope of discourse of math</p>
+
+<a name="174421949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421949">Daniel Donnelly (Aug 29 2019 at 04:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  yes, but as I say, it will not be 100% autogen, the user can go in and add stuff even to the currently pointed to file</p>
+
+<a name="174421955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421955">Daniel Donnelly (Aug 29 2019 at 04:06)</a>:</h4>
+<p>So they could create new variables there, using them up, while it's not reflected in Bancats, and that's okay</p>
+
+<a name="174421968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421968">Daniel Donnelly (Aug 29 2019 at 04:07)</a>:</h4>
+<p>Bancats is only a visual driver and displayer of diagram chasing proofs, which naturally are easier to remember if there's a diagram invovled.</p>
+
+<a name="174422010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422010">Daniel Donnelly (Aug 29 2019 at 04:08)</a>:</h4>
+<p>later, because of the Curry-Howard-Lambek correspondence of type thoery with cat theory, we may be able to use the diagram editor in a more interesting way such as extending Lean using diagrams (graphs) instead of 100% pure formal Lean code.</p>
+
+<a name="174422012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422012">Daniel Donnelly (Aug 29 2019 at 04:09)</a>:</h4>
+<p>But that's not a goal for version 1 or anything soon</p>
+
+<a name="174422028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422028">Mario Carneiro (Aug 29 2019 at 04:09)</a>:</h4>
+<p>hm, well I wish you luck</p>
+
+<a name="174422030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422030">Daniel Donnelly (Aug 29 2019 at 04:09)</a>:</h4>
+<p>In version 1, if the user would like to add a new non-standard lib category, then they'll have to write some .lean file and import it somehow.</p>
+
+<a name="174422074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422074">Daniel Donnelly (Aug 29 2019 at 04:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  thank you!  ^_^</p>
+
+<a name="174422146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422146">Daniel Donnelly (Aug 29 2019 at 04:12)</a>:</h4>
+<p>I've already come up with a 90% visual proof of Yoneda's Lemma.  The proof, I've never seen it before in a book, and no one else does the proof that way.  It's two commuting squares pasted together (natural diagram squares).  But you should wait for version 1 to view it in all of its bancat features</p>
+
+<a name="174422175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422175">Daniel Donnelly (Aug 29 2019 at 04:14)</a>:</h4>
+<p>Here's an MS Paint3D mock-up of it (with some text to complet that part of Yoneda's lemma):<br>
+<a href="https://i.stack.imgur.com/4uCeN.png" target="_blank" title="https://i.stack.imgur.com/4uCeN.png">https://i.stack.imgur.com/4uCeN.png</a></p>
+<div class="message_inline_image"><a href="https://i.stack.imgur.com/4uCeN.png" target="_blank" title="https://i.stack.imgur.com/4uCeN.png"><img src="https://i.stack.imgur.com/4uCeN.png"></a></div>
+
+<a name="174422221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174422221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174422221">Daniel Donnelly (Aug 29 2019 at 04:14)</a>:</h4>
+<p>But of course Lean will step in and any of that text will just be comments</p>
+
 
 {% endraw %}
 
