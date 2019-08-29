@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (15 messages, latest: Aug 29 2019 at 13:54)
+* [`apply'`timeout](02901applytimeout.html) (26 messages, latest: Aug 29 2019 at 15:57)
 
-* [`apply'`timeout](02901applytimeout.html) (24 messages, latest: Aug 29 2019 at 03:01)
+* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (15 messages, latest: Aug 29 2019 at 13:54)
 
 * [How do you set the Lean exec?](11856HowdoyousettheLeanexec.html) (37 messages, latest: Aug 28 2019 at 06:02)
 
