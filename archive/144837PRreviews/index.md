@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1339 special shapes of limits](272961339specialshapesoflimits.html) (1 message, latest: Aug 29 2019 at 11:00)
+* [#1339 special shapes of limits](272961339specialshapesoflimits.html) (2 messages, latest: Aug 29 2019 at 12:21)
 
 * [Manifolds](12382Manifolds.html) (49 messages, latest: Aug 29 2019 at 08:05)
 

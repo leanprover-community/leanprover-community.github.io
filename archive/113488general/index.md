@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [sanity check](33847sanitycheck.html) (12 messages, latest: Aug 29 2019 at 12:10)
+
 * [algebraic closure](74840algebraicclosure.html) (198 messages, latest: Aug 29 2019 at 10:46)
 
 * [global `mk_fresh_name`?](62080globalmkfreshname.html) (21 messages, latest: Aug 29 2019 at 07:55)
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (37 messages, latest: Aug 28 2019 at 23:37)
 
 * [List categories def'd in lib?](80394Listcategoriesdefdinlib.html) (18 messages, latest: Aug 28 2019 at 23:30)
-
-* [sanity check](33847sanitycheck.html) (11 messages, latest: Aug 28 2019 at 22:10)
 
 * [Error creating new project](62105Errorcreatingnewproject.html) (9 messages, latest: Aug 28 2019 at 20:36)
 
