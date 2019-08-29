@@ -1,0 +1,336 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/61979Printmkfreshnameresult.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html">Print mk_fresh_name result?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174419482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174419482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174419482">Daniel Donnelly (Aug 29 2019 at 03:00)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">→</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">do</span>
+    <span class="n">n</span> <span class="err">←</span> <span class="n">mk_fresh_name</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">hyp</span> <span class="err">←</span> <span class="n">get_local</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hyp</span>
+</pre></div>
+
+
+<p>I've tried placing the cursor at various points and that never gives the name stored in n, so how can I print that local variable <code>n</code>?</p>
+
+<a name="174419690"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174419690" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174419690">Daniel Donnelly (Aug 29 2019 at 03:06)</a>:</h4>
+<p>I'm not sure either how to make a "function that returns a string".  I've tried 10 different thoughts on it :/</p>
+
+<a name="174419782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174419782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174419782">Daniel Donnelly (Aug 29 2019 at 03:09)</a>:</h4>
+<p>Found this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+<span class="kn">variable</span> <span class="o">[</span><span class="n">io</span><span class="bp">.</span><span class="n">interface</span><span class="o">]</span>
+<span class="kn">open</span> <span class="n">nat</span> <span class="n">io</span>
+<span class="n">def</span> <span class="n">print_squares</span> <span class="o">:</span> <span class="n">N</span> <span class="bp">→</span> <span class="n">io</span> <span class="n">unit</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">return</span> <span class="o">()</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">print_squares</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span>
+<span class="n">put_str</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">to_string</span> <span class="n">n</span> <span class="bp">++</span> <span class="s2">&quot;^2 = &quot;</span> <span class="bp">++</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">to_string</span> <span class="o">(</span><span class="n">n</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">++</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">print_squares</span> <span class="mi">100</span>
+</pre></div>
+
+<a name="174420000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420000">Daniel Donnelly (Aug 29 2019 at 03:15)</a>:</h4>
+<p>What's literal for the void or empty type?</p>
+
+<a name="174420009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420009">Daniel Donnelly (Aug 29 2019 at 03:15)</a>:</h4>
+<p>I need <br>
+def my_print : empty -&gt; string := ...</p>
+
+<a name="174420217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420217">Daniel Donnelly (Aug 29 2019 at 03:21)</a>:</h4>
+<p><a href="/user_uploads/3121/cr4k2QZjXi0qSsCRVOfZx_l1/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> <br>
+Almost got it, but not quite.</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/cr4k2QZjXi0qSsCRVOfZx_l1/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/cr4k2QZjXi0qSsCRVOfZx_l1/pasted_image.png"></a></div>
+
+<a name="174420486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420486">Mario Carneiro (Aug 29 2019 at 03:28)</a>:</h4>
+<p>If by void you mean that thing in C, it's called <code>unit</code> and its element is <code>()</code></p>
+
+<a name="174420488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420488">Mario Carneiro (Aug 29 2019 at 03:28)</a>:</h4>
+<p><code>void</code> is a terrible name, because it's not empty</p>
+
+<a name="174420515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420515">Mario Carneiro (Aug 29 2019 at 03:29)</a>:</h4>
+<p>If you want a function that takes no arguments, that's just a value</p>
+
+<a name="174420563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420563">Daniel Donnelly (Aug 29 2019 at 03:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> how do I convert a <code>tactic name</code> type to a string?</p>
+
+<a name="174420571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420571">Mario Carneiro (Aug 29 2019 at 03:30)</a>:</h4>
+<p><code>def my_print : unit -&gt; string := ... </code> is basically equivalent to <code>def my_print : string := ...</code> and it can only return a constant string because lean is pure functional</p>
+
+<a name="174420585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420585">Mario Carneiro (Aug 29 2019 at 03:31)</a>:</h4>
+<p><code>to_string : name -&gt; string</code> should work</p>
+
+<a name="174420591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420591">Daniel Donnelly (Aug 29 2019 at 03:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+<span class="kn">open</span> <span class="n">io</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">print_name3</span> <span class="o">:=</span>
+    <span class="n">put_str</span> <span class="n">mk_fresh_name</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">print_name3</span>
+</pre></div>
+
+<a name="174420595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420595">Daniel Donnelly (Aug 29 2019 at 03:31)</a>:</h4>
+<p>Doesn't work, because mk_fresh_name isn't a string</p>
+
+<a name="174420646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420646">Daniel Donnelly (Aug 29 2019 at 03:32)</a>:</h4>
+<p><a href="/user_uploads/3121/lls3YSxHyWr_bC4x31KC2Ghj/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> </p>
+<div class="message_inline_image"><a href="/user_uploads/3121/lls3YSxHyWr_bC4x31KC2Ghj/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/lls3YSxHyWr_bC4x31KC2Ghj/pasted_image.png"></a></div><p>Here's trying <code>to_string</code>.  Errors...</p>
+
+<a name="174420656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420656">Mario Carneiro (Aug 29 2019 at 03:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+<span class="kn">open</span> <span class="n">io</span>
+<span class="kn">open</span> <span class="n">tactic</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">print_name3</span> <span class="o">:</span> <span class="n">io</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">n</span> <span class="err">←</span> <span class="n">run_tactic</span> <span class="n">mk_fresh_name</span><span class="o">,</span>
+   <span class="n">put_str</span> <span class="n">n</span><span class="bp">.</span><span class="n">to_string</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">print_name3</span>
+</pre></div>
+
+<a name="174420661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420661">Daniel Donnelly (Aug 29 2019 at 03:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  You're a super-coder.  Thank you!</p>
+
+<a name="174420698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420698">Mario Carneiro (Aug 29 2019 at 03:34)</a>:</h4>
+<p>I take it you aren't familiar with monads; it's a good thing to read up on if you want to do imperative coding in lean</p>
+
+<a name="174420702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420702">Daniel Donnelly (Aug 29 2019 at 03:34)</a>:</h4>
+<p>Yeah, I'm not that far yet in my cat theory studies.  Not a good place to be, but I'm getting there...</p>
+
+<a name="174420708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420708">Daniel Donnelly (Aug 29 2019 at 03:34)</a>:</h4>
+<p>I'll read up on monads &amp; programming this week</p>
+
+<a name="174420716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420716">Mario Carneiro (Aug 29 2019 at 03:35)</a>:</h4>
+<p>don't worry about the category theory monads, programming monads are easier and more useful</p>
+
+<a name="174420718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420718">Daniel Donnelly (Aug 29 2019 at 03:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  thank you!</p>
+
+<a name="174420722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420722">Mario Carneiro (Aug 29 2019 at 03:35)</a>:</h4>
+<p>and there are a bazillion tutorials online for them because haskell loves them and lean inherited the love</p>
+
+<a name="174420781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420781">Daniel Donnelly (Aug 29 2019 at 03:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  it returns <code>_fresh.657.185</code>.  I was expecting a nice variable like <code>C</code> that is available in the current scope</p>
+
+<a name="174420788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420788">Mario Carneiro (Aug 29 2019 at 03:37)</a>:</h4>
+<p>it's globally unique, what did you expect?</p>
+
+<a name="174420793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420793">Mario Carneiro (Aug 29 2019 at 03:38)</a>:</h4>
+<p>it needs a lot of numbers because lean goes through names ravenously</p>
+
+<a name="174420836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420836">Daniel Donnelly (Aug 29 2019 at 03:38)</a>:</h4>
+<p>I only need it unique for the current "context of the current file".  I.e. in the usual sense of declaring new variables in Lean</p>
+
+<a name="174420841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420841">Mario Carneiro (Aug 29 2019 at 03:38)</a>:</h4>
+<p>"available in the current scope" doesn't exist</p>
+
+<a name="174420843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420843">Daniel Donnelly (Aug 29 2019 at 03:38)</a>:</h4>
+<p>Like, this:</p>
+
+<a name="174420846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420846">Mario Carneiro (Aug 29 2019 at 03:38)</a>:</h4>
+<p>there isn't really a global scope</p>
+
+<a name="174420857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420857">Mario Carneiro (Aug 29 2019 at 03:39)</a>:</h4>
+<p>every definition has its own local scope</p>
+
+<a name="174420863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420863">Daniel Donnelly (Aug 29 2019 at 03:39)</a>:</h4>
+<p><code>variable n : nat</code>, is the only thing in a file.  Then querying for a free name should return something like <code>a</code>.</p>
+
+<a name="174420864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420864">Mario Carneiro (Aug 29 2019 at 03:39)</a>:</h4>
+<p>and stuff like <code>variable</code> are only directions for how to populate that local scope</p>
+
+<a name="174420884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420884">Mario Carneiro (Aug 29 2019 at 03:40)</a>:</h4>
+<p>without a definition, i.e. in a <code>run_cmd</code> or <code>#eval</code>, there is no scope</p>
+
+<a name="174420937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420937">Daniel Donnelly (Aug 29 2019 at 03:41)</a>:</h4>
+<p>Well, do you understand why I would need this?</p>
+
+<a name="174420939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174420939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174420939">Mario Carneiro (Aug 29 2019 at 03:41)</a>:</h4>
+<p>no?</p>
+
+<a name="174421001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421001">Daniel Donnelly (Aug 29 2019 at 03:42)</a>:</h4>
+<p>BananaCats works with one Bancats window per Lean file.  Each Bancats window has many diagrams.  Whatever you're currently doing, those create-object commands get put at the end of the lean file (usually).  And to query stuff like if a variable name is available, I also do that there, then remove the command immediately, once the result is obtained.</p>
+
+<a name="174421007"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421007" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421007">Mario Carneiro (Aug 29 2019 at 03:42)</a>:</h4>
+<p>sounds good so far</p>
+
+<a name="174421008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421008">Daniel Donnelly (Aug 29 2019 at 03:42)</a>:</h4>
+<p>If you create an object in a diagram</p>
+
+<a name="174421018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421018">Daniel Donnelly (Aug 29 2019 at 03:43)</a>:</h4>
+<p>then that code is permanent and is marked as auto-gen'd and "don't edit me"</p>
+
+<a name="174421023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421023">Daniel Donnelly (Aug 29 2019 at 03:43)</a>:</h4>
+<p>It's only permanent until the user decides to delete the object in the diagram and that variable's refcount drops to zero</p>
+
+<a name="174421065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421065">Daniel Donnelly (Aug 29 2019 at 03:44)</a>:</h4>
+<p>So, if managing to get the next available variable name is not doable right now in Lean, I can handle it on the Python side</p>
+
+<a name="174421074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421074">Daniel Donnelly (Aug 29 2019 at 03:44)</a>:</h4>
+<p>Because I just keep a dictionary of variables created</p>
+
+<a name="174421078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421078">Daniel Donnelly (Aug 29 2019 at 03:44)</a>:</h4>
+<p>and manage it</p>
+
+<a name="174421079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421079">Mario Carneiro (Aug 29 2019 at 03:44)</a>:</h4>
+<p>I still don't know why you need variable names from that though</p>
+
+<a name="174421085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421085">Mario Carneiro (Aug 29 2019 at 03:44)</a>:</h4>
+<p>don't objects have user created names?</p>
+
+<a name="174421097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421097">Daniel Donnelly (Aug 29 2019 at 03:45)</a>:</h4>
+<p>The user has the option to not specify the variable name sometimes.  And if the variable name is not available, I need to inform the user when they're thinking up a name</p>
+
+<a name="174421102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421102">Daniel Donnelly (Aug 29 2019 at 03:45)</a>:</h4>
+<p>It's a really professional app :)</p>
+
+<a name="174421149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421149">Mario Carneiro (Aug 29 2019 at 03:46)</a>:</h4>
+<p>To test if a variable is available, you can try to add the variable line and see if you get a redeclaration error</p>
+
+<a name="174421150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421150">Daniel Donnelly (Aug 29 2019 at 03:46)</a>:</h4>
+<p>For instance, when I create a category, I might not care that it got the variable name C</p>
+
+<a name="174421157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421157">Daniel Donnelly (Aug 29 2019 at 03:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  thanks, I'll try it out :)</p>
+
+<a name="174421164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421164">Mario Carneiro (Aug 29 2019 at 03:46)</a>:</h4>
+<p>If you are autogenerating names, just use some convention like <code>_banana_1</code>, <code>_banana_2</code> to make it obvious that they are autogenerated</p>
+
+<a name="174421180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421180">Daniel Donnelly (Aug 29 2019 at 03:47)</a>:</h4>
+<p>The Lean Code has to be readable and editable under the assumption that in version 0 you can't re-sync with Bancats pyqt5 should you mess with auto-gen code</p>
+
+<a name="174421184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421184">Daniel Donnelly (Aug 29 2019 at 03:47)</a>:</h4>
+<p>You're allowed to edit the file in VSCode while it's auto-gen'd (parts of it) by Bancats app</p>
+
+<a name="174421225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421225">Daniel Donnelly (Aug 29 2019 at 03:48)</a>:</h4>
+<p>Sort of like how Visual Studio &amp; Qt Creator work</p>
+
+<a name="174421238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421238">Daniel Donnelly (Aug 29 2019 at 03:48)</a>:</h4>
+<p>To accomplish this, I'm just storing the auto-gen code as strings on BanCats side, with the variable name.  When refcount goes to 0, I search the file for the exact declaration code, delete it</p>
+
+<a name="174421247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421247">Daniel Donnelly (Aug 29 2019 at 03:49)</a>:</h4>
+<p>This is all guess work so far, I have still to connect my app to VSCode</p>
+
+<a name="174421248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421248">Mario Carneiro (Aug 29 2019 at 03:49)</a>:</h4>
+<p>In lean proofs, there are many tactics that create names automatically, but it's bad form to refer to them explicitly - that means you should have named it</p>
+
+<a name="174421260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421260">Daniel Donnelly (Aug 29 2019 at 03:49)</a>:</h4>
+<p>I did work on some of the lean extension's typescript, adapting it to connect to two different EXE's, lean and bancats</p>
+
+<a name="174421312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421312">Daniel Donnelly (Aug 29 2019 at 03:50)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I'm not sure what that entails</p>
+
+<a name="174421331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421331">Daniel Donnelly (Aug 29 2019 at 03:51)</a>:</h4>
+<p>Should have named what?</p>
+
+<a name="174421333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421333">Daniel Donnelly (Aug 29 2019 at 03:51)</a>:</h4>
+<p>Could you give an example of what's bad?</p>
+
+<a name="174421387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421387">Daniel Donnelly (Aug 29 2019 at 03:52)</a>:</h4>
+<p>Anyway, thanks for all your help.  I like the variable decl idea, and will be using it</p>
+
+<a name="174421401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421401">Mario Carneiro (Aug 29 2019 at 03:54)</a>:</h4>
+<p>I mean if you write <code>intro</code> and it introduces a variable called <code>_a</code>, that's fine, but if you later have to write e.g. <code>exact _a</code> then you should go back and change it to <code>intro x</code> and <code>exact x</code></p>
+
+<a name="174421456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421456">Mario Carneiro (Aug 29 2019 at 03:54)</a>:</h4>
+<p>Similarly, if you have an unnamed object, that's fine, but if you have to talk about that object in any way then it's not fine anymore and you should prompt the user to name it</p>
+
+<a name="174421474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421474">Daniel Donnelly (Aug 29 2019 at 03:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> you're probably right.</p>
+
+<a name="174421531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421531">Daniel Donnelly (Aug 29 2019 at 03:56)</a>:</h4>
+<p>My design ideas aren't final until I release.  I'm design as I code and learn what <em>can</em> be done.</p>
+
+<a name="174421557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421557">Mario Carneiro (Aug 29 2019 at 03:57)</a>:</h4>
+<p>A simple mechanism that should work is to use the variable testing thing to find the next available name in some series like <code>C_1</code>, <code>C_2</code> or whatever you think a nice letter for your objects is</p>
+
+<a name="174421618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Print%20mk_fresh_name%20result%3F/near/174421618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/61979Printmkfreshnameresult.html#174421618">Mario Carneiro (Aug 29 2019 at 03:58)</a>:</h4>
+<p>the point about using auto variable names is more a code style thing; from an implementation perspective I think it should be fine to let the user refer to them if they really want to</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

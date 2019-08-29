@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Print mk_fresh_name result?](61979Printmkfreshnameresult.html) (69 messages, latest: Aug 29 2019 at 03:58)
+
+* [(no topic)](79918notopic.html) (53 messages, latest: Aug 29 2019 at 03:06)
+
 * [global `mk_fresh_name`?](62080globalmkfreshname.html) (20 messages, latest: Aug 29 2019 at 02:45)
 
 * [Category of U-Sets listed?](30393CategoryofUSetslisted.html) (14 messages, latest: Aug 29 2019 at 02:06)
@@ -214,8 +218,6 @@ permalink: archive/113488general/index.html
 * [invalid occurrence of recursive arg#10 of 'rvec.param.vcons'](20549invalidoccurrenceofrecursivearg10ofrvecparamvcons.html) (65 messages, latest: Jul 24 2019 at 12:33)
 
 * [recursor_of "list" is none](34070recursoroflistisnone.html) (30 messages, latest: Jul 24 2019 at 10:34)
-
-* [(no topic)](79918notopic.html) (52 messages, latest: Jul 24 2019 at 09:13)
 
 * [generalize semicolon](37872generalizesemicolon.html) (14 messages, latest: Jul 23 2019 at 13:58)
 
