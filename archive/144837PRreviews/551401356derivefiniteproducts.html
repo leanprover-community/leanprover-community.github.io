@@ -185,6 +185,25 @@ permalink: archive/144837PRreviews/551401356derivefiniteproducts.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231356%20derive%20finite_products/near/174584582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/551401356derivefiniteproducts.html#174584582">Mario Carneiro (Aug 30 2019 at 21:37)</a>:</h4>
 <p>I guess an approximate object should also be nonempty, and the sense of nonempty that agrees with the given application is <code>trunc J</code> where <code>J</code> is the index category</p>
 
+<a name="174587257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231356%20derive%20finite_products/near/174587257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/551401356derivefiniteproducts.html#174587257">Scott Morrison (Aug 30 2019 at 22:21)</a>:</h4>
+<p>I think we actually want a nonempty category enriched in singletons; why would you want to pay attention to the "non-designated" morphisms?</p>
+
+<a name="174587979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231356%20derive%20finite_products/near/174587979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/551401356derivefiniteproducts.html#174587979">Scott Morrison (Aug 30 2019 at 22:33)</a>:</h4>
+<p>I like the following picture:</p>
+<p>Suppose you are making some construction say of some Widget, that depends on choices. Let J be the set of choices, and think of your construction as a bundle, whose base space is J, and each fibre has the structure of a Widget. Now for each "path" between choices j and j', we want a "parallel transport" identifying the fibre over j with the fibre over j' (as Widgets). At this point we can make the candidate definition that our "real construction" is the set of flat sections of this fibre bundle --- no choices involved! (In some sense, they were 'deferred'.) We need one more fact before this is a satisfactory definition, that is, that our parallel transport is _flat_, i.e. that transporting from j to j' and then to j'' is the same as transporting directly from j to j''. Then an easy consequence is that the "evaluation map" taking a flat section and looking at its value at a point j is an isomorphism for every j.</p>
+<p>This description was very geometrical, but it's actually just the purely categorical discussion we've been having. We model J as a category so that <code>\forall X Y, unique (X \hom Y)</code>, and ask that our construction is a functor <code>J \func Widget</code>. This captures nicely the notion of a bundle with a flat connection. Of course "flat sections" can now be interpreted just as the limit of this functor. (If we can take limits in the underlying types, this says that a point in the limit is a point in the product of all the fibres, such that the chosen value in each fibre is carried by the morphisms to the chosen value in the other fibres.)</p>
+<p>Of course, non-constructively, any category has limits of shape J when J is nonempty and enriched in singletons --- just pick arbitrarily a point j in J, and declare that <code>limit F = F.obj j</code>.</p>
+
+<a name="174588032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231356%20derive%20finite_products/near/174588032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/551401356derivefiniteproducts.html#174588032">Scott Morrison (Aug 30 2019 at 22:34)</a>:</h4>
+<p>I'm not entirely certain what a "good API" for this idea would look like. Suggestions welcome.</p>
+
+<a name="174588062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231356%20derive%20finite_products/near/174588062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/551401356derivefiniteproducts.html#174588062">Scott Morrison (Aug 30 2019 at 22:34)</a>:</h4>
+<p>I think every mathematician has "used this construction" many times, even if they haven't phrased it this way. It's a lovely way to hide away arbitrary choices in a construction.</p>
+
 
 {% endraw %}
 

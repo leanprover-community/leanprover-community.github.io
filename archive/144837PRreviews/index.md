@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1356 derive finite_products](551401356derivefiniteproducts.html) (41 messages, latest: Aug 30 2019 at 21:37)
+* [#1356 derive finite_products](551401356derivefiniteproducts.html) (45 messages, latest: Aug 30 2019 at 22:34)
 
 * [#1368 `enumerable` class](823481368enumerableclass.html) (6 messages, latest: Aug 30 2019 at 20:14)
 
