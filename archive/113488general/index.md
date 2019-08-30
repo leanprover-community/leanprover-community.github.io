@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (1 message, latest: Aug 30 2019 at 16:58)
+* [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (3 messages, latest: Aug 30 2019 at 17:17)
 
-* [Computer science bibtex](97768Computersciencebibtex.html) (6 messages, latest: Aug 30 2019 at 16:42)
+* [Computer science bibtex](97768Computersciencebibtex.html) (7 messages, latest: Aug 30 2019 at 17:11)
 
 * [New error message](49914Newerrormessage.html) (1 message, latest: Aug 30 2019 at 14:10)
 

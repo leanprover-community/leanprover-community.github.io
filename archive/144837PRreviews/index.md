@@ -9,6 +9,10 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1365 derive finite_products](206761365derivefiniteproducts.html) (17 messages, latest: Aug 30 2019 at 17:57)
+
+* [#1356 derive finite_products](551401356derivefiniteproducts.html) (1 message, latest: Aug 30 2019 at 17:28)
+
 * [#1368 `enumerable` class](823481368enumerableclass.html) (1 message, latest: Aug 30 2019 at 15:42)
 
 * [#1366 add a `lt` relation independent from `le` for with_top](091241366addaltrelationindependentfromleforwithtop.html) (7 messages, latest: Aug 30 2019 at 15:38)
