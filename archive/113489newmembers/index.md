@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [TPIL Chap 3 exercise help](78186TPILChap3exercisehelp.html) (2 messages, latest: Aug 30 2019 at 16:28)
+
 * [`apply'`timeout](02901applytimeout.html) (29 messages, latest: Aug 29 2019 at 17:25)
 
 * [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (15 messages, latest: Aug 29 2019 at 13:54)
