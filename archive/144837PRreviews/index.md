@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1374 Comparing completions](938241374Comparingcompletions.html) (1 message, latest: Aug 30 2019 at 11:31)
+
 * [#1339 special shapes of limits](272961339specialshapesoflimits.html) (3 messages, latest: Aug 29 2019 at 23:27)
 
 * [Manifolds](12382Manifolds.html) (49 messages, latest: Aug 29 2019 at 08:05)
