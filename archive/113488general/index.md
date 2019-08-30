@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [New error message](49914Newerrormessage.html) (1 message, latest: Aug 30 2019 at 14:10)
+* [Computer science bibtex](97768Computersciencebibtex.html) (5 messages, latest: Aug 30 2019 at 15:21)
 
-* [Computer science bibtex](97768Computersciencebibtex.html) (2 messages, latest: Aug 30 2019 at 14:08)
+* [New error message](49914Newerrormessage.html) (1 message, latest: Aug 30 2019 at 14:10)
 
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (58 messages, latest: Aug 30 2019 at 10:48)
 

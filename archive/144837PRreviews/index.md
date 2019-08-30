@@ -9,6 +9,10 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1368 `enumerable` class](823481368enumerableclass.html) (1 message, latest: Aug 30 2019 at 15:42)
+
+* [#1366 add a `lt` relation independent from `le` for with_top](091241366addaltrelationindependentfromleforwithtop.html) (7 messages, latest: Aug 30 2019 at 15:38)
+
 * [#1374 Comparing completions](938241374Comparingcompletions.html) (1 message, latest: Aug 30 2019 at 11:31)
 
 * [#1339 special shapes of limits](272961339specialshapesoflimits.html) (3 messages, latest: Aug 29 2019 at 23:27)
