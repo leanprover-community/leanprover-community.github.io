@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (55 messages, latest: Aug 30 2019 at 08:58)
+
 * [Finding (deterministic) timeout](28140Findingdeterministictimeout.html) (33 messages, latest: Aug 29 2019 at 23:54)
 
 * [to_additive](21549toadditive.html) (64 messages, latest: Aug 29 2019 at 19:53)
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [Print mk_fresh_name result?](61979Printmkfreshnameresult.html) (102 messages, latest: Aug 29 2019 at 04:14)
 
 * [(no topic)](79918notopic.html) (53 messages, latest: Aug 29 2019 at 03:06)
-
-* [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (39 messages, latest: Aug 28 2019 at 23:39)
 
 * [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (37 messages, latest: Aug 28 2019 at 23:37)
 
