@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Finding (deterministic) timeout](28140Findingdeterministictimeout.html) (37 messages, latest: Aug 31 2019 at 14:56)
+* [talk on ATP and ITP](04431talkonATPandITP.html) (13 messages, latest: Aug 31 2019 at 16:45)
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (11 messages, latest: Aug 31 2019 at 10:29)
+* [Finding (deterministic) timeout](28140Findingdeterministictimeout.html) (37 messages, latest: Aug 31 2019 at 14:56)
 
 * [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (5 messages, latest: Aug 31 2019 at 01:25)
 
