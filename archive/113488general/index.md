@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (7 messages, latest: Aug 31 2019 at 01:30)
+* [talk on ATP and ITP](04431talkonATPandITP.html) (9 messages, latest: Aug 31 2019 at 05:34)
 
 * [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (5 messages, latest: Aug 31 2019 at 01:25)
 
