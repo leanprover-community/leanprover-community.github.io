@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [Manifolds](12382Manifolds.html) (53 messages, latest: Aug 31 2019 at 14:58)
+
 * [#1356 derive finite_products](551401356derivefiniteproducts.html) (48 messages, latest: Aug 31 2019 at 00:23)
 
 * [#1368 `enumerable` class](823481368enumerableclass.html) (6 messages, latest: Aug 30 2019 at 20:14)
@@ -20,8 +22,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1374 Comparing completions](938241374Comparingcompletions.html) (1 message, latest: Aug 30 2019 at 11:31)
 
 * [#1339 special shapes of limits](272961339specialshapesoflimits.html) (3 messages, latest: Aug 29 2019 at 23:27)
-
-* [Manifolds](12382Manifolds.html) (49 messages, latest: Aug 29 2019 at 08:05)
 
 * [#1274 combinatorial games](829791274combinatorialgames.html) (4 messages, latest: Aug 25 2019 at 14:08)
 
