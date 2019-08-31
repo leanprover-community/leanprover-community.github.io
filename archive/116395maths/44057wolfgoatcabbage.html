@@ -1,0 +1,103 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/44057wolfgoatcabbage.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html">wolf goat cabbage</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174608128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608128">Johan Commelin (Aug 31 2019 at 08:13)</a>:</h4>
+<p>Can we formalise the wolf-goat-cabbage problem, and its solution? As nice as possible...</p>
+
+<a name="174608170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608170">Johan Commelin (Aug 31 2019 at 08:14)</a>:</h4>
+<p>Would the game theory PR help here?</p>
+
+<a name="174608186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608186">Johan Commelin (Aug 31 2019 at 08:15)</a>:</h4>
+<p>I would like to have a tactic proof that works as an actual game.</p>
+
+<a name="174608231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608231">Johan Commelin (Aug 31 2019 at 08:16)</a>:</h4>
+<p>So that my kids can write the tactic <code>carry_in_boat wolf</code>, and it will fail with the error message: "Can't do that, the goat would eat the cabbage".</p>
+
+<a name="174608235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608235">Johan Commelin (Aug 31 2019 at 08:17)</a>:</h4>
+<p>And the tactic state should reflect in a clean way where all the protagonists are.</p>
+
+<a name="174608840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608840">Mario Carneiro (Aug 31 2019 at 08:38)</a>:</h4>
+<p>You mean like this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">defs</span>
+
+<span class="kn">namespace</span> <span class="n">list</span>
+
+<span class="kn">instance</span> <span class="n">decidable_chain₂</span> <span class="o">{</span><span class="n">α</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_rel</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">chain</span> <span class="n">R</span> <span class="n">a</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">l</span> <span class="n">generalizing</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">is_true</span> <span class="n">chain</span><span class="bp">.</span><span class="n">nil</span><span class="o">,</span>
+  <span class="n">exactI</span> <span class="n">decidable_of_iff&#39;</span> <span class="bp">_</span> <span class="n">chain_cons</span>
+<span class="kn">end</span>
+
+<span class="kn">instance</span> <span class="n">decidable_chain&#39;₂</span> <span class="o">{</span><span class="n">α</span> <span class="n">R</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_rel</span> <span class="n">R</span><span class="o">]</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">decidable</span> <span class="o">(</span><span class="n">chain&#39;</span> <span class="n">R</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cases</span> <span class="n">l</span><span class="bp">;</span> <span class="n">dunfold</span> <span class="n">chain&#39;</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="kn">end</span> <span class="n">list</span>
+
+<span class="kn">namespace</span> <span class="n">WGC</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span>
+<span class="kn">structure</span> <span class="n">state</span> <span class="o">:=</span> <span class="o">(</span><span class="n">wolf</span> <span class="n">goat</span> <span class="n">cabbage</span> <span class="n">farmer</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">valid</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">state</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">¬</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">∧</span> <span class="n">s</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">≠</span> <span class="n">s</span><span class="bp">.</span><span class="n">wolf</span><span class="o">)</span> <span class="bp">∧</span>
+<span class="bp">¬</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">=</span> <span class="n">s</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">∧</span> <span class="n">s</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">≠</span> <span class="n">s</span><span class="bp">.</span><span class="n">goat</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_pred</span> <span class="n">valid</span> <span class="bp">|</span> <span class="n">s</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">valid</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">step</span> <span class="o">(</span><span class="n">s₁</span> <span class="n">s₂</span> <span class="o">:</span> <span class="n">state</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">s₁</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">≠</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">∧</span>
+<span class="o">((</span><span class="n">s₁</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">cabbage</span><span class="o">)</span> <span class="bp">∨</span>
+ <span class="o">(</span><span class="n">s₁</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">=</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">∧</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">farmer</span><span class="o">)</span> <span class="bp">∨</span>
+ <span class="o">(</span><span class="n">s₁</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">=</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">∧</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">cabbage</span><span class="o">)</span> <span class="bp">∨</span>
+ <span class="o">(</span><span class="n">s₁</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">=</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">∧</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">wolf</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">farmer</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">cabbage</span> <span class="bp">∧</span> <span class="n">s₁</span><span class="bp">.</span><span class="n">goat</span> <span class="bp">=</span> <span class="n">s₂</span><span class="bp">.</span><span class="n">goat</span><span class="o">))</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="n">step</span> <span class="bp">|</span> <span class="n">s₁</span> <span class="n">s₂</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">unfold</span> <span class="n">step</span><span class="bp">;</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">path</span> <span class="o">:</span> <span class="n">list</span> <span class="n">state</span> <span class="o">:=</span>
+<span class="o">[</span><span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">ff</span><span class="bp">⟩</span><span class="o">,</span>
+ <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span><span class="o">]</span>
+
+<span class="kn">theorem</span> <span class="n">path_start</span> <span class="o">:</span> <span class="n">path</span><span class="bp">.</span><span class="n">head&#39;</span> <span class="bp">=</span> <span class="n">some</span> <span class="bp">⟨</span><span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span> <span class="n">ff</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">path_end</span> <span class="o">:</span> <span class="n">path</span><span class="bp">.</span><span class="n">last&#39;</span> <span class="bp">=</span> <span class="n">some</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">path_step</span> <span class="o">:</span> <span class="n">list</span><span class="bp">.</span><span class="n">chain&#39;</span> <span class="n">step</span> <span class="n">path</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+<span class="kn">theorem</span> <span class="n">path_valid</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">s</span> <span class="err">∈</span> <span class="n">path</span><span class="o">,</span> <span class="n">valid</span> <span class="n">s</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+
+<span class="kn">end</span> <span class="n">WGC</span>
+</pre></div>
+
+<a name="174608891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608891">Mario Carneiro (Aug 31 2019 at 08:40)</a>:</h4>
+<p>Ah, I guess I'm not meeting your secondary objectives...</p>
+
+<a name="174608901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/174608901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#174608901">Mario Carneiro (Aug 31 2019 at 08:41)</a>:</h4>
+<p>(PS: I had to fix some broken definitions of the decidable instances for <code>chain</code> and <code>chain'</code> here, caused by improper use of <code>simp</code> in a decidability proof.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
