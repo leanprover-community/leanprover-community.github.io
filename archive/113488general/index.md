@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Helloworld from PIL book](96577HelloworldfromPILbook.html) (1 message, latest: Aug 30 2019 at 23:56)
+* [Helloworld from PIL book](96577HelloworldfromPILbook.html) (3 messages, latest: Aug 31 2019 at 00:36)
+
+* [talk on ATP and ITP](04431talkonATPandITP.html) (3 messages, latest: Aug 31 2019 at 00:25)
 
 * [Finding (deterministic) timeout](28140Findingdeterministictimeout.html) (34 messages, latest: Aug 30 2019 at 23:41)
 
