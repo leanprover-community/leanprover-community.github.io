@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [talk on ATP and ITP](04431talkonATPandITP.html) (7 messages, latest: Aug 31 2019 at 01:30)
+
+* [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (5 messages, latest: Aug 31 2019 at 01:25)
+
 * [Helloworld from PIL book](96577HelloworldfromPILbook.html) (3 messages, latest: Aug 31 2019 at 00:36)
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (3 messages, latest: Aug 31 2019 at 00:25)
-
 * [Finding (deterministic) timeout](28140Findingdeterministictimeout.html) (34 messages, latest: Aug 30 2019 at 23:41)
-
-* [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (4 messages, latest: Aug 30 2019 at 20:58)
 
 * [Computer science bibtex](97768Computersciencebibtex.html) (7 messages, latest: Aug 30 2019 at 17:11)
 
