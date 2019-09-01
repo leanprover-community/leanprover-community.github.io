@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Launch py dbg vscode w/ command](35067Launchpydbgvscodewcommand.html) (3 messages, latest: Sep 01 2019 at 04:58)
+* [talk on ATP and ITP](04431talkonATPandITP.html) (14 messages, latest: Sep 01 2019 at 16:33)
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (13 messages, latest: Aug 31 2019 at 16:45)
+* [Launch py dbg vscode w/ command](35067Launchpydbgvscodewcommand.html) (3 messages, latest: Sep 01 2019 at 04:58)
 
 * [Finding (deterministic) timeout](28140Findingdeterministictimeout.html) (37 messages, latest: Aug 31 2019 at 14:56)
 
