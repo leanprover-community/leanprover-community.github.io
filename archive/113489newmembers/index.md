@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (37 messages, latest: Aug 31 2019 at 23:34)
+* [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (41 messages, latest: Sep 01 2019 at 00:29)
 
 * [TPIL Chap 3 exercise help](78186TPILChap3exercisehelp.html) (2 messages, latest: Aug 30 2019 at 16:28)
 
