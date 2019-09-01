@@ -193,6 +193,51 @@ p q r s : Prop
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636497">Mario Carneiro (Aug 31 2019 at 22:59)</a>:</h4>
 <p>The linux install instructions end with a link to <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md">https://github.com/leanprover-community/mathlib/blob/master/docs/install/project.md</a> . The OSX instructions should probably also link there, and it looks like a good place to start once you have lean but not mathlib</p>
 
+<a name="174636618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636618">Alexandre Rademaker (Aug 31 2019 at 23:03)</a>:</h4>
+<p>Yep. I am those paranoid people! <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span> </p>
+<p>Mario, I got</p>
+<div class="codehilite"><pre><span></span><span class="mi">9</span><span class="o">:</span><span class="mi">4</span><span class="o">:</span> <span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">there</span> <span class="n">are</span> <span class="n">unsolved</span> <span class="n">goals</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">p</span> <span class="n">q</span> <span class="n">r</span> <span class="n">s</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="err">⊢</span> <span class="o">(</span><span class="bp">¬</span><span class="n">p</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">¬</span><span class="n">q</span> <span class="bp">∨</span> <span class="n">r</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">¬</span><span class="n">r</span> <span class="bp">∨</span> <span class="n">s</span><span class="o">))</span> <span class="bp">∨</span> <span class="n">p</span>
+</pre></div>
+
+
+<p>is that the expected output? If I understood it right, the approach is all done in the type level, rewriting the goal. It would be interesting to contrast it with the transformation been done in the term level, with the explicit manipulation of the terms. But for that, I guess I would need to define my own datatype for propositional logic formulas, right?</p>
+
+<a name="174636910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636910">Mario Carneiro (Aug 31 2019 at 23:13)</a>:</h4>
+<p>The approach is to create a proof by recursion on the <code>expr</code> type</p>
+
+<a name="174636913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636913">Mario Carneiro (Aug 31 2019 at 23:13)</a>:</h4>
+<p>and then hand it to lean</p>
+
+<a name="174636954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636954">Mario Carneiro (Aug 31 2019 at 23:14)</a>:</h4>
+<p>It has to be done in <code>meta</code> land because directly interfacing with the elaborator is "untrusted"</p>
+
+<a name="174636958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636958">Mario Carneiro (Aug 31 2019 at 23:14)</a>:</h4>
+<p>There isn't really an alternative if you want something that acts like a tactic</p>
+
+<a name="174636971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174636971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174636971">Mario Carneiro (Aug 31 2019 at 23:15)</a>:</h4>
+<p>But you can minimize the untrusted part to only "reification", that is, rewriting your propositional formula as the semantics of some inductive datatype</p>
+
+<a name="174637010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174637010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174637010">Mario Carneiro (Aug 31 2019 at 23:16)</a>:</h4>
+<p>and then you can do manipulations on the inductive datatype in pure code</p>
+
+<a name="174637268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174637268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174637268">Alexandre Rademaker (Aug 31 2019 at 23:26)</a>:</h4>
+<p>Hum, I will need to assimilate it ... thank you</p>
+
+<a name="174637487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/CNF%20transformation%20of%20Propositional%20expressions/near/174637487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51898CNFtransformationofPropositionalexpressions.html#174637487">Alexandre Rademaker (Aug 31 2019 at 23:34)</a>:</h4>
+<p>I believe we are talking about the same thing ... define a data type for formulas and provide code to manipulate them. But I didn’t understand the mention to reification and untrusted.</p>
+
 
 {% endraw %}
 
