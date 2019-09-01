@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (14 messages, latest: Sep 01 2019 at 16:33)
+* [talk on ATP and ITP](04431talkonATPandITP.html) (16 messages, latest: Sep 01 2019 at 20:55)
 
 * [Launch py dbg vscode w/ command](35067Launchpydbgvscodewcommand.html) (3 messages, latest: Sep 01 2019 at 04:58)
 
