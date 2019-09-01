@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (5 messages, latest: Sep 01 2019 at 13:48)
+
 * [Are freshmen ripe for formal proofs?](23649Arefreshmenripeforformalproofs.html) (8 messages, latest: Jul 28 2019 at 10:54)
 
 * [bachelor thesis subjects](55956bachelorthesissubjects.html) (3 messages, latest: Jul 20 2019 at 17:23)
@@ -22,8 +24,6 @@ permalink: archive/187764Leanforteaching/index.html
 * [Papers](32460Papers.html) (3 messages, latest: Mar 06 2019 at 09:57)
 
 * [Scott's course](09945Scottscourse.html) (37 messages, latest: Mar 05 2019 at 23:08)
-
-* [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (4 messages, latest: Mar 04 2019 at 21:40)
 
 * [hello](47413hello.html) (2 messages, latest: Mar 01 2019 at 00:16)
 
