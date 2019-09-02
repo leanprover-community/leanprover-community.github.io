@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [certificates for calculations](84224certificatesforcalculations.html) (14 messages, latest: Sep 02 2019 at 10:59)
+* [certificates for calculations](84224certificatesforcalculations.html) (32 messages, latest: Sep 02 2019 at 11:58)
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (17 messages, latest: Sep 01 2019 at 21:04)
+* [talk on ATP and ITP](04431talkonATPandITP.html) (18 messages, latest: Sep 02 2019 at 11:21)
 
 * [Launch py dbg vscode w/ command](35067Launchpydbgvscodewcommand.html) (3 messages, latest: Sep 01 2019 at 04:58)
 

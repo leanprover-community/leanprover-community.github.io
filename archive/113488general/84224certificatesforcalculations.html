@@ -137,6 +137,87 @@ lemma s2 : s 17 2 = 194 := rfl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708130">Mario Carneiro (Sep 02 2019 at 10:59)</a>:</h4>
 <p>right, that's what I mean</p>
 
+<a name="174708193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708193">Mario Carneiro (Sep 02 2019 at 11:00)</a>:</h4>
+<p>if you try to close the goal, the elaborator or something takes over and takes too long in doing so</p>
+
+<a name="174708194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708194">Scott Morrison (Sep 02 2019 at 11:00)</a>:</h4>
+<p>Hmm, okay, I'd got that far.</p>
+
+<a name="174708547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708547">Mario Carneiro (Sep 02 2019 at 11:06)</a>:</h4>
+<p>hm, I think it might be the kernel... this fails too</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">add_s_thm</span> <span class="o">(</span><span class="n">p</span> <span class="n">i</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+  <span class="k">let</span> <span class="n">ep</span> <span class="o">:=</span> <span class="n">reflect</span> <span class="n">p</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">ea</span><span class="o">,</span> <span class="n">pa</span><span class="o">)</span> <span class="err">←</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">derive</span> <span class="bp">`</span><span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="err">%%</span><span class="n">ep</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span>
+  <span class="n">a</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="bp">ℕ</span> <span class="n">ea</span><span class="o">,</span>
+  <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="n">ec</span><span class="o">,</span> <span class="n">pc</span><span class="o">)</span> <span class="err">←</span> <span class="n">prove_s</span> <span class="n">ep</span> <span class="n">ea</span> <span class="n">pa</span> <span class="n">a</span> <span class="n">i</span><span class="o">,</span>
+  <span class="n">add_decl</span> <span class="err">$</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">thm</span> <span class="bp">`</span><span class="n">foo</span> <span class="o">[]</span> <span class="bp">`</span><span class="o">(</span><span class="n">s</span> <span class="err">%%</span><span class="n">ep</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">i</span><span class="o">)</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">ec</span><span class="o">)</span> <span class="o">(</span><span class="n">return</span> <span class="n">pc</span><span class="o">)</span>
+
+<span class="n">run_cmd</span> <span class="n">add_s_thm</span> <span class="mi">17</span> <span class="mi">1</span>
+</pre></div>
+
+<a name="174708608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708608">Mario Carneiro (Sep 02 2019 at 11:07)</a>:</h4>
+<p>in which case there is a bug somewhere, because there shouldn't be any significant kernel normalization</p>
+
+<a name="174708613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708613">Scott Morrison (Sep 02 2019 at 11:07)</a>:</h4>
+<p>oh!</p>
+
+<a name="174708625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708625">Mario Carneiro (Sep 02 2019 at 11:07)</a>:</h4>
+<p>unfortunately the kernel is absolutely terrible at reporting wtf is happening</p>
+
+<a name="174708787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708787">Scott Morrison (Sep 02 2019 at 11:10)</a>:</h4>
+<p>:-(</p>
+
+<a name="174708896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708896">Mario Carneiro (Sep 02 2019 at 11:12)</a>:</h4>
+<p>I do not have words to express my frustration with lean being so slow at basic verified math. It would be great if I could just turn off definition unfolding, which isn't supposed to happen in this proof</p>
+
+<a name="174708966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708966">Mario Carneiro (Sep 02 2019 at 11:14)</a>:</h4>
+<p>It is very easy to get the impression that this is a result of the fact that we have to check a big proof. It's not. This is easy, lean is being stupid</p>
+
+<a name="174709027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174709027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174709027">Scott Morrison (Sep 02 2019 at 11:15)</a>:</h4>
+<p>I wonder if we can minimise an example here that shows clearly the problem.</p>
+
+<a name="174709037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174709037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174709037">Scott Morrison (Sep 02 2019 at 11:15)</a>:</h4>
+<p>It would be nice to pass some good examples up the chain...</p>
+
+<a name="174709863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174709863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174709863">Mario Carneiro (Sep 02 2019 at 11:31)</a>:</h4>
+<p>I'm not sure an example will help, in the sense that the problem is almost certainly fixable on the <code>norm_num</code> side. There is some bad application or something, and it's not on the happy path so lean totally falls to pieces</p>
+
+<a name="174709881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174709881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174709881">Mario Carneiro (Sep 02 2019 at 11:31)</a>:</h4>
+<p>the problem is that lean doesn't help very much to say what the problem is</p>
+
+<a name="174709984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174709984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174709984">Mario Carneiro (Sep 02 2019 at 11:33)</a>:</h4>
+<p>and since <code>norm_num</code> deals with a bunch of constants that have definitions, lean goes unfold-happy at the slightest misuse of anything and performance goes down to the level of "2 ^ 4 exhausts memory"</p>
+
+<a name="174710457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174710457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174710457">Johan Commelin (Sep 02 2019 at 11:42)</a>:</h4>
+<p>So if the "constants that have definitions" get replaced by atoms, does the problem go away?</p>
+
+<a name="174711242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174711242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174711242">Mario Carneiro (Sep 02 2019 at 11:57)</a>:</h4>
+<p>probably lean will give a hard error somewhere instead of crashing</p>
+
+<a name="174711251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174711251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174711251">Mario Carneiro (Sep 02 2019 at 11:57)</a>:</h4>
+<p>but that's a bit hard to implement easily</p>
+
+<a name="174711330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174711330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174711330">Mario Carneiro (Sep 02 2019 at 11:58)</a>:</h4>
+<p>because we're talking about things like <code>+</code> on nat; it's not acceptable to say that <code>norm_num</code> doesn't accept goals containing these symbols anymore</p>
+
 
 {% endraw %}
 
