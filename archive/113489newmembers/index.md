@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Thinking about lists backwards](39001Thinkingaboutlistsbackwards.html) (6 messages, latest: Sep 02 2019 at 06:55)
+* [Thinking about lists backwards](39001Thinkingaboutlistsbackwards.html) (7 messages, latest: Sep 02 2019 at 07:12)
 
 * [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (53 messages, latest: Sep 01 2019 at 06:59)
 
