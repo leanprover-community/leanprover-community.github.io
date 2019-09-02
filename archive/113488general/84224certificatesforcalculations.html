@@ -1,0 +1,143 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84224certificatesforcalculations.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html">certificates for calculations</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174706211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174706211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174706211">Scott Morrison (Sep 02 2019 at 10:22)</a>:</h4>
+<p>Could someone help me prove</p>
+<div class="codehilite"><pre><span></span>def s (p : ℕ) : ℕ → ℕ
+| 0 := 4
+| (i+1) := ((s i)^2 - 2) % (2^p - 1)
+
+lemma s15 : s 17 15 = 0 := sorry
+</pre></div>
+
+
+<p>I can't get anywhere close: here are my attempts so far.</p>
+<div class="codehilite"><pre><span></span>import tactic.norm_num
+
+def s (p : ℕ) : ℕ → ℕ
+| 0 := 4
+| (i+1) := ((s i)^2 - 2) % (2^p - 1)
+
+lemma s0 : s 17 0 = 4 := rfl
+lemma s1 : s 17 1 = 14 := rfl
+lemma s2 : s 17 2 = 194 := rfl
+
+-- deep recursion:
+-- lemma s3_a : s 17 3 = 37634 :=
+
+-- timeout:
+-- lemma s3_b : s 17 3 = 37634 := rfl
+-- by { dsimp [s] {single_pass:=tt}, rw s2, norm_num, }
+
+-- timeout:
+-- lemma s3_c : s 17 3 = 37634 :=
+-- begin
+--   dsimp [s] {single_pass:=tt}, transitivity,
+--   apply congr_fun, apply congr_arg, apply congr_fun,
+--   apply congr_arg, apply congr_fun, apply congr_arg,
+--   exact s2, norm_num,
+-- end
+</pre></div>
+
+<a name="174706290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174706290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174706290">Scott Morrison (Sep 02 2019 at 10:24)</a>:</h4>
+<p>(A student here may have a go at the Lucas-Lehmer primality test, but I'd like to know that we can run it, before she writes the proof that it works...)</p>
+
+<a name="174707543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174707543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174707543">Johan Commelin (Sep 02 2019 at 10:47)</a>:</h4>
+<p>I guess it helps a lot to use optimizations for these computations in base 2</p>
+
+<a name="174707866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174707866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174707866">Johan Commelin (Sep 02 2019 at 10:54)</a>:</h4>
+<p>Nevertheless, you would hope that at some point Lean can cope on its own with numbers of size <code>2^17</code>.</p>
+
+<a name="174707920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174707920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174707920">Johan Commelin (Sep 02 2019 at 10:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I guess the tricky bit is <code>% (2^p - 1)</code>.</p>
+
+<a name="174707929"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174707929" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174707929">Scott Morrison (Sep 02 2019 at 10:55)</a>:</h4>
+<p>There are certainly tricks, like using that $k = (k mod 2^n) + \floor{k/2^n} mod 2^{n-1}$, but yeah, I'd like to know how to do this without such tricks (which should only be deployed later).</p>
+
+<a name="174707993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174707993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174707993">Johan Commelin (Sep 02 2019 at 10:56)</a>:</h4>
+<p>But how is Lean going to calculate <code>foo % (2^17 - 1)</code>?</p>
+
+<a name="174707998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174707998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174707998">Johan Commelin (Sep 02 2019 at 10:56)</a>:</h4>
+<p>That's going to take an insane amount of time, right?</p>
+
+<a name="174708023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708023">Mario Carneiro (Sep 02 2019 at 10:57)</a>:</h4>
+<p>I have a tactic that gets the answer right, but I think the elaborator is getting in the way and causing the timeout</p>
+
+<a name="174708029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708029">Johan Commelin (Sep 02 2019 at 10:58)</a>:</h4>
+<p>I would think you <code>rw</code> immediately into <code>base 2</code> numbers, and then compute using the tricks.</p>
+
+<a name="174708069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708069">Mario Carneiro (Sep 02 2019 at 10:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="n">def</span> <span class="n">s</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">4</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="o">((</span><span class="n">s</span> <span class="n">i</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">%</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">p</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">s0</span> <span class="o">:</span> <span class="n">s</span> <span class="mi">17</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">lemma</span> <span class="n">s_suc</span> <span class="o">{</span><span class="n">p</span> <span class="n">a</span> <span class="n">i</span> <span class="n">b</span> <span class="n">c</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="mi">2</span><span class="err">^</span><span class="n">p</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">s</span> <span class="n">p</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h3</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">%</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span> <span class="n">p</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">s</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_two</span><span class="o">,</span> <span class="n">h3</span><span class="o">]</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">prove_s</span> <span class="o">(</span><span class="n">p</span> <span class="n">ea</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="n">expr</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">return</span> <span class="o">(</span><span class="mi">4</span><span class="o">,</span> <span class="bp">`</span><span class="o">(</span><span class="mi">4</span><span class="o">),</span> <span class="bp">`</span><span class="o">(</span><span class="n">s0</span><span class="o">))</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
+  <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">eb</span><span class="o">,</span> <span class="n">pb</span><span class="o">)</span> <span class="err">←</span> <span class="n">prove_s</span> <span class="n">i</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">c</span> <span class="o">:=</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">%</span> <span class="n">a</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">ec</span> <span class="o">:=</span> <span class="n">reflect</span> <span class="n">c</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">ec&#39;</span><span class="o">,</span> <span class="n">pc</span><span class="o">)</span> <span class="err">←</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">derive</span> <span class="bp">`</span><span class="o">((</span><span class="err">%%</span><span class="n">eb</span> <span class="bp">*</span> <span class="err">%%</span><span class="n">eb</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">%</span> <span class="err">%%</span><span class="n">ea</span><span class="o">),</span>
+  <span class="n">return</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">ec</span><span class="o">,</span> <span class="bp">`</span><span class="o">(</span><span class="bp">@</span><span class="n">s_suc</span> <span class="err">%%</span><span class="n">p</span> <span class="err">%%</span><span class="n">ea</span> <span class="err">%%</span><span class="o">(</span><span class="n">reflect</span> <span class="n">i</span><span class="o">)</span> <span class="err">%%</span><span class="n">eb</span> <span class="err">%%</span><span class="n">ec</span> <span class="err">%%</span><span class="n">ha</span> <span class="err">%%</span><span class="n">pb</span> <span class="err">%%</span><span class="n">pc</span><span class="o">))</span>
+
+<span class="kn">open</span> <span class="n">tactic</span>
+<span class="n">meta</span> <span class="n">def</span> <span class="n">norm_num_s</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="bp">`</span><span class="o">(</span><span class="n">s</span> <span class="err">%%</span><span class="n">p</span> <span class="err">%%</span><span class="n">ei</span> <span class="bp">=</span> <span class="err">%%</span><span class="n">e2</span><span class="o">)</span> <span class="err">←</span> <span class="n">target</span><span class="o">,</span>
+  <span class="n">i</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="bp">ℕ</span> <span class="n">ei</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">ea</span><span class="o">,</span> <span class="n">pa</span><span class="o">)</span> <span class="err">←</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">derive</span> <span class="bp">`</span><span class="o">(</span><span class="mi">2</span> <span class="err">^</span> <span class="o">(</span><span class="err">%%</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span>
+  <span class="n">a</span> <span class="err">←</span> <span class="n">eval_expr</span> <span class="bp">ℕ</span> <span class="n">ea</span><span class="o">,</span>
+  <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="n">ec</span><span class="o">,</span> <span class="n">pc</span><span class="o">)</span> <span class="err">←</span> <span class="n">prove_s</span> <span class="n">p</span> <span class="n">ea</span> <span class="n">pa</span> <span class="n">a</span> <span class="n">i</span><span class="o">,</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">refine</span> <span class="bp">``</span><span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="err">%%</span><span class="n">pc</span> <span class="bp">_</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">s15</span> <span class="o">:</span> <span class="n">s</span> <span class="mi">17</span> <span class="mi">15</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num_s</span>
+</pre></div>
+
+<a name="174708117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708117">Mario Carneiro (Sep 02 2019 at 10:59)</a>:</h4>
+<p>Honestly, <code>norm_num</code> is designed to be extensible and <code>prove_s</code> should properly be an extension (it can be one of the alternatives in the <code>norm_num.derive</code>), but right now you have to modify the <code>tactic.norm_num</code> file to do that</p>
+
+<a name="174708125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708125">Scott Morrison (Sep 02 2019 at 10:59)</a>:</h4>
+<p>Hmm, replacing the last line with <code>lemma s15 : s 17 15 = 0 := by { norm_num_s, refl }</code> still times out.</p>
+
+<a name="174708130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174708130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174708130">Mario Carneiro (Sep 02 2019 at 10:59)</a>:</h4>
+<p>right, that's what I mean</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
