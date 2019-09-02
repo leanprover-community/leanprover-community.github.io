@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (1 message, latest: Sep 02 2019 at 01:18)
+* [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (2 messages, latest: Sep 02 2019 at 04:04)
 
 * [Manifolds](12382Manifolds.html) (64 messages, latest: Sep 01 2019 at 19:58)
 
