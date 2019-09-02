@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (1 message, latest: Sep 02 2019 at 01:18)
+
 * [Manifolds](12382Manifolds.html) (64 messages, latest: Sep 01 2019 at 19:58)
 
 * [#1356 derive finite_products](551401356derivefiniteproducts.html) (48 messages, latest: Aug 31 2019 at 00:23)
