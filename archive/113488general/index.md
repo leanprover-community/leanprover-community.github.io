@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (187 messages, latest: Sep 02 2019 at 16:34)
+* [sanity check](33847sanitycheck.html) (13 messages, latest: Sep 02 2019 at 17:38)
+
+* [Lean in the wild](43625Leaninthewild.html) (195 messages, latest: Sep 02 2019 at 17:33)
 
 * [doc_blame!](32536docblame.html) (3 messages, latest: Sep 02 2019 at 14:48)
 
@@ -32,8 +34,6 @@ permalink: archive/113488general/index.html
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (58 messages, latest: Aug 30 2019 at 10:48)
 
 * [to_additive](21549toadditive.html) (64 messages, latest: Aug 29 2019 at 19:53)
-
-* [sanity check](33847sanitycheck.html) (12 messages, latest: Aug 29 2019 at 12:10)
 
 * [algebraic closure](74840algebraicclosure.html) (198 messages, latest: Aug 29 2019 at 10:46)
 
