@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (187 messages, latest: Sep 02 2019 at 16:34)
+
 * [doc_blame!](32536docblame.html) (3 messages, latest: Sep 02 2019 at 14:48)
 
 * [certificates for calculations](84224certificatesforcalculations.html) (35 messages, latest: Sep 02 2019 at 13:24)
@@ -164,8 +166,6 @@ permalink: archive/113488general/index.html
 * [norm_num on fields](29952normnumonfields.html) (1 message, latest: Aug 06 2019 at 09:22)
 
 * [converting a `finset` to a `Type`](40496convertingafinsettoaType.html) (13 messages, latest: Aug 06 2019 at 08:04)
-
-* [Lean in the wild](43625Leaninthewild.html) (185 messages, latest: Aug 05 2019 at 20:43)
 
 * [contrapose](82079contrapose.html) (16 messages, latest: Aug 05 2019 at 19:44)
 
