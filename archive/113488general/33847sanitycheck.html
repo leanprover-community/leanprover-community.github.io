@@ -144,6 +144,18 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736863">Floris van Doorn (Sep 02 2019 at 18:59)</a>:</h4>
 <p>yes</p>
 
+<a name="174739957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174739957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174739957">Floris van Doorn (Sep 02 2019 at 20:13)</a>:</h4>
+<p>I managed to speed up <code>#sanity_check</code> by about 2 orders of magnitude. (it now takes 100-200ms in <code>adic_space</code>)</p>
+<p>One of the slowdowns was surprising me: if you run <code>if p ∧ q then ... else ...</code> and <code>p</code> is false, then <code>q</code> will also be checked. You have to use <code>&amp;&amp;</code> instead:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+<span class="kn">set_option</span> <span class="n">profiler</span> <span class="n">true</span>
+<span class="c1">-- very fast</span>
+<span class="n">run_cmd</span> <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">mfold</span> <span class="o">[]</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">d</span> <span class="n">ds</span><span class="o">,</span> <span class="n">return</span> <span class="err">$</span> <span class="k">if</span> <span class="n">ff</span> <span class="bp">&amp;&amp;</span> <span class="n">d</span><span class="bp">.</span><span class="n">is_auto_generated</span> <span class="n">e</span> <span class="k">then</span> <span class="n">d</span><span class="bp">::</span><span class="n">ds</span> <span class="k">else</span> <span class="n">ds</span>
+<span class="c1">-- very slow (assuming you are importing enough files)</span>
+<span class="n">run_cmd</span> <span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">mfold</span> <span class="o">[]</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">d</span> <span class="n">ds</span><span class="o">,</span> <span class="n">return</span> <span class="err">$</span> <span class="k">if</span> <span class="n">ff</span> <span class="bp">∧</span> <span class="n">d</span><span class="bp">.</span><span class="n">is_auto_generated</span> <span class="n">e</span> <span class="k">then</span> <span class="n">d</span><span class="bp">::</span><span class="n">ds</span> <span class="k">else</span> <span class="n">ds</span>
+</pre></div>
+
 
 {% endraw %}
 
