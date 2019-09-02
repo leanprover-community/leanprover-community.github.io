@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sanity check](33847sanitycheck.html) (13 messages, latest: Sep 02 2019 at 17:38)
+* [sanity check](33847sanitycheck.html) (24 messages, latest: Sep 02 2019 at 18:59)
+
+* [doc_blame!](32536docblame.html) (4 messages, latest: Sep 02 2019 at 18:10)
 
 * [Lean in the wild](43625Leaninthewild.html) (195 messages, latest: Sep 02 2019 at 17:33)
-
-* [doc_blame!](32536docblame.html) (3 messages, latest: Sep 02 2019 at 14:48)
 
 * [certificates for calculations](84224certificatesforcalculations.html) (35 messages, latest: Sep 02 2019 at 13:24)
 

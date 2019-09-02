@@ -86,6 +86,64 @@ permalink: archive/113488general/33847sanitycheck.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174733345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174733345">Johan Commelin (Sep 02 2019 at 17:38)</a>:</h4>
 <p>I'm getting deterministic timeouts if I run <code>#sanity_check</code> at the bottom of <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/adic_space.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/adic_space.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/adic_space.lean</a></p>
 
+<a name="174735054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174735054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174735054">Floris van Doorn (Sep 02 2019 at 18:17)</a>:</h4>
+<p>That's not good. I'll take a look.<br>
+Which of the following get a timeout?</p>
+<div class="codehilite"><pre><span></span>run_cmd print_decls_current_file prettify_unused_arguments &gt;&gt;= trace
+run_cmd print_decls_current_file incorrect_def_lemma &gt;&gt;= trace
+run_cmd print_decls_current_file dup_namespace &gt;&gt;= trace
+</pre></div>
+
+<a name="174735944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174735944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174735944">Johan Commelin (Sep 02 2019 at 18:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> </p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  print_decls_current_file prettify_unused_arguments &gt;&gt;= trace
+term
+  trace
+has type
+  string → thunk ?m_1 → ?m_1 : Type ?
+but is expected to have type
+  format → tactic ?m_1 : Type
+</pre></div>
+
+<a name="174736027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736027">Floris van Doorn (Sep 02 2019 at 18:41)</a>:</h4>
+<p>oh yes, it should be <code>tactic.trace</code>.</p>
+
+<a name="174736030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736030">Johan Commelin (Sep 02 2019 at 18:41)</a>:</h4>
+<p>1sec</p>
+
+<a name="174736079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736079">Floris van Doorn (Sep 02 2019 at 18:42)</a>:</h4>
+<p>I'm also building the project myself rn.</p>
+
+<a name="174736083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736083">Johan Commelin (Sep 02 2019 at 18:42)</a>:</h4>
+<p>None of them time out</p>
+
+<a name="174736105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736105">Floris van Doorn (Sep 02 2019 at 18:43)</a>:</h4>
+<p>Ok, then for the moment you can use those, they give the same information. I'll make <code>#sanity_check</code> more efficient (currently I'm running through the whole environment 3 times)</p>
+
+<a name="174736192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736192">Johan Commelin (Sep 02 2019 at 18:45)</a>:</h4>
+<p>They don't print anything at all... which might mean our code is sane...</p>
+
+<a name="174736377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736377">Floris van Doorn (Sep 02 2019 at 18:49)</a>:</h4>
+<p>Yes, I just ran them myself, and that file in sane :)</p>
+
+<a name="174736473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736473">Johan Commelin (Sep 02 2019 at 18:50)</a>:</h4>
+<p>Can you reproduce the timeout?</p>
+
+<a name="174736863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174736863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174736863">Floris van Doorn (Sep 02 2019 at 18:59)</a>:</h4>
+<p>yes</p>
+
 
 {% endraw %}
 
