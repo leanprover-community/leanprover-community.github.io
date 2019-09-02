@@ -218,6 +218,33 @@ lemma s2 : s 17 2 = 194 := rfl
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174711330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174711330">Mario Carneiro (Sep 02 2019 at 11:58)</a>:</h4>
 <p>because we're talking about things like <code>+</code> on nat; it's not acceptable to say that <code>norm_num</code> doesn't accept goals containing these symbols anymore</p>
 
+<a name="174712040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174712040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174712040">Mario Carneiro (Sep 02 2019 at 12:09)</a>:</h4>
+<p>hey, this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">:</span> <span class="mi">2</span> <span class="err">^</span> <span class="mi">17</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">131071</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+
+<span class="kn">lemma</span> <span class="n">s_suc</span> <span class="o">{</span><span class="n">p</span> <span class="n">a</span> <span class="n">i</span> <span class="n">b</span> <span class="n">c</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h1</span> <span class="o">:</span> <span class="mi">2</span><span class="err">^</span><span class="n">p</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">s</span> <span class="n">p</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h3</span> <span class="o">:</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">-</span> <span class="mi">2</span><span class="o">)</span> <span class="err">%</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span> <span class="n">p</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">s</span><span class="o">,</span> <span class="n">h1</span><span class="o">,</span> <span class="n">h2</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_two</span><span class="o">,</span> <span class="n">h3</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">s</span> <span class="mi">17</span> <span class="mi">15</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">s0</span><span class="o">,</span>
+  <span class="n">iterate</span> <span class="mi">15</span> <span class="o">{</span><span class="k">have</span> <span class="o">:=</span> <span class="n">s_suc</span> <span class="n">foo</span> <span class="n">this</span> <span class="o">(</span><span class="k">by</span> <span class="n">norm_num</span><span class="bp">;</span> <span class="n">refl</span><span class="o">)},</span>
+  <span class="n">exact</span> <span class="n">this</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I fixed a bug in <code>norm_num</code> which may be related, but it should only affect the proof of <code>foo</code>, not the main proof</p>
+
+<a name="174714283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/certificates%20for%20calculations/near/174714283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84224certificatesforcalculations.html#174714283">Scott Morrison (Sep 02 2019 at 12:44)</a>:</h4>
+<p>I better sleep, but I'll have a look in the morning.</p>
+
 
 {% endraw %}
 
