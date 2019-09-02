@@ -1,0 +1,62 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/39001Thinkingaboutlistsbackwards.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html">Thinking about lists backwards</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174694384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Thinking%20about%20lists%20backwards/near/174694384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html#174694384">Robert Spencer (Sep 02 2019 at 06:31)</a>:</h4>
+<p>I have a simple question, and then a follow up philosophy question.</p>
+<p>If I have a list, and a statement that it is not empty, is there an existing mechanism for extracting all but the last element (the equivalent of python's <code>mylist[:-1]</code>.  In particular, one that is "supported" in terms of lemmas about its length etc.</p>
+<p>My philosophical question is how to deal with the back of lists.  Since lists are defined inductively "from the front", it is easy to talk about their heads, tails and such forth.  It seems less simple to talk about their last element and the preceding sublist.  How should one treat the back of a list, or operations done to the back?  Should one reverse the list and then talk about the reversed head and then reverse again if necessary?  Is it possible to _neatly_ do the opposite to</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>i.e. something along the lines of</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">b</span> <span class="bp">++</span> <span class="o">[</span><span class="n">a</span><span class="o">])</span> <span class="o">:=</span> <span class="n">a</span>
+</pre></div>
+
+<a name="174694727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Thinking%20about%20lists%20backwards/near/174694727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html#174694727">Mario Carneiro (Sep 02 2019 at 06:38)</a>:</h4>
+<p>There are a few variants on <code>last</code> available, but I guess <code>init</code> was not defined, or I missed it in the initial pass (although <code>inits</code> is there)</p>
+
+<a name="174694732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Thinking%20about%20lists%20backwards/near/174694732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html#174694732">Mario Carneiro (Sep 02 2019 at 06:38)</a>:</h4>
+<p>It is of course easy to define</p>
+
+<a name="174694891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Thinking%20about%20lists%20backwards/near/174694891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html#174694891">Mario Carneiro (Sep 02 2019 at 06:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">init</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">list</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">[</span><span class="n">a</span><span class="o">]</span>    <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">::</span> <span class="n">init</span> <span class="n">l</span>
+</pre></div>
+
+
+<p>But to answer your second question, lean will certainly not let things be as nice if you want to manipulate lists from the right end. Besides the fact that both <code>init</code> and <code>last</code> are O(n) while <code>head</code> and <code>tail</code> are O(1), you can't use them in pattern matching. If you want to use pattern matching to decompose a list from the right, I suggest reversing it and then pattern matching.</p>
+
+<a name="174694979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Thinking%20about%20lists%20backwards/near/174694979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html#174694979">Robert Spencer (Sep 02 2019 at 06:45)</a>:</h4>
+<p>Right.  That is sort of what I thought.  Thanks.</p>
+
+<a name="174695389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Thinking%20about%20lists%20backwards/near/174695389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/39001Thinkingaboutlistsbackwards.html#174695389">Robert Spencer (Sep 02 2019 at 06:55)</a>:</h4>
+<p>Ah, no I've found <code>init</code> in the library.  It doesn't have much more than a definition that I can see though.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
