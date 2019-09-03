@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [wolf goat cabbage](44057wolfgoatcabbage.html) (39 messages, latest: Sep 01 2019 at 02:26)
+* [gluing presheaves](99453gluingpresheaves.html) (25 messages, latest: Sep 03 2019 at 11:36)
 
-* [gluing presheaves](99453gluingpresheaves.html) (22 messages, latest: Aug 29 2019 at 00:00)
+* [wolf goat cabbage](44057wolfgoatcabbage.html) (39 messages, latest: Sep 01 2019 at 02:26)
 
 * [Category of categories?](80729Categoryofcategories.html) (13 messages, latest: Aug 28 2019 at 23:41)
 
