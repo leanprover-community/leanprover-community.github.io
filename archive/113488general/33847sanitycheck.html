@@ -196,6 +196,105 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174750270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174750270">Floris van Doorn (Sep 03 2019 at 00:47)</a>:</h4>
 <p>Yeah, in the proof of <code>and_decidable</code> it probably evaluates the <code>then</code> clause before it evaluates the <code>if-then-else</code>. We should indeed rewrite it using a thunk.</p>
 
+<a name="174764440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764440">Chris Hughes (Sep 03 2019 at 07:21)</a>:</h4>
+<p>Why is this super fast in that case?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">ack</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">nat</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="n">y</span>     <span class="o">:=</span> <span class="n">y</span><span class="bp">+</span><span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">ack</span> <span class="n">x</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">y</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">ack</span> <span class="n">x</span> <span class="o">(</span><span class="n">ack</span> <span class="o">(</span><span class="n">x</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">y</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">X</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">false</span> <span class="k">then</span> <span class="n">ack</span> <span class="mi">100</span> <span class="mi">100</span> <span class="k">else</span> <span class="mi">0</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">X</span>
+</pre></div>
+
+<a name="174764694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764694">Mario Carneiro (Sep 03 2019 at 07:26)</a>:</h4>
+<p><code>if</code> uses thunks</p>
+
+<a name="174764711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764711">Chris Hughes (Sep 03 2019 at 07:27)</a>:</h4>
+<p>So why is the <code>and.decidable</code> instance slow?</p>
+
+<a name="174764727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764727">Mario Carneiro (Sep 03 2019 at 07:27)</a>:</h4>
+<p>it uses thunks on the then and else branches, not on the condition (which must be evaluated first)</p>
+
+<a name="174764798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764798">Chris Hughes (Sep 03 2019 at 07:28)</a>:</h4>
+<p>So that means it shouldn't be slow right?</p>
+
+<a name="174764812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764812">Mario Carneiro (Sep 03 2019 at 07:29)</a>:</h4>
+<p>The difference is that <code>band</code> is <code>@[inline]</code> and <code>and.decidable</code> isn't</p>
+
+<a name="174764830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174764830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174764830">Mario Carneiro (Sep 03 2019 at 07:29)</a>:</h4>
+<p>I recommend looking at the generated bytecode</p>
+
+<a name="174765151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174765151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174765151">Mario Carneiro (Sep 03 2019 at 07:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foo</span> <span class="o">:=</span> <span class="n">ff</span>
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">compiler</span><span class="bp">.</span><span class="n">optimize_bytecode</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">eval</span> <span class="k">if</span> <span class="n">false</span> <span class="bp">&amp;&amp;</span> <span class="n">foo</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="c1">-- [compiler.optimize_bytecode]  _main 0</span>
+<span class="c1">-- 0: scnstr #1</span>
+<span class="c1">-- 1: ginvoke decidable.false</span>
+<span class="c1">-- 2: scnstr #0</span>
+<span class="c1">-- 3: ginvoke decidable.to_bool</span>
+<span class="c1">-- 4: cases2 7</span>
+<span class="c1">-- 5: scnstr #0</span>
+<span class="c1">-- 6: goto 12</span>
+<span class="c1">-- 7: ginvoke foo</span>
+<span class="c1">-- 8: cases2 11</span>
+<span class="c1">-- 9: scnstr #0</span>
+<span class="c1">-- 10: goto 12</span>
+<span class="c1">-- 11: scnstr #1</span>
+<span class="c1">-- 12: ginvoke bool.decidable_eq._main</span>
+<span class="c1">-- 13: cases2 16</span>
+<span class="c1">-- 14: scnstr #0</span>
+<span class="c1">-- 15: goto 17</span>
+<span class="c1">-- 16: scnstr #1</span>
+<span class="c1">-- 17: cfun nat.repr</span>
+<span class="c1">-- 18: ret</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="k">if</span> <span class="n">false</span> <span class="bp">∧</span> <span class="n">foo</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span>
+<span class="c1">-- [compiler.optimize_bytecode]  _main 0</span>
+<span class="c1">-- 0: scnstr #1</span>
+<span class="c1">-- 1: ginvoke foo</span>
+<span class="c1">-- 2: ginvoke bool.decidable_eq._main</span>
+<span class="c1">-- 3: ginvoke decidable.false</span>
+<span class="c1">-- 4: scnstr #0</span>
+<span class="c1">-- 5: scnstr #0</span>
+<span class="c1">-- 6: ginvoke and.decidable</span>
+<span class="c1">-- 7: cases2 10</span>
+<span class="c1">-- 8: scnstr #0</span>
+<span class="c1">-- 9: goto 11</span>
+<span class="c1">-- 10: scnstr #1</span>
+<span class="c1">-- 11: cfun nat.repr</span>
+<span class="c1">-- 12: ret</span>
+</pre></div>
+
+
+<p>Notice in the second one that there is an explicit call to <code>and.decidable</code> at line 6, which needs <code>foo</code> to be called first (line 1). In the second one there is no call to <code>band</code> at all; instead it's all been inlined to an if-then (the <code>cases2</code> at line 4) and the call to <code>foo</code> only happens in the second branch (line 7)</p>
+
+<a name="174765218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174765218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174765218">Mario Carneiro (Sep 03 2019 at 07:36)</a>:</h4>
+<p>If you use <code>ff</code> instead of <code>false</code> in these examples, the call to <code>foo</code> disappears entirely, because lean optimizes <code>ff &amp;&amp; foo</code> to <code>ff</code> directly after unfolding the definition of <code>&amp;&amp;</code></p>
+
+<a name="174765297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174765297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174765297">Mario Carneiro (Sep 03 2019 at 07:38)</a>:</h4>
+<p>If you use <code>attribute [inline] decidable.false and.decidable</code> then you get the expected code</p>
+
+<a name="174765304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174765304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174765304">Mario Carneiro (Sep 03 2019 at 07:38)</a>:</h4>
+<p>arguably that should have been set</p>
+
+<a name="174766438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174766438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174766438">Scott Morrison (Sep 03 2019 at 07:59)</a>:</h4>
+<p>We can provide a higher priority instance that inclines, can't we?</p>
+
 
 {% endraw %}
 
