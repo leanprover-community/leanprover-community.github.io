@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sanity check](33847sanitycheck.html) (28 messages, latest: Sep 02 2019 at 22:42)
+* [certificates for calculations](84224certificatesforcalculations.html) (36 messages, latest: Sep 02 2019 at 23:36)
+
+* [sanity check](33847sanitycheck.html) (34 messages, latest: Sep 02 2019 at 23:25)
 
 * [doc_blame!](32536docblame.html) (4 messages, latest: Sep 02 2019 at 18:10)
 
 * [Lean in the wild](43625Leaninthewild.html) (195 messages, latest: Sep 02 2019 at 17:33)
-
-* [certificates for calculations](84224certificatesforcalculations.html) (35 messages, latest: Sep 02 2019 at 13:24)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (18 messages, latest: Sep 02 2019 at 11:21)
 

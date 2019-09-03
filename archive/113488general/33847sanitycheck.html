@@ -168,6 +168,30 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174746101" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174746101">Scott Morrison (Sep 02 2019 at 22:42)</a>:</h4>
 <p>Yeah, I couldn't understand either.</p>
 
+<a name="174747159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174747159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174747159">Reid Barton (Sep 02 2019 at 23:11)</a>:</h4>
+<p>Are we talking about the kernel or the VM here?</p>
+
+<a name="174747276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174747276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174747276">Scott Morrison (Sep 02 2019 at 23:14)</a>:</h4>
+<p>Looks like the VM, I guess, since it's inside a <code>run_cmd</code>.</p>
+
+<a name="174747287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174747287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174747287">Scott Morrison (Sep 02 2019 at 23:15)</a>:</h4>
+<p>I admit I have no idea what the VM does when it sees <code>if</code> or <code>∧</code>.</p>
+
+<a name="174747570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174747570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174747570">Mario Carneiro (Sep 02 2019 at 23:24)</a>:</h4>
+<p>It's actually surprising that either one is short circuiting. It's probably because of inlining</p>
+
+<a name="174747613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174747613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174747613">Mario Carneiro (Sep 02 2019 at 23:24)</a>:</h4>
+<p>The standard semantics of lean would require that both sides of the and be evaluated before the function is called (i.e. eager evaluation)</p>
+
+<a name="174747626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174747626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174747626">Mario Carneiro (Sep 02 2019 at 23:25)</a>:</h4>
+<p>One way to force delayed evaluation is to use a thunk</p>
+
 
 {% endraw %}
 
