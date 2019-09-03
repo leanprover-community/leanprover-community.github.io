@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [complete lattice of setoids](91280completelatticeofsetoids.html) (1 message, latest: Sep 03 2019 at 22:42)
+
 * [noob question(s)](52075noobquestions.html) (1330 messages, latest: Sep 03 2019 at 14:53)
 
 * [Thinking about lists backwards](39001Thinkingaboutlistsbackwards.html) (7 messages, latest: Sep 02 2019 at 07:12)
