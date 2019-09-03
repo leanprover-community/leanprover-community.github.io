@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sanity check](33847sanitycheck.html) (47 messages, latest: Sep 03 2019 at 07:59)
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (18 messages, latest: Sep 03 2019 at 08:10)
 
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (15 messages, latest: Sep 03 2019 at 07:58)
+* [sanity check](33847sanitycheck.html) (47 messages, latest: Sep 03 2019 at 07:59)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (18 messages, latest: Sep 03 2019 at 00:27)
 
