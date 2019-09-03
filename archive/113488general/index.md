@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (77 messages, latest: Sep 03 2019 at 12:55)
+* [Strong Induction](70987StrongInduction.html) (20 messages, latest: Sep 03 2019 at 13:37)
 
-* [Strong Induction](70987StrongInduction.html) (7 messages, latest: Sep 03 2019 at 12:48)
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (77 messages, latest: Sep 03 2019 at 12:55)
 
 * [subset of a subtype](71577subsetofasubtype.html) (5 messages, latest: Sep 03 2019 at 10:50)
 
