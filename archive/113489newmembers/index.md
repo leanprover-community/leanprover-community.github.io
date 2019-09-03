@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1330 messages, latest: Sep 03 2019 at 14:53)
+
 * [Thinking about lists backwards](39001Thinkingaboutlistsbackwards.html) (7 messages, latest: Sep 02 2019 at 07:12)
 
 * [CNF transformation of Propositional expressions](51898CNFtransformationofPropositionalexpressions.html) (53 messages, latest: Sep 01 2019 at 06:59)
@@ -52,8 +54,6 @@ permalink: archive/113489newmembers/index.html
 * [easy questions](27038easyquestions.html) (111 messages, latest: Aug 16 2019 at 07:17)
 
 * [How to write this in proof in tactic style](72722Howtowritethisinproofintacticstyle.html) (8 messages, latest: Aug 15 2019 at 20:39)
-
-* [noob question(s)](52075noobquestions.html) (1325 messages, latest: Aug 14 2019 at 21:53)
 
 * [Calclulational proofs](18082Calclulationalproofs.html) (12 messages, latest: Aug 13 2019 at 14:23)
 
