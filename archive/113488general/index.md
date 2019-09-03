@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (11 messages, latest: Sep 03 2019 at 05:11)
+
 * [sanity check](33847sanitycheck.html) (35 messages, latest: Sep 03 2019 at 00:47)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (18 messages, latest: Sep 03 2019 at 00:27)
@@ -130,8 +132,6 @@ permalink: archive/113488general/index.html
 * [dot notation and inheritance](11825dotnotationandinheritance.html) (22 messages, latest: Aug 17 2019 at 08:34)
 
 * [protected and add_decl](26846protectedandadddecl.html) (14 messages, latest: Aug 16 2019 at 14:25)
-
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (8 messages, latest: Aug 15 2019 at 08:38)
 
 * [timeout when working with ideal over polynomial ring](78086timeoutwhenworkingwithidealoverpolynomialring.html) (1 message, latest: Aug 14 2019 at 14:17)
 
