@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [sanity check](33847sanitycheck.html) (48 messages, latest: Sep 03 2019 at 16:24)
+
 * [Strong Induction](70987StrongInduction.html) (20 messages, latest: Sep 03 2019 at 13:37)
 
 * [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (77 messages, latest: Sep 03 2019 at 12:55)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [subset of a subtype](71577subsetofasubtype.html) (5 messages, latest: Sep 03 2019 at 10:50)
 
 * [incorrect def/lemma](54132incorrectdeflemma.html) (19 messages, latest: Sep 03 2019 at 10:10)
-
-* [sanity check](33847sanitycheck.html) (47 messages, latest: Sep 03 2019 at 07:59)
 
 * [certificates for calculations](84224certificatesforcalculations.html) (39 messages, latest: Sep 03 2019 at 00:04)
 
