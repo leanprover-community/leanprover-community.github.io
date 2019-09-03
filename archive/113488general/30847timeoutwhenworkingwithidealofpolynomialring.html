@@ -101,6 +101,255 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174776050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174776050">Casper Putz (Sep 03 2019 at 10:31)</a>:</h4>
 <p>I fixed the errors in <code>free_comm_ring.lean</code></p>
 
+<a name="174782949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174782949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174782949">Johan Commelin (Sep 03 2019 at 12:29)</a>:</h4>
+<p>The biggest source of errors in <code>power_series.lean</code> seems to come from the fact that <code>single unit.star n</code> is no longer defeq to <code>n</code>, for <code>n : ℕ</code>...</p>
+
+<a name="174783023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783023">Johan Commelin (Sep 03 2019 at 12:30)</a>:</h4>
+<p>I'm not sure how that happened. Because this is a statement about <code>unit</code> and <code>nat</code>, which shouldn't be affected by polynomials going classical.</p>
+
+<a name="174783297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783297">Mario Carneiro (Sep 03 2019 at 12:34)</a>:</h4>
+<p>basically you can't evaluate <code>single</code> anymore by defeq</p>
+
+<a name="174783309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783309">Johan Commelin (Sep 03 2019 at 12:34)</a>:</h4>
+<p>But why not?</p>
+
+<a name="174783312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783312">Mario Carneiro (Sep 03 2019 at 12:34)</a>:</h4>
+<p>there is a proof of <code>n = n</code> by classical in there</p>
+
+<a name="174783325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783325">Johan Commelin (Sep 03 2019 at 12:35)</a>:</h4>
+<p>This is stupid</p>
+
+<a name="174783348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783348">Mario Carneiro (Sep 03 2019 at 12:35)</a>:</h4>
+<p>it's something like <code>single unit.star n := if n = n then 1 else 0</code></p>
+
+<a name="174783370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783370">Mario Carneiro (Sep 03 2019 at 12:35)</a>:</h4>
+<p>where the <code>if</code> is no longer decidable because classical</p>
+
+<a name="174783383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783383">Mario Carneiro (Sep 03 2019 at 12:35)</a>:</h4>
+<p>solution: stop using defeq</p>
+
+<a name="174783398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783398">Mario Carneiro (Sep 03 2019 at 12:36)</a>:</h4>
+<p>use <code>simp</code></p>
+
+<a name="174783438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783438">Johan Commelin (Sep 03 2019 at 12:36)</a>:</h4>
+<p>You might as well say, "stop using definitions"</p>
+
+<a name="174783443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783443">Mario Carneiro (Sep 03 2019 at 12:36)</a>:</h4>
+<p>not at all</p>
+
+<a name="174783453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783453">Johan Commelin (Sep 03 2019 at 12:36)</a>:</h4>
+<p>And <code>simp</code> is slow... we learnt that.</p>
+
+<a name="174783454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783454">Mario Carneiro (Sep 03 2019 at 12:36)</a>:</h4>
+<p>use definitional equations</p>
+
+<a name="174783474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783474">Mario Carneiro (Sep 03 2019 at 12:36)</a>:</h4>
+<p>use <code>rw [single]</code></p>
+
+<a name="174783490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783490">Johan Commelin (Sep 03 2019 at 12:37)</a>:</h4>
+<p>Yep, but this <code>single</code> is hidden behind 4 definitions...</p>
+
+<a name="174783503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783503">Johan Commelin (Sep 03 2019 at 12:37)</a>:</h4>
+<p>And <code>rfl</code> used to blast through them</p>
+
+<a name="174783511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783511">Mario Carneiro (Sep 03 2019 at 12:37)</a>:</h4>
+<p>that's not a good thing</p>
+
+<a name="174783523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783523">Johan Commelin (Sep 03 2019 at 12:37)</a>:</h4>
+<p>And now I need to <code>delta</code> 5 things, and than I can <code>rw finsupp.single_zero</code> or something silly like that.</p>
+
+<a name="174783525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783525">Mario Carneiro (Sep 03 2019 at 12:37)</a>:</h4>
+<p>Why are you unfolding 4 definitions?</p>
+
+<a name="174783543"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783543" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783543">Mario Carneiro (Sep 03 2019 at 12:38)</a>:</h4>
+<p>you should only ever need to unfold one at most at a time</p>
+
+<a name="174783600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783600">Mario Carneiro (Sep 03 2019 at 12:38)</a>:</h4>
+<p>maybe two, but that's bad practice</p>
+
+<a name="174783602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783602">Mario Carneiro (Sep 03 2019 at 12:38)</a>:</h4>
+<p>4 is abuse</p>
+
+<a name="174783629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783629">Johan Commelin (Sep 03 2019 at 12:38)</a>:</h4>
+<p>Because <code>power_series.C</code> is defined as <code>mv_power_series.C</code> which is defined as <code>mv_power_series.monomial 0</code>, and <code>power_series.monomial</code> is defined as <code>mv_power_series.monomial</code>, and I these definitions to commute by <code>rfl</code>.</p>
+
+<a name="174783650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783650">Mario Carneiro (Sep 03 2019 at 12:39)</a>:</h4>
+<p>What are you proving?</p>
+
+<a name="174783679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783679">Johan Commelin (Sep 03 2019 at 12:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coeff_C_zero</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">coeff</span> <span class="mi">0</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="174783741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783741">Mario Carneiro (Sep 03 2019 at 12:40)</a>:</h4>
+<p>the proof should be <code>mv_power_series.coeff_C_zero</code></p>
+
+<a name="174783743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783743">Johan Commelin (Sep 03 2019 at 12:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="k">by</span> <span class="o">{</span> <span class="n">convert</span> <span class="n">coeff_monomial&#39;</span> <span class="mi">0</span> <span class="n">a</span><span class="o">,</span> <span class="n">delta</span> <span class="n">C</span> <span class="n">mv_power_series</span><span class="bp">.</span><span class="n">C</span> <span class="n">monomial</span><span class="o">,</span> <span class="n">rw</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">single_zero</span> <span class="o">}</span>
+</pre></div>
+
+<a name="174783758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783758">Mario Carneiro (Sep 03 2019 at 12:40)</a>:</h4>
+<p>that's one definition unfold</p>
+
+<a name="174783804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783804">Johan Commelin (Sep 03 2019 at 12:41)</a>:</h4>
+<p>Your proof doesn't work</p>
+
+<a name="174783827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783827">Johan Commelin (Sep 03 2019 at 12:41)</a>:</h4>
+<p>Because <code>single unit.star 0</code> is not defeq to <code>0</code></p>
+
+<a name="174783832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783832">Mario Carneiro (Sep 03 2019 at 12:41)</a>:</h4>
+<p>I'm not 100% on the exact definitions of everything here, but you should be able to unfold things until it's a statement about <code>mv_polynomial</code>, and then apply the appropriate lemma</p>
+
+<a name="174783932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783932">Johan Commelin (Sep 03 2019 at 12:42)</a>:</h4>
+<p>Nope, even that doesn't work</p>
+
+<a name="174783965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783965">Johan Commelin (Sep 03 2019 at 12:43)</a>:</h4>
+<p>This definition might be relevant:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The `n`th coefficient of a formal power series.-/</span>
+<span class="n">def</span> <span class="n">coeff</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">power_series</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">mv_power_series</span><span class="bp">.</span><span class="n">coeff</span> <span class="o">(</span><span class="n">single</span> <span class="o">()</span> <span class="n">n</span><span class="o">)</span>
+</pre></div>
+
+<a name="174783977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783977">Johan Commelin (Sep 03 2019 at 12:43)</a>:</h4>
+<p>This used to be harmless, but now it is not</p>
+
+<a name="174783985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174783985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174783985">Johan Commelin (Sep 03 2019 at 12:43)</a>:</h4>
+<p>Because of that <code>single () n</code> tagging at the end</p>
+
+<a name="174784056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784056">Johan Commelin (Sep 03 2019 at 12:44)</a>:</h4>
+<p>I can't understand why we can't have classical coefficients living together with a constructively decidable <code>unit</code> and <code>nat</code></p>
+
+<a name="174784067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784067">Mario Carneiro (Sep 03 2019 at 12:44)</a>:</h4>
+<p>I see this in the file now:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coeff_monomial&#39;</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">σ</span> <span class="bp">→</span><span class="err">₀</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">coeff</span> <span class="n">n</span> <span class="o">(</span><span class="n">monomial</span> <span class="n">n</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span> <span class="n">if_pos</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">coeff_C_zero</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">coeff</span> <span class="mi">0</span> <span class="o">(</span><span class="n">C</span> <span class="n">a</span> <span class="o">:</span> <span class="n">mv_power_series</span> <span class="n">σ</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="n">coeff_monomial&#39;</span> <span class="mi">0</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>are you saying that the two <code>coeff</code>s are different here?</p>
+
+<a name="174784105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784105">Johan Commelin (Sep 03 2019 at 12:45)</a>:</h4>
+<p>No, those <code>coeff</code>s are the same</p>
+
+<a name="174784106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784106">Mario Carneiro (Sep 03 2019 at 12:45)</a>:</h4>
+<blockquote>
+<p>I can't understand why we can't have classical coefficients living together with a constructively decidable unit and nat</p>
+</blockquote>
+<p>That's called accepting a <code>decidable_eq</code> instance, and we tried that</p>
+
+<a name="174784117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784117">Mario Carneiro (Sep 03 2019 at 12:45)</a>:</h4>
+<p>then what's the problem? they look defeq to me</p>
+
+<a name="174784127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784127">Mario Carneiro (Sep 03 2019 at 12:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">C</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">mv_power_series</span> <span class="n">σ</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">monomial</span> <span class="mi">0</span> <span class="n">a</span>
+</pre></div>
+
+<a name="174784137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784137">Johan Commelin (Sep 03 2019 at 12:45)</a>:</h4>
+<p>Yes...</p>
+
+<a name="174784199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784199">Johan Commelin (Sep 03 2019 at 12:46)</a>:</h4>
+<p>But <code>power_series.C</code> is no longer defeq to <code>power_series.monomial 0</code></p>
+
+<a name="174784213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784213">Mario Carneiro (Sep 03 2019 at 12:46)</a>:</h4>
+<p>why? Did the definition change?</p>
+
+<a name="174784221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784221">Johan Commelin (Sep 03 2019 at 12:46)</a>:</h4>
+<p>No</p>
+
+<a name="174784236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784236">Mario Carneiro (Sep 03 2019 at 12:46)</a>:</h4>
+<p>It says that it is defined as exactly that</p>
+
+<a name="174784240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784240">Johan Commelin (Sep 03 2019 at 12:46)</a>:</h4>
+<p>Someone removed a <code>[decidable_eq α]</code>. Em tasol.</p>
+
+<a name="174784270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784270">Johan Commelin (Sep 03 2019 at 12:47)</a>:</h4>
+<p>Over here it says</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- The constant formal power series.-/</span>
+<span class="n">def</span> <span class="n">C</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">power_series</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">mv_power_series</span><span class="bp">.</span><span class="n">C</span>
+</pre></div>
+
+<a name="174784314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784314">Mario Carneiro (Sep 03 2019 at 12:47)</a>:</h4>
+<p>oh, I was looking at the wrong C</p>
+
+<a name="174784411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784411">Johan Commelin (Sep 03 2019 at 12:48)</a>:</h4>
+<p>I mean... I can fix these errors, but the barrier between <code>mv_power_series unit</code> and <code>power_series</code> just got a lot bigger. Because we don't have good definitional reductions anymore.</p>
+
+<a name="174784443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784443">Mario Carneiro (Sep 03 2019 at 12:49)</a>:</h4>
+<p>I see, so the problem is that there is no theorem <code>power_series.C a = monomial 0 a</code></p>
+
+<a name="174784466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784466">Mario Carneiro (Sep 03 2019 at 12:49)</a>:</h4>
+<p>if you had that it would be a single rw</p>
+
+<a name="174784609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784609">Johan Commelin (Sep 03 2019 at 12:50)</a>:</h4>
+<p>Aha... I guess that theorem was missing, because it used to be defeq...</p>
+
+<a name="174784644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784644">Mario Carneiro (Sep 03 2019 at 12:51)</a>:</h4>
+<p>And the proof boils down to <code>single () 0 = 0</code>, which should be in finsupp</p>
+
+<a name="174784725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784725">Mario Carneiro (Sep 03 2019 at 12:52)</a>:</h4>
+<p><code>single_zero</code></p>
+
+<a name="174784964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/timeout%20when%20working%20with%20ideal%20of%20polynomial%20ring/near/174784964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/30847timeoutwhenworkingwithidealofpolynomialring.html#174784964">Johan Commelin (Sep 03 2019 at 12:55)</a>:</h4>
+<p>Thanks for your patience</p>
+
 
 {% endraw %}
 

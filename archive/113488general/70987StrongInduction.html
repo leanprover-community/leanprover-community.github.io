@@ -1,0 +1,79 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/70987StrongInduction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html">Strong Induction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174781643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174781643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174781643">Kevin Kappelmann (Sep 03 2019 at 12:09)</a>:</h4>
+<p>Does anyone know how to use strong induction on a term that does not appear in the goal? For example, given <code>variable {P : list ℕ → Prop}</code>, I want to prove that <code>∀ (l : list ℕ), P l</code>. Here are some failed attempts:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">needs_induction</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span><span class="o">,</span> <span class="c1">-- failed to find expression in the target</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">needs_induction</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">nat</span><span class="bp">.</span><span class="n">strong_induction_on</span> <span class="n">P</span> <span class="o">(</span><span class="n">l</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span> <span class="n">sorry</span> <span class="c1">-- type mismatch</span>
+
+<span class="kn">lemma</span> <span class="n">needs_induction_hack</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">l</span><span class="o">)</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">strong_induction_on</span> <span class="o">(</span><span class="n">l</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span>
+<span class="k">begin</span>
+  <span class="k">assume</span> <span class="n">n</span> <span class="n">IH</span> <span class="n">n_eq_length</span><span class="o">,</span> <span class="c1">-- l is not generalised in IH</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">needs_induction_fix</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">l</span> <span class="o">:=</span> <span class="n">needs_induction_hack</span> <span class="n">l</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="174782894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174782894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174782894">Reid Barton (Sep 03 2019 at 12:29)</a>:</h4>
+<p>One way is to prove <code>forall n l (h : l.length = n), P l</code></p>
+
+<a name="174782942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174782942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174782942">Reid Barton (Sep 03 2019 at 12:29)</a>:</h4>
+<p>Then apply it to <code>_ l rfl</code></p>
+
+<a name="174783013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174783013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174783013">Mario Carneiro (Sep 03 2019 at 12:30)</a>:</h4>
+<p>You can do this in tactic mode using <code>generalize e : l.length = n, induction n generalizing l</code></p>
+
+<a name="174783150"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174783150" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174783150">Chris Hughes (Sep 03 2019 at 12:32)</a>:</h4>
+<p>You can also use the equation compiler or <code>well_founded.fix</code></p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">needs_induction</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">P</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="n">l</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="n">using_well_founded</span> <span class="o">{</span> <span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span><span class="bp">⟩</span><span class="o">]</span> <span class="o">}</span>
+
+<span class="kn">lemma</span> <span class="n">needs_induction₂</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="n">well_founded</span><span class="bp">.</span><span class="n">fix</span> <span class="o">(</span><span class="n">measure_wf</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span> <span class="bp">_</span> <span class="n">l</span>
+</pre></div>
+
+<a name="174784139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174784139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174784139">Kevin Kappelmann (Sep 03 2019 at 12:45)</a>:</h4>
+<p>Cool, thank you all! <code>well_founded.fix</code> is the thing I was looking for - the trick by Mario cannot be done with strong induction, or am I wrong?</p>
+
+<a name="174784401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Strong%20Induction/near/174784401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70987StrongInduction.html#174784401">Chris Hughes (Sep 03 2019 at 12:48)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">needs_induction</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">generalize</span> <span class="n">hn</span> <span class="o">:</span> <span class="n">l</span><span class="bp">.</span><span class="n">length</span> <span class="bp">=</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="kn">using</span> <span class="n">nat</span><span class="bp">.</span><span class="n">strong_induction_on</span> <span class="n">generalizing</span> <span class="n">l</span><span class="o">,</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
