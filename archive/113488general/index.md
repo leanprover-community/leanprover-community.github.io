@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (18 messages, latest: Sep 03 2019 at 08:10)
+* [subset of a subtype](71577subsetofasubtype.html) (5 messages, latest: Sep 03 2019 at 10:50)
+
+* [timeout when working with ideal of polynomial ring](30847timeoutwhenworkingwithidealofpolynomialring.html) (20 messages, latest: Sep 03 2019 at 10:31)
+
+* [incorrect def/lemma](54132incorrectdeflemma.html) (19 messages, latest: Sep 03 2019 at 10:10)
 
 * [sanity check](33847sanitycheck.html) (47 messages, latest: Sep 03 2019 at 07:59)
-
-* [incorrect def/lemma](54132incorrectdeflemma.html) (18 messages, latest: Sep 03 2019 at 00:27)
 
 * [certificates for calculations](84224certificatesforcalculations.html) (39 messages, latest: Sep 03 2019 at 00:04)
 
