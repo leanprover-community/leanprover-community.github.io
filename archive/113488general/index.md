@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [certificates for calculations](84224certificatesforcalculations.html) (36 messages, latest: Sep 02 2019 at 23:36)
+* [sanity check](33847sanitycheck.html) (35 messages, latest: Sep 03 2019 at 00:47)
 
-* [sanity check](33847sanitycheck.html) (34 messages, latest: Sep 02 2019 at 23:25)
+* [incorrect def/lemma](54132incorrectdeflemma.html) (18 messages, latest: Sep 03 2019 at 00:27)
+
+* [certificates for calculations](84224certificatesforcalculations.html) (39 messages, latest: Sep 03 2019 at 00:04)
 
 * [doc_blame!](32536docblame.html) (4 messages, latest: Sep 02 2019 at 18:10)
 
@@ -82,8 +84,6 @@ permalink: archive/113488general/index.html
 * [2000](439072000.html) (11 messages, latest: Aug 25 2019 at 09:03)
 
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (5 messages, latest: Aug 24 2019 at 15:12)
-
-* [incorrect def/lemma](54132incorrectdeflemma.html) (17 messages, latest: Aug 24 2019 at 15:11)
 
 * [Proving for Fun](94070ProvingforFun.html) (106 messages, latest: Aug 24 2019 at 15:03)
 
