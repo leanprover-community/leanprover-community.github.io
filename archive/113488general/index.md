@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [2000](439072000.html) (14 messages, latest: Sep 04 2019 at 08:22)
+
 * [Lean in the wild](43625Leaninthewild.html) (196 messages, latest: Sep 04 2019 at 03:50)
 
 * [doc_blame!](32536docblame.html) (6 messages, latest: Sep 03 2019 at 20:43)
@@ -86,8 +88,6 @@ permalink: archive/113488general/index.html
 * [should minimum take an arbitrary relation](50190shouldminimumtakeanarbitraryrelation.html) (12 messages, latest: Aug 27 2019 at 00:17)
 
 * [Statement / Definition keyword list.](03037StatementDefinitionkeywordlist.html) (8 messages, latest: Aug 25 2019 at 21:24)
-
-* [2000](439072000.html) (11 messages, latest: Aug 25 2019 at 09:03)
 
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (5 messages, latest: Aug 24 2019 at 15:12)
 
