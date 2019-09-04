@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (181 messages, latest: Sep 04 2019 at 04:47)
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (185 messages, latest: Sep 04 2019 at 06:06)
 
 * [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (13 messages, latest: Sep 04 2019 at 03:51)
 
