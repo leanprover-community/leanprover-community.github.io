@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (196 messages, latest: Sep 04 2019 at 03:50)
+
 * [doc_blame!](32536docblame.html) (6 messages, latest: Sep 03 2019 at 20:43)
 
 * [sanity check](33847sanitycheck.html) (54 messages, latest: Sep 03 2019 at 19:13)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [incorrect def/lemma](54132incorrectdeflemma.html) (19 messages, latest: Sep 03 2019 at 10:10)
 
 * [certificates for calculations](84224certificatesforcalculations.html) (39 messages, latest: Sep 03 2019 at 00:04)
-
-* [Lean in the wild](43625Leaninthewild.html) (195 messages, latest: Sep 02 2019 at 17:33)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (18 messages, latest: Sep 02 2019 at 11:21)
 
