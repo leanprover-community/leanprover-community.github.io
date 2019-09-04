@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [complete lattice of setoids](91280completelatticeofsetoids.html) (2 messages, latest: Sep 03 2019 at 23:18)
+* [complete lattice of setoids](91280completelatticeofsetoids.html) (3 messages, latest: Sep 04 2019 at 02:24)
 
 * [noob question(s)](52075noobquestions.html) (1330 messages, latest: Sep 03 2019 at 14:53)
 
