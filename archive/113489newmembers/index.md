@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [terms as types?](73076termsastypes.html) (11 messages, latest: Sep 04 2019 at 12:59)
+
 * [complete lattice of setoids](91280completelatticeofsetoids.html) (5 messages, latest: Sep 04 2019 at 09:24)
 
 * [noob question(s)](52075noobquestions.html) (1330 messages, latest: Sep 03 2019 at 14:53)

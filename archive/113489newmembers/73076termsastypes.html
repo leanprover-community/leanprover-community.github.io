@@ -1,0 +1,120 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/73076termsastypes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html">terms as types?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="174875790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174875790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174875790">Alexandre Rademaker (Sep 04 2019 at 12:23)</a>:</h4>
+<p>We can prove a formula from assumptions declared as parameters:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">∧</span> <span class="n">B</span><span class="o">):</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">h₂</span><span class="bp">.</span><span class="n">left</span>
+</pre></div>
+
+
+<p>We can also reuse the parameters declaring them as variables:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">∧</span> <span class="n">B</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="o">:=</span> <span class="n">and</span><span class="bp">.</span><span class="n">left</span> <span class="n">h₂</span>
+</pre></div>
+
+
+<p>Now imagine that we want to prove the same formula in different many ways using different assumptions. Say that we want to prove <code>A ∨ B</code> from A and also from B.  Below, in the place of the type of the conclusion, we can't use put the term <code>h₁</code>. </p>
+<div class="codehilite"><pre><span></span>variable h₁ : A ∨ B
+
+example (h : A) : ??? := or.inl h
+</pre></div>
+
+
+<p>So the possible silly question is. How can we use an object (term) in a place expecting a type?</p>
+
+<a name="174876343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174876343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174876343">Andrew Ashworth (Sep 04 2019 at 12:30)</a>:</h4>
+<p>use a definition?</p>
+
+<a name="174877100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174877100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174877100">Alexandre Rademaker (Sep 04 2019 at 12:40)</a>:</h4>
+<p>hum, can you ellaborate on that?</p>
+
+<a name="174877681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174877681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174877681">Reid Barton (Sep 04 2019 at 12:48)</a>:</h4>
+<p>Something like <code>def my_conclusion := A ∨ B</code></p>
+
+<a name="174877796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174877796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174877796">Andrew Ashworth (Sep 04 2019 at 12:50)</a>:</h4>
+<p>but also you can't put <code>h1</code> inside there because those are two different formulas. If I understand you correctly what you actually have is </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="n">q</span> <span class="n">hp</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="n">p</span> <span class="n">hq</span>
+</pre></div>
+
+<a name="174877899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174877899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174877899">Alexandre Rademaker (Sep 04 2019 at 12:51)</a>:</h4>
+<blockquote>
+<p>Something like <code>def my_conclusion := A ∨ B</code></p>
+</blockquote>
+<p>In the code below, nor  h₁ or  h₂ works in the example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="n">def</span> <span class="n">h₁</span> <span class="o">:=</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span>
+<span class="kn">variable</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="err">???</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">h</span>
+</pre></div>
+
+<a name="174878182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174878182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174878182">Andrew Ashworth (Sep 04 2019 at 12:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="n">q</span> <span class="n">hp</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="n">p</span> <span class="n">hq</span>
+
+<span class="n">def</span> <span class="n">p_or_q</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p_or_q</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span>
+</pre></div>
+
+<a name="174878195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174878195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174878195">Reid Barton (Sep 04 2019 at 12:55)</a>:</h4>
+<p>It needs to be <code>h₁ A B</code></p>
+
+<a name="174878272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174878272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174878272">Alexandre Rademaker (Sep 04 2019 at 12:56)</a>:</h4>
+<blockquote>
+<p>but also you can't put <code>h1</code> inside there because those are two different formulas. If I understand you correctly what you actually have is </p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_left</span> <span class="n">q</span> <span class="n">hp</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">hq</span><span class="o">,</span> <span class="n">or</span><span class="bp">.</span><span class="n">intro_right</span> <span class="n">p</span> <span class="n">hq</span>
+</pre></div>
+
+
+</blockquote>
+<p>yes, I don't want to repeat the <code>p ∨ q</code>!</p>
+
+<a name="174878384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174878384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174878384">Andrew Ashworth (Sep 04 2019 at 12:57)</a>:</h4>
+<p>ahh maybe you want parameters then</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameters</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">p_or_q</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">)</span>  <span class="o">:</span> <span class="n">p_or_q</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">hq</span> <span class="o">:</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">p_or_q</span> <span class="o">:=</span> <span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">hq</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="174878616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/terms%20as%20types%3F/near/174878616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/73076termsastypes.html#174878616">Alexandre Rademaker (Sep 04 2019 at 12:59)</a>:</h4>
+<p>For give more context. Suppose I have an encoding of the hamiltonian cycle of a graph in propositional formulas. See <a href="https://www.csie.ntu.edu.tw/~lyuu/complexity/2011/20111018.pdf" target="_blank" title="https://www.csie.ntu.edu.tw/~lyuu/complexity/2011/20111018.pdf">https://www.csie.ntu.edu.tw/~lyuu/complexity/2011/20111018.pdf</a>. A SAT solver can give me one possible path as a truth assigment. I want to use Lean to model cheking. That is, to show that this assigment models the formulas. So what I want is to have the formulas declared first and after that introduce a set of theorems showing that all of them can be proved from the turth assigment (that is, the AND formula produced from the truth assigment with the variables assigned to TRUE). Hope the motivation is clear enough.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
