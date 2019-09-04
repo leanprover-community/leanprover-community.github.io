@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (181 messages, latest: Sep 04 2019 at 04:47)
+
 * [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (13 messages, latest: Sep 04 2019 at 03:51)
 
 * [complementary sequences](13037complementarysequences.html) (9 messages, latest: Sep 03 2019 at 22:43)
@@ -266,8 +268,6 @@ permalink: archive/116395maths/index.html
 * [What is this lemma called?](97145Whatisthislemmacalled.html) (19 messages, latest: Apr 23 2019 at 19:05)
 
 * [open_embedding](56209openembedding.html) (3 messages, latest: Apr 23 2019 at 18:15)
-
-* [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (180 messages, latest: Apr 23 2019 at 06:12)
 
 * [how to prove simple stuffs](50307howtoprovesimplestuffs.html) (13 messages, latest: Apr 20 2019 at 16:26)
 
