@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [algebraic closure](74840algebraicclosure.html) (203 messages, latest: Sep 04 2019 at 16:41)
+* [algebraic closure](74840algebraicclosure.html) (206 messages, latest: Sep 04 2019 at 17:23)
 
 * [sanity check](33847sanitycheck.html) (55 messages, latest: Sep 04 2019 at 15:28)
 
