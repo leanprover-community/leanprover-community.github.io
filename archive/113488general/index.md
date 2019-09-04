@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (199 messages, latest: Sep 04 2019 at 15:43)
+
+* [sanity check](33847sanitycheck.html) (55 messages, latest: Sep 04 2019 at 15:28)
+
 * [2000](439072000.html) (15 messages, latest: Sep 04 2019 at 09:02)
 
 * [Lean in the wild](43625Leaninthewild.html) (196 messages, latest: Sep 04 2019 at 03:50)
 
 * [doc_blame!](32536docblame.html) (6 messages, latest: Sep 03 2019 at 20:43)
-
-* [sanity check](33847sanitycheck.html) (54 messages, latest: Sep 03 2019 at 19:13)
 
 * [Strong Induction](70987StrongInduction.html) (20 messages, latest: Sep 03 2019 at 13:37)
 
@@ -44,8 +46,6 @@ permalink: archive/113488general/index.html
 * [Lean compile fails with GCC 9.1](70394LeancompilefailswithGCC91.html) (58 messages, latest: Aug 30 2019 at 10:48)
 
 * [to_additive](21549toadditive.html) (64 messages, latest: Aug 29 2019 at 19:53)
-
-* [algebraic closure](74840algebraicclosure.html) (198 messages, latest: Aug 29 2019 at 10:46)
 
 * [global `mk_fresh_name`?](62080globalmkfreshname.html) (21 messages, latest: Aug 29 2019 at 07:55)
 
