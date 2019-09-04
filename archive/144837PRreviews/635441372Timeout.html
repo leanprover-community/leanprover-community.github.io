@@ -24,6 +24,18 @@ permalink: archive/144837PRreviews/635441372Timeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174877394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174877394">Kevin Kappelmann (Sep 04 2019 at 12:44)</a>:</h4>
 <p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> (and whoever else knows how to deal with timeouts), what's the best approach for me to figure out why Travis is still timing out for this PR? Do I need to run the compile command on my PC and just wait for 90 minutes and see where it gets stuck? My laptop is quite old (+6 years) and hence has difficulties compiling mathlib all at once.</p>
 
+<a name="174888733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174888733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174888733">Floris van Doorn (Sep 04 2019 at 14:46)</a>:</h4>
+<p>Timeouts are annoying to track. I had to track down some timeouts in <a href="https://github.com/leanprover-community/mathlib/issues/1319" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1319">#1319</a>, and what I indeed did was compile the whole library locally. However, Lean doesn't print an error message when it reaches a timeout, and it still created the olean file (perhaps the command-line Lean has a much higher timeout treshhold?), so I looked at which olean files took longest to create. Now I realize I could have used <code>lean --make -T 100000</code> to set a timeout limit, which should probably work.</p>
+
+<a name="174888799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174888799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174888799">Floris van Doorn (Sep 04 2019 at 14:47)</a>:</h4>
+<p>That said, I'm worried whether there could be something wrong with the Travis setup. PR <a href="https://github.com/leanprover-community/mathlib/issues/1375" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1375">#1375</a> fails, but it is hard to imagine that adding a single lemma (that is never used!) causes a timeout somewhere (the lemma itself compiles fine on my laptop)</p>
+
+<a name="174889221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174889221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174889221">Keeley Hoek (Sep 04 2019 at 14:51)</a>:</h4>
+<p>On thing that should be mentioned is that travis does not provide a consistent computing power for jobs; sometimes when you just restart the build, it just works, because your job got more CPU. Since yours has failed over and over, that probably isn't the case?</p>
+
 
 {% endraw %}
 
