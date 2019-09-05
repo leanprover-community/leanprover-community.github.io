@@ -58,6 +58,18 @@ permalink: archive/144837PRreviews/635441372Timeout.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174932481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174932481">Scott Morrison (Sep 04 2019 at 23:36)</a>:</h4>
 <p>Seems not to have. I nuked the travis cache for <a href="https://github.com/leanprover-community/mathlib/issues/1372" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1372">#1372</a>, and merged master again.</p>
 
+<a name="174949257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/174949257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#174949257">Bryan Gin-ge Chen (Sep 05 2019 at 06:49)</a>:</h4>
+<p>I just finished building this branch locally, and it did take an absurd amount of time. It looks like there are timeouts in at least the following:</p>
+<ul>
+<li><code>data/nat/basic.lean</code> at <code>add_pow</code></li>
+<li><code>computability/partrec.lean</code> at <code>partrec</code></li>
+<li><code>computability/partrec_code.lean</code> at <code>eval</code></li>
+<li><code>computability/halting.lean</code> at <code>vec</code></li>
+</ul>
+<p>These were just the files where I happened to notice <code>lean --make</code> get stuck for a very long time.</p>
+<p>How hard would it be to write a script that recorded compile times or some other related profiling? Something like that seems like it would be really useful on travis.</p>
+
 
 {% endraw %}
 
