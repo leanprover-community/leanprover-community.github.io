@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/79619categoryuniversesagain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html">category universes again</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175012654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175012654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175012654">Reid Barton (Sep 05 2019 at 20:39)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> While updating lean-homotopy-theory to current mathlib I (or actually lean) noticed that the current formula for the universe level of functors is wrong. Worse, it doesn't really seem to be possible to fix it.</p>
+
+<a name="175012893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175012893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175012893">Reid Barton (Sep 05 2019 at 20:42)</a>:</h4>
+<p>The current formula is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">functor</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₂</span><span class="o">}</span> <span class="n">D</span><span class="o">]</span> <span class="o">:</span>
+  <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">u₁</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">:=</span> <span class="c1">-- ...</span>
+</pre></div>
+
+
+<p>But this isn't right, because the homs of C and D live in <code>Sort v₁</code> and <code>Sort v₂</code> respectively not <code>Type v₁</code> and <code>Type v₂</code>.<br>
+The correct formula would be</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">functor</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₂</span><span class="o">}</span> <span class="n">D</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">Sort</span> <span class="o">(</span><span class="n">max</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="o">(</span><span class="n">u₁</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">u₂</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">:=</span> <span class="c1">-- ...</span>
+</pre></div>
+
+<a name="175013083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175013083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175013083">Reid Barton (Sep 05 2019 at 20:45)</a>:</h4>
+<p>For example, suppose C and D are both <code>small_category.{w}</code>. Then <code>v₁ = v₂ = w+1</code> and <code>u₁ = u₂ = w</code>. The type of functors from C to D should again be a <code>Type w</code>. But according to the current formula it is a <code>Type (w+1)</code>.<br>
+This caused this definition to fail: <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/category_theory/bundled.lean#L27" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/category_theory/bundled.lean#L27">https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/category_theory/bundled.lean#L27</a><br>
+(I know <code>Cat</code> is in mathlib now, but I'd rather first get the current version of my library to build with current mathlib before taking advantage of new mathlib features.)</p>
+
+<a name="175013182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175013182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175013182">Reid Barton (Sep 05 2019 at 20:46)</a>:</h4>
+<p>However, if we use the corrected formula, then we have a problem in <code>functor_category</code>: we want to make functors the objects of a category but they form a <code>Sort _</code>, not a <code>Type _</code>.</p>
+
+<a name="175013241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175013241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175013241">Reid Barton (Sep 05 2019 at 20:47)</a>:</h4>
+<p>So making objects be a <code>Type u</code> and morphisms a <code>Sort v</code> isn't compatible with assigning the correct universe level to functors, as far as I can see.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

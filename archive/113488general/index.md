@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [talk on ATP and ITP](04431talkonATPandITP.html) (19 messages, latest: Sep 05 2019 at 20:03)
+
 * [Proving for Fun](94070ProvingforFun.html) (115 messages, latest: Sep 05 2019 at 16:13)
 
 * [Lean in the wild](43625Leaninthewild.html) (198 messages, latest: Sep 05 2019 at 14:19)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [incorrect def/lemma](54132incorrectdeflemma.html) (19 messages, latest: Sep 03 2019 at 10:10)
 
 * [certificates for calculations](84224certificatesforcalculations.html) (39 messages, latest: Sep 03 2019 at 00:04)
-
-* [talk on ATP and ITP](04431talkonATPandITP.html) (18 messages, latest: Sep 02 2019 at 11:21)
 
 * [Launch py dbg vscode w/ command](35067Launchpydbgvscodewcommand.html) (3 messages, latest: Sep 01 2019 at 04:58)
 

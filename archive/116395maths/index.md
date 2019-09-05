@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [category universes again](79619categoryuniversesagain.html) (5 messages, latest: Sep 05 2019 at 20:47)
+
 * [`naturality`](26894naturality.html) (2 messages, latest: Sep 05 2019 at 18:08)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (188 messages, latest: Sep 04 2019 at 07:55)
