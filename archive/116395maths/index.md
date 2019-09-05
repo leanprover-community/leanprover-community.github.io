@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`naturality`](26894naturality.html) (2 messages, latest: Sep 05 2019 at 18:08)
+
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (188 messages, latest: Sep 04 2019 at 07:55)
 
 * [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (13 messages, latest: Sep 04 2019 at 03:51)
