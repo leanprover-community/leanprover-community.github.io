@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving for Fun](94070ProvingforFun.html) (108 messages, latest: Sep 05 2019 at 10:36)
+
 * [algebraic closure](74840algebraicclosure.html) (208 messages, latest: Sep 04 2019 at 19:10)
 
 * [sanity check](33847sanitycheck.html) (55 messages, latest: Sep 04 2019 at 15:28)
@@ -90,8 +92,6 @@ permalink: archive/113488general/index.html
 * [Statement / Definition keyword list.](03037StatementDefinitionkeywordlist.html) (8 messages, latest: Aug 25 2019 at 21:24)
 
 * [list auto coercions of old structures](57939listautocoercionsofoldstructures.html) (5 messages, latest: Aug 24 2019 at 15:12)
-
-* [Proving for Fun](94070ProvingforFun.html) (106 messages, latest: Aug 24 2019 at 15:03)
 
 * [tactics for numbers](46415tacticsfornumbers.html) (21 messages, latest: Aug 24 2019 at 14:56)
 
