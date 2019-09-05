@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (197 messages, latest: Sep 05 2019 at 13:47)
+
 * [Proving for Fun](94070ProvingforFun.html) (108 messages, latest: Sep 05 2019 at 10:36)
 
 * [algebraic closure](74840algebraicclosure.html) (208 messages, latest: Sep 04 2019 at 19:10)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [sanity check](33847sanitycheck.html) (55 messages, latest: Sep 04 2019 at 15:28)
 
 * [2000](439072000.html) (15 messages, latest: Sep 04 2019 at 09:02)
-
-* [Lean in the wild](43625Leaninthewild.html) (196 messages, latest: Sep 04 2019 at 03:50)
 
 * [doc_blame!](32536docblame.html) (6 messages, latest: Sep 03 2019 at 20:43)
 
