@@ -9,11 +9,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [Manifolds](12382Manifolds.html) (66 messages, latest: Sep 06 2019 at 17:54)
+
 * [#1372 Timeout](635441372Timeout.html) (30 messages, latest: Sep 06 2019 at 16:14)
 
 * [#1391 use classical](493901391useclassical.html) (2 messages, latest: Sep 06 2019 at 11:13)
-
-* [Manifolds](12382Manifolds.html) (65 messages, latest: Sep 02 2019 at 06:10)
 
 * [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (2 messages, latest: Sep 02 2019 at 04:04)
 

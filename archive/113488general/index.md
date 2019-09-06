@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (10 messages, latest: Sep 06 2019 at 17:53)
+
 * [talk on ATP and ITP](04431talkonATPandITP.html) (20 messages, latest: Sep 06 2019 at 05:55)
 
 * [Proving for Fun](94070ProvingforFun.html) (115 messages, latest: Sep 05 2019 at 16:13)

@@ -26,6 +26,16 @@ What is the plan for making instances of all these classes?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_%2A%20limit%20classes/near/175075948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/32691haslimitclasses.html#175075948">Reid Barton (Sep 06 2019 at 15:35)</a>:</h4>
 <p>Or should it agree with the product which comes from <code>has_limits</code>, which will be of the form a subtype of a Pi type, and will definitely not be equal (at least not provably equal) to <code>X × Y</code>?</p>
 
+<a name="175084096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_%2A%20limit%20classes/near/175084096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/32691haslimitclasses.html#175084096">Reid Barton (Sep 06 2019 at 17:13)</a>:</h4>
+<p>I tried looking at other category theory libraries, namely the Lean 2 HoTT library and UniMath, although they may have different concerns than we do.<br>
+In the Lean 2 HoTT library, <code>has_binary_products</code> is simply defined to be (reducibly) <code>has_limits_of_shape</code> for a particular shape category (just two objects and no nonidentity morphisms). That is one extreme option. However, using a class that is reducible doesn't seem to work very well in Lean 3 (based on comments in that file, it might not have worked very well in Lean 2 either).<br>
+UniMath has two (or sometimes even more) definitions of each of these special types of limits, one defined generically as a limit and one which is direct, and prove their equivalence. They're not afraid to write a lot of stuff! On the other hand they don't use type classes at all, so they don't have the question of which of these relationships to make into instances.</p>
+
+<a name="175084175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/has_%2A%20limit%20classes/near/175084175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/32691haslimitclasses.html#175084175">Reid Barton (Sep 06 2019 at 17:14)</a>:</h4>
+<p>Trying to define an instance <code>has_binary_products Top</code> by hand, I'm quickly led to the conclusion that one ought to define a specialized <code>is_binary_product</code> (like UniMath does) and then prove its equivalence to the general limit concept.</p>
+
 
 {% endraw %}
 
