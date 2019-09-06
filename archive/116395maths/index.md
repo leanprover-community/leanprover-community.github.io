@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Formalizing modern maths](53509Formalizingmodernmaths.html) (6 messages, latest: Sep 06 2019 at 17:27)
+* [has_* limit classes](32691haslimitclasses.html) (7 messages, latest: Sep 06 2019 at 18:49)
 
-* [has_* limit classes](32691haslimitclasses.html) (5 messages, latest: Sep 06 2019 at 17:14)
+* [Formalizing modern maths](53509Formalizingmodernmaths.html) (6 messages, latest: Sep 06 2019 at 17:27)
 
 * [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (1 message, latest: Sep 06 2019 at 16:40)
 
