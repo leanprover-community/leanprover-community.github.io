@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Formalizing modern maths](53509Formalizingmodernmaths.html) (5 messages, latest: Sep 06 2019 at 16:43)
+
+* [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (1 message, latest: Sep 06 2019 at 16:40)
+
 * [has_* limit classes](32691haslimitclasses.html) (3 messages, latest: Sep 06 2019 at 15:35)
 
 * [binary (co)products notation](33353binarycoproductsnotation.html) (1 message, latest: Sep 06 2019 at 14:55)
