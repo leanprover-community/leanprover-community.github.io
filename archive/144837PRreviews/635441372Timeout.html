@@ -124,6 +124,26 @@ Thanks for running it locally <span class="user-mention" data-user-id="123965">@
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175065384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175065384">Kevin Kappelmann (Sep 06 2019 at 13:43)</a>:</h4>
 <p>So apparently, changing the import from <code>data.rat</code> to <code>data.rat.order</code> in <code>tactic.norm_num</code> (see <a href="https://github.com/leanprover-community/mathlib/pull/1403/files" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1403/files">here</a>) makes travis time out (see <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/581560818" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/581560818">here</a>). But why? <code>data.rat</code> imports <code>data.rat.order</code>. So to me it seems that it should not make any difference (or it should even be faster)(?).</p>
 
+<a name="175067756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175067756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175067756">Keeley Hoek (Sep 06 2019 at 14:07)</a>:</h4>
+<p>Just a total guess, but does <code>data.rat</code> have things like typeclass short-circuits to make typeclass resolution (potentially much) faster?</p>
+
+<a name="175067843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175067843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175067843">Keeley Hoek (Sep 06 2019 at 14:08)</a>:</h4>
+<p>By which I mean some technically-unnecessary instance declarations which make life easier for lean</p>
+
+<a name="175068100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175068100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175068100">Chris Hughes (Sep 06 2019 at 14:10)</a>:</h4>
+<p>My guess is that something now no longer imports <code>rat.cast</code> that needs it, and it timed out trying to coerce a <code>rat</code> to a <code>real</code></p>
+
+<a name="175068176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175068176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175068176">Patrick Massot (Sep 06 2019 at 14:11)</a>:</h4>
+<p>Chris's guess sounds very plausible. Broken coercions are a very common cause of timeout.</p>
+
+<a name="175068337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231372%20Timeout/near/175068337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/635441372Timeout.html#175068337">Kevin Kappelmann (Sep 06 2019 at 14:13)</a>:</h4>
+<p>Hmm, that sounds reasonable. I'll give it a shot.</p>
+
 
 {% endraw %}
 
