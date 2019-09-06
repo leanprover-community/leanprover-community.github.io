@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Formalizing modern maths](53509Formalizingmodernmaths.html) (8 messages, latest: Sep 06 2019 at 21:43)
+* [Formalizing modern maths](53509Formalizingmodernmaths.html) (10 messages, latest: Sep 06 2019 at 22:26)
 
 * [has_* limit classes](32691haslimitclasses.html) (7 messages, latest: Sep 06 2019 at 18:49)
 

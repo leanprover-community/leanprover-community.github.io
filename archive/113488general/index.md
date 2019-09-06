@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (13 messages, latest: Sep 06 2019 at 21:21)
+* [Arend — HoTT ITP](16525ArendHoTTITP.html) (27 messages, latest: Sep 06 2019 at 22:28)
+
+* [ITP 2019](78458ITP2019.html) (14 messages, latest: Sep 06 2019 at 22:00)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (20 messages, latest: Sep 06 2019 at 05:55)
 
@@ -160,8 +162,6 @@ permalink: archive/113488general/index.html
 * [to_additive and tags](84431toadditiveandtags.html) (63 messages, latest: Aug 09 2019 at 13:54)
 
 * [Generate homomorphism types for algebraic structures](63016Generatehomomorphismtypesforalgebraicstructures.html) (4 messages, latest: Aug 07 2019 at 15:24)
-
-* [Arend — HoTT ITP](16525ArendHoTTITP.html) (20 messages, latest: Aug 07 2019 at 07:31)
 
 * [100 theorems](37529100theorems.html) (96 messages, latest: Aug 06 2019 at 23:06)
 
