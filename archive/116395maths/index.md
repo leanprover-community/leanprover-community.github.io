@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [category universes again](79619categoryuniversesagain.html) (16 messages, latest: Sep 06 2019 at 03:59)
+* [category universes again](79619categoryuniversesagain.html) (25 messages, latest: Sep 06 2019 at 04:25)
 
 * [`naturality`](26894naturality.html) (2 messages, latest: Sep 05 2019 at 18:08)
 

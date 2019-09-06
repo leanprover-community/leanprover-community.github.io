@@ -90,6 +90,47 @@ This caused this definition to fail: <a href="https://github.com/rwbarton/lean-h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175033935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175033935">Scott Morrison (Sep 06 2019 at 03:59)</a>:</h4>
 <p>I am very tempted to hope that Keeley's suggestion is viable (i.e. that PR <a href="https://github.com/leanprover-community/mathlib/issues/1122" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1122">#1122</a> was ill-considered, and should be reverted).</p>
 
+<a name="175034364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034364">Scott Morrison (Sep 06 2019 at 04:12)</a>:</h4>
+<p>Back when everything was in <code>Sort</code>, we had</p>
+<div class="codehilite"><pre><span></span>structure functor (C : Sort u₁) [category.{v₁} C] (D : Sort u₂) [category.{v₂} D] : Sort (max u₁ v₁ u₂ v₂ 1) := ...
+</pre></div>
+
+
+<p>and I think this was also wrong according to Reid's analysis, because of that <code>1</code> appearing in the <code>max</code>.</p>
+
+<a name="175034378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034378">Scott Morrison (Sep 06 2019 at 04:12)</a>:</h4>
+<p>The discussion explaining this <code>1</code> in the max in the original PR was at <a href="https://github.com/leanprover-community/mathlib/pull/824#discussion_r270540901" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/824#discussion_r270540901">https://github.com/leanprover-community/mathlib/pull/824#discussion_r270540901</a></p>
+
+<a name="175034385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034385">Scott Morrison (Sep 06 2019 at 04:13)</a>:</h4>
+<p>where while it's wrong, we decided it perhaps wasn't harmful.</p>
+
+<a name="175034646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034646">Mario Carneiro (Sep 06 2019 at 04:21)</a>:</h4>
+<p>If you don't put the 1 in the projections won't work</p>
+
+<a name="175034698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034698">Scott Morrison (Sep 06 2019 at 04:22)</a>:</h4>
+<p>Yes, I don't think there's any way of getting around having the <code>1</code>.</p>
+
+<a name="175034711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034711">Scott Morrison (Sep 06 2019 at 04:23)</a>:</h4>
+<p>The question is --- do we switch to objects and homs in Type (i.e. pre <a href="https://github.com/leanprover-community/mathlib/issues/824" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/824">#824</a>), or switch to objects and homs in Sort (ie. between <a href="https://github.com/leanprover-community/mathlib/issues/824" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/824">#824</a> and <a href="https://github.com/leanprover-community/mathlib/issues/1122" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1122">#1122</a>).</p>
+
+<a name="175034716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034716">Scott Morrison (Sep 06 2019 at 04:23)</a>:</h4>
+<p>I've just made a branch which moves everything back to Type.</p>
+
+<a name="175034777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034777">Scott Morrison (Sep 06 2019 at 04:25)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/compare/category_no_sorts" target="_blank" title="https://github.com/leanprover-community/mathlib/compare/category_no_sorts"><code>category_no_sorts</code></a></p>
+
+<a name="175034781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/category%20universes%20again/near/175034781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/79619categoryuniversesagain.html#175034781">Scott Morrison (Sep 06 2019 at 04:25)</a>:</h4>
+<p>But I'm still tempted to go the other way.</p>
+
 
 {% endraw %}
 
