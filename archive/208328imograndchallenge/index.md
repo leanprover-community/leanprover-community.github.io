@@ -9,15 +9,15 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
-* [AI](35019AI.html) (3 messages, latest: Sep 07 2019 at 12:00)
+* [AI](35019AI.html) (4 messages, latest: Sep 07 2019 at 13:55)
+
+* [F2F](00479F2F.html) (12 messages, latest: Sep 07 2019 at 13:48)
+
+* [Team](97448Team.html) (3 messages, latest: Sep 07 2019 at 13:43)
 
 * [Inequalities](79086Inequalities.html) (2 messages, latest: Sep 07 2019 at 11:22)
 
-* [F2F](00479F2F.html) (9 messages, latest: Sep 07 2019 at 11:17)
-
 * [geometry problems](00977geometryproblems.html) (6 messages, latest: Sep 07 2019 at 09:12)
-
-* [Team](97448Team.html) (1 message, latest: Sep 07 2019 at 09:08)
 
 * [stream events](95106streamevents.html) (3 messages, latest: Sep 07 2019 at 08:33)
 

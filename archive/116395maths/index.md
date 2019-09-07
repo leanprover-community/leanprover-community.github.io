@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [has_* limit classes](32691haslimitclasses.html) (19 messages, latest: Sep 07 2019 at 12:29)
+* [has_* limit classes](32691haslimitclasses.html) (20 messages, latest: Sep 07 2019 at 13:15)
 
 * [binary (co)products notation](33353binarycoproductsnotation.html) (2 messages, latest: Sep 06 2019 at 23:42)
 
