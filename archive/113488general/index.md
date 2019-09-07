@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (25 messages, latest: Sep 07 2019 at 21:49)
+* [Lean 4 package manager](17436Lean4packagemanager.html) (1 message, latest: Sep 07 2019 at 22:28)
+
+* [talk on ATP and ITP](04431talkonATPandITP.html) (26 messages, latest: Sep 07 2019 at 22:08)
 
 * [ITP 2019](78458ITP2019.html) (15 messages, latest: Sep 07 2019 at 20:45)
 
