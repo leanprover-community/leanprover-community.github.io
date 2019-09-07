@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [IMO Grand Challenge](71157IMOGrandChallenge.html) (3 messages, latest: Sep 07 2019 at 07:38)
+* [IMO Grand Challenge](71157IMOGrandChallenge.html) (6 messages, latest: Sep 07 2019 at 14:42)
+
+* [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
 
 * [Arend — HoTT ITP](16525ArendHoTTITP.html) (28 messages, latest: Sep 07 2019 at 04:46)
 
@@ -60,8 +62,6 @@ permalink: archive/113488general/index.html
 * [Category of U-Sets listed?](30393CategoryofUSetslisted.html) (15 messages, latest: Aug 29 2019 at 07:52)
 
 * [Print mk_fresh_name result?](61979Printmkfreshnameresult.html) (102 messages, latest: Aug 29 2019 at 04:14)
-
-* [(no topic)](79918notopic.html) (53 messages, latest: Aug 29 2019 at 03:06)
 
 * [Cat theory example to learn from?](89672Cattheoryexampletolearnfrom.html) (37 messages, latest: Aug 28 2019 at 23:37)
 
