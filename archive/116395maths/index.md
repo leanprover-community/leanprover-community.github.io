@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [binary (co)products notation](33353binarycoproductsnotation.html) (2 messages, latest: Sep 06 2019 at 23:42)
+* [has_* limit classes](32691haslimitclasses.html) (19 messages, latest: Sep 07 2019 at 12:29)
 
-* [has_* limit classes](32691haslimitclasses.html) (14 messages, latest: Sep 06 2019 at 23:41)
+* [binary (co)products notation](33353binarycoproductsnotation.html) (2 messages, latest: Sep 06 2019 at 23:42)
 
 * [Formalizing modern maths](53509Formalizingmodernmaths.html) (10 messages, latest: Sep 06 2019 at 22:26)
 
