@@ -1,19 +1,19 @@
 ---
 layout: archive
 title: Lean Prover Zulip Chat Archive
-permalink: archive/208328imograndchallenge/index.html
+permalink: archive/208328IMOgrandchallenge/index.html
 ---
 
-## Stream: [imo-grand-challenge](https://leanprover-community.github.io/archive/208328imograndchallenge/index.html)
+## Stream: [IMO-grand-challenge](https://leanprover-community.github.io/archive/208328IMOgrandchallenge/index.html)
 ---
 
 ### Topics:
 
-* [geometry problems](00977geometryproblems.html) (2 messages, latest: Sep 07 2019 at 07:29)
+* [stream events](95106streamevents.html) (3 messages, latest: Sep 07 2019 at 08:33)
 
-* [F2F](00479F2F.html) (3 messages, latest: Sep 07 2019 at 04:55)
+* [geometry problems](00977geometryproblems.html) (4 messages, latest: Sep 07 2019 at 07:29)
 
-* [stream events](95106streamevents.html) (1 message, latest: Sep 06 2019 at 23:09)
+* [F2F](00479F2F.html) (6 messages, latest: Sep 07 2019 at 04:55)
 
 
 {% include archive_update.html %}

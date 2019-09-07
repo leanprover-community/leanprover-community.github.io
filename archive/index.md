@@ -28,5 +28,7 @@ permalink: archive/index.html
 
 * [imo-grand-challenge](208328imograndchallenge/index.html) (3 topics)
 
+* [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (3 topics)
+
 
 {% include archive_update.html %}
