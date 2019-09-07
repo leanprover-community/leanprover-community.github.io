@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (15 messages, latest: Sep 07 2019 at 20:45)
+
+* [talk on ATP and ITP](04431talkonATPandITP.html) (21 messages, latest: Sep 07 2019 at 20:40)
+
 * [IMO Grand Challenge](71157IMOGrandChallenge.html) (7 messages, latest: Sep 07 2019 at 17:36)
 
 * [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
 
 * [Arend — HoTT ITP](16525ArendHoTTITP.html) (28 messages, latest: Sep 07 2019 at 04:46)
-
-* [ITP 2019](78458ITP2019.html) (14 messages, latest: Sep 06 2019 at 22:00)
-
-* [talk on ATP and ITP](04431talkonATPandITP.html) (20 messages, latest: Sep 06 2019 at 05:55)
 
 * [Proving for Fun](94070ProvingforFun.html) (115 messages, latest: Sep 05 2019 at 16:13)
 
