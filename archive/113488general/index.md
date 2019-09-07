@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (15 messages, latest: Sep 07 2019 at 20:45)
+* [talk on ATP and ITP](04431talkonATPandITP.html) (25 messages, latest: Sep 07 2019 at 21:49)
 
-* [talk on ATP and ITP](04431talkonATPandITP.html) (21 messages, latest: Sep 07 2019 at 20:40)
+* [ITP 2019](78458ITP2019.html) (15 messages, latest: Sep 07 2019 at 20:45)
 
 * [IMO Grand Challenge](71157IMOGrandChallenge.html) (7 messages, latest: Sep 07 2019 at 17:36)
 
