@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Arend — HoTT ITP](16525ArendHoTTITP.html) (28 messages, latest: Sep 07 2019 at 04:46)
+* [IMO Grand Challenge](71157IMOGrandChallenge.html) (3 messages, latest: Sep 07 2019 at 07:38)
 
-* [IMO Grand Challenge](71157IMOGrandChallenge.html) (1 message, latest: Sep 07 2019 at 00:12)
+* [Arend — HoTT ITP](16525ArendHoTTITP.html) (28 messages, latest: Sep 07 2019 at 04:46)
 
 * [ITP 2019](78458ITP2019.html) (14 messages, latest: Sep 06 2019 at 22:00)
 
