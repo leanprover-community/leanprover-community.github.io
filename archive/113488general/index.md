@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nested exception: no goals](15296nestedexceptionnogoals.html) (11 messages, latest: Sep 08 2019 at 12:59)
+* [nested exception: no goals](15296nestedexceptionnogoals.html) (12 messages, latest: Sep 08 2019 at 13:00)
 
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (7 messages, latest: Sep 08 2019 at 12:05)
 

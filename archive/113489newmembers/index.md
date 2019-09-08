@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Is mathlib-nursary recommended/alive?](60865Ismathlibnursaryrecommendedalive.html) (1 message, latest: Sep 08 2019 at 13:47)
+
 * [noob question(s)](52075noobquestions.html) (1343 messages, latest: Sep 08 2019 at 09:45)
 
 * [terms as types?](73076termsastypes.html) (13 messages, latest: Sep 04 2019 at 13:19)
