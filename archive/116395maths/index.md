@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (2 messages, latest: Sep 07 2019 at 21:09)
+* [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (3 messages, latest: Sep 08 2019 at 00:02)
 
 * [has_* limit classes](32691haslimitclasses.html) (20 messages, latest: Sep 07 2019 at 13:15)
 
