@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [binary (co)products notation](33353binarycoproductsnotation.html) (4 messages, latest: Sep 08 2019 at 04:24)
+* [binary (co)products notation](33353binarycoproductsnotation.html) (5 messages, latest: Sep 08 2019 at 05:16)
 
 * [category universes again](79619categoryuniversesagain.html) (41 messages, latest: Sep 08 2019 at 04:24)
 

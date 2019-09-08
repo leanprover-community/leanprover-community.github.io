@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (8 messages, latest: Sep 08 2019 at 05:54)
+
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (26 messages, latest: Sep 07 2019 at 22:08)
