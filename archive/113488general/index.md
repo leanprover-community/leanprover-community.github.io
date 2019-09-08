@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (10 messages, latest: Sep 08 2019 at 06:38)
+* [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (11 messages, latest: Sep 08 2019 at 10:07)
 
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
 
