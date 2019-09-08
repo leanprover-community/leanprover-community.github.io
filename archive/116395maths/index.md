@@ -9,15 +9,15 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [binary (co)products notation](33353binarycoproductsnotation.html) (4 messages, latest: Sep 08 2019 at 04:24)
+
+* [category universes again](79619categoryuniversesagain.html) (41 messages, latest: Sep 08 2019 at 04:24)
+
 * [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (3 messages, latest: Sep 08 2019 at 00:02)
 
 * [has_* limit classes](32691haslimitclasses.html) (20 messages, latest: Sep 07 2019 at 13:15)
 
-* [binary (co)products notation](33353binarycoproductsnotation.html) (2 messages, latest: Sep 06 2019 at 23:42)
-
 * [Formalizing modern maths](53509Formalizingmodernmaths.html) (10 messages, latest: Sep 06 2019 at 22:26)
-
-* [category universes again](79619categoryuniversesagain.html) (38 messages, latest: Sep 06 2019 at 14:08)
 
 * [`naturality`](26894naturality.html) (2 messages, latest: Sep 05 2019 at 18:08)
 
