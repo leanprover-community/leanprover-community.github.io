@@ -1,0 +1,68 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/15296nestedexceptionnogoals.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html">nested exception: no goals</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175182890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175182890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175182890">Scott Morrison (Sep 08 2019 at 12:33)</a>:</h4>
+<p>Anyone ever seen this before:</p>
+<div class="codehilite"><pre><span></span>The nested exception contains the failure state for the decreasing tactic.
+nested exception message:
+tactic failed, there are no goals to be solved
+state:
+no goals
+</pre></div>
+
+<a name="175183175"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183175" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183175">Keeley Hoek (Sep 08 2019 at 12:42)</a>:</h4>
+<p>Does it just mean that <code>dec_tac</code> in <code>using_well_founded</code> failed because a tactic inside expected goals when there weren't any, e.g. with an appeal to <code>refl</code> at the end when everything is gone already?</p>
+
+<a name="175183477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183477">Scott Morrison (Sep 08 2019 at 12:51)</a>:</h4>
+<p>Hmm... I was getting this without an explicit <code>using_well_founded</code>!</p>
+
+<a name="175183480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183480">Scott Morrison (Sep 08 2019 at 12:51)</a>:</h4>
+<p>Anyone, I seem to have found a workaround.</p>
+
+<a name="175183553"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183553" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183553">Keeley Hoek (Sep 08 2019 at 12:53)</a>:</h4>
+<p>I would suspect that the culprit is something like the <code>tactic.dunfold_target</code>s in <code>init.meta.well_founded_tactics</code> (which run by default)</p>
+
+<a name="175183559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183559">Keeley Hoek (Sep 08 2019 at 12:53)</a>:</h4>
+<p>Probably there should be some <code>try</code>s wrapping some of that code</p>
+
+<a name="175183673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183673">Scott Morrison (Sep 08 2019 at 12:56)</a>:</h4>
+<p>ah... I had just found that same file. :-)</p>
+
+<a name="175183679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183679">Scott Morrison (Sep 08 2019 at 12:56)</a>:</h4>
+<p>But this is in core :-(</p>
+
+<a name="175183681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183681">Scott Morrison (Sep 08 2019 at 12:56)</a>:</h4>
+<p>So sad.</p>
+
+<a name="175183697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183697">Keeley Hoek (Sep 08 2019 at 12:57)</a>:</h4>
+<p>indeed</p>
+
+<a name="175183775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183775">Scott Morrison (Sep 08 2019 at 12:59)</a>:</h4>
+<p>3.5...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
