@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [talk on ATP and ITP](04431talkonATPandITP.html) (27 messages, latest: Sep 08 2019 at 14:11)
+
 * [nested exception: no goals](15296nestedexceptionnogoals.html) (12 messages, latest: Sep 08 2019 at 13:00)
 
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (7 messages, latest: Sep 08 2019 at 12:05)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (11 messages, latest: Sep 08 2019 at 10:07)
 
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
-
-* [talk on ATP and ITP](04431talkonATPandITP.html) (26 messages, latest: Sep 07 2019 at 22:08)
 
 * [ITP 2019](78458ITP2019.html) (15 messages, latest: Sep 07 2019 at 20:45)
 
