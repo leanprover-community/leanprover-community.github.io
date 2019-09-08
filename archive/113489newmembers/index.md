@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1343 messages, latest: Sep 08 2019 at 09:45)
+
 * [terms as types?](73076termsastypes.html) (13 messages, latest: Sep 04 2019 at 13:19)
 
 * [complete lattice of setoids](91280completelatticeofsetoids.html) (5 messages, latest: Sep 04 2019 at 09:24)
-
-* [noob question(s)](52075noobquestions.html) (1330 messages, latest: Sep 03 2019 at 14:53)
 
 * [Thinking about lists backwards](39001Thinkingaboutlistsbackwards.html) (7 messages, latest: Sep 02 2019 at 07:12)
 
