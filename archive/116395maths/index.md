@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Lebesgue measure](26463Lebesguemeasure.html) (1 message, latest: Sep 08 2019 at 17:28)
+
+* [`naturality`](26894naturality.html) (3 messages, latest: Sep 08 2019 at 17:09)
+
 * [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (6 messages, latest: Sep 08 2019 at 16:20)
 
 * [binary (co)products notation](33353binarycoproductsnotation.html) (12 messages, latest: Sep 08 2019 at 10:26)
@@ -18,8 +22,6 @@ permalink: archive/116395maths/index.html
 * [has_* limit classes](32691haslimitclasses.html) (20 messages, latest: Sep 07 2019 at 13:15)
 
 * [Formalizing modern maths](53509Formalizingmodernmaths.html) (10 messages, latest: Sep 06 2019 at 22:26)
-
-* [`naturality`](26894naturality.html) (2 messages, latest: Sep 05 2019 at 18:08)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (188 messages, latest: Sep 04 2019 at 07:55)
 

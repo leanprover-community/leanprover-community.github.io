@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (9 messages, latest: Sep 08 2019 at 16:45)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (3 messages, latest: Sep 08 2019 at 17:58)
+
+* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (10 messages, latest: Sep 08 2019 at 17:32)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (27 messages, latest: Sep 08 2019 at 14:11)
 
