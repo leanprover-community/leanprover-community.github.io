@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (6 messages, latest: Sep 08 2019 at 16:20)
+
 * [binary (co)products notation](33353binarycoproductsnotation.html) (12 messages, latest: Sep 08 2019 at 10:26)
 
 * [category universes again](79619categoryuniversesagain.html) (41 messages, latest: Sep 08 2019 at 04:24)
-
-* [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (3 messages, latest: Sep 08 2019 at 00:02)
 
 * [has_* limit classes](32691haslimitclasses.html) (20 messages, latest: Sep 07 2019 at 13:15)
 

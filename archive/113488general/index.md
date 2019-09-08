@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (9 messages, latest: Sep 08 2019 at 16:45)
+
 * [talk on ATP and ITP](04431talkonATPandITP.html) (27 messages, latest: Sep 08 2019 at 14:11)
 
 * [nested exception: no goals](15296nestedexceptionnogoals.html) (12 messages, latest: Sep 08 2019 at 13:00)
-
-* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (7 messages, latest: Sep 08 2019 at 12:05)
 
 * [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (11 messages, latest: Sep 08 2019 at 10:07)
 
