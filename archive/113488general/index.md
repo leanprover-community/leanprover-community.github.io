@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (3 messages, latest: Sep 08 2019 at 17:58)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (4 messages, latest: Sep 08 2019 at 20:55)
 
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (10 messages, latest: Sep 08 2019 at 17:32)
 
