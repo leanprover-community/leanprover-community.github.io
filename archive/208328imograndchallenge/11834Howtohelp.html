@@ -35,6 +35,90 @@ permalink: archive/208328IMOgrandchallenge/11834Howtohelp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175254384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175254384">Daniel Selsam (Sep 09 2019 at 15:47)</a>:</h4>
 <p><span class="user-mention" data-user-id="115715">@Jason Rute</span> FYI pushed <a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean</a></p>
 
+<a name="175267402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175267402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175267402">Floris van Doorn (Sep 09 2019 at 18:05)</a>:</h4>
+<p>In response to the determine file: I was also thinking a bit about this exact problem how to translate these problems.<br>
+The third proposal, using the solution set, is also not adequate. <code>determineSolutionSet X s_0</code> is equivalent to showing that <code>s_0</code> is countable: I can define (with a little bit of work) a <code>SolutionSet</code> witness using <code>choice</code> if I have proven that <code>s_0</code> is countable.</p>
+<p>I think a reasonable (but not completely satisfactory) solution is to change all problems of the form "determine all <code>f</code> that satisfy <code>P f</code>" to "Show that for all <code>f</code> we have <code>P f</code> iff <code>f</code> is in an explicitly given solution set". Of course, this is unsatisfactory, since we're already "giving the answer" to the program. Though I think that everyone will agree that finding the answer is not the "hard part" of a problem.</p>
+<p>Another possible option is that we do require the F2F programs to find the solutions themselves, but that the solution can only use certain specific "whitelisted" definitions from the library, and no other definitions. There might be issues in deciding which definitions are allowed so that we avoid all unsatisfactory answers.</p>
+
+<a name="175267950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175267950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175267950">Daniel Selsam (Sep 09 2019 at 18:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Hi Floris, thanks for pointing out that <code>countablyInfinite</code> is not "sound", in that it permits unacceptable solutions using choice. I will add that to the document, and to remove any possibility of a similar issue, I will remove the entire clause in the tentative proposal that allows for specific solution formats to be accepted without inspection. As for the "whitelist", this would be great but I am skeptical that it will be possible. Do you find the tentative proposal to be a reasonable compromise?</p>
+
+<a name="175268297"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268297" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268297">Johan Commelin (Sep 09 2019 at 18:15)</a>:</h4>
+<p>In some sense this just shows that the IMO problem is badly specified... we have this issue with exams as well. If you ask a question like this in Germany, you will always have students who will prove this by the informal analogue of <code>\&lt;_, iff.refl _\&gt;</code>. And if you don't give them full points, they might even threaten to sue the university... things like this have really happened.</p>
+
+<a name="175268308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268308">Patrick Massot (Sep 09 2019 at 18:15)</a>:</h4>
+<p>Floris, I don't think you can say "everyone will agree that finding the answer is not the "hard part" of a problem". Even the easy 2019 Q1 becomes much easier if you give the solution set.</p>
+
+<a name="175268420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268420">Johan Commelin (Sep 09 2019 at 18:16)</a>:</h4>
+<p>I do agree that it would be nice to keep the "find the solution" part. But I don't know how to formalize what that means.</p>
+
+<a name="175268444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268444">Daniel Selsam (Sep 09 2019 at 18:16)</a>:</h4>
+<blockquote>
+<p>Though I think that everyone will agree that finding the answer is not the "hard part" of a problem.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> I think the challenge must include the finding part as well as the proving part.</p>
+
+<a name="175268650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268650">Daniel Selsam (Sep 09 2019 at 18:18)</a>:</h4>
+<blockquote>
+<p>In some sense this just shows that the IMO problem is badly specified... </p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Imprecisely specified, yes, but one could argue that it is an interesting part of the challenge that one must have enough common sense to distinguish acceptable solutions from unacceptable ones.</p>
+
+<a name="175268796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175268796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175268796">Daniel Selsam (Sep 09 2019 at 18:20)</a>:</h4>
+<blockquote>
+<p>If you ask a question like this in Germany, you will always have students who will prove this by the informal analogue of <code>\&lt;_, iff.refl _\&gt;</code>. And if you don't give them full points, they might even threaten to sue the university... things like this have really happened.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Seriously? Is that folklore or do you have a source?</p>
+
+<a name="175269074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269074">Floris van Doorn (Sep 09 2019 at 18:23)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> I don't think the proposal is reasonable. Looking at IMO 2019-4, It is decidable to check whether a specific pair <code>(n,k)</code> is a solution, so I think the degenerate solution falls into the category "will get full score without inspection" (if I understand your proposal correctly).</p>
+<p>Even finiteness is too weak. Suppose a program proves that if <code>(n,k)</code> is a solution to IMO 2019-4, then the inequality <code>n, k &lt; 10^(10^100)</code> holds. We can then apply the degenerate solution. A human solution like that will be rejected (you are not allowed to omit a finite but infeasible amount of work).</p>
+
+<a name="175269223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269223">Daniel Selsam (Sep 09 2019 at 18:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> I removed that clause. Please reload the page.</p>
+
+<a name="175269237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269237">Floris van Doorn (Sep 09 2019 at 18:25)</a>:</h4>
+<p>Ok, I agree that giving the answer does make the problem easier. It's a useful hint to determine what proof approaches are likely to work.</p>
+
+<a name="175269250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269250">Daniel Selsam (Sep 09 2019 at 18:25)</a>:</h4>
+<p>I agree that we should not try to be clever and should require all witnesses be sanity-checked by humans.</p>
+
+<a name="175269550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269550">Daniel Selsam (Sep 09 2019 at 18:29)</a>:</h4>
+<blockquote>
+<p>Even finiteness is too weak. </p>
+</blockquote>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Thanks, great example. I will add that to the page.</p>
+
+<a name="175269557"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269557" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269557">Floris van Doorn (Sep 09 2019 at 18:29)</a>:</h4>
+<p>Oh sorry, you want to manually check all answers. <br>
+That is a reasonable compromise. It will be an extra challenge to the solvers: they have to define the solution set in a human-understandable way (so not buried behind a ton of definitions).</p>
+
+<a name="175269939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175269939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175269939">Johan Commelin (Sep 09 2019 at 18:33)</a>:</h4>
+<p>I don't have a precise source, but I hear these stories now and then... the professors in my department are really careful nowadays with how they handle students, exams, and all that. I've been present at several "Klausureinsichten" (where students come to see their grade, and the corrected exam). It's completely absurd. Never seen anything like that before. But I guess the most juicy stories are actually folklore, and jucier than what used to be their source in distant past.</p>
+
+<a name="175270065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175270065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175270065">Daniel Selsam (Sep 09 2019 at 18:34)</a>:</h4>
+<blockquote>
+<p>It will be an extra challenge to the solvers: they have to define the solution set in a human-understandable way (so not buried behind a ton of definitions).</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Yes, it is an extra challenge to the solvers, compared to a completely F2F version.</p>
+
 
 {% endraw %}
 

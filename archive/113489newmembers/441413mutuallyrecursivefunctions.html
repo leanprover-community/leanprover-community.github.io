@@ -101,6 +101,59 @@ Ideally <code>le</code> and <code>lt</code> would be defined mutually, but you c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175235146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175235146">Matija Pretnar (Sep 09 2019 at 12:07)</a>:</h4>
 <p>I'll give it a try, thanks again!</p>
 
+<a name="175267393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175267393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175267393">Žiga Lukšič (Sep 09 2019 at 18:05)</a>:</h4>
+<p>I have played around with it a bit and I would guess that the problem is in the fact that the type <code>A + B + C</code> is actually <code>A + (B + C)</code> (and the same problem probably persists with products?). As such, if you have <code>b : B</code> and <code>cons b : A</code> if you put them in the sum they become  <code>sum.inr (sum.inl b)</code> and <code>sum.inl (cons b)</code>, both having <code>.sizeof</code> (which is the default ordering it tries to use as far as I can tell) of 2 despite <code>b</code> being a subterm of <code>cons b</code>. </p>
+<p>Example: </p>
+<div class="codehilite"><pre><span></span>mutual inductive A, B, C
+with A : Type u
+| base : A
+| cons : C → A
+with B : Type u
+| cons : A → B
+with C : Type u
+| cons : B → C
+
+mutual def adepth, bdepth, cdepth
+with adepth : A → ℕ
+| A.base := 1
+| (A.cons c) := 1 + cdepth c
+with bdepth : B → ℕ
+| (B.cons a) := 1 + adepth a
+with cdepth : C → ℕ
+| (C.cons b) := 1 + bdepth b
+</pre></div>
+
+
+<p>The above code complains that it cant prove <code>2 &lt; 2</code> in the case <code>| (A.cons c) := 1 + cdepth c </code>.<br>
+This can then be kinda fixed by introducing a new type <code>t(riple)sum</code>.</p>
+<div class="codehilite"><pre><span></span>inductive tsum
+| first : A → tsum
+| second : B → tsum
+| third : C → tsum
+
+def depth : tsum → ℕ
+| (tsum.first A.base) := 1
+| (tsum.first (A.cons c)) := 1 + depth (tsum.third c)
+| (tsum.second (B.cons a)) := 1 + depth (tsum.first a)
+| (tsum.third (C.cons b)) := 1 + depth (tsum.second b)
+</pre></div>
+
+
+<p>and the code seems to work for now.</p>
+<p>But could one perhaps construct a better <code>sizeof</code> function for a specific sumtype?<br>
+So something like</p>
+<div class="codehilite"><pre><span></span>def correct_size :  A+B+C → ℕ
+| (sum.inl a) := A.sizeof a
+| (sum.inr (sum.inl b)) := B.sizeof b
+| (sum.inr (sum.inr c)) := C.sizeof c
+</pre></div>
+
+
+<p>and then use this as the measure? I have failed to find a way to insert this into the <code>using_well_founded</code> even with the help of<br>
+<a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a></p>
+<p>If I made any kind of wrong assumptions or conclusions please let me know.</p>
+
 
 {% endraw %}
 
