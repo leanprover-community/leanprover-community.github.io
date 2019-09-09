@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (13 messages, latest: Sep 09 2019 at 04:58)
+* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (14 messages, latest: Sep 09 2019 at 05:18)
 
 * [lean solver](47804leansolver.html) (53 messages, latest: Sep 09 2019 at 04:21)
 
