@@ -9,19 +9,19 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (23 messages, latest: Sep 09 2019 at 00:57)
+
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (7 messages, latest: Sep 09 2019 at 00:41)
+
 * [talk on ATP and ITP](04431talkonATPandITP.html) (28 messages, latest: Sep 08 2019 at 23:17)
 
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (11 messages, latest: Sep 08 2019 at 22:46)
-
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (4 messages, latest: Sep 08 2019 at 20:55)
 
 * [nested exception: no goals](15296nestedexceptionnogoals.html) (12 messages, latest: Sep 08 2019 at 13:00)
 
 * [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (11 messages, latest: Sep 08 2019 at 10:07)
 
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
-
-* [ITP 2019](78458ITP2019.html) (15 messages, latest: Sep 07 2019 at 20:45)
 
 * [IMO Grand Challenge](71157IMOGrandChallenge.html) (7 messages, latest: Sep 07 2019 at 17:36)
 

@@ -32,6 +32,37 @@ permalink: archive/113488general/24709Instanceresolutionfailures.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175199193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175199193">Sebastian Ullrich (Sep 08 2019 at 20:55)</a>:</h4>
 <p>We'd like to have realistic examples, but we'll still need to extract them if we want to test them in Lean 4</p>
 
+<a name="175205903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175205903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175205903">Floris van Doorn (Sep 09 2019 at 00:23)</a>:</h4>
+<p>Here is an unrealistic example which shows that diamonds cause an exponential blow-up in the type class inference search:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- Lean 3 code</span>
+<span class="kn">set_option</span> <span class="n">old_structure_cmd</span> <span class="n">true</span>
+<span class="n">class</span> <span class="n">bottom</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+<span class="n">class</span> <span class="n">left</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">bottom</span> <span class="n">α</span> <span class="n">n</span>
+<span class="n">class</span> <span class="n">right</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">bottom</span> <span class="n">α</span> <span class="n">n</span>
+<span class="n">class</span> <span class="n">top</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">left</span> <span class="n">α</span> <span class="n">n</span><span class="o">,</span> <span class="n">right</span> <span class="n">α</span> <span class="n">n</span>
+
+
+<span class="kn">instance</span> <span class="n">unrealistic_loop</span> <span class="o">(</span><span class="n">α</span> <span class="n">n</span><span class="o">)</span> <span class="o">[</span><span class="n">bottom</span> <span class="n">α</span> <span class="n">n</span><span class="o">]</span> <span class="o">:</span> <span class="n">top</span> <span class="n">α</span> <span class="n">n</span><span class="bp">.</span><span class="n">succ</span> <span class="o">:=</span> <span class="o">{</span> <span class="bp">.._</span><span class="n">inst_1</span> <span class="o">}</span>
+
+<span class="kn">set_option</span> <span class="n">trace</span><span class="bp">.</span><span class="n">class_instances</span> <span class="n">true</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">top</span> <span class="n">unit</span> <span class="mi">10</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span> <span class="c1">-- fails, but slowly</span>
+</pre></div>
+
+
+<p>Even though this example is unrealistic, diamonds occur all over the algebraic hierarchy, and I don't think there is a way avoiding diamonds from the algebraic hierarchy. And this is not a large amount of diamonds, there is already a significant slowdown with 11 diamonds on top of each other. I think mathlib has more diamonds (more parallel instead of serial).</p>
+
+<a name="175205975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175205975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175205975">Floris van Doorn (Sep 09 2019 at 00:24)</a>:</h4>
+<p>In the stream <a href="#narrow/stream/113488-general/topic/more.20type.20class.20inference.20issues" title="#narrow/stream/113488-general/topic/more.20type.20class.20inference.20issues">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/more.20type.20class.20inference.20issues</a> I suggested:</p>
+<blockquote>
+<p>There should really be a different algorithm for these "forgetful instances". Make a graph of all instances that change the class but not the type (like <code>add_comm_group \a -&gt; add_group \a</code>) and when you have searched through all structural instances (or all instances with priority &gt;= default priority), then use a graph reachability algorithm to quickly search for a path to any instance in the local context.</p>
+</blockquote>
+
+<a name="175206555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175206555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175206555">Floris van Doorn (Sep 09 2019 at 00:41)</a>:</h4>
+<p>I don't know if that is the best way to deal with diamonds, but it should avoid the exponential blowup.</p>
+
 
 {% endraw %}
 
