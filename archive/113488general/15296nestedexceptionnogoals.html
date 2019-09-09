@@ -66,6 +66,34 @@ no goals
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175183821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175183821">Keeley Hoek (Sep 08 2019 at 13:00)</a>:</h4>
 <p>I half typed a comment about that but thought it was a bit sassy</p>
 
+<a name="175219901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175219901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175219901">Scott Morrison (Sep 09 2019 at 07:17)</a>:</h4>
+<p>Ok, I've addressed this problem in <a href="https://github.com/leanprover-community/mathlib/issues/1419" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1419">#1419</a>. It comes at a slight cost: having to add <code>using_well_founded { dec_tac := well_founded_tactics.default_dec_tac' }</code> to half a dozen proofs across mathlib, to used the patched version of <code>default_dec_tac</code>.</p>
+
+<a name="175219940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175219940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175219940">Scott Morrison (Sep 09 2019 at 07:18)</a>:</h4>
+<p>I think it's worth it however, to let us make <code>simp</code> better at inequalities.</p>
+
+<a name="175221105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175221105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175221105">Keeley Hoek (Sep 09 2019 at 07:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> I think you could do better with the syntax by just defining a structure somewhere with a short name (e.g. <code>wf_tacs</code>) and type <code>well_founded_tactics</code>, equal to <code>{ dec_tac := well_founded_tactics.default_dec_tac' }</code>.</p>
+
+<a name="175221174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175221174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175221174">Keeley Hoek (Sep 09 2019 at 07:48)</a>:</h4>
+<p>Then <code>using_well_founded wf_tacs</code> works. Depending on how much of a hack <code>using_well_founded</code> is in the parser (probably a lot), we could even define notation for that; maybe <code>using_well_founded'</code></p>
+
+<a name="175221277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175221277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175221277">Keeley Hoek (Sep 09 2019 at 07:50)</a>:</h4>
+<p>Yeah, I have no idea how to do the notation thing, probably not possible.</p>
+
+<a name="175221302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175221302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175221302">Keeley Hoek (Sep 09 2019 at 07:51)</a>:</h4>
+<p>Actually, I think with some work I could make it work if you wrote <code>recdef</code> instead of <code>def</code> for the recursive definition, but I don't know a way to do make <code>using_well_founded wf_tacs</code> shorter.</p>
+
+<a name="175221372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20exception%3A%20no%20goals/near/175221372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15296nestedexceptionnogoals.html#175221372">Keeley Hoek (Sep 09 2019 at 07:52)</a>:</h4>
+<p>Also, we should put <code>default_dec_tac'</code> in lean <code>3.5.0</code> right away</p>
+
 
 {% endraw %}
 

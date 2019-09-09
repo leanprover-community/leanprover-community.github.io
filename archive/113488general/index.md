@@ -9,6 +9,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [sanity check](33847sanitycheck.html) (56 messages, latest: Sep 09 2019 at 07:56)
+
+* [nested exception: no goals](15296nestedexceptionnogoals.html) (19 messages, latest: Sep 09 2019 at 07:52)
+
+* [Arend — HoTT ITP](16525ArendHoTTITP.html) (29 messages, latest: Sep 09 2019 at 07:07)
+
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (14 messages, latest: Sep 09 2019 at 05:18)
 
 * [lean solver](47804leansolver.html) (53 messages, latest: Sep 09 2019 at 04:21)
@@ -19,8 +25,6 @@ permalink: archive/113488general/index.html
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (28 messages, latest: Sep 08 2019 at 23:17)
 
-* [nested exception: no goals](15296nestedexceptionnogoals.html) (12 messages, latest: Sep 08 2019 at 13:00)
-
 * [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (11 messages, latest: Sep 08 2019 at 10:07)
 
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
@@ -29,15 +33,11 @@ permalink: archive/113488general/index.html
 
 * [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
 
-* [Arend — HoTT ITP](16525ArendHoTTITP.html) (28 messages, latest: Sep 07 2019 at 04:46)
-
 * [Proving for Fun](94070ProvingforFun.html) (115 messages, latest: Sep 05 2019 at 16:13)
 
 * [Lean in the wild](43625Leaninthewild.html) (198 messages, latest: Sep 05 2019 at 14:19)
 
 * [algebraic closure](74840algebraicclosure.html) (208 messages, latest: Sep 04 2019 at 19:10)
-
-* [sanity check](33847sanitycheck.html) (55 messages, latest: Sep 04 2019 at 15:28)
 
 * [2000](439072000.html) (15 messages, latest: Sep 04 2019 at 09:02)
 

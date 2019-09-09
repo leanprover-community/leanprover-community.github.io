@@ -327,6 +327,14 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/174893034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#174893034">Floris van Doorn (Sep 04 2019 at 15:28)</a>:</h4>
 <p>I don't think so. I think it will then run both <code>decidable.to_bool</code> and <code>bool.decidable_eq</code>.</p>
 
+<a name="175221568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/sanity%20check/near/175221568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/33847sanitycheck.html#175221568">Sebastien Gouezel (Sep 09 2019 at 07:56)</a>:</h4>
+<p>I have started using sanity_check to clean up some files, and I found it super-useful. Just for the record, two small additions that I would find worthy:</p>
+<ul>
+<li>define an attribute <code>sanity_check_skip</code> for statements that should be skipped by <code>sanity_check</code>. For instance, <code>theorem imp_intro {α β} (h : α) (h₂ : β) : α := h</code> in <code>logic/basic.lean</code> has an unused argument by design. Or in fiber bundles the function <code>topological_fiber_bundle.fiber</code> has a lot of unused arguments, but this is to get a new name for a type, in order for typeclass inference to work correctly. If we don't add such an attribute, they will show up forever in the output of <code>sanity_check</code>.</li>
+<li>would it be possible to show as a mistake the use of <code>&gt;</code> or <code>&gt;=</code> in the assumptions or conclusions of theorems? Rewrites would be really easier if <code>&lt;</code> and <code>&lt;=</code> were used consistently all over mathlib, and I think this is a move we will have to do some day.</li>
+</ul>
+
 
 {% endraw %}
 
