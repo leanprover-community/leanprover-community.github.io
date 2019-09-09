@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nested exception: no goals](15296nestedexceptionnogoals.html) (20 messages, latest: Sep 09 2019 at 08:32)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (13 messages, latest: Sep 09 2019 at 09:43)
 
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (8 messages, latest: Sep 09 2019 at 08:11)
+* [nested exception: no goals](15296nestedexceptionnogoals.html) (22 messages, latest: Sep 09 2019 at 09:37)
 
 * [sanity check](33847sanitycheck.html) (56 messages, latest: Sep 09 2019 at 07:56)
 
