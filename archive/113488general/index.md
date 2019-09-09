@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Arend — HoTT ITP](16525ArendHoTTITP.html) (30 messages, latest: Sep 09 2019 at 11:11)
+
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (13 messages, latest: Sep 09 2019 at 09:43)
 
 * [nested exception: no goals](15296nestedexceptionnogoals.html) (22 messages, latest: Sep 09 2019 at 09:37)
 
 * [sanity check](33847sanitycheck.html) (56 messages, latest: Sep 09 2019 at 07:56)
-
-* [Arend — HoTT ITP](16525ArendHoTTITP.html) (29 messages, latest: Sep 09 2019 at 07:07)
 
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (14 messages, latest: Sep 09 2019 at 05:18)
 

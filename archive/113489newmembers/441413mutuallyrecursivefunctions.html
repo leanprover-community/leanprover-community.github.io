@@ -58,6 +58,39 @@ with f3 : N -&gt; N
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175228944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175228944">Keeley Hoek (Sep 09 2019 at 10:13)</a>:</h4>
 <p>If it was me, I would try defining <code>size : T1 \times T2 \times T3 \to N \times N \times N</code>, and then convincing lean that that is well-founded.</p>
 
+<a name="175231707"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175231707" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175231707">Matija Pretnar (Sep 09 2019 at 11:06)</a>:</h4>
+<p>Is there a better way of defining this function aside from listing all the possible 8 x 10 x 2 = 160 cases? I guess one can be smart with auxiliary functions, but probably that again leads to the well-foundedness issues?</p>
+
+<a name="175232735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232735">Keeley Hoek (Sep 09 2019 at 11:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="239275">@Matija Pretnar</span>  Yes, the declaration is slightly more ugly than three separate functions, but you do not need any more cases than you would have otherwise.</p>
+
+<a name="175232751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232751">Keeley Hoek (Sep 09 2019 at 11:27)</a>:</h4>
+<p>Just use a <code>match</code> statement to break off how to generate the three separate outputs</p>
+
+<a name="175232779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232779">Keeley Hoek (Sep 09 2019 at 11:27)</a>:</h4>
+<p>Like, a match for each of <code>T1</code>, <code>T2</code>, and <code>T3</code> (or however many there actually are).</p>
+
+<a name="175232796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232796">Keeley Hoek (Sep 09 2019 at 11:27)</a>:</h4>
+<p>Definitely there should be no duplication like you proposed.</p>
+
+<a name="175232849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232849">Keeley Hoek (Sep 09 2019 at 11:28)</a>:</h4>
+<p>Most of the time, for me anyway, writing everything like this just works out of the box.</p>
+
+<a name="175232859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175232859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175232859">Keeley Hoek (Sep 09 2019 at 11:28)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md</a><br>
+is where you have to go to fix further problems you then have</p>
+
+<a name="175234413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/3%2B%20mutually%20recursive%20functions/near/175234413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/441413mutuallyrecursivefunctions.html#175234413">Matija Pretnar (Sep 09 2019 at 11:56)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span> Many thanks! You had me scared there for a moment <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span> Do you by any chance have an example lying around so I can adapt it to my case?</p>
+
 
 {% endraw %}
 
