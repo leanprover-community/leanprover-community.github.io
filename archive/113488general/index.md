@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (30 messages, latest: Sep 09 2019 at 20:19)
+* [ITP 2019](78458ITP2019.html) (32 messages, latest: Sep 09 2019 at 21:16)
 
 * [lean solver](47804leansolver.html) (54 messages, latest: Sep 09 2019 at 14:49)
 
