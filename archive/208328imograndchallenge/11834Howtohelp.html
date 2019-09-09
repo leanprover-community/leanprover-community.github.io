@@ -119,6 +119,55 @@ That is a reasonable compromise. It will be an extra challenge to the solvers: t
 </blockquote>
 <p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> Yes, it is an extra challenge to the solvers, compared to a completely F2F version.</p>
 
+<a name="175272896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175272896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175272896">Kevin Buzzard (Sep 09 2019 at 19:06)</a>:</h4>
+<p>I was once personally faced with this: <a href="https://bmos.ukmt.org.uk/home/fist-1986.pdf" target="_blank" title="https://bmos.ukmt.org.uk/home/fist-1986.pdf">https://bmos.ukmt.org.uk/home/fist-1986.pdf</a> . Question 2 is "find the real number which is the supremum of this explicit non-empty bounded set". I realise I am a bit confused about how to formalise this. I feel like the real question is "give a finite sequence of buttons which one can press on a calculator, such that after you've pressed them, the answer is on the screen".</p>
+
+<a name="175272990"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175272990" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175272990">Kevin Buzzard (Sep 09 2019 at 19:07)</a>:</h4>
+<p>[NB I got that paper from here: <a href="https://bmos.ukmt.org.uk/home/bmo.shtml" target="_blank" title="https://bmos.ukmt.org.uk/home/bmo.shtml">https://bmos.ukmt.org.uk/home/bmo.shtml</a> -- big library of the training materials used by the UK for many years]</p>
+
+<a name="175274431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175274431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175274431">Chris Hughes (Sep 09 2019 at 19:26)</a>:</h4>
+<p>You can always ask for an explicit term of this type for the witness. I'm not sure if this covers every single "find this real" question</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">complex</span><span class="bp">.</span><span class="n">exponential</span>
+<span class="kn">open</span> <span class="n">real</span>
+
+<span class="kn">inductive</span> <span class="n">calculatorable</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">one</span> <span class="o">:</span> <span class="n">calculatorable</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">calculatorable</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="n">pi</span>   <span class="o">:</span> <span class="n">calculatorable</span> <span class="n">real</span><span class="bp">.</span><span class="n">pi</span>
+<span class="bp">|</span> <span class="n">add</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">mul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">div</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">/</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sub</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="n">y</span> <span class="bp">→</span>
+  <span class="n">calculatorable</span> <span class="o">(</span><span class="n">x</span> <span class="bp">-</span> <span class="n">y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sqrt</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">sqrt</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">sin</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">sin</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">cos</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">cos</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">exp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">exp</span> <span class="n">x</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">log</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">calculatorable</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">calculatorable</span> <span class="o">(</span><span class="n">log</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="175275156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275156">Daniel Selsam (Sep 09 2019 at 19:36)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span> Thanks. I would put this approach  in the "whitelist" category. I am open to this kind of approach in principle but I fear that a fleshed out proposal would not only be complicated but would probably still be at risk of being either too forgiving or too restrictive or both.</p>
+
+<a name="175275816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275816">Johan Commelin (Sep 09 2019 at 19:44)</a>:</h4>
+<p>If we do "inspection of results by humans" then we'll still have to engineer the tactics in such a way that they produce convincing results.</p>
+
+<a name="175275841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275841">Johan Commelin (Sep 09 2019 at 19:44)</a>:</h4>
+<p>Once that is done, proving that the result is <code>calculatorable</code> for a some reasonable definition of <code>calculatorable</code> is of course trivial.</p>
+
+<a name="175275885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175275885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175275885">Johan Commelin (Sep 09 2019 at 19:45)</a>:</h4>
+<p>So I guess it doesn't really matter too much what we do.</p>
+
 
 {% endraw %}
 

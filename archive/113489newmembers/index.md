@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1345 messages, latest: Sep 09 2019 at 19:45)
+
 * [3+ mutually recursive functions](441413mutuallyrecursivefunctions.html) (17 messages, latest: Sep 09 2019 at 18:05)
 
 * [Is mathlib-nursary recommended/alive?](60865Ismathlibnursaryrecommendedalive.html) (2 messages, latest: Sep 08 2019 at 16:27)
-
-* [noob question(s)](52075noobquestions.html) (1343 messages, latest: Sep 08 2019 at 09:45)
 
 * [terms as types?](73076termsastypes.html) (13 messages, latest: Sep 04 2019 at 13:19)
 

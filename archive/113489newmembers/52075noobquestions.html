@@ -7558,6 +7558,35 @@ it probably isn't a good idea to have tactics for use cases this concrete, and "
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/175178077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#175178077">Mario Carneiro (Sep 08 2019 at 09:45)</a>:</h4>
 <p>I think the normalization is domain specific</p>
 
+<a name="175273971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/175273971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#175273971">Gihan Marasingha (Sep 09 2019 at 19:19)</a>:</h4>
+<p>Lean works fine on my Windows machine, but I have a couple of issues on the Mac.</p>
+<p>My main problems is that VS Code doesn't seem to access the added dependencies.</p>
+<p>From the Mac command line, If I move into the directory of the Lean project I've already created on Windows (and synced via OneDrive) to which I have already added mathlib as a dependency, I can execute .lean files perfectly, but I get import resolution errors when attempting the same through VS Code.</p>
+<p>For example, if the file <code>tsum.lean</code> has the contents</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">big_operators</span>
+
+<span class="kn">open</span> <span class="n">finset</span>
+
+<span class="n">def</span> <span class="n">tsum</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span>
+    <span class="n">sum</span> <span class="o">(</span><span class="n">range</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">i</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">tsum</span> <span class="mi">10</span>
+</pre></div>
+
+
+<p>then executing, at the terminal, <code>lean tsum.lean</code> produces the expected output <code>55</code>. </p>
+<p>But VS Code presents me with the error messages:</p>
+<div class="codehilite"><pre><span></span>file &#39;algebra/big_operators&#39; not found in the LEAN_PATH
+
+invalid import: algebra.big_operators
+could not resolve import: algebra.big_operators
+</pre></div>
+
+<a name="175275887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/175275887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#175275887">Bryan Gin-ge Chen (Sep 09 2019 at 19:45)</a>:</h4>
+<p>Did you open the Lean package directory in VS Code or just the file <code>tsum.lean</code>? The vscode-lean extension won't work properly unless you do the former.</p>
+
 
 {% endraw %}
 
