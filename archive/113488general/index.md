@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (12 messages, latest: Sep 09 2019 at 03:18)
+* [non-equational simp lemmas](69796nonequationalsimplemmas.html) (13 messages, latest: Sep 09 2019 at 04:58)
 
-* [ITP 2019](78458ITP2019.html) (27 messages, latest: Sep 09 2019 at 01:14)
+* [lean solver](47804leansolver.html) (53 messages, latest: Sep 09 2019 at 04:21)
+
+* [ITP 2019](78458ITP2019.html) (28 messages, latest: Sep 09 2019 at 04:16)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (7 messages, latest: Sep 09 2019 at 00:41)
 
@@ -80,8 +82,6 @@ permalink: archive/113488general/index.html
 * [Error creating new project](62105Errorcreatingnewproject.html) (9 messages, latest: Aug 28 2019 at 20:36)
 
 * [Check whether variable exists](93116Checkwhethervariableexists.html) (9 messages, latest: Aug 28 2019 at 18:16)
-
-* [lean solver](47804leansolver.html) (52 messages, latest: Aug 28 2019 at 17:25)
 
 * [Way to get fresh variable?](84818Waytogetfreshvariable.html) (3 messages, latest: Aug 28 2019 at 16:14)
 
