@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (23 messages, latest: Sep 09 2019 at 00:57)
+* [ITP 2019](78458ITP2019.html) (27 messages, latest: Sep 09 2019 at 01:14)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (7 messages, latest: Sep 09 2019 at 00:41)
 
