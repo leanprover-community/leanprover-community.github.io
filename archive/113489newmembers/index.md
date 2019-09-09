@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [3+ mutually recursive functions](441413mutuallyrecursivefunctions.html) (14 messages, latest: Sep 09 2019 at 11:56)
+* [3+ mutually recursive functions](441413mutuallyrecursivefunctions.html) (16 messages, latest: Sep 09 2019 at 12:07)
 
 * [Is mathlib-nursary recommended/alive?](60865Ismathlibnursaryrecommendedalive.html) (2 messages, latest: Sep 08 2019 at 16:27)
 

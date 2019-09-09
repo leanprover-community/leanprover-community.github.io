@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [abelian failure](77173abelianfailure.html) (9 messages, latest: Sep 09 2019 at 12:50)
+
 * [Arend — HoTT ITP](16525ArendHoTTITP.html) (30 messages, latest: Sep 09 2019 at 11:11)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (13 messages, latest: Sep 09 2019 at 09:43)
@@ -1246,8 +1248,6 @@ permalink: archive/113488general/index.html
 * [unification hints](21856unificationhints.html) (23 messages, latest: Feb 15 2019 at 14:48)
 
 * [ITP class](03812ITPclass.html) (2 messages, latest: Feb 15 2019 at 13:20)
-
-* [abelian failure](77173abelianfailure.html) (7 messages, latest: Feb 15 2019 at 11:51)
 
 * [New structures breaking definitional equality](51350Newstructuresbreakingdefinitionalequality.html) (40 messages, latest: Feb 15 2019 at 11:04)
 
