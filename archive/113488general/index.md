@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [talk on ATP and ITP](04431talkonATPandITP.html) (28 messages, latest: Sep 08 2019 at 23:17)
+
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (11 messages, latest: Sep 08 2019 at 22:46)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (4 messages, latest: Sep 08 2019 at 20:55)
-
-* [talk on ATP and ITP](04431talkonATPandITP.html) (27 messages, latest: Sep 08 2019 at 14:11)
 
 * [nested exception: no goals](15296nestedexceptionnogoals.html) (12 messages, latest: Sep 08 2019 at 13:00)
 
