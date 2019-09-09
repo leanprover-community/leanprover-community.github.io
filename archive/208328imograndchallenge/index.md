@@ -9,11 +9,13 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
-* [problems: the source](55793problemsthesource.html) (10 messages, latest: Sep 08 2019 at 06:43)
+* [Intermediate Language](92224IntermediateLanguage.html) (4 messages, latest: Sep 09 2019 at 13:46)
 
-* [Intermediate Language](92224IntermediateLanguage.html) (3 messages, latest: Sep 08 2019 at 02:18)
+* [problems: the source](55793problemsthesource.html) (11 messages, latest: Sep 09 2019 at 13:40)
 
-* [F2F](00479F2F.html) (13 messages, latest: Sep 07 2019 at 23:43)
+* [How to help?](11834Howtohelp.html) (2 messages, latest: Sep 09 2019 at 13:25)
+
+* [F2F](00479F2F.html) (15 messages, latest: Sep 09 2019 at 13:21)
 
 * [AI](35019AI.html) (5 messages, latest: Sep 07 2019 at 14:00)
 
