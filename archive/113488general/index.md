@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (29 messages, latest: Sep 09 2019 at 17:44)
+
 * [lean solver](47804leansolver.html) (54 messages, latest: Sep 09 2019 at 14:49)
 
 * [abelian failure](77173abelianfailure.html) (10 messages, latest: Sep 09 2019 at 13:03)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [sanity check](33847sanitycheck.html) (56 messages, latest: Sep 09 2019 at 07:56)
 
 * [non-equational simp lemmas](69796nonequationalsimplemmas.html) (14 messages, latest: Sep 09 2019 at 05:18)
-
-* [ITP 2019](78458ITP2019.html) (28 messages, latest: Sep 09 2019 at 04:16)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (28 messages, latest: Sep 08 2019 at 23:17)
 
