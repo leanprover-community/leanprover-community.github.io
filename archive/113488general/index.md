@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sanity check](33847sanitycheck.html) (56 messages, latest: Sep 09 2019 at 07:56)
+* [nested exception: no goals](15296nestedexceptionnogoals.html) (20 messages, latest: Sep 09 2019 at 08:32)
 
-* [nested exception: no goals](15296nestedexceptionnogoals.html) (19 messages, latest: Sep 09 2019 at 07:52)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (8 messages, latest: Sep 09 2019 at 08:11)
+
+* [sanity check](33847sanitycheck.html) (56 messages, latest: Sep 09 2019 at 07:56)
 
 * [Arend — HoTT ITP](16525ArendHoTTITP.html) (29 messages, latest: Sep 09 2019 at 07:07)
 
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [lean solver](47804leansolver.html) (53 messages, latest: Sep 09 2019 at 04:21)
 
 * [ITP 2019](78458ITP2019.html) (28 messages, latest: Sep 09 2019 at 04:16)
-
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (7 messages, latest: Sep 09 2019 at 00:41)
 
 * [talk on ATP and ITP](04431talkonATPandITP.html) (28 messages, latest: Sep 08 2019 at 23:17)
 
