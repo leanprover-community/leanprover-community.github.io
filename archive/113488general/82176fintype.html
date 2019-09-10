@@ -91,6 +91,28 @@ permalink: archive/113488general/82176fintype.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/175342712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#175342712">Reid Barton (Sep 10 2019 at 14:37)</a>:</h4>
 <p>Maybe another question is: is <code>fintype</code> "correct"?</p>
 
+<a name="175350392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/175350392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#175350392">Floris van Doorn (Sep 10 2019 at 15:49)</a>:</h4>
+<p>Good point. Maybe we can prove that every <code>fintype</code> has decidable equality. <br>
+You can definitely prove <code>nonempty (decidable_eq \a)</code>, and maybe you can do some trickery to get decidable equality, since that is a subsingleton?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="n">def</span> <span class="n">dec</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">∨</span> <span class="n">x</span> <span class="bp">≠</span> <span class="n">y</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">unfreezeI</span><span class="o">,</span> <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">hs</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h2s</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">revert</span> <span class="n">hs</span> <span class="n">h2s</span><span class="o">,</span> <span class="n">refine</span> <span class="n">quotient</span><span class="bp">.</span><span class="n">rec_on_subsingleton</span> <span class="n">s</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">l</span> <span class="n">hl</span> <span class="n">h2l</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hx</span> <span class="o">:=</span> <span class="n">h2l</span> <span class="n">x</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hy</span> <span class="o">:=</span> <span class="n">h2l</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">mem_iff_nth_le</span><span class="o">]</span> <span class="n">at</span> <span class="n">hx</span> <span class="n">hy</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">hx</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">hn</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">rcases</span> <span class="n">hy</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">m</span><span class="o">,</span> <span class="n">hm</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">m</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">right</span><span class="o">,</span> <span class="n">refine</span> <span class="n">mt</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">nodup_iff_nth_le_inj</span><span class="o">]</span> <span class="n">at</span> <span class="n">hl</span><span class="o">,</span> <span class="n">apply</span> <span class="n">hl</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
