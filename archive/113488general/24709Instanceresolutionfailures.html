@@ -116,6 +116,24 @@ I have not worked with <code>out_param</code>s myself, so I cannot judge judge t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175316835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175316835">Scott Morrison (Sep 10 2019 at 08:39)</a>:</h4>
 <p>I wonder if just looking through the 53 current instances of <code>set_option class.instance_max_depth ...</code> in mathlib would provide some interesting examples.</p>
 
+<a name="175325702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175325702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175325702">Sebastien Gouezel (Sep 10 2019 at 11:17)</a>:</h4>
+<p>Orthogonal to instance failures, but the following has been painful for me in manifolds.</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">my_source</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">source</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span>
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">my_source</span> <span class="n">α</span><span class="o">))</span> <span class="o">:</span> <span class="bp">∀</span><span class="n">e</span> <span class="err">∈</span> <span class="n">A</span><span class="o">,</span> <span class="n">e</span><span class="bp">.</span><span class="n">source</span> <span class="bp">=</span> <span class="n">e</span><span class="bp">.</span><span class="n">source</span>
+</pre></div>
+
+
+<p>is not understood by Lean, as it is not able to infer the type of <code>e</code> in the statement of <code>foo</code> (even though <code>e ∈ A</code> should tell everything). So I have to give explicitly the type of <code>e</code>, which is not bad here but can be bad in more complicated instances. I know unification is complicated, but still...</p>
+
+<a name="175325955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175325955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175325955">Kenny Lau (Sep 10 2019 at 11:21)</a>:</h4>
+<p>I think the issue is that you shouldn't use projection with class.</p>
+
+<a name="175326366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175326366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175326366">Sebastien Gouezel (Sep 10 2019 at 11:27)</a>:</h4>
+<p>Sorry, I shouldn't have used <code>class</code>. Same outcome with <code>structure</code> instead.</p>
+
 
 {% endraw %}
 
