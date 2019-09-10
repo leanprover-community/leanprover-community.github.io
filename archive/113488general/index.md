@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [fintype](82176fintype.html) (20 messages, latest: Sep 10 2019 at 15:49)
+* [fintype](82176fintype.html) (25 messages, latest: Sep 10 2019 at 16:37)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (23 messages, latest: Sep 10 2019 at 11:27)
 
