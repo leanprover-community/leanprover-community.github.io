@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [fintype](82176fintype.html) (19 messages, latest: Sep 10 2019 at 14:37)
+
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (23 messages, latest: Sep 10 2019 at 11:27)
 
 * [sanity check](33847sanitycheck.html) (59 messages, latest: Sep 10 2019 at 07:12)
@@ -4092,8 +4094,6 @@ permalink: archive/113488general/index.html
 * [lists](93712lists.html) (14 messages, latest: Feb 28 2018 at 02:14)
 
 * [refl](51626refl.html) (10 messages, latest: Feb 28 2018 at 02:00)
-
-* [fintype](82176fintype.html) (16 messages, latest: Feb 28 2018 at 01:01)
 
 * [emacs lean-mode](27580emacsleanmode.html) (27 messages, latest: Feb 28 2018 at 00:14)
 
