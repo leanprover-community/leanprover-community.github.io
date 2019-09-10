@@ -22,6 +22,43 @@ Does anyone know which commit caused this regressed behavior?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175361861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175361861">Floris van Doorn (Sep 10 2019 at 17:55)</a>:</h4>
 <p>I assumed in my previous message that there was a merged commit that caused performance issues, but they all seem fine. Maybe this was a cache-related issue (I merged the PR into master, maybe that fixes it)</p>
 
+<a name="175363359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175363359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175363359">Rob Lewis (Sep 10 2019 at 18:11)</a>:</h4>
+<p>Regardless of what caused it here, regression testing for compilation time would be a good idea.</p>
+
+<a name="175363403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175363403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175363403">Rob Lewis (Sep 10 2019 at 18:11)</a>:</h4>
+<p>I don't know if Travis is reliable enough to do this.</p>
+
+<a name="175363427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175363427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175363427">Rob Lewis (Sep 10 2019 at 18:11)</a>:</h4>
+<p>But maybe we could run something once a day on Scott's server?</p>
+
+<a name="175363495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175363495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175363495">Rob Lewis (Sep 10 2019 at 18:12)</a>:</h4>
+<p>I guess that would more reliably throw the same processing power at it.</p>
+
+<a name="175363544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175363544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175363544">Reid Barton (Sep 10 2019 at 18:12)</a>:</h4>
+<p>Last three pushes to master built in around 107 (most recent), 100, 110 minutes. I didn't look at the changes, but I assume they were not responsible for this variance.</p>
+
+<a name="175363759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175363759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175363759">Reid Barton (Sep 10 2019 at 18:14)</a>:</h4>
+<p>Interestingly <a href="https://travis-ci.org/leanprover-community/mathlib/builds/583109848?utm_source=github_status&amp;utm_medium=notification" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/builds/583109848?utm_source=github_status&amp;utm_medium=notification">this build</a> of PR <a href="https://github.com/leanprover-community/mathlib/issues/1428" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1428">#1428</a> timed out, but <code>leanpkg build</code> actually finished, it just took so much longer than usual that there wasn't enough time left to run <code>leanchecker</code>.</p>
+
+<a name="175364067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175364067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175364067">Reid Barton (Sep 10 2019 at 18:17)</a>:</h4>
+<p>I'm sure a dedicated machine would be more consistent, I'm not sure how much more consistent.<br>
+Doesn't Scott already build everything anyways? Or did I imagine that?</p>
+
+<a name="175364221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175364221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175364221">Rob Lewis (Sep 10 2019 at 18:19)</a>:</h4>
+<p>I think the mathlib nightlies get pushed to Scott from Travis. Would he be building for another reason?</p>
+
+<a name="175364308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175364308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175364308">Rob Lewis (Sep 10 2019 at 18:20)</a>:</h4>
+<p>I could be wrong about that though.</p>
+
 
 {% endraw %}
 
