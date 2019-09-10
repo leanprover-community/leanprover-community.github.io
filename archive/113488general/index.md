@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sanity check](33847sanitycheck.html) (59 messages, latest: Sep 10 2019 at 07:12)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (20 messages, latest: Sep 10 2019 at 08:39)
 
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (15 messages, latest: Sep 10 2019 at 05:39)
+* [sanity check](33847sanitycheck.html) (59 messages, latest: Sep 10 2019 at 07:12)
 
 * [ITP 2019](78458ITP2019.html) (32 messages, latest: Sep 09 2019 at 21:16)
 
