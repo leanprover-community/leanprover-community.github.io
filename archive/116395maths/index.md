@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (15 messages, latest: Sep 10 2019 at 07:24)
+
 * [Lebesgue measure](26463Lebesguemeasure.html) (11 messages, latest: Sep 09 2019 at 15:20)
 
 * [`naturality`](26894naturality.html) (3 messages, latest: Sep 08 2019 at 17:09)
@@ -24,8 +26,6 @@ permalink: archive/116395maths/index.html
 * [Formalizing modern maths](53509Formalizingmodernmaths.html) (10 messages, latest: Sep 06 2019 at 22:26)
 
 * [Taking the Stacks Project formalisation forward](89037TakingtheStacksProjectformalisationforward.html) (188 messages, latest: Sep 04 2019 at 07:55)
-
-* [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (13 messages, latest: Sep 04 2019 at 03:51)
 
 * [complementary sequences](13037complementarysequences.html) (9 messages, latest: Sep 03 2019 at 22:43)
 
