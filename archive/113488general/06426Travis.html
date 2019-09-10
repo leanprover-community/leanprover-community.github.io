@@ -59,6 +59,46 @@ Doesn't Scott already build everything anyways? Or did I imagine that?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175364308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175364308">Rob Lewis (Sep 10 2019 at 18:20)</a>:</h4>
 <p>I could be wrong about that though.</p>
 
+<a name="175380528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175380528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175380528">Scott Morrison (Sep 10 2019 at 21:35)</a>:</h4>
+<p>No, at present I'm still building nothing. That project fell through, for lack of anyone who had the time/expertise combination to script things. I <em>think</em> the idea had been to push from travis to my account on S3, and then for my computer to poll that S3 account, but the pushing-to-S3 step never happened.</p>
+
+<a name="175380624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175380624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175380624">Scott Morrison (Sep 10 2019 at 21:36)</a>:</h4>
+<p>I would love to have the infrastructure in place so that every commit received an olean cache. I can provide the CPU time, I think.</p>
+
+<a name="175380791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175380791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175380791">Rob Lewis (Sep 10 2019 at 21:38)</a>:</h4>
+<p>I think that's <span class="user-mention" data-user-id="110026">@Simon Hudon</span> 's territory. Checking build times once a day would be a lot simpler. Do you think your server has a consistent enough load to do this with enough precision?</p>
+
+<a name="175381239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175381239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175381239">Scott Morrison (Sep 10 2019 at 21:45)</a>:</h4>
+<p>Probably. It has 18 physical cores. I routinely leave some single-threaded calculations running, but it's never more than 6. It's been a while since I've had anything multithreaded that I want left running. So if I limit the build to say 6 or 8 cores, and run it in the middle of my night, it shouldn't have any competition.</p>
+
+<a name="175381306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175381306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175381306">Scott Morrison (Sep 10 2019 at 21:46)</a>:</h4>
+<p>The idea is that I would just pull a fresh copy of master, build, and have a script post the time here?</p>
+
+<a name="175381416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175381416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175381416">Rob Lewis (Sep 10 2019 at 21:48)</a>:</h4>
+<p>Yeah, something like that. We just want to see an alert if there's an unexpected jump in compile time. Posting here would be enough.</p>
+
+<a name="175381554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175381554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175381554">Rob Lewis (Sep 10 2019 at 21:50)</a>:</h4>
+<p>Ideally, if it noticed a spike it would try to find the responsible commit.</p>
+
+<a name="175381574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175381574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175381574">Rob Lewis (Sep 10 2019 at 21:50)</a>:</h4>
+<p>That could use a bunch more cycles.</p>
+
+<a name="175381962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175381962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175381962">Scott Morrison (Sep 10 2019 at 21:52)</a>:</h4>
+<p>I think our limiting factor is scripting and testing, not available cycles.</p>
+
+<a name="175382070"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175382070" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175382070">Scott Morrison (Sep 10 2019 at 21:54)</a>:</h4>
+<p>I am just capable enough at writing bash scripts to do a bad job of this, so help would definitely be appreciated. It might require jumping through some hoops, but I could probably work out how to give someone ssh access.</p>
+
 
 {% endraw %}
 
