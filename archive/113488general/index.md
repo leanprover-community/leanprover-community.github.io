@@ -9,17 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [filters](74298filters.html) (18 messages, latest: Sep 11 2019 at 20:44)
+* [Proving for Fun](94070ProvingforFun.html) (118 messages, latest: Sep 11 2019 at 21:29)
 
-* [Proving for Fun](94070ProvingforFun.html) (117 messages, latest: Sep 11 2019 at 20:25)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (26 messages, latest: Sep 11 2019 at 21:24)
+
+* [filters](74298filters.html) (18 messages, latest: Sep 11 2019 at 20:44)
 
 * [Travis](06426Travis.html) (31 messages, latest: Sep 11 2019 at 16:57)
 
 * [Rewritten instances](23981Rewritteninstances.html) (2 messages, latest: Sep 11 2019 at 16:50)
 
 * [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
-
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (23 messages, latest: Sep 10 2019 at 11:27)
 
 * [sanity check](33847sanitycheck.html) (59 messages, latest: Sep 10 2019 at 07:12)
 

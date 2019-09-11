@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [binary (co)products notation](33353binarycoproductsnotation.html) (14 messages, latest: Sep 11 2019 at 12:33)
+* [binary (co)products notation](33353binarycoproductsnotation.html) (20 messages, latest: Sep 11 2019 at 21:56)
 
 * [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (15 messages, latest: Sep 10 2019 at 07:24)
 
