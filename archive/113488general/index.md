@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [filters](74298filters.html) (11 messages, latest: Sep 11 2019 at 17:57)
+
 * [Travis](06426Travis.html) (31 messages, latest: Sep 11 2019 at 16:57)
 
 * [Rewritten instances](23981Rewritteninstances.html) (2 messages, latest: Sep 11 2019 at 16:50)
-
-* [filters](74298filters.html) (10 messages, latest: Sep 11 2019 at 16:33)
 
 * [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
 
