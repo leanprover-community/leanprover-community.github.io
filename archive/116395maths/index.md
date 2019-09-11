@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [binary (co)products notation](33353binarycoproductsnotation.html) (14 messages, latest: Sep 11 2019 at 12:33)
+
 * [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (15 messages, latest: Sep 10 2019 at 07:24)
 
 * [Lebesgue measure](26463Lebesguemeasure.html) (11 messages, latest: Sep 09 2019 at 15:20)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [`naturality`](26894naturality.html) (3 messages, latest: Sep 08 2019 at 17:09)
 
 * [`data/rel` vs `logic/relation`](97073datarelvslogicrelation.html) (6 messages, latest: Sep 08 2019 at 16:20)
-
-* [binary (co)products notation](33353binarycoproductsnotation.html) (12 messages, latest: Sep 08 2019 at 10:26)
 
 * [category universes again](79619categoryuniversesagain.html) (41 messages, latest: Sep 08 2019 at 04:24)
 
