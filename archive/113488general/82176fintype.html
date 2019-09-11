@@ -147,6 +147,18 @@ If we replace <code>(complete : ∀ x : α, x ∈ elems)</code> by something whi
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/175360309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#175360309">Floris van Doorn (Sep 10 2019 at 17:38)</a>:</h4>
 <p>When I say something type-valued, it will remain a subsingleton. But probably the easiest is to just add a <code>decidable_eq</code> instance, which I think would be very helpful.</p>
 
+<a name="175402056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/175402056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#175402056">Mario Carneiro (Sep 11 2019 at 05:15)</a>:</h4>
+<p>I gave an example to Simon recently about this. Consider the quotient <code>Q</code> of nat (treated as enumerating programs) that identifies programs that both halt or both do not halt. Classically, this is a two element set, and we can computably construct a <code>fintype Q</code> with two elements (the proof that this enumeration is complete requires LEM, but it is still lean-computable). But deciding equality on this type is equivalent to the halting problem.</p>
+
+<a name="175402172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/175402172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#175402172">Mario Carneiro (Sep 11 2019 at 05:18)</a>:</h4>
+<p>I also argued that putting a decidable_eq argument in the definition would mean an instance <code>fintype A -&gt; decidable_eq A</code> and I'm not sure we want to make the <code>decidable</code> typeclass search any larger than it already is</p>
+
+<a name="175402344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype/near/175402344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82176fintype.html#175402344">Mario Carneiro (Sep 11 2019 at 05:23)</a>:</h4>
+<p>By the way, it's not actually clear if we follow the letter of that definition of finite. <code>fintype</code> is equivalent to a <code>bijection</code> from <code>fin n</code> for some <code>n</code> (not an <code>equiv</code>)</p>
+
 
 {% endraw %}
 
