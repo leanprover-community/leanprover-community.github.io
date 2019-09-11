@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Travis](06426Travis.html) (28 messages, latest: Sep 11 2019 at 07:53)
+* [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
 
-* [fintype](82176fintype.html) (31 messages, latest: Sep 11 2019 at 05:23)
+* [Travis](06426Travis.html) (28 messages, latest: Sep 11 2019 at 07:53)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (23 messages, latest: Sep 10 2019 at 11:27)
 
