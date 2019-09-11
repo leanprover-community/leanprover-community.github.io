@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [filters](74298filters.html) (16 messages, latest: Sep 11 2019 at 19:59)
+* [filters](74298filters.html) (18 messages, latest: Sep 11 2019 at 20:44)
+
+* [Proving for Fun](94070ProvingforFun.html) (117 messages, latest: Sep 11 2019 at 20:25)
 
 * [Travis](06426Travis.html) (31 messages, latest: Sep 11 2019 at 16:57)
 
@@ -42,8 +44,6 @@ permalink: archive/113488general/index.html
 * [IMO Grand Challenge](71157IMOGrandChallenge.html) (7 messages, latest: Sep 07 2019 at 17:36)
 
 * [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
-
-* [Proving for Fun](94070ProvingforFun.html) (115 messages, latest: Sep 05 2019 at 16:13)
 
 * [Lean in the wild](43625Leaninthewild.html) (198 messages, latest: Sep 05 2019 at 14:19)
 
