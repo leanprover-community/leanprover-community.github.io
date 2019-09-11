@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Travis](06426Travis.html) (29 messages, latest: Sep 11 2019 at 12:36)
+* [Travis](06426Travis.html) (31 messages, latest: Sep 11 2019 at 16:57)
+
+* [Rewritten instances](23981Rewritteninstances.html) (2 messages, latest: Sep 11 2019 at 16:50)
+
+* [filters](74298filters.html) (10 messages, latest: Sep 11 2019 at 16:33)
 
 * [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
 
@@ -2518,8 +2522,6 @@ permalink: archive/113488general/index.html
 * [can meta `def`?](69128canmetadef.html) (30 messages, latest: Sep 05 2018 at 19:28)
 
 * [behaviour of simpa changed](21663behaviourofsimpachanged.html) (2 messages, latest: Sep 05 2018 at 17:57)
-
-* [filters](74298filters.html) (9 messages, latest: Sep 05 2018 at 14:39)
 
 * [mul vs map_mul](43203mulvsmapmul.html) (3 messages, latest: Sep 05 2018 at 10:21)
 

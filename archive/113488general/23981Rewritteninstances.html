@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/23981Rewritteninstances.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html">Rewritten instances</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175450337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175450337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175450337">Sebastian Ullrich (Sep 11 2019 at 16:34)</a>:</h4>
+<p>I'm sure this is an issue that people here have to solve all the time, but I'm not aware of the current best practices, if they do exist:<br>
+When simplifying a term, an instance argument dependent on the term (e.g. the <code>decidable_pred</code> instance when rewriting the predicate of a <code>list.filter</code>) might also get rewritten. This can prevent further rewrites because the inferred and given instances don't match.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">xs</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">xs</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">true</span><span class="o">)</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_true</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="n">filter_false</span>
+</pre></div>
+
+
+<p>I can think of a few workarounds, but how do you usually deal with that?<br>
+/cc <span class="user-mention" data-user-id="221921">@Marc Huisinga</span></p>
+
+<a name="175451892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175451892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175451892">Sebastian Ullrich (Sep 11 2019 at 16:50)</a>:</h4>
+<p>Oh, bad example because <span class="user-mention" data-user-id="110044">@Chris Hughes</span> actually did use non-instance implicit parameters in <code>filter_false</code> for exactly this reason I suppose. But all the other lemmas on <code>filter</code> are still using <code>[decidable_pred p]</code> parameters.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
