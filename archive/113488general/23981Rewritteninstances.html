@@ -50,6 +50,36 @@ When simplifying a term, an instance argument dependent on the term (e.g. the <c
 <p>Another way of dealing with it is to just make the functions classical. The ring structure on <code>polynomial</code> now no longer requires a <code>decidable_eq</code> instance for reasons like this.</p>
 <p>I don't think there's a nice way of dealing with this at the moment.</p>
 
+<a name="175507860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175507860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175507860">Chris Hughes (Sep 12 2019 at 08:09)</a>:</h4>
+<p>This stuff is actually a big barrier to finite group theory right now. There are a few <code>congr</code>s in <code>group_theory/sylow.lean</code></p>
+
+<a name="175509237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175509237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175509237">Sebastian Ullrich (Sep 12 2019 at 08:32)</a>:</h4>
+<p>Thanks Chris. I believe the best solution would be for tactics like <code>rw</code> and <code>simp</code> to delay inferring class instance metavariables until after unification. But that should perhaps not be the default behavior, and of course would need to be changed in core. What one could write in mathlib is a tactic that re-infers all class instance arguments in the goal.</p>
+
+<a name="175509417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175509417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175509417">Chris Hughes (Sep 12 2019 at 08:35)</a>:</h4>
+<p>This delayed class instance already happens sometimes right? I'm not sure if this is a bug, but</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">ℕ</span> <span class="bp">⟨</span><span class="mi">1</span><span class="bp">⟩</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refl</span><span class="o">,</span> <span class="c1">--goals accomplished</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="175509497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175509497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175509497">Chris Hughes (Sep 12 2019 at 08:36)</a>:</h4>
+<p>Works with <code>rw</code> as well</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">+</span> <span class="bp">@</span><span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">ℕ</span> <span class="bp">⟨</span><span class="mi">1</span><span class="bp">⟩</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_zero</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="175510499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175510499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175510499">Sebastian Ullrich (Sep 12 2019 at 08:52)</a>:</h4>
+<p>Huh, curious. Unification inside the tactic stops before it discovers the type error. But as the proof term in the error message shows, it did not actually rewrite with <code>add_zero</code> :) . And the class instance trace shows that it did infer <code>add_monoid nat</code></p>
+
 
 {% endraw %}
 

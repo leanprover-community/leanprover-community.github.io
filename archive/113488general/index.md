@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Rewritten instances](23981Rewritteninstances.html) (3 messages, latest: Sep 12 2019 at 07:52)
+* [Rewritten instances](23981Rewritteninstances.html) (8 messages, latest: Sep 12 2019 at 08:52)
+
+* [Proving for Fun](94070ProvingforFun.html) (127 messages, latest: Sep 12 2019 at 08:48)
 
 * [filters](74298filters.html) (22 messages, latest: Sep 12 2019 at 06:37)
 
 * [dsimp failing](20152dsimpfailing.html) (4 messages, latest: Sep 12 2019 at 04:41)
-
-* [Proving for Fun](94070ProvingforFun.html) (123 messages, latest: Sep 12 2019 at 04:20)
 
 * [Travis](06426Travis.html) (44 messages, latest: Sep 12 2019 at 04:01)
 
