@@ -28,6 +28,28 @@ When simplifying a term, an instance argument dependent on the term (e.g. the <c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175451892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175451892">Sebastian Ullrich (Sep 11 2019 at 16:50)</a>:</h4>
 <p>Oh, bad example because <span class="user-mention" data-user-id="110044">@Chris Hughes</span> actually did use non-instance implicit parameters in <code>filter_false</code> for exactly this reason I suppose. But all the other lemmas on <code>filter</code> are still using <code>[decidable_pred p]</code> parameters.</p>
 
+<a name="175506852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Rewritten%20instances/near/175506852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/23981Rewritteninstances.html#175506852">Chris Hughes (Sep 12 2019 at 07:52)</a>:</h4>
+<p>This is usually quite painful.</p>
+<p><code>fintype</code> is another class for which this comes up a lot. Mixing up classical and non classical decidable instances is also a problem.</p>
+<p>Usually the way I deal with it, is to either use non-instance implicit parameters like with <code>filter_false</code>. Sometimes you can work around it using <code>congr</code> and <code>convert</code>, as in the following examples. This can obviously still be quite inconvenient though.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span>
+
+<span class="kn">open</span> <span class="n">list</span>
+
+<span class="kn">lemma</span> <span class="n">filter_false&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">l</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">false</span><span class="o">)</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">filter_false</span> <span class="bp">_</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">xs</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">xs</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">true</span><span class="o">)</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_true</span><span class="o">]</span><span class="bp">;</span> <span class="n">convert</span> <span class="n">filter_false&#39;</span> <span class="n">xs</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">xs</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">xs</span><span class="bp">.</span><span class="n">filter</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span><span class="n">true</span><span class="o">)</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">not_true</span><span class="o">]</span><span class="bp">;</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">filter_false&#39;</span> <span class="n">xs</span><span class="bp">;</span> <span class="n">congr</span>
+</pre></div>
+
+
+<p>Another way of dealing with it is to just make the functions classical. The ring structure on <code>polynomial</code> now no longer requires a <code>decidable_eq</code> instance for reasons like this.</p>
+<p>I don't think there's a nice way of dealing with this at the moment.</p>
+
 
 {% endraw %}
 
