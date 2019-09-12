@@ -154,6 +154,59 @@ I have not worked with <code>out_param</code>s myself, so I cannot judge judge t
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175477724" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175477724">Reid Barton (Sep 11 2019 at 21:24)</a>:</h4>
 <p>regardless of the number of classes or instances in the system or the depth of the class hierarchy</p>
 
+<a name="175529388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Instance%20resolution%20failures/near/175529388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24709Instanceresolutionfailures.html#175529388">Sebastien Gouezel (Sep 12 2019 at 13:35)</a>:</h4>
+<p>I just stumbled on a behavior I don't understand. Involving out_params, structures and typeclasses, so something a little bit exotic and probably the behavior will be completely different in Lean 4, but still let me record it here. Everything is fine with</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">local_homeomorph</span><span class="bp">.</span><span class="n">is_mdifferentiable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">local_homeomorph</span> <span class="n">M</span> <span class="n">M&#39;</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">mdifferentiable_on</span> <span class="err">𝕜</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">f</span><span class="bp">.</span><span class="n">source</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">mdifferentiable_on</span> <span class="err">𝕜</span> <span class="n">f</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">f</span><span class="bp">.</span><span class="n">target</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">mdifferentiable_atlas</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">atlas</span> <span class="n">M</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="n">e</span><span class="bp">.</span><span class="n">is_mdifferentiable</span> <span class="err">𝕜</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">mdifferentiable_on_atlas_to_fun</span> <span class="err">𝕜</span> <span class="n">h</span><span class="o">,</span> <span class="n">mdifferentiable_on_atlas_inv_fun</span> <span class="err">𝕜</span> <span class="n">h</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>But if I switch the definition to a structure, with</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">local_homeomorph</span><span class="bp">.</span><span class="n">is_mdifferentiable</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">local_homeomorph</span> <span class="n">M</span> <span class="n">M&#39;</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">diff_to_fun</span> <span class="o">:</span> <span class="n">mdifferentiable_on</span> <span class="err">𝕜</span> <span class="n">f</span><span class="bp">.</span><span class="n">to_fun</span> <span class="n">f</span><span class="bp">.</span><span class="n">source</span><span class="o">)</span>
+<span class="o">(</span><span class="n">diff_inv_fun</span> <span class="o">:</span> <span class="n">mdifferentiable_on</span> <span class="err">𝕜</span> <span class="n">f</span><span class="bp">.</span><span class="n">inv_fun</span> <span class="n">f</span><span class="bp">.</span><span class="n">target</span><span class="o">)</span>
+</pre></div>
+
+
+<p>then the lemma is not accepted any more, failing with 4 messages</p>
+<div class="codehilite"><pre><span></span><span class="n">don&#39;t</span> <span class="n">know</span> <span class="n">how</span> <span class="n">to</span> <span class="n">synthesize</span> <span class="n">placeholder</span>
+<span class="kn">context</span><span class="o">:</span>
+<span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">nondiscrete_normed_field</span> <span class="err">𝕜</span><span class="o">,</span>
+<span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">E</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">,</span>
+<span class="n">H</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_3</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_4</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">I</span> <span class="o">:</span> <span class="n">model_with_corners</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_4</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_5</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">M</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">manifold</span> <span class="n">H</span> <span class="n">M</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="n">smooth_manifold_with_corners</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">H</span> <span class="n">M</span><span class="o">,</span>
+<span class="n">e</span> <span class="o">:</span> <span class="n">local_homeomorph</span> <span class="n">M</span> <span class="n">H</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">e</span> <span class="err">∈</span> <span class="n">atlas</span> <span class="n">M</span> <span class="n">H</span>
+<span class="err">⊢</span> <span class="kt">Type</span> <span class="err">?</span>
+</pre></div>
+
+
+<p>I have several typeclass variables in scope, and I guess the main missing piece of information is the only exotic typeclass definition with outparams, i.e.,</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm"> Specialization to the case of smooth manifolds with corners, over a field 𝕜 and with infinite</span>
+<span class="cm">smoothness to simplify.</span>
+<span class="cm">The set E is a vector space, and H is a model with corners based on E.</span>
+<span class="cm">When 𝕜 is fixed, the model space with corners (E, H) should always be the same for a</span>
+<span class="cm">given manifold M. Therefore, we register it as an out_param: it will not be necessary to write</span>
+<span class="cm">it out explicitely when talking about smooth manifolds. This is the main point of this definition. -/</span>
+<span class="n">class</span> <span class="n">smooth_manifold_with_corners</span> <span class="o">(</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="err">𝕜</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">topological_space</span> <span class="n">H</span><span class="o">]</span> <span class="o">[</span><span class="n">I</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="n">model_with_corners</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">H</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">manifold</span> <span class="n">H</span> <span class="n">M</span><span class="o">]</span> <span class="kn">extends</span>
+  <span class="n">has_groupoid</span> <span class="n">H</span> <span class="n">M</span> <span class="o">(</span><span class="n">times_cont_diff_groupoid</span> <span class="err">⊤</span> <span class="err">𝕜</span> <span class="n">E</span> <span class="n">H</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span>
+</pre></div>
+
 
 {% endraw %}
 

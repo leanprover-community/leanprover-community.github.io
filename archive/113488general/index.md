@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (27 messages, latest: Sep 12 2019 at 13:35)
+
 * [Travis](06426Travis.html) (47 messages, latest: Sep 12 2019 at 12:55)
 
 * [Rewritten instances](23981Rewritteninstances.html) (8 messages, latest: Sep 12 2019 at 08:52)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [filters](74298filters.html) (22 messages, latest: Sep 12 2019 at 06:37)
 
 * [dsimp failing](20152dsimpfailing.html) (4 messages, latest: Sep 12 2019 at 04:41)
-
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (26 messages, latest: Sep 11 2019 at 21:24)
 
 * [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
 
