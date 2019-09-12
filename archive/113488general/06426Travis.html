@@ -150,6 +150,34 @@ AttributeError: &#39;module&#39; object has no attribute &#39;Client&#39;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175452489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175452489">Reid Barton (Sep 11 2019 at 16:57)</a>:</h4>
 <p>I also meant to ask whether there are statistics (<code>lean --profile</code> or anything else like it) which would be good to record and don't affect compile time too much</p>
 
+<a name="175490289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175490289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175490289">Bryan Gin-ge Chen (Sep 12 2019 at 01:06)</a>:</h4>
+<p>I managed to profile mathlib with <code>lean -j1 --make --profile src/ &gt; profile.log</code>. It took maybe 2 hours on my machine, so it's probably not something we could run more than once a day:</p>
+<div class="codehilite"><pre><span></span>cumulative profiling times:
+    compilation 12.8s
+    decl post-processing 2.56e+03s
+    elaboration 3.87e+03s
+    elaboration: tactic compilation 70.9s
+    elaboration: tactic execution 2.67e+03s
+    parsing 122s
+    type checking 17.2s
+</pre></div>
+
+
+<p>I've attached the (compressed) <code>profile.log</code> if anyone else wants to have a go at extracting useful statistics from it: <a href="user_uploads/3121/PLD-jhGvJwY0mtkFerySJ6zd/profile_140a606.log.zip" target="_blank" title="user_uploads/3121/PLD-jhGvJwY0mtkFerySJ6zd/profile_140a606.log.zip">profile_140a606.log.zip</a> (3.1MB)</p>
+
+<a name="175490477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175490477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175490477">Reid Barton (Sep 12 2019 at 01:11)</a>:</h4>
+<p>Couldn't we run it 12*N times per day, if we have N processors?</p>
+
+<a name="175490497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175490497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175490497">Reid Barton (Sep 12 2019 at 01:11)</a>:</h4>
+<p>(Assuming we believe in isolation between processors which is definitely false, but hey)</p>
+
+<a name="175490555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175490555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175490555">Bryan Gin-ge Chen (Sep 12 2019 at 01:12)</a>:</h4>
+<p>It also used a fairly large amount of memory too (~2 GB by the end).</p>
+
 
 {% endraw %}
 

@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Travis](06426Travis.html) (35 messages, latest: Sep 12 2019 at 01:12)
+
 * [Proving for Fun](94070ProvingforFun.html) (122 messages, latest: Sep 12 2019 at 00:30)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (26 messages, latest: Sep 11 2019 at 21:24)
 
 * [filters](74298filters.html) (18 messages, latest: Sep 11 2019 at 20:44)
-
-* [Travis](06426Travis.html) (31 messages, latest: Sep 11 2019 at 16:57)
 
 * [Rewritten instances](23981Rewritteninstances.html) (2 messages, latest: Sep 11 2019 at 16:50)
 
