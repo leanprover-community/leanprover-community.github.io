@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Rewritten instances](23981Rewritteninstances.html) (9 messages, latest: Sep 12 2019 at 16:46)
+
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (27 messages, latest: Sep 12 2019 at 13:35)
 
 * [Travis](06426Travis.html) (47 messages, latest: Sep 12 2019 at 12:55)
-
-* [Rewritten instances](23981Rewritteninstances.html) (8 messages, latest: Sep 12 2019 at 08:52)
 
 * [Proving for Fun](94070ProvingforFun.html) (127 messages, latest: Sep 12 2019 at 08:48)
 
