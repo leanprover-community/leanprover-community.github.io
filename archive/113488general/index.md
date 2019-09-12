@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Rewritten instances](23981Rewritteninstances.html) (10 messages, latest: Sep 12 2019 at 21:48)
+
 * [Travis](06426Travis.html) (48 messages, latest: Sep 12 2019 at 20:34)
 
 * [Computer science bibtex](97768Computersciencebibtex.html) (8 messages, latest: Sep 12 2019 at 20:20)
-
-* [Rewritten instances](23981Rewritteninstances.html) (9 messages, latest: Sep 12 2019 at 16:46)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (27 messages, latest: Sep 12 2019 at 13:35)
 
