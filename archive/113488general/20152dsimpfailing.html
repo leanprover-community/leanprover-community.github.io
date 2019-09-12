@@ -1,0 +1,52 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/20152dsimpfailing.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/20152dsimpfailing.html">dsimp failing</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175497930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%20failing/near/175497930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20152dsimpfailing.html#175497930">Kevin Buzzard (Sep 12 2019 at 04:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">A</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">list</span><span class="bp">.</span><span class="n">join</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">++</span> <span class="n">list</span><span class="bp">.</span><span class="n">join</span> <span class="n">L</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">dsimp</span> <span class="c1">-- fails</span>
+</pre></div>
+
+
+<p><code>rfl</code> works. Does this mean that this example has not been tagged with <code>[simp]</code>? I don't even know if this theorem has a name -- <code>library_search</code> tells me the proof is <code>exact rfl</code>. I couldn't get <code>#find</code> to give any output at all:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">find</span>
+
+<span class="n">def</span> <span class="n">find_bug_workaround</span> <span class="o">:=</span> <span class="mi">37</span>
+
+<span class="bp">#</span><span class="n">find</span> <span class="n">list</span><span class="bp">.</span><span class="n">join</span> <span class="o">(</span><span class="bp">_</span> <span class="bp">::</span> <span class="bp">_</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">_</span> <span class="bp">++</span> <span class="n">list</span><span class="bp">.</span><span class="n">join</span> <span class="bp">_</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">list</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="n">list</span> <span class="n">A</span><span class="o">))</span>
+
+<span class="bp">#</span><span class="n">find</span> <span class="n">list</span><span class="bp">.</span><span class="n">join</span> <span class="o">(</span><span class="n">a</span> <span class="bp">::</span> <span class="n">L</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">++</span> <span class="n">list</span><span class="bp">.</span><span class="n">join</span> <span class="n">L</span>
+</pre></div>
+
+
+<p>Is it a bad <code>simp</code> lemma?</p>
+
+<a name="175498338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%20failing/near/175498338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20152dsimpfailing.html#175498338">Scott Morrison (Sep 12 2019 at 04:34)</a>:</h4>
+<p>Sounds like a good simp lemma to me!</p>
+
+<a name="175498606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%20failing/near/175498606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20152dsimpfailing.html#175498606">Simon Hudon (Sep 12 2019 at 04:40)</a>:</h4>
+<p>Maybe we should tag <code>list.join</code> with <code>@[simp]</code></p>
+
+<a name="175498661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/dsimp%20failing/near/175498661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/20152dsimpfailing.html#175498661">Scott Morrison (Sep 12 2019 at 04:41)</a>:</h4>
+<p>Yes.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

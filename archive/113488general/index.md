@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Travis](06426Travis.html) (41 messages, latest: Sep 12 2019 at 03:53)
+* [dsimp failing](20152dsimpfailing.html) (4 messages, latest: Sep 12 2019 at 04:41)
 
-* [Proving for Fun](94070ProvingforFun.html) (122 messages, latest: Sep 12 2019 at 00:30)
+* [Proving for Fun](94070ProvingforFun.html) (123 messages, latest: Sep 12 2019 at 04:20)
+
+* [Travis](06426Travis.html) (44 messages, latest: Sep 12 2019 at 04:01)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (26 messages, latest: Sep 11 2019 at 21:24)
 
