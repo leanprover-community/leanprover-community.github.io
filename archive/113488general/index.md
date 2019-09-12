@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Travis](06426Travis.html) (48 messages, latest: Sep 12 2019 at 20:34)
+
+* [Computer science bibtex](97768Computersciencebibtex.html) (8 messages, latest: Sep 12 2019 at 20:20)
+
 * [Rewritten instances](23981Rewritteninstances.html) (9 messages, latest: Sep 12 2019 at 16:46)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (27 messages, latest: Sep 12 2019 at 13:35)
-
-* [Travis](06426Travis.html) (47 messages, latest: Sep 12 2019 at 12:55)
 
 * [Proving for Fun](94070ProvingforFun.html) (127 messages, latest: Sep 12 2019 at 08:48)
 
@@ -72,8 +74,6 @@ permalink: archive/113488general/index.html
 * [Unable to build vscode.lean](50365Unabletobuildvscodelean.html) (5 messages, latest: Aug 31 2019 at 01:25)
 
 * [Helloworld from PIL book](96577HelloworldfromPILbook.html) (3 messages, latest: Aug 31 2019 at 00:36)
-
-* [Computer science bibtex](97768Computersciencebibtex.html) (7 messages, latest: Aug 30 2019 at 17:11)
 
 * [New error message](49914Newerrormessage.html) (1 message, latest: Aug 30 2019 at 14:10)
 

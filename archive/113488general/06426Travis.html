@@ -229,6 +229,14 @@ It's a bit of a hassle either way.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175525552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175525552">Scott Morrison (Sep 12 2019 at 12:55)</a>:</h4>
 <p>By Australian standards, clearly Berkeley is part of San Francisco, and thus we have very few "cities", so apparently "suburb" is the next division down.</p>
 
+<a name="175568606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175568606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175568606">Wojciech Nawrocki (Sep 12 2019 at 20:34)</a>:</h4>
+<blockquote>
+<p>Couldn't we run it 12*N times per day, if we have N processors?<br>
+(Assuming we believe in isolation between processors which is definitely false, but hey)</p>
+</blockquote>
+<p>I tried this once, and the conclusion was that sadly if you want to get reliable benchmark results, you need to run your program with pretty much exclusive access to the machine (and on real hardware as opposed to a cloud vCPU). Running one benchmark per physical CPU core skews the timings to the point of uselessness, probably due to contention on memory, on I/O, and whatever else is shared between CPUs. Anyway in case of mathlib, because the build times are so long, maybe random noise is not that much of an issue - unless it's possible for a single run of <code>lean --make</code> to somehow get in a failure mode which makes the entire build proceed slower than usual, but that seems unlikely.</p>
+
 
 {% endraw %}
 
