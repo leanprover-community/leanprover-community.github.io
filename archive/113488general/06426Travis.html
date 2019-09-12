@@ -237,6 +237,41 @@ It's a bit of a hassle either way.</p>
 </blockquote>
 <p>I tried this once, and the conclusion was that sadly if you want to get reliable benchmark results, you need to run your program with pretty much exclusive access to the machine (and on real hardware as opposed to a cloud vCPU). Running one benchmark per physical CPU core skews the timings to the point of uselessness, probably due to contention on memory, on I/O, and whatever else is shared between CPUs. Anyway in case of mathlib, because the build times are so long, maybe random noise is not that much of an issue - unless it's possible for a single run of <code>lean --make</code> to somehow get in a failure mode which makes the entire build proceed slower than usual, but that seems unlikely.</p>
 
+<a name="175575761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175575761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175575761">Scott Morrison (Sep 12 2019 at 22:06)</a>:</h4>
+<p>Yeah, I'm pretty disappointed by the results <a href="#narrow/stream/113538-travis/topic/build.20time.20bot" title="#narrow/stream/113538-travis/topic/build.20time.20bot">from overnight</a>. </p>
+<p>113m51.476s<br>
+113m18.228s<br>
+114m49.561s<br>
+110m48.239s<br>
+105m30.344s<br>
+101m58.073s</p>
+<p>I would guess that's too much random variability to be useful.</p>
+
+<a name="175576037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175576037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175576037">Reid Barton (Sep 12 2019 at 22:10)</a>:</h4>
+<p>What conditions is that under?</p>
+
+<a name="175576042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175576042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175576042">Reid Barton (Sep 12 2019 at 22:11)</a>:</h4>
+<p>Travis or your own machine?</p>
+
+<a name="175576045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175576045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175576045">Reid Barton (Sep 12 2019 at 22:11)</a>:</h4>
+<p>1 core?</p>
+
+<a name="175576386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175576386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175576386">Scott Morrison (Sep 12 2019 at 22:17)</a>:</h4>
+<p>This is on my own machine, running with <code>-j1</code>.</p>
+
+<a name="175576647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175576647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175576647">Scott Morrison (Sep 12 2019 at 22:21)</a>:</h4>
+<p>I realise now that I left it running every hour, so builds were overlapping. I've slowed down cron and will see if that improves things.</p>
+
+<a name="175576894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175576894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175576894">Bryan Gin-ge Chen (Sep 12 2019 at 22:25)</a>:</h4>
+<p>If no one else is already working on it I'll take a stab at writing a Python script to parse the profile output into JSON (or some other format?) later tonight.</p>
+
 
 {% endraw %}
 

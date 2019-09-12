@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/59074unitsandisunit.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/59074unitsandisunit.html">units and is_unit</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175576378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/units%20and%20is_unit/near/175576378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59074unitsandisunit.html#175576378">Scott Morrison (Sep 12 2019 at 22:17)</a>:</h4>
+<p>Are we happy with the design of <code>units</code> and <code>is_unit</code>?</p>
+<div class="codehilite"><pre><span></span>structure units (α : Type u) [monoid α] :=
+(val : α)
+(inv : α)
+(val_inv : val * inv = 1)
+(inv_val : inv * val = 1)
+
+def is_unit [monoid α] (a : α) : Prop := ∃u:units α, a = u
+</pre></div>
+
+
+<p>This was a bit of a surprise to me.  A more common pattern would be to define <code>is_unit</code> as a structure with three fields, and then <code>units</code> as a dependent pair, an element and evidence that it was a unit.</p>
+<p>I guess the current design has the (small?) advantage that we can put <code>is_unit</code> in <code>Prop</code>, rather than just show it's a subsingleton.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

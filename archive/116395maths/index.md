@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [units and is_unit](59074unitsandisunit.html) (1 message, latest: Sep 12 2019 at 22:17)
+
 * [binary (co)products notation](33353binarycoproductsnotation.html) (25 messages, latest: Sep 12 2019 at 20:04)
 
 * [Equalizers & Products => Complete](26580EqualizersProductsComplete.html) (15 messages, latest: Sep 10 2019 at 07:24)
