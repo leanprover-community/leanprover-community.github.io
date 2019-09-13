@@ -28,6 +28,18 @@ def is_unit [monoid α] (a : α) : Prop := ∃u:units α, a = u
 <p>This was a bit of a surprise to me.  A more common pattern would be to define <code>is_unit</code> as a structure with three fields, and then <code>units</code> as a dependent pair, an element and evidence that it was a unit.</p>
 <p>I guess the current design has the (small?) advantage that we can put <code>is_unit</code> in <code>Prop</code>, rather than just show it's a subsingleton.</p>
 
+<a name="175594652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/units%20and%20is_unit/near/175594652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59074unitsandisunit.html#175594652">Johan Commelin (Sep 13 2019 at 05:10)</a>:</h4>
+<p>I guess the reasoning is: the type of <code>units</code> must record the inverse, not only its existence, and <code>is_unit</code> must be a <code>Prop</code>. Under those two conditions, the resulting definitions are quite reasonable....</p>
+
+<a name="175595810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/units%20and%20is_unit/near/175595810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59074unitsandisunit.html#175595810">Mario Carneiro (Sep 13 2019 at 05:36)</a>:</h4>
+<p>The only reasonable variation I can see is to make <code>is_unit</code> a type that records the inverse (and is a subsingleton). With that version you could factor it the other way around, but if <code>is_unit</code> is a prop then this approach is easier</p>
+
+<a name="175595884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/units%20and%20is_unit/near/175595884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/59074unitsandisunit.html#175595884">Mario Carneiro (Sep 13 2019 at 05:38)</a>:</h4>
+<p>I believe <code>is_unit</code> came later, and it was needed for defining an ideal or something so it was necessary for it to be a prop</p>
+
 
 {% endraw %}
 
