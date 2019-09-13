@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [complete lattice of setoids](91280completelatticeofsetoids.html) (6 messages, latest: Sep 13 2019 at 11:27)
+
 * [3+ mutually recursive functions](441413mutuallyrecursivefunctions.html) (19 messages, latest: Sep 10 2019 at 06:58)
 
 * [noob question(s)](52075noobquestions.html) (1348 messages, latest: Sep 09 2019 at 21:19)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [Is mathlib-nursary recommended/alive?](60865Ismathlibnursaryrecommendedalive.html) (2 messages, latest: Sep 08 2019 at 16:27)
 
 * [terms as types?](73076termsastypes.html) (13 messages, latest: Sep 04 2019 at 13:19)
-
-* [complete lattice of setoids](91280completelatticeofsetoids.html) (5 messages, latest: Sep 04 2019 at 09:24)
 
 * [Thinking about lists backwards](39001Thinkingaboutlistsbackwards.html) (7 messages, latest: Sep 02 2019 at 07:12)
 
