@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (30 messages, latest: Sep 13 2019 at 16:50)
+* [Proving for Fun](94070ProvingforFun.html) (136 messages, latest: Sep 13 2019 at 17:31)
 
-* [Proving for Fun](94070ProvingforFun.html) (135 messages, latest: Sep 13 2019 at 15:52)
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (31 messages, latest: Sep 13 2019 at 17:02)
 
 * [Travis](06426Travis.html) (55 messages, latest: Sep 12 2019 at 22:25)
 
