@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Schroeder-Bernstein](26743SchroederBernstein.html) (10 messages, latest: Sep 13 2019 at 16:47)
+
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (4 messages, latest: Sep 13 2019 at 14:52)
 
 * [units and is_unit](59074unitsandisunit.html) (4 messages, latest: Sep 13 2019 at 05:38)
-
-* [Schroeder-Bernstein](26743SchroederBernstein.html) (8 messages, latest: Sep 13 2019 at 04:23)
 
 * [binary (co)products notation](33353binarycoproductsnotation.html) (25 messages, latest: Sep 12 2019 at 20:04)
 
