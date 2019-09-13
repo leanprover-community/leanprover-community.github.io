@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (29 messages, latest: Sep 13 2019 at 12:58)
+
 * [Proving for Fun](94070ProvingforFun.html) (134 messages, latest: Sep 13 2019 at 09:18)
 
 * [Travis](06426Travis.html) (55 messages, latest: Sep 12 2019 at 22:25)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Rewritten instances](23981Rewritteninstances.html) (10 messages, latest: Sep 12 2019 at 21:48)
 
 * [Computer science bibtex](97768Computersciencebibtex.html) (8 messages, latest: Sep 12 2019 at 20:20)
-
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (27 messages, latest: Sep 12 2019 at 13:35)
 
 * [filters](74298filters.html) (22 messages, latest: Sep 12 2019 at 06:37)
 
