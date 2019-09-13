@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (1 message, latest: Sep 13 2019 at 09:22)
+
 * [units and is_unit](59074unitsandisunit.html) (4 messages, latest: Sep 13 2019 at 05:38)
 
 * [Schroeder-Bernstein](26743SchroederBernstein.html) (8 messages, latest: Sep 13 2019 at 04:23)
