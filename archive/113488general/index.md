@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (151 messages, latest: Sep 14 2019 at 00:51)
+* [Proving for Fun](94070ProvingforFun.html) (152 messages, latest: Sep 14 2019 at 02:54)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (31 messages, latest: Sep 13 2019 at 17:02)
 
