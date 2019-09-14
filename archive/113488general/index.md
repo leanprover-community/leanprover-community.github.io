@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Instance resolution failures](24709Instanceresolutionfailures.html) (33 messages, latest: Sep 14 2019 at 14:40)
+
 * [typeclasses for data structures](00598typeclassesfordatastructures.html) (18 messages, latest: Sep 14 2019 at 13:32)
 
 * [Proving for Fun](94070ProvingforFun.html) (156 messages, latest: Sep 14 2019 at 11:32)
-
-* [Instance resolution failures](24709Instanceresolutionfailures.html) (31 messages, latest: Sep 13 2019 at 17:02)
 
 * [Travis](06426Travis.html) (55 messages, latest: Sep 12 2019 at 22:25)
 
