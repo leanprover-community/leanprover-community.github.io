@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (154 messages, latest: Sep 14 2019 at 09:19)
+* [typeclasses for data structures](00598typeclassesfordatastructures.html) (4 messages, latest: Sep 14 2019 at 10:26)
+
+* [Proving for Fun](94070ProvingforFun.html) (155 messages, latest: Sep 14 2019 at 10:18)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (31 messages, latest: Sep 13 2019 at 17:02)
 

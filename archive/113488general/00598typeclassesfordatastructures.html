@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/00598typeclassesfordatastructures.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html">typeclasses for data structures</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175694153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175694153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175694153">Scott Morrison (Sep 14 2019 at 10:24)</a>:</h4>
+<p>Do we have examples in mathlib of typeclasses specifying the behaviour of a data structure?</p>
+<p>While working on a complicated tactic, I found myself wanting a priority queue, and ended up just using a list with <code>ordered_insert</code> (from <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/list/sort.lean#L71" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/list/sort.lean#L71">data/list/sort.lean</a>), because we don't have a good priority queue available.</p>
+<p>It occurred to me that I really should be writing against an API for a priority queue, so that if one was ever implemented I could drop that in easily, and I suppose that the right way to do this is with a typeclass describing how to think of some type <code>Q</code> as a priority queue. However I'm a bit disconcerted by not knowing examples of us doing this in mathlib at present. (Obviously the question of what to do here generalises to any other interesting data structure.)</p>
+<p>Does anyone have advice on best practice here?</p>
+
+<a name="175694177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175694177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175694177">Scott Morrison (Sep 14 2019 at 10:25)</a>:</h4>
+<p>My API might look something like:</p>
+<div class="codehilite"><pre><span></span>class priority_queue_ops (α Q : Type u) [decidable_linear_order α] :=
+(size : Q → ℕ)
+(insert : α → Q → Q)
+(peek : Π (q : Q), 0 &lt; size q → α)
+(pull : Π (q : Q), 0 &lt; size q → (α × Q))
+
+class priority_queue (α Q : Type u) [decidable_linear_order α] extends priority_queue_ops α Q :=
+(peek_eq_pull : ∀ (q : Q) (h : 0 &lt; size q), peek q h = (pull q h).1)
+(insert_size : ∀ (q : Q) (a : α), size (insert a q) = size q + 1)
+(pull_size : ∀ (q : Q) (h : 0 &lt; size q), size (pull q h).2 = size q - 1)
+(count : α → Q → ℕ)
+(pull_min : ∀ (q : Q) (h : 0 &lt; size q) (a : α) (w : 0 &lt; count a (pull q h).2), (pull q h).1 ≤ a)
+(count_insert : ∀ (a b : α) (q : Q), count a (insert b q) = count a q + (if a = b then 1 else 0))
+(count_pull : ∀ (a : α) (q : Q) (h : 0 &lt; size q), count a (pull q h).2 = count a q - (if a = (pull q h).1 then 1 else 0))
+
+instance (α : Type u) [decidable_linear_order α] : priority_queue α (Σ&#39; L : list α, L.sorted (≤)) := ...
+</pre></div>
+
+<a name="175694220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175694220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175694220">Scott Morrison (Sep 14 2019 at 10:26)</a>:</h4>
+<p>(A separate more specific question is whether this is a reasonable API for a priority queue, but I really want to hear about the general idea of using typeclasses for this purpose in mathlib.)</p>
+
+<a name="175694233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175694233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175694233">Scott Morrison (Sep 14 2019 at 10:26)</a>:</h4>
+<p>(If people are happy with it, I have an implementation of that final instance.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
