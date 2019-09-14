@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Schroeder-Bernstein](26743SchroederBernstein.html) (10 messages, latest: Sep 13 2019 at 16:47)
+* [Schroeder-Bernstein](26743SchroederBernstein.html) (12 messages, latest: Sep 13 2019 at 23:09)
 
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (4 messages, latest: Sep 13 2019 at 14:52)
 
