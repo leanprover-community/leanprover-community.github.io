@@ -48,6 +48,34 @@ instance (α : Type u) [decidable_linear_order α] : priority_queue α (Σ&#39; 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175694233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175694233">Scott Morrison (Sep 14 2019 at 10:26)</a>:</h4>
 <p>(If people are happy with it, I have an implementation of that final instance.)</p>
 
+<a name="175697507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175697507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175697507">Jason Rute (Sep 14 2019 at 12:06)</a>:</h4>
+<p>One idea is to look how type classes for priority queues (and other data structures) are is implemented in other languages like <a href="http://hackage.haskell.org/package/priority-queue-0.2.2/docs/Data-PriorityQueue.html" target="_blank" title="http://hackage.haskell.org/package/priority-queue-0.2.2/docs/Data-PriorityQueue.html">Haskell</a>.</p>
+
+<a name="175697547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175697547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175697547">Jason Rute (Sep 14 2019 at 12:06)</a>:</h4>
+<p>While in Lean, you can say <code>0 &lt; size q</code> explicitly, it might still be good to also have an option version of some of these functions.  In other programming languages at least, it allows for easy composibility.  For example it makes pull-or-else easy to implement and possible to chain a bunch of pulls together.  (And since there is only one failure case with a pull or peek, there is no loss of information when it returns none.)</p>
+
+<a name="175697551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175697551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175697551">Jason Rute (Sep 14 2019 at 12:06)</a>:</h4>
+<p>Also for implementing this and other such data structures in an efficient way, you might look at this <a href="https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf" target="_blank" title="https://www.cs.cmu.edu/~rwh/theses/okasaki.pdf">thesis</a> (which I guess is also a <a href="https://www.amazon.com/Purely-Functional-Data-Structures-Okasaki/dp/0521663504/ref=nodl_" target="_blank" title="https://www.amazon.com/Purely-Functional-Data-Structures-Okasaki/dp/0521663504/ref=nodl_">book</a>, neither of which I’ve read).</p>
+
+<a name="175697558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175697558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175697558">Jason Rute (Sep 14 2019 at 12:07)</a>:</h4>
+<p><del>Finally since it is Lean, you could have a separate lawful priority queue class which includes proofs that it really is a priority queue.</del></p>
+
+<a name="175697607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175697607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175697607">Jason Rute (Sep 14 2019 at 12:08)</a>:</h4>
+<p>(I don’t really program in Lean, so take my advice with a grain of salt.)</p>
+
+<a name="175697861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175697861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175697861">Jason Rute (Sep 14 2019 at 12:16)</a>:</h4>
+<p>Oh, sorry.  You already showed it is lawful.</p>
+
+<a name="175698500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175698500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175698500">Jason Rute (Sep 14 2019 at 12:39)</a>:</h4>
+<p>Should you have an <code>empty</code> function and proofs that size and count of <code>empty</code> are 0?</p>
+
 
 {% endraw %}
 
