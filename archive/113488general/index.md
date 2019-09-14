@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [typeclasses for data structures](00598typeclassesfordatastructures.html) (11 messages, latest: Sep 14 2019 at 12:39)
+* [typeclasses for data structures](00598typeclassesfordatastructures.html) (18 messages, latest: Sep 14 2019 at 13:32)
 
 * [Proving for Fun](94070ProvingforFun.html) (156 messages, latest: Sep 14 2019 at 11:32)
 

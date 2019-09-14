@@ -76,6 +76,34 @@ instance (α : Type u) [decidable_linear_order α] : priority_queue α (Σ&#39; 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175698500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175698500">Jason Rute (Sep 14 2019 at 12:39)</a>:</h4>
 <p>Should you have an <code>empty</code> function and proofs that size and count of <code>empty</code> are 0?</p>
 
+<a name="175699330"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175699330" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175699330">Jason Rute (Sep 14 2019 at 13:04)</a>:</h4>
+<p><code>empty</code> isn’t a good name, but I think you get the idea.  I can’t see how to use the API in an implementation free way without being able to have a starting point.</p>
+
+<a name="175699551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175699551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175699551">Jason Rute (Sep 14 2019 at 13:10)</a>:</h4>
+<p>Also more advance ideas:  Priority queues are monads (similar to the set monad).  I am not sure this fact is useful in practice and it is probably not worth implementing your priority queue as a monad.</p>
+
+<a name="175699824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175699824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175699824">Scott Morrison (Sep 14 2019 at 13:19)</a>:</h4>
+<p>Thanks, Jason, that's all helpful.</p>
+
+<a name="175699825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175699825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175699825">Scott Morrison (Sep 14 2019 at 13:19)</a>:</h4>
+<p>I'd first like to get some opinions on the higher level question --- should we even have APIs for data structures in Lean, or just build particular implementations of them? It's not totally obvious to me that we need the APIs yet, given how little programming infrastructure there is generally.</p>
+
+<a name="175699904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175699904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175699904">Scott Morrison (Sep 14 2019 at 13:21)</a>:</h4>
+<p>On some of the other points --- I actually added <code>empty</code> locally in the meantime. :-) I agree that the <code>option</code>-valued <code>pull</code> and <code>peek</code> are essential in use, but I struggled to write the laws in terms of those, so thought I'd tack them on afterwards.</p>
+
+<a name="175701616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175701616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175701616">Jason Rute (Sep 14 2019 at 13:31)</a>:</h4>
+<p>As to that question, I know monad and such are implemented without the laws.  Should the first class be the standard priority queue class?  For tactics, verified implementations of algorithms and data structures are good, but not essential.  And I could imagine it would be more inviting to first implement a fast priority queue and unit test it rather than do that and formally verify its correctness at the same time.</p>
+
+<a name="175701673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclasses%20for%20data%20structures/near/175701673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/00598typeclassesfordatastructures.html#175701673">Jason Rute (Sep 14 2019 at 13:32)</a>:</h4>
+<p>(I know this is now beside the point, but) I think it is possible to satisfy your contact in a few paradoxical ways.  First an ordered list  where size is one minus the length of the list should satisfy it I think.</p>
+
 
 {% endraw %}
 
