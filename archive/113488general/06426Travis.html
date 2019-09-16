@@ -425,6 +425,50 @@ compilation of subtype.comm_group took 2.67ms
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175746725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175746725">Wojciech Nawrocki (Sep 15 2019 at 12:27)</a>:</h4>
 <p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> I have looked into this a few weeks ago, and I'm almost certain that "type checking .. took" is incorrect - see <a href="https://github.com/leanprover-community/lean/issues/58" target="_blank" title="https://github.com/leanprover-community/lean/issues/58">#58</a>. I'm not sure about the other timings (elaboration, compilation) though.</p>
 
+<a name="175770899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/175770899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#175770899">Bryan Gin-ge Chen (Sep 15 2019 at 23:16)</a>:</h4>
+<p>Here's a python script that does some minimal parsing of these log files into JSON format: <a href="https://gist.github.com/bryangingechen/005e51814e698f889a76b59da0e58852" target="_blank" title="https://gist.github.com/bryangingechen/005e51814e698f889a76b59da0e58852">https://gist.github.com/bryangingechen/005e51814e698f889a76b59da0e58852</a></p>
+<p>The JSON files consist of an array of key-value pairs, which mostly correspond to individual lines of the log files (except for elaboration / tactics, which I tried to group together). As a simple example, the following lines:</p>
+<div class="codehilite"><pre><span></span>parsing took 0.117ms
+elaboration of integral took 63.5ms
+type checking of integral took 0.289ms
+compilation of measure_theory.integral took 0.00211ms
+decl post-processing of integral took 0.932ms
+</pre></div>
+
+
+<p>become:</p>
+<div class="codehilite"><pre><span></span><span class="p">[{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;pars&quot;</span><span class="p">,</span>
+<span class="nt">&quot;t&quot;</span><span class="p">:</span> <span class="mf">0.117</span>
+<span class="p">},</span>
+<span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;elab&quot;</span><span class="p">,</span>
+<span class="nt">&quot;lines&quot;</span><span class="p">:</span> <span class="p">[],</span>
+<span class="nt">&quot;t&quot;</span><span class="p">:</span> <span class="mf">63.5</span><span class="p">,</span>
+<span class="nt">&quot;decl&quot;</span><span class="p">:</span> <span class="s2">&quot;integral&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;tc&quot;</span><span class="p">,</span>
+<span class="nt">&quot;t&quot;</span><span class="p">:</span> <span class="mf">0.289</span><span class="p">,</span>
+<span class="nt">&quot;decl&quot;</span><span class="p">:</span> <span class="s2">&quot;integral&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;comp&quot;</span><span class="p">,</span>
+<span class="nt">&quot;t&quot;</span><span class="p">:</span> <span class="mf">0.00211</span><span class="p">,</span>
+<span class="nt">&quot;decl&quot;</span><span class="p">:</span> <span class="s2">&quot;measure_theory.integral&quot;</span>
+<span class="p">},</span>
+<span class="p">{</span>
+<span class="nt">&quot;type&quot;</span><span class="p">:</span> <span class="s2">&quot;decl&quot;</span><span class="p">,</span>
+<span class="nt">&quot;t&quot;</span><span class="p">:</span> <span class="mf">0.932</span><span class="p">,</span>
+<span class="nt">&quot;decl&quot;</span><span class="p">:</span> <span class="s2">&quot;integral&quot;</span>
+<span class="p">}]</span>
+</pre></div>
+
+
+<p>I didn't try too hard to group things together further – if there are other things I should do please let me know.</p>
+<p>The JSON files turn out to be ~35MB compared to the ~25MB of the logs. Here's one corresponding to <a href="#narrow/stream/113538-travis/topic/build.20time.20bot/near/175769199" title="#narrow/stream/113538-travis/topic/build.20time.20bot/near/175769199">this log</a> in the Travis stream. <a href="/user_uploads/3121/2_2PjNAJ8GWayo_KcbQQ4_gq/profile_81a31ca.json.zip" target="_blank" title="profile_81a31ca.json.zip">profile_81a31ca.json.zip</a> (3.1MB)</p>
+
 
 {% endraw %}
 
