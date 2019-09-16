@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nat.le_cases](41425natlecases.html) (6 messages, latest: Sep 16 2019 at 08:51)
+* [nat.le_cases](41425natlecases.html) (7 messages, latest: Sep 16 2019 at 09:05)
 
 * [Travis](06426Travis.html) (65 messages, latest: Sep 15 2019 at 23:16)
 
