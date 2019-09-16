@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`environment` and `private` declarations](81565environmentandprivatedeclarations.html) (1 message, latest: Sep 16 2019 at 16:24)
+
 * [nat.le_cases](41425natlecases.html) (7 messages, latest: Sep 16 2019 at 09:05)
 
 * [Travis](06426Travis.html) (65 messages, latest: Sep 15 2019 at 23:16)
