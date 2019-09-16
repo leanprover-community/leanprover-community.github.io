@@ -25,6 +25,27 @@ The one problem I see is that the index type <code>η</code> for <code>std_basis
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/175774645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#175774645">Scott Morrison (Sep 16 2019 at 00:50)</a>:</h4>
 <p>(Also, your PR is broken at the moment, see <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/582737438#L248" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/582737438#L248">https://travis-ci.org/leanprover-community/mathlib/jobs/582737438#L248</a>.)</p>
 
+<a name="175789773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/175789773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#175789773">Casper Putz (Sep 16 2019 at 07:33)</a>:</h4>
+<p>I looked into it and I believe you cannot easily do it using <code>std_basis</code>. I think the way to do it is to define <code>std_basis₀</code>, which is the same as <code>std_basis</code> but with every <code>Π</code> replaced by <code>Π₀</code>. You can prove that <code>std_basis₀</code> is a basis for <code>dfinsupp</code> using the exact same proves as for <code>std_basis</code> (in most cases you can literally substitute the names in the proves by the <code>₀</code> variants).</p>
+
+<a name="175790120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/175790120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#175790120">Casper Putz (Sep 16 2019 at 07:41)</a>:</h4>
+<p>There are some pros and cons to this:<br>
+The proof of <code>is_basis_std_basis</code> follows directly from <code>is_basis_std_basis₀</code> since functions from a <code>fintype ι</code> to <code>α</code> can be identified with <code>dfinsupp ι (λ_, α)</code> in the obvious way.</p>
+
+<a name="175790301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/175790301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#175790301">Casper Putz (Sep 16 2019 at 07:45)</a>:</h4>
+<p>However, it is quite some work and you would get quite some code duplication if we keep <code>std_basis</code>. I don't know enough about infinite dimensional linear algebra to know whether <code>std_basis</code> is useful when the domain is not a <code>fintype</code> but I would suspect there to be some uses for it</p>
+
+<a name="175790493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/175790493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#175790493">Casper Putz (Sep 16 2019 at 07:49)</a>:</h4>
+<p>The build I can fix easily btw, so I will do that in a bit. It remains the question whether I should change the direct proof with a proof that goes via <code>std_basis₀</code>.</p>
+
+<a name="175790500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/175790500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#175790500">Casper Putz (Sep 16 2019 at 07:49)</a>:</h4>
+<p>Doed anybody have any thoughts on that?</p>
+
 
 {% endraw %}
 
