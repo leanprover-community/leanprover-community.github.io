@@ -1,0 +1,80 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/41425natlecases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html">nat.le_cases</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175791365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.le_cases/near/175791365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html#175791365">Johan Commelin (Sep 16 2019 at 08:04)</a>:</h4>
+<p>Is the following snippet useful enough to PR to mathlib?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_cases</span><span class="bp">.</span><span class="n">aux</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="n">k</span> <span class="bp">=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_cases</span><span class="bp">.</span><span class="n">aux</span> <span class="n">n</span> <span class="bp">∨</span> <span class="n">k</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">lemma</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_cases</span> <span class="o">{</span><span class="n">k</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">nat</span><span class="bp">.</span><span class="n">le_cases</span><span class="bp">.</span><span class="n">aux</span> <span class="n">k</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">eq_zero_of_le_zero</span> <span class="n">h</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_add_one_iff</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h</span><span class="bp">.</span><span class="n">imp</span> <span class="n">ih</span> <span class="n">id</span> <span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">k</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span><span class="err">^</span><span class="mi">3</span> <span class="bp">-</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- ring,     -- does nothing useful</span>
+  <span class="c1">-- norm_num, -- does nothing useful</span>
+  <span class="n">replace</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_cases</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h</span><span class="bp">|</span><span class="n">rfl</span> <span class="o">},</span>
+  <span class="c1">-- all_goals { ring },     -- works</span>
+  <span class="n">all_goals</span> <span class="o">{</span> <span class="n">norm_num</span> <span class="o">},</span> <span class="c1">-- works</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I think <span class="user-mention" data-user-id="110087">@Scott Morrison</span> had some tactic in the making that would do such case-bashing. Maybe we want something more general, that also handles <code>k ∈ finset.Ico 3 7</code>, etc...</p>
+
+<a name="175793114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.le_cases/near/175793114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html#175793114">Rob Lewis (Sep 16 2019 at 08:31)</a>:</h4>
+<p>That was Scott's plan, but I don't think it's materialized yet. He did do <code>fin_cases</code> which you can force to work here. Not the most elegant way.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">fin_cases</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">k</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span><span class="err">^</span><span class="mi">3</span> <span class="bp">-</span> <span class="mi">3</span><span class="bp">*</span><span class="n">k</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="bp">*</span><span class="n">k</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">k&#39;</span> <span class="o">:</span> <span class="n">fin</span> <span class="mi">3</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">k</span><span class="o">,</span> <span class="k">by</span> <span class="n">linarith</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">k</span> <span class="k">with</span> <span class="n">k&#39;</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span>
+  <span class="n">fin_cases</span> <span class="n">k&#39;</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">h_1</span><span class="o">]</span><span class="bp">;</span> <span class="n">dsimp</span><span class="bp">;</span> <span class="n">norm_num</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="175793746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.le_cases/near/175793746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html#175793746">Johan Commelin (Sep 16 2019 at 08:42)</a>:</h4>
+<p>Aha, that already a useful start. I guess that is already good enough to not PR <code>nat.le_cases</code> to mathlib.</p>
+
+<a name="175794264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.le_cases/near/175794264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html#175794264">Scott Morrison (Sep 16 2019 at 08:51)</a>:</h4>
+<p>I think there's still an branch <code>nat_cases</code> that contains most of the tactic you're looking for.</p>
+
+<a name="175794276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.le_cases/near/175794276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html#175794276">Scott Morrison (Sep 16 2019 at 08:51)</a>:</h4>
+<p>It would be good to finish that off!</p>
+
+<a name="175794286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nat.le_cases/near/175794286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41425natlecases.html#175794286">Scott Morrison (Sep 16 2019 at 08:51)</a>:</h4>
+<p>Similarly our <code>hom</code> tactic, <span class="user-mention" data-user-id="112680">@Johan Commelin</span>!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
