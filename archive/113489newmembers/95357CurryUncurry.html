@@ -1,0 +1,65 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/95357CurryUncurry.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html">Curry/Uncurry</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="175834181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175834181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175834181">me myself and I (Sep 16 2019 at 17:36)</a>:</h4>
+<p>Hello.<br>
+I am working through "Theorem Proving in Lean" with only minimal background knowledge, so I am having trouble figuring out how to define curry and uncurry functions from the text:</p>
+<p>def curry (α β γ : Type) (f : α × β → γ) : α → β → γ := sorry</p>
+<p>def uncurry (α β γ : Type) (f : α → β → γ) : α × β → γ := sorry</p>
+<p>The core of my confusion is that I do not understand how the return types  α → β → γ and  α × β → γ can be expressed.<br>
+Am I supposed to def a new function inside the given function definition?  Trying that gives an error.</p>
+<p>If I start with lambda x y z g (for types alpha, beta, gamma, and function f), I get x : alpha, y : beta, z : ?m_1, and f : ?m_1.</p>
+<p>Would you please instruct me how to define these functions? </p>
+<p>Thank you.</p>
+
+<a name="175834619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175834619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175834619">Edward Ayers (Sep 16 2019 at 17:41)</a>:</h4>
+<p>Hi! The answer is <code>def curry (α β γ : Type) (f : α × β → γ) : α → β → γ := λ a b, f (a,b)</code>. In a <code>def</code> block, anything before the <code>:</code> is already in scope (so you don't need to lambda the<code>α</code>,<code>β</code>,<code>γ</code> or <code>f</code> ). If you replace <code>sorry</code> with an underscore <code>_</code> and look at the lean output it will give you some hints about what is in scope and what the underscore needs to be replaced with.</p>
+
+<a name="175834720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175834720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175834720">Edward Ayers (Sep 16 2019 at 17:42)</a>:</h4>
+<p>So eg </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">curry</span> <span class="o">(</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>Gives:</p>
+<div class="codehilite"><pre><span></span>α β γ : Type,
+f : α × β → γ
+⊢ α → β → γ
+</pre></div>
+
+<a name="175834901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175834901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175834901">Edward Ayers (Sep 16 2019 at 17:44)</a>:</h4>
+<p>So it's telling you that you need to provide a function that takes a <code>α</code> and <code>β</code> and returns a  <code>γ</code>.</p>
+
+<a name="175835103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175835103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175835103">me myself and I (Sep 16 2019 at 17:47)</a>:</h4>
+<p>OK; I understand now.<br>
+lambda x y, f(x,y) is actually returning a function with the required signature, yes?<br>
+Thank you for your wise and timely assistance!</p>
+
+<a name="175835116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175835116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175835116">Edward Ayers (Sep 16 2019 at 17:47)</a>:</h4>
+<p>yep</p>
+
+<a name="175835117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Curry/Uncurry/near/175835117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/95357CurryUncurry.html#175835117">Edward Ayers (Sep 16 2019 at 17:47)</a>:</h4>
+<p>np</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
