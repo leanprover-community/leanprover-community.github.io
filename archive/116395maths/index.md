@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [open embeddings](62405openembeddings.html) (2 messages, latest: Sep 16 2019 at 11:49)
+
 * [Schroeder-Bernstein](26743SchroederBernstein.html) (15 messages, latest: Sep 14 2019 at 14:38)
 
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (4 messages, latest: Sep 13 2019 at 14:52)
