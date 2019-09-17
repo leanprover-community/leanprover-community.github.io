@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (8 messages, latest: Sep 17 2019 at 00:50)
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (9 messages, latest: Sep 17 2019 at 04:23)
 
 * [open embeddings](62405openembeddings.html) (6 messages, latest: Sep 16 2019 at 12:09)
 
