@@ -213,6 +213,38 @@ That is a reasonable compromise. It will be an extra challenge to the solvers: t
 <p>2) <strong>IMO problems ask one to "find and prove", rather than just "prove".   </strong></p>
 <p>The fact that one must first decide <em>what</em> theorem to prove, and then subsequently prove it, differentiates IMO from other theorem proving / synthesis tasks. I'm not sure what the tried-and-true way to represent such problems is - and perhaps that's part of the difficulty others have been running into when formalizing this task. I've seen discussions here distinguishing between "proof" and "witness" - I take it that gets at this distinction between one's answer and one's proof the answer is correct. Perhaps someone can explain with an example how those terms are being used?</p>
 
+<a name="175939074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175939074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175939074">Daniel Selsam (Sep 17 2019 at 19:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="240563">@Blake Elias</span> Hi Blake, welcome!</p>
+<blockquote>
+<p>1) <strong>What is the simplest IMO problem for which we can produce a satisfactory formal statement in Lean? </strong><br>
+Perhaps if we start with a few such examples, it will be easier to generalize to certain classes of such "simple" problems -- and then move on to trickier ones -- rather than immediately jumping in to ones with the trickiest issues.</p>
+</blockquote>
+<p>I'll just note that most historical problems in algebra and number theory are easy to state. The combinatorics ones are usually pretty easy to state individually, but it may still require careful design to state them in a convenient, uniform way.</p>
+
+<a name="175939464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175939464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175939464">Daniel Selsam (Sep 17 2019 at 19:17)</a>:</h4>
+<blockquote>
+<p>2) <strong>IMO problems ask one to "find and prove", rather than just "prove".   </strong></p>
+<p>The fact that one must first decide <em>what</em> theorem to prove, and then subsequently prove it, differentiates IMO from other theorem proving / synthesis tasks. I'm not sure what the tried-and-true way to represent such problems is - and perhaps that's part of the difficulty others have been running into when formalizing this task. I've seen discussions here distinguishing between "proof" and "witness" - I take it that gets at this distinction between one's answer and one's proof the answer is correct. Perhaps someone can explain with an example how those terms are being used?</p>
+</blockquote>
+<p>See <a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean</a> for some notes on this issue. If we knew what type of object we were looking for, the "find" part would arguably be a standard synthesis problem. The issue is that we don't how to formally distinguish between "degenerate" solutions/witnesses and "acceptable" ones.</p>
+
+<a name="175940399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175940399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175940399">Johan Commelin (Sep 17 2019 at 19:28)</a>:</h4>
+<p>Would it help to require the "witness" part to be constructive? That would counter one of Floris's attacks, where he pointed out that one could use choice to get the witness.</p>
+
+<a name="175941349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175941349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175941349">Daniel Selsam (Sep 17 2019 at 19:39)</a>:</h4>
+<blockquote>
+<p>Would it help to require the "witness" part to be constructive? That would counter one of Floris's attacks, where he pointed out that one could use choice to get the witness.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Note that the Axiom of Choice is a theorem for encodeable types: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/equiv/encodable.lean#L280-L283" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/equiv/encodable.lean#L280-L283">https://github.com/leanprover-community/mathlib/blob/master/src/data/equiv/encodable.lean#L280-L283</a> . Also note that in the finite example Floris gave (<a href="#narrow/stream/208328-IMO-grand-challenge/topic/How.20to.20help.3F/near/175269074" title="#narrow/stream/208328-IMO-grand-challenge/topic/How.20to.20help.3F/near/175269074">https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How.20to.20help.3F/near/175269074</a>) the witness type is <code>List</code> and yet the proof can be checked without actually computing the list.</p>
+
+<a name="175941467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/How%20to%20help%3F/near/175941467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/11834Howtohelp.html#175941467">Johan Commelin (Sep 17 2019 at 19:40)</a>:</h4>
+<p>Alas...</p>
+
 
 {% endraw %}
 
