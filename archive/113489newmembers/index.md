@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [disjoint in algebra.big_operators](94440disjointinalgebrabigoperators.html) (5 messages, latest: Sep 18 2019 at 08:59)
+
 * [Curry/Uncurry](95357CurryUncurry.html) (7 messages, latest: Sep 16 2019 at 17:47)
 
 * [complete lattice of setoids](91280completelatticeofsetoids.html) (6 messages, latest: Sep 13 2019 at 11:27)
