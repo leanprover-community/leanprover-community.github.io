@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proving for Fun](94070ProvingforFun.html) (158 messages, latest: Sep 18 2019 at 16:41)
+* [Proving for Fun](94070ProvingforFun.html) (160 messages, latest: Sep 18 2019 at 19:39)
 
 * [list.take_subset and simp](05937listtakesubsetandsimp.html) (1 message, latest: Sep 18 2019 at 14:10)
 
