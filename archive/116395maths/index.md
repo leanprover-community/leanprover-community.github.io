@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (64 messages, latest: Sep 18 2019 at 15:35)
+
 * [open embeddings](62405openembeddings.html) (10 messages, latest: Sep 18 2019 at 14:18)
 
 * [Schroeder-Bernstein](26743SchroederBernstein.html) (16 messages, latest: Sep 17 2019 at 21:35)
-
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (47 messages, latest: Sep 17 2019 at 07:09)
 
 * [units and is_unit](59074unitsandisunit.html) (4 messages, latest: Sep 13 2019 at 05:38)
 
