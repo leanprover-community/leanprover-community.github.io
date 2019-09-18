@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Proving for Fun](94070ProvingforFun.html) (158 messages, latest: Sep 18 2019 at 16:41)
+
 * [list.take_subset and simp](05937listtakesubsetandsimp.html) (1 message, latest: Sep 18 2019 at 14:10)
 
 * [injections](00791injections.html) (5 messages, latest: Sep 17 2019 at 18:06)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [nat.le_cases](41425natlecases.html) (7 messages, latest: Sep 16 2019 at 09:05)
 
 * [Travis](06426Travis.html) (65 messages, latest: Sep 15 2019 at 23:16)
-
-* [Proving for Fun](94070ProvingforFun.html) (157 messages, latest: Sep 14 2019 at 18:04)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (34 messages, latest: Sep 14 2019 at 16:11)
 
