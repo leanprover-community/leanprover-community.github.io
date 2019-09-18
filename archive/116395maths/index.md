@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [open embeddings](62405openembeddings.html) (9 messages, latest: Sep 18 2019 at 11:44)
+* [open embeddings](62405openembeddings.html) (10 messages, latest: Sep 18 2019 at 14:18)
 
 * [Schroeder-Bernstein](26743SchroederBernstein.html) (16 messages, latest: Sep 17 2019 at 21:35)
 

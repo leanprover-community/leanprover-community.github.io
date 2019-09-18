@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [list.take_subset and simp](05937listtakesubsetandsimp.html) (1 message, latest: Sep 18 2019 at 14:10)
+
 * [injections](00791injections.html) (5 messages, latest: Sep 17 2019 at 18:06)
 
 * [`environment` and `private` declarations](81565environmentandprivatedeclarations.html) (1 message, latest: Sep 16 2019 at 16:24)
