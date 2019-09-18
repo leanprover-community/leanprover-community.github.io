@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [disjoint in algebra.big_operators](94440disjointinalgebrabigoperators.html) (10 messages, latest: Sep 18 2019 at 12:45)
+* [disjoint in algebra.big_operators](94440disjointinalgebrabigoperators.html) (11 messages, latest: Sep 18 2019 at 13:39)
 
 * [Curry/Uncurry](95357CurryUncurry.html) (7 messages, latest: Sep 16 2019 at 17:47)
 
