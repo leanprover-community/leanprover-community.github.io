@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [push coe](38808pushcoe.html) (11 messages, latest: Sep 19 2019 at 06:54)
+
+* [calling a tactic "by name"?](84723callingatacticbyname.html) (12 messages, latest: Sep 19 2019 at 06:53)
+
 * [Proving for Fun](94070ProvingforFun.html) (160 messages, latest: Sep 18 2019 at 19:39)
 
 * [list.take_subset and simp](05937listtakesubsetandsimp.html) (1 message, latest: Sep 18 2019 at 14:10)

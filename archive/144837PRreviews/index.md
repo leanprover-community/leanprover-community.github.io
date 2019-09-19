@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (3 messages, latest: Sep 19 2019 at 06:28)
+
 * [#1449 minpoly](752621449minpoly.html) (2 messages, latest: Sep 18 2019 at 07:25)
 
 * [#1425 dim_finsupp](986701425dimfinsupp.html) (15 messages, latest: Sep 16 2019 at 20:31)
@@ -18,8 +20,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1372 Timeout](635441372Timeout.html) (30 messages, latest: Sep 06 2019 at 16:14)
 
 * [#1391 use classical](493901391useclassical.html) (2 messages, latest: Sep 06 2019 at 11:13)
-
-* [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (2 messages, latest: Sep 02 2019 at 04:04)
 
 * [#1356 derive finite_products](551401356derivefiniteproducts.html) (48 messages, latest: Aug 31 2019 at 00:23)
 

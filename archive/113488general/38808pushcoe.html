@@ -1,0 +1,72 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/38808pushcoe.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html">push coe</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176073403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073403">Johan Commelin (Sep 19 2019 at 06:47)</a>:</h4>
+<p>I've complained that <code>ring</code> didn't do its job (sorry <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>) but I figured out what's wrong.<br>
+Here's the example that I had:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">-</span> <span class="err">↑</span><span class="o">((</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">y</span> <span class="bp">-</span> <span class="err">↑</span><span class="n">k</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="err">↑</span><span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">x</span> <span class="bp">-</span> <span class="err">↑</span><span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The reason that <code>ring</code> fails, is that the coercion <code>↑((x * y + 1) * k)</code> first needs to be pushed through the products and sum.</p>
+
+<a name="176073449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073449">Johan Commelin (Sep 19 2019 at 06:48)</a>:</h4>
+<p><code>simp</code> can do that, but you end up with a non-terminal simp, or an ugly <code>simp only</code> line.</p>
+
+<a name="176073451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073451">Mario Carneiro (Sep 19 2019 at 06:48)</a>:</h4>
+<p>does norm_cast help?</p>
+
+<a name="176073454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073454">Johan Commelin (Sep 19 2019 at 06:48)</a>:</h4>
+<p>Nope</p>
+
+<a name="176073473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073473">Mario Carneiro (Sep 19 2019 at 06:49)</a>:</h4>
+<p>I forget if I've said this before, but nonterminal <code>simp</code> is fine if it is followed by a "blasty" tactic, which doesn't care so much about the exact form of the goal</p>
+
+<a name="176073474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073474">Johan Commelin (Sep 19 2019 at 06:49)</a>:</h4>
+<p>I guess the <code>hom</code> tactic would help. But it is still under construction.</p>
+
+<a name="176073485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073485">Scott Morrison (Sep 19 2019 at 06:49)</a>:</h4>
+<p>This has nothing to do with <code>hom</code>, I thought.</p>
+
+<a name="176073499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073499">Scott Morrison (Sep 19 2019 at 06:50)</a>:</h4>
+<p>Isn't this exactly the sort of thing that <code>norm_cast</code> and friends are for?</p>
+
+<a name="176073555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073555">Scott Morrison (Sep 19 2019 at 06:50)</a>:</h4>
+<p>Maybe we're just missing some attributes on lemmas.</p>
+
+<a name="176073767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073767">Johan Commelin (Sep 19 2019 at 06:54)</a>:</h4>
+<p>Ok, maybe we need to add attributes to <code>int.coe_mul</code> or something like that...</p>
+
+<a name="176073779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/push%20coe/near/176073779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38808pushcoe.html#176073779">Johan Commelin (Sep 19 2019 at 06:54)</a>:</h4>
+<p>Anyway, I've pushed again. For the moment I'll just prove them with <code>simp, ring</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

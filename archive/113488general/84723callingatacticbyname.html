@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84723callingatacticbyname.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html">calling a tactic "by name"?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176073448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073448">Scott Morrison (Sep 19 2019 at 06:48)</a>:</h4>
+<p>I'd like to tell one of my tactics to try calling <code>norm_num</code>, but not have to import <code>norm_num</code> myself.</p>
+
+<a name="176073456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073456">Scott Morrison (Sep 19 2019 at 06:48)</a>:</h4>
+<p>In particular, I'd like my call to <code>norm_num</code> to just fail if <code>norm_num</code> hasn't actually been imported by the time I invoke it.</p>
+
+<a name="176073460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073460">Scott Morrison (Sep 19 2019 at 06:48)</a>:</h4>
+<p>Is there some trickery with pre-expressions that will let me do this?</p>
+
+<a name="176073471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073471">Keeley Hoek (Sep 19 2019 at 06:49)</a>:</h4>
+<p>Definitely.</p>
+
+<a name="176073488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073488">Keeley Hoek (Sep 19 2019 at 06:49)</a>:</h4>
+<p>You want to <code>eval_expr</code> an <code>expr</code> which corresponds to the <code>norm_num</code> tactic, which you build only if you can resolve the name in <code>tactic.interactive</code>.</p>
+
+<a name="176073567"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073567" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073567">Keeley Hoek (Sep 19 2019 at 06:50)</a>:</h4>
+<p>Then you can just execute it.</p>
+
+<a name="176073634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073634">Scott Morrison (Sep 19 2019 at 06:52)</a>:</h4>
+<p>Oh.. <code>tidy.lean</code> actually contains <code>name_to_tactic</code></p>
+
+<a name="176073640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073640">Scott Morrison (Sep 19 2019 at 06:52)</a>:</h4>
+<p>which maybe does exactly this</p>
+
+<a name="176073644"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073644" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073644">Mario Carneiro (Sep 19 2019 at 06:52)</a>:</h4>
+<p>You can more reliably test existence using <code>resolve_name</code></p>
+
+<a name="176073650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073650">Scott Morrison (Sep 19 2019 at 06:52)</a>:</h4>
+<p>I should <code>git blame</code> that line and see if I wrote it ...</p>
+
+<a name="176073706"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073706" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073706">Mario Carneiro (Sep 19 2019 at 06:53)</a>:</h4>
+<p>If you just <code>eval_expr</code> it then you won't be able to tell whether it failed because norm_num failed or norm_num doesn't exist</p>
+
+<a name="176073715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/calling%20a%20tactic%20%22by%20name%22%3F/near/176073715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84723callingatacticbyname.html#176073715">Scott Morrison (Sep 19 2019 at 06:53)</a>:</h4>
+<p>In this use case, I actually don't care much. :-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
