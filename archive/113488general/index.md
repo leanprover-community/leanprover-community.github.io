@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [push coe](38808pushcoe.html) (11 messages, latest: Sep 19 2019 at 06:54)
+* [calling a tactic "by name"?](84723callingatacticbyname.html) (14 messages, latest: Sep 19 2019 at 07:24)
 
-* [calling a tactic "by name"?](84723callingatacticbyname.html) (12 messages, latest: Sep 19 2019 at 06:53)
+* [push coe](38808pushcoe.html) (12 messages, latest: Sep 19 2019 at 07:06)
 
 * [Proving for Fun](94070ProvingforFun.html) (160 messages, latest: Sep 18 2019 at 19:39)
 
