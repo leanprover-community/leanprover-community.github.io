@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (6 messages, latest: Sep 19 2019 at 09:58)
+* [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (8 messages, latest: Sep 19 2019 at 10:30)
 
 * [push coe](38808pushcoe.html) (13 messages, latest: Sep 19 2019 at 08:12)
 
