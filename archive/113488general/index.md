@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [classical.choice_elim](82383classicalchoiceelim.html) (23 messages, latest: Sep 19 2019 at 14:48)
+* [Infinity Hotel](67367InfinityHotel.html) (2 messages, latest: Sep 19 2019 at 15:58)
+
+* [classical.choice_elim](82383classicalchoiceelim.html) (27 messages, latest: Sep 19 2019 at 15:53)
 
 * [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (10 messages, latest: Sep 19 2019 at 13:36)
 
