@@ -127,6 +127,64 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176101274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176101274">Keeley Hoek (Sep 19 2019 at 13:52)</a>:</h4>
 <p>all hope is lost Kevin</p>
 
+<a name="176103083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176103083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176103083">Kevin Buzzard (Sep 19 2019 at 14:10)</a>:</h4>
+<p>I can't deal with concepts that aren't functorial.</p>
+
+<a name="176103131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176103131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176103131">Kevin Buzzard (Sep 19 2019 at 14:10)</a>:</h4>
+<p>you can imagine why the HoTT people have trouble with choice...</p>
+
+<a name="176103941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176103941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176103941">Reid Barton (Sep 19 2019 at 14:19)</a>:</h4>
+<p>I would argue you should "never" use <code>choice</code></p>
+
+<a name="176103960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176103960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176103960">Reid Barton (Sep 19 2019 at 14:19)</a>:</h4>
+<p>where "never" = of course there are exceptions</p>
+
+<a name="176104087"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176104087" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176104087">Reid Barton (Sep 19 2019 at 14:20)</a>:</h4>
+<p>Except as <code>unique_choice</code>, which I guess only exists in my head</p>
+
+<a name="176104596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176104596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176104596">Kevin Buzzard (Sep 19 2019 at 14:25)</a>:</h4>
+<p>How do you avoid it in the following situation (a simplified version of where I was):</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">next_to</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">d</span> <span class="err">∈</span> <span class="o">([</span><span class="bp">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">]</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span>
+
+<span class="kn">lemma</span> <span class="n">next_to</span><span class="bp">.</span><span class="n">symm</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">hab</span> <span class="o">:</span> <span class="n">next_to</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>  <span class="n">next_to</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span> <span class="bp">⟨-</span><span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="n">hab</span><span class="o">,</span> <span class="n">sorry</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="176104852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176104852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176104852">Johan Commelin (Sep 19 2019 at 14:28)</a>:</h4>
+<p>I guess that falls under the category <code>unique_choice</code>.</p>
+
+<a name="176105013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176105013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176105013">Kevin Buzzard (Sep 19 2019 at 14:30)</a>:</h4>
+<p>I need to import Reid's head.</p>
+
+<a name="176105630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176105630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176105630">Chris Hughes (Sep 19 2019 at 14:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="n">def</span> <span class="n">next_to</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">d</span> <span class="err">∈</span> <span class="o">([</span><span class="bp">-</span><span class="mi">1</span><span class="o">,</span> <span class="mi">1</span><span class="o">]</span> <span class="o">:</span> <span class="n">list</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span>
+
+<span class="kn">lemma</span> <span class="n">next_to</span><span class="bp">.</span><span class="n">symm</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">(</span><span class="n">hab</span> <span class="o">:</span> <span class="n">next_to</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">next_to</span> <span class="n">b</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rcases</span> <span class="n">hab</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">hx₁</span><span class="o">,</span> <span class="n">hx₂</span><span class="bp">⟩;</span>
+  <span class="n">exact</span> <span class="bp">⟨-</span><span class="n">x</span><span class="o">,</span> <span class="k">by</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">eq_neg_iff_eq_neg</span><span class="o">,</span> <span class="n">eq_comm</span><span class="o">,</span> <span class="n">or_comm</span><span class="o">]</span> <span class="kn">using</span> <span class="n">hx₁</span><span class="o">,</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">hx₂</span><span class="bp">;</span> <span class="n">simp</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="176105942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176105942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176105942">Chris Hughes (Sep 19 2019 at 14:40)</a>:</h4>
+<p>Although I would be tempted to define <code>next_to</code> as</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">next_to</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">left</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">next_to</span> <span class="n">x</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">right</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="n">next_to</span> <span class="o">(</span><span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">x</span>
+</pre></div>
+
+<a name="176106726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176106726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176106726">Reid Barton (Sep 19 2019 at 14:48)</a>:</h4>
+<p>You're proving a proposition and you only need to deconstruct a single existential, so as Chris says you don't need to use choice at all.</p>
+
 
 {% endraw %}
 

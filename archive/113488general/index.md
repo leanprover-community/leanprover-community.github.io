@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [classical.choice_elim](82383classicalchoiceelim.html) (12 messages, latest: Sep 19 2019 at 13:52)
+* [classical.choice_elim](82383classicalchoiceelim.html) (23 messages, latest: Sep 19 2019 at 14:48)
 
 * [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (10 messages, latest: Sep 19 2019 at 13:36)
 
