@@ -1,0 +1,133 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/82383classicalchoiceelim.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html">classical.choice_elim</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176097414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176097414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176097414">Kevin Buzzard (Sep 19 2019 at 13:13)</a>:</h4>
+<p>I had a brain freeze and couldn't remember the name of the function <code>(∃ (x : α), p x) → α</code>. I tried <code>library_search</code>:</p>
+<div class="codehilite"><pre><span></span>example : Π {α : Sort u} {p : α → Prop}, (∃ (x : α), p x) → α := by library_search -- fails
+</pre></div>
+
+
+<p>but it failed! Is this a bug in <code>library_search</code> or is the issue that it's not a theorem? With my tail between my legs I opened up TPIL for the first time in a long time, and went to the section on choice. I learnt <code>classical.choice : Π {α : Sort u_1}, nonempty α → α</code> and thought "oh I can take it from here". I used <code>library_search</code> to discover  <br>
+<code>nonempty_of_exists : (∃ (x : α), p x) → nonempty α</code>and so I just defined my function to be <code>classical.choice (nonempty_of_exists h)</code> and moved on.</p>
+<p>A bit later I needed that the <code>x</code> provided by my function actually satisfied <code>p x</code>, and I took one look at that problem and thought "Oh -- that's <code>classical.some_spec</code>". I <em>then</em> remembered that the function I wanted but couldn't find was called <code>classical.some</code> and I figured that this would be no problem because the definition of <code>classical.some</code> will boil down to what I wrote. So I tried to prove this:</p>
+<div class="codehilite"><pre><span></span>example (α : Type) (p : α → Prop) (h : (∃ (x : α), p x)) : classical.choice (nonempty_of_exists h) = classical.some h := sorry
+</pre></div>
+
+
+<p>with <code>rfl</code>, but it didn't work! Here is me unwinding what went wrong:</p>
+<div class="codehilite"><pre><span></span>set_option pp.proofs true
+example (α : Type) (p : α → Prop) (h : (∃ (x : α), p x)) : classical.choice (nonempty_of_exists h) = classical.some h :=
+begin
+  cases h with x hx,
+  unfold classical.some,
+  delta classical.indefinite_description,
+  dsimp, -- changes the proofs!
+  delta id_rhs,
+  show classical.choice (nonempty_of_exists (Exists.intro x hx)) =
+       (classical.choice (nonempty.intro (⟨x, hx⟩ : {d : α // p d}))).val,
+  sorry
+end
+</pre></div>
+
+
+<p>The problem is that <code>classical.choice</code> is not as functorial as you'd want -- I guess there is no eliminator. The goal ended up being</p>
+<div class="codehilite"><pre><span></span>classical.choice (nonempty.intro x) = (classical.choice (nonempty.intro ⟨x, hx⟩)).val
+</pre></div>
+
+
+<p>This would be provable if we could prove this:</p>
+<div class="codehilite"><pre><span></span>theorem classical.choice_elim (α : Type) (x : α) : classical.choice (nonempty.intro x) = x := sorry
+</pre></div>
+
+
+<p>But that can't be proved in Lean, right? Because classical.choice is just an axiom so you can't prove anything about it which doesn't boil down to <code>rfl</code> in some sense. But OTOH the result is true in some funny sense, because the VM mumble mumble I don't know what I'm talking about stores it as x internally but the kernel forgets it or something. This is at the boundary of my understanding (I don't really understand the VM or the kernel but perhaps this example would help me understand them).  </p>
+<p>I was wondering whether it would be "safe" to add <code>classical.choice (nonempty.intro x) = x</code> as an axiom to Lean? Or can it somehow already be proved and I'm barking up the wrong tree?</p>
+
+<a name="176098604"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176098604" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176098604">Keeley Hoek (Sep 19 2019 at 13:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">kevin_ax</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="o">(</span><span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span>
+
+<span class="kn">theorem</span> <span class="n">uh_oh_kevin</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h₀</span> <span class="o">:</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="o">(</span><span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">kevin_ax</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">h₁</span> <span class="o">:</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="o">(</span><span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">kevin_ax</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">eq</span><span class="bp">.</span><span class="n">trans</span> <span class="n">h₀</span><span class="bp">.</span><span class="n">symm</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">contradiction</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176098693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176098693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176098693">Keeley Hoek (Sep 19 2019 at 13:27)</a>:</h4>
+<p>:(</p>
+
+<a name="176098873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176098873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176098873">Keeley Hoek (Sep 19 2019 at 13:29)</a>:</h4>
+<p>Propext makes the whole world blow up when you add <code>kevin_ax</code></p>
+
+<a name="176099544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176099544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176099544">Kevin Buzzard (Sep 19 2019 at 13:35)</a>:</h4>
+<p>nooo!</p>
+
+<a name="176099551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176099551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176099551">Kevin Buzzard (Sep 19 2019 at 13:35)</a>:</h4>
+<p>but it's true in the VM!</p>
+
+<a name="176099556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176099556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176099556">Kevin Buzzard (Sep 19 2019 at 13:35)</a>:</h4>
+<p>or something</p>
+
+<a name="176100161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176100161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176100161">Keeley Hoek (Sep 19 2019 at 13:41)</a>:</h4>
+<p>Could you have this without a contradiction?</p>
+
+<a name="176100164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176100164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176100164">Keeley Hoek (Sep 19 2019 at 13:41)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">axiom</span> <span class="n">choice_commutes</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">)</span> <span class="bp">=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+<a name="176100312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176100312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176100312">Keeley Hoek (Sep 19 2019 at 13:42)</a>:</h4>
+<p>I'm very afraid</p>
+
+<a name="176101268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176101268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176101268">Keeley Hoek (Sep 19 2019 at 13:52)</a>:</h4>
+<p>That's a negative</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">uh_oh_keeley</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">let</span> <span class="n">f</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">bool</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">g</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">bool</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">ff</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">bool</span> <span class="o">:=</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">intro</span> <span class="n">tt</span><span class="o">,</span>
+
+  <span class="k">have</span> <span class="n">hv</span> <span class="o">:</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">nonempty</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">rfl</span><span class="o">,</span>
+
+  <span class="k">have</span> <span class="o">:</span> <span class="n">tt</span> <span class="bp">=</span> <span class="n">ff</span> <span class="o">:=</span>
+    <span class="k">calc</span> <span class="n">tt</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="bp">;</span> <span class="n">refl</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">choice_commutes</span> <span class="bp">_</span> <span class="bp">_</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">map</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">hv</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">g</span> <span class="o">(</span><span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">choice_commutes</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">ff</span> <span class="o">:</span> <span class="k">by</span> <span class="n">cases</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="bp">;</span> <span class="n">refl</span><span class="o">,</span>
+
+  <span class="n">contradiction</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176101274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical.choice_elim/near/176101274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/82383classicalchoiceelim.html#176101274">Keeley Hoek (Sep 19 2019 at 13:52)</a>:</h4>
+<p>all hope is lost Kevin</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
