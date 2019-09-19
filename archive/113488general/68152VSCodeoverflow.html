@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/68152VSCodeoverflow.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/68152VSCodeoverflow.html">VSCode overflow?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176148289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VSCode%20overflow%3F/near/176148289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68152VSCodeoverflow.html#176148289">Kevin Buzzard (Sep 19 2019 at 22:33)</a>:</h4>
+<p>If I make a file like this in VS Code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="n">finset</span>
+</pre></div>
+
+
+<p>and then (on Ubuntu) put my cursor after <code>finset</code> and press ctrl-space I get the usual list of possible completions. If I scroll down then it seems, according to this screenshot <a href="/user_uploads/3121/gmel9XFuiVwitIgJTCa9wfv7/finset.png" target="_blank" title="finset.png">finset.png</a> that everything of the form <code>finset.blah</code> has <code>blah</code> starting with a capital letter, a, b or c; then it wraps back. Surely there is more info here which I can't see? e.g. there is <code>finset.prod</code>.</p>
+<div class="message_inline_image"><a href="/user_uploads/3121/gmel9XFuiVwitIgJTCa9wfv7/finset.png" target="_blank" title="finset.png"><img src="/user_uploads/3121/gmel9XFuiVwitIgJTCa9wfv7/finset.png"></a></div>
+
+<a name="176148412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VSCode%20overflow%3F/near/176148412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68152VSCodeoverflow.html#176148412">Bryan Gin-ge Chen (Sep 19 2019 at 22:35)</a>:</h4>
+<p>I think the Lean server only returns the first 100 results.</p>
+
+<a name="176148438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VSCode%20overflow%3F/near/176148438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68152VSCodeoverflow.html#176148438">Kevin Buzzard (Sep 19 2019 at 22:35)</a>:</h4>
+<p>So there's nothing we can do about it?</p>
+
+<a name="176149442"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/VSCode%20overflow%3F/near/176149442" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68152VSCodeoverflow.html#176149442">Bryan Gin-ge Chen (Sep 19 2019 at 22:52)</a>:</h4>
+<p>In principle it's fixable in 3.5.0c. The simplest thing to do would just be to increase the 100 <a href="https://github.com/leanprover-community/lean/blob/master/src/frontends/lean/completion.cpp#L24" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/frontends/lean/completion.cpp#L24">here</a>, though maybe it should be made more configurable.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

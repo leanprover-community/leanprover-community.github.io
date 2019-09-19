@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1359 messages, latest: Sep 19 2019 at 22:44)
+
 * [infinite Ramsey theorem](49628infiniteRamseytheorem.html) (43 messages, latest: Sep 18 2019 at 17:21)
 
 * [disjoint in algebra.big_operators](94440disjointinalgebrabigoperators.html) (11 messages, latest: Sep 18 2019 at 13:39)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [complete lattice of setoids](91280completelatticeofsetoids.html) (6 messages, latest: Sep 13 2019 at 11:27)
 
 * [3+ mutually recursive functions](441413mutuallyrecursivefunctions.html) (19 messages, latest: Sep 10 2019 at 06:58)
-
-* [noob question(s)](52075noobquestions.html) (1348 messages, latest: Sep 09 2019 at 21:19)
 
 * [Is mathlib-nursary recommended/alive?](60865Ismathlibnursaryrecommendedalive.html) (2 messages, latest: Sep 08 2019 at 16:27)
 

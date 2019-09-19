@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (2 messages, latest: Sep 19 2019 at 21:17)
+* [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (6 messages, latest: Sep 19 2019 at 22:18)
 
 * [units and is_unit](59074unitsandisunit.html) (7 messages, latest: Sep 19 2019 at 02:18)
 
