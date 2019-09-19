@@ -1,0 +1,33 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/53506normcastnotbehavingasexpected.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html">norm_cast not behaving as expected</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176078615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176078615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176078615">Johan Commelin (Sep 19 2019 at 08:29)</a>:</h4>
+<p>I'm having some issues with <code>norm_cast</code>. I'll repeat my example from the other thread:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">-</span> <span class="err">↑</span><span class="o">((</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">k</span><span class="o">)</span> <span class="bp">=</span> <span class="err">↑</span><span class="n">y</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">y</span> <span class="bp">-</span> <span class="err">↑</span><span class="n">k</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">y</span> <span class="bp">+</span> <span class="o">(</span><span class="err">↑</span><span class="n">x</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">x</span> <span class="bp">-</span> <span class="err">↑</span><span class="n">k</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">norm_cast</span><span class="o">,</span> <span class="c1">-- this doesn&#39;t move enough `coe`s.</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176078630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176078630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176078630">Johan Commelin (Sep 19 2019 at 08:29)</a>:</h4>
+<p>Nevertheless, <code>int.coe_nat_mul</code> and friends are tagged with the <code>move_cast</code> attribute in <code>tactic/norm_cast.lean</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

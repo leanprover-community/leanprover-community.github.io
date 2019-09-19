@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [calling a tactic "by name"?](84723callingatacticbyname.html) (14 messages, latest: Sep 19 2019 at 07:24)
+* [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (2 messages, latest: Sep 19 2019 at 08:29)
 
-* [push coe](38808pushcoe.html) (12 messages, latest: Sep 19 2019 at 07:06)
+* [push coe](38808pushcoe.html) (13 messages, latest: Sep 19 2019 at 08:12)
+
+* [calling a tactic "by name"?](84723callingatacticbyname.html) (14 messages, latest: Sep 19 2019 at 07:24)
 
 * [Proving for Fun](94070ProvingforFun.html) (160 messages, latest: Sep 18 2019 at 19:39)
 
