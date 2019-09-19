@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (67 messages, latest: Sep 18 2019 at 23:40)
+* [units and is_unit](59074unitsandisunit.html) (7 messages, latest: Sep 19 2019 at 02:18)
 
-* [units and is_unit](59074unitsandisunit.html) (5 messages, latest: Sep 18 2019 at 22:36)
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (67 messages, latest: Sep 18 2019 at 23:40)
 
 * [open embeddings](62405openembeddings.html) (10 messages, latest: Sep 18 2019 at 14:18)
 
