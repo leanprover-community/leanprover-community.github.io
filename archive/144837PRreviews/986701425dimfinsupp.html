@@ -98,6 +98,66 @@ The proof of <code>is_basis_std_basis</code> follows directly from <code>is_basi
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176080430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176080430">Casper Putz (Sep 19 2019 at 08:59)</a>:</h4>
 <p>So yes in that case that would replace the proof, but not in the general case</p>
 
+<a name="176080760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176080760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176080760">Johan Commelin (Sep 19 2019 at 09:04)</a>:</h4>
+<p>I'm totally confused. How can you then prove that the two bases are the same?</p>
+
+<a name="176080771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176080771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176080771">Johan Commelin (Sep 19 2019 at 09:04)</a>:</h4>
+<p>I guess whatever the explanation is, it deserves to be put in a comment above the code</p>
+
+<a name="176080834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176080834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176080834">Casper Putz (Sep 19 2019 at 09:05)</a>:</h4>
+<p>Well, the right-hand side is a finsupp, but is cast to a function. So as functions they are the same, but the RHS is a basis for finsupp, and the LHS is a basis for functions, but only if the domain is a fintype</p>
+
+<a name="176080885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176080885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176080885">Casper Putz (Sep 19 2019 at 09:06)</a>:</h4>
+<p>However as functions they are equal no matter if the domain is a fintype</p>
+
+<a name="176081166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081166">Johan Commelin (Sep 19 2019 at 09:11)</a>:</h4>
+<p>Aha, now I understand again</p>
+
+<a name="176081256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081256">Johan Commelin (Sep 19 2019 at 09:13)</a>:</h4>
+<p>Maybe wrap your basis in a definition <code>std_basis₀</code>. That conveys the intent a bit better than all the <code>single i.1 etc</code>.</p>
+
+<a name="176081263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081263">Johan Commelin (Sep 19 2019 at 09:13)</a>:</h4>
+<p>Other than that, this looks good to me.</p>
+
+<a name="176081289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081289">Johan Commelin (Sep 19 2019 at 09:13)</a>:</h4>
+<p>Of course <code>std_basis</code> is more general, because it would allow a family of <code>β</code>s.</p>
+
+<a name="176081337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081337">Johan Commelin (Sep 19 2019 at 09:14)</a>:</h4>
+<p>But I'm not sure how fast we will need such a general version</p>
+
+<a name="176081343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081343">Casper Putz (Sep 19 2019 at 09:14)</a>:</h4>
+<p>Yes, and in the future <code>std_basis₀</code>could be made more general</p>
+
+<a name="176081395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081395">Johan Commelin (Sep 19 2019 at 09:15)</a>:</h4>
+<p>Refactoring is always harder than we would like</p>
+
+<a name="176081403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081403">Johan Commelin (Sep 19 2019 at 09:15)</a>:</h4>
+<p>If you see how to do the general version, please do so now.</p>
+
+<a name="176081619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081619">Casper Putz (Sep 19 2019 at 09:18)</a>:</h4>
+<p>I know how to do it but it would involve copying almost all code on <code>std_basis</code> and replacing it with <code>std_basis₀</code>. I unfortunately don't have the time to do that right now. I don't know if there would be a any way of transferring one version into the other.</p>
+
+<a name="176081722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176081722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176081722">Johan Commelin (Sep 19 2019 at 09:20)</a>:</h4>
+<p>I'm not sure if <code>std_basis</code> should exist anyway. The finsupp version is what we actually want.</p>
+
+<a name="176082468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231425%20dim_finsupp/near/176082468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/986701425dimfinsupp.html#176082468">Casper Putz (Sep 19 2019 at 09:32)</a>:</h4>
+<p>I agree with that. I will think about it and maybe I will attempt on doing the <code>std_basis₀</code> stuff</p>
+
 
 {% endraw %}
 

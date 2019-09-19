@@ -27,6 +27,42 @@ permalink: archive/113488general/53506normcastnotbehavingasexpected.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176078630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176078630">Johan Commelin (Sep 19 2019 at 08:29)</a>:</h4>
 <p>Nevertheless, <code>int.coe_nat_mul</code> and friends are tagged with the <code>move_cast</code> attribute in <code>tactic/norm_cast.lean</code></p>
 
+<a name="176083418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176083418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176083418">Scott Morrison (Sep 19 2019 at 09:49)</a>:</h4>
+<p>Isn't the problem here that <code>norm_cast</code> is moving casts upwards, and you want them moved downwards?</p>
+
+<a name="176083666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176083666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176083666">Scott Morrison (Sep 19 2019 at 09:53)</a>:</h4>
+<div class="codehilite"><pre><span></span>import tactic
+
+example (k : ℕ) {x y : ℕ} :
+  (x * x + y * y : ℤ) - ↑((x * y + 1) * k) = ↑y * ↑y - ↑k * ↑x * ↑y + (↑x * ↑x - ↑k) :=
+begin
+  -- goal is:
+  --  ↑x * ↑x + ↑y * ↑y - ↑((x * y + 1) * k) = ↑y * ↑y - ↑k * ↑x * ↑y + (↑x * ↑x - ↑k)
+  norm_cast,
+  -- goal is:
+  --  ↑(x * x + y * y) - ↑((x * y + 1) * k) = ↑(y * y) - ↑(k * x * y) + (↑(x * x) - ↑k)
+  sorry
+end
+</pre></div>
+
+<a name="176083754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176083754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176083754">Scott Morrison (Sep 19 2019 at 09:55)</a>:</h4>
+<p><code>norm_cast</code> has done what it's meant to do --- pull casts upwards --- as far as it makes sense to do so --- it isn't going to convert <code>↑x - ↑y</code> to <code>↑(x - y)</code> because that requires the side condition <code>y &lt;= x</code>.</p>
+
+<a name="176083887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/norm_cast%20not%20behaving%20as%20expected/near/176083887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53506normcastnotbehavingasexpected.html#176083887">Scott Morrison (Sep 19 2019 at 09:58)</a>:</h4>
+<p>The problem is just that we need a <code>push_cast</code> tactic here instead, which would hopefully convert the goal to</p>
+<div class="codehilite"><pre><span></span>↑x * ↑x + ↑y * ↑y - ((↑x * ↑y + 1) * ↑k) = ↑y * ↑y - ↑k * ↑x * ↑y + (↑x * ↑x - ↑k)
+</pre></div>
+
+
+<p>which <code>ring</code> can cope with:</p>
+<div class="codehilite"><pre><span></span>example (k : ℕ) {x y : ℕ} : (x : ℤ) * (x : ℤ) + (y : ℤ) * (y : ℤ) - (((x : ℤ) * (y : ℤ) + 1) * (k : ℤ)) = (y : ℤ) * (y : ℤ) - (k : ℤ) * (x : ℤ) * (y : ℤ) + ((x : ℤ) * (x : ℤ) - (k : ℤ)) :=
+by ring
+</pre></div>
+
 
 {% endraw %}
 
