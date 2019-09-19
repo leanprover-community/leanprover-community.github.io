@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Infinity Hotel](67367InfinityHotel.html) (2 messages, latest: Sep 19 2019 at 15:58)
+* [Infinity Hotel](67367InfinityHotel.html) (3 messages, latest: Sep 19 2019 at 16:17)
 
 * [classical.choice_elim](82383classicalchoiceelim.html) (27 messages, latest: Sep 19 2019 at 15:53)
 
