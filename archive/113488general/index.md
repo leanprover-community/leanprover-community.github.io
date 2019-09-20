@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Flypitch](73316Flypitch.html) (4 messages, latest: Sep 20 2019 at 03:50)
+
 * [VSCode overflow?](68152VSCodeoverflow.html) (7 messages, latest: Sep 20 2019 at 00:54)
 
 * [Infinity Hotel](67367InfinityHotel.html) (6 messages, latest: Sep 19 2019 at 18:26)
@@ -940,8 +942,6 @@ permalink: archive/113488general/index.html
 * [group_equiv](50231groupequiv.html) (29 messages, latest: Apr 05 2019 at 16:13)
 
 * [cerw](13234cerw.html) (67 messages, latest: Apr 05 2019 at 14:50)
-
-* [Flypitch](73316Flypitch.html) (3 messages, latest: Apr 05 2019 at 03:22)
 
 * [Monotonic connectives](02104Monotonicconnectives.html) (12 messages, latest: Apr 05 2019 at 02:38)
 
