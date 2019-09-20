@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (7 messages, latest: Sep 20 2019 at 10:28)
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (89 messages, latest: Sep 20 2019 at 11:59)
+
+* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (9 messages, latest: Sep 20 2019 at 11:23)
 
 * [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (6 messages, latest: Sep 19 2019 at 22:18)
 
 * [units and is_unit](59074unitsandisunit.html) (7 messages, latest: Sep 19 2019 at 02:18)
-
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (67 messages, latest: Sep 18 2019 at 23:40)
 
 * [open embeddings](62405openembeddings.html) (10 messages, latest: Sep 18 2019 at 14:18)
 

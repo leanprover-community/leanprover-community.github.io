@@ -22,6 +22,75 @@ But get the error "rewrite tactic failed,  did not find instance of the pattern 
 I was expecting a match of n<em>n-n</em>n. <br>
 Thanks!</p>
 
+<a name="176182833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176182833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176182833">Kevin Buzzard (Sep 20 2019 at 11:03)</a>:</h4>
+<p>I'm not at lean right now. What does <code>#check @nat.mul_sub_left_distrib</code> say?</p>
+
+<a name="176182845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176182845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176182845">Kevin Buzzard (Sep 20 2019 at 11:03)</a>:</h4>
+<p>(outside of tactic mode)</p>
+
+<a name="176182931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176182931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176182931">Kevin Buzzard (Sep 20 2019 at 11:05)</a>:</h4>
+<p>If you use single quotes <code> ` </code> you can quote code. Some of what you wrote got mangled. Was that <code>*</code> symbols? I'm thinking you're applying the wrong lemma</p>
+
+<a name="176183114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183114">Kevin Buzzard (Sep 20 2019 at 11:08)</a>:</h4>
+<p>Oh I understand now! <code>n+n*n-n*n=n</code> is your goal. Zulip was garbling stuff and I thought it was the LaTeX issue. Yeah, that's bracketed the wrong way for you.</p>
+
+<a name="176183133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183133">Kevin Buzzard (Sep 20 2019 at 11:08)</a>:</h4>
+<p>That's <code>(n + n * n) - n * n</code> so the rewrite can't find it</p>
+
+<a name="176183159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183159">Kevin Buzzard (Sep 20 2019 at 11:09)</a>:</h4>
+<p>I would be tempted to just try the simplifier</p>
+
+<a name="176183278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183278">Kevin Buzzard (Sep 20 2019 at 11:12)</a>:</h4>
+<p>Import <code>tactic.linarith</code> and then try <code>example (a b : nat) : (a + b) - b = a := by library_search</code> and see if you get lucky</p>
+
+<a name="176183335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183335">Kevin Buzzard (Sep 20 2019 at 11:12)</a>:</h4>
+<p>(if the simplifier doesn't do it)</p>
+
+<a name="176183764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183764">Mario Carneiro (Sep 20 2019 at 11:20)</a>:</h4>
+<p>There is a lemma for this, use <code>library_search</code> to find it</p>
+
+<a name="176183883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183883">Patrick Massot (Sep 20 2019 at 11:23)</a>:</h4>
+<p>One more detail: you need mathlib to get access to <code>library_search</code>, and <code>import tactic</code> at top of your file if you have no import from mathlib at all</p>
+
+<a name="176183895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176183895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176183895">Patrick Massot (Sep 20 2019 at 11:23)</a>:</h4>
+<p>(although the lemma you're looking for is almost certainly in core)</p>
+
+<a name="176184433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176184433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176184433">Jens Kristian Egsgaard (Sep 20 2019 at 11:33)</a>:</h4>
+<p>Thanks for all the suggestions! Sorry about the garbled code. Kevin was spot on with the implicit bracketing being the wrong way around.</p>
+
+<a name="176184798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176184798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176184798">Patrick Massot (Sep 20 2019 at 11:40)</a>:</h4>
+<p>Associativity is tricky for mathematicians because we never think about it. We turn this property into "I can write sums without caring about parentheses", which is not very formalization friendly. But we certainly want Lean to take care of this (and indeed you can prove your goal by <code>simp</code>).</p>
+
+<a name="176185332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176185332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176185332">Jens Kristian Egsgaard (Sep 20 2019 at 11:48)</a>:</h4>
+<p>My main goal was to figure out why it didn't match, as I couldn't find any information about how the matching is performed but i think this enlightened me. Now I'm trying to figure out how to get the right bracketing :)<br>
+I cant seem to prove my goal with <code>simp</code> (but I have a proof by <code>exact nat.add_sub_cancel n (n*n)</code>)</p>
+
+<a name="176185847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176185847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176185847">Patrick Massot (Sep 20 2019 at 11:58)</a>:</h4>
+<p>It means you didn't import enough of mathlib. The simp attribute is set in <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/nat/basic.lean#L21" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/nat/basic.lean#L21">https://github.com/leanprover-community/mathlib/blob/master/src/data/nat/basic.lean#L21</a></p>
+
+<a name="176185861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176185861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176185861">Patrick Massot (Sep 20 2019 at 11:59)</a>:</h4>
+<p>I think almost any mathlib import would be enough to drag this in</p>
+
+<a name="176185872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%2C%20pattern%20matching/near/176185872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/24440Beginnerquestionpatternmatching.html#176185872">Patrick Massot (Sep 20 2019 at 11:59)</a>:</h4>
+<p>and you really don't want to start using Lean without mathlib</p>
+
 
 {% endraw %}
 
