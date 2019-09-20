@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (89 messages, latest: Sep 20 2019 at 11:59)
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (92 messages, latest: Sep 20 2019 at 12:55)
+
+* [subgroup set coercion](70326subgroupsetcoercion.html) (3 messages, latest: Sep 20 2019 at 12:48)
 
 * [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (9 messages, latest: Sep 20 2019 at 11:23)
 

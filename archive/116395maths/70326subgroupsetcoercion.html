@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/70326subgroupsetcoercion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html">subgroup set coercion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176188940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176188940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176188940">Patrick Massot (Sep 20 2019 at 12:46)</a>:</h4>
+<p>Here is a little type class failure experiment. In a Lean file, write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">A</span><span class="o">]</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">submodule</span> <span class="bp">ℤ</span> <span class="n">A</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="err">↑</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">A</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Both check succeed instantly. Now replace the first line by <code>import ring_theory.algebra</code>. The second check times out.</p>
+
+<a name="176188976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176188976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176188976">Patrick Massot (Sep 20 2019 at 12:47)</a>:</h4>
+<p>Next, create a dummy copy of <code>ring_theory.algebra</code> where the instance on <a href="https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/algebra.lean#L537" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/algebra.lean#L537">https://github.com/leanprover-community/mathlib/blob/master/src/ring_theory/algebra.lean#L537</a> is only a local instance. Then both checks succeed, but the second one is very slow.</p>
+
+<a name="176188986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176188986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176188986">Patrick Massot (Sep 20 2019 at 12:48)</a>:</h4>
+<p>What should we do?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
