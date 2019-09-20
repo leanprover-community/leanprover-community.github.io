@@ -223,6 +223,181 @@ EDIT: Oh wait, then it's false.</p>
 <span class="kn">end</span>
 </pre></div>
 
+<a name="176177182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176177182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176177182">Kevin Buzzard (Sep 20 2019 at 09:18)</a>:</h4>
+<p>the cardinal fact is proved like this: If b&lt;a then a=b+(a-b)=max(b,a-b), hence a-b=a.</p>
+
+<a name="176177224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176177224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176177224">Kevin Buzzard (Sep 20 2019 at 09:19)</a>:</h4>
+<p>Maybe some automatic theorem prover can find that fact about cardinals given what is in mathlib?</p>
+
+<a name="176177403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176177403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176177403">Kevin Buzzard (Sep 20 2019 at 09:22)</a>:</h4>
+<p>I'm taking a look at your proof. It's annoying that hovering over <code>equiv.set.sum_compl</code> doesn't show me its type -- I think this is because we're in tactic mode.</p>
+
+<a name="176177882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176177882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176177882">Mario Carneiro (Sep 20 2019 at 09:30)</a>:</h4>
+<p>Note that the cardinal fact as I've stated it is false, so if you think you have proved it you should not trust your proof</p>
+
+<a name="176177918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176177918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176177918">Mario Carneiro (Sep 20 2019 at 09:31)</a>:</h4>
+<p>it would be pretty difficult to get nitpick or whatever counterexample generator to find why the statement is false too</p>
+
+<a name="176177996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176177996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176177996">Mario Carneiro (Sep 20 2019 at 09:32)</a>:</h4>
+<p>actually scratch that - the problem is with finite sets so they can probably handle it</p>
+
+<a name="176178115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178115">Mario Carneiro (Sep 20 2019 at 09:34)</a>:</h4>
+<p>In chris's proof he uses calc blocks instead to build the equivs, which looks a bit nicer</p>
+
+<a name="176178141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178141">Kevin Buzzard (Sep 20 2019 at 09:34)</a>:</h4>
+<p>I thought we were talking about the infinite case now. All this a+b=max(a,b) is only true in the infinite case, I've been assuming infinite.</p>
+<p>Your proof is extraordinary.</p>
+<div class="codehilite"><pre><span></span>⊢ ⇑(equiv.trans (equiv.symm (equiv.set.sum_compl (set.range ⇑f)))
+         (equiv.trans (equiv.sum_congr (equiv.trans (equiv.symm (equiv.set.range ⇑f _)) (equiv.set.range ⇑g _)) e1)
+            (equiv.set.sum_compl (set.range ⇑g))))
+      (⇑f x) =
+    ⇑g x
+</pre></div>
+
+
+<p>We prove this by saying "...and the diagram obviously commutes". What is going on? This is trivial stuff.</p>
+
+<a name="176178162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178162">Mario Carneiro (Sep 20 2019 at 09:35)</a>:</h4>
+<p>there are side conditions</p>
+
+<a name="176178164"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178164" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178164">Kevin Buzzard (Sep 20 2019 at 09:35)</a>:</h4>
+<p>I can prove this whole thing by drawing one picture.</p>
+
+<a name="176178169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178169">Mario Carneiro (Sep 20 2019 at 09:35)</a>:</h4>
+<p>no, you can state the problem by drawing a picture</p>
+
+<a name="176178182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178182">Kevin Buzzard (Sep 20 2019 at 09:36)</a>:</h4>
+<p>There aren't any side conditions. Assuming foo, we can prove the existence theorem. This is a really great example of a proof which can be done by a simple picture.</p>
+
+<a name="176178227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178227">Mario Carneiro (Sep 20 2019 at 09:36)</a>:</h4>
+<p>The only thing I wrote in the proof are side conditions</p>
+
+<a name="176178232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178232">Mario Carneiro (Sep 20 2019 at 09:36)</a>:</h4>
+<p>everything else is indeed being handled by simp</p>
+
+<a name="176178244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178244">Kevin Buzzard (Sep 20 2019 at 09:36)</a>:</h4>
+<p>wow</p>
+
+<a name="176178280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178280">Mario Carneiro (Sep 20 2019 at 09:37)</a>:</h4>
+<p>The proof sketch you gave me essentially covers the first two lines of the proof</p>
+
+<a name="176178290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178290">Mario Carneiro (Sep 20 2019 at 09:37)</a>:</h4>
+<p>you never said what the bijection is or how to build it</p>
+
+<a name="176178294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178294">Mario Carneiro (Sep 20 2019 at 09:38)</a>:</h4>
+<p>that's all "type tetris"</p>
+
+<a name="176178340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178340">Mario Carneiro (Sep 20 2019 at 09:38)</a>:</h4>
+<p>with side conditions in the middle of it all</p>
+
+<a name="176178474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178474">Mario Carneiro (Sep 20 2019 at 09:40)</a>:</h4>
+<p>I think side conditions are the bane of any theorem prover, because there is no good way to write them, which makes it easy to ignore them for expositional purposes in math</p>
+
+<a name="176178561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178561">Kevin Buzzard (Sep 20 2019 at 09:42)</a>:</h4>
+<p><a href="/user_uploads/3121/FkyNkwO2aDMqTtrmgrUVbTo8/IMG_20190920_104043021.jpg" target="_blank" title="IMG_20190920_104043021.jpg">IMG_20190920_104043021.jpg</a></p>
+<div class="message_inline_image"><a href="/user_uploads/3121/FkyNkwO2aDMqTtrmgrUVbTo8/IMG_20190920_104043021.jpg" target="_blank" title="IMG_20190920_104043021.jpg"><img src="/user_uploads/3121/FkyNkwO2aDMqTtrmgrUVbTo8/IMG_20190920_104043021.jpg"></a></div>
+
+<a name="176178668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178668">Kevin Buzzard (Sep 20 2019 at 09:44)</a>:</h4>
+<p>Where is <code>equiv.set.sum_compl_symm_apply_of_mem</code> in my picture? What is going on?</p>
+
+<a name="176178672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178672">Mario Carneiro (Sep 20 2019 at 09:44)</a>:</h4>
+<p>Where's the bijection? I'm not even sure where f is in the picture</p>
+
+<a name="176178680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178680">Kevin Buzzard (Sep 20 2019 at 09:44)</a>:</h4>
+<p>Two down arrows are f and g.</p>
+
+<a name="176178697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178697">Kevin Buzzard (Sep 20 2019 at 09:45)</a>:</h4>
+<p>The bijection is because I identified the two sets Y and Z, the top halves are the same, and the bottom halves biject by a trivial lemma which I proved elsewhere on the board.</p>
+
+<a name="176178729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178729">Mario Carneiro (Sep 20 2019 at 09:45)</a>:</h4>
+<p><code>equiv.set.sum_compl_symm_apply_of_mem </code> says that if you are on the top half of the picture then you can go from y to the top half of y</p>
+
+<a name="176178730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178730">Kevin Buzzard (Sep 20 2019 at 09:45)</a>:</h4>
+<p>I am working in the category of sets equipped with a map from X, so somehow the commutativity of the diagrams just all gets swallowed up by the machine.</p>
+
+<a name="176178778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178778">Kevin Buzzard (Sep 20 2019 at 09:46)</a>:</h4>
+<p>Maybe I am using some better structure than you.</p>
+
+<a name="176178793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178793">Mario Carneiro (Sep 20 2019 at 09:46)</a>:</h4>
+<p>in lean there are two additional points in the picture, Y and Z</p>
+
+<a name="176178804"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178804" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178804">Mario Carneiro (Sep 20 2019 at 09:47)</a>:</h4>
+<p>and maps from Y to the parts of Y</p>
+
+<a name="176178833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178833">Kevin Buzzard (Sep 20 2019 at 09:47)</a>:</h4>
+<p>Aah, this is one of these instances where a mathematician thinks "set-theoretically" and all these issues melt away.</p>
+
+<a name="176178840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178840">Mario Carneiro (Sep 20 2019 at 09:47)</a>:</h4>
+<p>sure I'd love to do that, but DTT</p>
+
+<a name="176178842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178842">Kevin Buzzard (Sep 20 2019 at 09:47)</a>:</h4>
+<p>(all the maps become the identity map in some sense)</p>
+
+<a name="176178893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178893">Mario Carneiro (Sep 20 2019 at 09:48)</a>:</h4>
+<p>actually it doesn't really solve anything, it just removes the function <code>equiv.set.sum_compl_symm_apply_of_mem</code> and leaves the side condition</p>
+
+<a name="176178900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178900">Kevin Buzzard (Sep 20 2019 at 09:48)</a>:</h4>
+<p>Are we missing a tactic which does arguments like this?</p>
+
+<a name="176178912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178912">Mario Carneiro (Sep 20 2019 at 09:48)</a>:</h4>
+<p>meh</p>
+
+<a name="176178915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178915">Mario Carneiro (Sep 20 2019 at 09:48)</a>:</h4>
+<p>"like this" is never enough</p>
+
+<a name="176178927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178927">Mario Carneiro (Sep 20 2019 at 09:49)</a>:</h4>
+<p>I generalize from &gt;1 example</p>
+
+<a name="176178930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178930">Kevin Buzzard (Sep 20 2019 at 09:49)</a>:</h4>
+<p>given that Y \ f(X) bijects with Z \ g(X), figure out the rest yourself. Is that too much for an AI?</p>
+
+<a name="176178953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176178953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176178953">Mario Carneiro (Sep 20 2019 at 09:49)</a>:</h4>
+<p>Probably not</p>
+
+<a name="176179017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176179017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176179017">Mario Carneiro (Sep 20 2019 at 09:50)</a>:</h4>
+<p>I can imagine an SMT prover can get this, but when it's all embedded in lean some things get obscured</p>
+
 
 {% endraw %}
 
