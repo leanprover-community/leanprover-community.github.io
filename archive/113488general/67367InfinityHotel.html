@@ -46,6 +46,123 @@ EDIT: Oh wait, then it's false.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176164017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176164017">Mario Carneiro (Sep 20 2019 at 04:20)</a>:</h4>
 <p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Could you elaborate on that proof? a+b=a does not imply a-b=a for cardinals</p>
 
+<a name="176170582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176170582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176170582">Kevin Buzzard (Sep 20 2019 at 07:21)</a>:</h4>
+<p>I was imagining the generalisation being this: if B&lt;A is a subset, and |B|&lt;|A|, then any injection f:B -&gt; A can be extended to a bijection A -&gt; A. The proof is: write C=A\B and D=A\f(B) and observe that |C|=|A|=|D|. Did I slip up?</p>
+
+<a name="176171411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171411">Mario Carneiro (Sep 20 2019 at 07:39)</a>:</h4>
+<p>Those facts are all true but I'm not sure how you are arguing them</p>
+
+<a name="176171464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171464">Mario Carneiro (Sep 20 2019 at 07:40)</a>:</h4>
+<p>actually you forgot to assume A is infinite, else |C|=|A| fails</p>
+
+<a name="176171515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171515">Chris Hughes (Sep 20 2019 at 07:41)</a>:</h4>
+<p>I proved something similar as part of algebraic closure.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">schroeder_bernstein</span>
+
+<span class="kn">open</span> <span class="n">set</span> <span class="n">function</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span> <span class="n">w</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">dec</span>
+
+<span class="kn">lemma</span> <span class="n">thing_aux</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">(</span><span class="n">fxy</span> <span class="o">:</span> <span class="n">X</span> <span class="err">↪</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">fxz</span> <span class="o">:</span> <span class="n">X</span> <span class="err">↪</span> <span class="n">Z</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hYZ</span> <span class="o">:</span> <span class="o">(</span><span class="n">Z</span> <span class="err">↪</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="o">:</span> <span class="err">↥</span><span class="bp">-</span><span class="n">range</span> <span class="n">fxy</span><span class="bp">.</span><span class="mi">1</span> <span class="err">↪</span> <span class="err">↥</span><span class="bp">-</span><span class="n">range</span> <span class="n">fxz</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:=</span>
+<span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="err">$</span> <span class="n">or</span><span class="bp">.</span><span class="n">resolve_left</span> <span class="n">embedding</span><span class="bp">.</span><span class="n">total</span> <span class="err">$</span>
+  <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">f</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">hYZ</span> <span class="err">$</span>
+    <span class="k">calc</span> <span class="n">Z</span> <span class="err">↪</span> <span class="n">range</span> <span class="n">fxz</span> <span class="err">⊕</span> <span class="err">↥</span><span class="bp">-</span><span class="n">range</span> <span class="n">fxz</span> <span class="o">:</span>
+      <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">sum_compl</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_embedding</span>
+    <span class="bp">...</span> <span class="err">↪</span> <span class="n">range</span> <span class="n">fxy</span> <span class="err">⊕</span> <span class="err">↥</span><span class="bp">-</span><span class="n">range</span> <span class="n">fxy</span> <span class="o">:</span>
+      <span class="n">embedding</span><span class="bp">.</span><span class="n">sum_congr</span>
+        <span class="o">(((</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="bp">_</span> <span class="n">fxz</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_embedding</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span>
+          <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="bp">_</span> <span class="n">fxy</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">to_embedding</span><span class="o">)</span>
+        <span class="n">f</span>
+    <span class="bp">...</span> <span class="err">↪</span> <span class="n">Y</span> <span class="o">:</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">sum_compl</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">to_embedding</span>
+
+<span class="n">def</span> <span class="n">thing</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">(</span><span class="n">fxy</span> <span class="o">:</span> <span class="n">X</span> <span class="err">↪</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">fxz</span> <span class="o">:</span> <span class="n">X</span> <span class="err">↪</span> <span class="n">Z</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hYZ</span> <span class="o">:</span> <span class="o">(</span><span class="n">Z</span> <span class="err">↪</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">↪</span> <span class="n">Z</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">Y</span> <span class="err">↪</span> <span class="n">range</span> <span class="n">fxy</span> <span class="err">⊕</span> <span class="err">↥</span><span class="bp">-</span><span class="n">range</span> <span class="n">fxy</span> <span class="o">:</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">sum_compl</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_embedding</span>
+<span class="bp">...</span> <span class="err">↪</span> <span class="n">range</span> <span class="n">fxz</span> <span class="err">⊕</span> <span class="err">↥</span><span class="bp">-</span><span class="n">range</span> <span class="n">fxz</span> <span class="o">:</span> <span class="n">embedding</span><span class="bp">.</span><span class="n">sum_congr</span>
+  <span class="o">((</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="bp">_</span> <span class="n">fxy</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">.</span><span class="n">to_embedding</span><span class="bp">.</span><span class="n">trans</span>
+    <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="bp">_</span> <span class="n">fxz</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">.</span><span class="n">to_embedding</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">thing_aux</span> <span class="n">fxy</span> <span class="n">fxz</span> <span class="n">hYZ</span><span class="o">)</span>
+<span class="bp">...</span> <span class="err">↪</span> <span class="n">Z</span> <span class="o">:</span> <span class="o">(</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">sum_compl</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">to_embedding</span>
+
+<span class="kn">lemma</span> <span class="n">thing_commutes</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">Z</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span>  <span class="o">(</span><span class="n">fxy</span> <span class="o">:</span> <span class="n">X</span> <span class="err">↪</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">fxz</span> <span class="o">:</span> <span class="n">X</span> <span class="err">↪</span> <span class="n">Z</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hYZ</span> <span class="o">:</span> <span class="o">(</span><span class="n">Z</span> <span class="err">↪</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">thing</span> <span class="n">fxy</span> <span class="n">fxz</span> <span class="n">hYZ</span> <span class="o">(</span><span class="n">fxy</span> <span class="n">x</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fxz</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="o">(</span><span class="bp">⟨</span><span class="n">fxy</span> <span class="n">x</span><span class="o">,</span> <span class="n">mem_range_self</span> <span class="bp">_⟩</span> <span class="o">:</span> <span class="n">range</span> <span class="n">fxy</span><span class="o">)</span> <span class="bp">=</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">range</span> <span class="bp">_</span> <span class="n">fxy</span><span class="bp">.</span><span class="mi">2</span> <span class="n">x</span><span class="o">,</span> <span class="k">from</span> <span class="n">rfl</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">dsimp</span> <span class="n">only</span> <span class="o">[</span><span class="n">thing</span><span class="o">,</span> <span class="n">embedding</span><span class="bp">.</span><span class="n">trans_apply</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">trans_apply</span><span class="o">,</span> <span class="n">function</span><span class="bp">.</span><span class="n">comp</span><span class="o">,</span>
+    <span class="n">equiv</span><span class="bp">.</span><span class="n">to_embedding_coe_fn</span><span class="o">],</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">sum_compl_symm_apply_of_mem</span> <span class="o">(</span><span class="n">mem_range_self</span> <span class="bp">_</span><span class="o">),</span>
+    <span class="n">embedding</span><span class="bp">.</span><span class="n">sum_congr_apply_inl</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">set</span><span class="bp">.</span><span class="n">sum_compl_apply_inl</span><span class="o">,</span>
+    <span class="n">embedding</span><span class="bp">.</span><span class="n">trans_apply</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">to_embedding_coe_fn</span><span class="o">,</span> <span class="n">this</span><span class="o">,</span> <span class="n">equiv</span><span class="bp">.</span><span class="n">symm_apply_apply</span><span class="o">],</span>
+  <span class="n">refl</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176171600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171600">Chris Hughes (Sep 20 2019 at 07:43)</a>:</h4>
+<p>Somehow the assumption <code>(Z ↪ Y) → false</code> should be turned into <code>(Z ↪ X) → false</code></p>
+
+<a name="176171613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171613">Mario Carneiro (Sep 20 2019 at 07:43)</a>:</h4>
+<p>isn't that just transitivity?</p>
+
+<a name="176171779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171779">Mario Carneiro (Sep 20 2019 at 07:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I think your proof sketch is basically what floris did in the competition</p>
+
+<a name="176171805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176171805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176171805">Mario Carneiro (Sep 20 2019 at 07:47)</a>:</h4>
+<p>it would be nice to reduce it to a one liner of mathlib lemmas though</p>
+
+<a name="176172005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172005">Mario Carneiro (Sep 20 2019 at 07:50)</a>:</h4>
+<p>Unfortunately I don't see how to apply chris's lemma directly here</p>
+
+<a name="176172043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172043">Mario Carneiro (Sep 20 2019 at 07:51)</a>:</h4>
+<p>it only seems to construct an injection from Y to Z where |Y|&lt;|Z|, and the only obvious candidates are Y=B and Z=A, or Y=f(B) and Z=A, and neither is particularly helpful</p>
+
+<a name="176172190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172190">Mario Carneiro (Sep 20 2019 at 07:54)</a>:</h4>
+<p>In this situation, we want Y=Z=A, but then <code>(Z ↪ Y) → false</code> fails</p>
+
+<a name="176172323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172323">Chris Hughes (Sep 20 2019 at 07:56)</a>:</h4>
+<p>But in the infinite case can we weaken the assumption to <code>(Z ↪ X) → false</code>?</p>
+
+<a name="176172337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172337">Kevin Buzzard (Sep 20 2019 at 07:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  I don't understand why you're calling it a sketch ;-)</p>
+
+<a name="176172345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172345">Mario Carneiro (Sep 20 2019 at 07:57)</a>:</h4>
+<p>you have to reference actual theorems, and also prove the side conditions</p>
+
+<a name="176172396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172396">Mario Carneiro (Sep 20 2019 at 07:58)</a>:</h4>
+<p>ideally the formal proof should actually be that short, but the side conditions are messy here</p>
+
+<a name="176172398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172398">Kevin Buzzard (Sep 20 2019 at 07:58)</a>:</h4>
+<p>The argument would convince any mathematician. That's the level where we operate. What we really need is an interface where I can just say what I said to you and then let tactics do the rest.</p>
+
+<a name="176172418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172418">Kevin Buzzard (Sep 20 2019 at 07:59)</a>:</h4>
+<p>we can try <code>cases, refl</code> on the side conditions or whatever. It's all noise.</p>
+
+<a name="176172422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172422">Mario Carneiro (Sep 20 2019 at 07:59)</a>:</h4>
+<p>you also didn't prove what you claimed to... there are lots of issues with treating that literally as a proof</p>
+
+<a name="176172457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Infinity%20Hotel/near/176172457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/67367InfinityHotel.html#176172457">Kevin Buzzard (Sep 20 2019 at 08:00)</a>:</h4>
+<p>Can you give me specific examples of issues? I'd be happy to talk about this but I have to run</p>
+
 
 {% endraw %}
 

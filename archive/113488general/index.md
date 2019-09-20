@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Infinity Hotel](67367InfinityHotel.html) (26 messages, latest: Sep 20 2019 at 08:00)
+
+* [Flypitch](73316Flypitch.html) (8 messages, latest: Sep 20 2019 at 07:19)
+
 * [VSCode overflow?](68152VSCodeoverflow.html) (9 messages, latest: Sep 20 2019 at 06:23)
-
-* [Flypitch](73316Flypitch.html) (7 messages, latest: Sep 20 2019 at 06:16)
-
-* [Infinity Hotel](67367InfinityHotel.html) (7 messages, latest: Sep 20 2019 at 04:20)
 
 * [classical.choice_elim](82383classicalchoiceelim.html) (29 messages, latest: Sep 20 2019 at 04:02)
 
