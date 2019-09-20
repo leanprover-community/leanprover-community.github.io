@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (21 messages, latest: Sep 20 2019 at 13:45)
+
+* [subgroup set coercion](70326subgroupsetcoercion.html) (13 messages, latest: Sep 20 2019 at 13:12)
+
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (92 messages, latest: Sep 20 2019 at 12:55)
-
-* [subgroup set coercion](70326subgroupsetcoercion.html) (3 messages, latest: Sep 20 2019 at 12:48)
-
-* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (9 messages, latest: Sep 20 2019 at 11:23)
 
 * [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (6 messages, latest: Sep 19 2019 at 22:18)
 
