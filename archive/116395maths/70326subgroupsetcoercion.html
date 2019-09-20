@@ -79,6 +79,89 @@ permalink: archive/116395maths/70326subgroupsetcoercion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176213073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176213073">Patrick Massot (Sep 20 2019 at 17:24)</a>:</h4>
 <p>So, any idea? Anyone?</p>
 
+<a name="176217475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217475">Mario Carneiro (Sep 20 2019 at 18:14)</a>:</h4>
+<p>I think it's just a big instance problem</p>
+
+<a name="176217532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217532">Mario Carneiro (Sep 20 2019 at 18:14)</a>:</h4>
+<p>and it has the usual exponential blowup stuff</p>
+
+<a name="176217667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217667">Mario Carneiro (Sep 20 2019 at 18:16)</a>:</h4>
+<p>Note that the added import both significantly increases the number of available instances and also changes the type of the problem:<br>
+before:</p>
+<div class="codehilite"><pre><span></span><span class="n">has_coe_to_fun</span>
+  <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span> <span class="bp">ℤ</span> <span class="n">A</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">domain</span><span class="bp">.</span><span class="n">to_ring</span> <span class="bp">ℤ</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">to_domain</span> <span class="bp">ℤ</span>
+           <span class="o">(</span><span class="bp">@</span><span class="n">linear_ordered_comm_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_ring</span> <span class="bp">ℤ</span>
+              <span class="o">(</span><span class="bp">@</span><span class="n">decidable_linear_ordered_comm_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_comm_ring</span> <span class="bp">ℤ</span>
+                 <span class="n">int</span><span class="bp">.</span><span class="n">decidable_linear_ordered_comm_ring</span><span class="o">))))</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_add_comm_group</span> <span class="n">A</span> <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">A</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">))</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">add_comm_group</span><span class="bp">.</span><span class="n">module</span> <span class="n">A</span> <span class="o">(</span><span class="bp">@</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_add_comm_group</span> <span class="n">A</span> <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">A</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">))))</span>
+</pre></div>
+
+
+<p>after:</p>
+<div class="codehilite"><pre><span></span><span class="n">has_coe_to_fun</span>
+  <span class="o">(</span><span class="bp">@</span><span class="n">submodule</span> <span class="bp">ℤ</span> <span class="n">A</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">domain</span><span class="bp">.</span><span class="n">to_ring</span> <span class="bp">ℤ</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">to_domain</span> <span class="bp">ℤ</span>
+           <span class="o">(</span><span class="bp">@</span><span class="n">linear_ordered_comm_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_ring</span> <span class="bp">ℤ</span>
+              <span class="o">(</span><span class="bp">@</span><span class="n">decidable_linear_ordered_comm_ring</span><span class="bp">.</span><span class="n">to_linear_ordered_comm_ring</span> <span class="bp">ℤ</span>
+                 <span class="n">int</span><span class="bp">.</span><span class="n">decidable_linear_ordered_comm_ring</span><span class="o">))))</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">ring</span><span class="bp">.</span><span class="n">to_add_comm_group</span> <span class="n">A</span> <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">A</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">))</span>
+     <span class="o">(</span><span class="bp">@</span><span class="n">algebra</span><span class="bp">.</span><span class="n">module</span> <span class="bp">ℤ</span> <span class="n">A</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">nonzero_comm_ring</span><span class="bp">.</span><span class="n">to_comm_ring</span> <span class="bp">ℤ</span> <span class="o">(</span><span class="bp">@</span><span class="n">euclidean_domain</span><span class="bp">.</span><span class="n">to_nonzero_comm_ring</span> <span class="bp">ℤ</span> <span class="n">int</span><span class="bp">.</span><span class="n">euclidean_domain</span><span class="o">))</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">comm_ring</span><span class="bp">.</span><span class="n">to_ring</span> <span class="n">A</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span>
+        <span class="o">(</span><span class="bp">@</span><span class="n">algebra_int</span> <span class="n">A</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)))</span>
+</pre></div>
+
+<a name="176217733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217733">Mario Carneiro (Sep 20 2019 at 18:17)</a>:</h4>
+<p>I think it's probably not good that the proof of <code>module ℤ A</code> changes to this more complicated one after the import</p>
+
+<a name="176217813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217813">Mario Carneiro (Sep 20 2019 at 18:18)</a>:</h4>
+<p>we really need to think about using instance priorities in a systematic and coherent way across the library</p>
+
+<a name="176217841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217841">Patrick Massot (Sep 20 2019 at 18:18)</a>:</h4>
+<p>I don't even understand how we get a <code>has_coe_to_fun</code> search</p>
+
+<a name="176217862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217862">Mario Carneiro (Sep 20 2019 at 18:19)</a>:</h4>
+<p>I think it's because <code>set A</code> is a function type</p>
+
+<a name="176217897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217897">Patrick Massot (Sep 20 2019 at 18:20)</a>:</h4>
+<p>How weird</p>
+
+<a name="176217965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176217965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176217965">Mario Carneiro (Sep 20 2019 at 18:20)</a>:</h4>
+<p>I agree, I would have expected a has_coe</p>
+
+<a name="176219018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176219018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176219018">Johan Commelin (Sep 20 2019 at 18:32)</a>:</h4>
+<p>Should <code>set</code> be irreducible?</p>
+
+<a name="176219050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176219050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176219050">Johan Commelin (Sep 20 2019 at 18:32)</a>:</h4>
+<p>That would prevent a lot of defeqness that we currently depend on...</p>
+
+<a name="176219056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176219056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176219056">Johan Commelin (Sep 20 2019 at 18:32)</a>:</h4>
+<p>Doesn't sound good</p>
+
+<a name="176219828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176219828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176219828">Mario Carneiro (Sep 20 2019 at 18:42)</a>:</h4>
+<p>no, I think that's a bad idea</p>
+
+<a name="176219874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/subgroup%20set%20coercion/near/176219874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/70326subgroupsetcoercion.html#176219874">Mario Carneiro (Sep 20 2019 at 18:42)</a>:</h4>
+<p>it might work in principle but there isn't a strong argument for the distinction and we occasionally make use of the defeqness</p>
+
 
 {% endraw %}
 

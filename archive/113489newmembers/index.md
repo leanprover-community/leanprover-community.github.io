@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [(no topic)](79918notopic.html) (206 messages, latest: Sep 20 2019 at 17:37)
+* [(no topic)](79918notopic.html) (208 messages, latest: Sep 20 2019 at 18:13)
 
 * [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)
 
