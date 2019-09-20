@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Infinity Hotel](67367InfinityHotel.html) (7 messages, latest: Sep 20 2019 at 04:20)
+
+* [classical.choice_elim](82383classicalchoiceelim.html) (29 messages, latest: Sep 20 2019 at 04:02)
+
 * [Flypitch](73316Flypitch.html) (4 messages, latest: Sep 20 2019 at 03:50)
 
 * [VSCode overflow?](68152VSCodeoverflow.html) (7 messages, latest: Sep 20 2019 at 00:54)
-
-* [Infinity Hotel](67367InfinityHotel.html) (6 messages, latest: Sep 19 2019 at 18:26)
-
-* [classical.choice_elim](82383classicalchoiceelim.html) (27 messages, latest: Sep 19 2019 at 15:53)
 
 * [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (10 messages, latest: Sep 19 2019 at 13:36)
 
