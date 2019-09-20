@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (4 messages, latest: Sep 20 2019 at 08:47)
+
 * [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (6 messages, latest: Sep 19 2019 at 22:18)
 
 * [units and is_unit](59074unitsandisunit.html) (7 messages, latest: Sep 19 2019 at 02:18)

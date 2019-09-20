@@ -9,11 +9,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1449 minpoly](752621449minpoly.html) (3 messages, latest: Sep 20 2019 at 08:52)
+
 * [#1425 dim_finsupp](986701425dimfinsupp.html) (36 messages, latest: Sep 19 2019 at 09:32)
 
 * [#1379 and #1380 concrete categories with bundled homs](108521379and1380concretecategorieswithbundledhoms.html) (3 messages, latest: Sep 19 2019 at 06:28)
-
-* [#1449 minpoly](752621449minpoly.html) (2 messages, latest: Sep 18 2019 at 07:25)
 
 * [Manifolds](12382Manifolds.html) (73 messages, latest: Sep 09 2019 at 11:42)
 
