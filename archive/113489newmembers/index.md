@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (1 message, latest: Sep 20 2019 at 10:59)
+
 * [noob question(s)](52075noobquestions.html) (1359 messages, latest: Sep 19 2019 at 22:44)
 
 * [infinite Ramsey theorem](49628infiniteRamseytheorem.html) (43 messages, latest: Sep 18 2019 at 17:21)

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (11 messages, latest: Sep 20 2019 at 10:54)
+
 * [Infinity Hotel](67367InfinityHotel.html) (77 messages, latest: Sep 20 2019 at 09:50)
 
 * [Flypitch](73316Flypitch.html) (8 messages, latest: Sep 20 2019 at 07:19)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [VSCode overflow?](68152VSCodeoverflow.html) (9 messages, latest: Sep 20 2019 at 06:23)
 
 * [classical.choice_elim](82383classicalchoiceelim.html) (29 messages, latest: Sep 20 2019 at 04:02)
-
-* [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (10 messages, latest: Sep 19 2019 at 13:36)
 
 * [push coe](38808pushcoe.html) (13 messages, latest: Sep 19 2019 at 08:12)
 
