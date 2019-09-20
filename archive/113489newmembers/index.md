@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (206 messages, latest: Sep 20 2019 at 17:37)
+
 * [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)
 
 * [noob question(s)](52075noobquestions.html) (1359 messages, latest: Sep 19 2019 at 22:44)
@@ -52,8 +54,6 @@ permalink: archive/113489newmembers/index.html
 * [Propagate proof state in match?](80910Propagateproofstateinmatch.html) (9 messages, latest: Aug 24 2019 at 14:14)
 
 * [How to use VSCode Extension?](66271HowtouseVSCodeExtension.html) (94 messages, latest: Aug 24 2019 at 10:36)
-
-* [(no topic)](79918notopic.html) (205 messages, latest: Aug 24 2019 at 09:29)
 
 * [CD editor with Lean proof logic](92415CDeditorwithLeanprooflogic.html) (21 messages, latest: Aug 24 2019 at 08:26)
 
