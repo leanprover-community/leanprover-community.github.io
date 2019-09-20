@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (57 messages, latest: Sep 20 2019 at 14:57)
+* [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)
 
 * [noob question(s)](52075noobquestions.html) (1359 messages, latest: Sep 19 2019 at 22:44)
 
