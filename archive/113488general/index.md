@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [equation compiler documentation](41084equationcompilerdocumentation.html) (1 message, latest: Sep 20 2019 at 20:44)
+* [equation compiler documentation](41084equationcompilerdocumentation.html) (5 messages, latest: Sep 20 2019 at 21:44)
 
 * [classical.choice_elim](82383classicalchoiceelim.html) (31 messages, latest: Sep 20 2019 at 14:28)
 
