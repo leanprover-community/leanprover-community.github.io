@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (21 messages, latest: Sep 20 2019 at 13:45)
+* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (22 messages, latest: Sep 20 2019 at 14:41)
 
 * [subgroup set coercion](70326subgroupsetcoercion.html) (13 messages, latest: Sep 20 2019 at 13:12)
 

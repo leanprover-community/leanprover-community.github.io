@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [classical.choice_elim](82383classicalchoiceelim.html) (31 messages, latest: Sep 20 2019 at 14:28)
+
+* [IMO Grand Challenge](71157IMOGrandChallenge.html) (8 messages, latest: Sep 20 2019 at 14:01)
+
 * [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (11 messages, latest: Sep 20 2019 at 10:54)
 
 * [Infinity Hotel](67367InfinityHotel.html) (77 messages, latest: Sep 20 2019 at 09:50)
@@ -16,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Flypitch](73316Flypitch.html) (8 messages, latest: Sep 20 2019 at 07:19)
 
 * [VSCode overflow?](68152VSCodeoverflow.html) (9 messages, latest: Sep 20 2019 at 06:23)
-
-* [classical.choice_elim](82383classicalchoiceelim.html) (29 messages, latest: Sep 20 2019 at 04:02)
 
 * [push coe](38808pushcoe.html) (13 messages, latest: Sep 19 2019 at 08:12)
 
@@ -68,8 +70,6 @@ permalink: archive/113488general/index.html
 * [lean-3.4.2 tag on github?](23774lean342tagongithub.html) (11 messages, latest: Sep 08 2019 at 10:07)
 
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
-
-* [IMO Grand Challenge](71157IMOGrandChallenge.html) (7 messages, latest: Sep 07 2019 at 17:36)
 
 * [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
 
