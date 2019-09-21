@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [equation compiler documentation](41084equationcompilerdocumentation.html) (6 messages, latest: Sep 21 2019 at 12:58)
+* [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (72 messages, latest: Sep 21 2019 at 13:36)
 
-* [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (71 messages, latest: Sep 21 2019 at 12:58)
+* [equation compiler documentation](41084equationcompilerdocumentation.html) (6 messages, latest: Sep 21 2019 at 12:58)
 
 * [classical.choice_elim](82383classicalchoiceelim.html) (31 messages, latest: Sep 20 2019 at 14:28)
 

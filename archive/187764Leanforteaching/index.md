@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Next step after the Logic and Proofs](53097NextstepaftertheLogicandProofs.html) (1 message, latest: Sep 21 2019 at 13:48)
+
 * [Draft book using Lean for CS Discrete Math](23869DraftbookusingLeanforCSDiscreteMath.html) (5 messages, latest: Sep 01 2019 at 13:48)
 
 * [Are freshmen ripe for formal proofs?](23649Arefreshmenripeforformalproofs.html) (8 messages, latest: Jul 28 2019 at 10:54)

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Some numerology](27430Somenumerology.html) (9 messages, latest: Sep 21 2019 at 08:15)
+* [Some numerology](27430Somenumerology.html) (18 messages, latest: Sep 21 2019 at 13:04)
 
 * [subgroup set coercion](70326subgroupsetcoercion.html) (29 messages, latest: Sep 20 2019 at 19:27)
 

@@ -89,6 +89,47 @@ permalink: archive/116395maths/27430Somenumerology.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176255152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176255152">Patrick Massot (Sep 21 2019 at 08:15)</a>:</h4>
 <p>Thanks Floris and Mario!</p>
 
+<a name="176263880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176263880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176263880">Kevin Buzzard (Sep 21 2019 at 13:00)</a>:</h4>
+<p>Here's one I ran into the other day: </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Should that be in mathlib? Is it there already?</p>
+
+<a name="176263914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176263914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176263914">Johan Commelin (Sep 21 2019 at 13:01)</a>:</h4>
+<p><code>int.to_nat</code> is not maths right?</p>
+
+<a name="176264013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264013">Kevin Buzzard (Sep 21 2019 at 13:04)</a>:</h4>
+<p>It sends negative things to 0, that's why this is true. This should be called <code>to_nat_strict_mono</code> or something.</p>
+
+<a name="176264021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264021">Johan Commelin (Sep 21 2019 at 13:04)</a>:</h4>
+<p>It's far from strict</p>
+
+<a name="176264022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264022">Kevin Buzzard (Sep 21 2019 at 13:04)</a>:</h4>
+<p>So yes, it's not maths.</p>
+
+<a name="176264027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264027">Johan Commelin (Sep 21 2019 at 13:04)</a>:</h4>
+<p>I tend to prefer <code>nat_abs</code></p>
+
+<a name="176264029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264029">Kevin Buzzard (Sep 21 2019 at 13:04)</a>:</h4>
+<p>I thought strict meant "working with lt not le"</p>
+
+<a name="176264031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264031">Johan Commelin (Sep 21 2019 at 13:04)</a>:</h4>
+<p>Also, we now have the <code>lift</code> tactic</p>
+
+<a name="176264032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176264032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176264032">Kevin Buzzard (Sep 21 2019 at 13:04)</a>:</h4>
+<p><code>nat_abs</code> is the maths one, right?</p>
+
 
 {% endraw %}
 

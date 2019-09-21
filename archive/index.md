@@ -20,7 +20,7 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (9 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (10 topics)
 
 * [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (9 topics)
 
