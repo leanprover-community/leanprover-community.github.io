@@ -10,7 +10,7 @@ permalink: archive/index.html
 
 * [general](113488general/index.html) (2078 topics)
 
-* [maths](116395maths/index.html) (597 topics)
+* [maths](116395maths/index.html) (598 topics)
 
 * [new members](113489newmembers/index.html) (499 topics)
 
@@ -20,7 +20,7 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (10 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (11 topics)
 
 * [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (9 topics)
 

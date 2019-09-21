@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/83384idiomaticstatementofsandwichthm.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html">idiomatic statement of sandwich thm</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176270448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176270448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176270448">Kevin Buzzard (Sep 21 2019 at 16:05)</a>:</h4>
+<p>I occasionally mention the <a href="http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/docs/lean/sandwich.html">Lean Sandwich theorem</a> all nicely done with <span class="user-mention" data-user-id="110031">@Patrick Massot</span> 's formaliser, but over on <a class="stream" data-stream-id="187764" href="/#narrow/stream/187764-Lean-for-teaching">#Lean for teaching</a> I was thinking about a bigger real number project and when thinking about limits I realised that we'd just rolled our own with a local <code>is_limit</code> defined as</p>
+<div class="codehilite"><pre><span></span><span class="kn">definition</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="bp">∀</span> <span class="n">ε</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">N</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="bp">≥</span> <span class="n">N</span><span class="o">,</span> <span class="bp">|</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span> <span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span>
+</pre></div>
+
+
+<p>and developed the theory a way a mathematician would. The students and I were creating proofs of the form</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">tendsto_iff_sub_tendsto_zero</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">{</span><span class="n">l</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">is_limit</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="o">)</span> <span class="mi">0</span> <span class="bp">↔</span> <span class="n">is_limit</span> <span class="n">a</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span> <span class="bp">;</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h</span> <span class="n">ε</span> <span class="n">εpos</span><span class="o">,</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="n">ε</span> <span class="n">εpos</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">N</span><span class="o">,</span> <span class="n">H</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">N</span><span class="o">,</span>
+    <span class="n">intros</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">H</span> <span class="n">n</span> <span class="n">hn</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But is there some idiomatic way to do this? What's the idiomatic Lean way to say <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>→</mo><mi mathvariant="normal">ℓ</mi></mrow><annotation encoding="application/x-tex">a_n\to\ell</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">→</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">ℓ</span></span></span></span>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

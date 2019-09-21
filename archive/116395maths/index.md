@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (1 message, latest: Sep 21 2019 at 16:05)
+
 * [Some numerology](27430Somenumerology.html) (18 messages, latest: Sep 21 2019 at 13:04)
 
 * [subgroup set coercion](70326subgroupsetcoercion.html) (29 messages, latest: Sep 20 2019 at 19:27)
