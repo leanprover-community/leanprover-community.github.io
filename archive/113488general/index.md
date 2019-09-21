@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [emacs users](44956emacsusers.html) (18 messages, latest: Sep 21 2019 at 15:48)
+* [emacs users](44956emacsusers.html) (19 messages, latest: Sep 21 2019 at 19:58)
 
 * [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (72 messages, latest: Sep 21 2019 at 13:36)
 
