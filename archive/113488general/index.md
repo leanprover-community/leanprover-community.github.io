@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [emacs users](44956emacsusers.html) (18 messages, latest: Sep 21 2019 at 15:48)
+
 * [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (72 messages, latest: Sep 21 2019 at 13:36)
 
 * [equation compiler documentation](41084equationcompilerdocumentation.html) (6 messages, latest: Sep 21 2019 at 12:58)
@@ -136,8 +138,6 @@ permalink: archive/113488general/index.html
 * [How to open VSCode-Lean files?](58855HowtoopenVSCodeLeanfiles.html) (2 messages, latest: Aug 28 2019 at 06:11)
 
 * [Notation for fields](10955Notationforfields.html) (12 messages, latest: Aug 27 2019 at 19:01)
-
-* [emacs users](44956emacsusers.html) (17 messages, latest: Aug 27 2019 at 18:07)
 
 * [cleaning iff](37335cleaningiff.html) (35 messages, latest: Aug 27 2019 at 15:21)
 
