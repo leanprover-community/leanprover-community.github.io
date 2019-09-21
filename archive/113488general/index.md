@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (70 messages, latest: Sep 21 2019 at 03:48)
+
 * [equation compiler documentation](41084equationcompilerdocumentation.html) (5 messages, latest: Sep 20 2019 at 21:44)
 
 * [classical.choice_elim](82383classicalchoiceelim.html) (31 messages, latest: Sep 20 2019 at 14:28)
@@ -2290,8 +2292,6 @@ permalink: archive/113488general/index.html
 * [Physics?](32035Physics.html) (8 messages, latest: Sep 27 2018 at 23:08)
 
 * [rewrite under a pi](11835rewriteunderapi.html) (26 messages, latest: Sep 27 2018 at 15:42)
-
-* [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (69 messages, latest: Sep 27 2018 at 11:21)
 
 * [dec_trivial performance](25977dectrivialperformance.html) (3 messages, latest: Sep 27 2018 at 07:40)
 
