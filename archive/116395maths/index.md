@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [dirty nom_cast](58081dirtynomcast.html) (1 message, latest: Sep 21 2019 at 20:02)
+
 * [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (8 messages, latest: Sep 21 2019 at 19:32)
 
 * [Some numerology](27430Somenumerology.html) (19 messages, latest: Sep 21 2019 at 18:31)
