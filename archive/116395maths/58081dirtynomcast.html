@@ -54,6 +54,22 @@ permalink: archive/116395maths/58081dirtynomcast.html
 
 <p>Not sure right now why the <code>erw</code> is needed there, but whatever makes <code>rw</code> and <code>simp</code> fail is probably also making <code>norm_cast</code> fail.</p>
 
+<a name="176380956"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dirty%20nom_cast/near/176380956" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58081dirtynomcast.html#176380956">Floris van Doorn (Sep 23 2019 at 15:45)</a>:</h4>
+<p>The problem is that <code>fpow_of_nat</code> is stated using <code>(coe : ℕ → ℤ)</code>, while in the goal we have <code>int.of_nat</code> which are not syntactically equal. This works:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">fpow_of_nat&#39;</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">^</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">a</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">elim_cast</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">cast_fpow</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">discrete_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="n">q</span> <span class="err">^</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="n">q</span> <span class="err">^</span> <span class="n">k</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">cases</span> <span class="n">k</span><span class="bp">;</span> <span class="n">simp</span> <span class="o">[</span><span class="n">fpow_neg_succ_of_nat</span><span class="o">]</span>
+</pre></div>
+
+<a name="176381117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/dirty%20nom_cast/near/176381117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58081dirtynomcast.html#176381117">Floris van Doorn (Sep 23 2019 at 15:47)</a>:</h4>
+<p>Although the actual missing simp lemma is that <code>int.of_nat</code> should be turned into a coercion:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">of_nat_eq_coe</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
 
 {% endraw %}
 

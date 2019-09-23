@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [dirty nom_cast](58081dirtynomcast.html) (4 messages, latest: Sep 23 2019 at 15:47)
+
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (94 messages, latest: Sep 23 2019 at 14:21)
 
 * [Some numerology](27430Somenumerology.html) (26 messages, latest: Sep 23 2019 at 12:59)
 
 * [int.lt_succ_iff_le](42347intltsucciffle.html) (12 messages, latest: Sep 23 2019 at 10:26)
-
-* [dirty nom_cast](58081dirtynomcast.html) (2 messages, latest: Sep 23 2019 at 08:08)
 
 * [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (29 messages, latest: Sep 23 2019 at 07:52)
 

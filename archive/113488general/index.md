@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deriving instances](14561derivinginstances.html) (20 messages, latest: Sep 23 2019 at 14:22)
+* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (21 messages, latest: Sep 23 2019 at 15:56)
 
-* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (10 messages, latest: Sep 23 2019 at 12:54)
+* [deriving instances](14561derivinginstances.html) (20 messages, latest: Sep 23 2019 at 14:22)
 
 * [emacs users](44956emacsusers.html) (19 messages, latest: Sep 21 2019 at 19:58)
 

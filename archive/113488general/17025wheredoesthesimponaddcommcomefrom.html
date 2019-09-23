@@ -55,6 +55,65 @@ src/set_theory/lists.lean:local attribute <span class="o">[</span>-simp<span cla
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176365218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176365218">Patrick Massot (Sep 23 2019 at 12:54)</a>:</h4>
 <p>To me it sounds like automatic invocations of <code>add_comm</code> should be done by <code>ring</code>, <code>abel</code> and similar tactics.</p>
 
+<a name="176377075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176377075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176377075">Floris van Doorn (Sep 23 2019 at 15:06)</a>:</h4>
+<p>I think <code>add_comm</code> is the declaration that I most often have to remove from a simp set (<code>simp [-add_comm]</code>). I would also have preferred it to not have <code>simp</code> by default.</p>
+
+<a name="176377377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176377377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176377377">Simon Hudon (Sep 23 2019 at 15:09)</a>:</h4>
+<p>We should remove it from core. I don't know where the attribute is added. I'm wondering if it's through meta programming</p>
+
+<a name="176377976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176377976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176377976">Johan Commelin (Sep 23 2019 at 15:15)</a>:</h4>
+<p>Chris proposed a diagnosis several posts upstairs</p>
+
+<a name="176379098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176379098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176379098">Edward Ayers (Sep 23 2019 at 15:26)</a>:</h4>
+<p>A theory: I think it's in <code>group.lean</code>.</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">mul_comm</span> <span class="n">mul_assoc</span> <span class="n">mul_left_comm</span>
+<span class="c1">-- ... later</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">transport_with_dict</span> <span class="o">(</span><span class="n">dict</span> <span class="o">:</span> <span class="n">name_map</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">src</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="n">tgt</span> <span class="o">:</span> <span class="n">name</span><span class="o">)</span> <span class="o">:</span> <span class="n">command</span> <span class="o">:=</span>
+<span class="n">copy_decl_using</span> <span class="n">dict</span> <span class="n">src</span> <span class="n">tgt</span>
+<span class="bp">&gt;&gt;</span> <span class="n">copy_attribute</span> <span class="bp">`</span><span class="kn">reducible</span> <span class="n">src</span> <span class="n">tt</span> <span class="n">tgt</span>
+<span class="bp">&gt;&gt;</span> <span class="n">copy_attribute</span> <span class="bp">`</span><span class="n">simp</span> <span class="n">src</span> <span class="n">tt</span> <span class="n">tgt</span>
+<span class="bp">&gt;&gt;</span> <span class="n">copy_attribute</span> <span class="bp">`</span><span class="kn">instance</span> <span class="n">src</span> <span class="n">tt</span> <span class="n">tgt</span>
+</pre></div>
+
+
+<p>The <code>local</code> on <code>local attribute</code> means that the attribute is only present inside the section right? But maybe this localness gets clobbered when it does the <code>copy_attribute</code>.</p>
+
+<a name="176379106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176379106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176379106">Patrick Massot (Sep 23 2019 at 15:26)</a>:</h4>
+<p>I have <code>simp [-sub_eq_add_neg]</code> much more often than <code>simp [-add_comm]</code></p>
+
+<a name="176379266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176379266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176379266">Johan Commelin (Sep 23 2019 at 15:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="121918">@Edward Ayers</span>  Isn't that what Chris also said?</p>
+
+<a name="176379315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176379315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176379315">Edward Ayers (Sep 23 2019 at 15:29)</a>:</h4>
+<p>yep</p>
+
+<a name="176379522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176379522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176379522">Edward Ayers (Sep 23 2019 at 15:31)</a>:</h4>
+<p>But mul_comm isn't a simp lemma I think. So this is a bug in <code>transport_with_dict</code>?</p>
+
+<a name="176380470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176380470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176380470">Edward Ayers (Sep 23 2019 at 15:40)</a>:</h4>
+<p>I'm wondering if setting that <code>tt</code> flag on <code>copy_attribute</code> will cause it to be local</p>
+
+<a name="176381182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176381182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176381182">Edward Ayers (Sep 23 2019 at 15:48)</a>:</h4>
+<p>Ok so <code>copy_attribute `simp src ff tgt</code> will set it as a local attribute. But I can't see a tactic that tells you whether an attribute is local or not so I think the best fix is to just unset the attribute in the <code>group.lean</code> file.</p>
+
+<a name="176381857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176381857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176381857">Edward Ayers (Sep 23 2019 at 15:56)</a>:</h4>
+<blockquote>
+<p>I think you can't globally remove an attribute anyway.</p>
+</blockquote>
+<p>Aw damn.</p>
+
 
 {% endraw %}
 
