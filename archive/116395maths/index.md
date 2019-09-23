@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [int.lt_succ_iff_le](42347intltsucciffle.html) (1 message, latest: Sep 23 2019 at 07:59)
+* [Some numerology](27430Somenumerology.html) (25 messages, latest: Sep 23 2019 at 08:15)
 
-* [Some numerology](27430Somenumerology.html) (24 messages, latest: Sep 23 2019 at 07:55)
+* [dirty nom_cast](58081dirtynomcast.html) (2 messages, latest: Sep 23 2019 at 08:08)
+
+* [int.lt_succ_iff_le](42347intltsucciffle.html) (11 messages, latest: Sep 23 2019 at 08:04)
 
 * [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (29 messages, latest: Sep 23 2019 at 07:52)
-
-* [dirty nom_cast](58081dirtynomcast.html) (1 message, latest: Sep 21 2019 at 20:02)
 
 * [subgroup set coercion](70326subgroupsetcoercion.html) (29 messages, latest: Sep 20 2019 at 19:27)
 

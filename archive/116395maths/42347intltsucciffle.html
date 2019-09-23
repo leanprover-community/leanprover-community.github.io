@@ -21,6 +21,52 @@ permalink: archive/116395maths/42347intltsucciffle.html
 
 <p>This doesn't seem to be in mathlib. <code>split; intro; linarith</code> proves it but slowly...</p>
 
+<a name="176347444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347444">Chris Hughes (Sep 23 2019 at 08:00)</a>:</h4>
+<p>Is it called <code>int.lt_add_one</code>?</p>
+
+<a name="176347496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347496">Johan Commelin (Sep 23 2019 at 08:00)</a>:</h4>
+<p>Aah, nice <code>lt_add_one_iff</code></p>
+
+<a name="176347519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347519">Johan Commelin (Sep 23 2019 at 08:01)</a>:</h4>
+<p>I first had the sides swapped, and then <code>library_search</code> didn't find it. I thought you fixed that <span class="user-mention" data-user-id="110087">@Scott Morrison</span> didn't you?</p>
+
+<a name="176347661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347661">Johan Commelin (Sep 23 2019 at 08:03)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt_succ_iff_le</span> <span class="o">{</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">:</span>
+  <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">↔</span> <span class="n">m</span> <span class="bp">≤</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">library_search</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176347667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347667">Scott Morrison (Sep 23 2019 at 08:03)</a>:</h4>
+<p>Really? Ugh, I should fix that.</p>
+
+<a name="176347684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347684">Scott Morrison (Sep 23 2019 at 08:04)</a>:</h4>
+<p>ohh... I see, yeah, library search can't do that out of the box. If you <code>split; library_search</code> it should succeed, however.</p>
+
+<a name="176347726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347726">Johan Commelin (Sep 23 2019 at 08:04)</a>:</h4>
+<p>Aha, I see</p>
+
+<a name="176347727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347727">Scott Morrison (Sep 23 2019 at 08:04)</a>:</h4>
+<p>It's a slight hack to do this, but I can add it.</p>
+
+<a name="176347750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347750">Johan Commelin (Sep 23 2019 at 08:04)</a>:</h4>
+<p>Maybe it can try <code>symmetry</code> before applying...?</p>
+
+<a name="176347753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/int.lt_succ_iff_le/near/176347753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42347intltsucciffle.html#176347753">Johan Commelin (Sep 23 2019 at 08:04)</a>:</h4>
+<p>But maybe it costs too much</p>
+
 
 {% endraw %}
 
