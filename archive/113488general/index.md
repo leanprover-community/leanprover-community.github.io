@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (23 messages, latest: Sep 23 2019 at 22:15)
+
 * [instance matching](78529instancematching.html) (5 messages, latest: Sep 23 2019 at 19:09)
 
 * [ext trace](37185exttrace.html) (7 messages, latest: Sep 23 2019 at 19:03)
-
-* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (22 messages, latest: Sep 23 2019 at 16:13)
 
 * [deriving instances](14561derivinginstances.html) (20 messages, latest: Sep 23 2019 at 14:22)
 

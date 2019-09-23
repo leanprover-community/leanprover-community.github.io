@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [undone by powerful `refl` AI](16172undonebypowerfulreflAI.html) (14 messages, latest: Sep 23 2019 at 20:39)
+* [Some numerology](27430Somenumerology.html) (36 messages, latest: Sep 23 2019 at 22:18)
 
-* [Some numerology](27430Somenumerology.html) (32 messages, latest: Sep 23 2019 at 20:38)
+* [undone by powerful `refl` AI](16172undonebypowerfulreflAI.html) (14 messages, latest: Sep 23 2019 at 20:39)
 
 * [dirty nom_cast](58081dirtynomcast.html) (4 messages, latest: Sep 23 2019 at 15:47)
 
