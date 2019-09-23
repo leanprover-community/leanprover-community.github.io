@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/16172undonebypowerfulreflAI.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html">undone by powerful `refl` AI</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176401872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176401872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176401872">Kevin Buzzard (Sep 23 2019 at 19:39)</a>:</h4>
+<p>I had just shown a classroom of children that <code>2 + 2 = 4</code> could be proved by <code>refl</code> and we got talking about the algorithm. I said it just simplified everything down to <code>S(S(S(S(...)))=S(S(S(...)))</code> and commented that it might well run out of memory if we try big numbers! So I tried</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">1000000000000</span><span class="bp">+</span><span class="mi">1000000000000</span><span class="bp">=</span><span class="mi">2000000000000</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">refl</span>
+</pre></div>
+
+
+<p>and it typechecked! I was like "wooah kids, someone has updated the <code>refl</code> AI! I never knew it did that!" When did <code>refl</code> know about column addition? I know that <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> laughed once when I told him that refl was an AI.</p>
+
+<a name="176402418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176402418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176402418">Simon Hudon (Sep 23 2019 at 19:45)</a>:</h4>
+<p>What if you run that file with <code>lean --trust=0</code>. I'm wondering if it's sped up by using a macro</p>
+
+<a name="176403032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403032">Kevin Buzzard (Sep 23 2019 at 19:53)</a>:</h4>
+<p>oh rofl I think I see what's happening :-)</p>
+
+<a name="176403074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403074">Kevin Buzzard (Sep 23 2019 at 19:53)</a>:</h4>
+<p>ha ha ha</p>
+
+<a name="176403129"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403129" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403129">Kevin Buzzard (Sep 23 2019 at 19:54)</a>:</h4>
+<div class="codehilite"><pre><span></span>example : 1000000000000+2000000000000=3000000000000 :=  by refl -- deterministic timeout
+</pre></div>
+
+<a name="176403145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403145">Kevin Buzzard (Sep 23 2019 at 19:54)</a>:</h4>
+<p>the <em>definition</em> of 2000000000000 is 1000000000000 + 1000000000000</p>
+
+<a name="176403382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403382">Simon Hudon (Sep 23 2019 at 19:57)</a>:</h4>
+<p>Riiiiight, yeah, that makes sense</p>
+
+<a name="176403507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403507">Kevin Buzzard (Sep 23 2019 at 19:58)</a>:</h4>
+<p>I guess that is not obvious. Am I right? Where is the algorithm which turns strings of digits into a nat?</p>
+
+<a name="176403574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403574">Kevin Buzzard (Sep 23 2019 at 19:59)</a>:</h4>
+<p>Do you think it does the divisions etc in base 10 using long division?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

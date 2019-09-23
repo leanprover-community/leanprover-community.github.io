@@ -33,6 +33,20 @@ permalink: archive/113488general/78529instancematching.html
 My conclusion is that it allows all kinds of definitional equalities except that delta reductions are only permitted for <code>reducible</code> definitions. In other words, it's just usual definitional equality with an appropriate transparency setting.<br>
 However, there is a small mystery remaining: why <code>good (2 + 2)</code> works even by default.</p>
 
+<a name="176398646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176398646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176398646">Floris van Doorn (Sep 23 2019 at 19:03)</a>:</h4>
+<p>This seems to be something hard-coded into type-class inference. I think type-class inference normalizes (addition on) numerals using a mechanism other than definitional equality. Look at this example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">priority</span> <span class="mi">100000</span><span class="o">]</span> <span class="kn">instance</span> <span class="n">my_nat_add</span> <span class="o">:</span> <span class="n">has_add</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="mi">1</span><span class="bp">⟩</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">good</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>Note that the tactic <code>apply_instance</code> succeeds, even though <code>2 + 2</code> is not definitionally equal to <code>4</code> after my instance.</p>
+
+<a name="176399153"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176399153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176399153">Floris van Doorn (Sep 23 2019 at 19:09)</a>:</h4>
+<p>And after <code>apply_instance</code> succeeds, the kernel rejects the found instance.</p>
+
 
 {% endraw %}
 

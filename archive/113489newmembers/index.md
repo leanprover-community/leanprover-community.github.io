@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [\l symbol](94975lsymbol.html) (4 messages, latest: Sep 23 2019 at 19:35)
+
 * [(no topic)](79918notopic.html) (208 messages, latest: Sep 20 2019 at 18:13)
 
 * [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)

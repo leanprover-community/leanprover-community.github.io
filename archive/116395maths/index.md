@@ -9,11 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [undone by powerful `refl` AI](16172undonebypowerfulreflAI.html) (9 messages, latest: Sep 23 2019 at 19:59)
+
+* [Some numerology](27430Somenumerology.html) (27 messages, latest: Sep 23 2019 at 19:31)
+
 * [dirty nom_cast](58081dirtynomcast.html) (4 messages, latest: Sep 23 2019 at 15:47)
 
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (94 messages, latest: Sep 23 2019 at 14:21)
-
-* [Some numerology](27430Somenumerology.html) (26 messages, latest: Sep 23 2019 at 12:59)
 
 * [int.lt_succ_iff_le](42347intltsucciffle.html) (12 messages, latest: Sep 23 2019 at 10:26)
 

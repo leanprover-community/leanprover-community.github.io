@@ -184,6 +184,59 @@ permalink: archive/116395maths/27430Somenumerology.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176365579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176365579">Simon Hudon (Sep 23 2019 at 12:59)</a>:</h4>
 <p>I think <code>mono</code> could help here. What it does is that it tries <code>assumption</code> on the side condition while selecting a lemma. If it fails with <code>assumption</code> it just means that the lemma is more expensive to apply. The lemma with the fewest remaining side condition is selected. If there's only one candidate, you're just going to get a dump of all the side conditions that <code>mono</code> can't handle</p>
 
+<a name="176401132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some%20numerology/near/176401132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/27430Somenumerology.html#176401132">Kevin Buzzard (Sep 23 2019 at 19:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">Ioo_fin_equiv</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span><span class="bp">.</span><span class="n">Ioo</span> <span class="n">a</span> <span class="n">b</span> <span class="err">≃</span> <span class="n">fin</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="err">$</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">to_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">s</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">s</span><span class="bp">.</span><span class="n">val</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span> <span class="k">begin</span>
+    <span class="n">cases</span> <span class="n">s</span> <span class="k">with</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span>
+    <span class="k">show</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">s</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span>
+    <span class="n">cases</span> <span class="n">hs</span> <span class="k">with</span> <span class="n">has</span> <span class="n">hsb</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span>
+      <span class="n">linarith</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_lt_to_nat</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h1</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="o">(</span><span class="n">sub_lt_sub_iff_right</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span><span class="bp">.</span><span class="mi">2</span> <span class="n">hsb</span> <span class="kn">using</span> <span class="mi">1</span><span class="bp">;</span> <span class="n">ring</span><span class="o">,</span>
+  <span class="kn">end</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">inv_fun</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span><span class="bp">.</span><span class="n">val</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span> <span class="k">begin</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">int</span><span class="bp">.</span><span class="n">lt_of_add_one_le</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">add_assoc</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">le_add_of_nonneg_left</span><span class="o">,</span>
+      <span class="n">simp</span><span class="o">,</span>
+    <span class="n">suffices</span> <span class="o">:</span> <span class="o">(</span><span class="n">t</span><span class="bp">.</span><span class="n">val</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">,</span>
+      <span class="n">convert</span> <span class="n">add_lt_add_left</span> <span class="n">this</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="kn">using</span> <span class="mi">1</span><span class="bp">;</span> <span class="n">ring</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">t2</span> <span class="o">:=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_lt_coe_nat_of_lt</span> <span class="n">t2</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat_eq_max</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">max_eq_left</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">le_of_lt</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">),</span>
+      <span class="n">refine</span> <span class="n">lt_of_le_of_lt</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">)</span> <span class="n">t2</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">lt_iff_not_ge&#39;</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">lt_irrefl</span> <span class="mi">0</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">replace</span> <span class="n">h2</span> <span class="o">:=</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat_le</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h2</span><span class="o">,</span>
+    <span class="n">symmetry</span><span class="o">,</span> <span class="n">rwa</span> <span class="n">nat</span><span class="bp">.</span><span class="n">le_zero_iff</span> <span class="n">at</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="kn">end</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="n">left_inv</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">sa</span><span class="o">,</span> <span class="n">sb</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">suffices</span> <span class="o">:</span> <span class="err">↑</span><span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat</span> <span class="o">(</span><span class="n">s</span> <span class="bp">-</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)))</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">s</span><span class="o">,</span>
+      <span class="n">exact</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">eq</span> <span class="o">(</span><span class="k">by</span> <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">),</span>
+    <span class="n">rw</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">to_nat_of_nonneg</span> <span class="bp">_</span><span class="o">),</span> <span class="n">simp</span><span class="o">,</span>
+    <span class="n">linarith</span><span class="o">,</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">right_inv</span> <span class="o">:=</span> <span class="k">begin</span>
+    <span class="n">rintro</span> <span class="bp">⟨</span><span class="n">s</span><span class="o">,</span> <span class="n">hs</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">dsimp</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">fin</span><span class="bp">.</span><span class="n">ext_iff</span><span class="o">,</span>
+    <span class="n">dsimp</span><span class="o">,</span>
+    <span class="n">conv</span> <span class="k">in</span> <span class="o">(</span><span class="err">↑</span><span class="n">s</span> <span class="bp">+</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="bp">-</span><span class="n">a</span> <span class="bp">+</span> <span class="bp">-</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="k">begin</span> <span class="n">ring</span> <span class="kn">end</span><span class="o">,</span>
+    <span class="n">simp</span><span class="o">,</span>
+  <span class="kn">end</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>I really hope this can be seriously golfed. I just muddle through with stuff like this; there are a couple of non-terminal simps :-/</p>
+
 
 {% endraw %}
 
