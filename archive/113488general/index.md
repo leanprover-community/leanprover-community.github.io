@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (1 message, latest: Sep 23 2019 at 10:55)
+* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (6 messages, latest: Sep 23 2019 at 11:02)
 
 * [emacs users](44956emacsusers.html) (19 messages, latest: Sep 21 2019 at 19:58)
 

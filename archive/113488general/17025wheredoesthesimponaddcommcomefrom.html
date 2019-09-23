@@ -16,6 +16,29 @@ permalink: archive/113488general/17025wheredoesthesimponaddcommcomefrom.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176357776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176357776">Scott Morrison (Sep 23 2019 at 10:55)</a>:</h4>
 <p>Can anyone find where <code>add_comm</code> acquires <code>simp</code>?</p>
 
+<a name="176358088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176358088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176358088">Johan Commelin (Sep 23 2019 at 11:01)</a>:</h4>
+<p>I do find</p>
+<div class="codehilite"><pre><span></span>git grep <span class="s2">&quot;attri.*simp.*add_comm&quot;</span>
+src/set_theory/lists.lean:local attribute <span class="o">[</span>-simp<span class="o">]</span> add_comm add_assoc
+</pre></div>
+
+<a name="176358108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176358108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176358108">Johan Commelin (Sep 23 2019 at 11:01)</a>:</h4>
+<p>Maybe it's in core?</p>
+
+<a name="176358111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176358111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176358111">Chris Hughes (Sep 23 2019 at 11:01)</a>:</h4>
+<p><code>mul_comm</code> is locally <code>simp</code> when the <code>run_cmd transport_multiplicative_to_additive</code> defining <code>add_comm</code> is defined, so I guess that's where it gets the attribute.</p>
+
+<a name="176358130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176358130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176358130">Chris Hughes (Sep 23 2019 at 11:01)</a>:</h4>
+<p>in <code>init.algebra.group</code></p>
+
+<a name="176358198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/where%20does%20the%20%40%5Bsimp%5D%20on%20add_comm%20come%20from%3F/near/176358198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/17025wheredoesthesimponaddcommcomefrom.html#176358198">Johan Commelin (Sep 23 2019 at 11:02)</a>:</h4>
+<p>Maybe that line from <code>set_theory.lists</code> should move to <code>logic.basic</code> and become global?</p>
+
 
 {% endraw %}
 
