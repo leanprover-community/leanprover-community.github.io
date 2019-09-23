@@ -54,6 +54,29 @@ permalink: archive/116395maths/16172undonebypowerfulreflAI.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403574">Kevin Buzzard (Sep 23 2019 at 19:59)</a>:</h4>
 <p>Do you think it does the divisions etc in base 10 using long division?</p>
 
+<a name="176403746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403746">Simon Hudon (Sep 23 2019 at 20:00)</a>:</h4>
+<p>I suggest you put this here in your Lean file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">numerals</span> <span class="n">false</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="mi">1000000000000</span><span class="bp">+</span><span class="mi">2000000000000</span><span class="bp">=</span><span class="mi">3000000000000</span>
+</pre></div>
+
+<a name="176403789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403789">Floris van Doorn (Sep 23 2019 at 20:01)</a>:</h4>
+<p>Numerals are turned into a binary representation (using the auxiliary functions <code>bit0</code> and <code>bit1</code>).</p>
+
+<a name="176403874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176403874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176403874">Simon Hudon (Sep 23 2019 at 20:02)</a>:</h4>
+<p>What happens is that those digits turn into a term where we're using <code>bit0</code>, <code>bit1</code> and <code>one</code> (the functions) to represent the same numbers in binary</p>
+
+<a name="176406515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176406515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176406515">Kevin Buzzard (Sep 23 2019 at 20:29)</a>:</h4>
+<p>Does some part of the parser just completely unfold every string-of-digits-representing-a-nat completely into a bit0 bit1 bit0 ... representation before any other part of the system can get to it? I guess that's how it works. Then yeah definitely 2000000000000=1000000000000+1000000000000 is easy, the head terms are <code>has_add.add</code> and <code>bit0</code> and then <code>bit0</code> unfolds to <code>has_add.add</code> and it's all over -- the terms are now syntactically equal. Am I making sense?</p>
+
+<a name="176407382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/undone%20by%20powerful%20%60refl%60%20AI/near/176407382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/16172undonebypowerfulreflAI.html#176407382">Floris van Doorn (Sep 23 2019 at 20:39)</a>:</h4>
+<p>Yes, all of that makes sense and is correct.</p>
+
 
 {% endraw %}
 
