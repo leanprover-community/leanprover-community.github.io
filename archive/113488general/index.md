@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deriving instances](14561derivinginstances.html) (18 messages, latest: Sep 23 2019 at 13:54)
+
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (10 messages, latest: Sep 23 2019 at 12:54)
 
 * [emacs users](44956emacsusers.html) (19 messages, latest: Sep 21 2019 at 19:58)
@@ -130,8 +132,6 @@ permalink: archive/113488general/index.html
 * [Way to get fresh variable?](84818Waytogetfreshvariable.html) (3 messages, latest: Aug 28 2019 at 16:14)
 
 * [simp lemmas](46585simplemmas.html) (5 messages, latest: Aug 28 2019 at 15:23)
-
-* [deriving instances](14561derivinginstances.html) (10 messages, latest: Aug 28 2019 at 08:37)
 
 * [deterministic craziness](67975deterministiccraziness.html) (7 messages, latest: Aug 28 2019 at 07:31)
 
