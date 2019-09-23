@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [int.lt_succ_iff_le](42347intltsucciffle.html) (12 messages, latest: Sep 23 2019 at 10:26)
+* [Some numerology](27430Somenumerology.html) (26 messages, latest: Sep 23 2019 at 12:59)
 
-* [Some numerology](27430Somenumerology.html) (25 messages, latest: Sep 23 2019 at 08:15)
+* [int.lt_succ_iff_le](42347intltsucciffle.html) (12 messages, latest: Sep 23 2019 at 10:26)
 
 * [dirty nom_cast](58081dirtynomcast.html) (2 messages, latest: Sep 23 2019 at 08:08)
 
