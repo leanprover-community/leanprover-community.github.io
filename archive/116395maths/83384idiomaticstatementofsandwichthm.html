@@ -127,6 +127,51 @@ permalink: archive/116395maths/83384idiomaticstatementofsandwichthm.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176344685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176344685">Kevin Buzzard (Sep 23 2019 at 06:58)</a>:</h4>
 <p>The more I think about it, the more a predicate seems natural. How does one say <code>is_limit (a : nat -&gt; real) -&gt; real -&gt; Prop)</code> idiomatically in Lean?</p>
 
+<a name="176345251"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345251">Mario Carneiro (Sep 23 2019 at 07:12)</a>:</h4>
+<p>As chris said, this is <code>tendsto a at_top (nhds l)</code>, but you can define <code>is_limit a l</code> to mean this if it suits you</p>
+
+<a name="176345326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345326">Mario Carneiro (Sep 23 2019 at 07:14)</a>:</h4>
+<p>I know you think this looks ridiculous, but it's the most uniform way to handle all those disparate things you just said that you group under the name "limit of a sequence"</p>
+
+<a name="176345359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345359">Mario Carneiro (Sep 23 2019 at 07:15)</a>:</h4>
+<p>all the other encodings, using option real or option ereal or a set of reals or something are more ad hoc and less general</p>
+
+<a name="176345424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345424">Johan Commelin (Sep 23 2019 at 07:16)</a>:</h4>
+<p>You could probably do something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">abbreviation</span> <span class="n">sequence</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">X</span>
+
+<span class="n">def</span> <span class="n">sequence</span><span class="bp">.</span><span class="n">tends_to</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">X</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">sequence</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">tendsto</span> <span class="n">a</span> <span class="n">at_top</span> <span class="o">(</span><span class="n">nhds</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">sequence</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="bp">.</span><span class="n">tends_to</span> <span class="n">π</span>
+</pre></div>
+
+<a name="176345429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345429">Johan Commelin (Sep 23 2019 at 07:16)</a>:</h4>
+<p>Of course this doesn't help you with undefined limits or infinity</p>
+
+<a name="176345434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345434">Johan Commelin (Sep 23 2019 at 07:16)</a>:</h4>
+<p>But it does read nice, I think</p>
+
+<a name="176345446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345446">Johan Commelin (Sep 23 2019 at 07:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> I agree with Mario. The best thing is to just teach UGs about filters</p>
+
+<a name="176345622"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176345622" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176345622">Mario Carneiro (Sep 23 2019 at 07:20)</a>:</h4>
+<p>if you want to avoid talking about filters, you might try using <code>is_limit</code> defined like this, prove the elementary characterization for metric spaces or explicitly for real sequences, use that equivalence exclusively in proofs, and leave the investigation of the actual definition and the mathlib proofs about limits as advanced material / exercise for the reader</p>
+
+<a name="176347077"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/idiomatic%20statement%20of%20sandwich%20thm/near/176347077" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/83384idiomaticstatementofsandwichthm.html#176347077">Kevin Buzzard (Sep 23 2019 at 07:52)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110038">Kevin Buzzard</span> I agree with Mario. The best thing is to just teach UGs about filters</p>
+</blockquote>
+<p>I supervised a pretty cool 2nd year project on filters last term. No Lean involved, but it was very interesting all the same. They had already done a 2nd year topology course though, so the applications were rather more immediate (quick proof of Tychonoff etc)</p>
+
 
 {% endraw %}
 
