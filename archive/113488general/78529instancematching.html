@@ -1,0 +1,39 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/78529instancematching.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html">instance matching</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176393458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176393458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176393458">Reid Barton (Sep 23 2019 at 18:06)</a>:</h4>
+<p>Can anyone explain this behavior?</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">good</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span><span class="bp">.</span>
+<span class="kn">instance</span> <span class="n">good_4</span> <span class="o">:</span> <span class="n">good</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">good</span><span class="bp">.</span><span class="n">mk</span> <span class="mi">4</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">good</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">infer_instance</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">good</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">infer_instance</span>  <span class="c1">-- other pairs summing to 4 also work</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">good</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">*</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span> <span class="n">infer_instance</span>  <span class="c1">-- failed to synthesize type class instance for ⊢ good (2 * 2)</span>
+</pre></div>
+
+<a name="176393563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176393563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176393563">Reid Barton (Sep 23 2019 at 18:07)</a>:</h4>
+<p>Oh, <code>good (nat.add 2 2)</code> doesn't work. Some magic then?</p>
+
+<a name="176396988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176396988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176396988">Reid Barton (Sep 23 2019 at 18:45)</a>:</h4>
+<p>I was originally going to ask what kinds of definitional equivalence instance matching allows, but I realized I could just experiment instead.<br>
+My conclusion is that it allows all kinds of definitional equalities except that delta reductions are only permitted for <code>reducible</code> definitions. In other words, it's just usual definitional equality with an appropriate transparency setting.<br>
+However, there is a small mystery remaining: why <code>good (2 + 2)</code> works even by default.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

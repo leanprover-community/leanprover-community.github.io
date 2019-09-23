@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ext trace](37185exttrace.html) (5 messages, latest: Sep 23 2019 at 17:37)
+* [ext trace](37185exttrace.html) (6 messages, latest: Sep 23 2019 at 18:53)
+
+* [instance matching](78529instancematching.html) (3 messages, latest: Sep 23 2019 at 18:45)
 
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (22 messages, latest: Sep 23 2019 at 16:13)
 
