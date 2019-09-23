@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (94 messages, latest: Sep 23 2019 at 14:21)
+
 * [Some numerology](27430Somenumerology.html) (26 messages, latest: Sep 23 2019 at 12:59)
 
 * [int.lt_succ_iff_le](42347intltsucciffle.html) (12 messages, latest: Sep 23 2019 at 10:26)
@@ -20,8 +22,6 @@ permalink: archive/116395maths/index.html
 * [subgroup set coercion](70326subgroupsetcoercion.html) (29 messages, latest: Sep 20 2019 at 19:27)
 
 * [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (22 messages, latest: Sep 20 2019 at 14:41)
-
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (92 messages, latest: Sep 20 2019 at 12:55)
 
 * [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (6 messages, latest: Sep 19 2019 at 22:18)
 

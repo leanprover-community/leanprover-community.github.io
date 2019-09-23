@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deriving instances](14561derivinginstances.html) (18 messages, latest: Sep 23 2019 at 13:54)
+* [deriving instances](14561derivinginstances.html) (20 messages, latest: Sep 23 2019 at 14:22)
 
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (10 messages, latest: Sep 23 2019 at 12:54)
 
