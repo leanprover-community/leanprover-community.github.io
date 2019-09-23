@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (1 message, latest: Sep 23 2019 at 10:55)
+
 * [emacs users](44956emacsusers.html) (19 messages, latest: Sep 21 2019 at 19:58)
 
 * [Happy birthday, Kevin!](13508HappybirthdayKevin.html) (72 messages, latest: Sep 21 2019 at 13:36)
