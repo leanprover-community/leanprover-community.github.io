@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1467 fconstructor](590101467fconstructor.html) (5 messages, latest: Sep 20 2019 at 22:47)
+* [#1449 minpoly](752621449minpoly.html) (6 messages, latest: Sep 23 2019 at 06:55)
 
-* [#1449 minpoly](752621449minpoly.html) (3 messages, latest: Sep 20 2019 at 08:52)
+* [#1467 fconstructor](590101467fconstructor.html) (5 messages, latest: Sep 20 2019 at 22:47)
 
 * [#1425 dim_finsupp](986701425dimfinsupp.html) (36 messages, latest: Sep 19 2019 at 09:32)
 

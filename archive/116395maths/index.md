@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (18 messages, latest: Sep 23 2019 at 02:52)
+* [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (20 messages, latest: Sep 23 2019 at 06:58)
 
 * [dirty nom_cast](58081dirtynomcast.html) (1 message, latest: Sep 21 2019 at 20:02)
 
