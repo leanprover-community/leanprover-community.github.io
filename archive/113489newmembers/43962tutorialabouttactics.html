@@ -267,6 +267,28 @@ h2 : ∀ (x : ℕ), p x
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176428735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176428735">Kevin Buzzard (Sep 24 2019 at 03:10)</a>:</h4>
 <p>It would be interesting to see your proof.</p>
 
+<a name="176447920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176447920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176447920">Alexandre Rademaker (Sep 24 2019 at 09:47)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> , my current state is the following. I am just trying to complete this proof. </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="bp">∀</span><span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">q</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+ <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+ <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+ <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">from</span> <span class="o">(</span><span class="n">h1</span> <span class="n">h3</span><span class="o">),</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176448156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176448156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176448156">Alexandre Rademaker (Sep 24 2019 at 09:51)</a>:</h4>
+<p>Hi <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> , if I try <code>existsi (f a)</code> it says that <code>a</code> is unknow.</p>
+
+<a name="176448281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176448281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176448281">Chris Hughes (Sep 24 2019 at 09:53)</a>:</h4>
+<p>There's no variable called <code>a</code> in your context. Try <code>existsi (f 0)</code></p>
+
 
 {% endraw %}
 
