@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp priority](97980simppriority.html) (5 messages, latest: Sep 24 2019 at 15:05)
+* [sanity check](33847sanitycheck.html) (62 messages, latest: Sep 24 2019 at 22:25)
 
-* [sanity check](33847sanitycheck.html) (61 messages, latest: Sep 24 2019 at 05:37)
+* [simp priority](97980simppriority.html) (5 messages, latest: Sep 24 2019 at 15:05)
 
 * [deriving instances](14561derivinginstances.html) (26 messages, latest: Sep 24 2019 at 01:33)
 
