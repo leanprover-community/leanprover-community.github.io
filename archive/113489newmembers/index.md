@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [tutorial about tactics?](43962tutorialabouttactics.html) (51 messages, latest: Sep 24 2019 at 09:53)
+* [tutorial about tactics?](43962tutorialabouttactics.html) (72 messages, latest: Sep 24 2019 at 10:55)
 
 * [\l symbol](94975lsymbol.html) (4 messages, latest: Sep 23 2019 at 19:35)
 

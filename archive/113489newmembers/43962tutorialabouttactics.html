@@ -289,6 +289,115 @@ h2 : ∀ (x : ℕ), p x
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176448281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176448281">Chris Hughes (Sep 24 2019 at 09:53)</a>:</h4>
 <p>There's no variable called <code>a</code> in your context. Try <code>existsi (f 0)</code></p>
 
+<a name="176449311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176449311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176449311">Alexandre Rademaker (Sep 24 2019 at 10:09)</a>:</h4>
+<p>Wow! It worked!! So happy!! ;-) It looks like I have a proof. But why I can't use a generic term of type <code>nat</code> instead of <code>0</code> in the last step? It should be possible to prove <code>∀ (x : ℕ), q (f x) ⊢ ∃ (x : ℕ), q x</code> for any nat, right?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="bp">∀</span><span class="n">x</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">,</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">q</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+ <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+ <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+ <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">from</span> <span class="o">(</span><span class="n">h1</span> <span class="n">h3</span><span class="o">),</span>
+ <span class="n">existsi</span> <span class="o">(</span><span class="n">f</span> <span class="mi">0</span><span class="o">),</span> <span class="n">exact</span> <span class="o">(</span><span class="n">h4</span> <span class="mi">0</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176449657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176449657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176449657">Chris Hughes (Sep 24 2019 at 10:14)</a>:</h4>
+<p>You could use any <code>nat</code> other than <code>0</code> for the proof. Using an arbitrary <code>nat</code> when there isn't one in your context could cause problems if the type <code>nat</code> was empty. Your example is actually false with <code>nat</code> substituted for <code>empty</code> in the statement.</p>
+
+<a name="176449940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176449940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176449940">Alexandre Rademaker (Sep 24 2019 at 10:19)</a>:</h4>
+<p>Sorry, I didn’t understand. The reason for my question is that it should be possible to replace the type <code>nat</code> with a generic type <code>U : Type</code>, right?</p>
+
+<a name="176450897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176450897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176450897">Chris Hughes (Sep 24 2019 at 10:34)</a>:</h4>
+<p>Only if <code>U</code> is nonempty</p>
+
+<a name="176450962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176450962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176450962">Kevin Buzzard (Sep 24 2019 at 10:35)</a>:</h4>
+<p>....</p>
+
+<a name="176451196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451196">Alexandre Rademaker (Sep 24 2019 at 10:39)</a>:</h4>
+<p>Yes, if U is nonempty, an usual assumption for domains in first order logic. In that case, how can I replace nat by U saying that U is nonempty?</p>
+
+<a name="176451384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451384">Keeley Hoek (Sep 24 2019 at 10:42)</a>:</h4>
+<p>To minimally change your existing proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">hne</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="bp">∀</span><span class="n">x</span><span class="o">:</span><span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span><span class="n">x</span><span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">q</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+ <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+ <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+ <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">from</span> <span class="o">(</span><span class="n">h1</span> <span class="n">h3</span><span class="o">),</span>
+
+ <span class="k">have</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">hne</span><span class="o">,</span>
+ <span class="n">existsi</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span> <span class="n">exact</span> <span class="o">(</span><span class="n">h4</span> <span class="n">a</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176451454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451454">Keeley Hoek (Sep 24 2019 at 10:43)</a>:</h4>
+<p>If you would like a witness to the nonemptiness of the type <code>α</code> to actually be provided, use <code>inhabited</code> instead of <code>nonempty</code></p>
+
+<a name="176451682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451682">Alexandre Rademaker (Sep 24 2019 at 10:46)</a>:</h4>
+<p>Wow! Too many new things! I am curious why this discussion of nonempty types didn't appear in the <a href="https://leanprover.github.io/logic_and_proof/first_order_logic_in_lean.html#using-the-universal-quantifier" target="_blank" title="https://leanprover.github.io/logic_and_proof/first_order_logic_in_lean.html#using-the-universal-quantifier">chapter 9 of Logic and Proof</a>!</p>
+<p>Thank you <span class="user-mention" data-user-id="110111">@Keeley Hoek</span> ! Now I have to understand why the <code>{ ...}</code>, the use of <code>[...]</code>  in the declaration instead of <code>(...)</code> and the <code>classical.choice</code> operator.</p>
+
+<a name="176451720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451720">Keeley Hoek (Sep 24 2019 at 10:47)</a>:</h4>
+<p>What I've done is just replaced each use of nat with an arbitrary type <code>α</code>, but have required that a proof that <code>α</code> is <code>nonempty</code> is also provided.</p>
+
+<a name="176451774"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451774" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451774">Keeley Hoek (Sep 24 2019 at 10:48)</a>:</h4>
+<p>To obtain an actual element <code>a</code> of <code>α</code> based on the proof of nonemptiness <code>hne</code>, we appeal to the axiom of choice.</p>
+
+<a name="176451868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451868">Marc Huisinga (Sep 24 2019 at 10:50)</a>:</h4>
+<p>nonempty is also introduced here: <a href="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#choice" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#choice">https://leanprover.github.io/theorem_proving_in_lean/axioms_and_computation.html#choice</a></p>
+
+<a name="176451921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451921">Keeley Hoek (Sep 24 2019 at 10:51)</a>:</h4>
+<p>The curly and square brackets aren't necessary. They would be instructions to lean for anyone trying to use your proof, if it was a <code>def</code>, and not an <code>example</code>. The curly braces instruct lean to always guess <code>α</code> and never ask for it to be provided. The square brackets are trickier, and ask lean to perform so-called typeclass inference to obtain the proof of nonemptiness. You can read more about both of these in the book.</p>
+
+<a name="176451926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451926">Keeley Hoek (Sep 24 2019 at 10:51)</a>:</h4>
+<p>So, they just make it easier to use. There are no implications for your actual proof.</p>
+
+<a name="176451981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451981">Alexandre Rademaker (Sep 24 2019 at 10:52)</a>:</h4>
+<p>I didn't understand the difference between nonempty and inhabited! hne isn't a witness?</p>
+
+<a name="176451989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451989">Keeley Hoek (Sep 24 2019 at 10:52)</a>:</h4>
+<p>No. It is a proof that it is nonempty. The witness has been forgotten.</p>
+
+<a name="176451997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176451997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176451997">Keeley Hoek (Sep 24 2019 at 10:53)</a>:</h4>
+<p>It's because <code>nonempty</code> is defined to live in the universe <code>Prop</code>, but <code>inhabited</code> lives in <code>Type</code> (roughly speaking).</p>
+
+<a name="176452016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176452016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176452016">Keeley Hoek (Sep 24 2019 at 10:53)</a>:</h4>
+<p>So <code>inhabited</code> instances can be deconstructed, but <code>nonempty</code> instances cannot be deconstructed once built.</p>
+
+<a name="176452020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176452020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176452020">Keeley Hoek (Sep 24 2019 at 10:53)</a>:</h4>
+<p>Otherwise, they have the same definition exactly.</p>
+
+<a name="176452034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176452034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176452034">Marc Huisinga (Sep 24 2019 at 10:54)</a>:</h4>
+<p>{...} and [...] are also explained here: <br>
+<a href="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#implicit-arguments" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#implicit-arguments">https://leanprover.github.io/theorem_proving_in_lean/dependent_type_theory.html#implicit-arguments</a><br>
+<a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html">https://leanprover.github.io/theorem_proving_in_lean/type_classes.html</a></p>
+
+<a name="176452267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176452267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176452267">Alexandre Rademaker (Sep 24 2019 at 10:55)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="221921">@Marc Huisinga</span> for the links.</p>
+
 
 {% endraw %}
 
