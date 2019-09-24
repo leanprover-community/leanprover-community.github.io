@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp priority](97980simppriority.html) (3 messages, latest: Sep 24 2019 at 04:34)
+
 * [deriving instances](14561derivinginstances.html) (26 messages, latest: Sep 24 2019 at 01:33)
 
 * [ext trace](37185exttrace.html) (11 messages, latest: Sep 23 2019 at 23:57)
