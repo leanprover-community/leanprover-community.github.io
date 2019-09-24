@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simp priority](97980simppriority.html) (3 messages, latest: Sep 24 2019 at 04:34)
+* [sanity check](33847sanitycheck.html) (61 messages, latest: Sep 24 2019 at 05:37)
+
+* [simp priority](97980simppriority.html) (4 messages, latest: Sep 24 2019 at 05:26)
 
 * [deriving instances](14561derivinginstances.html) (26 messages, latest: Sep 24 2019 at 01:33)
 
@@ -66,8 +68,6 @@ permalink: archive/113488general/index.html
 * [dsimp failing](20152dsimpfailing.html) (4 messages, latest: Sep 12 2019 at 04:41)
 
 * [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
-
-* [sanity check](33847sanitycheck.html) (59 messages, latest: Sep 10 2019 at 07:12)
 
 * [ITP 2019](78458ITP2019.html) (32 messages, latest: Sep 09 2019 at 21:16)
 
