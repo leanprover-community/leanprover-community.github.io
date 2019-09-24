@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Some numerology](27430Somenumerology.html) (36 messages, latest: Sep 23 2019 at 22:18)
+* [Some numerology](27430Somenumerology.html) (41 messages, latest: Sep 24 2019 at 01:35)
 
 * [undone by powerful `refl` AI](16172undonebypowerfulreflAI.html) (14 messages, latest: Sep 23 2019 at 20:39)
 
