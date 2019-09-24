@@ -146,6 +146,26 @@ permalink: archive/113488general/14561derivinginstances.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176372725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176372725">Johan Commelin (Sep 23 2019 at 14:22)</a>:</h4>
 <p>Too bad it doesn't help with the kind of "problem" I had.</p>
 
+<a name="176417714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176417714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176417714">Scott Morrison (Sep 23 2019 at 23:04)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1475" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1475">#1475</a> is awesome, but I wonder if we were a bit fast merging it. I think we should at least create an issue reminding us to actually deploy it across the library!</p>
+
+<a name="176417849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176417849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176417849">Scott Morrison (Sep 23 2019 at 23:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>, re: <code>local attribute [reducible]</code>, I've just been getting more and more wary of relying of <code>rfl</code> to prove things. It feels like in so many examples we've seen it burn you later, either because Lean wanders off into "heavy refl" elaborations, or you find yourself writing things that don't quite make sense but "Lean can see what you mean" in very unintuitive ways, that are then impossible to read again later. Keeping <code>[reducible]</code> contained to small scopes shortly after the definition seems like a good hygiene regime --- it encourages you to get the API right at the point of definition, by preventing you from "cheating" later.</p>
+
+<a name="176419940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176419940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176419940">Reid Barton (Sep 23 2019 at 23:50)</a>:</h4>
+<p><code>local attribute [reducible]</code> doesn't do that though. You can still prove that things are equal by <code>rfl</code> outside that scope, unless you make the definition<code>[irreducible]</code>.</p>
+
+<a name="176420240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176420240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176420240">Scott Morrison (Sep 23 2019 at 23:56)</a>:</h4>
+<p>oh ... :-)</p>
+
+<a name="176420267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176420267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176420267">Scott Morrison (Sep 23 2019 at 23:57)</a>:</h4>
+<p>Maybe there is very little payoff at all, sorry.</p>
+
 
 {% endraw %}
 

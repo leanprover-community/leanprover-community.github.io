@@ -40,6 +40,23 @@ permalink: archive/113488general/37185exttrace.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext%20trace/near/176398624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37185exttrace.html#176398624">Simon Hudon (Sep 23 2019 at 19:03)</a>:</h4>
 <p>I don't see how the error message fixes that situation</p>
 
+<a name="176419455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext%20trace/near/176419455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37185exttrace.html#176419455">Scott Morrison (Sep 23 2019 at 23:41)</a>:</h4>
+<p><code>ext intro x</code> would introduce one new hypothesis, called <code>intro</code>, and then hopefully complain: <br>
+"hey, you gave me another hypothesis name, <code>x</code>, but I didn't find a use for it".</p>
+
+<a name="176419541"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext%20trace/near/176419541" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37185exttrace.html#176419541">Scott Morrison (Sep 23 2019 at 23:42)</a>:</h4>
+<p>This actually should be pretty easy to do. A student here (<span class="user-mention" data-user-id="209436">@Lucas Allen</span>) has some code that you can just wrap around another tactic, and it will produce strings of the form <code>refine ...</code> that reconstruct how the goal changed during the tactic invocation. Hopefully it could just be a matter of plugging that into <code>ext?</code>.</p>
+
+<a name="176419661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext%20trace/near/176419661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37185exttrace.html#176419661">Scott Morrison (Sep 23 2019 at 23:45)</a>:</h4>
+<p>Hmm, I guess there are also the intros, which would require some extra handling. I agree this would be a desirable thing, so I created an issue <a href="https://github.com/leanprover-community/mathlib/issues/1481" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1481">#1481</a> to keep track of it. :-)</p>
+
+<a name="176420260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ext%20trace/near/176420260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/37185exttrace.html#176420260">Simon Hudon (Sep 23 2019 at 23:57)</a>:</h4>
+<p>The issue with being inflexible like that is if the operands of <code>=</code> are of such a type as <code>(a -&gt; b) \x c</code>. `ext will split that goal into two, the first goal can use another variable name but not the second.</p>
+
 
 {% endraw %}
 
