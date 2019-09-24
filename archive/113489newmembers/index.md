@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (8 messages, latest: Sep 24 2019 at 13:52)
+
 * [tutorial about tactics?](43962tutorialabouttactics.html) (73 messages, latest: Sep 24 2019 at 11:36)
 
 * [\l symbol](94975lsymbol.html) (4 messages, latest: Sep 23 2019 at 19:35)
