@@ -1,0 +1,117 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/35222rewritingandtypeclassinference.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html">rewriting and type class inference</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176608876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176608876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176608876">Kevin Buzzard (Sep 25 2019 at 21:55)</a>:</h4>
+<p><a href="#narrow/stream/113488-general/topic/unused.20arguments/near/171995564" title="#narrow/stream/113488-general/topic/unused.20arguments/near/171995564">Mario said</a> (regarding whether variables should be implicit or explicit in an iff statement)</p>
+<blockquote>
+<p>The rule is that if it's an iff then it should be implicit if it appears on both sides of the iff. That is, iffs are treated as a pair of implications, and are implicit if they would be implicit in both one-directional versions</p>
+</blockquote>
+<p>But what about the following session? I only use mathlib to get a topological group; I don't know how far into the hierarchy one needs to go in order to see this phenomenon:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">algebra</span><span class="bp">.</span><span class="n">uniform_group</span>
+
+<span class="kn">lemma</span> <span class="n">silly</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">nonempty</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]:</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--rw silly, -- fails</span>
+  <span class="c1">--rw @silly, -- fails</span>
+  <span class="c1">-- rw @silly _, -- fails</span>
+  <span class="c">/-</span><span class="cm"> All fail with this error:</span>
+<span class="cm">  invalid rewrite tactic, failed to synthesize type class instance</span>
+<span class="cm">  -/</span>
+<span class="c1">--  rw @silly _ _ _, -- fails</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  invalid rewrite tactic, failed to synthesize type class instance</span>
+<span class="cm">state:</span>
+<span class="cm">4 goals</span>
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ nonempty G</span>
+
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ Type</span>
+
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ group ?m_1</span>
+
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ topological_space ?m_1</span>
+<span class="cm">-/</span>
+  <span class="n">rw</span> <span class="bp">@</span><span class="n">silly</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- works but now we have four goals e.g. ⊢ group G</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="c1">-- explicit G version</span>
+<span class="kn">lemma</span> <span class="n">silly2</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">nonempty</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]:</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">silly2</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">  4 goals</span>
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ nonempty G</span>
+
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ group G</span>
+
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ topological_space G</span>
+
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : group G,</span>
+<span class="cm">_inst_2 : topological_space G,</span>
+<span class="cm">_inst_3 : topological_group G</span>
+<span class="cm">⊢ topological_group G</span>
+<span class="cm">-/</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">sorry</span><span class="o">}</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">topological_group</span> <span class="n">G</span><span class="o">]:</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">silly2</span> <span class="n">G</span><span class="o">,</span> <span class="c1">-- works -- only one goal.</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Is this evidence that G should be explicit in <code>silly</code>?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

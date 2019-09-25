@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [rewriting and type class inference](35222rewritingandtypeclassinference.html) (1 message, latest: Sep 25 2019 at 21:55)
+
 * [fpow neg normal form](92916fpownegnormalform.html) (11 messages, latest: Sep 25 2019 at 20:47)
 
 * [mathlib notes](99147mathlibnotes.html) (12 messages, latest: Sep 25 2019 at 18:49)
