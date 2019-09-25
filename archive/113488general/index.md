@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [fpow neg normal form](92916fpownegnormalform.html) (9 messages, latest: Sep 25 2019 at 19:31)
+* [fpow neg normal form](92916fpownegnormalform.html) (11 messages, latest: Sep 25 2019 at 20:47)
 
 * [mathlib notes](99147mathlibnotes.html) (12 messages, latest: Sep 25 2019 at 18:49)
 
