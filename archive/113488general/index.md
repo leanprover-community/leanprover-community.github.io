@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [open_locale vs open](15069openlocalevsopen.html) (3 messages, latest: Sep 25 2019 at 15:59)
+
 * [sanity check](33847sanitycheck.html) (62 messages, latest: Sep 24 2019 at 22:25)
 
 * [simp priority](97980simppriority.html) (5 messages, latest: Sep 24 2019 at 15:05)
