@@ -111,6 +111,418 @@ permalink: archive/113488general/35222rewritingandtypeclassinference.html
 
 <p>Is this evidence that G should be explicit in <code>silly</code>?</p>
 
+<a name="176609242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609242">Reid Barton (Sep 25 2019 at 22:00)</a>:</h4>
+<p>I think it's evidence that something is wrong with <code>rw</code>: it should just work in all cases. Why doesn't it automatically deal with those side goals? I've seen behavior like this before, and I would love to know what's going on.</p>
+
+<a name="176609265"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609265" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609265">Reid Barton (Sep 25 2019 at 22:01)</a>:</h4>
+<p>Could it have something to do with the fact that <code>nonempty</code> is itself a class?</p>
+
+<a name="176609311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609311">Kevin Buzzard (Sep 25 2019 at 22:01)</a>:</h4>
+<p>mathlib-free version:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">foo</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">bar</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">silly</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">nonempty</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">--  rw silly, -- fails</span>
+<span class="c1">--  rw @silly G, -- fails</span>
+  <span class="n">rw</span> <span class="bp">@</span><span class="n">silly</span> <span class="n">G</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- works</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">silly2</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">nonempty</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">-- rw silly2, -- fails</span>
+<span class="c1">--  rw @silly2 G, -- fails</span>
+  <span class="n">rw</span> <span class="n">silly2</span> <span class="n">G</span><span class="o">,</span> <span class="c1">-- works -- perhaps different elaboration strat to the previous line?</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176609554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609554">Kevin Buzzard (Sep 25 2019 at 22:05)</a>:</h4>
+<p>The issue isn't that <code>nonempty</code> is a class. Maybe it's a bug in <code>rw</code>? I've also seen it before, but catching out a student; it's now catching me out though. </p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">foo</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">bar</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="n">def</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">lemma</span> <span class="n">silly</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">P</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">Q</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span> <span class="c1">-- rofl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">P</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">--  rw silly, -- fails</span>
+<span class="c1">--  rw @silly G, -- fails</span>
+  <span class="n">rw</span> <span class="bp">@</span><span class="n">silly</span> <span class="n">G</span> <span class="bp">_</span><span class="o">,</span> <span class="c1">-- works</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">silly2</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">P</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">Q</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">iff</span><span class="bp">.</span><span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">P</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="c1">-- rw silly2, -- fails</span>
+<span class="c1">--  rw @silly2 G, -- fails</span>
+  <span class="n">rw</span> <span class="n">silly2</span> <span class="n">G</span><span class="o">,</span> <span class="c1">-- works -- perhaps different elaboration strat to the previous line?</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176609704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609704">Reid Barton (Sep 25 2019 at 22:07)</a>:</h4>
+<p>Maybe related: in the first example, <code>apply silly.mp</code> succeeds but creates side goals for <code>foo G</code> and <code>bar G</code>, while <code>refine silly.mp _</code> works correctly</p>
+
+<a name="176609797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609797">Kevin Buzzard (Sep 25 2019 at 22:09)</a>:</h4>
+<p>I am rather surprised that <code>rw @silly2 G</code> fails at the end but <code>rw silly2 G</code> works. I know that the <code>@</code> can cause some stuff to be elaborated differently but that fact is not in the context of a rewrite. It would be great if this were a bug in <code>rw</code>, because I like Mario's rule; perhaps there needs to be an exception for when iterated typeclasses are involved though?</p>
+
+<a name="176609822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609822">Reid Barton (Sep 25 2019 at 22:09)</a>:</h4>
+<p>If <code>silly</code> only depends on <code>foo G</code> and not <code>bar G</code> then <code>rw silly</code> works in the first example but <code>apply silly.mp</code> still creates a side goal <code>foo G</code></p>
+
+<a name="176609910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609910">Reid Barton (Sep 25 2019 at 22:10)</a>:</h4>
+<p>Also if <code>bar G</code> doesn't depend on <code>foo G</code> then <code>rw silly</code> succeeds. That seems to suggest that <code>rw</code> might be trying to solve the goals in the wrong order?</p>
+
+<a name="176609962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176609962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176609962">Kevin Buzzard (Sep 25 2019 at 22:11)</a>:</h4>
+<p>Yes, if <code>bar</code> doesn't depend on <code>foo</code> then everything seems to work exactly as one might expect it to.</p>
+
+<a name="176610107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610107">Kevin Buzzard (Sep 25 2019 at 22:13)</a>:</h4>
+<p>Side issue: debugging is hard because in contrast to the usual situation where you can see exactly which instance Lean failed to infer, here we just get this generic message <code>failed to synthesize type class instance</code>. Is there any way of looking at the trace of a rewrite like there is for <code>simp</code>?</p>
+
+<a name="176610173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610173">Mario Carneiro (Sep 25 2019 at 22:14)</a>:</h4>
+<p>I would have just written <code>apply silly.1</code> in most of these cases</p>
+
+<a name="176610177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610177">Floris van Doorn (Sep 25 2019 at 22:14)</a>:</h4>
+<p>I also feel that the problem is that <code>rw</code> does type-class inference in the wrong order. If you provide underscores, then type-class inference will fire for those arguments <em>before</em> rewrite does anything.</p>
+
+<a name="176610221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610221">Reid Barton (Sep 25 2019 at 22:15)</a>:</h4>
+<p>Mario I'm sure you would have noticed that you don't even have to apply silly</p>
+
+<a name="176610235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610235">Mario Carneiro (Sep 25 2019 at 22:15)</a>:</h4>
+<p>that's fair</p>
+
+<a name="176610238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610238">Kevin Buzzard (Sep 25 2019 at 22:15)</a>:</h4>
+<blockquote>
+<p>I would have just written <code>apply silly.1</code> in most of these cases</p>
+</blockquote>
+<p>Yes, that's what we did to work around it, but I figured it was worth getting to the bottom of.</p>
+
+<a name="176610317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610317">Mario Carneiro (Sep 25 2019 at 22:16)</a>:</h4>
+<p>the rule that I gave is optimized for using <code>.1</code> and <code>.2</code> to apply bidirectional theorems</p>
+
+<a name="176610344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610344">Mario Carneiro (Sep 25 2019 at 22:17)</a>:</h4>
+<p>Does it work if you use <code>=</code> instead of <code>&lt;-&gt;</code>?</p>
+
+<a name="176610362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610362">Kevin Buzzard (Sep 25 2019 at 22:17)</a>:</h4>
+<p>One could imagine a big chain of rewrites though, where you don't want to stop and apply something.</p>
+
+<a name="176610652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610652">Kevin Buzzard (Sep 25 2019 at 22:21)</a>:</h4>
+<blockquote>
+<p>Does it work if you use <code>=</code> instead of <code>&lt;-&gt;</code>?</p>
+</blockquote>
+<p>Nope:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">foo</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">bar</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">true</span>
+
+<span class="kn">lemma</span> <span class="n">silly</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">P</span> <span class="n">G</span> <span class="bp">=</span> <span class="n">Q</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">P</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">silly</span><span class="o">,</span>
+  <span class="c">/-</span><span class="cm"></span>
+<span class="cm">invalid rewrite tactic, failed to synthesize type class instance</span>
+<span class="cm">state:</span>
+<span class="cm">G : Type,</span>
+<span class="cm">_inst_1 : foo G,</span>
+<span class="cm">_inst_2 : bar G</span>
+<span class="cm">⊢ P G</span>
+<span class="cm">-/</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176610671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610671">Floris van Doorn (Sep 25 2019 at 22:22)</a>:</h4>
+<p>don't forget to use <code>refine silly.1 _</code> to avoid the apply bug :)</p>
+
+<a name="176610734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610734">Floris van Doorn (Sep 25 2019 at 22:22)</a>:</h4>
+<p>I think I can explain all behavior except <code>rw @silly _ _</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">foo</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="n">class</span> <span class="n">bar</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span>
+
+<span class="kn">constant</span> <span class="n">P</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="kn">constant</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">lemma</span> <span class="n">silly</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">P</span> <span class="n">G</span> <span class="bp">↔</span> <span class="n">Q</span> <span class="n">G</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">foo</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">bar</span> <span class="n">G</span><span class="o">]</span> <span class="o">:</span> <span class="n">P</span> <span class="n">G</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- rw @silly, -- fails: rw infers arguments in wrong order?</span>
+  <span class="c1">-- rw @silly G, -- fails: rw infers arguments in wrong order?</span>
+  <span class="c1">-- rw @silly G _, -- succeeds: `foo` is inferred before rw is called</span>
+  <span class="c1">-- rw @silly G _ _, -- succeeds: `foo` and `bar` are inferred before rw is called</span>
+  <span class="c1">-- rw @silly _, -- fails: rw infers arguments in wrong order?</span>
+  <span class="c1">-- rw @silly _ _, -- fails?</span>
+  <span class="c1">-- rw @silly _ _ _, -- works, but generates too many new goals: couldn&#39;t infer type-class arguments before rw</span>
+  <span class="c1">-- rw silly, -- presumably same as `rw @silly` because names are treated differently than expressions</span>
+  <span class="c1">-- rw id silly, -- same as `rw @silly _ _ _`</span>
+  <span class="c1">-- refine silly.mpr _, -- preferred solution</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176610830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610830">Floris van Doorn (Sep 25 2019 at 22:24)</a>:</h4>
+<p>Oh <code>rw @silly _ _</code> probably fails for the same reason: it tries to synthesize <code>bar G</code> when <code>foo G</code> has not been synthesized yet.</p>
+
+<a name="176610833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610833">Kevin Buzzard (Sep 25 2019 at 22:24)</a>:</h4>
+<p><code>rw @silly _ _</code> is failing to synthesize <code>bar G</code> because when it tries it's <code>bar ?m_1</code> right?</p>
+
+<a name="176610836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610836">Mario Carneiro (Sep 25 2019 at 22:24)</a>:</h4>
+<p>what is the error <code>rw infers arguments in wrong order</code>?</p>
+
+<a name="176610849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610849">Floris van Doorn (Sep 25 2019 at 22:24)</a>:</h4>
+<p>that is my human-written reason that rw fails.</p>
+
+<a name="176610859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610859">Kevin Buzzard (Sep 25 2019 at 22:24)</a>:</h4>
+<div class="codehilite"><pre><span></span>invalid rewrite tactic, failed to synthesize type class instance
+state:
+G : Type,
+_inst_1 : foo G,
+_inst_2 : bar G
+⊢ P G
+</pre></div>
+
+<a name="176610862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610862">Mario Carneiro (Sep 25 2019 at 22:24)</a>:</h4>
+<p>I know, but what exactly is happening by your estimation</p>
+
+<a name="176610890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610890">Kevin Buzzard (Sep 25 2019 at 22:25)</a>:</h4>
+<p>I think that type class inference fails on <code>foo ?m_1</code> before it has decided that <code>?m_1=G</code></p>
+
+<a name="176610909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610909">Kevin Buzzard (Sep 25 2019 at 22:25)</a>:</h4>
+<p>but this is just a guess and I don't know how to find out if I'm right.</p>
+
+<a name="176610911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610911">Floris van Doorn (Sep 25 2019 at 22:25)</a>:</h4>
+<p>my estimation is that <code>rw</code> tries to infer <code>@bar G ?m</code> and fails before inferring <code>?m : foo G</code>.</p>
+
+<a name="176610969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610969">Mario Carneiro (Sep 25 2019 at 22:26)</a>:</h4>
+<p>it shouldn't do that</p>
+
+<a name="176610971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610971">Kevin Buzzard (Sep 25 2019 at 22:26)</a>:</h4>
+<p>Aah floris' suggestion is more refined than mine.</p>
+
+<a name="176610985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176610985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176610985">Reid Barton (Sep 25 2019 at 22:26)</a>:</h4>
+<p>I think Kevin's guess is wrong because it doesn't happen if <code>bar</code> is not involved</p>
+
+<a name="176611000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611000">Floris van Doorn (Sep 25 2019 at 22:27)</a>:</h4>
+<blockquote>
+<p>it shouldn't do that</p>
+</blockquote>
+<p>Agreed, but <em>does</em> it do that?</p>
+
+<a name="176611024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611024">Mario Carneiro (Sep 25 2019 at 22:27)</a>:</h4>
+<p>what's the error message?</p>
+
+<a name="176611028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611028">Kevin Buzzard (Sep 25 2019 at 22:27)</a>:</h4>
+<blockquote>
+<p>I think Kevin's guess is wrong because it doesn't happen if <code>bar</code> is not involved</p>
+</blockquote>
+<p>My guess can't be right because if it were right then we would have noticed this much much earlier</p>
+
+<a name="176611067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611067">Kevin Buzzard (Sep 25 2019 at 22:28)</a>:</h4>
+<blockquote>
+<p>what's the error message?</p>
+</blockquote>
+<p>Still the one I quoted.</p>
+
+<a name="176611085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611085">Reid Barton (Sep 25 2019 at 22:28)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>it shouldn't do that</p>
+</blockquote>
+<p>Agreed, but <em>does</em> it do that?</p>
+</blockquote>
+<p>This you can test with <code>set_option trace.class_instances true</code>, the first output is</p>
+<div class="codehilite"><pre><span></span>[class_instances]  class-instance resolution trace
+[class_instances] (0) ?x_0 : @bar G ?m__fresh.293.7708 := _inst_2
+failed is_def_eq
+</pre></div>
+
+<a name="176611104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611104">Kevin Buzzard (Sep 25 2019 at 22:28)</a>:</h4>
+<p>It's the "rubbish" version of the failed to synthesize type class instance error, when it doesn't tell you the type of the instance it failed to syntheize</p>
+
+<a name="176611115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611115">Reid Barton (Sep 25 2019 at 22:28)</a>:</h4>
+<p>In fact, that's the only relevant output because <code>rw</code> just gives up when that fails</p>
+
+<a name="176611126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611126">Mario Carneiro (Sep 25 2019 at 22:29)</a>:</h4>
+<p>ah, <code>synth_instances()</code> works in reverse order</p>
+
+<a name="176611167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611167">Reid Barton (Sep 25 2019 at 22:29)</a>:</h4>
+<p>Also if <code>bar</code> doesn't depend on <code>foo</code>, then you can see in the trace it solves <code>bar</code> first and then <code>foo</code></p>
+
+<a name="176611227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611227">Mario Carneiro (Sep 25 2019 at 22:30)</a>:</h4>
+<p>that's what gets called in <code>rewrite_core()</code> after the pattern matches (so G is unified) with the list of instance metavariables that were inserted in order to fill the pis in the equation</p>
+
+<a name="176611240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611240">Kevin Buzzard (Sep 25 2019 at 22:30)</a>:</h4>
+<p>You should never be solving the instances in reverse order -- things wouldn't even typecheck if I fed them to Lean in reverse order when I was defining the function.</p>
+
+<a name="176611295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611295">Mario Carneiro (Sep 25 2019 at 22:31)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/lean/blob/master/src/library/tactic/apply_tactic.cpp#L96-L97" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/src/library/tactic/apply_tactic.cpp#L96-L97">https://github.com/leanprover-community/lean/blob/master/src/library/tactic/apply_tactic.cpp#L96-L97</a></p>
+
+<a name="176611340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611340">Mario Carneiro (Sep 25 2019 at 22:32)</a>:</h4>
+<p>I don't know if it's an optimization or what</p>
+
+<a name="176611353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611353">Kevin Buzzard (Sep 25 2019 at 22:32)</a>:</h4>
+<p>It certainly looks like a conscious decision though doesn't it ;-)</p>
+
+<a name="176611425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611425">Mario Carneiro (Sep 25 2019 at 22:33)</a>:</h4>
+<p>if only Leo were active right now...</p>
+
+<a name="176611473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611473">Kevin Buzzard (Sep 25 2019 at 22:34)</a>:</h4>
+<p>don't even think about it.</p>
+
+<a name="176611489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611489">Kevin Buzzard (Sep 25 2019 at 22:34)</a>:</h4>
+<p>I'm going to go to bed before I snap and just ask him :-/</p>
+
+<a name="176611573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611573">Bryan Gin-ge Chen (Sep 25 2019 at 22:36)</a>:</h4>
+<p>Looks like that code was added in this commit: <a href="https://github.com/leanprover-community/lean/commit/f7fe2a775c1492184278931dc223648b95d9ce64#diff-cd4a348ea2537f9e3471d8c015145d5eR80-R91" target="_blank" title="https://github.com/leanprover-community/lean/commit/f7fe2a775c1492184278931dc223648b95d9ce64#diff-cd4a348ea2537f9e3471d8c015145d5eR80-R91">https://github.com/leanprover-community/lean/commit/f7fe2a775c1492184278931dc223648b95d9ce64#diff-cd4a348ea2537f9e3471d8c015145d5eR80-R91</a></p>
+<p>I couldn't find any issue that corresponded to the commit message though.</p>
+
+<a name="176611594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611594">Reid Barton (Sep 25 2019 at 22:36)</a>:</h4>
+<p>It was effectively moved from elsewhere in that commit though, so you'd have look farther back</p>
+
+<a name="176611637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611637">Reid Barton (Sep 25 2019 at 22:37)</a>:</h4>
+<p>I'll just change it to forwards and find out what breaks</p>
+
+<a name="176611830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176611830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176611830">Mario Carneiro (Sep 25 2019 at 22:40)</a>:</h4>
+<p>It's been there since the beginning: <a href="https://github.com/leanprover-community/lean/commit/61a845c0050c7617ce9df7e2071883d1c24f3a27" target="_blank" title="https://github.com/leanprover-community/lean/commit/61a845c0050c7617ce9df7e2071883d1c24f3a27">https://github.com/leanprover-community/lean/commit/61a845c0050c7617ce9df7e2071883d1c24f3a27</a></p>
+
+<a name="176612052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612052">Reid Barton (Sep 25 2019 at 22:44)</a>:</h4>
+<p>Well, the core library built successfully at least</p>
+
+<a name="176612295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612295">Mario Carneiro (Sep 25 2019 at 22:48)</a>:</h4>
+<p>do Kevin's tests work?</p>
+
+<a name="176612380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612380">Reid Barton (Sep 25 2019 at 22:50)</a>:</h4>
+<p>Yes</p>
+
+<a name="176612392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612392">Mario Carneiro (Sep 25 2019 at 22:50)</a>:</h4>
+<p>PR?</p>
+
+<a name="176612395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612395">Reid Barton (Sep 25 2019 at 22:50)</a>:</h4>
+<p>though <code>apply</code> still generates side conditions</p>
+
+<a name="176612405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612405">Mario Carneiro (Sep 25 2019 at 22:50)</a>:</h4>
+<p>I think that's something else</p>
+
+<a name="176612414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612414">Bryan Gin-ge Chen (Sep 25 2019 at 22:50)</a>:</h4>
+<p>Can you build mathlib? <span aria-label="rolling on the floor laughing" class="emoji emoji-1f923" role="img" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
+
+<a name="176612438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612438">Reid Barton (Sep 25 2019 at 22:51)</a>:</h4>
+<blockquote>
+<p>Can you build mathlib? <span aria-label="rolling on the floor laughing" class="emoji emoji-1f923" role="img" title="rolling on the floor laughing">:rolling_on_the_floor_laughing:</span></p>
+</blockquote>
+<p>in progress</p>
+
+<a name="176612525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612525">Reid Barton (Sep 25 2019 at 22:52)</a>:</h4>
+<p>I was hoping the <code>apply</code> thing was related just because the code was in <code>tactic_apply.cpp</code>, but it wasn't really consistent with the fact that it also occurred with only one class involved</p>
+
+<a name="176612546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612546">Mario Carneiro (Sep 25 2019 at 22:52)</a>:</h4>
+<p>Could you give a simple example of the apply behavior?</p>
+
+<a name="176612599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612599">Reid Barton (Sep 25 2019 at 22:53)</a>:</h4>
+<p>is "replace <code>rw silly</code> with <code>apply silly.1</code> in Kevin's examples" good enough?</p>
+
+<a name="176612671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612671">Mario Carneiro (Sep 25 2019 at 22:54)</a>:</h4>
+<p>and you get subgoals |- foo G, |- bar G?</p>
+
+<a name="176612712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612712">Reid Barton (Sep 25 2019 at 22:55)</a>:</h4>
+<p>Yep, with the main goal <code>nonempty G</code> first</p>
+
+<a name="176612825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612825">Reid Barton (Sep 25 2019 at 22:56)</a>:</h4>
+<p>Actually, hang on</p>
+
+<a name="176612951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/rewriting%20and%20type%20class%20inference/near/176612951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/35222rewritingandtypeclassinference.html#176612951">Reid Barton (Sep 25 2019 at 22:58)</a>:</h4>
+<p>Ah, never mind. I thought I saw something else going on, but it was due to other stuff in the same file (the second example).<br>
+The order of the new goals is also the same (<code>nonempty G</code> then <code>foo G</code> then <code>bar G</code>) with both standard Lean and my modified version.</p>
+
 
 {% endraw %}
 
