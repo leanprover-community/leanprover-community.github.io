@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [open_locale vs open](15069openlocalevsopen.html) (3 messages, latest: Sep 25 2019 at 15:59)
+* [open_locale vs open](15069openlocalevsopen.html) (6 messages, latest: Sep 25 2019 at 16:47)
+
+* [deriving instances](14561derivinginstances.html) (29 messages, latest: Sep 25 2019 at 16:30)
 
 * [sanity check](33847sanitycheck.html) (62 messages, latest: Sep 24 2019 at 22:25)
 
 * [simp priority](97980simppriority.html) (5 messages, latest: Sep 24 2019 at 15:05)
-
-* [deriving instances](14561derivinginstances.html) (26 messages, latest: Sep 24 2019 at 01:33)
 
 * [ext trace](37185exttrace.html) (11 messages, latest: Sep 23 2019 at 23:57)
 

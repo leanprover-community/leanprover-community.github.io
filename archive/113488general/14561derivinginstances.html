@@ -174,6 +174,20 @@ permalink: archive/113488general/14561derivinginstances.html
 <p>I don't think that we have to deploy a tactic in the same PR that introduces the tactic (for one: if you make the PR, often you have to make changes to the tactic, and then you might have to change the way you deploy it everywhere).</p>
 <p>It's probably good to create an issue indeed.</p>
 
+<a name="176582027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176582027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176582027">Reid Barton (Sep 25 2019 at 16:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> Arguably, the most correct (and simplest) way to implement this is actually to generate, for <code>@[derive ring] def T := ℤ</code>, the instance</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">ring</span> <span class="bp">ℤ</span><span class="o">]</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">T</span> <span class="o">:=</span> <span class="n">h</span>
+</pre></div>
+
+<a name="176582185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176582185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176582185">Reid Barton (Sep 25 2019 at 16:30)</a>:</h4>
+<p>That will also handle Johan's case where the instance we want to derive from has additional instance parameters, and lets us defer the decision of how to supply the original instance to the use site of the derived instance</p>
+
+<a name="176582205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176582205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176582205">Reid Barton (Sep 25 2019 at 16:30)</a>:</h4>
+<p>The downside is it means an extra step to resolve the instance</p>
+
 
 {% endraw %}
 
