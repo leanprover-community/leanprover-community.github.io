@@ -25,6 +25,32 @@ Also, what's the motivation behind using <code>priority 9</code> in the <code>lo
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231485%20priority%2010/near/176583916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/622971485priority10.html#176583916">Kevin Buzzard (Sep 25 2019 at 16:50)</a>:</h4>
 <p>I think TPIL once didn't mention priority 0 but then Jeremy changed it</p>
 
+<a name="176584879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231485%20priority%2010/near/176584879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/622971485priority10.html#176584879">Reid Barton (Sep 25 2019 at 17:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> if that's right, could you change it again? Apparently 10 is the new 0</p>
+
+<a name="176585562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231485%20priority%2010/near/176585562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/622971485priority10.html#176585562">Floris van Doorn (Sep 25 2019 at 17:08)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="111080">Floris van Doorn</span> I grepped for <code>prop_decidable</code> and I see it is set as an instance with some other priorities, like 100 or 1000, or sometimes without a priority. Should these be changed too?</p>
+</blockquote>
+<p>At least the ones that have a priority &gt;= 1000 (the default priority) should be changed. But that will require some work, because it might break the subsequent proofs in the files, like <a href="https://github.com/leanprover-community/mathlib/blob/master/src/topology/instances/ennreal.lean#L338-L340" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/topology/instances/ennreal.lean#L338-L340">here</a>. I did most of these in <a href="https://github.com/leanprover-community/mathlib/issues/1319" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1319">#1319</a>, but I left the ones that break the file.</p>
+<p>I don't care so much about using priority 0 or 1 for local attributes, I think it's more important for the global attributes. Then we can easily have (local) instances with lower priority.</p>
+
+<a name="176585584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231485%20priority%2010/near/176585584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/622971485priority10.html#176585584">Floris van Doorn (Sep 25 2019 at 17:09)</a>:</h4>
+<blockquote>
+<p>Also, what's the motivation behind using <code>priority 9</code> in the <code>localized</code> declaration?</p>
+</blockquote>
+<p>I thought: let's make it slightly lower than the "default" low priority</p>
+
+<a name="176585652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231485%20priority%2010/near/176585652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/622971485priority10.html#176585652">Floris van Doorn (Sep 25 2019 at 17:09)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="110865">Jeremy Avigad</span> if that's right, could you change it again? Apparently 10 is the new 0</p>
+</blockquote>
+<p>Well, even better (and hopefully easier to remember) is just to use <code>open_locale classical</code> if you have mathlib.</p>
+
 
 {% endraw %}
 

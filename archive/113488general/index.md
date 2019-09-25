@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [open_locale vs open](15069openlocalevsopen.html) (6 messages, latest: Sep 25 2019 at 16:47)
+* [mathlib notes](99147mathlibnotes.html) (9 messages, latest: Sep 25 2019 at 17:54)
 
-* [deriving instances](14561derivinginstances.html) (29 messages, latest: Sep 25 2019 at 16:30)
+* [deriving instances](14561derivinginstances.html) (30 messages, latest: Sep 25 2019 at 17:38)
+
+* [open_locale vs open](15069openlocalevsopen.html) (6 messages, latest: Sep 25 2019 at 16:47)
 
 * [sanity check](33847sanitycheck.html) (62 messages, latest: Sep 24 2019 at 22:25)
 

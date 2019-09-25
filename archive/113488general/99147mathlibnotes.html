@@ -1,0 +1,57 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/99147mathlibnotes.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html">mathlib notes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176586675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176586675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176586675">Reid Barton (Sep 25 2019 at 17:21)</a>:</h4>
+<p>One practice I miss from GHC is the use of named "notes", as described <a href="https://gitlab.haskell.org/ghc/ghc/wikis/commentary/coding-style#comments-in-the-source-code" target="_blank" title="https://gitlab.haskell.org/ghc/ghc/wikis/commentary/coding-style#comments-in-the-source-code">here</a> and also blogged about <a href="https://www.stackbuilders.com/news/the-notes-of-ghc" target="_blank" title="https://www.stackbuilders.com/news/the-notes-of-ghc">here</a>. GHC has around 2000 of these notes.<br>
+I'd like to adopt this in mathlib. For example, in category theory we have a convention of declaring universe variables in a particular order; this needs to happen in every file and <code>-- see Note [universe order in category theory]</code> would be a convenient way to document each occurrence.<br>
+Since we currently have none of these notes, maybe it would be good to establish a conventional format, so that they're easy to search for.</p>
+
+<a name="176587536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176587536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176587536">Floris van Doorn (Sep 25 2019 at 17:30)</a>:</h4>
+<p>That seems useful!<br>
+So in GHC these notes are at the bottom of source files?</p>
+
+<a name="176588487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176588487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176588487">Johan Commelin (Sep 25 2019 at 17:40)</a>:</h4>
+<p>I think this is a good idea. I suggest that it should be easy to grep for the "definition" of the note, and for the references to the note.</p>
+
+<a name="176588552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176588552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176588552">Johan Commelin (Sep 25 2019 at 17:41)</a>:</h4>
+<p>In particular, it might be good to have a slight syntactical difference. Maybe just <code>NoteDef [universe order ...]</code> vs <code>Note [universe order...]</code></p>
+
+<a name="176588578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176588578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176588578">Johan Commelin (Sep 25 2019 at 17:41)</a>:</h4>
+<p>Also, there shouldn't be line breaks in <code>Note.*]</code></p>
+
+<a name="176588668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176588668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176588668">Reid Barton (Sep 25 2019 at 17:42)</a>:</h4>
+<p>The notes go can go near the top or end of a file, or near wherever they are most relevant, but never in the middle of a declaration</p>
+
+<a name="176588901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176588901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176588901">Reid Barton (Sep 25 2019 at 17:45)</a>:</h4>
+<p>Another way to be able to search for the "definition" of the note is to standardize on, say, <code>/- Note [foo]</code> appearing at the start of a line</p>
+
+<a name="176588924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176588924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176588924">Reid Barton (Sep 25 2019 at 17:45)</a>:</h4>
+<p>although that doesn't help if you want to search on github, since it doesn't support regular expression search</p>
+
+<a name="176589816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mathlib%20notes/near/176589816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99147mathlibnotes.html#176589816">Floris van Doorn (Sep 25 2019 at 17:54)</a>:</h4>
+<p>I like <code>--see [universe order]</code> and <code>/- Note [universe order]</code>, so remove the word "note" from the reference.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
