@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [mathlib notes](99147mathlibnotes.html) (12 messages, latest: Sep 25 2019 at 18:49)
+* [fpow neg normal form](92916fpownegnormalform.html) (9 messages, latest: Sep 25 2019 at 19:31)
 
-* [fpow neg normal form](92916fpownegnormalform.html) (1 message, latest: Sep 25 2019 at 18:33)
+* [mathlib notes](99147mathlibnotes.html) (12 messages, latest: Sep 25 2019 at 18:49)
 
 * [deriving instances](14561derivinginstances.html) (30 messages, latest: Sep 25 2019 at 17:38)
 
