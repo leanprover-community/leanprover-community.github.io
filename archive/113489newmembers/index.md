@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [tutorial about tactics?](43962tutorialabouttactics.html) (75 messages, latest: Sep 24 2019 at 17:58)
+* [tutorial about tactics?](43962tutorialabouttactics.html) (80 messages, latest: Sep 25 2019 at 00:35)
 
 * [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (9 messages, latest: Sep 24 2019 at 14:06)
 

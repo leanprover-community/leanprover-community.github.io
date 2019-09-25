@@ -410,6 +410,38 @@ h2 : ∀ (x : ℕ), p x
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176488957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176488957">Floris van Doorn (Sep 24 2019 at 17:58)</a>:</h4>
 <p>You probably have to do <code>have := hne, cases this with a</code> (or <code>unfreezeI, cases hne with a</code>) for technical reasons.</p>
 
+<a name="176522198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176522198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176522198">Alexandre Rademaker (Sep 25 2019 at 00:29)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> and <span class="user-mention" data-user-id="111080">@Floris van Doorn</span> , the final proof is below. I prefer explicit identifiers, that is why I used y. I am not sure if I understood the intuition behind this <code>have ... cases ... with ...</code>! The <code>unfreezeI</code> is probably from the mathlib, right? I didn't find it in my system.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">hne</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">((</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">q</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+ <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+ <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h1</span> <span class="n">h2</span><span class="o">,</span>
+ <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">assume</span> <span class="n">a</span><span class="o">,</span> <span class="k">from</span> <span class="n">h2</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span>
+ <span class="k">have</span> <span class="n">h4</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">q</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">),</span> <span class="k">from</span> <span class="o">(</span><span class="n">h1</span> <span class="n">h3</span><span class="o">),</span>
+
+ <span class="k">have</span> <span class="n">y</span> <span class="o">:=</span> <span class="n">hne</span><span class="o">,</span> <span class="n">cases</span> <span class="n">y</span> <span class="k">with</span> <span class="n">a</span><span class="o">,</span>
+ <span class="n">existsi</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">),</span> <span class="n">exact</span> <span class="o">(</span><span class="n">h4</span> <span class="n">a</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176522270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176522270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176522270">Mario Carneiro (Sep 25 2019 at 00:30)</a>:</h4>
+<p>you can also use <code>cases id hne with a</code></p>
+
+<a name="176522367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176522367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176522367">Mario Carneiro (Sep 25 2019 at 00:32)</a>:</h4>
+<p>The technical reason is that <code>nonempty A</code> is a class, which means that that argument is "frozen" in the local context in order to cache and speed up typeclass searches. There are several mathlib tactics ending in <code>*I</code> that unfreeze these instances so that you can remove them from the context (which is what <code>cases hne</code> wants to do)</p>
+
+<a name="176522396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176522396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176522396">Mario Carneiro (Sep 25 2019 at 00:33)</a>:</h4>
+<p>they are available via <code>import tactic.cache</code></p>
+
+<a name="176522466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176522466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176522466">Mario Carneiro (Sep 25 2019 at 00:35)</a>:</h4>
+<p>If you don't have mathlib, you can also use <code>tactic.unfreeze_local_instances</code> for which <code>unfreezeI</code> is a synonym</p>
+
 
 {% endraw %}
 
