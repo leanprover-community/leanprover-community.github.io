@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Structure for simple graphs](22120Structureforsimplegraphs.html) (17 messages, latest: Sep 26 2019 at 18:55)
+* [false.elim tactic?](50744falseelimtactic.html) (10 messages, latest: Sep 26 2019 at 19:59)
+
+* [Structure for simple graphs](22120Structureforsimplegraphs.html) (18 messages, latest: Sep 26 2019 at 19:40)
 
 * [tutorial about tactics?](43962tutorialabouttactics.html) (100 messages, latest: Sep 26 2019 at 16:52)
 
