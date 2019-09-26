@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Next step after the Logic and Proofs](53097NextstepaftertheLogicandProofs.html) (32 messages, latest: Sep 21 2019 at 22:43)
+* [Next step after the Logic and Proofs](53097NextstepaftertheLogicandProofs.html) (34 messages, latest: Sep 26 2019 at 01:49)
 
 * [real numbers in Lean](60152realnumbersinLean.html) (1 message, latest: Sep 21 2019 at 16:46)
 
