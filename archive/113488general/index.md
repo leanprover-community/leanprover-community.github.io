@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [leancrawler](21009leancrawler.html) (8 messages, latest: Sep 26 2019 at 18:12)
+
+* [projects-using-mathlib](97964projectsusingmathlib.html) (14 messages, latest: Sep 26 2019 at 18:09)
+
 * [instance matching](78529instancematching.html) (10 messages, latest: Sep 26 2019 at 17:47)
 
 * [Lean in the wild](43625Leaninthewild.html) (211 messages, latest: Sep 26 2019 at 16:59)
@@ -17,11 +21,7 @@ permalink: archive/113488general/index.html
 
 * [algebraic closure](74840algebraicclosure.html) (209 messages, latest: Sep 26 2019 at 15:15)
 
-* [projects-using-mathlib](97964projectsusingmathlib.html) (13 messages, latest: Sep 26 2019 at 14:30)
-
 * [mathlib notes](99147mathlibnotes.html) (13 messages, latest: Sep 26 2019 at 12:09)
-
-* [leancrawler](21009leancrawler.html) (7 messages, latest: Sep 26 2019 at 06:54)
 
 * [rewriting and type class inference](35222rewritingandtypeclassinference.html) (94 messages, latest: Sep 26 2019 at 03:03)
 

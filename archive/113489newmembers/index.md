@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [tutorial about tactics?](43962tutorialabouttactics.html) (100 messages, latest: Sep 26 2019 at 16:52)
+* [Structure for simple graphs](22120Structureforsimplegraphs.html) (17 messages, latest: Sep 26 2019 at 18:55)
 
-* [Structure for simple graphs](22120Structureforsimplegraphs.html) (12 messages, latest: Sep 26 2019 at 16:29)
+* [tutorial about tactics?](43962tutorialabouttactics.html) (100 messages, latest: Sep 26 2019 at 16:52)
 
 * [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (9 messages, latest: Sep 24 2019 at 14:06)
 
