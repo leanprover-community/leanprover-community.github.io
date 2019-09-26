@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (211 messages, latest: Sep 26 2019 at 16:59)
+
 * [Flypitch](73316Flypitch.html) (12 messages, latest: Sep 26 2019 at 15:32)
 
 * [algebraic closure](74840algebraicclosure.html) (209 messages, latest: Sep 26 2019 at 15:15)
@@ -102,8 +104,6 @@ permalink: archive/113488general/index.html
 * [Lean 4 package manager](17436Lean4packagemanager.html) (2 messages, latest: Sep 07 2019 at 23:23)
 
 * [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
-
-* [Lean in the wild](43625Leaninthewild.html) (198 messages, latest: Sep 05 2019 at 14:19)
 
 * [2000](439072000.html) (15 messages, latest: Sep 04 2019 at 09:02)
 

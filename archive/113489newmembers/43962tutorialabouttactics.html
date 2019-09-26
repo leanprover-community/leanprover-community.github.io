@@ -512,6 +512,72 @@ h2 : ∀ (x : ℕ), p x
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176670693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176670693">Alexandre Rademaker (Sep 26 2019 at 15:57)</a>:</h4>
 <p>Yes, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I got your point. I am just trying to use the example to understand what is going on. But you are right about the example itself. It would not make sense to depend on an additional parameter.</p>
 
+<a name="176670993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176670993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176670993">Kevin Buzzard (Sep 26 2019 at 16:01)</a>:</h4>
+<p>If alpha is empty (which is fine in Lean) then the goal is false, right? Lean's type class inference system knows that nat is non-empty, but it won't know that alpha is non-empty unless you prove it first.</p>
+
+<a name="176671054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176671054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176671054">Kevin Buzzard (Sep 26 2019 at 16:02)</a>:</h4>
+<p><code>[hne : nonempty α]</code> is an assumption; <code>have hne : nonempty α := ...</code> is an unjustified claim.</p>
+
+<a name="176671118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176671118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176671118">Kevin Buzzard (Sep 26 2019 at 16:03)</a>:</h4>
+<p>PS in case I misunderstood -- it's very hard to debug your code if you just post random error messages. Can you post complete minimal working examples which other people can just cut and paste?</p>
+
+<a name="176671254"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176671254" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176671254">Bryan Gin-ge Chen (Sep 26 2019 at 16:04)</a>:</h4>
+<p>In addition to what Kevin said, you can also see <a href="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/type_classes.html">this chapter of TPiL</a> for some more info about instances.</p>
+
+<a name="176673014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176673014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176673014">Alexandre Rademaker (Sep 26 2019 at 16:27)</a>:</h4>
+<p>Sorry <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> , it edited my previous message. I thought it was clear from the rest of the thread what I am trying to do. Interesting, I thought that <code>apply_instance, cases hne with a</code> is proving/justifying the <code>hne : nonempty α</code> claim, but it would be introducing some circularity...</p>
+
+<a name="176673268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176673268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176673268">Kevin Buzzard (Sep 26 2019 at 16:30)</a>:</h4>
+<p>I am too lazy to refresh my memory of the thread by reading it all through again, and too forgetful to remember what its main points are :-)</p>
+
+<a name="176673303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176673303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176673303">Marc Huisinga (Sep 26 2019 at 16:31)</a>:</h4>
+<p>it can't prove that claim, because it isn't true in general</p>
+
+<a name="176673309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176673309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176673309">Marc Huisinga (Sep 26 2019 at 16:31)</a>:</h4>
+<p>not every α is nonempty</p>
+
+<a name="176673532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176673532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176673532">Kevin Buzzard (Sep 26 2019 at 16:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">empty_type</span> <span class="bp">.</span> <span class="c1">-- no constructors, so no terms.</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">nonempty</span> <span class="n">empty_type</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h</span> <span class="k">with</span> <span class="n">h2</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h2</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176673577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176673577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176673577">Kevin Buzzard (Sep 26 2019 at 16:35)</a>:</h4>
+<p>The first <code>cases</code> uses the fact that there is only one constructor for <code>nonempty X</code>, which needs a term of type <code>X</code>; this is <code>h2</code>. And then <code>cases h2</code> breaks up into one case per constructor; there are no constructors, so the proof is over.</p>
+
+<a name="176674100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176674100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176674100">Alexandre Rademaker (Sep 26 2019 at 16:43)</a>:</h4>
+<p>You mean "here is only ONE constructor for <code>nonempty X</code>"? I found in <code>logic.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="kn">inductive</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">intro</span> <span class="o">(</span><span class="n">val</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">nonempty</span>
+</pre></div>
+
+
+<p>Thank you for the example! I am learning a lot here.</p>
+
+<a name="176674212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176674212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176674212">Kevin Buzzard (Sep 26 2019 at 16:44)</a>:</h4>
+<p>Yes, sorry! I edited. The <code>cases</code> tactic takes a term of type <code>I</code>, with <code>I</code> an inductive type, and then creates one goal per constructor.</p>
+
+<a name="176674939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176674939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176674939">Alexandre Rademaker (Sep 26 2019 at 16:52)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> for the link. Yes, I need to finish to read the TPiL.</p>
+
 
 {% endraw %}
 

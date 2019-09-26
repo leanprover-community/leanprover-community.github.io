@@ -33,6 +33,66 @@ permalink: archive/113489newmembers/22120Structureforsimplegraphs.html
 <span class="err">⊢</span> <span class="n">has_insert</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">set</span> <span class="o">(</span><span class="err">↥</span><span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">insert</span> <span class="mi">3</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">insert</span> <span class="mi">2</span> <span class="o">{</span><span class="mi">1</span><span class="o">}))</span> <span class="bp">×</span> <span class="err">↥</span><span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">insert</span> <span class="mi">3</span> <span class="o">(</span><span class="n">set</span><span class="bp">.</span><span class="n">insert</span> <span class="mi">2</span> <span class="o">{</span><span class="mi">1</span><span class="o">}))))</span>
 </pre></div>
 
+<a name="176670910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176670910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176670910">Kevin Buzzard (Sep 26 2019 at 16:00)</a>:</h4>
+<p>Your <code>adjacent</code> seems to me to have type <code>set ℕ × ℕ</code> rather than what you want. <code>set alpha</code>  is actually just <code>alpha -&gt; Prop</code>, so <code>vertexset</code> is a function. You treat it as a type, which Lean deals with internally by coercing it to a subtype of alpha, but now a term of type <code>vertexset × vertexset</code> must be of the form <code>(a,b)</code> with <code>a</code> and <code>b</code> having type not <code>alpha</code> but the subtype.</p>
+
+<a name="176671302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671302">Vaibhav Karve (Sep 26 2019 at 16:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Does <code>import data.set</code> have any effect on this?</p>
+
+<a name="176671370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671370">Kevin Buzzard (Sep 26 2019 at 16:06)</a>:</h4>
+<p><del>No.</del> [edit: yes]</p>
+
+<a name="176671454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671454">Vaibhav Karve (Sep 26 2019 at 16:07)</a>:</h4>
+<p>Thank you. How then can I translate the idea that "A vertexset is a set of elements of type <code>alpha</code>"?</p>
+
+<a name="176671455"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671455" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671455">Patrick Massot (Sep 26 2019 at 16:07)</a>:</h4>
+<p>It may have.</p>
+
+<a name="176671464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671464">Patrick Massot (Sep 26 2019 at 16:08)</a>:</h4>
+<p>I think the coercion from set to type is in mathlib</p>
+
+<a name="176671510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671510">Kevin Buzzard (Sep 26 2019 at 16:08)</a>:</h4>
+<p>Oh!</p>
+
+<a name="176671519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671519">Patrick Massot (Sep 26 2019 at 16:08)</a>:</h4>
+<p>With no import at all, Lean probably won't like the definition.</p>
+
+<a name="176671538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671538">Kevin Buzzard (Sep 26 2019 at 16:08)</a>:</h4>
+<p>I would knock up some code but I switched computers yesterday so currently have no Lean. Hang on...</p>
+
+<a name="176671609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176671609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176671609">Vaibhav Karve (Sep 26 2019 at 16:09)</a>:</h4>
+<blockquote>
+<p>With no import at all, Lean probably won't like the definition.</p>
+</blockquote>
+<p>You are right about that. I had included the import already. Just forgot to mention it in my original question.</p>
+
+<a name="176673176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176673176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176673176">Kevin Buzzard (Sep 26 2019 at 16:29)</a>:</h4>
+<p>3 is not a great thing to be using. When Lean sees <code>3</code> it immediately wants to know what the definition of addition and 1 are, and then defines 3 to basically be 1 + 1 + 1. That's fine for nat, but this is type theory, not set theory, and <code>vertexset</code> is a type. I guess I would not use sets at all.</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">SimpleGraph</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">adjacent</span> <span class="o">:</span> <span class="n">set</span> <span class="o">(</span><span class="n">V</span> <span class="bp">×</span> <span class="n">V</span><span class="o">))</span>
+
+<span class="kn">inductive</span> <span class="n">V3</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">:</span> <span class="n">V3</span>
+<span class="bp">|</span> <span class="n">b</span> <span class="o">:</span> <span class="n">V3</span>
+<span class="bp">|</span> <span class="n">c</span> <span class="o">:</span> <span class="n">V3</span>
+
+<span class="kn">open</span> <span class="n">V3</span>
+
+<span class="n">def</span> <span class="n">triangle_graph</span> <span class="o">:</span> <span class="n">SimpleGraph</span> <span class="n">V3</span> <span class="o">:=</span>
+  <span class="o">{</span><span class="n">adjacent</span>  <span class="o">:=</span> <span class="o">{((</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)),</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">c</span><span class="o">),</span> <span class="o">(</span><span class="n">c</span><span class="o">,</span> <span class="n">a</span><span class="o">)}}</span>
+</pre></div>
+
 
 {% endraw %}
 
