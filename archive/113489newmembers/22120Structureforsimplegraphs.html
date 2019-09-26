@@ -117,6 +117,22 @@ permalink: archive/113489newmembers/22120Structureforsimplegraphs.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176690212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176690212">Marc Huisinga (Sep 26 2019 at 19:40)</a>:</h4>
 <p>(deleted)</p>
 
+<a name="176699340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176699340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176699340">Vaibhav Karve (Sep 26 2019 at 21:37)</a>:</h4>
+<blockquote>
+<p>I think the coercion from set to type is in mathlib</p>
+</blockquote>
+<p>I looked around and found <a href="https://github.com/leanprover-community/mathlib/blob/3cd334161808c7dd59148634cade6d660f206565/src/data/set/basic.lean#L10" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/3cd334161808c7dd59148634cade6d660f206565/src/data/set/basic.lean#L10">this line in mathlib</a>. The comment says it is set coercion, but i don't see a function that i can simply borrow and use.</p>
+<p>So now my new question is: <em>is there a function that given a Type returns a Set of values that inhabit that type?</em> Is there also a function that does the opposite?</p>
+
+<a name="176700060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176700060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176700060">Simon Hudon (Sep 26 2019 at 21:48)</a>:</h4>
+<p><code>set.univ</code> will give you the set of objects that inhabits a type. Set coercion to type will do the opposite. There is an operator to do it but Lean inserts coercions automatically. The operator is <code>↥</code> and is typed as <code>\u-|</code></p>
+
+<a name="176700061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Structure%20for%20simple%20graphs/near/176700061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22120Structureforsimplegraphs.html#176700061">Kevin Buzzard (Sep 26 2019 at 21:48)</a>:</h4>
+<p>If you are really sure that you want to use sets, then <code>set.univ : set α</code> is the set of values that inhabit <code>α</code>. This is just the function <code>α  -&gt; Prop</code> sending everything to True. But conversely given <code>S : set α</code> you already have alpha, it's mentioned in the type of S. But do be clear about what a set is -- there is no such thing as a random set in type theory, you should think of sets as being subsets of a given type, and you might find that subtypes work just as well.</p>
+
 
 {% endraw %}
 
