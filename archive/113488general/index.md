@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Flypitch](73316Flypitch.html) (12 messages, latest: Sep 26 2019 at 15:32)
+
+* [algebraic closure](74840algebraicclosure.html) (209 messages, latest: Sep 26 2019 at 15:15)
+
 * [projects-using-mathlib](97964projectsusingmathlib.html) (13 messages, latest: Sep 26 2019 at 14:30)
 
 * [mathlib notes](99147mathlibnotes.html) (13 messages, latest: Sep 26 2019 at 12:09)
@@ -46,8 +50,6 @@ permalink: archive/113488general/index.html
 * [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (11 messages, latest: Sep 20 2019 at 10:54)
 
 * [Infinity Hotel](67367InfinityHotel.html) (77 messages, latest: Sep 20 2019 at 09:50)
-
-* [Flypitch](73316Flypitch.html) (8 messages, latest: Sep 20 2019 at 07:19)
 
 * [VSCode overflow?](68152VSCodeoverflow.html) (9 messages, latest: Sep 20 2019 at 06:23)
 
@@ -102,8 +104,6 @@ permalink: archive/113488general/index.html
 * [(no topic)](79918notopic.html) (54 messages, latest: Sep 07 2019 at 14:17)
 
 * [Lean in the wild](43625Leaninthewild.html) (198 messages, latest: Sep 05 2019 at 14:19)
-
-* [algebraic closure](74840algebraicclosure.html) (208 messages, latest: Sep 04 2019 at 19:10)
 
 * [2000](439072000.html) (15 messages, latest: Sep 04 2019 at 09:02)
 
