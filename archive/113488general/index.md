@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [instance matching](78529instancematching.html) (10 messages, latest: Sep 26 2019 at 17:47)
+
 * [Lean in the wild](43625Leaninthewild.html) (211 messages, latest: Sep 26 2019 at 16:59)
 
 * [Flypitch](73316Flypitch.html) (12 messages, latest: Sep 26 2019 at 15:32)
@@ -36,8 +38,6 @@ permalink: archive/113488general/index.html
 * [ext trace](37185exttrace.html) (11 messages, latest: Sep 23 2019 at 23:57)
 
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (25 messages, latest: Sep 23 2019 at 23:55)
-
-* [instance matching](78529instancematching.html) (5 messages, latest: Sep 23 2019 at 19:09)
 
 * [emacs users](44956emacsusers.html) (19 messages, latest: Sep 21 2019 at 19:58)
 

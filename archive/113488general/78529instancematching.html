@@ -47,6 +47,31 @@ However, there is a small mystery remaining: why <code>good (2 + 2)</code> works
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176399153" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176399153">Floris van Doorn (Sep 23 2019 at 19:09)</a>:</h4>
 <p>And after <code>apply_instance</code> succeeds, the kernel rejects the found instance.</p>
 
+<a name="176678244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176678244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176678244">Reid Barton (Sep 26 2019 at 17:30)</a>:</h4>
+<p>I think there's one more special rule about instance matching I didn't notice earlier: as far as I can tell, instances themselves are always treated as reducible, whether or not they are marked as such.</p>
+
+<a name="176679447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176679447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176679447">Reid Barton (Sep 26 2019 at 17:44)</a>:</h4>
+<p>One "fun fact" here is if you write an instance like</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">C</span> <span class="n">T</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">delta</span> <span class="n">T</span><span class="o">,</span> <span class="n">apply_instance</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>then the tactic will actually produce <code>id (something)</code>, and <code>id</code> is <em>not</em> reducible, so this will behave differently than if you had just written <code>(something)</code> directly, under some circumstances.</p>
+
+<a name="176679545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176679545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176679545">Mario Carneiro (Sep 26 2019 at 17:45)</a>:</h4>
+<p>You can use <code>clean</code> to fix this</p>
+
+<a name="176679685"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176679685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176679685">Reid Barton (Sep 26 2019 at 17:46)</a>:</h4>
+<p>like <code>by clean by { delta CommRing, apply_instance }</code>?</p>
+
+<a name="176679732"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20matching/near/176679732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78529instancematching.html#176679732">Reid Barton (Sep 26 2019 at 17:47)</a>:</h4>
+<p>It worked but it doesn't look very ... clean</p>
+
 
 {% endraw %}
 
