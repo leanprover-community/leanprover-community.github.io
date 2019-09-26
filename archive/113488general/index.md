@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [projects-using-mathlib](97964projectsusingmathlib.html) (11 messages, latest: Sep 26 2019 at 03:28)
+* [leancrawler](21009leancrawler.html) (7 messages, latest: Sep 26 2019 at 06:54)
+
+* [projects-using-mathlib](97964projectsusingmathlib.html) (12 messages, latest: Sep 26 2019 at 06:17)
 
 * [rewriting and type class inference](35222rewritingandtypeclassinference.html) (94 messages, latest: Sep 26 2019 at 03:03)
-
-* [leancrawler](21009leancrawler.html) (5 messages, latest: Sep 26 2019 at 02:58)
 
 * [fpow neg normal form](92916fpownegnormalform.html) (11 messages, latest: Sep 25 2019 at 20:47)
 
