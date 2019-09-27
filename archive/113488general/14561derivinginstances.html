@@ -192,6 +192,27 @@ permalink: archive/113488general/14561derivinginstances.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176588311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176588311">Rob Lewis (Sep 25 2019 at 17:38)</a>:</h4>
 <p>That derive handler would never fail, right? You can make an instance like that for any declaration. It wouldn't be hard to accidentally create one that's slow to search for and never succeeds.</p>
 
+<a name="176706471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176706471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176706471">Reid Barton (Sep 26 2019 at 23:40)</a>:</h4>
+<p>So I hadn't actually tried out this delta instance thing yet and I didn't realize it was hooked into a general <code>@[derive]</code> mechanism. I agree that having a derive handler that can never fail isn't ideal.<br>
+Sort of relatedly, it's a bit annoying that this thing (which I'm not sure what to call exactly) doesn't give any useful information when it fails.</p>
+
+<a name="176706498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176706498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176706498">Reid Barton (Sep 26 2019 at 23:41)</a>:</h4>
+<p>Should this work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">has_coe_to_sort</span><span class="o">]</span> <span class="n">def</span> <span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">set</span> <span class="bp">ℕ</span> <span class="c1">-- failed to find a derive handler for &#39;has_coe_to_sort&#39;</span>
+<span class="c1">-- instance : has_coe_to_sort X := by { delta X, apply_instance } -- works</span>
+</pre></div>
+
+<a name="176706558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176706558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176706558">Reid Barton (Sep 26 2019 at 23:43)</a>:</h4>
+<p>It works for <code>has_inter</code>, say, so it must be something unusual about <code>has_coe_to_sort</code></p>
+
+<a name="176706721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176706721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176706721">Reid Barton (Sep 26 2019 at 23:46)</a>:</h4>
+<p>In GHC it was eventually (relatively recently) realized that sometimes you might want to specify whether to use GND (roughly equivalent to this <code>delta_instance</code>) or the built-in, class-specific deriving mechanism, so they added some kind of syntax to disambiguate the two mechanisms where required. But the list of classes with class-specific deriving mechanisms is fixed in GHC, so the rule "use class-specific mechanism for any class that has one, otherwise GND" worked well enough for a long time. But Lean makes the deriving mechanism extensible, so it might make more sense to use a different attribute entirely for <code>delta_instance</code>.</p>
+
 
 {% endraw %}
 
