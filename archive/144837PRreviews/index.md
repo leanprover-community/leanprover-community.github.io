@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1493](788371493.html) (3 messages, latest: Sep 27 2019 at 14:36)
+
 * [#1485 priority 10](622971485priority10.html) (15 messages, latest: Sep 26 2019 at 01:15)
 
 * [#1292 order of power series](790351292orderofpowerseries.html) (2 messages, latest: Sep 25 2019 at 11:10)
