@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deriving instances](14561derivinginstances.html) (36 messages, latest: Sep 27 2019 at 09:01)
+
 * [Flypitch](73316Flypitch.html) (17 messages, latest: Sep 27 2019 at 08:35)
 
 * [Lean in the wild](43625Leaninthewild.html) (215 messages, latest: Sep 27 2019 at 07:13)
-
-* [deriving instances](14561derivinginstances.html) (35 messages, latest: Sep 27 2019 at 00:32)
 
 * [leancrawler](21009leancrawler.html) (8 messages, latest: Sep 26 2019 at 18:12)
 
