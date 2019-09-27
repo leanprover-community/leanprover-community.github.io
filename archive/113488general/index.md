@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (215 messages, latest: Sep 27 2019 at 07:13)
+* [Flypitch](73316Flypitch.html) (17 messages, latest: Sep 27 2019 at 08:35)
 
-* [Flypitch](73316Flypitch.html) (13 messages, latest: Sep 27 2019 at 04:46)
+* [Lean in the wild](43625Leaninthewild.html) (215 messages, latest: Sep 27 2019 at 07:13)
 
 * [deriving instances](14561derivinginstances.html) (35 messages, latest: Sep 27 2019 at 00:32)
 
