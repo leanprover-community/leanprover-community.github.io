@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simps](83533simps.html) (1 message, latest: Sep 27 2019 at 17:44)
+* [simps](83533simps.html) (2 messages, latest: Sep 27 2019 at 18:32)
 
-* [Lean in the wild](43625Leaninthewild.html) (222 messages, latest: Sep 27 2019 at 14:23)
+* [Lean in the wild](43625Leaninthewild.html) (223 messages, latest: Sep 27 2019 at 18:12)
 
 * [Flypitch](73316Flypitch.html) (18 messages, latest: Sep 27 2019 at 11:21)
 

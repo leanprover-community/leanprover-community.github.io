@@ -68,6 +68,103 @@ Something like "if an argument <code>x</code> is mentioned in the type of a late
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176764865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176764865">Patrick Massot (Sep 27 2019 at 17:08)</a>:</h4>
 <p>That would be nice!</p>
 
+<a name="176771332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176771332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176771332">Floris van Doorn (Sep 27 2019 at 18:15)</a>:</h4>
+<p>One potential syntactic criterion is:</p>
+<blockquote>
+<p>If a type-class argument occurs in the conclusion of a declaration, then we should make it implicit (in curly braces instead of square brackets)</p>
+</blockquote>
+<p>This has both advantages and disadvantages, but it is too broad. The advantage of course is that is doesn't have to do type-class inference search. One disadvantage is that the argument <code>β →ₗ[α] γ</code> could have metavariables: maybe it's <code>@linear_map α β γ rα gβ gγ ?m1 ?m2</code>, and then it would be nice to figure out the implicit arguments. I don't think that is likely to happen in this case, since <code>linear_map</code>has these arguments as type-class arguments, but it is possible: maybe you're doing a tactic proof, and because you did something "bad" earlier (<a href="#narrow/stream/113488-general/topic/rewriting.20and.20type.20class.20inference" title="#narrow/stream/113488-general/topic/rewriting.20and.20type.20class.20inference">like in this thread</a>) the <code>?m1</code> and <code>?m2</code> are future subgoals.</p>
+<p>My syntactic criterion has the problem that it is too broad, covering declarations we don't want to cover. Consider </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mul_comm</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">comm_semigroup</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>The argument <code>h</code> occurs in the conclusion, in both instances of <code>_ * _</code>, which, written out fully, are</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="n">has_mul</span><span class="bp">.</span><span class="n">mul</span> <span class="n">α</span> <span class="o">(</span><span class="bp">@</span><span class="n">semigroup</span><span class="bp">.</span><span class="n">to_has_mul</span> <span class="n">α</span> <span class="o">(</span><span class="bp">@</span><span class="n">comm_semigroup</span><span class="bp">.</span><span class="n">to_semigroup</span> <span class="n">α</span> <span class="n">h</span><span class="o">))</span> <span class="n">a</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>However, there are cases when I want to apply <code>mul_comm</code> when the type-class argument of <code>has_mul.mul</code> is not syntactically of the form <br>
+<code>@semigroup.to_has_mul _ (@comm_semigroup.to_semigroup _ _) _ _</code>. For example, if I write <code>x * y</code> where <code>x</code> and <code>y</code> are elements in a commutative ring <code>α</code>, then the instance <code>has_mul α</code> might not go via <code>comm_semigroup α</code>. In that case, we do need type-class inference: we need to find <code>comm_semigroup α</code>, and then check that the two resulting <code>has_mul</code> instances are definitionally equal.</p>
+<p>Here is a syntactic criterion which we should consider:</p>
+<blockquote>
+<p>If a type-class argument occurs in the conclusion of a declaration, as a argument to a irreducible definition or a constant, then we should make it implicit (in curly braces)</p>
+</blockquote>
+<p>With "constant" I here also mean all inductive types, structures and constructors (maybe we should exclude recursors, since they have definitional reduction rules - but you're doing something very uglily if you have a recursor directly in the type of a declaration). <br>
+Note that this excludes the last example, since <code>h</code> is an argument only to <code>comm_semigroup.to_semigroup</code> which is not reducible.</p>
+<p>The fact that a type-class argument occurs as an argument to a constant or irreducible definition means that everything that reasonably unifies with the conclusion will have the type-class argument already written there.</p>
+
+<a name="176772434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176772434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176772434">Floris van Doorn (Sep 27 2019 at 18:28)</a>:</h4>
+<p>Here is a more compelling case where you could have metavariables in the conclusion, and you might want type-class inference to find them (the "disadvantage" of my previous post -- This is also a problem with the restricted syntactic criterion).</p>
+<p>Consider:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">finset</span><span class="bp">.</span><span class="n">prod</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="n">β</span><span class="o">],</span> <span class="n">finset</span> <span class="n">α</span> <span class="bp">→</span> <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="kn">theorem</span> <span class="n">finset</span><span class="bp">.</span><span class="n">prod_singleton</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">}</span> <span class="o">[</span><span class="n">h</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="n">β</span><span class="o">],</span> <span class="n">finset</span><span class="bp">.</span><span class="n">prod</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">singleton</span> <span class="n">a</span><span class="o">)</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">a</span>
+</pre></div>
+
+
+<p>For the sake of argument, suppose that <code>finset.prod</code> is irreducible. This is not the case, but it is a reasonable (and maybe even desirable?) thing to do. Now <code>finset.prod_singleton</code> satisfies my (restricted) syntactic criterium: <code>h</code> should be an implicit argument. But now suppose that I want to <code>rw [← finset.prod_singleton]</code>. Now we have a problem: how do we find <code>comm_monoid β</code>? It was not in the original expression: it was not needed in the term <code>f a</code>. But it is also not inferred by type-class inference, since we made the argument implicit. So now we probably get a new goal <code>comm_monoid β</code>, which is not desirable.</p>
+
+<a name="176772646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176772646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176772646">Mario Carneiro (Sep 27 2019 at 18:30)</a>:</h4>
+<p>this seems to be basically the same criterion that explains why equalities use explicit args</p>
+
+<a name="176772697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176772697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176772697">Floris van Doorn (Sep 27 2019 at 18:30)</a>:</h4>
+<p>The problem in my last example is that the expression we have here is <code>?m = f a</code>, and so the type class argument doesn't occur.</p>
+
+<a name="176772731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176772731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176772731">Mario Carneiro (Sep 27 2019 at 18:30)</a>:</h4>
+<p>if you want to rewrite with it, then you can infer stuff, but if you just want to state it (or rewrite the wrong direction) then less can be inferred</p>
+
+<a name="176773039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176773039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176773039">Floris van Doorn (Sep 27 2019 at 18:34)</a>:</h4>
+<p>But I want to sometimes rewrite in the wrong(?) direction. Do we need a separate lemma for rewriting in the wrong direction?</p>
+
+<a name="176773106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176773106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176773106">Mario Carneiro (Sep 27 2019 at 18:35)</a>:</h4>
+<p>The existing convention already handles this</p>
+
+<a name="176773139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176773139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176773139">Mario Carneiro (Sep 27 2019 at 18:35)</a>:</h4>
+<p><code>finset.prod_singleton</code> is breaking the convention and making too much stuff implicit</p>
+
+<a name="176773246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176773246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176773246">Mario Carneiro (Sep 27 2019 at 18:36)</a>:</h4>
+<p><code>a</code> and <code>f</code> should be explicit; given these arguments the comm_monoid instance is inferrable</p>
+
+<a name="176773450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176773450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176773450">Mario Carneiro (Sep 27 2019 at 18:38)</a>:</h4>
+<p>But you can still make typeclass arguments implicit when they would be implicit as regular args. That is, if they appear in the type of a hypothesis</p>
+
+<a name="176773594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176773594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176773594">Mario Carneiro (Sep 27 2019 at 18:40)</a>:</h4>
+<p>which covers your <code>f : β →ₗ[α] γ</code> example</p>
+
+<a name="176774300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176774300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176774300">Floris van Doorn (Sep 27 2019 at 18:48)</a>:</h4>
+<blockquote>
+<p><code>finset.prod_singleton</code> is breaking the convention and making too much stuff implicit</p>
+</blockquote>
+<p>true</p>
+<blockquote>
+<p><code>a</code> and <code>f</code> should be explicit; given these arguments the comm_monoid instance is inferrable</p>
+</blockquote>
+<p>using type-class inference, yes, but not without.</p>
+<blockquote>
+<p>But you can still make typeclass arguments implicit when they would be implicit as regular args. That is, if they appear in the type of a hypothesis<br>
+which covers your <code>f : β →ₗ[α] γ</code> example</p>
+</blockquote>
+<p>Ok, that is a different criterion than I used. But this very much does not cover <span class="user-mention" data-user-id="110044">@Chris Hughes</span>'s example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">gβ</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">gγ</span> <span class="o">:</span> <span class="n">add_comm_group</span> <span class="n">γ</span><span class="o">}</span>
+  <span class="o">{</span><span class="n">mβ</span> <span class="o">:</span> <span class="n">module</span> <span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">{</span><span class="n">mγ</span> <span class="o">:</span> <span class="n">module</span> <span class="n">α</span> <span class="n">γ</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">β</span> <span class="bp">→</span><span class="err">ₗ</span><span class="o">[</span><span class="n">α</span><span class="o">]</span> <span class="n">γ</span><span class="o">)</span>
+</pre></div>
+
+<a name="176775277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176775277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176775277">Mario Carneiro (Sep 27 2019 at 18:58)</a>:</h4>
+<p>That's true. I guess coercions are special, in that they never fire anyway unless the types are already pretty well pinned down</p>
+
 
 {% endraw %}
 
