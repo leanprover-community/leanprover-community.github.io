@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deriving instances](14561derivinginstances.html) (34 messages, latest: Sep 26 2019 at 23:46)
+* [deriving instances](14561derivinginstances.html) (35 messages, latest: Sep 27 2019 at 00:32)
 
 * [Lean in the wild](43625Leaninthewild.html) (212 messages, latest: Sep 26 2019 at 23:44)
 
