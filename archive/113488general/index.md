@@ -9,17 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deriving instances](14561derivinginstances.html) (35 messages, latest: Sep 27 2019 at 00:32)
+* [Lean in the wild](43625Leaninthewild.html) (214 messages, latest: Sep 27 2019 at 04:55)
 
-* [Lean in the wild](43625Leaninthewild.html) (212 messages, latest: Sep 26 2019 at 23:44)
+* [Flypitch](73316Flypitch.html) (13 messages, latest: Sep 27 2019 at 04:46)
+
+* [deriving instances](14561derivinginstances.html) (35 messages, latest: Sep 27 2019 at 00:32)
 
 * [leancrawler](21009leancrawler.html) (8 messages, latest: Sep 26 2019 at 18:12)
 
 * [projects-using-mathlib](97964projectsusingmathlib.html) (14 messages, latest: Sep 26 2019 at 18:09)
 
 * [instance matching](78529instancematching.html) (10 messages, latest: Sep 26 2019 at 17:47)
-
-* [Flypitch](73316Flypitch.html) (12 messages, latest: Sep 26 2019 at 15:32)
 
 * [algebraic closure](74840algebraicclosure.html) (209 messages, latest: Sep 26 2019 at 15:15)
 
