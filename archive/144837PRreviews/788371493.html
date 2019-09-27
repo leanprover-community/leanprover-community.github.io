@@ -165,6 +165,32 @@ which covers your <code>f : β →ₗ[α] γ</code> example</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176775277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176775277">Mario Carneiro (Sep 27 2019 at 18:58)</a>:</h4>
 <p>That's true. I guess coercions are special, in that they never fire anyway unless the types are already pretty well pinned down</p>
 
+<a name="176776778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176776778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176776778">Floris van Doorn (Sep 27 2019 at 19:11)</a>:</h4>
+<p>I agree that the problem is basically the same as the convention which non-type-class arguments should be explicit and which should be implicit. Unfortunately I think that covers <em>very</em> few cases. In something like</p>
+<div class="codehilite"><pre><span></span>def gpowers : Π {α : Type u_1} [_inst_1 : group α], α → set α
+theorem gpowers_subset : ∀ {α : Type u_1} [_inst_1 : group α] {a : α} {s : set α} [_inst_3 : is_subgroup s], a ∈ s → gpowers a ⊆ s
+</pre></div>
+
+
+<p>it seems like in almost all cases it's fine to make <code>_inst_1 : group α</code> implicit in <code>gpowers_subset</code>. You do have a problem if you want to write <code>have := gpowers_subset (h : a ∈ s)</code>, because then I think neither of the type-class arguments are known (<code>is_subgroup s</code> doesn't fire, since the argument <code>group α</code> is still a meta-variable, right?)</p>
+
+<a name="176777906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176777906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176777906">Mario Carneiro (Sep 27 2019 at 19:22)</a>:</h4>
+<p>If you interpret the subset as an implication, then you could make the group A argument implicit</p>
+
+<a name="176777955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176777955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176777955">Mario Carneiro (Sep 27 2019 at 19:23)</a>:</h4>
+<p>but that's basically saying that we don't intend to use the other form</p>
+
+<a name="176778733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176778733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176778733">Reid Barton (Sep 27 2019 at 19:31)</a>:</h4>
+<p>I think what is special about the coercion here is that in <code>has_coe_to_fun (β →ₗ[α] γ)</code>, <code>β →ₗ[α] γ</code> is basically an argument because it's the argument of the <code>coe</code> field</p>
+
+<a name="176778744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231493/near/176778744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/788371493.html#176778744">Reid Barton (Sep 27 2019 at 19:31)</a>:</h4>
+<p>but you'd have to look at <code>has_coe_to_fun</code> to know that</p>
+
 
 {% endraw %}
 
