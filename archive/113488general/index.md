@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (214 messages, latest: Sep 27 2019 at 04:55)
+* [Lean in the wild](43625Leaninthewild.html) (215 messages, latest: Sep 27 2019 at 07:13)
 
 * [Flypitch](73316Flypitch.html) (13 messages, latest: Sep 27 2019 at 04:46)
 
