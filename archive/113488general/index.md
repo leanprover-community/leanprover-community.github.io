@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simps](83533simps.html) (5 messages, latest: Sep 27 2019 at 20:40)
+* [simps](83533simps.html) (8 messages, latest: Sep 27 2019 at 21:29)
 
 * [Lean in the wild](43625Leaninthewild.html) (223 messages, latest: Sep 27 2019 at 18:12)
 
