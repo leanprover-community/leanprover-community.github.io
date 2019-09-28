@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [deriving instances](14561derivinginstances.html) (37 messages, latest: Sep 28 2019 at 13:52)
+* [Lean in the wild](43625Leaninthewild.html) (226 messages, latest: Sep 28 2019 at 15:52)
 
-* [Lean in the wild](43625Leaninthewild.html) (225 messages, latest: Sep 28 2019 at 12:39)
+* [deriving instances](14561derivinginstances.html) (37 messages, latest: Sep 28 2019 at 13:52)
 
 * [equatilies](88311equatilies.html) (3 messages, latest: Sep 28 2019 at 11:46)
 
