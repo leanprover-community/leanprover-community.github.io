@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Extending a class with two classes](22274Extendingaclasswithtwoclasses.html) (8 messages, latest: Sep 28 2019 at 11:51)
+* [Extending a class with two classes](22274Extendingaclasswithtwoclasses.html) (9 messages, latest: Sep 28 2019 at 12:40)
 
 * [false.elim tactic?](50744falseelimtactic.html) (34 messages, latest: Sep 26 2019 at 22:44)
 
