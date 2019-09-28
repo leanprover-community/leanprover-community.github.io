@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (1 message, latest: Sep 28 2019 at 14:20)
+
 * [Extending a class with two classes](22274Extendingaclasswithtwoclasses.html) (9 messages, latest: Sep 28 2019 at 12:40)
 
 * [false.elim tactic?](50744falseelimtactic.html) (34 messages, latest: Sep 26 2019 at 22:44)

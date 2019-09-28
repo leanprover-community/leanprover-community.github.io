@@ -1,0 +1,51 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/58116simplepatternmatchingwithlean4.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html">simple pattern matching with lean4</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176827964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/simple%20pattern%20matching%20with%20lean4/near/176827964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58116simplepatternmatchingwithlean4.html#176827964">Tobias Grosser (Sep 28 2019 at 14:20)</a>:</h4>
+<p>Hey guys (<span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span>?),</p>
+<p>I am trying to get the following code to compile in lean4:</p>
+<div class="codehilite"><pre><span></span>cat test.lean
+import init.data.int.basic
+import init.data.string.basic
+
+def foo (ctx : String) : Int → Int
+| x =&gt; if ctx == &quot;a&quot; then x else (foo &quot;a&quot; x)
+$lean test.lean
+/home/grosser/Projects/lean4/test.lean:4:4: error: type mismatch at application
+  foo &quot;a&quot;
+term
+  &quot;a&quot;
+has type
+  String
+but is expected to have type
+  Int
+$cat test2.lean
+import init.data.int.basic
+import init.data.string.basic
+
+def foo : String → Int → Int
+| &quot;a&quot; x =&gt; x
+| _ x =&gt; foo &quot;a&quot; x
+$lean test2.lean
+/home/grosser/Projects/lean4/test2.lean:4:4: error: invalid application, function expected
+</pre></div>
+
+
+<p>The example is obviously artificial and reduced from an example that is a lot larger. What I want to do is -- in certain cases -- change the first argument and then recurse into the very same function with the updated first argument. Unfortunately, this does not seem to work. In the first test.lean file it seems ctx is already implicitly passed as the first argument to foo such that only the second argument can be passed to foo. In the second test case I get an error message which I do not fully understand. Any ideas?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
