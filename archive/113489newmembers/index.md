@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Extending a class with two classes](22274Extendingaclasswithtwoclasses.html) (7 messages, latest: Sep 28 2019 at 08:59)
+
 * [false.elim tactic?](50744falseelimtactic.html) (34 messages, latest: Sep 26 2019 at 22:44)
 
 * [Structure for simple graphs](22120Structureforsimplegraphs.html) (21 messages, latest: Sep 26 2019 at 21:48)

@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/22274Extendingaclasswithtwoclasses.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html">Extending a class with two classes</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="176816799"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176816799" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176816799">Mukesh Tiwari (Sep 28 2019 at 08:42)</a>:</h4>
+<p>I have a definition of class meet_semilattice (A : Type u) (R : A -&gt; A -&gt; Prop)  (meet : A -&gt; A -&gt; A) extends partial_order A R  and <br>
+class join_semilattice (A : Type u) (R : A -&gt; A -&gt; Prop)   (join : A -&gt; A -&gt; A) extends partial_order A R, and Now I am trying to extend these two classes to <br>
+class lattice (A : Type u) (R : A -&gt; A -&gt; Prop)  (meet : A -&gt; A -&gt; A) (join : A -&gt; A -&gt; A) extends <br>
+(meet_semilattice A R meet)(join_semilattice A R join)  by following  <a href="https://github.com/leanprover/lean/blob/master/library/init/algebra/group.lean#L33" target="_blank" title="https://github.com/leanprover/lean/blob/master/library/init/algebra/group.lean#L33">https://github.com/leanprover/lean/blob/master/library/init/algebra/group.lean#L33</a></p>
+
+<a name="176816877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176816877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176816877">Mukesh Tiwari (Sep 28 2019 at 08:44)</a>:</h4>
+<p>But I am getting this error "Invalid 'structure' header, field 'to_partial_order' from 'Ordering.join_semilattice' has already been declared</p>
+
+<a name="176816959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176816959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176816959">Mukesh Tiwari (Sep 28 2019 at 08:47)</a>:</h4>
+<p><a href="https://gist.github.com/mukeshtiwari/6d40904d33911e46d342d194c1771a5b" target="_blank" title="https://gist.github.com/mukeshtiwari/6d40904d33911e46d342d194c1771a5b">https://gist.github.com/mukeshtiwari/6d40904d33911e46d342d194c1771a5b</a></p>
+
+<a name="176817117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176817117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176817117">Patrick Massot (Sep 28 2019 at 08:52)</a>:</h4>
+<p>You could have a look at how all this is done in the standard library: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/lattice.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/lattice.lean">https://github.com/leanprover-community/mathlib/blob/master/src/order/lattice.lean</a></p>
+
+<a name="176817324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176817324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176817324">Patrick Massot (Sep 28 2019 at 08:57)</a>:</h4>
+<p>If you want something closer to what you try, you can change <code>meet_semilattice</code>, <code>join_semilattice</code> and <code>lattice</code> to take <code>[partial_order A R]</code> as a parameter. Of course you'll also need to find other names for <code>H₁</code> etc in order to avoid name clashes.</p>
+
+<a name="176817387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176817387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176817387">Patrick Massot (Sep 28 2019 at 08:58)</a>:</h4>
+<p>But the setup in mathlib will probably be much more convenient.</p>
+
+<a name="176817407"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Extending%20a%20class%20with%20two%20classes/near/176817407" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22274Extendingaclasswithtwoclasses.html#176817407">Mukesh Tiwari (Sep 28 2019 at 08:59)</a>:</h4>
+<p>Thanks for the help Patrick.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
