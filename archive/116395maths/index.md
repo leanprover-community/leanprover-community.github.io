@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (114 messages, latest: Sep 28 2019 at 02:47)
+
 * [Some numerology](27430Somenumerology.html) (42 messages, latest: Sep 24 2019 at 04:32)
 
 * [undone by powerful `refl` AI](16172undonebypowerfulreflAI.html) (14 messages, latest: Sep 23 2019 at 20:39)
@@ -176,8 +178,6 @@ permalink: archive/116395maths/index.html
 * [breaking equality with sheaves](75037breakingequalitywithsheaves.html) (635 messages, latest: Jul 04 2019 at 16:13)
 
 * [Integration](83269Integration.html) (5 messages, latest: Jul 04 2019 at 11:51)
-
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (112 messages, latest: Jul 04 2019 at 11:38)
 
 * [Is this thing useful](31939Isthisthinguseful.html) (67 messages, latest: Jul 03 2019 at 20:53)
 
