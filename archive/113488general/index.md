@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [instance depth again](78859instancedepthagain.html) (1 message, latest: Sep 28 2019 at 00:53)
+
 * [Lean in the wild](43625Leaninthewild.html) (224 messages, latest: Sep 27 2019 at 22:36)
 
 * [simps](83533simps.html) (8 messages, latest: Sep 27 2019 at 21:29)
