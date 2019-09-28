@@ -413,6 +413,31 @@ permalink: archive/116395maths/37019Howtohandletransfertobundledhoms.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176372555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176372555">Johan Commelin (Sep 23 2019 at 14:21)</a>:</h4>
 <p>In the end, I think it wasn't even too painful.</p>
 
+<a name="176839649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/How%20to%20handle%20transfer%20to%20bundled%20homs/near/176839649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/37019Howtohandletransfertobundledhoms.html#176839649">Yury G. Kudryashov (Sep 28 2019 at 20:09)</a>:</h4>
+<p>I think, the problem is that currently the type of <code>coe_fn f</code> can depend on <code>f</code>, not only its type. On the one hand, this way we can coerce to function something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">bundled_fun</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">dom</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">codom</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="o">(</span><span class="n">to_fun</span> <span class="o">:</span> <span class="n">dom</span> <span class="bp">→</span> <span class="n">codom</span><span class="o">)</span>
+</pre></div>
+
+
+<p>On the other hand, if we have <code>coe_fn f x</code>, then Lean can't start looking at <code>x</code> before it knows <code>f</code>. I see two possible solutions:</p>
+<ul>
+<li>
+<p>Define something like<br>
+<code>lean
+  structure has_simple_coe_to_fun (α : Type*) (β : out_param Type*) := (coe : α → β)
+  </code><br>
+  and try it before <code>has_coe_to_fun</code></p>
+</li>
+<li>
+<p>Introduce convention (similar to, e.g., Python) that <code>coe_fn f</code> is a notation for <code>f.to_fun</code>.</p>
+</li>
+</ul>
+<p>Sure, each approach has its pros and cons. Hope, someone will come with a better idea.</p>
+
 
 {% endraw %}
 

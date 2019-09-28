@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (4 messages, latest: Sep 28 2019 at 18:17)
+* [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (6 messages, latest: Sep 28 2019 at 20:17)
 
 * [Extending a class with two classes](22274Extendingaclasswithtwoclasses.html) (9 messages, latest: Sep 28 2019 at 12:40)
 

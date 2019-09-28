@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling submonoids](35255bundlingsubmonoids.html) (18 messages, latest: Sep 28 2019 at 20:48)
+
+* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (95 messages, latest: Sep 28 2019 at 20:09)
+
 * [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (116 messages, latest: Sep 28 2019 at 12:48)
 
 * [Some numerology](27430Somenumerology.html) (42 messages, latest: Sep 24 2019 at 04:32)
@@ -16,8 +20,6 @@ permalink: archive/116395maths/index.html
 * [undone by powerful `refl` AI](16172undonebypowerfulreflAI.html) (14 messages, latest: Sep 23 2019 at 20:39)
 
 * [dirty nom_cast](58081dirtynomcast.html) (4 messages, latest: Sep 23 2019 at 15:47)
-
-* [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (94 messages, latest: Sep 23 2019 at 14:21)
 
 * [int.lt_succ_iff_le](42347intltsucciffle.html) (12 messages, latest: Sep 23 2019 at 10:26)
 
@@ -88,8 +90,6 @@ permalink: archive/116395maths/index.html
 * [instance \[semiring α\] : semiring (with_zero α)](17166instancesemiringsemiringwithzero.html) (33 messages, latest: Aug 06 2019 at 17:27)
 
 * [bundling normal subgroups](38055bundlingnormalsubgroups.html) (20 messages, latest: Aug 06 2019 at 15:04)
-
-* [bundling submonoids](35255bundlingsubmonoids.html) (16 messages, latest: Aug 05 2019 at 14:23)
 
 * [number fields in lean?](68407numberfieldsinlean.html) (24 messages, latest: Aug 02 2019 at 09:57)
 
