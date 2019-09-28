@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [deriving instances](14561derivinginstances.html) (37 messages, latest: Sep 28 2019 at 13:52)
+
 * [Lean in the wild](43625Leaninthewild.html) (225 messages, latest: Sep 28 2019 at 12:39)
 
 * [equatilies](88311equatilies.html) (3 messages, latest: Sep 28 2019 at 11:46)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [simps](83533simps.html) (8 messages, latest: Sep 27 2019 at 21:29)
 
 * [Flypitch](73316Flypitch.html) (18 messages, latest: Sep 27 2019 at 11:21)
-
-* [deriving instances](14561derivinginstances.html) (36 messages, latest: Sep 27 2019 at 09:01)
 
 * [leancrawler](21009leancrawler.html) (8 messages, latest: Sep 26 2019 at 18:12)
 
