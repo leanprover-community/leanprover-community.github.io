@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (114 messages, latest: Sep 28 2019 at 02:47)
+* [What's new in Lean maths?](62892WhatsnewinLeanmaths.html) (115 messages, latest: Sep 28 2019 at 07:44)
 
 * [Some numerology](27430Somenumerology.html) (42 messages, latest: Sep 24 2019 at 04:32)
 
