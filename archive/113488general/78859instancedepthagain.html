@@ -31,6 +31,15 @@ permalink: archive/113488general/78859instancedepthagain.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20depth%20again/near/176801568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78859instancedepthagain.html#176801568">Sebastien Gouezel (Sep 28 2019 at 01:48)</a>:</h4>
 <p>Could you prepare a stand-alone file (independent of mathlib) that contains just the relevant definitions, and that we could show to the Lean 4 team? They want examples showing the current shortcomings of instance search, and I think this one is pretty convincing!</p>
 
+<a name="176804236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instance%20depth%20again/near/176804236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78859instancedepthagain.html#176804236">Daniel Selsam (Sep 28 2019 at 03:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> I am guessing that the only reason for such a small <code>max_depth</code> is to prevent expensive failures elsewhere caused by diamonds. If so, the new typeclass resolution procedure in lean4 should fix this and allow a much greater default <code>max_depth</code>. The new procedure is prototyped at:</p>
+<p><a href="https://github.com/dselsam/lean4/blob/tabled_typeclasses/library/init/lean/typeclass/synth.lean" target="_blank" title="https://github.com/dselsam/lean4/blob/tabled_typeclasses/library/init/lean/typeclass/synth.lean">https://github.com/dselsam/lean4/blob/tabled_typeclasses/library/init/lean/typeclass/synth.lean</a> </p>
+<p>Here are some tests that show it can handle diamonds and loops:</p>
+<p><a href="https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_diamond.lean" target="_blank" title="https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_diamond.lean">https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_diamond.lean</a><br>
+<a href="https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_coerce.lean" target="_blank" title="https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_coerce.lean">https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_coerce.lean</a></p>
+<p>As <span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> said, it would be great to find out about typeclass problems encountered in mathlib that this new procedure does not solve (as well as desired uses of typeclasses that are impossible with the current resolution procedure).</p>
+
 
 {% endraw %}
 
