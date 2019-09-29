@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Trigonometric functions](04864Trigonometricfunctions.html) (96 messages, latest: Sep 29 2019 at 22:45)
+
 * [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (19 messages, latest: Sep 29 2019 at 10:39)
 
 * [tutorial about tactics?](43962tutorialabouttactics.html) (147 messages, latest: Sep 29 2019 at 00:15)
@@ -698,8 +700,6 @@ permalink: archive/113489newmembers/index.html
 * [Lean to Z3](76465LeantoZ3.html) (4 messages, latest: Oct 30 2018 at 01:17)
 
 * [Why doesn't dec_trivial solve `prime 3`?](60427Whydoesntdectrivialsolveprime3.html) (65 messages, latest: Oct 28 2018 at 21:16)
-
-* [Trigonometric functions](04864Trigonometricfunctions.html) (95 messages, latest: Oct 27 2018 at 09:19)
 
 * [clone formalization](63185cloneformalization.html) (27 messages, latest: Oct 24 2018 at 09:14)
 

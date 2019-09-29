@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (24 messages, latest: Sep 29 2019 at 22:52)
+
 * [bundling submonoids](35255bundlingsubmonoids.html) (18 messages, latest: Sep 28 2019 at 20:48)
 
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (95 messages, latest: Sep 28 2019 at 20:09)
@@ -26,8 +28,6 @@ permalink: archive/116395maths/index.html
 * [idiomatic statement of sandwich thm](83384idiomaticstatementofsandwichthm.html) (29 messages, latest: Sep 23 2019 at 07:52)
 
 * [subgroup set coercion](70326subgroupsetcoercion.html) (29 messages, latest: Sep 20 2019 at 19:27)
-
-* [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (22 messages, latest: Sep 20 2019 at 14:41)
 
 * [fintype or finset for integer ranges](95359fintypeorfinsetforintegerranges.html) (6 messages, latest: Sep 19 2019 at 22:18)
 
