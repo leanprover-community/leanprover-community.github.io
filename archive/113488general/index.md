@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (227 messages, latest: Sep 29 2019 at 17:03)
+* [Lean in the wild](43625Leaninthewild.html) (232 messages, latest: Sep 29 2019 at 21:43)
 
 * [deriving instances](14561derivinginstances.html) (37 messages, latest: Sep 28 2019 at 13:52)
 
