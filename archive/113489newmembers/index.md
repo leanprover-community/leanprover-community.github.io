@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (10 messages, latest: Sep 29 2019 at 09:57)
+* [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (19 messages, latest: Sep 29 2019 at 10:39)
 
 * [tutorial about tactics?](43962tutorialabouttactics.html) (147 messages, latest: Sep 29 2019 at 00:15)
 
