@@ -578,6 +578,241 @@ h2 : ∀ (x : ℕ), p x
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176674939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176674939">Alexandre Rademaker (Sep 26 2019 at 16:52)</a>:</h4>
 <p>Thank you <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> for the link. Yes, I need to finish to read the TPiL.</p>
 
+<a name="176845507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845507">Alexandre Rademaker (Sep 28 2019 at 23:01)</a>:</h4>
+<p>I must admit, tactics is a complicate stuff! No clue how to prove using tactics the following two theorems:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">U</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constants</span> <span class="n">p</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+ <span class="k">assume</span> <span class="n">y</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span>
+ <span class="k">assume</span> <span class="n">h₂</span> <span class="o">:</span> <span class="n">p</span> <span class="n">y</span><span class="o">,</span> <span class="n">h</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">y</span> <span class="n">h₂</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">classical</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+ <span class="n">by_contradiction</span>
+  <span class="o">(</span><span class="k">assume</span> <span class="n">h₁</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span>
+   <span class="n">h</span> <span class="o">(</span><span class="k">assume</span> <span class="n">b</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span>
+      <span class="n">by_contradiction</span>
+      <span class="o">(</span><span class="k">assume</span> <span class="n">h₂</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">b</span><span class="o">,</span> <span class="n">h₁</span> <span class="o">(</span><span class="n">exists</span><span class="bp">.</span><span class="n">intro</span> <span class="n">b</span> <span class="n">h₂</span><span class="o">))))</span>
+</pre></div>
+
+
+<p>It is not clear how to deal with exists.intro and negation in the hypothesis...</p>
+
+<a name="176845731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845731">Johan Commelin (Sep 28 2019 at 23:09)</a>:</h4>
+<p>There's <code>use</code>, <code>rintro</code>, <code>rcases</code>, <code>push_neg</code>, <code>contrapose!</code></p>
+
+<a name="176845734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845734">Johan Commelin (Sep 28 2019 at 23:09)</a>:</h4>
+<p>nice and powerful tactics (-;</p>
+
+<a name="176845785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845785">Kevin Buzzard (Sep 28 2019 at 23:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span> <span class="c1">-- mathlib, so I can use &quot;use&quot;</span>
+<span class="kn">variable</span> <span class="n">U</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">variable</span> <span class="n">p</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>If you don't like <code>use</code>, you can use <code>existsi</code> in core.</p>
+
+<a name="176845790"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845790" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845790">Mario Carneiro (Sep 28 2019 at 23:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+<span class="kn">constant</span> <span class="n">U</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constants</span> <span class="n">p</span> <span class="o">:</span> <span class="n">U</span> <span class="bp">→</span> <span class="kt">Prop</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">y</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h₂</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">classical</span><span class="o">,</span>
+  <span class="n">by_contra</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">by_contra</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h₂</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176845803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845803">Mario Carneiro (Sep 28 2019 at 23:11)</a>:</h4>
+<p>I probably would not have used tactics for some of these, but this is a pure-tactic style</p>
+
+<a name="176845846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845846">Mario Carneiro (Sep 28 2019 at 23:12)</a>:</h4>
+<p>for example the existsi, exact is easier to write as <code>refine ⟨b, h₂⟩</code></p>
+
+<a name="176845855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845855">Mario Carneiro (Sep 28 2019 at 23:12)</a>:</h4>
+<p>I use the <code>classical</code> tactic (in mathlib) when lean complains about this and that not being decidable</p>
+
+<a name="176845919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176845919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176845919">Mario Carneiro (Sep 28 2019 at 23:15)</a>:</h4>
+<p>here's a more hybrid approach:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">y</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">h</span> <span class="bp">⟨</span><span class="n">y</span><span class="o">,</span> <span class="n">h₂</span><span class="bp">⟩</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">classical</span><span class="o">,</span>
+  <span class="n">by_contra</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">refine</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">by_contra</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h₁</span> <span class="bp">⟨</span><span class="n">b</span><span class="o">,</span> <span class="n">h₂</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="176846767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846767">Alexandre Rademaker (Sep 28 2019 at 23:45)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> ! <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> , is there any alternative to the classical mathlib tactic? I am tryin to avoid introduce mathlib before get things more clear.</p>
+
+<a name="176846810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846810">Mario Carneiro (Sep 28 2019 at 23:46)</a>:</h4>
+<p><code>classical</code> is the same as <code>haveI := classical.prop_decidable</code></p>
+
+<a name="176846814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846814">Mario Carneiro (Sep 28 2019 at 23:46)</a>:</h4>
+<p>but <code>haveI</code> is another mathlib tactic</p>
+
+<a name="176846817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846817">Kevin Buzzard (Sep 28 2019 at 23:46)</a>:</h4>
+<p>What's <code>not not P -&gt; P</code> called in Lean? For some reason I can't find it with library_search</p>
+
+<a name="176846820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846820">Mario Carneiro (Sep 28 2019 at 23:46)</a>:</h4>
+<p>you can use <code>local attribute [instance] classical.prop_decidable</code> outside the proof instead</p>
+
+<a name="176846828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846828">Mario Carneiro (Sep 28 2019 at 23:47)</a>:</h4>
+<p><code>classical.by_contradiction</code></p>
+
+<a name="176846837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846837">Alexandre Rademaker (Sep 28 2019 at 23:47)</a>:</h4>
+<p>I like the compact notation of <code>⟨y, h₂⟩</code> but it is confusing since the same par of symbols is used to the <code>and.intro</code>.</p>
+
+<a name="176846879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846879">Mario Carneiro (Sep 28 2019 at 23:48)</a>:</h4>
+<p>it works with any inductive type with one constructor</p>
+
+<a name="176846882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846882">Kevin Buzzard (Sep 28 2019 at 23:48)</a>:</h4>
+<p>That's not confusing -- those are two instances of the same phenomenon. It's unifying :-)</p>
+
+<a name="176846884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846884">Mario Carneiro (Sep 28 2019 at 23:48)</a>:</h4>
+<p>or any <code>structure</code></p>
+
+<a name="176846898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846898">Kevin Buzzard (Sep 28 2019 at 23:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">¬</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">U</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">classical</span><span class="bp">.</span><span class="n">by_contradiction</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">classical</span><span class="bp">.</span><span class="n">by_contradiction</span><span class="o">,</span>
+  <span class="n">intro</span> <span class="n">h₂</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">h₁</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">assumption</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>There's a mathlib-free proof of the second one in tactic mode.</p>
+
+<a name="176846946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846946">Kevin Buzzard (Sep 28 2019 at 23:50)</a>:</h4>
+<p>(with thanks to Mario for <code>classical.by_contradiction</code>)</p>
+
+<a name="176846971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176846971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176846971">Alexandre Rademaker (Sep 28 2019 at 23:51)</a>:</h4>
+<p>Hum, but the signatures returned by the check command are quite different. In the type theory level both are constructors, I see.</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">exists</span><span class="bp">.</span><span class="n">intro</span>
+</pre></div>
+
+<a name="176847014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847014">Mario Carneiro (Sep 28 2019 at 23:52)</a>:</h4>
+<p>This isn't notation overloading - the parser has special support for constructing tuple-like inductives</p>
+
+<a name="176847030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847030">Mario Carneiro (Sep 28 2019 at 23:53)</a>:</h4>
+<p>You can also use the <code>{foo := ... , bar := ...}</code> notation, although I've never used it with exists or and before</p>
+
+<a name="176847041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847041">Alexandre Rademaker (Sep 28 2019 at 23:53)</a>:</h4>
+<p><code>not not P -&gt; P</code> is the <code>by_contradiction</code>, right?</p>
+
+<a name="176847042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847042">Mario Carneiro (Sep 28 2019 at 23:53)</a>:</h4>
+<p>yes</p>
+
+<a name="176847085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847085">Kevin Buzzard (Sep 28 2019 at 23:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">foo</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">bar</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">baz</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+<span class="o">(</span><span class="n">erm</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">foo</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">7</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="bp">-</span><span class="mi">5</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="176847091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847091">Mario Carneiro (Sep 28 2019 at 23:54)</a>:</h4>
+<p>oh, my mistake, apparently <code>{}</code> structure notation only works with actual <code>structure</code>s, so <code>exists</code> doesn't permit it, although <code>and</code> does</p>
+
+<a name="176847159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847159">Kevin Buzzard (Sep 28 2019 at 23:56)</a>:</h4>
+<p><code>exists</code> is so horrible for beginners. <code>#print notation ∃</code> gives garbage, and <code>#check exists</code> fails -- Lean wants another term so just looks at the next token and gives a confusing error.</p>
+
+<a name="176847171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847171">Kevin Buzzard (Sep 28 2019 at 23:57)</a>:</h4>
+<p>You're best off just finding the definitions in core (if you can figure out how to get to them)</p>
+
+<a name="176847220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847220">Alexandre Rademaker (Sep 28 2019 at 23:58)</a>:</h4>
+<p>Now I am starting to make sense with negation and exists in tactics!! Tomorrow more exercises!! After months in the 'term-mode', it is taking time to flip my mind to the tactic-mode.</p>
+
+<a name="176847221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847221">Mario Carneiro (Sep 28 2019 at 23:58)</a>:</h4>
+<p>Try <code>#check Exists</code></p>
+
+<a name="176847224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847224">Kevin Buzzard (Sep 28 2019 at 23:59)</a>:</h4>
+<p>Why is <code>Exists</code> an inductive type with one constructor and not a structure?</p>
+<p>Wooah, and what does</p>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="n">intro</span><span class="o">]</span> <span class="n">Exists</span><span class="bp">.</span><span class="n">intro</span>
+</pre></div>
+
+
+<p>mean?</p>
+
+<a name="176847235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/tutorial%20about%20tactics%3F/near/176847235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/43962tutorialabouttactics.html#176847235">Mario Carneiro (Sep 28 2019 at 23:59)</a>:</h4>
+<p>I know that <code>[intro]</code> (and <code>[intro!]</code>) exist, but I'm not sure what they do</p>
+
 
 {% endraw %}
 

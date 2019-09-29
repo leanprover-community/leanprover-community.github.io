@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [tutorial about tactics?](43962tutorialabouttactics.html) (134 messages, latest: Sep 28 2019 at 23:59)
+
 * [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (8 messages, latest: Sep 28 2019 at 22:03)
 
 * [Extending a class with two classes](22274Extendingaclasswithtwoclasses.html) (9 messages, latest: Sep 28 2019 at 12:40)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [false.elim tactic?](50744falseelimtactic.html) (34 messages, latest: Sep 26 2019 at 22:44)
 
 * [Structure for simple graphs](22120Structureforsimplegraphs.html) (21 messages, latest: Sep 26 2019 at 21:48)
-
-* [tutorial about tactics?](43962tutorialabouttactics.html) (100 messages, latest: Sep 26 2019 at 16:52)
 
 * [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (9 messages, latest: Sep 24 2019 at 14:06)
 
