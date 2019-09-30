@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linux command line](07416linuxcommandline.html) (1 message, latest: Sep 30 2019 at 03:55)
+
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (26 messages, latest: Sep 29 2019 at 22:39)
 
 * [Lean in the wild](43625Leaninthewild.html) (232 messages, latest: Sep 29 2019 at 21:43)
