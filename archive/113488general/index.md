@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (343 messages, latest: Sep 30 2019 at 16:21)
+
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
 * [linux command line](07416linuxcommandline.html) (59 messages, latest: Sep 30 2019 at 13:49)
-
-* [Lean in the wild](43625Leaninthewild.html) (342 messages, latest: Sep 30 2019 at 13:42)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (2 messages, latest: Sep 30 2019 at 08:22)
 

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [reference manual](64494referencemanual.html) (2 messages, latest: Sep 30 2019 at 16:22)
+
 * [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (20 messages, latest: Sep 30 2019 at 03:36)
 
 * [Trigonometric functions](04864Trigonometricfunctions.html) (97 messages, latest: Sep 29 2019 at 23:03)
