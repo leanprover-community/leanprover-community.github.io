@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Trigonometric functions](04864Trigonometricfunctions.html) (96 messages, latest: Sep 29 2019 at 22:45)
+* [Trigonometric functions](04864Trigonometricfunctions.html) (97 messages, latest: Sep 29 2019 at 23:03)
 
 * [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (19 messages, latest: Sep 29 2019 at 10:39)
 

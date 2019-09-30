@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bifunctor and End homs](44142bifunctorandEndhoms.html) (1 message, latest: Sep 29 2019 at 23:58)
+
 * [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (24 messages, latest: Sep 29 2019 at 22:52)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (18 messages, latest: Sep 28 2019 at 20:48)
