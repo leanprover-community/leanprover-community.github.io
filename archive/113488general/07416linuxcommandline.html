@@ -109,6 +109,172 @@ Can someone point me to instructions to actually run this executable? Google sea
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176902852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176902852">Tim Daly (Sep 30 2019 at 04:47)</a>:</h4>
 <p>lean /dev/sdtin almost works</p>
 
+<a name="176903368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176903368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176903368">Tim Daly (Sep 30 2019 at 05:01)</a>:</h4>
+<p>This sorta-kinda-almost works:</p>
+<p>lean /dev/stdin<br>
+import <a href="http://system.io" target="_blank" title="http://system.io">system.io</a><br>
+variable [io.interface]<br>
+open io</p>
+<p>def main : io unit :=<br>
+put_str "hello world\n"</p>
+<p>main<br>
+ctrl-d</p>
+<p>except that it doesn't seem to like the put_str type and it says "too may arguments"</p>
+<p>but, hey, progress!</p>
+
+<a name="176903523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176903523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176903523">Tim Daly (Sep 30 2019 at 05:04)</a>:</h4>
+<p>The above code is the first example from the tutorial with hello_world changed to main</p>
+
+<a name="176904047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904047">Tim Daly (Sep 30 2019 at 05:19)</a>:</h4>
+<p>And this "worked":</p>
+<p>lean /dev/stdio<br>
+import <a href="http://system.io" target="_blank" title="http://system.io">system.io</a><br>
+open io</p>
+<p>def main : io unit := put_str "hello world\n"</p>
+<p>#check main<br>
+ctrl-d</p>
+<p>resulting in the output:<br>
+main : io unit</p>
+
+<a name="176904138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904138">Mario Carneiro (Sep 30 2019 at 05:21)</a>:</h4>
+<p>lean doesn't work incrementally, it expects a complete file, so it seems a bit silly to be taking input on stdin</p>
+
+<a name="176904182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904182">Tim Daly (Sep 30 2019 at 05:22)</a>:</h4>
+<p>Success!</p>
+<p>lean /dev/stdio<br>
+import <a href="http://system.io" target="_blank" title="http://system.io">system.io</a><br>
+open io</p>
+<p>def main : io unit := put_str "hello world\n"</p>
+<p>#eval main<br>
+ctrl-d</p>
+<p>resulting in the output<br>
+hello world</p>
+<p>Many thanks.</p>
+
+<a name="176904185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904185">Mario Carneiro (Sep 30 2019 at 05:22)</a>:</h4>
+<p>It also uses the location of the file to find relative imports</p>
+
+<a name="176904189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904189">Mario Carneiro (Sep 30 2019 at 05:22)</a>:</h4>
+<p>so you are going to have trouble with nontrivial import statements</p>
+
+<a name="176904209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904209">Mario Carneiro (Sep 30 2019 at 05:23)</a>:</h4>
+<p>also use triple backtick <code> ```lean ... ``` </code> to bracket lean text</p>
+
+<a name="176904213"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904213" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904213">Tim Daly (Sep 30 2019 at 05:23)</a>:</h4>
+<p>Mario, the problem is that I'm using I/O from Axiom, not from a file.</p>
+
+<a name="176904220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904220">Mario Carneiro (Sep 30 2019 at 05:24)</a>:</h4>
+<p>then use Axiom to write to a file that exists somewhere in the intended import hierarchy</p>
+
+<a name="176904283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904283">Mario Carneiro (Sep 30 2019 at 05:24)</a>:</h4>
+<p>what are you trying to get lean to do? What kind of input are you expecting to feed it?</p>
+
+<a name="176904284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904284">Tim Daly (Sep 30 2019 at 05:24)</a>:</h4>
+<p>Axiom creates dependent types "on the fly" in the interpreter so there isn't (normally) an associated file</p>
+
+<a name="176904352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904352">Mario Carneiro (Sep 30 2019 at 05:26)</a>:</h4>
+<p><code>lean --run foo.lean</code> is essentially the same as <code>lean foo.lean</code> except that lean adds the line <code>#eval main</code> at the end of your file</p>
+
+<a name="176904369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904369">Mario Carneiro (Sep 30 2019 at 05:27)</a>:</h4>
+<p>This is useful for using lean as a programming language for standalone executables</p>
+
+<a name="176904377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904377">Mario Carneiro (Sep 30 2019 at 05:27)</a>:</h4>
+<p>If you are just proving theorems, you don't need it</p>
+
+<a name="176904424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904424">Tim Daly (Sep 30 2019 at 05:28)</a>:</h4>
+<p>Yep. lean --run hello.lean works.</p>
+<p>I'm looking to feed a lot of things into lean, and indeed, using lean for checking Axiom's spad code generated from a compiler back-end</p>
+
+<a name="176904512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904512">Tim Daly (Sep 30 2019 at 05:31)</a>:</h4>
+<p>I'm proving Axiom's algorithms correct and trying to use Lean as the proof machine. So I need to "converse" with it.</p>
+
+<a name="176904624"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904624" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904624">Tim Daly (Sep 30 2019 at 05:34)</a>:</h4>
+<p>Lean's axioms and lemmas will come from Axiom's type hierarchy, along with tactics. They won't exist in files.</p>
+
+<a name="176904631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904631">Mario Carneiro (Sep 30 2019 at 05:34)</a>:</h4>
+<p>Why don't you spit all the proof obligations into a file and then check it?</p>
+
+<a name="176904640"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904640" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904640">Mario Carneiro (Sep 30 2019 at 05:35)</a>:</h4>
+<p>what's the "conversation"?</p>
+
+<a name="176904714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904714">Tim Daly (Sep 30 2019 at 05:37)</a>:</h4>
+<p>File I/O is possible but ugly. It's the late 90s. We can do better. (Just my opinion, actually)</p>
+<p>Axiom interacts with other tools, like a browser, without file I/O</p>
+
+<a name="176904824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904824">Mario Carneiro (Sep 30 2019 at 05:40)</a>:</h4>
+<p>You can communicate using memory only files using the server mode, but it's still not clear to me what conversation you want to have with lean. It's not particularly chatty when it comes to verifying a theorem is correct - the answer is either "yes" or a spew of errors</p>
+
+<a name="176904827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904827">Tim Daly (Sep 30 2019 at 05:40)</a>:</h4>
+<p>I'm trying to learn lean programming. I'm pondering "compiling to lean" as one of the compiler backends. Of course, the user's program won't pass the compiler(s) (Axiom or Lean's) and I'll have to give feedback.</p>
+
+<a name="176904832"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904832" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904832">Mario Carneiro (Sep 30 2019 at 05:41)</a>:</h4>
+<p>If you want to "compile to lean" then you should clearly be writing to a file</p>
+
+<a name="176904886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904886">Tim Daly (Sep 30 2019 at 05:42)</a>:</h4>
+<p>Axiom can compile "on the fly" from the command line. In fact it does so when resolving parametric types. </p>
+<p>If you define f(x) == x*x then the call f(3) will compile an integer version and f(3.0) will compile a float version, all "on the fly"</p>
+
+<a name="176904895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904895">Tim Daly (Sep 30 2019 at 05:43)</a>:</h4>
+<p>Everything could be done through files, I agree.</p>
+
+<a name="176904897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904897">Mario Carneiro (Sep 30 2019 at 05:43)</a>:</h4>
+<p>I don't think lean will care about that. From lean's point of view that's just one function</p>
+
+<a name="176904949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904949">Tim Daly (Sep 30 2019 at 05:45)</a>:</h4>
+<p>but f("noise") should fail</p>
+
+<a name="176904963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176904963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176904963">Mario Carneiro (Sep 30 2019 at 05:45)</a>:</h4>
+<p>That doesn't map very easily to lean's type theory, although it can be done</p>
+
+<a name="176905014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176905014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176905014">Mario Carneiro (Sep 30 2019 at 05:46)</a>:</h4>
+<p>lean uses typeclasses for that sort of thing</p>
+
+<a name="176905023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176905023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176905023">Tim Daly (Sep 30 2019 at 05:47)</a>:</h4>
+<p>I suspect Axiom's dependent type machinery is going to give lean a bit of trouble. But that's pretty much my own research problem.</p>
+
+<a name="176905069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176905069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176905069">Mario Carneiro (Sep 30 2019 at 05:48)</a>:</h4>
+<p>In any case, I would recommend using lean as a compiler, as Reid suggested. Don't try to start it up on every REPL line</p>
+
+<a name="176905076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176905076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176905076">Tim Daly (Sep 30 2019 at 05:48)</a>:</h4>
+<p>Does the emacs interface use files?</p>
+
+<a name="176905156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linux%20command%20line/near/176905156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07416linuxcommandline.html#176905156">Tim Daly (Sep 30 2019 at 05:51)</a>:</h4>
+<p>In unix, a file is nothing more than a stream of bytes anyway</p>
+
 
 {% endraw %}
 
