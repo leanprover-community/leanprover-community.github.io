@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (48 messages, latest: Sep 30 2019 at 17:28)
+
 * [Lean in the wild](43625Leaninthewild.html) (343 messages, latest: Sep 30 2019 at 16:21)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
@@ -186,8 +188,6 @@ permalink: archive/113488general/index.html
 * [dec_trivial fails with instances using `rw`](95145dectrivialfailswithinstancesusingrw.html) (74 messages, latest: Aug 24 2019 at 07:45)
 
 * [a finite infinite hierarchy of types](46272afiniteinfinitehierarchyoftypes.html) (9 messages, latest: Aug 24 2019 at 01:23)
-
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (34 messages, latest: Aug 23 2019 at 15:08)
 
 * [VM code](77503VMcode.html) (1 message, latest: Aug 23 2019 at 12:11)
 
