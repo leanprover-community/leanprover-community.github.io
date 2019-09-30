@@ -241,6 +241,84 @@ Sort of relatedly, it's a bit annoying that this thing (which I'm not sure what 
 </blockquote>
 <p>Do others have an opinion on this? I see Reid's point, but I'm not sure if/when it will come up in practice.</p>
 
+<a name="176934375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176934375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176934375">Reid Barton (Sep 30 2019 at 14:00)</a>:</h4>
+<p>To clarify and relate to what I wrote earlier, the problem isn't so much that the end user really might want to make a decision between two methods of deriving (though it is possible), but that when <code>delta_handler</code> fails for some reason, it can't tell whether the user was trying to use it or some class-specific deriving method which will be tried later, so it can't do proper error reporting.</p>
+
+<a name="176935109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176935109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176935109">Reid Barton (Sep 30 2019 at 14:07)</a>:</h4>
+<p>For <code>@[derive]</code> Lean tries all registered derive handles with no guarantees about the order, right?</p>
+
+<a name="176935528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176935528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176935528">Rob Lewis (Sep 30 2019 at 14:11)</a>:</h4>
+<p>Okay, I see what you mean. There are two failure modes for derive handlers. Returning <code>ff</code> means "this derive handler doesn't apply to this instance," and failing means "this handler should have worked but something went wrong." But <code>delta_instance</code> can never fail because we don't know if it should work or not.</p>
+
+<a name="176935669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176935669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176935669">Rob Lewis (Sep 30 2019 at 14:12)</a>:</h4>
+<p>I think it's kind of a shame. Two different attributes that both mean "find an instance of this" is pretty ugly.</p>
+
+<a name="176935810"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176935810" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176935810">Rob Lewis (Sep 30 2019 at 14:14)</a>:</h4>
+<p>As far as I can tell there's no way to force a certain order on the derive handlers. They come in the order the attribute manager gives them, which is probably most recently declared first?</p>
+
+<a name="176936022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176936022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176936022">Sebastian Ullrich (Sep 30 2019 at 14:16)</a>:</h4>
+<p>Priority first, most recent secondary</p>
+
+<a name="176936157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176936157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176936157">Rob Lewis (Sep 30 2019 at 14:18)</a>:</h4>
+<p>Oh, nice. Then we could set <code>delta_instance</code> to <code>priority 10</code>.</p>
+
+<a name="176936550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176936550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176936550">Sebastian Ullrich (Sep 30 2019 at 14:22)</a>:</h4>
+<p>When I wrote the derive handlers API, it did not occur to me that there would be reasonable handlers apart from <code>delta_instance</code> for a <code>def</code>. I only skimmed this thread, do you have such an example?</p>
+
+<a name="176936711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176936711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176936711">Johan Commelin (Sep 30 2019 at 14:24)</a>:</h4>
+<p>Is the recently added <code>simps</code> an example?</p>
+
+<a name="176936788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176936788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176936788">Johan Commelin (Sep 30 2019 at 14:25)</a>:</h4>
+<p>It derives simp-lemmas when defining terms of a type that is a structure</p>
+
+<a name="176937061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176937061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176937061">Reid Barton (Sep 30 2019 at 14:28)</a>:</h4>
+<p>Maybe <code>decidable</code>? This isn't quite a real answer because the solution there would be to use <code>delta_instance</code> plus the existing <code>decidable</code> instances, but it feels close.</p>
+
+<a name="176937106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176937106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176937106">Rob Lewis (Sep 30 2019 at 14:28)</a>:</h4>
+<p>Hmm, but just running <code>delta_instance</code> last won't work either, e.g.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable_eq</span><span class="o">]</span> <span class="n">def</span> <span class="n">S</span> <span class="o">:=</span> <span class="bp">ℕ</span>
+</pre></div>
+
+<a name="176937260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176937260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176937260">Reid Barton (Sep 30 2019 at 14:29)</a>:</h4>
+<p>Oh interesting example. So here the handler for <code>decidable_eq</code> runs and it "knows" it is the correct handler so it fails rather than letting <code>delta_instance</code> run</p>
+
+<a name="176937500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176937500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176937500">Rob Lewis (Sep 30 2019 at 14:32)</a>:</h4>
+<p>Right. I think a generic handler like <code>delta_instance</code> just doesn't fit into <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> 's framework. So maybe it is better as a separate attribute.</p>
+
+<a name="176937716"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176937716" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176937716">Reid Barton (Sep 30 2019 at 14:34)</a>:</h4>
+<p>Another possibility is we give <code>delta_instance</code> the <em>highest</em> priority and have it assume it's the right handler if and only if it's applied to a <code>def</code> (assuming it can check that). But it feels like a bit of a hack</p>
+
+<a name="176938191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176938191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176938191">Rob Lewis (Sep 30 2019 at 14:39)</a>:</h4>
+<p>Yes, we can check that, or at least that it's applied to something that's not an inductive type.</p>
+
+<a name="176938453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176938453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176938453">Rob Lewis (Sep 30 2019 at 14:42)</a>:</h4>
+<p>All of the current derive handlers apply only to inductives. <code>delta_instance</code> applies only to defs. So this is safe until we think of another handler we want to apply to defs.</p>
+
+<a name="176938507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176938507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176938507">Rob Lewis (Sep 30 2019 at 14:43)</a>:</h4>
+<p>It does seem a little hackish, but it also feels a little bad to use two attributes <code>@[derive ...]</code> for inductives and <code>@[derive_inst ...]</code> for defs.</p>
+
+<a name="176938890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/deriving%20instances/near/176938890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/14561derivinginstances.html#176938890">Keeley Hoek (Sep 30 2019 at 14:47)</a>:</h4>
+<p>It seems like the derive system will always have trouble whenever there are two different ways of deriving the same class (unless you're happy with never ever getting error messages for one of the classes)</p>
+
 
 {% endraw %}
 
