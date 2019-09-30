@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (338 messages, latest: Sep 30 2019 at 12:53)
+* [linux command line](07416linuxcommandline.html) (59 messages, latest: Sep 30 2019 at 13:49)
+
+* [Lean in the wild](43625Leaninthewild.html) (342 messages, latest: Sep 30 2019 at 13:42)
 
 * [deriving instances](14561derivinginstances.html) (38 messages, latest: Sep 30 2019 at 08:36)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (2 messages, latest: Sep 30 2019 at 08:22)
-
-* [linux command line](07416linuxcommandline.html) (57 messages, latest: Sep 30 2019 at 05:51)
 
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (26 messages, latest: Sep 29 2019 at 22:39)
 
