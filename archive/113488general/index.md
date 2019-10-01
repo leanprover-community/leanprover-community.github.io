@@ -9,21 +9,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (3 messages, latest: Oct 01 2019 at 14:59)
+* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (7 messages, latest: Oct 01 2019 at 15:56)
+
+* [Lean in the wild](43625Leaninthewild.html) (346 messages, latest: Oct 01 2019 at 15:45)
+
+* [linear algebra documentation push](01636linearalgebradocumentationpush.html) (3 messages, latest: Oct 01 2019 at 15:02)
 
 * [simps](83533simps.html) (17 messages, latest: Oct 01 2019 at 14:54)
 
 * [ITP 2019](78458ITP2019.html) (36 messages, latest: Oct 01 2019 at 09:14)
-
-* [Lean in the wild](43625Leaninthewild.html) (344 messages, latest: Oct 01 2019 at 03:11)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (48 messages, latest: Sep 30 2019 at 17:28)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
 * [linux command line](07416linuxcommandline.html) (59 messages, latest: Sep 30 2019 at 13:49)
-
-* [linear algebra documentation push](01636linearalgebradocumentationpush.html) (2 messages, latest: Sep 30 2019 at 08:22)
 
 * [where does the @\[simp\] on add_comm come from?](17025wheredoesthesimponaddcommcomefrom.html) (26 messages, latest: Sep 29 2019 at 22:39)
 
