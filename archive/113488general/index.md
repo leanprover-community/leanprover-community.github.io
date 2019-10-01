@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (33 messages, latest: Oct 01 2019 at 08:43)
+
 * [simps](83533simps.html) (15 messages, latest: Oct 01 2019 at 04:50)
 
 * [Lean in the wild](43625Leaninthewild.html) (344 messages, latest: Oct 01 2019 at 03:11)
@@ -96,8 +98,6 @@ permalink: archive/113488general/index.html
 * [dsimp failing](20152dsimpfailing.html) (4 messages, latest: Sep 12 2019 at 04:41)
 
 * [fintype](82176fintype.html) (34 messages, latest: Sep 11 2019 at 11:28)
-
-* [ITP 2019](78458ITP2019.html) (32 messages, latest: Sep 09 2019 at 21:16)
 
 * [lean solver](47804leansolver.html) (54 messages, latest: Sep 09 2019 at 14:49)
 
