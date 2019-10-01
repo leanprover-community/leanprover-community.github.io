@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (347 messages, latest: Oct 01 2019 at 16:04)
+* [mathlib notes](99147mathlibnotes.html) (14 messages, latest: Oct 01 2019 at 17:35)
+
+* [Lean in the wild](43625Leaninthewild.html) (348 messages, latest: Oct 01 2019 at 17:31)
+
+* [noncomputable theorem](08268noncomputabletheorem.html) (16 messages, latest: Oct 01 2019 at 17:23)
 
 * [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (7 messages, latest: Oct 01 2019 at 15:56)
 
@@ -40,8 +44,6 @@ permalink: archive/113488general/index.html
 * [instance matching](78529instancematching.html) (10 messages, latest: Sep 26 2019 at 17:47)
 
 * [algebraic closure](74840algebraicclosure.html) (209 messages, latest: Sep 26 2019 at 15:15)
-
-* [mathlib notes](99147mathlibnotes.html) (13 messages, latest: Sep 26 2019 at 12:09)
 
 * [rewriting and type class inference](35222rewritingandtypeclassinference.html) (94 messages, latest: Sep 26 2019 at 03:03)
 
@@ -2094,8 +2096,6 @@ permalink: archive/113488general/index.html
 * [instances](23433instances.html) (8 messages, latest: Oct 20 2018 at 12:44)
 
 * [on incomprehensibility](13055onincomprehensibility.html) (4 messages, latest: Oct 20 2018 at 03:20)
-
-* [noncomputable theorem](08268noncomputabletheorem.html) (15 messages, latest: Oct 19 2018 at 22:45)
 
 * [backwards reasoning](49593backwardsreasoning.html) (2 messages, latest: Oct 19 2018 at 22:05)
 
