@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
+* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (10 messages, latest: Oct 01 2019 at 21:53)
 
-* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (9 messages, latest: Oct 01 2019 at 20:12)
+* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
 
 * [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (8 messages, latest: Oct 01 2019 at 19:55)
 
