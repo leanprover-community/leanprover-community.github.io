@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [introduce implication](77447introduceimplication.html) (2 messages, latest: Oct 01 2019 at 18:40)
+
+* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (2 messages, latest: Oct 01 2019 at 18:36)
+
 * [mathlib notes](99147mathlibnotes.html) (14 messages, latest: Oct 01 2019 at 17:35)
 
 * [Lean in the wild](43625Leaninthewild.html) (348 messages, latest: Oct 01 2019 at 17:31)

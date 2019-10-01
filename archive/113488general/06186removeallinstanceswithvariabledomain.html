@@ -1,0 +1,69 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/06186removeallinstanceswithvariabledomain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/06186removeallinstanceswithvariabledomain.html">remove all instances with variable domain</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177084142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/remove%20all%20instances%20with%20variable%20domain/near/177084142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06186removeallinstanceswithvariabledomain.html#177084142">Floris van Doorn (Oct 01 2019 at 18:31)</a>:</h4>
+<p>We need to remove all <code>has_coe</code> instances with variable domain, like:</p>
+<div class="codehilite"><pre><span></span>#print uniform_space.completion.has_coe
+#print localization.has_coe
+#print filter.filter_product.coe_filterprod
+</pre></div>
+
+
+<p>All these instances go from a variable to a specific type, e.g. <code>has_coe α (uniform_space.completion α)</code>. The problem is, that together with </p>
+<div class="codehilite"><pre><span></span>coe_trans [_inst_1 : has_coe a b] [_inst_2 : has_coe_t b c] : has_coe_t a c
+</pre></div>
+
+
+<p>these instances will just loop forever. If <code>coe_trans</code> applies, then all of these instances always apply for <code>_inst_1</code> and then <code>_inst_2</code> can again be inferred using <code>coe_trans</code>.</p>
+<p>Consider the following, when importing all of mathlib:</p>
+<div class="codehilite"><pre><span></span>set_option class.instance_max_depth 10
+def foo : has_coe_t name nat := by apply_instance
+</pre></div>
+
+
+<p>This will timeout with instance max depth (it is expected to fail).</p>
+<p>The actual problem I ran into was:</p>
+<div class="codehilite"><pre><span></span>def foo : list name := [`x]
+</pre></div>
+
+
+<p>Since the notation <code>[ ... ]</code> is overloaded (see <a href="https://github.com/leanprover-community/mathlib/issues/1502" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1502">#1502</a>), it then tries to find an instance <code>(vector3 name 1) (list name)</code>, which fails. The total elaboration time took 49s(!) for me.</p>
+<p>Here is another example:</p>
+<div class="codehilite"><pre><span></span>constant A : Type
+constant B : Type
+constant C : Type
+@[priority 999] instance : has_coe A B := sorry
+@[priority 999] instance : has_coe B C := sorry
+def foo : has_coe_t A C :=
+by apply_instance -- fails
+</pre></div>
+
+
+<p>The <code>priority 999</code> is just to mimic any instance that was declared before <code>filter.filter_product.coe_filterprod</code>. Since type-class inference reaches an infinite loop, it fails, while it it expected to succeed.</p>
+
+<a name="177084539"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/remove%20all%20instances%20with%20variable%20domain/near/177084539" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06186removeallinstanceswithvariabledomain.html#177084539">Floris van Doorn (Oct 01 2019 at 18:36)</a>:</h4>
+<p>Here is the full list of instances which will have to be removed:</p>
+<div class="codehilite"><pre><span></span>uniform_space.completion.has_coe : Π (α : Type u_1) [_inst_1 : uniform_space α], has_coe α (uniform_space.completion α)
+localization.has_coe : Π {α : Type u} [_inst_1 : comm_ring α] {S : set α} [_inst_2 : is_submonoid S], has_coe α (localization α S)
+filter.filter_product.coe_filterprod : Π {α : Type u} {β : Type v} {φ : filter α}, has_coe β (filter.filterprod β φ)
+computation.has_coe : Π {α : Type u}, has_coe α (computation α)
+quotient_group.has_coe : Π {α : Type u_1} [_inst_1 : group α] {s : set α} [_inst_2 : is_subgroup s], has_coe α (quotient_group.quotient s)
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
