@@ -1,0 +1,83 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/85353Typeoftheemptytype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html">Type of the empty type?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177088369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177088369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177088369">Michael Alan Thompson (Oct 01 2019 at 19:17)</a>:</h4>
+<p>Beginner here. As I understand it everything in lean has a type. If this is the case then what is the type of the empty type in lean (or type theories more generally)?</p>
+
+<a name="177089134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177089134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177089134">Rob Lewis (Oct 01 2019 at 19:26)</a>:</h4>
+<p>There are infinitely many empty types. Lean has a hierarchy of type universes <code>Sort 0, Sort 1, Sort 2, ...</code>. You can define an empty inductive type inside any universe. In fact, you can define multiple empty inductive types in the same universe, and you can't prove in Lean that they're equal. The type of an empty type will be <code>Sort i</code> for some <code>i</code>.</p>
+
+<a name="177089667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177089667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177089667">Michael Alan Thompson (Oct 01 2019 at 19:32)</a>:</h4>
+<p>Alright, so as an example, what is the type of the empty type which is used when defining the negation of a proposition? When we say ¬A is A -&gt; E what is the type of that E?</p>
+
+<a name="177089717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177089717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177089717">Rob Lewis (Oct 01 2019 at 19:33)</a>:</h4>
+<p>That empty type is named <code>false</code> in Lean. Its type is <code>Sort 0</code>, which also goes by the name <code>Prop</code>.</p>
+
+<a name="177090348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090348">Michael Alan Thompson (Oct 01 2019 at 19:40)</a>:</h4>
+<p>Ahh okay thanks. Also when trying to prove something and you end up with false as a hypothesis then you're done right? How does lean know that false proves everything?</p>
+
+<a name="177090393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090393">Rob Lewis (Oct 01 2019 at 19:41)</a>:</h4>
+<p>Yep. The theorem <code>false.elim</code> is what you need. In tactic mode, if you have <code>h : false</code> you can use <code>cases h</code>.</p>
+
+<a name="177090605"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090605" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090605">Rob Lewis (Oct 01 2019 at 19:44)</a>:</h4>
+<p>This is the recursion principle for an empty inductive type, btw, which is how Lean "knows" it.</p>
+
+<a name="177090607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090607">Patrick Massot (Oct 01 2019 at 19:44)</a>:</h4>
+<p>A variation which is easier to read in tactic mode is: <code>exfalso, exact h</code></p>
+
+<a name="177090684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090684">Johan Commelin (Oct 01 2019 at 19:45)</a>:</h4>
+<p>Or <code>contradiction</code></p>
+
+<a name="177090687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090687">Rob Lewis (Oct 01 2019 at 19:45)</a>:</h4>
+<p>Or the <code>contradiction</code> tactic is even easier to read.</p>
+
+<a name="177090861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177090861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177090861">Michael Alan Thompson (Oct 01 2019 at 19:47)</a>:</h4>
+<p>Can you elaborate on how its "the recursion principle for an empty inductive type" at all? What does that mena?</p>
+
+<a name="177091273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177091273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177091273">Rob Lewis (Oct 01 2019 at 19:53)</a>:</h4>
+<p>When you define an inductive type <code>T</code>, you give a list of the ways to construct a term of type <code>T</code>. The recursion principle says how to define a function with domain <code>T</code>. For each constructor, you say what the function should do given a term created with that constructor. This is enough to define a function, since the constructors are the only way to create a term of type <code>T</code>.</p>
+
+<a name="177091370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177091370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177091370">Rob Lewis (Oct 01 2019 at 19:54)</a>:</h4>
+<p>For an empty type like <code>false</code>,  there are no constructors, so there are no inputs to the recursor. It's a function from <code>false</code> to any type.</p>
+
+<a name="177091715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20of%20the%20empty%20type%3F/near/177091715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/85353Typeoftheemptytype.html#177091715">Rob Lewis (Oct 01 2019 at 19:58)</a>:</h4>
+<p>Recursors are generated automatically when you define an inductive type. For a simple non-degenerate example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">two</span>
+<span class="bp">|</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">b</span>
+
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">two</span><span class="bp">.</span><span class="n">rec_on</span>
+</pre></div>
+
+
+<p>You define a function out of the finite type <code>two</code> by saying what the values should be on <code>a</code> and <code>b</code>. Equivalently, you prove a theorem about all terms of type <code>two</code> by proving it for <code>a</code> and proving it for <code>b</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

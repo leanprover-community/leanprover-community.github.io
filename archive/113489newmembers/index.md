@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Type of the empty type?](85353Typeoftheemptytype.html) (14 messages, latest: Oct 01 2019 at 19:58)
+
 * [sets in Lean](78231setsinLean.html) (42 messages, latest: Oct 01 2019 at 15:06)
 
 * [reference manual](64494referencemanual.html) (3 messages, latest: Sep 30 2019 at 17:35)

@@ -20,6 +20,42 @@ permalink: archive/113488general/77447introduceimplication.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177084873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177084873">Simon Hudon (Oct 01 2019 at 18:40)</a>:</h4>
 <p>A lambda expression does that. <code>λ x : t, (s : u)</code> has type <code>t -&gt; u</code></p>
 
+<a name="177088639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177088639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177088639">Chris Laux (Oct 01 2019 at 19:21)</a>:</h4>
+<p>Ok, I see. I'm trying to solve the simple exercise <code>example : (∃ x : α, r) → r := sorry</code>, but I just can't find the right notation. Would anyone mind telling me the answer?</p>
+
+<a name="177089171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177089171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177089171">Johan Commelin (Oct 01 2019 at 19:27)</a>:</h4>
+<p>Do you want to use term mode or tactic mode? With or without mathlib?</p>
+
+<a name="177089215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177089215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177089215">Floris van Doorn (Oct 01 2019 at 19:27)</a>:</h4>
+<p>Assuming <code>r</code> is a proposition (of type <code>Prop</code>) then the following is a short way to prove it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="bp">λ⟨</span><span class="n">x</span><span class="o">,</span> <span class="n">h</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">h</span>
+</pre></div>
+
+
+<p>The <code>λ⟨x, h⟩</code> introduces a variable <code>x : α</code> and <code>h : r</code> (so that together, <code>⟨x, h⟩ : ∃ x : α, r</code>), and then the proof of <code>r</code> is <code>h</code>.</p>
+
+<a name="177089263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177089263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177089263">Floris van Doorn (Oct 01 2019 at 19:28)</a>:</h4>
+<p>This doesn't work if <code>r</code> is not a proposition.</p>
+
+<a name="177089377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177089377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177089377">Floris van Doorn (Oct 01 2019 at 19:29)</a>:</h4>
+<p>Slightly longer, but without the <code>⟨x, h⟩</code> brackets:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">r</span><span class="o">)</span> <span class="bp">→</span> <span class="n">r</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">prf</span><span class="o">,</span> <span class="n">exists</span><span class="bp">.</span><span class="n">elim</span> <span class="n">prf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">h</span><span class="o">,</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Here we call <code>exists.elim prf</code> to eliminate the existential quantifier.</p>
+
+<a name="177089728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/introduce%20implication/near/177089728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/77447introduceimplication.html#177089728">Chris Laux (Oct 01 2019 at 19:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> : thanks. <span class="user-mention" data-user-id="112680">@Johan Commelin</span> : I'm just getting started, so I'm not sure about those distinctions</p>
+
 
 {% endraw %}
 

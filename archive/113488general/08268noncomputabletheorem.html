@@ -87,6 +87,30 @@ D:\projects\mathlib2\src\ring_theory\unique_factorization_domain.lean:146:18: wa
 
 <p>For now, I just added the <code>sanity_skip</code> attribute to these decidability declarations.</p>
 
+<a name="177087935"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177087935" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177087935">Yury G. Kudryashov (Oct 01 2019 at 19:12)</a>:</h4>
+<p>Hi, where are the definitions that you're trying to change from <code>theorem</code> to <code>def</code>? I mean, file/line.</p>
+
+<a name="177087973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177087973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177087973">Floris van Doorn (Oct 01 2019 at 19:13)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/src/logic/basic.lean#L593-L597" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/logic/basic.lean#L593-L597">https://github.com/leanprover-community/mathlib/blob/master/src/logic/basic.lean#L593-L597</a></p>
+
+<a name="177088346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177088346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177088346">Yury G. Kudryashov (Oct 01 2019 at 19:17)</a>:</h4>
+<p>BTW, is there any difference between <code>theorem</code> and <code>noncomputable theorem</code>? I mean, theorems do not generate bytecode anyway.</p>
+
+<a name="177089515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177089515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177089515">Floris van Doorn (Oct 01 2019 at 19:30)</a>:</h4>
+<p>Lean will try to generate bytecode for them, because their type is non a proposition. You get an error when you remove <code>noncomputable</code>.</p>
+
+<a name="177089671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177089671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177089671">Simon Hudon (Oct 01 2019 at 19:32)</a>:</h4>
+<p>Does <code>noncomputable</code> infect the declarations that use them?</p>
+
+<a name="177089848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177089848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177089848">Yury G. Kudryashov (Oct 01 2019 at 19:34)</a>:</h4>
+<p>I had a similar error when one of the dependencies of a <code>def</code> was marked as <code>theorem</code> instead of <code>def</code>. It was something like <code>induction_on</code> with output in <code>Sort</code>.</p>
+
 
 {% endraw %}
 

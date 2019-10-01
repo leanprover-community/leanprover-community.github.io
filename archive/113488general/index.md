@@ -9,25 +9,25 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [introduce implication](77447introduceimplication.html) (2 messages, latest: Oct 01 2019 at 18:40)
+* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (8 messages, latest: Oct 01 2019 at 19:55)
 
-* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (2 messages, latest: Oct 01 2019 at 18:36)
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (50 messages, latest: Oct 01 2019 at 19:47)
 
-* [mathlib notes](99147mathlibnotes.html) (14 messages, latest: Oct 01 2019 at 17:35)
+* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (8 messages, latest: Oct 01 2019 at 19:41)
+
+* [noncomputable theorem](08268noncomputabletheorem.html) (22 messages, latest: Oct 01 2019 at 19:34)
+
+* [introduce implication](77447introduceimplication.html) (8 messages, latest: Oct 01 2019 at 19:33)
+
+* [mathlib notes](99147mathlibnotes.html) (16 messages, latest: Oct 01 2019 at 19:28)
 
 * [Lean in the wild](43625Leaninthewild.html) (348 messages, latest: Oct 01 2019 at 17:31)
-
-* [noncomputable theorem](08268noncomputabletheorem.html) (16 messages, latest: Oct 01 2019 at 17:23)
-
-* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (7 messages, latest: Oct 01 2019 at 15:56)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (3 messages, latest: Oct 01 2019 at 15:02)
 
 * [simps](83533simps.html) (17 messages, latest: Oct 01 2019 at 14:54)
 
 * [ITP 2019](78458ITP2019.html) (36 messages, latest: Oct 01 2019 at 09:14)
-
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (48 messages, latest: Sep 30 2019 at 17:28)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
