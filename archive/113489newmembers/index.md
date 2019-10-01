@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [sets in Lean](78231setsinLean.html) (2 messages, latest: Oct 01 2019 at 01:26)
+
 * [reference manual](64494referencemanual.html) (3 messages, latest: Sep 30 2019 at 17:35)
 
 * [simple pattern matching with lean4](58116simplepatternmatchingwithlean4.html) (20 messages, latest: Sep 30 2019 at 03:36)
