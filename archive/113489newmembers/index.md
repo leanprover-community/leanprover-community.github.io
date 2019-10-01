@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Type of the empty type?](85353Typeoftheemptytype.html) (14 messages, latest: Oct 01 2019 at 19:58)
+* [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html) (8 messages, latest: Oct 01 2019 at 20:29)
+
+* [Type of the empty type?](85353Typeoftheemptytype.html) (25 messages, latest: Oct 01 2019 at 20:20)
 
 * [sets in Lean](78231setsinLean.html) (42 messages, latest: Oct 01 2019 at 15:06)
 
@@ -904,8 +906,6 @@ permalink: archive/113489newmembers/index.html
 * [Backtick anguish](01196Backtickanguish.html) (9 messages, latest: Aug 16 2018 at 22:47)
 
 * [VS code unicode autocompletion without adding space](97734VScodeunicodeautocompletionwithoutaddingspace.html) (28 messages, latest: Aug 15 2018 at 17:12)
-
-* [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html) (7 messages, latest: Aug 15 2018 at 13:12)
 
 * [WLOG](18938WLOG.html) (19 messages, latest: Aug 14 2018 at 13:02)
 
