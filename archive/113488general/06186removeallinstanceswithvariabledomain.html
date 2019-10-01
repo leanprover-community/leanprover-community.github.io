@@ -98,6 +98,22 @@ quotient_group.has_coe : Π {α : Type u_1} [_inst_1 : group α] {s : set α} [_
 <p>These four  tests take ~10ms in total:</p>
 <p><a href="https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_coerce.lean#L49-L77" target="_blank" title="https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_coerce.lean#L49-L77">https://github.com/dselsam/lean4/blob/tabled_typeclasses/tests/lean/run/typeclass_coerce.lean#L49-L77</a></p>
 
+<a name="177102789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/remove%20all%20instances%20with%20variable%20domain/near/177102789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06186removeallinstanceswithvariabledomain.html#177102789">Patrick Massot (Oct 01 2019 at 22:16)</a>:</h4>
+<p>Thanks. Maybe I should try to learn how install Lean 4. Is this documented anywhere?</p>
+
+<a name="177103473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/remove%20all%20instances%20with%20variable%20domain/near/177103473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06186removeallinstanceswithvariabledomain.html#177103473">Daniel Selsam (Oct 01 2019 at 22:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span> Same instructions as Lean3. Note: Lean4 is still a long way from being ready for use. The typeclass procedure hasn't even been merged yet.</p>
+
+<a name="177105655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/remove%20all%20instances%20with%20variable%20domain/near/177105655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06186removeallinstanceswithvariabledomain.html#177105655">Floris van Doorn (Oct 01 2019 at 22:57)</a>:</h4>
+<blockquote>
+<p>The standard practice for these is to make them <code>has_coe_t</code></p>
+</blockquote>
+<p>Oh yes, thanks for reminding us. That is the correct way to go. </p>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>: this will mean in practice is that the coercion <code>α -&gt; quotient_group.quotient s</code> will still work, but you cannot go further (e.g. it will not go from <code>α</code> to a quotient of a quotient of <code>α</code>).</p>
+
 
 {% endraw %}
 

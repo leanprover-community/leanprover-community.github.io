@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (10 messages, latest: Oct 01 2019 at 21:53)
+* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (13 messages, latest: Oct 01 2019 at 22:57)
+
+* [introduce implication](77447introduceimplication.html) (10 messages, latest: Oct 01 2019 at 22:50)
 
 * [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
 
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (50 messages, latest: Oct 01 2019 at 19:47)
 
 * [noncomputable theorem](08268noncomputabletheorem.html) (22 messages, latest: Oct 01 2019 at 19:34)
-
-* [introduce implication](77447introduceimplication.html) (8 messages, latest: Oct 01 2019 at 19:33)
 
 * [mathlib notes](99147mathlibnotes.html) (16 messages, latest: Oct 01 2019 at 19:28)
 
