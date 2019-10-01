@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (48 messages, latest: Sep 30 2019 at 17:28)
+* [simps](83533simps.html) (9 messages, latest: Oct 01 2019 at 03:55)
 
-* [Lean in the wild](43625Leaninthewild.html) (343 messages, latest: Sep 30 2019 at 16:21)
+* [Lean in the wild](43625Leaninthewild.html) (344 messages, latest: Oct 01 2019 at 03:11)
+
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (48 messages, latest: Sep 30 2019 at 17:28)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [equatilies](88311equatilies.html) (3 messages, latest: Sep 28 2019 at 11:46)
 
 * [instance depth again](78859instancedepthagain.html) (3 messages, latest: Sep 28 2019 at 03:09)
-
-* [simps](83533simps.html) (8 messages, latest: Sep 27 2019 at 21:29)
 
 * [Flypitch](73316Flypitch.html) (18 messages, latest: Sep 27 2019 at 11:21)
 

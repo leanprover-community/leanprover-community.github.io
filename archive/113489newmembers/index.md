@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [sets in Lean](78231setsinLean.html) (5 messages, latest: Oct 01 2019 at 02:16)
+* [sets in Lean](78231setsinLean.html) (13 messages, latest: Oct 01 2019 at 03:29)
 
 * [reference manual](64494referencemanual.html) (3 messages, latest: Sep 30 2019 at 17:35)
 
