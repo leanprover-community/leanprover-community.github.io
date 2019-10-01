@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (7 messages, latest: Oct 01 2019 at 15:56)
+* [Lean in the wild](43625Leaninthewild.html) (347 messages, latest: Oct 01 2019 at 16:04)
 
-* [Lean in the wild](43625Leaninthewild.html) (346 messages, latest: Oct 01 2019 at 15:45)
+* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (7 messages, latest: Oct 01 2019 at 15:56)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (3 messages, latest: Oct 01 2019 at 15:02)
 
