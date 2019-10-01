@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (2 messages, latest: Oct 01 2019 at 13:35)
+* [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (3 messages, latest: Oct 01 2019 at 14:59)
+
+* [simps](83533simps.html) (17 messages, latest: Oct 01 2019 at 14:54)
 
 * [ITP 2019](78458ITP2019.html) (36 messages, latest: Oct 01 2019 at 09:14)
-
-* [simps](83533simps.html) (15 messages, latest: Oct 01 2019 at 04:50)
 
 * [Lean in the wild](43625Leaninthewild.html) (344 messages, latest: Oct 01 2019 at 03:11)
 

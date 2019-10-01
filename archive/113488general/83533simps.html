@@ -74,6 +74,21 @@ It is probably both the easiest write in a file (just adding a question mark to 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177023019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177023019">Scott Morrison (Oct 01 2019 at 04:50)</a>:</h4>
 <p>I'll stop in that case, and put up what I did so far.</p>
 
+<a name="177062429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177062429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177062429">Floris van Doorn (Oct 01 2019 at 14:48)</a>:</h4>
+<blockquote>
+<p>Also --- I noticed <code>@[simps]</code> fails if the definition uses a <code>let</code>. Not super important.</p>
+</blockquote>
+<p>I did not think about <code>let</code> expressions. What is the example in the library where it fails.</p>
+
+<a name="177063024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/simps/near/177063024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/83533simps.html#177063024">Floris van Doorn (Oct 01 2019 at 14:54)</a>:</h4>
+<blockquote>
+<p>I ran into one problem in <code>category_theory/products/associator.lean</code>, where <code>@[simps]</code> on <code>associator</code> and <code>inverse_associator</code> didn't seem to have the desired effect. Not quite sure why.</p>
+</blockquote>
+<p>It is currently the expected behavior that <code>@[simps]</code> produces different lemmas for this. <code>@[simps]</code> has no idea which structures you want to "go into" and which structures you don't, so currently it creates <code>associator_obj_fst</code>, <code>associator_obj_snd_fst</code> and <code>associator_obj_snd_snd</code> (and same for <code>map</code>). <br>
+At some point, you might be able to write <code>@[simps associator_obj associator_map]</code> to get your desired output, but that is currently not the case. For now you probably shouldn't use <code>@[simps]</code> on this declaration. If you have an algorithmic method of deciding when to not "go into" a structure, let me know.</p>
+
 
 {% endraw %}
 
