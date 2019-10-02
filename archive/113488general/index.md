@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (40 messages, latest: Oct 02 2019 at 17:30)
+
 * [paper about mathlib](90069paperaboutmathlib.html) (8 messages, latest: Oct 02 2019 at 16:50)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [obligatory xkcd](29767obligatoryxkcd.html) (2 messages, latest: Oct 02 2019 at 15:17)
 
 * [introduce implication](77447introduceimplication.html) (16 messages, latest: Oct 02 2019 at 11:17)
-
-* [ITP 2019](78458ITP2019.html) (39 messages, latest: Oct 02 2019 at 09:10)
 
 * [simps](83533simps.html) (19 messages, latest: Oct 02 2019 at 04:42)
 
