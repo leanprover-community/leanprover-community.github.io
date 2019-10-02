@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1366 messages, latest: Oct 02 2019 at 06:30)
+* [New wave](83678Newwave.html) (3 messages, latest: Oct 02 2019 at 13:33)
 
-* [New wave](83678Newwave.html) (2 messages, latest: Oct 01 2019 at 22:29)
+* [noob question(s)](52075noobquestions.html) (1366 messages, latest: Oct 02 2019 at 06:30)
 
 * [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html) (8 messages, latest: Oct 01 2019 at 20:29)
 
