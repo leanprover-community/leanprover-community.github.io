@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (40 messages, latest: Oct 02 2019 at 17:30)
+* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (14 messages, latest: Oct 02 2019 at 19:55)
 
-* [paper about mathlib](90069paperaboutmathlib.html) (8 messages, latest: Oct 02 2019 at 16:50)
+* [paper about mathlib](90069paperaboutmathlib.html) (9 messages, latest: Oct 02 2019 at 19:54)
+
+* [ITP 2019](78458ITP2019.html) (40 messages, latest: Oct 02 2019 at 17:30)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
 
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (51 messages, latest: Oct 02 2019 at 00:07)
 
 * [noncomputable theorem](08268noncomputabletheorem.html) (24 messages, latest: Oct 01 2019 at 23:03)
-
-* [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (13 messages, latest: Oct 01 2019 at 22:57)
 
 * [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
 
