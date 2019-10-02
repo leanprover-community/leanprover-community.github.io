@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1360 messages, latest: Oct 02 2019 at 01:35)
+
 * [New wave](83678Newwave.html) (2 messages, latest: Oct 01 2019 at 22:29)
 
 * [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html) (8 messages, latest: Oct 01 2019 at 20:29)
@@ -38,8 +40,6 @@ permalink: archive/113489newmembers/index.html
 * [(no topic)](79918notopic.html) (208 messages, latest: Sep 20 2019 at 18:13)
 
 * [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)
-
-* [noob question(s)](52075noobquestions.html) (1359 messages, latest: Sep 19 2019 at 22:44)
 
 * [infinite Ramsey theorem](49628infiniteRamseytheorem.html) (43 messages, latest: Sep 18 2019 at 17:21)
 
