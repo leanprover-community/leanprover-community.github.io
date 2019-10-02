@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (51 messages, latest: Oct 02 2019 at 00:07)
+
 * [noncomputable theorem](08268noncomputabletheorem.html) (24 messages, latest: Oct 01 2019 at 23:03)
 
 * [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (13 messages, latest: Oct 01 2019 at 22:57)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
 
 * [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (8 messages, latest: Oct 01 2019 at 19:55)
-
-* [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (50 messages, latest: Oct 01 2019 at 19:47)
 
 * [mathlib notes](99147mathlibnotes.html) (16 messages, latest: Oct 01 2019 at 19:28)
 
