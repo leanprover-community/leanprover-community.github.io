@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [introduce implication](77447introduceimplication.html) (11 messages, latest: Oct 02 2019 at 08:31)
+
 * [obligatory xkcd](29767obligatoryxkcd.html) (1 message, latest: Oct 02 2019 at 05:33)
 
 * [ITP 2019](78458ITP2019.html) (38 messages, latest: Oct 02 2019 at 04:59)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [noncomputable theorem](08268noncomputabletheorem.html) (24 messages, latest: Oct 01 2019 at 23:03)
 
 * [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (13 messages, latest: Oct 01 2019 at 22:57)
-
-* [introduce implication](77447introduceimplication.html) (10 messages, latest: Oct 01 2019 at 22:50)
 
 * [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
 
