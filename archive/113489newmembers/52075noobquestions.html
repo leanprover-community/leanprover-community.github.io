@@ -7688,6 +7688,35 @@ this : 2 ∣ b ^ 2 - a ^ 2
 ⊢ a ≡ b [MOD 2]
 </pre></div>
 
+<a name="177115336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/177115336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#177115336">Floris van Doorn (Oct 02 2019 at 02:01)</a>:</h4>
+<p>Your <code>have : 2 ∣ b^2 - a^2</code> statement is probably not what you want here. The <code>b^2</code> and <code>a^2</code> are natural numbers, so <code>-</code> is subtraction between natural numbers. To make the output a natural number, so we define it as 0 when <code>a^2 &gt; b^2</code>. This "truncated" subtraction is very often not what you want to use.</p>
+
+<a name="177115343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/177115343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#177115343">Floris van Doorn (Oct 02 2019 at 02:01)</a>:</h4>
+<p>So you want to give Lean a hint that you want to use integer subtraction:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span> <span class="n">data</span><span class="bp">.</span><span class="n">int</span><span class="bp">.</span><span class="n">all</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span><span class="err">^</span><span class="mi">2</span> <span class="bp">≡</span> <span class="n">b</span><span class="err">^</span><span class="mi">2</span> <span class="o">[</span><span class="n">MOD</span> <span class="mi">2</span><span class="o">]</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≡</span> <span class="n">b</span> <span class="o">[</span><span class="n">MOD</span> <span class="mi">2</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">assume</span> <span class="n">hyp</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="mi">2</span> <span class="err">∣</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span><span class="err">^</span><span class="mi">2</span> <span class="bp">-</span> <span class="n">a</span><span class="err">^</span><span class="mi">2</span><span class="o">,</span> <span class="n">exact_mod_cast</span> <span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">dvd_of_modeq</span> <span class="n">hyp</span><span class="o">,</span>
+  <span class="c1">-- rw [nat.modeq.modeq_iff_dvd] at hyp, norm_cast at hyp,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177115389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/177115389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#177115389">Floris van Doorn (Oct 02 2019 at 02:02)</a>:</h4>
+<p>I added an import, so that Lean knows about exponentiation of integers. You can alternatively also rewrite with <code>nat.modeq.modeq_iff_dvd</code> (see commented out code)</p>
+
+<a name="177115408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/177115408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#177115408">Floris van Doorn (Oct 02 2019 at 02:03)</a>:</h4>
+<p><code>norm_cast</code> and <code>exact_mod_cast</code> are useful tactics which will automatically deal with the cast from <code>nat</code> to <code>int</code>.</p>
+
+<a name="177115411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/177115411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#177115411">Floris van Doorn (Oct 02 2019 at 02:03)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#norm_cast" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#norm_cast">https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#norm_cast</a></p>
+
 
 {% endraw %}
 

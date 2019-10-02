@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (37 messages, latest: Oct 02 2019 at 02:21)
+
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (51 messages, latest: Oct 02 2019 at 00:07)
 
 * [noncomputable theorem](08268noncomputabletheorem.html) (24 messages, latest: Oct 01 2019 at 23:03)
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (3 messages, latest: Oct 01 2019 at 15:02)
 
 * [simps](83533simps.html) (17 messages, latest: Oct 01 2019 at 14:54)
-
-* [ITP 2019](78458ITP2019.html) (36 messages, latest: Oct 01 2019 at 09:14)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
