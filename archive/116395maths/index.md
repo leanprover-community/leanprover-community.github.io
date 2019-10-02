@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (1 message, latest: Oct 02 2019 at 18:58)
+
 * [bifunctor and End homs](44142bifunctorandEndhoms.html) (1 message, latest: Sep 29 2019 at 23:58)
 
 * [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (24 messages, latest: Sep 29 2019 at 22:52)
