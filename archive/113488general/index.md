@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [obligatory xkcd](29767obligatoryxkcd.html) (1 message, latest: Oct 02 2019 at 05:33)
+
 * [ITP 2019](78458ITP2019.html) (38 messages, latest: Oct 02 2019 at 04:59)
 
 * [simps](83533simps.html) (19 messages, latest: Oct 02 2019 at 04:42)
