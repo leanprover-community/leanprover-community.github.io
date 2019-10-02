@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (39 messages, latest: Oct 02 2019 at 09:10)
+* [introduce implication](77447introduceimplication.html) (12 messages, latest: Oct 02 2019 at 10:29)
 
-* [introduce implication](77447introduceimplication.html) (11 messages, latest: Oct 02 2019 at 08:31)
+* [ITP 2019](78458ITP2019.html) (39 messages, latest: Oct 02 2019 at 09:10)
 
 * [obligatory xkcd](29767obligatoryxkcd.html) (1 message, latest: Oct 02 2019 at 05:33)
 
