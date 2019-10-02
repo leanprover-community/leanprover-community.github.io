@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [introduce implication](77447introduceimplication.html) (12 messages, latest: Oct 02 2019 at 10:29)
+* [introduce implication](77447introduceimplication.html) (16 messages, latest: Oct 02 2019 at 11:17)
 
 * [ITP 2019](78458ITP2019.html) (39 messages, latest: Oct 02 2019 at 09:10)
 
