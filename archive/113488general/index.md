@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (37 messages, latest: Oct 02 2019 at 02:21)
+* [ITP 2019](78458ITP2019.html) (38 messages, latest: Oct 02 2019 at 04:59)
+
+* [simps](83533simps.html) (19 messages, latest: Oct 02 2019 at 04:42)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (51 messages, latest: Oct 02 2019 at 00:07)
 
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (348 messages, latest: Oct 01 2019 at 17:31)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (3 messages, latest: Oct 01 2019 at 15:02)
-
-* [simps](83533simps.html) (17 messages, latest: Oct 01 2019 at 14:54)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
