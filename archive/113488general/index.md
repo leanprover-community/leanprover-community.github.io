@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [paper about mathlib](90069paperaboutmathlib.html) (8 messages, latest: Oct 02 2019 at 16:50)
+
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
 
 * [obligatory xkcd](29767obligatoryxkcd.html) (2 messages, latest: Oct 02 2019 at 15:17)
-
-* [paper about mathlib](90069paperaboutmathlib.html) (1 message, latest: Oct 02 2019 at 15:08)
 
 * [introduce implication](77447introduceimplication.html) (16 messages, latest: Oct 02 2019 at 11:17)
 
