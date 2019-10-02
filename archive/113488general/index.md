@@ -9,11 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
+
+* [obligatory xkcd](29767obligatoryxkcd.html) (2 messages, latest: Oct 02 2019 at 15:17)
+
+* [paper about mathlib](90069paperaboutmathlib.html) (1 message, latest: Oct 02 2019 at 15:08)
+
 * [introduce implication](77447introduceimplication.html) (16 messages, latest: Oct 02 2019 at 11:17)
 
 * [ITP 2019](78458ITP2019.html) (39 messages, latest: Oct 02 2019 at 09:10)
-
-* [obligatory xkcd](29767obligatoryxkcd.html) (1 message, latest: Oct 02 2019 at 05:33)
 
 * [simps](83533simps.html) (19 messages, latest: Oct 02 2019 at 04:42)
 
@@ -30,8 +34,6 @@ permalink: archive/113488general/index.html
 * [mathlib notes](99147mathlibnotes.html) (16 messages, latest: Oct 01 2019 at 19:28)
 
 * [Lean in the wild](43625Leaninthewild.html) (348 messages, latest: Oct 01 2019 at 17:31)
-
-* [linear algebra documentation push](01636linearalgebradocumentationpush.html) (3 messages, latest: Oct 01 2019 at 15:02)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
