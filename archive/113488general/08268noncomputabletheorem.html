@@ -111,6 +111,14 @@ D:\projects\mathlib2\src\ring_theory\unique_factorization_domain.lean:146:18: wa
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177089848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177089848">Yury G. Kudryashov (Oct 01 2019 at 19:34)</a>:</h4>
 <p>I had a similar error when one of the dependencies of a <code>def</code> was marked as <code>theorem</code> instead of <code>def</code>. It was something like <code>induction_on</code> with output in <code>Sort</code>.</p>
 
+<a name="177105951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177105951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177105951">Yury G. Kudryashov (Oct 01 2019 at 23:01)</a>:</h4>
+<p>The reason is that <code>letI</code> hides the definition behind <code>let ... in ...</code>, and Lean can't understand that <code>classical.choice</code> is used only in the proofs.</p>
+
+<a name="177106045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20theorem/near/177106045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/08268noncomputabletheorem.html#177106045">Yury G. Kudryashov (Oct 01 2019 at 23:03)</a>:</h4>
+<p>A few ways to fix the problem: (a) use <code>haveI</code>; (b) move <code>letI</code> to the proof of <code>prime_factors</code>; (c) write <code>refine_struct { .. o }</code> before <code>letI</code>.</p>
+
 
 {% endraw %}
 
