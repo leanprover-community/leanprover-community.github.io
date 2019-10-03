@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [obligatory xkcd](29767obligatoryxkcd.html) (3 messages, latest: Oct 03 2019 at 00:45)
+* [obligatory xkcd](29767obligatoryxkcd.html) (7 messages, latest: Oct 03 2019 at 12:54)
 
 * [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (14 messages, latest: Oct 02 2019 at 19:55)
 
