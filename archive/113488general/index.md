@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [contrapositive](81947contrapositive.html) (44 messages, latest: Oct 03 2019 at 20:25)
+
 * [obligatory xkcd](29767obligatoryxkcd.html) (7 messages, latest: Oct 03 2019 at 12:54)
 
 * [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (14 messages, latest: Oct 02 2019 at 19:55)

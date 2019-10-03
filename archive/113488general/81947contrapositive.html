@@ -1,0 +1,239 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/81947contrapositive.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html">contrapositive</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177281656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177281656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177281656">Kevin Buzzard (Oct 03 2019 at 20:00)</a>:</h4>
+<p>A student has asked me how to prove <code>example (P Q : Prop) : (¬ Q → ¬ P) → (P → Q) </code> and <code>library_search</code> is failing me :-) What's this function called?</p>
+
+<a name="177281785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177281785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177281785">Simon Hudon (Oct 03 2019 at 20:01)</a>:</h4>
+<p>What if you assume <code>Q</code> is decidable and try again?</p>
+
+<a name="177282018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282018">Johan Commelin (Oct 03 2019 at 20:02)</a>:</h4>
+<p><code>by contrapose!, ...</code>?</p>
+
+<a name="177282048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282048">Kevin Buzzard (Oct 03 2019 at 20:03)</a>:</h4>
+<p>I'm assuming everything's decidable!</p>
+
+<a name="177282245"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282245" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282245">Kevin Buzzard (Oct 03 2019 at 20:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">Q</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">Q</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">library_search</span><span class="o">,</span>
+</pre></div>
+
+
+<p>still fails!</p>
+
+<a name="177282343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282343">Kevin Buzzard (Oct 03 2019 at 20:05)</a>:</h4>
+<p><code>  contrapose!, exact (and_comm _ _).1,</code> works :-/</p>
+
+<a name="177282469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282469">Patrick Massot (Oct 03 2019 at 20:07)</a>:</h4>
+<p><code>by tauto!</code></p>
+
+<a name="177282738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282738">Johan Commelin (Oct 03 2019 at 20:08)</a>:</h4>
+<p>It is a tautology after all <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span></p>
+
+<a name="177282746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282746">Patrick Massot (Oct 03 2019 at 20:08)</a>:</h4>
+<p>And <code>contrapose!, library_search</code> works too</p>
+
+<a name="177282770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282770">Patrick Massot (Oct 03 2019 at 20:08)</a>:</h4>
+<p>Even <code>by tauto</code> works</p>
+
+<a name="177282795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282795">Simon Hudon (Oct 03 2019 at 20:09)</a>:</h4>
+<p>and <code>apply not_imp_not</code> works too</p>
+
+<a name="177282865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282865">Patrick Massot (Oct 03 2019 at 20:10)</a>:</h4>
+<p>Looks like almost any random sequence of characters works then.</p>
+
+<a name="177282960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282960">Simon Hudon (Oct 03 2019 at 20:10)</a>:</h4>
+<p>That sounds like the right conclusion to draw</p>
+
+<a name="177282996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177282996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177282996">Rob Lewis (Oct 03 2019 at 20:11)</a>:</h4>
+<p><code>apply not_imp_not</code> doesn't work, it's an iff, and I think you hit the apply bug if you use <code>.1</code>.  <code>exact not_imp_not.1</code> works.</p>
+
+<a name="177283109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283109">Simon Hudon (Oct 03 2019 at 20:12)</a>:</h4>
+<p>Oh, have you tried <code>apply'</code>?</p>
+
+<a name="177283139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283139">Rob Lewis (Oct 03 2019 at 20:12)</a>:</h4>
+<p><code>apply'</code> leaves you with a mess.</p>
+
+<a name="177283156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283156">Rob Lewis (Oct 03 2019 at 20:12)</a>:</h4>
+<div class="codehilite"><pre><span></span>4 goals
+P Q : Prop,
+_inst_1 : decidable P,
+_inst_2 : decidable Q
+⊢ ¬((¬Q → ¬P) → P → Q) → ¬?m_1
+
+P Q : Prop,
+_inst_1 : decidable P,
+_inst_2 : decidable Q
+⊢ ?m_1
+
+P Q : Prop,
+_inst_1 : decidable P,
+_inst_2 : decidable Q
+⊢ Prop
+
+P Q : Prop,
+_inst_1 : decidable P,
+_inst_2 : decidable Q
+⊢ decidable ((¬Q → ¬P) → P → Q)
+</pre></div>
+
+<a name="177283219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283219">Patrick Massot (Oct 03 2019 at 20:13)</a>:</h4>
+<p><code>simp [not_imp_not]</code> works</p>
+
+<a name="177283298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283298">Reid Barton (Oct 03 2019 at 20:14)</a>:</h4>
+<p>Why are you all still writing random sequences of characters</p>
+
+<a name="177283316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283316">Patrick Massot (Oct 03 2019 at 20:14)</a>:</h4>
+<p>I sort of lost track of what we are trying to do.</p>
+
+<a name="177283329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283329">Rob Lewis (Oct 03 2019 at 20:14)</a>:</h4>
+<p>Heh. <code>cc</code> works.</p>
+
+<a name="177283334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283334">Reid Barton (Oct 03 2019 at 20:14)</a>:</h4>
+<p>Also, isn't library_search supposed to be able to apply iff lemmas?</p>
+
+<a name="177283343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283343">Patrick Massot (Oct 03 2019 at 20:14)</a>:</h4>
+<p>Isn't it a contest about finding as many proofs are possible?</p>
+
+<a name="177283370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283370">Rob Lewis (Oct 03 2019 at 20:15)</a>:</h4>
+<p>I think the problem is with <code>apply</code>, not <code>library_search</code>.</p>
+
+<a name="177283374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283374">Patrick Massot (Oct 03 2019 at 20:15)</a>:</h4>
+<p><code>by finish</code></p>
+
+<a name="177283403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283403">Patrick Massot (Oct 03 2019 at 20:15)</a>:</h4>
+<p><code>by clarify</code></p>
+
+<a name="177283413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283413">Patrick Massot (Oct 03 2019 at 20:15)</a>:</h4>
+<p><code>by safe</code></p>
+
+<a name="177283471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283471">Rob Lewis (Oct 03 2019 at 20:16)</a>:</h4>
+<p><code>tidy</code> takes a long time and reduces the goal to proving <code>Q</code>, that's not so good.</p>
+
+<a name="177283474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283474">Patrick Massot (Oct 03 2019 at 20:16)</a>:</h4>
+<p>Did I win?</p>
+
+<a name="177283499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283499">Rob Lewis (Oct 03 2019 at 20:16)</a>:</h4>
+<p><code>by cc</code> is the shortest!</p>
+
+<a name="177283649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283649">Simon Hudon (Oct 03 2019 at 20:17)</a>:</h4>
+<p>Can we write a shorter proof still?</p>
+
+<a name="177283654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283654">Patrick Massot (Oct 03 2019 at 20:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">i</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span> <span class="bp">`</span><span class="o">[</span><span class="n">cc</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">Q</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">Q</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="n">P</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">i</span>
+</pre></div>
+
+<a name="177283824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283824">Rob Lewis (Oct 03 2019 at 20:18)</a>:</h4>
+<p>Nah, the auxiliary def counts.</p>
+
+<a name="177283826"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283826" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283826">Simon Hudon (Oct 03 2019 at 20:18)</a>:</h4>
+<p>Does that count as shorter? You have to write a definition first</p>
+
+<a name="177283843"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283843" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283843">Patrick Massot (Oct 03 2019 at 20:18)</a>:</h4>
+<p>Let me open some PR.</p>
+
+<a name="177283854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177283854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177283854">Kevin Buzzard (Oct 03 2019 at 20:18)</a>:</h4>
+<blockquote>
+<p>and <code>apply not_imp_not</code> works too</p>
+</blockquote>
+<p>Chris is here and he swore blind that something with not_imp_not should work -- I don't know why it didn't show up. What I don't understand is why <code>library_search</code> doesn't help</p>
+
+<a name="177284112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284112">Johan Commelin (Oct 03 2019 at 20:20)</a>:</h4>
+<p>I think that <code>library_search</code> doesn't break iffs into implications</p>
+
+<a name="177284120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284120">Rob Lewis (Oct 03 2019 at 20:20)</a>:</h4>
+<p><code>library_search</code> doesn't work because of the <code>apply</code> bug. I'm not sure if it uses <code>apply'</code> instead, but it doesn't matter, because <code>apply'</code> is broken here too.</p>
+
+<a name="177284184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284184">Reid Barton (Oct 03 2019 at 20:21)</a>:</h4>
+<p>It doesn't use <code>apply'</code></p>
+
+<a name="177284452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284452">Rob Lewis (Oct 03 2019 at 20:23)</a>:</h4>
+<blockquote>
+<p>I think that <code>library_search</code> doesn't break iffs into implications</p>
+</blockquote>
+<p>I think it does. The tactic is definitely doing something with <code>iff</code>s.</p>
+
+<a name="177284518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284518">Reid Barton (Oct 03 2019 at 20:23)</a>:</h4>
+<p>There was a time when it didn't, though</p>
+
+<a name="177284614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284614">Johan Commelin (Oct 03 2019 at 20:24)</a>:</h4>
+<p>It tries <code>iff</code>s in the reverse direction</p>
+
+<a name="177284672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284672">Rob Lewis (Oct 03 2019 at 20:25)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">constants</span> <span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span>
+<span class="kn">axiom</span> <span class="n">ax</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">↔</span> <span class="n">B</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">A</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+<p>both work.</p>
+
+<a name="177284713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/contrapositive/near/177284713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81947contrapositive.html#177284713">Johan Commelin (Oct 03 2019 at 20:25)</a>:</h4>
+<p>Ok, I give up</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
