@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (15 messages, latest: Oct 03 2019 at 02:37)
+* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (16 messages, latest: Oct 03 2019 at 03:18)
 
 * [bifunctor and End homs](44142bifunctorandEndhoms.html) (1 message, latest: Sep 29 2019 at 23:58)
 
