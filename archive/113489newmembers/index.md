@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1368 messages, latest: Oct 02 2019 at 22:47)
+* [noob question(s)](52075noobquestions.html) (1372 messages, latest: Oct 03 2019 at 02:47)
 
 * [New wave](83678Newwave.html) (4 messages, latest: Oct 02 2019 at 17:16)
 
