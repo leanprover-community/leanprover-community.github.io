@@ -190,6 +190,46 @@ line 98 some cut and paste error</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/176025807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#176025807">Johan Commelin (Sep 18 2019 at 17:21)</a>:</h4>
 <p>This is reasonably sized already, so yes... PR this first</p>
 
+<a name="177266152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/177266152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#177266152">Jared Corduan (Oct 03 2019 at 17:20)</a>:</h4>
+<p>please let me know if chatting here is fine, or if it would be better to use github for this kind of thing.</p>
+<p>I had a few minutes today, so I tried to address one of the review comments on my ramsey theorem PR, namely reconciling my definition of <code>infinite</code> with that in <code>data.set.fintype</code> (namely <code>fintype α → false</code>).  One direction was easy for me, but the other I'm having a bit of trouble with.</p>
+<p>I named my definition <code>infinite'</code>, which isn't a great name. maybe normally you all just use namespaces to handle such separate definitions? anyway, at ITP 2019, <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> showed me some marvelous magic for pushing a negation through quantifiers, which is to use <code>simp [not_forall, not_exists]</code>. I can't get it to work in a different situation now, though, and was wondering what I am doing wrong. (I know how to manually prove the flip-flopping quantifiers, but this seems ugly...)</p>
+<div class="codehilite"><pre><span></span>def infinite&#39; (H : set ℕ) := ∀ x : ℕ, ∃ y : ℕ, x &lt; y ∧ y ∈ H
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>lemma infinite_equiv (H : set ℕ) (h : ¬ infinite&#39; H) : finite H :=
+begin
+  have hf : ∃ x, ∀ y, ¬ (x &lt; y ∧ y ∈ H),
+    simp [infinite&#39;, not_forall, not_exists] at h, -- why does Mario&#39;s magic not work here?
+    sorry,
+  simp at hf,
+  cases hf with x hx,
+  sorry,  -- is there a matlib theorem that says bounded sets of nats have fintype?
+end
+</pre></div>
+
+<a name="177266656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/177266656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#177266656">Mario Carneiro (Oct 03 2019 at 17:25)</a>:</h4>
+<p>There is a tactic for this BTW, which others will point out soon enough</p>
+
+<a name="177266769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/177266769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#177266769">Jared Corduan (Oct 03 2019 at 17:26)</a>:</h4>
+<p>ah, thank you! I just learned about the <code>PR reviews</code> channel and I'm talking with <span class="user-mention" data-user-id="112680">@Johan Commelin</span> there. :)</p>
+
+<a name="177266806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/177266806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#177266806">Mario Carneiro (Oct 03 2019 at 17:27)</a>:</h4>
+<p>The reason the <code>simp</code> line doesn't work is because you need to use classical reasoning to make the <code>not_forall</code> lemma trigger</p>
+
+<a name="177266816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/177266816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#177266816">Mario Carneiro (Oct 03 2019 at 17:27)</a>:</h4>
+<p>use <code>classical,</code> at the beginning of the proof</p>
+
+<a name="177266859"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/infinite%20Ramsey%20theorem/near/177266859" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/49628infiniteRamseytheorem.html#177266859">Jared Corduan (Oct 03 2019 at 17:27)</a>:</h4>
+<p>ah! thank you!</p>
+
 
 {% endraw %}
 

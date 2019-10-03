@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [infinite Ramsey theorem](49628infiniteRamseytheorem.html) (49 messages, latest: Oct 03 2019 at 17:27)
+
 * [Opening my first lean project](72726Openingmyfirstleanproject.html) (27 messages, latest: Oct 03 2019 at 15:53)
 
 * [sequence 1/n converges, "type mismatch"](45660sequence1nconvergestypemismatch.html) (3 messages, latest: Oct 03 2019 at 15:09)
@@ -46,8 +48,6 @@ permalink: archive/113489newmembers/index.html
 * [(no topic)](79918notopic.html) (208 messages, latest: Sep 20 2019 at 18:13)
 
 * [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)
-
-* [infinite Ramsey theorem](49628infiniteRamseytheorem.html) (43 messages, latest: Sep 18 2019 at 17:21)
 
 * [disjoint in algebra.big_operators](94440disjointinalgebrabigoperators.html) (11 messages, latest: Sep 18 2019 at 13:39)
 
