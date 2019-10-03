@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Opening my first lean project](72726Openingmyfirstleanproject.html) (26 messages, latest: Oct 03 2019 at 12:12)
+* [Opening my first lean project](72726Openingmyfirstleanproject.html) (27 messages, latest: Oct 03 2019 at 15:53)
+
+* [sequence 1/n converges, "type mismatch"](45660sequence1nconvergestypemismatch.html) (3 messages, latest: Oct 03 2019 at 15:09)
 
 * [noob question(s)](52075noobquestions.html) (1375 messages, latest: Oct 03 2019 at 08:30)
 
