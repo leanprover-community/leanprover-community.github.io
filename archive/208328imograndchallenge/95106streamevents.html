@@ -153,6 +153,50 @@ DETERMINE: distance(B,T) / distance(B,M)
 
 <p>Note that I also have a parser for that, so I can tell the types of the objects, possibly convert it to other format, etc.</p>
 
+<a name="177248253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/stream%20events/near/177248253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95106streamevents.html#177248253">Daniel Selsam (Oct 03 2019 at 14:14)</a>:</h4>
+<blockquote>
+<p>However, I feel the following issue of the formalization of the problem statement. There are some facts about the problem that are so obvious (but really nontrivial to formally proof) that it is unclear whether they are actually a part of the problem statement, or a part of the solution. I mean for example "given any initial line, there is exactly one windmill process".</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="133339">@Miroslav Olšák</span> I agree that these are big challenges. One approach might be to have a DSL for geometric processes, and then to encode the windmill process as a program in the DSL. </p>
+<div class="codehilite"><pre><span></span>windmill(S, s, l) =
+  while true:
+    l \gets rotateUntil(l, s, CLOCK_WISE, fun l =&gt; exists s&#39; \in S, s \neq s&#39; /\ on(s&#39;, l))
+    s \gets choose({s&#39; \in S : s&#39; \neq s /\ on(s&#39;, l)})
+</pre></div>
+
+
+<p>Here it would be provable that the <code>{s' \in S : ...}</code> set always has exactly one element (since by assumption |S| &gt; 1 and no three points are collinear) and thus the process is deterministic. The key insight required to solve the problem could then be cast as discovering an invariant of the program.</p>
+<p>I am not sure what kind of semantics such a hypothetical DSL would warrant, probably operational, and bottoming out into some geometric object parameterized by time. I am also not sure whether we would have already had such abstractions before the windmill year, or whether the abstractions we can build now will be good enough for future problems.</p>
+
+<a name="177249198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/stream%20events/near/177249198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95106streamevents.html#177249198">Daniel Selsam (Oct 03 2019 at 14:23)</a>:</h4>
+<blockquote>
+<p>As far as I know, the computational methods (Wu's method / Gröbner basis / ...) are stronger than any synthetic approach, and I have heard that they are capable of solving at least some of the IMO problems<br>
+...<br>
+Note that I also have a parser for that, so I can tell the types of the objects, possibly convert it to other format, etc.</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="133339">@Miroslav Olšák</span> I am very curious which existing problems can be solved by which existing tools. What do you think are the most relevant off-the-shelf tools to try?</p>
+
+<a name="177249634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/stream%20events/near/177249634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95106streamevents.html#177249634">Miroslav Olšák (Oct 03 2019 at 14:27)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="133339">Miroslav Olšák</span> Nice! What do you think about the current plan, of requiring human-assessment of the witnesses and only accepting witnesses that human judges would have accepted? See <a href="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean" target="_blank" title="https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean">https://github.com/IMO-grand-challenge/formal-encoding/blob/master/design/determine.lean</a> for more context.</p>
+</blockquote>
+<p>Well, putting a human into the loop is fine, it just rather postpones the problem than solves it (but it may be a good thing to postpone it). I also like the idea of whitelist of allowed operations for every individual problem where the problems available so far would help us prepare templates for such whitelists. But if a problem requiring something more complex emerged, we could simply modify the whitelist to allow what is necessary without providing much hints (it is actually also putting a human to the loop but to another place).</p>
+
+<a name="177250230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/stream%20events/near/177250230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95106streamevents.html#177250230">Miroslav Olšák (Oct 03 2019 at 14:33)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>As far as I know, the computational methods (Wu's method / Gröbner basis / ...) are stronger than any synthetic approach, and I have heard that they are capable of solving at least some of the IMO problems<br>
+...<br>
+Note that I also have a parser for that, so I can tell the types of the objects, possibly convert it to other format, etc.</p>
+</blockquote>
+<p><span class="user-mention silent" data-user-id="133339">Miroslav Olšák</span> I am very curious which existing problems can be solved by which existing tools. What do you think are the most relevant off-the-shelf tools to try?</p>
+</blockquote>
+<p>I don't know, perhaps we should ask people from the community aroung automated deduction in geometry. I don't have many contacts to them yet, For example, I exchanged a few e-mail with Pedro Quaresma (about synthetic approach), so you can try him.</p>
+
 
 {% endraw %}
 
