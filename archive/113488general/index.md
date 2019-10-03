@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Sphinx try it! with leanprover-community web editor](90281Sphinxtryitwithleanprovercommunitywebeditor.html) (4 messages, latest: Oct 03 2019 at 21:47)
+* [Sphinx try it! with leanprover-community web editor](90281Sphinxtryitwithleanprovercommunitywebeditor.html) (7 messages, latest: Oct 03 2019 at 22:52)
 
 * [contrapositive](81947contrapositive.html) (47 messages, latest: Oct 03 2019 at 21:34)
 

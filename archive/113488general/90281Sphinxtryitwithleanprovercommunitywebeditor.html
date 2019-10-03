@@ -31,6 +31,20 @@ permalink: archive/113488general/90281Sphinxtryitwithleanprovercommunitywebedito
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177291617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177291617">Bryan Gin-ge Chen (Oct 03 2019 at 21:47)</a>:</h4>
 <p>I can look into this. I think I changed the way that the code in the URL gets (un)escaped, and apparently newlines are encoded differently.</p>
 
+<a name="177292927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177292927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177292927">Bryan Gin-ge Chen (Oct 03 2019 at 22:03)</a>:</h4>
+<p>See if changing <a href="https://github.com/leanprover/theorem_proving_in_lean/blob/48e7584a01559530c2a4273a9094c62d3b00ccd4/lean_sphinx.py#L25" target="_blank" title="https://github.com/leanprover/theorem_proving_in_lean/blob/48e7584a01559530c2a4273a9094c62d3b00ccd4/lean_sphinx.py#L25">this line</a> to this works:</p>
+<div class="codehilite"><pre><span></span>    <span class="n">uri</span> <span class="o">+=</span> <span class="n">urlquote</span><span class="p">(</span><span class="n">code</span><span class="p">,</span> <span class="n">safe</span><span class="o">=</span><span class="s1">&#39;~()*!.</span><span class="se">\&#39;</span><span class="s1">&#39;</span><span class="p">)</span>
+</pre></div>
+
+<a name="177293228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177293228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177293228">Bryan Gin-ge Chen (Oct 03 2019 at 22:07)</a>:</h4>
+<p>Equals signs have to be %-encoded in the code URLs for the new web editor since it allows having either <code>code=something</code> or  <code>url=something</code> in the hash params of the URL.</p>
+
+<a name="177296071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177296071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177296071">Kevin Buzzard (Oct 03 2019 at 22:52)</a>:</h4>
+<p>Yes, I thought it was newlines, but you're right: my lines often end with <code>:=</code> and it's the <code>=</code> that gets truncated. Many thanks <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> for moving so fast on this! I'll chase this up again in a few days' time so I'm ready for this coming Thursday.</p>
+
 
 {% endraw %}
 
