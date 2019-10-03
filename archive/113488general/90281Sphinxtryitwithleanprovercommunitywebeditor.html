@@ -1,0 +1,37 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html">Sphinx try it! with leanprover-community web editor</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177291076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177291076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177291076">Kevin Buzzard (Oct 03 2019 at 21:40)</a>:</h4>
+<p>I have some Sphinx notes which use the same set-up as TPIL, and in particular there is Lean code with "Try it!" and people can click on "Try it!" and get taken to the official Lean web editor.</p>
+<p>I wanted to direct them instead to the Leanprover-community web editor, for better mathlib, so I changed a line in <code>lean_sphinx.py</code> : I changed this line</p>
+<p><a href="https://github.com/leanprover/theorem_proving_in_lean/blob/48e7584a01559530c2a4273a9094c62d3b00ccd4/lean_sphinx.py#L24" target="_blank" title="https://github.com/leanprover/theorem_proving_in_lean/blob/48e7584a01559530c2a4273a9094c62d3b00ccd4/lean_sphinx.py#L24">https://github.com/leanprover/theorem_proving_in_lean/blob/48e7584a01559530c2a4273a9094c62d3b00ccd4/lean_sphinx.py#L24</a></p>
+<p>from <code>uri = 'https://leanprover.github.io/live/3.4.1/#code='</code> to <code>uri = 'https://leanprover-community.github.io/lean-web-editor/#code='</code> and crossed my fingers. A simple test indicated that it worked, and it was only later when it was deployed and students were using it that I realised it wasn't working :-/ Only the first line of code was passed to the web editor; the rest was being lost. So is there some slight syntax difference between what the two web editors are expecting?</p>
+
+<a name="177291429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177291429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177291429">Kevin Buzzard (Oct 03 2019 at 21:44)</a>:</h4>
+<p>For example compare <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/ch1_and_or_props/prop_exercises.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/ch1_and_or_props/prop_exercises.html">this</a> (working) with <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html_broken/source/ch1_and_or_props/prop_exercises.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html_broken/source/ch1_and_or_props/prop_exercises.html">this</a> (not working). The only difference is that I compiled with the URL change in <code>lean_sphinx.py</code> -- the working one is Jeremy's version pointing to the classical Lean web editor, and the broken one creates links to the community web editor...which don't work :-(</p>
+
+<a name="177291452"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177291452" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177291452">Kevin Buzzard (Oct 03 2019 at 21:45)</a>:</h4>
+<p>Just click on "Try it!" in any of those files to see the phenomenon.</p>
+
+<a name="177291617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Sphinx%20try%20it%21%20with%20leanprover-community%20web%20editor/near/177291617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90281Sphinxtryitwithleanprovercommunitywebeditor.html#177291617">Bryan Gin-ge Chen (Oct 03 2019 at 21:47)</a>:</h4>
+<p>I can look into this. I think I changed the way that the code in the URL gets (un)escaped, and apparently newlines are encoded differently.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

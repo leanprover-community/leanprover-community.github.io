@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [contrapositive](81947contrapositive.html) (44 messages, latest: Oct 03 2019 at 20:25)
+* [Sphinx try it! with leanprover-community web editor](90281Sphinxtryitwithleanprovercommunitywebeditor.html) (4 messages, latest: Oct 03 2019 at 21:47)
+
+* [contrapositive](81947contrapositive.html) (47 messages, latest: Oct 03 2019 at 21:34)
 
 * [obligatory xkcd](29767obligatoryxkcd.html) (7 messages, latest: Oct 03 2019 at 12:54)
 
