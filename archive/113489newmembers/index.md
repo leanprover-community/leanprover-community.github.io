@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Opening my first lean project](72726Openingmyfirstleanproject.html) (20 messages, latest: Oct 03 2019 at 09:55)
+* [Opening my first lean project](72726Openingmyfirstleanproject.html) (22 messages, latest: Oct 03 2019 at 10:21)
 
 * [noob question(s)](52075noobquestions.html) (1375 messages, latest: Oct 03 2019 at 08:30)
 
