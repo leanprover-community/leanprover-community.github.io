@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [List of Unicode Input Terms?](74067ListofUnicodeInputTerms.html) (4 messages, latest: Oct 04 2019 at 06:51)
+* [Beginner question: inequality](54434Beginnerquestioninequality.html) (6 messages, latest: Oct 04 2019 at 07:56)
+
+* [List of Unicode Input Terms?](74067ListofUnicodeInputTerms.html) (7 messages, latest: Oct 04 2019 at 07:10)
 
 * [prime powers](31038primepowers.html) (7 messages, latest: Oct 04 2019 at 04:30)
 
