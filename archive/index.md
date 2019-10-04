@@ -22,7 +22,7 @@ permalink: archive/index.html
 
 * [Lean for teaching](187764Leanforteaching/index.html) (11 topics)
 
-* [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (10 topics)
+* [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (11 topics)
 
 * [concrete semantics](187724concretesemantics/index.html) (4 topics)
 
