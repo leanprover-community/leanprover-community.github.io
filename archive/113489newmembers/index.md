@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Apply rw to hypothesis](86403Applyrwtohypothesis.html) (7 messages, latest: Oct 04 2019 at 19:59)
+* [Apply rw to hypothesis](86403Applyrwtohypothesis.html) (8 messages, latest: Oct 04 2019 at 20:55)
 
 * [Beginner question: inequality](54434Beginnerquestioninequality.html) (17 messages, latest: Oct 04 2019 at 15:54)
 

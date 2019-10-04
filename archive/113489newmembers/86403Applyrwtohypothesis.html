@@ -61,6 +61,29 @@ end</p>
 <span class="kn">end</span>
 </pre></div>
 
+<a name="177378126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Apply%20rw%20to%20hypothesis/near/177378126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86403Applyrwtohypothesis.html#177378126">Patrick Massot (Oct 04 2019 at 20:55)</a>:</h4>
+<p>Johan's solution is fake tactic mode, it could be written as </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">h</span><span class="o">,</span> <span class="n">add_right_cancel</span> <span class="o">(</span><span class="n">add_right_cancel</span> <span class="n">h</span><span class="o">)</span>
+</pre></div>
+
+
+<p>(which is perfectly fine). More in the tactic mode spirit would be:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">add_right_cancel</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">add_right_cancel</span> <span class="n">h</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Although my taste in this case is to declare this as something Lean should just crush without asking any question:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">intros</span><span class="o">,</span>  <span class="n">linarith</span> <span class="o">}</span>
+</pre></div>
+
 
 {% endraw %}
 
