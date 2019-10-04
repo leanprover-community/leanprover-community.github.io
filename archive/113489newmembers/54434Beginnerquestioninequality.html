@@ -63,6 +63,50 @@ end</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177342058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177342058">Bryan Gin-ge Chen (Oct 04 2019 at 14:11)</a>:</h4>
 <p>Can you give a MWE of the crash? It might be something fixable in 3.5.0c.</p>
 
+<a name="177351639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177351639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177351639">Chu-Wee Lim (Oct 04 2019 at 15:46)</a>:</h4>
+<blockquote>
+<p>Aha, this lets me use my trick for the shortest proof ever:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≠</span> <span class="mi">1</span><span class="bp">.</span>
+</pre></div>
+
+
+</blockquote>
+<p>How does this work? I've never seen the period in Lean before.</p>
+
+<a name="177351844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177351844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177351844">Keeley Hoek (Oct 04 2019 at 15:48)</a>:</h4>
+<p>The period is sometimes required to terminate a statement if it is ambiguous whether the statement ends there or not (lean will otherwise proceed parsing, probably encounter the <code>lemma</code> beginning the next statement, interpret the result as a function application and throw an error)</p>
+
+<a name="177351888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177351888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177351888">Keeley Hoek (Oct 04 2019 at 15:49)</a>:</h4>
+<p>As for why it works... <span aria-label="shrug" class="emoji emoji-1f937" role="img" title="shrug">:shrug:</span> Maybe lean tries <code>dec_trivial</code> if you omit the definition of an <code>example</code>?</p>
+
+<a name="177352266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177352266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177352266">Keeley Hoek (Oct 04 2019 at 15:53)</a>:</h4>
+<p>Ah, got it</p>
+
+<a name="177352350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177352350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177352350">Keeley Hoek (Oct 04 2019 at 15:54)</a>:</h4>
+<p>Not is just shorthand for a map to false, so we are just defining a function to false using an empty inductive definition (the <code>match</code>-like syntax)</p>
+
+<a name="177352355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Beginner%20question%3A%20inequality/near/177352355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/54434Beginnerquestioninequality.html#177352355">Rob Lewis (Oct 04 2019 at 15:54)</a>:</h4>
+<p><code>0 ≠ 1</code> expands to <code>0 = 1 → false</code>. In general, you can define functions (or prove implications) using the equation compiler, e.g.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span>
+<span class="bp">|</span> <span class="n">ha</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>The equation compiler is more powerful than this example. If the variables are coming from an inductive type (<code>A</code>), you can destruct them using this syntax.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="bp">∨</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inl</span> <span class="n">ha</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">or</span><span class="bp">.</span><span class="n">inr</span> <span class="n">hb</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p><code>0 = 1</code> is an inductive proposition. There's only one way to prove an equality, <code>refl a : a = a</code>. But this can never be applied to prove <code>0 = 1</code>, since they're built with different constructors for <code>nat</code>. The equation compiler figures out that this case is impossible, so you're left with zero applicable cases for the pattern match.</p>
+
 
 {% endraw %}
 
