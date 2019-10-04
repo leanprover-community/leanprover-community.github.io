@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [sanity_check](06518sanitycheck.html) (21 messages, latest: Oct 04 2019 at 16:35)
+* [doc_blame](42231docblame.html) (9 messages, latest: Oct 04 2019 at 18:10)
 
-* [doc_blame](42231docblame.html) (8 messages, latest: Oct 04 2019 at 14:33)
+* [Projection is a def, should be lemma](21432Projectionisadefshouldbelemma.html) (4 messages, latest: Oct 04 2019 at 18:07)
+
+* [sanity_check](06518sanitycheck.html) (21 messages, latest: Oct 04 2019 at 16:35)
 
 * [contrapositive](81947contrapositive.html) (48 messages, latest: Oct 04 2019 at 02:21)
 
