@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Fourier transform](18841Fouriertransform.html) (4 messages, latest: Oct 04 2019 at 09:30)
+
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (16 messages, latest: Oct 03 2019 at 03:18)
 
 * [bifunctor and End homs](44142bifunctorandEndhoms.html) (1 message, latest: Sep 29 2019 at 23:58)
