@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Beginner question: inequality](54434Beginnerquestioninequality.html) (10 messages, latest: Oct 04 2019 at 11:58)
+* [Beginner question: inequality](54434Beginnerquestioninequality.html) (11 messages, latest: Oct 04 2019 at 14:11)
 
 * [List of Unicode Input Terms?](74067ListofUnicodeInputTerms.html) (7 messages, latest: Oct 04 2019 at 07:10)
 
