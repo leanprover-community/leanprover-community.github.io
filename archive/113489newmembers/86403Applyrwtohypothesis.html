@@ -34,6 +34,33 @@ begin<br>
 end</p>
 <p>Error message: rewrite tactic failed, lemma lhs is a metavariable</p>
 
+<a name="177371805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Apply%20rw%20to%20hypothesis/near/177371805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86403Applyrwtohypothesis.html#177371805">Johan Commelin (Oct 04 2019 at 19:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="242884">@Chu-Wee Lim</span> The problem is that <code>add_right_cancel</code> is not formulated as an <code>iff</code> statement. So you cannot use it like this.</p>
+
+<a name="177371981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Apply%20rw%20to%20hypothesis/near/177371981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86403Applyrwtohypothesis.html#177371981">Johan Commelin (Oct 04 2019 at 19:35)</a>:</h4>
+<p>You can do something like</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">assume</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">step1</span> <span class="o">:=</span> <span class="n">add_right_cancel</span> <span class="n">h</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">step2</span> <span class="o">:=</span> <span class="n">add_right_cancel</span> <span class="n">step1</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">step2</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177374041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Apply%20rw%20to%20hypothesis/near/177374041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/86403Applyrwtohypothesis.html#177374041">Floris van Doorn (Oct 04 2019 at 19:59)</a>:</h4>
+<p>If it were an <code>iff</code> statement, you could rewrite with it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">+</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">add_right_cancel_iff</span><span class="o">,</span> <span class="n">add_right_cancel_iff</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
