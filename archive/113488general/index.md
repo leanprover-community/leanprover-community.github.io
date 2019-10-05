@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simps](83533simps.html) (20 messages, latest: Oct 05 2019 at 20:57)
+
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (4 messages, latest: Oct 05 2019 at 19:40)
 
 * [Lean in the wild](43625Leaninthewild.html) (352 messages, latest: Oct 05 2019 at 18:57)
@@ -38,8 +40,6 @@ permalink: archive/113488general/index.html
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
 
 * [introduce implication](77447introduceimplication.html) (16 messages, latest: Oct 02 2019 at 11:17)
-
-* [simps](83533simps.html) (19 messages, latest: Oct 02 2019 at 04:42)
 
 * [Lean + Observable notebooks](66661LeanObservablenotebooks.html) (51 messages, latest: Oct 02 2019 at 00:07)
 
