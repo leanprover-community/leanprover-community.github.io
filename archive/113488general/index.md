@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (349 messages, latest: Oct 05 2019 at 03:22)
+
 * [sanity_check](06518sanitycheck.html) (25 messages, latest: Oct 05 2019 at 02:27)
 
 * [doc_blame](42231docblame.html) (9 messages, latest: Oct 04 2019 at 18:10)
@@ -42,8 +44,6 @@ permalink: archive/113488general/index.html
 * [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (8 messages, latest: Oct 01 2019 at 19:55)
 
 * [mathlib notes](99147mathlibnotes.html) (16 messages, latest: Oct 01 2019 at 19:28)
-
-* [Lean in the wild](43625Leaninthewild.html) (348 messages, latest: Oct 01 2019 at 17:31)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
