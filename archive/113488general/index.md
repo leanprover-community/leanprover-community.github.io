@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (350 messages, latest: Oct 05 2019 at 09:28)
+
 * [Sup of rats](82568Supofrats.html) (2 messages, latest: Oct 05 2019 at 08:15)
 
 * [wlog](90586wlog.html) (12 messages, latest: Oct 05 2019 at 05:07)
-
-* [Lean in the wild](43625Leaninthewild.html) (349 messages, latest: Oct 05 2019 at 03:22)
 
 * [sanity_check](06518sanitycheck.html) (25 messages, latest: Oct 05 2019 at 02:27)
 
