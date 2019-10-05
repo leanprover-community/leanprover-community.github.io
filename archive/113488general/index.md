@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [wlog](90586wlog.html) (12 messages, latest: Oct 05 2019 at 05:07)
+* [Sup of rats](82568Supofrats.html) (2 messages, latest: Oct 05 2019 at 08:15)
 
-* [Sup of rats](82568Supofrats.html) (1 message, latest: Oct 05 2019 at 04:14)
+* [wlog](90586wlog.html) (12 messages, latest: Oct 05 2019 at 05:07)
 
 * [Lean in the wild](43625Leaninthewild.html) (349 messages, latest: Oct 05 2019 at 03:22)
 
