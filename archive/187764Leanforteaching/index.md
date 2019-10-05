@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [Kevin 2019](57258Kevin2019.html) (3 messages, latest: Oct 05 2019 at 10:14)
+
 * [Next step after the Logic and Proofs](53097NextstepaftertheLogicandProofs.html) (52 messages, latest: Sep 30 2019 at 19:55)
 
 * [real numbers in Lean](60152realnumbersinLean.html) (1 message, latest: Sep 21 2019 at 16:46)

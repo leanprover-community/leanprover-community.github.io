@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [sanity_check](06518sanitycheck.html) (26 messages, latest: Oct 05 2019 at 10:22)
+
+* [Sup of rats](82568Supofrats.html) (4 messages, latest: Oct 05 2019 at 10:07)
+
 * [Lean in the wild](43625Leaninthewild.html) (350 messages, latest: Oct 05 2019 at 09:28)
 
-* [Sup of rats](82568Supofrats.html) (2 messages, latest: Oct 05 2019 at 08:15)
-
 * [wlog](90586wlog.html) (12 messages, latest: Oct 05 2019 at 05:07)
-
-* [sanity_check](06518sanitycheck.html) (25 messages, latest: Oct 05 2019 at 02:27)
 
 * [doc_blame](42231docblame.html) (9 messages, latest: Oct 04 2019 at 18:10)
 
