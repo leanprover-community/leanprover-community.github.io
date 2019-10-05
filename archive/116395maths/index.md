@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Fourier transform](18841Fouriertransform.html) (5 messages, latest: Oct 04 2019 at 15:23)
+* [Fourier transform](18841Fouriertransform.html) (6 messages, latest: Oct 05 2019 at 01:56)
 
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (16 messages, latest: Oct 03 2019 at 03:18)
 
