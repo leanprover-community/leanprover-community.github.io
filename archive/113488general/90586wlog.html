@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/90586wlog.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html">wlog</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177397136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397136">Johan Commelin (Oct 05 2019 at 04:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Can you explain to me how I should invoke <code>wlog</code> in this problem that is <em>clearly</em> (lol) symmetric:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">forty_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span><span class="bp">/</span><span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="bp">≤</span> <span class="mi">42</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">wlog</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177397183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397183">Johan Commelin (Oct 05 2019 at 04:20)</a>:</h4>
+<p>Note that <code>wlog : a ≤ b</code> succeeds after thinking for a long time.</p>
+
+<a name="177397189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397189">Johan Commelin (Oct 05 2019 at 04:20)</a>:</h4>
+<p>I wouldn't mind if it dumps some proof obligations in my face. I can then manually select a hammer to kill them off.</p>
+
+<a name="177397833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397833">Simon Hudon (Oct 05 2019 at 04:44)</a>:</h4>
+<p>What if you specified the variables on which the symmetry hinges? <code>wlog : a ≤ b ∧ b ≤ c using a b c,</code>?</p>
+
+<a name="177397904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177397904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177397904">Johan Commelin (Oct 05 2019 at 04:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> </p>
+<div class="codehilite"><pre><span></span>To generate cases at least two permutations are required, i.e. `using [x y, y x]` or exactly 0 or 2 variables
+</pre></div>
+
+<a name="177398067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/177398067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#177398067">Simon Hudon (Oct 05 2019 at 04:53)</a>:</h4>
+<p>You could do <code>wlog : a ≤ b ∧ b ≤ c using [a b c,b c a],</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
