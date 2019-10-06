@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (28 messages, latest: Oct 06 2019 at 18:58)
+* [mathlib notes](99147mathlibnotes.html) (17 messages, latest: Oct 06 2019 at 19:48)
+
+* [AI and theorem proving](41431AIandtheoremproving.html) (32 messages, latest: Oct 06 2019 at 19:27)
 
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (9 messages, latest: Oct 06 2019 at 18:52)
 
@@ -50,8 +52,6 @@ permalink: archive/113488general/index.html
 * [Kevin's talk at MSR](11883KevinstalkatMSR.html) (1 message, latest: Oct 01 2019 at 20:48)
 
 * [The axiomatic details of Lean.](09962TheaxiomaticdetailsofLean.html) (8 messages, latest: Oct 01 2019 at 19:55)
-
-* [mathlib notes](99147mathlibnotes.html) (16 messages, latest: Oct 01 2019 at 19:28)
 
 * [deriving instances](14561derivinginstances.html) (57 messages, latest: Sep 30 2019 at 14:47)
 
