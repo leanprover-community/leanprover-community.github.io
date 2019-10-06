@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [dfinsupp vs finsupp](16216dfinsuppvsfinsupp.html) (1 message, latest: Oct 06 2019 at 16:47)
+
 * [Fourier transform](18841Fouriertransform.html) (6 messages, latest: Oct 05 2019 at 01:56)
 
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (16 messages, latest: Oct 03 2019 at 03:18)
