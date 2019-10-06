@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (36 messages, latest: Oct 06 2019 at 20:48)
+* [AI and theorem proving](41431AIandtheoremproving.html) (37 messages, latest: Oct 06 2019 at 22:25)
 
 * [mathlib notes](99147mathlibnotes.html) (17 messages, latest: Oct 06 2019 at 19:48)
 
