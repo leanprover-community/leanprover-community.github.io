@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [dfinsupp vs finsupp](16216dfinsuppvsfinsupp.html) (3 messages, latest: Oct 06 2019 at 19:55)
+* [dfinsupp vs finsupp](16216dfinsuppvsfinsupp.html) (4 messages, latest: Oct 06 2019 at 21:22)
 
 * [Fourier transform](18841Fouriertransform.html) (6 messages, latest: Oct 05 2019 at 01:56)
 
