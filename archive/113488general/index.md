@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (23 messages, latest: Oct 06 2019 at 14:13)
+* [AI and theorem proving](41431AIandtheoremproving.html) (26 messages, latest: Oct 06 2019 at 17:50)
 
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (6 messages, latest: Oct 06 2019 at 13:30)
 
