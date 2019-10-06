@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Mechanization Roundtable](33179MechanizationRoundtable.html) (6 messages, latest: Oct 06 2019 at 13:30)
+
 * [Lean in the wild](43625Leaninthewild.html) (358 messages, latest: Oct 06 2019 at 10:07)
 
 * [simps](83533simps.html) (20 messages, latest: Oct 05 2019 at 20:57)
-
-* [Mechanization Roundtable](33179MechanizationRoundtable.html) (4 messages, latest: Oct 05 2019 at 19:40)
 
 * [sanity_check](06518sanitycheck.html) (36 messages, latest: Oct 05 2019 at 18:32)
 

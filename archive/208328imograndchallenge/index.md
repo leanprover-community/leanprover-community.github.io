@@ -9,6 +9,8 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
+* [problems: the source](55793problemsthesource.html) (12 messages, latest: Oct 06 2019 at 13:15)
+
 * [general discussion](95555generaldiscussion.html) (13 messages, latest: Oct 05 2019 at 09:31)
 
 * [Reading list/sample AI](10546ReadinglistsampleAI.html) (2 messages, latest: Oct 04 2019 at 04:09)
@@ -20,8 +22,6 @@ permalink: archive/208328IMOgrandchallenge/index.html
 * [How to help?](11834Howtohelp.html) (40 messages, latest: Sep 17 2019 at 19:40)
 
 * [Intermediate Language](92224IntermediateLanguage.html) (6 messages, latest: Sep 09 2019 at 14:18)
-
-* [problems: the source](55793problemsthesource.html) (11 messages, latest: Sep 09 2019 at 13:40)
 
 * [AI](35019AI.html) (5 messages, latest: Sep 07 2019 at 14:00)
 
