@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (26 messages, latest: Oct 06 2019 at 17:50)
+* [AI and theorem proving](41431AIandtheoremproving.html) (28 messages, latest: Oct 06 2019 at 18:58)
 
-* [Mechanization Roundtable](33179MechanizationRoundtable.html) (6 messages, latest: Oct 06 2019 at 13:30)
+* [Mechanization Roundtable](33179MechanizationRoundtable.html) (9 messages, latest: Oct 06 2019 at 18:52)
 
 * [Lean in the wild](43625Leaninthewild.html) (358 messages, latest: Oct 06 2019 at 10:07)
 
