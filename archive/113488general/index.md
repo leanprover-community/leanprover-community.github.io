@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [AI and theorem proving](41431AIandtheoremproving.html) (23 messages, latest: Oct 06 2019 at 14:13)
+
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (6 messages, latest: Oct 06 2019 at 13:30)
 
 * [Lean in the wild](43625Leaninthewild.html) (358 messages, latest: Oct 06 2019 at 10:07)
@@ -320,8 +322,6 @@ permalink: archive/113488general/index.html
 * [import all files](00808importallfiles.html) (16 messages, latest: Jul 29 2019 at 22:17)
 
 * [Recommended Lean version](98858RecommendedLeanversion.html) (1 message, latest: Jul 29 2019 at 01:17)
-
-* [AI and theorem proving](41431AIandtheoremproving.html) (18 messages, latest: Jul 28 2019 at 13:14)
 
 * [tactic question](62193tacticquestion.html) (65 messages, latest: Jul 27 2019 at 21:45)
 
