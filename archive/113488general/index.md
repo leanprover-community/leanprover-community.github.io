@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [sanity_check](06518sanitycheck.html) (38 messages, latest: Oct 07 2019 at 16:30)
+
 * [AI and formal mathematical languages.](66894AIandformalmathematicallanguages.html) (1 message, latest: Oct 07 2019 at 10:46)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (43 messages, latest: Oct 07 2019 at 04:37)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (358 messages, latest: Oct 06 2019 at 10:07)
 
 * [simps](83533simps.html) (20 messages, latest: Oct 05 2019 at 20:57)
-
-* [sanity_check](06518sanitycheck.html) (36 messages, latest: Oct 05 2019 at 18:32)
 
 * [Sup of rats](82568Supofrats.html) (4 messages, latest: Oct 05 2019 at 10:07)
 

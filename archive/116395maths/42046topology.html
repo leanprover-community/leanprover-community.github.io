@@ -25,6 +25,36 @@ I ask because I have an ugly, but working proof of the former lying around somew
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177527732" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177527732">Reid Barton (Oct 07 2019 at 15:03)</a>:</h4>
 <p>So I started trying to write module documentation for topology but (perhaps predictably) I ended up doing another reorganization--hopefully less drastic than the one from March. It is still in progress, but I will be posting a few preliminary PRs.</p>
 
+<a name="177536725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177536725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177536725">Patrick Massot (Oct 07 2019 at 16:35)</a>:</h4>
+<p>Great!</p>
+
+<a name="177537524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177537524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177537524">Reid Barton (Oct 07 2019 at 16:46)</a>:</h4>
+<p>Currently, <code>topology.constructions</code> is a big grab-bag which I found difficult to document. For example, it doesn't actually contain any constructions themselves, but rather theorems about them, but sometimes those theorems are somewhere else.<br>
+So here's what I'm trying.</p>
+<ul>
+<li>Move the definitions of product topology, etc. from near the end of <code>topology.order</code> to a new file (working name: <code>topology.basic_constructions</code>) which imports <code>topology.order</code>. Also move the most elementary facts about these constructions there (e.g., projections are continuous).</li>
+<li>Import <code>topology.basic_constructions</code> in most other modules, in order to move proofs like "if <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>⊂</mo><mi>X</mi></mrow><annotation encoding="application/x-tex">S \subset X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>T</mi><mo>⊂</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">T \subset Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.72243em;vertical-align:-0.0391em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">⊂</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> are compact, then <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>S</mi><mo>×</mo><mi>T</mi></mrow><annotation encoding="application/x-tex">S \times T</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.05764em;">S</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">×</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.13889em;">T</span></span></span></span> is compact" to near the definition of compactness.</li>
+<li>A few basic facts about products and so on (like <code>is_open_prod_iff'</code>) use concepts (like <code>is_open_map</code>) which are defined in later files, so those will remain in <code>topology.constructions</code> (which should perhaps be renamed), which will end up a hopefully much smaller grab-bag.</li>
+</ul>
+
+<a name="177537548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177537548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177537548">Reid Barton (Oct 07 2019 at 16:46)</a>:</h4>
+<p>So far I implemented this for <code>prod</code> and not any of the other constructions, but it appears to be going well.</p>
+
+<a name="177537621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177537621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177537621">Reid Barton (Oct 07 2019 at 16:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>, you likely tried something like this in the original refactoring; do you see any particular snags?</p>
+
+<a name="177538699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177538699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177538699">Reid Barton (Oct 07 2019 at 16:59)</a>:</h4>
+<p>I'm really tempted to rename all the space variables to <code>X Y Z W</code> first...</p>
+
+<a name="177538733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/topology/near/177538733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/42046topology.html#177538733">Reid Barton (Oct 07 2019 at 17:00)</a>:</h4>
+<p>since it will make this refactoring a lot easier</p>
+
 
 {% endraw %}
 
