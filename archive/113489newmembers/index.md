@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Getting started](52778Gettingstarted.html) (10 messages, latest: Oct 07 2019 at 21:51)
+
 * [resource for mutual lemmas](52711resourceformutuallemmas.html) (3 messages, latest: Oct 07 2019 at 13:55)
 
 * [simple arithmetic proofs](43662simplearithmeticproofs.html) (3 messages, latest: Oct 07 2019 at 12:27)
