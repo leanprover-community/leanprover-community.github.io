@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [topology](42046topology.html) (3 messages, latest: Oct 07 2019 at 15:03)
+
 * [Transitive classes for 3ʳᵈ iso thm](55969Transitiveclassesfor3isothm.html) (2 messages, latest: Oct 07 2019 at 13:53)
 
 * [dfinsupp vs finsupp](16216dfinsuppvsfinsupp.html) (4 messages, latest: Oct 06 2019 at 21:22)
@@ -620,8 +622,6 @@ permalink: archive/116395maths/index.html
 * [more limit stuff](30267morelimitstuff.html) (6 messages, latest: Dec 17 2018 at 05:53)
 
 * [2 variables functions](968692variablesfunctions.html) (7 messages, latest: Dec 16 2018 at 09:58)
-
-* [topology](42046topology.html) (2 messages, latest: Dec 14 2018 at 07:13)
 
 * [simple field theory](59434simplefieldtheory.html) (19 messages, latest: Dec 12 2018 at 18:35)
 
