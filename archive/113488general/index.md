@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [AI and theorem proving](41431AIandtheoremproving.html) (44 messages, latest: Oct 07 2019 at 18:56)
+* [sanity_check](06518sanitycheck.html) (39 messages, latest: Oct 07 2019 at 20:26)
 
-* [sanity_check](06518sanitycheck.html) (38 messages, latest: Oct 07 2019 at 16:30)
+* [AI and theorem proving](41431AIandtheoremproving.html) (44 messages, latest: Oct 07 2019 at 18:56)
 
 * [AI and formal mathematical languages.](66894AIandformalmathematicallanguages.html) (1 message, latest: Oct 07 2019 at 10:46)
 

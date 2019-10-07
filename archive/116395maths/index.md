@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topology](42046topology.html) (16 messages, latest: Oct 07 2019 at 18:28)
+* [topology](42046topology.html) (18 messages, latest: Oct 07 2019 at 20:52)
 
 * [Transitive classes for 3ʳᵈ iso thm](55969Transitiveclassesfor3isothm.html) (2 messages, latest: Oct 07 2019 at 13:53)
 
