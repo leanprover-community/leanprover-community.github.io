@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (14 messages, latest: Oct 07 2019 at 11:54)
+
+* [equality in lean](25510equalityinlean.html) (3 messages, latest: Oct 07 2019 at 11:41)
+
 * [Apply rw to hypothesis](86403Applyrwtohypothesis.html) (8 messages, latest: Oct 04 2019 at 20:55)
 
 * [Beginner question: inequality](54434Beginnerquestioninequality.html) (17 messages, latest: Oct 04 2019 at 15:54)
