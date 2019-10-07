@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [resource for mutual lemmas](52711resourceformutuallemmas.html) (1 message, latest: Oct 07 2019 at 12:53)
+* [resource for mutual lemmas](52711resourceformutuallemmas.html) (3 messages, latest: Oct 07 2019 at 13:55)
 
 * [simple arithmetic proofs](43662simplearithmeticproofs.html) (3 messages, latest: Oct 07 2019 at 12:27)
 

@@ -38,6 +38,23 @@ with val_list_eqb_eq : ∀ l0 l1, val_list_eqb l0 l1 = tt ↔ l0 = l1
 <code>invalid equations, must be followed by a command, '.', 'with', doc-string or EOF</code> on the <code>:=</code> and <code>invalid mutual declaration, 'val_list_eqb_eq' expected</code> on the <code>end</code>.</p>
 <p>I can't find much on <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion</a>, but maybe there are other resources ?</p>
 
+<a name="177520026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177520026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177520026">Rob Lewis (Oct 07 2019 at 13:42)</a>:</h4>
+<p>I think you have to use pattern matching notation in mutual declarations, e.g.</p>
+<div class="codehilite"><pre><span></span><span class="n">mutual</span> <span class="kn">theorem</span> <span class="n">val_eqb_eq</span><span class="o">,</span> <span class="n">val_list_eqb_eq</span>
+<span class="k">with</span> <span class="n">val_eqb_eq</span><span class="o">:</span> <span class="bp">∀</span> <span class="n">v0</span> <span class="n">v1</span><span class="o">,</span> <span class="n">val_eqb</span> <span class="n">v0</span> <span class="n">v1</span> <span class="bp">=</span> <span class="n">tt</span> <span class="bp">↔</span> <span class="n">v0</span> <span class="bp">=</span> <span class="n">v1</span>
+<span class="bp">|</span> <span class="n">v0</span> <span class="n">v1</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="k">with</span> <span class="n">val_list_eqb_eq</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">l0</span> <span class="n">l1</span><span class="o">,</span> <span class="n">val_list_eqb</span> <span class="n">l0</span> <span class="n">l1</span> <span class="bp">=</span> <span class="n">tt</span> <span class="bp">↔</span> <span class="n">l0</span> <span class="bp">=</span> <span class="n">l1</span>
+<span class="bp">|</span> <span class="n">l0</span> <span class="n">l1</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>But note that nested inductives (<code>VSequence : list value -&gt; value</code>) are not one of the strong points of Lean 3. There's limited support for this and you'll get frustrated quickly.</p>
+
+<a name="177521188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177521188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177521188">Vincent Siles (Oct 07 2019 at 13:55)</a>:</h4>
+<p>Damned... and I was thinking I could get away from Coq for that reason :D Thanks for the insight</p>
+
 
 {% endraw %}
 

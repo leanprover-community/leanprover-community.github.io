@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Transitive classes for 3ʳᵈ iso thm](55969Transitiveclassesfor3isothm.html) (2 messages, latest: Oct 07 2019 at 13:53)
+
 * [dfinsupp vs finsupp](16216dfinsuppvsfinsupp.html) (4 messages, latest: Oct 06 2019 at 21:22)
 
 * [Fourier transform](18841Fouriertransform.html) (6 messages, latest: Oct 05 2019 at 01:56)
