@@ -1,0 +1,44 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/52711resourceformutuallemmas.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html">resource for mutual lemmas</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177515778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/resource%20for%20mutual%20lemmas/near/177515778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52711resourceformutuallemmas.html#177515778">Vincent Siles (Oct 07 2019 at 12:53)</a>:</h4>
+<p>Using the doc I managed to define a  simple  value type </p>
+<div class="codehilite"><pre><span></span>inductive value : Type
+| VBoolean : bool -&gt; value
+| VInteger : int -&gt; value
+| VString : string -&gt; value
+| VSequence : list value -&gt; value
+| VNone : value
+</pre></div>
+
+
+<p>and  a boolean equality on it (by mutually defining <code>val_eqb</code> and <code>val_list_eqb</code>). Now I'm trying to prove some facts about it (my ultimate goal would be to provide an instance of <code>decidable_eq</code>), but I'm struggling to define mutual lemmas. So far I tried:</p>
+<div class="codehilite"><pre><span></span>mutual theorem val_eqb_eq, val_list_eqb_eq
+with val_eqb_eq: ∀ v0 v1, val_eqb v0 v1 = tt ↔ v0 = v1  :=
+begin
+sorry,
+end
+with val_list_eqb_eq : ∀ l0 l1, val_list_eqb l0 l1 = tt ↔ l0 = l1
+</pre></div>
+
+
+<p>which has several issues:<br>
+<code>invalid equations, must be followed by a command, '.', 'with', doc-string or EOF</code> on the <code>:=</code> and <code>invalid mutual declaration, 'val_list_eqb_eq' expected</code> on the <code>end</code>.</p>
+<p>I can't find much on <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#mutual-recursion</a>, but maybe there are other resources ?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

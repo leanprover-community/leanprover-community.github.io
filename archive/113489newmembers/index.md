@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (14 messages, latest: Oct 07 2019 at 11:54)
+* [resource for mutual lemmas](52711resourceformutuallemmas.html) (1 message, latest: Oct 07 2019 at 12:53)
+
+* [simple arithmetic proofs](43662simplearithmeticproofs.html) (3 messages, latest: Oct 07 2019 at 12:27)
+
+* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (15 messages, latest: Oct 07 2019 at 12:12)
 
 * [equality in lean](25510equalityinlean.html) (3 messages, latest: Oct 07 2019 at 11:41)
 
