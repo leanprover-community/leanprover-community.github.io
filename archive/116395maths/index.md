@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [on real numbers](14718onrealnumbers.html) (3 messages, latest: Oct 08 2019 at 07:34)
+* [on real numbers](14718onrealnumbers.html) (5 messages, latest: Oct 08 2019 at 08:26)
 
 * [topology](42046topology.html) (18 messages, latest: Oct 07 2019 at 20:52)
 
