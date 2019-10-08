@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [classical instance confusion](24697classicalinstanceconfusion.html) (3 messages, latest: Oct 08 2019 at 13:41)
+* [classical instance confusion](24697classicalinstanceconfusion.html) (19 messages, latest: Oct 08 2019 at 15:58)
+
+* [leanpkg upgrade not working for me](08406leanpkgupgradenotworkingforme.html) (8 messages, latest: Oct 08 2019 at 15:47)
+
+* [Lean not finding an instance of `category` from a `bundled`](88667Leannotfindinganinstanceofcategoryfromabundled.html) (19 messages, latest: Oct 08 2019 at 15:29)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (55 messages, latest: Oct 08 2019 at 13:27)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (6 messages, latest: Oct 08 2019 at 13:17)
-
-* [Lean not finding an instance of `category` from a `bundled`](88667Leannotfindinganinstanceofcategoryfromabundled.html) (16 messages, latest: Oct 08 2019 at 13:04)
 
 * [algebraic closure](74840algebraicclosure.html) (210 messages, latest: Oct 08 2019 at 10:30)
 

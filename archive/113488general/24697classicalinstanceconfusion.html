@@ -29,6 +29,70 @@ permalink: archive/113488general/24697classicalinstanceconfusion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177614962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177614962">Floris van Doorn (Oct 08 2019 at 13:41)</a>:</h4>
 <p>Do you have a MWE? I'm surprised that <code>classical.decidable_linear_order</code> appears in your goal. It's not even an instance, and doesn't seem to be used often in the library.</p>
 
+<a name="177624842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177624842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177624842">Reid Barton (Oct 08 2019 at 15:05)</a>:</h4>
+<p>Are you stuck proving this goal or would you just prefer that it not arise in the first place?</p>
+
+<a name="177625792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177625792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177625792">Johan Commelin (Oct 08 2019 at 15:15)</a>:</h4>
+<p>I'd rather not have it in the first place</p>
+
+<a name="177625814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177625814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177625814">Johan Commelin (Oct 08 2019 at 15:15)</a>:</h4>
+<p>I can <code>delta</code> those instances, and then <code>congr</code> proves it</p>
+
+<a name="177625845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177625845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177625845">Johan Commelin (Oct 08 2019 at 15:15)</a>:</h4>
+<p>But that's just ugly</p>
+
+<a name="177626275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177626275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177626275">Reid Barton (Oct 08 2019 at 15:19)</a>:</h4>
+<p>I was going to say you should prove/apply a lemma of the form "two DLOs are equal if their orderings are equal" and then use <code>refl</code></p>
+
+<a name="177626302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177626302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177626302">Reid Barton (Oct 08 2019 at 15:19)</a>:</h4>
+<p>At least, I assume that's what's going on here since I can't see how it could be otherwise</p>
+
+<a name="177626537"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177626537" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177626537">Johan Commelin (Oct 08 2019 at 15:21)</a>:</h4>
+<p>I was trying to apply a lemma, but it failed. So I used <code>convert</code>, and it worked, but gave me the goal to prove that these orders were equal.</p>
+
+<a name="177626629"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177626629" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177626629">Johan Commelin (Oct 08 2019 at 15:22)</a>:</h4>
+<p>It would be better if applying the lemma just worked.</p>
+
+<a name="177626646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177626646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177626646">Johan Commelin (Oct 08 2019 at 15:22)</a>:</h4>
+<p>But I don't know how to make sure that the right order gets inferred</p>
+
+<a name="177626692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177626692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177626692">Johan Commelin (Oct 08 2019 at 15:23)</a>:</h4>
+<p>I tried giving <code>classical.decidable_eq</code> priority <code>1</code> or <code>1001</code> but the problem remained.</p>
+
+<a name="177628329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177628329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177628329">Reid Barton (Oct 08 2019 at 15:38)</a>:</h4>
+<p>One of them probably uses <code>classical.prop_decidable</code> where the other uses <code>@decidable_eq_of_decidable_le _ _ classical.prop_decidable</code></p>
+
+<a name="177628403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177628403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177628403">Reid Barton (Oct 08 2019 at 15:39)</a>:</h4>
+<p><code>decidable_linear_order.lift</code>'s definition of <code>decidable_eq</code> might also be implicated</p>
+
+<a name="177628532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177628532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177628532">Reid Barton (Oct 08 2019 at 15:40)</a>:</h4>
+<p>(why is there both <code>classical.decidable_linear_order</code> and <code>classical.DLO</code>?)</p>
+
+<a name="177628773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177628773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177628773">Floris van Doorn (Oct 08 2019 at 15:42)</a>:</h4>
+<p>Do you know what declaration caused <code>classical.decidable_linear_order</code> to appear in your goal? That is likely the declaration we want to change.</p>
+
+<a name="177630027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177630027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177630027">Reid Barton (Oct 08 2019 at 15:56)</a>:</h4>
+<p>I think in any case we should also fix <code>decidable_linear_order.lift</code> and this may or may not avoid your issue</p>
+
+<a name="177630226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177630226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177630226">Floris van Doorn (Oct 08 2019 at 15:58)</a>:</h4>
+<p>You want to fix it by using <code>classical.prop_decidable</code>? That doesn't seem objectively better...</p>
+
 
 {% endraw %}
 
