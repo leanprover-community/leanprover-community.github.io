@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [ring bug? use bug?](40440ringbugusebug.html) (10 messages, latest: Oct 08 2019 at 09:46)
+* [ring bug? use bug?](40440ringbugusebug.html) (11 messages, latest: Oct 08 2019 at 10:03)
 
 * [on real numbers](14718onrealnumbers.html) (6 messages, latest: Oct 08 2019 at 09:22)
 

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (210 messages, latest: Oct 08 2019 at 10:30)
+
 * [AI and theorem proving](41431AIandtheoremproving.html) (54 messages, latest: Oct 08 2019 at 09:12)
 
 * [sanity_check](06518sanitycheck.html) (44 messages, latest: Oct 08 2019 at 01:01)
@@ -72,8 +74,6 @@ permalink: archive/113488general/index.html
 * [projects-using-mathlib](97964projectsusingmathlib.html) (14 messages, latest: Sep 26 2019 at 18:09)
 
 * [instance matching](78529instancematching.html) (10 messages, latest: Sep 26 2019 at 17:47)
-
-* [algebraic closure](74840algebraicclosure.html) (209 messages, latest: Sep 26 2019 at 15:15)
 
 * [rewriting and type class inference](35222rewritingandtypeclassinference.html) (94 messages, latest: Sep 26 2019 at 03:03)
 
