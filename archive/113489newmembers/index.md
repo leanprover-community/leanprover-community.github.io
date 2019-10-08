@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [resource for mutual lemmas](52711resourceformutuallemmas.html) (4 messages, latest: Oct 08 2019 at 00:50)
+* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (17 messages, latest: Oct 08 2019 at 06:57)
 
-* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (16 messages, latest: Oct 08 2019 at 00:49)
+* [resource for mutual lemmas](52711resourceformutuallemmas.html) (5 messages, latest: Oct 08 2019 at 06:56)
 
-* [Getting started](52778Gettingstarted.html) (27 messages, latest: Oct 07 2019 at 23:56)
+* [Getting started](52778Gettingstarted.html) (28 messages, latest: Oct 08 2019 at 06:21)
 
 * [simple arithmetic proofs](43662simplearithmeticproofs.html) (3 messages, latest: Oct 07 2019 at 12:27)
 
