@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [on real numbers](14718onrealnumbers.html) (5 messages, latest: Oct 08 2019 at 08:26)
+* [ring bug? use bug?](40440ringbugusebug.html) (10 messages, latest: Oct 08 2019 at 09:46)
+
+* [on real numbers](14718onrealnumbers.html) (6 messages, latest: Oct 08 2019 at 09:22)
 
 * [topology](42046topology.html) (18 messages, latest: Oct 07 2019 at 20:52)
 

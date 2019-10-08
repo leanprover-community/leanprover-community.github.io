@@ -1,0 +1,79 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/40440ringbugusebug.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html">ring bug? use bug?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177596666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177596666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177596666">Kevin Buzzard (Oct 08 2019 at 09:23)</a>:</h4>
+<p>Whatever's going on here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="c1">-- real numbers</span>
+
+<span class="kn">lemma</span> <span class="n">Sht2Question5a</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span> <span class="bp">=</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">use</span> <span class="mi">2</span> <span class="bp">-</span> <span class="n">x</span><span class="o">,</span>
+  <span class="c1">-- ⊢ x + (2 - x) = 2</span>
+  <span class="n">ring</span><span class="o">,</span> <span class="c1">-- nothing happened?</span>
+  <span class="n">ring</span><span class="o">,</span> <span class="c1">-- normal service resumed, goal closed</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>If I'd not tried this out beforehand then I would have looked very silly in front of 300 people.</p>
+
+<a name="177596747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177596747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177596747">Kevin Buzzard (Oct 08 2019 at 09:24)</a>:</h4>
+<p>Even with pp.all true I cannot figure out the problem. The first <code>ring</code> seems to not change the tactic state at all.</p>
+
+<a name="177596765"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177596765" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177596765">Kevin Buzzard (Oct 08 2019 at 09:24)</a>:</h4>
+<p><code>example (x : ℝ) : x + (2 - x) = 2 := by ring</code> works fine</p>
+
+<a name="177597142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177597142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177597142">Rob Lewis (Oct 08 2019 at 09:31)</a>:</h4>
+<p>I think <code>use</code> is leaving uninstantiated metavars in the goal. The first <code>ring</code> call is instantiating them but doing nothing else, then the second finishes the job.</p>
+
+<a name="177597146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177597146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177597146">Rob Lewis (Oct 08 2019 at 09:31)</a>:</h4>
+<p><code>existsi</code> instead of <code>use</code> works.</p>
+
+<a name="177597285"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177597285" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177597285">Kevin Buzzard (Oct 08 2019 at 09:33)</a>:</h4>
+<p>I thought <code>use</code> would be the culprit. I was surprised the metavars didn't manifest themselves in some way in the tactic state though.</p>
+
+<a name="177597288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177597288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177597288">Kevin Buzzard (Oct 08 2019 at 09:33)</a>:</h4>
+<p>Thanks Rob.</p>
+
+<a name="177597798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177597798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177597798">Rob Lewis (Oct 08 2019 at 09:41)</a>:</h4>
+<p>I don't see anything suspicious in <code>use</code> that would cause this. It's basically just a wrapper around <code>refine</code> and <code>fconstructor</code>. It feels a little hackish to just make <code>use</code> clean up the goal afterward, but I'm not sure how else to fix it.</p>
+
+<a name="177597853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177597853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177597853">Rob Lewis (Oct 08 2019 at 09:42)</a>:</h4>
+<p>Is there a "clean up metavars in the goal" tactic already? Something like this?</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">fix_goal</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">target</span> <span class="bp">&gt;&gt;=</span> <span class="n">instantiate_mvars</span> <span class="bp">&gt;&gt;=</span> <span class="n">change</span>
+</pre></div>
+
+<a name="177598135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177598135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177598135">Rob Lewis (Oct 08 2019 at 09:46)</a>:</h4>
+<blockquote>
+<p>I thought <code>use</code> would be the culprit. I was surprised the metavars didn't manifest themselves in some way in the tactic state though.</p>
+</blockquote>
+<p>The pretty printer instantiates metavars by default, you can disable it with <code>set_option pp.instantiate_mvars false</code> to see what's happening.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

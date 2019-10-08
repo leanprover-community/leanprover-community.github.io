@@ -1,0 +1,35 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/35296workingwithsymbolicrealnumbers.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/35296workingwithsymbolicrealnumbers.html">working with symbolic real numbers</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177596422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20symbolic%20real%20numbers/near/177596422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35296workingwithsymbolicrealnumbers.html#177596422">Luca Seemungal (Oct 08 2019 at 09:19)</a>:</h4>
+<p>How do I solve the following goal : </p>
+<div class="codehilite"><pre><span></span>ε : ℝ,
+H : ε &gt; 0,
+n : ℕ,
+H_1 : nat_ceil (1 / ε) &lt; n
+⊢ abs (↑n)⁻¹ &lt; ε
+</pre></div>
+
+
+<p>What sort of tactics would be useful here?</p>
+
+<a name="177597156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/working%20with%20symbolic%20real%20numbers/near/177597156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35296workingwithsymbolicrealnumbers.html#177597156">Kevin Buzzard (Oct 08 2019 at 09:31)</a>:</h4>
+<p>This is a nice question. The result is trivial mathematically, but I suspect it's still a bit of work in Lean. We have tactics which help with this sort of thing. My first instinct is to turn H_1 into an inequality about reals (there should be a tactic which does this now but I'm not up to speed with how it's done nowadays, I just remember sweating 2 years ago). Then there will be theorems in the library saying 1/e&lt;=(nat_ceil (1/e) : real) and 0&lt;x&lt;y -&gt; 1/y&lt;1/x which I would be tempted to apply manually. Then you should be reduced to abs (\u n)\-1 = 1/n which should hopefully be less of a pain. I would love it if someone could use tactics to make this less painful.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
