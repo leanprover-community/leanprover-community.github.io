@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean not finding an instance of `category` from a `bundled`](88667Leannotfindinganinstanceofcategoryfromabundled.html) (15 messages, latest: Oct 08 2019 at 12:58)
+
 * [algebraic closure](74840algebraicclosure.html) (210 messages, latest: Oct 08 2019 at 10:30)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (54 messages, latest: Oct 08 2019 at 09:12)

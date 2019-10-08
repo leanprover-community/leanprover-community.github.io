@@ -1,0 +1,81 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html">Lean not finding an instance of `category` from a `bundled`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177608044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177608044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177608044">Jack Crawford (Oct 08 2019 at 12:28)</a>:</h4>
+<p>I'm having a small spot of trouble constructing an instance of a category. We covered the Eilenberg-Steenrod axioms in my Algebraic Topology class earlier today and I wanted to have a crack at them. I've been fiddling around trying to define the category of topological pairs, and after a few messier attempts decided to try mimicking the approach from <code>topology.category.Top.basic</code>. </p>
+<p>I've defined a <code>class topological_pair (α : Type u) extends topological_space α := (subset  : set α)</code>,  <code>@[reducible] def Pairs : Type (u+1) := bundled topological_pair </code>, and even an <code>instance concrete_category_pair_map : unbundled_hom @pair_map</code>, but then on the subsequent few lines it seems that Lean is still failing to find an instance of <code>category Pairs</code> (and <code>has_hom Pairs</code>,  and <code>category_struct Pairs</code>), although I was under the impression that it was supposed to be able to infer this from its definition as a <code>bundled topological_pair</code> (there is an <code>instance : category (bundled c)</code> in <code>category_theory.concrete_category.bundled_hom</code>, which I have imported). Lean seems to have no trouble finding an instance of <code>category Top</code> just fine in <code>topology.category.Top.basic</code>, which has a near-identical setup, so I'm not sure where I'm going wrong.</p>
+<p>I've been fiddling with things for the last hour trying to fix this -- what am I misunderstanding?</p>
+<p>The errors are the <code>-- TODO</code> lines in this teeny file: <a href="https://github.com/jjcrawford/leanprover_experiments/blob/master/src/Eilenberg-Steenrod.lean" target="_blank" title="https://github.com/jjcrawford/leanprover_experiments/blob/master/src/Eilenberg-Steenrod.lean">https://github.com/jjcrawford/leanprover_experiments/blob/master/src/Eilenberg-Steenrod.lean</a></p>
+
+<a name="177608315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177608315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177608315">Johan Commelin (Oct 08 2019 at 12:31)</a>:</h4>
+<p>First thought: use <code>embedding</code></p>
+
+<a name="177608364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177608364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177608364">Johan Commelin (Oct 08 2019 at 12:32)</a>:</h4>
+<p>You probably don't want to tie yourself down to subsets</p>
+
+<a name="177608883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177608883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177608883">Jack Crawford (Oct 08 2019 at 12:38)</a>:</h4>
+<p>Thanks, this seems like good advice! I didn't know about <code>embedding</code>, and <code>set</code> just seemed sufficient for a first attempt (I expected to probably have to re-engineer it a few times later anyway). I'll try rewriting it in terms of embedding soon.</p>
+
+<a name="177608955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177608955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177608955">Kevin Buzzard (Oct 08 2019 at 12:39)</a>:</h4>
+<p>Another thought -- if you use <code>embedding</code> (and I like Johan think it's a good idea) then your <code>pair_map</code> could be a structure consisting of a map alpha-&gt;beta (why not just use regular maths notation like X and Y for this regular maths stuff?) and also a map U -&gt; V for the two subsets plus a proof that the diagram commutes.</p>
+
+<a name="177609262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177609262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177609262">Kevin Buzzard (Oct 08 2019 at 12:43)</a>:</h4>
+<p>As for the category theory stuff, I was hoping I could make some quick useful comment but I've never used categories seriously before so I can't. I can tell you what the error is though -- I think. As far as I can see <code>Pairs</code> is just some random type, I am not sure if it has a category structure, so when you start using the category theory arrows Lean doesn't know what to do with them.</p>
+
+<a name="177609574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177609574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177609574">Jack Crawford (Oct 08 2019 at 12:47)</a>:</h4>
+<p>^ yeah, this is definitely the case. I'm just not sure why Lean can't see the <code>instance : category (bundled c)</code> from <code>category_theory.concrete_category.bundled_hom</code>, since my <code>Pairs</code> is defined as a <code>bundled topological_pair</code> (and is even <code>@[reducible]</code>).</p>
+
+<a name="177609632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177609632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177609632">Jack Crawford (Oct 08 2019 at 12:48)</a>:</h4>
+<p>The category structure should come for free, at least, this is how it seemed to work for the definition of <code>Top</code></p>
+
+<a name="177609748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177609748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177609748">Jack Crawford (Oct 08 2019 at 12:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110087">@Scott Morrison</span> Could I bother you to have a quick look and see if you can identify why this isn't working?</p>
+
+<a name="177609868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177609868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177609868">Keeley Hoek (Oct 08 2019 at 12:50)</a>:</h4>
+<p><em>puts on Scott voice</em> I think you need a <code>topological_space</code> instance for <code>topological_pair</code>s</p>
+
+<a name="177610219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177610219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177610219">Scott Morrison (Oct 08 2019 at 12:54)</a>:</h4>
+<p>No, it's that you've written <code>Type</code> instead of <code>Type u</code> in a few places.</p>
+
+<a name="177610321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177610321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177610321">Jack Crawford (Oct 08 2019 at 12:55)</a>:</h4>
+<p>oh! I was wondering whether it might have to be some silly universe thing that was eluding me, thanks!</p>
+
+<a name="177610493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177610493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177610493">Jack Crawford (Oct 08 2019 at 12:57)</a>:</h4>
+<p>That absolutely did the job. I'll have to keep track of my <code>Type</code>s a little more closely.</p>
+
+<a name="177610621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177610621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177610621">Scott Morrison (Oct 08 2019 at 12:58)</a>:</h4>
+<p>You had only described the morphisms in the special case of pairs in the actual universe, but then you wanted to talk about the category of pairs in some ridiculous imaginary universe. One solution to this is to only use universe variables when you need to... (which might include contributing to mathlib, where you never know if someone will later want to use ridiculous universes. :-)</p>
+
+<a name="177610643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20not%20finding%20an%20instance%20of%20%60category%60%20from%20a%20%60bundled%60/near/177610643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/88667Leannotfindinganinstanceofcategoryfromabundled.html#177610643">Scott Morrison (Oct 08 2019 at 12:58)</a>:</h4>
+<p>The other solution is to get in the habit of using arbitrary universes from the beginning.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

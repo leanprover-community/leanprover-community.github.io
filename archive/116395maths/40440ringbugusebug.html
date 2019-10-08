@@ -146,6 +146,42 @@ permalink: archive/116395maths/40440ringbugusebug.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177606059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177606059">Rob Lewis (Oct 08 2019 at 12:00)</a>:</h4>
 <p>Assuming this issue with <code>use</code> is fixed, what are the other problems?</p>
 
+<a name="177606186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177606186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177606186">Rob Lewis (Oct 08 2019 at 12:01)</a>:</h4>
+<p><code>use</code> is somewhat more general than <code>existsi</code> because it supports things like this:</p>
+
+<a name="177606189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177606189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177606189">Rob Lewis (Oct 08 2019 at 12:01)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">use</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">],</span> <span class="c1">-- good</span>
+  <span class="c1">-- existsi [1, 2] -- fails</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">×</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">use</span> <span class="mi">1</span><span class="o">,</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">2 goals</span>
+<span class="cm">⊢ ℕ</span>
+
+<span class="cm">⊢ true-/</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177606208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177606208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177606208">Patrick Massot (Oct 08 2019 at 12:01)</a>:</h4>
+<p>I'll try to grep for <code>existsi</code> in the perfectoid project, and see if I can get a minimized version</p>
+
+<a name="177607468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177607468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177607468">Keeley Hoek (Oct 08 2019 at 12:20)</a>:</h4>
+<p>So long as there aren't really any core tactics which are big metavariable offenders, it seems reasonable to me that a convention to clean up after yourself is optimal. On the other hand, unless tactics are being called automatically (as in by another tactic lots of times), probably <code>instantiate_mvars</code> can't be thaaat expensive to pointlessly run?</p>
+<p>Oh, but I see your example makes <code>existsi</code> mess up <code>ring</code>. Gotcha.</p>
+
+<a name="177607917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177607917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177607917">Rob Lewis (Oct 08 2019 at 12:26)</a>:</h4>
+<p>Yeah, the problem is it's not always possible to clean up, as in the <code>existsi</code> example. I think it's reasonable to ask interactive tactics to clean up as much as they can. But that's not a guarantee.</p>
+
 
 {% endraw %}
 
