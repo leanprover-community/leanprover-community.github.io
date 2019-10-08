@@ -182,6 +182,30 @@ permalink: archive/116395maths/40440ringbugusebug.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177607917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177607917">Rob Lewis (Oct 08 2019 at 12:26)</a>:</h4>
 <p>Yeah, the problem is it's not always possible to clean up, as in the <code>existsi</code> example. I think it's reasonable to ask interactive tactics to clean up as much as they can. But that's not a guarantee.</p>
 
+<a name="177618503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177618503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177618503">Rob Lewis (Oct 08 2019 at 14:11)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/pull/1520" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1520">https://github.com/leanprover-community/mathlib/pull/1520</a></p>
+
+<a name="177618626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177618626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177618626">Patrick Massot (Oct 08 2019 at 14:12)</a>:</h4>
+<p>Did you try to figure out the performance impact on ring?</p>
+
+<a name="177618902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177618902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177618902">Rob Lewis (Oct 08 2019 at 14:14)</a>:</h4>
+<p>It should be negligible.</p>
+
+<a name="177619714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177619714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177619714">Keeley Hoek (Oct 08 2019 at 14:21)</a>:</h4>
+<p>I guess it'd be <code>O(number of verts in the expression tree)</code> if the number of metavariables is low, and there are some pretty cray cray typeclass-related expression traces, but probably not in a goal <code>ring</code> should eat I guess.</p>
+
+<a name="177621486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177621486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177621486">Rob Lewis (Oct 08 2019 at 14:34)</a>:</h4>
+<p>The calls to <code>instantiate_mvars_in_target</code> take at most half a millisecond each. I'll keep going and see if there are any weird long ones, but I bet this adds under half a second total.</p>
+
+<a name="177621941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177621941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177621941">Rob Lewis (Oct 08 2019 at 14:37)</a>:</h4>
+<p>It does actually add a few ms to <code>complex.exp_add</code>.</p>
+
 
 {% endraw %}
 
