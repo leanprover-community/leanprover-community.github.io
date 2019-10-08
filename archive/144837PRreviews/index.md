@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1521 rename type variables](499201521renametypevariables.html) (40 messages, latest: Oct 08 2019 at 19:59)
+
 * [1089 Commuting elements](520351089Commutingelements.html) (4 messages, latest: Oct 04 2019 at 12:06)
 
 * [#1460 Infinite Ramsey](625821460InfiniteRamsey.html) (9 messages, latest: Oct 03 2019 at 17:32)

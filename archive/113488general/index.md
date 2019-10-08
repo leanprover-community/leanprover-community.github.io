@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [fpow neg normal form](92916fpownegnormalform.html) (14 messages, latest: Oct 08 2019 at 19:50)
+
 * [classical instance confusion](24697classicalinstanceconfusion.html) (35 messages, latest: Oct 08 2019 at 18:38)
 
 * [leanpkg upgrade not working for me](08406leanpkgupgradenotworkingforme.html) (8 messages, latest: Oct 08 2019 at 15:47)
@@ -82,8 +84,6 @@ permalink: archive/113488general/index.html
 * [instance matching](78529instancematching.html) (10 messages, latest: Sep 26 2019 at 17:47)
 
 * [rewriting and type class inference](35222rewritingandtypeclassinference.html) (94 messages, latest: Sep 26 2019 at 03:03)
-
-* [fpow neg normal form](92916fpownegnormalform.html) (11 messages, latest: Sep 25 2019 at 20:47)
 
 * [open_locale vs open](15069openlocalevsopen.html) (6 messages, latest: Sep 25 2019 at 16:47)
 

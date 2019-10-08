@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (6 messages, latest: Oct 08 2019 at 13:57)
+* [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (7 messages, latest: Oct 08 2019 at 19:13)
 
 * [resource for mutual lemmas](52711resourceformutuallemmas.html) (18 messages, latest: Oct 08 2019 at 09:32)
 
