@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [resource for mutual lemmas](52711resourceformutuallemmas.html) (18 messages, latest: Oct 08 2019 at 09:32)
+* [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (6 messages, latest: Oct 08 2019 at 13:57)
 
-* [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (2 messages, latest: Oct 08 2019 at 09:31)
+* [resource for mutual lemmas](52711resourceformutuallemmas.html) (18 messages, latest: Oct 08 2019 at 09:32)
 
 * [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (17 messages, latest: Oct 08 2019 at 06:57)
 

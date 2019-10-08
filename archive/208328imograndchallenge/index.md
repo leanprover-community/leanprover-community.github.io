@@ -9,6 +9,8 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
+* [geometry problems](00977geometryproblems.html) (8 messages, latest: Oct 08 2019 at 13:35)
+
 * [Reading list/sample AI](10546ReadinglistsampleAI.html) (5 messages, latest: Oct 07 2019 at 18:04)
 
 * [problems: the source](55793problemsthesource.html) (12 messages, latest: Oct 06 2019 at 13:15)
@@ -28,8 +30,6 @@ permalink: archive/208328IMOgrandchallenge/index.html
 * [Team](97448Team.html) (3 messages, latest: Sep 07 2019 at 13:43)
 
 * [Inequalities](79086Inequalities.html) (2 messages, latest: Sep 07 2019 at 11:22)
-
-* [geometry problems](00977geometryproblems.html) (6 messages, latest: Sep 07 2019 at 09:12)
 
 
 {% include archive_update.html %}

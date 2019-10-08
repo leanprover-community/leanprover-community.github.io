@@ -9,11 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean not finding an instance of `category` from a `bundled`](88667Leannotfindinganinstanceofcategoryfromabundled.html) (15 messages, latest: Oct 08 2019 at 12:58)
+* [classical instance confusion](24697classicalinstanceconfusion.html) (3 messages, latest: Oct 08 2019 at 13:41)
+
+* [AI and theorem proving](41431AIandtheoremproving.html) (55 messages, latest: Oct 08 2019 at 13:27)
+
+* [linear algebra documentation push](01636linearalgebradocumentationpush.html) (6 messages, latest: Oct 08 2019 at 13:17)
+
+* [Lean not finding an instance of `category` from a `bundled`](88667Leannotfindinganinstanceofcategoryfromabundled.html) (16 messages, latest: Oct 08 2019 at 13:04)
 
 * [algebraic closure](74840algebraicclosure.html) (210 messages, latest: Oct 08 2019 at 10:30)
-
-* [AI and theorem proving](41431AIandtheoremproving.html) (54 messages, latest: Oct 08 2019 at 09:12)
 
 * [sanity_check](06518sanitycheck.html) (44 messages, latest: Oct 08 2019 at 01:01)
 
@@ -46,8 +50,6 @@ permalink: archive/113488general/index.html
 * [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (14 messages, latest: Oct 02 2019 at 19:55)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (9 messages, latest: Oct 02 2019 at 19:54)
-
-* [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
 
 * [introduce implication](77447introduceimplication.html) (16 messages, latest: Oct 02 2019 at 11:17)
 
