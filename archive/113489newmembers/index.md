@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Getting started](52778Gettingstarted.html) (20 messages, latest: Oct 07 2019 at 22:54)
+* [Getting started](52778Gettingstarted.html) (27 messages, latest: Oct 07 2019 at 23:56)
 
 * [resource for mutual lemmas](52711resourceformutuallemmas.html) (3 messages, latest: Oct 07 2019 at 13:55)
 
