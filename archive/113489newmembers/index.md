@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (17 messages, latest: Oct 08 2019 at 06:57)
+* [resource for mutual lemmas](52711resourceformutuallemmas.html) (17 messages, latest: Oct 08 2019 at 07:28)
 
-* [resource for mutual lemmas](52711resourceformutuallemmas.html) (5 messages, latest: Oct 08 2019 at 06:56)
+* [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (17 messages, latest: Oct 08 2019 at 06:57)
 
 * [Getting started](52778Gettingstarted.html) (28 messages, latest: Oct 08 2019 at 06:21)
 
