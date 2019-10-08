@@ -93,6 +93,54 @@ permalink: archive/113488general/24697classicalinstanceconfusion.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177630226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177630226">Floris van Doorn (Oct 08 2019 at 15:58)</a>:</h4>
 <p>You want to fix it by using <code>classical.prop_decidable</code>? That doesn't seem objectively better...</p>
 
+<a name="177630454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177630454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177630454">Reid Barton (Oct 08 2019 at 16:00)</a>:</h4>
+<p>No by making <code>decidable_eq</code> like the other fields</p>
+
+<a name="177630476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177630476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177630476">Reid Barton (Oct 08 2019 at 16:00)</a>:</h4>
+<p>(sorry for being cryptic, on phone)</p>
+
+<a name="177631328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177631328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177631328">Floris van Doorn (Oct 08 2019 at 16:08)</a>:</h4>
+<p>I'm not sure if you can have much improvement: <code>decidable_le</code> and <code>decidable_lt</code> reduces definitionally to <code>f x ? f y</code>, but <code>decidable_eq</code> doesn't, and you have to use injectivity of <code>f</code>.</p>
+
+<a name="177632507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177632507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177632507">Reid Barton (Oct 08 2019 at 16:20)</a>:</h4>
+<p>Oh I didn't look at this closely enough</p>
+
+<a name="177634065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634065">Reid Barton (Oct 08 2019 at 16:39)</a>:</h4>
+<p>Right, so I guess there is no way to make <code>decidable_linear_order.lift</code> of <code>classical.decidable_linear_order</code> (or anything similar defined using <code>classical.prop_decidable</code>) agree definitionally with using <code>classical.decidable_linear_order</code> directly.</p>
+
+<a name="177634738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634738">Johan Commelin (Oct 08 2019 at 16:47)</a>:</h4>
+<p>The problematic code is here <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/perfection.lean#L96" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/perfection.lean#L96">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/perfection.lean#L96</a></p>
+
+<a name="177634742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634742">Johan Commelin (Oct 08 2019 at 16:47)</a>:</h4>
+<p>I'm not very good at debugging this sort of thing.</p>
+
+<a name="177634836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634836">Reid Barton (Oct 08 2019 at 16:48)</a>:</h4>
+<p>Well, probably it has to do with one of the several places where you have <code>local attribute [instance, priority 0] classical.decidable_linear_order</code></p>
+
+<a name="177634869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634869">Simon Hudon (Oct 08 2019 at 16:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="111080">@Floris van Doorn</span> argues that priority 10 is better for inclusion in mathlib</p>
+
+<a name="177634899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634899">Johan Commelin (Oct 08 2019 at 16:49)</a>:</h4>
+<p>Aha, we should fix our project</p>
+
+<a name="177634991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177634991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177634991">Reid Barton (Oct 08 2019 at 16:50)</a>:</h4>
+<p>Well I don't think the priority is the relevant bit</p>
+
+<a name="177635375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/classical%20instance%20confusion/near/177635375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/24697classicalinstanceconfusion.html#177635375">Reid Barton (Oct 08 2019 at 16:54)</a>:</h4>
+<p>Using <code>classical.decidable_linear_order</code> less might help, but I'm not sure you should really try very hard to avoid this situation</p>
+
 
 {% endraw %}
 
