@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ITP 2019](78458ITP2019.html) (41 messages, latest: Oct 08 2019 at 00:07)
+
 * [sanity_check](06518sanitycheck.html) (43 messages, latest: Oct 07 2019 at 23:52)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (44 messages, latest: Oct 07 2019 at 18:56)
@@ -40,8 +42,6 @@ permalink: archive/113488general/index.html
 * [remove all instances with variable domain](06186removeallinstanceswithvariabledomain.html) (14 messages, latest: Oct 02 2019 at 19:55)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (9 messages, latest: Oct 02 2019 at 19:54)
-
-* [ITP 2019](78458ITP2019.html) (40 messages, latest: Oct 02 2019 at 17:30)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (5 messages, latest: Oct 02 2019 at 15:37)
 
