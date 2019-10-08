@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ITP 2019](78458ITP2019.html) (41 messages, latest: Oct 08 2019 at 00:07)
+* [sanity_check](06518sanitycheck.html) (44 messages, latest: Oct 08 2019 at 01:01)
 
-* [sanity_check](06518sanitycheck.html) (43 messages, latest: Oct 07 2019 at 23:52)
+* [ITP 2019](78458ITP2019.html) (41 messages, latest: Oct 08 2019 at 00:07)
 
 * [AI and theorem proving](41431AIandtheoremproving.html) (44 messages, latest: Oct 07 2019 at 18:56)
 
