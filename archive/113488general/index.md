@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [visualizations](70566visualizations.html) (15 messages, latest: Oct 09 2019 at 12:34)
+
 * [Type classes again](90385Typeclassesagain.html) (85 messages, latest: Oct 09 2019 at 11:18)
 
 * [classical instance confusion](24697classicalinstanceconfusion.html) (38 messages, latest: Oct 09 2019 at 11:15)
-
-* [visualizations](70566visualizations.html) (14 messages, latest: Oct 09 2019 at 11:12)
 
 * [Difficulty Installing mathlib](90922DifficultyInstallingmathlib.html) (5 messages, latest: Oct 09 2019 at 08:44)
 

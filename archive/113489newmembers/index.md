@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Getting started](52778Gettingstarted.html) (31 messages, latest: Oct 09 2019 at 12:34)
+
 * [help finding a lemma](30422helpfindingalemma.html) (197 messages, latest: Oct 09 2019 at 11:48)
 
 * [Dealing with ite](08051Dealingwithite.html) (3 messages, latest: Oct 09 2019 at 03:16)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [resource for mutual lemmas](52711resourceformutuallemmas.html) (18 messages, latest: Oct 08 2019 at 09:32)
 
 * [noob question: vscode and LEAN_PATH](65316noobquestionvscodeandLEANPATH.html) (17 messages, latest: Oct 08 2019 at 06:57)
-
-* [Getting started](52778Gettingstarted.html) (28 messages, latest: Oct 08 2019 at 06:21)
 
 * [simple arithmetic proofs](43662simplearithmeticproofs.html) (3 messages, latest: Oct 07 2019 at 12:27)
 
