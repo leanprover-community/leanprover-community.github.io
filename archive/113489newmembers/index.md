@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [help finding a lemma](30422helpfindingalemma.html) (178 messages, latest: Oct 09 2019 at 09:59)
+* [help finding a lemma](30422helpfindingalemma.html) (190 messages, latest: Oct 09 2019 at 10:19)
 
 * [Dealing with ite](08051Dealingwithite.html) (3 messages, latest: Oct 09 2019 at 03:16)
 

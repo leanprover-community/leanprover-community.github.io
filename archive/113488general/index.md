@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [visualizations](70566visualizations.html) (8 messages, latest: Oct 09 2019 at 09:31)
+* [visualizations](70566visualizations.html) (10 messages, latest: Oct 09 2019 at 10:55)
 
 * [Difficulty Installing mathlib](90922DifficultyInstallingmathlib.html) (5 messages, latest: Oct 09 2019 at 08:44)
 
