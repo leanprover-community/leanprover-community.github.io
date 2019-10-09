@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1521 rename type variables](499201521renametypevariables.html) (92 messages, latest: Oct 09 2019 at 19:42)
+* [#1521 rename type variables](499201521renametypevariables.html) (108 messages, latest: Oct 09 2019 at 20:59)
 
 * [#1528 sequential](152151528sequential.html) (9 messages, latest: Oct 09 2019 at 16:13)
 

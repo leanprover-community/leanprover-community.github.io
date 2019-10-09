@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (3 messages, latest: Oct 09 2019 at 20:23)
+
 * [open_locale scoping](40917openlocalescoping.html) (5 messages, latest: Oct 09 2019 at 17:40)
 
 * [visualizations](70566visualizations.html) (16 messages, latest: Oct 09 2019 at 15:58)
-
-* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (2 messages, latest: Oct 09 2019 at 15:25)
 
 * [Type classes again](90385Typeclassesagain.html) (97 messages, latest: Oct 09 2019 at 14:45)
 

@@ -459,6 +459,77 @@ permalink: archive/144837PRreviews/499201521renametypevariables.html
 </blockquote>
 <p>And you have to run it twice to compare!</p>
 
+<a name="177750313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177750313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177750313">Reid Barton (Oct 09 2019 at 20:00)</a>:</h4>
+<p>Luckily I didn't try to make it process anything in parallel so my laptop can do both runs at once</p>
+
+<a name="177751085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177751085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177751085">Reid Barton (Oct 09 2019 at 20:09)</a>:</h4>
+<p>So the script noticed that in <code>sesq_form.to_module</code> the order of the two universe parameters changed</p>
+
+<a name="177751126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177751126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177751126">Reid Barton (Oct 09 2019 at 20:09)</a>:</h4>
+<p>which is not that surprising, and almost certainly harmless?</p>
+
+<a name="177751286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177751286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177751286">Reid Barton (Oct 09 2019 at 20:11)</a>:</h4>
+<p>Oh, it's not the universe arguments order that changed</p>
+
+<a name="177751394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177751394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177751394">Reid Barton (Oct 09 2019 at 20:12)</a>:</h4>
+<p>it's the order of various implicit/type class arguments. It used to be</p>
+<div class="codehilite"><pre><span></span>sesq_form.to_module    Pi {a0 : Type.{u0}} [a1 : add_comm_group.{u0} a0] {a2 : Type.{u1}} [a3 : comm_ring.{u1} a2] [a4 : module.{u1 u0} a2 a0 (comm_ring.to_ring.{u1} a2 a3) a1] ...
+</pre></div>
+
+
+<p>and now it's a more logical</p>
+<div class="codehilite"><pre><span></span>sesq_form.to_module    Pi {a0 : Type.{u1}} [a1 : comm_ring.{u1} a0] {a2 : Type.{u0}} [a3 : add_comm_group.{u0} a2] [a4 : module.{u1 u0} a0 a2 (comm_ring.to_ring.{u1} a0 a1) a3] ...
+</pre></div>
+
+<a name="177751773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177751773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177751773">Johan Commelin (Oct 09 2019 at 20:16)</a>:</h4>
+<p>Was that the only change that it found?</p>
+
+<a name="177752061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177752061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177752061">Reid Barton (Oct 09 2019 at 20:17)</a>:</h4>
+<p>It's currently trying to emit what must be a rather large type</p>
+
+<a name="177752075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177752075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177752075">Rob Lewis (Oct 09 2019 at 20:17)</a>:</h4>
+<p>Hmm. It is a semantic change, but an improvement. We can take that one.</p>
+
+<a name="177752319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177752319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177752319">Rob Lewis (Oct 09 2019 at 20:20)</a>:</h4>
+<p>Reid, you're not checking all of mathlib, are you? It's easy enough to only run that on files in the linear_algebra directory.</p>
+
+<a name="177752322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177752322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177752322">Rob Lewis (Oct 09 2019 at 20:20)</a>:</h4>
+<p>I just noticed that wasn't in the script you posted.</p>
+
+<a name="177753865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177753865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177753865">Reid Barton (Oct 09 2019 at 20:38)</a>:</h4>
+<p>Indeed that optimization seems to be worth implementing</p>
+
+<a name="177753895"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177753895" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177753895">Reid Barton (Oct 09 2019 at 20:38)</a>:</h4>
+<p>How can I check whether a string contains another string?</p>
+
+<a name="177754050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177754050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177754050">Rob Lewis (Oct 09 2019 at 20:40)</a>:</h4>
+<p><code>sanity_check</code> is probably the easiest example of this to follow.</p>
+
+<a name="177754227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177754227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177754227">Reid Barton (Oct 09 2019 at 20:42)</a>:</h4>
+<p>oh, I have to use mathlib apparently</p>
+
+<a name="177755536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177755536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177755536">Reid Barton (Oct 09 2019 at 20:57)</a>:</h4>
+<p>Update: It's still slow</p>
+
+<a name="177755683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177755683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177755683">Rob Lewis (Oct 09 2019 at 20:59)</a>:</h4>
+<p>But slow on the 768 declarations in linear algebra instead of the 32098 in mathlib plus whatever's in core.</p>
+
 
 {% endraw %}
 
