@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Type classes again](90385Typeclassesagain.html) (89 messages, latest: Oct 09 2019 at 13:55)
+* [Type classes again](90385Typeclassesagain.html) (97 messages, latest: Oct 09 2019 at 14:45)
 
 * [classical instance confusion](24697classicalinstanceconfusion.html) (39 messages, latest: Oct 09 2019 at 13:23)
 
