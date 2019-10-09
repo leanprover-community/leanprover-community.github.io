@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [map_nat_cast](81259mapnatcast.html) (4 messages, latest: Oct 09 2019 at 09:20)
+
 * [ring bug? use bug?](40440ringbugusebug.html) (36 messages, latest: Oct 08 2019 at 15:21)
 
 * [on real numbers](14718onrealnumbers.html) (6 messages, latest: Oct 08 2019 at 09:22)

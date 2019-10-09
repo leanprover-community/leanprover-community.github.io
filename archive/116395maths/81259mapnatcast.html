@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/81259mapnatcast.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/81259mapnatcast.html">map_nat_cast</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177695643"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/map_nat_cast/near/177695643" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81259mapnatcast.html#177695643">Johan Commelin (Oct 09 2019 at 09:15)</a>:</h4>
+<p>I couldn't find the following in mathlib. Do we have it?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">map_nat_cast</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">β</span><span class="o">]</span>
+  <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">[</span><span class="n">is_semiring_hom</span> <span class="n">f</span><span class="o">]</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">ih</span><span class="o">,</span> <span class="o">{</span> <span class="n">exact</span> <span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_zero</span> <span class="n">f</span> <span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">cast_succ</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">cast_succ</span><span class="o">,</span> <span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_add</span> <span class="n">f</span><span class="o">,</span> <span class="n">ih</span><span class="o">,</span> <span class="n">is_semiring_hom</span><span class="bp">.</span><span class="n">map_one</span> <span class="n">f</span><span class="o">],</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177695954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/map_nat_cast/near/177695954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81259mapnatcast.html#177695954">Mario Carneiro (Oct 09 2019 at 09:18)</a>:</h4>
+<p>It looks like <code>eq_cast</code>, but with the definition <code>semiring_hom</code> explicitly</p>
+
+<a name="177696100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/map_nat_cast/near/177696100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81259mapnatcast.html#177696100">Johan Commelin (Oct 09 2019 at 09:20)</a>:</h4>
+<p>Aha... I guess we want both versions?</p>
+
+<a name="177696112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/map_nat_cast/near/177696112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81259mapnatcast.html#177696112">Johan Commelin (Oct 09 2019 at 09:20)</a>:</h4>
+<p>And even better: <code>ring_hom.map_nat_cast</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

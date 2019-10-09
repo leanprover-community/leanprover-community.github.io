@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [help finding a lemma](30422helpfindingalemma.html) (178 messages, latest: Oct 09 2019 at 09:59)
+
 * [Dealing with ite](08051Dealingwithite.html) (3 messages, latest: Oct 09 2019 at 03:16)
 
 * [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (7 messages, latest: Oct 08 2019 at 19:13)
@@ -354,8 +356,6 @@ permalink: archive/113489newmembers/index.html
 * [locally disabling instances](21606locallydisablinginstances.html) (7 messages, latest: Apr 02 2019 at 22:06)
 
 * [getting the defining equation of a recursor](43977gettingthedefiningequationofarecursor.html) (16 messages, latest: Apr 02 2019 at 18:40)
-
-* [help finding a lemma](30422helpfindingalemma.html) (174 messages, latest: Apr 02 2019 at 03:03)
 
 * ["Fix an arbitrary x."](38353Fixanarbitraryx.html) (7 messages, latest: Mar 31 2019 at 09:17)
 
