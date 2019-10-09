@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [open_locale scoping](40917openlocalescoping.html) (5 messages, latest: Oct 09 2019 at 17:40)
+
 * [visualizations](70566visualizations.html) (16 messages, latest: Oct 09 2019 at 15:58)
 
 * [Kevin's talk at MSR](11883KevinstalkatMSR.html) (2 messages, latest: Oct 09 2019 at 15:25)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [classical instance confusion](24697classicalinstanceconfusion.html) (39 messages, latest: Oct 09 2019 at 13:23)
 
 * [Difficulty Installing mathlib](90922DifficultyInstallingmathlib.html) (5 messages, latest: Oct 09 2019 at 08:44)
-
-* [open_locale scoping](40917openlocalescoping.html) (4 messages, latest: Oct 09 2019 at 02:24)
 
 * [fpow neg normal form](92916fpownegnormalform.html) (15 messages, latest: Oct 09 2019 at 01:05)
 
