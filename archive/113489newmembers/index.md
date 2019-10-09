@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Beginner question: inequality](54434Beginnerquestioninequality.html) (19 messages, latest: Oct 09 2019 at 16:56)
+* [Getting started](52778Gettingstarted.html) (32 messages, latest: Oct 09 2019 at 21:02)
 
-* [Getting started](52778Gettingstarted.html) (31 messages, latest: Oct 09 2019 at 12:34)
+* [Beginner question: inequality](54434Beginnerquestioninequality.html) (19 messages, latest: Oct 09 2019 at 16:56)
 
 * [help finding a lemma](30422helpfindingalemma.html) (197 messages, latest: Oct 09 2019 at 11:48)
 
