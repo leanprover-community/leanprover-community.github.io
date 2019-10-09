@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [fpow neg normal form](92916fpownegnormalform.html) (15 messages, latest: Oct 09 2019 at 01:05)
+* [open_locale scoping](40917openlocalescoping.html) (4 messages, latest: Oct 09 2019 at 02:24)
 
-* [open_locale scoping](40917openlocalescoping.html) (2 messages, latest: Oct 09 2019 at 01:04)
+* [visualizations](70566visualizations.html) (2 messages, latest: Oct 09 2019 at 02:11)
+
+* [fpow neg normal form](92916fpownegnormalform.html) (15 messages, latest: Oct 09 2019 at 01:05)
 
 * [classical instance confusion](24697classicalinstanceconfusion.html) (35 messages, latest: Oct 08 2019 at 18:38)
 
