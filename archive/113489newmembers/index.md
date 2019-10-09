@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Beginner question: inequality](54434Beginnerquestioninequality.html) (19 messages, latest: Oct 09 2019 at 16:56)
+
 * [Getting started](52778Gettingstarted.html) (31 messages, latest: Oct 09 2019 at 12:34)
 
 * [help finding a lemma](30422helpfindingalemma.html) (197 messages, latest: Oct 09 2019 at 11:48)
@@ -26,8 +28,6 @@ permalink: archive/113489newmembers/index.html
 * [equality in lean](25510equalityinlean.html) (3 messages, latest: Oct 07 2019 at 11:41)
 
 * [Apply rw to hypothesis](86403Applyrwtohypothesis.html) (8 messages, latest: Oct 04 2019 at 20:55)
-
-* [Beginner question: inequality](54434Beginnerquestioninequality.html) (17 messages, latest: Oct 04 2019 at 15:54)
 
 * [List of Unicode Input Terms?](74067ListofUnicodeInputTerms.html) (7 messages, latest: Oct 04 2019 at 07:10)
 
