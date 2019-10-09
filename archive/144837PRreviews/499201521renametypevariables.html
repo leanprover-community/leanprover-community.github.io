@@ -316,6 +316,149 @@ permalink: archive/144837PRreviews/499201521renametypevariables.html
 </blockquote>
 <p>Yeah, that should be right. I'm building the exports right now, but it's slow on my laptop.</p>
 
+<a name="177745561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177745561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177745561">Rob Lewis (Oct 09 2019 at 19:05)</a>:</h4>
+<p>Heh, one of the exports somehow has 4000 more lines than the other...</p>
+
+<a name="177745680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177745680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177745680">Rob Lewis (Oct 09 2019 at 19:06)</a>:</h4>
+<p>Either something changed, or it's not an accurate way to compare.</p>
+
+<a name="177745976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177745976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177745976">Reid Barton (Oct 09 2019 at 19:10)</a>:</h4>
+<p>Unfortunately if the exports are not the same then it's going to be very hard to tell how they differ</p>
+
+<a name="177746588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177746588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177746588">Reid Barton (Oct 09 2019 at 19:17)</a>:</h4>
+<p>Here is my attempt to alpha normalize everything. Does it look reasonable? It's quite slow to run on all of the core library already...</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span> <span class="n">expr</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">gen_name</span> <span class="o">(</span><span class="n">hint</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">:</span> <span class="n">state_t</span> <span class="n">nat</span> <span class="n">tactic</span> <span class="n">name</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">i</span> <span class="err">←</span> <span class="n">get</span><span class="o">,</span>
+   <span class="n">put</span> <span class="o">(</span><span class="n">i</span><span class="bp">+</span><span class="mi">1</span><span class="o">),</span>
+   <span class="n">return</span> <span class="o">(</span><span class="n">mk_simple_name</span> <span class="o">(</span><span class="n">hint</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">i</span><span class="o">))</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">alpha_normalize_aux</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">state_t</span> <span class="n">nat</span> <span class="n">tactic</span> <span class="n">expr</span>
+<span class="bp">|</span> <span class="n">e</span><span class="bp">@</span><span class="o">(</span><span class="n">var</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">e</span>
+<span class="bp">|</span> <span class="n">e</span><span class="bp">@</span><span class="o">(</span><span class="n">sort</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">e</span>
+<span class="bp">|</span> <span class="n">e</span><span class="bp">@</span><span class="o">(</span><span class="n">const</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">e</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">mvar</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">state_t</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">fail</span> <span class="s2">&quot;Unexpected mvar in type&quot;</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">local_const</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">state_t</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">fail</span> <span class="s2">&quot;Unexpected local_const in type&quot;</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">app</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">app</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₁</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₂</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">lam</span> <span class="bp">_</span> <span class="n">bi</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">lam</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">gen_name</span> <span class="s2">&quot;x&quot;</span> <span class="bp">&lt;*&gt;</span>
+    <span class="n">pure</span> <span class="n">bi</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₁</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₂</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">pi</span> <span class="bp">_</span> <span class="n">bi</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">pi</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">gen_name</span> <span class="s2">&quot;a&quot;</span> <span class="bp">&lt;*&gt;</span>
+    <span class="n">pure</span> <span class="n">bi</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₁</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₂</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">elet</span> <span class="bp">_</span> <span class="n">bi</span> <span class="n">e₁</span> <span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="n">elet</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">gen_name</span> <span class="s2">&quot;v&quot;</span> <span class="bp">&lt;*&gt;</span>
+    <span class="n">pure</span> <span class="n">bi</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₁</span> <span class="bp">&lt;*&gt;</span> <span class="n">alpha_normalize_aux</span> <span class="n">e₂</span>
+<span class="c1">-- I have no idea whether this macro case is reasonable</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">macro</span> <span class="n">m</span> <span class="n">es</span><span class="o">)</span> <span class="o">:=</span> <span class="n">macro</span> <span class="n">m</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="n">mmap</span> <span class="n">alpha_normalize_aux</span> <span class="n">es</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">alpha_normalize</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="n">expr</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">expr</span> <span class="o">:=</span>
+<span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="bp">&lt;</span><span class="err">$</span><span class="bp">&gt;</span> <span class="o">((</span><span class="n">alpha_normalize_aux</span> <span class="n">e</span><span class="o">)</span><span class="bp">.</span><span class="n">run</span> <span class="mi">0</span><span class="o">)</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">emit_declaration</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="k">let</span> <span class="n">ls</span> <span class="o">:=</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">range</span> <span class="n">d</span><span class="bp">.</span><span class="n">univ_params</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span><span class="bp">.</span><span class="n">map</span>
+       <span class="o">(</span><span class="bp">λ</span> <span class="n">i</span><span class="o">,</span> <span class="n">level</span><span class="bp">.</span><span class="n">param</span> <span class="o">(</span><span class="n">mk_simple_name</span> <span class="err">$</span> <span class="s2">&quot;u&quot;</span> <span class="bp">++</span> <span class="n">to_string</span> <span class="n">i</span><span class="o">)),</span>
+   <span class="n">t</span> <span class="err">←</span> <span class="n">d</span><span class="bp">.</span><span class="n">instantiate_type_univ_params</span> <span class="n">ls</span><span class="o">,</span>
+   <span class="n">t&#39;</span> <span class="err">←</span> <span class="n">alpha_normalize</span> <span class="n">t</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="o">(</span><span class="s2">&quot;failed on declaration &quot;</span> <span class="bp">++</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span><span class="bp">.</span><span class="n">to_string</span><span class="o">),</span>
+   <span class="n">vs</span> <span class="err">←</span> <span class="k">match</span> <span class="n">d</span> <span class="k">with</span>
+   <span class="bp">|</span> <span class="o">(</span><span class="n">declaration</span><span class="bp">.</span><span class="n">defn</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
+       <span class="n">v</span> <span class="err">←</span> <span class="n">d</span><span class="bp">.</span><span class="n">instantiate_value_univ_params</span> <span class="n">ls</span><span class="o">,</span>
+       <span class="n">v&#39;</span> <span class="err">←</span> <span class="n">alpha_normalize</span> <span class="n">v</span> <span class="bp">&lt;|&gt;</span> <span class="n">fail</span> <span class="o">(</span><span class="s2">&quot;failed on declaration &quot;</span> <span class="bp">++</span> <span class="n">d</span><span class="bp">.</span><span class="n">to_name</span><span class="bp">.</span><span class="n">to_string</span><span class="o">),</span>
+       <span class="n">return</span> <span class="n">v&#39;</span><span class="bp">.</span><span class="n">to_string</span>
+   <span class="bp">|</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">return</span> <span class="s2">&quot;_&quot;</span>
+   <span class="kn">end</span><span class="o">,</span>
+   <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span> <span class="o">(</span><span class="n">d</span><span class="bp">.</span><span class="n">to_name</span><span class="bp">.</span><span class="n">to_string</span> <span class="bp">++</span> <span class="s2">&quot;</span><span class="err">\</span><span class="s2">t&quot;</span> <span class="bp">++</span> <span class="n">t&#39;</span><span class="bp">.</span><span class="n">to_string</span> <span class="bp">++</span> <span class="s2">&quot;</span><span class="err">\</span><span class="s2">t&quot;</span> <span class="bp">++</span> <span class="n">vs</span><span class="o">),</span>
+   <span class="n">return</span> <span class="o">()</span>
+
+<span class="n">meta</span> <span class="n">def</span> <span class="n">emit_all</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">unit</span> <span class="o">:=</span>
+<span class="n">do</span> <span class="n">e</span> <span class="err">←</span> <span class="n">get_env</span><span class="o">,</span>
+   <span class="n">e</span><span class="bp">.</span><span class="n">fold</span> <span class="o">(</span><span class="n">return</span> <span class="o">())</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">d</span> <span class="n">m</span><span class="o">,</span> <span class="n">emit_declaration</span> <span class="n">d</span> <span class="bp">&gt;&gt;</span> <span class="n">m</span><span class="o">)</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">all</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">unit</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">emit_all</span><span class="o">,</span>
+  <span class="n">constructor</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177746651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177746651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177746651">Reid Barton (Oct 09 2019 at 19:18)</a>:</h4>
+<p>oh, actually it only took 43 seconds to run on core</p>
+
+<a name="177746856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177746856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177746856">Reid Barton (Oct 09 2019 at 19:21)</a>:</h4>
+<p>The idea is to run this on both mathlibs, then sort and compare the outputs. I guess this only checks the types currently, not the values (for definitions).</p>
+
+<a name="177747735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177747735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177747735">Rob Lewis (Oct 09 2019 at 19:31)</a>:</h4>
+<p>The sensitivity proof is very slightly broken but not caused by our changes.</p>
+
+<a name="177747904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177747904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177747904">Rob Lewis (Oct 09 2019 at 19:33)</a>:</h4>
+<p>Incidentally, I just noticed something. Tooltips in VSCode specialize universe levels when you hover over declarations to see the type, but only sometimes. Hover over <code>vector_space.dim</code> in the following and compare.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">f</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">10</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">vector_space</span><span class="bp">.</span><span class="n">dim</span> <span class="n">ℝ</span> <span class="n">α</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span> <span class="n">trivial</span>
+<span class="n">def</span> <span class="n">g</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="mi">10</span><span class="o">}</span>  <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">vector_space</span> <span class="n">ℝ</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="n">vector_space</span><span class="bp">.</span><span class="n">dim</span> <span class="n">ℝ</span> <span class="n">α</span>
+</pre></div>
+
+<a name="177748058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748058">Rob Lewis (Oct 09 2019 at 19:35)</a>:</h4>
+<p>I think that script looks reasonable? The output will be enormous.</p>
+
+<a name="177748122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748122">Reid Barton (Oct 09 2019 at 19:36)</a>:</h4>
+<p>I modified my tactic to emit the values of definitions as well.</p>
+
+<a name="177748145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748145">Patrick Massot (Oct 09 2019 at 19:36)</a>:</h4>
+<p>We really need to PR that sensitivity thing to mathlib's example folder</p>
+
+<a name="177748207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748207">Rob Lewis (Oct 09 2019 at 19:37)</a>:</h4>
+<p>Yeah, it's been on my todo list for ages but hasn't reached the top.</p>
+
+<a name="177748209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748209">Reid Barton (Oct 09 2019 at 19:37)</a>:</h4>
+<p>some of the individual types it outputs are around a megabyte</p>
+
+<a name="177748250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748250">Rob Lewis (Oct 09 2019 at 19:37)</a>:</h4>
+<blockquote>
+<p>some of the individual types it outputs are around a megabyte</p>
+</blockquote>
+<p>Sounds about right!</p>
+
+<a name="177748305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748305">Patrick Massot (Oct 09 2019 at 19:38)</a>:</h4>
+<blockquote>
+<p>Yeah, it's been on my todo list for ages but hasn't reached the top.</p>
+</blockquote>
+<p>Same here...</p>
+
+<a name="177748318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748318">Reid Barton (Oct 09 2019 at 19:38)</a>:</h4>
+<p>It still takes less than a minute on core, so hopefully it will take less than a day on mathlib?</p>
+
+<a name="177748342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748342">Rob Lewis (Oct 09 2019 at 19:38)</a>:</h4>
+<p>The breakage in the sensitivity proof was really minor, but one of the breaks I don't understand.</p>
+
+<a name="177748359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748359">Rob Lewis (Oct 09 2019 at 19:39)</a>:</h4>
+<p>It's easy to fix but I don't know why it happened.</p>
+
+<a name="177748636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231521%20rename%20type%20variables/near/177748636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/499201521renametypevariables.html#177748636">Rob Lewis (Oct 09 2019 at 19:42)</a>:</h4>
+<blockquote>
+<p>It still takes less than a minute on core, so hopefully it will take less than a day on mathlib?</p>
+</blockquote>
+<p>And you have to run it twice to compare!</p>
+
 
 {% endraw %}
 
