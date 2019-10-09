@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/08051Dealingwithite.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html">Dealing with ite</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177678376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dealing%20with%20ite/near/177678376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html#177678376">Chu-Wee Lim (Oct 09 2019 at 03:03)</a>:</h4>
+<p>Are there any good tips for dealing with ite cases? The following seems unnecessarily verbose.</p>
+<p>I'd greatly appreciate any advice. Thanks in advance for any suggestions.</p>
+<div class="codehilite"><pre><span></span>example : ∀ a b c : ℕ, ite (a ≤ b) c (c + 1) ≤ (c + 2) :=
+begin
+   intros a b c,
+   by_cases (a ≤ b),
+   simp [h], apply nat.le_add_right,
+   simp [h], apply nat.add_le_add_left,
+
+   -- Is there an easier way to show 1 ≤ 2?
+
+   apply nat.succ_le_succ, exact zero_le_one
+end
+</pre></div>
+
+<a name="177678787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dealing%20with%20ite/near/177678787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html#177678787">Mario Carneiro (Oct 09 2019 at 03:15)</a>:</h4>
+<p>use the <code>split_ifs</code> tactic after the <code>intros</code></p>
+
+<a name="177678838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dealing%20with%20ite/near/177678838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html#177678838">Mario Carneiro (Oct 09 2019 at 03:16)</a>:</h4>
+<p>the <code>1 &lt;= 2</code> can be solved by <code>norm_num</code> or <code>exact dec_trivial</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

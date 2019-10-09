@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Dealing with ite](08051Dealingwithite.html) (3 messages, latest: Oct 09 2019 at 03:16)
+
 * [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (7 messages, latest: Oct 08 2019 at 19:13)
 
 * [resource for mutual lemmas](52711resourceformutuallemmas.html) (18 messages, latest: Oct 08 2019 at 09:32)
