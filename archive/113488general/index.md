@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Difficulty Installing mathlib](90922DifficultyInstallingmathlib.html) (2 messages, latest: Oct 09 2019 at 07:08)
+* [visualizations](70566visualizations.html) (4 messages, latest: Oct 09 2019 at 08:56)
+
+* [Difficulty Installing mathlib](90922DifficultyInstallingmathlib.html) (5 messages, latest: Oct 09 2019 at 08:44)
 
 * [open_locale scoping](40917openlocalescoping.html) (4 messages, latest: Oct 09 2019 at 02:24)
-
-* [visualizations](70566visualizations.html) (2 messages, latest: Oct 09 2019 at 02:11)
 
 * [fpow neg normal form](92916fpownegnormalform.html) (15 messages, latest: Oct 09 2019 at 01:05)
 
