@@ -947,6 +947,57 @@ by cases h; exact h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177699865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177699865">Mario Carneiro (Oct 09 2019 at 10:19)</a>:</h4>
 <p>it makes more sense to view that as a congruence lemma for <code>nat.modeq</code></p>
 
+<a name="177704137"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177704137" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177704137">Scott Morrison (Oct 09 2019 at 11:29)</a>:</h4>
+<p>I have never managed to do anything under <code>modeq</code>. The thing I wanted to prove was </p>
+<div class="codehilite"><pre><span></span>lemma foo (n k : ℕ) : k ≡ ((k / 2^n) + (k % 2^n)) [MOD 2^n - 1] :=
+</pre></div>
+
+
+<p>using the following proof:</p>
+<ol>
+<li>rewrite the <code>k</code> on the left hand side using <code>k = (k / 2^n) * 2^n + k % 2^n</code></li>
+<li>now replace the <code>* 2^n</code> with <code>* 1</code>, since we are working mod <code>2^n - 1</code>.</li>
+<li>simplify away <code>(k / 2^n) * 1</code> to <code>k / 2^n</code>, and we're done.</li>
+</ol>
+<p>But once we're inside the <code>modeq</code> I can't use <code>simp</code>, or <code>rw</code>, or <code>conv</code>, and so I don't know how to express this proof... :-(</p>
+
+<a name="177704170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177704170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177704170">Chris Hughes (Oct 09 2019 at 11:29)</a>:</h4>
+<p>work with <code>zmod</code> instead?</p>
+
+<a name="177704418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177704418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177704418">Johan Commelin (Oct 09 2019 at 11:33)</a>:</h4>
+<p>I agree that we need to be able to write nice <code>calc</code> style proofs working modulo some ideal/element.</p>
+
+<a name="177704469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177704469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177704469">Johan Commelin (Oct 09 2019 at 11:34)</a>:</h4>
+<p>I remember that this was quite painful when I was writing Witt vectors.</p>
+
+<a name="177704517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177704517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177704517">Johan Commelin (Oct 09 2019 at 11:35)</a>:</h4>
+<p>You need to remind Lean all the time that the quotient map is a ring hom. No content at all. Should be transparent.</p>
+
+<a name="177705236"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177705236" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177705236">Mario Carneiro (Oct 09 2019 at 11:47)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span>
+
+<span class="kn">lemma</span> <span class="n">foo</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≡</span> <span class="o">((</span><span class="n">k</span> <span class="bp">/</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="o">)</span> <span class="bp">+</span> <span class="o">(</span><span class="n">k</span> <span class="err">%</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="o">))</span> <span class="o">[</span><span class="n">MOD</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="o">{</span><span class="n">to_rhs</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">k</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="o">),</span> <span class="n">add_comm</span><span class="o">]},</span>
+  <span class="n">refine</span> <span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">modeq_add</span> <span class="bp">_</span> <span class="o">(</span><span class="k">by</span> <span class="n">refl</span><span class="o">),</span>
+  <span class="n">conv</span> <span class="o">{</span><span class="n">to_rhs</span><span class="o">,</span> <span class="n">skip</span><span class="o">,</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">one_mul</span> <span class="o">(</span><span class="n">k</span><span class="bp">/</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="o">)},</span>
+  <span class="n">refine</span> <span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">modeq_mul</span> <span class="bp">_</span> <span class="o">(</span><span class="k">by</span> <span class="n">refl</span><span class="o">),</span>
+  <span class="n">symmetry</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">modeq</span><span class="bp">.</span><span class="n">modeq_iff_dvd</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_sub</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">nat</span><span class="bp">.</span><span class="n">pow_pos</span> <span class="n">dec_trivial</span> <span class="bp">_</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177705288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177705288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177705288">Mario Carneiro (Oct 09 2019 at 11:48)</a>:</h4>
+<p>that basically follows your proof sketch</p>
+
 
 {% endraw %}
 

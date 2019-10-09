@@ -9,15 +9,17 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [visualizations](70566visualizations.html) (10 messages, latest: Oct 09 2019 at 10:55)
+* [Type classes again](90385Typeclassesagain.html) (85 messages, latest: Oct 09 2019 at 11:18)
+
+* [classical instance confusion](24697classicalinstanceconfusion.html) (38 messages, latest: Oct 09 2019 at 11:15)
+
+* [visualizations](70566visualizations.html) (14 messages, latest: Oct 09 2019 at 11:12)
 
 * [Difficulty Installing mathlib](90922DifficultyInstallingmathlib.html) (5 messages, latest: Oct 09 2019 at 08:44)
 
 * [open_locale scoping](40917openlocalescoping.html) (4 messages, latest: Oct 09 2019 at 02:24)
 
 * [fpow neg normal form](92916fpownegnormalform.html) (15 messages, latest: Oct 09 2019 at 01:05)
-
-* [classical instance confusion](24697classicalinstanceconfusion.html) (35 messages, latest: Oct 08 2019 at 18:38)
 
 * [leanpkg upgrade not working for me](08406leanpkgupgradenotworkingforme.html) (8 messages, latest: Oct 08 2019 at 15:47)
 
@@ -650,8 +652,6 @@ permalink: archive/113488general/index.html
 * [simplifier](47605simplifier.html) (6 messages, latest: Jun 05 2019 at 20:20)
 
 * [Structures in meta](37699Structuresinmeta.html) (15 messages, latest: Jun 05 2019 at 20:02)
-
-* [Type classes again](90385Typeclassesagain.html) (84 messages, latest: Jun 05 2019 at 09:15)
 
 * [mergify](77684mergify.html) (1 message, latest: Jun 05 2019 at 07:47)
 

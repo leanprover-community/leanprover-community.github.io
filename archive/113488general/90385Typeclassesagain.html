@@ -513,6 +513,34 @@ The reason we have two parameters in category theory is just to avoid duplicatio
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/167370809" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#167370809">Sebastien Gouezel (Jun 05 2019 at 09:15)</a>:</h4>
 <p>If someone wants to play with this weird instance search behavior, the branch is now available at <a href="https://github.com/leanprover-community/mathlib/issues/1112" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1112">#1112</a></p>
 
+<a name="177703430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Type%20classes%20again/near/177703430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90385Typeclassesagain.html#177703430">Sebastien Gouezel (Oct 09 2019 at 11:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> You were looking for weird instance behavior. The one at the beginning of this thread is still puzzling for me. To sum it up: in <code>analysis/normed_space/operator_norm.lean</code>, there are the lines</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Continuous linear maps themselves form a normed space with respect to</span>
+<span class="cm">    the operator norm. -/</span>
+<span class="kn">instance</span> <span class="n">to_normed_group</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">normed_group</span><span class="bp">.</span><span class="n">of_core</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">op_norm_zero_iff</span><span class="o">,</span> <span class="n">op_norm_triangle</span><span class="o">,</span> <span class="n">op_norm_neg</span><span class="bp">⟩</span>
+
+<span class="c">/-</span><span class="cm"> The next instance should be found automatically, but it is not.</span>
+<span class="cm">TODO: fix me -/</span>
+<span class="kn">instance</span> <span class="n">to_normed_group_prod</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="o">(</span><span class="n">E</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="err">𝕜</span><span class="o">]</span> <span class="o">(</span><span class="n">F</span> <span class="bp">×</span> <span class="n">G</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">continuous_linear_map</span><span class="bp">.</span><span class="n">to_normed_group</span>
+</pre></div>
+
+
+<p>I don't know why the second instance is not found by <code>apply_instance</code>. The instance trace search contains the line</p>
+<div class="codehilite"><pre><span></span><span class="o">[</span><span class="n">class_instances</span><span class="o">]</span> <span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="err">?</span><span class="n">x_36</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span> <span class="o">:=</span> <span class="bp">_</span><span class="n">inst_7</span>
+<span class="n">failed</span> <span class="n">is_def_eq</span>
+</pre></div>
+
+
+<p>while the context contains</p>
+<div class="codehilite"><pre><span></span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="bp">@</span><span class="n">normed_space</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span> <span class="n">uG</span><span class="o">}</span> <span class="n">k</span> <span class="n">G</span> <span class="o">(</span><span class="bp">@</span><span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="o">}</span> <span class="n">k</span> <span class="bp">_</span><span class="n">inst_1</span><span class="o">)</span> <span class="bp">_</span><span class="n">inst_6</span>
+</pre></div>
+
+
+<p>If everything is put in <code>Type</code> (or even in the same universe), then the issue disappears.</p>
+
 
 {% endraw %}
 
