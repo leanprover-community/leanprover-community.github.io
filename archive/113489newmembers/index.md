@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Getting started](52778Gettingstarted.html) (34 messages, latest: Oct 10 2019 at 07:52)
+* [Getting started](52778Gettingstarted.html) (39 messages, latest: Oct 10 2019 at 08:32)
 
 * [help finding a lemma](30422helpfindingalemma.html) (198 messages, latest: Oct 09 2019 at 22:09)
 
