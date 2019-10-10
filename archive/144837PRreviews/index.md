@@ -9,11 +9,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [curly braces](77952curlybraces.html) (3 messages, latest: Oct 10 2019 at 17:58)
+
 * [#1521 rename type variables](499201521renametypevariables.html) (126 messages, latest: Oct 10 2019 at 09:06)
 
 * [#1528 sequential](152151528sequential.html) (9 messages, latest: Oct 09 2019 at 16:13)
-
-* [curly braces](77952curlybraces.html) (1 message, latest: Oct 09 2019 at 15:32)
 
 * [1089 Commuting elements](520351089Commutingelements.html) (4 messages, latest: Oct 04 2019 at 12:06)
 
