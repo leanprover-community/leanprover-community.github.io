@@ -98,6 +98,74 @@ permalink: archive/113488general/11883KevinstalkatMSR.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177835898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177835898">Johan Commelin (Oct 10 2019 at 17:59)</a>:</h4>
 <p>It's a social thing.</p>
 
+<a name="177836021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836021">Olli (Oct 10 2019 at 18:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> ok, so it's basically the proportion of library work that has gone into the theorems proved using classical logic?</p>
+
+<a name="177836042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836042">Mario Carneiro (Oct 10 2019 at 18:00)</a>:</h4>
+<p>it's an obscure technical issue though, and I hadn't heard that coinductive types break SR in Coq but it sounds similarly irrelevant</p>
+
+<a name="177836064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836064">Floris van Doorn (Oct 10 2019 at 18:00)</a>:</h4>
+<p>I wrote a response, but I'm wondering whether I should post it there. I don't want to cause a flame war. However, I also don't see the email address of Pierre-Marie Pédrot anywhere publicly, so that I can discuss this in private.</p>
+<blockquote>
+<p>Hi, long-term Lean user here. I don't want to start a flame war, but I just want to address @ppedrot's concern about quotients causing a failure of subject reduction.</p>
+<p>The reason that quotients cause a failure of subject reduction is a historical design issue with quotients, and not anything that comes up in practice. The problem is the interaction between quotients and definitional proof irrelevance (which Lean has for its bottom universe <code>Prop</code>). The problem is that quotients can be defined for types in all universes, even for propositions. In this case, we can get a failure of subject reduction (described <a href="https://github.com/digama0/lean-type-theory/releases/download/v1.0/main.pdf" target="_blank" title="https://github.com/digama0/lean-type-theory/releases/download/v1.0/main.pdf">here</a>).</p>
+<p>Note that taking a quotient of a proposition is a useless operation, because all propositions are already subsingletons. We only take quotients of types that are not in <code>Prop</code> in practice, and the problem doesn't occur there.</p>
+<p>Ideally, we would remove the ability to take quotients of propositions from Lean. This would remove this failure of subject reduction (there is still another failure with inductive families of propositions + proof irrelevance) and would not decrease the usability of quotients.</p>
+</blockquote>
+
+<a name="177836080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836080">Johan Commelin (Oct 10 2019 at 18:00)</a>:</h4>
+<p>But they shouldn't be surprised that there are no mathematicians knocking on their doors... given what I just read in those threads. That's fine. I respect what they are doing. But they really shouldn't be surprised that mathematicians turn away immediately. It is very <em>very</em> easy to forget that 98% of the mathematicians has <em>NO IDEA</em> what being constructive means.</p>
+
+<a name="177836121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836121">Floris van Doorn (Oct 10 2019 at 18:01)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="112680">Johan Commelin</span> what is the main feature of Lean that makes it less constructive than Coq? I was under the impression that they are mostly the same</p>
+</blockquote>
+<p>The fact that we extensively use the axioms we add to Lean (mostly the axiom of choice).</p>
+
+<a name="177836208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836208">Olli (Oct 10 2019 at 18:02)</a>:</h4>
+<p>ok, yeah that was what I thought, and was just curious if there might have been a more technical reason</p>
+
+<a name="177836233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836233">Johan Commelin (Oct 10 2019 at 18:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="126113">@Olli</span> I'm dead serious. Ask any random mathematician in an <em>actual</em> math department. They don't know what intuitionism is. Beyond maybe some historical anecdote involving Brouwer and Hilbert.</p>
+
+<a name="177836580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177836580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177836580">Mario Carneiro (Oct 10 2019 at 18:05)</a>:</h4>
+<p>The real reason SR is a bigger deal in coq is because the community does more DTT things, constructive things, etc</p>
+
+<a name="177839565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177839565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177839565">Johan Commelin (Oct 10 2019 at 18:31)</a>:</h4>
+<p>Thanks for writing that reply. Even if you only share it here... <span aria-label="smiley" class="emoji emoji-1f603" role="img" title="smiley">:smiley:</span></p>
+
+<a name="177840358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177840358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177840358">Wojciech Nawrocki (Oct 10 2019 at 18:38)</a>:</h4>
+<p>Does Lean obey, vaguely, a sort of weakened form of subject reduction? For example, that one can always exhibit an <code>Id(a,b)</code> if <code>t: a --&gt; u: b</code>.</p>
+
+<a name="177840815"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177840815" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177840815">Floris van Doorn (Oct 10 2019 at 18:42)</a>:</h4>
+<p>I sent an email directly to Pierre-Marie Pédrot, I didn't want to start this discussion publicly.</p>
+
+<a name="177841095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177841095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177841095">Floris van Doorn (Oct 10 2019 at 18:45)</a>:</h4>
+<p><span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> The "weakened" subject reduction is that <code>≡</code> in Mario's paper satisfies subject reduction. I think this translates to "if <code>t</code> reduces to <code>u</code>, and <code>t : A</code> then you have to apply a finite number of type ascriptions <code>(... : T)</code> to subterms of <code>u</code> and that term will have type <code>A</code>."</p>
+
+<a name="177841447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177841447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177841447">Wojciech Nawrocki (Oct 10 2019 at 18:49)</a>:</h4>
+<p>Oh, you can actually force the algorithmic equality to recognize every <code>≡</code> by using type ascriptions?</p>
+
+<a name="177841870"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kevin%27s%20talk%20at%20MSR/near/177841870" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11883KevinstalkatMSR.html#177841870">Floris van Doorn (Oct 10 2019 at 18:53)</a>:</h4>
+<blockquote>
+<p>Oh, you can actually force the algorithmic equality to recognize every <code>≡</code> by using type ascriptions?</p>
+</blockquote>
+<p>Yes, because the algorithmic equality just fails transitivity. So if you give each intermediate step manually (so that the algorithm doesn't have to apply transitivity itself), then Lean can type-check it. <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> can you confirm?</p>
+
 
 {% endraw %}
 
