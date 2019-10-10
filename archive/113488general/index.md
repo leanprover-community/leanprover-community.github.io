@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (13 messages, latest: Oct 10 2019 at 15:45)
+* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (16 messages, latest: Oct 10 2019 at 16:35)
 
 * [equation compiler surprisingly liberal](24984equationcompilersurprisinglyliberal.html) (8 messages, latest: Oct 10 2019 at 07:53)
 
