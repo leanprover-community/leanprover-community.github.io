@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [equation compiler surprisingly liberal](24984equationcompilersurprisinglyliberal.html) (8 messages, latest: Oct 10 2019 at 07:53)
+* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (5 messages, latest: Oct 10 2019 at 14:57)
 
-* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (3 messages, latest: Oct 09 2019 at 20:23)
+* [equation compiler surprisingly liberal](24984equationcompilersurprisinglyliberal.html) (8 messages, latest: Oct 10 2019 at 07:53)
 
 * [open_locale scoping](40917openlocalescoping.html) (5 messages, latest: Oct 09 2019 at 17:40)
 
