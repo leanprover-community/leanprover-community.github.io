@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (26 messages, latest: Oct 10 2019 at 18:44)
+* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (27 messages, latest: Oct 10 2019 at 21:53)
 
 * [Characterizing tendsto using sequences](72482Characterizingtendstousingsequences.html) (5 messages, latest: Oct 10 2019 at 12:55)
 
