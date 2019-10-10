@@ -8,7 +8,7 @@ permalink: archive/index.html
 
 ## Streams:
 
-* [general](113488general/index.html) (2114 topics)
+* [general](113488general/index.html) (2115 topics)
 
 * [maths](116395maths/index.html) (610 topics)
 
@@ -20,7 +20,7 @@ permalink: archive/index.html
 
 * [kbb](141825kbb/index.html) (13 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (12 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (13 topics)
 
 * [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (11 topics)
 

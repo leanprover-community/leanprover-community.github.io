@@ -9,7 +9,9 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Kevin 2019](57258Kevin2019.html) (3 messages, latest: Oct 05 2019 at 10:14)
+* [Kevin 2019](57258Kevin2019.html) (6 messages, latest: Oct 10 2019 at 07:49)
+
+* [Kevin teaching 2019](49869Kevinteaching2019.html) (1 message, latest: Oct 10 2019 at 07:48)
 
 * [Next step after the Logic and Proofs](53097NextstepaftertheLogicandProofs.html) (52 messages, latest: Sep 30 2019 at 19:55)
 
