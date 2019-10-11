@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis in Lean](99676analysisinLean.html) (1 message, latest: Oct 11 2019 at 00:31)
+* [analysis in Lean](99676analysisinLean.html) (6 messages, latest: Oct 11 2019 at 01:13)
 
 * [subalgebra.comm_ring](72322subalgebracommring.html) (5 messages, latest: Oct 11 2019 at 00:14)
 
