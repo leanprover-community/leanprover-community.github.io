@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [visualizations](70566visualizations.html) (18 messages, latest: Oct 11 2019 at 12:17)
+
 * [Zulip users](15527Zulipusers.html) (1 message, latest: Oct 11 2019 at 08:50)
 
 * [Benchmarking](73610Benchmarking.html) (5 messages, latest: Oct 11 2019 at 05:51)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [equation compiler surprisingly liberal](24984equationcompilersurprisinglyliberal.html) (8 messages, latest: Oct 10 2019 at 07:53)
 
 * [open_locale scoping](40917openlocalescoping.html) (5 messages, latest: Oct 09 2019 at 17:40)
-
-* [visualizations](70566visualizations.html) (16 messages, latest: Oct 09 2019 at 15:58)
 
 * [Type classes again](90385Typeclassesagain.html) (97 messages, latest: Oct 09 2019 at 14:45)
 

@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Getting started](52778Gettingstarted.html) (63 messages, latest: Oct 11 2019 at 11:53)
+* [Giry monad](88715Girymonad.html) (1 message, latest: Oct 11 2019 at 12:53)
 
-* [helloworld](15997helloworld.html) (24 messages, latest: Oct 11 2019 at 11:49)
+* [Getting started](52778Gettingstarted.html) (64 messages, latest: Oct 11 2019 at 12:03)
+
+* [helloworld](15997helloworld.html) (25 messages, latest: Oct 11 2019 at 12:00)
 
 * [reduce bool variable](98379reduceboolvariable.html) (3 messages, latest: Oct 11 2019 at 07:32)
 
