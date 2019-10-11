@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (30 messages, latest: Oct 11 2019 at 07:48)
+* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (33 messages, latest: Oct 11 2019 at 08:21)
 
-* [analysis in Lean](99676analysisinLean.html) (8 messages, latest: Oct 11 2019 at 05:36)
+* [analysis in Lean](99676analysisinLean.html) (9 messages, latest: Oct 11 2019 at 08:21)
 
 * [subalgebra.comm_ring](72322subalgebracommring.html) (5 messages, latest: Oct 11 2019 at 00:14)
 
