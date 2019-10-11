@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Giry monad](88715Girymonad.html) (15 messages, latest: Oct 11 2019 at 18:59)
+* [Giry monad](88715Girymonad.html) (18 messages, latest: Oct 11 2019 at 19:42)
 
 * [Getting started](52778Gettingstarted.html) (64 messages, latest: Oct 11 2019 at 12:03)
 
