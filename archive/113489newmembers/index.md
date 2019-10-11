@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [helloworld](15997helloworld.html) (12 messages, latest: Oct 11 2019 at 08:24)
+* [Getting started](52778Gettingstarted.html) (52 messages, latest: Oct 11 2019 at 09:59)
+
+* [helloworld](15997helloworld.html) (16 messages, latest: Oct 11 2019 at 09:58)
 
 * [reduce bool variable](98379reduceboolvariable.html) (3 messages, latest: Oct 11 2019 at 07:32)
-
-* [Getting started](52778Gettingstarted.html) (39 messages, latest: Oct 10 2019 at 08:32)
 
 * [help finding a lemma](30422helpfindingalemma.html) (198 messages, latest: Oct 09 2019 at 22:09)
 
