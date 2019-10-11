@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/98379reduceboolvariable.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/98379reduceboolvariable.html">reduce bool variable</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177880083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduce%20bool%20variable/near/177880083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98379reduceboolvariable.html#177880083">Alex Kassil (Oct 11 2019 at 05:49)</a>:</h4>
+<p>If I have this:</p>
+<div class="codehilite"><pre><span></span>variable b : bool
+#reduce b &amp;&amp; tt
+#reduce b &amp;&amp; ff
+#reduce ff &amp;&amp; b
+#reduce tt &amp;&amp; b
+</pre></div>
+
+
+<p>I get back </p>
+<div class="codehilite"><pre><span></span>b &amp;&amp; tt
+b &amp;&amp; ff
+ff
+tt &amp;&amp; b
+</pre></div>
+
+
+<p>my question is why does <code>b &amp;&amp; ff</code> not reduce to <code>ff</code> and  why does <code>tt &amp;&amp; b</code> not reduce to <code>b</code>? Thanks!</p>
+
+<a name="177880346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/reduce%20bool%20variable/near/177880346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98379reduceboolvariable.html#177880346">Floris van Doorn (Oct 11 2019 at 05:56)</a>:</h4>
+<p>The reason is that <code>band</code> (the name for <code>&amp;&amp;</code>) was defined as follows:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">band</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="bp">_</span>  <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="n">ff</span> <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="n">tt</span> <span class="o">:=</span> <span class="n">tt</span>
+</pre></div>
+
+
+<p>If we would have defined it as follows</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">my_band</span> <span class="o">:</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">bool</span> <span class="bp">→</span> <span class="n">bool</span>
+<span class="bp">|</span> <span class="n">ff</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">ff</span>
+<span class="bp">|</span> <span class="n">tt</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">b</span>
+<span class="kn">variable</span> <span class="n">b</span> <span class="o">:</span> <span class="n">bool</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">my_band</span> <span class="n">b</span> <span class="n">tt</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">my_band</span> <span class="n">b</span> <span class="n">ff</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">my_band</span> <span class="n">ff</span> <span class="n">b</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">my_band</span> <span class="n">tt</span> <span class="n">b</span>
+</pre></div>
+
+
+<p>then, as you can see <code>tt &amp;&amp; b</code> would reduce to <code>b</code>.</p>
+<p>I don't think that there is a way to define <code>&amp;&amp;</code> so that <em>both</em> <code>ff &amp;&amp; b</code> and <code>b &amp;&amp; ff</code> will reduce to <code>ff</code>: it will have to decide which side it will evaluate first.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [reduce bool variable](98379reduceboolvariable.html) (2 messages, latest: Oct 11 2019 at 05:56)
+
 * [helloworld](15997helloworld.html) (8 messages, latest: Oct 11 2019 at 04:18)
 
 * [Getting started](52778Gettingstarted.html) (39 messages, latest: Oct 10 2019 at 08:32)

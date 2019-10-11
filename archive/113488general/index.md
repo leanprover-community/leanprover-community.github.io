@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (43 messages, latest: Oct 11 2019 at 02:51)
+* [Benchmarking](73610Benchmarking.html) (5 messages, latest: Oct 11 2019 at 05:51)
 
-* [Benchmarking](73610Benchmarking.html) (4 messages, latest: Oct 11 2019 at 02:44)
+* [Kevin's talk at MSR](11883KevinstalkatMSR.html) (43 messages, latest: Oct 11 2019 at 02:51)
 
 * [equation compiler surprisingly liberal](24984equationcompilersurprisinglyliberal.html) (8 messages, latest: Oct 10 2019 at 07:53)
 
