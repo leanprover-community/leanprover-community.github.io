@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (37 messages, latest: Oct 11 2019 at 10:09)
+* [wolf goat cabbage](44057wolfgoatcabbage.html) (40 messages, latest: Oct 11 2019 at 11:45)
+
+* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (39 messages, latest: Oct 11 2019 at 11:24)
 
 * [analysis in Lean](99676analysisinLean.html) (9 messages, latest: Oct 11 2019 at 08:21)
 
@@ -86,8 +88,6 @@ permalink: archive/116395maths/index.html
 * [complementary sequences](13037complementarysequences.html) (9 messages, latest: Sep 03 2019 at 22:43)
 
 * [gluing presheaves](99453gluingpresheaves.html) (25 messages, latest: Sep 03 2019 at 11:36)
-
-* [wolf goat cabbage](44057wolfgoatcabbage.html) (39 messages, latest: Sep 01 2019 at 02:26)
 
 * [Category of categories?](80729Categoryofcategories.html) (13 messages, latest: Aug 28 2019 at 23:41)
 
