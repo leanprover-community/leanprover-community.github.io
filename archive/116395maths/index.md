@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [analysis in Lean](99676analysisinLean.html) (1 message, latest: Oct 11 2019 at 00:31)
+
+* [subalgebra.comm_ring](72322subalgebracommring.html) (5 messages, latest: Oct 11 2019 at 00:14)
+
 * [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (27 messages, latest: Oct 10 2019 at 21:53)
 
 * [Characterizing tendsto using sequences](72482Characterizingtendstousingsequences.html) (5 messages, latest: Oct 10 2019 at 12:55)
