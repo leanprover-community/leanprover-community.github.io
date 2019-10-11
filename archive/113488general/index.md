@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [General Questions](48074GeneralQuestions.html) (21 messages, latest: Oct 11 2019 at 19:14)
+* [visualizations](70566visualizations.html) (27 messages, latest: Oct 11 2019 at 21:42)
 
-* [visualizations](70566visualizations.html) (26 messages, latest: Oct 11 2019 at 17:36)
+* [General Questions](48074GeneralQuestions.html) (21 messages, latest: Oct 11 2019 at 19:14)
 
 * [Zulip users](15527Zulipusers.html) (1 message, latest: Oct 11 2019 at 08:50)
 
