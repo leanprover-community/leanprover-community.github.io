@@ -364,6 +364,47 @@ When even these little bits of customization are so much fun, can you imagine wh
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177899399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177899399">Wojciech Nawrocki (Oct 11 2019 at 11:45)</a>:</h4>
 <p>I recall that at Big Proof 2019 a few people were playing this online drag-n-drop proof game, where graph nodes are more or less inference rules. I was looking for it and for the life of me can't find it - does anyone remember the website name?</p>
 
+<a name="177906580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177906580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177906580">Mario Carneiro (Oct 11 2019 at 13:28)</a>:</h4>
+<p>that sounds like <a href="http://incredible.pm" target="_blank" title="http://incredible.pm">incredible.pm</a></p>
+
+<a name="177907295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177907295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177907295">Wojciech Nawrocki (Oct 11 2019 at 13:39)</a>:</h4>
+<p>Yes. Thank you!</p>
+
+<a name="177907996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177907996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177907996">Bryan Gin-ge Chen (Oct 11 2019 at 13:47)</a>:</h4>
+<p>I had forgotten about this. At some point I'd like to clean up my notebook and "publish" it on Observable. Before that, what's going on with this error I'm seeing in <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> 's code above? (I guess <span class="user-mention" data-user-id="112680">@Johan Commelin</span> pointed this out too): </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">finish</span> <span class="o">:</span> <span class="n">solution_from</span> <span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">[</span><span class="bp">⟨</span><span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="o">,</span> <span class="n">tt</span><span class="bp">⟩</span><span class="o">],</span> <span class="n">dec_trivial</span><span class="bp">⟩</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">failed to synthesize type class instance for</span>
+<span class="cm">⊢ decidable</span>
+<span class="cm">    (list.head&#39; [{wolf := tt, goat := tt, cabbage := tt, farmer := tt}] =</span>
+<span class="cm">         some {wolf := tt, goat := tt, cabbage := tt, farmer := tt} ∧</span>
+<span class="cm">       list.last&#39; [{wolf := tt, goat := tt, cabbage := tt, farmer := tt}] =</span>
+<span class="cm">           some {wolf := tt, goat := tt, cabbage := tt, farmer := tt} ∧</span>
+<span class="cm">         list.chain&#39; step [{wolf := tt, goat := tt, cabbage := tt, farmer := tt}] ∧</span>
+<span class="cm">           ∀ (s&#39; : state), s&#39; ∈ [{wolf := tt, goat := tt, cabbage := tt, farmer := tt}] → valid s&#39;)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="177908483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177908483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177908483">Mario Carneiro (Oct 11 2019 at 13:53)</a>:</h4>
+<p>that's odd. I guess I must have changed something relevant in <code>data.list.basic</code> when I was fiddling with those decidable instances</p>
+
+<a name="177908634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177908634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177908634">Mario Carneiro (Oct 11 2019 at 13:54)</a>:</h4>
+<p>it works if you put <code>@[derive decidable_eq]</code> on <code>structure state</code>, or if you replace the proof of <code>finish</code> with <code>⟨[⟨tt, tt, tt, tt⟩], rfl, rfl, dec_trivial⟩</code></p>
+
+<a name="177908941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177908941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177908941">Bryan Gin-ge Chen (Oct 11 2019 at 13:58)</a>:</h4>
+<p>Great! I wonder why later code that used <code>finish</code> still worked when it had the error.</p>
+
+<a name="177909038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/wolf%20goat%20cabbage/near/177909038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44057wolfgoatcabbage.html#177909038">Bryan Gin-ge Chen (Oct 11 2019 at 13:59)</a>:</h4>
+<p>Oh, maybe <code>tactic.try</code> doesn't care about missing instances.</p>
+
 
 {% endraw %}
 
