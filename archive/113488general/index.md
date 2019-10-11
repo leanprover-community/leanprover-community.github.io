@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [visualizations](70566visualizations.html) (27 messages, latest: Oct 11 2019 at 21:42)
+* [visualizations](70566visualizations.html) (28 messages, latest: Oct 11 2019 at 22:27)
 
 * [General Questions](48074GeneralQuestions.html) (21 messages, latest: Oct 11 2019 at 19:14)
 
