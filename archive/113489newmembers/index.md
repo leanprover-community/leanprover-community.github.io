@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Getting started](52778Gettingstarted.html) (131 messages, latest: Oct 12 2019 at 12:58)
+* [Getting started](52778Gettingstarted.html) (139 messages, latest: Oct 12 2019 at 13:44)
 
 * [type class question](70065typeclassquestion.html) (19 messages, latest: Oct 12 2019 at 09:48)
 

@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [visualizations](70566visualizations.html) (30 messages, latest: Oct 12 2019 at 13:18)
+
 * [some lemmas](11572somelemmas.html) (12 messages, latest: Oct 12 2019 at 11:57)
 
 * [out_params and products](13059outparamsandproducts.html) (8 messages, latest: Oct 12 2019 at 10:44)
-
-* [visualizations](70566visualizations.html) (29 messages, latest: Oct 12 2019 at 07:59)
 
 * [General Questions](48074GeneralQuestions.html) (21 messages, latest: Oct 11 2019 at 19:14)
 
