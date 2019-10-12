@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [wolf goat cabbage](44057wolfgoatcabbage.html) (47 messages, latest: Oct 11 2019 at 13:59)
+* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (40 messages, latest: Oct 12 2019 at 07:23)
 
-* [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (39 messages, latest: Oct 11 2019 at 11:24)
+* [wolf goat cabbage](44057wolfgoatcabbage.html) (47 messages, latest: Oct 11 2019 at 13:59)
 
 * [analysis in Lean](99676analysisinLean.html) (9 messages, latest: Oct 11 2019 at 08:21)
 

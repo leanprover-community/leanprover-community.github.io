@@ -1,0 +1,92 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/70065typeclassquestion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html">type class question</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177975372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177975372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177975372">Nicolás Ojeda Bär (Oct 12 2019 at 07:13)</a>:</h4>
+<p>Hello! I have some basic mathlib-related questions:<br>
+Given a module \beta over a field \alpha where \beta is a ring I want to define the morphism \alpha \to \beta, given by x \mapsto x * 1_\beta.<br>
+So I have this:</p>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">struct_hom</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="err">•</span> <span class="n">has_one</span><span class="bp">.</span><span class="n">one</span> <span class="n">β</span>
+</pre></div>
+
+
+<p>(some of this may be nonsense!)<br>
+I get:</p>
+<div class="codehilite"><pre><span></span>maximum class-instance resolution depth has been reached (the limit can be increased by setting option &#39;class.instance_max_depth&#39;) (the class-instance resolution trace can be visualized by setting option &#39;trace.class_instances&#39;)
+</pre></div>
+
+
+<p>I guess  the system has trouble disambiguating some of the terms in the lambda definition. How can I supply the necessary constraints ?<br>
+Thanks!</p>
+
+<a name="177975670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177975670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177975670">Kevin Buzzard (Oct 12 2019 at 07:22)</a>:</h4>
+<p>Hi Nicolas! The problem seems to be here:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">α</span> <span class="n">β</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>  <span class="c1">-- max instance depth</span>
+</pre></div>
+
+<a name="177975800"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177975800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177975800">Kevin Buzzard (Oct 12 2019 at 07:25)</a>:</h4>
+<p>Whilst I'm not entirely sure why that's happening, I guess that one problem with the way you're setting things up here is that the alpha-module structure on beta will be completely unrelated to the commutative ring structure (so for example you will not even know that the addition on beta-as-alpha-module equals the addition on beta-as-commutative-ring), which is presumably not what you want.</p>
+
+<a name="177975848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177975848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177975848">Kevin Buzzard (Oct 12 2019 at 07:26)</a>:</h4>
+<p>There is already a theory of alpha-algebras which solves this problem and you probably want to use that.</p>
+
+<a name="177975979"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177975979" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177975979">Kevin Buzzard (Oct 12 2019 at 07:30)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">has_scalar</span> <span class="n">k</span> <span class="n">R</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">struct_hom</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">→</span> <span class="n">R</span> <span class="o">:=</span> <span class="n">algebra_map</span> <span class="n">R</span>
+</pre></div>
+
+<a name="177976035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177976035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177976035">Kevin Buzzard (Oct 12 2019 at 07:32)</a>:</h4>
+<p>NB when using mathematical objects I am on a crusade to stay away from this alpha beta etc notation and stick to the notation we're used to; initially this was just mathematicians trying to cause trouble but more recently there have been situations where the computer scientists have seen the value of this convention and my impression is that they're coming round to it.</p>
+
+<a name="177976040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177976040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177976040">Nicolás Ojeda Bär (Oct 12 2019 at 07:32)</a>:</h4>
+<p>Indeed, that makes sense. Thanks for pointing out <code>ring_theory.algebra</code>, I wasn't aware of it.</p>
+
+<a name="177976059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177976059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177976059">Nicolás Ojeda Bär (Oct 12 2019 at 07:33)</a>:</h4>
+<p>Ah yes, re the notation I would also prefer to use "traditional" notation but I thought the "house style" was to use greek letters for types. Will switch, thanks!</p>
+
+<a name="177976108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177976108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177976108">Kevin Buzzard (Oct 12 2019 at 07:34)</a>:</h4>
+<p>The house style is that, but mathematicians sort-of rebelled against it and because mathematicians infiltrated the mathlib maintainers it started slipping through into the library.</p>
+
+<a name="177976131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177976131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177976131">Kevin Buzzard (Oct 12 2019 at 07:35)</a>:</h4>
+<p>I think it's the unique case where mathematicians have suggested a notational change which the CS people could see the merits of. When we started suggesting that they called every lemma something like lemma 13.4 they were adamant that their more expressive system was a much better idea ;-)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
