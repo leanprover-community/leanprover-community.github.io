@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [type class question](70065typeclassquestion.html) (10 messages, latest: Oct 12 2019 at 07:35)
+* ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (15 messages, latest: Oct 12 2019 at 08:58)
+
+* [type class question](70065typeclassquestion.html) (14 messages, latest: Oct 12 2019 at 08:48)
 
 * [Giry monad](88715Girymonad.html) (24 messages, latest: Oct 12 2019 at 04:58)
 

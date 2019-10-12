@@ -1,0 +1,107 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/69024eliminatorelaborationwasnotused.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html">'eliminator' elaboration was not used</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177978489"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978489" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978489">mth (Oct 12 2019 at 08:44)</a>:</h4>
+<p>I'm trying to define composition of partial functions as suggested in chapter 7 of <em>Theorem Proving in Lean</em> and I'm curious as to why this works:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">option</span><span class="bp">.</span><span class="n">rec</span> <span class="n">option</span><span class="bp">.</span><span class="n">none</span> <span class="n">f</span> <span class="n">b</span><span class="o">)</span> <span class="err">∘</span> <span class="n">g</span>
+</pre></div>
+
+
+<p>but this doesn't:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">rec</span> <span class="n">option</span><span class="bp">.</span><span class="n">none</span> <span class="n">f</span><span class="o">)</span> <span class="err">∘</span> <span class="n">g</span> <span class="c1">-- error: type mismatch at application &#39;option.rec none&#39;</span>
+</pre></div>
+
+
+<p>I'm also getting </p>
+<div class="codehilite"><pre><span></span>term
+  none
+has type
+  option ?m_1 : Type ?
+but is expected to have type
+  ?m_1 none : Sort ?
+Additional information:
+context: &#39;eliminator&#39; elaboration was not used for &#39;option.rec&#39; because it is not fully applied, #3 explicit arguments expected
+</pre></div>
+
+
+<p>What is Lean trying to tell me? Why can't I use the partial application here?</p>
+
+<a name="177978554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978554">Patrick Massot (Oct 12 2019 at 08:46)</a>:</h4>
+<p>Do you understand what "fully applied" means here?</p>
+
+<a name="177978618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978618">mth (Oct 12 2019 at 08:48)</a>:</h4>
+<p>that I didn't pass all the arguments the function expected?</p>
+
+<a name="177978703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978703">Patrick Massot (Oct 12 2019 at 08:50)</a>:</h4>
+<p>Yes, in the first version, <code>option.rec</code> gets as many arguments as it could hope for, but not in the second version.</p>
+
+<a name="177978713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978713">Mario Carneiro (Oct 12 2019 at 08:51)</a>:</h4>
+<p>Right. From a pure type theory point of view this should be alright, but lean's type inference isn't smart enough for this unless you explicitly give it all the arguments</p>
+
+<a name="177978718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978718">Patrick Massot (Oct 12 2019 at 08:51)</a>:</h4>
+<p>Now, the elaboration process (which is the crucial step where Lean tries to fill in everything the user let implicit) is pretty subtle, and the recursor case is special, it needs more hand-holding.</p>
+
+<a name="177978759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978759">Patrick Massot (Oct 12 2019 at 08:52)</a>:</h4>
+<p>But this is clearly not the intended solution to the exercise. Using recursors directly is not something I would recommend doing.</p>
+
+<a name="177978760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978760">Patrick Massot (Oct 12 2019 at 08:52)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">comp</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="k">match</span> <span class="n">g</span> <span class="n">a</span> <span class="k">with</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">some</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">b</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">:=</span> <span class="n">none</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177978762"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978762" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978762">Patrick Massot (Oct 12 2019 at 08:52)</a>:</h4>
+<p>This is the user-friendly solution.</p>
+
+<a name="177978816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978816">mth (Oct 12 2019 at 08:54)</a>:</h4>
+<p>ah, thank you!</p>
+
+<a name="177978835"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978835">Patrick Massot (Oct 12 2019 at 08:55)</a>:</h4>
+<p>I hope the exercise comes after introducing <code>match</code></p>
+
+<a name="177978839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978839">Patrick Massot (Oct 12 2019 at 08:55)</a>:</h4>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span>?</p>
+
+<a name="177978893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978893">Patrick Massot (Oct 12 2019 at 08:56)</a>:</h4>
+<p>Otherwise I don't know what was the intended solution.</p>
+
+<a name="177978965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978965">mth (Oct 12 2019 at 08:58)</a>:</h4>
+<p>match is introduced later in 8.8</p>
+
+<a name="177978970"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978970">mth (Oct 12 2019 at 08:58)</a>:</h4>
+<p>maybe the intended solution was to use <code>cases_on</code>? is that any friendlier?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

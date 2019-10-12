@@ -9,6 +9,8 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
+* [natural number game](77211naturalnumbergame.html) (8 messages, latest: Oct 12 2019 at 08:44)
+
 * [Kevin 2019](57258Kevin2019.html) (6 messages, latest: Oct 10 2019 at 07:49)
 
 * [Kevin teaching 2019](49869Kevinteaching2019.html) (1 message, latest: Oct 10 2019 at 07:48)

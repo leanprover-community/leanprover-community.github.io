@@ -12,15 +12,15 @@ permalink: archive/index.html
 
 * [maths](116395maths/index.html) (614 topics)
 
-* [new members](113489newmembers/index.html) (528 topics)
+* [new members](113489newmembers/index.html) (529 topics)
 
-* [PR reviews](144837PRreviews/index.html) (193 topics)
+* [PR reviews](144837PRreviews/index.html) (194 topics)
 
 * [Lean Together 2019](179818LeanTogether2019/index.html) (31 topics)
 
-* [kbb](141825kbb/index.html) (13 topics)
+* [Lean for teaching](187764Leanforteaching/index.html) (14 topics)
 
-* [Lean for teaching](187764Leanforteaching/index.html) (13 topics)
+* [kbb](141825kbb/index.html) (13 topics)
 
 * [IMO-grand-challenge](208328IMOgrandchallenge/index.html) (11 topics)
 

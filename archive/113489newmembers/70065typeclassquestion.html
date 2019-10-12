@@ -86,6 +86,46 @@ Thanks!</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177976131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177976131">Kevin Buzzard (Oct 12 2019 at 07:35)</a>:</h4>
 <p>I think it's the unique case where mathematicians have suggested a notational change which the CS people could see the merits of. When we started suggesting that they called every lemma something like lemma 13.4 they were adamant that their more expressive system was a much better idea ;-)</p>
 
+<a name="177977993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177977993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177977993">Patrick Massot (Oct 12 2019 at 08:29)</a>:</h4>
+<p>Since <a href="https://github.com/leanprover-community/mathlib/pull/1521" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1521">https://github.com/leanprover-community/mathlib/pull/1521</a> was merged, this notation victory is official. We should update the style guide though.</p>
+
+<a name="177978558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177978558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177978558">Nicolás Ojeda Bär (Oct 12 2019 at 08:46)</a>:</h4>
+<p>Follow-up: trying to write down the definition of algebraic number. I have the following</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">is_algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">k</span><span class="o">),</span> <span class="n">polynomial</span><span class="bp">.</span><span class="n">aeval</span> <span class="n">k</span> <span class="n">R</span> <span class="n">x</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">has_zero</span><span class="bp">.</span><span class="n">zero</span> <span class="n">R</span>
+</pre></div>
+
+
+<p>I get :</p>
+<div class="codehilite"><pre><span></span>failed to synthesize type class instance for
+k : Type u,
+R : Type v,
+_inst_1 : comm_ring k,
+_inst_2 : ring R,
+_inst_3 : algebra k R,
+x : R,
+p : polynomial k
+⊢ comm_ring R
+</pre></div>
+
+
+<p>(the error points to <code>polynomial.aeval</code>). What is the error saying ?</p>
+
+<a name="177978570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177978570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177978570">Patrick Massot (Oct 12 2019 at 08:47)</a>:</h4>
+<p>You declared a ring structure on R, but not a commutative one.</p>
+
+<a name="177978617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177978617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177978617">Nicolás Ojeda Bär (Oct 12 2019 at 08:48)</a>:</h4>
+<p>Ah, yes. Thanks!</p>
+
 
 {% endraw %}
 
