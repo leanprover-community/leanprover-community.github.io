@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [0 < 1 + 1](91642011.html) (34 messages, latest: Oct 12 2019 at 19:51)
+* [complex.I is algebraic !](35943complexIisalgebraic.html) (2 messages, latest: Oct 12 2019 at 21:58)
 
-* [format_lean woes](35495formatleanwoes.html) (18 messages, latest: Oct 12 2019 at 18:58)
+* [format_lean woes](35495formatleanwoes.html) (22 messages, latest: Oct 12 2019 at 21:21)
+
+* [0 < 1 + 1](91642011.html) (34 messages, latest: Oct 12 2019 at 19:51)
 
 * [Getting started](52778Gettingstarted.html) (156 messages, latest: Oct 12 2019 at 16:40)
 
