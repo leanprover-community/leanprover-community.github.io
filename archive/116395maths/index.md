@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [constructive polynomials](53889constructivepolynomials.html) (1 message, latest: Oct 12 2019 at 17:59)
+* [topology](42046topology.html) (38 messages, latest: Oct 12 2019 at 18:38)
 
-* [proof about sums](68010proofaboutsums.html) (1 message, latest: Oct 12 2019 at 17:14)
+* [constructive polynomials](53889constructivepolynomials.html) (14 messages, latest: Oct 12 2019 at 18:32)
 
-* [topology](42046topology.html) (32 messages, latest: Oct 12 2019 at 15:37)
+* [proof about sums](68010proofaboutsums.html) (3 messages, latest: Oct 12 2019 at 18:10)
 
 * [ring bug? use bug?](40440ringbugusebug.html) (43 messages, latest: Oct 12 2019 at 10:59)
 
