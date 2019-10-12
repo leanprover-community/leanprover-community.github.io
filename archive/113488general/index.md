@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [visualizations](70566visualizations.html) (54 messages, latest: Oct 12 2019 at 16:03)
+* [some lemmas](11572somelemmas.html) (15 messages, latest: Oct 12 2019 at 17:59)
 
-* [algebraic hierarchy](28922algebraichierarchy.html) (2 messages, latest: Oct 12 2019 at 16:00)
+* [visualizations](70566visualizations.html) (55 messages, latest: Oct 12 2019 at 17:46)
 
-* [some lemmas](11572somelemmas.html) (12 messages, latest: Oct 12 2019 at 11:57)
+* [algebraic hierarchy](28922algebraichierarchy.html) (3 messages, latest: Oct 12 2019 at 17:42)
 
 * [out_params and products](13059outparamsandproducts.html) (8 messages, latest: Oct 12 2019 at 10:44)
 
