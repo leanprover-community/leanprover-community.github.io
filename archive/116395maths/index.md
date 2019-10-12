@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topology](42046topology.html) (38 messages, latest: Oct 12 2019 at 18:38)
+* [topology](42046topology.html) (41 messages, latest: Oct 12 2019 at 19:04)
 
 * [constructive polynomials](53889constructivepolynomials.html) (14 messages, latest: Oct 12 2019 at 18:32)
 

@@ -17,6 +17,35 @@ permalink: archive/113488general/16952Propclass.html
 <p>If we have <code>class C a : Prop := (...)</code>, and then <code>instance foo : C bar := (...)</code>, I guess Lean treats <code>foo</code> as a <code>def</code> not a <code>lemma</code>, right?<br>
 Is there ever an argument for writing <code>@[instance] lemma foo : C bar := (...)</code>?</p>
 
+<a name="178003126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Prop%20class/near/178003126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16952Propclass.html#178003126">Miguel Raz Guzmán Macedo (Oct 12 2019 at 19:31)</a>:</h4>
+<p>How much breakage of user code that doesn't use internals is expected in the lean 3 -&gt; lean 4 transition?</p>
+
+<a name="178003268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Prop%20class/near/178003268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16952Propclass.html#178003268">Johan Commelin (Oct 12 2019 at 19:35)</a>:</h4>
+<p>My impressions was about 86.4%</p>
+
+<a name="178003271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Prop%20class/near/178003271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16952Propclass.html#178003271">Johan Commelin (Oct 12 2019 at 19:35)</a>:</h4>
+<p>No seriously... I think we shouldn't expect any compatibility</p>
+
+<a name="178003316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Prop%20class/near/178003316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16952Propclass.html#178003316">Johan Commelin (Oct 12 2019 at 19:36)</a>:</h4>
+<p>But some people on the chat, who are a lot more skilled than I am, might be able to convert huge bunches of code using fancy metaprogramming trick plus Perl regexes.</p>
+
+<a name="178003387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Prop%20class/near/178003387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16952Propclass.html#178003387">Miguel Raz Guzmán Macedo (Oct 12 2019 at 19:38)</a>:</h4>
+<p>Got it...</p>
+
+<a name="178003459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Prop%20class/near/178003459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16952Propclass.html#178003459">Floris van Doorn (Oct 12 2019 at 19:41)</a>:</h4>
+<blockquote>
+<p>If we have <code>class C a : Prop := (...)</code>, and then <code>instance foo : C bar := (...)</code>, I guess Lean treats <code>foo</code> as a <code>def</code> not a <code>lemma</code>, right?<br>
+Is there ever an argument for writing <code>@[instance] lemma foo : C bar := (...)</code>?</p>
+</blockquote>
+<p>This is correct. And all <code>instances</code> also have a greater transparency than the default (<code>semireducible</code>).</p>
+<p>Maybe there is sometimes an argument for <code>@[instance] lemma</code>, but I don't think it matters very much when you use <code>def</code> instead of <code>lemma</code> (the other way around is bad). Note: for <code>#sanity_check</code> I explicitly omit everything tagged with <code>@[instance]</code> from the <code>lemma</code>/<code>def</code> check.</p>
+
 
 {% endraw %}
 
