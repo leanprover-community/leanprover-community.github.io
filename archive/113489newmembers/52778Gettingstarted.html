@@ -420,6 +420,269 @@ bash: ./update-mathlib.sh: No such file or directory
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985120">Kevin Buzzard (Oct 12 2019 at 11:55)</a>:</h4>
 <p>What is the output of <code>curl https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/remote-install-update-mathlib.sh -sSf | bash</code> ? That's surely the line that installs update-mathlib :D</p>
 
+<a name="177985328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985328">Mario Carneiro (Oct 12 2019 at 12:00)</a>:</h4>
+<p>reading the script, it looks like it tells you to run <code>source ~/.profile</code> at the end</p>
+
+<a name="177985331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985331">Marko Grdinic (Oct 12 2019 at 12:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> </p>
+<blockquote>
+<p>The issue isn't C++ dependencies, it is Lean itself. Mathlib is composed of several hundred large lean files, which all need to be run through lean. This involves running a bunch of tactics and each file takes a few seconds to minutes</p>
+</blockquote>
+<p>If it is like that, then I could have let the VS Code plugin install <code>elan</code> directly rather than running the scripts? Is Python also a real dependency?</p>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<div class="codehilite"><pre><span></span>$ curl https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/remote-install-update-mathlib.sh -sSf | bash
+Installing python dependencies (at user level)
+/c/Users/Marko/AppData/Local/Programs/Python/Python37-32/Scripts/pip3
+Requirement already up-to-date: setuptools in c:\users\marko\appdata\roaming\python\python37\site-packages (41.4.0)
+You are using pip version 19.0.3, however version 19.2.3 is available.
+You should consider upgrading via the &#39;python -m pip install --upgrade pip&#39; command.
+Requirement already up-to-date: toml in c:\users\marko\appdata\roaming\python\python37\site-packages (0.10.0)
+Requirement already up-to-date: PyGithub in c:\users\marko\appdata\roaming\python\python37\site-packages (1.43.8)
+Requirement already up-to-date: certifi in c:\users\marko\appdata\roaming\python\python37\site-packages (2019.9.11)
+Requirement already up-to-date: gitpython in c:\users\marko\appdata\roaming\python\python37\site-packages (3.0.3)
+Requirement already up-to-date: requests in c:\users\marko\appdata\roaming\python\python37\site-packages (2.22.0)
+Requirement already satisfied, skipping upgrade: deprecated in c:\users\marko\appdata\roaming\python\python37\site-packages (from PyGithub) (1.2.6)
+Requirement already satisfied, skipping upgrade: pyjwt in c:\users\marko\appdata\roaming\python\python37\site-packages (from PyGithub) (1.7.1)
+Requirement already satisfied, skipping upgrade: gitdb2&gt;=2.0.0 in c:\users\marko\appdata\roaming\python\python37\site-packages (from gitpython) (2.0.6)
+Requirement already satisfied, skipping upgrade: chardet&lt;3.1.0,&gt;=3.0.2 in c:\users\marko\appdata\roaming\python\python37\site-packages (from requests) (3.0.4)
+Requirement already satisfied, skipping upgrade: urllib3!=1.25.0,!=1.25.1,&lt;1.26,&gt;=1.21.1 in c:\users\marko\appdata\roaming\python\python37\site-packages (from requests) (1.25.6)
+Requirement already satisfied, skipping upgrade: idna&lt;2.9,&gt;=2.5 in c:\users\marko\appdata\roaming\python\python37\site-packages (from requests) (2.8)
+Requirement already satisfied, skipping upgrade: wrapt&lt;2,&gt;=1.10 in c:\users\marko\appdata\roaming\python\python37\site-packages (from deprecated-&gt;PyGithub) (1.11.2)
+Requirement already satisfied, skipping upgrade: smmap2&gt;=2.0.0 in c:\users\marko\appdata\roaming\python\python37\site-packages (from gitdb2&gt;=2.0.0-&gt;gitpython) (2.0.5)
+You are using pip version 19.0.3, however version 19.2.3 is available.
+You should consider upgrading via the &#39;python -m pip install --upgrade pip&#39; command.
+Fetching the update-mathlib script
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  3255  100  3255    0     0   3011      0  0:00:01  0:00:01 --:--:--  3011
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  4961  100  4961    0     0  14421      0 --:--:-- --:--:-- --:--:-- 14421
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   508  100   508    0     0   1439      0 --:--:-- --:--:-- --:--:--  1435
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1241  100  1241    0     0   3760      0 --:--:-- --:--:-- --:--:--  3760
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  1078  100  1078    0     0   3053      0 --:--:-- --:--:-- --:--:--  3053
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   493  100   493    0     0   1507      0 --:--:-- --:--:-- --:--:--  1507
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100   475  100   475    0     0   1422      0 --:--:-- --:--:-- --:--:--  1422
+installing it in $HOME/.mathlib/bin
+mathlib scripts are already added to $PATH in .profile
+</pre></div>
+
+
+<p>Hmmmm...is <code>mathlib scripts are already added to $PATH in .profile</code> the part where the scripts should be located. I'll check it out. Let me try restarting first. Be right back.</p>
+
+<a name="177985338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985338">Kevin Buzzard (Oct 12 2019 at 12:00)</a>:</h4>
+<p>Just <code>source .profile</code></p>
+
+<a name="177985365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985365">Kevin Buzzard (Oct 12 2019 at 12:01)</a>:</h4>
+<p>Or restarting -- that will hopefully also fix it.</p>
+
+<a name="177985374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985374">Mario Carneiro (Oct 12 2019 at 12:01)</a>:</h4>
+<p>restarting your shell, that is</p>
+
+<a name="177985415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985415">Mario Carneiro (Oct 12 2019 at 12:02)</a>:</h4>
+<p>I don't think you have to restart your session</p>
+
+<a name="177985674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985674">Marko Grdinic (Oct 12 2019 at 12:09)</a>:</h4>
+<p>I am back. I just finished restarting. Either way, it still cannot find <code>update-mathlib</code> unfortunately. To make matters worse, it seems that Lean is not caching the library and it is taking long to typecheck that basic fragment. You can really feel the effort based on how long it takes the shell to react to my typing. So I am going to have to figure out how to do this. Any advice how I can go from here?</p>
+<p>I see that <code>update-mathlib</code> is a Python script so I guess that answers one of my questions.</p>
+
+<a name="177985738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985738">Kevin Buzzard (Oct 12 2019 at 12:10)</a>:</h4>
+<p>If the issue is as simple as not being able to find the python file then post your PATH variable (in linux it would be something like <code>echo $PATH</code>) and see if you can use the Windows search tools to find a file called <code>update-mathlib</code> somewhere on your system.</p>
+
+<a name="177985740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985740">Rob Lewis (Oct 12 2019 at 12:10)</a>:</h4>
+<p><code>update-mathlib</code> was installed to <code>~/.mathlib/bin/</code> on my system. Does that directory exist for you? Is the script there?</p>
+
+<a name="177985757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985757">Kevin Buzzard (Oct 12 2019 at 12:11)</a>:</h4>
+<p>If you just type <code>update-mathlib</code> then the idea is that the OS looks through all the directories in the <code>$PATH</code> system variable and sees if it can find a file called <code>update-mathlib</code> in any of them.</p>
+
+<a name="177985818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985818">Kevin Buzzard (Oct 12 2019 at 12:12)</a>:</h4>
+<p>Judging by the output of what you posted above, <code>$HOME/.mathlib/bin</code> would be a good place to start (and Rob confirms that it's there in his).</p>
+
+<a name="177985841"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985841" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985841">Marko Grdinic (Oct 12 2019 at 12:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> </p>
+<p>Yeah, it is there. Echoing the PATH, it does not seem that .profile is adding the required directories to PATH. Let me try adding it to PATH manually.</p>
+
+<a name="177985890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985890">Kevin Buzzard (Oct 12 2019 at 12:14)</a>:</h4>
+<p><code>source ~/.profile</code> should add it automatically.</p>
+
+<a name="177985901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985901">Kevin Buzzard (Oct 12 2019 at 12:14)</a>:</h4>
+<p>Are you using the terminal which is recommended by the mathlib install instructions, by the way?</p>
+
+<a name="177985916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985916">Kevin Buzzard (Oct 12 2019 at 12:15)</a>:</h4>
+<blockquote>
+<p>We recommend that you use git bash and not msys2, since installing the supporting tools (below) causes issues in msys2.</p>
+</blockquote>
+
+<a name="177985966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985966">Marko Grdinic (Oct 12 2019 at 12:16)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  Yes. I am using it from VS Code rather than directly though.</p>
+
+<a name="177985981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985981">Marko Grdinic (Oct 12 2019 at 12:17)</a>:</h4>
+<p>As an aside, for some reason the <code>which</code> command got broken in the Powershell by the recent installations. I have no idea what to make of that.</p>
+
+<a name="177985985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985985">Kevin Buzzard (Oct 12 2019 at 12:17)</a>:</h4>
+<p>I have no idea whether that changes things but it seems to me that we have located the source of the problem.</p>
+
+<a name="177986030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986030">Kevin Buzzard (Oct 12 2019 at 12:18)</a>:</h4>
+<p>You could just run <code>update-mathlib</code> directly from that path, e.g. by typing <code>~/.mathlib/bin/update-mathlib</code> from the root of the project folder.</p>
+
+<a name="177986050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986050">Kevin Buzzard (Oct 12 2019 at 12:19)</a>:</h4>
+<p>I have absolutely no understanding of path variables in windows nor of which incantations of shells read .profile files but if the python file is there, just run it in the root directory of the project folder [I see from the above that you seem to have a Lean project].</p>
+
+<a name="177986124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986124">Kevin Buzzard (Oct 12 2019 at 12:21)</a>:</h4>
+<p>Your project folder should have files in it called things like <code>leanpkg.toml</code> and <code>leanpkg.path</code> and directories <code>_target</code> and <code>src</code> by this point.</p>
+
+<a name="177986191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986191">Marko Grdinic (Oct 12 2019 at 12:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thank you very much for the help so far.</p>
+<p>I've added it to PATH and have just run <code>update-mathlib</code>. We'll see how it goes. I'll try figuring out why <code>.profile</code> is not working after that.</p>
+
+<a name="177986207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986207">Kevin Buzzard (Oct 12 2019 at 12:23)</a>:</h4>
+<p>And the output looked good? If so then create a file in src called <code>test.lean</code> and write something like <code>import data.real.basic</code> at the top. It's essential that you used the "open folder" command in VS Code and opened the project folder.</p>
+
+<a name="177986276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986276">Kevin Buzzard (Oct 12 2019 at 12:25)</a>:</h4>
+<p>If <code>test.lean</code> gives you an error saying it can't find the import, that's bad. If it gives you an error saying "can't find the <code>import data.real.basi</code>" and then there is an orange bar at the left side of the window which doesn't go away, that's bad (it means Lean did find data.real.basic but will now spend 2 minutes compiling it). If the orange bar goes away after a few seconds, that's good.</p>
+
+<a name="177986323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986323">Kevin Buzzard (Oct 12 2019 at 12:26)</a>:</h4>
+<p>(the reason for the missing c is that when you were typing, Lean was compiling frantically, and the error was the last import that failed)</p>
+
+<a name="177986328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986328">Marko Grdinic (Oct 12 2019 at 12:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  That is what I've been doing.</p>
+<div class="codehilite"><pre><span></span>Marko@Lain MINGW64 /e/TheoremProving/lean/my_project (lean-3.4.2)
+$ &quot;C:/Program Files (x86)/Microsoft Visual Studio/Shared/Anaconda3_64/Scripts/activate&quot;
+/c/Program Files (x86)/Microsoft Visual Studio/Shared/Anaconda3_64/etc/profile.d/conda.sh: line 56: /c/Program: No such file or directory
+
+Marko@Lain MINGW64 /e/TheoremProving/lean/my_project (lean-3.4.2)
+$ conda activate Anaconda3_64
+bash: conda: command not found
+
+Marko@Lain MINGW64 /e/TheoremProving/lean/my_project (lean-3.4.2)
+</pre></div>
+
+
+<p>This is what happens when I try to open a terminal in VS Code right now. It seems there is something left over from the old version of the shell where it is setup to activate the Anaconda distro. Things like this happens when you just plop stuff in. Maybe that is why it did not just work out of the box.</p>
+
+<a name="177986339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986339">Kevin Buzzard (Oct 12 2019 at 12:27)</a>:</h4>
+<p>You do not need to be opening terminals in VS Code if you have run update-mathlib. Your terminal days are over.</p>
+
+<a name="177986349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986349">Kevin Buzzard (Oct 12 2019 at 12:27)</a>:</h4>
+<p>The fact that your OS cannot deal with spaces in path names is not my problem ;-)</p>
+
+<a name="177986562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986562">Marko Grdinic (Oct 12 2019 at 12:32)</a>:</h4>
+<p>It can deal with spaces in path names just fine, I have no idea why you had issues with that. :)</p>
+<p>I made a mistake trying to run <code>update-mathlib</code> in the root. What happened was that it seemed like it has started running something but there was no output. I see now that when I run it in the project folder I actually get some response.</p>
+<div class="codehilite"><pre><span></span>Marko@Lain MINGW64 ~
+$ cd E:/TheoremProving/lean/my_project
+
+Marko@Lain MINGW64 /e/TheoremProving/lean/my_project (lean-3.4.2)
+$ update-mathlib
+Info: No github section found in &#39;git config&#39;, we will use GitHub with no authentication
+Querying GitHub...
+Downloading nightly...
+Extracting nightly...
+</pre></div>
+
+
+<p>This should be fine, right? Let me give it a try.</p>
+
+<a name="177986570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986570">Kevin Buzzard (Oct 12 2019 at 12:32)</a>:</h4>
+<p>Your output in the last thing you pasted had an error caused by a space in a file name.</p>
+
+<a name="177986575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986575">Kevin Buzzard (Oct 12 2019 at 12:32)</a>:</h4>
+<p><code>line 56: /c/Program: No such file or directory</code></p>
+
+<a name="177986593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986593">Kevin Buzzard (Oct 12 2019 at 12:33)</a>:</h4>
+<p>Yes, the update-mathlib output looks perfect. I am cautiously optimistic.</p>
+
+<a name="177986648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986648">Kevin Buzzard (Oct 12 2019 at 12:35)</a>:</h4>
+<p>We do have a Windows machine at home and I actually renamed <code>C:\Program Files</code> to <code>C:\Program_Files</code> because I got so sick of that issue</p>
+
+<a name="177986718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986718">Mario Carneiro (Oct 12 2019 at 12:36)</a>:</h4>
+<p>wow, I'm surprised you didn't brick your system doing that</p>
+
+<a name="177986740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986740">Kevin Buzzard (Oct 12 2019 at 12:37)</a>:</h4>
+<p>Oh I haven't explained what I did correctly. I'm sure it would have bricked it. What I did was made a new directory Program_Files right at the start and then installed everything into that.</p>
+
+<a name="177986770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986770">Marko Grdinic (Oct 12 2019 at 12:37)</a>:</h4>
+<p>Oh, lol. I assure you, native Windows programs do not have that issue.</p>
+<p>At any rate, it seems that now the project is loading and typechecking instantly. Great.</p>
+<p>I am going to dig around a bit more to see if I can figure out why <code>.profile</code> is not adding the directory to PATH properly.</p>
+
+<a name="177986828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177986828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177986828">Kevin Buzzard (Oct 12 2019 at 12:38)</a>:</h4>
+<p>:D . I'm off for lunch because I can't help with anything else ;-) Happy leaning!</p>
+
+<a name="177987601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177987601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177987601">Marko Grdinic (Oct 12 2019 at 12:58)</a>:</h4>
+<p>Ok, I see what is going on.</p>
+<p>(Git shell run directly from the shortcut)</p>
+<div class="codehilite"><pre><span></span>Marko@Lain MINGW64 ~
+$ echo $PATH
+/c/Users/Marko/.elan/bin:/c/Users/Marko/.mathlib/bin:/c/Users/Marko/bin:/mingw64/bin:/usr/local/bin:/usr/bin:/bin:/mingw64/bin:/usr/bin:/c/Users/Marko/bin:/c/emacs-26.2-x8...
+</pre></div>
+
+
+<p>(Git shell run via VS Code)</p>
+<div class="codehilite"><pre><span></span>$ echo $PATH
+/mingw64/bin:/usr/bin:/c/Users/Marko/bin:/c/emacs-26.2-x86_64/bin...
+</pre></div>
+
+
+<p>(Powershell)</p>
+<div class="codehilite"><pre><span></span>PS C:\Users\Marko\.mathlib\bin&gt; $Env:Path
+C:\emacs-26.2-x86_64\bin....
+</pre></div>
+
+
+<p>I replaced the cutoff parts with <code>...</code> by hand. It seems that <code>.profile</code> only gets run when Git Bash is ran via the shortcut. Running it from VS Code will not have the <code>.elan</code> and <code>mathlib</code> directories be added to the PATH variable. That explains that.</p>
+<p>With this I've finally successfully setup the project. I started work on this at 10am and it is nearly 3pm now. It should definitely be a priority for the devs to make it so that one can just clone the repo and point the compiler at the library. Even if it would take 10m to compile, that would still beat having to go through all these hoops.</p>
+<p>I understand that the reason it took so long is partly my fault as I've given into the temptation of trying to save time by not following the instruction properly, but good installation instructions should not produce such temptation in the first place.</p>
+<p>Nonetheless, I let me offer my thanks for helping me with this once again. Cyao.</p>
+
 
 {% endraw %}
 
