@@ -206,6 +206,22 @@ With 320 edges, it has still a few more than the other versions. Fun fact: the h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177988322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177988322">Jeremy Avigad (Oct 12 2019 at 13:18)</a>:</h4>
 <p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> I know, but even a chain of ten instances to unravel a "+" sounds like it could cause problems ofr elaboration and unification. But if you tell me not to worry about it, I won't.</p>
 
+<a name="177991525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177991525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177991525">Kevin Buzzard (Oct 12 2019 at 14:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> <span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> Working on the perfectoid project this morning I had a max class instance resolution error, and if I increased the instance search level it turned into a timeout error. After some time staring at trace outputs and seeing exactly what <code>by apply_instance</code> could do, I managed to discover that I had managed to construct a ring <code>B</code> for which the type class inference structure could construct an instance of <code>comm_ring B</code> but not an instance of <code>ring B</code> (this was where the timeout occurred). The ring B was a "normal mathematical ring" -- it was a quotient of a subring of a field -- but the debugging was troublesome and the traces were gigantic and terrifying. I fixed the problem by giving <code>comm_ring.to_ring</code> a local priority of 1000 (this was the smallest number that worked). Looking at the traces, it really hit home what a phenomenally difficult job Lean has trying to solve these problems, but it was equally absolutely clear that the vast majority of what it was trying was really crazy. I just wanted to put my hands on Lean's shoulders and say "we are doing abstract ring theory here, stop thinking about int.ring and all these other silly ideas". Here, the issue didn't seem so much to be the loops in the inference graph but simply that it was so darn big and it was hard to highlight the manifestly important part of it.</p>
+
+<a name="177991868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177991868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177991868">Mario Carneiro (Oct 12 2019 at 14:46)</a>:</h4>
+<p>I think the issue is still the loops in the inference graph, it's just that since stuff like <code>int.ring</code> appears at the leaves it's going to appear a significant fraction of the time</p>
+
+<a name="177991951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177991951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177991951">Mario Carneiro (Oct 12 2019 at 14:48)</a>:</h4>
+<p>Does it help to <code>letI := comm_ring B</code> in the proof / statement?</p>
+
+<a name="177991983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177991983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177991983">Mario Carneiro (Oct 12 2019 at 14:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> Is the new instance algorithm back-portable to lean 3, or does it depend on significantly different architecture?</p>
+
 
 {% endraw %}
 

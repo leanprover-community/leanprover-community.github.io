@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [topology](42046topology.html) (19 messages, latest: Oct 12 2019 at 14:55)
+
 * [ring bug? use bug?](40440ringbugusebug.html) (43 messages, latest: Oct 12 2019 at 10:59)
 
 * [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (40 messages, latest: Oct 12 2019 at 07:23)
@@ -26,8 +28,6 @@ permalink: archive/116395maths/index.html
 * [map_nat_cast](81259mapnatcast.html) (4 messages, latest: Oct 09 2019 at 09:20)
 
 * [on real numbers](14718onrealnumbers.html) (6 messages, latest: Oct 08 2019 at 09:22)
-
-* [topology](42046topology.html) (18 messages, latest: Oct 07 2019 at 20:52)
 
 * [Transitive classes for 3ʳᵈ iso thm](55969Transitiveclassesfor3isothm.html) (2 messages, latest: Oct 07 2019 at 13:53)
 
