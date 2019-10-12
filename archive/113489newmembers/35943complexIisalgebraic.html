@@ -51,6 +51,42 @@ permalink: archive/113489newmembers/35943complexIisalgebraic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178008294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178008294">Reid Barton (Oct 12 2019 at 21:58)</a>:</h4>
 <p>My expert tip: <code>rw</code> is shorter than <code>rewrite</code></p>
 
+<a name="178009743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178009743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178009743">Alex J. Best (Oct 12 2019 at 22:43)</a>:</h4>
+<p>I'm not an expert, but here's where I'd take it too if I found the same proof,</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span> <span class="c1">-- how I &quot;remembered&quot; the name of degree_one just ask library_search</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span> <span class="n">complex</span> <span class="c1">-- so I can write I instead of complex.I</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="c1">-- I changed R to be implicit as we want it to be in is_algebraic, there is no need to specify R twice, as its already just whatever ring x is a term of and x is in the definition</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">is_algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">monic</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">aeval</span> <span class="n">k</span> <span class="n">R</span> <span class="n">x</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_algebraic</span> <span class="n">ℝ</span> <span class="n">I</span> <span class="o">:=</span> <span class="c1">-- making R implicit above lets me remove \C here, opening complex lets me just write I</span>
+<span class="k">begin</span>
+<span class="c1">-- removed the unfold as it&#39;s not needed (except to find the proof in the first place)</span>
+<span class="n">use</span> <span class="o">(</span><span class="n">X</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span>
+<span class="n">split</span><span class="o">,</span>
+<span class="o">{</span> <span class="c1">-- prove monic (X^2 + 1)</span>
+<span class="n">exact</span> <span class="o">(</span><span class="n">monic_X_pow_add</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">degree_one</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">))</span> <span class="c1">-- there is a lemma saying degree of 1 is 0 already, so use it and then 0 \le \u 1 is boring so hit it with dec_trivial, probably there is a lemma for this but dec_trivial is good.</span>
+<span class="o">},</span>
+<span class="o">{</span> <span class="c1">-- prove that I^2 + 1 = 0</span>
+<span class="n">simp</span> <span class="o">[</span><span class="n">aeval_def</span><span class="o">,</span> <span class="n">pow_two</span><span class="o">],</span> <span class="c1">-- bit of golfing, personal preference and not necessary, but is more like the human &quot;simplify everything using the definition and that x^2=x&quot;</span>
+<span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178009801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178009801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178009801">Alex J. Best (Oct 12 2019 at 22:45)</a>:</h4>
+<p>And yeah probably someone here can get a one-line proof of this ;) but this seems a good balance to me</p>
+
+<a name="178010052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178010052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178010052">Alex J. Best (Oct 12 2019 at 22:53)</a>:</h4>
+<p>oops, confused myself and forgot the earlier conversation, integral = algebraic over a field!</p>
+
 
 {% endraw %}
 
