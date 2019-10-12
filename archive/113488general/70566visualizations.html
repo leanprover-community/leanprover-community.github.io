@@ -222,6 +222,80 @@ With 320 edges, it has still a few more than the other versions. Fun fact: the h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177991983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177991983">Mario Carneiro (Oct 12 2019 at 14:49)</a>:</h4>
 <p><span class="user-mention" data-user-id="230999">@Daniel Selsam</span> Is the new instance algorithm back-portable to lean 3, or does it depend on significantly different architecture?</p>
 
+<a name="177994277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994277">Kevin Buzzard (Oct 12 2019 at 15:45)</a>:</h4>
+<p>It does not help. In tactic mode I managed to get myself in a situation where <code>letI : comm_ring B := by apply_instance</code> succeeded and then on the next line <code>letI : ring B := by apply_instance</code> failed.</p>
+
+<a name="177994293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994293">Kevin Buzzard (Oct 12 2019 at 15:45)</a>:</h4>
+<p>Once I had isolated this I could then fix the problem by fudging the instance priority.</p>
+
+<a name="177994347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994347">Mario Carneiro (Oct 12 2019 at 15:46)</a>:</h4>
+<p>hm, I thought local instances always had the highest priority</p>
+
+<a name="177994359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994359">Kevin Buzzard (Oct 12 2019 at 15:46)</a>:</h4>
+<div class="codehilite"><pre><span></span> <span class="k">let</span> <span class="n">B</span> <span class="o">:=</span> <span class="n">ideal</span><span class="bp">.</span><span class="n">quotient</span> <span class="n">A</span><span class="o">,</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">B</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- works fine</span>
+  <span class="n">letI</span> <span class="o">:</span> <span class="n">ring</span> <span class="n">B</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span><span class="o">,</span> <span class="c1">-- max class instance reached!</span>
+</pre></div>
+
+
+<p>(from a PM to Patrick and Johan earlier today)</p>
+
+<a name="177994364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994364">Reid Barton (Oct 12 2019 at 15:46)</a>:</h4>
+<p>But first we have to figure out to apply <code>comm_ring.to_ring</code>, right? and that doesn't have highest priority</p>
+
+<a name="177994375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994375">Mario Carneiro (Oct 12 2019 at 15:47)</a>:</h4>
+<p>that's true, but are there a lot of other options?</p>
+
+<a name="177994383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994383">Kevin Buzzard (Oct 12 2019 at 15:47)</a>:</h4>
+<p>[this is in the middle of a complicated thing, A is a subring of a perfectoid field, I couldn't minimise (indeed that was part of the problem)]</p>
+
+<a name="177994390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994390">Mario Carneiro (Oct 12 2019 at 15:47)</a>:</h4>
+<p>I guess it went to division ring and then to field and wandered off</p>
+
+<a name="177994443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994443">Mario Carneiro (Oct 12 2019 at 15:48)</a>:</h4>
+<p><code>  letI : ring B := comm_ring.to_ring</code> should presumably work</p>
+
+<a name="177994454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994454">Kevin Buzzard (Oct 12 2019 at 15:49)</a>:</h4>
+<p><code>local attribute [instance, priority 1000] comm_ring.to_ring</code> beforehand fixed everything. 999 was not enough.</p>
+
+<a name="177994460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994460">Mario Carneiro (Oct 12 2019 at 15:49)</a>:</h4>
+<p>aha</p>
+
+<a name="177994463"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994463" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994463">Mario Carneiro (Oct 12 2019 at 15:49)</a>:</h4>
+<p>that must be the priority of local instances</p>
+
+<a name="177994548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994548">Mario Carneiro (Oct 12 2019 at 15:51)</a>:</h4>
+<p>no, it's default priority</p>
+
+<a name="177994560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994560">Kevin Buzzard (Oct 12 2019 at 15:51)</a>:</h4>
+<p>comm_ring.to_ring definitely had smaller priority than that, because I checked! I think it was 100? Not at Lean right now</p>
+
+<a name="177994628"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994628" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994628">Reid Barton (Oct 12 2019 at 15:52)</a>:</h4>
+<p>yes, it's 100</p>
+
+<a name="177994817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994817">Mario Carneiro (Oct 12 2019 at 15:57)</a>:</h4>
+<p>I'm looking at the code, and it seems like they should be 1000 by default</p>
+
+<a name="177994864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177994864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#177994864">Mario Carneiro (Oct 12 2019 at 15:58)</a>:</h4>
+<p>oh, the core lean files set the default_priority lower when algebraic structures are defined</p>
+
 
 {% endraw %}
 

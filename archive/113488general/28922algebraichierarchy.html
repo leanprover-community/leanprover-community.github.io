@@ -1,0 +1,38 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/28922algebraichierarchy.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/28922algebraichierarchy.html">algebraic hierarchy</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177994467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/algebraic%20hierarchy/near/177994467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/28922algebraichierarchy.html#177994467">Jeremy Avigad (Oct 12 2019 at 15:49)</a>:</h4>
+<p>I am picking up here on the discussion in visualizations (<a href="#narrow/stream/113488-general/topic/visualizations/near/177991983" title="#narrow/stream/113488-general/topic/visualizations/near/177991983">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/177991983</a>) but I renamed the thread. I'd like to expand on my concerns about our coding of the algebraic hierarchy.</p>
+<p>Recently I went back to look at the Mathematical Components library, and I was struck by how carefully the library is designed to avoid any search at all when it comes to working with structures. The algebraic hierarchy is mostly here:</p>
+<p><a href="https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/ssralg.v" target="_blank" title="https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/ssralg.v">https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/ssralg.v</a><br>
+<a href="https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/ssrnum.v" target="_blank" title="https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/ssrnum.v">https://github.com/math-comp/math-comp/blob/master/mathcomp/algebra/ssrnum.v</a></p>
+<p>Not even notation is overloaded. When the "nat scope" is in effect, <code>*</code> means multiplication on <code>nat</code>. When the "ring scope" is open, <code>*</code> means multiplication in a ring structure. There are gadgets that make it more palatable to use natural numbers and rings at the same time. But whenever you want to use multiplication in something that has a ring structure, there is always a one step path (a "canonical structure" hint) that will get you there from the type in hand to the relevant ring structure.</p>
+<p>The same is true of associativity. If you say <code>mulnA</code>, you are referring to multiplication on nats. If you say <code>mulrA</code>, you are referring to multiplication on a ring. In either case, a one-step canonical structure hint will find it. </p>
+<p>Of course, when we do group theory, we want multiplication in groups. You guessed it: there is a group scope, and there is a <code>mulgA</code>. But unless you are doing group theory, these aren't even loaded. You certainly don't have to worry about semigroups, monoids, and groups when doing a calculation on the integers.</p>
+<p>I am not saying we have to be that hard core. It is nice to use <code>has_mul</code> to disambiguate notation. But we can come closer to the Mathematical Compoments approach by making sure there are short paths <code>nat</code> -&gt; <code>has_mul</code> and <code>ring</code> -&gt; <code>has_mul</code> and <code>group -&gt; has_mul</code>. This is a trivial search through a few common instances. Similarly, a generic<code>mul_assoc</code> can replace <code>mulnA</code>, <code>mulrA</code>, and <code>mulgA</code>.</p>
+<p>I am also not saying that the solution is to add shortcuts for every instance in the current hierarchy. Rather, we could design the hierarchy so that it works better for type class inference. Unless someone is working on monoid theory (an age-old, venerable branch of mathematics) there is no need to have the monoid structure playing an essential role every time a user types <code>*</code>.</p>
+<p>Mathematical components is evidence that something along these lines is possible. I also made some suggestions here: <a href="#narrow/stream/180721-mathlib-maintainers/topic/Redesigning.20Lean.20classes.20-.20call.20for.20problematic.20examples/near/176877491" title="#narrow/stream/180721-mathlib-maintainers/topic/Redesigning.20Lean.20classes.20-.20call.20for.20problematic.20examples/near/176877491">https://leanprover.zulipchat.com/#narrow/stream/180721-mathlib-maintainers/topic/Redesigning.20Lean.20classes.20-.20call.20for.20problematic.20examples/near/176877491</a>.) </p>
+<p>My concern is that having long paths from complex structure down to notations causes problems:<br>
+- elaboration gets slower<br>
+- unification gets slower: if in an instance of reflexivity, a <code>*</code> one each side is represented differently (because they are build up by applying generic lemmas in different settings), the system potentially has to do a lot of unfolding to recognize that they are the same<br>
+- error messages become more opaque and problems become harder to debug<br>
+- automation: e.g. we want the simplifier to find relevant generic facts very quickly</p>
+<p>That said, I don't have any hard data that says that these are problems, and others don't seem to be complaining about them much. So maybe I am worrying for no reason. It might be that a technical fixes and improvements -- caching, better class inference algorithms, etc. -- will sustain mathlib in the future. But the problem with performance problems is that they creep in slowly and only become unbearable when the library gets really large, at which point, it becomes harder to deal with them. So the move to Lean 4 may be an opportunity to get things right.</p>
+<p>So my question to <span class="user-mention" data-user-id="230999">@Daniel Selsam</span> and <span class="user-mention" data-user-id="110024">@Sebastian Ullrich</span> is not a rhetorical one. Is this something we should think about when we start moving the library to Lean 4, or should we just port the library as is and stay the course? I am o.k. with continuing with the current style, but I would like to hear at least a bit of discussion from people working at the outer limits of our structure hierarchy and people involved in the implementation to make sure we are doing this deliberately, not blindly.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

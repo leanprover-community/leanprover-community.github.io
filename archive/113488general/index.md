@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [visualizations](70566visualizations.html) (34 messages, latest: Oct 12 2019 at 14:49)
+* [visualizations](70566visualizations.html) (51 messages, latest: Oct 12 2019 at 15:58)
+
+* [algebraic hierarchy](28922algebraichierarchy.html) (1 message, latest: Oct 12 2019 at 15:49)
 
 * [some lemmas](11572somelemmas.html) (12 messages, latest: Oct 12 2019 at 11:57)
 

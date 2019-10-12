@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [topology](42046topology.html) (19 messages, latest: Oct 12 2019 at 14:55)
+* [topology](42046topology.html) (32 messages, latest: Oct 12 2019 at 15:37)
 
 * [ring bug? use bug?](40440ringbugusebug.html) (43 messages, latest: Oct 12 2019 at 10:59)
 

@@ -1,0 +1,189 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/91642011.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html">0 < 1 + 1</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177992933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177992933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177992933">Nicolás Ojeda Bär (Oct 12 2019 at 15:11)</a>:</h4>
+<p>I try to prove <code>0 &lt; 1 + 1</code> with</p>
+<div class="codehilite"><pre><span></span>example : 0 &lt; 1 + 1 :=
+begin
+apply (int.lt_add_one_of_le (int.le_of_lt int.zero_lt_one))
+end
+</pre></div>
+
+
+<p>I get:</p>
+<div class="codehilite"><pre><span></span>invalid apply tactic, failed to unify
+  0 &lt; 1 + 1
+with
+  0 &lt; 1 + 1
+state:
+⊢ 0 &lt; 1 + 1
+</pre></div>
+
+
+<p>?? Thanks!</p>
+
+<a name="177992981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177992981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177992981">Patrick Massot (Oct 12 2019 at 15:12)</a>:</h4>
+<p>By default, Lean thinks numerals are natural numbers, not integers</p>
+
+<a name="177992986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177992986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177992986">Mario Carneiro (Oct 12 2019 at 15:12)</a>:</h4>
+<p>the theorem statement is about nat, but the theorems you are applying are about ints</p>
+
+<a name="177992993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177992993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177992993">Patrick Massot (Oct 12 2019 at 15:12)</a>:</h4>
+<p>Ha! I was faster than Mario! <span aria-label="tada" class="emoji emoji-1f389" role="img" title="tada">:tada:</span></p>
+
+<a name="177992997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177992997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177992997">Nicolás Ojeda Bär (Oct 12 2019 at 15:12)</a>:</h4>
+<p>OK, got it ... I guess I have to look in the <code>nat</code> namespace then, right?</p>
+
+<a name="177993004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993004">Bryan Gin-ge Chen (Oct 12 2019 at 15:13)</a>:</h4>
+<p>You can also coerce the numerals to ints:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="n">apply</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">lt_add_one_of_le</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">le_of_lt</span> <span class="n">int</span><span class="bp">.</span><span class="n">zero_lt_one</span><span class="o">))</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177993020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993020">Mario Carneiro (Oct 12 2019 at 15:13)</a>:</h4>
+<p>there is a tactic <code>norm_num</code> for solving problems like this</p>
+
+<a name="177993022"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993022" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993022">Patrick Massot (Oct 12 2019 at 15:13)</a>:</h4>
+<p>That was my next message.</p>
+
+<a name="177993024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993024">Patrick Massot (Oct 12 2019 at 15:13)</a>:</h4>
+<p>and the next one.</p>
+
+<a name="177993027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993027">Mario Carneiro (Oct 12 2019 at 15:13)</a>:</h4>
+<p><code>dec_trivial</code> will also work here</p>
+
+<a name="177993031"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993031" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993031">Patrick Massot (Oct 12 2019 at 15:13)</a>:</h4>
+<p>I spent too much time celebrating my first successful race.</p>
+
+<a name="177993032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993032">Mario Carneiro (Oct 12 2019 at 15:13)</a>:</h4>
+<p>lol</p>
+
+<a name="177993116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993116">Mario Carneiro (Oct 12 2019 at 15:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="n">nat</span><span class="bp">.</span><span class="n">lt_succ_of_lt</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero_lt_one</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="n">dec_trivial</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
+
+<a name="177993250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993250">Nicolás Ojeda Bär (Oct 12 2019 at 15:18)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="177993275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993275">Mario Carneiro (Oct 12 2019 at 15:19)</a>:</h4>
+<p>Note that some theorems about <code>nat</code> are generic and don't have a prefix, like <code>le_of_lt</code> (there is no <code>nat.le_of_lt</code>)</p>
+
+<a name="177993321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993321">Mario Carneiro (Oct 12 2019 at 15:20)</a>:</h4>
+<p>only theorems that are "uniquely about <code>nat</code>" have a <code>nat</code> prefix</p>
+
+<a name="177993337"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993337" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993337">Mario Carneiro (Oct 12 2019 at 15:21)</a>:</h4>
+<p><code>int.le_of_lt</code> is an exception because it is used for bootstrapping before <code>le_of_lt</code> is available</p>
+
+<a name="177993512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993512">Nicolás Ojeda Bär (Oct 12 2019 at 15:25)</a>:</h4>
+<p>Is there a way I can tell Lean to print some type annotations so that I can see the difference between nat and int ?</p>
+
+<a name="177993521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993521">Mario Carneiro (Oct 12 2019 at 15:25)</a>:</h4>
+<p>not without it getting a lot uglier</p>
+
+<a name="177993573"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993573" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993573">Mario Carneiro (Oct 12 2019 at 15:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="kn">notation</span> <span class="n">false</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">implicit</span> <span class="n">true</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="c1">-- @has_lt.lt nat nat.has_lt 0 (@has_add.add nat nat.has_add 1 1) : Prop</span>
+</pre></div>
+
+<a name="177993580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993580">Patrick Massot (Oct 12 2019 at 15:26)</a>:</h4>
+<p>In that specific case, you could use <code>set_option pp.numerals false</code>, but only because we are talking about numerals.</p>
+
+<a name="177993603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993603">Mario Carneiro (Oct 12 2019 at 15:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">numerals</span> <span class="n">false</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span>
+<span class="c1">-- has_zero.zero ℕ &lt; has_one.one ℕ + has_one.one ℕ : Prop</span>
+</pre></div>
+
+<a name="177993692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993692">Nicolás Ojeda Bär (Oct 12 2019 at 15:29)</a>:</h4>
+<p>OK, got it. Another question : what is the simplest way of lifting properties (eg inequalities) about N to with_bot N ?</p>
+
+<a name="177993749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993749">Patrick Massot (Oct 12 2019 at 15:30)</a>:</h4>
+<p>Could you give a specific example lemma?</p>
+
+<a name="177993831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993831">Nicolás Ojeda Bär (Oct 12 2019 at 15:33)</a>:</h4>
+<p>For example, given the proof of <code>0 &lt; 1 + 1</code> (for <code>nat</code>), I need it to apply to elements of <code>with_bot nat</code>.</p>
+
+<a name="177993837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177993837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177993837">Kenny Lau (Oct 12 2019 at 15:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">right</span><span class="bp">;</span> <span class="n">left</span>
+</pre></div>
+
+<a name="177994105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994105">Mario Carneiro (Oct 12 2019 at 15:40)</a>:</h4>
+<p>that depends on how you have <code>0</code> and <code>1+1</code> expressed in <code>with_bot nat</code></p>
+
+<a name="177994109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994109">Mario Carneiro (Oct 12 2019 at 15:41)</a>:</h4>
+<p>but it's probably also <code>dec_trivial</code></p>
+
+<a name="177994122"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994122" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994122">Kevin Buzzard (Oct 12 2019 at 15:41)</a>:</h4>
+<p>I just did an hour of marking so was in a grumpy mood, and then I popped back here just before going out and 20 seconds later was laughing out loud.</p>
+
+<a name="177994377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994377">Reid Barton (Oct 12 2019 at 15:47)</a>:</h4>
+<p><code>by repeat { constructor }</code> is a vast generalization of Kenny's proof</p>
+
+<a name="177994473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994473">Rob Lewis (Oct 12 2019 at 15:49)</a>:</h4>
+<blockquote>
+<p><code>by repeat { constructor }</code> is a vast generalization of Kenny's proof</p>
+</blockquote>
+<p>But it sounds much less like a <a href="https://www.youtube.com/watch?v=wZv62ShoStY" target="_blank" title="https://www.youtube.com/watch?v=wZv62ShoStY">dance move</a>.</p>
+<div class="youtube-video message_inline_image"><a data-id="wZv62ShoStY" href="https://www.youtube.com/watch?v=wZv62ShoStY" target="_blank" title="https://www.youtube.com/watch?v=wZv62ShoStY"><img src="https://i.ytimg.com/vi/wZv62ShoStY/default.jpg"></a></div>
+
+<a name="177994544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994544">Reid Barton (Oct 12 2019 at 15:51)</a>:</h4>
+<p>True, I hadn't thought about the choreographic interpretation of constructive type theory</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
