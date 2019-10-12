@@ -1,0 +1,71 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/11572somelemmas.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html">some lemmas</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177981574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177981574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177981574">Scott Morrison (Oct 12 2019 at 10:17)</a>:</h4>
+<p>Any opinions on adding these?</p>
+<div class="codehilite"><pre><span></span>lemma int.succ_ne_self (n : ℤ) : n + 1 ≠ n :=
+λ h, one_ne_zero ((add_left_inj n).mp (by { convert h, simp }))
+lemma int.pred_ne_self (n : ℤ) : n - 1 ≠ n :=
+λ h, one_ne_zero (neg_inj ((add_left_inj n).mp (by { convert h, simp })))
+</pre></div>
+
+
+<p>I couldn't find them in mathlib.</p>
+
+<a name="177981854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177981854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177981854">Chris Hughes (Oct 12 2019 at 10:24)</a>:</h4>
+<p>They're true in ring with <code>0 \ne 1</code>. Maybe even semiring.</p>
+
+<a name="177981921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177981921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177981921">Johan Commelin (Oct 12 2019 at 10:26)</a>:</h4>
+<p>The second doesn't make sense in a semiring... for the former you need something cancellative</p>
+
+<a name="177981998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177981998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177981998">Scott Morrison (Oct 12 2019 at 10:28)</a>:</h4>
+<p>Does <code>int</code> have some typeclass already that asserts <code>0 \ne 1</code>?</p>
+
+<a name="177982024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982024">Scott Morrison (Oct 12 2019 at 10:29)</a>:</h4>
+<div class="codehilite"><pre><span></span>example : zero_ne_one_class ℤ := infer_instance
+</pre></div>
+
+<a name="177982105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982105">Johan Commelin (Oct 12 2019 at 10:31)</a>:</h4>
+<p>There is <code>nonzero_comm_ring</code>. I don't think there is <code>nonzero_ring</code> though.</p>
+
+<a name="177982168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982168">Scott Morrison (Oct 12 2019 at 10:33)</a>:</h4>
+<p>I'll just write the lemma with [zero_ne_one_class R] and [ring R]?</p>
+
+<a name="177982172"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982172" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982172">Johan Commelin (Oct 12 2019 at 10:33)</a>:</h4>
+<p>I think you than have two incompatible zeros?</p>
+
+<a name="177982176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982176">Johan Commelin (Oct 12 2019 at 10:33)</a>:</h4>
+<p>And two ones...</p>
+
+<a name="177982231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982231">Scott Morrison (Oct 12 2019 at 10:34)</a>:</h4>
+<p>... yes.</p>
+
+<a name="177982649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/some%20lemmas/near/177982649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/11572somelemmas.html#177982649">Scott Morrison (Oct 12 2019 at 10:46)</a>:</h4>
+<p>Okay, sorted it out. Shall I put this in a separate PR? (I'm tempted to just roll it into the PR that needs these lemmas...)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

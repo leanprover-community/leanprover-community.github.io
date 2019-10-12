@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [out_params and products](13059outparamsandproducts.html) (1 message, latest: Oct 12 2019 at 09:43)
+* [some lemmas](11572somelemmas.html) (11 messages, latest: Oct 12 2019 at 10:46)
+
+* [out_params and products](13059outparamsandproducts.html) (8 messages, latest: Oct 12 2019 at 10:44)
 
 * [visualizations](70566visualizations.html) (29 messages, latest: Oct 12 2019 at 07:59)
 

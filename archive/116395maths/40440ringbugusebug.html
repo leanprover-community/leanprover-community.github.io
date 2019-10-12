@@ -210,6 +210,43 @@ permalink: archive/116395maths/40440ringbugusebug.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177626551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177626551">Reid Barton (Oct 08 2019 at 15:21)</a>:</h4>
 <p>Oh I need to look at this thread again later, but this is very interesting. I've seen the <code>ring, ring</code> thing before and I never imagined it could be the fault of something other than <code>ring</code> itself</p>
 
+<a name="177982825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177982825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177982825">Kevin Buzzard (Oct 12 2019 at 10:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">l</span> <span class="n">m</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">abs</span><span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="bp">-</span><span class="n">l</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">abs</span><span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="bp">-</span><span class="n">l</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="n">m</span><span class="o">)))</span> <span class="o">:=</span>
+<span class="c1">-- by ring -- I think this used to work but now it doesn&#39;t</span>
+<span class="k">by</span> <span class="n">congr&#39;</span> <span class="mi">1</span><span class="bp">;</span> <span class="n">ring</span>
+</pre></div>
+
+
+<p>Did <code>ring</code> change as a result of this conversation and now this? Or was this some other change? A project which I'm pretty sure used to compile now no longer does.</p>
+
+<a name="177982938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177982938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177982938">Kevin Buzzard (Oct 12 2019 at 10:54)</a>:</h4>
+<p>Similarly <code>lam n, [a thing] = lam n, [a thing which ring can prove is equal]</code> can no longer be closed by <code>ring</code>. Am I just behind the times? If this is a design decision I'm fine.</p>
+
+<a name="177983048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177983048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177983048">Mario Carneiro (Oct 12 2019 at 10:57)</a>:</h4>
+<p>I don't think that was ever supposed to work</p>
+
+<a name="177983105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177983105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177983105">Mario Carneiro (Oct 12 2019 at 10:58)</a>:</h4>
+<p><code>ring</code> will rewrite in subterms if it isn't facing an equality of rings, but that's mostly for viewing purposes so you know why <code>ring</code> isn't working</p>
+
+<a name="177983108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177983108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177983108">Kevin Buzzard (Oct 12 2019 at 10:58)</a>:</h4>
+<p>OK then no worries. I have an old project written before update-mathlib and I bumped mathlib to get update-mathlib working and it broke the project.</p>
+
+<a name="177983119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177983119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177983119">Kevin Buzzard (Oct 12 2019 at 10:59)</a>:</h4>
+<p>All the fixes are easy. I neither know nor care why it broke.</p>
+
+<a name="177983125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/ring%20bug%3F%20use%20bug%3F/near/177983125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/40440ringbugusebug.html#177983125">Mario Carneiro (Oct 12 2019 at 10:59)</a>:</h4>
+<p>I would actually expect in the <code>abs</code> example that <code>ring</code> sees it as two atoms and tries to prove <code>x = y</code></p>
+
 
 {% endraw %}
 

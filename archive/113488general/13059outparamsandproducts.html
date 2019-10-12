@@ -40,6 +40,41 @@ permalink: archive/113488general/13059outparamsandproducts.html
 <p>In <code>come_on_lean</code> (which is exactly the same statement as the instance just before), <code>apply_instance</code> fails to find the relevant instance. And the instance search starts with <code>@has_model ?x_0 ?x_1 (γ × δ)</code>, which looks crazy to me because I have said right away that the model type should be <code>α × β</code>, so why start the search with <code>?x_0</code>? Then <code>doesnt_work</code> also fails, not surprisingly, because Lean fails to find the same model space instance on the product.</p>
 <p>Is there a proper way to formulate my instances (while keeping the out_param)?</p>
 
+<a name="177981016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177981016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177981016">Mario Carneiro (Oct 12 2019 at 10:01)</a>:</h4>
+<p>I'm not surprised that the search starts with <code>@has_model ?x_0 ?x_1 (γ × δ)</code>; you said the first two args are out_params so it doesn't use them in the search</p>
+
+<a name="177981136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177981136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177981136">Mario Carneiro (Oct 12 2019 at 10:04)</a>:</h4>
+<p>this works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">has_model_prod</span> <span class="o">{</span><span class="bp">_</span> <span class="o">:</span> <span class="n">model</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="bp">_</span> <span class="o">:</span> <span class="n">model</span> <span class="n">β</span><span class="o">}</span>
+  <span class="o">[</span><span class="n">has_model</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">β</span> <span class="n">δ</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_model</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="bp">×</span> <span class="n">δ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">my_fun</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">has_model</span><span class="bp">.</span><span class="n">my_fun</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">has_model</span><span class="bp">.</span><span class="n">my_fun</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">works</span> <span class="o">[</span><span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">model</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">β</span> <span class="n">δ</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_model</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="bp">×</span> <span class="n">δ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+<a name="177982239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177982239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177982239">Sebastien Gouezel (Oct 12 2019 at 10:35)</a>:</h4>
+<p>Thanks a lot, this is black magic to me! And it also works in my more complicated real use case, by replacing randomly some typeclass arguments in several of my definitions by implicit arguments. A little bit like with the recent changes to implicit arguments in coercions, I don't really understand what is going on. Is there a rule of thumb like the following: If we have <code>lemma foo [first_class A B] [second_class A B] ...</code> and <code>second_class</code> in its definition has a typeclass argument <code>[first_class A B]</code>, then one could (and should?) change the definition of <code>foo</code> to <code>lemma foo {_ : first_class A B} [second_class A B]</code>?</p>
+
+<a name="177982440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177982440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177982440">Mario Carneiro (Oct 12 2019 at 10:40)</a>:</h4>
+<p>What happens is that in your instance, with <code>[model α] [model β] [has_model α γ] [has_model β δ]</code>, it will search for all four of these instances, from left to right. Since the target is <code>@has_model ?x_0 ?x_1 (γ × δ)</code> which unifies with the instance conclusion, you end up searching for <code>model ?m_2</code> where ?x_0 := (?m_2 × ?m_3)`, which is not good</p>
+
+<a name="177982507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177982507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177982507">Mario Carneiro (Oct 12 2019 at 10:42)</a>:</h4>
+<p>By setting the <code>model α</code> arguments to implicit, we are saying to not attempt to typeclass search for them, and instead search only for <code>has_model α γ</code> (which gives us <code>model α</code> by unification), and since this has an out_param on <code>α</code> this works</p>
+
+<a name="177982538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177982538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177982538">Mario Carneiro (Oct 12 2019 at 10:43)</a>:</h4>
+<p>Whether to use <code> [first_class A B] [second_class A B]</code> or <code> {_ : first_class A B} [second_class A B]</code> depends on whether the typeclass search <code>@second_class A ? B</code> is supposed to be able to succeed</p>
+
+<a name="177982583"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177982583" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177982583">Mario Carneiro (Oct 12 2019 at 10:44)</a>:</h4>
+<p>If there is an out_param on that argument, then this search will work, otherwise it's probably not a good idea</p>
+
 
 {% endraw %}
 

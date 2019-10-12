@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [ring bug? use bug?](40440ringbugusebug.html) (43 messages, latest: Oct 12 2019 at 10:59)
+
 * [With Category Theory, Mathematics Escapes From Equality](39704WithCategoryTheoryMathematicsEscapesFromEquality.html) (40 messages, latest: Oct 12 2019 at 07:23)
 
 * [wolf goat cabbage](44057wolfgoatcabbage.html) (47 messages, latest: Oct 11 2019 at 13:59)
@@ -22,8 +24,6 @@ permalink: archive/116395maths/index.html
 * [ring_hom coe](79019ringhomcoe.html) (2 messages, latest: Oct 09 2019 at 21:28)
 
 * [map_nat_cast](81259mapnatcast.html) (4 messages, latest: Oct 09 2019 at 09:20)
-
-* [ring bug? use bug?](40440ringbugusebug.html) (36 messages, latest: Oct 08 2019 at 15:21)
 
 * [on real numbers](14718onrealnumbers.html) (6 messages, latest: Oct 08 2019 at 09:22)
 
