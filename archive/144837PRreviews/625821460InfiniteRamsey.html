@@ -48,6 +48,75 @@ permalink: archive/144837PRreviews/625821460InfiniteRamsey.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177267288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177267288">Jared Corduan (Oct 03 2019 at 17:32)</a>:</h4>
 <p>ok, sure thing. That mean stating the ramsey theorems with the mathlib infinite, and swapping out when I need unbounded (which shall be unnamed).</p>
 
+<a name="177965239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965239">Jared Corduan (Oct 12 2019 at 02:02)</a>:</h4>
+<p>I'm having trouble proving the <code>iff</code> between the mathlib <code>infinite</code>and my unbounded definition. I am currently here:</p>
+<div class="codehilite"><pre><span></span>lemma infinite_unbounded (H : set ℕ) :
+  set.infinite H ↔ ∀ x : ℕ, ∃ y : ℕ, x &lt; y ∧ y ∈ H :=
+begin
+  constructor,
+  { classical,
+    contrapose,
+    intro h, unfold set.infinite, rw not_not,
+    have hf : ∃ x, ∀ y, ¬ (x &lt; y ∧ y ∈ H),
+    simp [not_forall, not_exists] at h, simp, exact h,
+    simp at hf,
+    cases hf with x hx,
+    unfold finite,
+    constructor,
+    exact ⟨sorry, sorry⟩,
+  },
+  { intros h hfin,
+    cases (finset.exists_nat_subset_range hfin.to_finset) with n hn,
+    cases (h n) with y Hy,
+    have hyn : y ∈ finset.range n,
+    apply finset.subset_iff.mpr hn, simp [Hy.right],
+    simp at hyn,
+    exact lt_irrefl n (lt_trans (Hy.left) hyn) }
+end
+</pre></div>
+
+
+<p>In context, right before the two sorrys, I have <code>hx : ∀ (y : ℕ), x &lt; y → y ∉ H</code> and need to show <code>fintype ↥H</code>. which seems great, <code>finset.range x</code> should be my fintype. But I get two errors that I'm having trouble understanding.</p>
+<p>If I replace the first sorry with <code>finset.range x</code>, I learn that <code>finset ℕ</code> is not the same type as <code>finset ↥H</code>. Is the coercion on <code>set ℕ</code> not to <code>ℕ</code>?</p>
+<p>If I try to fix the second sorry by showing <code>have hb : ∀ x : ↑H, x ∈ finset.range x</code>, I learn that there is a class instance problem with <code>has_mem ↑H (finset ℕ)</code>.</p>
+<p>I think that I am misunderstanding <code>↑H</code> somehow (it must not be <code>ℕ</code>).</p>
+
+<a name="177965781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965781">Jesse Michael Han (Oct 12 2019 at 02:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">set</span>
+<span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="kn">open</span> <span class="n">set</span>
+
+<span class="kn">lemma</span> <span class="n">infinite_unbounded</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">set</span><span class="bp">.</span><span class="n">infinite</span> <span class="n">H</span> <span class="bp">↔</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">H</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">constructor</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h</span> <span class="n">x</span><span class="o">,</span> <span class="n">classical</span><span class="o">,</span> <span class="n">by_contra</span> <span class="n">H_contra</span><span class="o">,</span> <span class="n">push_neg</span> <span class="n">at</span> <span class="n">H_contra</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h</span><span class="o">,</span> <span class="n">refine</span> <span class="n">finite_subset</span> <span class="o">(</span><span class="n">finite_le_nat</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="k">by</span> <span class="n">finish</span><span class="o">)</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">h</span> <span class="n">hfin</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">exists_nat_subset_range</span> <span class="n">hfin</span><span class="bp">.</span><span class="n">to_finset</span><span class="o">)</span> <span class="k">with</span> <span class="n">n</span> <span class="n">hn</span><span class="o">,</span>
+    <span class="n">cases</span> <span class="o">(</span><span class="n">h</span> <span class="n">n</span><span class="o">)</span> <span class="k">with</span> <span class="n">y</span> <span class="n">Hy</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">hyn</span> <span class="o">:</span> <span class="n">y</span> <span class="err">∈</span> <span class="n">finset</span><span class="bp">.</span><span class="n">range</span> <span class="n">n</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">subset_iff</span><span class="bp">.</span><span class="n">mpr</span> <span class="n">hn</span><span class="o">,</span> <span class="n">simp</span> <span class="o">[</span><span class="n">Hy</span><span class="bp">.</span><span class="n">right</span><span class="o">],</span>
+    <span class="n">simp</span> <span class="n">at</span> <span class="n">hyn</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">lt_irrefl</span> <span class="n">n</span> <span class="o">(</span><span class="n">lt_trans</span> <span class="o">(</span><span class="n">Hy</span><span class="bp">.</span><span class="n">left</span><span class="o">)</span> <span class="n">hyn</span><span class="o">)</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="177965901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965901">Jared Corduan (Oct 12 2019 at 02:19)</a>:</h4>
+<p>thank you <span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> ! I will look up what <code>refine finite_subset (finite_le_nat x) (λ _ _, by finish)</code> does! <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span>  refine and finish!</p>
+
+<a name="177965968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177965968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177965968">Jesse Michael Han (Oct 12 2019 at 02:20)</a>:</h4>
+<p>oh oops, that's supposed to be an <code>exact</code>, i just used <code>refine</code> while finding the proof</p>
+
+<a name="177966056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/177966056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#177966056">Jared Corduan (Oct 12 2019 at 02:23)</a>:</h4>
+<p>I knew about <code>push_neg</code> from <span class="user-mention" data-user-id="112680">@Johan Commelin</span> , but <code>finish</code> is new to me, thanks!</p>
+
 
 {% endraw %}
 

@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1460 Infinite Ramsey](625821460InfiniteRamsey.html) (14 messages, latest: Oct 12 2019 at 02:23)
+
 * [curly braces](77952curlybraces.html) (5 messages, latest: Oct 10 2019 at 23:52)
 
 * [#1521 rename type variables](499201521renametypevariables.html) (126 messages, latest: Oct 10 2019 at 09:06)
@@ -16,8 +18,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1528 sequential](152151528sequential.html) (9 messages, latest: Oct 09 2019 at 16:13)
 
 * [1089 Commuting elements](520351089Commutingelements.html) (4 messages, latest: Oct 04 2019 at 12:06)
-
-* [#1460 Infinite Ramsey](625821460InfiniteRamsey.html) (9 messages, latest: Oct 03 2019 at 17:32)
 
 * [#1493](788371493.html) (31 messages, latest: Sep 27 2019 at 22:27)
 
