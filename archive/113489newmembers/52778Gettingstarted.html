@@ -312,6 +312,114 @@ git clone <a href="https://github.com/leanprover/lean.git" target="_blank" title
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177982441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177982441">Kevin Buzzard (Oct 12 2019 at 10:40)</a>:</h4>
 <p>I added installation instructions to that project (and bumped mathlib to the point where <code>update-mathlib</code> worked). I will resurrect this project this year I guess.</p>
 
+<a name="177983955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177983955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177983955">Kevin Buzzard (Oct 12 2019 at 11:21)</a>:</h4>
+<p>I even got the project compiling again ;-)</p>
+
+<a name="177984440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984440">Marko Grdinic (Oct 12 2019 at 11:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  I did as you suggested and the installation did go through, almost without a hitch.</p>
+<div class="codehilite"><pre><span></span>leanpkg new my_project
+cd my_project
+leanpkg add leanprover-community/mathlib
+update-mathlib
+</pre></div>
+
+
+<p>For some reason the shell is not recognizing the <code>update-mathlib</code> command. But though it took it a while to do what it needs to under the hood in order to go through with the import, the test fragment seems to be working.</p>
+<p>What is <code>update-mathlib</code> supposed to be doing? Is it a problem that I haven't done that step properly?</p>
+
+<a name="177984492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984492">Marko Grdinic (Oct 12 2019 at 11:37)</a>:</h4>
+<p>Also it is strange that a library would be harder to install than the language itself. Just what is going on that makes it so complicated?</p>
+
+<a name="177984495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984495">Kevin Buzzard (Oct 12 2019 at 11:37)</a>:</h4>
+<p>Yup. <code>update-mathlib</code> is a custom script installed by the incantations that you ignore, which takes a project, looks at which version of mathlib it compiles with, and then fetches precompiled binaries from a stash in the cloud and downloads them and puts them in the right place. Saves you 15 minutes of 100% CPU hammering.</p>
+
+<a name="177984544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984544">Kevin Buzzard (Oct 12 2019 at 11:38)</a>:</h4>
+<p>It's not harder to install, you can compile the project yourself without update-mathlib, just make sure your device is plugged into the mains and you have something else to do for 30 minutes, and every time the maintainers decide to bump the version of mathlib you'll have the same problem.</p>
+
+<a name="177984559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984559">Reid Barton (Oct 12 2019 at 11:39)</a>:</h4>
+<p>Well, since it's your own project in this case, it's really every time you decide to bump to the newest version of mathlib, but otherwise yeah.</p>
+
+<a name="177984560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984560">Kevin Buzzard (Oct 12 2019 at 11:39)</a>:</h4>
+<p>You could instead just go into the project and type <code>lean --make</code></p>
+
+<a name="177984563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984563">Kevin Buzzard (Oct 12 2019 at 11:39)</a>:</h4>
+<p>you should get some warnings (because not all proofs are complete) but no errors.</p>
+
+<a name="177984615"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984615" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984615">Kevin Buzzard (Oct 12 2019 at 11:40)</a>:</h4>
+<p>The extra work is not because installing the library is hard, it's because compiling the library is painful. The extra stuff is to make your life easier.</p>
+
+<a name="177984736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984736">Marko Grdinic (Oct 12 2019 at 11:44)</a>:</h4>
+<p>Any idea why <code>update-mathlib</code> is not being recognized by the shell? I did follow the instructions exactly as far as I could this time.</p>
+<p>Why would compiling the library be painful? I remember in one of the slides reading that the <code>array</code> data type  is implemented in C++. Does the library have C++ dependencies it needs to compile directly or something?</p>
+
+<a name="177984875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984875">Kevin Buzzard (Oct 12 2019 at 11:49)</a>:</h4>
+<p>Oh -- you did the incantations? Then it should work. Compiling the library is painful because it is a large amount of Lean code and it's got to the point where it's painful. There are some short proofs that take 20 seconds to compile because mathlib pushes Lean's type class resolution system to its limits.</p>
+
+<a name="177984951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984951">Kevin Buzzard (Oct 12 2019 at 11:50)</a>:</h4>
+<p>Very short Lean files can force the kernel to deal with absolutely gigantic terms, because mathematics is good at bundling stuff like fields up into neat packages but Lean has to deal with what's actually going on.</p>
+
+<a name="177984963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984963">Kevin Buzzard (Oct 12 2019 at 11:51)</a>:</h4>
+<p>Lean 4 might change all this, but Lean 4 is not quite ready.</p>
+
+<a name="177984975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984975">Kevin Buzzard (Oct 12 2019 at 11:51)</a>:</h4>
+<p>(I mean, it's ready to play around with, but there is no tactic framework and no type class resolution system)</p>
+
+<a name="177984976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177984976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177984976">Mario Carneiro (Oct 12 2019 at 11:51)</a>:</h4>
+<p>you might have to write <code>./update-mathlib</code> or <code>./update-mathlib.sh</code></p>
+
+<a name="177985018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985018">Mario Carneiro (Oct 12 2019 at 11:52)</a>:</h4>
+<p>(I assume it's a shell script)</p>
+
+<a name="177985032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985032">Kevin Buzzard (Oct 12 2019 at 11:53)</a>:</h4>
+<p>If Marko has followed the instructions to the letter it should just all work, right? Do you know precisely which line installs the update-mathlib script? Marko could try that one again and report on output.</p>
+
+<a name="177985040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985040">Mario Carneiro (Oct 12 2019 at 11:53)</a>:</h4>
+<p>The issue isn't C++ dependencies, it is Lean itself. Mathlib is composed of several hundred large lean files, which all need to be run through lean. This involves running a bunch of tactics and each file takes a few seconds to minutes</p>
+
+<a name="177985091"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985091" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985091">Marko Grdinic (Oct 12 2019 at 11:54)</a>:</h4>
+<div class="codehilite"><pre><span></span>Marko@Lain MINGW64 /e/TheoremProving/lean/my_project (lean-3.4.2)
+$ ./update-mathlib
+bash: ./update-mathlib: No such file or directory
+
+Marko@Lain MINGW64 /e/TheoremProving/lean/my_project (lean-3.4.2)
+$ ./update-mathlib.sh
+bash: ./update-mathlib.sh: No such file or directory
+</pre></div>
+
+
+<p>Indeed, the files are not in the directory just as the errors indicated. On Windows the <code>./</code> prefix means to run the thing in the current dir. I am not sure how it is on Linux.</p>
+
+<a name="177985103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985103">Mario Carneiro (Oct 12 2019 at 11:55)</a>:</h4>
+<p>it means that in linux too</p>
+
+<a name="177985112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985112">Mario Carneiro (Oct 12 2019 at 11:55)</a>:</h4>
+<p>I guess you need to add something to your PATH</p>
+
+<a name="177985120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177985120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177985120">Kevin Buzzard (Oct 12 2019 at 11:55)</a>:</h4>
+<p>What is the output of <code>curl https://raw.githubusercontent.com/leanprover-community/mathlib-tools/master/scripts/remote-install-update-mathlib.sh -sSf | bash</code> ? That's surely the line that installs update-mathlib :D</p>
+
 
 {% endraw %}
 
