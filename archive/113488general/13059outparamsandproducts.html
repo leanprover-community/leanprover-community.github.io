@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/13059outparamsandproducts.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html">out_params and products</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="177980386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/out_params%20and%20products/near/177980386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/13059outparamsandproducts.html#177980386">Sebastien Gouezel (Oct 12 2019 at 09:43)</a>:</h4>
+<p>I have just stumbled on a situation where I am not happy with typeclass inference. Maybe I am misusing it. I have been able to minimize the example, so maybe <span class="user-mention" data-user-id="230999">@Daniel Selsam</span> you will be interested in this. Some motivation. Assume that some types can have a model type, whatever that means, and that this model type when it exists is unique. Then I want to register it as an outparam, to avoid writing it explicitly in all the formulas. This works pretty well most of the time, but not when I have products where it fails to find the relevant instance. MWE:</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">δ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">class</span> <span class="n">model</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">model_prod</span> <span class="o">[</span><span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">model</span> <span class="n">β</span><span class="o">]</span> <span class="o">:</span> <span class="n">model</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">constructor</span>
+
+<span class="n">class</span> <span class="n">has_model</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">out_param</span> <span class="err">$</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">out_param</span> <span class="err">$</span> <span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">my_fun</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">has_model_prod</span> <span class="o">[</span><span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">model</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">β</span> <span class="n">δ</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">has_model</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="bp">×</span> <span class="n">δ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">my_fun</span> <span class="o">:=</span> <span class="bp">λ</span><span class="n">p</span><span class="o">,</span> <span class="o">(</span><span class="n">has_model</span><span class="bp">.</span><span class="n">my_fun</span> <span class="n">p</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">has_model</span><span class="bp">.</span><span class="n">my_fun</span> <span class="n">p</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">come_on_lean</span> <span class="o">[</span><span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">model</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">β</span> <span class="n">δ</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_model</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">γ</span> <span class="bp">×</span> <span class="n">δ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">apply_instance</span>
+
+<span class="n">def</span> <span class="n">foo</span> <span class="o">[</span><span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">γ</span> <span class="o">:=</span> <span class="n">x</span>
+
+<span class="kn">lemma</span> <span class="n">doesnt_work</span> <span class="o">[</span><span class="n">model</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">α</span> <span class="n">γ</span><span class="o">]</span> <span class="o">[</span><span class="n">model</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="n">has_model</span> <span class="n">β</span> <span class="n">δ</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">γ</span> <span class="bp">×</span> <span class="n">δ</span><span class="o">)</span> <span class="o">:</span> <span class="n">foo</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>In <code>come_on_lean</code> (which is exactly the same statement as the instance just before), <code>apply_instance</code> fails to find the relevant instance. And the instance search starts with <code>@has_model ?x_0 ?x_1 (γ × δ)</code>, which looks crazy to me because I have said right away that the model type should be <code>α × β</code>, so why start the search with <code>?x_0</code>? Then <code>doesnt_work</code> also fails, not surprisingly, because Lean fails to find the same model space instance on the product.</p>
+<p>Is there a proper way to formulate my instances (while keeping the out_param)?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

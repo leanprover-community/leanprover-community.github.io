@@ -101,6 +101,34 @@ context: &#39;eliminator&#39; elaboration was not used for &#39;option.rec&#39; 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177978970" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177978970">mth (Oct 12 2019 at 08:58)</a>:</h4>
 <p>maybe the intended solution was to use <code>cases_on</code>? is that any friendlier?</p>
 
+<a name="177979106"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177979106" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177979106">Patrick Massot (Oct 12 2019 at 09:03)</a>:</h4>
+<p>Yes it is a bit friendlier</p>
+
+<a name="177979156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177979156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177979156">Patrick Massot (Oct 12 2019 at 09:04)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">comp&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">g</span> <span class="n">a</span><span class="o">)</span> <span class="n">none</span> <span class="n">f</span>
+
+<span class="n">def</span> <span class="n">comp&#39;&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">do</span> <span class="n">b</span> <span class="err">←</span> <span class="n">g</span> <span class="n">a</span><span class="o">,</span> <span class="n">c</span> <span class="err">←</span> <span class="n">f</span> <span class="n">b</span><span class="o">,</span> <span class="n">return</span> <span class="n">c</span>
+</pre></div>
+
+
+<p>I'll let your decide which solution you prefer. I think the <code>match</code> one is by far the easiest to read.</p>
+
+<a name="177979231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177979231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177979231">Patrick Massot (Oct 12 2019 at 09:06)</a>:</h4>
+<p>Quickly reading back that chapter, the <code>cases_on</code> solution is clearly the one Jeremy intended.</p>
+
+<a name="177979235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177979235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177979235">Patrick Massot (Oct 12 2019 at 09:06)</a>:</h4>
+<p>Now I need to go.</p>
+
+<a name="177979244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177979244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177979244">mth (Oct 12 2019 at 09:07)</a>:</h4>
+<p>ok, thanks a lot</p>
+
 
 {% endraw %}
 

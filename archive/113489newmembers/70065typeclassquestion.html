@@ -126,6 +126,26 @@ p : polynomial k
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177978617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177978617">Nicolás Ojeda Bär (Oct 12 2019 at 08:48)</a>:</h4>
 <p>Ah, yes. Thanks!</p>
 
+<a name="177980165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177980165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177980165">Kevin Buzzard (Oct 12 2019 at 09:36)</a>:</h4>
+<p>You should demand that p is monic, to stop p=0 from letting everything be algebraic. And all this <code>has_zero.zero R</code> -- you can just write this as <code>(0 : R)</code>. That's exactly the point of the <code>has_zero</code> typeclass -- it is a type class written specifically so that we can use <code>0</code> notation.</p>
+
+<a name="177980324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177980324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177980324">Nicolás Ojeda Bär (Oct 12 2019 at 09:41)</a>:</h4>
+<p>Yes, good point, I was just looking into how best to specify that <code>p</code> is non-zero. And thanks for the tip on the notation!</p>
+
+<a name="177980500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177980500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177980500">Kevin Buzzard (Oct 12 2019 at 09:46)</a>:</h4>
+<p>If you demand it's non-zero then you will often have to apply a lemma saying "if there's a non-zero poly which works then there's a monic poly which works" because we often say "wlog it's monic". On the other hand if you demand it's monic then you won't have to apply this lemma, but if you are trying to prove a specific thing is algebraic and you only manage to find a non-zero poly, you'll have to apply the lemma above. So you have to make a guess about whether you will say "wlog it's monic" more times than being in a situation where you've constructed a non-zero polynomial which is not obviously monic in a proof that something is algebraic, and in my comment I was implicitly guessing that there will be more wlogs.</p>
+
+<a name="177980506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177980506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177980506">Kevin Buzzard (Oct 12 2019 at 09:46)</a>:</h4>
+<p>Isn't formalising great ;-)</p>
+
+<a name="177980571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20class%20question/near/177980571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70065typeclassquestion.html#177980571">Kevin Buzzard (Oct 12 2019 at 09:48)</a>:</h4>
+<p>In maths we can just say "TFAE: (a) there's a non-zero poly (b) there's a monic poly. We define _algebraic_ to mean both of them". The advantage with this approach is that whichever one you need, you can just say it's true "by definition" :D In formalising you have to choose one of them to be the definition and then you prove the lemma that it's equivalent to the other one and then only some percentage of things are true "by definition" and the trick if you want to write smaller faster code is to maximise this percentage.</p>
+
 
 {% endraw %}
 

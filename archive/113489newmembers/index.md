@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (15 messages, latest: Oct 12 2019 at 08:58)
+* [Getting started](52778Gettingstarted.html) (65 messages, latest: Oct 12 2019 at 09:59)
 
-* [type class question](70065typeclassquestion.html) (14 messages, latest: Oct 12 2019 at 08:48)
+* [type class question](70065typeclassquestion.html) (19 messages, latest: Oct 12 2019 at 09:48)
+
+* ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (20 messages, latest: Oct 12 2019 at 09:07)
 
 * [Giry monad](88715Girymonad.html) (24 messages, latest: Oct 12 2019 at 04:58)
-
-* [Getting started](52778Gettingstarted.html) (64 messages, latest: Oct 11 2019 at 12:03)
 
 * [helloworld](15997helloworld.html) (25 messages, latest: Oct 11 2019 at 12:00)
 
