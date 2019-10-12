@@ -9,11 +9,11 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1531 adjoin_root alg_hom](464611531adjoinrootalghom.html) (7 messages, latest: Oct 12 2019 at 16:51)
+
+* [#1538 install doc](325141538installdoc.html) (3 messages, latest: Oct 12 2019 at 16:43)
+
 * [#1460 Infinite Ramsey](625821460InfiniteRamsey.html) (23 messages, latest: Oct 12 2019 at 12:21)
-
-* [#1531 adjoin_root alg_hom](464611531adjoinrootalghom.html) (6 messages, latest: Oct 12 2019 at 09:08)
-
-* [#1538 install doc](325141538installdoc.html) (1 message, latest: Oct 12 2019 at 08:33)
 
 * [curly braces](77952curlybraces.html) (5 messages, latest: Oct 10 2019 at 23:52)
 

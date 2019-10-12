@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [0 < 1 + 1](91642011.html) (32 messages, latest: Oct 12 2019 at 15:51)
+* [Getting started](52778Gettingstarted.html) (156 messages, latest: Oct 12 2019 at 16:40)
 
-* [Getting started](52778Gettingstarted.html) (144 messages, latest: Oct 12 2019 at 14:14)
+* [0 < 1 + 1](91642011.html) (33 messages, latest: Oct 12 2019 at 16:13)
 
 * [type class question](70065typeclassquestion.html) (19 messages, latest: Oct 12 2019 at 09:48)
 

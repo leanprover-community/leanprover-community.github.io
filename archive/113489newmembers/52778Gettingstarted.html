@@ -751,6 +751,54 @@ lean --make .target/mathlib/src
 - set up dependencies via leanpkg<br>
 - run leanpkg build</p>
 
+<a name="177994993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177994993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177994993">Andrew Ashworth (Oct 12 2019 at 16:01)</a>:</h4>
+<p>I am surprised leanpkg and lean --make is not the default instruction. In some ways distributing binary artifacts via shell script is kind of weird, at least when it comes to compiled languages. Although I totally understand the motivation. I have been using Lean+MinGW for years now with no problems.</p>
+
+<a name="177995135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995135">Andrew Ashworth (Oct 12 2019 at 16:05)</a>:</h4>
+<p>It has been a few months since I have recompiled mathlib. I am not at Lean right now, but isn't there an option to do a user-wide install of mathlib? Then it is compile once, use in many projects</p>
+
+<a name="177995257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995257">Andrew Ashworth (Oct 12 2019 at 16:08)</a>:</h4>
+<p>Of course, avoiding compilation time is a desirable feature. I wonder if modifications to leanpkg would be welcome at this point? Properly speaking, this should be a responsibility of the package manager</p>
+
+<a name="177995266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995266">Andrew Ashworth (Oct 12 2019 at 16:08)</a>:</h4>
+<p>Also, are .olean files even portable across systems? I recall reading that there were issues on ARM regarding this.</p>
+
+<a name="177995335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995335">Mario Carneiro (Oct 12 2019 at 16:10)</a>:</h4>
+<p>There were rumors about that but after writing olean-rs I can't find anything processor dependent in it, and we've been sharing olean files for a while now without issue</p>
+
+<a name="177995356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995356">Reid Barton (Oct 12 2019 at 16:11)</a>:</h4>
+<p>The most likely thing would be <code>int</code>s stored in native byte order</p>
+
+<a name="177995369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995369">Mario Carneiro (Oct 12 2019 at 16:11)</a>:</h4>
+<p>is ARM big endian? I think not</p>
+
+<a name="177995416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995416">Mario Carneiro (Oct 12 2019 at 16:12)</a>:</h4>
+<p>it's bi-endian...?</p>
+
+<a name="177995423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995423">Reid Barton (Oct 12 2019 at 16:12)</a>:</h4>
+<p>I think it depends, maybe? I forget</p>
+
+<a name="177995425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995425">Mario Carneiro (Oct 12 2019 at 16:13)</a>:</h4>
+<p>LGBT processors</p>
+
+<a name="177995830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177995830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177995830">Andrew Ashworth (Oct 12 2019 at 16:22)</a>:</h4>
+<p>ah, i found the original issue: <a href="https://github.com/leanprover/lean/issues/1679" target="_blank" title="https://github.com/leanprover/lean/issues/1679">https://github.com/leanprover/lean/issues/1679</a></p>
+
+<a name="177996569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Getting%20started/near/177996569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52778Gettingstarted.html#177996569">Reid Barton (Oct 12 2019 at 16:40)</a>:</h4>
+<p>this bug looks amazing</p>
+
 
 {% endraw %}
 

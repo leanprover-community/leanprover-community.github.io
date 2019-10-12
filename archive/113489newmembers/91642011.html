@@ -183,6 +183,31 @@ state:
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177994544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177994544">Reid Barton (Oct 12 2019 at 15:51)</a>:</h4>
 <p>True, I hadn't thought about the choreographic interpretation of constructive type theory</p>
 
+<a name="177995430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/0%20%3C%201%20%2B%201/near/177995430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91642011.html#177995430">Patrick Massot (Oct 12 2019 at 16:13)</a>:</h4>
+<p>Returning to the <code>with_bot</code>. There is a principled way to deal with those kind of things, using <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#norm_cast" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tactics.md#norm_cast">norm_cast</a> but it seems the relevant tagging has not been done for <code>with_bot</code>. You can write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">ordered_group</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">elim_cast</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_one&#39;</span> <span class="o">[</span><span class="n">has_one</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="o">((</span><span class="mi">1</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elim_cast</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_zero&#39;</span> <span class="o">[</span><span class="n">add_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="o">((</span><span class="mi">0</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">move_cast</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">add_coe&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_semigroup</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+    <span class="o">((</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="bp">+</span> <span class="n">b</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="n">attribute</span> <span class="o">[</span><span class="n">elim_cast</span><span class="o">]</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">coe_lt_coe</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="n">with_bot</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">norm_cast</span><span class="o">,</span>
+  <span class="n">norm_num</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>But everything before the example should be in mathlib (feel free to open a PR!)</p>
+
 
 {% endraw %}
 
