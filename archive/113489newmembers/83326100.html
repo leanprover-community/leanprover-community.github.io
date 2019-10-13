@@ -1,0 +1,160 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/83326100.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html">1/0=0</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178029695"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029695" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029695">Marko Grdinic (Oct 13 2019 at 09:26)</a>:</h4>
+<p>So it seems that <code>1/0</code> does not raise a type error in Lean. That is a surprise.</p>
+<p><a href="https://www.hillelwayne.com/post/divide-by-zero/" target="_blank" title="https://www.hillelwayne.com/post/divide-by-zero/">https://www.hillelwayne.com/post/divide-by-zero/</a></p>
+<p>I've Googled a bit and according to this, it seems that allowing division by zero is a convention in theorem provers and Lean is not an exception. Still, shouldn't there be safe division somewhere in the library. What is it called?</p>
+
+<a name="178029705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029705">Kevin Buzzard (Oct 13 2019 at 09:27)</a>:</h4>
+<p>What is unsafe about this? ;-)</p>
+
+<a name="178029717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029717">Kevin Buzzard (Oct 13 2019 at 09:27)</a>:</h4>
+<p>It's completely safe because every single <em>theorem</em> where division by 0 isn't allowed contains the hypothesis that the denominator isn't 0 in its statement.</p>
+
+<a name="178029721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029721">Mario Carneiro (Oct 13 2019 at 09:27)</a>:</h4>
+<p>this <em>is</em> what I would call a safe division, one where you don't have to worry about it blowing up on you</p>
+
+<a name="178029785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029785">Kevin Buzzard (Oct 13 2019 at 09:28)</a>:</h4>
+<p>You should think of Lean's <code>/</code> as a different function to the mathematician's definition of division. It's a new function, which mathematicians should use different notation for (e.g. <code>/</code> with a little asterisk next to it), which is defined by <code>x/^*y</code> =  usual x/y if y isn't 0, and 0 otherwise.</p>
+
+<a name="178029807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029807">Mario Carneiro (Oct 13 2019 at 09:29)</a>:</h4>
+<p>That said, I know what you mean and there is a function that does division in a ring, where the second argument is a unit, and in a division ring you can construct a unit from a nonzero element</p>
+
+<a name="178029816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029816">Kevin Buzzard (Oct 13 2019 at 09:29)</a>:</h4>
+<p>Sure you can make mathematician's /, by just defining a function from the reals times the non-zero reals to the reals, or defining a function from the reals times the reals to the type "option real" consisting of the reals plus an extra element "NaN". Indeed, when I started doing Lean i was so horrified by this convention that I made these functions.</p>
+
+<a name="178029896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029896">Kevin Buzzard (Oct 13 2019 at 09:31)</a>:</h4>
+<p>And then I very quickly realised that they were much harder to use in practice than Lean's convention. Because with "mathematician's division" you just can't do things like a/(b/c) at all easily, because b/c is in "reals + NaN" and now you have to insert the proof that c isn't zero and then get the real out of b/c <em>whilst in the middle of writing a mathematical statement</em></p>
+
+<a name="178029955"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029955" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029955">Kevin Buzzard (Oct 13 2019 at 09:32)</a>:</h4>
+<p>With Lean's convention you just do a/(b/c), don't worry about the answer, and then pick up the pieces later (the moment you start using it Lean will start asking you to prove that c isn't 0 and that b/c isn't zero, and you can do that once, at a time which is convenient for you, and just add them as hypotheses)</p>
+
+<a name="178029984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178029984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178029984">Kevin Buzzard (Oct 13 2019 at 09:33)</a>:</h4>
+<p>In summary, if you're a mathematician who wants to prove a theorem which involves a definition, it's your job to make sure that the denominator isn't zero in your theorem. If you can't do that, then it's your problem, not Lean's. If you can do it, that's great, we'll keep track of that hypothesis, but experience has shown that <code>\^*</code> is a much easier function to manipulate in Lean so <em>in the proof</em> we'd rather use that more convenient function, but we know it agrees with division whenever division makes sense, so we can glue together at the end.</p>
+
+<a name="178030029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030029">Kevin Buzzard (Oct 13 2019 at 09:34)</a>:</h4>
+<p>(by <code>\^*</code> I mean Lean's non-mathematical division)</p>
+
+<a name="178030033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030033">Marko Grdinic (Oct 13 2019 at 09:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<blockquote>
+<p>It's completely safe because every single theorem where division by 0 isn't allowed contains the hypothesis that the denominator isn't 0 in its statement.</p>
+</blockquote>
+<p>Yeah, but I have to write a short program here. I mean sure, I see that there is no chance of it being wrong, but I might write a larger program in the future where this will be an issue.</p>
+<p>I guess I'll have to define my own safe division then. Every time I will use it Lean should be able to prove automatically that the division is valid anyway.</p>
+<blockquote>
+<p>Nans</p>
+</blockquote>
+<p>I hate those. When I was working on the Spiral language because <code>Nan &lt;&gt; Nan</code>  it turns out that you cannot memoize them and that makes the compiler diverge. I solved that issue in v0.1 by making every compile time Nan a type error. It still causes the compiler to diverge in v0.09.</p>
+
+<a name="178030058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030058">Mario Carneiro (Oct 13 2019 at 09:35)</a>:</h4>
+<blockquote>
+<p>Yeah, but I have to write a short program here. I mean sure, I see that there is no chance of it being wrong, but I might write a larger program in the future where this will be an issue.</p>
+</blockquote>
+<p>What, concretely, do you envision as causing a problem?</p>
+
+<a name="178030060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030060">Kevin Buzzard (Oct 13 2019 at 09:35)</a>:</h4>
+<blockquote>
+<p>I guess I'll have to define my own safe division then. Every time I will use it Lean should be able to prove automatically that the division is valid anyway.</p>
+</blockquote>
+<p>This is exactly how I used to feel, and if you want to try this way of doing it then you will probably learn the way I learnt that it's much more inconvenient. The big question you have is simply: what will the domain and the codomain of your function be?</p>
+
+<a name="178030108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030108">Kevin Buzzard (Oct 13 2019 at 09:36)</a>:</h4>
+<p>There is no good answer to this domain/codomain question, as far as I can see.</p>
+
+<a name="178030121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030121">Mario Carneiro (Oct 13 2019 at 09:36)</a>:</h4>
+<blockquote>
+<p>I guess I'll have to define my own safe division then. Every time I will use it Lean should be able to prove automatically that the division is valid anyway.</p>
+</blockquote>
+<p>It won't be automatic, and you will start to hate life if you try to use it for too long</p>
+
+<a name="178030140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030140">Marko Grdinic (Oct 13 2019 at 09:37)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> </p>
+<div class="codehilite"><pre><span></span>import data.rat
+import data.vector
+
+def E {n} (l : vector rat (n+1)) : rat := list.foldl (+) 0 l.val / (n+1)
+</pre></div>
+
+
+<p>Here is what I am doing now. This just calculates the mean of a vector. If I mess up and write <code>n</code> rather than <code>n+1</code>, it would have been erroneous on empty vectors.</p>
+
+<a name="178030143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030143">Kevin Buzzard (Oct 13 2019 at 09:37)</a>:</h4>
+<p>I used to be very upset about this convention. I am over it now because I simply remember that when I see <code>/</code> in Lean it is not mathemtician's division, it is simply another function with a bad name.</p>
+
+<a name="178030208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030208">Mario Carneiro (Oct 13 2019 at 09:38)</a>:</h4>
+<p>This is only the weakest kind of safety that you achieve. The real safety comes from proving theorems about your definition, and you will notice immediately if you have an off by one error</p>
+
+<a name="178030226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030226">Kevin Buzzard (Oct 13 2019 at 09:39)</a>:</h4>
+<p>This function <code>E</code> above will be hard to work with because you have built in your own off-by-one error-possibility in its definition. I would definitely recommend you change n+1 to n</p>
+
+<a name="178030288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030288">Kevin Buzzard (Oct 13 2019 at 09:40)</a>:</h4>
+<p>I have been burnt by this several times. You always think it's a good idea, and then when you're writing code you're just "crap crap crap, I have this n and I know it's non-zero but I now need to feed n-1 into this function and now I have to deal with natural number subtraction which is a pain because 2-3 isn't -1 it's 0"</p>
+
+<a name="178030326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030326">Mario Carneiro (Oct 13 2019 at 09:41)</a>:</h4>
+<p>and <code>n-1+1</code> isn't definitionally equal to <code>n</code>, so <code>l</code> isn't even in the same type, so you need a cast, so now addition of vectors is borked...</p>
+
+<a name="178030378"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030378" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030378">Kevin Buzzard (Oct 13 2019 at 09:42)</a>:</h4>
+<p>With type theory you have to think about things in a slightly different way. If you define E with n's instead of n+1's then you, as someone new to this area, is thinking "oh goodness this will be horrible if n=0". But it's just like division. You're defining a function and you know you'll only be running it on positive integers, but that's fine, define it for all naturals, let it return junk for n=0, but the theorems will come out much nicer if you define it like that, and like division it doesn't matter that it's defined on a larger domain than you need.</p>
+
+<a name="178030419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030419">Kevin Buzzard (Oct 13 2019 at 09:43)</a>:</h4>
+<p>This point of view pervades mathematics in Lean. We even defined a sheaf on an open subset U of X to just be a sheaf on X; this is a more complex example but the upshot is that we had a vast amount of extra data which was just meaningless but which was being ignored.</p>
+
+<a name="178030440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030440">Mario Carneiro (Oct 13 2019 at 09:44)</a>:</h4>
+<p>Actually that post by hillel wayne is a good one to read for understanding this kind of approach</p>
+
+<a name="178030491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030491">Kevin Buzzard (Oct 13 2019 at 09:44)</a>:</h4>
+<p>The aim is to get crisp clear theorems with no random +1's in. This turns out, from experience, to be a more efficient way to proceed than having functions which take n as input and return something of size n+1</p>
+
+<a name="178030975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178030975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178030975">Marko Grdinic (Oct 13 2019 at 09:54)</a>:</h4>
+<p>I found the replies here interesting.</p>
+<div class="codehilite"><pre><span></span>def div (a : rat) (b : rat) {_ : 0 &lt; b} := a / b
+def E {n} (l : vector rat (n+1)) : rat := div (list.foldl (+) 0 l.val) (n+1)
+</pre></div>
+
+
+<p>Since it seems that lean cannot automatically synthesize that <code>0 &lt; n+1</code> here in order to pass it to <code>div</code>, I'll go with what you suggest. I've been hoping that it would, but no way would I produce the proofs by hand for every single division. That settles it for me.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
