@@ -16,6 +16,23 @@ permalink: archive/113489newmembers/05853Proofsearch.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178035658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178035658">Marko Grdinic (Oct 13 2019 at 12:06)</a>:</h4>
 <p>I am working on a little proof and need to rewrite <code>sqr (a - b)</code> into <code>sqr a - 2 * a * b + sqr b</code>. Now of course I could define a postulate for this like I did in the Agda proof I am rewriting, but I am guessing that this is proven in the <code>mathlib</code> and Lean has some kind of proof search. In Coq I could write something like <code>Search (forall a b, sqr (a - b) = sqr a - 2 * a * b + sqr b).</code> What functionality for this sort of thing does Lean have?</p>
 
+<a name="178037525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178037525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178037525">Chris Hughes (Oct 13 2019 at 13:06)</a>:</h4>
+<p>The <code>ring</code> tactic should solve this. You'll need to use <code>^2</code> instead of <code>sqr</code> though.</p>
+
+<a name="178038080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178038080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178038080">Floris van Doorn (Oct 13 2019 at 13:24)</a>:</h4>
+<p>For searching, <code>library_search</code> is convenient:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span>
+
+<span class="kn">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">library_search</span> <span class="c1">-- exact add_mul_self_eq a b</span>
+</pre></div>
+
+<a name="178038139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178038139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178038139">Floris van Doorn (Oct 13 2019 at 13:26)</a>:</h4>
+<p>Oh wait, the minus sign got lost in translation. I don't think that particular lemma is in the library yet.</p>
+
 
 {% endraw %}
 

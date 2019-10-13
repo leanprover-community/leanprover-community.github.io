@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Proof search](05853Proofsearch.html) (1 message, latest: Oct 13 2019 at 12:06)
+* [Proof search](05853Proofsearch.html) (4 messages, latest: Oct 13 2019 at 13:26)
 
 * [1/0=0](83326100.html) (30 messages, latest: Oct 13 2019 at 11:33)
 
