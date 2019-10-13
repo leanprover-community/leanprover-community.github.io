@@ -39,6 +39,18 @@ permalink: archive/113489newmembers/53953rangeofringmorphism.html
   [_inst_3 : is_ring_hom f], ring ↥(set.range f)
 </pre></div>
 
+<a name="178051240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/range%20of%20ring%20morphism%20%3F/near/178051240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53953rangeofringmorphism.html#178051240">Kevin Buzzard (Oct 13 2019 at 19:23)</a>:</h4>
+<p>There's a subtlety here. <code>set.range f</code> is a term of type <code>set beta</code>, but not itself a type. The way rings work in Lean is via the typeclass system. In other words, if R is a type then the way to make it a ring is to get a term of type <code>ring R</code>. But <code>ring (set.range f)</code> does not literally make sense. However Lean makes <code>set.range f</code> into a type under the hood, namely a subtype of beta, and then <code>ring (\u set.range f)</code> does make sense (with \u being a little up-arrow to indicate that something subtle just happened) and, as Kenny shows, type class inference then magics up the term of this type automatically.</p>
+
+<a name="178051311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/range%20of%20ring%20morphism%20%3F/near/178051311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53953rangeofringmorphism.html#178051311">Kevin Buzzard (Oct 13 2019 at 19:25)</a>:</h4>
+<p>You are talking about "a set" and "a ring" as if they were the same sort of thing, but in Lean they are not at all the same. There's no such thing as a set, there's only a subset of a type, and stuff like groups and rings etc are all done using type class inference, they are not at all "a set plus some axioms" like in set theory.</p>
+
+<a name="178052432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/range%20of%20ring%20morphism%20%3F/near/178052432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53953rangeofringmorphism.html#178052432">Nicolás Ojeda Bär (Oct 13 2019 at 19:56)</a>:</h4>
+<p>Thanks, this clarifies things a bit.</p>
+
 
 {% endraw %}
 

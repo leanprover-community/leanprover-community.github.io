@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [range of ring morphism ?](53953rangeofringmorphism.html) (4 messages, latest: Oct 13 2019 at 18:42)
+* [range of ring morphism ?](53953rangeofringmorphism.html) (7 messages, latest: Oct 13 2019 at 19:56)
 
 * [Proof search](05853Proofsearch.html) (4 messages, latest: Oct 13 2019 at 13:26)
 
