@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [optional proofs for type class inference](65166optionalproofsfortypeclassinference.html) (1 message, latest: Oct 13 2019 at 14:03)
+
 * [file headers](86717fileheaders.html) (6 messages, latest: Oct 13 2019 at 09:57)
 
 * [some lemmas](11572somelemmas.html) (16 messages, latest: Oct 13 2019 at 06:41)

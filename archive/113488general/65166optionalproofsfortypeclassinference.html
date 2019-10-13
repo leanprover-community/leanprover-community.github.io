@@ -1,0 +1,34 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/65166optionalproofsfortypeclassinference.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html">optional proofs for type class inference</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178039299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178039299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178039299">Chris Hughes (Oct 13 2019 at 14:03)</a>:</h4>
+<p>At the moment we have two types for integers mod n <code>zmod</code> and <code>zmodp</code> depending on whether <code>n</code> is <code>prime</code> or not, so that the field instance can be synthesized. This means that a lot of proofs are duplicated. I think there are other places where this sort of problem could come up.</p>
+<p>Here's an idea I came up with that might make this nicer</p>
+<div class="codehilite"><pre><span></span><span class="n">mport</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">prime</span>
+
+<span class="kn">inductive</span> <span class="n">option&#39;</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">)</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span>
+<span class="bp">|</span> <span class="n">none</span> <span class="o">{}</span> <span class="o">:</span> <span class="n">option&#39;</span>
+<span class="bp">|</span> <span class="n">some</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option&#39;</span>
+
+<span class="n">def</span> <span class="n">zmod</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">option&#39;</span> <span class="n">n</span><span class="bp">.</span><span class="n">prime</span> <span class="o">:=</span> <span class="n">option&#39;</span><span class="bp">.</span><span class="n">none</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">fin</span> <span class="n">n</span>
+</pre></div>
+
+
+<p>This way proofs that apply whether or not <code>n</code> is prime can be stated in full generality in one statement, and the field instances can be put on the type <code>zmod n (some _)</code>  What do people think of this strategy?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
