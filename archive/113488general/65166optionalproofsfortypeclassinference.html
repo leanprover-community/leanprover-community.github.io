@@ -44,6 +44,18 @@ permalink: archive/113488general/65166optionalproofsfortypeclassinference.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045673">Johan Commelin (Oct 13 2019 at 16:59)</a>:</h4>
 <p>Exactly</p>
 
+<a name="178045759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045759">Johan Commelin (Oct 13 2019 at 17:01)</a>:</h4>
+<p>Parts of the library are currently using <code>[nat.prime p]</code>. But then, we can't write <code>instance : nat.prime (ring_char k)</code> for finite fields <code>k</code>. Because <code>nat.prime</code> is not actually a class. There's still a bunch of things that have to be sorted out here.</p>
+
+<a name="178045885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178045885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178045885">Johan Commelin (Oct 13 2019 at 17:04)</a>:</h4>
+<p>Otoh, maybe <code>ring_char</code> is actually bad. If you have 3 or more fields, it might be more practical to show that they all have <code>char_p _ p</code> then showing that they all pairwise have the same <code>ring_char</code>.</p>
+
+<a name="178046451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/optional%20proofs%20for%20type%20class%20inference/near/178046451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65166optionalproofsfortypeclassinference.html#178046451">Chris Hughes (Oct 13 2019 at 17:18)</a>:</h4>
+<p>This seems sensible to me. Because you almost always have the assumption <code>p.prime</code> as an assumption to the theorem, it shouldn't be as annoying as <code>pnat</code>, because you never start with a natural number and then prove it's prime like you do with positivity. I think perhaps refactors like this should wait until Lean 4 when we know exactly what type class inference will be like</p>
+
 
 {% endraw %}
 
