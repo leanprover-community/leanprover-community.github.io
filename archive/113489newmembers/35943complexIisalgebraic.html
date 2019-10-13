@@ -87,6 +87,34 @@ permalink: archive/113489newmembers/35943complexIisalgebraic.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178010052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178010052">Alex J. Best (Oct 12 2019 at 22:53)</a>:</h4>
 <p>oops, confused myself and forgot the earlier conversation, integral = algebraic over a field!</p>
 
+<a name="178022734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178022734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178022734">Floris van Doorn (Oct 13 2019 at 05:53)</a>:</h4>
+<p>Here is my try. I didn't change Alex's proof, but I did change the statement. If we want to prove that <code>i</code> is algebraic, we really want to prove that it's algebraic over <code>Q</code>. I had to add some instances for Lean to recognize that <code>C</code> is an algebra over <code>Q</code>. These should be added to mathlib. Also, Alex's proof was robust enough to work without changes!</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">ring_theory</span><span class="bp">.</span><span class="n">algebra</span>
+
+<span class="kn">open</span> <span class="n">polynomial</span> <span class="n">complex</span>
+
+<span class="kn">instance</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast</span><span class="bp">.</span><span class="n">is_ring_hom</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">division_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">is_ring_hom</span> <span class="o">(</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast</span> <span class="o">:</span> <span class="n">ℚ</span> <span class="bp">→</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">rat</span><span class="bp">.</span><span class="n">cast_one</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_mul</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast_add</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">algebra_rat</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">field</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">char_zero</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">ℚ</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">algebra</span><span class="bp">.</span><span class="n">of_ring_hom</span> <span class="n">rat</span><span class="bp">.</span><span class="n">cast</span> <span class="o">(</span><span class="k">by</span> <span class="n">apply_instance</span><span class="o">)</span>
+
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">field</span> <span class="n">k</span><span class="o">]</span> <span class="o">[</span><span class="n">comm_ring</span> <span class="n">R</span><span class="o">]</span> <span class="o">[</span><span class="n">algebra</span> <span class="n">k</span> <span class="n">R</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">is_algebraic</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∃</span> <span class="n">p</span><span class="o">,</span> <span class="n">monic</span> <span class="n">p</span> <span class="bp">∧</span> <span class="n">aeval</span> <span class="n">k</span> <span class="n">R</span> <span class="n">x</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">is_algebraic</span> <span class="n">ℚ</span> <span class="n">I</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">use</span> <span class="o">(</span><span class="n">X</span><span class="err">^</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span> <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="o">(</span><span class="n">monic_X_pow_add</span> <span class="o">(</span><span class="k">by</span> <span class="n">rw</span> <span class="n">degree_one</span><span class="bp">;</span> <span class="n">exact</span> <span class="n">dec_trivial</span><span class="o">))</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">simp</span> <span class="o">[</span><span class="n">aeval_def</span><span class="o">,</span> <span class="n">pow_two</span><span class="o">]</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
