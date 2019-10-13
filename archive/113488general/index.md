@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic hierarchy](28922algebraichierarchy.html) (4 messages, latest: Oct 12 2019 at 23:22)
+
 * [Prop class](16952Propclass.html) (7 messages, latest: Oct 12 2019 at 19:41)
 
 * [some lemmas](11572somelemmas.html) (15 messages, latest: Oct 12 2019 at 17:59)
 
 * [visualizations](70566visualizations.html) (55 messages, latest: Oct 12 2019 at 17:46)
-
-* [algebraic hierarchy](28922algebraichierarchy.html) (3 messages, latest: Oct 12 2019 at 17:42)
 
 * [out_params and products](13059outparamsandproducts.html) (8 messages, latest: Oct 12 2019 at 10:44)
 
