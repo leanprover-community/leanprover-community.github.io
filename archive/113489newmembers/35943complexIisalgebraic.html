@@ -115,6 +115,19 @@ permalink: archive/113489newmembers/35943complexIisalgebraic.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="178023061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178023061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178023061">Alex J. Best (Oct 13 2019 at 06:05)</a>:</h4>
+<p>Nice, definitely these should end up in mathlib. I also worked on getting exactly the same cast going to prove that X^2 + 1 was monic actually, I was hoping that dec_trivial would prove that monic polynomials over Q were in fact monic, and then the proof for R could involve <code>convert (monic_map (rat.cast : ℚ → ℝ)) (dec_trivial : (monic : polynomial ℚ → Prop)(X^2 + 1)),</code> I was hoping that this would be even more robust, and you could show that every polynomial which is "obviously" monic over Q was monic without work this way, rather than worrying about special lemmas on the form of the polynomial. But I couldn't make a decidable instance for polynomial.monic that was computable. I guess this is due to some lines in the polynomial files like noncomputable theory and prop_decidable instances, but I think it would be nice if this could work, is there  a reason not to allow this sort of thing? Or am I missing an existing way to do this?</p>
+
+<a name="178024102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/complex.I%20is%20algebraic%20%21/near/178024102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35943complexIisalgebraic.html#178024102">Keeley Hoek (Oct 13 2019 at 06:39)</a>:</h4>
+<p>There is an instance for decidability of monic-ness, <code>monic.decidable</code>, but it doesn't work at the moment in this case</p>
+<div class="codehilite"><pre><span></span>instance dinst : decidable (@monic ℚ _ (X^2 + 1)) := by apply_instance
+</pre></div>
+
+
+<p>because of picking up classical stuff in the polynomial development</p>
+
 
 {% endraw %}
 
