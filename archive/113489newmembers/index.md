@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [1/0=0](83326100.html) (28 messages, latest: Oct 13 2019 at 10:01)
+* [1/0=0](83326100.html) (30 messages, latest: Oct 13 2019 at 11:33)
 
 * [complex.I is algebraic !](35943complexIisalgebraic.html) (12 messages, latest: Oct 13 2019 at 08:51)
 

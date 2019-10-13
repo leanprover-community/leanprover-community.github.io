@@ -158,6 +158,18 @@ def E {n} (l : vector rat (n+1)) : rat := div (list.foldl (+) 0 l.val) (n+1)
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178031296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178031296">Mario Carneiro (Oct 13 2019 at 10:01)</a>:</h4>
 <p>There are tricks you can do to make this work in some cases (in particular, you would want that third argument in square brackets), but that needs additional setup as well, to make a typeclass for nonzeroness and some instances</p>
 
+<a name="178034450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178034450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178034450">Marc Huisinga (Oct 13 2019 at 11:28)</a>:</h4>
+<p>this is perhaps a bit more general, but my experience from doing a bit of program verification with lean is that there are essentially two ways of doing this: </p>
+<p>you can either carry around an invariant everywhere you go or use seperate hypotheses.<br>
+for the list example, you can either use vectors that are parameterized by some <code>n</code>, or pass in a proof that the list you're using has the right length. the div example looks similar.</p>
+<p>on paper, algorithms are usually proven correct using the invariant approach, but when working with a theorem prover, maintaining the invariant is a lot more effort than on paper, and the approach with separate hypotheses is usually more comfortable in my experience.</p>
+<p>that being said, i do believe that the invariant approach can be useful, in particular when the invariant is needed for many different parts of the function you're trying to prove things for or when the invariant is very easy to maintain. if it is only needed rarely, passing in a separate hypothesis seems to be more comfortable.</p>
+
+<a name="178034578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/1/0%3D0/near/178034578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/83326100.html#178034578">Marc Huisinga (Oct 13 2019 at 11:33)</a>:</h4>
+<p>for another example, you can use finsets and maintain the nodup invariant by using finset functions (and then when using <code>map</code> and the like prove that <code>f</code> is an injection to maintain the invariant), or you can use multisets and just prove nodup when you actually need it in a proof. i've found both useful in different cases.</p>
+
 
 {% endraw %}
 
