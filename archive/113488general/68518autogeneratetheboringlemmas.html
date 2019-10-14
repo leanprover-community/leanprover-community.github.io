@@ -32,6 +32,63 @@ And if we teach it the naming scheme, then the result should be pretty usable. N
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178126786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178126786">Koundinya Vajjha (Oct 14 2019 at 18:33)</a>:</h4>
 <p>(Although this was quite controversial when it came out.)</p>
 
+<a name="178129195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178129195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178129195">Rob Lewis (Oct 14 2019 at 19:02)</a>:</h4>
+<p>It's a tough problem. You only want to see correct and interesting conjectures, so you need to both sniff out the good stuff and be able to prove it. I know of some work on lemma generation for inductive theorem proving (<a href="http://www.cse.chalmers.se/~jomoa/papers/hipspec-atx.pdf" target="_blank" title="http://www.cse.chalmers.se/~jomoa/papers/hipspec-atx.pdf">http://www.cse.chalmers.se/~jomoa/papers/hipspec-atx.pdf</a>). And there's some work on conjecturing guided by machine learning, <a href="http://ceur-ws.org/Vol-1785/W23.pdf" target="_blank" title="http://ceur-ws.org/Vol-1785/W23.pdf">http://ceur-ws.org/Vol-1785/W23.pdf</a> comes to mind but I'm pretty sure there are others.</p>
+
+<a name="178129243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178129243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178129243">Wojciech Nawrocki (Oct 14 2019 at 19:03)</a>:</h4>
+<p>From what I heard, the hard part is not necessarily generating lemmas, but generating <em>interesting</em> lemmas. Equivalently, pruning the space of true statements to contain only useful laws and not a bazillion variants of rewriting by associativity or some such. Both of these, being human-centric notions, sound difficult to teach a computer, but are potentially a good fit for heuristics and then machine learning.</p>
+<p>For benchmarking equality decision procedures, I wrote a short Python script that can generate as many commutative ring equalities as you might want, exercising hopefully many of the axioms (although I had to limit it slightly for some technical reasons I can't remember at the moment). I would hardly call any of these interesting though. Example: <code>(x14+x6) = (0+(x6+(1*x14)))</code>. This one only contains two variables, so I would call it shortish, but there already are quite a few of these (exponential explosion etc), potentially making the file huge. So I think one initial step could be to pick out the axioms which generate more interesting statements. In this case, by omitting <code>0+x=x</code> and <code>1*x=x</code>.</p>
+<p>An interesting alternative is to scrap the lemmas altogether and instead hand-code a proven simplification procedure which can exercise the laws when needed.</p>
+
+<a name="178129531"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178129531" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178129531">Johan Commelin (Oct 14 2019 at 19:07)</a>:</h4>
+<p><span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> What do you mean with your last sentence?</p>
+
+<a name="178130434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178130434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178130434">Kevin Buzzard (Oct 14 2019 at 19:19)</a>:</h4>
+<p>Johan don't you think that we found out by ourselves, using experience and examples and so on, what lemmas to put in those valuation files, via quite a bit of hard work? Here's the current state of our file: <a href="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/basic.lean" target="_blank" title="https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/basic.lean">https://github.com/leanprover-community/lean-perfectoid-spaces/blob/master/src/valuation/basic.lean</a> . Stuff about the support of a valuation being a prime ideal, or facts like v(x+y)=max(v(x),v(y)) if v(x) isn't v(y) -- I would imagine a computer program generating thousands and thousands of random facts before they ran into these useful (for us) ones. The support of a valuation is a definition -- the stuff that gets mapped to zero. How can the system come up with definitions? For every good idea there are ten bad ones, don't you think? The notion of equivalence of valuations is a great example of something really important but probably extremely difficult to find if you're just wandering around some search space.</p>
+
+<a name="178131351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131351">Johan Commelin (Oct 14 2019 at 19:29)</a>:</h4>
+<p>Aah, let me be clear. I don't expect it to generate the definitions</p>
+
+<a name="178131366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131366">Wojciech Nawrocki (Oct 14 2019 at 19:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> This is just a wild guess, but a sufficiently sophisticated tactic could potentially use the current goal and context in a sort of guided search. The lemmas would be generated on-the-fly as intermediate steps in order to simplify or otherwise "make-nicer" (heuristic) the goal. It seems defining <em>interesting</em> might be easier in the context of a sensible (human-provided) target. Since generated statements wouldn't have to be stored on disk, this partly alleviates the exponential explosion issue when they are very specific/long. But then again, maybe such a tactic is just "by general_intelligence".</p>
+
+<a name="178131377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131377">Johan Commelin (Oct 14 2019 at 19:29)</a>:</h4>
+<p>Put all the 10 or so definitions in that file all the way at the top. And have the computer generate all the boring lemmas.</p>
+
+<a name="178131461"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131461" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131461">Johan Commelin (Oct 14 2019 at 19:30)</a>:</h4>
+<p>It might miss some of them. But it could still provide a good start...</p>
+
+<a name="178131468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131468">Kevin Buzzard (Oct 14 2019 at 19:30)</a>:</h4>
+<p>We've seen examples where the definitions can't be formalised until you've proved a whole bunch of the lemmas though ;-)</p>
+
+<a name="178131484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131484">Kevin Buzzard (Oct 14 2019 at 19:30)</a>:</h4>
+<p>There is some subtle interplay</p>
+
+<a name="178131619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178131619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178131619">Johan Commelin (Oct 14 2019 at 19:32)</a>:</h4>
+<p>Sure... the definitions that can't be formalised unless you have a bunch of lemmas first should then move to a new file...</p>
+
+<a name="178132981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178132981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178132981">Gabriel Ebner (Oct 14 2019 at 19:50)</a>:</h4>
+<blockquote>
+<p>It's a tough problem. You only want to see correct and interesting conjectures, so you need to both sniff out the good stuff and be able to prove it. I know of some work on lemma generation for inductive theorem proving (<a href="http://www.cse.chalmers.se/~jomoa/papers/hipspec-atx.pdf" target="_blank" title="http://www.cse.chalmers.se/~jomoa/papers/hipspec-atx.pdf">http://www.cse.chalmers.se/~jomoa/papers/hipspec-atx.pdf</a>).</p>
+</blockquote>
+<p>Moa and her group did a lot of work in this area, hipspec is just the application of the general framework to inductive theorem proving.  The theory exploration tool itself is called hipster (<a href="https://arxiv.org/abs/1405.3426" target="_blank" title="https://arxiv.org/abs/1405.3426">https://arxiv.org/abs/1405.3426</a>).  They even have a working Isabelle integration where you can say "give me theorems [just equations] about list.append, list.reverse, and list.nil" and then after a few minutes you get a working Isabelle file: <a href="https://github.com/moajohansson/IsaHipster" target="_blank" title="https://github.com/moajohansson/IsaHipster">https://github.com/moajohansson/IsaHipster</a></p>
+
+<a name="178133152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178133152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178133152">Johan Commelin (Oct 14 2019 at 19:53)</a>:</h4>
+<p>Cool! That looks really interesting.</p>
+
 
 {% endraw %}
 

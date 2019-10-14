@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
+
 * [Proof search](05853Proofsearch.html) (11 messages, latest: Oct 14 2019 at 16:35)
 
 * [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (19 messages, latest: Oct 14 2019 at 13:19)
@@ -30,8 +32,6 @@ permalink: archive/113489newmembers/index.html
 * [type class question](70065typeclassquestion.html) (19 messages, latest: Oct 12 2019 at 09:48)
 
 * ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (20 messages, latest: Oct 12 2019 at 09:07)
-
-* [Giry monad](88715Girymonad.html) (24 messages, latest: Oct 12 2019 at 04:58)
 
 * [helloworld](15997helloworld.html) (25 messages, latest: Oct 11 2019 at 12:00)
 
