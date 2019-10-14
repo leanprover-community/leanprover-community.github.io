@@ -99,6 +99,45 @@ theorem E.const_right (c : rat) (l : list rat) : E (fun x, x * c) l = E id l * c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084995">Mario Carneiro (Oct 14 2019 at 08:53)</a>:</h4>
 <p>That is, it's easy to match <code> c * E id l</code> against the pattern <code>?c * E ?f ?l</code></p>
 
+<a name="178085549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178085549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178085549">Marko Grdinic (Oct 14 2019 at 09:01)</a>:</h4>
+<p>Yeah, I think I understand it now.</p>
+<div class="codehilite"><pre><span></span>rewrite tactic failed, did not find instance of the pattern in the target expression
+  E (λ (x : ℚ), c * id x) l
+state:
+c : ℚ,
+l : list ℚ
+⊢ E (λ (x : ℚ), c * x) l = c * E id l
+</pre></div>
+
+
+<p>I should have looked at the type error more carefully. <code>c * id x</code> and <code>c * x</code> are not quite the same thing here.</p>
+<p>Is there a way to make <code>... = c * E id l : by {rw (E.const_left id c l)}</code> work by getting it to simplify the expression passed to <code>rw</code> namely the <code>E.const_left id c l</code> ?</p>
+
+<a name="178085662"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178085662" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178085662">Mario Carneiro (Oct 14 2019 at 09:02)</a>:</h4>
+<p>sure, but it would take more than one line to do so</p>
+
+<a name="178085791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178085791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178085791">Mario Carneiro (Oct 14 2019 at 09:03)</a>:</h4>
+<div class="codehilite"><pre><span></span>        <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">E</span> <span class="n">id</span> <span class="n">l</span> <span class="o">:</span> <span class="k">by</span> <span class="o">{</span>
+          <span class="k">have</span> <span class="o">:=</span> <span class="n">E</span><span class="bp">.</span><span class="n">const_left</span> <span class="n">id</span> <span class="n">c</span> <span class="n">l</span><span class="o">,</span>
+          <span class="n">dsimp</span> <span class="n">only</span> <span class="o">[</span><span class="n">id</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+          <span class="n">rw</span> <span class="n">this</span> <span class="o">}</span>
+</pre></div>
+
+<a name="178085931"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178085931" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178085931">Mario Carneiro (Oct 14 2019 at 09:04)</a>:</h4>
+<p>it's easier in this case to rewrite backwards so you get <code>E (λ (x : ℚ), c * x) l = E (λ (x : ℚ), c * id x) l</code>, which can then be closed by <code>refl</code></p>
+
+<a name="178085944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178085944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178085944">Mario Carneiro (Oct 14 2019 at 09:05)</a>:</h4>
+<p>because <code>id x</code> is defeq to <code>x</code></p>
+
+<a name="178086090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178086090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178086090">Marko Grdinic (Oct 14 2019 at 09:07)</a>:</h4>
+<p>Thank you very much. This was definitely instructive for me.</p>
+
 
 {% endraw %}
 
