@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Proof search](05853Proofsearch.html) (8 messages, latest: Oct 14 2019 at 15:48)
+* [Proof search](05853Proofsearch.html) (11 messages, latest: Oct 14 2019 at 16:35)
 
 * [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (19 messages, latest: Oct 14 2019 at 13:19)
 
