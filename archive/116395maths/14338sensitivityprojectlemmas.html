@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/14338sensitivityprojectlemmas.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html">sensitivity project lemmas</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178107936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178107936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178107936">Rob Lewis (Oct 14 2019 at 14:29)</a>:</h4>
+<p>I'm trying to move the sensitivity formalization to mathlib and need to locate one or two lemmas.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_ite&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">β</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable_pred</span> <span class="n">P</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="k">if</span> <span class="n">P</span> <span class="n">a</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="o">))</span> <span class="bp">=</span> <span class="o">(</span><span class="n">s</span> <span class="err">∩</span> <span class="n">P</span><span class="bp">.</span><span class="n">to_finset</span><span class="o">)</span><span class="bp">.</span><span class="n">sum</span> <span class="n">f</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>feels like it belongs in <code>algebra.big_operators</code> but also needs a <code>data.fintype</code> import. Also, I'm not at all sure that this is the ideal way to state this. Opinions?</p>
+
+<a name="178108100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178108100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178108100">Johan Commelin (Oct 14 2019 at 14:31)</a>:</h4>
+<p>Why do you need the fintype? Can't we filter <code>s</code> by <code>P</code>?</p>
+
+<a name="178108376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178108376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178108376">Johan Commelin (Oct 14 2019 at 14:35)</a>:</h4>
+<p>This statement doesn't really seem to know whether it wants to treat <code>P</code> as a set or as a predicate.</p>
+
+<a name="178108536"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178108536" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178108536">Chris Hughes (Oct 14 2019 at 14:36)</a>:</h4>
+<p>I think this is so easy to prove with <code>sum_subset</code> that it might not be worth stating.</p>
+
+<a name="178108550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178108550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178108550">Mario Carneiro (Oct 14 2019 at 14:36)</a>:</h4>
+<p>I would prefer <code>if P a then f a else 0</code> in the statement of this theorem, with another lemma expressing <code>a * boole p = (if p then a else 0)</code></p>
+
+<a name="178109163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178109163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178109163">Johan Commelin (Oct 14 2019 at 14:45)</a>:</h4>
+<p>FYI: there is already <a href="https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/big_operators.lean#L453" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/big_operators.lean#L453">https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/big_operators.lean#L453</a></p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">sum_mul_boole</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">s</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">ite</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">x</span><span class="o">)</span> <span class="mi">1</span> <span class="mi">0</span><span class="o">))</span> <span class="bp">=</span> <span class="n">ite</span> <span class="o">(</span><span class="n">a</span> <span class="err">∈</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="mi">0</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="178109224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178109224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178109224">Rob Lewis (Oct 14 2019 at 14:46)</a>:</h4>
+<p>It isn't a direct application of <code>sum_subset</code>, is it? <code>f</code> changes. <code>sum_mul_boole</code> might be helpful.</p>
+
+<a name="178109333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178109333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178109333">Johan Commelin (Oct 14 2019 at 14:47)</a>:</h4>
+<p>Well, it's a bit restrictive. I would want <code>sum_mul_boole</code> to use a more general predicate than <code>a = _</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
