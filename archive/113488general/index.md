@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [strange build behavior](07637strangebuildbehavior.html) (9 messages, latest: Oct 14 2019 at 13:41)
+* [visualizations](70566visualizations.html) (58 messages, latest: Oct 14 2019 at 15:31)
 
-* [visualizations](70566visualizations.html) (57 messages, latest: Oct 14 2019 at 12:42)
+* [strange build behavior](07637strangebuildbehavior.html) (9 messages, latest: Oct 14 2019 at 13:41)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (10 messages, latest: Oct 14 2019 at 11:14)
 

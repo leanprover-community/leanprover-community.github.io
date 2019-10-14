@@ -33,6 +33,44 @@ permalink: archive/113489newmembers/05853Proofsearch.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178038139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178038139">Floris van Doorn (Oct 13 2019 at 13:26)</a>:</h4>
 <p>Oh wait, the minus sign got lost in translation. I don't think that particular lemma is in the library yet.</p>
 
+<a name="178111436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178111436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178111436">Marko Grdinic (Oct 14 2019 at 15:10)</a>:</h4>
+<p>Let me bring this subject up again as I am having some trouble. </p>
+<div class="codehilite"><pre><span></span>1 goal
+c x : ℚ,
+l : list ℚ,
+E.const_none : ∀ (l : list ℚ), monoid.pow c (list.length l) * rat.inv ↑(list.length l) = c ∨ l = list.nil
+⊢ monoid.pow c (1 + list.length l) * rat.inv (1 + ↑(list.length l)) = c
+</pre></div>
+
+
+<p>Right now I have something like this in my tactic state and I want to search all the proofs involving <code>monoid.pow</code>. What would be the best way to go about this. <code>library_search</code> is not quite equivalent to Coq's <code>Search</code> as it is a tactic that fails or succeeds. Coq's <code>Search</code> can print out every function in which a term appears.</p>
+
+<a name="178113220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178113220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178113220">Alex J. Best (Oct 14 2019 at 15:31)</a>:</h4>
+<p>You can also use <code>set_option trace.library_search true</code> to have library_search list of all possible results matching a given type. Alternatively you can make an educated guess at names with a bit of grepping / text searching in vscode or whatever to find things, this is surprisingly effective because the mathlib naming scheme is quite rigid.</p>
+
+<a name="178113672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178113672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178113672">Kevin Buzzard (Oct 14 2019 at 15:36)</a>:</h4>
+<p>In tactic mode you can try <code>exact monoid.pow</code> and then ctrl-space and then maybe esc and ctrl-space again for good measure. This might give you a list of helpful things.</p>
+
+<a name="178114600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178114600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178114600">Marko Grdinic (Oct 14 2019 at 15:48)</a>:</h4>
+<blockquote>
+<p>Coq's Search can print out every function in which a term appears.</p>
+</blockquote>
+<p>Actually, what I meant to write here is that it can print out every function <strong>in whose type</strong> a term appears which is very useful for searching through theorems of equalities. It is a powerful thing. I am not sure if it is on the requested features list, but if it is not, it definitely should be.</p>
+<p><span class="user-mention" data-user-id="127136">@Alex J. Best</span> </p>
+<blockquote>
+<p>You can also use set_option trace.library_search true to have library_search list of all possible results matching a given type.</p>
+</blockquote>
+<p>I am not sure how to control <code>library_search</code> to just search it for equalities involving <code>monoid.pow</code>. Right now I just tried it and it gave me what seems to be an unordered list of 4k lemmas. It is not really quite the thing I am looking for.</p>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> </p>
+<blockquote>
+<p>In tactic mode you can try exact monoid.pow and then ctrl-space and then maybe esc and ctrl-space again for good measure. This might give you a list of helpful things.</p>
+</blockquote>
+<p>In VS Code that is the trigger for autosuggestion, I am not sure if you are using Emacs what is it there. One thing I do know is that Ctrl + click dives me into the implementation of a function which is useful, but not quite enough for me.</p>
+
 
 {% endraw %}
 

@@ -54,6 +54,23 @@ permalink: archive/116395maths/14338sensitivityprojectlemmas.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178109333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178109333">Johan Commelin (Oct 14 2019 at 14:47)</a>:</h4>
 <p>Well, it's a bit restrictive. I would want <code>sum_mul_boole</code> to use a more general predicate than <code>a = _</code></p>
 
+<a name="178112587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178112587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178112587">Rob Lewis (Oct 14 2019 at 15:24)</a>:</h4>
+<p>Aha. Here's the missing lemma. With this, <code>finset.sum_ite'</code> is unnecessary.</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">mul_ite</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">P</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="k">if</span> <span class="n">P</span> <span class="k">then</span> <span class="mi">1</span> <span class="k">else</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">=</span> <span class="k">if</span> <span class="n">P</span> <span class="k">then</span> <span class="n">a</span> <span class="k">else</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">split_ifs</span><span class="bp">;</span> <span class="n">simp</span>
+</pre></div>
+
+<a name="178112671"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178112671" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178112671">Rob Lewis (Oct 14 2019 at 15:24)</a>:</h4>
+<p>Does this exist already/where does it belong?</p>
+
+<a name="178114163"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/sensitivity%20project%20lemmas/near/178114163" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/14338sensitivityprojectlemmas.html#178114163">Rob Lewis (Oct 14 2019 at 15:43)</a>:</h4>
+<p>An issue with another lemma from the sensitivity project.</p>
+<p>This has come up a few times (<a href="#narrow/stream/113488-general/topic/fintype.2Ecard" title="#narrow/stream/113488-general/topic/fintype.2Ecard">https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/fintype.2Ecard</a>, <a href="#narrow/stream/116395-maths/topic/.60decidable_mem_of_fintype.60.20problem" title="#narrow/stream/116395-maths/topic/.60decidable_mem_of_fintype.60.20problem">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/.60decidable_mem_of_fintype.60.20problem</a>): there's a type class loop. With <code>A : Type, fintype A, s : set A</code>, a search for <code>fintype ↥s</code> loops. <code>subtype.fintype</code> directs it to find <code>decidable_pred s</code>, and then <code>decidable_mem_of_fintype</code> directs it to find <code>fintype ↥s</code>.</p>
+
 
 {% endraw %}
 

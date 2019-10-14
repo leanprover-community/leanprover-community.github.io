@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Proof search](05853Proofsearch.html) (8 messages, latest: Oct 14 2019 at 15:48)
+
 * [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (19 messages, latest: Oct 14 2019 at 13:19)
 
 * [emacs lean mathlib](84267emacsleanmathlib.html) (53 messages, latest: Oct 14 2019 at 02:36)
 
 * [range of ring morphism ?](53953rangeofringmorphism.html) (7 messages, latest: Oct 13 2019 at 19:56)
-
-* [Proof search](05853Proofsearch.html) (4 messages, latest: Oct 13 2019 at 13:26)
 
 * [1/0=0](83326100.html) (30 messages, latest: Oct 13 2019 at 11:33)
 
