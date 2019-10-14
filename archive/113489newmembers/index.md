@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (11 messages, latest: Oct 14 2019 at 08:53)
+
 * [emacs lean mathlib](84267emacsleanmathlib.html) (53 messages, latest: Oct 14 2019 at 02:36)
 
 * [range of ring morphism ?](53953rangeofringmorphism.html) (7 messages, latest: Oct 13 2019 at 19:56)

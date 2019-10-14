@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [visualizations](70566visualizations.html) (56 messages, latest: Oct 14 2019 at 08:52)
+
 * [optional proofs for type class inference](65166optionalproofsfortypeclassinference.html) (8 messages, latest: Oct 13 2019 at 17:18)
 
 * [file headers](86717fileheaders.html) (6 messages, latest: Oct 13 2019 at 09:57)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [algebraic hierarchy](28922algebraichierarchy.html) (4 messages, latest: Oct 12 2019 at 23:22)
 
 * [Prop class](16952Propclass.html) (7 messages, latest: Oct 12 2019 at 19:41)
-
-* [visualizations](70566visualizations.html) (55 messages, latest: Oct 12 2019 at 17:46)
 
 * [out_params and products](13059outparamsandproducts.html) (8 messages, latest: Oct 12 2019 at 10:44)
 

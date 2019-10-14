@@ -1,0 +1,105 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html">How to fold statements into the calc block?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178083107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178083107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178083107">Marko Grdinic (Oct 14 2019 at 08:25)</a>:</h4>
+<div class="codehilite"><pre><span></span>import data.rat
+
+def mean (l : list rat) : rat := list.sum l / l.length
+def E (f : rat -&gt; rat) (l : list rat) := mean $ list.map f l
+
+theorem E.const_left (f : rat -&gt; rat) (c : rat) (l : list rat)
+    : E (fun x, c * f x) l = c * E f l  := sorry
+
+theorem E.const_right (c : rat) (l : list rat) : E (fun x, x * c) l = E id l * c :=
+    have mult_dist : (fun x, x * c) = (fun x, c * x), from funext $ fun x, mul_comm x c,
+    have const_left : E (fun x, c * x) l = c * E id l, from E.const_left id c l,
+    calc
+        E (fun x, x * c) l = E (fun x, c * x) l : by rw mult_dist
+        ... = c * E id l : by rw const_left
+        ... = E id l * c : by rw mul_comm
+</pre></div>
+
+
+<p>I am trying to rewrite the above so the extraneous names and type annotations are eliminated. Here is what I want to write.</p>
+<div class="codehilite"><pre><span></span>import data.rat
+
+def mean (l : list rat) : rat := list.sum l / l.length
+def E (f : rat -&gt; rat) (l : list rat) := mean $ list.map f l
+
+theorem E.const_left (f : rat -&gt; rat) (c : rat) (l : list rat)
+    : E (fun x, c * f x) l = c * E f l  := sorry
+
+theorem E.const_right (c : rat) (l : list rat) : E (fun x, x * c) l = E id l * c :=
+    calc
+        E (fun x, x * c) l = E (fun x, c * x) l : by {rw (funext $ fun x, mul_comm x c)}
+        ... = c * E id l : by {rw (E.const_left id c l)}
+        ... = E id l * c : by rw mul_comm
+</pre></div>
+
+
+<p>It says that the rewrite tactic fails for some reason. At first I thought that it might have been because in the original version some of the arguments were implicit, but that turned out to not be it. I am not sure what to think about this. I am having trouble with similar rewrites in other places. Lean seems to be bad at inferring the right types in the calc block proofs from expressions on the left side.</p>
+
+<a name="178083521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178083521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178083521">Johan Commelin (Oct 14 2019 at 08:31)</a>:</h4>
+<p>In the first one, maybe you can try <code>by { funext, ext, rw mul_comm }</code>?</p>
+
+<a name="178083712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178083712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178083712">Mario Carneiro (Oct 14 2019 at 08:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">E</span><span class="bp">.</span><span class="n">const_right</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">E</span> <span class="n">id</span> <span class="n">l</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span>
+    <span class="k">calc</span>
+        <span class="n">E</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">E</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span><span class="o">,</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="n">l</span> <span class="o">:</span> <span class="k">by</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">]</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">E</span> <span class="n">id</span> <span class="n">l</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">E</span><span class="bp">.</span><span class="n">const_left</span><span class="bp">;</span> <span class="n">refl</span>
+        <span class="bp">...</span> <span class="bp">=</span> <span class="n">E</span> <span class="n">id</span> <span class="n">l</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_comm</span>
+</pre></div>
+
+<a name="178083769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178083769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178083769">Mario Carneiro (Oct 14 2019 at 08:35)</a>:</h4>
+<p>If you use <code> ```lean ... ``` </code> then you get syntax highlighting btw</p>
+
+<a name="178083849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178083849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178083849">Mario Carneiro (Oct 14 2019 at 08:36)</a>:</h4>
+<p>also:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">E</span><span class="bp">.</span><span class="n">const_right</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="n">E</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">E</span> <span class="n">id</span> <span class="n">l</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">,</span> <span class="err">←</span> <span class="n">E</span><span class="bp">.</span><span class="n">const_left</span><span class="o">]</span><span class="bp">;</span> <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">mul_comm</span><span class="o">,</span> <span class="n">id</span><span class="o">]</span>
+</pre></div>
+
+<a name="178084361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084361">Marko Grdinic (Oct 14 2019 at 08:44)</a>:</h4>
+<p>I am surprised by <code>.. = c * E id l : by rw ← E.const_left; refl</code>. Why rewrite to the left? That does not make much sense to me.</p>
+
+<a name="178084507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084507">Mario Carneiro (Oct 14 2019 at 08:46)</a>:</h4>
+<p><code>rw</code> will rewrite any subterm of the <em>entire goal</em> using the given equation from left to right (or right to left if you give the <code>&lt;-</code>). That means that it can be used to rewrite the right side of the equation as well as the left side, at which point both sides become equal and <code>refl</code> closes the goal</p>
+
+<a name="178084708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084708">Marko Grdinic (Oct 14 2019 at 08:49)</a>:</h4>
+<p>Ah, I see. I just realized that <code>... = c * E id l : by rw E.const_left; refl</code> works too. The type error does not indicate what the problem is.</p>
+
+<a name="178084919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084919">Mario Carneiro (Oct 14 2019 at 08:52)</a>:</h4>
+<p>Oh, I guess it was able to match <code>f := \lam x, x</code> even if you write from left to right, I wouldn't have expected that</p>
+
+<a name="178084947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084947">Mario Carneiro (Oct 14 2019 at 08:52)</a>:</h4>
+<p>The matching problem from right to left is easier, because it doesn't have to do any higher order matching</p>
+
+<a name="178084995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20fold%20statements%20into%20the%20calc%20block%3F/near/178084995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/32311Howtofoldstatementsintothecalcblock.html#178084995">Mario Carneiro (Oct 14 2019 at 08:53)</a>:</h4>
+<p>That is, it's easy to match <code> c * E id l</code> against the pattern <code>?c * E ?f ?l</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
