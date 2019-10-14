@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [paper about mathlib](90069paperaboutmathlib.html) (10 messages, latest: Oct 14 2019 at 11:14)
+* [visualizations](70566visualizations.html) (57 messages, latest: Oct 14 2019 at 12:42)
 
-* [visualizations](70566visualizations.html) (56 messages, latest: Oct 14 2019 at 08:52)
+* [paper about mathlib](90069paperaboutmathlib.html) (10 messages, latest: Oct 14 2019 at 11:14)
 
 * [optional proofs for type class inference](65166optionalproofsfortypeclassinference.html) (8 messages, latest: Oct 13 2019 at 17:18)
 
