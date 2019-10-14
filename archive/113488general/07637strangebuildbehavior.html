@@ -77,6 +77,11 @@ permalink: archive/113488general/07637strangebuildbehavior.html
 <p>I've been using <code>find src -name *.olean -exec touch +</code> by default now, and it seems to work well. <br>
 I'm guessing that the relative timestamps of the <code>.olean</code> files don't matter, but it only matters that <code>foo.olean</code> is newer than <code>foo.lean</code>.</p>
 
+<a name="178139683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178139683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178139683">Sebastian Ullrich (Oct 14 2019 at 21:11)</a>:</h4>
+<p>No, the .olean file is rebuilt if any transitive dependencies are newer: <a href="https://github.com/leanprover/lean/blob/master/src/library/module_mgr.cpp#L184-L187" target="_blank" title="https://github.com/leanprover/lean/blob/master/src/library/module_mgr.cpp#L184-L187">https://github.com/leanprover/lean/blob/master/src/library/module_mgr.cpp#L184-L187</a><br>
+However, <code>xargs --show-limits</code> tells me that it supports 131072 bytes per command (on my machine), so if <code>find</code> uses anywhere near that, it's most probably doing a single call...</p>
+
 
 {% endraw %}
 
