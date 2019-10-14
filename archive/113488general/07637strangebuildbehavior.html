@@ -1,0 +1,78 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/07637strangebuildbehavior.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html">strange build behavior</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178101062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101062">Rob Lewis (Oct 14 2019 at 13:06)</a>:</h4>
+<p>I'm seeing some strange build behavior possibly related to <code>cache-olean</code>. I don't have time to confirm right now, but I think I saw similar with <code>update-mathlib</code> earlier.</p>
+<p>Steps:</p>
+<ul>
+<li>Get a fresh clone of mathlib and run <code>leanpkg configure</code>, <code>git reset --hard origin/lean-3.4.2</code>, <code>cache-olean --fetch</code>. This is successful and populates <code>src</code> with olean files.</li>
+<li>Create a new file <code>blah.lean</code> with the following content (sufficient, probably not necessary):</li>
+</ul>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">fin_cases</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply_fun</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">finite_dimensional</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">dual</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basis</span>
+</pre></div>
+
+
+<ul>
+<li>Run <code>lean blah.lean --make</code>. It terminates after ~5 seconds, and appears to compile a few files in <code>logic</code> and <code>data</code>.</li>
+<li>Run <code>lean blah.lean --make</code> again. It appears to recompile everything.</li>
+</ul>
+
+<a name="178101167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101167">Rob Lewis (Oct 14 2019 at 13:08)</a>:</h4>
+<p>I can't spare the CPU time for more testing right this second. Does anyone recognize this behavior?</p>
+
+<a name="178101262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101262">Jesse Michael Han (Oct 14 2019 at 13:09)</a>:</h4>
+<p>i've also occasionally been getting this behavior after leanpkg-configure -&gt; update-mathlib</p>
+
+<a name="178101355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101355">Johan Commelin (Oct 14 2019 at 13:10)</a>:</h4>
+<p>Usually <code>find src | grep "[.]olean$" | xargs touch</code> fixes it for me</p>
+
+<a name="178101484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101484">Rob Lewis (Oct 14 2019 at 13:12)</a>:</h4>
+<blockquote>
+<p>Usually <code>find src | grep "[.]olean$" | xargs touch</code> fixes it for me</p>
+</blockquote>
+<p>That does it. Thanks!</p>
+
+<a name="178101505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101505">Rob Lewis (Oct 14 2019 at 13:12)</a>:</h4>
+<p>Should this be part of the <code>cache-olean</code>/<code>update-mathlib</code> script?</p>
+
+<a name="178101574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178101574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178101574">Simon Hudon (Oct 14 2019 at 13:13)</a>:</h4>
+<p><code>find src -name *.olean -exec touch {} \;</code> might be a bit less clunky</p>
+
+<a name="178102247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178102247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178102247">Simon Hudon (Oct 14 2019 at 13:22)</a>:</h4>
+<p>We could add it to <code>cache-olean</code> / <code>update-mathlib</code>. I don't know if we should do it every time though. It would be worth testing</p>
+
+<a name="178103650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/strange%20build%20behavior/near/178103650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07637strangebuildbehavior.html#178103650">Reid Barton (Oct 14 2019 at 13:41)</a>:</h4>
+<blockquote>
+<p><code>find src -name *.olean -exec touch {} \;</code> might be a bit less clunky</p>
+</blockquote>
+<p>This one probably won't work. Using <code>xargs</code> makes the timestamps all equal (as long as all the <code>.olean</code> file names fit on a single command line).</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
