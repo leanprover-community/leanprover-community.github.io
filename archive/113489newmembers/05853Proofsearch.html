@@ -261,6 +261,20 @@ Putting it there right away does nothing. I need to unfold <code>monoid.pow</cod
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195602">Marc Huisinga (Oct 15 2019 at 13:57)</a>:</h4>
 <p>at least according to TPIL, simp only uses tagged lemmas from files that have been imported (<a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier">https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier</a>, "Once the attribute is applied, however, there is no way to remove it; it persists in any file that imports the one where the attribute is assigned.")</p>
 
+<a name="178196572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178196572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178196572">Marko Grdinic (Oct 15 2019 at 14:06)</a>:</h4>
+<p>I guess <code>data.rat</code> must be importing them then at some point.</p>
+
+<a name="178200943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178200943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178200943">Marko Grdinic (Oct 15 2019 at 14:53)</a>:</h4>
+<p>Here is an easier way of implementing the above function. </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">_</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span> <span class="n">simp</span><span class="o">,</span> <span class="n">rw</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul_eq_mul</span> <span class="bp">_</span> <span class="n">c</span><span class="o">,</span> <span class="n">ring</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>All my difficulty here was not really understanding the difference between monoidal and regular multiplication. One can use <code>add_monoid.smul_eq_mul</code> to go between the two.</p>
+
 
 {% endraw %}
 

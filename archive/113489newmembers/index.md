@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Proof search](05853Proofsearch.html) (38 messages, latest: Oct 15 2019 at 13:57)
+* [Proof search](05853Proofsearch.html) (40 messages, latest: Oct 15 2019 at 14:53)
 
 * [How to prove `¬ (↑(list.length l) + 1) = (0 : rat)`?](25529Howtoprovelistlengthl10rat.html) (3 messages, latest: Oct 15 2019 at 13:17)
 
