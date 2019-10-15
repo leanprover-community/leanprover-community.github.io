@@ -96,6 +96,22 @@ E.const_none : ∀ (l : list ℚ), monoid.pow c (list.length l) * rat.inv ↑(li
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178154177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178154177">Johan Commelin (Oct 15 2019 at 01:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="209436">@Lucas Allen</span> Hooray! Nice work!</p>
 
+<a name="178172645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172645">Marko Grdinic (Oct 15 2019 at 08:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> </p>
+<blockquote>
+<p>You are trying to prove that c ^ something = c. You want to do this be claiming that something = 1. You can guess the name of the lemma that says c ^ 1 = c: it will/should/must/shall/ought be called pow_one. So you proceed by saying convert pow_one c. Now you are left with proving something = 1.</p>
+</blockquote>
+<p>Actually,  <code>monoid.pow</code> is misleading here, it really is multiplication under the hood. What I am trying to prove is more like <code>c * (1 + n) / (1 + n) = c</code>. What makes this situation confusing is that the simplifier got it into this strange form using I do not know which rewrites, and I am not sure what the steps for dealing with this should be. It cannot be solved by <code>ring</code> here. Maybe I will try simplifying it step by step in addition to going through the lemmas for <code>rat</code>.</p>
+
+<a name="178172710"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172710" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172710">Johan Commelin (Oct 15 2019 at 08:48)</a>:</h4>
+<p>There is <code>squeeze_simp</code> that will report what the simplifier did.</p>
+
+<a name="178172737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172737">Johan Commelin (Oct 15 2019 at 08:48)</a>:</h4>
+<p>And I agree that this seems a very crazy end result be the simplifier.</p>
+
 
 {% endraw %}
 
