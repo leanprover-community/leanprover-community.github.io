@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [#simp](14237simp.html) (5 messages, latest: Oct 15 2019 at 02:22)
+* [strange build behavior](07637strangebuildbehavior.html) (12 messages, latest: Oct 15 2019 at 03:31)
 
-* [strange build behavior](07637strangebuildbehavior.html) (11 messages, latest: Oct 14 2019 at 21:11)
+* [#simp](14237simp.html) (5 messages, latest: Oct 15 2019 at 02:22)
 
 * [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (17 messages, latest: Oct 14 2019 at 20:40)
 
