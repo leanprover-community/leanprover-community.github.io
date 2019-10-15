@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Is it possible to write at goal?](57568Isitpossibletowriteatgoal.html) (4 messages, latest: Oct 15 2019 at 11:53)
+
 * [Proof search](05853Proofsearch.html) (32 messages, latest: Oct 15 2019 at 10:24)
 
 * [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
