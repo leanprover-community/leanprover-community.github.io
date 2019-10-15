@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Constructive Logic](52376ConstructiveLogic.html) (7 messages, latest: Oct 15 2019 at 17:33)
+* [Constructive Logic](52376ConstructiveLogic.html) (10 messages, latest: Oct 15 2019 at 20:44)
 
 * [sensitivity project lemmas](14338sensitivityprojectlemmas.html) (18 messages, latest: Oct 15 2019 at 12:11)
 
