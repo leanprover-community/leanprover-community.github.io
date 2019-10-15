@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
+* [Proof search](05853Proofsearch.html) (12 messages, latest: Oct 14 2019 at 23:43)
 
-* [Proof search](05853Proofsearch.html) (11 messages, latest: Oct 14 2019 at 16:35)
+* [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
 
 * [How to fold statements into the calc block?](32311Howtofoldstatementsintothecalcblock.html) (19 messages, latest: Oct 14 2019 at 13:19)
 
