@@ -112,6 +112,110 @@ E.const_none : ∀ (l : list ℚ), monoid.pow c (list.length l) * rat.inv ↑(li
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178172737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178172737">Johan Commelin (Oct 15 2019 at 08:48)</a>:</h4>
 <p>And I agree that this seems a very crazy end result be the simplifier.</p>
 
+<a name="178174991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178174991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178174991">Marko Grdinic (Oct 15 2019 at 09:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <br>
+I think I am looking at some bug here. I thought that <code>monoid.pow</code> was multiplication, but it turns out it really is a power function.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">_</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span> <span class="c1">-- list.sum (list.map (λ (_x : ℚ), c) (x :: l)) = c * ↑(list.length (x :: l))</span>
+        <span class="n">simp</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="c1">-- add_monoid.smul (1 + list.length l) c = c * (1 + ↑(list.length l))</span>
+        <span class="n">ring</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="c1">-- add_monoid.smul (list.length l + 1) c = (↑(list.length l) + 1) * c</span>
+        <span class="n">unfold</span> <span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span> <span class="c1">-- monoid.pow c (list.length l + 1) = (↑(list.length l) + 1) * c</span>
+        <span class="n">unfold</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span><span class="o">,</span> <span class="c1">-- c * monoid.pow c (list.length l) = (↑(list.length l) + 1) * c</span>
+        <span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span><span class="o">,</span> <span class="c1">-- c * (↑(list.length l) * c) = (↑(list.length l) + 1) * c</span>
+        <span class="n">ring</span><span class="o">,</span> <span class="c1">-- c * (c * ↑(list.length l)) = c * ↑(list.length l) + c</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>Something is not right here.</p>
+
+<a name="178175189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175189">Johan Commelin (Oct 15 2019 at 09:27)</a>:</h4>
+<p>What is the output if you replace the first <code>simp</code> with <code>squeeze_simp</code>?</p>
+
+<a name="178175230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175230">Johan Commelin (Oct 15 2019 at 09:28)</a>:</h4>
+<p>You want to <code>rw</code> by <code>add_monoid.smul_add</code>, so probably you can add that to <code>simp</code></p>
+
+<a name="178175322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175322">Johan Commelin (Oct 15 2019 at 09:29)</a>:</h4>
+<p>The place where everything goes bonkers is <code>unfold add_monoid.smul</code>, because it switches you from additive to multiplicative notation. Reason: <code>add_monoid.smul</code> is defined to be <code>monoid.pow</code> on <code>multiplicative M</code>, where <code>M</code> is your additive monoid.</p>
+
+<a name="178175518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175518">Marko Grdinic (Oct 15 2019 at 09:33)</a>:</h4>
+<blockquote>
+<p>What is the output if you replace the first simp with squeeze_simp?</p>
+</blockquote>
+<div class="codehilite"><pre><span></span>variance.lean:72:8: information trace output
+simp only [list.repeat,
+ list.length,
+ add_comm,
+ list.sum_repeat,
+ list.map_const,
+ nat.cast_add,
+ nat.cast_one,
+ list.map] at *
+</pre></div>
+
+<a name="178175779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175779">Marko Grdinic (Oct 15 2019 at 09:36)</a>:</h4>
+<blockquote>
+<p>You want to rw by add_monoid.smul_add, so probably you can add that to simp</p>
+</blockquote>
+<p>The effect of that is the same as unfolding it like I am doing now.</p>
+<blockquote>
+<p>The place where everything goes bonkers is unfold add_monoid.smul, because it switches you from additive to multiplicative notation. </p>
+</blockquote>
+<p>So what you are saying is that the <code>*</code>s are actually <code>+</code>s on the left side of the equality?</p>
+
+<a name="178175798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175798">Johan Commelin (Oct 15 2019 at 09:36)</a>:</h4>
+<p>Are you rewriting by <code>smul</code> or <code>smul_add</code>?</p>
+
+<a name="178175847"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175847" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175847">Johan Commelin (Oct 15 2019 at 09:37)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/group_power.lean#L143" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/group_power.lean#L143">https://github.com/leanprover-community/mathlib/blob/494132e1ebdba300a43d66e19ddc5b724fd20129/src/algebra/group_power.lean#L143</a></p>
+
+<a name="178175886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175886">Johan Commelin (Oct 15 2019 at 09:38)</a>:</h4>
+<p>That seems like a useful lemma for you</p>
+
+<a name="178175911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175911">Johan Commelin (Oct 15 2019 at 09:38)</a>:</h4>
+<p>It's not tagged as a <code>simp</code>-lemma. So you could add it to the simp-set manually.</p>
+
+<a name="178175960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178175960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178175960">Johan Commelin (Oct 15 2019 at 09:39)</a>:</h4>
+<p>If you then also add <code>list.eq.repeat</code> (your induction hypothesis) to the simp set, it might be able to close the goal completely</p>
+
+<a name="178176052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178176052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178176052">Johan Commelin (Oct 15 2019 at 09:41)</a>:</h4>
+<p>Also, your lemma doesn't really use that <code>c</code> is a <code>rat</code>. So you could state it for any <code>semiring</code> I guess</p>
+
+<a name="178176793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178176793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178176793">Marko Grdinic (Oct 15 2019 at 09:52)</a>:</h4>
+<p>Thanks.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">list</span> <span class="n">rat</span><span class="o">),</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="bp">_</span><span class="o">,</span> <span class="n">c</span><span class="o">)</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="n">l</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">x</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="k">by</span> <span class="o">{</span>
+        <span class="k">have</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">eq</span><span class="bp">.</span><span class="n">repeat</span> <span class="n">l</span><span class="o">,</span>
+        <span class="n">simp</span> <span class="o">[</span><span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul</span><span class="o">]</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+        <span class="n">ring</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+        <span class="n">unfold</span> <span class="n">monoid</span><span class="bp">.</span><span class="n">pow</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">this</span><span class="o">,</span>
+        <span class="n">ring</span><span class="o">,</span>
+        <span class="n">simp</span> <span class="o">[</span><span class="n">add_monoid</span><span class="bp">.</span><span class="n">smul_add</span><span class="o">],</span>
+        <span class="n">refl</span>
+    <span class="o">}</span>
+</pre></div>
+
+
+<p>This goes through. I still find this confusing though. I have no idea why the notation suddenly changed mid way. How does that work? Is there a way print out the goal without the operators?</p>
+
 
 {% endraw %}
 
