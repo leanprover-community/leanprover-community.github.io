@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [type error in ring tactic](53580typeerrorinringtactic.html) (4 messages, latest: Oct 15 2019 at 15:25)
+
 * [#simp](14237simp.html) (6 messages, latest: Oct 15 2019 at 10:23)
 
 * [strange build behavior](07637strangebuildbehavior.html) (12 messages, latest: Oct 15 2019 at 03:31)

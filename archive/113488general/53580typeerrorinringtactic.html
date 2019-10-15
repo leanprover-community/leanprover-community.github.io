@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/53580typeerrorinringtactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html">type error in ring tactic</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178201936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/178201936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#178201936">Tim Baanen (Oct 15 2019 at 15:03)</a>:</h4>
+<p>I was trying out some edge cases of <code>ring</code>, and the following code failed</p>
+<div class="codehilite"><pre><span></span>  import tactic.ring
+  example (n : ℕ) (a : ℤ) : a^(n^0) = a^1 := by ring
+</pre></div>
+
+
+<p>with a type error:</p>
+<div class="codehilite"><pre><span></span>error: type mismatch at application
+  tactic.ring.subst_into_pow a (n ^ 0) (tactic.ring.horner 1 a 1 0) 1
+term
+  1
+has type
+  ℤ
+but is expected to have type
+  ℕ
+⊢ 0 = 1
+</pre></div>
+
+
+<p>I think the problem is that <code>ring</code> simplifies <code>n^0</code> to <code>1 : ℤ</code> instead of <code>1 : ℕ</code>. With the variable <code>a : ℕ</code> it works.</p>
+
+<a name="178203394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/178203394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#178203394">Mario Carneiro (Oct 15 2019 at 15:19)</a>:</h4>
+<p>the type error is a problem, but <code>ring</code> isn't supposed to be able to solve this anyway</p>
+
+<a name="178203946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/178203946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#178203946">Tim Baanen (Oct 15 2019 at 15:24)</a>:</h4>
+<p>Yeah, I'm aware that <code>ring</code> doesn't really support this. On the other hand, <code>a^(n^0) = a^1 := by norm_num</code> also works, so it seems reasonable to me that <code>ring</code> shouldn't fail here either.</p>
+
+<a name="178203978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/178203978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#178203978">Mario Carneiro (Oct 15 2019 at 15:25)</a>:</h4>
+<p>that's because <code>norm_num</code> calls <code>simp</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
