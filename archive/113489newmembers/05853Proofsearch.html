@@ -229,6 +229,38 @@ simp only [list.repeat,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178178914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178178914">Johan Commelin (Oct 15 2019 at 10:24)</a>:</h4>
 <p><span class="user-mention" data-user-id="244262">@Marko Grdinic</span> Don't do <code>simp [add_monoid.smul]</code> but put the <code>smul_add</code> there instead. I would hope that it would avoid all the ugly notation.</p>
 
+<a name="178193302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178193302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178193302">Marko Grdinic (Oct 15 2019 at 13:34)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> <br>
+Putting it there right away does nothing. I need to unfold <code>monoid.pow</code> first.</p>
+
+<a name="178193354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178193354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178193354">Johan Commelin (Oct 15 2019 at 13:35)</a>:</h4>
+<p>Weird</p>
+
+<a name="178195032"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195032" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195032">Marko Grdinic (Oct 15 2019 at 13:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- list.sum (list.map (λ (_x : ℚ), c) (x :: l)) = c * ↑(list.length (x :: l))</span>
+<span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">map_const</span><span class="o">,</span> <span class="c1">-- list.sum (list.repeat c (list.length (x :: l))) = c * ↑(list.length (x :: l))</span>
+<span class="n">rw</span> <span class="n">list</span><span class="bp">.</span><span class="n">sum_repeat</span> <span class="c1">-- add_monoid.smul (list.length (x :: l)) c = c * ↑(list.length (x :: l))</span>
+</pre></div>
+
+
+<p><code>@[simp] theorem list.sum_repeat : ∀ (a : β) (n : ℕ), (list.repeat a n).sum = n • a</code> is the function that leads into it. It is in <code>algebra.group_power</code>, while map_const is in <code>list.basic</code>. I am not sure why that rewriting is happening considering I had not imported any of the <code>algebra</code> files myself. The only import I have is <code>data.rat</code>. I guess this means that every file in the project can extend the namespace in such a manner.</p>
+<p>Hmmm...definitely not what I expected. I expected that imports would be the main mechanism of information exchange between modules, but these extension definitions seem to be entirely separate from that. I am not sure if the manual said anything about this.</p>
+
+<a name="178195264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195264">Johan Commelin (Oct 15 2019 at 13:53)</a>:</h4>
+<p>It's really powerful!</p>
+
+<a name="178195475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195475">Marc Huisinga (Oct 15 2019 at 13:56)</a>:</h4>
+<p>maybe some file you imported also imports the algebra files.</p>
+
+<a name="178195602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20search/near/178195602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05853Proofsearch.html#178195602">Marc Huisinga (Oct 15 2019 at 13:57)</a>:</h4>
+<p>at least according to TPIL, simp only uses tagged lemmas from files that have been imported (<a href="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier">https://leanprover.github.io/theorem_proving_in_lean/tactics.html#using-the-simplifier</a>, "Once the attribute is applied, however, there is no way to remove it; it persists in any file that imports the one where the attribute is assigned.")</p>
+
 
 {% endraw %}
 
