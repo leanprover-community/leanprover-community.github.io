@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Proof search](05853Proofsearch.html) (30 messages, latest: Oct 15 2019 at 09:52)
+* [Proof search](05853Proofsearch.html) (32 messages, latest: Oct 15 2019 at 10:24)
 
 * [Giry monad](88715Girymonad.html) (26 messages, latest: Oct 14 2019 at 19:36)
 
