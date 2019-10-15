@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [diamonds](50672diamonds.html) (7 messages, latest: Oct 14 2019 at 21:29)
+* [sensitivity project lemmas](14338sensitivityprojectlemmas.html) (18 messages, latest: Oct 15 2019 at 12:11)
 
-* [sensitivity project lemmas](14338sensitivityprojectlemmas.html) (17 messages, latest: Oct 14 2019 at 19:07)
+* [diamonds](50672diamonds.html) (7 messages, latest: Oct 14 2019 at 21:29)
 
 * [constructive polynomials](53889constructivepolynomials.html) (15 messages, latest: Oct 13 2019 at 00:44)
 
