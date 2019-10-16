@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (1 message, latest: Oct 16 2019 at 08:10)
+* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (4 messages, latest: Oct 16 2019 at 09:36)
 
 * [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (21 messages, latest: Oct 16 2019 at 04:45)
 

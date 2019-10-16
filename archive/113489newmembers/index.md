@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (11 messages, latest: Oct 16 2019 at 08:12)
+* [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (13 messages, latest: Oct 16 2019 at 09:20)
 
 * [Proof search](05853Proofsearch.html) (41 messages, latest: Oct 15 2019 at 22:12)
 
