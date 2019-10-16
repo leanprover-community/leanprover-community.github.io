@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (21 messages, latest: Oct 16 2019 at 04:45)
+
 * [type error in ring tactic](53580typeerrorinringtactic.html) (4 messages, latest: Oct 15 2019 at 15:25)
 
 * [#simp](14237simp.html) (6 messages, latest: Oct 15 2019 at 10:23)
 
 * [strange build behavior](07637strangebuildbehavior.html) (12 messages, latest: Oct 15 2019 at 03:31)
-
-* [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (17 messages, latest: Oct 14 2019 at 20:40)
 
 * [visualizations](70566visualizations.html) (58 messages, latest: Oct 14 2019 at 15:31)
 

@@ -93,6 +93,38 @@ And if we teach it the naming scheme, then the result should be pretty usable. N
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178137039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178137039">Edward Ayers (Oct 14 2019 at 20:40)</a>:</h4>
 <p>There is a tool called Mathsaid that has some interesting heuristics for picking out interesting lemmas: <a href="https://link.springer.com/article/10.1007/s10489-017-0954-8" target="_blank" title="https://link.springer.com/article/10.1007/s10489-017-0954-8">https://link.springer.com/article/10.1007/s10489-017-0954-8</a></p>
 
+<a name="178257173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178257173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178257173">Johan Commelin (Oct 16 2019 at 04:08)</a>:</h4>
+<p>One thing that Hipster does could be summarised as "playing around with examples". I think that is something that human mathematicians do a lot. But currently there is no way to register such information in Lean.<br>
+We could have something like</p>
+<div class="codehilite"><pre><span></span><span class="n">register_example</span> <span class="n">nat</span> <span class="mi">0</span>
+<span class="n">register_example</span> <span class="n">nat</span> <span class="mi">1</span>
+<span class="n">register_example</span> <span class="n">nat</span> <span class="mi">37</span>
+
+<span class="n">register_example</span> <span class="n">int</span> <span class="bp">-</span><span class="mi">1</span>
+
+<span class="n">register_example</span> <span class="n">rat</span> <span class="mi">2</span><span class="bp">/</span><span class="mi">3</span>
+
+<span class="n">register_example</span> <span class="n">real</span> <span class="n">real</span><span class="bp">.</span><span class="n">pi</span>
+
+<span class="n">register_example</span> <span class="o">(</span><span class="err">∏</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="n">group</span> <span class="n">G</span><span class="o">)</span> <span class="err">\</span><span class="bp">&lt;</span><span class="n">int</span><span class="o">,</span> <span class="n">infer_instance</span><span class="err">\</span><span class="bp">&gt;</span>
+<span class="n">register_example</span> <span class="o">(</span><span class="err">∏</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="n">group</span> <span class="n">G</span><span class="o">)</span> <span class="err">\</span><span class="bp">&lt;</span><span class="n">zmod</span> <span class="mi">6</span><span class="o">,</span> <span class="n">infer_instance</span><span class="err">\</span><span class="bp">&gt;</span>
+
+<span class="n">register_example</span> <span class="o">(</span><span class="err">∏</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">),</span> <span class="n">topological_space</span> <span class="n">X</span><span class="o">)</span> <span class="err">\</span><span class="bp">&lt;</span><span class="n">real</span><span class="o">,</span> <span class="n">infer_instance</span><span class="err">\</span><span class="bp">&gt;</span>
+</pre></div>
+
+<a name="178257243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178257243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178257243">Johan Commelin (Oct 16 2019 at 04:10)</a>:</h4>
+<p>I think such a database could potentially be really useful for tactics that try to prove or find counterexamples. And as Hipster shows, it's also useful for generating conjectures/boring lemmas.</p>
+
+<a name="178257262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178257262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178257262">Johan Commelin (Oct 16 2019 at 04:11)</a>:</h4>
+<p>(Hipster generates the examples on the fly. But I think that will quickly break down if you are not working with lists/trees or other CS-y data types.)</p>
+
+<a name="178258693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/autogenerate%20the%20boring%20lemmas/near/178258693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/68518autogeneratetheboringlemmas.html#178258693">Alex J. Best (Oct 16 2019 at 04:45)</a>:</h4>
+<p>Yeah I like the sound of this a lot, I've started using <span class="user-mention" data-user-id="110026">@Simon Hudon</span>'s slim_check and even if it has issues its really very handy to tell you when you've forgotten a trivial case in a statement, or accidentally got your tactic state into an unprovable situation. But like Johan says handmade examples would be needed for non-trivial structures (how does it handle groups I wonder). It would be great to include these or equivalent tactics!</p>
+
 
 {% endraw %}
 
