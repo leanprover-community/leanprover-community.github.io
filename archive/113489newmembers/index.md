@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [sets in Lean](78231setsinLean.html) (47 messages, latest: Oct 16 2019 at 21:46)
+
 * [Proof search](05853Proofsearch.html) (50 messages, latest: Oct 16 2019 at 19:34)
 
 * [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (14 messages, latest: Oct 16 2019 at 19:33)
@@ -82,8 +84,6 @@ permalink: archive/113489newmembers/index.html
 * [unicode fonts for VS code on macOS](93037unicodefontsforVScodeonmacOS.html) (8 messages, latest: Oct 01 2019 at 20:29)
 
 * [Type of the empty type?](85353Typeoftheemptytype.html) (25 messages, latest: Oct 01 2019 at 20:20)
-
-* [sets in Lean](78231setsinLean.html) (42 messages, latest: Oct 01 2019 at 15:06)
 
 * [reference manual](64494referencemanual.html) (3 messages, latest: Sep 30 2019 at 17:35)
 
