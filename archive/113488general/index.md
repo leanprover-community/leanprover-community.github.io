@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (4 messages, latest: Oct 16 2019 at 09:36)
+* [ring with natural number division](37426ringwithnaturalnumberdivision.html) (1 message, latest: Oct 16 2019 at 11:54)
 
-* [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (21 messages, latest: Oct 16 2019 at 04:45)
+* [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (22 messages, latest: Oct 16 2019 at 11:44)
+
+* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (4 messages, latest: Oct 16 2019 at 09:36)
 
 * [type error in ring tactic](53580typeerrorinringtactic.html) (4 messages, latest: Oct 15 2019 at 15:25)
 
