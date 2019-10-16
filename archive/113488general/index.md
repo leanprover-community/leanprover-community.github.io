@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ring with natural number division](37426ringwithnaturalnumberdivision.html) (1 message, latest: Oct 16 2019 at 11:54)
+* [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (23 messages, latest: Oct 16 2019 at 12:34)
 
-* [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (22 messages, latest: Oct 16 2019 at 11:44)
+* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (1 message, latest: Oct 16 2019 at 12:05)
+
+* [ring with natural number division](37426ringwithnaturalnumberdivision.html) (3 messages, latest: Oct 16 2019 at 12:04)
 
 * [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (4 messages, latest: Oct 16 2019 at 09:36)
 
