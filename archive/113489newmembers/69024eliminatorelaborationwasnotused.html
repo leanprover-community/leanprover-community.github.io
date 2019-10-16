@@ -129,6 +129,41 @@ context: &#39;eliminator&#39; elaboration was not used for &#39;option.rec&#39; 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/177979244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#177979244">mth (Oct 12 2019 at 09:07)</a>:</h4>
 <p>ok, thanks a lot</p>
 
+<a name="178276780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/178276780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#178276780">mth (Oct 16 2019 at 10:38)</a>:</h4>
+<p>Why does the elaborator complain here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">δ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">comp</span> <span class="n">f</span> <span class="o">(</span><span class="n">comp</span> <span class="n">g</span> <span class="n">h</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">h</span> <span class="n">a</span><span class="o">)</span> <span class="n">none</span> <span class="n">g</span><span class="o">)</span> <span class="n">none</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<blockquote>
+<p>error: invalid <code>option.cases_on</code> application, elaborator has special support for this kind of application (it is handled as an "eliminator"), but expected type must not contain metavariables: <code>option ?m_1</code></p>
+</blockquote>
+<p>(Sorry to annoy you again.)</p>
+
+<a name="178277665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/178277665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#178277665">Patrick Massot (Oct 16 2019 at 10:54)</a>:</h4>
+<p>The elaborator complains it doesn't know the type expected in the big parenthesis. It is not being smart enough.</p>
+
+<a name="178277674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/178277674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#178277674">Patrick Massot (Oct 16 2019 at 10:54)</a>:</h4>
+<p>You can help it using a type ascription</p>
+
+<a name="178277675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/178277675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#178277675">Patrick Massot (Oct 16 2019 at 10:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">f</span><span class="o">:</span> <span class="n">γ</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">δ</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">option</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">comp</span> <span class="n">f</span> <span class="o">(</span><span class="n">comp</span> <span class="n">g</span> <span class="n">h</span><span class="o">)</span> <span class="bp">=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">option</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">h</span> <span class="n">a</span><span class="o">)</span> <span class="n">none</span> <span class="n">g</span> <span class="o">:</span> <span class="n">option</span> <span class="n">γ</span><span class="o">)</span> <span class="n">none</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="178277703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/178277703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#178277703">Patrick Massot (Oct 16 2019 at 10:55)</a>:</h4>
+<p>But I'm not sure I understand the point of this statement.</p>
+
+<a name="178277885"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/%27eliminator%27%20elaboration%20was%20not%20used/near/178277885" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/69024eliminatorelaborationwasnotused.html#178277885">mth (Oct 16 2019 at 10:58)</a>:</h4>
+<p>Yes, its pretty pointless on its own</p>
+
 
 {% endraw %}
 

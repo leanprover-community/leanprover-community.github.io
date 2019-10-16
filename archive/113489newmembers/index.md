@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (26 messages, latest: Oct 16 2019 at 10:58)
+
 * [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (13 messages, latest: Oct 16 2019 at 09:20)
 
 * [Proof search](05853Proofsearch.html) (41 messages, latest: Oct 15 2019 at 22:12)
@@ -36,8 +38,6 @@ permalink: archive/113489newmembers/index.html
 * [Getting started](52778Gettingstarted.html) (156 messages, latest: Oct 12 2019 at 16:40)
 
 * [type class question](70065typeclassquestion.html) (19 messages, latest: Oct 12 2019 at 09:48)
-
-* ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (20 messages, latest: Oct 12 2019 at 09:07)
 
 * [helloworld](15997helloworld.html) (25 messages, latest: Oct 11 2019 at 12:00)
 
