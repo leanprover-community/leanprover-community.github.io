@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (6 messages, latest: Oct 16 2019 at 19:55)
+* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (8 messages, latest: Oct 16 2019 at 20:18)
 
 * [algebraic closure](74840algebraicclosure.html) (215 messages, latest: Oct 16 2019 at 19:38)
 
