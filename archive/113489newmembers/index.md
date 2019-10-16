@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to prove `(-2) * m * m + m ^ 2 ≤ (-2) * m * m' + m' ^ 2`](58311Howtoprove2mmm22mmm2.html) (8 messages, latest: Oct 16 2019 at 14:50)
+
 * [Proof search](05853Proofsearch.html) (43 messages, latest: Oct 16 2019 at 13:39)
 
 * ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (26 messages, latest: Oct 16 2019 at 10:58)
