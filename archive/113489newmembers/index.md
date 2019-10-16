@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (1 message, latest: Oct 16 2019 at 05:49)
+
 * [Proof search](05853Proofsearch.html) (41 messages, latest: Oct 15 2019 at 22:12)
 
 * [How to prove `¬ (↑(list.length l) + 1) = (0 : rat)`?](25529Howtoprovelistlengthl10rat.html) (3 messages, latest: Oct 15 2019 at 13:17)
