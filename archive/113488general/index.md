@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (8 messages, latest: Oct 16 2019 at 20:18)
+* [algebraic closure](74840algebraicclosure.html) (216 messages, latest: Oct 16 2019 at 22:09)
 
-* [algebraic closure](74840algebraicclosure.html) (215 messages, latest: Oct 16 2019 at 19:38)
+* [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (8 messages, latest: Oct 16 2019 at 20:18)
 
 * [ring with natural number division](37426ringwithnaturalnumberdivision.html) (4 messages, latest: Oct 16 2019 at 14:09)
 
