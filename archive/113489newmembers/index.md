@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Proof search](05853Proofsearch.html) (43 messages, latest: Oct 16 2019 at 13:39)
+
 * ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (26 messages, latest: Oct 16 2019 at 10:58)
 
 * [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (13 messages, latest: Oct 16 2019 at 09:20)
-
-* [Proof search](05853Proofsearch.html) (41 messages, latest: Oct 15 2019 at 22:12)
 
 * [How to prove `¬ (↑(list.length l) + 1) = (0 : rat)`?](25529Howtoprovelistlengthl10rat.html) (3 messages, latest: Oct 15 2019 at 13:17)
 
