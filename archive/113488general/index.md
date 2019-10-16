@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [algebraic closure](74840algebraicclosure.html) (211 messages, latest: Oct 16 2019 at 15:16)
+
 * [ring with natural number division](37426ringwithnaturalnumberdivision.html) (4 messages, latest: Oct 16 2019 at 14:09)
 
 * [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (23 messages, latest: Oct 16 2019 at 12:34)
@@ -66,8 +68,6 @@ permalink: archive/113488general/index.html
 * [AI and theorem proving](41431AIandtheoremproving.html) (55 messages, latest: Oct 08 2019 at 13:27)
 
 * [linear algebra documentation push](01636linearalgebradocumentationpush.html) (6 messages, latest: Oct 08 2019 at 13:17)
-
-* [algebraic closure](74840algebraicclosure.html) (210 messages, latest: Oct 08 2019 at 10:30)
 
 * [sanity_check](06518sanitycheck.html) (44 messages, latest: Oct 08 2019 at 01:01)
 
