@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [physics](86660physics.html) (3 messages, latest: Oct 17 2019 at 19:09)
+
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (145 messages, latest: Oct 17 2019 at 13:07)
 
 * [Stretch goal](98945Stretchgoal.html) (3 messages, latest: Oct 16 2019 at 09:23)

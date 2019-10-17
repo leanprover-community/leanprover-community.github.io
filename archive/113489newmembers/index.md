@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to write out variable declarations involving typeclasses](26656Howtowriteoutvariabledeclarationsinvolvingtypeclasses.html) (4 messages, latest: Oct 17 2019 at 17:02)
+* [Representation Theory](30735RepresentationTheory.html) (21 messages, latest: Oct 17 2019 at 19:59)
+
+* [How to write out variable declarations involving typeclasses](26656Howtowriteoutvariabledeclarationsinvolvingtypeclasses.html) (5 messages, latest: Oct 17 2019 at 19:00)
 
 * [Do lenses fit anywhere in mathlib?](81179Dolensesfitanywhereinmathlib.html) (15 messages, latest: Oct 17 2019 at 14:43)
-
-* [Representation Theory](30735RepresentationTheory.html) (20 messages, latest: Oct 17 2019 at 08:04)
 
 * [How to prove `(-2) * m * m + m ^ 2 ≤ (-2) * m * m' + m' ^ 2`](58311Howtoprove2mmm22mmm2.html) (9 messages, latest: Oct 16 2019 at 23:39)
 
