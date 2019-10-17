@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Do lenses fit anywhere in mathlib?](81179Dolensesfitanywhereinmathlib.html) (3 messages, latest: Oct 17 2019 at 13:58)
+* [Do lenses fit anywhere in mathlib?](81179Dolensesfitanywhereinmathlib.html) (15 messages, latest: Oct 17 2019 at 14:43)
 
 * [Representation Theory](30735RepresentationTheory.html) (20 messages, latest: Oct 17 2019 at 08:04)
 
