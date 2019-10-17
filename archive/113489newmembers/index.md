@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to write out variable declarations involving typeclasses](26656Howtowriteoutvariabledeclarationsinvolvingtypeclasses.html) (1 message, latest: Oct 17 2019 at 15:58)
+
 * [Do lenses fit anywhere in mathlib?](81179Dolensesfitanywhereinmathlib.html) (15 messages, latest: Oct 17 2019 at 14:43)
 
 * [Representation Theory](30735RepresentationTheory.html) (20 messages, latest: Oct 17 2019 at 08:04)
