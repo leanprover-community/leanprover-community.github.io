@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (17 messages, latest: Oct 17 2019 at 01:19)
+
 * [Stretch goal](98945Stretchgoal.html) (3 messages, latest: Oct 16 2019 at 09:23)
 
 * [Uniqueness of the reals](17534Uniquenessofthereals.html) (9 messages, latest: Oct 16 2019 at 08:55)
@@ -48,8 +50,6 @@ permalink: archive/116395maths/index.html
 * [dfinsupp vs finsupp](16216dfinsuppvsfinsupp.html) (4 messages, latest: Oct 06 2019 at 21:22)
 
 * [Fourier transform](18841Fouriertransform.html) (6 messages, latest: Oct 05 2019 at 01:56)
-
-* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (16 messages, latest: Oct 03 2019 at 03:18)
 
 * [bifunctor and End homs](44142bifunctorandEndhoms.html) (1 message, latest: Sep 29 2019 at 23:58)
 

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Representation Theory](30735RepresentationTheory.html) (2 messages, latest: Oct 17 2019 at 01:59)
+
 * [How to prove `(-2) * m * m + m ^ 2 ≤ (-2) * m * m' + m' ^ 2`](58311Howtoprove2mmm22mmm2.html) (9 messages, latest: Oct 16 2019 at 23:39)
 
 * [Proof search](05853Proofsearch.html) (56 messages, latest: Oct 16 2019 at 22:41)
