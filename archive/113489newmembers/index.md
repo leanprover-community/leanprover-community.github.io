@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to prove `(-2) * m * m + m ^ 2 ≤ (-2) * m * m' + m' ^ 2`](58311Howtoprove2mmm22mmm2.html) (9 messages, latest: Oct 16 2019 at 23:39)
+
 * [Proof search](05853Proofsearch.html) (56 messages, latest: Oct 16 2019 at 22:41)
 
 * [example: (p ∨ q) ∧ (p ∨ r) → p ∨ (q ∧ r)](93506examplepqprpqr.html) (16 messages, latest: Oct 16 2019 at 22:33)
 
 * [sets in Lean](78231setsinLean.html) (47 messages, latest: Oct 16 2019 at 21:46)
-
-* [How to prove `(-2) * m * m + m ^ 2 ≤ (-2) * m * m' + m' ^ 2`](58311Howtoprove2mmm22mmm2.html) (8 messages, latest: Oct 16 2019 at 14:50)
 
 * ['eliminator' elaboration was not used](69024eliminatorelaborationwasnotused.html) (26 messages, latest: Oct 16 2019 at 10:58)
 
