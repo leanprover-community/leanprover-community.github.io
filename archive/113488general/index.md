@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [visualizations](70566visualizations.html) (61 messages, latest: Oct 17 2019 at 11:51)
+
 * [algebraic closure](74840algebraicclosure.html) (216 messages, latest: Oct 16 2019 at 22:09)
 
 * [Perfectoid spaces paper](06301Perfectoidspacespaper.html) (8 messages, latest: Oct 16 2019 at 20:18)
@@ -24,8 +26,6 @@ permalink: archive/113488general/index.html
 * [#simp](14237simp.html) (6 messages, latest: Oct 15 2019 at 10:23)
 
 * [strange build behavior](07637strangebuildbehavior.html) (12 messages, latest: Oct 15 2019 at 03:31)
-
-* [visualizations](70566visualizations.html) (58 messages, latest: Oct 14 2019 at 15:31)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (10 messages, latest: Oct 14 2019 at 11:14)
 

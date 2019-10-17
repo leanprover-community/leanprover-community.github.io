@@ -333,6 +333,18 @@ With 320 edges, it has still a few more than the other versions. Fun fact: the h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/178113228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#178113228">Kevin Buzzard (Oct 14 2019 at 15:31)</a>:</h4>
 <p>Thanks all! I will (when I have a minute)</p>
 
+<a name="178373092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/178373092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#178373092">Sebastian Ullrich (Oct 17 2019 at 11:50)</a>:</h4>
+<p>I took a closer look at a <code>has_scalar A B</code> example <span class="user-mention" data-user-id="110596">@Rob Lewis</span> gave me that fails after 47000 steps. It turns out that perhaps the most problematic instance is <code>[comm_ring A] [ring B] [algebra A B] : has_scalar A B</code>. In Rob's specific example, <code>[comm_ring A]</code> quickly succeeds, but <code>[ring B]</code> fails (slowly). So Lean 3's inference backtracks, finds another instance for <code>[comm_ring A]</code>, <em>and tries again to find a <code>[ring B]</code></em> (which "obviously" fails again). In the end, the number of steps after which <code>[ring B]</code> fails (~400) is multiplied by the number of (not necessarily non-defeq) instances of <code>[comm_ring A]</code> (~100).</p>
+
+<a name="178373109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/178373109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#178373109">Sebastian Ullrich (Oct 17 2019 at 11:50)</a>:</h4>
+<p>Fortunately, <span class="user-mention" data-user-id="230999">@Daniel Selsam</span>'s algorithm should eat this example for breakfast</p>
+
+<a name="178373178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/visualizations/near/178373178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70566visualizations.html#178373178">Johan Commelin (Oct 17 2019 at 11:51)</a>:</h4>
+<p>/me usually takes &gt; 15 minutes for eating his breakfast <span aria-label="worried" class="emoji emoji-1f61f" role="img" title="worried">:worried:</span></p>
+
 
 {% endraw %}
 
