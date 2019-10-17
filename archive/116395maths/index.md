@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (17 messages, latest: Oct 17 2019 at 01:19)
+* [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (43 messages, latest: Oct 17 2019 at 02:59)
 
 * [Stretch goal](98945Stretchgoal.html) (3 messages, latest: Oct 16 2019 at 09:23)
 
