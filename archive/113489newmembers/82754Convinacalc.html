@@ -1,0 +1,67 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/82754Convinacalc.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html">Conv in a calc</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178433577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178433577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178433577">Scott Viteri (Oct 18 2019 at 00:18)</a>:</h4>
+<p>The last line in the following fails -- even though it is the same operation that is proved to create h''.<br>
+Is there an issue with using conv in calc, or am I misunderstanding how calc works?</p>
+<div class="codehilite"><pre><span></span>theorem le_trans {x y z : α} (h : x ≤ y) (h&#39; : y ≤ z) : x ≤ z :=
+begin
+  replace h : x = x ⊓ y, from (eq.subst (le_def x y) h),
+  replace h&#39; : y = y ⊓ z, from (eq.subst (le_def y z) h&#39;),
+  refine (eq.subst (le_def x z).symm _),
+  have h&#39;&#39; : x ⊓ y = x ⊓ (y ⊓ y), from by conv { to_lhs, congr, skip, rw ←(inf_idem y) }
+  calc
+    x      = x ⊓ y       : by exact h,
+    ...    = x ⊓ (y ⊓ y) : by conv { to_lhs, congr, skip, rw ←(inf_idem y) }
+</pre></div>
+
+<a name="178434216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178434216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178434216">Reid Barton (Oct 18 2019 at 00:34)</a>:</h4>
+<p>If <code>h''</code> is introduced by <code>have</code> then its definition is not "visible". Use <code>let</code> instead</p>
+
+<a name="178434313"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178434313" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178434313">Scott Viteri (Oct 18 2019 at 00:37)</a>:</h4>
+<p>The issue was the comma at the end of the first calc line</p>
+
+<a name="178434365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178434365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178434365">Scott Viteri (Oct 18 2019 at 00:38)</a>:</h4>
+<p>h'' seems still too be visible -- lean doesn't complain at the following:</p>
+<div class="codehilite"><pre><span></span>theorem le_trans {x y z : α} (h : x ≤ y) (h&#39; : y ≤ z) : x ≤ z :=
+begin
+  replace h : x = x ⊓ y, from (eq.subst (le_def x y) h),
+  replace h&#39; : y = y ⊓ z, from (eq.subst (le_def y z) h&#39;),
+  refine (eq.subst (le_def x z).symm _),
+  have h&#39;&#39; : x ⊓ y = x ⊓ (y ⊓ y), from by conv { to_lhs, congr, skip, rw ←(inf_idem y) },
+  calc
+    x      = x ⊓ y       : by exact h
+    ...    = x ⊓ (y ⊓ y) : by exact h&#39;&#39;
+</pre></div>
+
+<a name="178434368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178434368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178434368">Reid Barton (Oct 18 2019 at 00:38)</a>:</h4>
+<p>Oh yes, that's also no good!</p>
+
+<a name="178434369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178434369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178434369">Reid Barton (Oct 18 2019 at 00:38)</a>:</h4>
+<p>Ah, I didn't read closely enough about <code>h''</code>.</p>
+
+<a name="178434380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Conv%20in%20a%20calc/near/178434380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/82754Convinacalc.html#178434380">Scott Viteri (Oct 18 2019 at 00:39)</a>:</h4>
+<p>no problem, and thanks!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
