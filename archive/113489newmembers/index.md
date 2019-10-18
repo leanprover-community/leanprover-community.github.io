@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Conv in a calc](82754Convinacalc.html) (9 messages, latest: Oct 18 2019 at 15:04)
+* [Conv in a calc](82754Convinacalc.html) (10 messages, latest: Oct 18 2019 at 17:45)
+
+* [Lean for Cryptography](19828LeanforCryptography.html) (7 messages, latest: Oct 18 2019 at 17:45)
 
 * [Dependent induction?](08452Dependentinduction.html) (26 messages, latest: Oct 18 2019 at 14:59)
 
 * [How to destructure `fin` using pattern matching?](70935Howtodestructurefinusingpatternmatching.html) (12 messages, latest: Oct 18 2019 at 14:42)
-
-* [Lean for Cryptography](19828LeanforCryptography.html) (6 messages, latest: Oct 18 2019 at 12:28)
 
 * [Representation Theory](30735RepresentationTheory.html) (22 messages, latest: Oct 18 2019 at 07:50)
 
