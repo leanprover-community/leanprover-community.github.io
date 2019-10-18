@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Lean for Cryptography](19828LeanforCryptography.html) (1 message, latest: Oct 18 2019 at 10:44)
+* [How to destructure `fin` using pattern matching?](70935Howtodestructurefinusingpatternmatching.html) (3 messages, latest: Oct 18 2019 at 12:54)
+
+* [Dependent induction?](08452Dependentinduction.html) (2 messages, latest: Oct 18 2019 at 12:45)
+
+* [Lean for Cryptography](19828LeanforCryptography.html) (6 messages, latest: Oct 18 2019 at 12:28)
 
 * [Conv in a calc](82754Convinacalc.html) (8 messages, latest: Oct 18 2019 at 07:51)
 

@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html">How to destructure `fin` using pattern matching?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178470157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178470157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178470157">Marko Grdinić (Oct 18 2019 at 12:51)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- def nat.foldl.fin {α : Type} (n&#39; : nat) : ∀ (n : fin n&#39;) (s : α) (f : fin n&#39; → α → α), α</span>
+<span class="c1">--     | 0 s f := s</span>
+<span class="c1">--     | (n+1) s f := f n (nat.foldl.fin n s f)</span>
+
+<span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">),</span> <span class="n">α</span>
+    <span class="bp">|</span> <span class="mi">0</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">s</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">n</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">foldl</span> <span class="n">n</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">array</span><span class="bp">.</span><span class="n">map_foldl</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">array</span> <span class="n">n</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">β</span> <span class="o">:=</span>
+    <span class="n">n</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="k">fun</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span><span class="o">)</span> <span class="bp">⟨</span> <span class="n">a</span> <span class="o">,</span> <span class="n">s</span> <span class="bp">⟩</span><span class="o">,</span>
+        <span class="k">let</span> <span class="o">(</span><span class="n">el</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span><span class="o">)</span> <span class="n">s</span> <span class="k">in</span>
+        <span class="o">(</span><span class="n">a</span><span class="bp">.</span><span class="n">write</span> <span class="n">i</span> <span class="n">el</span><span class="o">,</span> <span class="n">s</span><span class="o">)</span>
+        <span class="o">)</span>
+</pre></div>
+
+
+<p>I am trying to make a little helper for <code>array</code> and it requires <code>fin</code>s rather than <code>nat</code> in order to ensure bounds checking. But <code>fin</code> uses anonymous constructors and I am not sure how to destructure it in patterns nor how to construct it normally. How should I do this?</p>
+
+<a name="178470275"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178470275" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178470275">Marko Grdinić (Oct 18 2019 at 12:53)</a>:</h4>
+<p>As an aside, does Lean have any special syntax for monadic computations like Haskell or Idris for example?</p>
+
+<a name="178470401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178470401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178470401">Tim Baanen (Oct 18 2019 at 12:54)</a>:</h4>
+<p>There is <code>do</code> notation, described here: <a href="https://leanprover.github.io/programming_in_lean/#07_Monads.html" target="_blank" title="https://leanprover.github.io/programming_in_lean/#07_Monads.html">https://leanprover.github.io/programming_in_lean/#07_Monads.html</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

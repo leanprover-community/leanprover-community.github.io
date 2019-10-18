@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/08452Dependentinduction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html">Dependent induction?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178468919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178468919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178468919">Vincent Beffara (Oct 18 2019 at 12:36)</a>:</h4>
+<p>Hi,<br>
+I am trying to formalize a few things in graph theory, and for that I am introducing a helper inductive type of non-empty lists, like this :</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">llist</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="bp">|</span> <span class="n">P</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">llist</span> <span class="bp">|</span> <span class="n">L</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">llist</span> <span class="bp">-&gt;</span> <span class="n">llist</span>
+</pre></div>
+
+
+<p>Such lists have a first and last elements,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">first</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">V</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span> <span class="bp">|</span> <span class="o">(</span><span class="n">L</span> <span class="n">v</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span>
+<span class="n">def</span> <span class="n">last</span>  <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="n">V</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span> <span class="bp">|</span> <span class="o">(</span><span class="n">L</span> <span class="n">v</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">last</span> <span class="n">l</span>
+</pre></div>
+
+
+<p>and I define a <code>path</code> to be a <code>llist</code> with prescribed endpoints: </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">path</span> <span class="o">(</span><span class="n">V</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">l</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">//</span> <span class="n">first</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">last</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>So far so good, now I want to concatenate paths with compatible endpoints,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">concat</span> <span class="o">{</span><span class="n">V</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">}</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="n">x</span> <span class="n">z</span>
+</pre></div>
+
+
+<p>just concatenating the lists of elements but without repeating the <code>y</code>. For the moment, the only way I manage to do it is to first define it on unconstrained llists, like this,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">concat&#39;</span> <span class="o">{</span><span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">l1</span> <span class="n">l2</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">last</span> <span class="n">l1</span> <span class="bp">=</span> <span class="n">first</span> <span class="n">l2</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="o">(</span><span class="n">first</span> <span class="n">l1</span><span class="o">)</span> <span class="o">(</span><span class="n">last</span> <span class="n">l2</span><span class="o">)</span>
+</pre></div>
+
+
+<p>inductively, and then use that to define <code>concat</code>. When I try to define <code>concat</code> directly by induction on p1.val, it fails because in the inductive step, x is still there while the tail of p1.val obviously doesn't start with x, so the induction hypothesis is not useful.</p>
+<p>Am I missing something? What is the right way to use induction for such dependent types?</p>
+
+<a name="178469658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178469658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178469658">Tim Baanen (Oct 18 2019 at 12:45)</a>:</h4>
+<p>Hi! I'm guessing that you're doing induction by pattern-matching on the arguments (as in the tutorial here: <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching</a>). When definining <code>concat</code>, <code>x</code> is fixed (because it's on the left of the colon), but it varies in the recursive call. So you can put it on the right with a Π-type.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
