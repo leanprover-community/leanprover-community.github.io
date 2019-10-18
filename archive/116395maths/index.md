@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [constructive polynomials](53889constructivepolynomials.html) (16 messages, latest: Oct 18 2019 at 01:22)
+* [constructive polynomials](53889constructivepolynomials.html) (18 messages, latest: Oct 18 2019 at 05:11)
 
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (146 messages, latest: Oct 17 2019 at 22:10)
 
