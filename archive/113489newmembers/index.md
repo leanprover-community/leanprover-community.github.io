@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1376 messages, latest: Oct 18 2019 at 18:57)
+* [Lean for Cryptography](19828LeanforCryptography.html) (9 messages, latest: Oct 18 2019 at 19:45)
 
-* [Lean for Cryptography](19828LeanforCryptography.html) (8 messages, latest: Oct 18 2019 at 18:30)
+* [noob question(s)](52075noobquestions.html) (1376 messages, latest: Oct 18 2019 at 18:57)
 
 * [Conv in a calc](82754Convinacalc.html) (10 messages, latest: Oct 18 2019 at 17:45)
 

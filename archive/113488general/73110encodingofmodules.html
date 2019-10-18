@@ -20,6 +20,18 @@ permalink: archive/113488general/73110encodingofmodules.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178500069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178500069">Kevin Buzzard (Oct 18 2019 at 18:38)</a>:</h4>
 <p>Just to remark that we also use <code>[comm_ring R] [topological_space R] [topological_ring R]</code> instead of bundling everything into the topological ring structure. But is this a different issue?</p>
 
+<a name="178501771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178501771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178501771">Johan Commelin (Oct 18 2019 at 19:03)</a>:</h4>
+<p><span class="user-mention" data-user-id="110865">@Jeremy Avigad</span> I think it is to support the possibility that <code>M</code>is a module over several different rings. In such cases you wouldn't want the additive group structure to change, but only the scalar multiplication. Hence the two step process.</p>
+
+<a name="178501916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178501916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178501916">Johan Commelin (Oct 18 2019 at 19:05)</a>:</h4>
+<p>Before this refactor, we had a setup where <code>R</code> was an <code>out_param</code>. (And it still didn't really support having two scalar rings on the same <code>M</code>, IIRC.) But this out_param caused lots of headaches and issues with type-class search. At the time I was even more of a newbie then I am nowadays, so I really didn't understand what was going on. All I knew was that it was impossible to use modules in any non-trivial way. Then Mario and Kenny refactored it, and nowadays they are quite pleasant to use.</p>
+
+<a name="178502008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178502008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178502008">Johan Commelin (Oct 18 2019 at 19:06)</a>:</h4>
+<p>Of course want could define <code>Module R</code> (and in fact this has recently been done by <span class="user-mention" data-user-id="201572">@Robert Spencer</span>), and write <code>M : Module R</code>. This has the benefit that you can (and we have) a category structure on <code>Module R</code>. But the problem is that it makes it harder to talk about <code>\C</code> as an <code>\R</code>-module, etc... Also changing the scalar ring is not so transparent anymore.</p>
+
 
 {% endraw %}
 
