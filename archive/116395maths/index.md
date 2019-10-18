@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [constructive polynomials](53889constructivepolynomials.html) (16 messages, latest: Oct 18 2019 at 01:22)
+
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (146 messages, latest: Oct 17 2019 at 22:10)
 
 * [physics](86660physics.html) (3 messages, latest: Oct 17 2019 at 19:09)
@@ -22,8 +24,6 @@ permalink: archive/116395maths/index.html
 * [sensitivity project lemmas](14338sensitivityprojectlemmas.html) (18 messages, latest: Oct 15 2019 at 12:11)
 
 * [diamonds](50672diamonds.html) (7 messages, latest: Oct 14 2019 at 21:29)
-
-* [constructive polynomials](53889constructivepolynomials.html) (15 messages, latest: Oct 13 2019 at 00:44)
 
 * [topology](42046topology.html) (41 messages, latest: Oct 12 2019 at 19:04)
 
