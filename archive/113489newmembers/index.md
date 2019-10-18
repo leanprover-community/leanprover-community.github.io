@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Conv in a calc](82754Convinacalc.html) (10 messages, latest: Oct 18 2019 at 17:45)
+* [noob question(s)](52075noobquestions.html) (1376 messages, latest: Oct 18 2019 at 18:57)
 
-* [Lean for Cryptography](19828LeanforCryptography.html) (7 messages, latest: Oct 18 2019 at 17:45)
+* [Lean for Cryptography](19828LeanforCryptography.html) (8 messages, latest: Oct 18 2019 at 18:30)
+
+* [Conv in a calc](82754Convinacalc.html) (10 messages, latest: Oct 18 2019 at 17:45)
 
 * [Dependent induction?](08452Dependentinduction.html) (26 messages, latest: Oct 18 2019 at 14:59)
 
@@ -88,8 +90,6 @@ permalink: archive/113489newmembers/index.html
 * [Opening my first lean project](72726Openingmyfirstleanproject.html) (27 messages, latest: Oct 03 2019 at 15:53)
 
 * [sequence 1/n converges, "type mismatch"](45660sequence1nconvergestypemismatch.html) (3 messages, latest: Oct 03 2019 at 15:09)
-
-* [noob question(s)](52075noobquestions.html) (1375 messages, latest: Oct 03 2019 at 08:30)
 
 * [prod_instances](79197prodinstances.html) (5 messages, latest: Oct 03 2019 at 05:54)
 

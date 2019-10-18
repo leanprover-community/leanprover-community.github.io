@@ -7817,6 +7817,15 @@ this : 2 ∣ b ^ 2 - a ^ 2
 <p>Thank you both! I am understanding the proofs by tracing them step by step. I see that the key is to understand <code>zmod n</code> itself as a number type and either turning the mod congruence in <code>nat</code> into equality in <code>zmod n</code> and prove it there, or turning equality in <code>zmod n</code> into mod congruence in <code>nat</code> and apply them here. Hmm... I have a vague intuition about this from my Haskell experience, but I need to think hard about how to explain this to my maths colleagues...</p>
 <p>I still don't get many intricacies in there either, like why I need to show <code>0 = 1</code> and why <code>-hyp</code> is necessary in <code>simp[*, -hyp]</code>. <code>conv_lhs</code> has not yet been documented. The first two steps <code>congr, skip</code> seems very arbitrary. Although I understand the proofs now, I can hardly imagine writing them.</p>
 
+<a name="178501319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178501319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178501319">Chris B (Oct 18 2019 at 18:57)</a>:</h4>
+<p>Is there a nicer way of doing this?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">always_less</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="o">(</span><span class="k">if</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="mi">5</span> <span class="k">then</span> <span class="n">a</span> <span class="k">else</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">6</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">decidable</span><span class="bp">.</span><span class="n">cases_on</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">decidable_lt</span> <span class="n">a</span> <span class="mi">5</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hnc</span><span class="o">,</span> <span class="n">dec_trivial</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">λ</span> <span class="n">hc</span><span class="o">,</span> <span class="k">show</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="mi">6</span><span class="o">,</span> <span class="k">from</span> <span class="n">lt</span><span class="bp">.</span><span class="n">step</span> <span class="n">hc</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 
