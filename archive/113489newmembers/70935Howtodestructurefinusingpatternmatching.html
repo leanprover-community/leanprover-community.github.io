@@ -40,6 +40,59 @@ permalink: archive/113489newmembers/70935Howtodestructurefinusingpatternmatching
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178470401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178470401">Tim Baanen (Oct 18 2019 at 12:54)</a>:</h4>
 <p>There is <code>do</code> notation, described here: <a href="https://leanprover.github.io/programming_in_lean/#07_Monads.html" target="_blank" title="https://leanprover.github.io/programming_in_lean/#07_Monads.html">https://leanprover.github.io/programming_in_lean/#07_Monads.html</a></p>
 
+<a name="178471000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178471000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178471000">Tim Baanen (Oct 18 2019 at 13:01)</a>:</h4>
+<p>Pointy brackets <code>⟨_, _, _, ...⟩</code> work for con-/destructing any structure:</p>
+<div class="codehilite"><pre><span></span>def nat.foldl.fin {α : Type} (n&#39; : nat) : ∀ (n : fin n&#39;) (s : α) (f : fin n&#39; → α → α), α
+| ⟨0, _⟩ s f := s
+| ⟨n+1, lt⟩ s f := let n&#39; : fin n&#39; := ⟨n, sorry⟩ in f n&#39; (nat.foldl.fin n&#39; s f)
+</pre></div>
+
+<a name="178472642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178472642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178472642">Marko Grdinić (Oct 18 2019 at 13:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">foldl</span><span class="bp">.</span><span class="n">fin</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">n&#39;</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n&#39;</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">),</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">⟩</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">n&#39;</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n&#39;</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">buffer</span><span class="bp">.</span><span class="n">lt_aux_1</span> <span class="n">lt</span> <span class="bp">⟩</span> <span class="k">in</span> <span class="n">f</span> <span class="n">n&#39;</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">foldl</span><span class="bp">.</span><span class="n">fin</span> <span class="n">n&#39;</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I've filled in that <code>sorry</code>. Interesting that when I write it like...</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">nat</span><span class="bp">.</span><span class="n">foldl</span><span class="bp">.</span><span class="n">fin</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">n&#39;</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n&#39;</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">),</span> <span class="n">α</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="mi">0</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">,</span> <span class="n">lt</span><span class="bp">⟩</span> <span class="n">s</span> <span class="n">f</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">n&#39;</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n&#39;</span><span class="o">,</span> <span class="k">from</span> <span class="bp">⟨</span><span class="n">n</span><span class="o">,</span> <span class="n">buffer</span><span class="bp">.</span><span class="n">lt_aux_1</span> <span class="n">lt</span> <span class="bp">⟩</span><span class="o">,</span> <span class="n">f</span> <span class="n">n&#39;</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">foldl</span><span class="bp">.</span><span class="n">fin</span> <span class="n">n&#39;</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+
+<p>It runs into issues with termination checking. Why is that?</p>
+
+<a name="178472968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178472968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178472968">Johan Commelin (Oct 18 2019 at 13:22)</a>:</h4>
+<p>I guess the trouble is that <code>fin</code> is not an inductive type... but maybe there are ways to deal with that.</p>
+
+<a name="178473154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178473154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178473154">Rob Lewis (Oct 18 2019 at 13:24)</a>:</h4>
+<p>No, the problem is that using <code>have</code> hides the definitional content of <code>n'</code>. If you do that, <code>n'</code> is just an arbitrary term of type <code>fin n'</code>, and Lean can't confirm that it's structurally smaller than <code>&lt;n+1, lt&gt;</code>.</p>
+
+<a name="178473197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178473197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178473197">Rob Lewis (Oct 18 2019 at 13:25)</a>:</h4>
+<p>(Careful with duplicating the variable name <code>n'</code>, by the way!)</p>
+
+<a name="178473342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178473342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178473342">Rob Lewis (Oct 18 2019 at 13:26)</a>:</h4>
+<p>In general, you should use <code>have</code> for propositions and <code>let</code> for data.</p>
+
+<a name="178474186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178474186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178474186">Marko Grdinić (Oct 18 2019 at 13:36)</a>:</h4>
+<p>I see.</p>
+<blockquote>
+<p>(Careful with duplicating the variable name n', by the way!)</p>
+</blockquote>
+<p>That reminds me, is Lean lazy like Haskell or strict like Idris? I remember running into unexpected issues when doing variable shadowing in Haskell.</p>
+
+<a name="178474969"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20destructure%20%60fin%60%20using%20pattern%20matching%3F/near/178474969" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/70935Howtodestructurefinusingpatternmatching.html#178474969">Reid Barton (Oct 18 2019 at 13:46)</a>:</h4>
+<p>It's strict, and <code>let</code> is nonrecursive.</p>
+
 
 {% endraw %}
 

@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to destructure `fin` using pattern matching?](70935Howtodestructurefinusingpatternmatching.html) (3 messages, latest: Oct 18 2019 at 12:54)
+* [How to destructure `fin` using pattern matching?](70935Howtodestructurefinusingpatternmatching.html) (11 messages, latest: Oct 18 2019 at 13:46)
 
-* [Dependent induction?](08452Dependentinduction.html) (2 messages, latest: Oct 18 2019 at 12:45)
+* [Dependent induction?](08452Dependentinduction.html) (23 messages, latest: Oct 18 2019 at 13:43)
 
 * [Lean for Cryptography](19828LeanforCryptography.html) (6 messages, latest: Oct 18 2019 at 12:28)
 

@@ -48,6 +48,185 @@ I am trying to formalize a few things in graph theory, and for that I am introdu
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178469658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178469658">Tim Baanen (Oct 18 2019 at 12:45)</a>:</h4>
 <p>Hi! I'm guessing that you're doing induction by pattern-matching on the arguments (as in the tutorial here: <a href="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching">https://leanprover.github.io/theorem_proving_in_lean/induction_and_recursion.html#pattern-matching</a>). When definining <code>concat</code>, <code>x</code> is fixed (because it's on the left of the colon), but it varies in the recursive call. So you can put it on the right with a Π-type.</p>
 
+<a name="178471555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178471555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178471555">Vincent Beffara (Oct 18 2019 at 13:07)</a>:</h4>
+<blockquote>
+<p>Hi! I'm guessing that you're doing induction by pattern-matching on the arguments</p>
+</blockquote>
+<p>I am doing it like this, which might be completely misguided:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">concat</span> <span class="o">{</span><span class="n">V</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">}</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="n">V</span> <span class="n">x</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">rcases</span> <span class="n">p1</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">l1</span><span class="o">,</span><span class="n">hx</span><span class="o">,</span><span class="n">hy</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">induction</span> <span class="n">l1</span> <span class="k">with</span> <span class="n">v</span> <span class="n">v</span> <span class="n">l</span> <span class="n">hr</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simp</span> <span class="n">at</span> <span class="n">hx</span> <span class="n">hy</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="bp">&lt;-</span><span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="o">],</span> <span class="n">exact</span> <span class="n">p2</span> <span class="o">},</span>
+    <span class="c1">-- Now the state contains these, which are useless:</span>
+    <span class="c1">-- hr : first l = x -&gt; last l = y -&gt; path x z</span>
+    <span class="c1">-- hx : first (L v l) = x</span>
+    <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178471867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178471867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178471867">Kenny Lau (Oct 18 2019 at 13:11)</a>:</h4>
+<p>don't use tactics for <code>def</code>s unless you know what you're doing</p>
+
+<a name="178472063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472063">Johan Commelin (Oct 18 2019 at 13:13)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> Kenny's warning is for the following reason: tactics usually leave artifacts that are very annoying to handle later on.</p>
+
+<a name="178472115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472115">Johan Commelin (Oct 18 2019 at 13:14)</a>:</h4>
+<p>For proofs this doesn't matter, because of proof irrelevance</p>
+
+<a name="178472142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472142">Johan Commelin (Oct 18 2019 at 13:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> It might be helpful to show beginners how to actually do it right, instead of only telling them what not to do.</p>
+
+<a name="178472382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472382">Kenny Lau (Oct 18 2019 at 13:17)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> I am</p>
+
+<a name="178472729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472729">Vincent Beffara (Oct 18 2019 at 13:20)</a>:</h4>
+<p>Yes an example would be very helpful, I tried to do it with pattern matching but wasn't able to get anywhere. Using tactics like this does feel wrong but it's the only way I managed to get a working definition :-(</p>
+
+<a name="178472821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472821">Vincent Beffara (Oct 18 2019 at 13:21)</a>:</h4>
+<p>(I do get huge lambda terms when using <code>simp</code> later, is that what you mean by "very annoying"? because it is ...)</p>
+
+<a name="178472863"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472863" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472863">Johan Commelin (Oct 18 2019 at 13:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> I think Tim suggests that you try something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">concat</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">V</span><span class="o">},</span> <span class="o">(</span><span class="n">path</span> <span class="n">V</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">path</span> <span class="n">V</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="bp">→</span> <span class="n">path</span> <span class="n">V</span> <span class="n">x</span> <span class="n">z</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="n">p1</span> <span class="n">p2</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="178472886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178472886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178472886">Johan Commelin (Oct 18 2019 at 13:22)</a>:</h4>
+<p>But then... I'm not an expert pattern matcher</p>
+
+<a name="178473243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178473243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178473243">Johan Commelin (Oct 18 2019 at 13:25)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> Slightly unrelated. Graph theory seems to be a tricky subject as a first project in Lean. You might get stuck and disappointed rather quickly. Nevertheless I would love to see more graph theory. Hence I suggest you write a bit more about what your goals are. People might be able to suggest a mathematically equivalent approach that makes lots of troubles vanish right away.</p>
+
+<a name="178473348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178473348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178473348">Johan Commelin (Oct 18 2019 at 13:26)</a>:</h4>
+<p>It's something that took me a bit of time to adjust to. Two definitions can be mathematically equal/the same/indistinguishable. But they can behave quite differently in Lean...</p>
+
+<a name="178473793"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178473793" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178473793">Kenny Lau (Oct 18 2019 at 13:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">theorem</span> <span class="n">list</span><span class="bp">.</span><span class="n">last_append&#39;</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="o">{</span><span class="n">L₁</span> <span class="n">L₂</span> <span class="o">:</span> <span class="n">list</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h₁</span> <span class="n">h₂</span><span class="o">),</span> <span class="o">(</span><span class="n">L₁</span> <span class="bp">++</span> <span class="n">L₂</span><span class="o">)</span><span class="bp">.</span><span class="n">last</span> <span class="n">h₁</span> <span class="bp">=</span> <span class="n">L₂</span><span class="bp">.</span><span class="n">last</span> <span class="n">h₂</span>
+<span class="bp">|</span> <span class="o">[]</span>     <span class="n">L₂</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">::</span><span class="n">t</span><span class="o">)</span> <span class="n">L₂</span> <span class="n">h₁</span> <span class="n">h₂</span> <span class="o">:=</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">last_cons</span> <span class="bp">_</span> <span class="err">$</span> <span class="n">list</span><span class="bp">.</span><span class="n">append_ne_nil_of_ne_nil_right</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h₂</span><span class="o">)</span><span class="bp">.</span><span class="n">trans</span> <span class="err">$</span>
+    <span class="n">list</span><span class="bp">.</span><span class="n">last_append&#39;</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="n">def</span> <span class="n">llist</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">α</span> <span class="bp">×</span> <span class="n">list</span> <span class="n">α</span>
+
+<span class="kn">namespace</span> <span class="n">llist</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">L</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">α</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">first</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">L</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="n">def</span> <span class="n">last</span> <span class="o">:</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="n">list</span><span class="bp">.</span><span class="n">last</span> <span class="o">(</span><span class="n">L</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">::</span> <span class="n">L</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">end</span> <span class="n">llist</span>
+
+<span class="n">def</span> <span class="n">path</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">L</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">L</span><span class="bp">.</span><span class="n">first</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">L</span><span class="bp">.</span><span class="n">last</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">concat</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">path</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">path</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="n">x</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">(</span><span class="n">p1</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">p1</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">++</span> <span class="n">p2</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">::</span> <span class="n">p2</span><span class="bp">.</span><span class="mi">1</span><span class="bp">.</span><span class="mi">2</span><span class="o">),</span> <span class="n">p1</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">unfold</span> <span class="n">llist</span><span class="bp">.</span><span class="n">last</span><span class="o">,</span> <span class="n">dsimp</span> <span class="n">only</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">list</span><span class="bp">.</span><span class="n">last_cons</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">last_append&#39;</span><span class="o">],</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">p2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">exact</span> <span class="n">list</span><span class="bp">.</span><span class="n">append_ne_nil_of_ne_nil_right</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">cons_ne_nil</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">}</span>
+<span class="kn">end</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="178473948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178473948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178473948">Tim Baanen (Oct 18 2019 at 13:33)</a>:</h4>
+<p>Here is a pattern-matching based implementation, but unfortunately Lean doesn't recognize that it terminates:</p>
+<div class="codehilite"><pre><span></span>def concat {V y z} : Π {x} (p1 : path V x y) (p2 : path V y z), path V x z
+| x ⟨P x&#39;, ⟨rfl, rfl⟩⟩ p2 := p2
+| x ⟨L x&#39; y&#39;, ⟨hx, hy⟩⟩ p2 :=
+  let ⟨p1&#39; , ⟨_, hy&#39;⟩⟩ := concat ⟨y&#39;, ⟨rfl, hy⟩⟩ p2
+  in ⟨L x&#39; p1&#39; , ⟨hx, hy&#39;⟩⟩
+</pre></div>
+
+
+<p>(I come from an Agda background, so to me this "should just work" and I can't quickly figure out why not :P)</p>
+
+<a name="178474111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474111">Kenny Lau (Oct 18 2019 at 13:35)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="178474266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474266">Vincent Beffara (Oct 18 2019 at 13:37)</a>:</h4>
+<blockquote>
+<p>what are <code>P</code> and <code>L</code>?</p>
+</blockquote>
+<p><code>P</code> and <code>L</code> are the constructors of my non-empty-list type (<code>P</code> for point and <code>L</code> for link in my head)</p>
+
+<a name="178474636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474636">Vincent Beffara (Oct 18 2019 at 13:42)</a>:</h4>
+<p>I tried a few approaches for the non-empty-list type:</p>
+<ul>
+<li>the explicit inductive type</li>
+<li><code>{ l list V // l \neq [] }</code></li>
+<li><code>V \times list V</code><br>
+and also for the concatenation, I thought a bit about just concatenating without looking for compatibility, just dropping a vertex and trusting that it will never be used outside the compatible case, kind of like setting <code>1/0=0</code>, but then all the lemmas that I want to have, like <code>last (concat l1 l2) = last l2</code>, become conditional ...</li>
+</ul>
+
+<a name="178474655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474655">Kenny Lau (Oct 18 2019 at 13:42)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span>
+
+<span class="kn">inductive</span> <span class="n">llist</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">|</span> <span class="n">P</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">-&gt;</span> <span class="n">llist</span> <span class="bp">|</span> <span class="n">L</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">-&gt;</span> <span class="n">llist</span> <span class="bp">-&gt;</span> <span class="n">llist</span>
+
+<span class="kn">namespace</span> <span class="n">llist</span>
+
+<span class="n">def</span> <span class="n">first</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">α</span> <span class="bp">-&gt;</span> <span class="n">α</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span> <span class="bp">|</span> <span class="o">(</span><span class="n">L</span> <span class="n">v</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span>
+<span class="n">def</span> <span class="n">last</span>  <span class="o">:</span> <span class="n">llist</span> <span class="n">α</span> <span class="bp">-&gt;</span> <span class="n">α</span> <span class="bp">|</span> <span class="o">(</span><span class="n">P</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span> <span class="n">v</span> <span class="bp">|</span> <span class="o">(</span><span class="n">L</span> <span class="n">v</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">last</span> <span class="n">l</span>
+
+<span class="n">def</span> <span class="n">path</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">l</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">α</span> <span class="bp">//</span> <span class="n">first</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">last</span> <span class="n">l</span> <span class="bp">=</span> <span class="n">y</span> <span class="o">}</span>
+
+<span class="n">def</span> <span class="n">concat_aux</span> <span class="o">{</span><span class="n">y</span> <span class="n">z</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">x</span><span class="o">}</span> <span class="o">(</span><span class="n">p11</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">first</span> <span class="n">p11</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">∧</span> <span class="n">last</span> <span class="n">p11</span> <span class="bp">=</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">path</span> <span class="n">y</span> <span class="n">z</span><span class="o">),</span> <span class="n">path</span> <span class="n">x</span> <span class="n">z</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">(</span><span class="n">P</span> <span class="n">x&#39;</span><span class="o">)</span> <span class="bp">⟨</span><span class="n">rfl</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span> <span class="n">p2</span> <span class="o">:=</span> <span class="n">p2</span>
+<span class="bp">|</span> <span class="n">x</span> <span class="o">(</span><span class="n">L</span> <span class="n">x&#39;</span> <span class="n">y&#39;</span><span class="o">)</span> <span class="bp">⟨</span><span class="n">hx</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="n">p2</span> <span class="o">:=</span>
+  <span class="k">let</span> <span class="bp">⟨</span><span class="n">p1&#39;</span> <span class="o">,</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">hy&#39;</span><span class="bp">⟩⟩</span> <span class="o">:=</span> <span class="n">concat_aux</span> <span class="n">y&#39;</span> <span class="bp">⟨</span><span class="n">rfl</span><span class="o">,</span> <span class="n">hy</span><span class="bp">⟩</span> <span class="n">p2</span>
+  <span class="k">in</span> <span class="bp">⟨</span><span class="n">L</span> <span class="n">x&#39;</span> <span class="n">p1&#39;</span> <span class="o">,</span> <span class="bp">⟨</span><span class="n">hx</span><span class="o">,</span> <span class="n">hy&#39;</span><span class="bp">⟩⟩</span>
+
+<span class="n">def</span> <span class="n">concat</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">p1</span> <span class="o">:</span> <span class="n">path</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">(</span><span class="n">p2</span> <span class="o">:</span> <span class="n">path</span> <span class="n">y</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">path</span> <span class="n">x</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="n">concat_aux</span> <span class="n">p1</span><span class="bp">.</span><span class="mi">1</span> <span class="n">p1</span><span class="bp">.</span><span class="mi">2</span> <span class="n">p2</span>
+
+<span class="kn">end</span> <span class="n">llist</span>
+</pre></div>
+
+<a name="178474663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474663">Kenny Lau (Oct 18 2019 at 13:42)</a>:</h4>
+<p><span class="user-mention" data-user-id="238446">@Tim Baanen</span> you need an auxiliary def</p>
+
+<a name="178474673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474673">Kenny Lau (Oct 18 2019 at 13:42)</a>:</h4>
+<p>for recursing in a subtype</p>
+
+<a name="178474701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dependent%20induction%3F/near/178474701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08452Dependentinduction.html#178474701">Kenny Lau (Oct 18 2019 at 13:43)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> my approach above is <code>\a \times list \a</code></p>
+
 
 {% endraw %}
 
