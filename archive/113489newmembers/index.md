@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Conv in a calc](82754Convinacalc.html) (7 messages, latest: Oct 18 2019 at 00:39)
+* [Conv in a calc](82754Convinacalc.html) (8 messages, latest: Oct 18 2019 at 07:51)
 
-* [Representation Theory](30735RepresentationTheory.html) (21 messages, latest: Oct 17 2019 at 19:59)
+* [Representation Theory](30735RepresentationTheory.html) (22 messages, latest: Oct 18 2019 at 07:50)
 
 * [How to write out variable declarations involving typeclasses](26656Howtowriteoutvariabledeclarationsinvolvingtypeclasses.html) (5 messages, latest: Oct 17 2019 at 19:00)
 
