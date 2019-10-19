@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Dependent induction?](08452Dependentinduction.html) (27 messages, latest: Oct 19 2019 at 22:58)
+
 * [noob question(s)](52075noobquestions.html) (1387 messages, latest: Oct 19 2019 at 21:00)
 
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (32 messages, latest: Oct 19 2019 at 17:36)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [Lean for Cryptography](19828LeanforCryptography.html) (13 messages, latest: Oct 18 2019 at 21:32)
 
 * [Conv in a calc](82754Convinacalc.html) (10 messages, latest: Oct 18 2019 at 17:45)
-
-* [Dependent induction?](08452Dependentinduction.html) (26 messages, latest: Oct 18 2019 at 14:59)
 
 * [How to destructure `fin` using pattern matching?](70935Howtodestructurefinusingpatternmatching.html) (12 messages, latest: Oct 18 2019 at 14:42)
 
