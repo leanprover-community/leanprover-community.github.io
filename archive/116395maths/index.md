@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [constructive polynomials](53889constructivepolynomials.html) (21 messages, latest: Oct 19 2019 at 14:28)
+* [constructive polynomials](53889constructivepolynomials.html) (22 messages, latest: Oct 19 2019 at 15:41)
 
 * [physics](86660physics.html) (4 messages, latest: Oct 19 2019 at 03:41)
 

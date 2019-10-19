@@ -7850,6 +7850,42 @@ this : 2 ∣ b ^ 2 - a ^ 2
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178548989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178548989">Yury G. Kudryashov (Oct 19 2019 at 14:36)</a>:</h4>
 <p>Do we have something like <code>fintype {m : ℤ | a ≤ m /\ m &lt; b}</code>?</p>
 
+<a name="178551312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178551312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178551312">Kevin Buzzard (Oct 19 2019 at 15:42)</a>:</h4>
+<p>There was a thread about this only recently</p>
+
+<a name="178551324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178551324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178551324">Kevin Buzzard (Oct 19 2019 at 15:43)</a>:</h4>
+<p>I mean the fintype</p>
+
+<a name="178551619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178551619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178551619">Kevin Buzzard (Oct 19 2019 at 15:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">≤</span> <span class="n">x</span> <span class="bp">→</span> <span class="n">x</span> <span class="bp">≤</span> <span class="mi">1</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="o">({</span><span class="mi">0</span><span class="o">,</span> <span class="mi">1</span><span class="o">}</span> <span class="o">:</span> <span class="n">set</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span> <span class="n">h0</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">le_iff_lt_or_eq</span> <span class="n">at</span> <span class="n">h0</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h0</span><span class="o">,</span> <span class="n">swap</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">h0</span><span class="o">,</span> <span class="n">right</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">lt_iff_add_one_le</span><span class="o">,</span> <span class="n">zero_add</span><span class="o">,</span> <span class="n">le_iff_lt_or_eq</span><span class="o">]</span> <span class="n">at</span> <span class="n">h0</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">h0</span><span class="o">,</span>
+    <span class="n">exfalso</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">lt_iff_not_ge</span> <span class="n">at</span> <span class="n">h0</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">h0</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h1</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span> <span class="n">exact</span> <span class="n">h0</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178551711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178551711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178551711">Kevin Buzzard (Oct 19 2019 at 15:52)</a>:</h4>
+<p><a href="#narrow/stream/116395-maths/topic/Some.20numerology" title="#narrow/stream/116395-maths/topic/Some.20numerology">https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Some.20numerology</a> That's more than you need for the fintype. As you can see, I partially PR'ed it (some nat lemmas) and then teaching started at my university and I never finished the job. Feel absolutely free to PR that stuff! I'm still snowed under until November.</p>
+
+<a name="178551726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178551726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178551726">Yury G. Kudryashov (Oct 19 2019 at 15:53)</a>:</h4>
+<p>Thank you for the link. I'll possibly PR it next week.</p>
+
 
 {% endraw %}
 
