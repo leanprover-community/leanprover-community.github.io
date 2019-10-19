@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [constructive polynomials](53889constructivepolynomials.html) (22 messages, latest: Oct 19 2019 at 15:41)
+* [physics](86660physics.html) (5 messages, latest: Oct 19 2019 at 16:48)
 
-* [physics](86660physics.html) (4 messages, latest: Oct 19 2019 at 03:41)
+* [constructive polynomials](53889constructivepolynomials.html) (25 messages, latest: Oct 19 2019 at 16:40)
 
 * [Stretch goal](98945Stretchgoal.html) (4 messages, latest: Oct 18 2019 at 20:27)
 

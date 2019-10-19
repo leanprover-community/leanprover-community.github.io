@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (31 messages, latest: Oct 19 2019 at 16:18)
+
 * [noob question(s)](52075noobquestions.html) (1386 messages, latest: Oct 19 2019 at 15:53)
 
 * [example : ((p ∨ q) → r) → (p → r) ∧ (q → r)](44782examplepqrprqr.html) (3 messages, latest: Oct 19 2019 at 15:04)
-
-* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (28 messages, latest: Oct 19 2019 at 09:12)
 
 * [format_lean woes](35495formatleanwoes.html) (24 messages, latest: Oct 19 2019 at 03:48)
 
