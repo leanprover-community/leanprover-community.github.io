@@ -211,6 +211,33 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536798">Mario Carneiro (Oct 19 2019 at 08:58)</a>:</h4>
 <p>the first one is confusing because the bound variable <code>α</code> shadows the <code>α</code> earlier in the definition</p>
 
+<a name="178536874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536874">Mario Carneiro (Oct 19 2019 at 09:00)</a>:</h4>
+<p>The auto_param thing is supposed to be there. A <code>(x : foo . tac)</code> binder is elaborated to <code>(x : auto_param foo `tac)</code>. If you look at the definition, you will see that <code>auto_param α tac := α</code>, so this doesn't affect type correctness of anything. It just acts as a marker for the elaborator so it can remember what tactic you wanted to call in case the value is not provided</p>
+
+<a name="178536904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536904">Mario Carneiro (Oct 19 2019 at 09:01)</a>:</h4>
+<p>A similar thing happens with <code>opt_param</code>, if you write <code>(x : foo := val)</code></p>
+
+<a name="178537288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178537288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178537288">Marko Grdinić (Oct 19 2019 at 09:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mem</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">rbnode</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">leaf</span>               <span class="o">:=</span> <span class="n">false</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">red_node</span> <span class="n">l</span> <span class="n">v</span> <span class="n">r</span><span class="o">)</span>   <span class="o">:=</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">lt</span> <span class="n">a</span> <span class="n">v</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">r</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">black_node</span> <span class="n">l</span> <span class="n">v</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">∨</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">lt</span> <span class="n">a</span> <span class="n">v</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>Would it be worth it to change the above implementation of <code>mem</code> to the following one?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">mem</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">rbnode</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="n">leaf</span>               <span class="o">:=</span> <span class="n">false</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">red_node</span> <span class="n">l</span> <span class="n">v</span> <span class="n">r</span><span class="o">)</span>   <span class="o">:=</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">lt</span> <span class="n">a</span> <span class="n">v</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">∨</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">r</span>
+<span class="bp">|</span> <span class="n">a</span> <span class="o">(</span><span class="n">black_node</span> <span class="n">l</span> <span class="n">v</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">¬</span> <span class="n">lt</span> <span class="n">a</span> <span class="n">v</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">lt</span> <span class="n">v</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∨</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">l</span> <span class="bp">∨</span> <span class="n">mem</span> <span class="n">a</span> <span class="n">r</span>
+</pre></div>
+
+
+<p>I am surprised it has not been done like this originally. Rather than traversing the left side of the tree first, it would be better to check immediately whether the element is a match and shortcut the search if it is.</p>
+
 
 {% endraw %}
 
