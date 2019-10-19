@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [example : ((p ∨ q) → r) → (p → r) ∧ (q → r)](44782examplepqrprqr.html) (2 messages, latest: Oct 19 2019 at 14:44)
+
+* [noob question(s)](52075noobquestions.html) (1381 messages, latest: Oct 19 2019 at 14:36)
+
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (28 messages, latest: Oct 19 2019 at 09:12)
 
 * [format_lean woes](35495formatleanwoes.html) (24 messages, latest: Oct 19 2019 at 03:48)
 
 * [Lean for Cryptography](19828LeanforCryptography.html) (13 messages, latest: Oct 18 2019 at 21:32)
-
-* [noob question(s)](52075noobquestions.html) (1379 messages, latest: Oct 18 2019 at 21:00)
 
 * [Conv in a calc](82754Convinacalc.html) (10 messages, latest: Oct 18 2019 at 17:45)
 
