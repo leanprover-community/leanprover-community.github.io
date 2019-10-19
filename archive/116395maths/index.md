@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [physics](86660physics.html) (4 messages, latest: Oct 19 2019 at 03:41)
+
 * [Stretch goal](98945Stretchgoal.html) (4 messages, latest: Oct 18 2019 at 20:27)
 
 * [constructive polynomials](53889constructivepolynomials.html) (18 messages, latest: Oct 18 2019 at 05:11)
 
 * [Math education question (teaching textbook proofs in Lean)](07699MatheducationquestionteachingtextbookproofsinLean.html) (146 messages, latest: Oct 17 2019 at 22:10)
-
-* [physics](86660physics.html) (3 messages, latest: Oct 17 2019 at 19:09)
 
 * [Uniqueness of the reals](17534Uniquenessofthereals.html) (9 messages, latest: Oct 16 2019 at 08:55)
 

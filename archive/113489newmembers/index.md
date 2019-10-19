@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [format_lean woes](35495formatleanwoes.html) (24 messages, latest: Oct 19 2019 at 03:48)
+
 * [Lean for Cryptography](19828LeanforCryptography.html) (13 messages, latest: Oct 18 2019 at 21:32)
 
 * [noob question(s)](52075noobquestions.html) (1379 messages, latest: Oct 18 2019 at 21:00)
@@ -50,8 +52,6 @@ permalink: archive/113489newmembers/index.html
 * [1/0=0](83326100.html) (30 messages, latest: Oct 13 2019 at 11:33)
 
 * [complex.I is algebraic !](35943complexIisalgebraic.html) (12 messages, latest: Oct 13 2019 at 08:51)
-
-* [format_lean woes](35495formatleanwoes.html) (22 messages, latest: Oct 12 2019 at 21:21)
 
 * [0 < 1 + 1](91642011.html) (34 messages, latest: Oct 12 2019 at 19:51)
 
