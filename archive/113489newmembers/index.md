@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (31 messages, latest: Oct 19 2019 at 16:18)
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (32 messages, latest: Oct 19 2019 at 17:36)
 
 * [noob question(s)](52075noobquestions.html) (1386 messages, latest: Oct 19 2019 at 15:53)
 
