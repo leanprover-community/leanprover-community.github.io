@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (25 messages, latest: Oct 19 2019 at 08:58)
+
 * [format_lean woes](35495formatleanwoes.html) (24 messages, latest: Oct 19 2019 at 03:48)
 
 * [Lean for Cryptography](19828LeanforCryptography.html) (13 messages, latest: Oct 18 2019 at 21:32)

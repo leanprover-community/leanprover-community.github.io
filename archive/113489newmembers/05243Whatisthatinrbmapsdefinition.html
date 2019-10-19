@@ -1,0 +1,217 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html">What is that `.` in `rbmap`'s definition?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178534982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178534982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178534982">Marko Grdinić (Oct 19 2019 at 08:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rbmap</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">.</span> <span class="n">rbtree</span><span class="bp">.</span><span class="n">default_lt</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">rbtree</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">rbmap_lt</span> <span class="n">lt</span><span class="o">)</span>
+</pre></div>
+
+
+<p>I am wondering what <code>Prop . rbtree.default_lt</code> is supposed to be. The <code>.</code> operator here does not seem to be a function so it is probably some kind of built in, but I am not sure what it does.</p>
+<p>It is too bad that <code>β</code> here is not dependent on <code>α</code>. I have a use case where that would be useful and am going to try to redesign the <code>rbmap</code>. It is good there is not much there.</p>
+
+<a name="178535184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535184">Kenny Lau (Oct 19 2019 at 08:08)</a>:</h4>
+<p>it's <code>\a \to \a \to Prop</code> defaulting to <code>rbtree.default_lt</code></p>
+
+<a name="178535481"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535481" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535481">Marko Grdinić (Oct 19 2019 at 08:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> </p>
+<p>I see. Does it get printed like <code>lt : auto_param (α → α → Prop) (name.mk_string "default_lt" (name.mk_string "rbtree" name.anonymous))</code> for you? </p>
+<p>Also...</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rbmap_lt</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="kn">set_option</span> <span class="n">auto_param</span><span class="bp">.</span><span class="n">check_exists</span> <span class="n">false</span>
+
+<span class="n">def</span> <span class="n">rbmap</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">.</span> <span class="n">rbtree</span><span class="bp">.</span><span class="n">default_lt</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">rbtree</span> <span class="o">(</span><span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">rbmap_lt</span> <span class="n">lt</span><span class="o">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>type mismatch at application
+  lt (a.fst)
+term
+  a.fst
+has type
+  Type u : Type (u+1)
+but is expected to have type
+  α : Type u
+</pre></div>
+
+
+<p>I am getting some type errors in both functions when trying to make a dependent map that I am not sure how to deal with. What is wrong here?</p>
+
+<a name="178535651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535651">Marko Grdinić (Oct 19 2019 at 08:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rbmap_lt</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="kn">set_option</span> <span class="n">auto_param</span><span class="bp">.</span><span class="n">check_exists</span> <span class="n">false</span>
+
+<span class="n">def</span> <span class="n">rbmap</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">.</span> <span class="n">rbtree</span><span class="bp">.</span><span class="n">default_lt</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">rbtree</span> <span class="o">(</span><span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">rbmap_lt</span> <span class="n">lt</span><span class="o">)</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>type mismatch at application
+  rbmap_lt lt
+term
+  lt
+has type
+  auto_param (α → α → Prop) (name.mk_string &quot;default_lt&quot; (name.mk_string &quot;rbtree&quot; name.anonymous)) : Type u
+but is expected to have type
+  ?m_1 → ?m_1 → Prop : Type
+</pre></div>
+
+
+<p>I've managed to figure out the first part. Now what is this?</p>
+
+<a name="178535728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535728">Mario Carneiro (Oct 19 2019 at 08:26)</a>:</h4>
+<p>Notice that the type is <code>Type</code> instead of <code>Type u</code></p>
+
+<a name="178535737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535737">Mario Carneiro (Oct 19 2019 at 08:27)</a>:</h4>
+<p>the auto_param thing is not the problem</p>
+
+<a name="178535780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535780">Mario Carneiro (Oct 19 2019 at 08:28)</a>:</h4>
+<p>When you defined <code>rbmap_lt</code>, you used <code>Type</code> for the type of alpha and beta (i.e. non universe polymorphic), but then you apply it in <code>rbmap</code> where alpha and beta now live in arbitrary universes</p>
+
+<a name="178535933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535933">Marko Grdinić (Oct 19 2019 at 08:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rbmap_lt</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="kn">set_option</span> <span class="n">auto_param</span><span class="bp">.</span><span class="n">check_exists</span> <span class="n">false</span>
+
+<span class="n">def</span> <span class="n">rbmap</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">.</span> <span class="n">rbtree</span><span class="bp">.</span><span class="n">default_lt</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">rbtree</span> <span class="o">(</span><span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">rbmap_lt</span> <span class="n">lt</span><span class="o">)</span>
+</pre></div>
+
+
+<p>So like this then. If I omit the universe levels in the type will it get inferred like so or will it be non-universe polymorphic? I can't check this easily because <code>#check</code> seems to fail with an error when I pass it this function.</p>
+
+<a name="178535976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178535976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178535976">Marko Grdinić (Oct 19 2019 at 08:34)</a>:</h4>
+<p>The error is <code>invalid auto_param, unknown tactic 'rbtree.default_lt'</code>.</p>
+
+<a name="178536028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536028">Scott Morrison (Oct 19 2019 at 08:36)</a>:</h4>
+<p>Yeah, I was running into the same problem: <code>rbtree.default_lt</code> doesn't seem to actually exist...</p>
+
+<a name="178536038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536038">Mario Carneiro (Oct 19 2019 at 08:36)</a>:</h4>
+<p>it's in <code>init.data.rbtree.default</code></p>
+
+<a name="178536050"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536050" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536050">Mario Carneiro (Oct 19 2019 at 08:37)</a>:</h4>
+<p>this checks for me:</p>
+<div class="codehilite"><pre><span></span><span class="n">prelude</span>
+<span class="kn">import</span> <span class="n">init</span><span class="bp">.</span><span class="n">data</span><span class="bp">.</span><span class="n">rbtree</span><span class="bp">.</span><span class="n">basic</span>
+<span class="n">universes</span> <span class="n">u</span> <span class="n">v</span>
+
+<span class="n">def</span> <span class="n">rbmap_lt</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span>
+
+<span class="kn">set_option</span> <span class="n">auto_param</span><span class="bp">.</span><span class="n">check_exists</span> <span class="n">false</span>
+
+<span class="n">def</span> <span class="n">rbmap</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">(</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span> <span class="bp">.</span> <span class="n">rbtree</span><span class="bp">.</span><span class="n">default_lt</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">u</span> <span class="n">v</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">rbtree</span> <span class="o">(</span><span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">rbmap_lt</span> <span class="n">lt</span><span class="o">)</span>
+</pre></div>
+
+<a name="178536105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536105">Mario Carneiro (Oct 19 2019 at 08:38)</a>:</h4>
+<p>If I don't use <code>prelude</code> then I get a duplicate definition error because this is all defined in <code>init</code></p>
+
+<a name="178536183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536183">Mario Carneiro (Oct 19 2019 at 08:41)</a>:</h4>
+<blockquote>
+<p>So like this then. If I omit the universe levels in the type will it get inferred like so or will it be non-universe polymorphic?</p>
+</blockquote>
+<p>If you want to omit the universe level but keep it polymorphic, use <code>Type*</code> (or <code>Type _</code> which is equivalent). The core library deliberately uses universe variables everywhere, but in mathlib the preference is for <code>Type*</code> unless universe inference fails</p>
+
+<a name="178536227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536227">Marko Grdinić (Oct 19 2019 at 08:42)</a>:</h4>
+<blockquote>
+<p>If I don't use prelude then I get a duplicate definition error because this is all defined in init</p>
+</blockquote>
+<p>Actually, I am using that as well as I just copy pasted the <code>rbmap.basic</code> into my own project. But even if I insert that <code>#check rbmap</code> in the original file, I get the same error.</p>
+
+<a name="178536244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536244">Mario Carneiro (Oct 19 2019 at 08:43)</a>:</h4>
+<p>right, <code>#check rbmap</code> fails if you put it right after my code snippet</p>
+
+<a name="178536291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536291">Mario Carneiro (Oct 19 2019 at 08:44)</a>:</h4>
+<p>If you <code>import init.data.rbtree</code> instead, then it calls the tactic (which fails)</p>
+
+<a name="178536309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536309">Mario Carneiro (Oct 19 2019 at 08:45)</a>:</h4>
+<p>This is only a problem if you use the auto_param feature: that is, you leave implicit the <code>lt</code> argument</p>
+
+<a name="178536312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536312">Mario Carneiro (Oct 19 2019 at 08:45)</a>:</h4>
+<p><code>#check @rbmap</code> works fine</p>
+
+<a name="178536361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536361">Mario Carneiro (Oct 19 2019 at 08:46)</a>:</h4>
+<p>obviously it can't call the tactic if it doesn't exist. Normally it errors when the auto_param is defined, but as you can see from the code snippet this check was explicitly disabled</p>
+
+<a name="178536381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536381">Mario Carneiro (Oct 19 2019 at 08:47)</a>:</h4>
+<p>I'm not exactly sure why the definition was delayed, but I would guess it's because of bootstrapping the tactic framework</p>
+
+<a name="178536546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536546">Marko Grdinić (Oct 19 2019 at 08:51)</a>:</h4>
+<p>Ok, I see. Just a bit more...</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">drbmap_lt</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="err">Σ</span> <span class="n">α</span><span class="o">,</span> <span class="n">β</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span>
+</pre></div>
+
+
+<p>I am a bit confused here. Why is this type definition right?</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">drbmap_lt</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">lt</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="err">Σ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="n">lt</span> <span class="n">a</span><span class="bp">.</span><span class="mi">1</span> <span class="n">b</span><span class="bp">.</span><span class="mi">1</span>
+</pre></div>
+
+
+<p>Shouldn't I have written it like this?</p>
+
+<a name="178536608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536608">Marko Grdinić (Oct 19 2019 at 08:53)</a>:</h4>
+<div class="codehilite"><pre><span></span>drbmap :
+  Π (α : Type u_1),
+    (α → Type u_2) →
+    auto_param (α → α → Prop) (name.mk_string &quot;default_lt&quot; (name.mk_string &quot;rbtree&quot; name.anonymous)) →
+    Type (max u_1 u_2)
+</pre></div>
+
+
+<p>Also were you saying that the printing of the <code>auto_param</code> is not an error?</p>
+
+<a name="178536791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536791">Mario Carneiro (Oct 19 2019 at 08:58)</a>:</h4>
+<p>The only difference between your two definitions is the name of the bound variable</p>
+
+<a name="178536798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/What%20is%20that%20%60.%60%20in%20%60rbmap%60%27s%20definition%3F/near/178536798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/05243Whatisthatinrbmapsdefinition.html#178536798">Mario Carneiro (Oct 19 2019 at 08:58)</a>:</h4>
+<p>the first one is confusing because the bound variable <code>α</code> shadows the <code>α</code> earlier in the definition</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
