@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (51 messages, latest: Oct 20 2019 at 02:00)
+
 * [Dependent induction?](08452Dependentinduction.html) (31 messages, latest: Oct 19 2019 at 23:48)
 
 * [noob question(s)](52075noobquestions.html) (1387 messages, latest: Oct 19 2019 at 21:00)
@@ -348,8 +350,6 @@ permalink: archive/113489newmembers/index.html
 * [Definition of simple functions and its integral](11899Definitionofsimplefunctionsanditsintegral.html) (33 messages, latest: May 13 2019 at 18:39)
 
 * [nat lemmas](73955natlemmas.html) (14 messages, latest: May 13 2019 at 00:26)
-
-* [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (47 messages, latest: May 12 2019 at 23:14)
 
 * [Kind of a vague question](81837Kindofavaguequestion.html) (15 messages, latest: May 10 2019 at 02:48)
 
