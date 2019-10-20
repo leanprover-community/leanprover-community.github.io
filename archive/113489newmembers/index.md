@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Dependent induction?](08452Dependentinduction.html) (27 messages, latest: Oct 19 2019 at 22:58)
+* [Dependent induction?](08452Dependentinduction.html) (31 messages, latest: Oct 19 2019 at 23:48)
 
 * [noob question(s)](52075noobquestions.html) (1387 messages, latest: Oct 19 2019 at 21:00)
 
