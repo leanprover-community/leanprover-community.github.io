@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (33 messages, latest: Oct 20 2019 at 13:57)
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (34 messages, latest: Oct 20 2019 at 14:27)
 
 * [Dependent induction?](08452Dependentinduction.html) (36 messages, latest: Oct 20 2019 at 08:26)
 
