@@ -66,6 +66,61 @@ permalink: archive/113488general/56368instancesandparameters.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178607359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178607359">Kevin Buzzard (Oct 20 2019 at 19:48)</a>:</h4>
 <p>I half-started typing "maybe you could make a wrapper def and make it a class" but then I thought it would probably be so horrible to use in practice that I had better not mention it!</p>
 
+<a name="178609338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609338">Reid Barton (Oct 20 2019 at 20:44)</a>:</h4>
+<p>I learned this week that something much more general is planned for Lean 4: you will be able to invoke tactics from instances using <code>auto_param</code>s, like</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">bar</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span> <span class="bp">.</span> <span class="n">my_tac</span><span class="o">)</span> <span class="o">:</span> <span class="n">my_class</span> <span class="o">(</span><span class="n">Icc</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>I would guess something along the lines of <code>def my_tac := tactic.linarith &lt;|&gt; tactic.assumption</code> would solve most of your goals automatically, and the rest manually, provided you can stuff the proof you need into the environment somehow.</p>
+
+<a name="178609365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609365">Reid Barton (Oct 20 2019 at 20:45)</a>:</h4>
+<p>(I don't think it ever occurred to me to even try this in Lean 3, but I just confirmed that it in fact does not work currently.)</p>
+
+<a name="178609412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609412">Patrick Massot (Oct 20 2019 at 20:46)</a>:</h4>
+<p>Where did you see that in Lean 4?</p>
+
+<a name="178609418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609418">Reid Barton (Oct 20 2019 at 20:46)</a>:</h4>
+<p>I was at MSR for the past week.</p>
+
+<a name="178609446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609446">Patrick Massot (Oct 20 2019 at 20:47)</a>:</h4>
+<p>Did you tell Lean 4 everything you know about IMO problem solving?</p>
+
+<a name="178609488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609488">Reid Barton (Oct 20 2019 at 20:48)</a>:</h4>
+<p>But this is my favorite tidbit. Also consider the possibility of coercing to a bundled morphism, with a tactic which synthesizes the proof of continuity, or whatever.</p>
+
+<a name="178609568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609568">Patrick Massot (Oct 20 2019 at 20:50)</a>:</h4>
+<p>Do they have tests suggesting this won't kill type class search performance?</p>
+
+<a name="178609571"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609571" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609571">Reid Barton (Oct 20 2019 at 20:50)</a>:</h4>
+<blockquote>
+<p>Did you tell Lean 4 everything you know about IMO problem solving?</p>
+</blockquote>
+<p>Well, the reason this feature is only planned so far is that there is no mechanism at all to invoke tactics (<code>begin ... end</code>) yet, so it's a bit premature to communicate with Lean 4 directly</p>
+
+<a name="178609630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609630">Patrick Massot (Oct 20 2019 at 20:52)</a>:</h4>
+<p>Yeah I know, this (and VScode extension) is why we cannot play with Lean 4 yet.</p>
+
+<a name="178609666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609666">Mario Carneiro (Oct 20 2019 at 20:53)</a>:</h4>
+<p>I don't think the problem has ever been about performance. Certainly tactics should be used sparingly and fail fast in such a context, but when I talked about this with leo early in lean 3 his concern was that this will make type class searches nondeterministic (so caching is not necessarily safe anymore)</p>
+
+<a name="178609731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178609731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178609731">Reid Barton (Oct 20 2019 at 20:55)</a>:</h4>
+<blockquote>
+<p>Do they have tests suggesting this won't kill type class search performance?</p>
+</blockquote>
+<p>Of course it will be bad if the tactic itself is expensive, but based on what I understand about the new instance search procedure, I expect the tactic will be invoked at most once per specific goal per query.</p>
+
 
 {% endraw %}
 

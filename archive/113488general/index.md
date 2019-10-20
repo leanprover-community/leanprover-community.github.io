@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [instances and parameters](56368instancesandparameters.html) (8 messages, latest: Oct 20 2019 at 19:48)
+* [instances and parameters](56368instancesandparameters.html) (19 messages, latest: Oct 20 2019 at 20:55)
+
+* [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
 * [encoding of modules](73110encodingofmodules.html) (9 messages, latest: Oct 20 2019 at 19:00)
 
