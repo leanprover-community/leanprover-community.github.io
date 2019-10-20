@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1390 messages, latest: Oct 20 2019 at 17:40)
+* [noob question(s)](52075noobquestions.html) (1391 messages, latest: Oct 20 2019 at 18:37)
 
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (34 messages, latest: Oct 20 2019 at 14:27)
 

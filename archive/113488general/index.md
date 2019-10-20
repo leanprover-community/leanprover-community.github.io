@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [instances and parameters](56368instancesandparameters.html) (1 message, latest: Oct 20 2019 at 18:57)
+
+* [encoding of modules](73110encodingofmodules.html) (8 messages, latest: Oct 20 2019 at 18:53)
+
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
 
 * [Coq memes](25595Coqmemes.html) (21 messages, latest: Oct 20 2019 at 15:30)
-
-* [encoding of modules](73110encodingofmodules.html) (6 messages, latest: Oct 19 2019 at 16:23)
 
 * [visualizations](70566visualizations.html) (62 messages, latest: Oct 17 2019 at 12:00)
 
