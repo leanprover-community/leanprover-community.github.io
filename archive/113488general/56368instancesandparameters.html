@@ -25,6 +25,47 @@ permalink: archive/113488general/56368instancesandparameters.html
 
 <p><code>bar</code> fails. Is there a way to solve this?</p>
 
+<a name="178605503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178605503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178605503">Kenny Lau (Oct 20 2019 at 19:01)</a>:</h4>
+<p>I don't think it's solvable</p>
+
+<a name="178605518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178605518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178605518">Kevin Buzzard (Oct 20 2019 at 19:02)</a>:</h4>
+<p>Is the issue that x&lt;y isn't a typeclass?</p>
+
+<a name="178605552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178605552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178605552">Kevin Buzzard (Oct 20 2019 at 19:02)</a>:</h4>
+<p>Oh I see, this is the point</p>
+
+<a name="178605729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178605729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178605729">Sebastien Gouezel (Oct 20 2019 at 19:07)</a>:</h4>
+<p>So, you mean I should go for</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">my_class</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">le_class</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="n">y</span>
+
+<span class="n">attribute</span> <span class="o">[</span><span class="n">class</span><span class="o">]</span> <span class="n">le_class</span>
+
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">[</span><span class="n">le_class</span> <span class="n">x</span> <span class="n">y</span><span class="o">]</span> <span class="o">:</span> <span class="n">my_class</span> <span class="o">(</span><span class="n">Icc</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">constructor</span>
+
+<span class="kn">instance</span> <span class="n">bar</span> <span class="o">{</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">le_class</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:</span> <span class="n">my_class</span> <span class="o">(</span><span class="n">Icc</span> <span class="n">x</span> <span class="n">y</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>This is a little bit sad, but it works...</p>
+
+<a name="178605878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178605878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178605878">Sebastien Gouezel (Oct 20 2019 at 19:11)</a>:</h4>
+<p>Would it be possible in Lean 4 to allow for normal parameters in instances, where instance search would only be allowed to look in the context to fill these parameters, instead of going on with the search?</p>
+
+<a name="178606058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178606058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178606058">Patrick Massot (Oct 20 2019 at 19:16)</a>:</h4>
+<p>That would be really nice.</p>
+
+<a name="178607359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178607359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178607359">Kevin Buzzard (Oct 20 2019 at 19:48)</a>:</h4>
+<p>I half-started typing "maybe you could make a wrapper def and make it a class" but then I thought it would probably be so horrible to use in practice that I had better not mention it!</p>
+
 
 {% endraw %}
 

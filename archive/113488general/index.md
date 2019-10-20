@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [instances and parameters](56368instancesandparameters.html) (1 message, latest: Oct 20 2019 at 18:57)
+* [instances and parameters](56368instancesandparameters.html) (8 messages, latest: Oct 20 2019 at 19:48)
 
-* [encoding of modules](73110encodingofmodules.html) (8 messages, latest: Oct 20 2019 at 18:53)
+* [encoding of modules](73110encodingofmodules.html) (9 messages, latest: Oct 20 2019 at 19:00)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
 
