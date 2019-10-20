@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (33 messages, latest: Oct 20 2019 at 13:57)
+
 * [Dependent induction?](08452Dependentinduction.html) (36 messages, latest: Oct 20 2019 at 08:26)
 
 * [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (90 messages, latest: Oct 20 2019 at 02:30)
 
 * [noob question(s)](52075noobquestions.html) (1387 messages, latest: Oct 19 2019 at 21:00)
-
-* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (32 messages, latest: Oct 19 2019 at 17:36)
 
 * [example : ((p ∨ q) → r) → (p → r) ∧ (q → r)](44782examplepqrprqr.html) (3 messages, latest: Oct 19 2019 at 15:04)
 
