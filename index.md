@@ -11,6 +11,8 @@ There has been a community effort to develop [mathlib](https://github.com/leanpr
 library of mathematics formalized in Lean. The library also contains definitions useful for
 programming. This project is very active, with many regular contributors and daily activity.
 
+The contents, design, and community organization of mathlib are described in the paper [The Lean mathematical library](papers/mathlib-paper.pdf).
+
 This site hosts an [online JavaScript / WebAssembly version](lean-web-editor/) of the [community fork of Lean](https://github.com/leanprover-community/lean) where you can try out Lean and mathlib in your browser.
 
 Much of the discussion surrounding Lean occurs in a [Zulip chat room](https://leanprover.zulipchat.com).
