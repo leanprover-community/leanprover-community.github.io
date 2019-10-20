@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (90 messages, latest: Oct 20 2019 at 02:30)
+* [Dependent induction?](08452Dependentinduction.html) (35 messages, latest: Oct 20 2019 at 06:53)
 
-* [Dependent induction?](08452Dependentinduction.html) (31 messages, latest: Oct 19 2019 at 23:48)
+* [File not found in LEAN_PATH](08625FilenotfoundinLEANPATH.html) (90 messages, latest: Oct 20 2019 at 02:30)
 
 * [noob question(s)](52075noobquestions.html) (1387 messages, latest: Oct 19 2019 at 21:00)
 
