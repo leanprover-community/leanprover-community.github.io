@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
+
 * [Coq memes](25595Coqmemes.html) (21 messages, latest: Oct 20 2019 at 15:30)
 
 * [encoding of modules](73110encodingofmodules.html) (6 messages, latest: Oct 19 2019 at 16:23)
@@ -22,8 +24,6 @@ permalink: archive/113488general/index.html
 * [ring with natural number division](37426ringwithnaturalnumberdivision.html) (4 messages, latest: Oct 16 2019 at 14:09)
 
 * [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (23 messages, latest: Oct 16 2019 at 12:34)
-
-* [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (1 message, latest: Oct 16 2019 at 12:05)
 
 * [type error in ring tactic](53580typeerrorinringtactic.html) (4 messages, latest: Oct 15 2019 at 15:25)
 
