@@ -125,6 +125,10 @@ permalink: archive/113488general/56368instancesandparameters.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178610012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178610012">Mario Carneiro (Oct 20 2019 at 21:03)</a>:</h4>
 <p>it actually might be nice for the typeclass search itself to have the conditions for applicability of the tactic already available. I guess if you want this to work using auto_param instances, you would need a dummy blanket instance like <code>instance (h : continuous f . cont_tac) : continuous f</code></p>
 
+<a name="178623928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178623928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178623928">Daniel Selsam (Oct 21 2019 at 03:51)</a>:</h4>
+<p>Here is the current plan: when typeclass resolution encounters a precondition in an instance whose head unifies with a goal, it will create a metavariable for the proof and move on as if the precondition had been proved. If typeclass inference eventually succeeds, the elaborator will call any registered tactics to instantiate those metavariables (i.e. to prove the preconditions), and will throw a (good) error message if any of these tactics fail. This plan will not handle cases where different instances are desired depending on whether or not certain preconditions are provable. Interleaving typeclass resolution and tactic invocation would add a lot of complexity and we do not intend to support it. However, we would potentially consider supporting it if there were very valuable uses of typeclasses that require it. If anyone has any such examples, now is the time to share.</p>
+
 
 {% endraw %}
 
