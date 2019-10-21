@@ -80,6 +80,86 @@ mathlib = {git = "<a href="https://github.com/leanprover/mathlib" target="_blank
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669497">Kevin Sullivan (Oct 21 2019 at 16:00)</a>:</h4>
 <p>Thank you. It was of course "the obvious".</p>
 
+<a name="178669609"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669609" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669609">Kevin Buzzard (Oct 21 2019 at 16:01)</a>:</h4>
+<p>I tried running <code>lean</code> in an old clone of mathlib and lo and behold, elan awoke!</p>
+<div class="codehilite"><pre><span></span>$ cd mathlib-kbuzzard/
+buzzard@brian:~/lean-projects/mathlib-kbuzzard$ lean --version
+info: downloading component &#39;lean&#39;
+info: installing component &#39;lean&#39;
+Lean (version 3.4.1, commit 17fe3decaf8a, Release)
+buzzard@brian:~/lean-projects/mathlib-kbuzzard$
+</pre></div>
+
+<a name="178669865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669865">Kevin Sullivan (Oct 21 2019 at 16:03)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>So the issue is simply that lean is being run in a different directory on the two occasions?</p>
+</blockquote>
+</blockquote>
+<p>Yes, but this happens even when the same complete path to one executable is given. The "new" executable must be (doing the equivalent of) checking the toml file and redirecting execution to the old version (presumably at a different path somewhere in the 2018 nightly toolchain). This is what confused me.</p>
+
+<a name="178670112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670112">Kevin Buzzard (Oct 21 2019 at 16:06)</a>:</h4>
+<p>I know that all the "actual" binaries are in <code>.elan/toolchains</code> (at least for me)</p>
+
+<a name="178670249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670249">Patrick Massot (Oct 21 2019 at 16:07)</a>:</h4>
+<p>Yes, I think that <code>.elan/bin/lean</code> is only triaging to the correct version of lean.</p>
+
+<a name="178670405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670405">Kevin Sullivan (Oct 21 2019 at 16:09)</a>:</h4>
+<p>Ok. While I have you on the line ... all of the preceding was precipitated by an "unexpected token" error when processing a file that was working under the 2018 nightly version but that is no longer working under the stable 3.4.2 version. I checked the release notes, and there is no indication that anything should have changed. The problem occurs when I try to do this:</p>
+<p>notation e1 ⇒ e2 := pImpl e1 e2</p>
+<p>I now get "unexpected token" at the  ⇒ symbol. Any ideas? That character by the way is \r= or \=&gt;.</p>
+
+<a name="178670794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670794">Kevin Buzzard (Oct 21 2019 at 16:13)</a>:</h4>
+<p>Is that arrow defined to mean something in Lean now?</p>
+
+<a name="178670812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670812">Patrick Massot (Oct 21 2019 at 16:13)</a>:</h4>
+<p>It used to be some relator thing</p>
+
+<a name="178670896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670896">Kevin Buzzard (Oct 21 2019 at 16:14)</a>:</h4>
+<p>so maybe when the relator change happened, the arrow was removed from the list of valid unicode tokens</p>
+
+<a name="178670927"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670927" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670927">Patrick Massot (Oct 21 2019 at 16:14)</a>:</h4>
+<p><span class="user-mention" data-user-id="124175">@Kevin Sullivan</span> the commit you are looking for is <a href="https://github.com/leanprover/lean/commit/95fa4cfb0a8774570d67bb231c1ab088a94e12bb" target="_blank" title="https://github.com/leanprover/lean/commit/95fa4cfb0a8774570d67bb231c1ab088a94e12bb">https://github.com/leanprover/lean/commit/95fa4cfb0a8774570d67bb231c1ab088a94e12bb</a></p>
+
+<a name="178670949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178670949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178670949">Patrick Massot (Oct 21 2019 at 16:14)</a>:</h4>
+<p>Especially the deletion of <code>relator.lean</code>.</p>
+
+<a name="178671045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178671045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178671045">Patrick Massot (Oct 21 2019 at 16:15)</a>:</h4>
+<p>You now need to use <a href="https://github.com/leanprover-community/mathlib/blob/master/src/logic/relator.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/logic/relator.lean">https://github.com/leanprover-community/mathlib/blob/master/src/logic/relator.lean</a></p>
+
+<a name="178671073"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178671073" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178671073">Patrick Massot (Oct 21 2019 at 16:16)</a>:</h4>
+<p>(note this is now in mathlib)</p>
+
+<a name="178671124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178671124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178671124">Patrick Massot (Oct 21 2019 at 16:16)</a>:</h4>
+<p>All this understood provided I correctly recognized the arrow you were using.</p>
+
+<a name="178671208"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178671208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178671208">Patrick Massot (Oct 21 2019 at 16:17)</a>:</h4>
+<p>Or maybe you want to use that symbol for something else than the relator thing?</p>
+
+<a name="178673611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178673611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178673611">Kevin Sullivan (Oct 21 2019 at 16:41)</a>:</h4>
+<p>That must be it. Didn't see change in release notes. Maybe change in library.</p>
+
+<a name="178673612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178673612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178673612">Kevin Sullivan (Oct 21 2019 at 16:41)</a>:</h4>
+<p>#print ⇒  </p>
+<p>This also gives an unexpected token error at  ⇒  </p>
+<p>Is #print not the right way to see the definition of a notation?</p>
+
 
 {% endraw %}
 

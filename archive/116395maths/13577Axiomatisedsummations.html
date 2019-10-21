@@ -85,6 +85,78 @@ permalink: archive/116395maths/13577Axiomatisedsummations.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178667352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178667352">Patrick Massot (Oct 21 2019 at 15:40)</a>:</h4>
 <p>Kenny explained the relation (unless <code>tsum</code> and <code>has_sum</code> can somehow be used to prove <code>false</code>).</p>
 
+<a name="178669852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178669852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178669852">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 16:03)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="bp">...</span>
+<span class="kn">theorem</span> <span class="n">no_sum</span> <span class="o">(</span><span class="n">sum</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">sum_axioms</span> <span class="n">sum</span><span class="o">)</span> <span class="o">:</span> <span class="n">false</span> <span class="o">:=</span>
+<span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">sub_lt_self</span> <span class="bp">_</span> <span class="o">(</span><span class="n">zero_lt_one</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="mi">1</span><span class="o">))</span>
+
+<span class="kn">theorem</span> <span class="n">sum_is_anything</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_sum</span> <span class="n">a</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">s</span> <span class="n">hs</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="err">$</span> <span class="n">no_sum</span> <span class="n">s</span> <span class="n">hs</span>
+</pre></div>
+
+
+</blockquote>
+<p>Damn it, I keep screwing this up. There's got to be a correct way to define it.</p>
+
+<a name="178670566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178670566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178670566">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 16:10)</a>:</h4>
+<p>I have an idea. What if one defined axioms defining "summable spaces" as subspaces of <code>ℕ → ℝ</code> that were (1) vector spaces and (2) closed under shifts -- then such spaces could have a definable summations even though all of <code>ℕ → ℝ</code> does not.</p>
+
+<a name="178670596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178670596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178670596">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 16:10)</a>:</h4>
+<p>No wait, that's useless.</p>
+
+<a name="178670999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178670999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178670999">Kenny Lau (Oct 21 2019 at 16:15)</a>:</h4>
+<p>unfortunately this is a situation like measure theory: you can't have all sets be measurable</p>
+
+<a name="178671117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671117">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 16:16)</a>:</h4>
+<p>Yes, but what would be a reasonably useful definition of the "Borel sets" here? Somehow there are some series for which you can define sums without causing any contradictions.</p>
+
+<a name="178671234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671234">Kevin Buzzard (Oct 21 2019 at 16:17)</a>:</h4>
+<p>The ones that converge?</p>
+
+<a name="178671249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671249">Kenny Lau (Oct 21 2019 at 16:17)</a>:</h4>
+<p><a href="https://blog.wolfram.com/2014/08/06/the-abcd-of-divergent-series/" target="_blank" title="https://blog.wolfram.com/2014/08/06/the-abcd-of-divergent-series/">https://blog.wolfram.com/2014/08/06/the-abcd-of-divergent-series/</a></p>
+
+<a name="178671314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671314">Patrick Massot (Oct 21 2019 at 16:18)</a>:</h4>
+<p>Again, why do you want to axiomatize this when we have it defined from first principles in mathlib?</p>
+
+<a name="178671317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671317">Kenny Lau (Oct 21 2019 at 16:18)</a>:</h4>
+<p>I guess you can pick a letter from A to D and then consider the space of the summable functions under the letter</p>
+
+<a name="178671426"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671426" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671426">Kevin Buzzard (Oct 21 2019 at 16:19)</a>:</h4>
+<p>Abhi likes physics, he wants to do 1+2+3+4+...=-1/2 or whatever, right?</p>
+
+<a name="178671520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178671520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178671520">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 16:20)</a>:</h4>
+<p>-1/12 isn't really possible with these axioms. But e.g. 1-2+3-4+...=1/4 is.</p>
+
+<a name="178674321"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178674321" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178674321">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 16:51)</a>:</h4>
+<p>Perhaps this is better:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">sum_add</span> <span class="o">(</span><span class="n">sum</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sum</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">sum</span> <span class="n">b</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="n">n</span> <span class="bp">+</span> <span class="n">b</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="bp">+</span> <span class="n">t</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">sum_smul</span> <span class="o">(</span><span class="n">sum</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">s</span> <span class="n">c</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sum</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">c</span> <span class="bp">*</span> <span class="n">a</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">c</span> <span class="bp">*</span> <span class="n">s</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">sum_shift</span> <span class="o">(</span><span class="n">sum</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">s</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">sum</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">sum</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">a</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">s</span> <span class="bp">-</span> <span class="n">a</span> <span class="mi">0</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">sum_axioms</span> <span class="o">(</span><span class="n">has_sum</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">sum_add</span> <span class="n">has_sum</span> <span class="bp">∧</span> <span class="n">sum_smul</span> <span class="n">has_sum</span> <span class="bp">∧</span> <span class="n">sum_shift</span> <span class="n">has_sum</span>
+
+<span class="n">def</span> <span class="n">has_sum</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">sum</span><span class="o">,</span> <span class="n">sum_axioms</span> <span class="n">sum</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">t</span><span class="o">,</span> <span class="n">sum</span> <span class="n">a</span> <span class="n">t</span> <span class="bp">→</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">s</span>
+</pre></div>
+
 
 {% endraw %}
 
