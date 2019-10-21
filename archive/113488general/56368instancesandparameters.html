@@ -129,6 +129,51 @@ permalink: archive/113488general/56368instancesandparameters.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178623928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178623928">Daniel Selsam (Oct 21 2019 at 03:51)</a>:</h4>
 <p>Here is the current plan: when typeclass resolution encounters a precondition in an instance whose head unifies with a goal, it will create a metavariable for the proof and move on as if the precondition had been proved. If typeclass inference eventually succeeds, the elaborator will call any registered tactics to instantiate those metavariables (i.e. to prove the preconditions), and will throw a (good) error message if any of these tactics fail. This plan will not handle cases where different instances are desired depending on whether or not certain preconditions are provable. Interleaving typeclass resolution and tactic invocation would add a lot of complexity and we do not intend to support it. However, we would potentially consider supporting it if there were very valuable uses of typeclasses that require it. If anyone has any such examples, now is the time to share.</p>
 
+<a name="178624342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624342">Mario Carneiro (Oct 21 2019 at 04:02)</a>:</h4>
+<p>I assume tactics can still call <code>apply_instance</code>?</p>
+
+<a name="178624365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624365">Daniel Selsam (Oct 21 2019 at 04:03)</a>:</h4>
+<blockquote>
+<p>I assume tactics can still call <code>apply_instance</code>?</p>
+</blockquote>
+<p>Yes, that direction is fine.</p>
+
+<a name="178624425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624425">Mario Carneiro (Oct 21 2019 at 04:05)</a>:</h4>
+<p>So instances with auto_params always succeed then? A tactic that appears in an auto_param instance must handle the complete problem without failure?</p>
+
+<a name="178624610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624610">Mario Carneiro (Oct 21 2019 at 04:11)</a>:</h4>
+<p>One example that comes to mind is Z/pZ. It would be nice if we could infer a field structure on Z/nZ if and only if n is prime</p>
+
+<a name="178624734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624734">Mario Carneiro (Oct 21 2019 at 04:15)</a>:</h4>
+<p>This plan is effectively going to always assume that the primality check succeeds, but then the question is whether that leads to a bad proof sometimes. For example, maybe I want multiplication on Z/4Z, and the instance search does <code>has_mul Z/4Z &lt;- ring Z/4Z &lt;- field Z/4Z &lt;- defer proof that 4 is prime</code> and "succeeds", then it runs the primality check, fails, and says "sorry, no multiplication found", even though let's say the instance it would have tried right after <code>ring A &lt;- field A</code> was <code>ring Z/nZ</code> with no assumptions</p>
+
+<a name="178624839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624839">Daniel Selsam (Oct 21 2019 at 04:18)</a>:</h4>
+<blockquote>
+<p>So instances with auto_params always succeed then? </p>
+</blockquote>
+<p>Here is another way to think about it. Typeclass resolution will ignore preconditions and <em>commit</em> to the first instance it can synthesize (ignoring preconditions). Then the elaborator will call the registered tactics to synthesize the preconditions, and fail if they cannot be synthesized.</p>
+<blockquote>
+<p>A tactic that appears in an auto_param instance must handle the complete problem without failure?</p>
+</blockquote>
+<p>This is actually a separate issue, but I would suggest that the tactics must succeed completely. The alternative is for the elaborator to return subgoals as in Coq's <code>refine</code>, but I think this leads to unmaintainable code.</p>
+
+<a name="178624869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178624869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178624869">Daniel Selsam (Oct 21 2019 at 04:19)</a>:</h4>
+<blockquote>
+<p>This plan is effectively going to always assume that the primality check succeeds, but then the question is whether that leads to a bad proof sometimes. For example, maybe I want multiplication on Z/4Z, and the instance search does <code>has_mul Z/4Z &lt;- ring Z/4Z &lt;- field Z/4Z &lt;- defer proof that 4 is prime</code> and "succeeds", then it runs the primality check, fails, and says "sorry, no multiplication found", even though let's say the instance it would have tried right after <code>ring A &lt;- field A</code> was <code>ring Z/nZ</code> with no assumptions</p>
+</blockquote>
+<p>Thanks, this is a great example of something that will not work reliably with the current plan.</p>
+
+<a name="178625397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178625397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178625397">Daniel Selsam (Oct 21 2019 at 04:34)</a>:</h4>
+<p>Workaround: make <code>prime</code> a class, with instances for whatever concrete primes you care about, and take <code>[prime n]</code> as an argument to instances instead of <code>(prime n . &lt;tac&gt;)</code>. The typeclass resolution will also succeed for arbitrary <code>n</code> if <code>prime n</code> is in the context. Note: you only need to use the restricted <code>[prime n]</code> as an argument to instances, and can still use <code>(prime n . &lt;tac&gt;)</code> for non-instances.</p>
+
 
 {% endraw %}
 
