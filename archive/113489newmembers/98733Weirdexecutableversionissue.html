@@ -1,0 +1,86 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/98733Weirdexecutableversionissue.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html">Weird executable version issue</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178668593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178668593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178668593">Kevin Sullivan (Oct 21 2019 at 15:51)</a>:</h4>
+<p>When I run lean --version from a terminal window within VS Code <strong>with a full path to the executable</strong>, I get one version.</p>
+<p>$ /Users/sullivan/.elan/bin/lean --version<br>
+Lean (version 3.4.2, nightly-2018-08-23, commit b13ac127fd83, Release)</p>
+<p>When I run lean --version from an OSX terminal window <strong>with the same full path to the executable</strong>, I get a different version.</p>
+<p>$ /Users/sullivan/.elan/bin/lean --version<br>
+Lean (version 3.4.2, commit cbd2b6686ddb, Release)</p>
+<p>What is going on here?</p>
+<p>The version difference matters to me because it appears that the newest release version (86ddb) breaks the possibility to overload =&gt;, an issue we're still investigating. Be that as it may, something strange and unexpected is happening. Or I'm crazy or just missing the obvious. Probably the latter. Can anyone enlighten me? I did by the way just erase .elan and download and install it again using option 1) proceed to install (default).</p>
+
+<a name="178668752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178668752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178668752">Kevin Buzzard (Oct 21 2019 at 15:53)</a>:</h4>
+<p>Is the <code>lean</code> you're running an executable or a link?</p>
+
+<a name="178668792"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178668792" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178668792">Kevin Buzzard (Oct 21 2019 at 15:53)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="178669181"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669181" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669181">Kevin Sullivan (Oct 21 2019 at 15:56)</a>:</h4>
+<p>Thanks, Kevin. It's the executable downloaded by the elan installer.</p>
+<p>$ ls -l /Users/sullivan/.elan/bin/lean<br>
+-rwxr-xr-x  4 sullivan  staff  5379104 Oct 21 09:26 /Users/sullivan/.elan/bin/lean</p>
+
+<a name="178669215"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669215" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669215">Reid Barton (Oct 21 2019 at 15:57)</a>:</h4>
+<p>Under elan, <code>lean</code> will check your <code>leanpkg.toml</code> file and invoke the <code>lean</code> binary of the toolchain corresponding to the specified version.</p>
+
+<a name="178669249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669249">Kevin Sullivan (Oct 21 2019 at 15:57)</a>:</h4>
+<p>Oh that's got to be it. Let me check.</p>
+
+<a name="178669255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669255">Reid Barton (Oct 21 2019 at 15:57)</a>:</h4>
+<p><code>elan show</code> is a good place to start</p>
+
+<a name="178669325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669325">Kevin Sullivan (Oct 21 2019 at 15:58)</a>:</h4>
+<p>elan show<br>
+installed toolchains</p>
+<hr>
+<p>stable (default)<br>
+nightly-2018-08-23</p>
+<p>active toolchain</p>
+<hr>
+<p>stable (default)<br>
+Lean (version 3.4.2, commit cbd2b6686ddb, Release)</p>
+
+<a name="178669398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669398">Kevin Buzzard (Oct 21 2019 at 15:59)</a>:</h4>
+<p>So the issue is simply that lean is being run in a different directory on the two occasions?</p>
+
+<a name="178669403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669403">Kevin Sullivan (Oct 21 2019 at 15:59)</a>:</h4>
+<p>Yep.</p>
+<p>[package]<br>
+name = "2102dev"<br>
+version = "0.1"<br>
+lean_version = "nightly-2018-08-23"<br>
+path = "src"</p>
+<p>[dependencies]<br>
+mathlib = {git = "<a href="https://github.com/leanprover/mathlib" target="_blank" title="https://github.com/leanprover/mathlib">https://github.com/leanprover/mathlib</a>", rev = "3ddfc239ddd757aa60cfa5a6f106bc68c5b8e1fc"}</p>
+
+<a name="178669497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Weird%20executable%20version%20issue/near/178669497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98733Weirdexecutableversionissue.html#178669497">Kevin Sullivan (Oct 21 2019 at 16:00)</a>:</h4>
+<p>Thank you. It was of course "the obvious".</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

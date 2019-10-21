@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Weird executable version issue](98733Weirdexecutableversionissue.html) (11 messages, latest: Oct 21 2019 at 16:00)
+
+* [(no topic)](79918notopic.html) (209 messages, latest: Oct 21 2019 at 15:52)
+
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (35 messages, latest: Oct 21 2019 at 08:46)
 
 * [dne implies em](56189dneimpliesem.html) (10 messages, latest: Oct 20 2019 at 23:49)
@@ -124,8 +128,6 @@ permalink: archive/113489newmembers/index.html
 * [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (9 messages, latest: Sep 24 2019 at 14:06)
 
 * [\l symbol](94975lsymbol.html) (4 messages, latest: Sep 23 2019 at 19:35)
-
-* [(no topic)](79918notopic.html) (208 messages, latest: Sep 20 2019 at 18:13)
 
 * [Beginner question, pattern matching](24440Beginnerquestionpatternmatching.html) (61 messages, latest: Sep 20 2019 at 15:11)
 
