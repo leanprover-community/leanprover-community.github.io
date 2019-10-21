@@ -9,9 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [encoding of modules](73110encodingofmodules.html) (29 messages, latest: Oct 21 2019 at 12:22)
+* [instances and parameters](56368instancesandparameters.html) (35 messages, latest: Oct 21 2019 at 13:58)
 
-* [instances and parameters](56368instancesandparameters.html) (32 messages, latest: Oct 21 2019 at 07:48)
+* [Strong binding power](90950Strongbindingpower.html) (2 messages, latest: Oct 21 2019 at 13:41)
+
+* [paper about mathlib](90069paperaboutmathlib.html) (11 messages, latest: Oct 21 2019 at 13:29)
+
+* [encoding of modules](73110encodingofmodules.html) (29 messages, latest: Oct 21 2019 at 12:22)
 
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
@@ -34,8 +38,6 @@ permalink: archive/113488general/index.html
 * [#simp](14237simp.html) (6 messages, latest: Oct 15 2019 at 10:23)
 
 * [strange build behavior](07637strangebuildbehavior.html) (12 messages, latest: Oct 15 2019 at 03:31)
-
-* [paper about mathlib](90069paperaboutmathlib.html) (10 messages, latest: Oct 14 2019 at 11:14)
 
 * [optional proofs for type class inference](65166optionalproofsfortypeclassinference.html) (8 messages, latest: Oct 13 2019 at 17:18)
 
