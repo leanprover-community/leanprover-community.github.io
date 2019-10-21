@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [encoding of modules](73110encodingofmodules.html) (30 messages, latest: Oct 21 2019 at 17:52)
+
 * [instances and parameters](56368instancesandparameters.html) (41 messages, latest: Oct 21 2019 at 15:15)
 
 * [Strong binding power](90950Strongbindingpower.html) (2 messages, latest: Oct 21 2019 at 13:41)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (11 messages, latest: Oct 21 2019 at 13:29)
-
-* [encoding of modules](73110encodingofmodules.html) (29 messages, latest: Oct 21 2019 at 12:22)
 
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
