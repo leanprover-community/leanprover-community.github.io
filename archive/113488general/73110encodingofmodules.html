@@ -48,6 +48,63 @@ permalink: archive/113488general/73110encodingofmodules.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178605472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178605472">Kevin Buzzard (Oct 20 2019 at 19:00)</a>:</h4>
 <p>I found this all very interesting. We did all this very inefficiently because of poor communication. I can quite believe that the definition of a module over a ring was there even in 2017 when I started on Lean, but there was nothing nontrivial proved about them. Then when I started pushing for things like noetherian modules, and <span class="user-mention" data-user-id="110064">@Kenny Lau</span> and <span class="user-mention" data-user-id="112680">@Johan Commelin</span> and I started actually trying to do MSc level algebra we were instantly hit by outparam problems which we didn't understand because we're mathematicians. Some initial hacks were tried but somehow the set-up just couldn't be made to work. I was trying to prove things like the  Hilbert Basis theorem and other mathematicians were doing other things and it was only then that it became clear what we actually <em>wanted</em>. Mario acted as interpreter between us and Sebastian and it was eventually decided to do a huge module refactor, which took Mario a long time and I imagine was a huge effort. There is some sort of moral there. Maybe it's just that if a mathematician wants a structure they had better be very clear as early as possible about what they want to do with it. This is hard though because "we just want to do maths with it", and this isn't a good enough answer</p>
 
+<a name="178614532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614532">Jeremy Avigad (Oct 20 2019 at 23:06)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Do you remember what the problems were and how the refactor solved them? If there are lessons here to be learned, we shouldn't squander the opportunity.</p>
+
+<a name="178614587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614587">Mario Carneiro (Oct 20 2019 at 23:08)</a>:</h4>
+<p>The problem was the out_param. I think we've gotten better at it, but you have to be careful when you use these classes because it's easy to get the binders wrong in theorems. Once we figured that out it mostly worked, except for the inherent limitation that a module could only have one base ring</p>
+
+<a name="178614709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614709">Jeremy Avigad (Oct 20 2019 at 23:12)</a>:</h4>
+<p>What do you mean, "get the binders wrong in theorems"? What did we get better at?</p>
+
+<a name="178614728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614728">Mario Carneiro (Oct 20 2019 at 23:13)</a>:</h4>
+<p>In short, you can give module the type <code>module (R : out_param Type) {_: out_param (ring R)} (M : Type) : Type extends add_comm_group M</code>, and then in theorems you use the binders <code>{R : Type} {_ : ring R} {M : Type} [module R M]</code></p>
+
+<a name="178614738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614738">Mario Carneiro (Oct 20 2019 at 23:13)</a>:</h4>
+<p>people want to put <code>ring R</code> in an instance binder and that causes <code>ring ?</code> typeclass searches which causes looping</p>
+
+<a name="178614797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614797">Mario Carneiro (Oct 20 2019 at 23:15)</a>:</h4>
+<p>It took a while after the definition of module for this to hit us because there weren't any ring constructions yet, but when they got introduced this caused lots of unrelated typeclass problems to fail</p>
+
+<a name="178614917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178614917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178614917">Jeremy Avigad (Oct 20 2019 at 23:19)</a>:</h4>
+<p>Oh, I get it. But actually we use <code>class module (α : Type u) (β : Type v) [ring α] [add_comm_group β] extends semimodule α β</code> where <code>add_comm_group</code> is on the outside. And what goes wrong if we put everything but the two types on the inside?</p>
+
+<a name="178615246"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615246" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615246">Mario Carneiro (Oct 20 2019 at 23:30)</a>:</h4>
+<p>with the non-out_param version, the add_comm_group has to come outside</p>
+
+<a name="178615295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615295">Mario Carneiro (Oct 20 2019 at 23:32)</a>:</h4>
+<p>Otherwise, if you have a parent coercion from <code>module</code> to <code>add_comm_group</code>, you get a search like <code>add_comm_group G &lt;- module ? G &lt;- ring ?</code></p>
+
+<a name="178615763"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615763" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615763">Jeremy Avigad (Oct 20 2019 at 23:48)</a>:</h4>
+<p>O.k., so if I understand correctly, in hindsight, we could have kept the original encoding of module (with everything but the types on the inside), as long as we were careful not to mark <code>R</code> for type class inference in the instances. Alternatively, we can do what is in the library now.</p>
+<p>As far as you can tell, are both equally good? It would be more consistent with everything else we are doing to put it all on the inside.</p>
+
+<a name="178615824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615824">Mario Carneiro (Oct 20 2019 at 23:50)</a>:</h4>
+<p>They are equally good, but they make some different assertions about mathematical practice and the original approach turned out not to be a reasonable assumption</p>
+
+<a name="178615827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615827">Mario Carneiro (Oct 20 2019 at 23:50)</a>:</h4>
+<p>that is, a module has only one base ring</p>
+
+<a name="178615837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615837">Mario Carneiro (Oct 20 2019 at 23:51)</a>:</h4>
+<p>That's the real reason we switched. Kevin had some examples of module structures he wanted that didn't fit the mold, and finsupp already had some module constructions that didn't work and had to be defs</p>
+
+<a name="178615887"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/encoding%20of%20modules/near/178615887" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/73110encodingofmodules.html#178615887">Mario Carneiro (Oct 20 2019 at 23:53)</a>:</h4>
+<p>This is basically the fundamental assumption that licenses using typeclasses. If it's not true, then you have to do things some other way - you have to be more explicit about what you want because it matters which one you get</p>
+
 
 {% endraw %}
 

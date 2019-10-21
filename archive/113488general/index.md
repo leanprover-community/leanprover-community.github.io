@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [encoding of modules](73110encodingofmodules.html) (23 messages, latest: Oct 20 2019 at 23:53)
+
 * [instances and parameters](56368instancesandparameters.html) (20 messages, latest: Oct 20 2019 at 21:03)
 
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
-
-* [encoding of modules](73110encodingofmodules.html) (9 messages, latest: Oct 20 2019 at 19:00)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
 
