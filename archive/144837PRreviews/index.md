@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1582 nhds notation](487491582nhdsnotation.html) (27 messages, latest: Oct 21 2019 at 16:46)
+* [#1582 nhds notation](487491582nhdsnotation.html) (29 messages, latest: Oct 21 2019 at 18:55)
 
 * [#1548 val_min_abs](138411548valminabs.html) (1 message, latest: Oct 13 2019 at 16:29)
 
