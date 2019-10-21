@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [instances and parameters](56368instancesandparameters.html) (35 messages, latest: Oct 21 2019 at 13:58)
+* [instances and parameters](56368instancesandparameters.html) (39 messages, latest: Oct 21 2019 at 15:00)
 
 * [Strong binding power](90950Strongbindingpower.html) (2 messages, latest: Oct 21 2019 at 13:41)
 

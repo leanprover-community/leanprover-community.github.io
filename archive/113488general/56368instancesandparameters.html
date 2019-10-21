@@ -230,6 +230,28 @@ permalink: archive/113488general/56368instancesandparameters.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178657234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178657234">Patrick Massot (Oct 21 2019 at 13:58)</a>:</h4>
 <p>Primality testing is much easier than prime factorization, but it's still a valid point.</p>
 
+<a name="178658038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178658038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178658038">Mario Carneiro (Oct 21 2019 at 14:06)</a>:</h4>
+<p>Doesn't it cache instance searches?</p>
+
+<a name="178658701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178658701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178658701">Daniel Selsam (Oct 21 2019 at 14:13)</a>:</h4>
+<blockquote>
+<p>Primality testing is much easier than prime factorization, but it's still a valid point.</p>
+</blockquote>
+<p>(updated)</p>
+
+<a name="178659273"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178659273" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178659273">Daniel Selsam (Oct 21 2019 at 14:19)</a>:</h4>
+<blockquote>
+<p>Doesn't it cache instance searches?</p>
+</blockquote>
+<p>We don't know yet when and whether to cache typeclass resolution results in Lean4. We may not need to cache at all, since the resolution itself will be so much faster than in Lean3, but we'll see. Either way, it is bad style to depend on caching policies for reasonable performance when there exists a simple, reliable solution: <code>instance : Prime &lt;huge concrete number&gt; := by primality_test</code>.</p>
+
+<a name="178663324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/instances%20and%20parameters/near/178663324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/56368instancesandparameters.html#178663324">Patrick Massot (Oct 21 2019 at 15:00)</a>:</h4>
+<p>Daniel, among all those wonders of type class resolution, could you also try to improve error reporting? When Lean 3 fails to infer an instance then most of the time we don't even know which instance it was trying to infer.</p>
+
 
 {% endraw %}
 
