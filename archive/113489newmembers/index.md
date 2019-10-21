@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (35 messages, latest: Oct 21 2019 at 08:46)
+
 * [dne implies em](56189dneimpliesem.html) (10 messages, latest: Oct 20 2019 at 23:49)
 
 * [noob question(s)](52075noobquestions.html) (1391 messages, latest: Oct 20 2019 at 18:37)
-
-* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (34 messages, latest: Oct 20 2019 at 14:27)
 
 * [Dependent induction?](08452Dependentinduction.html) (36 messages, latest: Oct 20 2019 at 08:26)
 
