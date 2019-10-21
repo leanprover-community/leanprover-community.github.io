@@ -350,6 +350,58 @@ permalink: archive/116395maths/13577Axiomatisedsummations.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178681471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178681471">Kenny Lau (Oct 21 2019 at 18:05)</a>:</h4>
 <p>I don't think I can prove it. Does anyone have a counterexample?</p>
 
+<a name="178689372"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689372" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689372">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 19:33)</a>:</h4>
+<p>I can prove that.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">sum_of_has_sum</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">has_sum</span> <span class="n">a</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="o">(</span><span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">→</span> <span class="n">ℝ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">HS</span> <span class="o">:</span> <span class="n">is_sum</span> <span class="n">S</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">Ht</span> <span class="o">:</span> <span class="n">S</span> <span class="n">a</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">S</span> <span class="n">a</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rwa</span> <span class="o">(</span><span class="n">H</span> <span class="n">S</span> <span class="n">HS</span> <span class="n">t</span> <span class="n">Ht</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+
+<span class="kn">theorem</span> <span class="n">has_sum_test&#39;</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">hst</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≠</span> <span class="n">t</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_sum</span> <span class="n">a</span> <span class="n">s</span> <span class="bp">→</span> <span class="n">has_sum</span> <span class="n">a</span> <span class="n">t</span> <span class="bp">→</span> <span class="bp">∀</span> <span class="n">s</span><span class="o">,</span> <span class="n">has_sum</span> <span class="n">a</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">hs</span> <span class="n">ht</span> <span class="n">u</span> <span class="n">S</span> <span class="n">HS</span> <span class="n">v</span> <span class="n">Hv</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hst</span> <span class="o">(</span><span class="n">ht</span> <span class="n">S</span> <span class="n">HS</span> <span class="n">s</span> <span class="o">(</span><span class="n">sum_of_has_sum</span> <span class="n">a</span> <span class="n">s</span> <span class="n">hs</span> <span class="n">S</span> <span class="n">HS</span> <span class="n">v</span> <span class="n">Hv</span><span class="o">)))</span>
+</pre></div>
+
+<a name="178689417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689417">Kenny Lau (Oct 21 2019 at 19:33)</a>:</h4>
+<p>good job, but you're still missing the existence</p>
+
+<a name="178689482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689482">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 19:34)</a>:</h4>
+<p>That part is just obvious, isn't it?</p>
+
+<a name="178689497"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689497" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689497">Kenny Lau (Oct 21 2019 at 19:34)</a>:</h4>
+<p>why is it obvious?</p>
+
+<a name="178689534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689534">Kenny Lau (Oct 21 2019 at 19:35)</a>:</h4>
+<p>if the sequence is (1,0,0,0,...) then the only possible s is 1</p>
+
+<a name="178689755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689755">Kenny Lau (Oct 21 2019 at 19:37)</a>:</h4>
+<p>and it would take me too long to prove it (I would have to construct the summation operator on finitely supported sequences)</p>
+
+<a name="178689902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178689902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178689902">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 19:39)</a>:</h4>
+<p>I'm not sure what you're saying. We just need to prove that every sequence <code>a</code> has a real number <code>s</code> such that <code>has_sum a s</code>, right?</p>
+
+<a name="178690018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178690018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178690018">Kenny Lau (Oct 21 2019 at 19:40)</a>:</h4>
+<p>yes</p>
+
+<a name="178690020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178690020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178690020">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 19:40)</a>:</h4>
+<p>Well, if there wasn't,  every real number would satisfy it from the definition of <code>has_sum</code>.</p>
+
+<a name="178690034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178690034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178690034">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 19:40)</a>:</h4>
+<p>Maybe I'm confused. Let me try proving it.</p>
+
+<a name="178691204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178691204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178691204">Abhimanyu Pallavi Sudhir (Oct 21 2019 at 19:51)</a>:</h4>
+<p>Ok, yeah, it isn't obvious.</p>
+
 
 {% endraw %}
 
