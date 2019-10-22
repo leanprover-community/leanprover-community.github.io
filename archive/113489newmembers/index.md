@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [wf recursion after mathlib update](37390wfrecursionaftermathlibupdate.html) (2 messages, latest: Oct 22 2019 at 17:34)
+* [what is the type of fst?](09109whatisthetypeoffst.html) (7 messages, latest: Oct 22 2019 at 18:56)
 
-* [what is the type of fst?](09109whatisthetypeoffst.html) (6 messages, latest: Oct 22 2019 at 17:33)
+* [wf recursion after mathlib update](37390wfrecursionaftermathlibupdate.html) (2 messages, latest: Oct 22 2019 at 17:34)
 
 * [example : ¬(p ↔ ¬p)](90832examplepp.html) (27 messages, latest: Oct 22 2019 at 10:56)
 
