@@ -84,6 +84,54 @@ permalink: archive/113489newmembers/90832examplepp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178725179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178725179">Johan Commelin (Oct 22 2019 at 05:54)</a>:</h4>
 <p>Does it typecheck? If so, you won.</p>
 
+<a name="178725474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178725474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178725474">Eduardo Cavazos (Oct 22 2019 at 06:02)</a>:</h4>
+<p>This seems to typecheck:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">))</span> <span class="bp">→</span> <span class="n">false</span> <span class="o">:=</span>
+
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hppf</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)),</span>
+
+        <span class="k">have</span> <span class="n">hppf1</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">),</span> <span class="k">from</span> <span class="n">iff</span><span class="bp">.</span><span class="n">elim_left</span> <span class="n">hppf</span><span class="o">,</span>
+        <span class="k">have</span> <span class="n">hppf2</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="n">iff</span><span class="bp">.</span><span class="n">elim_right</span> <span class="n">hppf</span><span class="o">,</span>
+
+        <span class="k">have</span> <span class="n">hpf</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">),</span> <span class="k">from</span> <span class="o">(</span><span class="k">assume</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="o">((</span><span class="n">hppf1</span> <span class="n">hp</span><span class="o">)</span> <span class="n">hp</span><span class="o">)),</span>
+
+        <span class="k">have</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="k">from</span> <span class="o">(</span><span class="n">hppf2</span> <span class="n">hpf</span><span class="o">),</span>
+
+        <span class="o">(</span><span class="n">hppf1</span> <span class="n">hp</span><span class="o">)</span> <span class="n">hp</span><span class="o">)</span>
+</pre></div>
+
+<a name="178725509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178725509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178725509">Johan Commelin (Oct 22 2019 at 06:03)</a>:</h4>
+<p>Here's my version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">assume</span> <span class="n">H</span><span class="o">,</span>
+  <span class="k">have</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="o">:=</span> <span class="n">H</span><span class="bp">.</span><span class="n">mpr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span><span class="o">,</span> <span class="bp">_</span><span class="o">),</span>
+  <span class="n">all_goals</span>
+  <span class="o">{</span> <span class="k">have</span> <span class="n">hp_copy</span> <span class="o">:=</span> <span class="n">hp</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">H</span> <span class="n">at</span> <span class="n">hp_copy</span><span class="o">,</span>
+    <span class="n">contradiction</span> <span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="178725647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178725647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178725647">Johan Commelin (Oct 22 2019 at 06:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="243015">@Eduardo Cavazos</span> and here is a golfed version:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span><span class="n">p</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">finish</span>
+</pre></div>
+
+<a name="178725756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178725756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178725756">Eduardo Cavazos (Oct 22 2019 at 06:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> ,</p>
+<p>Your earlier hint helped me, thank you!</p>
+<p>Here I was aiming for a solution that doesn't use the techniques mentioned in section 3.5 "Classical Logic". Indeed, exercise 3.7.1 asks for this.</p>
+
+<a name="178726114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178726114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178726114">Eduardo Cavazos (Oct 22 2019 at 06:15)</a>:</h4>
+<p>Thank you <span class="user-mention" data-user-id="110049">@Mario Carneiro</span>! Your hint along with Johan's helped me come up with something that appears to work.</p>
+
 
 {% endraw %}
 
