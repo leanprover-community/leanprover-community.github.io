@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [example : ¬(p ↔ ¬p)](90832examplepp.html) (24 messages, latest: Oct 22 2019 at 09:35)
+* [example : ¬(p ↔ ¬p)](90832examplepp.html) (27 messages, latest: Oct 22 2019 at 10:56)
 
 * [Weird executable version issue](98733Weirdexecutableversionissue.html) (27 messages, latest: Oct 21 2019 at 16:41)
 

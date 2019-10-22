@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What's new in mathlib](80721Whatsnewinmathlib.html) (46 messages, latest: Oct 22 2019 at 10:06)
+
 * [encoding of modules](73110encodingofmodules.html) (30 messages, latest: Oct 21 2019 at 17:52)
 
 * [instances and parameters](56368instancesandparameters.html) (41 messages, latest: Oct 21 2019 at 15:15)
@@ -1558,8 +1560,6 @@ permalink: archive/113488general/index.html
 * [guards](18791guards.html) (3 messages, latest: Jan 28 2019 at 00:08)
 
 * [using induction hypothesis in match](86728usinginductionhypothesisinmatch.html) (6 messages, latest: Jan 27 2019 at 21:48)
-
-* [What's new in mathlib](80721Whatsnewinmathlib.html) (45 messages, latest: Jan 27 2019 at 17:24)
 
 * [non-persistent attributes](10577nonpersistentattributes.html) (4 messages, latest: Jan 26 2019 at 23:06)
 

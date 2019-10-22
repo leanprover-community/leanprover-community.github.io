@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Axiomatised summations](13577Axiomatisedsummations.html) (60 messages, latest: Oct 22 2019 at 01:09)
+* [Axiomatised summations](13577Axiomatisedsummations.html) (64 messages, latest: Oct 22 2019 at 10:12)
 
 * [physics](86660physics.html) (5 messages, latest: Oct 19 2019 at 16:48)
 
