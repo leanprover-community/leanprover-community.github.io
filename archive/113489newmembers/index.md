@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [example : ¬(p ↔ ¬p)](90832examplepp.html) (3 messages, latest: Oct 22 2019 at 04:49)
+
 * [Weird executable version issue](98733Weirdexecutableversionissue.html) (27 messages, latest: Oct 21 2019 at 16:41)
 
 * [(no topic)](79918notopic.html) (209 messages, latest: Oct 21 2019 at 15:52)
