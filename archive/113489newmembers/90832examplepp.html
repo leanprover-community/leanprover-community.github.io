@@ -152,6 +152,34 @@ permalink: archive/113489newmembers/90832examplepp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178734208" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178734208">Rob Lewis (Oct 22 2019 at 08:36)</a>:</h4>
 <p>I think the <code>i</code> versions of the <code>finish</code> family have been there since the beginning, no?</p>
 
+<a name="178736338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178736338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178736338">Chris Hughes (Oct 22 2019 at 09:08)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">finish</span>
+
+<span class="kn">lemma</span> <span class="n">X</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">):</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">↔</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ifinish</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">X</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">λ (p : Prop),</span>
+<span class="cm">  eq.mpr</span>
+<span class="cm">    (id</span>
+<span class="cm">       (eq.trans ((λ (a a_1 : Prop) (e_1 : a = a_1), congr_arg not e_1) (p ↔ ¬p) false (propext (iff_not_self p)))</span>
+<span class="cm">          (propext not_false_iff)))</span>
+<span class="cm">    (decidable.by_contradiction</span>
+<span class="cm">       (λ (a : ¬true), (λ (p : Prop) (a : ¬true), false.rec false (false_of_true_eq_false (eq_false_intro a))) p a))</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>I like how the proof term uses <code>decidable.by_contradiction</code> to prove <code>true</code>.</p>
+
+<a name="178736743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178736743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178736743">Mario Carneiro (Oct 22 2019 at 09:13)</a>:</h4>
+<p>It thinks like an undergraduate</p>
+
+<a name="178738169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%94%20%C2%ACp%29/near/178738169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/90832examplepp.html#178738169">Rob Lewis (Oct 22 2019 at 09:35)</a>:</h4>
+<p>Yeah, that's a very long way to write <code>(iff_not_self p).1</code>.</p>
+
 
 {% endraw %}
 
