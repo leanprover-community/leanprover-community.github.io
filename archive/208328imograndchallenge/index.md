@@ -9,6 +9,8 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
+* [folklore problems](12899folkloreproblems.html) (1 message, latest: Oct 23 2019 at 10:34)
+
 * [geometry problems](00977geometryproblems.html) (8 messages, latest: Oct 08 2019 at 13:35)
 
 * [Reading list/sample AI](10546ReadinglistsampleAI.html) (5 messages, latest: Oct 07 2019 at 18:04)
