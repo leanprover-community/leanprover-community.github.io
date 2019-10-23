@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [help finding a lemma](30422helpfindingalemma.html) (201 messages, latest: Oct 22 2019 at 23:57)
+
 * [wf recursion after mathlib update](37390wfrecursionaftermathlibupdate.html) (4 messages, latest: Oct 22 2019 at 21:40)
 
 * [what is the type of fst?](09109whatisthetypeoffst.html) (7 messages, latest: Oct 22 2019 at 18:56)
@@ -80,8 +82,6 @@ permalink: archive/113489newmembers/index.html
 * [helloworld](15997helloworld.html) (25 messages, latest: Oct 11 2019 at 12:00)
 
 * [reduce bool variable](98379reduceboolvariable.html) (3 messages, latest: Oct 11 2019 at 07:32)
-
-* [help finding a lemma](30422helpfindingalemma.html) (198 messages, latest: Oct 09 2019 at 22:09)
 
 * [Beginner question: inequality](54434Beginnerquestioninequality.html) (19 messages, latest: Oct 09 2019 at 16:56)
 

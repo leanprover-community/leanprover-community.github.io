@@ -1002,6 +1002,30 @@ by cases h; exact h
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/177760538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#177760538">Scott Morrison (Oct 09 2019 at 22:09)</a>:</h4>
 <p>Thanks.</p>
 
+<a name="178810025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/178810025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#178810025">Scott Morrison (Oct 22 2019 at 23:54)</a>:</h4>
+<p>A better proof of</p>
+<div class="codehilite"><pre><span></span>example (a : ℕ) : ¬ (a &lt; a - 1) :=
+begin
+  intro h₁,
+  have h₂ : a - 1 ≤ a, { erw nat.pred_le_iff, exact nat.le_succ _ },
+  exact lt_irrefl _ (lt_of_lt_of_le h₁ h₂),
+end
+</pre></div>
+
+
+<p>?</p>
+
+<a name="178810121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/178810121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#178810121">Mario Carneiro (Oct 22 2019 at 23:56)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">not_lt_of_ge</span> <span class="err">$</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_le</span> <span class="bp">_</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="178810159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/178810159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#178810159">Reid Barton (Oct 22 2019 at 23:57)</a>:</h4>
+<p>dang too slow<br>
+<code>example (a : ℕ) : ¬ (a &lt; a - 1) := not_lt_of_ge (nat.pred_le a)</code></p>
+
 
 {% endraw %}
 
