@@ -16,6 +16,22 @@ permalink: archive/113488general/18823noncomputableif.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20if/near/178900928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18823noncomputableif.html#178900928">Reid Barton (Oct 23 2019 at 21:58)</a>:</h4>
 <p>I sort of wish we had two <code>if</code>s, one defined in terms of <code>decidable</code> like the built-in one, and a noncomputable one defined in terms of <code>choice</code>. That way we would never have to worry about which proof of decidability appears in the statements of lemmas. Is this crazy?</p>
 
+<a name="178901105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20if/near/178901105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18823noncomputableif.html#178901105">Reid Barton (Oct 23 2019 at 22:01)</a>:</h4>
+<p>Thinking of lemmas such as <code>s.prod (λ x, (ite (a = x) b 1)) = ite (a ∈ s) b 1</code>: of course the lemma is true whether or not the evidence of <code>decidable (a = x)</code> has anything to do with the evidence of <code>decidable (a ∈ s)</code>, but the lemma statement might require them to be related in a specific way (depending on exactly what instance parameters it assumes).</p>
+
+<a name="178901201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20if/near/178901201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18823noncomputableif.html#178901201">Reid Barton (Oct 23 2019 at 22:02)</a>:</h4>
+<p>This is also in the spirit of "classical semantics, computable algorithms specified in terms of them"</p>
+
+<a name="178902666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20if/near/178902666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18823noncomputableif.html#178902666">Reid Barton (Oct 23 2019 at 22:25)</a>:</h4>
+<p>Well, it's also the case that it's possible to write these lemmas in a way that they can be applied in any situation, regardless of the choices of <code>decidable</code> instances. It's just really awkward to do so.</p>
+
+<a name="178904930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/noncomputable%20if/near/178904930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/18823noncomputableif.html#178904930">Mario Carneiro (Oct 23 2019 at 23:00)</a>:</h4>
+<p>it seems like this is a failing of rewriting and congr stuff to not be able to properly ignore decidable args</p>
+
 
 {% endraw %}
 

@@ -1,0 +1,65 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/51733emptycone.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html">empty cone</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178904414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178904414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178904414">Calle Sönne (Oct 23 2019 at 22:52)</a>:</h4>
+<p>I want to define the empty cone, given an object in a category C. I have tried to do as follows:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">empty_cone</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">:</span> <span class="n">cone</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">empty</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">X</span> <span class="o">:=</span> <span class="n">X</span><span class="o">,</span>
+  <span class="n">π</span> <span class="o">:=</span> <span class="n">nat_trans</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">empty</span> <span class="n">C</span><span class="o">)</span> <span class="o">((</span><span class="n">functor</span><span class="bp">.</span><span class="n">const</span> <span class="n">pempty</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>by (trying to) mimic the way the constant functor is used in const.lean</p>
+<p>I get the following error:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">field</span> <span class="kn">notation</span><span class="o">,</span> <span class="n">type</span> <span class="n">is</span> <span class="n">not</span> <span class="n">of</span> <span class="n">the</span> <span class="n">form</span> <span class="o">(</span><span class="n">C</span> <span class="bp">...</span><span class="o">)</span> <span class="n">where</span> <span class="n">C</span> <span class="n">is</span> <span class="n">a</span> <span class="kn">constant</span>
+  <span class="n">functor</span><span class="bp">.</span><span class="n">const</span> <span class="n">pempty</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="kt">Type</span> <span class="err">?</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="err">?</span>
+</pre></div>
+
+
+<p>If I remove the .obj X I instead get:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">nat_trans</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">empty</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">const</span> <span class="n">pempty</span><span class="o">)</span>
+<span class="n">term</span>
+  <span class="n">functor</span><span class="bp">.</span><span class="n">const</span> <span class="n">pempty</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="kt">Type</span> <span class="err">?</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="err">?</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="o">(</span><span class="err">?</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="err">?</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">pempty</span> <span class="err">⥤</span> <span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v</span> <span class="n">u</span><span class="o">)</span>
+<span class="n">Additional</span> <span class="n">information</span><span class="o">:</span>
+<span class="bp">/</span><span class="n">home</span><span class="bp">/</span><span class="n">calle</span><span class="bp">/</span><span class="n">lean</span><span class="bp">/</span><span class="n">sheaves</span><span class="bp">/</span><span class="n">src</span><span class="bp">/</span><span class="n">zeroobject</span><span class="bp">.</span><span class="n">lean</span><span class="o">:</span><span class="mi">14</span><span class="o">:</span><span class="mi">7</span><span class="o">:</span> <span class="kn">context</span><span class="o">:</span> <span class="n">switched</span> <span class="n">to</span> <span class="n">simple</span> <span class="n">application</span> <span class="n">elaboration</span> <span class="n">procedure</span> <span class="n">because</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">use</span> <span class="n">expected</span> <span class="n">type</span> <span class="n">to</span> <span class="n">elaborate</span> <span class="n">it</span><span class="o">,</span> <span class="n">error</span> <span class="n">message</span>
+  <span class="n">type</span> <span class="n">mismatch</span><span class="o">,</span> <span class="n">term</span>
+    <span class="n">nat_trans</span> <span class="err">?</span><span class="n">m_5</span> <span class="err">?</span><span class="n">m_6</span>
+  <span class="n">has</span> <span class="n">type</span>
+    <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="err">?</span> <span class="err">?</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">((</span><span class="n">max</span> <span class="err">?</span> <span class="err">?</span><span class="o">)</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+  <span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+    <span class="o">(</span><span class="n">functor</span><span class="bp">.</span><span class="n">const</span> <span class="n">pempty</span><span class="o">)</span><span class="bp">.</span><span class="n">obj</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">functor</span><span class="bp">.</span><span class="n">empty</span> <span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span>
+</pre></div>
+
+<a name="178904705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178904705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178904705">Reid Barton (Oct 23 2019 at 22:56)</a>:</h4>
+<p><code>π := nat_trans</code> is already wrong--<code>π</code> needs to be a specific natural transformation, not the type of natural transformation between ... and ...<br>
+Is there something like <code>nat_trans.empty</code> already? Otherwise, you can define it easily enough</p>
+
+<a name="178904777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178904777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178904777">Calle Sönne (Oct 23 2019 at 22:57)</a>:</h4>
+<p>I have not found anything like nat_trans.empty, so I will try to define it myself. Thank you.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

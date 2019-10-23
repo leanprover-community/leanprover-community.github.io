@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [noncomputable if](18823noncomputableif.html) (1 message, latest: Oct 23 2019 at 21:58)
+* [noncomputable if](18823noncomputableif.html) (5 messages, latest: Oct 23 2019 at 23:00)
+
+* [squashing PRs](42409squashingPRs.html) (11 messages, latest: Oct 23 2019 at 22:45)
 
 * [emacs buffers](99927emacsbuffers.html) (6 messages, latest: Oct 23 2019 at 17:46)
 

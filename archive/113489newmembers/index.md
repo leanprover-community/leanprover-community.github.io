@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [zero_max a rfl lemma](80279zeromaxarfllemma.html) (6 messages, latest: Oct 23 2019 at 21:49)
+* [empty cone](51733emptycone.html) (3 messages, latest: Oct 23 2019 at 22:57)
 
-* [subtype coercion](10559subtypecoercion.html) (13 messages, latest: Oct 23 2019 at 15:48)
+* [subtype coercion](10559subtypecoercion.html) (14 messages, latest: Oct 23 2019 at 22:50)
+
+* [zero_max a rfl lemma](80279zeromaxarfllemma.html) (8 messages, latest: Oct 23 2019 at 22:42)
 
 * [How do I map a list along with proof of membership?](55801HowdoImapalistalongwithproofofmembership.html) (3 messages, latest: Oct 23 2019 at 14:19)
 
