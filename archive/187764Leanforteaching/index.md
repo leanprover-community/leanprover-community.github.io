@@ -9,7 +9,7 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [graphs](66822graphs.html) (2 messages, latest: Oct 22 2019 at 23:32)
+* [graphs](66822graphs.html) (6 messages, latest: Oct 23 2019 at 06:45)
 
 * [natural number game](77211naturalnumbergame.html) (21 messages, latest: Oct 14 2019 at 02:23)
 
