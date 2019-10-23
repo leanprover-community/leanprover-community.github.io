@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/55801HowdoImapalistalongwithproofofmembership.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/55801HowdoImapalistalongwithproofofmembership.html">How do I map a list along with proof of membership?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178857209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20map%20a%20list%20along%20with%20proof%20of%20membership%3F/near/178857209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55801HowdoImapalistalongwithproofofmembership.html#178857209">Marko Grdinić (Oct 23 2019 at 14:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">list_dice</span> <span class="o">:=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">list_claim</span> <span class="o">:=</span> <span class="o">[(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)]</span>
+
+<span class="kn">inductive</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Claim</span> <span class="o">(</span><span class="n">claim</span> <span class="o">:</span> <span class="o">{</span><span class="n">n</span> <span class="bp">//</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">list_claim</span><span class="o">})</span> <span class="o">:</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Dudo</span> <span class="o">:</span> <span class="n">Action</span>
+
+<span class="n">def</span> <span class="n">actions</span> <span class="o">:</span> <span class="n">list</span> <span class="n">Action</span> <span class="o">:=</span>
+    <span class="k">let</span> <span class="n">claims</span> <span class="o">:</span> <span class="n">list</span> <span class="n">Action</span> <span class="o">:=</span>
+        <span class="n">list_claim</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="k">fun</span> <span class="n">x</span><span class="o">,</span>
+            <span class="n">Action</span><span class="bp">.</span><span class="n">Claim</span> <span class="bp">⟨</span> <span class="n">x</span><span class="o">,</span> <span class="n">sorry</span> <span class="bp">⟩</span>
+            <span class="o">)</span> <span class="k">in</span>
+    <span class="n">Action</span><span class="bp">.</span><span class="n">Dudo</span> <span class="bp">::</span> <span class="n">claims</span>
+</pre></div>
+
+
+<p>I've defined an inductive type like this and now I also want to turn it into a list. That having said, I have no idea how to provide the proof of membership. The <code>x</code> is opaque, so I do not have the necessary information to prove this.</p>
+<p>How should I approach this?</p>
+
+<a name="178857697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20map%20a%20list%20along%20with%20proof%20of%20membership%3F/near/178857697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55801HowdoImapalistalongwithproofofmembership.html#178857697">Marc Huisinga (Oct 23 2019 at 14:17)</a>:</h4>
+<p>you can attach the proof of membership before mapping <a href="https://github.com/leanprover-community/mathlib/blob/24dd80b0db5f2adbefd3b00709b4a445fc18fb9b/src/data/list/basic.lean#L1720" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/24dd80b0db5f2adbefd3b00709b4a445fc18fb9b/src/data/list/basic.lean#L1720">https://github.com/leanprover-community/mathlib/blob/24dd80b0db5f2adbefd3b00709b4a445fc18fb9b/src/data/list/basic.lean#L1720</a><br>
+(edited to provide permalink ;))</p>
+
+<a name="178857886"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20do%20I%20map%20a%20list%20along%20with%20proof%20of%20membership%3F/near/178857886" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/55801HowdoImapalistalongwithproofofmembership.html#178857886">Marko Grdinić (Oct 23 2019 at 14:19)</a>:</h4>
+<p>Thank you.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

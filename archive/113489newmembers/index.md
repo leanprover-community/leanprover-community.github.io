@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How do I map a list along with proof of membership?](55801HowdoImapalistalongwithproofofmembership.html) (3 messages, latest: Oct 23 2019 at 14:19)
+
 * [subtype coercion](10559subtypecoercion.html) (12 messages, latest: Oct 23 2019 at 09:15)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (5 messages, latest: Oct 23 2019 at 03:52)
