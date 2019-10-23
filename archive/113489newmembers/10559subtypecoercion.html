@@ -1,0 +1,75 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/10559subtypecoercion.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html">subtype coercion</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178832625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178832625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178832625">Vincent Beffara (Oct 23 2019 at 08:29)</a>:</h4>
+<p>Hi,<br>
+TPiL states that "the standard library defines a coercion from subtype <code>{x : α // p x}</code> to <code>α</code> so I would expect the following to work:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">tttt</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">true</span>
+<span class="n">def</span> <span class="n">toto</span> <span class="o">:=</span> <span class="o">{</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">//</span> <span class="n">true</span> <span class="o">}</span>
+<span class="n">def</span> <span class="n">toto&#39;</span> <span class="o">:=</span> <span class="n">subtype</span> <span class="n">tttt</span>
+<span class="n">def</span> <span class="n">titi</span> <span class="o">:</span> <span class="n">toto</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">3</span><span class="o">,</span><span class="n">trivial</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">titi&#39;</span> <span class="o">:</span> <span class="n">toto&#39;</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">3</span><span class="o">,</span><span class="n">trivial</span><span class="bp">⟩</span>
+<span class="n">def</span> <span class="n">tata</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="n">n</span><span class="bp">+</span><span class="mi">2</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">tata</span> <span class="n">titi</span><span class="o">)</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">tata</span> <span class="n">titi&#39;</span><span class="o">)</span>
+<span class="kn">instance</span> <span class="n">tutu</span> <span class="o">:</span> <span class="n">has_coe</span> <span class="n">toto</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span><span class="bp">⟩</span>
+<span class="bp">#</span><span class="n">reduce</span> <span class="o">(</span><span class="n">tata</span> <span class="n">titi</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Unfortunately only the last <code>reduce</code> works, the first one complains that it is expecting a <code>nat</code> and gets a <code>toto</code> instead. Am I misunderstanding the sentence in TPiL?</p>
+
+<a name="178833388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833388">Chris Hughes (Oct 23 2019 at 08:41)</a>:</h4>
+<p>The problem is probably that you renamed the type, and after renaming, a type loses all the instances it has.</p>
+<p>The instance search does not unfold the definition of <code>toto</code> when searching for a coercion.</p>
+
+<a name="178833503"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833503" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833503">Rob Lewis (Oct 23 2019 at 08:43)</a>:</h4>
+<p>You can put <code>@[reducible]</code> in front of <code>toto</code> and <code>toto'</code> to make it work.</p>
+
+<a name="178833568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833568">Marc Huisinga (Oct 23 2019 at 08:44)</a>:</h4>
+<p>or use <code>abbreviation</code>instead of <code>def</code></p>
+
+<a name="178833743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833743">Johan Commelin (Oct 23 2019 at 08:47)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> See also <a href="https://github.com/leanprover-community/mathlib/blob/5ed5f59433278367f0b2ceeb7b363d21840a3fc0/test/delta_instance.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/5ed5f59433278367f0b2ceeb7b363d21840a3fc0/test/delta_instance.lean">https://github.com/leanprover-community/mathlib/blob/5ed5f59433278367f0b2ceeb7b363d21840a3fc0/test/delta_instance.lean</a></p>
+<p>Recently we got some slick method to carry instances over to a "type wrapper"</p>
+
+<a name="178833816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833816">Johan Commelin (Oct 23 2019 at 08:48)</a>:</h4>
+<p>The thing is, sometimes you want this to happen, sometimes not. Example: if <code>X</code> is an ordered set... then <code>dual X</code> should of course <em>not</em> find the order instance on <code>X</code></p>
+
+<a name="178833827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833827">Johan Commelin (Oct 23 2019 at 08:48)</a>:</h4>
+<p>Instead, we want to define a new order, that is opposite to the one on <code>X</code></p>
+
+<a name="178833837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833837">Johan Commelin (Oct 23 2019 at 08:48)</a>:</h4>
+<p>But Lean doesn't see any difference between <code>dual</code> and <code>toto</code></p>
+
+<a name="178833926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178833926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178833926">Marc Huisinga (Oct 23 2019 at 08:50)</a>:</h4>
+<p>is semi-reducibility explained anywhere in TPIL, or are there examples for where defs are unfolded and where not?</p>
+
+<a name="178834385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20coercion/near/178834385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/10559subtypecoercion.html#178834385">Vincent Beffara (Oct 23 2019 at 08:57)</a>:</h4>
+<p>Thanks, I think I see the point. The wording in TPiL is a bit misleading then, it can be read as "whenever you define a subtype Lean will instantiate the corresponding coercion", which it doesn't (for good reason).</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

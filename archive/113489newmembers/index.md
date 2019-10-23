@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [subtype coercion](10559subtypecoercion.html) (10 messages, latest: Oct 23 2019 at 08:57)
+
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (5 messages, latest: Oct 23 2019 at 03:52)
 
 * [help finding a lemma](30422helpfindingalemma.html) (202 messages, latest: Oct 23 2019 at 00:55)
