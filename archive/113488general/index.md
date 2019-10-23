@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (360 messages, latest: Oct 23 2019 at 15:35)
+
 * [emacs buffers](99927emacsbuffers.html) (2 messages, latest: Oct 23 2019 at 13:40)
 
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (6 messages, latest: Oct 23 2019 at 11:28)
@@ -98,8 +100,6 @@ permalink: archive/113488general/index.html
 * [mathlib notes](99147mathlibnotes.html) (17 messages, latest: Oct 06 2019 at 19:48)
 
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (9 messages, latest: Oct 06 2019 at 18:52)
-
-* [Lean in the wild](43625Leaninthewild.html) (358 messages, latest: Oct 06 2019 at 10:07)
 
 * [simps](83533simps.html) (20 messages, latest: Oct 05 2019 at 20:57)
 
