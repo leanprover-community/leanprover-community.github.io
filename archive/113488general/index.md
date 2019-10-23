@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (3 messages, latest: Oct 23 2019 at 04:56)
+
 * [What's new in mathlib](80721Whatsnewinmathlib.html) (46 messages, latest: Oct 22 2019 at 10:06)
 
 * [encoding of modules](73110encodingofmodules.html) (30 messages, latest: Oct 21 2019 at 17:52)

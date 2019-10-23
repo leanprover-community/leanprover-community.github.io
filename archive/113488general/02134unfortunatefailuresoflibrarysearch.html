@@ -1,0 +1,40 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/02134unfortunatefailuresoflibrarysearch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html">unfortunate failures of `library_search`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178822549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/178822549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#178822549">Scott Morrison (Oct 23 2019 at 04:54)</a>:</h4>
+<p>I'm going to use this thread as a not-quite-bug-tracker for unfortunate failures of <code>library_search</code> / <code>suggest</code>, so I remember them as test cases for potential future improvements.</p>
+
+<a name="178822551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/178822551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#178822551">Scott Morrison (Oct 23 2019 at 04:54)</a>:</h4>
+<p>Feel free to add your own suggestions!</p>
+
+<a name="178822636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/178822636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#178822636">Scott Morrison (Oct 23 2019 at 04:56)</a>:</h4>
+<div class="codehilite"><pre><span></span>example (a b : ℕ) (h : 0 &lt; b) : (a * b) / b = a := by library_search
+</pre></div>
+
+
+<p>works, but</p>
+<div class="codehilite"><pre><span></span>example (a b : ℕ) (h : b ≠ 0) : (a * b) / b = a := by library_search
+</pre></div>
+
+
+<p>doesn't. This is a common problem, in fact so common I'm considering just hardwiring something to <code>library_search</code> for exactly this case. (e.g. add <code>zero_lt_iff_ne_zero.mpr</code> into the set of lemmas for <code>solve_by_elim</code>.</p>
+<p>(There are "more principled solutions", involving add _lots_ of extra lemmas to <code>solve_by_elim</code>, but this will take some engineering...)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
