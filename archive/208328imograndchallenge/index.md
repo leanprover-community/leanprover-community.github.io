@@ -9,7 +9,7 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
-* [Reading list/sample AI](10546ReadinglistsampleAI.html) (7 messages, latest: Oct 23 2019 at 17:31)
+* [Reading list/sample AI](10546ReadinglistsampleAI.html) (9 messages, latest: Oct 23 2019 at 18:46)
 
 * [folklore problems](12899folkloreproblems.html) (1 message, latest: Oct 23 2019 at 10:34)
 

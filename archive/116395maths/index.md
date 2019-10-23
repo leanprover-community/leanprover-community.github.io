@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (3 messages, latest: Oct 23 2019 at 06:12)
+* [Axiomatised summations](13577Axiomatisedsummations.html) (66 messages, latest: Oct 23 2019 at 18:59)
 
-* [Axiomatised summations](13577Axiomatisedsummations.html) (65 messages, latest: Oct 22 2019 at 16:42)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (3 messages, latest: Oct 23 2019 at 06:12)
 
 * [physics](86660physics.html) (5 messages, latest: Oct 19 2019 at 16:48)
 
