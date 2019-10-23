@@ -1,0 +1,50 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/80279zeromaxarfllemma.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html">zero_max a rfl lemma</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178819700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178819700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178819700">Lucas Allen (Oct 23 2019 at 03:30)</a>:</h4>
+<p>Hello,</p>
+<p>I was messing around with <code>suggest</code> just now and I found that <code>zero_max</code> in <code>data.nat.basic</code> can be proved by <code>rfl</code>, i.e. the following code works for me:</p>
+<div class="codehilite"><pre><span></span>lemma zero_max {m : nat} : max 0 m = m := rfl
+</pre></div>
+
+
+<p>But the proof of this lemma in my version of mathlib is</p>
+<div class="codehilite"><pre><span></span>lemma zero_max {m : nat} : max 0 m = m :=
+max_eq_right (zero_le _)
+</pre></div>
+
+
+<p>Should this be changed?</p>
+
+<a name="178819812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178819812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178819812">Kenny Lau (Oct 23 2019 at 03:34)</a>:</h4>
+<p>yes</p>
+
+<a name="178820255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178820255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178820255">Mario Carneiro (Oct 23 2019 at 03:49)</a>:</h4>
+<p>no</p>
+
+<a name="178820379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178820379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178820379">Mario Carneiro (Oct 23 2019 at 03:52)</a>:</h4>
+<p>refl proofs are more brittle. This adds an unneeded dependence on the fact that the decidable instance of <code>0 &lt;= m</code> reduces to true, as well as the fact that the definition of <code>max a b</code> is <code>if a &lt;= b then b else a</code> instead of <code>if b &lt;= a then a else b</code></p>
+
+<a name="178820382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/zero_max%20a%20rfl%20lemma/near/178820382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/80279zeromaxarfllemma.html#178820382">Mario Carneiro (Oct 23 2019 at 03:52)</a>:</h4>
+<p>the given proof is insensitive to such details</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

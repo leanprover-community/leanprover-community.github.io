@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (2 messages, latest: Oct 23 2019 at 03:40)
+
 * [#1582 nhds notation](487491582nhdsnotation.html) (30 messages, latest: Oct 21 2019 at 19:08)
 
 * [#1548 val_min_abs](138411548valminabs.html) (1 message, latest: Oct 13 2019 at 16:29)
