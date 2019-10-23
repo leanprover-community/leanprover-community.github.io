@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtype coercion](10559subtypecoercion.html) (10 messages, latest: Oct 23 2019 at 08:57)
+* [subtype coercion](10559subtypecoercion.html) (12 messages, latest: Oct 23 2019 at 09:15)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (5 messages, latest: Oct 23 2019 at 03:52)
 
