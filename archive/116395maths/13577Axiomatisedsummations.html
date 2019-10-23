@@ -454,6 +454,111 @@ permalink: archive/116395maths/13577Axiomatisedsummations.html
 <p>I see -- I <em>can</em> prove that the sum of <code>λn, 1/(n+1)</code> can equal any given real number -- I just need to construct a sum operator on the smallest shift-invariant linear space of sequences containing the sequence <code>λn, 1/(n+1)</code></p>
 <p>Picking a basis a 1, a 2,... where <code>a m := λ n, 1 / (m + n)</code>, it follows from basic linear algebra that defining the operator on this basis <code>S (a m) = x - (1 + 1/2 + ... + 1/(m-1))</code> defines a sum operator for some <code>x</code>. The key fact is that the <code>a i</code> actually forms a basis, which is straightforward in math, but difficult in Lean.</p>
 
+<a name="178884862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178884862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178884862">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:00)</a>:</h4>
+<p>So existence is false.</p>
+
+<a name="178884993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178884993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178884993">Kenny Lau (Oct 23 2019 at 19:02)</a>:</h4>
+<p>why is <code>a i</code> linearly independent?</p>
+
+<a name="178887365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178887365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178887365">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:30)</a>:</h4>
+<p>Isn't it?</p>
+
+<a name="178887582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178887582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178887582">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:33)</a>:</h4>
+<p>If it isn't, there is some minimum <code>m</code> such that the <code>a i</code> up to that <code>m</code> are linearly dependent.</p>
+
+<a name="178887733"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178887733" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178887733">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:35)</a>:</h4>
+<p>Which would produce an infinite system of linear equations:</p>
+<div class="codehilite"><pre><span></span>    c1 + 1/2 c2 + ... + 1/m     cm = 0
+1/2 c1 + 1/3 c2 + ... + 1/(m+1) cm = 0
+1/3 c1 + 1/4 c2 + ... + 1/(m+2) cm = 0
+...
+</pre></div>
+
+<a name="178887866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178887866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178887866">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:36)</a>:</h4>
+<p>In particular, </p>
+<div class="codehilite"><pre><span></span>        c1 + 1/2     c2 + ... + 1/m     cm = 0
+1/2     c1 + 1/3     c2 + ... + 1/(m+1) cm = 0
+1/3     c1 + 1/4     c2 + ... + 1/(m+2) cm = 0
+                          ...
+1/(m+1) c1 + 1/(m+2) c2 + ... + 1/(2m)  cm = 0
+</pre></div>
+
+<a name="178888044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888044">Reid Barton (Oct 23 2019 at 19:38)</a>:</h4>
+<p>It is linearly independent, but I'm curious to see what proof you have in mind</p>
+
+<a name="178888066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888066">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:38)</a>:</h4>
+<p>I don't. I'm just thinking.</p>
+
+<a name="178888099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888099">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:39)</a>:</h4>
+<p>So perhaps one could work out the determinant of that system in general.</p>
+
+<a name="178888253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888253">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:40)</a>:</h4>
+<p>And if it's non-zero, we're done.</p>
+
+<a name="178888342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888342">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:41)</a>:</h4>
+<blockquote>
+<p>It is linearly independent, but I'm curious to see what proof you have in mind</p>
+</blockquote>
+<p>What's the proof?</p>
+
+<a name="178888345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888345">Reid Barton (Oct 23 2019 at 19:41)</a>:</h4>
+<p>If it was linearly dependent, then the sequence <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">a_n = 1/n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">n</span></span></span></span> would be defined by a linear recurrence of some fixed length and then the associated generating function <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∑</mo><mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow></msub><msup><mi>x</mi><mi>n</mi></msup><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">A(x) = \sum_{n \ge 1} x^n/n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.144889em;vertical-align:-0.39488900000000005em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139799999999992em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">≥</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.39488900000000005em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathdefault">n</span></span></span></span> would be a rational function. But it's not, it's <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\log (1-x)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>.</p>
+
+<a name="178888522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178888522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178888522">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:43)</a>:</h4>
+<p>Ah, that's really neat.</p>
+
+<a name="178889019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889019">Kenny Lau (Oct 23 2019 at 19:48)</a>:</h4>
+<p>nice</p>
+
+<a name="178889089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889089">Reid Barton (Oct 23 2019 at 19:48)</a>:</h4>
+<p>I'm pretty sure the determinant you were writing down is also known, but the name escapes me at the moment</p>
+
+<a name="178889199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889199">Koundinya Vajjha (Oct 23 2019 at 19:50)</a>:</h4>
+<p>The hilbert matrix?</p>
+
+<a name="178889266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889266">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:50)</a>:</h4>
+<p>Yes!</p>
+
+<a name="178889271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889271">Koundinya Vajjha (Oct 23 2019 at 19:50)</a>:</h4>
+<p><a href="https://en.wikipedia.org/wiki/Hilbert_matrix" target="_blank" title="https://en.wikipedia.org/wiki/Hilbert_matrix">https://en.wikipedia.org/wiki/Hilbert_matrix</a></p>
+
+<a name="178889336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889336">Kenny Lau (Oct 23 2019 at 19:50)</a>:</h4>
+<p>you guys are amazing</p>
+
+<a name="178889499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889499">Abhimanyu Pallavi Sudhir (Oct 23 2019 at 19:52)</a>:</h4>
+<p>I think we saw the Hilbert matrix in M1GLA <span class="user-mention" data-user-id="110064">@Kenny Lau</span> -- at least if Richard Thomas taught the module for you too. We didn't calculate its determinant I think, but we did observe its invertibility.</p>
+
+<a name="178889550"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889550" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889550">Kenny Lau (Oct 23 2019 at 19:52)</a>:</h4>
+<p>even if I saw it there's no way I would remember the name</p>
+
+<a name="178889575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Axiomatised%20summations/near/178889575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/13577Axiomatisedsummations.html#178889575">Koundinya Vajjha (Oct 23 2019 at 19:52)</a>:</h4>
+<blockquote>
+<p>If it was linearly dependent, then the sequence <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mn>1</mn><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">a_n = 1/n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.58056em;vertical-align:-0.15em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">1</span><span class="mord">/</span><span class="mord mathdefault">n</span></span></span></span> would be defined by a linear recurrence of some fixed length and then the associated generating function <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>A</mi><mo stretchy="false">(</mo><mi>x</mi><mo stretchy="false">)</mo><mo>=</mo><msub><mo>∑</mo><mrow><mi>n</mi><mo>≥</mo><mn>1</mn></mrow></msub><msup><mi>x</mi><mi>n</mi></msup><mi mathvariant="normal">/</mi><mi>n</mi></mrow><annotation encoding="application/x-tex">A(x) = \sum_{n \ge 1} x^n/n</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">A</span><span class="mopen">(</span><span class="mord mathdefault">x</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.144889em;vertical-align:-0.39488900000000005em;"></span><span class="mop"><span class="mop op-symbol small-op" style="position:relative;top:-0.0000050000000000050004em;">∑</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.15139799999999992em;"><span style="top:-2.40029em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">≥</span><span class="mord mtight">1</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.39488900000000005em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">x</span><span class="msupsub"><span class="vlist-t"><span class="vlist-r"><span class="vlist" style="height:0.664392em;"><span style="top:-3.063em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span></span></span></span><span class="mord">/</span><span class="mord mathdefault">n</span></span></span></span> would be a rational function. But it's not, it's <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mi>log</mi><mo>⁡</mo><mo stretchy="false">(</mo><mn>1</mn><mo>−</mo><mi>x</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">-\log (1-x)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">−</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mop">lo<span style="margin-right:0.01389em;">g</span></span><span class="mopen">(</span><span class="mord">1</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">−</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">x</span><span class="mclose">)</span></span></span></span>.</p>
+</blockquote>
+<p>This is a pretty cool proof.</p>
+
 
 {% endraw %}
 

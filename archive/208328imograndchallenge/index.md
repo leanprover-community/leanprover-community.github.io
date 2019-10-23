@@ -9,15 +9,15 @@ permalink: archive/208328IMOgrandchallenge/index.html
 
 ### Topics:
 
-* [Reading list/sample AI](10546ReadinglistsampleAI.html) (9 messages, latest: Oct 23 2019 at 18:46)
+* [general discussion](95555generaldiscussion.html) (14 messages, latest: Oct 23 2019 at 19:52)
+
+* [Reading list/sample AI](10546ReadinglistsampleAI.html) (10 messages, latest: Oct 23 2019 at 19:05)
 
 * [folklore problems](12899folkloreproblems.html) (1 message, latest: Oct 23 2019 at 10:34)
 
 * [geometry problems](00977geometryproblems.html) (8 messages, latest: Oct 08 2019 at 13:35)
 
 * [problems: the source](55793problemsthesource.html) (12 messages, latest: Oct 06 2019 at 13:15)
-
-* [general discussion](95555generaldiscussion.html) (13 messages, latest: Oct 05 2019 at 09:31)
 
 * [stream events](95106streamevents.html) (23 messages, latest: Oct 03 2019 at 16:10)
 
