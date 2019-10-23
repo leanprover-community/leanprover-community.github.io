@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (360 messages, latest: Oct 23 2019 at 15:35)
+* [emacs buffers](99927emacsbuffers.html) (6 messages, latest: Oct 23 2019 at 17:46)
 
-* [emacs buffers](99927emacsbuffers.html) (2 messages, latest: Oct 23 2019 at 13:40)
+* [Lean in the wild](43625Leaninthewild.html) (360 messages, latest: Oct 23 2019 at 15:35)
 
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (6 messages, latest: Oct 23 2019 at 11:28)
 
