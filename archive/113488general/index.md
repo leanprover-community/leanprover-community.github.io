@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (76 messages, latest: Oct 24 2019 at 10:10)
+
 * [Lean in the wild](43625Leaninthewild.html) (362 messages, latest: Oct 24 2019 at 08:39)
 
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (7 messages, latest: Oct 24 2019 at 01:07)
@@ -596,8 +598,6 @@ permalink: archive/113488general/index.html
 * [determinant of groups](67057determinantofgroups.html) (1 message, latest: Jun 20 2019 at 16:49)
 
 * [Bugs](04242Bugs.html) (5 messages, latest: Jun 19 2019 at 15:20)
-
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (75 messages, latest: Jun 19 2019 at 13:57)
 
 * [installing mathlib](12119installingmathlib.html) (43 messages, latest: Jun 19 2019 at 13:47)
 
