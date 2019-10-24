@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [endomorphism algebra](03140endomorphismalgebra.html) (1 message, latest: Oct 24 2019 at 21:25)
+* [endomorphism algebra](03140endomorphismalgebra.html) (3 messages, latest: Oct 24 2019 at 22:55)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (16 messages, latest: Oct 24 2019 at 17:25)
 
