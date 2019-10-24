@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (195 messages, latest: Oct 24 2019 at 10:12)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (201 messages, latest: Oct 24 2019 at 11:57)
 
 * [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
 

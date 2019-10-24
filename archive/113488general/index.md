@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (76 messages, latest: Oct 24 2019 at 10:10)
+* [Lean in the wild](43625Leaninthewild.html) (368 messages, latest: Oct 24 2019 at 11:59)
 
-* [Lean in the wild](43625Leaninthewild.html) (362 messages, latest: Oct 24 2019 at 08:39)
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (76 messages, latest: Oct 24 2019 at 10:10)
 
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (7 messages, latest: Oct 24 2019 at 01:07)
 

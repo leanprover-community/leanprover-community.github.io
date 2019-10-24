@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (6 messages, latest: Oct 24 2019 at 10:58)
+* [empty cone](51733emptycone.html) (40 messages, latest: Oct 24 2019 at 11:34)
 
-* [empty cone](51733emptycone.html) (36 messages, latest: Oct 24 2019 at 10:51)
+* [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (6 messages, latest: Oct 24 2019 at 10:58)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (12 messages, latest: Oct 24 2019 at 01:31)
 
