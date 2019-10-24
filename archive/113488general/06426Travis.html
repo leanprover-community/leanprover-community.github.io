@@ -473,6 +473,62 @@ decl post-processing of integral took 0.932ms
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178966978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178966978">Rob Lewis (Oct 24 2019 at 15:57)</a>:</h4>
 <p>Based on <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/602292786?utm_medium=notification&amp;utm_source=github_status" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/602292786?utm_medium=notification&amp;utm_source=github_status">https://travis-ci.org/leanprover-community/mathlib/jobs/602292786?utm_medium=notification&amp;utm_source=github_status</a>, I'm guessing the Travis config in <a href="https://github.com/leanprover-community/mathlib/issues/1606" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1606">#1606</a> isn't right. I wanted to reuse the olean files from the build to run a final test. That test takes ~45 seconds on my laptop and has been going for 20 min on Travis, so I'm guessing it's recompiling everything. I tried to copy the setup for archive and test, which do use the oleans -- any ideas?</p>
 
+<a name="178968348"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178968348" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178968348">Bryan Gin-ge Chen (Oct 24 2019 at 16:09)</a>:</h4>
+<p>My guess is that this is because the master branch was updated after the travis build started. My understanding is that each build stage does a merge with master when it starts, so this can lead to later stages having to do rebuilds.</p>
+
+<a name="178968484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178968484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178968484">Rob Lewis (Oct 24 2019 at 16:11)</a>:</h4>
+<p>What? Every build stage does a merge with master? That can't be right. It's testing the PR, not the PR's compatibility with master.</p>
+
+<a name="178968592"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178968592" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178968592">Bryan Gin-ge Chen (Oct 24 2019 at 16:12)</a>:</h4>
+<p>Yes, this surprised me at first too. But see <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/602292786#L164" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/602292786#L164">https://travis-ci.org/leanprover-community/mathlib/jobs/602292786#L164</a> and <a href="https://docs.travis-ci.com/user/pull-requests/#my-pull-request-isnt-being-built" target="_blank" title="https://docs.travis-ci.com/user/pull-requests/#my-pull-request-isnt-being-built">https://docs.travis-ci.com/user/pull-requests/#my-pull-request-isnt-being-built</a></p>
+
+<a name="178968596"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178968596" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178968596">Rob Lewis (Oct 24 2019 at 16:12)</a>:</h4>
+<p>If that's what it's doing, I'm very confused about our CI, heh.</p>
+
+<a name="178969425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178969425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178969425">Rob Lewis (Oct 24 2019 at 16:22)</a>:</h4>
+<p>But the archive task ran the same command, and finished in a minute. I don't think <a href="https://github.com/leanprover-community/mathlib/commit/3f8a492bfa4ba2ad0ff26c3bff298e3afb05f861" target="_blank" title="https://github.com/leanprover-community/mathlib/commit/3f8a492bfa4ba2ad0ff26c3bff298e3afb05f861">https://github.com/leanprover-community/mathlib/commit/3f8a492bfa4ba2ad0ff26c3bff298e3afb05f861</a> landed in between the two.</p>
+
+<a name="178970709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178970709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178970709">Bryan Gin-ge Chen (Oct 24 2019 at 16:35)</a>:</h4>
+<p>You're right that the commit happened earlier, so I'm not sure why the docs and archive stages didn't require a rebuild.</p>
+
+<a name="178972289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178972289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178972289">Rob Lewis (Oct 24 2019 at 16:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you know what's up here?</p>
+
+<a name="178972476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178972476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178972476">Rob Lewis (Oct 24 2019 at 16:53)</a>:</h4>
+<p>I do see wildly different build times for the archive in the PR history, which is consistent with oleans from the first step being invalidated by a merge.</p>
+
+<a name="178972510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178972510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178972510">Rob Lewis (Oct 24 2019 at 16:54)</a>:</h4>
+<p>If this is what's happening, it sounds both inefficient and unreliable.</p>
+
+<a name="178972562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178972562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178972562">Reid Barton (Oct 24 2019 at 16:54)</a>:</h4>
+<blockquote>
+<p>My understanding is that each build stage does a merge with master when it starts, so this can lead to later stages having to do rebuilds.</p>
+</blockquote>
+<p>Where's my upside-down light bulb emoji</p>
+
+<a name="178972728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178972728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178972728">Rob Lewis (Oct 24 2019 at 16:56)</a>:</h4>
+<p>Ah. Perhaps one relevant line is this? <a href="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L14" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L14">https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L14</a><br>
+Edit - never mind, everything in the last step is happening in <code>src</code>.</p>
+
+<a name="178973016"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973016" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973016">Simon Hudon (Oct 24 2019 at 16:59)</a>:</h4>
+<p>Sometimes, it's enough to just restart the travis build</p>
+
+<a name="178973056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973056">Simon Hudon (Oct 24 2019 at 16:59)</a>:</h4>
+<p>we might also want to try the build of test and archive with touching all the <code>olean</code> files in <code>src</code></p>
+
 
 {% endraw %}
 
