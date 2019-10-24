@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (382 messages, latest: Oct 24 2019 at 13:46)
+* [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (1 message, latest: Oct 24 2019 at 14:58)
+
+* [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (16 messages, latest: Oct 24 2019 at 14:04)
+
+* [Lean in the wild](43625Leaninthewild.html) (384 messages, latest: Oct 24 2019 at 14:03)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (76 messages, latest: Oct 24 2019 at 10:10)
 
@@ -1098,8 +1102,6 @@ permalink: archive/113488general/index.html
 * [Problem with type class search](44348Problemwithtypeclasssearch.html) (36 messages, latest: Apr 03 2019 at 00:41)
 
 * [transfer between isomorphic types](89154transferbetweenisomorphictypes.html) (26 messages, latest: Apr 02 2019 at 18:51)
-
-* [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (15 messages, latest: Apr 01 2019 at 15:47)
 
 * [int.induction_on](76899intinductionon.html) (25 messages, latest: Apr 01 2019 at 10:27)
 

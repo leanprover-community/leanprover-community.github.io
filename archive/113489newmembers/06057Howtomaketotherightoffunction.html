@@ -122,6 +122,56 @@ permalink: archive/113489newmembers/06057Howtomaketotherightoffunction.html
 <p>Would it be possible to implement the above except with <code>list_claim</code> being replaced by an array (including in the <code>Action</code> type)?</p>
 <p>Either way, thanks for the examples. Let me study them for a bit.</p>
 
+<a name="178956738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20%60to_the_right_of%60%20function%3F/near/178956738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06057Howtomaketotherightoffunction.html#178956738">Marko Grdinić (Oct 24 2019 at 14:20)</a>:</h4>
+<p>Since when I will be indexing into the array in the Lean version, the inputs will be of the form <code>{n // n ∈ list_claim}</code>, meaning they will have proof of membership I would like to take advantage of that.</p>
+<div class="codehilite"><pre><span></span>def after_first : ∀ (l : list (nat × nat)) (x : {x // x ∈ l}), {ll // {lr // ll ++ [x.1] ++ lr = l}}
+</pre></div>
+
+
+<p>Right now I am trying to do this function and am wondering how to even write the <code>{ll // {lr // ll ++ [x.1] ++ lr = l}}</code> part correctly. How should it be done?</p>
+<hr>
+<p>I've realized that with arrays, the membership proofs actually include an index.</p>
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="n">def</span> <span class="n">mem</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">buffer</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="bp">∃</span><span class="n">i</span><span class="o">,</span> <span class="n">read</span> <span class="n">a</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span>
+</pre></div>
+
+
+<p>Here is the one in <code>buffer</code>. Unfortunately, as I am also realizing, there is a difference between an existential and a subtype. It seems that the existential <code>Prop</code>s cannot be destructured in regular code unlike subtypes. I was wondering what the difference between <code>Prop</code> and <code>Type</code> was up to now. I guess I have my answer.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">claims</span> <span class="o">:</span> <span class="n">buffer</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">to_buffer</span> <span class="o">[(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)]</span>
+
+<span class="kn">inductive</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Claim</span> <span class="o">(</span><span class="n">claim</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">claims</span><span class="o">)</span> <span class="o">:</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Dudo</span> <span class="o">:</span> <span class="n">Action</span>
+
+<span class="n">def</span> <span class="n">Action</span><span class="bp">.</span><span class="k">show</span> <span class="o">:</span> <span class="n">Action</span> <span class="bp">→</span> <span class="n">string</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Action</span><span class="bp">.</span><span class="n">Claim</span> <span class="bp">⟨</span> <span class="n">n</span><span class="o">,</span> <span class="bp">_⟩</span> <span class="o">)</span> <span class="o">:=</span> <span class="s2">&quot;Claim &quot;</span> <span class="bp">++</span> <span class="n">has_repr</span><span class="bp">.</span><span class="n">repr</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">Action</span><span class="bp">.</span><span class="n">Dudo</span> <span class="o">:=</span> <span class="s2">&quot;Dudo&quot;</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>equation compiler failed (use &#39;set_option trace.eqn_compiler.elim_match true&#39; for additional details)
+nested exception message:
+induction tactic failed, recursor &#39;Exists.dcases_on&#39; can only eliminate into Prop
+</pre></div>
+
+
+<hr>
+<p>Given all that, the way I would really like to structure the <code>Action</code> type would be something like this (in pseudo-code)...</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">list_claim</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">to_buffer</span> <span class="o">[(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)]</span>
+
+<span class="kn">inductive</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Claim</span> <span class="o">(</span><span class="n">claim</span> <span class="o">:</span> <span class="o">{</span><span class="n">n</span> <span class="n">i</span> <span class="bp">//</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">list_claim</span> <span class="bp">@</span> <span class="n">i</span><span class="o">})</span> <span class="o">:</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Dudo</span> <span class="o">:</span> <span class="n">Action</span>
+</pre></div>
+
+
+<p>Rather than having to waste time looking up the array, having the index there directly would be ideal. It would have made taking all the items of the array to the right of the index trivially easy. I should have implemented the F# version like that, but I wasn't aiming for an efficient implementation there. But since I am doing it in Lean, I am interested in exploring some of the possibilities of the language as an exercise. Where should I start with this?</p>
+<p>The one thing I am going to need some help is figuring out how to do the equivalent of <code>list.attach</code> for <code>buffer</code>s. I am drawing a blank on how to approach that. Would it be possible to adapt <code>list.pmap</code> for that purpose somehow? I guess that is the first place I should look into...</p>
+
+<a name="178957361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20%60to_the_right_of%60%20function%3F/near/178957361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06057Howtomaketotherightoffunction.html#178957361">Andrew Ashworth (Oct 24 2019 at 14:26)</a>:</h4>
+<p>oof, that's a lot of dependent types</p>
+
 
 {% endraw %}
 
