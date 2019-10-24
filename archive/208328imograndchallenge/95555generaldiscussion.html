@@ -275,6 +275,48 @@ Also given that the IMO problem is about an arbitrary collection of points, I do
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178913994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178913994">Reid Barton (Oct 24 2019 at 01:51)</a>:</h4>
 <p>I don't know the answer to that, but this FFI business is relevant because it means it is actually viable to build your ML system in Lean, which gives you direct access to the Lean tactic state and so on as well. For other theorem provers, you'd want to use a different programming language and then you have the problem of importing/exporting data like the tactic state. (Although I'm not sure why you couldn't just use OCaml as the host language for the theorem provers written in it.)</p>
 
+<a name="178915602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178915602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178915602">Brando Miranda (Oct 24 2019 at 02:28)</a>:</h4>
+<p>Well, most serious ML researchers use python, so thats why, I believe most of us don't know OCaml (I'm learning it myself now thought cuz I predicted it might be useful as you have pointed out, but even if I write my ML in OCaml then it means little people can build on it if its all in OCaml)</p>
+
+<a name="178915705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178915705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178915705">Brando Miranda (Oct 24 2019 at 02:30)</a>:</h4>
+<blockquote>
+<p>but this FFI business is relevant because it means it is actually viable to build your ML system in Lean, which gives you direct access to the Lean tactic state and so on as well.</p>
+</blockquote>
+<p>Oh interesting! But would that mean I can build an ML system inside of Lean or inside of Python?</p>
+
+<a name="178915783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178915783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178915783">Brando Miranda (Oct 24 2019 at 02:32)</a>:</h4>
+<blockquote>
+<p>For other theorem provers, you'd want to use a different programming language and then you have the problem of importing/exporting data like the tactic state.</p>
+</blockquote>
+<p>Do you mind expanding what this means? In particular, why does one need an external programming language for most ITPs? (perhaps a few examples would be nice) Also, why isn't this a problem in Lean? Is it because Lean is a programming language itself or because of the foreign function interface (FFI)?</p>
+<p>(Perhaps I will go and play with Lean's foreign function interface (FFI) so that its less wishy-washy in my head and get my hands dirty).</p>
+
+<a name="178915898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178915898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178915898">Jason Rute (Oct 24 2019 at 02:35)</a>:</h4>
+<p>As for rewriting HOL light in C++.  I tried to look it up.  It seems that in <a href="https://arxiv.org/pdf/1904.03241.pdf" target="_blank" title="https://arxiv.org/pdf/1904.03241.pdf">the first HOList paper</a> and <a href="https://sites.google.com/view/holist/home" target="_blank" title="https://sites.google.com/view/holist/home">the website</a> mention that their modified form of HOL Light is called DeepHOL.  I think looking at the code they seemed to have just rewritten the kernel in C++, but I am not certain.  The whole thing is usable as a docker container where one can treat it as a black box theorem prover interface.  (See the website for how to use it.)</p>
+
+<a name="178916069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178916069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178916069">Reid Barton (Oct 24 2019 at 02:39)</a>:</h4>
+<p>Other theorem provers (including Lean 3, really) either aren't programming languages at all, or aren't adequate as programming languages for the task (though I must say I don't understand the situation with Coq, in particular)</p>
+
+<a name="178916196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178916196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178916196">Jason Rute (Oct 24 2019 at 02:43)</a>:</h4>
+<p>I think one would need the following in a project like this.  </p>
+<ul>
+<li>A reinforcement learning master algorithm which decides which problems to try to attempt, tells the agent to try to solve them, records the results, and uses these results to train the neural network.  This would also probably be a heavily parallelized application.</li>
+<li>A search algorithm which tries to solve a particular problem (repeatedly querying a neural network as an oracle).</li>
+<li>The part which actually runs the neural network.  (And for speed it probably needs to batch up calls to the neural network and send them together to make efficient use of the GPU.</li>
+<li>The part which trains the neural network.</li>
+</ul>
+<p>I think the last two need to be in Python or C++.  The tree search agent could be in Lean with FFI to the part which calls the network, but I don't know how well a purely functional language  does with (non-depth-first) tree search.  The overall master agent could be written in lean, but I assume it would make more sense in something else.</p>
+
+<a name="178916279"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178916279" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178916279">Jason Rute (Oct 24 2019 at 02:45)</a>:</h4>
+<p>Also, I guess speed doesn't matter as much when you have massive parallelism.  (At my job, when we need something done fast, we just reserve more AWS instances.  [Well in theory.  In practice there always seems to be a bottle neck or it is too expensive.])</p>
+
 
 {% endraw %}
 

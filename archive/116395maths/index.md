@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (6 messages, latest: Oct 24 2019 at 02:33)
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (4 messages, latest: Oct 23 2019 at 22:13)
+* [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
 
 * [Axiomatised summations](13577Axiomatisedsummations.html) (90 messages, latest: Oct 23 2019 at 20:48)
 
