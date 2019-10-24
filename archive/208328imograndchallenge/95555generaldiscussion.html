@@ -99,6 +99,28 @@ Also given that the IMO problem is about an arbitrary collection of points, I do
 </blockquote>
 <p>It is not hard to interface with ML systems. Lean has a tactic framework, with excellent meta-programming support, and also a foreign function interface.</p>
 
+<a name="178908913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178908913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178908913">Jason Rute (Oct 24 2019 at 00:06)</a>:</h4>
+<blockquote>
+<p>it seems that re-implementing HOList would be a pain (I wish I understood why)</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="246156">@Brando Miranda</span> I can try to address (narrowly) what I think would need to happen to reimplement HOList in Lean.  I know at least one person here is working on it.  I don’t know what progress they have made.  I’m probably the one who said this  a “pain”.  I should probably backtrack and say it is doable with a good amount of engineering work, and I hope someone builds it!  As I think you have an ML background, I won’t try to cover up the ML terminology.</p>
+
+<a name="178908916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178908916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178908916">Jason Rute (Oct 24 2019 at 00:06)</a>:</h4>
+<p>As I see it, the HOList projects have the following parts that would need to be reimplemented:</p>
+<ol>
+<li><em>A list of theorems</em> For both training and testing, one needs a list of theorems (and the full context in some nicely parsable form) to train on.</li>
+<li><em>Proof recording (optional)</em> If one wants to do supervised learning, then one needs a list of proofs as well to train on.  These proofs will contain the theorem to prove (with the context) as well as the various tactics which have been applied along with their arguments.  This needs to be at some intermediate level which records the name of the tactic and the arguments (so at a higher level than type theory), but probably not at the level of the raw lean code.  I’ve heard from some in the Lean community that the tactic environment could be hacked to provide this information, but I don’t know that it has ever been done.  HOL Light has some advantages here.  It has a simpler tactic framework (I think), it is a larger library (more training data), it is written by one person mostly (so is more uniform), and HOL Light only uses tactics (whereas Lean uses a mixture of tactics and the type theoretic framework).  However, the ASTactic (CogGym) and ProverBot9001 projects also used proof recording for Coq.</li>
+<li><em>An interactive environment</em> If one wants to do reinforcement learning and/or tree search, one needs to be able to quickly interact with the system.  For tree search, given a particular state, one needs to be able to try possible tactics, see what the results are and back track if needed (using for example beam search).  Also, for reinforcement learning, one needs to be able to try out a very large number of scenarios (in this case theorems, either real or synthetic, to prove).  This necessitates an even faster back-and-forth between the agent and the system.  Google rewrote HOL Light in C++ for this purpose.  (The various Coq ML projects don’t use reinforcement learning.)</li>
+<li><em>A system for scoring tactics and tactic arguments</em>  Scoring the tactics can be done as a probability distribution over the tactics (computed by a neural network), but scoring the arguments to these tactics can be a bit more tricky because of the large number of possibilities.  HOList has one system for doing this.  The two Coq projects have another system.  I don’t know if either is readily adaptable to Lean.</li>
+<li><em>Access to neural networks and computer power for training and evaluation</em> The agent will have to compute tactic and argument scores via (graph?) neural networks.  Therefore, it needs access to TensorFlow or PyTorch and a distributed computing system.</li>
+</ol>
+
+<a name="178908921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/178908921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#178908921">Jason Rute (Oct 24 2019 at 00:06)</a>:</h4>
+<p>Some further comments.  One doesn’t need proof recording.  Instead one can train solely with theorem statements and reinforcement learning.  Conversely, if one doesn’t use reinforcement learning, then one doesn’t need as much speed in the interactive environment.  Also, the tree search agent could live inside Lean (as a tactic) making FFI calls to TensorFlow, say.  Alternately it could have the agent in Python or C++.  Then it would have to guide Lean from the outside.  I don’t know which is better.</p>
+
 
 {% endraw %}
 

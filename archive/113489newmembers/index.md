@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [empty cone](51733emptycone.html) (12 messages, latest: Oct 23 2019 at 23:45)
+* [empty cone](51733emptycone.html) (14 messages, latest: Oct 24 2019 at 00:18)
 
 * [subtype coercion](10559subtypecoercion.html) (15 messages, latest: Oct 23 2019 at 23:44)
 
