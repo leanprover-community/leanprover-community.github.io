@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (362 messages, latest: Oct 24 2019 at 08:39)
+
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (7 messages, latest: Oct 24 2019 at 01:07)
 
 * [noncomputable if](18823noncomputableif.html) (9 messages, latest: Oct 23 2019 at 23:10)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [squashing PRs](42409squashingPRs.html) (11 messages, latest: Oct 23 2019 at 22:45)
 
 * [emacs buffers](99927emacsbuffers.html) (6 messages, latest: Oct 23 2019 at 17:46)
-
-* [Lean in the wild](43625Leaninthewild.html) (360 messages, latest: Oct 23 2019 at 15:35)
 
 * [Advocacy is Volunteering](61161AdvocacyisVolunteering.html) (1 message, latest: Oct 23 2019 at 06:00)
 
