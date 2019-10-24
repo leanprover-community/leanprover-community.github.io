@@ -1,0 +1,37 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/03140endomorphismalgebra.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/03140endomorphismalgebra.html">endomorphism algebra</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="178999460"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/endomorphism%20algebra/near/178999460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/03140endomorphismalgebra.html#178999460">Oliver Nash (Oct 24 2019 at 21:25)</a>:</h4>
+<p>Be gentle, this is my first ever question!</p>
+<p>For a module M over a commutative ring R, we have the endomorphism algebra. Looking in Mathlib, I can see the ring structure defined here: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/linear_algebra/basic.lean#L176" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/linear_algebra/basic.lean#L176">https://github.com/leanprover-community/mathlib/blob/master/src/linear_algebra/basic.lean#L176</a> and I can see a scalar action defined here: <a href="https://github.com/leanprover-community/mathlib/blob/master/src/linear_algebra/basic.lean#L257" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/linear_algebra/basic.lean#L257">https://github.com/leanprover-community/mathlib/blob/master/src/linear_algebra/basic.lean#L257</a> but I cannot find anywhere putting it all together and actually asserting the algebra structure. After hacking around a bit, the following seems to give me what I want:</p>
+<div class="codehilite"><pre><span></span>  variables (M : Type v) [add_comm_group M]
+  variables (R : Type u) [comm_ring R] [module R M]
+
+  instance endomorphism_algebra : algebra R (M →ₗ[R] M) :=
+  begin
+    refine algebra.mk _ _ _,
+    { exact λ r, r • linear_map.id, },
+    { refine is_ring_hom.mk _ _ _; intros; ext; simp [mul_smul, add_smul], },
+    repeat { intros, ext, simp, },
+  end
+</pre></div>
+
+
+<p>Am I missing something or is this truly a small gap that deserves filling?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
