@@ -749,6 +749,46 @@ Could it have to do with the cache being shared between concurrent builds?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178983904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178983904">Johan Commelin (Oct 24 2019 at 18:43)</a>:</h4>
 <p>Sounds like it's time to look at alternatives</p>
 
+<a name="178985517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178985517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178985517">Johan Commelin (Oct 24 2019 at 19:00)</a>:</h4>
+<p>I can potentially look into setting up a Jenkins server. As far as I can see, Jenkins is capable of distributing builds to different servers, so we could share the load if others also have some resources</p>
+
+<a name="178989530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178989530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178989530">Johan Commelin (Oct 24 2019 at 19:43)</a>:</h4>
+<p>I guess the problem with moving away from Travis is that this also creates Mergify headaches</p>
+
+<a name="178989923"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178989923" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178989923">Rob Lewis (Oct 24 2019 at 19:47)</a>:</h4>
+<p>So it reached the lint stage a little while ago and started recompiling again. There's no way anything could have changed between the archive and lint stages. The archive took a minute, no commits to master, etc.</p>
+
+<a name="178990014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178990014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178990014">Rob Lewis (Oct 24 2019 at 19:48)</a>:</h4>
+<p>I added a line to touch the olean files before the lint stage. Not sure if it will help, but maybe.</p>
+
+<a name="178990139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178990139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178990139">Rob Lewis (Oct 24 2019 at 19:50)</a>:</h4>
+<p>If our hypothesis is true and it is getting unpredictable info from the <code>/merge</code> branch: my impression is this is bizarre, and inefficient, but not fatal.</p>
+
+<a name="178990293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178990293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178990293">Rob Lewis (Oct 24 2019 at 19:51)</a>:</h4>
+<p>There's no real connection between Mergify and Travis, any CI with proper GitHub support should work with Mergify.</p>
+
+<a name="178990395"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178990395" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178990395">Johan Commelin (Oct 24 2019 at 19:52)</a>:</h4>
+<p>Yeah... but I don't know how hard it is to get Github support working for self-hosted CI's</p>
+
+<a name="178990665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178990665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178990665">Rob Lewis (Oct 24 2019 at 19:55)</a>:</h4>
+<p>The costs of the Travis craziness are slower and occasionally broken PR builds, and <em>maybe</em> it's possible a broken PR could make it to master. The costs of switching to a CI with bad GitHub support are higher, I think.</p>
+
+<a name="178990876"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178990876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178990876">Simon Hudon (Oct 24 2019 at 19:57)</a>:</h4>
+<p>Git lab has a nice CI infrastructure and it supports github. If Travis is too much of a pain, it can be worth investigating. And the maximum timeout is 3 hours which goes most of the way to building mathlib completely</p>
+
+<a name="178991040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178991040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178991040">Tim Daly (Oct 24 2019 at 19:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Did you mean running a github server on a local machine? It is a pretty straightforward effort.</p>
+
 
 {% endraw %}
 

@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (6 messages, latest: Oct 24 2019 at 18:57)
+* [Travis](06426Travis.html) (140 messages, latest: Oct 24 2019 at 19:59)
 
-* [Travis](06426Travis.html) (130 messages, latest: Oct 24 2019 at 18:43)
+* [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (7 messages, latest: Oct 24 2019 at 19:00)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (16 messages, latest: Oct 24 2019 at 14:04)
 
