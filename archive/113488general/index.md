@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (374 messages, latest: Oct 24 2019 at 12:35)
+* [Lean in the wild](43625Leaninthewild.html) (382 messages, latest: Oct 24 2019 at 13:46)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (76 messages, latest: Oct 24 2019 at 10:10)
 

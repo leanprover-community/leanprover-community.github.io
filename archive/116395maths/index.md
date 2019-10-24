@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [manifolds](86782manifolds.html) (4 messages, latest: Oct 24 2019 at 13:43)
+
 * [Proof by algorithm](86601Proofbyalgorithm.html) (205 messages, latest: Oct 24 2019 at 12:59)
 
 * [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
@@ -152,8 +154,6 @@ permalink: archive/116395maths/index.html
 * [presheafed space category](15170presheafedspacecategory.html) (22 messages, latest: Jul 28 2019 at 10:56)
 
 * [order topology](42234ordertopology.html) (1 message, latest: Jul 26 2019 at 12:13)
-
-* [manifolds](86782manifolds.html) (3 messages, latest: Jul 25 2019 at 21:20)
 
 * [help with sequences](21714helpwithsequences.html) (15 messages, latest: Jul 24 2019 at 19:03)
 
