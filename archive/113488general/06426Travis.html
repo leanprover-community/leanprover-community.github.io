@@ -580,6 +580,175 @@ Edit - never mind, everything in the last step is happening in <code>src</code>.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178978578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178978578">Rob Lewis (Oct 24 2019 at 17:54)</a>:</h4>
 <p>But then maybe we should move archive and docs too? Neither is slow, unless the oleans are outdated.</p>
 
+<a name="178979508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178979508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178979508">Simon Hudon (Oct 24 2019 at 18:03)</a>:</h4>
+<p>What do you mean by move docs and archive?</p>
+
+<a name="178979883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178979883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178979883">Rob Lewis (Oct 24 2019 at 18:07)</a>:</h4>
+<p>The docs and archive stages of the Travis build. If we build those directories as part of the test stage, instead of as separate stages, there's no chance that updates to master will invalidate the oleans.</p>
+
+<a name="178979925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178979925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178979925">Simon Hudon (Oct 24 2019 at 18:07)</a>:</h4>
+<p>Updates to master has no effect on the build. That's not what the issues are</p>
+
+<a name="178979997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178979997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178979997">Simon Hudon (Oct 24 2019 at 18:08)</a>:</h4>
+<p>The state of the cache and the timestamps on the files is where you should look for the issues.</p>
+
+<a name="178980180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178980180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178980180">Reid Barton (Oct 24 2019 at 18:10)</a>:</h4>
+<p>This does sound more plausible, though I'm having trouble constructing a mechanism under which recompilation sometimes happens, but usually not.<br>
+Could it have to do with the cache being shared between concurrent builds?</p>
+
+<a name="178980290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178980290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178980290">Bryan Gin-ge Chen (Oct 24 2019 at 18:11)</a>:</h4>
+<blockquote>
+<p>Updates to master has no effect on the build. </p>
+</blockquote>
+<p>Are you sure about this? I thought <a href="https://travis-ci.org/leanprover-community/mathlib/jobs/602292783#L164" target="_blank" title="https://travis-ci.org/leanprover-community/mathlib/jobs/602292783#L164">this line</a> would mean that a merge happens at the start of each stage, but maybe my git / github understanding is wrong.</p>
+
+<a name="178980436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178980436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178980436">Simon Hudon (Oct 24 2019 at 18:12)</a>:</h4>
+<p>Which line do you mean?</p>
+
+<a name="178980485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178980485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178980485">Reid Barton (Oct 24 2019 at 18:13)</a>:</h4>
+<p><code>$ git fetch origin +refs/pull/1606/merge:</code></p>
+
+<a name="178980527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178980527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178980527">Reid Barton (Oct 24 2019 at 18:13)</a>:</h4>
+<p>line 164, it should be highlighted</p>
+
+<a name="178980588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178980588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178980588">Bryan Gin-ge Chen (Oct 24 2019 at 18:14)</a>:</h4>
+<p>In particular I thought the suffix <code>/merge</code> retrieves a merge commit from the PR branch to master.</p>
+
+<a name="178981120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981120">Bryan Gin-ge Chen (Oct 24 2019 at 18:19)</a>:</h4>
+<p>I can't find any official documentation about the <code>/merge</code> ref, but I did find <a href="https://discourse.drone.io/t/github-claims-that-merge-refs-are-undocumented-feature/1100" target="_blank" title="https://discourse.drone.io/t/github-claims-that-merge-refs-are-undocumented-feature/1100">this forum post</a> in which someone quotes Github support as saying:</p>
+<blockquote>
+<p>The /merge refs that are being used here are an undocumented feature and you shouldn’t be relying on them. That feature was build to power Pull Requests in the Web UI, it was not built to be used by 3rd party services. Because it’s undocumented – you should not have any expectations about behavior, the behavior might change at any time and those refs might completely go away without warning.</p>
+</blockquote>
+
+<a name="178981196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981196">Rob Lewis (Oct 24 2019 at 18:20)</a>:</h4>
+<p>After some testing on my own fork... maybe the <code>+refs/pull/*/merge</code> branches are fixed to merge with whatever master was at the time of the last commit on the PR branch?</p>
+
+<a name="178981220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981220">Reid Barton (Oct 24 2019 at 18:20)</a>:</h4>
+<p>It makes a merge with something, but it doesn't seem to be current master, yeah.</p>
+
+<a name="178981430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981430">Reid Barton (Oct 24 2019 at 18:22)</a>:</h4>
+<p>I tried with <a href="https://github.com/leanprover-community/mathlib/issues/1540" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1540">#1540</a> and it gave me a merge with the commit containing <a href="https://github.com/leanprover-community/mathlib/issues/1584" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1584">#1584</a>. I don't see how these are related yet.</p>
+
+<a name="178981562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981562">Bryan Gin-ge Chen (Oct 24 2019 at 18:22)</a>:</h4>
+<p>If I'm reading the forum post correctly, it seems that the <code>/merge</code> ref gets updated only when needed by the web UI? Disturbing.</p>
+<blockquote>
+<p>Instead, the mergeability is triggered when it’s needed: when a user visits the page for the pull request via the UI or requests the pull request via the API. In order to determine the mergeability of a pull request, GitHub actually performs a merge between the head and the base ref, and the result of that merge is stored in the /merge ref (the ref you’re using).</p>
+</blockquote>
+
+<a name="178981574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981574">Reid Barton (Oct 24 2019 at 18:23)</a>:</h4>
+<p>git tells me the latter commit is also <code>sgouezel/master</code> but I'm assuming that's not relevant :)</p>
+
+<a name="178981661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981661">Reid Barton (Oct 24 2019 at 18:23)</a>:</h4>
+<p>Oh hey, it gave me a merge with current master this time.</p>
+
+<a name="178981746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981746">Bryan Gin-ge Chen (Oct 24 2019 at 18:24)</a>:</h4>
+<p>Possibly because you or I clicked on the PR page for <a href="https://github.com/leanprover-community/mathlib/issues/1540" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1540">#1540</a> and that triggered an update?</p>
+
+<a name="178981789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981789">Reid Barton (Oct 24 2019 at 18:24)</a>:</h4>
+<p>Presumably</p>
+
+<a name="178981813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981813">Reid Barton (Oct 24 2019 at 18:25)</a>:</h4>
+<p>And it seems plausible that the last time anyone looked at that page was 2 days ago</p>
+
+<a name="178981831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981831">Reid Barton (Oct 24 2019 at 18:25)</a>:</h4>
+<p>So, that's pretty terrible</p>
+
+<a name="178981845"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981845" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981845">Rob Lewis (Oct 24 2019 at 18:25)</a>:</h4>
+<p>So basically, Travis is choosing at random what to build every time.</p>
+
+<a name="178981883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981883">Reid Barton (Oct 24 2019 at 18:25)</a>:</h4>
+<p>Is this <code>/merge</code> stuff built in to Travis or something we configured?</p>
+
+<a name="178981890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981890">Rob Lewis (Oct 24 2019 at 18:25)</a>:</h4>
+<p>Including on the final builds for Mergify.</p>
+
+<a name="178981997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178981997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178981997">Reid Barton (Oct 24 2019 at 18:26)</a>:</h4>
+<p>mergify doesn't build the same commit it will push? I thought that was part of the point</p>
+
+<a name="178982105"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982105" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982105">Bryan Gin-ge Chen (Oct 24 2019 at 18:27)</a>:</h4>
+<p>I think it's built into travis. Maybe we will have to look into other CI services?</p>
+
+<a name="178982113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982113">Rob Lewis (Oct 24 2019 at 18:27)</a>:</h4>
+<p>It's not in the .travis.yml  file. Maybe it's configured somewhere I don't have access to?</p>
+
+<a name="178982229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982229">Reid Barton (Oct 24 2019 at 18:28)</a>:</h4>
+<p>^ <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> (?)</p>
+
+<a name="178982302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982302">Rob Lewis (Oct 24 2019 at 18:29)</a>:</h4>
+<p>Hmm, actually, I'm not sure about Mergify. It merges the PR into master and lets Travis build that. Travis is... maybe... checking the merge of that with something else? Does Mergify's merge commit force the <code>/merge</code> branch to update?</p>
+
+<a name="178982457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982457">Rob Lewis (Oct 24 2019 at 18:30)</a>:</h4>
+<p>I'd hope that adding a commit to the PR would update <code>/merge</code> to merge with the current master.</p>
+
+<a name="178982482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982482">Reid Barton (Oct 24 2019 at 18:30)</a>:</h4>
+<p>Hopefully the commit mergify builds will be a descendant of current master anyways, right? Otherwise what would happen when it tries to push?</p>
+
+<a name="178982500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982500">Reid Barton (Oct 24 2019 at 18:31)</a>:</h4>
+<p>So the merge from <code>/merge</code> ought to be a no-op</p>
+
+<a name="178982530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982530">Rob Lewis (Oct 24 2019 at 18:31)</a>:</h4>
+<p>Mergify doesn't build the squashed commit.</p>
+
+<a name="178982560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982560">Simon Hudon (Oct 24 2019 at 18:31)</a>:</h4>
+<p>We could test it. Start the build with <code>git rev-parse HEAD</code></p>
+
+<a name="178982664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982664">Reid Barton (Oct 24 2019 at 18:32)</a>:</h4>
+<blockquote>
+<p>Mergify doesn't build the squashed commit.</p>
+</blockquote>
+<p>I'm going to go cry in the corner</p>
+
+<a name="178982940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982940">Rob Lewis (Oct 24 2019 at 18:34)</a>:</h4>
+<p>The file state in the commit that Mergify pushes is exactly the same as the PR branch that Mergify checks. But the git history is different.</p>
+
+<a name="178982983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178982983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178982983">Rob Lewis (Oct 24 2019 at 18:34)</a>:</h4>
+<p>And now I don't trust that Travis is actually checking what's in the PR branch.</p>
+
+<a name="178983055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178983055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178983055">Rob Lewis (Oct 24 2019 at 18:35)</a>:</h4>
+<p>Travis runs again once a commit is added to master. THAT one should be checked correctly.</p>
+
+<a name="178983904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178983904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178983904">Johan Commelin (Oct 24 2019 at 18:43)</a>:</h4>
+<p>Sounds like it's time to look at alternatives</p>
+
 
 {% endraw %}
 
