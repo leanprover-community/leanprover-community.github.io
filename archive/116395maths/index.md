@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [manifolds](86782manifolds.html) (11 messages, latest: Oct 24 2019 at 14:58)
+* [manifolds](86782manifolds.html) (15 messages, latest: Oct 24 2019 at 15:24)
 
 * [Proof by algorithm](86601Proofbyalgorithm.html) (205 messages, latest: Oct 24 2019 at 12:59)
 

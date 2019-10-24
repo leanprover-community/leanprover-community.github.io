@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1601 attribute \[class\] nat.prime](096921601attributeclassnatprime.html) (23 messages, latest: Oct 24 2019 at 14:26)
+* [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (123 messages, latest: Oct 24 2019 at 15:23)
 
-* [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (122 messages, latest: Oct 24 2019 at 13:46)
+* [#1601 attribute \[class\] nat.prime](096921601attributeclassnatprime.html) (23 messages, latest: Oct 24 2019 at 14:26)
 
 * [#1582 nhds notation](487491582nhdsnotation.html) (30 messages, latest: Oct 21 2019 at 19:08)
 

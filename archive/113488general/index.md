@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (1 message, latest: Oct 24 2019 at 14:58)
+* [Travis](06426Travis.html) (66 messages, latest: Oct 24 2019 at 15:57)
+
+* [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (5 messages, latest: Oct 24 2019 at 15:04)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (16 messages, latest: Oct 24 2019 at 14:04)
 
@@ -194,8 +196,6 @@ permalink: archive/113488general/index.html
 * [`environment` and `private` declarations](81565environmentandprivatedeclarations.html) (1 message, latest: Sep 16 2019 at 16:24)
 
 * [nat.le_cases](41425natlecases.html) (7 messages, latest: Sep 16 2019 at 09:05)
-
-* [Travis](06426Travis.html) (65 messages, latest: Sep 15 2019 at 23:16)
 
 * [Instance resolution failures](24709Instanceresolutionfailures.html) (34 messages, latest: Sep 14 2019 at 16:11)
 
