@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [manifolds](86782manifolds.html) (15 messages, latest: Oct 24 2019 at 15:24)
+* [manifolds](86782manifolds.html) (19 messages, latest: Oct 24 2019 at 17:43)
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (205 messages, latest: Oct 24 2019 at 12:59)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (210 messages, latest: Oct 24 2019 at 17:34)
 
 * [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
 

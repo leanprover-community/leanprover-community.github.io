@@ -16,6 +16,25 @@ permalink: archive/113489newmembers/71784conemorphisms.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/178972996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#178972996">Calle Sönne (Oct 24 2019 at 16:59)</a>:</h4>
 <p>Is there some theorem in lean that proves composition of cone morphism is a cone morphism? I cant find it in cone.lean or limit.lean</p>
 
+<a name="178973934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/178973934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#178973934">Kenny Lau (Oct 24 2019 at 17:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="132603">@Calle Sönne</span> </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simps</span><span class="o">]</span> <span class="kn">instance</span> <span class="n">cone</span><span class="bp">.</span><span class="n">category</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="o">(</span><span class="n">cone</span> <span class="n">F</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span>  <span class="o">:=</span> <span class="bp">λ</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span> <span class="n">cone_morphism</span> <span class="n">A</span> <span class="n">B</span><span class="o">,</span>
+  <span class="n">comp</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">f</span><span class="bp">.</span><span class="n">hom</span> <span class="err">≫</span> <span class="n">g</span><span class="bp">.</span><span class="n">hom</span><span class="o">,</span>
+    <span class="n">w&#39;</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">intro</span> <span class="n">j</span><span class="bp">;</span> <span class="n">rw</span> <span class="o">[</span><span class="n">assoc</span><span class="o">,</span> <span class="n">g</span><span class="bp">.</span><span class="n">w</span><span class="o">,</span> <span class="n">f</span><span class="bp">.</span><span class="n">w</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">id</span>   <span class="o">:=</span> <span class="bp">λ</span> <span class="n">B</span><span class="o">,</span> <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="mi">𝟙</span> <span class="n">B</span><span class="bp">.</span><span class="n">X</span> <span class="o">}</span> <span class="o">}</span>
+</pre></div>
+
+<a name="178973940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/178973940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#178973940">Kenny Lau (Oct 24 2019 at 17:08)</a>:</h4>
+<p>that they form a category</p>
+
+<a name="178973972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/178973972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#178973972">Kenny Lau (Oct 24 2019 at 17:09)</a>:</h4>
+<p>that also means you shouldn't use <code>cone_morphism</code> explicitly, but rather <code>A \hom B</code></p>
+
 
 {% endraw %}
 

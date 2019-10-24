@@ -529,6 +529,57 @@ Edit - never mind, everything in the last step is happening in <code>src</code>.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973056">Simon Hudon (Oct 24 2019 at 16:59)</a>:</h4>
 <p>we might also want to try the build of test and archive with touching all the <code>olean</code> files in <code>src</code></p>
 
+<a name="178973170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973170">Simon Hudon (Oct 24 2019 at 17:00)</a>:</h4>
+<p>Because each stage is a whole new build, you restore the cache and clone the git repo and there the time stamps can be unreliable.</p>
+
+<a name="178973548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973548">Rob Lewis (Oct 24 2019 at 17:04)</a>:</h4>
+<p>Okay, I restarted the build. <a href="https://github.com/leanprover-community/mathlib/issues/1565" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1565">#1565</a> should hit master while this is going, so let's see if the same issue comes up.</p>
+
+<a name="178973602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973602">Rob Lewis (Oct 24 2019 at 17:05)</a>:</h4>
+<p>Should we just add the command to touch all oleans in src? It can't hurt.</p>
+
+<a name="178973667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973667">Rob Lewis (Oct 24 2019 at 17:05)</a>:</h4>
+<p>It also wouldn't hurt to remove <code>--make</code> when we build the archive and tests.</p>
+
+<a name="178973913"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178973913" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178973913">Rob Lewis (Oct 24 2019 at 17:08)</a>:</h4>
+<p>If each stage does a fresh merge with master, how do the first stages even work? What if a commit lands during pre-build 2? Doesn't that mean all the work has to be redone in the test stage?</p>
+
+<a name="178975645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178975645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178975645">Bryan Gin-ge Chen (Oct 24 2019 at 17:24)</a>:</h4>
+<blockquote>
+<p>Doesn't that mean all the work has to be redone in the test stage?</p>
+</blockquote>
+<p>I think so, doesn't it explain the spread in run times for the test stages?</p>
+
+<a name="178976043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178976043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178976043">Rob Lewis (Oct 24 2019 at 17:28)</a>:</h4>
+<p>I thought the reason we had the pre-build stages was because we were hitting time limits when we built the whole thing in one stage. If we were doing that in the test stage, shouldn't we hit the same limits?</p>
+
+<a name="178976784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178976784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178976784">Bryan Gin-ge Chen (Oct 24 2019 at 17:35)</a>:</h4>
+<p>I think we do sometimes, but people often restart the jobs when they fail.</p>
+
+<a name="178978287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178978287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178978287">Rob Lewis (Oct 24 2019 at 17:50)</a>:</h4>
+<p>It feels like that should be way more common. I guess commits near the leafs of the import hierarchy would have less of an effect, maybe that limits it.</p>
+
+<a name="178978312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178978312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178978312">Rob Lewis (Oct 24 2019 at 17:51)</a>:</h4>
+<p>My mind is blown, and not in a good way, heh.</p>
+
+<a name="178978406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178978406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178978406">Rob Lewis (Oct 24 2019 at 17:52)</a>:</h4>
+<p>We could move the linting test to the test stage. That would create less potential duplication of work.</p>
+
+<a name="178978578"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/178978578" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#178978578">Rob Lewis (Oct 24 2019 at 17:54)</a>:</h4>
+<p>But then maybe we should move archive and docs too? Neither is slow, unless the oleans are outdated.</p>
+
 
 {% endraw %}
 

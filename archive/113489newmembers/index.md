@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [cone morphisms](71784conemorphisms.html) (1 message, latest: Oct 24 2019 at 16:59)
+* [zero_max a rfl lemma](80279zeromaxarfllemma.html) (16 messages, latest: Oct 24 2019 at 17:25)
 
-* [zero_max a rfl lemma](80279zeromaxarfllemma.html) (13 messages, latest: Oct 24 2019 at 16:14)
+* [cone morphisms](71784conemorphisms.html) (4 messages, latest: Oct 24 2019 at 17:09)
 
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (9 messages, latest: Oct 24 2019 at 14:26)
 
