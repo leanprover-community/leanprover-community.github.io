@@ -36,6 +36,102 @@ permalink: archive/116395maths/86601Proofbyalgorithm.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178915808" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178915808">Mario Carneiro (Oct 24 2019 at 02:33)</a>:</h4>
 <p>I don't know what that means</p>
 
+<a name="178928346"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928346" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928346">Tim Daly (Oct 24 2019 at 07:46)</a>:</h4>
+<p>I don't either, actually. But I have heard many times that "Programs are proofs" and "Constructive Proofs are programs" by Curry Howard. I can "sort-of, maybe, sometimes (SMS) " agree with constructive proofs being programs, under a lot of assumptions. But "programs are proofs" is a direction that I'm "sort-of, maybe, sometimes" wresting with. I have many working GCD algorithms (e.g. NAT, POlYNOMIALS, etc.) and I'm trying to prove them "correct". That is, I'm trying to prove that they fulfill a specification. The specification is "sort-of, maybe, sometimes" a set of logical definitions and axioms, (e.g. gcd(x,y) == gcd(y,x) )</p>
+<p>The language of the program (in this case, lisp) is irrelevant since it should be possible to translate a proof into a lambda form expressible in lisp. Given that the lambda form came from a proof with its associated definitions and axioms, it should be possible to "prove" the lambda form, that is, to prove the program.</p>
+<p>So the fundamental tasks are to (1) turn a gcd proof into a program and (2) to turn the program into a gcd proof. I am pondering a way to take the lowest level Lean output format into lisp.</p>
+<p>Given that this is research (aka creative reuse :-) ) I was hoping for working examples to SMS reasoning.</p>
+<p>The other working assumption is that I'm just confused but that's more of an axiom than an assumption.</p>
+
+<a name="178928415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928415">Kenny Lau (Oct 24 2019 at 07:47)</a>:</h4>
+<p>"programs are proofs" (i.e. Curry--Howard correspondence) has nothing to do with algorithmic proofs</p>
+
+<a name="178928447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928447">Tim Daly (Oct 24 2019 at 07:47)</a>:</h4>
+<p>I'm listening. Can you give me a reference I can study?</p>
+
+<a name="178928505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928505">Mario Carneiro (Oct 24 2019 at 07:48)</a>:</h4>
+<p>I'm sorry to tell you that by the Curry Howard isomorphism, the only thing you learn proof-wise from the existence of an algorithm in lisp is that the type of lisp s-expressions is inhabited</p>
+
+<a name="178928569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928569">Mario Carneiro (Oct 24 2019 at 07:49)</a>:</h4>
+<p>In order to get anything nontrivial out of curry howard, you need a really strong type system</p>
+
+<a name="178928619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928619">Tim Daly (Oct 24 2019 at 07:50)</a>:</h4>
+<p>So a constructive proof is only evidence that the type is inhabited? Then what does it mean to "generate program" from ITP?</p>
+
+<a name="178928651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928651">Mario Carneiro (Oct 24 2019 at 07:50)</a>:</h4>
+<p>Terms in lean have a "computational interpretation", aka an operational semantics, so you can run them</p>
+
+<a name="178928652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928652">Tim Daly (Oct 24 2019 at 07:50)</a>:</h4>
+<p>Axiom has "First Class Dynamic Types", so I have a really strong type system.</p>
+
+<a name="178928672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928672">Mario Carneiro (Oct 24 2019 at 07:51)</a>:</h4>
+<p>Dynamic types don't cut it</p>
+
+<a name="178928701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928701">Mario Carneiro (Oct 24 2019 at 07:52)</a>:</h4>
+<p>well, they sort of do, but you have to run the program to obtain a proof, and you only get a proof for that particular input</p>
+
+<a name="178928740"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928740">Tim Daly (Oct 24 2019 at 07:52)</a>:</h4>
+<p>So if I generate a lisp program using the computational interpretation then it has a corresponding proof.</p>
+
+<a name="178928749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928749">Mario Carneiro (Oct 24 2019 at 07:52)</a>:</h4>
+<p>so you won't be able to prove <code>gcd(x,y) = gcd(y,x)</code>, only <code>gcd(3,6) = gcd(6,3)</code> and similar</p>
+
+<a name="178928758"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928758" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928758">Tim Daly (Oct 24 2019 at 07:52)</a>:</h4>
+<p>"You only get a proof for that particular input"... But Axiom is symbolic so "that particular input" is actually a class of inputs.</p>
+
+<a name="178928776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928776">Mario Carneiro (Oct 24 2019 at 07:53)</a>:</h4>
+<p>you presumably can't symbolically execute all code paths though</p>
+
+<a name="178928836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928836">Mario Carneiro (Oct 24 2019 at 07:54)</a>:</h4>
+<p>you might operate <em>on</em> symbolic expressions, but to prove facts about the program that is doing the manipulation you need to work a meta level above that</p>
+
+<a name="178928844"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928844">Tim Daly (Oct 24 2019 at 07:54)</a>:</h4>
+<p>GCD(x:NAT,y:NAT) == GCD(y:NAT,x:NAT)</p>
+
+<a name="178928872"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928872" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928872">Mario Carneiro (Oct 24 2019 at 07:55)</a>:</h4>
+<p>Have you looked at ACL2? That sounds like it bears much more relation to what you are doing than lean</p>
+
+<a name="178928896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928896">Tim Daly (Oct 24 2019 at 07:55)</a>:</h4>
+<p>NAT has a lot of axioms and definitions (which, in the latest Axiom I'm building) are inherited from the Categories (aka typeclasses)</p>
+
+<a name="178928953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928953">Tim Daly (Oct 24 2019 at 07:56)</a>:</h4>
+<p>Yes, I've used ACL2. It isn't strong enough.</p>
+
+<a name="178928980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928980">Mario Carneiro (Oct 24 2019 at 07:57)</a>:</h4>
+<p>Have you looked at the <code>gcd</code> function in lean, and the proof that <code>gcd x y = gcd y x</code>?</p>
+
+<a name="178928993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178928993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178928993">Mario Carneiro (Oct 24 2019 at 07:57)</a>:</h4>
+<p>lean's <code>gcd</code> function is computable, it has code and you can run it on given inputs</p>
+
+<a name="178929048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178929048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178929048">Mario Carneiro (Oct 24 2019 at 07:58)</a>:</h4>
+<p>I'm not really sure what you are trying to do that is not covered by this approach</p>
+
+<a name="178929092"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/178929092" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#178929092">Tim Daly (Oct 24 2019 at 07:59)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> mentioned there is a gcd proof but not which file it lives in. I haven't searched for it yet. Do you know where it lives?</p>
+
 
 {% endraw %}
 
