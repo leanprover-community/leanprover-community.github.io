@@ -93,6 +93,35 @@ permalink: archive/113489newmembers/06057Howtomaketotherightoffunction.html
 <span class="bp">#</span><span class="kn">eval</span> <span class="n">buffer</span><span class="bp">.</span><span class="n">after_first</span> <span class="o">(</span><span class="n">eq</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">4</span><span class="o">))</span> <span class="n">buffer_claim</span>
 </pre></div>
 
+<a name="178946720"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20%60to_the_right_of%60%20function%3F/near/178946720" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/06057Howtomaketotherightoffunction.html#178946720">Marko Grdinić (Oct 24 2019 at 12:34)</a>:</h4>
+<blockquote>
+<p>That doesn't seem to be the same as the F# code</p>
+</blockquote>
+<p>Indeed. I can't really translate it directly into Lean as it does not have exceptions, so the issue is making sure that all accesses are valid at compile time.</p>
+<blockquote>
+<p>why do you have the attach stuff?</p>
+</blockquote>
+<p>I am translating the CFR algorithm + <a href="https://en.wikipedia.org/wiki/Dudo" target="_blank" title="https://en.wikipedia.org/wiki/Dudo">Dudo game</a> from <a href="https://github.com/mrakgr/The-Spiral-Language/tree/1cdc7e5b3c99d74fe232437ec2c689fc865020a7/Learning/CFR/Intro/CFR" target="_blank" title="https://github.com/mrakgr/The-Spiral-Language/tree/1cdc7e5b3c99d74fe232437ec2c689fc865020a7/Learning/CFR/Intro/CFR">F#</a> to Lean. The real goal after I am done with this is to translate the theorems from the CFR papers into Lean. This is something I would not be able to do with a less powerful type system than Leans.</p>
+<p>Here is how <code>dudo.lean</code> looks so far.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>
+
+<span class="n">def</span> <span class="n">list_dice</span> <span class="o">:=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">,</span><span class="mi">4</span><span class="o">,</span><span class="mi">5</span><span class="o">,</span><span class="mi">6</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">list_claim</span> <span class="o">:=</span> <span class="o">[(</span><span class="mi">1</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">1</span><span class="o">,</span><span class="mi">1</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">2</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">3</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">4</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">5</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">6</span><span class="o">),</span> <span class="o">(</span><span class="mi">2</span><span class="o">,</span><span class="mi">1</span><span class="o">)]</span>
+
+<span class="kn">inductive</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Claim</span> <span class="o">(</span><span class="n">claim</span> <span class="o">:</span> <span class="o">{</span><span class="n">n</span> <span class="bp">//</span> <span class="n">n</span> <span class="err">∈</span> <span class="n">list_claim</span><span class="o">})</span> <span class="o">:</span> <span class="n">Action</span>
+<span class="bp">|</span> <span class="n">Dudo</span> <span class="o">:</span> <span class="n">Action</span>
+
+<span class="n">def</span> <span class="n">actions</span><span class="bp">.</span><span class="k">begin</span> <span class="o">:=</span> <span class="n">list_claim</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">map</span> <span class="n">Action</span><span class="bp">.</span><span class="n">Claim</span>
+<span class="n">def</span> <span class="n">actions</span><span class="bp">.</span><span class="n">later</span> <span class="o">:=</span> <span class="n">actions</span><span class="bp">.</span><span class="k">begin</span> <span class="bp">++</span> <span class="o">[</span><span class="n">Action</span><span class="bp">.</span><span class="n">Dudo</span><span class="o">]</span>
+</pre></div>
+
+
+<p>Unlike in the <a href="https://github.com/mrakgr/The-Spiral-Language/blob/1cdc7e5b3c99d74fe232437ec2c689fc865020a7/Learning/CFR/Intro/CFR/dudo_v4.fsx" target="_blank" title="https://github.com/mrakgr/The-Spiral-Language/blob/1cdc7e5b3c99d74fe232437ec2c689fc865020a7/Learning/CFR/Intro/CFR/dudo_v4.fsx">F# version</a>, in Lean I want to relate the <code>Action</code> type to the existing list of actions at compile time.</p>
+<p>Would it be possible to implement the above except with <code>list_claim</code> being replaced by an array (including in the <code>Action</code> type)?</p>
+<p>Either way, thanks for the examples. Let me study them for a bit.</p>
+
 
 {% endraw %}
 

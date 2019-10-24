@@ -299,6 +299,61 @@ Is there something like <code>nat_trans.empty</code> already? Otherwise, you can
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178942725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178942725">Calle Sönne (Oct 24 2019 at 11:34)</a>:</h4>
 <p>Sounds good!</p>
 
+<a name="178947369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178947369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178947369">Calle Sönne (Oct 24 2019 at 12:42)</a>:</h4>
+<p>How do you use abbrevations? I have the following abbrevations:</p>
+<div class="codehilite"><pre><span></span><span class="kn">abbreviation</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="n">limit</span><span class="bp">.</span><span class="n">π</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="n">zero</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">,</span> <span class="n">reassoc</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span> <span class="o">:</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≫</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">erw</span> <span class="n">limit</span><span class="bp">.</span><span class="n">w</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="n">walking_parallel_pair_hom</span><span class="bp">.</span><span class="n">left</span><span class="o">,</span>
+  <span class="n">erw</span> <span class="n">limit</span><span class="bp">.</span><span class="n">w</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="n">walking_parallel_pair_hom</span><span class="bp">.</span><span class="n">right</span>
+<span class="kn">end</span>
+
+<span class="kn">abbreviation</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="o">{</span><span class="n">W</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">W</span> <span class="err">⟶</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="err">≫</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">k</span> <span class="err">≫</span> <span class="n">g</span><span class="o">)</span> <span class="o">:</span> <span class="n">W</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="o">:=</span>
+<span class="n">limit</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">fork</span><span class="bp">.</span><span class="n">of_ι</span> <span class="n">k</span> <span class="n">h</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I want to combine them as:<br>
+<code>lean have H1 : equalizer f g ⟶ equalizer g f, exact ((equalizer g f).lift (equalizer f g).ι (equalizer f g).condition) </code><br>
+But this gives the error</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">field</span> <span class="kn">notation</span><span class="o">,</span> <span class="n">type</span> <span class="n">is</span> <span class="n">not</span> <span class="n">of</span> <span class="n">the</span> <span class="n">form</span> <span class="o">(</span><span class="n">C</span> <span class="bp">...</span><span class="o">)</span> <span class="n">where</span> <span class="n">C</span> <span class="n">is</span> <span class="n">a</span> <span class="kn">constant</span>
+  <span class="n">limits</span><span class="bp">.</span><span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="n">C</span>
+</pre></div>
+
+<a name="178947849"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178947849" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178947849">Johan Commelin (Oct 24 2019 at 12:48)</a>:</h4>
+<p>Unrelated: <code>have</code> is for propositions. Your morphism is data, so you need <code>let H1 : ...</code></p>
+
+<a name="178947880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178947880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178947880">Calle Sönne (Oct 24 2019 at 12:49)</a>:</h4>
+<p>Thank you</p>
+
+<a name="178947988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178947988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178947988">Johan Commelin (Oct 24 2019 at 12:50)</a>:</h4>
+<p>Next, <code>(equalizer g f).lift</code> will try to see if <code>(equalizer g f)</code> is a <em>term</em> of type <code>equalizer _ _</code></p>
+
+<a name="178947992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178947992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178947992">Johan Commelin (Oct 24 2019 at 12:50)</a>:</h4>
+<p>But it is not.</p>
+
+<a name="178948013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178948013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178948013">Johan Commelin (Oct 24 2019 at 12:51)</a>:</h4>
+<p>So you should simply write <code>equalizer.lift _ _</code></p>
+
+<a name="178948674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178948674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178948674">Calle Sönne (Oct 24 2019 at 12:58)</a>:</h4>
+<p>I see, thank you</p>
+
+<a name="178948749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/empty%20cone/near/178948749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51733emptycone.html#178948749">Johan Commelin (Oct 24 2019 at 12:59)</a>:</h4>
+<p>Does it work now?</p>
+
 
 {% endraw %}
 
