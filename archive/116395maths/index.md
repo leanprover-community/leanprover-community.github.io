@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [the integer game](45674theintegergame.html) (1 message, latest: Oct 25 2019 at 17:51)
+
 * [algebraic independence in K-Algebras](58701algebraicindependenceinKAlgebras.html) (19 messages, latest: Oct 25 2019 at 15:43)
 
 * [manifolds](86782manifolds.html) (29 messages, latest: Oct 25 2019 at 09:25)
