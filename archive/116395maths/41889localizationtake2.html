@@ -1,0 +1,65 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/41889localizationtake2.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html">localization take 2</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179025676"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localization%20take%202/near/179025676" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html#179025676">Kenny Lau (Oct 25 2019 at 06:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">group_theory</span><span class="bp">.</span><span class="n">submonoid</span>
+
+<span class="n">universes</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">[</span><span class="n">is_submonoid</span> <span class="n">s</span><span class="o">]</span>
+
+<span class="kn">namespace</span> <span class="n">localization</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">setoid</span> <span class="o">(</span><span class="n">α</span> <span class="bp">×</span> <span class="n">s</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">r</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">×</span> <span class="n">s</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">t</span> <span class="o">:</span> <span class="n">s</span><span class="o">,</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span>
+  <span class="n">iseqv</span> <span class="o">:=</span> <span class="bp">⟨λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="mi">1</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht</span><span class="bp">.</span><span class="n">symm</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="bp">⟨</span><span class="n">t</span><span class="o">,</span> <span class="n">ht</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">u</span><span class="o">,</span> <span class="n">hu</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">t</span> <span class="bp">*</span> <span class="n">u</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="k">calc</span>
+          <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span>
+        <span class="bp">=</span> <span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="o">(</span><span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ac_refl</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="o">(</span><span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">ht</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="o">(</span><span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ac_refl</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="o">(</span><span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">hu</span>
+    <span class="bp">...</span> <span class="bp">=</span> <span class="n">t</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">u</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">y</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">z</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">*</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">ac_refl</span><span class="bp">⟩⟩</span> <span class="o">}</span>
+
+<span class="kn">end</span> <span class="n">localization</span>
+
+<span class="n">def</span> <span class="n">localization</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">:=</span>
+<span class="n">quotient</span> <span class="err">$</span> <span class="n">localization</span><span class="bp">.</span><span class="n">setoid</span> <span class="n">α</span> <span class="n">s</span>
+</pre></div>
+
+<a name="179025684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localization%20take%202/near/179025684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html#179025684">Kenny Lau (Oct 25 2019 at 06:37)</a>:</h4>
+<p>is this useful?</p>
+
+<a name="179025694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localization%20take%202/near/179025694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html#179025694">Kenny Lau (Oct 25 2019 at 06:37)</a>:</h4>
+<p>we can localization any commutative monoid on a submonoid</p>
+
+<a name="179026238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localization%20take%202/near/179026238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html#179026238">Johan Commelin (Oct 25 2019 at 06:51)</a>:</h4>
+<p>You should be aware that there is a massive refactor in the making by <span class="user-mention" data-user-id="118107">@Amelia Livingston</span></p>
+
+<a name="179026252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localization%20take%202/near/179026252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html#179026252">Johan Commelin (Oct 25 2019 at 06:51)</a>:</h4>
+<p>It would be best to talk to here, before diving into this</p>
+
+<a name="179026318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/localization%20take%202/near/179026318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/41889localizationtake2.html#179026318">Kenny Lau (Oct 25 2019 at 06:53)</a>:</h4>
+<p>oh I wasn't aware</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (219 messages, latest: Oct 25 2019 at 04:35)
+* [localization take 2](41889localizationtake2.html) (6 messages, latest: Oct 25 2019 at 06:53)
+
+* [Proof by algorithm](86601Proofbyalgorithm.html) (221 messages, latest: Oct 25 2019 at 06:23)
 
 * [Single Axiom for Groups](50248SingleAxiomforGroups.html) (1 message, latest: Oct 25 2019 at 03:19)
 
