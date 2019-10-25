@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (24 messages, latest: Oct 25 2019 at 18:40)
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (26 messages, latest: Oct 25 2019 at 20:30)
 
 * [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (31 messages, latest: Oct 25 2019 at 15:06)
 
