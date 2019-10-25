@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Travis](06426Travis.html) (166 messages, latest: Oct 25 2019 at 09:23)
+
 * [Writing proof terms to disk](15236Writingprooftermstodisk.html) (18 messages, latest: Oct 25 2019 at 02:41)
 
 * [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (77 messages, latest: Oct 25 2019 at 00:35)
-
-* [Travis](06426Travis.html) (160 messages, latest: Oct 25 2019 at 00:10)
 
 * [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (7 messages, latest: Oct 24 2019 at 19:00)
 

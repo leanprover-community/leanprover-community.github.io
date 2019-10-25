@@ -869,6 +869,30 @@ Could it have to do with the cache being shared between concurrent builds?</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179010660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179010660">Mario Carneiro (Oct 25 2019 at 00:10)</a>:</h4>
 <p>the only thing I can do is turn different kinds of builds on or off (they are all on), or adjust the <code>.travis.yml</code></p>
 
+<a name="179033798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179033798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179033798">Rob Lewis (Oct 25 2019 at 09:12)</a>:</h4>
+<p>Oh my god, this is so frustrating. I got the linting test to work (i.e., Travis failed due to linting errors) by moving it to the <code>test</code> stage. Then I changed the linting test to a weaker one that should pass. Now it's running the linting test in the pre-build. It's reusing cached oleans from the previous run, which is fine and expected. But the auto-generated <code>lint_mathlib.lean</code> shouldn't show up until the <code>test</code> stage. Is it somehow retrieving the file state from the previous run?</p>
+
+<a name="179033813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179033813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179033813">Rob Lewis (Oct 25 2019 at 09:12)</a>:</h4>
+<p><code>lint_mathlib.lean</code> isn't part of the git repo. It failed to build in the last run, so there shouldn't be an olean, and even if there were, <code>purge_olean.sh</code> should delete it.</p>
+
+<a name="179033825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179033825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179033825">Rob Lewis (Oct 25 2019 at 09:13)</a>:</h4>
+<p>Is there a way I can see the contents of the directory Travis is working in?</p>
+
+<a name="179033906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179033906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179033906">Rob Lewis (Oct 25 2019 at 09:14)</a>:</h4>
+<p>I still have no idea why the separate linting stage was refusing to use the cached oleans.</p>
+
+<a name="179034375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179034375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179034375">Rob Lewis (Oct 25 2019 at 09:21)</a>:</h4>
+<p>Hmm. I guess this is the meaning of this line: <a href="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L17" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L17">https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L17</a></p>
+
+<a name="179034505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Travis/near/179034505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/06426Travis.html#179034505">Rob Lewis (Oct 25 2019 at 09:23)</a>:</h4>
+<p>But shouldn't <a href="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L38" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L38">https://github.com/leanprover-community/mathlib/blob/master/.travis.yml#L38</a> delete <code>lint_mathlib.lean</code>?</p>
+
 
 {% endraw %}
 

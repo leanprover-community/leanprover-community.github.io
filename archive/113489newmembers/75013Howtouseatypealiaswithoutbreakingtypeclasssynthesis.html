@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html">How to use a type alias without breaking typeclass synthesis</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179036569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179036569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179036569">Marko Grdinić (Oct 25 2019 at 09:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">History</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span> <span class="bp">×</span> <span class="n">list</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">claims</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">HistoryToActions</span> <span class="o">({</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span> <span class="bp">×</span> <span class="n">list</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="bp">∃</span> <span class="n">v</span><span class="o">,</span> <span class="n">claims</span><span class="bp">.</span><span class="n">read</span> <span class="n">i</span> <span class="bp">=</span> <span class="n">v</span><span class="o">})</span> <span class="n">Action</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="o">[])</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="n">actions</span><span class="bp">.</span><span class="k">begin</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">actions</span><span class="bp">.</span><span class="k">begin</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟩</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="bp">_</span><span class="o">,</span> <span class="n">x</span> <span class="bp">::</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="k">let</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">actions</span><span class="bp">.</span><span class="n">later</span><span class="bp">.</span><span class="n">drop</span> <span class="o">(</span><span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="k">in</span> <span class="bp">⟨</span> <span class="n">v</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">v</span><span class="bp">.</span><span class="n">read</span> <span class="bp">⟩</span>
+
+<span class="kn">structure</span> <span class="n">Particle</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">:=</span> <span class="n">mk</span> <span class="bp">::</span>
+    <span class="o">(</span><span class="n">state</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">probability</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">infosets</span> <span class="o">:</span> <span class="n">Infosets</span> <span class="n">ha</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">is_updateable</span> <span class="o">:</span> <span class="n">bool</span><span class="o">)</span>
+</pre></div>
+
+
+<p>This piece of code typechecks as written above, but when I replace <code>{die // die ∈ dice} × list {i // ∃ v, claims.read i = v}</code> with <code>History</code> in <code>ha</code>'s type, I get an error that it cannot synthesize the typeclass instances for <code>(infosets : Infosets ha)</code>. The particular typeclass instance is <code>has_lt History</code>. What should I do here?</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">History</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span><span class="n">unfold</span> <span class="n">History</span><span class="o">,</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>Also, it occurred to me that I could try providing it directly, but I am not sure which tactic to use here. Even if this could work, I'd prefer it if I could instruct the compiler to inline the alias rather than doing this.</p>
+<p>Sorry about not giving a simplified example - I gave it a shot, but there are a lot of hierarchies that I do not know how to pare down without significant effort.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

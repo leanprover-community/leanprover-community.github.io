@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localization take 2](41889localizationtake2.html) (7 messages, latest: Oct 25 2019 at 07:23)
+* [manifolds](86782manifolds.html) (29 messages, latest: Oct 25 2019 at 09:25)
 
-* [manifolds](86782manifolds.html) (28 messages, latest: Oct 25 2019 at 07:21)
+* [localization take 2](41889localizationtake2.html) (7 messages, latest: Oct 25 2019 at 07:23)
 
 * [Proof by algorithm](86601Proofbyalgorithm.html) (221 messages, latest: Oct 25 2019 at 06:23)
 

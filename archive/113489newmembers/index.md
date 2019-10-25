@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (1 message, latest: Oct 25 2019 at 09:58)
+
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (5 messages, latest: Oct 25 2019 at 04:10)
