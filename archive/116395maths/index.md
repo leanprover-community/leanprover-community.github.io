@@ -9,13 +9,13 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [localization take 2](41889localizationtake2.html) (6 messages, latest: Oct 25 2019 at 06:53)
+* [localization take 2](41889localizationtake2.html) (7 messages, latest: Oct 25 2019 at 07:23)
+
+* [manifolds](86782manifolds.html) (28 messages, latest: Oct 25 2019 at 07:21)
 
 * [Proof by algorithm](86601Proofbyalgorithm.html) (221 messages, latest: Oct 25 2019 at 06:23)
 
 * [Single Axiom for Groups](50248SingleAxiomforGroups.html) (1 message, latest: Oct 25 2019 at 03:19)
-
-* [manifolds](86782manifolds.html) (27 messages, latest: Oct 25 2019 at 00:13)
 
 * [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
 
