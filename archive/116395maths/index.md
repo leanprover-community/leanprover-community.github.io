@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [algebraic independence in K-Algebras](58701algebraicindependenceinKAlgebras.html) (4 messages, latest: Oct 25 2019 at 14:55)
+* [algebraic independence in K-Algebras](58701algebraicindependenceinKAlgebras.html) (19 messages, latest: Oct 25 2019 at 15:43)
 
 * [manifolds](86782manifolds.html) (29 messages, latest: Oct 25 2019 at 09:25)
 

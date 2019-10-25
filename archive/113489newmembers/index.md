@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (30 messages, latest: Oct 25 2019 at 14:42)
+* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (31 messages, latest: Oct 25 2019 at 15:06)
 
 * [noob question(s)](52075noobquestions.html) (1409 messages, latest: Oct 25 2019 at 14:09)
 
