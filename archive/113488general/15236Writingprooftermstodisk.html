@@ -1,0 +1,88 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/15236Writingprooftermstodisk.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html">Writing proof terms to disk</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179014307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179014307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179014307">John Tristan (Oct 25 2019 at 01:17)</a>:</h4>
+<p>Is there a command I could use to write a proof term to disk? Something like #print, but where I could specify a file where to write the term.</p>
+
+<a name="179014515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179014515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179014515">Scott Morrison (Oct 25 2019 at 01:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="110111">@Keeley Hoek</span>?</p>
+
+<a name="179014874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179014874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179014874">Bryan Gin-ge Chen (Oct 25 2019 at 01:31)</a>:</h4>
+<p>I take it putting <code>#print some_term</code> at the end of <code>some_file.lean</code> and running <code>lean some_file.lean &gt; output_file</code> from the command line won't do for some reason?</p>
+
+<a name="179015010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015010">Bryan Gin-ge Chen (Oct 25 2019 at 01:34)</a>:</h4>
+<p>I have zero experience with programming in Lean, but I bet someone could rig something together following <a href="https://github.com/leanprover-community/lean/blob/master/leanpkg/leanpkg/main.lean#L10" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/leanpkg/leanpkg/main.lean#L10">this</a> function from <code>leanpkg</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">system</span><span class="bp">.</span><span class="n">io</span>
+
+<span class="n">def</span> <span class="n">write_file</span> <span class="o">(</span><span class="n">fn</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">cnts</span> <span class="o">:</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">mode</span> <span class="o">:=</span> <span class="n">io</span><span class="bp">.</span><span class="n">mode</span><span class="bp">.</span><span class="n">write</span><span class="o">)</span> <span class="o">:</span> <span class="n">io</span> <span class="n">unit</span> <span class="o">:=</span> <span class="n">do</span>
+<span class="n">h</span> <span class="err">←</span> <span class="n">io</span><span class="bp">.</span><span class="n">mk_file_handle</span> <span class="n">fn</span> <span class="n">io</span><span class="bp">.</span><span class="n">mode</span><span class="bp">.</span><span class="n">write</span><span class="o">,</span>
+<span class="n">io</span><span class="bp">.</span><span class="n">fs</span><span class="bp">.</span><span class="n">write</span> <span class="n">h</span> <span class="n">cnts</span><span class="bp">.</span><span class="n">to_char_buffer</span><span class="o">,</span>
+<span class="n">io</span><span class="bp">.</span><span class="n">fs</span><span class="bp">.</span><span class="n">close</span> <span class="n">h</span>
+</pre></div>
+
+<a name="179015028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015028">John Tristan (Oct 25 2019 at 01:35)</a>:</h4>
+<p>It does work actually, thanks for the idea. In general, I might need to write different proof terms to different files so I don't know if this trick will always do it.</p>
+
+<a name="179015317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015317">John Tristan (Oct 25 2019 at 01:42)</a>:</h4>
+<p>Following up on this is there a way to control the amount of inlining? Let me clarify with an example.<br>
+Consider the following snippet:</p>
+<p>/- start -/<br>
+open nat</p>
+<p>def isEven(n : ℕ): Prop := ∃ k: ℕ, n = 2 * k</p>
+<p>def double(n: ℕ): ℕ := 2 * n </p>
+<p>lemma doubleIsEven: ∀ n: ℕ, isEven(double(n)) :=<br>
+begin<br>
+    intros,<br>
+    unfold double,<br>
+    unfold isEven,<br>
+    existsi n,<br>
+    trivial,<br>
+end</p>
+<p>def P := doubleIsEven(2:nat)</p>
+<p>#print P<br>
+/- end -/</p>
+<p>It prints: <br>
+def P : isEven (double 2) :=<br>
+doubleIsEven 2</p>
+<p>But ideally, what I want is to print the term of doubleIsEven applied to 2 and beta reduced.<br>
+Is it something that I could do? Does it even make sense?</p>
+
+<a name="179015437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015437">Bryan Gin-ge Chen (Oct 25 2019 at 01:46)</a>:</h4>
+<p>Maybe what you want is <code>#reduce P</code>?</p>
+
+<a name="179015486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015486">John Tristan (Oct 25 2019 at 01:47)</a>:</h4>
+<p>I actually gave it a try and I end up with the message "Exists.intro 2 (eq.refl 4)"</p>
+
+<a name="179015619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015619">Bryan Gin-ge Chen (Oct 25 2019 at 01:50)</a>:</h4>
+<p>Yeah, I'm not sure how to get it to display the result with notation...</p>
+
+<a name="179015778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Writing%20proof%20terms%20to%20disk/near/179015778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15236Writingprooftermstodisk.html#179015778">Bryan Gin-ge Chen (Oct 25 2019 at 01:54)</a>:</h4>
+<p>If you put <code>set_option pp.implicit true</code> in the line before you get to see the implicit arguments to <code>Exists.intro</code>:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="n">Exists</span><span class="bp">.</span><span class="n">intro</span> <span class="bp">ℕ</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="mi">4</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul</span> <span class="mi">2</span> <span class="n">k</span><span class="o">)</span> <span class="mi">2</span> <span class="o">(</span><span class="bp">@</span><span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">ℕ</span> <span class="mi">4</span><span class="o">)</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
