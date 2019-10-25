@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [zero_max a rfl lemma](80279zeromaxarfllemma.html) (17 messages, latest: Oct 25 2019 at 21:50)
+* [non-empty lists, again](58819nonemptylistsagain.html) (2 messages, latest: Oct 25 2019 at 22:42)
 
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (29 messages, latest: Oct 25 2019 at 21:37)
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (30 messages, latest: Oct 25 2019 at 22:38)
+
+* [zero_max a rfl lemma](80279zeromaxarfllemma.html) (18 messages, latest: Oct 25 2019 at 22:03)
 
 * [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (31 messages, latest: Oct 25 2019 at 15:06)
 

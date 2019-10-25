@@ -1,0 +1,113 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/86036Grahamsnumber.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html">Graham's number</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179094694"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094694" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094694">Mario Carneiro (Oct 25 2019 at 22:31)</a>:</h4>
+<p>Inspired by a recent numberphile video, here's Graham's number in lean:</p>
+<div class="codehilite"><pre><span></span><span class="c1">-- knuth e m n = m ^(e) n</span>
+<span class="n">def</span> <span class="n">knuth</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">m</span> <span class="bp">*</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">e</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="o">(</span><span class="n">knuth</span> <span class="n">e</span> <span class="n">m</span><span class="o">)</span><span class="err">^</span><span class="o">[</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">]</span> <span class="n">m</span>
+
+<span class="n">def</span> <span class="n">g</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">4</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">knuth</span> <span class="o">(</span><span class="n">g</span> <span class="n">n</span><span class="o">)</span> <span class="mi">3</span> <span class="mi">3</span>
+
+<span class="n">def</span> <span class="n">graham_number</span> <span class="o">:=</span> <span class="n">g</span> <span class="mi">64</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">graham_number</span>
+</pre></div>
+
+<a name="179094770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094770">Mario Carneiro (Oct 25 2019 at 22:32)</a>:</h4>
+<p>no one ever talks about the 0 base case</p>
+
+<a name="179094896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094896">Kevin Buzzard (Oct 25 2019 at 22:34)</a>:</h4>
+<p>wait, this times out on my my machine</p>
+
+<a name="179094906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094906">Mario Carneiro (Oct 25 2019 at 22:34)</a>:</h4>
+<p>I would be very impressed if it didn't</p>
+
+<a name="179094928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094928">Kevin Buzzard (Oct 25 2019 at 22:35)</a>:</h4>
+<p>my machine would need a lot more atoms than the universe could provide, I suspect</p>
+
+<a name="179094949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094949">Mario Carneiro (Oct 25 2019 at 22:35)</a>:</h4>
+<p>just wait for moore's law to catch up</p>
+
+<a name="179094995"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179094995" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179094995">Kevin Buzzard (Oct 25 2019 at 22:36)</a>:</h4>
+<p>or for the sun to burn out</p>
+
+<a name="179095058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095058">Mario Carneiro (Oct 25 2019 at 22:38)</a>:</h4>
+<p>I guess <code>TREE(3)</code> is probably impossible to define in lean</p>
+
+<a name="179095142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095142">Mario Carneiro (Oct 25 2019 at 22:39)</a>:</h4>
+<p>oh actually I take that back, you only need second order arithmetic to prove it exists</p>
+
+<a name="179095210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095210">Kevin Buzzard (Oct 25 2019 at 22:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">f</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="mi">1</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">f</span><span class="err">^</span><span class="o">[</span><span class="mi">4</span><span class="o">]</span> <span class="mi">6</span> <span class="c1">-- 10</span>
+</pre></div>
+
+
+<p>Since when has that been a thing? I didn't know about that thing</p>
+
+<a name="179095231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095231">Mario Carneiro (Oct 25 2019 at 22:41)</a>:</h4>
+<p>it's in core</p>
+
+<a name="179095232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095232">Kevin Buzzard (Oct 25 2019 at 22:41)</a>:</h4>
+<p>oh wow</p>
+
+<a name="179095234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095234">Mario Carneiro (Oct 25 2019 at 22:41)</a>:</h4>
+<p><code>nat.iterate</code></p>
+
+<a name="179095247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095247">Kevin Buzzard (Oct 25 2019 at 22:41)</a>:</h4>
+<p>Is that busy beaver number which is unknowable definable in Lean? I guess not.</p>
+
+<a name="179095252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095252">Kevin Buzzard (Oct 25 2019 at 22:41)</a>:</h4>
+<p><a href="https://www.scottaaronson.com/blog/?p=2725" target="_blank" title="https://www.scottaaronson.com/blog/?p=2725">https://www.scottaaronson.com/blog/?p=2725</a></p>
+
+<a name="179095255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095255">Mario Carneiro (Oct 25 2019 at 22:41)</a>:</h4>
+<p>No, I think it is</p>
+
+<a name="179095296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095296">Mario Carneiro (Oct 25 2019 at 22:42)</a>:</h4>
+<p>it's not <code>computable</code> though :P</p>
+
+<a name="179095307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095307">Mario Carneiro (Oct 25 2019 at 22:42)</a>:</h4>
+<p>It's actually within our capabilities given the computability theory stuff</p>
+
+<a name="179095344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Graham%27s%20number/near/179095344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/86036Grahamsnumber.html#179095344">Mario Carneiro (Oct 25 2019 at 22:43)</a>:</h4>
+<p>I think <code>TREE(3)</code> is provable and computable</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

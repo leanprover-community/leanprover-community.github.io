@@ -1,0 +1,36 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/58819nonemptylistsagain.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html">non-empty lists, again</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179092989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179092989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179092989">Vincent Beffara (Oct 25 2019 at 22:04)</a>:</h4>
+<p>Hi again,<br>
+Still playing around with various ways to define non-empty lists, this time following advice and using <code>V \times list V</code> to be able to use library functions. I still would like to make inductive definitions using pattern matching (if only for practice), but I am getting complaints about well-founded relations,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">llist</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">V</span> <span class="bp">×</span> <span class="n">list</span> <span class="n">V</span>
+
+<span class="n">def</span> <span class="n">simple</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span>
+    <span class="bp">|</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,[]</span><span class="bp">⟩</span>   <span class="o">:=</span> <span class="n">true</span>
+    <span class="bp">|</span> <span class="bp">⟨</span><span class="n">v</span><span class="o">,</span><span class="n">w</span><span class="bp">::</span><span class="n">l</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">¬</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">w</span><span class="bp">::</span><span class="n">l</span> <span class="bp">∧</span> <span class="n">simple</span> <span class="bp">⟨</span><span class="n">w</span><span class="o">,</span><span class="n">l</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>What would be the proper way to do what I want? It would be very nice to avoid auxiliary functions and piling to_list and from_list, because that would push me towards defining an inductive type and having to reinvent the wheel...</p>
+
+<a name="179095308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179095308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179095308">Bryan Gin-ge Chen (Oct 25 2019 at 22:42)</a>:</h4>
+<p>Unfortunately I haven't been able to solve your issue but <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/well_founded_recursion.md">this</a> is the doc page that's usually suggested when Lean has trouble proving something well-founded. Apologies if you've already seen it.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
