@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
+
 * [endomorphism algebra](03140endomorphismalgebra.html) (5 messages, latest: Oct 25 2019 at 04:10)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (16 messages, latest: Oct 24 2019 at 17:25)
 
 * [cone morphisms](71784conemorphisms.html) (4 messages, latest: Oct 24 2019 at 17:09)
-
-* [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (9 messages, latest: Oct 24 2019 at 14:26)
 
 * [empty cone](51733emptycone.html) (49 messages, latest: Oct 24 2019 at 13:08)
 
