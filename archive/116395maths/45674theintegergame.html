@@ -24,6 +24,42 @@ permalink: archive/116395maths/45674theintegergame.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179075491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179075491">Mario Carneiro (Oct 25 2019 at 18:17)</a>:</h4>
 <p>As you've identified, the reason this is done is for computation</p>
 
+<a name="179079988"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179079988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179079988">Chris Hughes (Oct 25 2019 at 19:11)</a>:</h4>
+<p>But natural numbers are disastrous computationally in the kernel, and integers are just GMP integers in the VM, ignoring the inductive def, so I still don't really get this.</p>
+
+<a name="179080131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080131">Reid Barton (Oct 25 2019 at 19:13)</a>:</h4>
+<p>It still has the advantage that, for example, 2 - 1 is defeq to 1</p>
+
+<a name="179080161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080161">Kevin Buzzard (Oct 25 2019 at 19:13)</a>:</h4>
+<p>I'm thinking about the sequel to the natural number game and I'm wondering if I'd be better off just going straight for the equivalence relation approach. I'm looking for potential disadvantages. It would be the same sort of thing -- just take a bunch of typeclasses which int has and try and prove them for myint from first principles.</p>
+
+<a name="179080252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080252">Kevin Buzzard (Oct 25 2019 at 19:14)</a>:</h4>
+<p>I don't care about defeq. Mathematicians don't understand this and I actively encourage them to <code>rw add_zero</code> in the natural number game</p>
+
+<a name="179080292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080292">Reid Barton (Oct 25 2019 at 19:15)</a>:</h4>
+<p>Well, you did prove <code>two + two = four</code> by <code>refl</code></p>
+
+<a name="179080298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080298">Reid Barton (Oct 25 2019 at 19:15)</a>:</h4>
+<p>but I agree it's not that compelling a reason for the purpose of integer game</p>
+
+<a name="179080377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080377">Mario Carneiro (Oct 25 2019 at 19:17)</a>:</h4>
+<p>I think the integer game with a quotient construction should be about as hard as the complex number game</p>
+
+<a name="179080415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080415">Reid Barton (Oct 25 2019 at 19:17)</a>:</h4>
+<p>It also has the advantage that it introduces the quotient game mechanic</p>
+
+<a name="179080416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/the%20integer%20game/near/179080416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/45674theintegergame.html#179080416">Mario Carneiro (Oct 25 2019 at 19:17)</a>:</h4>
+<p>you get less defeq, but that's more representative of higher math anyway</p>
+
 
 {% endraw %}
 
