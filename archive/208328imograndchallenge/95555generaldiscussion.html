@@ -328,6 +328,56 @@ Also given that the IMO problem is about an arbitrary collection of points, I do
 </blockquote>
 <p>What worries me is the "pre-trained" neural net (NN) part. I think if Lean is going to be used besides just a theorem prover, it should allow for training of the NN. Also, another thing to consider is that its going to be hard for people to adopt the challenge or ITP Lean environment/dataset if it all lives in a new programming language that is not "standard" like python. I dont think its going to be able to kick off like imagenet if everyone is forced to learn functional programming (fp) and take years to get good at it. Having things in Python imho will make any ITP challenge more likely to thrive.</p>
 
+<a name="179011212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011212">Jason Rute (Oct 25 2019 at 00:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="246156">@Brando Miranda</span> I think in some sense one needs both (to (1) be able to run a search algorithm inside Lean with a NN and (2) guide Lean from the outside in something like Python).  Setting aside the IMO challenge and just thinking about improving Lean, from the perspective of a Lean user, they want whatever system one is building to be usable in Lean.  And this is really a problem with the other tools out there.  I don't know if any of the AI/ITP systems currently out there are usable and useful to the practitioners of that ITP system.  However, if Lean had a HOList-like tactic called <code>lean_ist</code> (which admittedly would involve some additional setup), then they could write <code>by lean_ist</code>.  The system would behave similar to the <code>library_search</code> tactic, outputting a proof which can be pasted into Lean.</p>
+
+<a name="179011250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011250">Jason Rute (Oct 25 2019 at 00:21)</a>:</h4>
+<p>On the flip side, something that inhibits the growth of these AI for ITP systems is that it is a major engineering feat to link your AI library to your theorem prover (and just as large of a feat to learn the intricacies of the logic).  One thing that has really increased neural network research progress has been environments which are easy to spin up and play with.  These "gym" environments allow you apply the same training algorithm to many different problems which have the same interface.  I think a very useful research project would be the following:  Go through the other AI for theorem proving projects out there, and find a common gym-like interface for interactive theorem provers and related systems, including tableau calculus, constraint solvers, QBF solvers, SMT solvers with tactics, non-classical proof systems.  (I can point one to over a dozen papers, each in a separate system.)   As far as I see they have the following uniform framework:</p>
+<ul>
+<li>A term and formula language</li>
+<li>A local goal state: What one is trying to prove at the moment (as an ordered list of formulas in some formal language)</li>
+<li>Premise List: all the possible previously proven theorem statements one could use (which needs to be significantly narrowed down in a process called “premise selection”)</li>
+<li>Tactics or inference rules: a fixed finite set of rules one can apply to ones current goal state</li>
+<li>Tactic parameters: the possible parameters that can be added to the above tactics.  (This is by far the most inconsistent and flexible part of the framework.  These parameters can include numbers, terms, and premises from the premise list.)</li>
+<li>a training and test set: formulas to prove (and possibly proofs for supervised learning)</li>
+<li>application: one needs to be able to quickly apply a rule/tactic</li>
+<li>persistence/backtracking: So that any tree search algorithm can be applied, one needs a notion of backtracking.  (Practically, this means that states need to be persistent.  If one applies a tactic it creates a new state, without changing the old state.  Think immutable data structures.)</li>
+</ul>
+
+<a name="179011267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011267">Jason Rute (Oct 25 2019 at 00:21)</a>:</h4>
+<p>Now not all systems use all of the above.  A simple logical system, e.g. QBFs, may not use premise selection or tactic parameters.   A fully automatic system (e.g. an ATP like E-prover) may only have one tactic (solve) and the challenge is just premise selection.  Some systems also don’t have the backtracking, but that severely limits how effectively one can search.</p>
+
+<a name="179011311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011311">Jason Rute (Oct 25 2019 at 00:22)</a>:</h4>
+<p>Now HOList has basically created a system like this in DeepHOL (although not very well documented) which they make easier to use by burying it in a docker container, so it just becomes a black box (a gym).  I also think they had to do a lot of work to make the persistence/backtracking thing work, but that is also not documented well.  I think the CoqGym and GamePad systems also try to do something similar for Coq.  In some systems like MetaMath, it shouldn’t be terribly hard to just rewrite the logic to make such an environment.  <strong>The question is, can Lean be abstracted into a system like this which is fast (and more importantly, it satisfies the persistence/backtracking requirement).</strong></p>
+
+<a name="179011320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011320">Jason Rute (Oct 25 2019 at 00:22)</a>:</h4>
+<p>Getting back to the IMO challenge, I feel the goal is different than developing a training algorithm for an arbitrary neural theorem prover.  However, I agree that it isn’t clear if this project will attract those outside of the established Lean community or Microsoft Research because of the barrier to entry.  However, you are here @Brando, so maybe it is working. :)</p>
+
+<a name="179011638"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011638" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011638">Mario Carneiro (Oct 25 2019 at 00:27)</a>:</h4>
+<p>lean has always had a backtracking tactic state</p>
+
+<a name="179011649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011649">Mario Carneiro (Oct 25 2019 at 00:27)</a>:</h4>
+<p>speed might be an issue, but possibly lean 4 has solved that problem</p>
+
+<a name="179011742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011742">Jason Rute (Oct 25 2019 at 00:28)</a>:</h4>
+<p>But is it useable from the outside.  Could it be wrapped in a black box with a set number of tactics?  (So from the outside it is just like a chess board with a set number of possible moves?)</p>
+
+<a name="179011962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011962">Mario Carneiro (Oct 25 2019 at 00:32)</a>:</h4>
+<p>I would really like a C++ API for doing this</p>
+
+<a name="179011991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/208328-IMO-grand-challenge/topic/general%20discussion/near/179011991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/208328IMOgrandchallenge/95555generaldiscussion.html#179011991">Mario Carneiro (Oct 25 2019 at 00:33)</a>:</h4>
+<p>You can do it with lean --server but there is far too much overhead involved</p>
+
 
 {% endraw %}
 

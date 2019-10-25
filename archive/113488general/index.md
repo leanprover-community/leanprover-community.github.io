@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Travis](06426Travis.html) (158 messages, latest: Oct 24 2019 at 21:46)
+* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (77 messages, latest: Oct 25 2019 at 00:35)
+
+* [Travis](06426Travis.html) (160 messages, latest: Oct 25 2019 at 00:10)
 
 * [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (7 messages, latest: Oct 24 2019 at 19:00)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (16 messages, latest: Oct 24 2019 at 14:04)
 
 * [Lean in the wild](43625Leaninthewild.html) (384 messages, latest: Oct 24 2019 at 14:03)
-
-* [Prime number theorem in lean](11698Primenumbertheoreminlean.html) (76 messages, latest: Oct 24 2019 at 10:10)
 
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (7 messages, latest: Oct 24 2019 at 01:07)
 
