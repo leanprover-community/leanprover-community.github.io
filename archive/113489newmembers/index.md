@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1396 messages, latest: Oct 25 2019 at 13:59)
+* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (30 messages, latest: Oct 25 2019 at 14:42)
 
-* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (19 messages, latest: Oct 25 2019 at 13:47)
+* [noob question(s)](52075noobquestions.html) (1409 messages, latest: Oct 25 2019 at 14:09)
 
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
 

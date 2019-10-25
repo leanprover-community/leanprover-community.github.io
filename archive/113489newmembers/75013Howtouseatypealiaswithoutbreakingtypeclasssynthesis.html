@@ -183,6 +183,79 @@ a b : Die
 
 <p>For <code>Die</code> not so much. It cannot find the instance. I am trying to see whether I can get it to so it only compares the first argument (which is a nat), but I cannot unfold <code>has_lt.lt</code> here. What should I do?</p>
 
+<a name="179052977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179052977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179052977">Marko Grdinić (Oct 25 2019 at 14:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Die</span> <span class="o">:=</span> <span class="o">{</span><span class="n">die</span> <span class="bp">//</span> <span class="n">die</span> <span class="err">∈</span> <span class="n">dice</span><span class="o">}</span>
+<span class="kn">instance</span> <span class="n">Die_has_lt</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">Die</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="k">fun</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span><span class="bp">.</span><span class="n">val</span> <span class="bp">&lt;</span> <span class="n">b</span><span class="bp">.</span><span class="n">val</span> <span class="bp">⟩</span>
+<span class="kn">instance</span> <span class="n">Die_decidable_rel</span> <span class="o">:</span> <span class="n">decidable_rel</span> <span class="o">((</span><span class="bp">&lt;</span><span class="o">)</span> <span class="o">:</span> <span class="n">Die</span> <span class="bp">→</span> <span class="n">Die</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:=</span> <span class="n">infer_instance</span>
+</pre></div>
+
+
+<p>I get it now. I won't be sure until I go over the subtype, but it seems that the default <code>has_lt</code> was not good for my use case. I should be able to make this work now.</p>
+
+<a name="179053250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053250">Marko Grdinić (Oct 25 2019 at 14:17)</a>:</h4>
+<p>Hmmm...I can't find anything on <code>has_lt</code> for subtypes in the core library's <code>init.data.subtype</code> folder. There is no much there. Is it somewhere else? If so, where?</p>
+
+<a name="179053416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053416">Marko Grdinić (Oct 25 2019 at 14:19)</a>:</h4>
+<p>Is there any way to track down the instance that is being inferred?</p>
+
+<a name="179053560"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053560" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053560">Reid Barton (Oct 25 2019 at 14:20)</a>:</h4>
+<blockquote>
+<p>Hmmm...I can't find anything on <code>has_lt</code> for subtypes in the core library's <code>init.data.subtype</code> folder. There is no much there. Is it somewhere else? If so, where?</p>
+</blockquote>
+<p>Are you using mathlib?</p>
+
+<a name="179053904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179053904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179053904">Reid Barton (Oct 25 2019 at 14:24)</a>:</h4>
+<p>A bit convoluted, but you can write, for example,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">nat</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>which will print <code>nat.has_lt</code>, then</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">nat</span><span class="bp">.</span><span class="n">has_lt</span>
+</pre></div>
+
+
+<p>which will output something you don't care about, but now you can use jump-to-definition on <code>nat.has_lt</code></p>
+
+<a name="179054616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179054616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179054616">Marko Grdinić (Oct 25 2019 at 14:33)</a>:</h4>
+<p>Apparently, the function is <code>preorder.to_has_lt</code>. </p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">preorder</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">has_le</span> <span class="n">α</span><span class="o">,</span> <span class="n">has_lt</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">le_refl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">le_trans</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">c</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">lt_iff_le_not_le</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="n">b</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="bp">.</span> <span class="n">order_laws_tac</span><span class="o">)</span>
+</pre></div>
+
+
+<p>When I try to track it down by Ctrl + left click, it just puts me at the class definition. I am not sure where to go from there.</p>
+
+<a name="179054713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179054713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179054713">Reid Barton (Oct 25 2019 at 14:34)</a>:</h4>
+<p>Ah, in that case try <code>set_option pp.all true</code> before the <code>#print</code>, and try to guess where the actual instance is, or post the output here</p>
+
+<a name="179054967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179054967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179054967">Reid Barton (Oct 25 2019 at 14:37)</a>:</h4>
+<p><code>preorder.to_has_lt</code> extracts the <code>has_lt</code> instance from a <code>preorder</code> instance</p>
+
+<a name="179055046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179055046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179055046">Reid Barton (Oct 25 2019 at 14:38)</a>:</h4>
+<p>it's automatically generated by that <code>class preorder</code> declaration</p>
+
+<a name="179055264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179055264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179055264">Marko Grdinić (Oct 25 2019 at 14:40)</a>:</h4>
+<p>Ah, I see. So that is why I get sent to the typeclass definition. I guess the question now becomes of how to track down where the subtype is declared as a preorder.</p>
+
+<a name="179055484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20a%20type%20alias%20without%20breaking%20typeclass%20synthesis/near/179055484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html#179055484">Marko Grdinić (Oct 25 2019 at 14:42)</a>:</h4>
+<p>Then I would be able to find the implementation of <code>has_lt</code> for it. What would be the best way to do this?</p>
+
 
 {% endraw %}
 
