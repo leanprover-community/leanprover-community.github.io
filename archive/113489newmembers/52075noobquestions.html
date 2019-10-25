@@ -7906,6 +7906,58 @@ this : 2 ∣ b ^ 2 - a ^ 2
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/178604665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#178604665">Chris B (Oct 20 2019 at 18:37)</a>:</h4>
 <p>Thanks, that definitely simplifies things, bool it is then.</p>
 
+<a name="179048341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179048341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179048341">Yury G. Kudryashov (Oct 25 2019 at 13:19)</a>:</h4>
+<p>Hi, is it possible to express <code>∃ b &gt; a, p b</code> using <code>&lt;</code> only? I understand that I can write <code>∃ b  (H : a &lt; b),  p b</code> but this is less readable.</p>
+
+<a name="179048499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179048499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179048499">Kevin Buzzard (Oct 25 2019 at 13:21)</a>:</h4>
+<p>I think what you suggest (the less readable thing) is what we're supposed to be writing nowadays.</p>
+
+<a name="179051404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179051404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179051404">Seewoo Lee (Oct 25 2019 at 13:56)</a>:</h4>
+<p>Hi, here's a noob question: I'm trying to prove currying &amp; uncurrying, i.e. (p -&gt; q -&gt; r) &lt;-&gt; ((p \and q) -&gt; r). Here's my try:</p>
+<div class="codehilite"><pre><span></span>theorem t3 : ((p ∧ q) → r) → (p → q → r) :=
+    assume h₁ : (p ∧ q) → r,
+    assume hp : p,
+    assume hq : q,
+    have h₂ : p ∧ q, from and.intro hp hq,
+    h₁ h₂
+
+theorem t4 : (p → q → r) → ((p ∧ q) → r) :=
+    assume h₁ : p → q → r,
+    assume h₂ : p ∧ q,
+    have hp : p, from and.left h₂,
+    have hq : q, from and.right h₂,
+    have h₃ : q → r, from h₁ hp,
+    have hr : r, from h₃ hq
+    hr
+</pre></div>
+
+
+<p>t3 seems to have no problem, but t4 has. It gives an error like</p>
+<div class="codehilite"><pre><span></span>function expected at
+  h₃ hq
+term has type
+  r
+</pre></div>
+
+
+<p>and</p>
+<div class="codehilite"><pre><span></span>unknown identifier &#39;hr&#39;
+</pre></div>
+
+
+<p>but I can't find the reason. Any helps?</p>
+
+<a name="179051601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179051601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179051601">Seewoo Lee (Oct 25 2019 at 13:58)</a>:</h4>
+<p>I forgot one: I put <code>variables p q r : Prop</code> before t3 and t4, of course.</p>
+
+<a name="179051680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179051680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179051680">Kenny Lau (Oct 25 2019 at 13:59)</a>:</h4>
+<p>because you forgot a comma</p>
+
 
 {% endraw %}
 

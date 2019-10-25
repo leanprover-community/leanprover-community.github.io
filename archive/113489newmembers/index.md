@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (6 messages, latest: Oct 25 2019 at 12:41)
+* [noob question(s)](52075noobquestions.html) (1396 messages, latest: Oct 25 2019 at 13:59)
+
+* [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (19 messages, latest: Oct 25 2019 at 13:47)
 
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
 
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (35 messages, latest: Oct 21 2019 at 08:46)
 
 * [dne implies em](56189dneimpliesem.html) (10 messages, latest: Oct 20 2019 at 23:49)
-
-* [noob question(s)](52075noobquestions.html) (1391 messages, latest: Oct 20 2019 at 18:37)
 
 * [Dependent induction?](08452Dependentinduction.html) (36 messages, latest: Oct 20 2019 at 08:26)
 
