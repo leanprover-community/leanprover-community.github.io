@@ -1088,6 +1088,54 @@ It is an SEI/CERT research report I did at CMU.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179111233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179111233">Mario Carneiro (Oct 26 2019 at 05:57)</a>:</h4>
 <p>to be fair, he practically invented the idea of formal notation for logic, but it was a bit like edison's 1000 dead lightbulbs</p>
 
+<a name="179113831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179113831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179113831">Tim Daly (Oct 26 2019 at 07:22)</a>:</h4>
+<p>I'm looking deeply into Milawa <a href="http://www.cse.chalmers.se/~myreen/2015-jar-milawa.pdf" target="_blank" title="http://www.cse.chalmers.se/~myreen/2015-jar-milawa.pdf">http://www.cse.chalmers.se/~myreen/2015-jar-milawa.pdf</a> for a system "proven down to the metal". It is particularly interesting because it takes a layered approach to the problem, aka the trusted kernel idea.</p>
+
+<a name="179113897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179113897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179113897">Tim Daly (Oct 26 2019 at 07:24)</a>:</h4>
+<p>The fact that it is lisp-based is also a feature as it is easy to translate logic into lisp notation. I've written machine vision code in C++ so I can read it. But I find that the Lean C++ code is opaque. I could not find how a single logic rule was implemented. (I'm looking at your master's thesis now)</p>
+
+<a name="179113920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179113920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179113920">Tim Daly (Oct 26 2019 at 07:25)</a>:</h4>
+<p>A Milawa implementation raises the possibility of using it against itself for checking.</p>
+
+<a name="179114260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114260">Tim Daly (Oct 26 2019 at 07:36)</a>:</h4>
+<p>Another long-term issue with C++ is.... which C++ "standard"? C++ emits a new standard every few years so the C++ you write may not compile in the future. As an example, Axiom compiles to C under the covers. One of the issues is that the C library implementation has changed which caused an amazing amount of maintenance grief. The new "C++ standard" will include "concepts" which will not compile in earlier versions. I also maintained the open source project Magnus (<a href="https://github.com/markuspf/magnus" target="_blank" title="https://github.com/markuspf/magnus">https://github.com/markuspf/magnus</a>) which is a C++ computer algebra program that does Infinite Group Theory. Keeping that alive in C++ is a nightmare.  (Did you know that you can construct classes IN THE ARGUMENT LIST of a function definition at compile time?</p>
+
+<a name="179114345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114345">Mario Carneiro (Oct 26 2019 at 07:39)</a>:</h4>
+<p>as far as I'm aware, C++ has not made anything not compile that used to compile, as this is a very important aspect of the rationale for using C++ in the first place</p>
+
+<a name="179114349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114349">Tim Daly (Oct 26 2019 at 07:40)</a>:</h4>
+<p>If Lean's goal is to import all of mathematics it needs a "30 year horizon" view, that is, it needs to be very, very maintainable.</p>
+
+<a name="179114393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114393">Mario Carneiro (Oct 26 2019 at 07:40)</a>:</h4>
+<p>Usually, when a compiler update causes your code to break, that means you used undefined behavior</p>
+
+<a name="179114397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114397">Tim Daly (Oct 26 2019 at 07:40)</a>:</h4>
+<p>Oh, how I wish that were true.</p>
+
+<a name="179114576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114576">Giovanni Mascellani (Oct 26 2019 at 07:46)</a>:</h4>
+<p>If a compiler update breaks your code, then you probably relied on UB; but it is very well possible that a <em>standard</em> update breaks your code. Usually they try to not do that too much and have reasonable deprecation windows, but sometime breaking changes happen. For example, C++17 removed <a href="https://en.cppreference.com/w/cpp/memory/auto_ptr" target="_blank" title="https://en.cppreference.com/w/cpp/memory/auto_ptr">std::auto_ptr</a>.</p>
+
+<a name="179114697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114697">Tim Daly (Oct 26 2019 at 07:50)</a>:</h4>
+<p>On the other hand, the common lisp code from the 1980s runs unchanged and there is only 1 standard.</p>
+
+<a name="179114879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114879">Tim Daly (Oct 26 2019 at 07:56)</a>:</h4>
+<p>I've been associated with the Axiom code for nearly 40 years so I understand the issue of "long term maintenance". Where does Lean want to be in 40 years? Will it have 100,000 theorems, 50,000 definitions, 1/2 million lemmas, in dozens of areas of mathematics? Who, and how, is that going to be maintained?</p>
+
+<a name="179114946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179114946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179114946">Tim Daly (Oct 26 2019 at 07:58)</a>:</h4>
+<p>If <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> wants all of mathematics to be written down in Lean, how is that going to be curated?</p>
+
 
 {% endraw %}
 

@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (31 messages, latest: Oct 26 2019 at 01:06)
+* [non-empty lists, again](58819nonemptylistsagain.html) (3 messages, latest: Oct 26 2019 at 07:17)
 
-* [non-empty lists, again](58819nonemptylistsagain.html) (2 messages, latest: Oct 25 2019 at 22:42)
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (31 messages, latest: Oct 26 2019 at 01:06)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (18 messages, latest: Oct 25 2019 at 22:03)
 
