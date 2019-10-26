@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (33 messages, latest: Oct 26 2019 at 17:54)
+
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
 
 * [cone morphisms](71784conemorphisms.html) (140 messages, latest: Oct 26 2019 at 15:00)
 
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (37 messages, latest: Oct 26 2019 at 09:45)
-
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (32 messages, latest: Oct 26 2019 at 08:20)
 
 * [non-empty lists, again](58819nonemptylistsagain.html) (3 messages, latest: Oct 26 2019 at 07:17)
 
