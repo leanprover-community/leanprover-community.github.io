@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (385 messages, latest: Oct 26 2019 at 18:29)
+
 * [vscode snippets](92603vscodesnippets.html) (28 messages, latest: Oct 26 2019 at 15:19)
 
 * [Time to move to 3.5?](16418Timetomoveto35.html) (23 messages, latest: Oct 26 2019 at 08:20)
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [nat.pos_iff_ne_zero'](90576natposiffnezero.html) (7 messages, latest: Oct 24 2019 at 19:00)
 
 * [Leaked Lean 4 Logos](75199LeakedLean4Logos.html) (16 messages, latest: Oct 24 2019 at 14:04)
-
-* [Lean in the wild](43625Leaninthewild.html) (384 messages, latest: Oct 24 2019 at 14:03)
 
 * [proposed lemmas for mathlib](09620proposedlemmasformathlib.html) (7 messages, latest: Oct 24 2019 at 01:07)
 

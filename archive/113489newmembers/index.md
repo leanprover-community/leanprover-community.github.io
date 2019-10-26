@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (33 messages, latest: Oct 26 2019 at 17:54)
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (40 messages, latest: Oct 26 2019 at 19:00)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
 
