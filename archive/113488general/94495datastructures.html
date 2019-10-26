@@ -40,6 +40,25 @@ permalink: archive/113488general/94495datastructures.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data%20structures/near/179105806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94495datastructures.html#179105806">Simon Hudon (Oct 26 2019 at 02:59)</a>:</h4>
 <p>By the way, with the splay tree data structure, we're cooking up an extension to lazy evaluation that uses dependent types and quotient types that allows functions <em>reading</em> the data structure to mutate it without returning a new copy. That should help make functional data structures, especially the ones with amortized complexity, significantly faster.</p>
 
+<a name="179109673"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data%20structures/near/179109673" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94495datastructures.html#179109673">Jason Rute (Oct 26 2019 at 05:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> That is interesting.  Do you know if is similar to the various lazy heap ideas in Okasaki's book (or thesis)?  That book (which I have just skimmed) has a lot to say about laziness and where it shines and slows things down in practice in functional data structures.</p>
+
+<a name="179109797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data%20structures/near/179109797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94495datastructures.html#179109797">Jason Rute (Oct 26 2019 at 05:04)</a>:</h4>
+<p>For example it says this about one of it's lazy heap implementations:</p>
+<blockquote>
+<p>Hint to Practitioners: Although it now deals gracefully with persistence, this implementation of pairing heaps is relatively slow in practice because of overheads associated with lazy evaluation. It shines, however, under heavily persistent usage, where we reap maximum benefit from memoization. It is also competitive in lazy languages, where all data structures pay the over- heads of lazy evaluation regardless of whether they actually gain any benefit.</p>
+</blockquote>
+
+<a name="179109814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data%20structures/near/179109814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94495datastructures.html#179109814">Mario Carneiro (Oct 26 2019 at 05:05)</a>:</h4>
+<p>I once planned to formalize Okasaki's book, but I hit a roadblock with laziness, because lean provides no way to implement memoization</p>
+
+<a name="179110480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/data%20structures/near/179110480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/94495datastructures.html#179110480">Simon Hudon (Oct 26 2019 at 05:30)</a>:</h4>
+<p>The idea is to add a mechanism expressive enough to allow the implementation of laziness and memoization. Because we have dependent types, we can go further than memoization. We can, for instance, rebalance trees or shuffle items around just like a Haskell program would evaluate and cache the value of a thunk.</p>
+
 
 {% endraw %}
 
