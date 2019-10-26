@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game](77211naturalnumbergame.html) (32 messages, latest: Oct 26 2019 at 22:59)
+
 * [non-empty lists, again](58819nonemptylistsagain.html) (22 messages, latest: Oct 26 2019 at 21:51)
 
 * [Projective geometry](67112Projectivegeometry.html) (14 messages, latest: Oct 26 2019 at 20:25)
-
-* [natural number game](77211naturalnumbergame.html) (22 messages, latest: Oct 26 2019 at 19:49)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (46 messages, latest: Oct 26 2019 at 19:17)
 
