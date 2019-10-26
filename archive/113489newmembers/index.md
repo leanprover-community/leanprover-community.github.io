@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [non-empty lists, again](58819nonemptylistsagain.html) (20 messages, latest: Oct 26 2019 at 20:56)
+* [non-empty lists, again](58819nonemptylistsagain.html) (22 messages, latest: Oct 26 2019 at 21:51)
 
 * [Projective geometry](67112Projectivegeometry.html) (14 messages, latest: Oct 26 2019 at 20:25)
 
