@@ -43,6 +43,111 @@ Still playing around with various ways to define non-empty lists, this time foll
     <span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">⟩</span><span class="o">]}</span>
 </pre></div>
 
+<a name="179139487"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179139487" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179139487">Vincent Beffara (Oct 26 2019 at 20:06)</a>:</h4>
+<p>Thanks for the working version! Still the version with an auxiliary function,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">simple_l</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">list</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span> <span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">true</span> <span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="bp">::</span><span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">¬</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">xs</span> <span class="bp">∧</span> <span class="n">simple_l</span> <span class="n">xs</span>
+
+<span class="n">def</span> <span class="n">simple</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">V</span> <span class="bp">×</span> <span class="n">list</span> <span class="n">V</span> <span class="bp">-&gt;</span> <span class="kt">Prop</span> <span class="bp">|</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span><span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">simple_l</span> <span class="o">(</span><span class="n">x</span><span class="bp">::</span><span class="n">xs</span><span class="o">)</span>
+</pre></div>
+
+
+<p>feels much simpler.  I'm ok with incantations about <code>measure_wf</code> that I don't understand (yet?) but I really would prefer not having to put them near the definition of <code>simple</code> because there are a lot of other things that I am defining in a similar way.</p>
+
+<a name="179140335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140335">Vincent Beffara (Oct 26 2019 at 20:29)</a>:</h4>
+<p>Ah, in fact I still get an error with your version:</p>
+<div class="codehilite"><pre><span></span><span class="n">error</span><span class="o">:</span> <span class="n">failed</span> <span class="n">to</span> <span class="n">prove</span> <span class="n">recursive</span> <span class="n">application</span> <span class="n">is</span> <span class="n">decreasing</span><span class="o">,</span> <span class="n">well</span> <span class="n">founded</span> <span class="n">relation</span>
+  <span class="bp">@</span><span class="n">has_well_founded</span><span class="bp">.</span><span class="n">r</span> <span class="o">(</span><span class="n">llist</span> <span class="n">V</span><span class="o">)</span>
+    <span class="o">(</span><span class="bp">@</span><span class="n">has_well_founded</span><span class="bp">.</span><span class="n">mk</span> <span class="o">(</span><span class="n">llist</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="bp">@</span><span class="n">measure</span> <span class="o">(</span><span class="n">llist</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span><span class="o">),</span> <span class="bp">@</span><span class="n">length</span> <span class="n">V</span> <span class="o">(</span><span class="bp">@</span><span class="n">prod</span><span class="bp">.</span><span class="n">snd</span> <span class="n">V</span> <span class="o">(</span><span class="n">list</span> <span class="n">V</span><span class="o">)</span> <span class="n">l</span><span class="o">)))</span> <span class="bp">_</span><span class="o">)</span>
+<span class="n">The</span> <span class="n">nested</span> <span class="n">exception</span> <span class="n">contains</span> <span class="n">the</span> <span class="n">failure</span> <span class="n">state</span> <span class="n">for</span> <span class="n">the</span> <span class="n">decreasing</span> <span class="n">tactic</span><span class="bp">.</span>
+<span class="n">nested</span> <span class="n">exception</span> <span class="n">message</span><span class="o">:</span>
+<span class="n">tactic</span> <span class="n">failed</span><span class="o">,</span> <span class="n">there</span> <span class="n">are</span> <span class="n">no</span> <span class="n">goals</span> <span class="n">to</span> <span class="n">be</span> <span class="n">solved</span>
+</pre></div>
+
+<a name="179140424"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140424" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140424">Vincent Beffara (Oct 26 2019 at 20:31)</a>:</h4>
+<p>But this does:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">simple</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">v</span><span class="o">,[])</span>   <span class="o">:=</span> <span class="n">true</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span><span class="n">w</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="k">have</span> <span class="n">length</span> <span class="n">l</span> <span class="bp">&lt;</span> <span class="n">length</span> <span class="o">(</span><span class="n">w</span><span class="bp">::</span><span class="n">l</span><span class="o">),</span> <span class="k">by</span> <span class="o">{</span> <span class="n">simp</span> <span class="o">},</span> <span class="bp">¬</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">w</span><span class="bp">::</span><span class="n">l</span> <span class="bp">∧</span> <span class="n">simple</span> <span class="o">(</span><span class="n">w</span><span class="o">,</span><span class="n">l</span><span class="o">)</span>
+    <span class="n">using_well_founded</span> <span class="n">wf_tacs</span>
+</pre></div>
+
+<a name="179140472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140472">Kevin Buzzard (Oct 26 2019 at 20:32)</a>:</h4>
+<p>Bryan's version works for me. Which version of Lean are you using?</p>
+
+<a name="179140493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140493">Bryan Gin-ge Chen (Oct 26 2019 at 20:33)</a>:</h4>
+<p>Ah, my version fails if I add <code>import data.list.basic</code>...</p>
+
+<a name="179140498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140498">Kevin Buzzard (Oct 26 2019 at 20:33)</a>:</h4>
+<p>because <code>simp</code> gets too good.</p>
+
+<a name="179140563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140563">Vincent Beffara (Oct 26 2019 at 20:34)</a>:</h4>
+<p>All right, explanation is in <code>mathlib/src/tactic/well_founded_tactics.lean</code></p>
+
+<a name="179140568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140568">Bryan Gin-ge Chen (Oct 26 2019 at 20:34)</a>:</h4>
+<p>Yep, you need to add a <code>dec_tac</code> line from that file:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">well_founded_tactics</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">def</span> <span class="n">llist</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">V</span> <span class="bp">×</span> <span class="n">list</span> <span class="n">V</span>
+
+<span class="n">def</span> <span class="n">simple</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">v</span><span class="o">,[])</span>   <span class="o">:=</span> <span class="n">true</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span><span class="n">w</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">¬</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">w</span><span class="bp">::</span><span class="n">l</span> <span class="bp">∧</span> <span class="n">simple</span> <span class="o">(</span><span class="n">w</span><span class="o">,</span><span class="n">l</span><span class="o">)</span>
+    <span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">⟩</span><span class="o">],</span>
+    <span class="n">dec_tac</span> <span class="o">:=</span> <span class="n">well_founded_tactics</span><span class="bp">.</span><span class="n">default_dec_tac&#39;</span><span class="o">}</span>
+</pre></div>
+
+<a name="179140892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179140892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179140892">Bryan Gin-ge Chen (Oct 26 2019 at 20:44)</a>:</h4>
+<p>I wonder if this issue with <code>default_dec_tac</code> described in <code>tactic/well_founded_tactics.lean</code> is something which ought to be addressed in 3.5? <span class="user-mention" data-user-id="110026">@Simon Hudon</span></p>
+
+<a name="179141035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141035">Vincent Beffara (Oct 26 2019 at 20:48)</a>:</h4>
+<p>In the meantime, is there any way to attach the information to use <code>wf_tacs</code> to the type <code>llist V</code> rather than having to mention it with every inductive definition?</p>
+
+<a name="179141046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141046">Vincent Beffara (Oct 26 2019 at 20:49)</a>:</h4>
+<p>Or to cheat by using a slightly more complicated measure instead of <code>list.length</code> so that the default tactic works again, but that would feel a little dirty ...</p>
+
+<a name="179141056"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141056" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141056">Bryan Gin-ge Chen (Oct 26 2019 at 20:50)</a>:</h4>
+<p>I would be curious to know the answers to those questions too.</p>
+
+<a name="179141121"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141121" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141121">Vincent Beffara (Oct 26 2019 at 20:51)</a>:</h4>
+<p>Like so:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">llist</span> <span class="o">(</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">:=</span> <span class="n">V</span> <span class="bp">×</span> <span class="n">list</span> <span class="n">V</span>
+<span class="kn">instance</span> <span class="n">llist_wf</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">has_well_founded</span> <span class="o">(</span><span class="n">llist</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">((</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="n">n</span><span class="bp">+</span><span class="n">n</span><span class="o">)</span> <span class="err">∘</span> <span class="n">list</span><span class="bp">.</span><span class="n">length</span> <span class="err">∘</span> <span class="n">prod</span><span class="bp">.</span><span class="n">snd</span><span class="o">)</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">simple</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">llist</span> <span class="n">V</span> <span class="bp">→</span> <span class="kt">Prop</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">v</span><span class="o">,[])</span>   <span class="o">:=</span> <span class="n">true</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">v</span><span class="o">,</span><span class="n">w</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">¬</span> <span class="n">v</span> <span class="err">∈</span> <span class="n">w</span><span class="bp">::</span><span class="n">l</span> <span class="bp">∧</span> <span class="n">simple</span> <span class="o">(</span><span class="n">w</span><span class="o">,</span><span class="n">l</span><span class="o">)</span>
+</pre></div>
+
+<a name="179141193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141193">Bryan Gin-ge Chen (Oct 26 2019 at 20:53)</a>:</h4>
+<p>What's the reason for <code>(λ n, n+n) </code>? I removed it and it still works for me.</p>
+
+<a name="179141247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141247">Vincent Beffara (Oct 26 2019 at 20:54)</a>:</h4>
+<p>Ah, that's the dirty trick to answer my second question, if I leave it out then it fails again with the "no goals to be solved" error</p>
+
+<a name="179141255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141255">Bryan Gin-ge Chen (Oct 26 2019 at 20:55)</a>:</h4>
+<p>Yes, you're right. I had some interfering definitions that confused me.</p>
+
+<a name="179141305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/non-empty%20lists%2C%20again/near/179141305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58819nonemptylistsagain.html#179141305">Vincent Beffara (Oct 26 2019 at 20:56)</a>:</h4>
+<p><code>(\lambda n, 2*n)</code> apparently is too transparent though</p>
+
 
 {% endraw %}
 

@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [non-empty lists, again](58819nonemptylistsagain.html) (20 messages, latest: Oct 26 2019 at 20:56)
+
+* [Projective geometry](67112Projectivegeometry.html) (14 messages, latest: Oct 26 2019 at 20:25)
+
 * [natural number game](77211naturalnumbergame.html) (22 messages, latest: Oct 26 2019 at 19:49)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (46 messages, latest: Oct 26 2019 at 19:17)
@@ -18,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [cone morphisms](71784conemorphisms.html) (140 messages, latest: Oct 26 2019 at 15:00)
 
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (37 messages, latest: Oct 26 2019 at 09:45)
-
-* [non-empty lists, again](58819nonemptylistsagain.html) (3 messages, latest: Oct 26 2019 at 07:17)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (18 messages, latest: Oct 25 2019 at 22:03)
 
