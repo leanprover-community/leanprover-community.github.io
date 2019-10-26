@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (173 messages, latest: Oct 26 2019 at 11:30)
+* [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (174 messages, latest: Oct 26 2019 at 15:05)
 
 * [#1601 attribute \[class\] nat.prime](096921601attributeclassnatprime.html) (23 messages, latest: Oct 24 2019 at 14:26)
 

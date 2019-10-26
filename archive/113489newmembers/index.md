@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [cone morphisms](71784conemorphisms.html) (139 messages, latest: Oct 26 2019 at 13:18)
+* [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
 
-* [endomorphism algebra](03140endomorphismalgebra.html) (7 messages, latest: Oct 26 2019 at 12:25)
+* [cone morphisms](71784conemorphisms.html) (140 messages, latest: Oct 26 2019 at 15:00)
 
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (37 messages, latest: Oct 26 2019 at 09:45)
 
