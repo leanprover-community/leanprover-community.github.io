@@ -658,6 +658,47 @@ But that's a whole bunch of work. So you can also leave it like this, and add a 
 </blockquote>
 <p>I feel like I could supervise 10 PhD students right now. I'm serious. It's very different to maths, where I felt that if I took on more than around 1 student per year then I would have difficulty coming up with appropriate projects for them.</p>
 
+<a name="179120209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120209">Scott Morrison (Oct 26 2019 at 10:35)</a>:</h4>
+<p>I was having a look at this proof, in particular thinking about how to make term mode proofs more comprehensible to mortals like me.</p>
+
+<a name="179120220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120220">Scott Morrison (Oct 26 2019 at 10:35)</a>:</h4>
+<p>This is a pretty fun theorem, not just a tedious lemma, and so I think it's worth a little thought on what we'd like theorems like this to look like.</p>
+
+<a name="179120221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120221">Scott Morrison (Oct 26 2019 at 10:35)</a>:</h4>
+<p>(I don't at all mean to hold this PR up --- I'm happy if we hit merge right now.)</p>
+
+<a name="179120272"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120272" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120272">Scott Morrison (Oct 26 2019 at 10:37)</a>:</h4>
+<p>One place I get stuck reading a proof like this is that I can't inspect the types of variables. For example, in the line </p>
+<div class="codehilite"><pre><span></span>(λ s, finset.induction_on s (λ g hg i, false.elim) $ λ a s has ih g hg,
+</pre></div>
+
+
+<p>how do I work out what <code>a</code>, <code>s</code>, <code>has</code>, <code>ih</code>, <code>g</code>, and <code>hg</code> are? I can guess from the names, or do a little work to deduce them. But I don't know how to ask the editor for much help. Hovering the mouse over <code>hg</code> just gives me the extremely unhelpful tooltip for the <code>exact</code> tactic.</p>
+
+<a name="179120320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120320">Scott Morrison (Oct 26 2019 at 10:38)</a>:</h4>
+<p>If we were in tactic mode, of course, I'd have no trouble here: I'd insert the cursor between tactic invocations, and inspect the tactic state.</p>
+
+<a name="179120329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120329">Scott Morrison (Oct 26 2019 at 10:39)</a>:</h4>
+<p>(I was actually thinking about trying to "document" this proof, without changing Kenny's code at all, just inserting some comments, but found it pretty painful because of this issue.)</p>
+
+<a name="179120438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120438">Scott Morrison (Oct 26 2019 at 10:43)</a>:</h4>
+<p>In fact, my efforts to turn the proof into a tactic style proof have so far been failing. :-(</p>
+
+<a name="179120479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120479">Scott Morrison (Oct 26 2019 at 10:44)</a>:</h4>
+<p>I thought since it's just a big chain of <code>have X : Y, from Z, ..., P</code>, it should have been easy, but I get weird errors <code>function expected at a, term has type i \mem s</code>...</p>
+
+<a name="179120551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231595%20Dedekind%27s%20linear%20independence%20of%20characters/near/179120551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/514841595Dedekindslinearindependenceofcharacters.html#179120551">Kevin Buzzard (Oct 26 2019 at 10:46)</a>:</h4>
+<p>What happens if you replace stuff by <code>_</code>s?</p>
+
 
 {% endraw %}
 

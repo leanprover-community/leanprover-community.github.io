@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [cone morphisms](71784conemorphisms.html) (19 messages, latest: Oct 26 2019 at 10:59)
+
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (37 messages, latest: Oct 26 2019 at 09:45)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (32 messages, latest: Oct 26 2019 at 08:20)
@@ -24,8 +26,6 @@ permalink: archive/113489newmembers/index.html
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (5 messages, latest: Oct 25 2019 at 04:10)
-
-* [cone morphisms](71784conemorphisms.html) (4 messages, latest: Oct 24 2019 at 17:09)
 
 * [empty cone](51733emptycone.html) (49 messages, latest: Oct 24 2019 at 13:08)
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (335 messages, latest: Oct 26 2019 at 09:47)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (341 messages, latest: Oct 26 2019 at 10:58)
 
 * [the integer game](45674theintegergame.html) (15 messages, latest: Oct 25 2019 at 21:03)
 

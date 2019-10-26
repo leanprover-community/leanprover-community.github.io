@@ -35,6 +35,135 @@ permalink: archive/113489newmembers/71784conemorphisms.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/178973972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#178973972">Kenny Lau (Oct 24 2019 at 17:09)</a>:</h4>
 <p>that also means you shouldn't use <code>cone_morphism</code> explicitly, but rather <code>A \hom B</code></p>
 
+<a name="179120606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120606">Calle Sönne (Oct 26 2019 at 10:48)</a>:</h4>
+<p>I have the following code:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">comm_of_equalizer</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≅</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">let</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">g</span> <span class="n">f</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+<span class="k">let</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">exact</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">g</span> <span class="n">f</span><span class="o">)),</span>
+<span class="k">have</span> <span class="n">comp12</span> <span class="o">:</span> <span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">),</span> <span class="n">apply</span> <span class="n">uniq_cone_morphism</span> <span class="n">limit</span><span class="bp">.</span><span class="n">is_limit</span><span class="o">((</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">))</span> <span class="o">(</span><span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span><span class="o">)</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="o">(</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">))</span>
+
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The last have line is a sketch of what I want to say, right now it is giving me an error. I want to apply uniq_cone_morphism to get a goal to show that both H1 &gt;&gt; H2 and the identity are cone morphisms. The statement for uniq_cone_morphism is:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">uniq_cone_morphism</span> <span class="o">{</span><span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="n">cone</span> <span class="n">F</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">t</span><span class="o">)</span> <span class="o">{</span><span class="n">f</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">s</span> <span class="err">⟶</span> <span class="n">t</span><span class="o">}</span> <span class="o">:</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">f&#39;</span>
+</pre></div>
+
+
+<p>So I need to say that the equalizer is the limit and here is where I get confused. Equalizer is defined as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">abbreviation</span> <span class="n">equalizer</span> <span class="o">:=</span> <span class="n">limit</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span>
+</pre></div>
+
+
+<p>But limit is defined to be the object of the cone that is the limit:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_limit</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">cone</span> <span class="o">:</span> <span class="n">cone</span> <span class="n">F</span><span class="o">)</span>
+<span class="o">(</span><span class="n">is_limit</span> <span class="o">:</span> <span class="n">is_limit</span> <span class="n">cone</span> <span class="bp">.</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">apply_instance</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">limit</span><span class="bp">.</span><span class="n">cone</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">has_limit</span> <span class="n">F</span><span class="o">]</span> <span class="o">:</span> <span class="n">cone</span> <span class="n">F</span> <span class="o">:=</span> <span class="n">has_limit</span><span class="bp">.</span><span class="n">cone</span> <span class="n">F</span>
+
+<span class="n">def</span> <span class="n">limit</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">)</span> <span class="o">[</span><span class="n">has_limit</span> <span class="n">F</span><span class="o">]</span> <span class="o">:=</span> <span class="o">(</span><span class="n">limit</span><span class="bp">.</span><span class="n">cone</span> <span class="n">F</span><span class="o">)</span><span class="bp">.</span><span class="n">X</span>
+</pre></div>
+
+
+<p>So my question is: from the object (limit) equalizer f g how do I refer back to the cone (whilst preserving the information that it is indeed a limit)</p>
+
+<a name="179120610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120610">Kevin Buzzard (Oct 26 2019 at 10:48)</a>:</h4>
+<p>what imports do you need to get this running?</p>
+
+<a name="179120612"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120612" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120612">Kevin Buzzard (Oct 26 2019 at 10:49)</a>:</h4>
+<p>I should really learn this stuff at some point</p>
+
+<a name="179120621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120621">Calle Sönne (Oct 26 2019 at 10:49)</a>:</h4>
+<p>import category_theory.limits.shapes.equalizers<br>
+import category_theory.limits.limits</p>
+<p>open category_theory</p>
+<p>namespace category_theory.limits<br>
+namespace is_limit</p>
+
+<a name="179120672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120672">Kevin Buzzard (Oct 26 2019 at 10:50)</a>:</h4>
+<p>I still have errors</p>
+
+<a name="179120674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120674">Kevin Buzzard (Oct 26 2019 at 10:50)</a>:</h4>
+<p>just make a new scratch file and minimise</p>
+
+<a name="179120684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120684">Kevin Buzzard (Oct 26 2019 at 10:51)</a>:</h4>
+<p><code>unknown identifier 'equalizer'</code> being the most serious one</p>
+
+<a name="179120728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120728">Kevin Buzzard (Oct 26 2019 at 10:52)</a>:</h4>
+<p><code>unknown identifier 'f'</code> being the next one</p>
+
+<a name="179120782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120782">Calle Sönne (Oct 26 2019 at 10:54)</a>:</h4>
+<p>Oh I got variables. I will send them</p>
+
+<a name="179120783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120783">Calle Sönne (Oct 26 2019 at 10:54)</a>:</h4>
+<p>variables {C : Type u} [𝒞 : category.{v} C]<br>
+include 𝒞<br>
+variables {X Y : C}<br>
+variables (f g : X ⟶ Y)<br>
+variables [has_limit (parallel_pair f g)]  [has_limit (parallel_pair g f)]</p>
+
+<a name="179120788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120788">Kevin Buzzard (Oct 26 2019 at 10:54)</a>:</h4>
+<p>Now I have errors on parallel_pair. Just create a new file, get it working at your end, and paste the whole thing</p>
+
+<a name="179120797"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120797" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120797">Calle Sönne (Oct 26 2019 at 10:55)</a>:</h4>
+<p>Ok</p>
+
+<a name="179120802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120802">Kevin Buzzard (Oct 26 2019 at 10:55)</a>:</h4>
+<p>I don't know anything, I don't know what is defined where, but I'm very interested in this project you're doing</p>
+
+<a name="179120920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120920">Calle Sönne (Oct 26 2019 at 10:59)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">shapes</span><span class="bp">.</span><span class="n">equalizers</span>
+<span class="kn">import</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">limits</span>
+
+<span class="kn">open</span> <span class="n">category_theory</span>
+
+<span class="kn">namespace</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+<span class="kn">namespace</span> <span class="n">is_limit</span>
+
+<span class="n">universes</span> <span class="n">v</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span>
+<span class="n">include</span> <span class="err">𝒞</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">f</span> <span class="n">g</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">has_limit</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">f</span> <span class="n">g</span><span class="o">)]</span>  <span class="o">[</span><span class="n">has_limit</span> <span class="o">(</span><span class="n">parallel_pair</span> <span class="n">g</span> <span class="n">f</span><span class="o">)]</span>
+
+<span class="kn">lemma</span> <span class="n">comm_of_equalizer</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≅</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+<span class="k">let</span> <span class="n">H1</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span><span class="o">,</span> <span class="n">exact</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">g</span> <span class="n">f</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+<span class="k">let</span> <span class="n">H2</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="err">⟶</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">,</span> <span class="n">exact</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">g</span> <span class="n">f</span><span class="o">)),</span>
+<span class="k">have</span> <span class="n">comp12</span> <span class="o">:</span> <span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">),</span> <span class="n">apply</span> <span class="n">uniq_cone_morphism</span> <span class="n">limit</span><span class="bp">.</span><span class="n">is_limit</span><span class="o">((</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">))</span> <span class="o">(</span><span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span><span class="o">)</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="o">(</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">))</span>
+<span class="kn">end</span>
+
+
+<span class="kn">end</span> <span class="n">is_limit</span>
+<span class="kn">end</span> <span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span>
+</pre></div>
+
+
+<p>this is enough for me</p>
+
+<a name="179120959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120959">Kevin Buzzard (Oct 26 2019 at 10:59)</a>:</h4>
+<p>Oh!</p>
+
 
 {% endraw %}
 
