@@ -164,6 +164,337 @@ variables [has_limit (parallel_pair f g)]  [has_limit (parallel_pair g f)]</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179120959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179120959">Kevin Buzzard (Oct 26 2019 at 10:59)</a>:</h4>
 <p>Oh!</p>
 
+<a name="179121011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121011">Kevin Buzzard (Oct 26 2019 at 11:00)</a>:</h4>
+<p>I am using a mathlib from July, that must be the problem. Sorry!</p>
+
+<a name="179121085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121085">Kevin Buzzard (Oct 26 2019 at 11:02)</a>:</h4>
+<p>Mario would tell you to use <code>refine</code> not <code>apply</code> because <code>apply</code> is in core and has a bug which we can't fix</p>
+
+<a name="179121100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121100">Calle Sönne (Oct 26 2019 at 11:03)</a>:</h4>
+<p>Oh, thats good to know thanks!</p>
+
+<a name="179121151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121151">Kevin Buzzard (Oct 26 2019 at 11:04)</a>:</h4>
+<p>So the error is this:</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  limits.is_limit.uniq_cone_morphism limits.limit.is_limit
+term
+  limits.limit.is_limit
+has type
+  Π (F : ?m_1 ⥤ ?m_3) [_inst_3 : limits.has_limit F], limits.is_limit (limits.limit.cone F) : Type (max
+        (max ? ?)
+        ?
+        ?)
+but is expected to have type
+  limits.is_limit ?m_6 : Type (max ? ?)
+Additional information:
+/home/buzzard/Encfs/Computer_languages/Lean/lean-projects/natural_number_game/scratch/scratch.lean:22:9: context: switched to simple application elaboration procedure because failed to use expected type to elaborate it, error message
+  too many arguments
+</pre></div>
+
+<a name="179121160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121160">Calle Sönne (Oct 26 2019 at 11:04)</a>:</h4>
+<p>yeah</p>
+
+<a name="179121179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121179">Kevin Buzzard (Oct 26 2019 at 11:05)</a>:</h4>
+<p>so it says "<code>limits.limit.is_limit</code> wants an <code>F</code> but you didn't give it an <code>F</code>"?</p>
+
+<a name="179121235"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121235" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121235">Kevin Buzzard (Oct 26 2019 at 11:07)</a>:</h4>
+<p>Is this progress: <code>  refine uniq_cone_morphism (limit.is_limit (equalizer f g) (H1 ≫ H2) (𝟙 (equalizer f g)))</code>? Or have I misunderstood something?</p>
+
+<a name="179121238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121238">Calle Sönne (Oct 26 2019 at 11:07)</a>:</h4>
+<p>yeah thats the problem, I gave equalizer but thats the limit object</p>
+
+<a name="179121286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121286">Kevin Buzzard (Oct 26 2019 at 11:08)</a>:</h4>
+<p>Does <code>\gg</code> do composition in "the wrong order"?</p>
+
+<a name="179121296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121296">Kevin Buzzard (Oct 26 2019 at 11:08)</a>:</h4>
+<p>oh yes I can just check its type and see that it does</p>
+
+<a name="179121308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121308">Calle Sönne (Oct 26 2019 at 11:09)</a>:</h4>
+<p>wait it does?</p>
+
+<a name="179121309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121309">Kevin Buzzard (Oct 26 2019 at 11:09)</a>:</h4>
+<p>Isn't it at this point that you just type <code>tidy</code> or some other fancy tactic and you're done?</p>
+
+<a name="179121312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121312">Kevin Buzzard (Oct 26 2019 at 11:09)</a>:</h4>
+<p>You are using gg correctly</p>
+
+<a name="179121358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121358">Kevin Buzzard (Oct 26 2019 at 11:10)</a>:</h4>
+<p>I was just thrown for a second</p>
+
+<a name="179121359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121359">Calle Sönne (Oct 26 2019 at 11:10)</a>:</h4>
+<p>neither tidy or simp works</p>
+
+<a name="179121418"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121418" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121418">Kevin Buzzard (Oct 26 2019 at 11:12)</a>:</h4>
+<p>Why does </p>
+<div class="codehilite"><pre><span></span><span class="k">have</span> <span class="n">comp12</span> <span class="o">:</span> <span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">),</span>
+  <span class="n">refine</span> <span class="n">uniq_cone_morphism</span> <span class="bp">_</span><span class="o">,</span>
+</pre></div>
+
+
+<p>not work?</p>
+<div class="codehilite"><pre><span></span>invalid type ascription, term has type
+  ?m_8 = ?m_9
+but is expected to have type
+  H1 ≫ H2 = 𝟙 (limits.equalizer f g)
+</pre></div>
+
+<a name="179121422"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121422" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121422">Calle Sönne (Oct 26 2019 at 11:12)</a>:</h4>
+<p>Yeah I got to there now as well</p>
+
+<a name="179121434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121434">Calle Sönne (Oct 26 2019 at 11:12)</a>:</h4>
+<p>I didnt have to give the cone, I had to give the diagram (parallel_pair f g)</p>
+
+<a name="179121515"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121515" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121515">Calle Sönne (Oct 26 2019 at 11:15)</a>:</h4>
+<p>Now one thing Im not sure of is if lean 'knows' that the identity and composition of H1 and H2 are cone morphisms. As kenny said earlier the fact that they form a category is in mathlib, but maybe we need to provide this explictly</p>
+
+<a name="179121517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121517">Kevin Buzzard (Oct 26 2019 at 11:15)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="n">refine</span> <span class="bp">@</span><span class="n">uniq_cone_morphism</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">_</span> <span class="o">:</span> <span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">limits</span><span class="bp">.</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+</pre></div>
+
+
+<p>doesn't work either</p>
+
+<a name="179121575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121575">Kevin Buzzard (Oct 26 2019 at 11:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="n">convert</span> <span class="bp">@</span><span class="n">uniq_cone_morphism</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+</pre></div>
+
+
+<p>gives</p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  category_struct.comp H1
+term
+  H1
+has type
+  limits.equalizer f g ⟶ limits.equalizer g f : Type v
+but is expected to have type
+  ?m_6 ⟶ ?m_7 : Type ?
+</pre></div>
+
+
+<p>Is this a universe issue??</p>
+
+<a name="179121630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121630">Kevin Buzzard (Oct 26 2019 at 11:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">convert</span> <span class="bp">@</span><span class="n">uniq_cone_morphism</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">H1</span> <span class="err">≫</span> <span class="n">H2</span><span class="o">)</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="o">(</span><span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+</pre></div>
+
+
+<p>shows it isn't. </p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  category_struct.comp H1
+term
+  H1
+has type
+  limits.equalizer f g ⟶ limits.equalizer g f
+but is expected to have type
+  ?m_6 ⟶ ?m_7
+</pre></div>
+
+<a name="179121637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121637">Kevin Buzzard (Oct 26 2019 at 11:19)</a>:</h4>
+<p>Now I need to count to see which is the 6th <code>_</code></p>
+
+<a name="179121746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121746">Calle Sönne (Oct 26 2019 at 11:22)</a>:</h4>
+<p>I think we need to show that H1 and H2 are cone morphisms</p>
+
+<a name="179121747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121747">Calle Sönne (Oct 26 2019 at 11:22)</a>:</h4>
+<p>Because right now they are just maps between some objects</p>
+
+<a name="179121750"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121750" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121750">Calle Sönne (Oct 26 2019 at 11:22)</a>:</h4>
+<p>equalizer is just the object, not the cone</p>
+
+<a name="179121754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121754">Kevin Buzzard (Oct 26 2019 at 11:22)</a>:</h4>
+<p>right, this seems to me to be just a case of looking carefully at the type of everything</p>
+
+<a name="179121806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121806">Scott Morrison (Oct 26 2019 at 11:23)</a>:</h4>
+<p>Just saw this thread, and may have to run in a moment.</p>
+
+<a name="179121855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121855">Scott Morrison (Oct 26 2019 at 11:24)</a>:</h4>
+<p>Have a look at <code>def prod.braiding (P Q : C) : P ⨯ Q ≅ Q ⨯ P := ...</code></p>
+
+<a name="179121858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121858">Scott Morrison (Oct 26 2019 at 11:24)</a>:</h4>
+<p>in <code>category_theory/limits/shapes/binary_products.lean</code></p>
+
+<a name="179121878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121878">Scott Morrison (Oct 26 2019 at 11:25)</a>:</h4>
+<p>I don't think <code>uniq_cone_morphism</code> is going to be particularly helpful -- why do you want to use that?</p>
+
+<a name="179121917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121917">Scott Morrison (Oct 26 2019 at 11:26)</a>:</h4>
+<p>Oh, to prove that the two compositions are the identity, I see.</p>
+
+<a name="179121978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121978">Scott Morrison (Oct 26 2019 at 11:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="n">tidy</span><span class="o">]</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">case_bash</span>
+
+<span class="kn">lemma</span> <span class="n">comm_of_equalizer</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≅</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">g</span> <span class="n">f</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">g</span> <span class="n">f</span><span class="o">)),</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>doesn't quite get there, but it gives two very manageable goals that possibly ought to be simp lemmas.</p>
+
+<a name="179121992"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179121992" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179121992">Scott Morrison (Oct 26 2019 at 11:29)</a>:</h4>
+<p>(The first incantation <code>local attribute [tidy] tactic.case_bash</code> tells the tidy tactic that it's allowed to case bash on hypotheses which are inductive types. In particular, that means that to prove two natural transformations out of a "finite" category are equal, it can check object by object.)</p>
+
+<a name="179122060"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122060" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122060">Scott Morrison (Oct 26 2019 at 11:31)</a>:</h4>
+<p>(Boarding a flight Perth-London, so I'll be offline for a while. :-) Good luck!)</p>
+
+<a name="179122064"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122064" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122064">Kevin Buzzard (Oct 26 2019 at 11:31)</a>:</h4>
+<p>Which London?</p>
+
+<a name="179122356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122356">Calle Sönne (Oct 26 2019 at 11:41)</a>:</h4>
+<p>I dont really understand the above syntax, how to I continue of what Scott was doing?</p>
+
+<a name="179122398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122398">Calle Sönne (Oct 26 2019 at 11:42)</a>:</h4>
+<p>Is the := just like let?</p>
+
+<a name="179122402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122402">Kevin Buzzard (Oct 26 2019 at 11:42)</a>:</h4>
+<p>he's making a structure, isn't he?</p>
+
+<a name="179122404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122404">Calle Sönne (Oct 26 2019 at 11:42)</a>:</h4>
+<p>Oh right the isomorphism</p>
+
+<a name="179122412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122412">Calle Sönne (Oct 26 2019 at 11:43)</a>:</h4>
+<p>But then how do I continue the proof?</p>
+
+<a name="179122423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122423">Kevin Buzzard (Oct 26 2019 at 11:43)</a>:</h4>
+<p>good question! I was trying to figure out what was going on in your proof still.</p>
+
+<a name="179122466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122466">Kevin Buzzard (Oct 26 2019 at 11:44)</a>:</h4>
+<p>I think he decided to come to London to help you out personally. It's a bit of an extreme reaction but he has to be applauded.</p>
+
+<a name="179122470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122470">Kevin Buzzard (Oct 26 2019 at 11:44)</a>:</h4>
+<p>got it</p>
+
+<a name="179122476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122476">Kevin Buzzard (Oct 26 2019 at 11:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">comm_of_equalizer</span> <span class="o">:</span> <span class="n">equalizer</span> <span class="n">f</span> <span class="n">g</span> <span class="err">≅</span> <span class="n">equalizer</span> <span class="n">g</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">refine_struct</span> <span class="o">{</span> <span class="n">hom</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">g</span> <span class="n">f</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">f</span> <span class="n">g</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">f</span> <span class="n">g</span><span class="o">)),</span>
+  <span class="n">inv</span> <span class="o">:=</span> <span class="n">equalizer</span><span class="bp">.</span><span class="n">lift</span> <span class="n">f</span> <span class="n">g</span> <span class="o">(</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">ι</span> <span class="n">g</span> <span class="n">f</span><span class="o">)</span> <span class="o">(</span><span class="n">eq</span><span class="bp">.</span><span class="n">symm</span> <span class="o">((</span><span class="n">equalizer</span><span class="bp">.</span><span class="n">condition</span><span class="o">)</span> <span class="n">g</span> <span class="n">f</span><span class="o">)),</span> <span class="o">},</span>
+  <span class="n">sorry</span><span class="o">,</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179122532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122532">Kevin Buzzard (Oct 26 2019 at 11:46)</a>:</h4>
+<p>does this help? Now it looks like you have to prove something which looks like a standard diagram chase.</p>
+
+<a name="179122544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122544">Calle Sönne (Oct 26 2019 at 11:47)</a>:</h4>
+<p>Yes exactly, but it feels like that could be done by some tactic?</p>
+
+<a name="179122591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122591">Kevin Buzzard (Oct 26 2019 at 11:48)</a>:</h4>
+<p>I'm afraid I do't know how the category theory library works at all. For those watching with amusement, we're now on</p>
+<div class="codehilite"><pre><span></span>⊢ limits.equalizer.ι f g ≫ g = limits.limit.π (limits.parallel_pair f g) limits.walking_parallel_pair.one
+</pre></div>
+
+<a name="179122649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122649">Calle Sönne (Oct 26 2019 at 11:50)</a>:</h4>
+<p>Yeah right now im just reading up, hopefully there is some theorem about the fact that the projection commutes with the diagram</p>
+
+<a name="179122656"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122656" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122656">Calle Sönne (Oct 26 2019 at 11:50)</a>:</h4>
+<p>I mean its in the definition but Im not sure how to access that</p>
+
+<a name="179122658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122658">Kevin Buzzard (Oct 26 2019 at 11:50)</a>:</h4>
+<p>you could just wait for about 20 hours and then go and meet him at the airport</p>
+
+<a name="179122672"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122672" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122672">Calle Sönne (Oct 26 2019 at 11:51)</a>:</h4>
+<p>Seems like a reasonable plan</p>
+
+<a name="179122700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122700">Calle Sönne (Oct 26 2019 at 11:52)</a>:</h4>
+<p>but I think this will help</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">lemma</span> <span class="n">cone</span><span class="bp">.</span><span class="n">w</span> <span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">cone</span> <span class="n">F</span><span class="o">)</span> <span class="o">{</span><span class="n">j</span> <span class="n">j&#39;</span> <span class="o">:</span> <span class="n">J</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">j</span> <span class="err">⟶</span> <span class="n">j&#39;</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">c</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">app</span> <span class="n">j</span> <span class="err">≫</span> <span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="n">f</span> <span class="bp">=</span> <span class="n">c</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">app</span> <span class="n">j&#39;</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">convert</span> <span class="err">←</span><span class="o">(</span><span class="n">c</span><span class="bp">.</span><span class="n">π</span><span class="bp">.</span><span class="n">naturality</span> <span class="n">f</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span><span class="bp">;</span> <span class="n">apply</span> <span class="n">id_comp</span>
+</pre></div>
+
+<a name="179122776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122776">Calle Sönne (Oct 26 2019 at 11:54)</a>:</h4>
+<p>But then the question again becomes how to we access the cone of the equalizer</p>
+
+<a name="179122778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122778">Kevin Buzzard (Oct 26 2019 at 11:54)</a>:</h4>
+<p>I cannot steer this stuff at all.</p>
+
+<a name="179122782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122782">Calle Sönne (Oct 26 2019 at 11:54)</a>:</h4>
+<p>steer?</p>
+
+<a name="179122864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122864">Kevin Buzzard (Oct 26 2019 at 11:58)</a>:</h4>
+<p>I don't even know the basics.</p>
+
+<a name="179122901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122901">Kevin Buzzard (Oct 26 2019 at 11:58)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/tutorial/category_theory/calculating_colimits_in_Top.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/tutorial/category_theory/calculating_colimits_in_Top.lean">https://github.com/leanprover-community/mathlib/blob/master/docs/tutorial/category_theory/calculating_colimits_in_Top.lean</a></p>
+
+<a name="179122904"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122904" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122904">Kevin Buzzard (Oct 26 2019 at 11:58)</a>:</h4>
+<p>That's the only documentation I have ever seen.</p>
+
+<a name="179122906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122906">Calle Sönne (Oct 26 2019 at 11:58)</a>:</h4>
+<p>ah</p>
+
+<a name="179122908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122908">Kevin Buzzard (Oct 26 2019 at 11:58)</a>:</h4>
+<p>What I'm saying is that I don't have a clue how to access the cone of the equalizer. In maths I'd just draw a picture and say we were done.</p>
+
+<a name="179122916"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122916" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122916">Kevin Buzzard (Oct 26 2019 at 11:59)</a>:</h4>
+<p>But I can't work Scott's library</p>
+
+<a name="179122919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179122919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179122919">Kevin Buzzard (Oct 26 2019 at 11:59)</a>:</h4>
+<p>If it were a car, I'm not saying that I can't drive it, I'm saying I can't even use the steering wheel.</p>
+
 
 {% endraw %}
 
