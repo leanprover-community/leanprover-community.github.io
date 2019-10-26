@@ -921,6 +921,111 @@ permalink: archive/116395maths/86601Proofbyalgorithm.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179025117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179025117">Tim Daly (Oct 25 2019 at 06:23)</a>:</h4>
 <p>A "pride of lions", a "gaggle of geese", a "herd of cattle".... and now a "riot of computer scientists" :-) I am SO going to squeeze this into a talk somewhere.</p>
 
+<a name="179109028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109028">Tim Daly (Oct 26 2019 at 04:38)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I'm reading your MetaMath Zero paper. You mentioned "proof to the x86 architecture".</p>
+<p>I worked in security and developed the semantics of the x86 architecture. The input is binary (since we were reverse engineering malware and need to know EXACTLY what the malware does). The output is in several formats. One format is called Conditional-Concurrent assignment (CCA). Basically it rolls a bunch of statements under a logical condition which can be combined with other conditions. If you want to ensure you're getting the right code executed you can compile your program and ask for the assembler output from my program, thus "round-tripping" your code.</p>
+<p>The "Intel Instruction Semantics Generator" (<a href="http://daly.axiom-developer.org/TimothyDaly_files/publications/sei/intel/intel.pdf" target="_blank" title="http://daly.axiom-developer.org/TimothyDaly_files/publications/sei/intel/intel.pdf">http://daly.axiom-developer.org/TimothyDaly_files/publications/sei/intel/intel.pdf</a>) is a literate program containing both the source code and the documentation, a fair amount of which is the individual intel instruction semantics.<br>
+It is an SEI/CERT research report I did at CMU.</p>
+<p>The x86 architecture, while widely used is, I can safely say based on my experience, rather a challenge to understand at the logical / semantics layer. It is especially challenging when you automate semantic generation. My advice to you would be to find the smallest possible subset (regardless of efficiency). Perhaps it might make sense to construct mealy / moore state machines for your logical operations and build semantics on verified versions of that.</p>
+
+<a name="179109084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109084">Mario Carneiro (Oct 26 2019 at 04:40)</a>:</h4>
+<p>I'm already working down to the byte level, so there is no compiler</p>
+
+<a name="179109095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109095">Tim Daly (Oct 26 2019 at 04:41)</a>:</h4>
+<p>You have my sympathy.</p>
+
+<a name="179109098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109098">Mario Carneiro (Oct 26 2019 at 04:41)</a>:</h4>
+<p>Certainly I do not formalize the entire x86 arch, only the part that matters to me, about 30-40 instructions out of 1800 or so (even intel can't get an accurate count)</p>
+
+<a name="179109140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109140">Mario Carneiro (Oct 26 2019 at 04:42)</a>:</h4>
+<p>I'm not sure what CCA is; I looked it up and I get references to VHDL hardware logic</p>
+
+<a name="179109156"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109156" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109156">Mario Carneiro (Oct 26 2019 at 04:43)</a>:</h4>
+<p>which is a bit lower than I am going. I stop at the ISA level, but below that there is the micro architecture and the arrangement of logic gates, which is usually done in languages like VHDL and Verilog, and it's all closed source in Intel's case</p>
+
+<a name="179109205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109205">Mario Carneiro (Oct 26 2019 at 04:45)</a>:</h4>
+<p>If you are interested in this part of the project you should check out my MM0 + x86 talk at ITP: <a href="https://youtu.be/7hAShC6K_vA" target="_blank" title="https://youtu.be/7hAShC6K_vA">https://youtu.be/7hAShC6K_vA</a></p>
+<div class="youtube-video message_inline_image"><a data-id="7hAShC6K_vA" href="https://youtu.be/7hAShC6K_vA" target="_blank" title="https://youtu.be/7hAShC6K_vA"><img src="https://i.ytimg.com/vi/7hAShC6K_vA/default.jpg"></a></div>
+
+<a name="179109263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109263">Mario Carneiro (Oct 26 2019 at 04:46)</a>:</h4>
+<p>you have a 5000 page document? That's even larger than the intel ISA</p>
+
+<a name="179109268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109268">Mario Carneiro (Oct 26 2019 at 04:47)</a>:</h4>
+<p>"literate" seems like a stretch</p>
+
+<a name="179109269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109269">Tim Daly (Oct 26 2019 at 04:47)</a>:</h4>
+<p>If you're working in VHDL I did some work at CMU (for a startup idea I failed to startup). I have that code around somewhere but I'm not sure it will be of interest. I used an Altera FPGA. Unfortunately, once I seriously started VHDL coding Altera was bought by Intel. The Xilinx FPGA is a different architecture. The FPGA tool sets are proprietary and I didn't have the funds or the ambition to start all over.</p>
+
+<a name="179109315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109315">Tim Daly (Oct 26 2019 at 04:48)</a>:</h4>
+<p>The document is 60,000 lines of code and about 6000 pages formatted. Nobody expects to print it as it contains executable code.</p>
+
+<a name="179109324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109324">Mario Carneiro (Oct 26 2019 at 04:48)</a>:</h4>
+<p>Latex thinks the TOC is too large, the numbers overflow</p>
+
+<a name="179109325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109325">Tim Daly (Oct 26 2019 at 04:48)</a>:</h4>
+<p>Beleive me, 5000 pages is small in the Intel world. The stack of x86 books makes that look like a pamphlet</p>
+
+<a name="179109331"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109331" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109331">Mario Carneiro (Oct 26 2019 at 04:49)</a>:</h4>
+<p>I assume you are trying to communicate, though...?</p>
+
+<a name="179109371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109371">Mario Carneiro (Oct 26 2019 at 04:50)</a>:</h4>
+<p>are you talking to a person or a computer? Seems like trying for both at the same time leads to two poor jobs</p>
+
+<a name="179109381"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109381" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109381">Tim Daly (Oct 26 2019 at 04:50)</a>:</h4>
+<p>It is reasonably well organized by instruction. There are a LOT of instructions, as you've already noticed. At 1 instruction per page you already have several thousand pages.</p>
+
+<a name="179109393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109393">Mario Carneiro (Oct 26 2019 at 04:51)</a>:</h4>
+<p>holy crap I'm 250 pages in and the TOC keeps going</p>
+
+<a name="179109436"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109436" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109436">Tim Daly (Oct 26 2019 at 04:52)</a>:</h4>
+<p>Literate programming, like Lisp, is an "Ah Ha! epiphany event". You don't "get it" until you "get it" and then you wonder why other people don't "get it". Once you "get it", you never want to go back.</p>
+
+<a name="179109438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109438">Tim Daly (Oct 26 2019 at 04:52)</a>:</h4>
+<p>The Intel CPU is a complex beast</p>
+
+<a name="179109444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109444">Tim Daly (Oct 26 2019 at 04:53)</a>:</h4>
+<p>I found mistakes in a lot of Intel assemblers.</p>
+
+<a name="179109445"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109445" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109445">Mario Carneiro (Oct 26 2019 at 04:53)</a>:</h4>
+<p>You should look at mine then</p>
+
+<a name="179109446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109446">Tim Daly (Oct 26 2019 at 04:53)</a>:</h4>
+<p>Pointer?</p>
+
+<a name="179109485"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109485" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109485">Tim Daly (Oct 26 2019 at 04:54)</a>:</h4>
+<p>I want to understand things like how you generate lean output.</p>
+
+<a name="179109500"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109500" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109500">Tim Daly (Oct 26 2019 at 04:55)</a>:</h4>
+<p>I'm also cruising the <a href="http://Metamath.org" target="_blank" title="http://Metamath.org">Metamath.org</a> website, per your recommendation.</p>
+
+<a name="179109611"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proof%20by%20algorithm/near/179109611" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/86601Proofbyalgorithm.html#179109611">Tim Daly (Oct 26 2019 at 04:59)</a>:</h4>
+<p>We're not that far apart in what we are trying to do, we are just coming at it from different backgrounds (proof vs computer algebra)</p>
+
 
 {% endraw %}
 

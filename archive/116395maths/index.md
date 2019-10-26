@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Proof by algorithm](86601Proofbyalgorithm.html) (246 messages, latest: Oct 26 2019 at 04:59)
+
 * [the integer game](45674theintegergame.html) (15 messages, latest: Oct 25 2019 at 21:03)
 
 * [algebraic independence in K-Algebras](58701algebraicindependenceinKAlgebras.html) (19 messages, latest: Oct 25 2019 at 15:43)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [manifolds](86782manifolds.html) (29 messages, latest: Oct 25 2019 at 09:25)
 
 * [localization take 2](41889localizationtake2.html) (7 messages, latest: Oct 25 2019 at 07:23)
-
-* [Proof by algorithm](86601Proofbyalgorithm.html) (221 messages, latest: Oct 25 2019 at 06:23)
 
 * [Single Axiom for Groups](50248SingleAxiomforGroups.html) (1 message, latest: Oct 25 2019 at 03:19)
 
