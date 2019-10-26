@@ -703,6 +703,140 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179124988" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179124988">Calle Sönne (Oct 26 2019 at 12:58)</a>:</h4>
 <p>FYI on the line <code>refine comp</code> I had the exact same goal, only without the 2nd function composition. Then refine comp worked perfectly to eliminate one of the goals</p>
 
+<a name="179125196"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125196">Kevin Buzzard (Oct 26 2019 at 13:04)</a>:</h4>
+<p>Before <code>rw comp</code> your local context is this:</p>
+<div class="codehilite"><pre><span></span>comp : h ≫ limits.equalizer.ι f g = i ≫ limits.equalizer.ι f g
+⊢ h ≫
+      limits.limit.π (limits.parallel_pair f g) limits.walking_parallel_pair.zero ≫
+        (limits.parallel_pair f g).map limits.walking_parallel_pair_hom.right =
+    i ≫
+      limits.limit.π (limits.parallel_pair f g) limits.walking_parallel_pair.zero ≫
+        (limits.parallel_pair f g).map limits.walking_parallel_pair_hom.right
+</pre></div>
+
+
+<p>So <code>rw comp</code> will fail because <code>rw</code> works with syntactic equality, and the left hand side of <code>h</code> is not exactly mentioned in the goal.</p>
+
+<a name="179125223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125223">Calle Sönne (Oct 26 2019 at 13:05)</a>:</h4>
+<p>So can I somehow rewrite the abbrevation first?</p>
+
+<a name="179125266"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125266" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125266">Kevin Buzzard (Oct 26 2019 at 13:06)</a>:</h4>
+<p>I have no idea how to steer abbreviations. I don't even know what they are.</p>
+
+<a name="179125271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125271">Calle Sönne (Oct 26 2019 at 13:06)</a>:</h4>
+<p>ah :/</p>
+
+<a name="179125281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125281">Kevin Buzzard (Oct 26 2019 at 13:07)</a>:</h4>
+<p>Is the left hand side of the goal I posted definitionally equal to the left hand side of <code>comp</code> in your opinion?</p>
+
+<a name="179125287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125287">Kevin Buzzard (Oct 26 2019 at 13:07)</a>:</h4>
+<p>there are too many &gt;&gt;'s, right?</p>
+
+<a name="179125293"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125293">Calle Sönne (Oct 26 2019 at 13:07)</a>:</h4>
+<p>but the last &gt;&gt; is the same on both sides</p>
+
+<a name="179125341"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125341" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125341">Kevin Buzzard (Oct 26 2019 at 13:08)</a>:</h4>
+<p>Is &gt;&gt; left associative or right associative?</p>
+
+<a name="179125344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125344">Kevin Buzzard (Oct 26 2019 at 13:08)</a>:</h4>
+<p>aah! It's right associative!</p>
+
+<a name="179125345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125345">Calle Sönne (Oct 26 2019 at 13:08)</a>:</h4>
+<p>Wait now Im confused, isnt it both?</p>
+
+<a name="179125347"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125347" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125347">Kevin Buzzard (Oct 26 2019 at 13:09)</a>:</h4>
+<p>nonono</p>
+
+<a name="179125350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125350">Calle Sönne (Oct 26 2019 at 13:09)</a>:</h4>
+<p>oh okay now I see</p>
+
+<a name="179125353"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125353" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125353">Kevin Buzzard (Oct 26 2019 at 13:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="kn">notation</span> <span class="err">≫</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">notation</span> <span class="bp">+</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">notation</span> <span class="err">^</span>
+</pre></div>
+
+<a name="179125362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125362">Kevin Buzzard (Oct 26 2019 at 13:09)</a>:</h4>
+<p>I can never remember whether the difference in numbers means left or right</p>
+
+<a name="179125371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125371">Kevin Buzzard (Oct 26 2019 at 13:09)</a>:</h4>
+<p>For <code>+</code> the two numbers are the same, so <code>+</code> is left associative</p>
+
+<a name="179125383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125383">Kevin Buzzard (Oct 26 2019 at 13:09)</a>:</h4>
+<p>by which I mean "when Lean says <code>a+b+c</code>, it means <code>(a+b)+c</code>"</p>
+
+<a name="179125429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125429">Calle Sönne (Oct 26 2019 at 13:10)</a>:</h4>
+<p>So I have to rewrite associativity first</p>
+
+<a name="179125433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125433">Kevin Buzzard (Oct 26 2019 at 13:10)</a>:</h4>
+<p>For <code>^</code> the numbers differ by 1, because it's right associative. So, yes.</p>
+
+<a name="179125438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125438">Kevin Buzzard (Oct 26 2019 at 13:11)</a>:</h4>
+<p>what's this lemma called?</p>
+
+<a name="179125441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125441">Kevin Buzzard (Oct 26 2019 at 13:11)</a>:</h4>
+<p>actually, what's this axiom called?</p>
+
+<a name="179125444"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125444" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125444">Kevin Buzzard (Oct 26 2019 at 13:11)</a>:</h4>
+<p>ha ha if I don't even know the names of the axioms this is a pretty good indication of how good I am at categories in Lean :D</p>
+
+<a name="179125448"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125448" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125448">Calle Sönne (Oct 26 2019 at 13:11)</a>:</h4>
+<p>category.assoc_symm</p>
+
+<a name="179125491"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125491" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125491">Kevin Buzzard (Oct 26 2019 at 13:12)</a>:</h4>
+<p>Not <code>assoc</code>??</p>
+
+<a name="179125502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125502">Kevin Buzzard (Oct 26 2019 at 13:13)</a>:</h4>
+<p>wow you're right. Maybe it's because it's the other way around to usual because of the different conventions.</p>
+
+<a name="179125505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125505">Calle Sönne (Oct 26 2019 at 13:13)</a>:</h4>
+<p>I dont know but category.assoc_symm worked</p>
+
+<a name="179125511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125511">Calle Sönne (Oct 26 2019 at 13:13)</a>:</h4>
+<p>Thank you. The proof is now completed</p>
+
+<a name="179125551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125551">Kevin Buzzard (Oct 26 2019 at 13:14)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="kn">notation</span> <span class="err">∘</span>
+</pre></div>
+
+
+<p>Usual function composition is left associative, so the convention I guess is that <code>assoc</code> means <code>(a*b)*c=a*(b*c)</code> [for a general infix binary operator]</p>
+
+<a name="179125554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125554">Kevin Buzzard (Oct 26 2019 at 13:14)</a>:</h4>
+<p>and then you apply <code>eq.symm</code> and you get Scott's axiom.</p>
+
+<a name="179125639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cone%20morphisms/near/179125639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/71784conemorphisms.html#179125639">Kevin Buzzard (Oct 26 2019 at 13:18)</a>:</h4>
+<p>so the rewrite does work. I guess <code>abbreviation</code> really does not change even syntactic equality. Maybe the parser just unfolds it before even passing it to the kernel?</p>
+
 
 {% endraw %}
 
