@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [non-empty lists, again](58819nonemptylistsagain.html) (3 messages, latest: Oct 26 2019 at 07:17)
+* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (36 messages, latest: Oct 26 2019 at 08:54)
 
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (31 messages, latest: Oct 26 2019 at 01:06)
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (32 messages, latest: Oct 26 2019 at 08:20)
+
+* [non-empty lists, again](58819nonemptylistsagain.html) (3 messages, latest: Oct 26 2019 at 07:17)
 
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (18 messages, latest: Oct 25 2019 at 22:03)
 
@@ -42,8 +44,6 @@ permalink: archive/113489newmembers/index.html
 * [Weird executable version issue](98733Weirdexecutableversionissue.html) (27 messages, latest: Oct 21 2019 at 16:41)
 
 * [(no topic)](79918notopic.html) (209 messages, latest: Oct 21 2019 at 15:52)
-
-* [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (35 messages, latest: Oct 21 2019 at 08:46)
 
 * [dne implies em](56189dneimpliesem.html) (10 messages, latest: Oct 20 2019 at 23:49)
 
