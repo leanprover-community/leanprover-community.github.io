@@ -9,6 +9,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Time to move to 3.5?](16418Timetomoveto35.html) (7 messages, latest: Oct 25 2019 at 23:46)
+
+* [data structures](94495datastructures.html) (2 messages, latest: Oct 25 2019 at 23:40)
+
+* [two basic recursor questions](12189twobasicrecursorquestions.html) (10 messages, latest: Oct 25 2019 at 23:25)
+
 * [Graham's number](86036Grahamsnumber.html) (19 messages, latest: Oct 25 2019 at 22:43)
 
 * [Travis](06426Travis.html) (192 messages, latest: Oct 25 2019 at 19:07)
