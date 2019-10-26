@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [vscode snippets](92603vscodesnippets.html) (27 messages, latest: Oct 26 2019 at 12:00)
+
 * [Time to move to 3.5?](16418Timetomoveto35.html) (23 messages, latest: Oct 26 2019 at 08:20)
 
 * [oops!](54691oops.html) (12 messages, latest: Oct 26 2019 at 07:48)
@@ -1452,8 +1454,6 @@ permalink: archive/113488general/index.html
 * [derive](25024derive.html) (10 messages, latest: Feb 13 2019 at 17:02)
 
 * [use and exists_prop](21313useandexistsprop.html) (13 messages, latest: Feb 13 2019 at 14:35)
-
-* [vscode snippets](92603vscodesnippets.html) (26 messages, latest: Feb 13 2019 at 07:28)
 
 * [Logic & Proof Ch. 8 Homework Question](82512LogicProofCh8HomeworkQuestion.html) (7 messages, latest: Feb 13 2019 at 07:08)
 
