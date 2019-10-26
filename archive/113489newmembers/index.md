@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (40 messages, latest: Oct 26 2019 at 19:00)
+* [natural number game](77211naturalnumbergame.html) (22 messages, latest: Oct 26 2019 at 19:49)
+
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (46 messages, latest: Oct 26 2019 at 19:17)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
 
