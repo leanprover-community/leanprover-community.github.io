@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (345 messages, latest: Oct 27 2019 at 09:06)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (346 messages, latest: Oct 27 2019 at 12:08)
 
 * [bundling submonoids](35255bundlingsubmonoids.html) (23 messages, latest: Oct 27 2019 at 05:26)
 

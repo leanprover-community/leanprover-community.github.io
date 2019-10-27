@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (12 messages, latest: Oct 27 2019 at 11:48)
+* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (19 messages, latest: Oct 27 2019 at 12:21)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (1 message, latest: Oct 27 2019 at 10:52)
 
