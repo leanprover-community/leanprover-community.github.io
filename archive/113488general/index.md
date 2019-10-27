@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean vs other systems](78564Leanvsothersystems.html) (100 messages, latest: Oct 27 2019 at 14:56)
+* [Zulip users](15527Zulipusers.html) (2 messages, latest: Oct 27 2019 at 15:54)
+
+* [Lean vs other systems](78564Leanvsothersystems.html) (102 messages, latest: Oct 27 2019 at 15:32)
 
 * [Lean in the wild](43625Leaninthewild.html) (388 messages, latest: Oct 27 2019 at 09:23)
 
@@ -94,8 +96,6 @@ permalink: archive/113488general/index.html
 * [out_params and products](13059outparamsandproducts.html) (8 messages, latest: Oct 12 2019 at 10:44)
 
 * [General Questions](48074GeneralQuestions.html) (21 messages, latest: Oct 11 2019 at 19:14)
-
-* [Zulip users](15527Zulipusers.html) (1 message, latest: Oct 11 2019 at 08:50)
 
 * [Benchmarking](73610Benchmarking.html) (5 messages, latest: Oct 11 2019 at 05:51)
 
