@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to turn off termination checking for a function?](65961Howtoturnoffterminationcheckingforafunction.html) (1 message, latest: Oct 27 2019 at 07:55)
+
+* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (1 message, latest: Oct 27 2019 at 07:00)
+
 * [cone morphisms](71784conemorphisms.html) (141 messages, latest: Oct 27 2019 at 06:22)
 
 * [trichotomy of naturals](58482trichotomyofnaturals.html) (3 messages, latest: Oct 27 2019 at 03:14)
