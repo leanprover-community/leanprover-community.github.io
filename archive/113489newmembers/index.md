@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to change the `#eval` duration?](51529Howtochangetheevalduration.html) (4 messages, latest: Oct 27 2019 at 09:30)
+
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (2 messages, latest: Oct 27 2019 at 08:40)
 
 * [How to turn off termination checking for a function?](65961Howtoturnoffterminationcheckingforafunction.html) (5 messages, latest: Oct 27 2019 at 08:16)

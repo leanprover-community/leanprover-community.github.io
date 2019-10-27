@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [bundling submonoids](35255bundlingsubmonoids.html) (23 messages, latest: Oct 27 2019 at 05:26)
+* [Proof by algorithm](86601Proofbyalgorithm.html) (345 messages, latest: Oct 27 2019 at 09:06)
 
-* [Proof by algorithm](86601Proofbyalgorithm.html) (344 messages, latest: Oct 26 2019 at 12:40)
+* [bundling submonoids](35255bundlingsubmonoids.html) (23 messages, latest: Oct 27 2019 at 05:26)
 
 * [the integer game](45674theintegergame.html) (15 messages, latest: Oct 25 2019 at 21:03)
 
