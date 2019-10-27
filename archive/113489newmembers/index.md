@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (9 messages, latest: Oct 27 2019 at 16:47)
+* [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (10 messages, latest: Oct 27 2019 at 17:02)
 
 * [trichotomy of naturals](58482trichotomyofnaturals.html) (6 messages, latest: Oct 27 2019 at 14:50)
 

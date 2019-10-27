@@ -554,6 +554,32 @@ permalink: archive/113488general/78564Leanvsothersystems.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178271">Mario Carneiro (Oct 27 2019 at 16:58)</a>:</h4>
 <p>the savings from extracting a theorem is (number of uses) * (size of proof) - definitions needed to state the theorem - (number of uses) * (unpacking overhead)</p>
 
+<a name="179178343"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178343" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178343">Mario Carneiro (Oct 27 2019 at 17:00)</a>:</h4>
+<p>if unpacking overhead is small and no new definitions are needed, then it's a pretty low bar to meet, but definitions and unpacking overhead often go together, and category theory is full of small abstract theorems</p>
+
+<a name="179178532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178532">Olli (Oct 27 2019 at 17:04)</a>:</h4>
+<p>the unpacking overhead is high because it is applicable in a wider set of contexts, right? i.e. we are talking about breadth vs. depth</p>
+
+<a name="179178741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178741">Mario Carneiro (Oct 27 2019 at 17:11)</a>:</h4>
+<p>Unpacking overhead depends on a few things. Roughly, it depends on the difference between the putative generalization and the concrete instance that it's supposed to be generalizing. Oftentimes it's a literal generalization, as in you have just universally quantified some variable that was already there. Rather than prove 2 + 3 = 3 + 2 we prove a + b = b + a. This kind of generalization has almost no overhead.</p>
+<p>A bigger overhead comes from unpacking structures; for example we want that to follow from an abelian group axiom, so we have some <code>&lt;G, +&gt; \in AbGroup</code> and have a theorem <code>&lt;G, +&gt; \in AbGroup -&gt; a \in G -&gt; b \in G -&gt; a + b = b + a</code>. This is still not so bad, because I've unfolded the structure. If it shows up bundled, it might instead be <code>S \in AbGroup -&gt; a \in carrier G -&gt; b \in carrier G -&gt; add G a b = add G b a</code> and now we have to instantiate this with <code>&lt;G, +&gt;</code>, and then replace <code>add &lt;G, +&gt;</code> with <code>+</code> and <code>carrier &lt;G, +&gt;</code> with <code>G</code> everywhere they appear</p>
+
+<a name="179178795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178795">Mario Carneiro (Oct 27 2019 at 17:13)</a>:</h4>
+<p>If, as in lean, we didn't bother to remember that e.g. <code>int</code> is an abelian group, but instead have to traverse the algebraic hierarchy to find the proof, then the overhead is a bit more.</p>
+
+<a name="179178869"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178869" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178869">Olli (Oct 27 2019 at 17:15)</a>:</h4>
+<p>right, so you are saying that you don't value this theorem as much because its abstractness makes it less useful in digging deeper faster, meaning it would not be a useful piece of a superhuman tactic, as it would slow it down.</p>
+<p>What I am getting at is that this type of theorem is useful not as a building block, but as a goal in itself, i.e. I care less about theorems that go very deep, and more about the ones that bridge a lot of gaps.</p>
+
+<a name="179179433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179179433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179179433">Olli (Oct 27 2019 at 17:33)</a>:</h4>
+<p>I concede that what I initially wrote is what your point refutes, but it made me realize that an actually useful AI for doing mathematics probably should wrestle with these two conflicting goals of digging deep into a search tree, and the conflicting objective of organizing theorems in such a way that makes them slow to use (but insightful to read)</p>
+
 
 {% endraw %}
 
