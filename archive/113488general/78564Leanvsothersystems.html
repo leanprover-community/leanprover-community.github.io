@@ -454,6 +454,106 @@ permalink: archive/113488general/78564Leanvsothersystems.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179175293" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179175293">Jesse Michael Han (Oct 27 2019 at 15:32)</a>:</h4>
 <p>of course, your Lean server recompiles every time more than 200ms elapses between keystrokes, and while ideally you don't notice this because of caching, it's not hard for users to get to a place where they experience significant lag waiting on elaboration, typeclass resolution, and tactic execution</p>
 
+<a name="179177310"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177310" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177310">Jesse Michael Han (Oct 27 2019 at 16:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="126113">@Olli</span> note that Lean's implementation of DTT naturally has semantics in locally cartesian closed categories, so it's easy to shallowly replay the proof of the LFPT in <code>Type</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+
+<span class="c1">-- https://ncatlab.org/nlab/show/Lawvere%27s+fixed+point+theorem</span>
+
+<span class="n">def</span> <span class="n">δ</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">X</span> <span class="bp">×</span> <span class="n">X</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">x</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="kn">eval</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">:</span> <span class="o">(</span><span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="bp">×</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">pr</span><span class="o">,</span> <span class="n">pr</span><span class="bp">.</span><span class="mi">1</span> <span class="n">pr</span><span class="bp">.</span><span class="mi">2</span>
+
+<span class="kn">lemma</span> <span class="n">lfpt</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ϕ</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">(</span><span class="n">Hf</span> <span class="o">:</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">ϕ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∀</span> <span class="n">f</span> <span class="o">:</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">B</span><span class="o">,</span> <span class="bp">∃</span> <span class="n">s</span> <span class="o">:</span> <span class="n">B</span><span class="o">,</span> <span class="n">f</span> <span class="n">s</span> <span class="bp">=</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">f</span><span class="o">,</span> <span class="n">cases</span> <span class="n">Hf</span> <span class="o">(</span><span class="n">f</span> <span class="err">∘</span> <span class="kn">eval</span> <span class="err">∘</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">map</span> <span class="n">ϕ</span> <span class="n">id</span><span class="o">)</span> <span class="err">∘</span> <span class="n">δ</span><span class="o">)</span> <span class="k">with</span> <span class="n">p</span> <span class="n">Hp</span><span class="o">,</span> <span class="n">use</span> <span class="n">ϕ</span> <span class="n">p</span> <span class="n">p</span><span class="o">,</span>
+  <span class="n">conv_rhs</span> <span class="o">{</span> <span class="n">rw</span> <span class="n">Hp</span> <span class="o">},</span> <span class="n">refl</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">cantor</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">(</span><span class="n">ϕ</span> <span class="o">:</span> <span class="n">X</span> <span class="bp">→</span> <span class="o">(</span><span class="n">set</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="bp">¬</span> <span class="n">function</span><span class="bp">.</span><span class="n">surjective</span> <span class="n">ϕ</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">H</span><span class="o">,</span> <span class="n">cases</span> <span class="n">lfpt</span> <span class="n">ϕ</span> <span class="n">H</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span> <span class="k">with</span> <span class="n">p</span> <span class="n">Hp</span><span class="o">,</span> <span class="n">ifinish</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179177389"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177389" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177389">Olli (Oct 27 2019 at 16:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="116045">@Jesse Michael Han</span> thanks, I was going to attempt this on my own but it's good to have something to look at if I get stuck :)</p>
+
+<a name="179177441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177441">Olli (Oct 27 2019 at 16:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> if I were to prove LFPT in Metamath and then show that Cantor's Theorem follows from it, would I be assuming <code>lfpt</code> and deriving <code>canth</code>, or would I have to make a new statement different from <code>canth</code> that I know means the same thing?</p>
+
+<a name="179177506"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177506" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177506">Olli (Oct 27 2019 at 16:34)</a>:</h4>
+<p>I think the larger issue I am trying to understand is if there is a way for me to see what are some examples of theorems/definitions that have very high generality (such as LFPT) simply by looking at the shape of the set of proof derivations in the database of theorems I'm working in (so probably <code>set.mm</code> in Metamath)</p>
+
+<a name="179177511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177511">Mario Carneiro (Oct 27 2019 at 16:35)</a>:</h4>
+<p>You would apply <code>lfpt</code> to get something that is not exactly <code>canth</code> but is equivalent to it (defeq in lean terminology)</p>
+
+<a name="179177522"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177522">Mario Carneiro (Oct 27 2019 at 16:35)</a>:</h4>
+<p>you would have to postprocess the statement to get rid of the category theory notations</p>
+
+<a name="179177563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177563">Mario Carneiro (Oct 27 2019 at 16:36)</a>:</h4>
+<p>There isn't that much category theory, but here's the yoneda lemma: <a href="http://us.metamath.org/mpeuni/yoneda.html" target="_blank" title="http://us.metamath.org/mpeuni/yoneda.html">http://us.metamath.org/mpeuni/yoneda.html</a></p>
+
+<a name="179177674"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177674" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177674">Olli (Oct 27 2019 at 16:40)</a>:</h4>
+<p>To continue with the analogy of maintaining software at large, I am wondering if we have the same conflict between adding new features (theorems) vs. abstracting/decoupling them from each other, and how much does the foundation we choose have to do with the ease of organizing things nicely</p>
+
+<a name="179177802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177802">Mario Carneiro (Oct 27 2019 at 16:44)</a>:</h4>
+<p>I think that the cost of abstraction is higher in (formal) math than it is in software, because you have to filter everything through an extra definitional layer</p>
+
+<a name="179177820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177820">Mario Carneiro (Oct 27 2019 at 16:45)</a>:</h4>
+<p>the foundation doesn't matter at all. The only thing a foundation can do for you is make certain things impossible and other things difficult</p>
+
+<a name="179177865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177865">Mario Carneiro (Oct 27 2019 at 16:46)</a>:</h4>
+<p>the job of making things easy is left to the user interface</p>
+
+<a name="179177881"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177881" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177881">Olli (Oct 27 2019 at 16:47)</a>:</h4>
+<p>it's interesting to think about especially when it comes to the prospects of having some kind of an AI helping us do mathematics. The first thing that comes to mind is a superhuman tactic to solve a goal, but wouldn't it be even more valuable having suggestions on how to organize the material we already have in a way that makes expanding it easier?</p>
+
+<a name="179177936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179177936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179177936">Mario Carneiro (Oct 27 2019 at 16:48)</a>:</h4>
+<p>yes? What does that have to do with foundations?</p>
+
+<a name="179178023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178023">Mario Carneiro (Oct 27 2019 at 16:51)</a>:</h4>
+<p>To give a simple example of why foundations don't matter, suppose I rewrote the lean kernel to produce typechecking proofs that it fed to metamath / ZFC as an oracle, and reports success if the backend prover accepts the proof. The front end wouldn't change at all, mathlib would still compile, you wouldn't even notice the difference - yet now the foundation is fundamentally different</p>
+
+<a name="179178069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178069">Mario Carneiro (Oct 27 2019 at 16:52)</a>:</h4>
+<p>this is why I see a type system as a front end feature</p>
+
+<a name="179178088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178088">Olli (Oct 27 2019 at 16:53)</a>:</h4>
+<p>if we think of the set of theorems we have as a data structure, then I think a highly general theorem such as LFPT should be a densely connected node, or there should be some metric for valuing these types of theorems over ones that are less general. I mean I am not a mathematician so this might be very naive, but if we were to throw process cycles at a database of theorems in the hopes of making breakthroughs that connect areas of mathematics we had not realized were related, then this type of activity would be essential</p>
+
+<a name="179178142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178142">Olli (Oct 27 2019 at 16:54)</a>:</h4>
+<p>densely connected node is probably an incorrect description, but I hope you understand what I mean by valuing generality</p>
+
+<a name="179178159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178159">Mario Carneiro (Oct 27 2019 at 16:55)</a>:</h4>
+<p>Honestly, given Jesse's demonstration of the proof, I don't value it very highly. The proof is apparently only two lines, which means that if you try to apply this theorem in a particular category the unpacking overhead will be more than the proof itself</p>
+
+<a name="179178167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178167">Mario Carneiro (Oct 27 2019 at 16:55)</a>:</h4>
+<p>I always tend to get this impression from category theory proofs</p>
+
+<a name="179178271"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179178271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179178271">Mario Carneiro (Oct 27 2019 at 16:58)</a>:</h4>
+<p>the savings from extracting a theorem is (number of uses) * (size of proof) - definitions needed to state the theorem - (number of uses) * (unpacking overhead)</p>
+
 
 {% endraw %}
 

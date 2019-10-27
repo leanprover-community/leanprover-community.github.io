@@ -1,0 +1,96 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html">How to insert a proposition as a field of an inductive type?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179176959"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179176959" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179176959">Marko Grdinić (Oct 27 2019 at 16:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span> <span class="n">data</span><span class="bp">.</span><span class="n">vector</span>
+
+<span class="kn">inductive</span> <span class="n">InfosetedGame</span> <span class="o">(</span><span class="n">players</span> <span class="o">:</span> <span class="n">list</span> <span class="n">string</span><span class="o">)</span> <span class="o">(</span><span class="n">infoset_count</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">infoset_sizes</span> <span class="o">:</span> <span class="n">vector</span> <span class="n">nat</span> <span class="n">infoset_count</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">Terminal</span> <span class="o">(</span><span class="n">player</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">players</span><span class="o">})</span> <span class="o">(</span><span class="n">reward</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span>
+<span class="bp">|</span> <span class="n">Response</span>
+    <span class="o">(</span><span class="n">player</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">players</span><span class="o">})</span>
+    <span class="o">(</span><span class="n">subnodes</span> <span class="o">:</span> <span class="n">list</span> <span class="n">InfosetedGame</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">infoset_id</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">infoset_count</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">wf</span> <span class="o">:</span> <span class="n">infoset_sizes</span><span class="bp">.</span><span class="n">nth</span> <span class="n">infoset_id</span> <span class="bp">=</span> <span class="n">subnodes</span><span class="bp">.</span><span class="n">length</span><span class="o">)</span>
+    <span class="o">:</span> <span class="n">InfosetedGame</span>
+<span class="bp">|</span> <span class="n">Chance</span> <span class="o">(</span><span class="n">player</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">players</span><span class="o">})</span> <span class="o">(</span><span class="n">subnodes</span> <span class="o">:</span> <span class="n">list</span> <span class="n">InfosetedGame</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>nested occurrence &#39;eq.{1} nat (vector.nth.{0} nat infoset_count infoset_sizes infoset_id) (list.length.{0} InfosetedGame subnodes)&#39; lives in universe &#39;0&#39; but must live in resultant universe &#39;1&#39;
+</pre></div>
+
+
+<p>The problem here is <code>(wf : infoset_sizes.nth infoset_id = subnodes.length)</code>. This kind of code would work in Coq and Agda, though I do remember running into issues with propositions and types being two different things in Coq as well. In addition to the above problem, I've run into problems with not being able to return equalities in tuples and such.  I find that quite annoying.</p>
+<p>What should I do here?</p>
+
+<a name="179177169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177169">Mario Carneiro (Oct 27 2019 at 16:24)</a>:</h4>
+<p>The easiest thing to do would be to use a function <code>fin n -&gt; A</code> in place of <code>{l : list A // length l = n}</code></p>
+
+<a name="179177239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177239">Marko Grdinić (Oct 27 2019 at 16:26)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> </p>
+<p>I do not follow. What do you mean by that?</p>
+
+<a name="179177255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177255">Mario Carneiro (Oct 27 2019 at 16:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span>
+
+<span class="kn">inductive</span> <span class="n">InfosetedGame</span> <span class="o">(</span><span class="n">players</span> <span class="o">:</span> <span class="n">list</span> <span class="n">string</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">infoset_count</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">infoset_sizes</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">infoset_count</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">Terminal</span> <span class="o">(</span><span class="n">player</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">players</span><span class="o">})</span> <span class="o">(</span><span class="n">reward</span> <span class="o">:</span> <span class="n">rat</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span>
+<span class="bp">|</span> <span class="n">Response</span>
+    <span class="o">(</span><span class="n">player</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">players</span><span class="o">})</span>
+    <span class="o">(</span><span class="n">infoset_id</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">infoset_count</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">subnodes</span> <span class="o">:</span> <span class="n">fin</span> <span class="o">(</span><span class="n">infoset_sizes</span> <span class="n">infoset_id</span><span class="o">)</span> <span class="bp">→</span> <span class="n">InfosetedGame</span><span class="o">)</span>
+    <span class="o">:</span> <span class="n">InfosetedGame</span>
+<span class="bp">|</span> <span class="n">Chance</span> <span class="o">(</span><span class="n">player</span> <span class="o">:</span> <span class="o">{</span><span class="n">i</span> <span class="bp">//</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">players</span><span class="o">})</span>
+    <span class="o">{</span><span class="n">n</span><span class="o">}</span> <span class="o">(</span><span class="n">subnodes</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">InfosetedGame</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span>
+</pre></div>
+
+<a name="179177394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177394">Marko Grdinić (Oct 27 2019 at 16:31)</a>:</h4>
+<p>This is an interesting way of doing this. It is quite nice.</p>
+<p>Still, why is putting that equality into a field a problem?</p>
+
+<a name="179177398"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177398" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177398">Mario Carneiro (Oct 27 2019 at 16:31)</a>:</h4>
+<p>Recursive arguments are not allowed to be dependent</p>
+
+<a name="179177459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177459">Mario Carneiro (Oct 27 2019 at 16:33)</a>:</h4>
+<p>Plus, you used <code>list T -&gt; T</code>  so it's actually a nested inductive, and these are not built in, lean simulates them, and not that well</p>
+
+<a name="179177625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177625">Marko Grdinić (Oct 27 2019 at 16:38)</a>:</h4>
+<p>What do you mean by dependent? What do you mean by not simulating lists inside other types well? Would it be possible to do it by wrapping the proposition in a type?</p>
+<p><code>(wf : {i : unit // infoset_sizes.nth infoset_id = subnodes.length})</code></p>
+<div class="codehilite"><pre><span></span>nested inductive type compiled to invalid inductive type
+nested exception message:
+inductive type being declared can only be nested inside the parameters of other inductive types
+</pre></div>
+
+
+<p>It seems not. This does seem like a limitation Lean has that I haven't seen in other provers. Is this restriction going to be removed in Lean 4 maybe?</p>
+
+<a name="179177884"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20insert%20a%20proposition%20as%20a%20field%20of%20an%20inductive%20type%3F/near/179177884" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47991Howtoinsertapropositionasafieldofaninductivetype.html#179177884">Mario Carneiro (Oct 27 2019 at 16:47)</a>:</h4>
+<p>You can't make reference to the name <code>subnodes</code> at all in the type of another argument</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

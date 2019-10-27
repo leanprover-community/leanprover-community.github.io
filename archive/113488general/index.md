@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Zulip users](15527Zulipusers.html) (2 messages, latest: Oct 27 2019 at 15:54)
+* [Lean vs other systems](78564Leanvsothersystems.html) (122 messages, latest: Oct 27 2019 at 16:58)
 
-* [Lean vs other systems](78564Leanvsothersystems.html) (102 messages, latest: Oct 27 2019 at 15:32)
+* [Zulip users](15527Zulipusers.html) (8 messages, latest: Oct 27 2019 at 16:17)
 
 * [Lean in the wild](43625Leaninthewild.html) (388 messages, latest: Oct 27 2019 at 09:23)
 
