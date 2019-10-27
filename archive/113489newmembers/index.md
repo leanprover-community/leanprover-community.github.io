@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [cone morphisms](71784conemorphisms.html) (141 messages, latest: Oct 27 2019 at 06:22)
+
 * [trichotomy of naturals](58482trichotomyofnaturals.html) (3 messages, latest: Oct 27 2019 at 03:14)
 
 * [natural number game](77211naturalnumbergame.html) (106 messages, latest: Oct 27 2019 at 02:10)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [Projective geometry](67112Projectivegeometry.html) (14 messages, latest: Oct 26 2019 at 20:25)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
-
-* [cone morphisms](71784conemorphisms.html) (140 messages, latest: Oct 26 2019 at 15:00)
 
 * [What is that `.` in `rbmap`'s definition?](05243Whatisthatinrbmapsdefinition.html) (37 messages, latest: Oct 26 2019 at 09:45)
 
