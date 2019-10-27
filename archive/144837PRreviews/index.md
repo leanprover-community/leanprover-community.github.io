@@ -9,7 +9,7 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1617 and #1619, fixing timeouts with "by exact"](367891617and1619fixingtimeoutswithbyexact.html) (1 message, latest: Oct 26 2019 at 23:22)
+* [#1617 and #1619, fixing timeouts with "by exact"](367891617and1619fixingtimeoutswithbyexact.html) (2 messages, latest: Oct 27 2019 at 02:27)
 
 * [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (176 messages, latest: Oct 26 2019 at 20:59)
 

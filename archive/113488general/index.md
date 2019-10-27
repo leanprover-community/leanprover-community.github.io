@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Logic notation hisotry](82669Logicnotationhisotry.html) (1 message, latest: Oct 27 2019 at 02:22)
+
 * [Lean in the wild](43625Leaninthewild.html) (385 messages, latest: Oct 26 2019 at 18:29)
 
 * [vscode snippets](92603vscodesnippets.html) (28 messages, latest: Oct 26 2019 at 15:19)

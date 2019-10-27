@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game](77211naturalnumbergame.html) (104 messages, latest: Oct 27 2019 at 01:59)
+* [trichotomy of naturals](58482trichotomyofnaturals.html) (1 message, latest: Oct 27 2019 at 02:50)
+
+* [natural number game](77211naturalnumbergame.html) (106 messages, latest: Oct 27 2019 at 02:10)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (48 messages, latest: Oct 27 2019 at 01:24)
 
