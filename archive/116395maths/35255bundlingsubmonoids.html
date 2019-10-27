@@ -109,6 +109,15 @@ permalink: archive/116395maths/35255bundlingsubmonoids.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/176841062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#176841062">Yury G. Kudryashov (Sep 28 2019 at 20:48)</a>:</h4>
 <p>Let me tag <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> <span class="user-mention" data-user-id="112680">@Johan Commelin</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span></p>
 
+<a name="179152976"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/179152976" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#179152976">Amelia Livingston (Oct 27 2019 at 03:39)</a>:</h4>
+<blockquote>
+<p>Hi, what is the current progress with bundling submonoids?</p>
+</blockquote>
+<p>Hi <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> and others; sorry for the delay as I haven't been doing much Lean since term started. But the branch bundled_submonoids_etc is ready to PR (I think; I want to check it through in the morning). Unbundled submonoids are still there but bundled ones are too. The only things in the library that can be refactored to depend on these before we've also bundled subgroups are some lemmas in <code>group_theory\coset.lean</code>, <code>algebra\commute.lean</code> and <code>ring_theory\localization.lean</code>. I've done the first two but in this PR I haven't touched <code>localization</code>, because I've refactored that to PR a couple of PRs after this one.</p>
+<p>There are also a couple of lemmas that I needed for later stuff about congruence relations/localization/etc. </p>
+<p>I've started bundling subgroups, not on a branch, but I'm not prioritising it at the moment and I'm also unsure how to approach it. I extended bundled submonoids, and now I could just duplicate every lemma in <code>group_theory\submonoid.lean</code> so that given a subgroup S you can write <code>S.list_prod_mem</code> instead of having to write <code>S.1.list_prod_mem</code> or <code>S.to_submonoid.list_prod_mem</code>, for example. Or the user could just be told in the docs to write S.1 instead of S for some lemmas. I don't know. (I've got the same question about the localization refactor; I've commented out tons of lemmas where you can essentially use the version for localizations of comm monoids, which is another file, but it might confuse users.)</p>
+
 
 {% endraw %}
 

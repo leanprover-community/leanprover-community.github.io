@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [bundling submonoids](35255bundlingsubmonoids.html) (19 messages, latest: Oct 27 2019 at 03:39)
+
 * [Proof by algorithm](86601Proofbyalgorithm.html) (344 messages, latest: Oct 26 2019 at 12:40)
 
 * [the integer game](45674theintegergame.html) (15 messages, latest: Oct 25 2019 at 21:03)
@@ -72,8 +74,6 @@ permalink: archive/116395maths/index.html
 * [bifunctor and End homs](44142bifunctorandEndhoms.html) (1 message, latest: Sep 29 2019 at 23:58)
 
 * [Generalized Smale conjecture](47631GeneralizedSmaleconjecture.html) (24 messages, latest: Sep 29 2019 at 22:52)
-
-* [bundling submonoids](35255bundlingsubmonoids.html) (18 messages, latest: Sep 28 2019 at 20:48)
 
 * [How to handle transfer to bundled homs](37019Howtohandletransfertobundledhoms.html) (95 messages, latest: Sep 28 2019 at 20:09)
 
