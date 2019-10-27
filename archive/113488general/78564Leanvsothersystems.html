@@ -316,6 +316,101 @@ permalink: archive/113488general/78564Leanvsothersystems.html
 </blockquote>
 <p>I guess this list of axioms are more or less the rules for recursors of inductive types.</p>
 
+<a name="179170648"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179170648" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179170648">Olli (Oct 27 2019 at 13:14)</a>:</h4>
+<p>I have a related question about foundations and how they play with different proof systems.</p>
+<p>I've been reading about topos theory lately, which I understand in some ways is an alternative foundations for mathematics, where there's a clearer distinction between the types of foundational assumptions we make.</p>
+<p>This may sound hilarious to the mathematicians, but as a programmer I think of it as being a foundation with built-in axiomatic/foundational polymorphism, in the sense that I can define mathematical objects like the real numbers that are independent of the topos I work in, so by delaying the choice of topos that restricts the type of things I can say, I get a nicer organization of theorems based on the types of assumptions that have been made.</p>
+<p>So to my naive understanding, it feels like doing math in topos theory is analogous to following good software engineering practices in maintaining a large code base. Is this a valid comparison?</p>
+<p>If so, does the choice of foundations between something like Metamath/STT/DTT make a difference in working towards a goal like this?</p>
+
+<a name="179170880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179170880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179170880">Mario Carneiro (Oct 27 2019 at 13:20)</a>:</h4>
+<blockquote>
+<p>relative (between theorems) performance of the checker would be determined by which axioms you add.</p>
+</blockquote>
+<p>If you need to add axioms to make a proof check faster (by more than a constant additive factor), then the prover is not expressive enough</p>
+
+<a name="179171075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171075">Mario Carneiro (Oct 27 2019 at 13:26)</a>:</h4>
+<blockquote>
+<p>If so, does the choice of foundations between something like Metamath/STT/DTT make a difference in working towards a goal like this?</p>
+</blockquote>
+<p>Note that Metamath does not belong on that list - it is not a mathematical foundation, it is an environment that lets you define your mathematical foundation. Isabelle has a similar distinction, if you are familiar with the difference between Isabelle/Pure vs Isabelle/HOL.</p>
+<p>Most formal systems let you pick your axioms, although lean doesn't really let you turn off a great deal of axioms that you might not want (like universes or proof irrelevance). To me, your topos theory example is similar to proving theorems with attention paid to the axioms you use. In metamath this is easy because the axioms are quite fine grained - there are 30 or so of them, leading to 2^30 different subsystems of ZFC you could study; or just forget ZFC and add your own axioms if you prefer something else. Lean has only 3 axioms, and the only really useful one to avoid is <code>choice</code>, so reverse mathematics is a non-starter.</p>
+
+<a name="179171226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171226">Olli (Oct 27 2019 at 13:31)</a>:</h4>
+<p>Could you define CoIC inside Metamath and then work using that?</p>
+
+<a name="179171359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171359">Mario Carneiro (Oct 27 2019 at 13:35)</a>:</h4>
+<p>Yes</p>
+
+<a name="179171375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171375">Mario Carneiro (Oct 27 2019 at 13:36)</a>:</h4>
+<p>I got most of the way to doing that with lean, but that was before my masters thesis so I wasn't really sure what the axioms for inductives were</p>
+
+<a name="179171415"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171415" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171415">Mario Carneiro (Oct 27 2019 at 13:36)</a>:</h4>
+<p>MLTT is not difficult</p>
+
+<a name="179171429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171429">Mario Carneiro (Oct 27 2019 at 13:37)</a>:</h4>
+<p>There is a HOL library for metamath available at <a href="http://us.metamath.org/holuni/mmhol.html" target="_blank" title="http://us.metamath.org/holuni/mmhol.html">http://us.metamath.org/holuni/mmhol.html</a></p>
+
+<a name="179171478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171478">Mario Carneiro (Oct 27 2019 at 13:38)</a>:</h4>
+<p>the real bottleneck is usually getting an exact statement of the axiomatic system</p>
+
+<a name="179171494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171494">Olli (Oct 27 2019 at 13:39)</a>:</h4>
+<p>Ok, yeah I can see the analogy with it being the assembly language for proofs.</p>
+
+<a name="179171625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171625">Olli (Oct 27 2019 at 13:43)</a>:</h4>
+<p>For my example with topos theory, let's say I make a definition that works in any elementary topos, and then I define a new topos, I can do this in independent order, and as soon as I'm done I should get a bunch of free theorems. If one was working in Metamath, then it feels like you'd have to be working one level higher, where the free theorems get automatically generated, does this sound correct?</p>
+
+<a name="179171682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171682">Mario Carneiro (Oct 27 2019 at 13:44)</a>:</h4>
+<p>If you prove a theorem using axioms A, B and apply it in a context where you are also assuming C, you don't need to do anything special</p>
+
+<a name="179171755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171755">Mario Carneiro (Oct 27 2019 at 13:46)</a>:</h4>
+<p>What you don't get with this kind of embedding is the ability to reinterpret symbols. For example, if I prove a fact like <code>foo = foo</code> where <code>foo</code> is a "fixed constant" about which I know nothing, I cannot apply it with <code>foo := 2</code>. I can add an axiom saying <code>foo = 2</code>, and then <code>foo</code> acts like a definition, but I can't also add a definition <code>foo = 3</code> because that would be inconsistent</p>
+
+<a name="179171769"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171769" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171769">Mario Carneiro (Oct 27 2019 at 13:47)</a>:</h4>
+<p>In order to really do the topos theory approach justice, you have to deep embed it, getting something more like the category theory library</p>
+
+<a name="179171818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171818">Mario Carneiro (Oct 27 2019 at 13:48)</a>:</h4>
+<p>this comes with some notational overhead unless you design the tool to deal with terms of this form</p>
+
+<a name="179171823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171823">Olli (Oct 27 2019 at 13:48)</a>:</h4>
+<p>right, the reason we have higher level programming languages is not just to avoid typing less, but because our intended meaning of the program is better captured at a higher level, because the lower level aspects are deemed implementation details.</p>
+
+<a name="179171837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171837">Olli (Oct 27 2019 at 13:49)</a>:</h4>
+<p>MM1 is higher level than MM0 is higher level than Metamath if I've understood things correctly</p>
+
+<a name="179171900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171900">Mario Carneiro (Oct 27 2019 at 13:51)</a>:</h4>
+<p>MM0 is more complex than metamath but they are equally expressive. MM1 is sugar over MM0</p>
+
+<a name="179171902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171902">Olli (Oct 27 2019 at 13:51)</a>:</h4>
+<p>ah right</p>
+
+<a name="179171910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179171910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179171910">Mario Carneiro (Oct 27 2019 at 13:51)</a>:</h4>
+<p>"higher level" is perhaps not the right characterization. All of them are capable of speaking at quite high levels mathematically</p>
+
+<a name="179172023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179172023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179172023">Mario Carneiro (Oct 27 2019 at 13:53)</a>:</h4>
+<p>the thing that is low level is the actual mechanics of proving theorems. It's not like with computer languages where the low level languages are concerned with completely different things, different levels of abstraction</p>
+
 
 {% endraw %}
 
