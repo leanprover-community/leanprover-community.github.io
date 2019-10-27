@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [trichotomy of naturals](58482trichotomyofnaturals.html) (6 messages, latest: Oct 27 2019 at 14:50)
+
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (19 messages, latest: Oct 27 2019 at 12:21)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (1 message, latest: Oct 27 2019 at 10:52)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [How to turn off termination checking for a function?](65961Howtoturnoffterminationcheckingforafunction.html) (5 messages, latest: Oct 27 2019 at 08:16)
 
 * [cone morphisms](71784conemorphisms.html) (141 messages, latest: Oct 27 2019 at 06:22)
-
-* [trichotomy of naturals](58482trichotomyofnaturals.html) (3 messages, latest: Oct 27 2019 at 03:14)
 
 * [natural number game](77211naturalnumbergame.html) (106 messages, latest: Oct 27 2019 at 02:10)
 

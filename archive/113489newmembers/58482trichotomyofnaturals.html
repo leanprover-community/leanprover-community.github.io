@@ -34,6 +34,39 @@ permalink: archive/113489newmembers/58482trichotomyofnaturals.html
 <span class="k">by</span> <span class="n">rw</span> <span class="n">ne_iff_lt_or_gt</span> <span class="n">at</span> <span class="n">h</span><span class="bp">;</span> <span class="n">omega</span>
 </pre></div>
 
+<a name="179172855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trichotomy%20of%20naturals/near/179172855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58482trichotomyofnaturals.html#179172855">Bhavik Mehta (Oct 27 2019 at 14:17)</a>:</h4>
+<p>Thanks both! Is there somewhere I can search for things like this?</p>
+
+<a name="179173399"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trichotomy%20of%20naturals/near/179173399" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58482trichotomyofnaturals.html#179173399">Bryan Gin-ge Chen (Oct 27 2019 at 14:33)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/naming.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/naming.md">This doc on naming conventions</a> may be helpful, since it will help with using autocomplete in VS Code (or emacs?) to get a list of relevant suggestions. </p>
+<p>There's also <code>#find</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">find</span>
+
+<span class="c1">-- need to have some declaration before #find starts to work</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span> <span class="n">trivial</span>
+
+<span class="bp">#</span><span class="n">find</span> <span class="bp">_</span> <span class="bp">≠</span> <span class="bp">_</span> <span class="bp">→</span> <span class="bp">_</span> <span class="bp">≤</span> <span class="bp">_</span> <span class="bp">∨</span> <span class="bp">_</span> <span class="bp">≥</span> <span class="bp">_</span>
+<span class="c1">-- returns nothing, probably because using &lt; and &gt; would be better</span>
+<span class="bp">#</span><span class="n">find</span> <span class="bp">_</span> <span class="bp">≠</span> <span class="bp">_</span> <span class="bp">→</span> <span class="bp">_</span> <span class="bp">&lt;</span> <span class="bp">_</span> <span class="bp">∨</span> <span class="bp">_</span> <span class="bp">&gt;</span> <span class="bp">_</span>
+<span class="c1">-- lt_or_gt_of_ne: ∀ {α : Type u} [_inst_1 : linear_order α] {a b : α}, a ≠ b → a &lt; b ∨ a &gt; b</span>
+</pre></div>
+
+<a name="179173943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/trichotomy%20of%20naturals/near/179173943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/58482trichotomyofnaturals.html#179173943">Kevin Buzzard (Oct 27 2019 at 14:50)</a>:</h4>
+<p>To give an example of autocomplete here -- for a general totally ordered thing (e.g. the reals) the theorem is going to be a != x iff a &lt; x or a &gt; x, so I write</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span> <span class="c1">-- mega import to make sure I get lots of mathlib in</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="mi">2</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">&lt;</span> <span class="mi">2</span> <span class="bp">∨</span> <span class="n">a</span> <span class="bp">&gt;</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="n">ne_iff</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>(because I know <code>ne_iff...</code> is what this thing will be called, by the naming conventions) and then I move to just after the last <code>f</code> of <code>iff</code> and (in VS Code) hit esc, ctrl-space, and then if I don't get enough stuff I hit esc, ctrl-space again (I don't know why I have to do it twice sometimes). I can now see a big list of lots of theorems which have <code>ne_iff</code> in, and then I can use the arrow keys to scroll around and find the one I want.</p>
+
 
 {% endraw %}
 

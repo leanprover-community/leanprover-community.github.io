@@ -411,6 +411,41 @@ permalink: archive/113488general/78564Leanvsothersystems.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179172023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179172023">Mario Carneiro (Oct 27 2019 at 13:53)</a>:</h4>
 <p>the thing that is low level is the actual mechanics of proving theorems. It's not like with computer languages where the low level languages are concerned with completely different things, different levels of abstraction</p>
 
+<a name="179172307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179172307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179172307">Olli (Oct 27 2019 at 14:01)</a>:</h4>
+<p>Hmm yeah it is possible that I fail to notice my own bias with thinking about software/programming languages.</p>
+<p>When I say higher level proof language, I mean a language that generates proofs that have a lot of repetition. The way Metamath allows you to inspect proofs down to very low level of detail is very nice, but the issue I have in mind is that if I write a definition in this higher level language, then the best way to understand its meaning is by reading it at this level, because we want to hide the repetition to increase the signal/noise ratio. Do you see this not being an issue?</p>
+
+<a name="179172633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179172633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179172633">Olli (Oct 27 2019 at 14:10)</a>:</h4>
+<p>I can give an example I have in mind: Take Lawvere's Fixpoint Theorem, that generalizes many other fixpoint theorems. I would like to see not just the proof of the LFT itself, but also how other theorems are instances of it. To me it feels like you would need to work on a higher semantic level than MM0 in order to do this, but maybe I'm mistaken?</p>
+
+<a name="179173747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179173747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179173747">Mario Carneiro (Oct 27 2019 at 14:44)</a>:</h4>
+<blockquote>
+<p>When I say higher level proof language, I mean a language that generates proofs that have a lot of repetition. The way Metamath allows you to inspect proofs down to very low level of detail is very nice, but the issue I have in mind is that if I write a definition in this higher level language, then the best way to understand its meaning is by reading it at this level, because we want to hide the repetition to increase the signal/noise ratio. Do you see this not being an issue?</p>
+</blockquote>
+<p>Metamath is actually very non-repetitive, MM0 even more so. It would be nice to have some theorems about this, but they are pretty close to optimal. The repetition you see in the web page presentation is because each line is independent of the others, and common subterms are expanded during printing. In the actual proof it's totally deduplicated</p>
+
+<a name="179173825"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179173825" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179173825">Mario Carneiro (Oct 27 2019 at 14:47)</a>:</h4>
+<blockquote>
+<p>I can give an example I have in mind: Take Lawvere's Fixpoint Theorem, that generalizes many other fixpoint theorems. I would like to see not just the proof of the LFT itself, but also how other theorems are instances of it. To me it feels like you would need to work on a higher semantic level than MM0 in order to do this, but maybe I'm mistaken?</p>
+</blockquote>
+<p>I don't know what Lawvere's Fixpoint Theorem is, but I'm 100% confident you can state it as a single theorem of MM/MM0. If you want to apply it in a particular circumstance, you prove that your category instantiates the assumptions, unfold the meaning of the symbols (i.e. maybe you want to replace "generic morphism" with "function") in the statement, and that's it.</p>
+
+<a name="179173890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179173890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179173890">Mario Carneiro (Oct 27 2019 at 14:49)</a>:</h4>
+<p>the considerations are roughly the same if you wanted to do the same thing in lean. Declare the general concept of a category, do your work there, then instantiate the theory in the concrete case</p>
+
+<a name="179174088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179174088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179174088">Mario Carneiro (Oct 27 2019 at 14:54)</a>:</h4>
+<p>Lean is actually far more repetitive than Metamath. This is the result of things like tactics that don't clean up after themselves in the output proof, <code>congr</code> generating congr lemmas from scratch every time it's called, typeclass inference not saving and reusing typeclass lookups, and kernel <code>rfl</code> proofs, which have to unfold huge equation compiler terms</p>
+
+<a name="179174155"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Lean%20vs%20other%20systems/near/179174155" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78564Leanvsothersystems.html#179174155">Mario Carneiro (Oct 27 2019 at 14:56)</a>:</h4>
+<p>Metamath looks more repetitive because of its print settings, but exactly because of that people have a much greater incentive to minimize repetition. In other theorem provers all the junk is hidden under the rug</p>
+
 
 {% endraw %}
 
