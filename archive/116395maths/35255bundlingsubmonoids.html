@@ -118,6 +118,22 @@ permalink: archive/116395maths/35255bundlingsubmonoids.html
 <p>There are also a couple of lemmas that I needed for later stuff about congruence relations/localization/etc. </p>
 <p>I've started bundling subgroups, not on a branch, but I'm not prioritising it at the moment and I'm also unsure how to approach it. I extended bundled submonoids, and now I could just duplicate every lemma in <code>group_theory\submonoid.lean</code> so that given a subgroup S you can write <code>S.list_prod_mem</code> instead of having to write <code>S.1.list_prod_mem</code> or <code>S.to_submonoid.list_prod_mem</code>, for example. Or the user could just be told in the docs to write S.1 instead of S for some lemmas. I don't know. (I've got the same question about the localization refactor; I've commented out tons of lemmas where you can essentially use the version for localizations of comm monoids, which is another file, but it might confuse users.)</p>
 
+<a name="179155734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/179155734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#179155734">Johan Commelin (Oct 27 2019 at 05:19)</a>:</h4>
+<p>I don't know the answer to this question. Can <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> or <span class="user-mention" data-user-id="110596">@Rob Lewis</span> or <span class="user-mention" data-user-id="110032">@Reid Barton</span> shed some light on how to deal with this? It sounds like bad design to duplicate the API. But <code>S.to_submonoid.foobar</code> isn't very nice either.</p>
+
+<a name="179155834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/179155834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#179155834">Mario Carneiro (Oct 27 2019 at 05:22)</a>:</h4>
+<p>I think the easiest thing to do would be to just duplicate the api. The theorems should just be redirects, but note that the statements are actually different - things like <code>\mem</code> will be finding a different typeclass instance so it's not exactly the same thing (it is defeq though so the proof should be trivial)</p>
+
+<a name="179155938"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/179155938" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#179155938">Johan Commelin (Oct 27 2019 at 05:26)</a>:</h4>
+<p>We have a similar thing with <code>{mv_,}power_series</code> and <code>*_hom</code>. Are we approaching enough examples to try to automate this?</p>
+
+<a name="179155940"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/bundling%20submonoids/near/179155940" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/35255bundlingsubmonoids.html#179155940">Johan Commelin (Oct 27 2019 at 05:26)</a>:</h4>
+<p>Because manually duplication will get out of sync <em>fast</em></p>
+
 
 {% endraw %}
 
