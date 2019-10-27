@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean vs other systems](78564Leanvsothersystems.html) (54 messages, latest: Oct 27 2019 at 11:59)
+
 * [Lean in the wild](43625Leaninthewild.html) (388 messages, latest: Oct 27 2019 at 09:23)
 
 * [vscode snippets](92603vscodesnippets.html) (29 messages, latest: Oct 27 2019 at 06:45)
