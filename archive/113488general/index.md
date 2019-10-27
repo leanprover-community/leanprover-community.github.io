@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (387 messages, latest: Oct 27 2019 at 08:49)
+
 * [vscode snippets](92603vscodesnippets.html) (29 messages, latest: Oct 27 2019 at 06:45)
 
 * [Logic notation hisotry](82669Logicnotationhisotry.html) (1 message, latest: Oct 27 2019 at 02:22)
-
-* [Lean in the wild](43625Leaninthewild.html) (385 messages, latest: Oct 26 2019 at 18:29)
 
 * [Time to move to 3.5?](16418Timetomoveto35.html) (23 messages, latest: Oct 26 2019 at 08:20)
 

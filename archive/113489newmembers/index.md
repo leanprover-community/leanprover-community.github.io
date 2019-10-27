@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to turn off termination checking for a function?](65961Howtoturnoffterminationcheckingforafunction.html) (1 message, latest: Oct 27 2019 at 07:55)
+* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (2 messages, latest: Oct 27 2019 at 08:40)
 
-* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (1 message, latest: Oct 27 2019 at 07:00)
+* [How to turn off termination checking for a function?](65961Howtoturnoffterminationcheckingforafunction.html) (5 messages, latest: Oct 27 2019 at 08:16)
 
 * [cone morphisms](71784conemorphisms.html) (141 messages, latest: Oct 27 2019 at 06:22)
 
