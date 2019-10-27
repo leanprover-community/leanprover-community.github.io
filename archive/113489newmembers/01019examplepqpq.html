@@ -22,6 +22,120 @@ permalink: archive/113489newmembers/01019examplepqpq.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179161652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179161652">Kevin Buzzard (Oct 27 2019 at 08:40)</a>:</h4>
 <p>I posted a suggested answer.</p>
 
+<a name="179165085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179165085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179165085">Eduardo Cavazos (Oct 27 2019 at 10:26)</a>:</h4>
+<p>Based on Kevin's suggestion, here's what I have so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">((</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">q</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="o">:=</span>
+
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hpqf</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+
+        <span class="n">by_cases</span>
+
+            <span class="o">(</span><span class="k">assume</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span>
+
+                <span class="n">by_cases</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hq</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">hp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq&#39;</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">hpqf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp&#39;</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">hq</span><span class="o">)))</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hqf</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">hp</span> <span class="n">hqf</span><span class="o">))</span>
+
+            <span class="o">(</span><span class="k">assume</span> <span class="n">hpf</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+
+                <span class="n">by_cases</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hq</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hpqf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">hq</span><span class="o">)))</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hqf</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span> <span class="bp">_</span>
+
+                        <span class="c1">-- and.intro hp hqf                         But we don&#39;t have hp.</span>
+
+                        <span class="c1">-- false.elim (hpqf (λ hp : p, hq))         But we don&#39;t have hq.</span>
+
+                    <span class="o">)))</span>
+</pre></div>
+
+
+<p>The first three cases appear to be complete.</p>
+<p>In the last case, we have the following:</p>
+<div class="codehilite"><pre><span></span>hpqf : (p → q) → false,
+hpf : p → false,
+hqf : q → false
+</pre></div>
+
+
+<p>As the inline comments above say, one option is:</p>
+<p><code>and.intro hp hqf                         -- But we don't have hp.</code></p>
+<p>Another option is:</p>
+<p><code>false.elim (hpqf (λ hp : p, hq))         -- But we don't have hq.</code></p>
+<p>Should I aim for the <code>and.intro ...</code> approach? Or the <code>false.elim ...</code> approach? Or something entirely different? :-)</p>
+<p>Thanks for your help so far!</p>
+<p>Hang on... I think I see it...</p>
+
+<a name="179165666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179165666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179165666">Eduardo Cavazos (Oct 27 2019 at 10:43)</a>:</h4>
+<p>OK, this seems to work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="o">((</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">q</span> <span class="bp">→</span> <span class="n">false</span><span class="o">)</span> <span class="o">:=</span>
+
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hpqf</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+
+        <span class="n">by_cases</span>
+
+            <span class="o">(</span><span class="k">assume</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span>
+
+                <span class="n">by_cases</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hq</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">hp</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hq&#39;</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">hpqf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp&#39;</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">hq</span><span class="o">)))</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hqf</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span> <span class="n">and</span><span class="bp">.</span><span class="n">intro</span> <span class="n">hp</span> <span class="n">hqf</span><span class="o">))</span>
+
+            <span class="o">(</span><span class="k">assume</span> <span class="n">hpf</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+
+                <span class="n">by_cases</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hq</span> <span class="o">:</span> <span class="n">q</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hpqf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">hq</span><span class="o">)))</span>
+
+                    <span class="o">(</span><span class="k">assume</span> <span class="n">hqf</span> <span class="o">:</span> <span class="n">q</span> <span class="bp">→</span> <span class="n">false</span><span class="o">,</span>
+
+                        <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hpqf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span><span class="o">,</span> <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hpf</span> <span class="n">hp</span><span class="o">))))))</span>
+</pre></div>
+
+<a name="179165668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179165668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179165668">Eduardo Cavazos (Oct 27 2019 at 10:43)</a>:</h4>
+<p>Thanks for your help <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> !!!</p>
+
+<a name="179165856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179165856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179165856">Kevin Buzzard (Oct 27 2019 at 10:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">tauto</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="kn">open</span> <span class="n">classical</span>
+<span class="n">def</span> <span class="n">XYZ</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">tauto</span><span class="bp">!</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">XYZ</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">  def XYZ : ∀ (p q : Prop), ¬(p → q) → p ∧ ¬q :=</span>
+<span class="cm">  λ (p q : Prop) (a : ¬(p → q)),</span>
+<span class="cm">  and.dcases_on (not_imp.mp a) (λ (a_left : p) (a_right : ¬q), ⟨eq.mpr rfl a_left, eq.mpr rfl a_right⟩)</span>
+<span class="cm">  -/</span>
+</pre></div>
+
+<a name="179165906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179165906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179165906">Kevin Buzzard (Oct 27 2019 at 10:50)</a>:</h4>
+<p>There's a super-short term mode proof, using stuff in the mathlib library which is not covered by Theorem Proving In Lean.</p>
+
+<a name="179166028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179166028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179166028">Kevin Buzzard (Oct 27 2019 at 10:54)</a>:</h4>
+<p>I do understand that you're learning this stuff so in some sense these answers are not useful, but I thought it was worth emphasizing how many ways there are to solve this problem, and what is available to you in Lean's maths library. In fact looking at the proof which <code>tauto!</code> finds I see that we can just do this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">variables</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span>
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10</span><span class="o">]</span> <span class="n">classical</span><span class="bp">.</span><span class="n">prop_decidable</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">p</span> <span class="bp">→</span> <span class="n">q</span><span class="o">)</span> <span class="bp">→</span> <span class="n">p</span> <span class="bp">∧</span> <span class="bp">¬</span><span class="n">q</span> <span class="o">:=</span> <span class="n">not_imp</span><span class="bp">.</span><span class="n">mp</span>
+</pre></div>
+
+<a name="179166098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%28p%20%E2%86%92%20q%29%20%E2%86%92%20p%20%E2%88%A7%20%C2%ACq/near/179166098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/01019examplepqpq.html#179166098">Eduardo Cavazos (Oct 27 2019 at 10:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> ,</p>
+<p>These more advanced answers are very useful! Indeed, I'm interested in the various approaches. Yes, it's true that I'm currently focused on the "finger exercises" approach, but it's nice to know that there are exotic islands awaiting.</p>
+
 
 {% endraw %}
 
