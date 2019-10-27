@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game](77211naturalnumbergame.html) (101 messages, latest: Oct 27 2019 at 00:21)
+* [natural number game](77211naturalnumbergame.html) (104 messages, latest: Oct 27 2019 at 01:59)
+
+* [rewriting in hypotheses](38335rewritinginhypotheses.html) (48 messages, latest: Oct 27 2019 at 01:24)
 
 * [non-empty lists, again](58819nonemptylistsagain.html) (22 messages, latest: Oct 26 2019 at 21:51)
 
 * [Projective geometry](67112Projectivegeometry.html) (14 messages, latest: Oct 26 2019 at 20:25)
-
-* [rewriting in hypotheses](38335rewritinginhypotheses.html) (46 messages, latest: Oct 26 2019 at 19:17)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
 
