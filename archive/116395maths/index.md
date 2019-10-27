@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Single Axiom for Groups](50248SingleAxiomforGroups.html) (2 messages, latest: Oct 27 2019 at 22:22)
+
+* [manifolds](86782manifolds.html) (30 messages, latest: Oct 27 2019 at 22:21)
+
 * [bundling submonoids](35255bundlingsubmonoids.html) (27 messages, latest: Oct 27 2019 at 21:49)
 
 * [Proof by algorithm](86601Proofbyalgorithm.html) (346 messages, latest: Oct 27 2019 at 12:08)
@@ -17,11 +21,7 @@ permalink: archive/116395maths/index.html
 
 * [algebraic independence in K-Algebras](58701algebraicindependenceinKAlgebras.html) (19 messages, latest: Oct 25 2019 at 15:43)
 
-* [manifolds](86782manifolds.html) (29 messages, latest: Oct 25 2019 at 09:25)
-
 * [localization take 2](41889localizationtake2.html) (7 messages, latest: Oct 25 2019 at 07:23)
-
-* [Single Axiom for Groups](50248SingleAxiomforGroups.html) (1 message, latest: Oct 25 2019 at 03:19)
 
 * [product of 0s and 1s](47377productof0sand1s.html) (20 messages, latest: Oct 24 2019 at 00:49)
 
