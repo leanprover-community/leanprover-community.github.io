@@ -94,6 +94,34 @@ permalink: archive/116395maths/53994Provingthatderivativeofsiniscos.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179263686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179263686">Luca Seemungal (Oct 28 2019 at 18:58)</a>:</h4>
 <p>Thanks everyone. I want to be more extremely basic so I just want to show that the derivative of sine is cosine, and so I just need to get the derivative of a function from C to C working. So using stuff in <code>analysis/calculus/deriv.lean</code> I have to use <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">C</mi></mrow><annotation encoding="application/x-tex">\mathbb{C}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">C</span></span></span></span></span> instead of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">k</mi></mrow><annotation encoding="application/x-tex">\mathbb{k}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">k</span></span></span></span></span> and <code>F</code> and then ... "make it work"?</p>
 
+<a name="179263918"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179263918" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179263918">Luca Seemungal (Oct 28 2019 at 19:00)</a>:</h4>
+<p>And then after that I'll need differentiability of power series within their radius of convergence. Do we have this? Do we have ROC?</p>
+
+<a name="179264334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179264334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179264334">Mario Carneiro (Oct 28 2019 at 19:04)</a>:</h4>
+<p><span class="user-mention" data-user-id="221895">@Luca Seemungal</span> The strategy I call "trivial generalization" is to <em>write</em> the statement with K like Sebastien suggests, but pretend it says R instead, and apply theorems as if it was R and hoping it all just works. As soon as something fails because you are missing an assumption, switch to R for that theorem (or ask here and we can probably suggest the right structure class to use)</p>
+
+<a name="179264432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179264432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179264432">Luca Seemungal (Oct 28 2019 at 19:05)</a>:</h4>
+<p>Ah, ok. Will do</p>
+
+<a name="179264806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179264806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179264806">Mario Carneiro (Oct 28 2019 at 19:10)</a>:</h4>
+<p><span class="user-mention" data-user-id="110050">@Sebastien Gouezel</span> what is that scalar prod thing? has deriv at filter is supposed to be the common generalization of the other two</p>
+
+<a name="179265152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179265152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179265152">Sebastien Gouezel (Oct 28 2019 at 19:13)</a>:</h4>
+<p>If you have an element <code>c : F</code> and want to construct a linear map from <code>𝕜</code> to <code>F</code> mapping <code>1</code> to <code>c</code>, you need to do something. This is precisely what <code>scalar_prod_space_iso</code> does. Here is its type:</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- Associating to a scalar-valued linear map and an element of `γ` the</span>
+<span class="cm">`γ`-valued linear map obtained by multiplying the two (a.k.a. tensoring by `γ`) -/</span>
+<span class="n">def</span> <span class="n">scalar_prod_space_iso</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">α</span><span class="o">]</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">γ</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span><span class="n">L</span><span class="o">[</span><span class="n">α</span><span class="o">]</span> <span class="n">γ</span>
+</pre></div>
+
+<a name="179267384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Proving%20that%20derivative%20of%20sin%20is%20cos/near/179267384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/53994Provingthatderivativeofsiniscos.html#179267384">Jeremy Avigad (Oct 28 2019 at 19:38)</a>:</h4>
+<p>Paula is working on epistemic logic now, and isn't planning on working on the analysis library. I am still hoping Joe will finish the Bochner integral (where "finish" means leave it in a state where others can work on it without having to deal with the low-level definitions).</p>
+
 
 {% endraw %}
 
