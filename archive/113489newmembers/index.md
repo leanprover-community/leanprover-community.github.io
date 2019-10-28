@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (1 message, latest: Oct 28 2019 at 08:16)
+* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (2 messages, latest: Oct 28 2019 at 10:35)
+
+* [Projective geometry](67112Projectivegeometry.html) (15 messages, latest: Oct 28 2019 at 10:18)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (3 messages, latest: Oct 28 2019 at 03:13)
 
@@ -32,8 +34,6 @@ permalink: archive/113489newmembers/index.html
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (48 messages, latest: Oct 27 2019 at 01:24)
 
 * [non-empty lists, again](58819nonemptylistsagain.html) (22 messages, latest: Oct 26 2019 at 21:51)
-
-* [Projective geometry](67112Projectivegeometry.html) (14 messages, latest: Oct 26 2019 at 20:25)
 
 * [endomorphism algebra](03140endomorphismalgebra.html) (8 messages, latest: Oct 26 2019 at 15:43)
 
