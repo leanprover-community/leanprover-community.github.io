@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (1 message, latest: Oct 28 2019 at 02:52)
+* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (3 messages, latest: Oct 28 2019 at 03:13)
 
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (20 messages, latest: Oct 28 2019 at 00:04)
 
