@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (389 messages, latest: Oct 28 2019 at 06:33)
+
 * [Zulip users](15527Zulipusers.html) (14 messages, latest: Oct 27 2019 at 23:31)
 
 * [Lean vs other systems](78564Leanvsothersystems.html) (128 messages, latest: Oct 27 2019 at 17:33)
-
-* [Lean in the wild](43625Leaninthewild.html) (388 messages, latest: Oct 27 2019 at 09:23)
 
 * [vscode snippets](92603vscodesnippets.html) (29 messages, latest: Oct 27 2019 at 06:45)
 
