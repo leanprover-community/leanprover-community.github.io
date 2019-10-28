@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Single Axiom for Groups](50248SingleAxiomforGroups.html) (2 messages, latest: Oct 27 2019 at 22:22)
+* [Single Axiom for Groups](50248SingleAxiomforGroups.html) (15 messages, latest: Oct 28 2019 at 00:45)
+
+* [algebra.comap](53517algebracomap.html) (12 messages, latest: Oct 28 2019 at 00:32)
 
 * [manifolds](86782manifolds.html) (30 messages, latest: Oct 27 2019 at 22:21)
 

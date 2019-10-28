@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (20 messages, latest: Oct 28 2019 at 00:04)
+
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (10 messages, latest: Oct 27 2019 at 17:02)
 
 * [trichotomy of naturals](58482trichotomyofnaturals.html) (6 messages, latest: Oct 27 2019 at 14:50)
-
-* [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (19 messages, latest: Oct 27 2019 at 12:21)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (1 message, latest: Oct 27 2019 at 10:52)
 
