@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [type error in ring tactic](53580typeerrorinringtactic.html) (14 messages, latest: Oct 28 2019 at 13:46)
+
 * [Lean in the wild](43625Leaninthewild.html) (389 messages, latest: Oct 28 2019 at 06:33)
 
 * [Zulip users](15527Zulipusers.html) (14 messages, latest: Oct 27 2019 at 23:31)
@@ -76,8 +78,6 @@ permalink: archive/113488general/index.html
 * [ring with natural number division](37426ringwithnaturalnumberdivision.html) (4 messages, latest: Oct 16 2019 at 14:09)
 
 * [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (23 messages, latest: Oct 16 2019 at 12:34)
-
-* [type error in ring tactic](53580typeerrorinringtactic.html) (4 messages, latest: Oct 15 2019 at 15:25)
 
 * [#simp](14237simp.html) (6 messages, latest: Oct 15 2019 at 10:23)
 

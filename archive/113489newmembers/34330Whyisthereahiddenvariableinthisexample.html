@@ -76,6 +76,63 @@ Yeah, but that is besides the point as that binding should not even be there in 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179227591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179227591">Mario Carneiro (Oct 28 2019 at 12:56)</a>:</h4>
 <p>you should just leave the first argument as <code>_</code> since it is forced</p>
 
+<a name="179228311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179228311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179228311">Reid Barton (Oct 28 2019 at 13:06)</a>:</h4>
+<p>I think the rule is that parameters which otherwise wouldn't be determined are explicit in the constructor, though in practice I never find it easy to predict what Lean will do</p>
+
+<a name="179228474"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179228474" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179228474">Marko Grdinić (Oct 28 2019 at 13:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> <br>
+Why is it forced?</p>
+
+<a name="179228627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179228627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179228627">Mario Carneiro (Oct 28 2019 at 13:10)</a>:</h4>
+<p>Because you are doing a recursive definition over <code>InfosetedGame</code>, so that argument is forced to the value it is given in the parameter in the def itself (the <code>infoset_sizes</code> argument to the function). Nevertheless, the constructor appears in the pattern with all its arguments, including the parameters; you are not allowed to put anything else in that field</p>
+
+<a name="179228699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179228699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179228699">Mario Carneiro (Oct 28 2019 at 13:11)</a>:</h4>
+<p>If you moved <code>infoset_sizes</code> right of the colon, you would have a little more flexibility, although you can't pattern match on it in any interesting way because it's a function type, not an inductive</p>
+
+<a name="179229268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179229268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179229268">Marko Grdinić (Oct 28 2019 at 13:18)</a>:</h4>
+<blockquote>
+<p>Because you are doing a recursive definition over InfosetedGame</p>
+</blockquote>
+<p>I do not really understand this. The particular example I am showing here as <a href="#narrow/stream/113489-new-members/topic/How.20to.20insert.20a.20proposition.20as.20a.20field.20of.20an.20inductive.20type.3F" title="#narrow/stream/113489-new-members/topic/How.20to.20insert.20a.20proposition.20as.20a.20field.20of.20an.20inductive.20type.3F">(opposed to)</a> is not recursive as far as I can see.</p>
+<blockquote>
+<p>so that argument is forced to the value it is given in the parameter in the def itself (the infoset_sizes argument to the function).</p>
+</blockquote>
+<p>Sorry, I can't follow this. What is what here exactly?</p>
+
+<a name="179230290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179230290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179230290">Mario Carneiro (Oct 28 2019 at 13:29)</a>:</h4>
+<p>I mean "recursive" only in the sense that you are using the recursor, i.e. cases on an inductive type</p>
+
+<a name="179230420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179230420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179230420">Mario Carneiro (Oct 28 2019 at 13:31)</a>:</h4>
+<p>The definition has to look like this:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">utility</span> <span class="o">(</span><span class="n">infoset_count</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">infoset_sizes</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">infoset_count</span> <span class="bp">→</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span> <span class="o">[</span><span class="s2">&quot;One&quot;</span><span class="o">,</span> <span class="s2">&quot;Two&quot;</span><span class="o">]</span> <span class="n">infoset_sizes</span> <span class="bp">→</span> <span class="n">rat</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">InfosetedGame</span><span class="bp">.</span><span class="n">Terminal</span> <span class="n">infoset_sizes</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="179230490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179230490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179230490">Mario Carneiro (Oct 28 2019 at 13:31)</a>:</h4>
+<p>You can leave it implicit if you like (I usually always do this for forced arguments):</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">utility</span> <span class="o">(</span><span class="n">infoset_count</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">infoset_sizes</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">infoset_count</span> <span class="bp">→</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span> <span class="o">[</span><span class="s2">&quot;One&quot;</span><span class="o">,</span> <span class="s2">&quot;Two&quot;</span><span class="o">]</span> <span class="n">infoset_sizes</span> <span class="bp">→</span> <span class="n">rat</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">InfosetedGame</span><span class="bp">.</span><span class="n">Terminal</span> <span class="bp">_</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="179230559"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179230559" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179230559">Mario Carneiro (Oct 28 2019 at 13:32)</a>:</h4>
+<p>but anything like this is not valid:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">utility</span> <span class="o">(</span><span class="n">infoset_count</span> <span class="o">:</span> <span class="n">nat</span><span class="o">)</span> <span class="o">(</span><span class="n">infoset_sizes</span> <span class="o">:</span> <span class="n">fin</span> <span class="n">infoset_count</span> <span class="bp">→</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">InfosetedGame</span> <span class="o">[</span><span class="s2">&quot;One&quot;</span><span class="o">,</span> <span class="s2">&quot;Two&quot;</span><span class="o">]</span> <span class="n">infoset_sizes</span> <span class="bp">→</span> <span class="n">rat</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">InfosetedGame</span><span class="bp">.</span><span class="n">Terminal</span> <span class="o">(</span><span class="err">\</span><span class="n">lam</span> <span class="bp">_</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">_</span>
+</pre></div>
+
+<a name="179230649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20there%20a%20hidden%20variable%20in%20this%20example%3F/near/179230649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/34330Whyisthereahiddenvariableinthisexample.html#179230649">Mario Carneiro (Oct 28 2019 at 13:33)</a>:</h4>
+<p>Technically this is an "inaccessible pattern". Back in the day you had to write these as <code>._</code> (or <code>.(infoset_sizes)</code>) to indicate that they aren't being matched by the equation compiler, but it later learned how to infer these annotations so they are basically never needed anymore</p>
+
 
 {% endraw %}
 

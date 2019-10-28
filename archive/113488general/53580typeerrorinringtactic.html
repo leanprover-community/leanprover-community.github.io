@@ -47,6 +47,64 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/178203978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#178203978">Mario Carneiro (Oct 15 2019 at 15:25)</a>:</h4>
 <p>that's because <code>norm_num</code> calls <code>simp</code></p>
 
+<a name="179230566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179230566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179230566">Tim Baanen (Oct 28 2019 at 13:32)</a>:</h4>
+<p>I got the same type error again:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="err">^</span> <span class="o">(</span><span class="mi">2</span> <span class="bp">+</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="err">^</span><span class="mi">4</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span>
+</pre></div>
+
+
+<p>I decided to investigate, and it seems to arise from:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="kn">eval</span> <span class="o">:</span> <span class="n">expr</span> <span class="bp">→</span> <span class="n">ring_m</span> <span class="o">(</span><span class="n">horner_expr</span> <span class="bp">×</span> <span class="n">expr</span><span class="o">)</span>
+<span class="bp">...</span>
+<span class="bp">|</span> <span class="n">e</span><span class="bp">@`</span><span class="o">(</span><span class="bp">@</span><span class="n">has_pow</span><span class="bp">.</span><span class="n">pow</span> <span class="bp">_</span> <span class="bp">_</span> <span class="err">%%</span><span class="n">P</span> <span class="err">%%</span><span class="n">e₁</span> <span class="err">%%</span><span class="n">e₂</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
+  <span class="o">(</span><span class="n">e₂&#39;</span><span class="o">,</span> <span class="n">p₂</span><span class="o">)</span> <span class="err">←</span> <span class="kn">eval</span> <span class="n">e₂</span><span class="o">,</span>
+</pre></div>
+
+
+<p>Since <code>eval</code> assumes its argument is of a fixed <code>α</code> (here <code>ℚ</code>), but the exponent is in <code>ℕ</code>, we get a type error. One fix is to replace <code>eval</code> with <code>norm_num</code> (which would work, since we don't use the <code>horner_expr</code> data of `e₂'). I just tested this change, and mathlib compiles with the change.</p>
+<p>Thoughts?</p>
+
+<a name="179230785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179230785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179230785">Reid Barton (Oct 28 2019 at 13:35)</a>:</h4>
+<p>My thought is what about things like <code>a^(n + 1) = a^(1 + n)</code>, but now I don't know whether we're outside the scope of what <code>ring</code> is supposed to do</p>
+
+<a name="179230883"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179230883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179230883">Mario Carneiro (Oct 28 2019 at 13:36)</a>:</h4>
+<p>yeah, those arguments have to be closed numerals so <code>norm_num</code> should work</p>
+
+<a name="179231014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231014">Tim Baanen (Oct 28 2019 at 13:37)</a>:</h4>
+<p>I'm actually working on a tactic that is designed to deal with expressions like <code>a^(n + 1) = a^(1 + n)</code>, so I'm not worried about <code>ring</code> being too powerless :)</p>
+
+<a name="179231476"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231476">Tim Baanen (Oct 28 2019 at 13:42)</a>:</h4>
+<blockquote>
+<p>I just tested this change, and mathlib compiles with the change.</p>
+</blockquote>
+<p>Hmm, I must have done something wrong when testing it. Now this goal in <code>mathlib/src/data/polynomial.lean:2385:2</code> isn't solved: <code>(x + y) * (y ^ 2 * z + (x * x ^ n + (↑n + 1) * x ^ n * y)) = x * (x * x ^ n) + ((↑n + 2) * (x * x ^ n) * y + (z * x + (y * z + (↑n + 1) * x ^ n)) * y ^ 2)</code></p>
+
+<a name="179231495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231495">Mario Carneiro (Oct 28 2019 at 13:42)</a>:</h4>
+<p>I suppose you could recognize that as <code>a^n * a</code> where <code>a^n</code> is an atom; or you could operate recursively in the argument with a different type (so you could do <code>a ^ (x ^ 2 - y ^ 2) = a ^ ((x + y) * (x - y))</code></p>
+
+<a name="179231630"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231630" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231630">Mario Carneiro (Oct 28 2019 at 13:44)</a>:</h4>
+<p>I pushed a fix for this to the PR</p>
+
+<a name="179231666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231666">Tim Baanen (Oct 28 2019 at 13:44)</a>:</h4>
+<p>Yeah, changing the type in <code>eval</code>ing the exponent seems doable; it's what I do in my new tactic.</p>
+
+<a name="179231687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231687">Mario Carneiro (Oct 28 2019 at 13:45)</a>:</h4>
+<p>but travis takes just long enough for me to forget that I was compiling before it reports an error</p>
+
+<a name="179231868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231868">Mario Carneiro (Oct 28 2019 at 13:46)</a>:</h4>
+<p>I think this is going outside <code>ring</code>'s intended domain though. If you have a ring equality stuffed in an exponent you should first use <code>congr</code> or other things designed for it</p>
+
 
 {% endraw %}
 

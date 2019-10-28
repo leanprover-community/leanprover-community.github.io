@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (8 messages, latest: Oct 28 2019 at 12:56)
+* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (18 messages, latest: Oct 28 2019 at 13:33)
 
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (14 messages, latest: Oct 28 2019 at 12:45)
 
