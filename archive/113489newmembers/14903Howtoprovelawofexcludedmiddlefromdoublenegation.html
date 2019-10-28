@@ -42,6 +42,57 @@ theorem em: p ∨ ¬p := sorry
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179238282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179238282">Bryan Gin-ge Chen (Oct 28 2019 at 14:56)</a>:</h4>
 <p>This is a pretty popular question here, if you want some spoilers, search zulip for "dne em".</p>
 
+<a name="179239423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179239423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179239423">agro1986 (Oct 28 2019 at 15:08)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span> On that link, line 2 is "assume p". After the writer established that it leads to contradiction, on line 5 the writer said "so assume not p". That means the writer used "p or not p" to prove "p or not p"?</p>
+
+<a name="179239665"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179239665" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179239665">Reid Barton (Oct 28 2019 at 15:10)</a>:</h4>
+<p>Line 5 is stating that we have "not p", because we proved (lines 2-4) that "p" implies false.</p>
+
+<a name="179239954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179239954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179239954">Reid Barton (Oct 28 2019 at 15:13)</a>:</h4>
+<p>(This style of proof is hard to follow, in my opinion, if you don't already know what is supposed to be happening.)</p>
+
+<a name="179240230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179240230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179240230">Reid Barton (Oct 28 2019 at 15:15)</a>:</h4>
+<p>It's easier with the nesting structure displayed</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">|</span> <span class="n">p</span>
+<span class="bp">|</span> <span class="bp">|</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span>
+<span class="bp">|</span> <span class="bp">|</span> <span class="err">⊥</span>
+<span class="bp">|</span> <span class="bp">¬</span> <span class="n">p</span>
+<span class="bp">|</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span>
+<span class="bp">|</span> <span class="err">⊥</span>
+<span class="bp">¬</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span>
+<span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span>
+</pre></div>
+
+<a name="179240590"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179240590" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179240590">Kenny Lau (Oct 28 2019 at 15:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span>   <span class="o">[</span><span class="n">assumtion</span><span class="o">]</span>
+<span class="bp">|</span> <span class="bp">|</span> <span class="n">p</span>             <span class="o">[</span><span class="n">assumption</span><span class="o">]</span>
+<span class="bp">|</span> <span class="bp">|</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span>       <span class="o">[</span><span class="bp">∨</span><span class="n">I</span><span class="bp">.</span><span class="n">L</span> <span class="mi">2</span><span class="o">]</span>
+<span class="bp">|</span> <span class="bp">|</span> <span class="err">⊥</span>             <span class="o">[</span><span class="bp">¬</span><span class="n">E</span> <span class="mi">1</span> <span class="mi">3</span><span class="o">]</span>
+<span class="bp">|</span> <span class="bp">¬</span> <span class="n">p</span>           <span class="o">[</span><span class="bp">¬</span><span class="n">I</span> <span class="mi">2</span><span class="bp">-</span><span class="mi">4</span><span class="o">]</span>
+<span class="bp">|</span> <span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span>       <span class="o">[</span><span class="bp">∨</span><span class="n">I</span><span class="bp">.</span><span class="n">R</span> <span class="mi">5</span><span class="o">]</span>
+<span class="bp">|</span> <span class="err">⊥</span>             <span class="o">[</span><span class="bp">¬</span><span class="n">E</span> <span class="mi">1</span> <span class="mi">6</span><span class="o">]</span>
+<span class="bp">¬</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span><span class="o">)</span> <span class="o">[</span><span class="bp">¬</span><span class="n">I</span> <span class="mi">1</span><span class="bp">-</span><span class="mi">7</span><span class="o">]</span>
+<span class="n">p</span> <span class="bp">∨</span> <span class="bp">¬</span> <span class="n">p</span>       <span class="o">[</span><span class="bp">¬¬</span><span class="n">E</span> <span class="mi">8</span><span class="o">]</span>
+</pre></div>
+
+<a name="179240619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179240619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179240619">Kenny Lau (Oct 28 2019 at 15:19)</a>:</h4>
+<p><code>I</code> is introduction and <code>E</code> is elimination and <code>L</code> is left and <code>R</code> is right and the numbers are line numbers</p>
+
+<a name="179240742"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20prove%20law%20of%20excluded%20middle%20from%20double%20negation%3F/near/179240742" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/14903Howtoprovelawofexcludedmiddlefromdoublenegation.html#179240742">Kenny Lau (Oct 28 2019 at 15:20)</a>:</h4>
+<p><code>¬I</code> basically says:</p>
+<div class="codehilite"><pre><span></span> φ⊢⊥
+-----
+  ¬φ
+</pre></div>
+
 
 {% endraw %}
 
