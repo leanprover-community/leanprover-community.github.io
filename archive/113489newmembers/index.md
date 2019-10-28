@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (2 messages, latest: Oct 28 2019 at 10:35)
+* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (8 messages, latest: Oct 28 2019 at 12:56)
+
+* [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (14 messages, latest: Oct 28 2019 at 12:45)
 
 * [Projective geometry](67112Projectivegeometry.html) (15 messages, latest: Oct 28 2019 at 10:18)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (3 messages, latest: Oct 28 2019 at 03:13)
 
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (20 messages, latest: Oct 28 2019 at 00:04)
-
-* [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (10 messages, latest: Oct 27 2019 at 17:02)
 
 * [trichotomy of naturals](58482trichotomyofnaturals.html) (6 messages, latest: Oct 27 2019 at 14:50)
 
