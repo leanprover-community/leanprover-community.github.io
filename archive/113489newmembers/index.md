@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (1 message, latest: Oct 28 2019 at 08:16)
+
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (3 messages, latest: Oct 28 2019 at 03:13)
 
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (20 messages, latest: Oct 28 2019 at 00:04)
