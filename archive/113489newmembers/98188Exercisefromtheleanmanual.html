@@ -1,0 +1,42 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/98188Exercisefromtheleanmanual.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/98188Exercisefromtheleanmanual.html">Exercise from the lean manual</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179270037"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercise%20from%20the%20lean%20manual/near/179270037" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98188Exercisefromtheleanmanual.html#179270037">yuppie (Oct 28 2019 at 20:07)</a>:</h4>
+<p>I am trying to solve ex. 2.10.3 from the online tutorial (defining addition on vector nat n). I have tried the following:<br>
+def vec_add (n : nat) : vector nat n → vector nat n → vector nat n<br>
+| ⟨ [],    h ⟩ _ := ⟨ [], h ⟩<br>
+| _ ⟨ [],    h ⟩ := ⟨ [], h ⟩<br>
+| ⟨ a :: v, h ⟩ ⟨ b :: w, g ⟩ := ⟨ (a+b) :: (vec_add ⟨v (congr_arg nat.pred h)⟩ ⟨w congr_arg nat.pred g⟩), h ⟩<br>
+#check vec_add<br>
+But the las case does not type check. The error message says the following:<br>
+function expected at<br>
+  v<br>
+term has type<br>
+  list ℕ<br>
+So somehow I messe up converting v into a vector of length n-1 but I have no idea how to do that.</p>
+<p>I am still starting to learn lean. Does anybody have any idea?</p>
+
+<a name="179272003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercise%20from%20the%20lean%20manual/near/179272003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98188Exercisefromtheleanmanual.html#179272003">Reid Barton (Oct 28 2019 at 20:26)</a>:</h4>
+<p>You need commas after <code>v</code> and then after <code>w</code>.</p>
+
+<a name="179272057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Exercise%20from%20the%20lean%20manual/near/179272057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/98188Exercisefromtheleanmanual.html#179272057">Reid Barton (Oct 28 2019 at 20:26)</a>:</h4>
+<p>Although that still won't work for other reasons.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
