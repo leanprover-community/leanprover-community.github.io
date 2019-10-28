@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (26 messages, latest: Oct 28 2019 at 15:55)
+* [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (27 messages, latest: Oct 28 2019 at 16:06)
 
 * [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (11 messages, latest: Oct 28 2019 at 15:20)
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [lemma for noether normalization](21648lemmafornoethernormalization.html) (15 messages, latest: Oct 28 2019 at 15:24)
+* [lemma for noether normalization](21648lemmafornoethernormalization.html) (20 messages, latest: Oct 28 2019 at 16:41)
 
 * [algebra.comap](53517algebracomap.html) (13 messages, latest: Oct 28 2019 at 06:59)
 
