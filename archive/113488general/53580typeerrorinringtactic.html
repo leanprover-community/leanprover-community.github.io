@@ -105,6 +105,40 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179231868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179231868">Mario Carneiro (Oct 28 2019 at 13:46)</a>:</h4>
 <p>I think this is going outside <code>ring</code>'s intended domain though. If you have a ring equality stuffed in an exponent you should first use <code>congr</code> or other things designed for it</p>
 
+<a name="179234317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179234317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179234317">Tim Baanen (Oct 28 2019 at 14:12)</a>:</h4>
+<p>I used <code>norm_num</code> and it seems I get less errors than the Travis build using <code>norm_num.derive</code>.</p>
+
+<a name="179234318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179234318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179234318">Tim Baanen (Oct 28 2019 at 14:12)</a>:</h4>
+<p>The difference between <code>tactic.norm_num</code> and <code>tactic.norm_num.derive</code> is that <code>derive</code> supports more expressions, right?</p>
+
+<a name="179235126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179235126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179235126">Tim Baanen (Oct 28 2019 at 14:21)</a>:</h4>
+<p>Ah, it's because <code>tactic.norm_num</code> threw an error so the <code>ring</code> tactic went over to simplification mode which just happened to end up with an equality, while <code>tactic.norm_num.derive</code> didn't throw an error and didn't reach the equality immediately</p>
+
+<a name="179235666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179235666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179235666">Tim Baanen (Oct 28 2019 at 14:28)</a>:</h4>
+<p>It seems that going to <code>norm_num.derive</code> makes the following not work anymore:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">a</span> <span class="err">^</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span>
+</pre></div>
+
+<a name="179236043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179236043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179236043">Rob Lewis (Oct 28 2019 at 14:32)</a>:</h4>
+<p>Tim, did you see Mario's PR here? <a href="https://github.com/leanprover-community/mathlib/pull/1557" target="_blank" title="https://github.com/leanprover-community/mathlib/pull/1557">https://github.com/leanprover-community/mathlib/pull/1557</a></p>
+
+<a name="179236067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179236067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179236067">Rob Lewis (Oct 28 2019 at 14:32)</a>:</h4>
+<p>It looks like <code>derive</code> was failing on input that was already a numeral. Mario added <code>derive'</code>.</p>
+
+<a name="179237657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179237657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179237657">Tim Baanen (Oct 28 2019 at 14:49)</a>:</h4>
+<p>Aha, I didn't check the other changes in the PR.</p>
+
+<a name="179237680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/type%20error%20in%20ring%20tactic/near/179237680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/53580typeerrorinringtactic.html#179237680">Tim Baanen (Oct 28 2019 at 14:49)</a>:</h4>
+<p>Thanks for the fix!</p>
+
 
 {% endraw %}
 

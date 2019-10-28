@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (18 messages, latest: Oct 28 2019 at 13:33)
+* [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (4 messages, latest: Oct 28 2019 at 14:56)
+
+* [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (1 message, latest: Oct 28 2019 at 14:47)
+
+* [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (19 messages, latest: Oct 28 2019 at 14:36)
 
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (14 messages, latest: Oct 28 2019 at 12:45)
 

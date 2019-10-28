@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [type error in ring tactic](53580typeerrorinringtactic.html) (14 messages, latest: Oct 28 2019 at 13:46)
+* [type error in ring tactic](53580typeerrorinringtactic.html) (22 messages, latest: Oct 28 2019 at 14:49)
 
 * [Lean in the wild](43625Leaninthewild.html) (389 messages, latest: Oct 28 2019 at 06:33)
 
