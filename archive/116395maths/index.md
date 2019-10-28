@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Proving that derivative of sin is cos](53994Provingthatderivativeofsiniscos.html) (10 messages, latest: Oct 28 2019 at 17:50)
+
 * [lemma for noether normalization](21648lemmafornoethernormalization.html) (20 messages, latest: Oct 28 2019 at 16:41)
 
 * [algebra.comap](53517algebracomap.html) (13 messages, latest: Oct 28 2019 at 06:59)
