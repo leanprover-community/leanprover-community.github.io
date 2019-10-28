@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Finite-rank free modules](68692Finiterankfreemodules.html) (3 messages, latest: Oct 28 2019 at 20:58)
+* [Finite-rank free modules](68692Finiterankfreemodules.html) (5 messages, latest: Oct 28 2019 at 21:00)
 
 * [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (3 messages, latest: Oct 28 2019 at 20:26)
 
