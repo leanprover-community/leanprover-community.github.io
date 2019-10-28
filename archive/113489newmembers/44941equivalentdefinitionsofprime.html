@@ -1,0 +1,56 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/44941equivalentdefinitionsofprime.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html">equivalent definitions of prime</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179198552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179198552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179198552">Lucas Allen (Oct 28 2019 at 02:52)</a>:</h4>
+<p>I have another definition for prime and I want to prove that it's equivalent to the definition in mathlib. My definition is</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">divisors_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="mi">1</span>     <span class="o">:=</span> <span class="o">[</span><span class="mi">1</span><span class="o">]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">n</span> <span class="err">%</span> <span class="n">h</span> <span class="bp">=</span> <span class="mi">0</span>
+           <span class="k">then</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="bp">++</span> <span class="n">divisors_aux</span> <span class="n">h</span>
+           <span class="k">else</span> <span class="n">divisors_aux</span> <span class="n">h</span>
+
+<span class="n">def</span> <span class="n">divisors</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span><span class="bp">ℕ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">divisors_aux</span> <span class="n">n</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">myprime</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="o">(</span><span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">∧</span> <span class="n">divisors</span> <span class="n">p</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="n">p</span><span class="o">]</span>
+</pre></div>
+
+
+<p>The <code>divisors</code> function gives a list of divisors, and <code>myprime p</code> says a number is primes if the divisor are <code>1</code> and <code>p</code>.</p>
+<p>Here's my attempt at the first direction</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">my_prime_good</span> <span class="o">(</span><span class="n">p</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">myprime</span> <span class="n">p</span> <span class="o">:=</span>
+<span class="k">have</span> <span class="n">s₁</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">→</span> <span class="o">(</span><span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">),</span> <span class="k">from</span> <span class="n">prime</span><span class="bp">.</span><span class="n">two_le</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">s₄</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">→</span> <span class="o">(</span><span class="n">n</span> <span class="err">∣</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">p</span><span class="o">),</span> <span class="k">from</span> <span class="bp">λ</span> <span class="o">(</span><span class="n">pp</span> <span class="o">:</span> <span class="n">prime</span> <span class="n">p</span><span class="o">),</span> <span class="o">(</span><span class="n">dvd_prime</span> <span class="n">pp</span><span class="o">)</span><span class="bp">.</span><span class="n">mp</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">s₂</span> <span class="o">:</span> <span class="o">(</span><span class="n">n</span> <span class="err">∣</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">∨</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">p</span><span class="o">)</span> <span class="bp">→</span> <span class="n">divisors</span> <span class="n">p</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="n">p</span><span class="o">],</span> <span class="k">from</span>
+<span class="k">begin</span>
+  <span class="n">intro</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">s₃</span> <span class="o">:</span> <span class="o">(</span><span class="n">p</span> <span class="bp">≥</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">divisors</span> <span class="n">p</span> <span class="bp">=</span> <span class="o">[</span><span class="mi">1</span><span class="o">,</span><span class="n">p</span><span class="o">])</span> <span class="bp">→</span> <span class="n">myprime</span> <span class="n">p</span><span class="o">,</span> <span class="k">from</span>
+  <span class="k">begin</span> <span class="n">intros</span><span class="o">,</span> <span class="n">unfold</span> <span class="n">myprime</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span> <span class="kn">end</span><span class="o">,</span>
+<span class="k">show</span> <span class="n">prime</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">myprime</span> <span class="n">p</span><span class="o">,</span> <span class="k">from</span>
+<span class="k">begin</span> <span class="n">intro</span><span class="o">,</span> <span class="n">apply</span> <span class="n">s₃</span><span class="o">,</span> <span class="n">split</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">s₁</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">s₂</span> <span class="o">(</span><span class="n">s₄</span> <span class="n">a</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I'm totally stuck at the <code>sorry</code>. I think I need to break <code>divisors</code> into cases somehow. How can I prove this?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
