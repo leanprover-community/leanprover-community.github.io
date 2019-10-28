@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simps](83533simps.html) (21 messages, latest: Oct 28 2019 at 22:01)
+
 * [type error in ring tactic](53580typeerrorinringtactic.html) (22 messages, latest: Oct 28 2019 at 14:49)
 
 * [Lean in the wild](43625Leaninthewild.html) (389 messages, latest: Oct 28 2019 at 06:33)
@@ -130,8 +132,6 @@ permalink: archive/113488general/index.html
 * [mathlib notes](99147mathlibnotes.html) (17 messages, latest: Oct 06 2019 at 19:48)
 
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (9 messages, latest: Oct 06 2019 at 18:52)
-
-* [simps](83533simps.html) (20 messages, latest: Oct 05 2019 at 20:57)
 
 * [Sup of rats](82568Supofrats.html) (4 messages, latest: Oct 05 2019 at 10:07)
 
