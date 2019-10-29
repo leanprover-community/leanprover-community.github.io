@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (6 messages, latest: Oct 29 2019 at 12:36)
+
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (51 messages, latest: Oct 29 2019 at 07:33)
 
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (10 messages, latest: Oct 29 2019 at 07:29)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (2 messages, latest: Oct 29 2019 at 02:50)
 
 * [Cast with apply](97870Castwithapply.html) (4 messages, latest: Oct 29 2019 at 00:36)
 
