@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [simps](83533simps.html) (25 messages, latest: Oct 29 2019 at 03:58)
+* [simps](83533simps.html) (26 messages, latest: Oct 29 2019 at 04:02)
 
 * [type error in ring tactic](53580typeerrorinringtactic.html) (22 messages, latest: Oct 28 2019 at 14:49)
 
