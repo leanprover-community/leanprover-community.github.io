@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (7 messages, latest: Oct 29 2019 at 15:42)
+* [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (4 messages, latest: Oct 29 2019 at 17:32)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (8 messages, latest: Oct 29 2019 at 17:25)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (51 messages, latest: Oct 29 2019 at 07:33)
 
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (10 messages, latest: Oct 29 2019 at 07:29)
 
 * [Cast with apply](97870Castwithapply.html) (4 messages, latest: Oct 29 2019 at 00:36)
-
-* [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (3 messages, latest: Oct 28 2019 at 20:26)
 
 * [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (27 messages, latest: Oct 28 2019 at 16:06)
 
