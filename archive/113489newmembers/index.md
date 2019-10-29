@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [(no topic)](79918notopic.html) (215 messages, latest: Oct 29 2019 at 21:37)
+
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (11 messages, latest: Oct 29 2019 at 19:40)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (16 messages, latest: Oct 29 2019 at 18:28)
@@ -74,8 +76,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬(p ↔ ¬p)](90832examplepp.html) (27 messages, latest: Oct 22 2019 at 10:56)
 
 * [Weird executable version issue](98733Weirdexecutableversionissue.html) (27 messages, latest: Oct 21 2019 at 16:41)
-
-* [(no topic)](79918notopic.html) (209 messages, latest: Oct 21 2019 at 15:52)
 
 * [dne implies em](56189dneimpliesem.html) (10 messages, latest: Oct 20 2019 at 23:49)
 
