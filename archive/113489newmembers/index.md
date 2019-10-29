@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Finite-rank free modules](68692Finiterankfreemodules.html) (11 messages, latest: Oct 29 2019 at 19:40)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (16 messages, latest: Oct 29 2019 at 18:28)
 
 * [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (4 messages, latest: Oct 29 2019 at 17:32)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (51 messages, latest: Oct 29 2019 at 07:33)
-
-* [Finite-rank free modules](68692Finiterankfreemodules.html) (10 messages, latest: Oct 29 2019 at 07:29)
 
 * [Cast with apply](97870Castwithapply.html) (4 messages, latest: Oct 29 2019 at 00:36)
 
