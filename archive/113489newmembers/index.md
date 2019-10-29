@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Cast with apply](97870Castwithapply.html) (4 messages, latest: Oct 29 2019 at 00:36)
+
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (5 messages, latest: Oct 28 2019 at 21:00)
 
 * [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (3 messages, latest: Oct 28 2019 at 20:26)
-
-* [Cast with apply](97870Castwithapply.html) (3 messages, latest: Oct 28 2019 at 20:02)
 
 * [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (27 messages, latest: Oct 28 2019 at 16:06)
 
