@@ -34,6 +34,18 @@ permalink: archive/113488general/02134unfortunatefailuresoflibrarysearch.html
 <p>doesn't. This is a common problem, in fact so common I'm considering just hardwiring something to <code>library_search</code> for exactly this case. (e.g. add <code>zero_lt_iff_ne_zero.mpr</code> into the set of lemmas for <code>solve_by_elim</code>.</p>
 <p>(There are "more principled solutions", involving add _lots_ of extra lemmas to <code>solve_by_elim</code>, but this will take some engineering...)</p>
 
+<a name="179451772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179451772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179451772">Scott Morrison (Oct 30 2019 at 16:43)</a>:</h4>
+<p>Just copying a reported failure of <code>library_search</code> from Kevin:</p>
+<div class="codehilite"><pre><span></span>import tactic.library_search
+
+example (P Q : Prop) [decidable P] [decidable Q]: (¬ Q → ¬ P) → (P → Q) := by library_search -- fails
+example (P Q : Prop) [decidable P] [decidable Q]: (¬ Q → ¬ P) ↔ (P → Q) := by library_search -- not_imp_not
+</pre></div>
+
+
+<p>I would have thought this one works, so I'll investigate later.</p>
+
 
 {% endraw %}
 

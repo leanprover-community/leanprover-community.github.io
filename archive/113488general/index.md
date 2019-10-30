@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (4 messages, latest: Oct 30 2019 at 16:43)
+
 * [simp changes with_top to with_bot](48676simpchangeswithtoptowithbot.html) (1 message, latest: Oct 30 2019 at 15:52)
 
 * [implication is not a function](16494implicationisnotafunction.html) (8 messages, latest: Oct 30 2019 at 15:47)
@@ -58,8 +60,6 @@ permalink: archive/113488general/index.html
 * [emacs buffers](99927emacsbuffers.html) (6 messages, latest: Oct 23 2019 at 17:46)
 
 * [Advocacy is Volunteering](61161AdvocacyisVolunteering.html) (1 message, latest: Oct 23 2019 at 06:00)
-
-* [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (3 messages, latest: Oct 23 2019 at 04:56)
 
 * [What's new in mathlib](80721Whatsnewinmathlib.html) (46 messages, latest: Oct 22 2019 at 10:06)
 

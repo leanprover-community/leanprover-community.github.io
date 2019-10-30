@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (11 messages, latest: Oct 30 2019 at 15:59)
+* [how to use simp](72888howtousesimp.html) (12 messages, latest: Oct 30 2019 at 16:49)
 
-* [how to use simp](72888howtousesimp.html) (9 messages, latest: Oct 30 2019 at 15:22)
+* [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (16 messages, latest: Oct 30 2019 at 16:36)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (18 messages, latest: Oct 30 2019 at 15:17)
 
