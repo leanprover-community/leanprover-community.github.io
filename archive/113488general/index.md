@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [implication is not a function](16494implicationisnotafunction.html) (4 messages, latest: Oct 30 2019 at 11:53)
+* [implication is not a function](16494implicationisnotafunction.html) (6 messages, latest: Oct 30 2019 at 12:09)
 
 * [mm0](59723mm0.html) (62 messages, latest: Oct 29 2019 at 16:43)
 
