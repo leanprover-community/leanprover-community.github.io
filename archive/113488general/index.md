@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [implication is not a function](16494implicationisnotafunction.html) (2 messages, latest: Oct 30 2019 at 10:57)
+
 * [mm0](59723mm0.html) (62 messages, latest: Oct 29 2019 at 16:43)
 
 * [simps](83533simps.html) (26 messages, latest: Oct 29 2019 at 04:02)
