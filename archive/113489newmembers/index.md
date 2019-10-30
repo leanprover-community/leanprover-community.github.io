@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1411 messages, latest: Oct 30 2019 at 04:13)
+
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (24 messages, latest: Oct 30 2019 at 02:24)
 
 * [(no topic)](79918notopic.html) (215 messages, latest: Oct 29 2019 at 21:37)
@@ -56,8 +58,6 @@ permalink: archive/113489newmembers/index.html
 * [zero_max a rfl lemma](80279zeromaxarfllemma.html) (18 messages, latest: Oct 25 2019 at 22:03)
 
 * [How to use a type alias without breaking typeclass synthesis](75013Howtouseatypealiaswithoutbreakingtypeclasssynthesis.html) (31 messages, latest: Oct 25 2019 at 15:06)
-
-* [noob question(s)](52075noobquestions.html) (1409 messages, latest: Oct 25 2019 at 14:09)
 
 * [How to make `to_the_right_of` function?](06057Howtomaketotherightoffunction.html) (10 messages, latest: Oct 25 2019 at 08:21)
 
