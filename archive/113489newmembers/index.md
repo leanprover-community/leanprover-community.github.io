@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (13 messages, latest: Oct 30 2019 at 00:21)
+
 * [(no topic)](79918notopic.html) (215 messages, latest: Oct 29 2019 at 21:37)
 
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (11 messages, latest: Oct 29 2019 at 19:40)
@@ -30,8 +32,6 @@ permalink: archive/113489newmembers/index.html
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (14 messages, latest: Oct 28 2019 at 12:45)
 
 * [Projective geometry](67112Projectivegeometry.html) (15 messages, latest: Oct 28 2019 at 10:18)
-
-* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (3 messages, latest: Oct 28 2019 at 03:13)
 
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (20 messages, latest: Oct 28 2019 at 00:04)
 

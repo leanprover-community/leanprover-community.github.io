@@ -58,6 +58,86 @@ permalink: archive/113489newmembers/44941equivalentdefinitionsofprime.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179199271" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179199271">Reid Barton (Oct 28 2019 at 03:13)</a>:</h4>
 <p>You can prove something like if <code>p</code> is prime and <code>1 &lt;= a &lt;= p</code> then <code>divisors_aux p a = [1]</code> by induction on <code>a</code>, and then compute <code>divisors p</code>.</p>
 
+<a name="179390595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179390595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179390595">Lucas Allen (Oct 30 2019 at 00:08)</a>:</h4>
+<p>I had a go at proving that if <code>p</code> is prime and <code>1 &lt;= a &lt;= p</code> then <code>divisors_aux p a = [1]</code>, but I don't know how to break apart <code>divisors_aux</code>. When I run <code>unfold divisors_aux</code> I get the error "simplify tactic failed to simplify." Is there some other way to unfold these definitions, or is there a way around this problem?</p>
+
+<a name="179391306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391306">Kenny Lau (Oct 30 2019 at 00:16)</a>:</h4>
+<p><code>divisors_aux n 0</code> and <code>divisors_aux n (h+1)</code> can be simplified, but not <code>divisors_aux</code></p>
+
+<a name="179391316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391316">Kenny Lau (Oct 30 2019 at 00:16)</a>:</h4>
+<p>so you need to do (strong) induction on the input</p>
+
+<a name="179391417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391417">Kenny Lau (Oct 30 2019 at 00:17)</a>:</h4>
+<p>also you might want to try <code>#eval divisors_aux [some number] [some number]</code> to see if you got the function right</p>
+
+<a name="179391508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391508">Kenny Lau (Oct 30 2019 at 00:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">divisors_aux</span> <span class="mi">12</span> <span class="mi">13</span> <span class="c1">-- [12, 6, 4, 3, 2, 1, 1]</span>
+</pre></div>
+
+<a name="179391566"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391566" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391566">Kenny Lau (Oct 30 2019 at 00:19)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">divisors_aux</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">divisors_aux : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux._main : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux._main._meta_aux : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux._main.equations._eqn_1 : ∀ (n : ℕ), divisors_aux._main n 0 = list.nil</span>
+<span class="cm">divisors_aux._main.equations._eqn_2 : ∀ (n : ℕ), divisors_aux._main n 1 = [1]</span>
+<span class="cm">divisors_aux._main.equations._eqn_3 : ∀ (n n_1 : ℕ),</span>
+<span class="cm">  divisors_aux._main n (nat.succ n_1 + 1) =</span>
+<span class="cm">    ite (n % nat.succ n_1 = 0) ([nat.succ n_1] ++ divisors_aux._main n (nat.succ n_1))</span>
+<span class="cm">      (divisors_aux._main n (nat.succ n_1))</span>
+<span class="cm">divisors_aux._sunfold : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux.equations._eqn_1 : ∀ (n : ℕ), divisors_aux n 0 = list.nil</span>
+<span class="cm">divisors_aux.equations._eqn_2 : ∀ (n : ℕ), divisors_aux n 1 = [1]</span>
+<span class="cm">divisors_aux.equations._eqn_3 : ∀ (n n_1 : ℕ),</span>
+<span class="cm">  divisors_aux n (nat.succ n_1 + 1) =</span>
+<span class="cm">    ite (n % nat.succ n_1 = 0) ([nat.succ n_1] ++ divisors_aux n (nat.succ n_1)) (divisors_aux n (nat.succ n_1))</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="179391626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391626">Kenny Lau (Oct 30 2019 at 00:20)</a>:</h4>
+<p><code>h+1</code> and <code>1</code> are overlapping cases</p>
+
+<a name="179391667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391667">Kenny Lau (Oct 30 2019 at 00:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">divisors_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">n</span> <span class="err">%</span> <span class="n">h</span> <span class="bp">=</span> <span class="mi">0</span>
+           <span class="k">then</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="bp">++</span> <span class="n">divisors_aux</span> <span class="n">h</span>
+           <span class="k">else</span> <span class="n">divisors_aux</span> <span class="n">h</span>
+
+<span class="bp">#</span><span class="kn">eval</span> <span class="n">divisors_aux</span> <span class="mi">12</span> <span class="mi">100</span> <span class="c1">-- [12, 6, 4, 3, 2, 1]</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="kn">prefix</span> <span class="n">divisors_aux</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">divisors_aux : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux._main : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux._main._meta_aux : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux._main.equations._eqn_1 : ∀ (n : ℕ), divisors_aux._main n 0 = list.nil</span>
+<span class="cm">divisors_aux._main.equations._eqn_2 : ∀ (n h : ℕ), divisors_aux._main n (h + 1) = ite (n % h = 0) ([h] ++ divisors_aux._main n h) (divisors_aux._main n h)</span>
+<span class="cm">divisors_aux._sunfold : ℕ → ℕ → list ℕ</span>
+<span class="cm">divisors_aux.equations._eqn_1 : ∀ (n : ℕ), divisors_aux n 0 = list.nil</span>
+<span class="cm">divisors_aux.equations._eqn_2 : ∀ (n h : ℕ), divisors_aux n (h + 1) = ite (n % h = 0) ([h] ++ divisors_aux n h) (divisors_aux n h)</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="179391675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391675">Kenny Lau (Oct 30 2019 at 00:21)</a>:</h4>
+<p>maybe this is what you want</p>
+
+<a name="179391708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179391708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179391708">Kenny Lau (Oct 30 2019 at 00:21)</a>:</h4>
+<p>also beware of the edge case:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">divisors_aux</span> <span class="mi">0</span> <span class="mi">10</span> <span class="c1">-- [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]</span>
+</pre></div>
+
 
 {% endraw %}
 
