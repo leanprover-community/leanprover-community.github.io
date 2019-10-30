@@ -9,7 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [how to use simp](72888howtousesimp.html) (7 messages, latest: Oct 30 2019 at 13:25)
+* [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (11 messages, latest: Oct 30 2019 at 15:59)
+
+* [how to use simp](72888howtousesimp.html) (9 messages, latest: Oct 30 2019 at 15:22)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (18 messages, latest: Oct 30 2019 at 15:17)
 
 * [noob question(s)](52075noobquestions.html) (1415 messages, latest: Oct 30 2019 at 13:14)
 
@@ -18,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [(no topic)](79918notopic.html) (215 messages, latest: Oct 29 2019 at 21:37)
 
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (11 messages, latest: Oct 29 2019 at 19:40)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (16 messages, latest: Oct 29 2019 at 18:28)
 
 * [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (4 messages, latest: Oct 29 2019 at 17:32)
 
