@@ -189,6 +189,62 @@ mathlib = {git = &quot;https://github.com/leanprover-community/mathlib.git&quot;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179470000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179470000">Kevin Buzzard (Oct 30 2019 at 19:50)</a>:</h4>
 <p>Oh I see. You need a computer scientist, sorry ;-)</p>
 
+<a name="179471538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179471538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179471538">Jason Gross (Oct 30 2019 at 20:05)</a>:</h4>
+<p>Another question: How do I get <code>norm_num</code> to simplify my new definitions?  I noticed there is no <code>int.pow</code>, so I wrote </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+  <span class="n">nat</span><span class="bp">.</span><span class="n">rec</span>
+    <span class="mi">1</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span> <span class="n">acc</span><span class="o">,</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">acc</span><span class="o">)</span>
+    <span class="n">e</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="n">int_has_pow_nat</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">int</span> <span class="n">nat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">int</span> <span class="n">int</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">pow</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>but <code>norm_num</code> doesn't simplify it.</p>
+
+<a name="179472277"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179472277" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179472277">Rob Lewis (Oct 30 2019 at 20:13)</a>:</h4>
+<p>I'll take a look at your earlier questions in a bit and see if I have any hints. For the latest: you can tell <code>norm_num</code> to reduce definitions with square brackets, e.g. <code>norm_num [int.pow]</code>. For your example, that definition of <code>pow_nat</code> will get in the way.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="n">k</span>
+
+<span class="kn">instance</span> <span class="n">int_has_pow_nat</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">int</span> <span class="n">nat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">int</span> <span class="n">int</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">pow</span><span class="bp">⟩</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">-</span><span class="mi">2</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span><span class="err">^</span><span class="mi">4</span> <span class="bp">=</span> <span class="mi">16</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">norm_num</span> <span class="o">[(</span><span class="err">^</span><span class="o">),</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow</span><span class="o">,</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span><span class="o">]</span>
+</pre></div>
+
+<a name="179472410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179472410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179472410">Rob Lewis (Oct 30 2019 at 20:15)</a>:</h4>
+<p>I don't think the <code>simp</code> attributes you had on the instances will work, will they?</p>
+
+<a name="179472737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179472737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179472737">Jason Gross (Oct 30 2019 at 20:19)</a>:</h4>
+<p>Why is it that <code>norm_num [(^), int.pow, int.pow_nat]</code> works for <code>(-2 : ℤ) ^ 0</code> but fails to reduce for <code>int.pow (-2 : ℤ) 0</code>?</p>
+
+<a name="179472756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179472756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179472756">Jason Gross (Oct 30 2019 at 20:19)</a>:</h4>
+<p>(re <code>simp</code> on instances: idk, I'm still at the cargo-culting stage in learning lean)</p>
+
 
 {% endraw %}
 

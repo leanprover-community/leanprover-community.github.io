@@ -8076,6 +8076,59 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179469250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179469250">Floris van Doorn (Oct 30 2019 at 19:41)</a>:</h4>
 <p>Oh, I have never encountered that. Does setting <code>pp.max_steps</code> help?</p>
 
+<a name="179471045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179471045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179471045">Jason Gross (Oct 30 2019 at 20:00)</a>:</h4>
+<p>That does seem to help, but not interactively.  I get <code>11:1: excessive memory consumption detected at 'replace' (potential solution: increase memory consumption threshold)</code>  And it takes something like 15 GB on the command line.  Here's an example:</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">big</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="n">v</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">v</span>
+<span class="bp">|</span> <span class="n">v</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span> <span class="n">big</span> <span class="o">(</span><span class="n">v</span> <span class="bp">+</span> <span class="n">v</span><span class="o">)</span> <span class="n">c</span>
+
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">max_depth</span> <span class="mi">1000000000</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">max_steps</span> <span class="mi">1000000000</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">v</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">big</span> <span class="n">v</span> <span class="mi">20</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="n">only</span> <span class="o">[</span><span class="n">big</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179474306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179474306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179474306">Jason Gross (Oct 30 2019 at 20:36)</a>:</h4>
+<p>If I get <code>kernel failed to type check declaration 'int.pow_of_nat' this is usually due to a buggy tactic or a bug in the builtin elaborator</code> on a definition I'm giving by <code>rfl</code>, is that a bug in lean?</p>
+
+<a name="179474906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179474906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179474906">Scott Morrison (Oct 30 2019 at 20:42)</a>:</h4>
+<p>Probably not... :-) Can you minimise your example enough to post here?</p>
+
+<a name="179476449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179476449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179476449">Jason Gross (Oct 30 2019 at 20:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="n">e</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">b</span> <span class="err">^</span> <span class="n">e</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="n">k</span>
+
+<span class="kn">instance</span> <span class="n">int_has_pow_nat</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">int</span> <span class="n">nat</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span><span class="bp">⟩</span>
+
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">b</span> <span class="err">^</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="mi">0</span>
+
+<span class="kn">instance</span> <span class="o">:</span> <span class="n">has_pow</span> <span class="n">int</span> <span class="n">int</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="n">int</span><span class="bp">.</span><span class="n">pow</span><span class="bp">⟩</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_of_nat</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow</span> <span class="n">b</span> <span class="n">e</span> <span class="bp">=</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">b</span> <span class="err">^</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="c1">-- 15:5: kernel failed to type check declaration &#39;int.pow_of_nat&#39; this is usually due to a buggy tactic or a bug in the builtin elaborator</span>
+<span class="c1">-- elaborated type:</span>
+<span class="c1">--   ∀ (b e : ℕ), int.pow ↑b ↑e = int.of_nat (b ^ e)</span>
+<span class="c1">-- elaborated value:</span>
+<span class="c1">--   λ (b e : ℕ), rfl</span>
+<span class="c1">-- nested exception message:</span>
+<span class="c1">-- type mismatch at definition &#39;int.pow_of_nat&#39;, has type</span>
+<span class="c1">--   ∀ (b e : ℕ), int.pow ↑b ↑e = int.pow ↑b ↑e</span>
+<span class="c1">-- but is expected to have type</span>
+<span class="c1">--   ∀ (b e : ℕ), int.pow ↑b ↑e = int.of_nat (b ^ e)</span>
+</pre></div>
+
 
 {% endraw %}
 
