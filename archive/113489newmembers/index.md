@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [how to use simp](72888howtousesimp.html) (19 messages, latest: Oct 30 2019 at 17:37)
+* [how to use simp](72888howtousesimp.html) (38 messages, latest: Oct 30 2019 at 19:50)
+
+* [noob question(s)](52075noobquestions.html) (1418 messages, latest: Oct 30 2019 at 19:41)
+
+* [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (17 messages, latest: Oct 30 2019 at 17:32)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (18 messages, latest: Oct 30 2019 at 15:17)
-
-* [noob question(s)](52075noobquestions.html) (1415 messages, latest: Oct 30 2019 at 13:14)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (24 messages, latest: Oct 30 2019 at 02:24)
 
@@ -26,8 +28,6 @@ permalink: archive/113489newmembers/index.html
 * [Exercise from the lean manual](98188Exercisefromtheleanmanual.html) (4 messages, latest: Oct 29 2019 at 17:32)
 
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (51 messages, latest: Oct 29 2019 at 07:33)
-
-* [Cast with apply](97870Castwithapply.html) (4 messages, latest: Oct 29 2019 at 00:36)
 
 * [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (27 messages, latest: Oct 28 2019 at 16:06)
 
