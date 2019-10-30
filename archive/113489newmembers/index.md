@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [how to use simp](72888howtousesimp.html) (2 messages, latest: Oct 30 2019 at 06:50)
+* [how to use simp](72888howtousesimp.html) (6 messages, latest: Oct 30 2019 at 07:38)
 
 * [noob question(s)](52075noobquestions.html) (1414 messages, latest: Oct 30 2019 at 06:47)
 
