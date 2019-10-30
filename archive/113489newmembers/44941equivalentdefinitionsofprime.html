@@ -200,6 +200,45 @@ permalink: archive/113489newmembers/44941equivalentdefinitionsofprime.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179396123" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179396123">Bryan Gin-ge Chen (Oct 30 2019 at 01:56)</a>:</h4>
 <p>So to address your most recent message, you can either just work with <code>divisors_aux p (p+1)</code> as if it were already in the form <code>if _ then _ else _</code> or you can use the <code>show</code> tactic to make that explicit in the tactic state first.</p>
 
+<a name="179396446"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179396446" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179396446">Lucas Allen (Oct 30 2019 at 02:05)</a>:</h4>
+<p>The example</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">divisors_aux</span> <span class="n">m</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="k">if</span> <span class="n">m</span> <span class="err">%</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="bp">++</span> <span class="n">divisors_aux</span> <span class="n">m</span> <span class="n">n</span> <span class="k">else</span> <span class="n">divisors_aux</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>doesn't work for me. I get a red squiggle under the <code>rfl</code> with the error </p>
+<div class="codehilite"><pre><span></span>type mismatch, term  rfl
+has type
+  ?m_2 = ?m_2
+but is expected to have type
+  divisors_aux n (h + 1) = ite (n % h = 0) ([h] ++ divisors_aux n h) (divisors_aux n h)&quot;
+</pre></div>
+
+
+<p>Is my lean out of date or something?</p>
+
+<a name="179396579"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179396579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179396579">Bryan Gin-ge Chen (Oct 30 2019 at 02:08)</a>:</h4>
+<p>Oh hmm, maybe I'm using a different definition for <code>divisors_aux</code>. Here's the full file:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">divisors_aux</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℕ</span>
+<span class="bp">|</span> <span class="mi">0</span>     <span class="o">:=</span> <span class="o">[]</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">h</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">n</span> <span class="err">%</span> <span class="n">h</span> <span class="bp">=</span> <span class="mi">0</span>
+           <span class="k">then</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="bp">++</span> <span class="n">divisors_aux</span> <span class="n">h</span>
+           <span class="k">else</span> <span class="n">divisors_aux</span> <span class="n">h</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">divisors_aux</span> <span class="n">n</span> <span class="mi">0</span> <span class="bp">=</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">divisors_aux</span> <span class="n">m</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="k">if</span> <span class="n">m</span> <span class="err">%</span> <span class="n">n</span> <span class="bp">=</span> <span class="mi">0</span> <span class="k">then</span> <span class="o">[</span><span class="n">n</span><span class="o">]</span> <span class="bp">++</span> <span class="n">divisors_aux</span> <span class="n">m</span> <span class="n">n</span> <span class="k">else</span> <span class="n">divisors_aux</span> <span class="n">m</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="179397028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179397028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179397028">Bryan Gin-ge Chen (Oct 30 2019 at 02:20)</a>:</h4>
+<p>If you post your new definition of <code>divisors_aux</code> I can update my examples above, but basically if you replace the stuff on the right hand side of the equation with a suitable version of whatever's in the <code>(h+1)</code> case of your new definition, <code>rfl</code> should work. (I say "a suitable version" because you may have to do things like replace <code>divisors_aux h</code> with <code>divisors_aux m n</code> as I did in my example.)</p>
+
+<a name="179397165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179397165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179397165">Lucas Allen (Oct 30 2019 at 02:24)</a>:</h4>
+<p>The problem was that my definition for <code>divisors_aux</code> had an unnecessary case <code>| 1     := []</code> in it. It now works. I'm gonna mess around with this for a while. Thanks for the help :).</p>
+
 
 {% endraw %}
 
