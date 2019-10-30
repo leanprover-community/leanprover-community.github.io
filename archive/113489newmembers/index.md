@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1424 messages, latest: Oct 30 2019 at 21:28)
+* [how to use simp](72888howtousesimp.html) (47 messages, latest: Oct 30 2019 at 22:57)
 
-* [how to use simp](72888howtousesimp.html) (46 messages, latest: Oct 30 2019 at 21:25)
+* [noob question(s)](52075noobquestions.html) (1428 messages, latest: Oct 30 2019 at 22:53)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (27 messages, latest: Oct 30 2019 at 22:50)
 
 * [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (17 messages, latest: Oct 30 2019 at 17:32)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (18 messages, latest: Oct 30 2019 at 15:17)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (24 messages, latest: Oct 30 2019 at 02:24)
 

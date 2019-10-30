@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Coq memes](25595Coqmemes.html) (26 messages, latest: Oct 30 2019 at 22:53)
+
 * [`simp` and monoids](75078simpandmonoids.html) (2 messages, latest: Oct 30 2019 at 21:58)
 
 * [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (4 messages, latest: Oct 30 2019 at 16:43)
@@ -76,8 +78,6 @@ permalink: archive/113488general/index.html
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
-
-* [Coq memes](25595Coqmemes.html) (21 messages, latest: Oct 20 2019 at 15:30)
 
 * [visualizations](70566visualizations.html) (62 messages, latest: Oct 17 2019 at 12:00)
 

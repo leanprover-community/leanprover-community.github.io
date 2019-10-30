@@ -8137,6 +8137,23 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179479522" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179479522">Jason Gross (Oct 30 2019 at 21:28)</a>:</h4>
 <p>reported as <a href="https://github.com/leanprover-community/lean/issues/76" target="_blank" title="https://github.com/leanprover-community/lean/issues/76">https://github.com/leanprover-community/lean/issues/76</a></p>
 
+<a name="179482512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179482512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179482512">Chris Hughes (Oct 30 2019 at 22:06)</a>:</h4>
+<p>I don't think it is a bug. I wouldn't expect <code>rfl</code> to be able to prove that, you should have to induct on <code>e</code> first.</p>
+<p>I don't think that's the usual error message, but I think that might be because it is a <code>def</code> rather than a lemma which would be more usual.</p>
+
+<a name="179483174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179483174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179483174">Jason Gross (Oct 30 2019 at 22:15)</a>:</h4>
+<p>If I do <code>def bad : true = false := rfl</code>, then I get a standard type error, without the extra words about it being possibly a bug</p>
+
+<a name="179485582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179485582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179485582">Reid Barton (Oct 30 2019 at 22:52)</a>:</h4>
+<p>It looks to me like the elaborator thought that <code>int.pow_nat (int.of_nat b) e</code> would reduce to <code>int.of_nat (b ^ e)</code>, but if you <code>#print int.pow_nat._main</code> you can see it actually won't.</p>
+
+<a name="179485649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179485649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179485649">Reid Barton (Oct 30 2019 at 22:53)</a>:</h4>
+<p>Surprisingly to me and the elaborator (but apparently not to Chris) the equation compiler generated an outermost match on the second argument, not the first.</p>
+
 
 {% endraw %}
 
