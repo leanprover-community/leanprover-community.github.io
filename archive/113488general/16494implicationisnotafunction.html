@@ -22,6 +22,26 @@ permalink: archive/113488general/16494implicationisnotafunction.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implication%20is%20not%20a%20function/near/179420304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16494implicationisnotafunction.html#179420304">Kevin Buzzard (Oct 30 2019 at 10:57)</a>:</h4>
 <p><span class="user-mention" data-user-id="228602">@Sian Carey</span> was a UROP student with me from Leeds over the summer, and I gave her a really technically difficult problem about constructing a theory of quotient monoids and I found it absolutely fascinating teaching her, but there were some concepts which I could see I was teaching her poorly. And then I showed her the natural number game and said I needed a power world and she just knocked one off. There are secret collectibles in the natural number game, which I couldn't figure out how to add to the system in its current form but you can see them in the source code. Mathematicians like collecting them.</p>
 
+<a name="179422794"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implication%20is%20not%20a%20function/near/179422794" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16494implicationisnotafunction.html#179422794">Emily Riehl (Oct 30 2019 at 11:41)</a>:</h4>
+<p>This explains a lot of the errors I've been getting! Let me try to remember where they were.</p>
+<p>In 3.11 after the split I wanted to just type "exact eq_zero_or_eq_zero_of_mul_eq_zero," </p>
+<p>When that didn't work I tried "exact eq_zero_or_eq_zero_of_mul_eq_zero a b," (with various combinations of parentheses). </p>
+<p>Finally I realized  I could "apply the function" with something like:</p>
+<div class="codehilite"><pre><span></span>intro hyp,
+apply eq_zero_or_eq_zero_of_mul_eq_zero,
+exact hyp,
+</pre></div>
+
+<a name="179423542"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/implication%20is%20not%20a%20function/near/179423542" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/16494implicationisnotafunction.html#179423542">Emily Riehl (Oct 30 2019 at 11:53)</a>:</h4>
+<p>Similarly I was hoping to compose succ_inj with the inductive hypothesis "hn : n + b = n + c → b = c," in 2.9 but instead had to settle for</p>
+<div class="codehilite"><pre><span></span>intro hyp,
+apply hn,
+apply succ_inj,
+exact hyp,
+</pre></div>
+
 
 {% endraw %}
 
