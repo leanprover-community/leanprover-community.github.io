@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [`simp` and monoids](75078simpandmonoids.html) (2 messages, latest: Oct 30 2019 at 21:58)
+
 * [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (4 messages, latest: Oct 30 2019 at 16:43)
 
 * [simp changes with_top to with_bot](48676simpchangeswithtoptowithbot.html) (1 message, latest: Oct 30 2019 at 15:52)

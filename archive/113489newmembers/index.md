@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1422 messages, latest: Oct 30 2019 at 20:58)
+* [noob question(s)](52075noobquestions.html) (1424 messages, latest: Oct 30 2019 at 21:28)
 
-* [how to use simp](72888howtousesimp.html) (43 messages, latest: Oct 30 2019 at 20:19)
+* [how to use simp](72888howtousesimp.html) (46 messages, latest: Oct 30 2019 at 21:25)
 
 * [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
 

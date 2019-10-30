@@ -245,6 +245,40 @@ mathlib = {git = &quot;https://github.com/leanprover-community/mathlib.git&quot;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179472756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179472756">Jason Gross (Oct 30 2019 at 20:19)</a>:</h4>
 <p>(re <code>simp</code> on instances: idk, I'm still at the cargo-culting stage in learning lean)</p>
 
+<a name="179478580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179478580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179478580">Jason Gross (Oct 30 2019 at 21:19)</a>:</h4>
+<p>Why is it that neither <code>norm_num</code> nor <code>simp</code> can deal with these definitions?</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat&#39;</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="mi">1</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat&#39;</span> <span class="n">k</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat_rev</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">of_nat</span> <span class="o">(</span><span class="n">b</span> <span class="err">^</span> <span class="n">e</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat&#39;</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">neg_succ_of_nat</span> <span class="n">b</span><span class="o">)</span> <span class="n">e</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span> <span class="n">int</span><span class="bp">.</span><span class="n">pow_nat_rev</span> <span class="n">e</span> <span class="n">b</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">mod</span> <span class="mi">1</span> <span class="o">(</span><span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span> <span class="mi">2</span> <span class="mi">16</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span> <span class="o">[</span><span class="n">int</span><span class="bp">.</span><span class="n">mod</span><span class="o">,</span><span class="n">int</span><span class="bp">.</span><span class="n">pow_nat</span><span class="o">,(</span><span class="err">^</span><span class="o">),</span><span class="n">int</span><span class="bp">.</span><span class="n">pow_nat_rev</span><span class="o">]</span>
+<span class="kn">end</span>
+<span class="c1">-- 18:1: tactic failed, there are unsolved goals</span>
+<span class="c1">-- state:</span>
+<span class="c1">-- ⊢ int.mod 1 (int.pow_nat_rev 16 2) = 0</span>
+</pre></div>
+
+<a name="179478880"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179478880" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179478880">Jason Gross (Oct 30 2019 at 21:22)</a>:</h4>
+<p>Hm, and apparently <code>import tactic.norm_num</code> is enough to make <code>simp [(+)]</code> loop</p>
+
+<a name="179479199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179479199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179479199">Jason Gross (Oct 30 2019 at 21:25)</a>:</h4>
+<p>Reported as <a href="https://github.com/leanprover-community/mathlib/issues/1637" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1637">https://github.com/leanprover-community/mathlib/issues/1637</a></p>
+
 
 {% endraw %}
 
