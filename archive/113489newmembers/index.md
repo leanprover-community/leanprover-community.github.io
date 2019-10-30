@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [how to use simp](72888howtousesimp.html) (6 messages, latest: Oct 30 2019 at 07:38)
+* [how to use simp](72888howtousesimp.html) (7 messages, latest: Oct 30 2019 at 13:25)
 
-* [noob question(s)](52075noobquestions.html) (1414 messages, latest: Oct 30 2019 at 06:47)
+* [noob question(s)](52075noobquestions.html) (1415 messages, latest: Oct 30 2019 at 13:14)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (24 messages, latest: Oct 30 2019 at 02:24)
 
