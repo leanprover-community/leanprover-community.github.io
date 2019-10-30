@@ -69,6 +69,40 @@ permalink: archive/113489newmembers/72888howtousesimp.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179452276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179452276">Scott Morrison (Oct 30 2019 at 16:49)</a>:</h4>
 <p>(On a related note, I have written a few proofs recently leaving the line <code>suggest</code> at the bottom of my <code>begin ... end</code> block as I work, and it can be pretty awesome... "Oh, you're done! That goal too!")</p>
 
+<a name="179454737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179454737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179454737">Kevin Buzzard (Oct 30 2019 at 17:16)</a>:</h4>
+<p>I don't like errors in my code so I often leave <code>sorry</code> at the end of every branch I've not filled in (say I'm in the middle of a big tactic mode proof). Do I just stop using <code>sorry</code> and start using <code>suggest</code>?</p>
+
+<a name="179455184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179455184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179455184">Jason Gross (Oct 30 2019 at 17:20)</a>:</h4>
+<p>I get <code>unknown identifier 'norm_num'</code>(I'm using lean installed from <a href="https://github.com/leanprover/lean/releases/download/v3.4.2/lean-3.4.2-linux.tar.gz" target="_blank" title="https://github.com/leanprover/lean/releases/download/v3.4.2/lean-3.4.2-linux.tar.gz">https://github.com/leanprover/lean/releases/download/v3.4.2/lean-3.4.2-linux.tar.gz</a>)</p>
+
+<a name="179455242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179455242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179455242">Kevin Buzzard (Oct 30 2019 at 17:21)</a>:</h4>
+<p><code>norm_num</code> is a mathlib tactic. Try <code>import tactic.norm_num</code> at the top of your file.</p>
+
+<a name="179455833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179455833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179455833">Jason Gross (Oct 30 2019 at 17:26)</a>:</h4>
+<blockquote>
+<p>What is the more complex goal you are trying to solve? This looks like an XY problem to me</p>
+</blockquote>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I'm trying to perf-test lean's tactics for rewriting/partial evaluation on a goal for generating straightline-code for big integer field arithmetic for a fixed prime modulus on a fixed-width platform.  In particular, I'm trying to rewrite in <a href="https://github.com/mit-plv/fiat-crypto/blob/d801192d534a0c80eab74ef7874c38b7c84a0134/fiat_crypto.lean#L367" target="_blank" title="https://github.com/mit-plv/fiat-crypto/blob/d801192d534a0c80eab74ef7874c38b7c84a0134/fiat_crypto.lean#L367">this goal</a> until everything except <code>let_in</code> and arithmetic definitions on non-numerals is unfolded, and I will also need to rewrite with <a href="https://github.com/mit-plv/fiat-crypto/blob/d801192d534a0c80eab74ef7874c38b7c84a0134/fiat_crypto.lean#L351" target="_blank" title="https://github.com/mit-plv/fiat-crypto/blob/d801192d534a0c80eab74ef7874c38b7c84a0134/fiat_crypto.lean#L351"><code>this lemma</code></a> to lift binders so they don't block rewriting/reduction.  Additionally, there are a number of places where I'm doing a test on equality of <code>int</code>s which are numerals, and I need to reduce/rewrite/compute the test so that the <code>if</code> statement goes away.</p>
+
+<a name="179455857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179455857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179455857">Rob Lewis (Oct 30 2019 at 17:26)</a>:</h4>
+<blockquote>
+<p>(On a related note, I have written a few proofs recently leaving the line <code>suggest</code> at the bottom of my <code>begin ... end</code> block as I work, and it can be pretty awesome... "Oh, you're done! That goal too!")</p>
+</blockquote>
+<p>Isn't this super laggy? That's folding over the environment a lot.</p>
+
+<a name="179456657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179456657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179456657">Scott Morrison (Oct 30 2019 at 17:35)</a>:</h4>
+<p>Yes, it's slow, but not as slow as me, so sometimes it has time to say something helpful. :-)</p>
+
+<a name="179456828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179456828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179456828">Scott Morrison (Oct 30 2019 at 17:37)</a>:</h4>
+<p>(This slowness also prompted me to wonder if I could parallelise <code>suggest</code>. Keeley says "maybe".)</p>
+
 
 {% endraw %}
 
