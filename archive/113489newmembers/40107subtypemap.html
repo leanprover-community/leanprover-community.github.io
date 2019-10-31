@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/40107subtypemap.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html">subtype map</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179535821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179535821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179535821">Calle Sönne (Oct 31 2019 at 14:24)</a>:</h4>
+<p>Is there some theorem/lemma that can give me a map from a subtype into the corresponding type?</p>
+
+<a name="179535871"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179535871" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179535871">Rob Lewis (Oct 31 2019 at 14:25)</a>:</h4>
+<p><code>subtype.val</code>?</p>
+
+<a name="179535989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179535989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179535989">Calle Sönne (Oct 31 2019 at 14:26)</a>:</h4>
+<p>Thanks! I must have been searching for the wrong thing then.. thought its name would be something like 'lift' or 'map'</p>
+
+<a name="179537262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179537262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179537262">Calle Sönne (Oct 31 2019 at 14:40)</a>:</h4>
+<p>Despite its simplicity I am having problems using subtype.val<br>
+I have the following code (the only important thing is the last line in tactic mode):</p>
+<div class="codehilite"><pre><span></span><span class="n">open_locale</span> <span class="n">classical</span>
+<span class="kn">lemma</span> <span class="n">finite_prod_of_binary_prod</span> <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J</span><span class="o">)</span> <span class="n">C</span>
+<span class="bp">|</span> <span class="n">J</span> <span class="n">fin</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">J</span> <span class="k">then</span>
+<span class="k">begin</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">J&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">a</span> <span class="bp">//</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">x</span><span class="o">},</span> <span class="n">resetI</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">card_lt</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J&#39;</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J</span><span class="o">,</span> <span class="n">refine</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_subtype_lt</span> <span class="n">J</span> <span class="bp">_</span><span class="o">,</span> <span class="n">exact</span> <span class="n">x</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">lim_J&#39;</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J&#39;</span><span class="o">)</span> <span class="n">C</span><span class="o">,</span> <span class="n">refine</span> <span class="n">finite_prod_of_binary_prod</span> <span class="n">J&#39;</span><span class="o">,</span>
+<span class="n">refine</span> <span class="bp">⟨_⟩</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">F&#39;</span> <span class="o">:=</span> <span class="n">discrete</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="n">J&#39;</span><span class="o">),</span>
+
+<span class="kn">end</span>
+<span class="k">else</span> <span class="bp">_</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">⟩</span><span class="o">]}</span>
+</pre></div>
+
+
+<p>I get the following error: </p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">mismatch</span> <span class="n">at</span> <span class="n">application</span>
+  <span class="n">J&#39;</span><span class="bp">.</span><span class="n">val</span>
+<span class="n">term</span>
+  <span class="n">J&#39;</span>
+<span class="n">has</span> <span class="n">type</span>
+  <span class="kt">Type</span> <span class="n">v</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="mi">1</span> <span class="o">(</span><span class="n">v</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span>
+<span class="n">but</span> <span class="n">is</span> <span class="n">expected</span> <span class="n">to</span> <span class="k">have</span> <span class="n">type</span>
+  <span class="n">subtype</span> <span class="err">?</span><span class="n">m_3</span> <span class="o">:</span> <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="err">?</span> <span class="err">?</span><span class="o">)</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_binary_products</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">finite_prod_of_binary_prod</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J</span><span class="o">)</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">,</span>
+<span class="n">fin</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">J</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">J</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">J</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">J&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="o">{</span><span class="n">a</span> <span class="bp">//</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">x</span><span class="o">},</span>
+<span class="n">card_lt</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J&#39;</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J</span><span class="o">,</span>
+<span class="n">lim_J&#39;</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J&#39;</span><span class="o">)</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">F</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span>
+<span class="err">⊢</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limit</span> <span class="n">F</span>
+</pre></div>
+
+
+<p>How do I supply the fact that J' is a subtype of J to subtype.val? Shouldnt this be inferred?</p>
+
+<a name="179537574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179537574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179537574">Chris Hughes (Oct 31 2019 at 14:43)</a>:</h4>
+<p>You can't apply <code>subtype.val</code> to <code>J'</code> only to an element of <code>J'</code></p>
+
+<a name="179537651"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179537651" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179537651">Rob Lewis (Oct 31 2019 at 14:44)</a>:</h4>
+<p>I'm not sure what the type of <code>discrete.lift</code> is, but note that <code>subtype.val</code> is a function from <code>J'</code> to <code>J</code>, not a function that can be applied to <code>J'</code> itself.</p>
+
+<a name="179537737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179537737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179537737">Chris Hughes (Oct 31 2019 at 14:45)</a>:</h4>
+<p>You just want <code>discrete.lift subtype.val</code></p>
+
+<a name="179537823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179537823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179537823">Chris Hughes (Oct 31 2019 at 14:46)</a>:</h4>
+<p>Or probably <code>discrete.lift (subtype.val : J' -&gt; J)</code></p>
+
+<a name="179537827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179537827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179537827">Rob Lewis (Oct 31 2019 at 14:46)</a>:</h4>
+<blockquote>
+<p>You just want <code>discrete.lift subtype.val</code></p>
+</blockquote>
+<p>Maybe with some type annotations.</p>
+
+<a name="179538034"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/subtype%20map/near/179538034" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40107subtypemap.html#179538034">Calle Sönne (Oct 31 2019 at 14:48)</a>:</h4>
+<p>Great! Thank you :)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
