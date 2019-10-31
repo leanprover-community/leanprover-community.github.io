@@ -8485,6 +8485,158 @@ term has type
 <p>I've gone back to simp directly with the definition, but keeping the destructuring let, which prevents the unfolding from getting out of hand.</p>
 <p>I should more seriously consider writing some equivalent to <code>cbv</code> that will do all of these things in the right order</p>
 
+<a name="179502618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502618">Mario Carneiro (Oct 31 2019 at 05:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="241007">@Jason Gross</span>  I managed to get your original <code>ex2</code> problem to compute to a value with a few modifications: <a href="https://gist.github.com/digama0/7649577d7c8af881cdbad50f9e84d81f" target="_blank" title="https://gist.github.com/digama0/7649577d7c8af881cdbad50f9e84d81f">https://gist.github.com/digama0/7649577d7c8af881cdbad50f9e84d81f</a></p>
+
+<a name="179502848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502848">Jason Gross (Oct 31 2019 at 05:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Thanks! </p>
+<div class="codehilite"><pre><span></span><span class="gd">-def let_in {A : Type u} {B : Type v} (x : A) (f : A → B) := f x</span>
+<span class="gi">+@[simp] def let_in {A : Type u} {B : Type v} (x : A) (f : A → B) := f x</span>
+</pre></div>
+
+
+<p>Uh, it's pretty important to not make this change; it results in ~exponential blowup, and in some of the examples even larger than this one, it becomes even more of a problem.  Is it essential to your way of making things work?</p>
+
+<a name="179502898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502898">Mario Carneiro (Oct 31 2019 at 05:32)</a>:</h4>
+<p>I don't think so, it was mostly to get it out of the way for the other changes. A suitable set of other simp lemmas about let_in should suffice</p>
+
+<a name="179502902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502902">Mario Carneiro (Oct 31 2019 at 05:32)</a>:</h4>
+<p>Lean does internally deduplicate expressions though, so it shouldn't cause exponential blowup</p>
+
+<a name="179502914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502914">Mario Carneiro (Oct 31 2019 at 05:33)</a>:</h4>
+<p>basically, your approach is interfering with lean's own approach to the same problem</p>
+
+<a name="179502962"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502962" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502962">Jason Gross (Oct 31 2019 at 05:34)</a>:</h4>
+<p>The issue is that the goal is to generate C code, eventually, and we don't want exponential blow-up in the C code output, so we need to not unfold let_in.  This is what all of the <code>let_in.lift*</code> lemmas at the bottom are about</p>
+
+<a name="179502972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179502972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179502972">Mario Carneiro (Oct 31 2019 at 05:35)</a>:</h4>
+<p>In that case, why is <code>let_in</code> not a constructor?</p>
+
+<a name="179503023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503023">Jason Gross (Oct 31 2019 at 05:36)</a>:</h4>
+<p>Because I didn't want to re-write a bunch of code to be in a monad</p>
+
+<a name="179503028"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503028" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503028">Jason Gross (Oct 31 2019 at 05:36)</a>:</h4>
+<p>But, sure, you could make it a constructor, and sprinkle <code>bind</code> everywhere</p>
+
+<a name="179503033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503033">Jason Gross (Oct 31 2019 at 05:36)</a>:</h4>
+<p>(But then you also need a way to do <code>list (M T) -&gt; M (list T)</code>, etc)</p>
+
+<a name="179503048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503048">Mario Carneiro (Oct 31 2019 at 05:37)</a>:</h4>
+<p>The thing is that you are also trying to compute with this in lean, and in that context the let_in doesn't make any sense</p>
+
+<a name="179503090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503090">Mario Carneiro (Oct 31 2019 at 05:38)</a>:</h4>
+<p>And you can't compute a C code expression this way because <code>let_in</code> would be reduced away</p>
+
+<a name="179503100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503100">Jason Gross (Oct 31 2019 at 05:38)</a>:</h4>
+<p>The final step to get to C would be reifying or otherwise pretty-printing the code</p>
+
+<a name="179503118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503118">Jason Gross (Oct 31 2019 at 05:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="gd">-  def positional.to_associational (n:ℕ) (xs:list ℤ) : list (ℤ × ℤ)</span>
+<span class="gd">-    := list.combine (list.map weight (list.seq 0 n)) xs</span>
+<span class="gi">+  def positional.to_associational (n:ℕ) (xs:list ℤ) : list (ℕ × ℤ)</span>
+<span class="gi">+    := list.enum xs</span>
+</pre></div>
+
+
+<p>This seems wrong.   Did you deliberately remove <code>weight</code> here, or was it an oversight?</p>
+
+<a name="179503124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503124">Mario Carneiro (Oct 31 2019 at 05:39)</a>:</h4>
+<p>the removal of weight was an oversight</p>
+
+<a name="179503126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503126">Mario Carneiro (Oct 31 2019 at 05:39)</a>:</h4>
+<p>I wasn't sure about whether the removal of <code>n</code> was correct either</p>
+
+<a name="179503176"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503176" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503176">Mario Carneiro (Oct 31 2019 at 05:40)</a>:</h4>
+<p>But if <code>n</code> is much larger than <code>xs</code> the original approach has a lot of unnecessary computation</p>
+
+<a name="179503188"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503188">Jason Gross (Oct 31 2019 at 05:41)</a>:</h4>
+<p><code>n</code> is always equal to the length of <code>xs</code></p>
+
+<a name="179503198"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503198" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503198">Mario Carneiro (Oct 31 2019 at 05:41)</a>:</h4>
+<p>In that case I would want to have just one loop instead of two here</p>
+
+<a name="179503210"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503210" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503210">Jason Gross (Oct 31 2019 at 05:41)</a>:</h4>
+<p>Sure, that seems fine</p>
+
+<a name="179503263"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503263" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503263">Jason Gross (Oct 31 2019 at 05:42)</a>:</h4>
+<p>Also, how long should I expect this to take?  The code you gave me has already been running for 14 minutes</p>
+
+<a name="179503269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503269">Mario Carneiro (Oct 31 2019 at 05:42)</a>:</h4>
+<p>my test ran 7 minutes</p>
+
+<a name="179503291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503291">Jason Gross (Oct 31 2019 at 05:43)</a>:</h4>
+<p>If I pass <code>--tstack=1000000</code>, does that make it slower?</p>
+
+<a name="179503294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503294">Mario Carneiro (Oct 31 2019 at 05:43)</a>:</h4>
+<p>I doubt it</p>
+
+<a name="179503304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503304">Jason Gross (Oct 31 2019 at 05:43)</a>:</h4>
+<p>Maybe your machine is more than 2x as fast as mine?</p>
+
+<a name="179503354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503354">Mario Carneiro (Oct 31 2019 at 05:44)</a>:</h4>
+<p>let me fix the bugs and try again to make sure I posted the right file</p>
+
+<a name="179503368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503368">Jason Gross (Oct 31 2019 at 05:45)</a>:</h4>
+<p>(Seems doubtful that you're twice as fast as me; my cpu is 3.6 GHz...)</p>
+
+<a name="179503430"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503430" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503430">Jason Gross (Oct 31 2019 at 05:46)</a>:</h4>
+<p>What does <code>by exact _match l</code> do in <code>| (a::l) := positional.carry_reduce n s c a (by exact _match l)</code>?  (What's <code>_match</code>, and why are you doing it this way?)</p>
+
+<a name="179503680"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503680" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503680">Mario Carneiro (Oct 31 2019 at 05:53)</a>:</h4>
+<p>Unfortunately lean does not have Coq's <code>fix</code> constructor for making a recursive definition in the middle of a term. It has <code>match</code> for invoking the equation compiler, but it doesn't expose the name of the recursive function so you can make a recursive call. However it is exposed in tactics with the name <code>_match</code></p>
+
+<a name="179503752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503752">Mario Carneiro (Oct 31 2019 at 05:54)</a>:</h4>
+<p>An equivalent approach would be:</p>
+<div class="codehilite"><pre><span></span>    <span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">positional</span><span class="bp">.</span><span class="n">chained_carries_aux</span> <span class="o">(</span><span class="n">n</span> <span class="n">s</span> <span class="n">c</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="n">nat</span> <span class="bp">→</span> <span class="n">list</span> <span class="bp">ℤ</span>
+    <span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="n">p</span>
+    <span class="bp">|</span> <span class="o">(</span><span class="n">a</span><span class="bp">::</span><span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">positional</span><span class="bp">.</span><span class="n">carry_reduce</span> <span class="n">n</span> <span class="n">s</span> <span class="n">c</span> <span class="n">a</span> <span class="o">(</span><span class="n">positional</span><span class="bp">.</span><span class="n">chained_carries_aux</span> <span class="n">l</span><span class="o">)</span>
+
+    <span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">positional</span><span class="bp">.</span><span class="n">chained_carries</span> <span class="o">(</span><span class="n">n</span> <span class="n">s</span> <span class="n">c</span> <span class="n">p</span><span class="o">)</span> <span class="o">(</span><span class="n">idxs</span> <span class="o">:</span> <span class="n">list</span> <span class="n">nat</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="n">positional</span><span class="bp">.</span><span class="n">chained_carries_aux</span> <span class="n">n</span> <span class="n">s</span> <span class="n">c</span> <span class="n">p</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">reverse</span> <span class="n">idxs</span><span class="o">)</span>
+</pre></div>
+
+<a name="179503837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503837">Reid Barton (Oct 31 2019 at 05:56)</a>:</h4>
+<p>It's really annoying too when <code>apply</code> notices that this funny <code>_match</code> thing has the same type as the goal (imagine that)</p>
+
+<a name="179503848"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503848" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503848">Reid Barton (Oct 31 2019 at 05:56)</a>:</h4>
+<p>Er, maybe not <code>apply</code> but things that try <code>assumption</code></p>
+
+<a name="179503924"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503924">Mario Carneiro (Oct 31 2019 at 05:58)</a>:</h4>
+<p>oh, I think I know what might be the difference: when I first tested it, I ran the <code>norm_num</code> invocation with <code>carry_mulmod ... = sorry</code>, and it finished after 7 minutes with the goal <code>[0, 0, 0, 0, 0] = sorry</code>. The version I put on the gist has the <code>[0,0,0,0,0]</code> edited in, which means that this also includes the kernel typechecking time</p>
+
 
 {% endraw %}
 

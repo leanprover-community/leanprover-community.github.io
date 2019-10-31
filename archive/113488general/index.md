@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mm0](59723mm0.html) (70 messages, latest: Oct 31 2019 at 05:18)
+
 * [Coq memes](25595Coqmemes.html) (45 messages, latest: Oct 31 2019 at 00:57)
 
 * [`simp` and monoids](75078simpandmonoids.html) (2 messages, latest: Oct 30 2019 at 21:58)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [simp changes with_top to with_bot](48676simpchangeswithtoptowithbot.html) (1 message, latest: Oct 30 2019 at 15:52)
 
 * [implication is not a function](16494implicationisnotafunction.html) (8 messages, latest: Oct 30 2019 at 15:47)
-
-* [mm0](59723mm0.html) (62 messages, latest: Oct 29 2019 at 16:43)
 
 * [simps](83533simps.html) (26 messages, latest: Oct 29 2019 at 04:02)
 
