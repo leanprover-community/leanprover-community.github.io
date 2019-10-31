@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (5 messages, latest: Oct 31 2019 at 18:35)
+
 * [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (21 messages, latest: Oct 31 2019 at 17:00)
 
 * [subtype map](40107subtypemap.html) (10 messages, latest: Oct 31 2019 at 14:48)

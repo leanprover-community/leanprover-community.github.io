@@ -1,0 +1,86 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/35490Pitypeinvalidfieldnotation.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/35490Pitypeinvalidfieldnotation.html">Pi type/invalid field notation</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179560892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pi%20type/invalid%20field%20notation/near/179560892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35490Pitypeinvalidfieldnotation.html#179560892">Calle Sönne (Oct 31 2019 at 18:22)</a>:</h4>
+<p>I have the following code and error I cant understand:<br>
+Code:</p>
+<div class="codehilite"><pre><span></span><span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">lemma</span> <span class="n">finite_prod_of_binary_prod</span> <span class="o">[</span><span class="n">has_binary_products</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J</span><span class="o">)</span> <span class="n">C</span>
+<span class="bp">|</span> <span class="n">J</span> <span class="n">fin</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">J</span> <span class="k">then</span>
+<span class="k">begin</span>
+<span class="k">let</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">J&#39;</span> <span class="o">:=</span> <span class="o">{</span><span class="n">a</span> <span class="bp">//</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">x</span><span class="o">},</span> <span class="n">resetI</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">card_lt</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J&#39;</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J</span><span class="o">,</span> <span class="n">refine</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card_subtype_lt</span> <span class="n">J</span> <span class="bp">_</span><span class="o">,</span> <span class="n">exact</span> <span class="n">x</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">J&#39;_lims</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J&#39;</span><span class="o">)</span> <span class="n">C</span><span class="o">,</span> <span class="n">refine</span> <span class="n">finite_prod_of_binary_prod</span> <span class="n">J&#39;</span><span class="o">,</span>
+<span class="n">refine</span> <span class="bp">⟨_⟩</span><span class="o">,</span> <span class="n">intro</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">F&#39;</span> <span class="o">:=</span> <span class="o">(</span><span class="n">discrete</span><span class="bp">.</span><span class="n">lift</span> <span class="o">(</span><span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="o">:</span> <span class="n">J&#39;</span> <span class="bp">-&gt;</span> <span class="n">J</span><span class="o">))</span> <span class="err">⋙</span> <span class="n">F</span><span class="o">,</span>
+<span class="k">let</span> <span class="n">test</span> <span class="o">:=</span> <span class="n">J&#39;_lims</span><span class="bp">.</span><span class="n">has_limit</span><span class="o">,</span>
+<span class="k">have</span> <span class="n">F&#39;_has_lim</span> <span class="o">:</span> <span class="n">has_limit</span> <span class="n">F&#39;</span><span class="o">,</span> <span class="n">refine</span> <span class="o">(</span><span class="n">J&#39;_lims</span><span class="bp">.</span><span class="n">has_limit</span> <span class="n">F&#39;</span><span class="o">),</span>
+
+<span class="kn">end</span>
+<span class="k">else</span> <span class="bp">_</span>
+<span class="n">using_well_founded</span> <span class="o">{</span><span class="n">rel_tac</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">`</span><span class="o">[</span><span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="n">measure_wf</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="bp">@</span><span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">x</span><span class="bp">.</span><span class="mi">1</span> <span class="n">x</span><span class="bp">.</span><span class="mi">2</span><span class="o">)</span><span class="bp">⟩</span><span class="o">]}</span>
+</pre></div>
+
+
+<p>Error:</p>
+<div class="codehilite"><pre><span></span><span class="n">invalid</span> <span class="n">field</span> <span class="kn">notation</span><span class="o">,</span> <span class="n">function</span> <span class="err">&#39;</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span><span class="bp">.</span><span class="n">has_limit&#39;</span> <span class="n">does</span> <span class="n">not</span> <span class="k">have</span> <span class="n">explicit</span> <span class="n">argument</span> <span class="k">with</span> <span class="n">type</span> <span class="o">(</span><span class="n">category_theory</span><span class="bp">.</span><span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="bp">...</span><span class="o">)</span>
+<span class="n">state</span><span class="o">:</span>
+<span class="mi">2</span> <span class="n">goals</span>
+<span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">,</span>
+<span class="err">𝒞</span> <span class="o">:</span> <span class="n">category</span> <span class="n">C</span><span class="o">,</span>
+<span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_binary_products</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">finite_prod_of_binary_prod</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">)</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">J</span><span class="o">],</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J</span><span class="o">)</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">J</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">,</span>
+<span class="n">fin</span> <span class="o">:</span> <span class="n">fintype</span> <span class="n">J</span><span class="o">,</span>
+<span class="n">h</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">J</span><span class="o">,</span>
+<span class="n">x</span> <span class="o">:</span> <span class="n">J</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">choice</span> <span class="n">h</span><span class="o">,</span>
+<span class="n">J&#39;</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span> <span class="o">:=</span> <span class="o">{</span><span class="n">a</span> <span class="bp">//</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">x</span><span class="o">},</span>
+<span class="n">card_lt</span> <span class="o">:</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J&#39;</span> <span class="bp">&lt;</span> <span class="n">fintype</span><span class="bp">.</span><span class="n">card</span> <span class="n">J</span><span class="o">,</span>
+<span class="n">J&#39;_lims</span> <span class="o">:</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span> <span class="o">(</span><span class="n">discrete</span> <span class="n">J&#39;</span><span class="o">)</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">F</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">,</span>
+<span class="n">F&#39;</span> <span class="o">:</span> <span class="n">discrete</span> <span class="o">{</span><span class="n">a</span> <span class="bp">//</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">x</span><span class="o">}</span> <span class="err">⥤</span> <span class="n">C</span> <span class="o">:=</span> <span class="n">discrete</span><span class="bp">.</span><span class="n">lift</span> <span class="n">subtype</span><span class="bp">.</span><span class="n">val</span> <span class="err">⋙</span> <span class="n">F</span><span class="o">,</span>
+<span class="n">test</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">F</span> <span class="o">:</span> <span class="n">discrete</span> <span class="n">J&#39;</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">),</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limit</span> <span class="n">F</span> <span class="o">:=</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limits_of_shape</span><span class="bp">.</span><span class="n">has_limit</span>
+<span class="err">⊢</span> <span class="n">limits</span><span class="bp">.</span><span class="n">has_limit</span> <span class="n">F&#39;</span>
+</pre></div>
+
+
+<p>I created the test hypothesis to show what the type of J'_lims.has_limit. It seems to me that I should just be able to supply F' (which is a functor from discrete J' -&gt; C). What am I missing?</p>
+<p>If it helps this is the definition of has_limits_of_shape:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">has_limits_of_shape</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">has_limit</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">F</span> <span class="o">:</span> <span class="n">J</span> <span class="err">⥤</span> <span class="n">C</span><span class="o">,</span> <span class="n">has_limit</span> <span class="n">F</span><span class="o">)</span>
+</pre></div>
+
+<a name="179560987"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pi%20type/invalid%20field%20notation/near/179560987" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35490Pitypeinvalidfieldnotation.html#179560987">Calle Sönne (Oct 31 2019 at 18:22)</a>:</h4>
+<p>Alternative quesiton: How do I make lean expand the ... in the error?</p>
+
+<a name="179562401"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pi%20type/invalid%20field%20notation/near/179562401" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35490Pitypeinvalidfieldnotation.html#179562401">Johan Commelin (Oct 31 2019 at 18:34)</a>:</h4>
+<p>First remark <span class="user-mention" data-user-id="132603">@Calle Sönne</span>: that should be a <code>def</code>, not a <code>lemma</code>. This might miraculously solve some problem, but probably not.</p>
+
+<a name="179562470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pi%20type/invalid%20field%20notation/near/179562470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35490Pitypeinvalidfieldnotation.html#179562470">Scott Morrison (Oct 31 2019 at 18:35)</a>:</h4>
+<p>I don’t think you need to expand the <code>...</code>. The problem is that you’re trying to access a field of a class as if it were a structure.</p>
+
+<a name="179562483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Pi%20type/invalid%20field%20notation/near/179562483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/35490Pitypeinvalidfieldnotation.html#179562483">Scott Morrison (Oct 31 2019 at 18:35)</a>:</h4>
+<p>(Back later.)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
