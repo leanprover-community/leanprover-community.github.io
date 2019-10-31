@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [how to use simp](72888howtousesimp.html) (47 messages, latest: Oct 30 2019 at 22:57)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (42 messages, latest: Oct 30 2019 at 23:57)
 
-* [noob question(s)](52075noobquestions.html) (1428 messages, latest: Oct 30 2019 at 22:53)
+* [how to use simp](72888howtousesimp.html) (59 messages, latest: Oct 30 2019 at 23:51)
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (27 messages, latest: Oct 30 2019 at 22:50)
+* [noob question(s)](52075noobquestions.html) (1441 messages, latest: Oct 30 2019 at 23:48)
 
 * [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
 

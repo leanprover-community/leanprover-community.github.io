@@ -133,6 +133,72 @@ I'm glad it's finally working! :)</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179485460" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179485460">Kevin Buzzard (Oct 30 2019 at 22:50)</a>:</h4>
 <p>But what you need to learn about is this stuff: <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/ch1_and_or_props/prop_exercises.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/ch1_and_or_props/prop_exercises.html">http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/ch1_and_or_props/prop_exercises.html</a></p>
 
+<a name="179487745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179487745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179487745">vrs (Oct 30 2019 at 23:27)</a>:</h4>
+<p>hi, I'm a noob and I'm very confused about world 2 level 10 - I get the impression that it's supposed to be three lines, but <code>rw add_comm a, rw add_comm b, exact add_left_cancel,</code> complains about "invalid type ascription" and I suspect a more exact match than what I have is needed, so what is my misunderstanding here?</p>
+
+<a name="179488010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179488010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179488010">Reid Barton (Oct 30 2019 at 23:31)</a>:</h4>
+<p><code>add_left_cancel</code> takes <code>a</code> <code>b</code> <code>c</code> as explicit arguments. I'm not sure what the game has taught you so far, but you can either specify them explicitly or use <code>apply</code> instead of <code>exact</code></p>
+
+<a name="179488562"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179488562" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179488562">vrs (Oct 30 2019 at 23:40)</a>:</h4>
+<p>ahah so what I had to do was <code>rw add_comm a, rw add_comm b, apply add_left_cancel,</code>, while going from <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/tactics/apply.html" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/tactics/apply.html">http://wwwf.imperial.ac.uk/~buzzard/xena/html/source/tactics/apply.html</a> I would've expected that apply would reduce my goal to <code>a = b</code> and not solve it outright</p>
+
+<a name="179488966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179488966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179488966">Reid Barton (Oct 30 2019 at 23:46)</a>:</h4>
+<p>I see. I agree you wouldn't expect <code>apply</code> to work here based on that description.</p>
+
+<a name="179488981"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179488981" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179488981">Kevin Buzzard (Oct 30 2019 at 23:46)</a>:</h4>
+<p>I might have broken the default explicit/implicit argument thing.</p>
+
+<a name="179488996"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179488996" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179488996">Reid Barton (Oct 30 2019 at 23:47)</a>:</h4>
+<p>You were probably expected to <code>intro</code> the hypothesis, then rewrite the hypothesis, and then <code>apply add_left_cancel</code> and finally provide the rewritten hypothesis.</p>
+
+<a name="179488999"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179488999" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179488999">Kevin Buzzard (Oct 30 2019 at 23:47)</a>:</h4>
+<p>I'm trying to figure out what my users like best.</p>
+
+<a name="179489010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489010">Kevin Buzzard (Oct 30 2019 at 23:47)</a>:</h4>
+<p>The users are currently not expected to be able to solve those levels at all.</p>
+
+<a name="179489027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489027">Kevin Buzzard (Oct 30 2019 at 23:47)</a>:</h4>
+<p>That's why I'm removing them for a bit.</p>
+
+<a name="179489390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489390">vrs (Oct 30 2019 at 23:52)</a>:</h4>
+<p>sample solutions would be nice, I got most of the way on my own but occasionally I feel I did something super ugly and awkward and there has to be an elegant way</p>
+
+<a name="179489408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489408">vrs (Oct 30 2019 at 23:53)</a>:</h4>
+<p>also they'd teach me about how to use certain tactics properly, in an "oh you can do that?" way</p>
+
+<a name="179489469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489469">Mario Carneiro (Oct 30 2019 at 23:54)</a>:</h4>
+<p>if you want to see solutions, asking here is an easy way to have an "oh you can do that?" moment</p>
+
+<a name="179489483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489483">Mario Carneiro (Oct 30 2019 at 23:54)</a>:</h4>
+<p>If I heard correctly, the solutions are also available from the source code for the game</p>
+
+<a name="179489512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489512">Kevin Buzzard (Oct 30 2019 at 23:55)</a>:</h4>
+<p>That is true, for example you can see my solution to 2-10 here:</p>
+<p><a href="https://github.com/ImperialCollegeLondon/natural_number_game/blob/master/src/game/world2/level10.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/blob/master/src/game/world2/level10.lean">https://github.com/ImperialCollegeLondon/natural_number_game/blob/master/src/game/world2/level10.lean</a></p>
+
+<a name="179489599"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179489599" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179489599">vrs (Oct 30 2019 at 23:57)</a>:</h4>
+<p>oh that is in fact very much what my 2-9 solution looked like!</p>
+<div class="codehilite"><pre><span></span>intro,
+induction a with d hd,
+{rw ← zero_add b, rw ← zero_add c, exact a_1},
+{apply hd, rw ← eq_iff_succ_eq_succ, rw ← succ_add, rw ← succ_add, exact a_1},
+</pre></div>
+
 
 {% endraw %}
 

@@ -286,6 +286,66 @@ mathlib = {git = &quot;https://github.com/leanprover-community/mathlib.git&quot;
 </blockquote>
 <p>That would be the <code>ring1</code> tactic</p>
 
+<a name="179486384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179486384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179486384">Mario Carneiro (Oct 30 2019 at 23:04)</a>:</h4>
+<p>Note that simp can often be made to loop if you have lemmas that disagree about what normal form is</p>
+
+<a name="179486396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179486396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179486396">Mario Carneiro (Oct 30 2019 at 23:04)</a>:</h4>
+<p>you have to not only add a new thing but remove the old one if you want to avoid this</p>
+
+<a name="179486434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179486434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179486434">Mario Carneiro (Oct 30 2019 at 23:05)</a>:</h4>
+<p>I expect that <code>simp [(+)]</code> loops because there is a lemma in the default simp set that re-folds <code>int.add x y</code> to <code>x + y</code></p>
+
+<a name="179486533"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179486533" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179486533">Mario Carneiro (Oct 30 2019 at 23:06)</a>:</h4>
+<p>Power on integers is supported in <code>norm_num</code> via <code>monoid.pow</code>. You will have to import <code>algebra.group_power</code> but then you can just write <code>x ^ y</code> where <code>x : Z</code> and <code>y : N</code></p>
+
+<a name="179488076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179488076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179488076">Jason Gross (Oct 30 2019 at 23:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> re <code>algebra.group_power</code>: Thanks!</p>
+
+<a name="179488115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179488115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179488115">Mario Carneiro (Oct 30 2019 at 23:33)</a>:</h4>
+<p>I also responded to leanprover-community/lean#76, I don't know if you still want to pursue it</p>
+
+<a name="179488746"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179488746" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179488746">Jason Gross (Oct 30 2019 at 23:43)</a>:</h4>
+<p>I replied on leanprover-community/lean#76; feel free to do whatever you think makes sense about the issue</p>
+
+<a name="179489093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179489093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179489093">Floris van Doorn (Oct 30 2019 at 23:48)</a>:</h4>
+<p>You might have already figured it out, but the following works:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">1</span> <span class="err">%</span> <span class="mi">2</span> <span class="err">^</span> <span class="mi">16</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">norm_num</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179489125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179489125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179489125">Mario Carneiro (Oct 30 2019 at 23:48)</a>:</h4>
+<p>are those integers?</p>
+
+<a name="179489178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179489178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179489178">Floris van Doorn (Oct 30 2019 at 23:49)</a>:</h4>
+<p>Good point, probably not. But the following also reduces to false:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="err">%</span> <span class="mi">2</span> <span class="err">^</span> <span class="mi">16</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">norm_num</span>
+</pre></div>
+
+<a name="179489286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179489286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179489286">Kevin Buzzard (Oct 30 2019 at 23:50)</a>:</h4>
+<p>I was looking at "but the following works" and thinking "is that actually _true_ though?" Now I try it I see by "works" Floris means "does not compile" :D</p>
+
+<a name="179489315"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/how%20to%20use%20simp/near/179489315" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/72888howtousesimp.html#179489315">Floris van Doorn (Oct 30 2019 at 23:51)</a>:</h4>
+<p>"<code>norm_num</code> works", which I think is what the question was. But in my second message I clarified it :)</p>
+
 
 {% endraw %}
 
