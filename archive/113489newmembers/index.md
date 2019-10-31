@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (22 messages, latest: Oct 31 2019 at 20:16)
+
 * [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (7 messages, latest: Oct 31 2019 at 19:07)
 
 * [noob question(s)](52075noobquestions.html) (1521 messages, latest: Oct 31 2019 at 19:05)
-
-* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (21 messages, latest: Oct 31 2019 at 17:00)
 
 * [subtype map](40107subtypemap.html) (10 messages, latest: Oct 31 2019 at 14:48)
 
