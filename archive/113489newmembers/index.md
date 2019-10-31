@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (17 messages, latest: Oct 31 2019 at 10:57)
+* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (19 messages, latest: Oct 31 2019 at 11:35)
 
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (17 messages, latest: Oct 31 2019 at 08:52)
 
