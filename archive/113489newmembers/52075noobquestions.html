@@ -8206,6 +8206,201 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179489088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179489088">Jason Gross (Oct 30 2019 at 23:48)</a>:</h4>
 <p>I mean, iterating <code>norm_num1, simp, ...</code> seems not wrong, and in fact the call I have there produces the correct output for the smaller toy example.  (I can't see if it produces correct output on a slightly larger example because I get the recursion depth error)</p>
 
+<a name="179490084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490084">Mario Carneiro (Oct 31 2019 at 00:06)</a>:</h4>
+<p>So I looked through that fiat-crypto file, and what I see are 300 lines of definitions without any theorems, where almost every definition is marked for unfolding. This will <em>explode</em> in lean</p>
+
+<a name="179490140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490140">Mario Carneiro (Oct 31 2019 at 00:07)</a>:</h4>
+<p>What you want are rewrites that unfold what matters, in the cases that matter. If you have a recursive definition (defined with <code>*.rec</code>), it should <em>never</em> be directly unfolded; instead you should have a theorem for the various constructors of the inductive type that you are recursing on</p>
+
+<a name="179490221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490221">Mario Carneiro (Oct 31 2019 at 00:08)</a>:</h4>
+<p>What is the point of the <code>let_in</code> definition? It seems plainly useless</p>
+
+<a name="179490281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490281">Mario Carneiro (Oct 31 2019 at 00:09)</a>:</h4>
+<p>Note that lean actually has a <code>let</code> construct</p>
+
+<a name="179490459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490459">Jason Gross (Oct 31 2019 at 00:12)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> The <code>let_in</code> definition is one of the very few definitions that should never be unfolded</p>
+
+<a name="179490554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490554">Jason Gross (Oct 31 2019 at 00:14)</a>:</h4>
+<p>After reduction/unfolding/rewriting, the only remaining definitions which are not unfolded should be <code>*</code>, <code>+</code>, <code>%</code>, <code>/</code>, and <code>let_in</code></p>
+
+<a name="179490603"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490603" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490603">Jason Gross (Oct 31 2019 at 00:15)</a>:</h4>
+<p>I can change my definitions to not be in terms of recursors and instead be recursive themselves, but I don't see how that will fix anything.  The times to unfold them are in fact when the underlying recursor is ready to be reduced</p>
+
+<a name="179490868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490868">Mario Carneiro (Oct 31 2019 at 00:21)</a>:</h4>
+<p>The following definitions should not be simp: <code>list.flat_map</code> (aka <code>list.bind</code>), <code>list.combine</code> (aka <code>list.zip</code>), <code>int.to_nat_bit(0/1)</code> (the if statement should be a precondition), <code>associational.eval</code>, <code>mul</code>, definitely <code>square</code>, <code>negate_snd</code>, <code>split</code>, <code>reduce</code>, definitely <code>reduce_square</code>, <code>carryterm</code>, <code>positional.from_associational</code>, <code>from_associational_cons</code>, <code>chained_carries</code>, <code>chained_carries_no_reduce</code>.</p>
+
+<a name="179490947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179490947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179490947">Mario Carneiro (Oct 31 2019 at 00:22)</a>:</h4>
+<p>You don't necessarily need to change the definition (although using the equation compiler will do some of these things automatically for you), but you should add equational lemmas in the cases where you want the definition to unfold. Asking everything to unfold all at once is asking for trouble</p>
+
+<a name="179491071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491071">Jason Gross (Oct 31 2019 at 00:25)</a>:</h4>
+<p>Wait, why should <code>list.combine</code> not be <code>simp</code>?  It's just there so that I could make code translation easier, it literally just unfolds to <code>list.zip</code> (which I don't touch the flags of).  <code>from_associational_cons</code> is telling <code>from_associational</code> to reduce in as close a match to the case where it should that I can get (in the case where it's applied to a concrete list)</p>
+
+<a name="179491095"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491095" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491095">Mario Carneiro (Oct 31 2019 at 00:25)</a>:</h4>
+<p>For example:</p>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">prod</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+  <span class="n">list</span><span class="bp">.</span><span class="n">foldr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">fst</span> <span class="n">p</span> <span class="bp">*</span> <span class="n">snd</span> <span class="n">p</span><span class="o">)</span> <span class="n">p</span><span class="o">)</span>
+</pre></div>
+
+
+<p>should be</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="o">:=</span>
+  <span class="n">list</span><span class="bp">.</span><span class="n">foldr</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">y</span><span class="o">)</span> <span class="mi">0</span> <span class="o">(</span><span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">p</span><span class="o">,</span> <span class="n">fst</span> <span class="n">p</span> <span class="bp">*</span> <span class="n">snd</span> <span class="n">p</span><span class="o">)</span> <span class="n">p</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">associational</span><span class="bp">.</span><span class="n">eval_nil</span> <span class="o">:</span> <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">[]</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">associational</span><span class="bp">.</span><span class="n">eval_cons</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">l</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">((</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">l</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="179491145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491145">Jason Gross (Oct 31 2019 at 00:26)</a>:</h4>
+<p>Sure.  Though I will note that I don't use <code>associational.eval</code> anywhere right now, so not unfolding it is not a high priority</p>
+
+<a name="179491160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491160">Mario Carneiro (Oct 31 2019 at 00:27)</a>:</h4>
+<p>or</p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">ℤ</span>
+<span class="bp">|</span> <span class="o">[]</span> <span class="o">:=</span> <span class="mi">0</span>
+<span class="bp">|</span> <span class="o">((</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="bp">::</span> <span class="n">l</span><span class="o">)</span> <span class="o">:=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">associational</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">l</span>
+</pre></div>
+
+<a name="179491184"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491184" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491184">Mario Carneiro (Oct 31 2019 at 00:27)</a>:</h4>
+<p>It's an example; I can demonstrate on something else if you like</p>
+
+<a name="179491195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491195">Jason Gross (Oct 31 2019 at 00:27)</a>:</h4>
+<p>Of the ones you listed, I use <code>list.flat_map</code>, <code>list.combine</code>, <code>mul</code>, <code>split</code>, <code>reduce</code>, <code>carryterm</code>, <code>positional.from_associational</code>, and <code>chained_carries</code></p>
+
+<a name="179491349"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491349" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491349">Jason Gross (Oct 31 2019 at 00:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span>  Could you demonstrate on <code>reduce</code> (or <code>split</code>)?</p>
+
+<a name="179491370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491370">Jason Gross (Oct 31 2019 at 00:31)</a>:</h4>
+<p>I'd also be interested in seeing <code>carryterm</code></p>
+
+<a name="179491387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491387">Jason Gross (Oct 31 2019 at 00:31)</a>:</h4>
+<p><code>reduce</code> because I don't see how to write a simplification lemma for it; <code>carryterm</code> because the conditions under which it should reduce are complicated (namely, when <code>fst t</code> and <code>w</code> are numerals/closed terms)</p>
+
+<a name="179491582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491582">Mario Carneiro (Oct 31 2019 at 00:36)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">prod</span>
+<span class="n">def</span> <span class="n">let_in</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span><span class="o">)</span> <span class="o">:=</span> <span class="n">f</span> <span class="n">x</span>
+
+<span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="n">mul</span> <span class="o">(</span><span class="n">p</span> <span class="n">q</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="n">split</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">×</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">list</span><span class="bp">.</span><span class="n">partition</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">fst</span> <span class="n">t</span><span class="o">)</span> <span class="err">%</span> <span class="n">s</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="n">p</span> <span class="k">in</span>
+<span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">fst</span> <span class="n">t</span> <span class="bp">/</span> <span class="n">s</span><span class="o">,</span> <span class="n">snd</span> <span class="n">t</span><span class="o">))</span> <span class="n">a</span><span class="o">)</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">associational</span><span class="bp">.</span><span class="n">split_val</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">}</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)}</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">list</span><span class="bp">.</span><span class="n">partition</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">prod</span><span class="bp">.</span><span class="n">fst</span> <span class="n">t</span><span class="o">)</span> <span class="err">%</span> <span class="n">s</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="n">p</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">associational</span><span class="bp">.</span><span class="n">split</span> <span class="n">s</span> <span class="n">p</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span><span class="o">,</span> <span class="n">list</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="o">(</span><span class="n">fst</span> <span class="n">t</span> <span class="bp">/</span> <span class="n">s</span><span class="o">,</span> <span class="n">snd</span> <span class="n">t</span><span class="o">))</span> <span class="n">a</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">associational</span><span class="bp">.</span><span class="n">split</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">associational</span><span class="bp">.</span><span class="n">split</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="n">reduce</span> <span class="o">(</span><span class="n">s</span> <span class="n">c</span> <span class="n">p</span><span class="o">)</span> <span class="o">:</span> <span class="n">list</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">let</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span> <span class="n">associational</span><span class="bp">.</span><span class="n">split</span> <span class="n">s</span> <span class="n">p</span> <span class="k">in</span>
+<span class="n">a</span> <span class="bp">++</span> <span class="n">associational</span><span class="bp">.</span><span class="n">mul</span> <span class="n">c</span> <span class="n">b</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">associational</span><span class="bp">.</span><span class="n">reduce_val</span> <span class="o">(</span><span class="n">s</span> <span class="n">c</span> <span class="n">p</span><span class="o">)</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">associational</span><span class="bp">.</span><span class="n">split</span> <span class="n">s</span> <span class="n">p</span> <span class="bp">=</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">))</span> <span class="o">:</span>
+  <span class="n">associational</span><span class="bp">.</span><span class="n">reduce</span> <span class="n">s</span> <span class="n">c</span> <span class="n">p</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">++</span> <span class="n">associational</span><span class="bp">.</span><span class="n">mul</span> <span class="n">c</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">associational</span><span class="bp">.</span><span class="n">reduce</span><span class="o">,</span> <span class="n">h</span><span class="o">,</span> <span class="n">associational</span><span class="bp">.</span><span class="n">reduce</span><span class="o">]</span>
+</pre></div>
+
+<a name="179491684"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491684" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491684">Mario Carneiro (Oct 31 2019 at 00:39)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">associational</span><span class="bp">.</span><span class="n">carryterm</span> <span class="o">(</span><span class="n">w</span> <span class="n">fw</span><span class="o">:</span><span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">t</span><span class="o">:</span><span class="bp">ℤ</span> <span class="bp">×</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">if</span> <span class="o">(</span><span class="n">fst</span> <span class="n">t</span> <span class="bp">=</span> <span class="n">w</span><span class="o">)</span>
+  <span class="k">then</span> <span class="n">let_in</span> <span class="o">(</span><span class="n">snd</span> <span class="n">t</span><span class="o">)</span>         <span class="o">(</span><span class="bp">λ</span> <span class="n">t2</span><span class="o">,</span>
+       <span class="n">let_in</span> <span class="o">(</span><span class="n">t2</span> <span class="bp">/</span> <span class="n">fw</span><span class="o">)</span>       <span class="o">(</span><span class="bp">λ</span> <span class="n">d2</span><span class="o">,</span>
+       <span class="n">let_in</span> <span class="o">(</span><span class="n">t2</span> <span class="err">%</span> <span class="n">fw</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m2</span><span class="o">,</span>
+       <span class="o">[(</span><span class="n">w</span> <span class="bp">*</span> <span class="n">fw</span><span class="o">,</span> <span class="n">d2</span><span class="o">),</span> <span class="o">(</span><span class="n">w</span><span class="o">,</span><span class="n">m2</span><span class="o">)])))</span>
+  <span class="k">else</span> <span class="o">[</span><span class="n">t</span><span class="o">]</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">associational</span><span class="bp">.</span><span class="n">carryterm_pos</span> <span class="o">(</span><span class="n">w</span> <span class="n">fw</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">associational</span><span class="bp">.</span><span class="n">carryterm</span> <span class="n">w</span> <span class="n">fw</span> <span class="o">(</span><span class="n">w</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span>
+  <span class="n">let_in</span> <span class="n">b</span>               <span class="o">(</span><span class="bp">λ</span> <span class="n">t2</span><span class="o">,</span>
+  <span class="n">let_in</span> <span class="o">(</span><span class="n">t2</span> <span class="bp">/</span> <span class="n">fw</span><span class="o">)</span>       <span class="o">(</span><span class="bp">λ</span> <span class="n">d2</span><span class="o">,</span>
+  <span class="n">let_in</span> <span class="o">(</span><span class="n">t2</span> <span class="err">%</span> <span class="n">fw</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">m2</span><span class="o">,</span>
+  <span class="o">[(</span><span class="n">w</span> <span class="bp">*</span> <span class="n">fw</span><span class="o">,</span> <span class="n">d2</span><span class="o">),</span> <span class="o">(</span><span class="n">w</span><span class="o">,</span><span class="n">m2</span><span class="o">)])))</span> <span class="o">:=</span> <span class="n">if_pos</span> <span class="n">rfl</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">simp</span><span class="o">]</span> <span class="kn">theorem</span> <span class="n">associational</span><span class="bp">.</span><span class="n">carryterm_neg</span> <span class="o">{</span><span class="n">w</span> <span class="n">fw</span> <span class="n">a</span> <span class="n">b</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≠</span> <span class="n">w</span><span class="o">)</span> <span class="o">:</span> <span class="n">associational</span><span class="bp">.</span><span class="n">carryterm</span> <span class="n">w</span> <span class="n">fw</span> <span class="o">(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="o">[(</span><span class="n">a</span><span class="o">,</span> <span class="n">b</span><span class="o">)]</span> <span class="o">:=</span> <span class="n">if_neg</span> <span class="n">h</span>
+</pre></div>
+
+<a name="179491760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491760">Mario Carneiro (Oct 31 2019 at 00:41)</a>:</h4>
+<p>The basic idea is to have all arguments to the functions be in weak head normal form (i.e. for a <code>list (Z x Z)</code> it should be an empty list or a cons of a pair), and additionally when there are destructuring lets or other pattern matches inside the function the results of these should be hypotheses</p>
+
+<a name="179491839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491839">Mario Carneiro (Oct 31 2019 at 00:42)</a>:</h4>
+<p>lean's equation compiler gives you something similar with an auxiliary function; if you print the definition of <code>associational.split</code> you will see that the destructuring let was done by creating an auxiliary that is defined by pattern matching</p>
+
+<a name="179491868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491868">Jason Gross (Oct 31 2019 at 00:43)</a>:</h4>
+<p>And then how do I make use of these?  Do I interleave "prove side-conditions with <code>refl</code> with <code>simp</code> for <code>split_val</code>?  And it looks like rewriting with <code>associational.carryterm_pos</code> is incompatible with rewriting with <code>associational.carryterm_neg</code>; how do I get lean to pick the right one to rewrite with and prove the side-condition automatically?</p>
+
+<a name="179491878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491878">Mario Carneiro (Oct 31 2019 at 00:43)</a>:</h4>
+<p><code>simp</code> will do this</p>
+
+<a name="179491941"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179491941" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179491941">Mario Carneiro (Oct 31 2019 at 00:44)</a>:</h4>
+<p>But I should admit that lean has for a long time needed a tactic like Coq's <code>cbv</code>, for just doing evaluations like this</p>
+
+<a name="179492026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492026">Mario Carneiro (Oct 31 2019 at 00:46)</a>:</h4>
+<p><code>simp</code> uses an auxiliary side condition discharger (that is by default <code>simp</code> to true) for using conditional rewrite lemmas</p>
+
+<a name="179492047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492047">Kevin Buzzard (Oct 31 2019 at 00:46)</a>:</h4>
+<p>What does CBV stand for?</p>
+
+<a name="179492052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492052">Mario Carneiro (Oct 31 2019 at 00:47)</a>:</h4>
+<p><code>norm_num</code> uses <code>norm_num</code> as the simp discharger, so it should be able to do the numeric part even inside if conditions and such</p>
+
+<a name="179492061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492061">Mario Carneiro (Oct 31 2019 at 00:47)</a>:</h4>
+<p>call by value</p>
+
+<a name="179492066"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492066" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492066">Mario Carneiro (Oct 31 2019 at 00:47)</a>:</h4>
+<p>there is also <code>cbn</code> for call by name</p>
+
+<a name="179492078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492078">Mario Carneiro (Oct 31 2019 at 00:47)</a>:</h4>
+<p>it refers to the order of evaluation. It's basically treating terms as a functional program and evaluating functions according to their definitions</p>
+
+<a name="179492131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492131">Mario Carneiro (Oct 31 2019 at 00:48)</a>:</h4>
+<p>which is what <code>rfl</code> does already, but <code>rfl</code> has to go to completion while the hypothetical <code>cbv</code> tactic would just stop when it gets stuck</p>
+
+<a name="179492146"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492146" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492146">Mario Carneiro (Oct 31 2019 at 00:48)</a>:</h4>
+<p>right now people have to write mile-long simp invocations unfolding everything in sight</p>
+
+<a name="179492173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179492173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179492173">Mario Carneiro (Oct 31 2019 at 00:49)</a>:</h4>
+<p>or use carefully designed simp lemmas like the ones I've given above to guide the evaluation</p>
+
 
 {% endraw %}
 
