@@ -1,0 +1,103 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html">Why is Prop not a part of the Type hierarchy?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179518563"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179518563" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179518563">Marko Grdinić (Oct 31 2019 at 10:31)</a>:</h4>
+<p>I've had issues such as returning a <code>Prop</code> in a tuple only to find out it does not typecheck. Or not being able to pattern match on membership proofs that are <code>Prop</code>s in regular code. And there were recent issues with putting <code>Prop</code>s in inductive types only to have them not compile.</p>
+<p>What is the purpose for splitting the type hierarchy into two? I've never seen this explained up to now, and it feels like some kind of language design error more than anything else. I already know from Agda that things like equalities and inequalities can be regular types, so what is the deal with this?</p>
+
+<a name="179519124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519124">Mario Carneiro (Oct 31 2019 at 10:39)</a>:</h4>
+<p><code>Prop = Sort 0</code>, <code>Type u = Sort (u+1)</code></p>
+
+<a name="179519222"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519222" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519222">Mario Carneiro (Oct 31 2019 at 10:41)</a>:</h4>
+<p>You can use <code>Sort</code> when you want to be parametric over both, but inductive types with target <code>Sort u</code> behave oddly in a few ways because the recursor goes into <code>Prop</code> instead of <code>Sort</code></p>
+
+<a name="179519322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519322">Mario Carneiro (Oct 31 2019 at 10:42)</a>:</h4>
+<p>You can use <code>pprod</code> if you want to put a Sort in a tuple, and <code>psigma</code> or <code>\Sigma'</code> to have a dependent tuple</p>
+
+<a name="179519403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519403">Mario Carneiro (Oct 31 2019 at 10:43)</a>:</h4>
+<blockquote>
+<p>Or not being able to pattern match on membership proofs that are Props in regular code.</p>
+</blockquote>
+<p>This one is a fundamental restriction. A <code>Prop</code> is erased at runtime so you can't make decisions based on one</p>
+
+<a name="179519528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519528">Mario Carneiro (Oct 31 2019 at 10:45)</a>:</h4>
+<p>However, if one side is decidable you can make it work:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">decide</span> <span class="o">{</span><span class="n">p</span> <span class="n">q</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable</span> <span class="n">p</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">p</span> <span class="bp">∨</span> <span class="n">q</span><span class="o">)</span> <span class="o">:</span> <span class="n">psum</span> <span class="n">p</span> <span class="n">q</span> <span class="o">:=</span>
+<span class="k">if</span> <span class="n">hp</span> <span class="o">:</span> <span class="n">p</span> <span class="k">then</span> <span class="n">psum</span><span class="bp">.</span><span class="n">inl</span> <span class="n">hp</span> <span class="k">else</span> <span class="n">psum</span><span class="bp">.</span><span class="n">inr</span> <span class="o">(</span><span class="n">h</span><span class="bp">.</span><span class="n">resolve_left</span> <span class="n">hp</span><span class="o">)</span>
+</pre></div>
+
+<a name="179519653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519653">Marko Grdinić (Oct 31 2019 at 10:47)</a>:</h4>
+<blockquote>
+<p>A Prop is erased at runtime so you can't make decisions based on one.</p>
+</blockquote>
+<p>Is there any benefit to this besides being a performance consideration?</p>
+
+<a name="179519722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519722">Mario Carneiro (Oct 31 2019 at 10:48)</a>:</h4>
+<p>It's pretty fundamental to the setup</p>
+
+<a name="179519735"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519735" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519735">Marko Grdinić (Oct 31 2019 at 10:48)</a>:</h4>
+<p>What do you mean?</p>
+
+<a name="179519736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519736">Mario Carneiro (Oct 31 2019 at 10:48)</a>:</h4>
+<p>The biggest theoretical upshot is proof irrelevance</p>
+
+<a name="179519761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519761">Marko Grdinić (Oct 31 2019 at 10:49)</a>:</h4>
+<p>What is the purpose of proof irrelevance?</p>
+
+<a name="179519785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519785">Mario Carneiro (Oct 31 2019 at 10:49)</a>:</h4>
+<p>...It makes proofs equal to each other by definition?</p>
+
+<a name="179519802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519802">Mario Carneiro (Oct 31 2019 at 10:50)</a>:</h4>
+<p>that's pretty convenient for a lot of reasons</p>
+
+<a name="179519861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519861">Mario Carneiro (Oct 31 2019 at 10:50)</a>:</h4>
+<p>like subtypes act like <em>sub</em>types rather than types with extra data</p>
+
+<a name="179519915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179519915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179519915">Mario Carneiro (Oct 31 2019 at 10:51)</a>:</h4>
+<p>Also proofs tend to be pretty big, so being able to ignore them is a big deal</p>
+
+<a name="179520030"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179520030" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179520030">Mario Carneiro (Oct 31 2019 at 10:53)</a>:</h4>
+<p>It doesn't quite recover the separation of proof and data from ZFC / FOL foundations, but it goes a long way</p>
+
+<a name="179520238"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Why%20is%20Prop%20not%20a%20part%20of%20the%20Type%20hierarchy%3F/near/179520238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/96149WhyisPropnotapartoftheTypehierarchy.html#179520238">Marko Grdinić (Oct 31 2019 at 10:57)</a>:</h4>
+<blockquote>
+<p>Also proofs tend to be pretty big, so being able to ignore them is a big deal</p>
+</blockquote>
+<p>In his latest talk, Edwin Brady talked about quantitative type theory which tracks the usage of variables during type checking. Could that be a substitute for using <code>Prop</code>s for efficiency reasons?</p>
+<blockquote>
+<p>..It makes proofs equal to each other by definition?</p>
+</blockquote>
+<p>I am not familiar with the details, but I know that extensional type theory has uniqueness of identity proofs which I think is supposed to make identity proofs equal to each other. Does that cover some of the functionality of proof irrelevance?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

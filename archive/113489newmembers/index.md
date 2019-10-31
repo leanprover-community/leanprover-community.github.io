@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (17 messages, latest: Oct 31 2019 at 10:57)
+
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (17 messages, latest: Oct 31 2019 at 08:52)
 
 * [Is it possible to define Fin and Vec in Lean like in Agda?](75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html) (35 messages, latest: Oct 31 2019 at 08:48)
