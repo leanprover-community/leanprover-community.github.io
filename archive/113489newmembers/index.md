@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (5 messages, latest: Oct 31 2019 at 18:35)
+* [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (7 messages, latest: Oct 31 2019 at 19:07)
+
+* [noob question(s)](52075noobquestions.html) (1521 messages, latest: Oct 31 2019 at 19:05)
 
 * [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (21 messages, latest: Oct 31 2019 at 17:00)
 
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (17 messages, latest: Oct 31 2019 at 08:52)
 
 * [Is it possible to define Fin and Vec in Lean like in Agda?](75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html) (35 messages, latest: Oct 31 2019 at 08:48)
-
-* [noob question(s)](52075noobquestions.html) (1519 messages, latest: Oct 31 2019 at 07:02)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (42 messages, latest: Oct 30 2019 at 23:57)
 
