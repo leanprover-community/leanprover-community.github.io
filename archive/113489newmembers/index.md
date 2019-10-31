@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (17 messages, latest: Oct 31 2019 at 08:52)
+
+* [Is it possible to define Fin and Vec in Lean like in Agda?](75158IsitpossibletodefineFinandVecinLeanlikeinAgda.html) (35 messages, latest: Oct 31 2019 at 08:48)
+
 * [noob question(s)](52075noobquestions.html) (1519 messages, latest: Oct 31 2019 at 07:02)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (42 messages, latest: Oct 30 2019 at 23:57)
@@ -34,8 +38,6 @@ permalink: archive/113489newmembers/index.html
 * [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (11 messages, latest: Oct 28 2019 at 15:20)
 
 * [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (19 messages, latest: Oct 28 2019 at 14:36)
-
-* [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (14 messages, latest: Oct 28 2019 at 12:45)
 
 * [Projective geometry](67112Projectivegeometry.html) (15 messages, latest: Oct 28 2019 at 10:18)
 

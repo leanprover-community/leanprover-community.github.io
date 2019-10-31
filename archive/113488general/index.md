@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [mm0](59723mm0.html) (100 messages, latest: Oct 31 2019 at 07:23)
+* [mm0](59723mm0.html) (109 messages, latest: Oct 31 2019 at 09:00)
 
-* [Coq memes](25595Coqmemes.html) (46 messages, latest: Oct 31 2019 at 06:20)
+* [Coq memes](25595Coqmemes.html) (48 messages, latest: Oct 31 2019 at 08:41)
 
 * [`simp` and monoids](75078simpandmonoids.html) (2 messages, latest: Oct 30 2019 at 21:58)
 
