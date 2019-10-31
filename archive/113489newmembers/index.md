@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [subtype map](40107subtypemap.html) (10 messages, latest: Oct 31 2019 at 14:48)
+* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (21 messages, latest: Oct 31 2019 at 17:00)
 
-* [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (20 messages, latest: Oct 31 2019 at 12:48)
+* [subtype map](40107subtypemap.html) (10 messages, latest: Oct 31 2019 at 14:48)
 
 * [How to insert a proposition as a field of an inductive type?](47991Howtoinsertapropositionasafieldofaninductivetype.html) (17 messages, latest: Oct 31 2019 at 08:52)
 
