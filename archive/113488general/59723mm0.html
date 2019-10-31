@@ -319,6 +319,110 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179502417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179502417">Mario Carneiro (Oct 31 2019 at 05:18)</a>:</h4>
 <p>fixed, I'll push later</p>
 
+<a name="179504029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504029">Johan Commelin (Oct 31 2019 at 06:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I'm confused. <a href="https://github.com/digama0/mm0/blob/master/mm0-hs/mm1.md" target="_blank" title="https://github.com/digama0/mm0/blob/master/mm0-hs/mm1.md">https://github.com/digama0/mm0/blob/master/mm0-hs/mm1.md</a> is talking about <code>mmu</code> files, but your paper doesn't mention them, I think.</p>
+
+<a name="179504049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504049">Johan Commelin (Oct 31 2019 at 06:01)</a>:</h4>
+<p>So the <code>mm0-c</code> folder is all about checking <code>mmb</code> files</p>
+
+<a name="179504053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504053">Johan Commelin (Oct 31 2019 at 06:01)</a>:</h4>
+<p>And I think <code>mm0-hs</code> is about compiling certain files into <code>mmb</code> files</p>
+
+<a name="179504111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504111">Johan Commelin (Oct 31 2019 at 06:02)</a>:</h4>
+<p>But I'm not sure if I completely grasp the flow diagram, and which programs are used in which parts</p>
+
+<a name="179504128"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504128" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504128">Mario Carneiro (Oct 31 2019 at 06:02)</a>:</h4>
+<p>The <code>mmu</code> format was indeed omitted from the paper. It is basically a text version of <code>mmb</code> available for debugging purposes</p>
+
+<a name="179504147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504147">Mario Carneiro (Oct 31 2019 at 06:03)</a>:</h4>
+<p>In the flow diagram, the "editor" and "compiler" parts are <code>mm0-hs</code> and the "verifier" part is <code>mm0-c</code></p>
+
+<a name="179504200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504200">Johan Commelin (Oct 31 2019 at 06:04)</a>:</h4>
+<p>Right... but the "compiler" is also part of the "trusted core", right?</p>
+
+<a name="179504203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504203">Mario Carneiro (Oct 31 2019 at 06:04)</a>:</h4>
+<p>no</p>
+
+<a name="179504206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504206">Johan Commelin (Oct 31 2019 at 06:04)</a>:</h4>
+<p>Why not?</p>
+
+<a name="179504216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504216">Mario Carneiro (Oct 31 2019 at 06:05)</a>:</h4>
+<p>it produces an <code>mm0</code> file (or you provide an <code>mm0</code> file to check against) and an <code>mmb</code> file, and they stand on their own</p>
+
+<a name="179504230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504230">Johan Commelin (Oct 31 2019 at 06:05)</a>:</h4>
+<p>But <code>verifier.c</code> only works with <code>mmb</code> files, right?</p>
+
+<a name="179504233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504233">Mario Carneiro (Oct 31 2019 at 06:05)</a>:</h4>
+<p>You are supposed to be able to read the <code>mm0</code> file to know what is being proven, and the <code>mmb</code> file is verified to prove the theorems in the <code>mm0</code> file by the verifier</p>
+
+<a name="179504278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504278">Mario Carneiro (Oct 31 2019 at 06:06)</a>:</h4>
+<p>Actually <code>mm0-c</code> is incomplete; the <code>mm0</code> checking part didn't make it in time for the paper</p>
+
+<a name="179504281"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504281" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504281">Johan Commelin (Oct 31 2019 at 06:06)</a>:</h4>
+<p>Aah, right</p>
+
+<a name="179504284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504284">Johan Commelin (Oct 31 2019 at 06:06)</a>:</h4>
+<p>Because for all I know, you just compile Fermat into <code>true</code>, and the proof is <code>trivial</code></p>
+
+<a name="179504290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504290">Mario Carneiro (Oct 31 2019 at 06:06)</a>:</h4>
+<p>exactly</p>
+
+<a name="179504299"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504299" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504299">Johan Commelin (Oct 31 2019 at 06:07)</a>:</h4>
+<p>No wonder you can get &lt;1s compile times <span aria-label="angry devil" class="emoji emoji-1f47f" role="img" title="angry devil">:angry_devil:</span></p>
+
+<a name="179504302"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504302" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504302">Johan Commelin (Oct 31 2019 at 06:07)</a>:</h4>
+<p>Lol, I trust you</p>
+
+<a name="179504306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504306">Johan Commelin (Oct 31 2019 at 06:07)</a>:</h4>
+<p>But I would like to see the <code>mm0</code> checking part at some point <span aria-label="grinning" class="emoji emoji-1f600" role="img" title="grinning">:grinning:</span></p>
+
+<a name="179504312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504312">Mario Carneiro (Oct 31 2019 at 06:07)</a>:</h4>
+<p>Note that the mm0 checking part is proportional to the size of the mm0 file. For a problem like Fermat this will be quite small</p>
+
+<a name="179504361"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504361" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504361">Johan Commelin (Oct 31 2019 at 06:08)</a>:</h4>
+<p>The <code>c</code> code will not be proportional to anything</p>
+
+<a name="179504370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504370">Johan Commelin (Oct 31 2019 at 06:08)</a>:</h4>
+<p>But the running time might be. And I will believe that it is negligable</p>
+
+<a name="179504379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504379">Mario Carneiro (Oct 31 2019 at 06:09)</a>:</h4>
+<p><code>mm0-hs</code> has a verifier that checks the <code>mm0</code> file, but it reads mmu files instead of mmb</p>
+
+<a name="179504382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504382">Johan Commelin (Oct 31 2019 at 06:09)</a>:</h4>
+<p>Aha</p>
+
+<a name="179504417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504417">Mario Carneiro (Oct 31 2019 at 06:10)</a>:</h4>
+<p>(that's <code>mm0-hs verify</code>, in the <code>Verifier.hs</code> file if you care to look)</p>
+
+<a name="179504443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179504443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179504443">Johan Commelin (Oct 31 2019 at 06:10)</a>:</h4>
+<p>/me takes a break to munch on some breakfast <span aria-label="bread" class="emoji emoji-1f35e" role="img" title="bread">:bread:</span> <span aria-label="glass of milk" class="emoji emoji-1f95b" role="img" title="glass of milk">:glass_of_milk:</span></p>
+
 
 {% endraw %}
 

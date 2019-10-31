@@ -8637,6 +8637,14 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179503924" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179503924">Mario Carneiro (Oct 31 2019 at 05:58)</a>:</h4>
 <p>oh, I think I know what might be the difference: when I first tested it, I ran the <code>norm_num</code> invocation with <code>carry_mulmod ... = sorry</code>, and it finished after 7 minutes with the goal <code>[0, 0, 0, 0, 0] = sorry</code>. The version I put on the gist has the <code>[0,0,0,0,0]</code> edited in, which means that this also includes the kernel typechecking time</p>
 
+<a name="179505704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179505704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179505704">Jason Gross (Oct 31 2019 at 06:41)</a>:</h4>
+<p>If it finishes with <code>[0,0,0,0,0]</code>, that's a bug (perhaps the removal of <code>weight</code> that I mentioned?).  It's not supposed to reduce to a numeral, it's supposed to reduce to a bunch of <code>let_in</code>s expressing arithmetic about elements of <code>f</code> and <code>g</code>, followed by a list of bound variables</p>
+
+<a name="179505779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179505779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179505779">Mario Carneiro (Oct 31 2019 at 06:42)</a>:</h4>
+<p>When I take out the <code>let_in</code> simplification, it blocks on a function that takes a list, being passed a <code>let_in</code> applied to a list literal</p>
+
 
 {% endraw %}
 
