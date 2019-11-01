@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to make Vec polymorphic over the universe levels?](53884HowtomakeVecpolymorphicovertheuniverselevels.html) (3 messages, latest: Nov 01 2019 at 13:57)
+
+* [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (12 messages, latest: Nov 01 2019 at 13:09)
+
 * [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (22 messages, latest: Nov 01 2019 at 10:26)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (50 messages, latest: Nov 01 2019 at 10:12)
@@ -40,8 +44,6 @@ permalink: archive/113489newmembers/index.html
 * [rewriting in hypotheses](38335rewritinginhypotheses.html) (51 messages, latest: Oct 29 2019 at 07:33)
 
 * [invalid nat.cases_on application](41272invalidnatcasesonapplication.html) (27 messages, latest: Oct 28 2019 at 16:06)
-
-* [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (11 messages, latest: Oct 28 2019 at 15:20)
 
 * [Why is there a hidden variable in this example?](34330Whyisthereahiddenvariableinthisexample.html) (19 messages, latest: Oct 28 2019 at 14:36)
 
