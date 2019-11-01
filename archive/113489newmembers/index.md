@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (57 messages, latest: Nov 01 2019 at 20:35)
+
 * [How to make Vec polymorphic over the universe levels?](53884HowtomakeVecpolymorphicovertheuniverselevels.html) (30 messages, latest: Nov 01 2019 at 16:29)
 
 * [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (12 messages, latest: Nov 01 2019 at 13:09)
 
 * [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (22 messages, latest: Nov 01 2019 at 10:26)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (50 messages, latest: Nov 01 2019 at 10:12)
 
 * [noob question(s)](52075noobquestions.html) (1528 messages, latest: Nov 01 2019 at 09:07)
 

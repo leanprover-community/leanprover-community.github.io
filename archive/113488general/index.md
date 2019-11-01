@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (391 messages, latest: Nov 01 2019 at 20:10)
+
 * [Interview with John Harrison on Proving](26577InterviewwithJohnHarrisononProving.html) (1 message, latest: Nov 01 2019 at 02:53)
 
 * [_refl_lemma](08628refllemma.html) (3 messages, latest: Oct 31 2019 at 15:06)
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [simps](83533simps.html) (26 messages, latest: Oct 29 2019 at 04:02)
 
 * [type error in ring tactic](53580typeerrorinringtactic.html) (22 messages, latest: Oct 28 2019 at 14:49)
-
-* [Lean in the wild](43625Leaninthewild.html) (389 messages, latest: Oct 28 2019 at 06:33)
 
 * [Zulip users](15527Zulipusers.html) (14 messages, latest: Oct 27 2019 at 23:31)
 
