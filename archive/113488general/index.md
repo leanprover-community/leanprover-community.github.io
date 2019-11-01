@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Interview with John Harrison on Proving](26577InterviewwithJohnHarrisononProving.html) (1 message, latest: Nov 01 2019 at 02:53)
+
 * [_refl_lemma](08628refllemma.html) (3 messages, latest: Oct 31 2019 at 15:06)
 
 * [Coq memes](25595Coqmemes.html) (49 messages, latest: Oct 31 2019 at 14:07)
