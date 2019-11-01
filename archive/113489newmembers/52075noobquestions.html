@@ -8678,6 +8678,23 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179607861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179607861">Jason Gross (Nov 01 2019 at 08:31)</a>:</h4>
 <p>I appreciate all the help you've provided; thank you.  And feel free to take it as a test case for lean 4.  I will note that Coq only performs adequately if I rewrite the entire thing in CPS (so no term lifting needs to be done to reduce), make all the things that don't get unfolded axioms, and then run it in the vm.  Coq's rewriting tactics perform more slowly than Lean's (by a factor of 6, in the one case I could test).  Getting reasonable performance on this benchmark has been my PhD project for the last year or two, sort-of, and required writing a reflective rewriter mixed with NbE to be run in vm compute, and I'm currently in the process of writing this up in a paper for PLDI</p>
 
+<a name="179609507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179609507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179609507">Mario Carneiro (Nov 01 2019 at 09:05)</a>:</h4>
+<p>I updated the gist with my latest version: <a href="https://gist.github.com/digama0/7649577d7c8af881cdbad50f9e84d81f" target="_blank" title="https://gist.github.com/digama0/7649577d7c8af881cdbad50f9e84d81f">https://gist.github.com/digama0/7649577d7c8af881cdbad50f9e84d81f</a></p>
+<p>I put it in a monad after all:</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">let_bound</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="bp">|</span> <span class="n">base</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">let_bound</span>
+<span class="bp">|</span> <span class="n">dlet</span> <span class="o">:</span> <span class="bp">ℤ</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">ℤ</span> <span class="bp">→</span> <span class="n">let_bound</span><span class="o">)</span> <span class="bp">→</span> <span class="n">let_bound</span>
+<span class="bp">|</span> <span class="n">mlet</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="o">(</span><span class="n">β</span> <span class="bp">→</span> <span class="n">let_bound</span><span class="o">)</span> <span class="bp">→</span> <span class="n">let_bound</span>
+</pre></div>
+
+
+<p>The meaning is that <code>dlet</code> is the constructor for <code>let_in</code>, and <code>mlet</code> is a subgoal that should be solved by <code>norm_num</code>. In theory, you should be able to take the <code>(carry_mulmod ...).eval</code> term, and then successively normalize it (by whnf) to <code>(mlet x f).eval</code> which rewrites to <code>(f y).eval</code> after figuring out <code>x ~&gt; y</code> by other tactics, and <code>(dlet x f).eval</code> which rewrites to <code>let_in x (\lam a, (f a).eval)</code>and work continues inside the lambda.</p>
+
+<a name="179609606"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179609606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179609606">Mario Carneiro (Nov 01 2019 at 09:07)</a>:</h4>
+<p>In practice, it seems to take about 1 sec per let binding, plus my tactics for doing the reduction are super janky</p>
+
 
 {% endraw %}
 

@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (18 messages, latest: Nov 01 2019 at 09:53)
+
+* [noob question(s)](52075noobquestions.html) (1528 messages, latest: Nov 01 2019 at 09:07)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (48 messages, latest: Nov 01 2019 at 08:54)
 
-* [noob question(s)](52075noobquestions.html) (1526 messages, latest: Nov 01 2019 at 08:31)
-
 * [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (22 messages, latest: Oct 31 2019 at 20:16)
-
-* [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (7 messages, latest: Oct 31 2019 at 19:07)
 
 * [subtype map](40107subtypemap.html) (10 messages, latest: Oct 31 2019 at 14:48)
 
