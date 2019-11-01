@@ -8670,6 +8670,14 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179598188" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179598188">Jason Gross (Nov 01 2019 at 04:01)</a>:</h4>
 <p>Then I can combine this theorem with the <code>carry_mulmod ... = let_in ...</code> theorem to get a theorem about the evaluation of the final expression</p>
 
+<a name="179606785"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179606785" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179606785">Mario Carneiro (Nov 01 2019 at 08:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="241007">@Jason Gross</span> I don't think I can help you with this one. I've tried several methods, but I think lean's kernel evaluation just isn't up to the task - it's abysmally slow at just about every approach to this that doesn't involve a complete rewrite. (It doesn't help that the algorithm itself is not super efficient; I can see that this would probably evaluate well enough in Coq but the Coq kernel evaluator is more efficient than lean's.) The fact that it's not completely a refl proof but has embedded subproofs makes this evaluation significantly more elaborate than it otherwise would be, and the constant allocation of new variables and lifting the term is also a performance bottleneck. This is possibly a good test case for lean 4.</p>
+
+<a name="179607861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179607861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179607861">Jason Gross (Nov 01 2019 at 08:31)</a>:</h4>
+<p>I appreciate all the help you've provided; thank you.  And feel free to take it as a test case for lean 4.  I will note that Coq only performs adequately if I rewrite the entire thing in CPS (so no term lifting needs to be done to reduce), make all the things that don't get unfolded axioms, and then run it in the vm.  Coq's rewriting tactics perform more slowly than Lean's (by a factor of 6, in the one case I could test).  Getting reasonable performance on this benchmark has been my PhD project for the last year or two, sort-of, and required writing a reflective rewriter mixed with NbE to be run in vm compute, and I'm currently in the process of writing this up in a paper for PLDI</p>
+
 
 {% endraw %}
 
