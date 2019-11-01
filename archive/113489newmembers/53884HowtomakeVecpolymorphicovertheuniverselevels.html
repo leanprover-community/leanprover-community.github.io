@@ -242,6 +242,39 @@ foldl b _⊕_ n <span class="o">(</span>x ∷ xs<span class="o">)</span> <span c
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179638232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179638232">Johan Commelin (Nov 01 2019 at 15:59)</a>:</h4>
 <p>And can't the <code>n</code> in the second argument to <code>@foldl</code> be inferred from the type of <code>xs</code>?</p>
 
+<a name="179638820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179638820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179638820">Marko Grdinić (Nov 01 2019 at 16:05)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> <br>
+I am skeptical that your version is correct.  Is incrementing <code>n</code> as it is passed to <code>f</code> really the right choice here? As you go from left to right over the vector, would that not make <code>n</code> constant in <code>f</code>? Imagine if you were iterating in an array that way.</p>
+
+<a name="179638928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179638928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179638928">Marko Grdinić (Nov 01 2019 at 16:06)</a>:</h4>
+<p>I mean, creating an <code>array</code> that way.</p>
+
+<a name="179639928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179639928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179639928">Marko Grdinić (Nov 01 2019 at 16:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>#eval @foldl nat (fun i, nat) 3 (fun n s a, s + n) 0 (cons 11 (cons 11 (cons 11 (@nil nat))) -- 3
+</pre></div>
+
+
+<p>Hmmm, it is right.</p>
+
+<a name="179640646"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179640646" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179640646">Marko Grdinić (Nov 01 2019 at 16:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">foldl</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">a</span><span class="o">)</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">}</span>
+    <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span><span class="o">},</span> <span class="n">P</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">P</span> <span class="mi">0</span><span class="o">)</span>
+    <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">Vec</span> <span class="n">α</span> <span class="n">n</span><span class="o">),</span> <span class="n">P</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">P</span> <span class="mi">0</span> <span class="n">f</span> <span class="n">s</span> <span class="o">(</span><span class="n">nil</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">f</span> <span class="n">s</span> <span class="o">(</span><span class="n">cons</span> <span class="n">x</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">foldl</span> <span class="o">(</span><span class="k">fun</span> <span class="n">n</span><span class="o">,</span> <span class="n">P</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">n</span><span class="o">,</span> <span class="bp">@</span><span class="n">f</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">))</span> <span class="o">(</span><span class="bp">@</span><span class="n">f</span> <span class="mi">0</span> <span class="n">s</span> <span class="n">x</span><span class="o">)</span> <span class="n">xs</span>
+</pre></div>
+
+
+<p>Uf, I got tricked by Agda. I did not expect at all that this would be the true form of the function. Agda is really doing some sleight of hand to pass the correct implicit argument to <code>n ⊕ x</code>. I wonder how it is doing that?</p>
+
+<a name="179641019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179641019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179641019">Marko Grdinić (Nov 01 2019 at 16:29)</a>:</h4>
+<p>Well, thank you for the help. I'll try asking on SO about this to satisfy my curiosity.</p>
+
 
 {% endraw %}
 
