@@ -40,6 +40,88 @@ universe level of type_of(arg #3) of &#39;Vec.cons&#39; is too big for the corre
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179627708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179627708">Marko Grdinić (Nov 01 2019 at 13:57)</a>:</h4>
 <p>Thanks.</p>
 
+<a name="179629336"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179629336" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179629336">Marko Grdinić (Nov 01 2019 at 14:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">universes</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span>
+
+<span class="kn">inductive</span> <span class="n">Vec</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Type</span> <span class="n">a</span>
+<span class="bp">|</span> <span class="n">nil</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">Vec</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="n">cons</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">a</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">b</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">Vec</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">nil</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">cons</span> <span class="n">w</span> <span class="n">e</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>Vec.lean:11:17: error
+ill-formed match/equation expression
+</pre></div>
+
+
+<p>I am having trouble not necessarily how to implement <code>foldl</code>, but just figuring out how to write out the pattern. It is not 3 or 4 arguments that it wants. It is not even something like <code>(@Vec.cons n w e r)</code>. Just how am I supposed to destructure <code>Vec</code> here?</p>
+
+<a name="179629504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179629504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179629504">Kenny Lau (Nov 01 2019 at 14:17)</a>:</h4>
+<p>you need to let <code>n</code> be part of the recursion</p>
+
+<a name="179629621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179629621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179629621">Marko Grdinić (Nov 01 2019 at 14:18)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">Vec</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">nil</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">cons</span> <span class="n">e</span> <span class="n">r</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>Ah, I see. Thanks again.</p>
+
+<a name="179630977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179630977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179630977">Marko Grdinić (Nov 01 2019 at 14:34)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="n">s</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">nil</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="n">s</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">cons</span> <span class="n">x</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">s</span><span class="o">)</span> <span class="n">xs</span>
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>Vec.lean:11:4: error
+equation compiler failed to prove equation lemma (workaround: disable lemma generation using `set_option eqn_compiler.lemmas false`)
+</pre></div>
+
+
+<p>Sorry, I need a hand once again. What does this error mean?</p>
+
+<a name="179631040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179631040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179631040">Marko Grdinić (Nov 01 2019 at 14:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="n">s</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">nil</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">s</span> <span class="o">(</span><span class="n">Vec</span><span class="bp">.</span><span class="n">cons</span> <span class="n">x</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">s</span><span class="o">)</span> <span class="n">xs</span>
+</pre></div>
+
+
+<p>Ah, I see. Nevermind. I did it wrong the first time around.</p>
+
+<a name="179631044"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179631044" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179631044">Kenny Lau (Nov 01 2019 at 14:35)</a>:</h4>
+<p>oh shouldn't you have <code>| nil : Vec 0</code>?</p>
+
+<a name="179631218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179631218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179631218">Marko Grdinić (Nov 01 2019 at 14:37)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">Vec</span>
+
+<span class="n">def</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">},</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">Vec</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">β</span>
+<span class="bp">|</span> <span class="n">n</span> <span class="n">s</span> <span class="o">(</span><span class="n">nil</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">s</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">s</span> <span class="o">(</span><span class="n">cons</span> <span class="n">x</span> <span class="n">xs</span><span class="o">)</span> <span class="o">:=</span> <span class="n">Vec</span><span class="bp">.</span><span class="n">foldl</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span> <span class="n">s</span><span class="o">)</span> <span class="n">xs</span>
+</pre></div>
+
+
+<p>Do you mean something like this, or are you referring to the fact that there is an <a href="#narrow/stream/113489-new-members/topic/Why.20is.20there.20a.20hidden.20variable.20in.20this.20example.3F" title="#narrow/stream/113489-new-members/topic/Why.20is.20there.20a.20hidden.20variable.20in.20this.20example.3F">extra argument</a> for some reason? If it is the last one, I have no idea.</p>
+
+<a name="179631294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20make%20Vec%20polymorphic%20over%20the%20universe%20levels%3F/near/179631294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53884HowtomakeVecpolymorphicovertheuniverselevels.html#179631294">Marko Grdinić (Nov 01 2019 at 14:38)</a>:</h4>
+<p>Ah, you mean in the type definition? Ah, yes, well spotted. Yeah, that is what it should be.</p>
+
 
 {% endraw %}
 
