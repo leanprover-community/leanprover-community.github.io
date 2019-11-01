@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (57 messages, latest: Nov 01 2019 at 20:35)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (70 messages, latest: Nov 01 2019 at 21:27)
 
 * [How to make Vec polymorphic over the universe levels?](53884HowtomakeVecpolymorphicovertheuniverselevels.html) (30 messages, latest: Nov 01 2019 at 16:29)
 

@@ -259,6 +259,78 @@ induction a with d hd,
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179662835" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179662835">Bryan Gin-ge Chen (Nov 01 2019 at 20:35)</a>:</h4>
 <p>As Johan says, <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">conv</a> might help.</p>
 
+<a name="179665946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179665946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179665946">Antoine Chambert-Loir (Nov 01 2019 at 21:08)</a>:</h4>
+<p>I am stuck at world 2, level 2. <br>
+I brought Lean to the goal:</p>
+<p>case mynat.succ<br>
+a b c1 : mynat,<br>
+hc1 : a + b + c1 = a + (b + c1)<br>
+⊢ succ (a + b + c1) = succ (a + (b + c1))</p>
+<p>and I expected to conclude with</p>
+<p>rw succ_inj,</p>
+<p>but I get the answer</p>
+<p>rewrite tactic failed, lemma lhs is a metavariable</p>
+
+<a name="179665983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179665983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179665983">vrs (Nov 01 2019 at 21:09)</a>:</h4>
+<p>conv did help, but turned out that I would've needed mul_comm either way</p>
+
+<a name="179666009"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666009" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666009">Kevin Buzzard (Nov 01 2019 at 21:09)</a>:</h4>
+<p><span class="user-mention" data-user-id="130609">@Antoine Chambert-Loir</span> you are going the wrong way.</p>
+
+<a name="179666089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666089">Kevin Buzzard (Nov 01 2019 at 21:10)</a>:</h4>
+<p><code>succ_inj</code> will prove that your goal implies a hypothesis.</p>
+
+<a name="179666097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666097">Kevin Buzzard (Nov 01 2019 at 21:10)</a>:</h4>
+<p>You need to show that your hypotheses imply the goal</p>
+
+<a name="179666126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666126">Kevin Buzzard (Nov 01 2019 at 21:11)</a>:</h4>
+<p><code>succ_inj</code> is a red herring. I am consdering removing it from the game completely.</p>
+
+<a name="179666214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666214">Antoine Chambert-Loir (Nov 01 2019 at 21:12)</a>:</h4>
+<p>Oh yes! Sorry... but I'm stuck anyway. :-)</p>
+
+<a name="179666247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666247">Kevin Buzzard (Nov 01 2019 at 21:13)</a>:</h4>
+<p>In fact the fact that you are even asking this question makes it clear that I should do this. I will introduce it at the place where the users know the tactics to be able to use it (e.g .<code>apply</code>). New levels to come but here's a sneak preview:</p>
+<p><a href="https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/game/function_world" target="_blank" title="https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/game/function_world">https://github.com/ImperialCollegeLondon/natural_number_game/tree/master/src/game/function_world</a></p>
+
+<a name="179666434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666434">Johan Commelin (Nov 01 2019 at 21:15)</a>:</h4>
+<p><span class="user-mention" data-user-id="130609">@Antoine Chambert-Loir</span> Aside: you can get syntax highlighting on the chat using the following mark-up</p>
+<div class="codehilite"><pre><span></span>```lean
+code goes here
+```
+</pre></div>
+
+<a name="179666457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666457">Kevin Buzzard (Nov 01 2019 at 21:15)</a>:</h4>
+<p>Well, the hint is that the result you need is mathematically trivial now, all you need to do is to sub in. You have been misled by <code>succ_inj</code>, because you are only just getting used to thinking about laying maths out formally in this way, and the set-up has led you to the incorrect conclusion that <code>succ_inj</code> needs to be used in some way. It's much easier than that.</p>
+
+<a name="179666709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179666709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179666709">Antoine Chambert-Loir (Nov 01 2019 at 21:19)</a>:</h4>
+<p>Thanks, I needed to go back to World 2 Level 2 to be reminded to use  rw on the induction hypothesis</p>
+<div class="codehilite"><pre><span></span><span class="n">rw</span> <span class="n">hc1</span><span class="o">,</span>
+</pre></div>
+
+
+<p>I is not clear to me what it does. <br>
+But I can rush to level 3 !</p>
+
+<a name="179667227"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179667227" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179667227">Johan Commelin (Nov 01 2019 at 21:27)</a>:</h4>
+<p><code>rw</code> takes an equality <code>h</code> (or an iff) and searches the goal for occurences of the left-hand-side of <code>h</code>. If it finds them, it replaces them with the right-hand-side of <code>h</code>.</p>
+
+<a name="179667247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179667247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179667247">Johan Commelin (Nov 01 2019 at 21:27)</a>:</h4>
+<p>With <code>rw h at foo</code>, you can do the same thing at hypothesis <code>foo</code> instead of the goal</p>
+
 
 {% endraw %}
 
