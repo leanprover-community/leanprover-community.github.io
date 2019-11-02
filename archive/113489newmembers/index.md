@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Proof review](93401Proofreview.html) (36 messages, latest: Nov 02 2019 at 13:46)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (79 messages, latest: Nov 02 2019 at 12:28)
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (41 messages, latest: Nov 02 2019 at 08:57)
@@ -16,8 +18,6 @@ permalink: archive/113489newmembers/index.html
 * [How to make Vec polymorphic over the universe levels?](53884HowtomakeVecpolymorphicovertheuniverselevels.html) (31 messages, latest: Nov 02 2019 at 08:42)
 
 * [noob question(s)](52075noobquestions.html) (1589 messages, latest: Nov 02 2019 at 05:39)
-
-* [Proof review](93401Proofreview.html) (27 messages, latest: Nov 02 2019 at 03:27)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (42 messages, latest: Nov 02 2019 at 02:58)
 
