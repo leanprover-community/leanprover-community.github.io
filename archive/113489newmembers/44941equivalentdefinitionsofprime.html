@@ -239,6 +239,113 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179397165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179397165">Lucas Allen (Oct 30 2019 at 02:24)</a>:</h4>
 <p>The problem was that my definition for <code>divisors_aux</code> had an unnecessary case <code>| 1     := []</code> in it. It now works. I'm gonna mess around with this for a while. Thanks for the help :).</p>
 
+<a name="179680736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179680736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179680736">Lucas Allen (Nov 02 2019 at 02:28)</a>:</h4>
+<p>Is it possible to start <code>induction a</code> at <code>2</code> instead of <code>0</code> if we have the hypothesis <code>a &gt;= 2</code>?</p>
+
+<a name="179680749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179680749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179680749">Kevin Buzzard (Nov 02 2019 at 02:29)</a>:</h4>
+<p>If I want a quick and dirty solution to this I just do cases a couple of times before I start. Hang on I'll knock something up.</p>
+
+<a name="179681107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681107">Kevin Buzzard (Nov 02 2019 at 02:40)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="n">def</span> <span class="n">induction_from_2</span> <span class="o">(</span><span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h2</span> <span class="o">:</span> <span class="n">P</span> <span class="mi">2</span><span class="o">)</span>
+<span class="o">(</span><span class="n">IH</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">succ</span> <span class="n">d</span><span class="o">))</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">≤</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">a</span> <span class="k">with</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">linarith</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">b</span> <span class="k">with</span> <span class="n">c</span><span class="o">,</span>
+    <span class="n">linarith</span><span class="o">,</span>
+  <span class="n">clear</span> <span class="n">ha</span><span class="o">,</span> <span class="c1">-- no longer of any use to us</span>
+  <span class="c1">-- induction starts here on c=0 with a=c+2</span>
+  <span class="n">induction</span> <span class="n">c</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+    <span class="n">assumption</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">IH</span><span class="o">,</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="n">succ_eq_add_one</span><span class="o">],</span>
+  <span class="n">assumption</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179681112"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681112" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681112">Kevin Buzzard (Nov 02 2019 at 02:41)</a>:</h4>
+<p>You can just apply that function now</p>
+
+<a name="179681114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681114">Kevin Buzzard (Nov 02 2019 at 02:41)</a>:</h4>
+<p>if you can't be bothered to fill in an input, just use _ and Lean will try and figure it out.</p>
+
+<a name="179681162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681162">Lucas Allen (Nov 02 2019 at 02:42)</a>:</h4>
+<p>Ok, thanks.</p>
+
+<a name="179681216"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681216" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681216">Kevin Buzzard (Nov 02 2019 at 02:44)</a>:</h4>
+<p>If you want more hints about how to steer that function, just post some code and I'll show you how to drop it in.</p>
+
+<a name="179681217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681217">Kenny Lau (Nov 02 2019 at 02:44)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">solve_by_elim</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">nat</span><span class="bp">.</span><span class="n">induction_from</span> <span class="o">{</span><span class="n">proposition</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">start</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">proposition_start</span> <span class="o">:</span> <span class="n">proposition</span> <span class="n">start</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">induction_hypothesis</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">start</span> <span class="bp">≤</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">proposition</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">proposition</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">d</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">current</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">start_le_current</span> <span class="o">:</span> <span class="n">start</span> <span class="bp">≤</span> <span class="n">current</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">proposition</span> <span class="n">current</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">induction</span> <span class="n">start_le_current</span><span class="bp">;</span> <span class="n">solve_by_elim</span>
+</pre></div>
+
+<a name="179681219"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681219" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681219">Kevin Buzzard (Nov 02 2019 at 02:44)</a>:</h4>
+<p>Go Kenny</p>
+
+<a name="179681220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681220">Kenny Lau (Nov 02 2019 at 02:44)</a>:</h4>
+<p>the trick is to actually do induction on the inequality</p>
+
+<a name="179681223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681223">Kevin Buzzard (Nov 02 2019 at 02:44)</a>:</h4>
+<p>Kenny has proved the general case by induction on the starting point.</p>
+
+<a name="179681234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681234">Kenny Lau (Nov 02 2019 at 02:45)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">solve_by_elim</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">elab_as_eliminator</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">nat</span><span class="bp">.</span><span class="n">induction_from</span> <span class="o">{</span><span class="n">P</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">}</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hs</span> <span class="o">:</span> <span class="n">P</span> <span class="n">s</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">ih</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">P</span> <span class="n">d</span> <span class="bp">→</span> <span class="n">P</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">d</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hsn</span> <span class="o">:</span> <span class="n">s</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">P</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">induction</span> <span class="n">hsn</span><span class="bp">;</span> <span class="n">solve_by_elim</span>
+</pre></div>
+
+<a name="179681278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681278">Kevin Buzzard (Nov 02 2019 at 02:46)</a>:</h4>
+<p><span class="user-mention" data-user-id="209436">@Lucas Allen</span> they are making better and better tools to do this job. They can even turn them into tactics for you.</p>
+
+<a name="179681280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681280">Kevin Buzzard (Nov 02 2019 at 02:46)</a>:</h4>
+<p>(I don't know how to do that)</p>
+
+<a name="179681288"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681288" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681288">Kenny Lau (Nov 02 2019 at 02:47)</a>:</h4>
+<p>why are condensed variable names preferred?</p>
+
+<a name="179681652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681652">Lucas Allen (Nov 02 2019 at 02:56)</a>:</h4>
+<p>Oh... so the induction tactic can already handle this problem?</p>
+
+<a name="179681709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681709">Kenny Lau (Nov 02 2019 at 02:58)</a>:</h4>
+<p>yes because <code>\le</code> for <code>nat</code> is defined inductively</p>
+
+<a name="179681712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/equivalent%20definitions%20of%20prime/near/179681712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/44941equivalentdefinitionsofprime.html#179681712">Lucas Allen (Nov 02 2019 at 02:58)</a>:</h4>
+<p>Cool, Thanks.</p>
+
 
 {% endraw %}
 

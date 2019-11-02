@@ -35,6 +35,56 @@ permalink: archive/113489newmembers/93401Proofreview.html
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">prime</span> <span class="n">n</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">prime</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">use</span> <span class="mi">11</span><span class="bp">;</span> <span class="n">norm_num</span>
 </pre></div>
 
+<a name="179680008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20review/near/179680008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93401Proofreview.html#179680008">Kevin Buzzard (Nov 02 2019 at 02:05)</a>:</h4>
+<p><a href="https://github.com/b-mehta/lean-experiments/blob/669f0d464167db055836768d94af88f30da88ed9/number_theory_q5.lean#L10" target="_blank" title="https://github.com/b-mehta/lean-experiments/blob/669f0d464167db055836768d94af88f30da88ed9/number_theory_q5.lean#L10">https://github.com/b-mehta/lean-experiments/blob/669f0d464167db055836768d94af88f30da88ed9/number_theory_q5.lean#L10</a> is your proof of </p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">division_lemma</span> <span class="o">{</span> <span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">}</span> <span class="o">(</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span> <span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span> <span class="err">∣</span> <span class="n">a</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span>
+</pre></div>
+
+
+<p>I want to do this using <code>ring</code> but stupid natural number subtraction gets in the way. Is there a one-line command nowadays which fills in this sorry nowadays?</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">division_lemma</span> <span class="o">{</span> <span class="n">a</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">}</span> <span class="o">(</span> <span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≥</span> <span class="mi">1</span> <span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span> <span class="err">∣</span> <span class="n">a</span> <span class="err">^</span> <span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+    <span class="n">use</span> <span class="mi">0</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hd</span> <span class="k">with</span> <span class="n">q</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="n">use</span> <span class="n">q</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="c1">-- need some extra tidying because need to use IH as we don&#39;t have Groebner bases</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">pow_succ</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="err">←</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="err">←</span><span class="n">hq</span><span class="o">],</span>
+  <span class="c1">-- ⊢ a ^ d * a - 1 = (a ^ d - 1) * a + (a - 1) * 1</span>
+  <span class="c1">-- ring doesn&#39;t work I think because of natural number subtraction,</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">e</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hb</span> <span class="o">:</span> <span class="o">(</span><span class="mi">1</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">b</span><span class="o">),</span>
+    <span class="n">b</span> <span class="err">^</span> <span class="n">e</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">-</span> <span class="mi">1</span> <span class="bp">=</span> <span class="o">(</span><span class="n">b</span> <span class="err">^</span> <span class="n">e</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">intros</span><span class="o">,</span> <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="179681218"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20review/near/179681218" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93401Proofreview.html#179681218">Mario Carneiro (Nov 02 2019 at 02:44)</a>:</h4>
+<p>did you try casting the equation to int, using norm_cast, then ring?</p>
+
+<a name="179681333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20review/near/179681333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93401Proofreview.html#179681333">Mario Carneiro (Nov 02 2019 at 02:48)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">prime</span> <span class="n">n</span> <span class="bp">∧</span> <span class="bp">¬</span> <span class="n">prime</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">use</span> <span class="mi">11</span><span class="bp">;</span> <span class="n">norm_num</span>
+</pre></div>
+
+
+</blockquote>
+<p>I just want to say how happy I am that this kind of thing is basically a solved problem today. I have a paper about how much of a struggle this was in 2015: <a href="https://arxiv.org/abs/1503.02349" target="_blank" title="https://arxiv.org/abs/1503.02349">https://arxiv.org/abs/1503.02349</a></p>
+
+<a name="179681512"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20review/near/179681512" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93401Proofreview.html#179681512">Kevin Buzzard (Nov 02 2019 at 02:54)</a>:</h4>
+<p>By the way <span class="user-mention" data-user-id="246273">@Bhavik Mehta</span> don't use <code>a ≥ 1</code>, always use<code>1 ≤ a</code> or you're asking for trouble. Unfold this layer of abstraction yourself.</p>
+
+<a name="179681721"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Proof%20review/near/179681721" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/93401Proofreview.html#179681721">Kevin Buzzard (Nov 02 2019 at 02:59)</a>:</h4>
+<blockquote>
+<p>did you try casting the equation to int, using norm_cast, then ring?</p>
+</blockquote>
+<p>I can't figure out how to make <code>norm_cast</code> do it because there is stupid natural number subtraction. I realise now that  my sorry is perhaps harder than it looks. I am not sure we can get away without proving that b^e*b-1 really is one less if b&gt;=1.</p>
+
 
 {% endraw %}
 

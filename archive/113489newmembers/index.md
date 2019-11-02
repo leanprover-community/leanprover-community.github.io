@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Proof review](93401Proofreview.html) (5 messages, latest: Nov 02 2019 at 01:40)
+* [Proof review](93401Proofreview.html) (10 messages, latest: Nov 02 2019 at 02:59)
+
+* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (42 messages, latest: Nov 02 2019 at 02:58)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (77 messages, latest: Nov 02 2019 at 01:22)
 
@@ -34,8 +36,6 @@ permalink: archive/113489newmembers/index.html
 * [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (17 messages, latest: Oct 30 2019 at 17:32)
-
-* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (24 messages, latest: Oct 30 2019 at 02:24)
 
 * [(no topic)](79918notopic.html) (215 messages, latest: Oct 29 2019 at 21:37)
 
