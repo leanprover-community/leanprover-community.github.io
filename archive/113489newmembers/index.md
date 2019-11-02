@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (20 messages, latest: Nov 02 2019 at 07:58)
+
 * [noob question(s)](52075noobquestions.html) (1589 messages, latest: Nov 02 2019 at 05:39)
 
 * [Proof review](93401Proofreview.html) (27 messages, latest: Nov 02 2019 at 03:27)
