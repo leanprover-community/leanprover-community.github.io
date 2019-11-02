@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (103 messages, latest: Nov 02 2019 at 14:47)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (107 messages, latest: Nov 02 2019 at 15:58)
 
-* [Proof review](93401Proofreview.html) (36 messages, latest: Nov 02 2019 at 13:46)
+* [Proof review](93401Proofreview.html) (40 messages, latest: Nov 02 2019 at 15:53)
 
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (41 messages, latest: Nov 02 2019 at 08:57)
 
