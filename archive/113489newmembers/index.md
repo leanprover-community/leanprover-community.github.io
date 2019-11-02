@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1592 messages, latest: Nov 02 2019 at 16:03)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (112 messages, latest: Nov 02 2019 at 19:59)
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (107 messages, latest: Nov 02 2019 at 15:58)
+* [noob question(s)](52075noobquestions.html) (1592 messages, latest: Nov 02 2019 at 16:03)
 
 * [Proof review](93401Proofreview.html) (40 messages, latest: Nov 02 2019 at 15:53)
 

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mm0](59723mm0.html) (146 messages, latest: Nov 02 2019 at 19:20)
+
 * [function with random definition](60909functionwithrandomdefinition.html) (22 messages, latest: Nov 02 2019 at 14:06)
 
 * [Lean in the wild](43625Leaninthewild.html) (393 messages, latest: Nov 02 2019 at 05:16)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [_refl_lemma](08628refllemma.html) (3 messages, latest: Oct 31 2019 at 15:06)
 
 * [Coq memes](25595Coqmemes.html) (49 messages, latest: Oct 31 2019 at 14:07)
-
-* [mm0](59723mm0.html) (144 messages, latest: Oct 31 2019 at 09:27)
 
 * [`simp` and monoids](75078simpandmonoids.html) (2 messages, latest: Oct 30 2019 at 21:58)
 
