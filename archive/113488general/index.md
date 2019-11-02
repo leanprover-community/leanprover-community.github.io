@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [function with random definition](60909functionwithrandomdefinition.html) (36 messages, latest: Nov 02 2019 at 20:57)
+* [function with random definition](60909functionwithrandomdefinition.html) (39 messages, latest: Nov 02 2019 at 21:45)
+
+* [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
 
 * [mm0](59723mm0.html) (146 messages, latest: Nov 02 2019 at 19:20)
 
@@ -220,8 +222,6 @@ permalink: archive/113488general/index.html
 * [push coe](38808pushcoe.html) (13 messages, latest: Sep 19 2019 at 08:12)
 
 * [calling a tactic "by name"?](84723callingatacticbyname.html) (14 messages, latest: Sep 19 2019 at 07:24)
-
-* [Proving for Fun](94070ProvingforFun.html) (160 messages, latest: Sep 18 2019 at 19:39)
 
 * [list.take_subset and simp](05937listtakesubsetandsimp.html) (1 message, latest: Sep 18 2019 at 14:10)
 
