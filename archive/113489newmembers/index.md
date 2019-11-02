@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1576 messages, latest: Nov 02 2019 at 04:59)
+
 * [Proof review](93401Proofreview.html) (27 messages, latest: Nov 02 2019 at 03:27)
 
 * [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (42 messages, latest: Nov 02 2019 at 02:58)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (12 messages, latest: Nov 01 2019 at 13:09)
 
 * [Pi type/invalid field notation](35490Pitypeinvalidfieldnotation.html) (22 messages, latest: Nov 01 2019 at 10:26)
-
-* [noob question(s)](52075noobquestions.html) (1528 messages, latest: Nov 01 2019 at 09:07)
 
 * [Why is Prop not a part of the Type hierarchy?](96149WhyisPropnotapartoftheTypehierarchy.html) (22 messages, latest: Oct 31 2019 at 20:16)
 

@@ -8695,6 +8695,249 @@ term has type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179609606" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179609606">Mario Carneiro (Nov 01 2019 at 09:07)</a>:</h4>
 <p>In practice, it seems to take about 1 sec per let binding, plus my tactics for doing the reduction are super janky</p>
 
+<a name="179684072"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684072" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684072">Jason Gross (Nov 02 2019 at 04:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Neat, thanks!  Is that 1 second per internal let-binder (including mlet), or 1 second per emitted dlet?  I will note that real examples range from a couple dozen dlets at the small end to about 3800 dlets (possibly more for some of the code we don't build routinely) at the large end.</p>
+
+<a name="179684134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684134">Mario Carneiro (Nov 02 2019 at 04:05)</a>:</h4>
+<p>I think what I was seeing was mlets. In ex2 there are about a dozen of them (solving stupidly large goals like <code>to_bool (1 % &lt;big number&gt; = 0)</code>) before you get to the first dlet</p>
+
+<a name="179684179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684179">Jason Gross (Nov 02 2019 at 04:06)</a>:</h4>
+<p>Ah, yes, there are a lot of those</p>
+
+<a name="179684479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684479">Jason Gross (Nov 02 2019 at 04:16)</a>:</h4>
+<blockquote>
+<p>solving stupidly large goals like <code>to_bool (1 % &lt;big number&gt; = 0)</code></p>
+</blockquote>
+<p>Shouldn't solving this be fast/easy, because <code>1 % &lt;big number&gt;</code> is always <code>1</code>, and the division computation should be relatively fast because the numerator is small?</p>
+
+<a name="179684709"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684709" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684709">Jason Gross (Nov 02 2019 at 04:22)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> I tried running your code, but it seems to fail with ~no progress after 77 seconds?</p>
+<div class="codehilite"><pre><span></span>$ /usr/bin/time -f &quot;$@ (real: %e, user: %U, sys: %S, mem: %M ko)&quot; lean fiat-test.lean
+to_bool (weight machine_wordsize 1 0 * weight machine_wordsize 1 0 % s = 0)
+2 goals
+f g : ℕ → ℤ,
+a : ℤ
+⊢ let_bound.eval
+      (let_bound.bind (positional.carry_reduce (… 1) n s c 1)
+         ((λ (x : ℤ), let_bound.bind (… s c 0) ((λ (x : ℤ), let_bound.map … (… …)) x)) a)) =
+    ?m_1 a
+
+f g : ℕ → ℤ
+⊢ ℤ → list ℤ
+to_bool (weight machine_wordsize 1 0 = weight machine_wordsize 1 0)
+f g : ℕ → ℤ,
+a a_1 : ℤ
+⊢ let_bound.eval
+      (let_bound.bind (positional.carry_reduce (… 1) n s c 1)
+         ((λ (x : ℤ),
+             let_bound.bind (λ (a : list ℤ), let x : list … := … a in … …)
+               ((λ (x : ℤ), let_bound.bind … (… x)) x))
+            a_1)) =
+    ?m_1 a_1
+f g : ℕ → ℤ,
+a a_1 a_2 : ℤ
+⊢ let_bound.eval
+      (let_bound.bind (positional.carry_reduce (… 1) n s c 1)
+         ((λ (x : ℤ),
+             let_bound.bind (λ (a : list ℤ), let x : list … := … a in … …)
+               ((λ (x : ℤ), let_bound.bind … (… x)) x))
+            a_2)) =
+    ?m_1 a_2
+/home/jgross/Documents/repos/fiat-lean-test/fiat-test.lean:345:2: error: convert tactic failed, there are unsolved goals
+state:
+f g : ℕ → ℤ,
+a a_1 a_2 : ℤ
+⊢ let_bound.eval
+      (let_bound.bind (positional.carry_reduce (… 1) n s c 1)
+         ((λ (x : ℤ),
+             let_bound.bind (λ (a : list ℤ), let x : list … := … a in … …)
+               ((λ (x : ℤ), let_bound.bind … (… x)) x))
+            a_2)) =
+    ?m_1 a_2
+Command exited with non-zero status 1
+ (real: 76.88, user: 76.73, sys: 0.24, mem: 396720 ko)
+</pre></div>
+
+<a name="179684727"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684727" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684727">Mario Carneiro (Nov 02 2019 at 04:22)</a>:</h4>
+<p>it probably doesn't work</p>
+
+<a name="179684729"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684729" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684729">Jason Gross (Nov 02 2019 at 04:22)</a>:</h4>
+<p>(Maybe I am misreading the output, though...)</p>
+
+<a name="179684741"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684741" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684741">Mario Carneiro (Nov 02 2019 at 04:23)</a>:</h4>
+<p>if you can find some use for the code, great, but it comes with no warranty</p>
+
+<a name="179684787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684787">Mario Carneiro (Nov 02 2019 at 04:24)</a>:</h4>
+<p>the tactic itself is extremely experimental</p>
+
+<a name="179684795"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684795" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684795">Jason Gross (Nov 02 2019 at 04:24)</a>:</h4>
+<p>Okay.  I think I'm not yet sufficiently experienced with Lean to extract value from the tactic code, and I've satisfied my curiosity about how good Lean's features are out-of-the-box at solving this sort of goal.</p>
+
+<a name="179684796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684796">Mario Carneiro (Nov 02 2019 at 04:24)</a>:</h4>
+<p>it got a bit hard to test because everything takes forever</p>
+
+<a name="179684813"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684813" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684813">Mario Carneiro (Nov 02 2019 at 04:25)</a>:</h4>
+<p>This is definitely not something anyone has attempted to do before in lean</p>
+
+<a name="179684818"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684818" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684818">Jason Gross (Nov 02 2019 at 04:25)</a>:</h4>
+<blockquote>
+<p>it got a bit hard to test because everything takes forever</p>
+</blockquote>
+<p>That's the story of my PhD.  I've probably spent 80% of my time trying to figure out how to work around performance issues in Coq</p>
+
+<a name="179684861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684861">Mario Carneiro (Nov 02 2019 at 04:26)</a>:</h4>
+<p>My instincts say "fix the algorithm"</p>
+
+<a name="179684867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684867">Jason Gross (Nov 02 2019 at 04:26)</a>:</h4>
+<p>What do you mean "fix the algorithm"?</p>
+
+<a name="179684877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684877">Mario Carneiro (Nov 02 2019 at 04:26)</a>:</h4>
+<p>There is a ton of list manipulation code in here that seems to be unnecessary</p>
+
+<a name="179684893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684893">Mario Carneiro (Nov 02 2019 at 04:27)</a>:</h4>
+<p>I mean, if it's a benchmark then that's fine, but I think you can obtain equivalent results with another approach that doesn't involve all these let bindings</p>
+
+<a name="179684951"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684951" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684951">Mario Carneiro (Nov 02 2019 at 04:28)</a>:</h4>
+<p>and what's with all this back and forth between positional and associational representations?</p>
+
+<a name="179684973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179684973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179684973">Jason Gross (Nov 02 2019 at 04:29)</a>:</h4>
+<p>The ultimate goal is to produce code like this: <a href="https://github.com/mit-plv/fiat-crypto/blob/5a51b7a2f9fc8aad46963f0d9bbe64047de0704f/curve25519_64.c#L96-L154" target="_blank" title="https://github.com/mit-plv/fiat-crypto/blob/5a51b7a2f9fc8aad46963f0d9bbe64047de0704f/curve25519_64.c#L96-L154">https://github.com/mit-plv/fiat-crypto/blob/5a51b7a2f9fc8aad46963f0d9bbe64047de0704f/curve25519_64.c#L96-L154</a></p>
+
+<a name="179685040"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685040" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685040">Mario Carneiro (Nov 02 2019 at 04:31)</a>:</h4>
+<p>I would write a tactic that produces that, and a simultaneously proof of the semantics of it</p>
+
+<a name="179685098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685098">Mario Carneiro (Nov 02 2019 at 04:32)</a>:</h4>
+<p>Z would never show up in the algorithm</p>
+
+<a name="179685108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685108">Mario Carneiro (Nov 02 2019 at 04:32)</a>:</h4>
+<p>(except in the tactic code itself)</p>
+
+<a name="179685174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685174">Jason Gross (Nov 02 2019 at 04:34)</a>:</h4>
+<p>The back-and-forth between positional and associational is because some algorithms are easy to express and prove in the associational representation (addition of numbers is just list concatenation, multiplication is just all the ways of combining pairs of elements of the lists with <code>*</code>), while positional is the format that is actually used to store the numbers in memory / transmit them on the wire.  But you're right, there's a lot of unnecessary back-and-forth in <code>chained_carries</code>, which could probably benefit from being moved to <code>associational</code>.</p>
+
+<a name="179685253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685253">Mario Carneiro (Nov 02 2019 at 04:36)</a>:</h4>
+<p>The point is to separate the parts of the algorithm that actually need to be executed, and the parts that are actually the output (creating the list of let bindings)</p>
+
+<a name="179685264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685264">Mario Carneiro (Nov 02 2019 at 04:36)</a>:</h4>
+<p>the part that gets executed can happen in the VM (fast and untrusted), and the part that is output is term creation with a proof of correctness</p>
+
+<a name="179685276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685276">Mario Carneiro (Nov 02 2019 at 04:37)</a>:</h4>
+<p>Right now <em>everything</em> is happening as term manipulation, so it's all slow</p>
+
+<a name="179685379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685379">Jason Gross (Nov 02 2019 at 04:40)</a>:</h4>
+<p>Maybe I don't understand what you mean by a tactic that produces both the term and the proof.  e.g., what would this look like for <code>associational.carryterm</code>, whose spec is <code>associational.eval (associational.carryterm w fw t) = associational.eval [t]</code> (Coq proof <a href="https://github.com/mit-plv/fiat-crypto/blob/5a51b7a2f9fc8aad46963f0d9bbe64047de0704f/src/Arithmetic/Core.v#L476-L483" target="_blank" title="https://github.com/mit-plv/fiat-crypto/blob/5a51b7a2f9fc8aad46963f0d9bbe64047de0704f/src/Arithmetic/Core.v#L476-L483">here</a>)</p>
+
+<a name="179685462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685462">Jason Gross (Nov 02 2019 at 04:41)</a>:</h4>
+<p>(The proof is pretty simple: it's basically just the spec of div and mod, plus ring)</p>
+
+<a name="179685528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685528">Jason Gross (Nov 02 2019 at 04:43)</a>:</h4>
+<p>Do you mean something like, a tactic that builds a sigma type <code>{ ct : list (Z * Z) | associational.eval ct = associational.eval [t] }</code>?</p>
+
+<a name="179685532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685532">Jason Gross (Nov 02 2019 at 04:43)</a>:</h4>
+<p>or, er, maybe it is all inside the let monad</p>
+
+<a name="179685581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685581">Mario Carneiro (Nov 02 2019 at 04:44)</a>:</h4>
+<p>You have a tactic called <code>carryterm (...) : tactic (term x expr)</code>, which is given some inputs and produces a pair of a term and a proof of <code>associational.eval t' = associational.eval [t]</code> (where <code>t'</code> is the reification of the returned term)</p>
+
+<a name="179685657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685657">Mario Carneiro (Nov 02 2019 at 04:46)</a>:</h4>
+<p>yes, you could also view it as a sigma type, although you want <code>ct</code> here to be a concrete list, not an arbitrary term of type <code>list (Z * Z)</code></p>
+
+<a name="179685667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685667">Jason Gross (Nov 02 2019 at 04:46)</a>:</h4>
+<p>Yes, a concrete list, but it's under let binders</p>
+
+<a name="179685675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685675">Mario Carneiro (Nov 02 2019 at 04:47)</a>:</h4>
+<p>which is why it is returned as a <code>term</code> (which is some inductive type you define that specifies the valid constructions, in this case a list under let binders)</p>
+
+<a name="179685702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685702">Mario Carneiro (Nov 02 2019 at 04:47)</a>:</h4>
+<p>I suspect that you actually should be keeping the let binders on the side though; that is, you have some growing context of let binders and your monad allows you to add to it</p>
+
+<a name="179685755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685755">Jason Gross (Nov 02 2019 at 04:48)</a>:</h4>
+<p>Hm, but the proofs are invalid if you don't know the values of the binders.  I get the evaluation for the proofs looks things up from the binders on the side?</p>
+
+<a name="179685761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685761">Mario Carneiro (Nov 02 2019 at 04:49)</a>:</h4>
+<p>Yes, you would be passing it as another argument to eval in that case</p>
+
+<a name="179685781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685781">Jason Gross (Nov 02 2019 at 04:49)</a>:</h4>
+<p>Okay, so I see how I could produce the term, but I don't see how producing the proof on the fly every time I call carryterm is going to be any faster.  It seems like it can only possibly be slower, because now not only are you computing equality of list manipulation, you're also computing equality of <code>associational.eval</code></p>
+
+<a name="179685868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685868">Jason Gross (Nov 02 2019 at 04:51)</a>:</h4>
+<p>Oh, I see, at least for carryterm, you don't need to worry about what the bool computes you, you just produce a proof of one side or the other</p>
+
+<a name="179685877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685877">Jason Gross (Nov 02 2019 at 04:52)</a>:</h4>
+<p>(I still think the proof is going to be expensive here, because you're calling ring)</p>
+
+<a name="179685917"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685917" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685917">Mario Carneiro (Nov 02 2019 at 04:52)</a>:</h4>
+<p>Both parts are produced by application of theorems like those I mentioned earlier. You aren't "computing" anything in the DTT sense; you are applying theorems that build up eval equalities about these reified terms</p>
+
+<a name="179685920"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685920" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685920">Mario Carneiro (Nov 02 2019 at 04:52)</a>:</h4>
+<p>You actually don't need to call <code>ring</code> at all this way</p>
+
+<a name="179685922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685922">Mario Carneiro (Nov 02 2019 at 04:52)</a>:</h4>
+<p>That's the main benefit</p>
+
+<a name="179685939"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179685939" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179685939">Mario Carneiro (Nov 02 2019 at 04:53)</a>:</h4>
+<p>If you have something like <code>if a % s = 0 then ... else ...</code> in the algorithm, that's fine, it runs in the VM and uses a bignum library</p>
+
+<a name="179686014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179686014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179686014">Mario Carneiro (Nov 02 2019 at 04:55)</a>:</h4>
+<p>The only reason you need to run <code>norm_num</code> is if you needed that fact <code>a % s = 0</code> in order to produce the correctness proof, but with this approach it's easy to run it and provide the input where it is needed</p>
+
+<a name="179686076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179686076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179686076">Jason Gross (Nov 02 2019 at 04:57)</a>:</h4>
+<p>Hm, this is interesting, I'll have to think more about this approach</p>
+
+<a name="179686081"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179686081" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179686081">Jason Gross (Nov 02 2019 at 04:58)</a>:</h4>
+<p>(And, indeed, in <code>associational.split</code>, we need a proof of <code>a % s = 0</code> for the <code>then</code> branch, but don't need to know anything in the <code>else</code> branch)</p>
+
+<a name="179686143"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/noob%20question%28s%29/near/179686143" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52075noobquestions.html#179686143">Mario Carneiro (Nov 02 2019 at 04:59)</a>:</h4>
+<p>Additionally, you can easily shortcut the computation by applying a theorem with the alternate hypothesis <code>a = 0</code>, or <code>a = s</code>, or <code>a = k * s</code> where you precompute what <code>k</code> should be</p>
+
 
 {% endraw %}
 
