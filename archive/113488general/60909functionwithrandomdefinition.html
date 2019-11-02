@@ -235,6 +235,18 @@ permalink: archive/113488general/60909functionwithrandomdefinition.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/function%20with%20random%20definition/near/179720344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60909functionwithrandomdefinition.html#179720344">Kevin Buzzard (Nov 02 2019 at 21:45)</a>:</h4>
 <p><code>rw</code> always acts on the goal. Should I say this more explicitly? I must say Antoine, your feedback has been invaluable so far, because I know I can trust you as a mathematician, so if you find something difficult I can be confident that you understand the mathematics and the problem is the explanation.</p>
 
+<a name="179721006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/function%20with%20random%20definition/near/179721006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/60909functionwithrandomdefinition.html#179721006">Bryan Gin-ge Chen (Nov 02 2019 at 22:06)</a>:</h4>
+<blockquote>
+<p>I did not understand precisely on what expression [tactics] act and by what kind of magic they progressively build a term of the correct type.</p>
+</blockquote>
+<p>This is not something I understand too well either, but let me try anyway. Tactics operate on the "tactic state", which includes:<br>
+- the "environment" (containing all declarations like <code>def</code> and <code>theorem</code>), <br>
+- the "local context" (containing a list of the hypotheses available in the current proof), and <br>
+- all current goals. </p>
+<p>All this state is wrapped in some functional programming construct called a "monad" (which allows for e.g. backtracking and error-handling) to make it convenient to manipulate via Lean code (tactics are "just" functions involving this "tactic monad"). </p>
+<p>For more info, there's <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/tactic_writing.md">the tactic writing tutorial in the mathlib docs</a> with pointers to some more sources.</p>
+
 
 {% endraw %}
 
