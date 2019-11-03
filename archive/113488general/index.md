@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`let` = `have`](00711lethave.html) (4 messages, latest: Nov 03 2019 at 11:50)
+* [`let` = `have`](00711lethave.html) (10 messages, latest: Nov 03 2019 at 12:55)
 
-* [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (9 messages, latest: Nov 03 2019 at 11:14)
+* [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (10 messages, latest: Nov 03 2019 at 12:15)
 
 * [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (18 messages, latest: Nov 03 2019 at 04:06)
 
