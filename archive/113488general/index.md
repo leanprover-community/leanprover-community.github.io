@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (14 messages, latest: Nov 03 2019 at 04:00)
+
 * [function with random definition](60909functionwithrandomdefinition.html) (42 messages, latest: Nov 02 2019 at 23:16)
 
 * [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
@@ -26,8 +28,6 @@ permalink: archive/113488general/index.html
 * [Coq memes](25595Coqmemes.html) (49 messages, latest: Oct 31 2019 at 14:07)
 
 * [`simp` and monoids](75078simpandmonoids.html) (2 messages, latest: Oct 30 2019 at 21:58)
-
-* [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (4 messages, latest: Oct 30 2019 at 16:43)
 
 * [simp changes with_top to with_bot](48676simpchangeswithtoptowithbot.html) (1 message, latest: Oct 30 2019 at 15:52)
 

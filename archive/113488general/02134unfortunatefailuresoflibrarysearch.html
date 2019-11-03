@@ -46,6 +46,61 @@ example (P Q : Prop) [decidable P] [decidable Q]: (¬ Q → ¬ P) ↔ (P → Q) 
 
 <p>I would have thought this one works, so I'll investigate later.</p>
 
+<a name="179729655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179729655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179729655">Lucas Allen (Nov 03 2019 at 03:14)</a>:</h4>
+<p>I think it'd be cool if <code>library_search</code> gave the proof <code>exact h₃ ⟨h₁,h₂⟩</code> for </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">h₃</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span> <span class="n">c</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+<p>at the moment <code>library_search</code> fails for this example.</p>
+
+<a name="179730837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730837">Mario Carneiro (Nov 03 2019 at 03:54)</a>:</h4>
+<p>It's not a proof search, it is a library search</p>
+
+<a name="179730846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730846">Mario Carneiro (Nov 03 2019 at 03:55)</a>:</h4>
+<p>it is supposed to help you find a lemma by type rather than by name</p>
+
+<a name="179730892"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730892" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730892">Mario Carneiro (Nov 03 2019 at 03:56)</a>:</h4>
+<p>Library searching is relatively expensive, particularly if you start throwing in more advanced operations at the same time. If it becomes a full blown proof search it will take forever; use <code>tidy</code> if you are looking for more proof-search like tasks</p>
+
+<a name="179730898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730898">Lucas Allen (Nov 03 2019 at 03:57)</a>:</h4>
+<p>Another thing I think would be cool is if <code>library_search</code> gave the proof <code>exact h₁.left</code> for</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+<p>I'm using <code>library_search</code> quite heavily at the moment, and I had to use my memory to figure out <code>.left</code> and <code>.right</code> for something just now. I think if <code>library_search</code> could solve some of these things it would decrease the learning curve for Lean somewhat. This would be because people would only ever need to remember <code>library_search</code>, instead of lots of little bits and pieces.</p>
+
+<a name="179730902"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730902" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730902">Mario Carneiro (Nov 03 2019 at 03:57)</a>:</h4>
+<p>I think <code>tidy</code> is a better fit for this approach</p>
+
+<a name="179730942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730942">Mario Carneiro (Nov 03 2019 at 03:58)</a>:</h4>
+<p>although I agree in this case that it should find the lemma <code>and.left</code></p>
+
+<a name="179730947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730947">Lucas Allen (Nov 03 2019 at 03:59)</a>:</h4>
+<p>Oh yeah, <code>tidy</code> works. That's quite nice.</p>
+
+<a name="179730958"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730958" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730958">Mario Carneiro (Nov 03 2019 at 03:59)</a>:</h4>
+<p>I would guess that</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">-&gt;</span> <span class="n">a</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">library_search</span>
+</pre></div>
+
+
+<p>works?</p>
+
+<a name="179730965"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/unfortunate%20failures%20of%20%60library_search%60/near/179730965" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/02134unfortunatefailuresoflibrarysearch.html#179730965">Lucas Allen (Nov 03 2019 at 04:00)</a>:</h4>
+<p>No, not for me.</p>
+
 
 {% endraw %}
 
