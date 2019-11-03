@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Learning proof systems](98287Learningproofsystems.html) (3 messages, latest: Nov 03 2019 at 14:56)
+
 * [`let` = `have`](00711lethave.html) (11 messages, latest: Nov 03 2019 at 13:01)
 
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (10 messages, latest: Nov 03 2019 at 12:15)
