@@ -54,6 +54,30 @@ permalink: archive/113488general/78731typeclassorimplicitarguments.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179740972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179740972">Mario Carneiro (Nov 03 2019 at 09:59)</a>:</h4>
 <p>The reason it works in this case is because <code>continuous f</code> and <code>continuous g</code> are hypotheses, which then determine these arguments. Often, the arguments are determined by the type of the conclusion instead, in which case this trick doesn't work. Basically it's the same rule as when we ask if an argument should be implicit vs explicit, except here it is implicit vs instance implicit</p>
 
+<a name="179741035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179741035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179741035">Mario Carneiro (Nov 03 2019 at 10:01)</a>:</h4>
+<p>The science fiction solution is actually fact for binder inference in projections of structures; this is the reason why things <code>list.nil</code> would have an explicit alpha but <code>list.cons</code> doesn't (except that we override this behavior in that particular case with the funny <code>| nil {} : list</code> notation)</p>
+
+<a name="179742131"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179742131" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179742131">Sebastien Gouezel (Nov 03 2019 at 10:39)</a>:</h4>
+<p>Sure, you need a hypothesis (Prop or Type) determining the typeclass. But this happens everywhere! I just opened a file at random and took a random statement:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">minimal_polynomial</span><span class="bp">.</span><span class="n">min</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">comm_ring</span> <span class="n">β</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">algebra</span> <span class="n">α</span> <span class="n">β</span><span class="o">]</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span>
+<span class="o">(</span><span class="n">hx</span> <span class="o">:</span> <span class="n">is_integral</span> <span class="n">α</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span><span class="n">p</span> <span class="o">:</span> <span class="n">polynomial</span> <span class="n">α</span><span class="o">},</span>
+  <span class="n">polynomial</span><span class="bp">.</span><span class="n">monic</span> <span class="n">p</span> <span class="bp">→</span> <span class="err">⇑</span><span class="o">(</span><span class="n">polynomial</span><span class="bp">.</span><span class="n">aeval</span> <span class="n">α</span> <span class="n">β</span> <span class="n">x</span><span class="o">)</span> <span class="n">p</span> <span class="bp">=</span> <span class="mi">0</span> <span class="bp">→</span> <span class="n">degree</span> <span class="o">(</span><span class="n">minimal_polynomial</span> <span class="n">hx</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">degree</span> <span class="n">p</span>
+</pre></div>
+
+
+<p>All the typeclass arguments can be made implicit as they are already contained in <code> is_integral α x</code>.</p>
+
+<a name="179742421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179742421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179742421">Sebastien Gouezel (Nov 03 2019 at 10:49)</a>:</h4>
+<p>I can see several options here.<br>
+1) Don't change anything to our practice<br>
+2) In new additions, make implicit the parameters that can be made implicit, and also do it in existing files when it seems useful (possibly with the help of a linter)<br>
+3) Wait for Lean 4, and build there a mechanism that will transform automagically typeclass arguments into implicit arguments if they can be inferred from a later argument.<br>
+4) (unrealistic) fix everything in mathlib</p>
+<p>Any opinion about this? I think it is an important question for performance in Lean 3 as instance search is often a bottleneck.</p>
+
 
 {% endraw %}
 
