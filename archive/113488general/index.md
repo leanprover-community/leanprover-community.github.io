@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [function with random definition](60909functionwithrandomdefinition.html) (40 messages, latest: Nov 02 2019 at 22:06)
+* [function with random definition](60909functionwithrandomdefinition.html) (42 messages, latest: Nov 02 2019 at 23:16)
 
 * [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
 

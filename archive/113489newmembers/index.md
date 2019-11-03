@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (122 messages, latest: Nov 02 2019 at 22:24)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (126 messages, latest: Nov 02 2019 at 23:49)
 
 * [Look for lemma](97673Lookforlemma.html) (4 messages, latest: Nov 02 2019 at 21:56)
 
