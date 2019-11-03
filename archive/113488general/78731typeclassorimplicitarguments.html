@@ -1,0 +1,60 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/78731typeclassorimplicitarguments.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html">typeclass or implicit arguments</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179739600"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179739600" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179739600">Sebastien Gouezel (Nov 03 2019 at 09:11)</a>:</h4>
+<p>I keep coming back to the question of typeclass or implicit arguments, as I feel I still don't understand well enough what is going on. Let me take the example of the continuity of composition for the sake of the discussion. In mathlib, we have</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span>
+<span class="kn">theorem</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_3</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">]</span>
+<span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">γ</span><span class="o">]</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">},</span> <span class="n">continuous</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">continuous</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">continuous</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">continuous</span>
+<span class="n">def</span> <span class="n">continuous</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_1</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u_2</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">],</span>
+  <span class="o">(</span><span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="bp">→</span> <span class="kt">Prop</span>
+</pre></div>
+
+
+<p>In <code>continuous.comp</code>, the explicit arguments <code>continuous g</code> and <code>continuous f</code> already contain information about some topologies. So, when we use <code>continuous.comp</code>, instance search fires to find topologies on <code>α</code>, <code>β</code> and <code>γ</code>, and then it sees the arguments <code>continuous g</code> and <code>continuous f</code> and it checks that the topologies found by instance search are defeq to the ones in these arguments. </p>
+<p>If instead the topologies in <code>continuous.comp</code> where implicit arguments, then none of this would be needed. However, this is not what we do usually, so I was afraid of some trap. As a little experiment, I changed the definition of <code>continuous.comp</code> to have</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">continuous</span><span class="bp">.</span><span class="n">comp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">{</span><span class="n">γ</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">w</span><span class="o">}</span> <span class="o">{</span><span class="n">hα</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">hβ</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">β</span><span class="o">}</span>
+<span class="o">{</span><span class="n">hγ</span> <span class="o">:</span> <span class="n">topological_space</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">g</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">γ</span><span class="o">}</span> <span class="o">{</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">},</span> <span class="n">continuous</span> <span class="n">g</span> <span class="bp">→</span> <span class="n">continuous</span> <span class="n">f</span> <span class="bp">→</span> <span class="n">continuous</span> <span class="o">(</span><span class="n">g</span> <span class="err">∘</span> <span class="n">f</span><span class="o">)</span>
+</pre></div>
+
+
+<p>Surprisingly, mathlib compiles perfectly well with this change (and I know that <code>continuous.comp</code> is used zillions of times, so this should be a robust check).</p>
+<p>Is there any drawback to this, or should we change our practice and change typeclass argument to implicit arguments whenever this is possible?  (And I have the impression this would be possible at many many many places!)</p>
+
+<a name="179740339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179740339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179740339">Kevin Buzzard (Nov 03 2019 at 09:37)</a>:</h4>
+<blockquote>
+<p>However, this is not what we do usually, so I was afraid of some trap</p>
+</blockquote>
+<p>Isn't this because we had got into our habits before Chris' brilliant idea?</p>
+
+<a name="179740438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179740438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179740438">Sebastien Gouezel (Nov 03 2019 at 09:40)</a>:</h4>
+<p>Probably yes, but I had not realized yet how this is applicable all over mathlib. Would this be lintable?</p>
+
+<a name="179740523"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179740523" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179740523">Sebastien Gouezel (Nov 03 2019 at 09:43)</a>:</h4>
+<p>An issue is that it would be cumbersome to adjust the (typeclass or implicit) parameters to each statement. Ideally, one could declare parameters with <code>variable {[topological_space α]}</code>, meaning use typeclass unless this is inferrable from later parameters. But this looks like science-fiction to me.</p>
+
+<a name="179740972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/typeclass%20or%20implicit%20arguments/near/179740972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78731typeclassorimplicitarguments.html#179740972">Mario Carneiro (Nov 03 2019 at 09:59)</a>:</h4>
+<p>The reason it works in this case is because <code>continuous f</code> and <code>continuous g</code> are hypotheses, which then determine these arguments. Often, the arguments are determined by the type of the conclusion instead, in which case this trick doesn't work. Basically it's the same rule as when we ask if an argument should be implicit vs explicit, except here it is implicit vs instance implicit</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
