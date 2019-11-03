@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [`let` = `have`](00711lethave.html) (10 messages, latest: Nov 03 2019 at 12:55)
+* [`let` = `have`](00711lethave.html) (11 messages, latest: Nov 03 2019 at 13:01)
 
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (10 messages, latest: Nov 03 2019 at 12:15)
 
