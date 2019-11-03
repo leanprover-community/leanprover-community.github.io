@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Learning proof systems](98287Learningproofsystems.html) (3 messages, latest: Nov 03 2019 at 14:56)
+* [Learning proof systems](98287Learningproofsystems.html) (4 messages, latest: Nov 03 2019 at 22:13)
 
 * [`let` = `have`](00711lethave.html) (11 messages, latest: Nov 03 2019 at 13:01)
 
