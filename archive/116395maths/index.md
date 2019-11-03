@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Result exists?](44607Resultexists.html) (1 message, latest: Nov 03 2019 at 17:46)
+
 * [lemma for noether normalization](21648lemmafornoethernormalization.html) (33 messages, latest: Oct 30 2019 at 18:57)
 
 * [Proving that derivative of sin is cos](53994Provingthatderivativeofsiniscos.html) (29 messages, latest: Oct 29 2019 at 10:32)
