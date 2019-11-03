@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (130 messages, latest: Nov 03 2019 at 01:05)
+* [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (131 messages, latest: Nov 03 2019 at 19:46)
 
 * [Look for lemma](97673Lookforlemma.html) (4 messages, latest: Nov 02 2019 at 21:56)
 
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (17 messages, latest: Oct 30 2019 at 17:32)
-
-* [(no topic)](79918notopic.html) (215 messages, latest: Oct 29 2019 at 21:37)
 
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (11 messages, latest: Oct 29 2019 at 19:40)
 
