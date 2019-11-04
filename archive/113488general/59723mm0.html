@@ -655,6 +655,34 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179779067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179779067">Mario Carneiro (Nov 04 2019 at 04:55)</a>:</h4>
 <p>I should qualify the MM0 importing thing by saying that I am actually segmenting the mm0 files on the repo using an include mechanism, but this is only recognized by the MM1 compiler and is intended as a pseudo feature so you can assemble MM0 files (by concatenation) for use by real MM0 verifiers</p>
 
+<a name="179779258"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179779258" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179779258">Simon Cruanes (Nov 04 2019 at 05:02)</a>:</h4>
+<p>Interesting. I was thinking of mm0/mmb files as a kind of compiled version with a stable ABI (like a <code>.o</code> file, in a way). Splitting large libraries into many such files (pairs of files, really) would then make incremental checking easy, and also to have different high-level tools tackle different parts of the library (say, a frontend with a <code>omega</code>-like tactic in a part, a frontend by another team with Gröbner basis working on another part). That would avoid relying too much on a single high level tool, imho.</p>
+<p>You could still have something that takes all the mm0/mmu files and concatenates them, in topological order, into a single file, for checking/releasing (kind of like single-file libraries in C such as sqlite).</p>
+
+<a name="179780375"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179780375" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179780375">Mario Carneiro (Nov 04 2019 at 05:38)</a>:</h4>
+<p>They are a lot like <code>.o</code> files, but they are still self contained</p>
+
+<a name="179780393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179780393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179780393">Mario Carneiro (Nov 04 2019 at 05:39)</a>:</h4>
+<p>You can conceivably combine a number of <code>.mmb</code> files together, where one proves theorem X using axiom Y, and the other proves theorem Y from axiom Z</p>
+
+<a name="179780453"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179780453" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179780453">Mario Carneiro (Nov 04 2019 at 05:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="132878">@Simon Cruanes</span> There isn't really much advantage to having the format itself note this "splittability" since it is basically a metatheoretic property of proofs that can be implemented by an untrusted transformer (i.e. a "linker" for proof files)</p>
+
+<a name="179780582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179780582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179780582">Mario Carneiro (Nov 04 2019 at 05:45)</a>:</h4>
+<p>If you think about how <code>.o</code> files work, they present "unresolved symbols" that are linked with other object files. It is unsafe to present these external symbols without declaring their types (and definitions, if examinable), but if you do that, it's not much different from having <code>axiom</code> and <code>def</code> declarations for these. OpenTheory also does something similar; there is no distinction made between an "axiom" as in something true according to the ambient foundation and an "axiom" meaning a theorem that has been proven elsewhere that will later be linked in</p>
+
+<a name="179780781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179780781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179780781">Mario Carneiro (Nov 04 2019 at 05:50)</a>:</h4>
+<blockquote>
+<p>also to have different high-level tools tackle different parts of the library (say, a frontend with a omega-like tactic in a part, a frontend by another team with Gröbner basis working on another part). That would avoid relying too much on a single high level tool, imho.</p>
+</blockquote>
+<p>Indeed I've been thinking about this a bit. It would be nice to have a heterogeneous proof construction approach, where different front ends are used for building different parts of the library that are later linked together using a common proof substrate. For instance, I'm writing an x86 compiler which is MM0 proof producing, but the front end for that doesn't really have the same style as the MM1 format. It is a lot more automatic, and the user is mostly providing hints along the way (assertion-decorated code), by comparison to regular theorems where you want lots of unification and proof search tactics</p>
+
 
 {% endraw %}
 
