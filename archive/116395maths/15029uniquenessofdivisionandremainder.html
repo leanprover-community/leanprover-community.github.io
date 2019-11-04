@@ -1,0 +1,49 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/15029uniquenessofdivisionandremainder.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/15029uniquenessofdivisionandremainder.html">uniqueness of division and remainder</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179832059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniqueness%20of%20division%20and%20remainder/near/179832059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15029uniquenessofdivisionandremainder.html#179832059">Kevin Buzzard (Nov 04 2019 at 13:22)</a>:</h4>
+<p>Do we have anything like this</p>
+<div class="codehilite"><pre><span></span>example (a q b r : ℤ) (hb : b &gt; 0) : a = r + b * q → 0 ≤ r → r &lt; b → r = a % b := sorry
+</pre></div>
+
+
+<p>in mathlib already? One could also prove q = a / b. I can prove them, I just don't want to. </p>
+<p>Related: if b &gt; 0 is an integer and 0 &lt;= r &lt; b is a multiple of b then r = 0. Do we have this?</p>
+
+<a name="179832130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniqueness%20of%20division%20and%20remainder/near/179832130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15029uniquenessofdivisionandremainder.html#179832130">Chris Hughes (Nov 04 2019 at 13:23)</a>:</h4>
+<p>I remember something called div_mod_unique. It might only be for nat.</p>
+
+<a name="179832165"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniqueness%20of%20division%20and%20remainder/near/179832165" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15029uniquenessofdivisionandremainder.html#179832165">Kevin Buzzard (Nov 04 2019 at 13:23)</a>:</h4>
+<p>Well remembered and yes it's only for nat, so it seems. Thanks.</p>
+
+<a name="179832377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniqueness%20of%20division%20and%20remainder/near/179832377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15029uniquenessofdivisionandremainder.html#179832377">Kevin Buzzard (Nov 04 2019 at 13:26)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">protected</span> <span class="kn">theorem</span> <span class="n">div_mod_unique</span> <span class="o">{</span><span class="n">n</span> <span class="n">k</span> <span class="n">m</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">k</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">n</span> <span class="bp">/</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">d</span> <span class="bp">∧</span> <span class="n">n</span> <span class="err">%</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">m</span> <span class="bp">↔</span> <span class="n">m</span> <span class="bp">+</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">∧</span> <span class="n">m</span> <span class="bp">&lt;</span> <span class="n">k</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>What are the chances that the user has those facts in exactly that way so they can rewrite? Both sides have an \and :-/ The int version will have the additional hypothesis that m&gt;=0 as well :-/</p>
+
+<a name="179833416"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/uniqueness%20of%20division%20and%20remainder/near/179833416" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/15029uniquenessofdivisionandremainder.html#179833416">Mario Carneiro (Nov 04 2019 at 13:38)</a>:</h4>
+<p>it's not for rewriting like that, but you can always rewrite with <code>((div_mod_unique h1).2 &lt;h2, h3&gt;).2</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
