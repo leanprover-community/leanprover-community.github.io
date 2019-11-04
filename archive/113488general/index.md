@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean, machine learning, and internships](22920Leanmachinelearningandinternships.html) (8 messages, latest: Nov 04 2019 at 16:34)
+
 * [mm0](59723mm0.html) (159 messages, latest: Nov 04 2019 at 15:30)
 
 * [Learning proof systems](98287Learningproofsystems.html) (5 messages, latest: Nov 04 2019 at 00:06)

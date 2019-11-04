@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [I proved divisibility is transitive!](29909Iproveddivisibilityistransitive.html) (15 messages, latest: Nov 04 2019 at 15:58)
+* [I proved divisibility is transitive!](29909Iproveddivisibilityistransitive.html) (30 messages, latest: Nov 04 2019 at 16:15)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (140 messages, latest: Nov 04 2019 at 11:04)
 

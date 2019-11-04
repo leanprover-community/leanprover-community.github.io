@@ -136,6 +136,77 @@ theorem two_divides_twenty: divides 2 20 :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179845686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179845686">Kevin Buzzard (Nov 04 2019 at 15:58)</a>:</h4>
 <p><span class="user-mention" data-user-id="244890">@agro1986</span> when I started here two years ago <code>ring</code> didn't exist and all these calculations had to be done by hand. My undergraduates found all this <code>rw add_assoc</code> very hard work and then Mario stepped in and wrote it and it was a real game-changer. <a href="https://xenaproject.wordpress.com/2018/06/13/ab3/" target="_blank" title="https://xenaproject.wordpress.com/2018/06/13/ab3/">https://xenaproject.wordpress.com/2018/06/13/ab3/</a> . Since then Rob Lewis wrote <code>linarith</code> which was another game changer -- we were doing basic undergraduate analysis in Lean and the tactic made a whole bunch of inequality-chasing on the real numbers much easier.</p>
 
+<a name="179845830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179845830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179845830">agro1986 (Nov 04 2019 at 16:00)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> Thanks for the suggestion! I guess because there are so many choices (e.g., variable vs constant, axiom vs def vs theorem) It'll be a while before I can get a "feel" on which is the best to use</p>
+
+<a name="179845831"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179845831" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179845831">Bryan Gin-ge Chen (Nov 04 2019 at 16:00)</a>:</h4>
+<p>Tactics are wonderful since you can inspect the tactic state, but they can make things less transparent since they are often used as a black box. I think it's not an issue in this specific case, but I could imagine that in some instances, a proof using high-powered tactics like <code>ring</code> and <code>norm_num</code> for elementary facts could end up depending on the proof of the same fact (or something stronger) somewhere else in mathlib. I once lost points in a representation theory course for appealing to Jordan-Hölder without proving it myself; I sort of see this as roughly analogous.</p>
+
+<a name="179845899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179845899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179845899">Kevin Buzzard (Nov 04 2019 at 16:01)</a>:</h4>
+<p>We don't have tactics which are sufficiently powerful to deserve the name "black box" yet :D</p>
+
+<a name="179846046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846046">agro1986 (Nov 04 2019 at 16:02)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Thanks for the natural number game link! Will check it out. Great point about <code>b = a * d</code> easier to use than <code>a * d = b</code>. Actually <code>a * d = b</code> is the written form straight out of my number theory textbook haha. Gotta start thinking more about subtle things like that.</p>
+
+<a name="179846214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846214">Bryan Gin-ge Chen (Nov 04 2019 at 16:04)</a>:</h4>
+<p>The state of my meta knowledge means that every tactic is a black box. (Much like Jordan-Hölder was, in fact <span aria-label="sweat smile" class="emoji emoji-1f605" role="img" title="sweat smile">:sweat_smile:</span>)</p>
+
+<a name="179846403"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846403" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846403">Kevin Buzzard (Nov 04 2019 at 16:06)</a>:</h4>
+<p>yeah, don't trust mathematicians, they somehow think that <code>a*d=b</code> and <code>b=a*d</code> are the same.</p>
+
+<a name="179846419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846419">Kevin Buzzard (Nov 04 2019 at 16:06)</a>:</h4>
+<p>At least, proper mathematicians do.</p>
+
+<a name="179846802"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846802" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846802">Kevin Buzzard (Nov 04 2019 at 16:10)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">12345</span> <span class="bp">*</span> <span class="mi">54321</span> <span class="bp">=</span> <span class="mi">670592745</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span><span class="err">^</span><span class="mi">3</span> <span class="bp">=</span> <span class="n">a</span><span class="err">^</span><span class="mi">3</span><span class="bp">+</span><span class="mi">3</span><span class="bp">*</span><span class="n">a</span><span class="bp">*</span><span class="n">b</span><span class="err">^</span><span class="mi">2</span><span class="bp">+</span><span class="mi">3</span><span class="bp">*</span><span class="n">a</span><span class="err">^</span><span class="mi">2</span><span class="bp">*</span><span class="n">b</span><span class="bp">+</span><span class="n">b</span><span class="err">^</span><span class="mi">3</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">ring</span>
+</pre></div>
+
+
+<p>If you want to call these black boxes then fair enough, but my feeling is that if a new 1st year maths undergraduate asserted either of these claims to a lecturer here and claimed they were true, the lecturer would not ask for a proof -- the techniques used are in both cases "standard". So I would rather call applications of these tactics "enabling mathematicians to do mathematics the way they expect to be able to do it" rather than elevating what is going on to the level of "black box". Of course you see from that blog post that there's a heck of a lot going on with the <code>ring</code> example! But because the answer is "obvious" we mathematicians shouldn't need to care about what's going on.</p>
+
+<a name="179846861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846861">Kevin Buzzard (Nov 04 2019 at 16:10)</a>:</h4>
+<p>Why are there red boxes around the ^ signs by the way? <span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> that's the sort of thing you know :D</p>
+
+<a name="179846906"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179846906" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179846906">Bryan Gin-ge Chen (Nov 04 2019 at 16:11)</a>:</h4>
+<p>Yes, I think we're mostly in agreement. I guess I would feel more comfortable if I knew how to inspect all the "dependencies" of a theorem.</p>
+
+<a name="179847019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179847019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179847019">Kevin Buzzard (Nov 04 2019 at 16:12)</a>:</h4>
+<p>In this case they are a mass of mathematicial trivialities which have some computer science content, reflecting the fact that mathematics is not the same as type theory</p>
+
+<a name="179847025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179847025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179847025">Bryan Gin-ge Chen (Nov 04 2019 at 16:12)</a>:</h4>
+<p>The red boxes are because Zulip is relying on pygments for syntax highlighting and that's out of date. I think there were discussions right around when I joined about fixing it but I guess they never went anywhere.</p>
+
+<a name="179847048"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179847048" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179847048">Kevin Buzzard (Nov 04 2019 at 16:12)</a>:</h4>
+<p>Thanks!</p>
+
+<a name="179847261"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179847261" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179847261">Kevin Buzzard (Nov 04 2019 at 16:14)</a>:</h4>
+<blockquote>
+<p>In this case they are a mass of mathematicial trivialities which have some computer science content, reflecting the fact that mathematics is not the same as type theory</p>
+</blockquote>
+<p>Oh -- in the norm_num case they are also reflecting the fact that computer scientists care about runtime. We mathematicians all know the proof is just <code>rfl</code> because we know it will work and we don't care how long it will take.</p>
+
+<a name="179847305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/I%20proved%20divisibility%20is%20transitive%21/near/179847305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/29909Iproveddivisibilityistransitive.html#179847305">Bryan Gin-ge Chen (Nov 04 2019 at 16:15)</a>:</h4>
+<blockquote>
+<p>In this case they are a mass of mathematicial trivialities</p>
+</blockquote>
+<p>Right, my point is just that there is potentially an issue here for new people trying to prove simple things.</p>
+
 
 {% endraw %}
 
