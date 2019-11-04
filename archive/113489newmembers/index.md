@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (140 messages, latest: Nov 04 2019 at 11:04)
+
 * [Bug with letter H?](80050BugwithletterH.html) (5 messages, latest: Nov 04 2019 at 09:51)
 
 * [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (15 messages, latest: Nov 04 2019 at 09:37)
 
 * [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (11 messages, latest: Nov 04 2019 at 09:20)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (139 messages, latest: Nov 04 2019 at 07:57)
 
 * [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
 
