@@ -50,6 +50,36 @@ permalink: archive/113489newmembers/02222examplexpxxpx.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179814936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179814936">Eduardo Cavazos (Nov 04 2019 at 08:51)</a>:</h4>
 <p>The only way I can see to create a <code>false</code> is to make a <code>(∀ x, ¬ p x)</code> for use with <code>hnAxnpx</code>, but that requires <code>x</code> so I'm back to square one. ;-)</p>
 
+<a name="179815796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179815796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179815796">Eduardo Cavazos (Nov 04 2019 at 09:06)</a>:</h4>
+<p>Trying something...</p>
+
+<a name="179816483"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179816483" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179816483">Eduardo Cavazos (Nov 04 2019 at 09:17)</a>:</h4>
+<p>Based on the above discussion, I tried the following:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">x</span><span class="o">,</span> <span class="n">p</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+    <span class="o">(</span><span class="k">assume</span> <span class="n">hnAxnpx</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">x</span><span class="o">,</span> <span class="bp">¬</span> <span class="n">p</span> <span class="n">x</span><span class="o">),</span>
+        <span class="n">false</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">hnAxnpx</span>
+            <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span>
+                <span class="o">(</span><span class="bp">λ</span> <span class="n">hpx</span> <span class="o">:</span> <span class="n">p</span> <span class="n">x</span><span class="o">,</span> <span class="bp">_</span><span class="o">))))</span> <span class="c1">-- Here we&#39;ll need a false.</span>
+</pre></div>
+
+<a name="179816498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179816498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179816498">Eduardo Cavazos (Nov 04 2019 at 09:17)</a>:</h4>
+<p>As that gets me an <code>x</code> and <code>p x</code>.</p>
+
+<a name="179816548"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179816548" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179816548">Eduardo Cavazos (Nov 04 2019 at 09:18)</a>:</h4>
+<p>However, at that point, it isn't clear to me how to get a <code>false</code> value at the point of the underscore.</p>
+
+<a name="179817744"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179817744" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179817744">Mario Carneiro (Nov 04 2019 at 09:36)</a>:</h4>
+<p>Don't use <code>false.elim</code> where you did; that's throwing away the information that we are trying to prove <code>(∃ x, p x)</code> and leads to an unsolvable state</p>
+
+<a name="179817775"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/example%20%3A%20%C2%AC%20%28%E2%88%80%20x%2C%20%C2%AC%20p%20x%29%20%E2%86%92%20%28%E2%88%83%20x%2C%20p%20x%29/near/179817775" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02222examplexpxxpx.html#179817775">Mario Carneiro (Nov 04 2019 at 09:37)</a>:</h4>
+<p>Use <code>by_contradiction</code> there instead, which gives you additionally the assumption that <code>¬ (∃ x, p x)</code></p>
+
 
 {% endraw %}
 
