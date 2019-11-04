@@ -17,6 +17,34 @@ permalink: archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html
 <p>Hi, </p>
 <p><code>subtype.eq</code> shows that two members of a subtype with the same <code>val</code> are equal, is there something similar for structures (typically, a tactic that transforms a goal which states the equality of two structures into a list of goals, one for each non-<code>Prop</code> field)?</p>
 
+<a name="179769751"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179769751" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179769751">Chris Hughes (Nov 04 2019 at 00:14)</a>:</h4>
+<p>Sadly no, the closest would be <code>subtype.mk.inj</code>, a version of which is generated for all structures.</p>
+
+<a name="179770259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179770259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179770259">Mario Carneiro (Nov 04 2019 at 00:31)</a>:</h4>
+<p>I could have sworn there was a tactic for this, that Scott petitioned for and Simon wrote, although I forget the name</p>
+
+<a name="179770308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179770308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179770308">Mario Carneiro (Nov 04 2019 at 00:32)</a>:</h4>
+<p>These kinds of theorems usually go by the name <code>*_ext</code></p>
+
+<a name="179770332"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179770332" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179770332">Vincent Beffara (Nov 04 2019 at 00:33)</a>:</h4>
+<p><code>subtype.mk.inj</code> feels like it goes in the wrong direction</p>
+
+<a name="179770340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179770340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179770340">Mario Carneiro (Nov 04 2019 at 00:33)</a>:</h4>
+<p>Maybe I'm just thinking of the <code>ext</code> tactic, which applies <code>@[extensionality]</code> lemmas. But you have to state the theorem for your structure.</p>
+
+<a name="179770392"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179770392" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179770392">Mario Carneiro (Nov 04 2019 at 00:34)</a>:</h4>
+<p>luckily it's pretty easy to prove: case on the two structures, then congr; assumption</p>
+
+<a name="179770457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Equivalent%20of%20subtype.eq%20for%20structures%3F/near/179770457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22382Equivalentofsubtypeeqforstructures.html#179770457">Vincent Beffara (Nov 04 2019 at 00:36)</a>:</h4>
+<p>Yes, that's more or less what I am doing, it works well enough</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (1 message, latest: Nov 03 2019 at 23:49)
+* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (8 messages, latest: Nov 04 2019 at 00:36)
 
 * [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
 
