@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean, machine learning, and internships](22920Leanmachinelearningandinternships.html) (16 messages, latest: Nov 04 2019 at 21:59)
+* [Lean, machine learning, and internships](22920Leanmachinelearningandinternships.html) (18 messages, latest: Nov 04 2019 at 22:41)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (5 messages, latest: Nov 04 2019 at 20:48)
 
