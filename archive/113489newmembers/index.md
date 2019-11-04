@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (137 messages, latest: Nov 04 2019 at 06:48)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (139 messages, latest: Nov 04 2019 at 07:57)
+
+* [Bug with letter H?](80050BugwithletterH.html) (4 messages, latest: Nov 04 2019 at 07:44)
 
 * [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (10 messages, latest: Nov 04 2019 at 05:31)
 
