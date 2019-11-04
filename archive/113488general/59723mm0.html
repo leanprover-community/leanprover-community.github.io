@@ -623,6 +623,38 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179714932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179714932">Bryan Gin-ge Chen (Nov 02 2019 at 19:20)</a>:</h4>
 <p>Isn't that what <code>mm0-hs from-mm</code> does?</p>
 
+<a name="179778877"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179778877" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179778877">Simon Cruanes (Nov 04 2019 at 04:49)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> do you have plans / vague ideas for the following?<br>
+- multiple file developments (one mm0 importing another mm0, hopefully not with a <code>#include</code> like mechanism, but rather some proper namespacing)<br>
+- multiple independent checkers for mm0/mmu/mmb (run automatically in CI, like in metamath, that's super neat)<br>
+- multiple interactive frontends (maybe specialized for different logics, like one for CIC, one for HOL, one for TLA… etc.), as it seems to me that interop between systems/teams should be on the mm0 level  rather than one more complex, more specialized formats such as mm1</p>
+
+<a name="179778933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179778933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179778933">Mario Carneiro (Nov 04 2019 at 04:50)</a>:</h4>
+<blockquote>
+<p>- multiple file developments (one mm0 importing another mm0, hopefully not with a #include like mechanism, but rather some proper namespacing)</p>
+</blockquote>
+<p>Explicitly no. This is implemented for MM1, but this is a huge complexity increase even there, and it also adds a lot of filesystem stuff to the trusted base</p>
+
+<a name="179778952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179778952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179778952">Mario Carneiro (Nov 04 2019 at 04:51)</a>:</h4>
+<blockquote>
+<p>- multiple independent checkers for mm0/mmu/mmb (run automatically in CI, like in metamath, that's super neat)</p>
+</blockquote>
+<p>Yes. There are already multiple checkers, written as I need them, and the spec is intended to be implementation agnostic as with metamath. Besides checkers written by me, I believe Giovanni Mascellani started working on a python checker but I don't know what the progress is on that</p>
+
+<a name="179779008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179779008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179779008">Mario Carneiro (Nov 04 2019 at 04:53)</a>:</h4>
+<blockquote>
+<p>- multiple interactive frontends (maybe specialized for different logics, like one for CIC, one for HOL, one for TLA… etc.), as it seems to me that interop between systems/teams should be on the mm0 level rather than one more complex, more specialized formats such as mm1</p>
+</blockquote>
+<p>That's right. I have vague plans about this, but this is really my dream for the future - I think this is the best way to get a really high quality front end on a metamath like backend</p>
+
+<a name="179779067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179779067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179779067">Mario Carneiro (Nov 04 2019 at 04:55)</a>:</h4>
+<p>I should qualify the MM0 importing thing by saying that I am actually segmenting the mm0 files on the repo using an include mechanism, but this is only recognized by the MM1 compiler and is intended as a pseudo feature so you can assemble MM0 files (by concatenation) for use by real MM0 verifiers</p>
+
 
 {% endraw %}
 

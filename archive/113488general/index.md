@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [mm0](59723mm0.html) (151 messages, latest: Nov 04 2019 at 04:55)
+
 * [Learning proof systems](98287Learningproofsystems.html) (5 messages, latest: Nov 04 2019 at 00:06)
 
 * [`let` = `have`](00711lethave.html) (11 messages, latest: Nov 03 2019 at 13:01)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [function with random definition](60909functionwithrandomdefinition.html) (42 messages, latest: Nov 02 2019 at 23:16)
 
 * [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
-
-* [mm0](59723mm0.html) (146 messages, latest: Nov 02 2019 at 19:20)
 
 * [Lean in the wild](43625Leaninthewild.html) (393 messages, latest: Nov 02 2019 at 05:16)
 
