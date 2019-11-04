@@ -683,6 +683,24 @@ warranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
 </blockquote>
 <p>Indeed I've been thinking about this a bit. It would be nice to have a heterogeneous proof construction approach, where different front ends are used for building different parts of the library that are later linked together using a common proof substrate. For instance, I'm writing an x86 compiler which is MM0 proof producing, but the front end for that doesn't really have the same style as the MM1 format. It is a lot more automatic, and the user is mostly providing hints along the way (assertion-decorated code), by comparison to regular theorems where you want lots of unification and proof search tactics</p>
 
+<a name="179842827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179842827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179842827">Simon Cruanes (Nov 04 2019 at 15:27)</a>:</h4>
+<blockquote>
+<p>Indeed I've been thinking about this a bit. It would be nice to have a heterogeneous proof construction approach, where different front ends are used for building different parts of the library that are later linked together using a common proof substrate.</p>
+</blockquote>
+<p>Other use cases for having heterogeneous proof construction that immediately come to me:<br>
+- custom decision procedures _as separate tools_ (omega.exe? mathematica bridge? <span aria-label="grinning face with smiling eyes" class="emoji emoji-1f601" role="img" title="grinning face with smiling eyes">:grinning_face_with_smiling_eyes:</span>)<br>
+- hammers (calling to Z3, CVC4, E and reconstruct a proof — no need to burden the main interactive prover with that)<br>
+- experimenting with alternative tactic languages (as is the case in Coq these days, just how many tactic languages do they have…)</p>
+
+<a name="179843084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/mm0/near/179843084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/59723mm0.html#179843084">Simon Cruanes (Nov 04 2019 at 15:30)</a>:</h4>
+<blockquote>
+<p>If you think about how <code>.o</code> files work, they present "unresolved symbols" that are linked with other object files.</p>
+</blockquote>
+<p>Pushing the analogy a bit too far, <code>.o</code> files have big shortcomings too. They don't specify a dependency order, nor do they protect against duplicate symbols.</p>
+<p>I think maybe just declaring a <code>module foo;</code> as the first statement of a <code>.mm0</code> file, and its dependencies just after that (<code>import bar;</code>) without roping in the exact filesystem details on how to import <code>bar</code>, could be a lightweight solution?</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [uniqueness of division and remainder](15029uniquenessofdivisionandremainder.html) (5 messages, latest: Nov 04 2019 at 13:38)
+* [uniqueness of division and remainder](15029uniquenessofdivisionandremainder.html) (6 messages, latest: Nov 04 2019 at 15:49)
 
 * [Result exists?](44607Resultexists.html) (6 messages, latest: Nov 03 2019 at 22:51)
 
