@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (1 message, latest: Nov 03 2019 at 23:49)
+
 * [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (131 messages, latest: Nov 03 2019 at 19:46)
