@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (25 messages, latest: Nov 05 2019 at 19:53)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (18 messages, latest: Nov 05 2019 at 20:58)
+
+* [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (31 messages, latest: Nov 05 2019 at 20:42)
 
 * [Lean in the wild](43625Leaninthewild.html) (402 messages, latest: Nov 05 2019 at 12:15)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (6 messages, latest: Nov 05 2019 at 08:10)
 
 * [nested namespaces](85988nestednamespaces.html) (5 messages, latest: Nov 05 2019 at 01:45)
 

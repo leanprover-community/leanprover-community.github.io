@@ -38,6 +38,60 @@ permalink: archive/113488general/07338markdownmoduledocstrings.html
 <p>You can see lean 3.4.2's tests <a href="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/tests/lean/run/doc_string3.lean" target="_blank" title="https://github.com/leanprover/lean/blob/ceacfa7445953cbc8860ddabc55407430a9ca5c3/tests/lean/run/doc_string3.lean">doc_string3.lean</a> for the extent of the non-community edition support e.g. there are some tactics for printing out the doc_strings.</p>
 <p>I haven't tested if lumpy-leandoc does the right thing for <code>/-! -/</code> yet... but it'd be very easy to add something which extracts the .md file to it in addition to the limited html/pdf stuff it currently does.</p>
 
+<a name="179972494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179972494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179972494">matt rice (Nov 05 2019 at 20:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="110044">@Chris Hughes</span>  I fixed up lumpy so it could build mathlib again, <a href="https://gist.github.com/ratmice/00072c2695d335dfade2db54f18ae333#file-mathlib-docs-zip" target="_blank" title="https://gist.github.com/ratmice/00072c2695d335dfade2db54f18ae333#file-mathlib-docs-zip">mathlib-docs.zip</a></p>
+<p>Rob Lewis seems correct in that it's not useful with 3.4.2 in lumpy at least, the <code>/-! -/</code> comments never make it to the output, so <code>/-! -/</code> only shows up when the lean files were built with the community edition.</p>
+<p>The way lumpy treats <code>/-! -/</code> is to include it verbatim, i.e. It doesn't prepend it with the name of the definition to which the doc_string is associated, because it's generally just associated with the section that corresponds to the file.<br>
+Hopefully that helps.</p>
+
+<a name="179973162"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973162" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973162">Rob Lewis (Nov 05 2019 at 20:25)</a>:</h4>
+<p>That's actually closer to real doc generation than I realized we were.</p>
+
+<a name="179973228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973228">Rob Lewis (Nov 05 2019 at 20:26)</a>:</h4>
+<p>It seems to be treating the sections of module docs as sections of the document, which is very confusing.</p>
+
+<a name="179973242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973242">Rob Lewis (Nov 05 2019 at 20:26)</a>:</h4>
+<p>But the core structure is there.</p>
+
+<a name="179973394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973394">Rob Lewis (Nov 05 2019 at 20:28)</a>:</h4>
+<blockquote>
+<p>It seems to be treating the sections of module docs as sections of the document, which is very confusing.</p>
+</blockquote>
+<p>In the PDF, that is. The HTML looks better, except it doesn't print the def names? Which do appear in the PDF?</p>
+
+<a name="179973423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973423">matt rice (Nov 05 2019 at 20:28)</a>:</h4>
+<p>Yeah, it's because I was following the html -&gt; tex convention that e.g. &lt;h1&gt; corresponds to \chapter &lt;h2&gt; \section etc, and the docs aren't really built with that in mind</p>
+
+<a name="179973712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973712">Rob Lewis (Nov 05 2019 at 20:29)</a>:</h4>
+<p>Yeah, this was the forseeable problem with creating the doc standards before we could generate docs.</p>
+
+<a name="179973891"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179973891" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179973891">matt rice (Nov 05 2019 at 20:31)</a>:</h4>
+<p>Yup, I haven't done a lot of work on the html generation (or in fact looked at it today), it should in theory be easy to add unless i have forgotten why it is missing, I will try and look at it again tomorrow and fix that if I can.</p>
+
+<a name="179974669"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179974669" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179974669">Rob Lewis (Nov 05 2019 at 20:37)</a>:</h4>
+<p>Cool. What are the prospects for linking? Something like this: "if an identifier appears between backticks, and we've seen a declaration with that name, turn it into a link." I'm guessing that's way more work?</p>
+
+<a name="179975772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179975772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179975772">matt rice (Nov 05 2019 at 20:48)</a>:</h4>
+<p>Something like that, It'll need some thought, as it parses all lean files in parallel currently, so i'll probably have to do a pass over declarations build a table of declarations first before generating links (I'm guessing we want to link across files, which means we also need to mirror the import behavior I suppose)... <span aria-label="octopus" class="emoji emoji-1f419" role="img" title="octopus">:octopus:</span></p>
+
+<a name="179976376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179976376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179976376">Rob Lewis (Nov 05 2019 at 20:54)</a>:</h4>
+<p>With two passes I think you could ignore the import tree. Generate a table the first pass, and note which html file each declaration will live in. Then fill in the info in the second pass. Namespacing means this will be impossible to get exactly right though. There's no way doc strings will be consistent about referring to declarations with full namespaces, and there will be ambiguous cases.</p>
+
+<a name="179976846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/179976846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#179976846">matt rice (Nov 05 2019 at 20:58)</a>:</h4>
+<p>yeah, shall see if we can get away with that, anyhow i must get going.</p>
+
 
 {% endraw %}
 
