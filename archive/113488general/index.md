@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [nested namespaces](85988nestednamespaces.html) (3 messages, latest: Nov 05 2019 at 00:51)
+
 * [Lean, machine learning, and internships](22920Leanmachinelearningandinternships.html) (18 messages, latest: Nov 04 2019 at 22:41)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (5 messages, latest: Nov 04 2019 at 20:48)

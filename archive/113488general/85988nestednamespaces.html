@@ -1,0 +1,43 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/85988nestednamespaces.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html">nested namespaces</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179892433"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20namespaces/near/179892433" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html#179892433">Reid Barton (Nov 05 2019 at 00:47)</a>:</h4>
+<p>I found out today that</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">A</span><span class="bp">.</span><span class="n">B</span>
+<span class="bp">...</span>
+<span class="kn">end</span> <span class="n">A</span><span class="bp">.</span><span class="n">B</span>
+</pre></div>
+
+
+<p>is not entirely equivalent to</p>
+<div class="codehilite"><pre><span></span><span class="kn">namespace</span> <span class="n">A</span>
+<span class="kn">namespace</span> <span class="n">B</span>
+<span class="bp">...</span>
+<span class="kn">end</span> <span class="n">B</span>
+<span class="kn">end</span> <span class="n">A</span>
+</pre></div>
+
+<a name="179892575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20namespaces/near/179892575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html#179892575">Reid Barton (Nov 05 2019 at 00:50)</a>:</h4>
+<p>If you're in a namespace <code>C</code> and you refer to a name <code>x</code> and <code>C.x</code> exists, then Lean will assume you mean <code>C.x</code> and not consider any other potential <code>x</code>. For this purpose, the latter sequence above is "in" both namespaces <code>A</code> and <code>A.B</code> (I assume <code>A.B</code> gets checked first, though I didn't test), while the former sequence is only "in" namespace <code>A.B</code>, not namespace <code>A</code>.</p>
+
+<a name="179892595"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20namespaces/near/179892595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html#179892595">Reid Barton (Nov 05 2019 at 00:51)</a>:</h4>
+<p>If you're writing category theory modules, I recommend not writing <code>namespace category_theory.foo</code> (as I used to).</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
