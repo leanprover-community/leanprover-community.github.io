@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Linear algebra](71530Linearalgebra.html) (6 messages, latest: Nov 04 2019 at 22:45)
+* [Linear algebra](71530Linearalgebra.html) (7 messages, latest: Nov 05 2019 at 10:46)
 
 * [Result exists?](44607Resultexists.html) (9 messages, latest: Nov 04 2019 at 18:55)
 
