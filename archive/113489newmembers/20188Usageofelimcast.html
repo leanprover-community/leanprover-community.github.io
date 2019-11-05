@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/20188Usageofelimcast.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html">Usage of elim_cast</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="179935308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179935308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179935308">rory (Nov 05 2019 at 14:13)</a>:</h4>
+<p>I'm trying to prove this</p>
+<div class="codehilite"><pre><span></span>theorem cor8 (p : ℕ) (a b : ℤ):
+nat.prime p ∧ ↑p ∣ a*b → (↑p ∣ a) ∨ (↑p ∣ b) :=
+begin
+ intros hp,
+ apply (iff.elim_left (nat.prime.dvd_mul hp.left)),
+ -- goal not match
+ -- have this (p ∣ a) ∨ (p ∣ b)
+end
+</pre></div>
+
+
+<p>But I'm not sure how to do the coercion from nat to int</p>
+
+<a name="179935352"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179935352" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179935352">rory (Nov 05 2019 at 14:13)</a>:</h4>
+<p>I'm guessing elim_cast is what I need, but I'm not sure how to use it : (</p>
+
+<a name="179936298"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179936298" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179936298">Johan Commelin (Nov 05 2019 at 14:22)</a>:</h4>
+<p>There is the <code>norm_cast</code> tactic, but I don't think it will work here.</p>
+
+<a name="179936323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179936323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179936323">Johan Commelin (Nov 05 2019 at 14:23)</a>:</h4>
+<p><code>nat.prime.dvd_mul</code> is a lemma about natural numbers, you want something for integers</p>
+
+<a name="179936345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179936345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179936345">Johan Commelin (Nov 05 2019 at 14:23)</a>:</h4>
+<p>What you need is a lemma saying that <code>↑p</code> is an irreducible (or prime) element in <code>ℤ</code>. I think we have such a lemma in the library</p>
+
+<a name="179936431"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179936431" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179936431">Kevin Buzzard (Nov 05 2019 at 14:24)</a>:</h4>
+<p>That's a good way to do it.</p>
+
+<a name="179936693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179936693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179936693">Johan Commelin (Nov 05 2019 at 14:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="247585">@rory</span>  <a href="https://github.com/leanprover-community/mathlib/blob/81a31ca4a8c0287bf0b0ce40f1a0df16543b7abe/src/algebra/gcd_domain.lean#L571" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/81a31ca4a8c0287bf0b0ce40f1a0df16543b7abe/src/algebra/gcd_domain.lean#L571">https://github.com/leanprover-community/mathlib/blob/81a31ca4a8c0287bf0b0ce40f1a0df16543b7abe/src/algebra/gcd_domain.lean#L571</a></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
