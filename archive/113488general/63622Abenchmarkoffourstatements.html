@@ -166,6 +166,29 @@ permalink: archive/113488general/63622Abenchmarkoffourstatements.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20benchmark%20of%20four%20statements/near/179975204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63622Abenchmarkoffourstatements.html#179975204">François G. Dorais (Nov 05 2019 at 20:42)</a>:</h4>
 <p>The P-names are ground model sets, so they're not a problem. The tough part is defining the forcing language, specifically the atomic relations for membership and equality, which is traditionally done as a mutual transfinite recursion.</p>
 
+<a name="179977824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20benchmark%20of%20four%20statements/near/179977824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63622Abenchmarkoffourstatements.html#179977824">Jesse Michael Han (Nov 05 2019 at 21:06)</a>:</h4>
+<p>if we replace P with a boolean completion B, i think constructing the forcing language is tantamount to exhibiting the B-valued L_ZFC structure on the B-names, which we know how to do (here P and B are types)</p>
+<p>still, this seems to give a rather unpleasant definition of PFA. is there a definition of "proper forcing" which avoids P-names entirely?</p>
+
+<a name="179978507"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20benchmark%20of%20four%20statements/near/179978507" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63622Abenchmarkoffourstatements.html#179978507">François G. Dorais (Nov 05 2019 at 21:14)</a>:</h4>
+<p>Yes there is. But, side issue, the proof of the consistency of not CH in Lean that I read some while ago actually falls short of Cohen's actual theorem since it only shows that Lean (+AC) proves Con(ZFC+not CH). The piece that is missing is the internal definition of the forcing language, which shows that ZFC itself proves that Con(ZFC) implies Con(ZFC+not CH).</p>
+
+<a name="179980501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20benchmark%20of%20four%20statements/near/179980501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63622Abenchmarkoffourstatements.html#179980501">Jesse Michael Han (Nov 05 2019 at 21:38)</a>:</h4>
+<p>yes, we intentionally avoided working internally as much as possible (formal proofs get an order of magnitude slower working in an embedded logic)</p>
+<p>the project is aptly named "a formal proof of the independence of the continuum hypothesis", not "a formal proof that there is a formal proof of the independence of the continuum hypothesis from ZFC, in ZFC" :^)</p>
+<p>getting from Lean +(AC) proves Con(ZFC + not CH) to Lean +(AC) proves (ZFC proves Con(ZFC) implies Con(ZFC + notCH)) is definitely an open problem though. i don't think it's doable with the current state of the art, and it would be very interesting to see how to get there.</p>
+
+<a name="179981822"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20benchmark%20of%20four%20statements/near/179981822" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63622Abenchmarkoffourstatements.html#179981822">François G. Dorais (Nov 05 2019 at 21:53)</a>:</h4>
+<p>You don't need an embedded logic, all you need is to avoid increasing type levels. Concretely, the membership and equality relation for Type n names doesn't need Type n + 1. Once that's done, you have Cohen's actual theorem, mod some typical meta translations.</p>
+
+<a name="179982080"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/A%20benchmark%20of%20four%20statements/near/179982080" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/63622Abenchmarkoffourstatements.html#179982080">François G. Dorais (Nov 05 2019 at 21:55)</a>:</h4>
+<p>(The "mod" part actually involves a major part of Mario's thesis, so "typical" was perhaps a strong word there.)</p>
+
 
 {% endraw %}
 
