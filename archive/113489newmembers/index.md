@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (45 messages, latest: Nov 05 2019 at 03:58)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (141 messages, latest: Nov 05 2019 at 03:13)
+
 * [commuting endomorphisms simultaneously diagonalisable](49689commutingendomorphismssimultaneouslydiagonalisable.html) (5 messages, latest: Nov 04 2019 at 22:13)
 
 * [example : ¬ (∀ x, ¬ p x) → (∃ x, p x)](02222examplexpxxpx.html) (73 messages, latest: Nov 04 2019 at 19:36)
 
 * [I proved divisibility is transitive!](29909Iproveddivisibilityistransitive.html) (30 messages, latest: Nov 04 2019 at 16:15)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (140 messages, latest: Nov 04 2019 at 11:04)
 
 * [Bug with letter H?](80050BugwithletterH.html) (5 messages, latest: Nov 04 2019 at 09:51)
 
@@ -32,8 +34,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬ (∃ x, ¬ p x) → (∀ x, p x)](34382examplexpxxpx.html) (41 messages, latest: Nov 02 2019 at 08:57)
 
 * [How to make Vec polymorphic over the universe levels?](53884HowtomakeVecpolymorphicovertheuniverselevels.html) (31 messages, latest: Nov 02 2019 at 08:42)
-
-* [equivalent definitions of prime](44941equivalentdefinitionsofprime.html) (42 messages, latest: Nov 02 2019 at 02:58)
 
 * [How to prove law of excluded middle from double negation?](14903Howtoprovelawofexcludedmiddlefromdoublenegation.html) (12 messages, latest: Nov 01 2019 at 13:09)
 

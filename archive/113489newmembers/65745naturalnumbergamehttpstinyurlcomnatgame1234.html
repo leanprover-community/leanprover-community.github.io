@@ -721,6 +721,21 @@ An abbreviation for <code>rewrite</code>.</p>
 </blockquote>
 <p>Is it possible to do something like <a href="http://incredible.pm/" target="_blank" title="http://incredible.pm/">http://incredible.pm/</a>, where progress is saved but when the game is updated, we hold on to old progress?</p>
 
+<a name="179898290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179898290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179898290">Luis O'Shea (Nov 05 2019 at 03:13)</a>:</h4>
+<p>I solved World 3/Level 5 with</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">mul_assoc</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">mynat</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">b</span><span class="o">)</span> <span class="bp">*</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">c</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">c</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">mul_zero</span><span class="o">},</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">mul_succ</span><span class="o">,</span> <span class="n">mul_succ</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">hd</span><span class="o">],</span>
+  <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> says "2) Did you know you can do rwa [hd, mul_add]? (I learnt that trick from Ken Lee)". How do I use that hint?</p>
+
 
 {% endraw %}
 
