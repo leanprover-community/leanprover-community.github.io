@@ -37,6 +37,14 @@ permalink: archive/113488general/85988nestednamespaces.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20namespaces/near/179892595" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html#179892595">Reid Barton (Nov 05 2019 at 00:51)</a>:</h4>
 <p>If you're writing category theory modules, I recommend not writing <code>namespace category_theory.foo</code> (as I used to).</p>
 
+<a name="179894090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20namespaces/near/179894090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html#179894090">Mario Carneiro (Nov 05 2019 at 01:23)</a>:</h4>
+<p><code>namespace A.B</code> can be seen as having two effects: Making all new definitions <code>x</code> land as <code>A.B.x</code>, and <code>open</code>ing the namespace <code>A.B</code> so that <code>A.B.foo</code> is accessible. If you use nested namespace, the former effect (the target namespace) is the same, but you have two <code>open</code>s instead of one. (A <code>namespace</code> is also something like a high-priority <code>open</code>; it will always trump any other <code>open</code> when there is a conflict, while a conflict between two <code>open</code>s results in an ambiguity error.)</p>
+
+<a name="179895011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/nested%20namespaces/near/179895011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/85988nestednamespaces.html#179895011">Reid Barton (Nov 05 2019 at 01:45)</a>:</h4>
+<p>I find it really weird. You're in some particular namespace at any given point, it shouldn't matter how you got there.</p>
+
 
 {% endraw %}
 
