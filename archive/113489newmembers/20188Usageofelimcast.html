@@ -52,6 +52,24 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179936693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179936693">Johan Commelin (Nov 05 2019 at 14:27)</a>:</h4>
 <p><span class="user-mention" data-user-id="247585">@rory</span>  <a href="https://github.com/leanprover-community/mathlib/blob/81a31ca4a8c0287bf0b0ce40f1a0df16543b7abe/src/algebra/gcd_domain.lean#L571" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/81a31ca4a8c0287bf0b0ce40f1a0df16543b7abe/src/algebra/gcd_domain.lean#L571">https://github.com/leanprover-community/mathlib/blob/81a31ca4a8c0287bf0b0ce40f1a0df16543b7abe/src/algebra/gcd_domain.lean#L571</a></p>
 
+<a name="179941949"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Usage%20of%20elim_cast/near/179941949" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/20188Usageofelimcast.html#179941949">rory (Nov 05 2019 at 15:22)</a>:</h4>
+<p>Fore future reference, I eventually solve it like this.</p>
+<div class="codehilite"><pre><span></span>theorem cor8 (p : ℕ) (a b : ℤ):
+nat.prime p ∧ ↑p ∣ a*b → (↑p ∣ a) ∨ (↑p ∣ b) :=
+begin
+ intros hp,
+ have h₁ : prime ↑p,
+ apply iff.elim_left nat.prime_iff_prime_int hp.left,
+ apply prime.div_or_div,
+ exact h₁,
+ exact hp.right
+end
+</pre></div>
+
+
+<p>I haven't figure out how to clean it, so maybe I will re-edit this in the future.</p>
+
 
 {% endraw %}
 

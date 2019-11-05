@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Usage of elim_cast](20188Usageofelimcast.html) (7 messages, latest: Nov 05 2019 at 14:27)
+* [Usage of elim_cast](20188Usageofelimcast.html) (8 messages, latest: Nov 05 2019 at 15:22)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (147 messages, latest: Nov 05 2019 at 07:32)
 
