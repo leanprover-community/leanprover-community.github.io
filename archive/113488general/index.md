@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (394 messages, latest: Nov 05 2019 at 08:48)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (6 messages, latest: Nov 05 2019 at 08:10)
+
 * [nested namespaces](85988nestednamespaces.html) (5 messages, latest: Nov 05 2019 at 01:45)
 
 * [Lean, machine learning, and internships](22920Leanmachinelearningandinternships.html) (18 messages, latest: Nov 04 2019 at 22:41)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (5 messages, latest: Nov 04 2019 at 20:48)
 
 * [mm0](59723mm0.html) (159 messages, latest: Nov 04 2019 at 15:30)
 
@@ -28,8 +30,6 @@ permalink: archive/113488general/index.html
 * [function with random definition](60909functionwithrandomdefinition.html) (42 messages, latest: Nov 02 2019 at 23:16)
 
 * [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
-
-* [Lean in the wild](43625Leaninthewild.html) (393 messages, latest: Nov 02 2019 at 05:16)
 
 * [modifying tactic framework](20461modifyingtacticframework.html) (4 messages, latest: Nov 01 2019 at 23:07)
 
