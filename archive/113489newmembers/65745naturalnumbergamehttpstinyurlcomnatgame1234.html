@@ -744,6 +744,27 @@ An abbreviation for <code>rewrite</code>.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179902251" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179902251">Johan Commelin (Nov 05 2019 at 05:05)</a>:</h4>
 <p>That said, I don't see exactly what Kevin means with the hint</p>
 
+<a name="179907062"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179907062" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179907062">Kevin Buzzard (Nov 05 2019 at 07:16)</a>:</h4>
+<p>I think hint (2) is supposed to be read in conjunction with hint (1).</p>
+
+<a name="179907117"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179907117" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179907117">Kevin Buzzard (Nov 05 2019 at 07:17)</a>:</h4>
+<div class="codehilite"><pre><span></span>  <span class="n">induction</span> <span class="n">c</span> <span class="k">with</span> <span class="n">d</span> <span class="n">hd</span><span class="o">,</span>
+    <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">mul_zero</span><span class="o">},</span>
+    <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">mul_succ</span><span class="o">},</span>
+     <span class="n">rwa</span> <span class="o">[</span><span class="n">hd</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">],</span>
+  <span class="c1">-- no refl!</span>
+</pre></div>
+
+<a name="179907834"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179907834" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179907834">Kevin Buzzard (Nov 05 2019 at 07:32)</a>:</h4>
+<p>I have no idea why <code>repeat {rw mul_zero}</code> doesn't need a refl. This is I guess a bug in the game. I have modified some tactics to behave differently but I didn't modify <code>repeat</code>. I don't know if it tries <code>refl</code> at the end of things.</p>
+
+<a name="179907855"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/179907855" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#179907855">Kevin Buzzard (Nov 05 2019 at 07:32)</a>:</h4>
+<p>In real Lean, <code>rw</code> tries to close the goal by <code>refl</code> at the end so you often don't need to write it. I decided this was confusing for the mathematician user and made them write all of them by disabling this.</p>
+
 
 {% endraw %}
 
