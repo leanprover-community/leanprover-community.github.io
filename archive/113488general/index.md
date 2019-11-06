@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (46 messages, latest: Nov 06 2019 at 05:52)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (29 messages, latest: Nov 06 2019 at 09:57)
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (19 messages, latest: Nov 05 2019 at 21:02)
+* [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (48 messages, latest: Nov 06 2019 at 09:09)
 
 * [Lean in the wild](43625Leaninthewild.html) (402 messages, latest: Nov 05 2019 at 12:15)
 
