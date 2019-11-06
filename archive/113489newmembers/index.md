@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (3 messages, latest: Nov 06 2019 at 13:58)
+* [Reassign variable value](23264Reassignvariablevalue.html) (12 messages, latest: Nov 06 2019 at 14:40)
+
+* [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (4 messages, latest: Nov 06 2019 at 14:03)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (19 messages, latest: Nov 06 2019 at 12:20)
 
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (8 messages, latest: Nov 06 2019 at 11:31)
-
-* [Reassign variable value](23264Reassignvariablevalue.html) (11 messages, latest: Nov 06 2019 at 10:21)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (155 messages, latest: Nov 06 2019 at 08:41)
 
