@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/53166Thestupidwaytoprovethedivisibilityofsums.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/53166Thestupidwaytoprovethedivisibilityofsums.html">The stupid way to prove the divisibility of sums</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180033943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/The%20stupid%20way%20to%20prove%20the%20divisibility%20of%20sums/near/180033943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53166Thestupidwaytoprovethedivisibilityofsums.html#180033943">agro1986 (Nov 06 2019 at 13:53)</a>:</h4>
+<p>Hi all. So, I proved that if d|a, d|b, then for any integers m, n, I have d | (ma + nb)</p>
+<div class="codehilite"><pre><span></span>import tactic.ring
+variables {a b c d: ℤ}
+def divides (a b: ℤ): Prop := ∃(d: ℤ), b = a * d
+
+theorem divides_linear_sum (hda: divides d a) (hdb: divides d b):
+  ∀ (m n: ℤ), divides d (m * a + n * b) :=
+begin
+  assume m, assume n,
+  cases hda with q hq,
+  cases hdb with r hr,
+  use m * q + n * r,
+  rw [hq, hr],
+  ring,
+end
+</pre></div>
+
+
+<p>Now "obviously" this holds for the special case m = n = 1. However I couldn't write the proof in a concise way.</p>
+<div class="codehilite"><pre><span></span>theorem divides_sum (hda: divides d a) (hdb: divides d b):
+  divides d (a + b) :=
+have h : divides d (1 * a + 1 * b), from divides_linear_sum hda hdb 1 1,
+have simplify: 1 * a + 1 * b = a + b, from
+  begin
+    ring,
+  end,
+simplify ▸ h
+</pre></div>
+
+
+<p>I thought I could proof it in 1 step using <code>divides_linear_sum hda hdb 1 1</code>. The problem was, when I gave <code>divides_linear_sum hda hdb 1 1</code> I got <code>divides d (1 * a + 1 * b)</code> which isn't the same as <code>divides d (a + b)</code> syntactically. Any pointers (like how to write it concisely in tactics mode)? Thanks!</p>
+
+<a name="180034278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/The%20stupid%20way%20to%20prove%20the%20divisibility%20of%20sums/near/180034278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53166Thestupidwaytoprovethedivisibilityofsums.html#180034278">Kenny Lau (Nov 06 2019 at 13:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">divides_sum</span> <span class="o">(</span><span class="n">hda</span><span class="o">:</span> <span class="n">divides</span> <span class="n">d</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hdb</span><span class="o">:</span> <span class="n">divides</span> <span class="n">d</span> <span class="n">b</span><span class="o">):</span>
+  <span class="n">divides</span> <span class="n">d</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">convert</span> <span class="n">divides_linear_sum</span> <span class="n">hda</span> <span class="n">hdb</span> <span class="mi">1</span> <span class="mi">1</span><span class="bp">;</span> <span class="n">rw</span> <span class="n">one_mul</span>
+</pre></div>
+
+<a name="180034379"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/The%20stupid%20way%20to%20prove%20the%20divisibility%20of%20sums/near/180034379" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/53166Thestupidwaytoprovethedivisibilityofsums.html#180034379">Kenny Lau (Nov 06 2019 at 13:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">divides_sum</span> <span class="o">(</span><span class="n">hda</span><span class="o">:</span> <span class="n">divides</span> <span class="n">d</span> <span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">hdb</span><span class="o">:</span> <span class="n">divides</span> <span class="n">d</span> <span class="n">b</span><span class="o">):</span>
+  <span class="n">divides</span> <span class="n">d</span> <span class="o">(</span><span class="n">a</span> <span class="bp">+</span> <span class="n">b</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">simpa</span> <span class="n">only</span> <span class="o">[</span><span class="n">one_mul</span><span class="o">]</span> <span class="kn">using</span> <span class="n">divides_linear_sum</span> <span class="n">hda</span> <span class="n">hdb</span> <span class="mi">1</span> <span class="mi">1</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
