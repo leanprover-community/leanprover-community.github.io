@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (155 messages, latest: Nov 06 2019 at 08:41)
+* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (7 messages, latest: Nov 06 2019 at 10:59)
 
-* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (5 messages, latest: Nov 06 2019 at 07:07)
+* [Reassign variable value](23264Reassignvariablevalue.html) (11 messages, latest: Nov 06 2019 at 10:21)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (155 messages, latest: Nov 06 2019 at 08:41)
 
 * [error on "import tactic.ring"](32733erroronimporttacticring.html) (4 messages, latest: Nov 06 2019 at 07:04)
 

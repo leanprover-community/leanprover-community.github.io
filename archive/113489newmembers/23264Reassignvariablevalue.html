@@ -1,0 +1,72 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/23264Reassignvariablevalue.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html">Reassign variable value</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180017387"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017387" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017387">rory (Nov 06 2019 at 10:06)</a>:</h4>
+<p>I'm proving a theorem which uses subgoal as <code> have p : k ∣ int.gcd a b ↔ k ∣ int.gcd b (a - n*b) </code>, but I didn't impose any constraint on k, k is just a variable of type <code>ℤ</code>, is there a way to reassign k value, or to reassign k value, I have to prove <code>have p : ∀ k : ℤ, k ∣ int.gcd a b ↔ k ∣ int.gcd b (a - n*b)</code></p>
+
+<a name="180017639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017639">Johan Commelin (Nov 06 2019 at 10:11)</a>:</h4>
+<p>Can you give a bit more context?</p>
+
+<a name="180017654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017654">Johan Commelin (Nov 06 2019 at 10:11)</a>:</h4>
+<p>I'm not sure I understand what the problem is</p>
+
+<a name="180017784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017784">rory (Nov 06 2019 at 10:13)</a>:</h4>
+<blockquote>
+<p>I'm not sure I understand what the problem is</p>
+</blockquote>
+<p>So this is the theorem I'm proving,</p>
+<div class="codehilite"><pre><span></span>theorem prop4 (a b : ℤ) (h : a ≠ 0 ∧ b ≠ 0) (k : ℤ):
+∀ n : ℤ, int.gcd a b = int.gcd b (a - n*b) :=
+....stuff...
+  have p₅ : k ∣ int.gcd a b ↔ k ∣ int.gcd b (a - n*b),
+  ...stuff...
+  have p₆ : int.gcd a b ∣ int.gcd b (a - n*b),
+</pre></div>
+
+<a name="180017850"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017850" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017850">rory (Nov 06 2019 at 10:14)</a>:</h4>
+<p>I want to prove p6 using p5</p>
+
+<a name="180017915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017915">Johan Commelin (Nov 06 2019 at 10:15)</a>:</h4>
+<p>Aha... yes, you can't change <code>k</code>. So you have to restate <code>p₅</code> as <code>\forall k : ℤ, ...</code></p>
+
+<a name="180017967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180017967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180017967">Johan Commelin (Nov 06 2019 at 10:16)</a>:</h4>
+<p>And so you should remove <code>k</code> from the hypotheses of <code>prop4</code></p>
+
+<a name="180018113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180018113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180018113">rory (Nov 06 2019 at 10:18)</a>:</h4>
+<p>So there's no way for subgoals to share a <code>\forall k </code> generally</p>
+
+<a name="180018252"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180018252" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180018252">Johan Commelin (Nov 06 2019 at 10:20)</a>:</h4>
+<p>No... what you are asking for is an implicit universal quantifier. But how would Lean know if you want this or not</p>
+
+<a name="180018284"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180018284" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180018284">Johan Commelin (Nov 06 2019 at 10:21)</a>:</h4>
+<p>For all it knows, you might want to use the specific that you assumed something about somewhere else</p>
+
+<a name="180018309"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Reassign%20variable%20value/near/180018309" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/23264Reassignvariablevalue.html#180018309">rory (Nov 06 2019 at 10:21)</a>:</h4>
+<p>Okay, that makes sense</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

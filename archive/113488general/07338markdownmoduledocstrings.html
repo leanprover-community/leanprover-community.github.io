@@ -139,6 +139,133 @@ Hopefully that helps.</p>
 <p>I don't know anything about html really, i'll try and figure out the div's class, I assume i need to declare some empty style e.g. decl and then give it the class decl?</p>
 <p>I also wish I could style the syntax highlighting rather than hard coded colors, but that is going to take some work.</p>
 
+<a name="180016968"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180016968" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180016968">Rob Lewis (Nov 06 2019 at 10:00)</a>:</h4>
+<p>For the div classes, the easy part is printing <code>&lt;div class="decl"&gt;</code> instead of just <code>&lt;div&gt;</code>. Then someone needs to add a css file that styles them properly, which we probably want to integrate with the rest of the website.</p>
+
+<a name="180017067"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017067" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017067">Rob Lewis (Nov 06 2019 at 10:01)</a>:</h4>
+<p>I suspect you'll get a presentable type, but I don't know.</p>
+
+<a name="180017119"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017119" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017119">matt rice (Nov 06 2019 at 10:02)</a>:</h4>
+<p>index should be easy it's already in a big table just need to enumerate the keys of.</p>
+
+<a name="180017183"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017183" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017183">Johan Commelin (Nov 06 2019 at 10:03)</a>:</h4>
+<p>Can you use pygments to generate highlighted code?</p>
+
+<a name="180017397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017397">matt rice (Nov 06 2019 at 10:06)</a>:</h4>
+<p>it's currently using <a href="https://docs.rs/syntect/3.3.0/syntect/" target="_blank" title="https://docs.rs/syntect/3.3.0/syntect/">syntect</a> with a conversion of the vscode syntax highlighting, I haven't really compared to how vscode gets highlighted yet to see if that conversion is accurate though.</p>
+<p>Using pygments would be a big change.  Part of the reason i chose syntect is so i can compile the whole thing to web assembly eventually and not shell out to stuff.</p>
+
+<a name="180017547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017547">Johan Commelin (Nov 06 2019 at 10:09)</a>:</h4>
+<p>Aha... <code>pandoc</code> uses pygments, and so does Zulip. I don't know syntect.</p>
+
+<a name="180017786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017786">Rob Lewis (Nov 06 2019 at 10:13)</a>:</h4>
+<p>For the syntax highlighting, we could at least move the style definition to a separate css file, so the colors are specified once instead of every time code is displayed.</p>
+
+<a name="180017864"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180017864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180017864">Rob Lewis (Nov 06 2019 at 10:14)</a>:</h4>
+<p>The Zulip archive lets Zulip do the structuring (with pygments, I think?) and then copies the Zulip CSS to display it.</p>
+
+<a name="180018014"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018014" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018014">Rob Lewis (Nov 06 2019 at 10:17)</a>:</h4>
+<p>I don't know how different the syntect structuring is, presumably it's not compatible. But we should be able to manually match the colors for analogous items.</p>
+
+<a name="180018089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018089">matt rice (Nov 06 2019 at 10:18)</a>:</h4>
+<p>Yeah, the problem is the syntax highlighter hard coding the colors, the current solution to this is to hard code the colors for each thing to a specific unique value and then sniff the colors and turn them into the appropriate CSS.  Ideally I would like to just get it to emit CSS directly.</p>
+
+<a name="180018120"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018120" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018120">Rob Lewis (Nov 06 2019 at 10:19)</a>:</h4>
+<p>Oh, I see. That's kind of annoying.</p>
+
+<a name="180018230"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018230" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018230">matt rice (Nov 06 2019 at 10:20)</a>:</h4>
+<p>Yeah, there should be a way to do it, but this was easy to add as a placeholder for now.</p>
+
+<a name="180018365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018365">Rob Lewis (Nov 06 2019 at 10:22)</a>:</h4>
+<p>It's maybe not ideal, but it looks fine as-is. I wouldn't worry about it too much.</p>
+
+<a name="180018411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018411">Rob Lewis (Nov 06 2019 at 10:23)</a>:</h4>
+<blockquote>
+<p>Nice! I just checked out a couple of the better documented files. It looks great. <a href="https://leanprover-community.github.io/doc_demo/manifold.html" target="_blank" title="https://leanprover-community.github.io/doc_demo/manifold.html">https://leanprover-community.github.io/doc_demo/manifold.html</a></p>
+</blockquote>
+<p>Updated to apply the default stylesheet. Not bad, hmm?</p>
+
+<a name="180018511"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018511" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018511">matt rice (Nov 06 2019 at 10:24)</a>:</h4>
+<p>The main thing that had me tearing my hair out with pygments was that each backend has different supported rendering options, like line numbers, and things So like html may support line-numbers and latex ignore them and what not.  Eventually i would like to be able to attach footnotes to lines-numbers and for that I need some fairly custom syntax highlighting anyways.</p>
+
+<a name="180018670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018670">Rob Lewis (Nov 06 2019 at 10:27)</a>:</h4>
+<p>Speaking of line numbers, does the Lean byte code let you access the line number of a declaration? Linking declarations to their statement on GitHub would be really nice.</p>
+
+<a name="180018907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180018907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180018907">Johan Commelin (Nov 06 2019 at 10:31)</a>:</h4>
+<blockquote>
+<p>Right now it only prints declarations that have docstrings, right? Our doc guidelines don't require them for theorems, since in principle all you need to know about a theorem is its statement. Complicated/big/important theorems should have docstrings anyway, but we probably want more than just those in the doc output.</p>
+</blockquote>
+<p>I think that maybe we should only print things that do have a docstring. Otherwise it becomes close to replicating the source. These pages could be a good intermediate step that extracts the "juicy" bits.</p>
+
+<a name="180019039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019039">Rob Lewis (Nov 06 2019 at 10:34)</a>:</h4>
+<p>Then I think we need to raise the percentage of theorems that get documented. The Python docs wouldn't be very helpful if they only told you the juicy parts about manipulating strings.</p>
+
+<a name="180019130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019130">Rob Lewis (Nov 06 2019 at 10:34)</a>:</h4>
+<p>In principle the module docs at the top should point to the juicy bits.</p>
+
+<a name="180019159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019159">Johan Commelin (Nov 06 2019 at 10:35)</a>:</h4>
+<p>So what is the purpose of these documents over the github source (besides typesetting the markdown)?</p>
+
+<a name="180019177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019177">Rob Lewis (Nov 06 2019 at 10:35)</a>:</h4>
+<p>Omitting declaration bodies gets you pretty far from the source.</p>
+
+<a name="180019249"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019249" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019249">Rob Lewis (Nov 06 2019 at 10:36)</a>:</h4>
+<p>Imagine if the Python docs showed you the implementation of every function.</p>
+
+<a name="180019260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019260">matt rice (Nov 06 2019 at 10:36)</a>:</h4>
+<p>Yeah, you can extract line numbers, olean-rs/types.rs PosInfo structure.  We should be able to make links revision-stable as well if we can pull the sha out of git.</p>
+
+<a name="180019513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180019513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180019513">Rob Lewis (Nov 06 2019 at 10:40)</a>:</h4>
+<p>But again, I'm not sure that <em>every</em> theorem deserves to show up in the HTML. Maybe we could use a <code>@[nodoc]</code> attribute to make it opt-out instead of opt-in. We should have access to attributes from the byte code, right?</p>
+
+<a name="180020075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180020075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180020075">matt rice (Nov 06 2019 at 10:49)</a>:</h4>
+<p>I believe so looks like either Modification::UserAttribute or Modification::Attr. let me know what you guys decide, currently I just ignore undocumented things.</p>
+
+<a name="180020186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180020186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180020186">matt rice (Nov 06 2019 at 10:50)</a>:</h4>
+<p>Anyhow, going go try and implement some of the things discussed.</p>
+
+<a name="180020253"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180020253" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180020253">Rob Lewis (Nov 06 2019 at 10:51)</a>:</h4>
+<p>Hmm, a tougher one, can you identify when declarations are builtin or user-defined? We have a tactic to do this. But that might not be contained in the byte code.</p>
+
+<a name="180020290"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180020290" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180020290">Rob Lewis (Nov 06 2019 at 10:51)</a>:</h4>
+<p>We don't want to include random recursors and aux definitions in the docs.</p>
+
+<a name="180020408"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180020408" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180020408">matt rice (Nov 06 2019 at 10:52)</a>:</h4>
+<p>I'm not sure, there has been plenty to do without getting too in depth with the bytecode so far :)</p>
+
+<a name="180020458"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180020458" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180020458">Rob Lewis (Nov 06 2019 at 10:53)</a>:</h4>
+<p>Hah, fair enough!</p>
+
 
 {% endraw %}
 
