@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Linear algebra](71530Linearalgebra.html) (7 messages, latest: Nov 05 2019 at 10:46)
+* [Result exists?](44607Resultexists.html) (13 messages, latest: Nov 06 2019 at 12:20)
 
-* [Result exists?](44607Resultexists.html) (9 messages, latest: Nov 04 2019 at 18:55)
+* [Linear algebra](71530Linearalgebra.html) (7 messages, latest: Nov 05 2019 at 10:46)
 
 * [uniqueness of division and remainder](15029uniquenessofdivisionandremainder.html) (6 messages, latest: Nov 04 2019 at 15:49)
 

@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (19 messages, latest: Nov 06 2019 at 12:20)
+
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (8 messages, latest: Nov 06 2019 at 11:31)
 
 * [Reassign variable value](23264Reassignvariablevalue.html) (11 messages, latest: Nov 06 2019 at 10:21)
@@ -58,8 +60,6 @@ permalink: archive/113489newmembers/index.html
 * [how to use simp](72888howtousesimp.html) (59 messages, latest: Oct 30 2019 at 23:51)
 
 * [Cast with apply](97870Castwithapply.html) (6 messages, latest: Oct 30 2019 at 19:09)
-
-* [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (17 messages, latest: Oct 30 2019 at 17:32)
 
 * [Finite-rank free modules](68692Finiterankfreemodules.html) (11 messages, latest: Oct 29 2019 at 19:40)
 

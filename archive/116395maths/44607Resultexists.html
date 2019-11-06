@@ -53,6 +53,31 @@ permalink: archive/116395maths/44607Resultexists.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/179862691" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#179862691">Floris van Doorn (Nov 04 2019 at 18:55)</a>:</h4>
 <p>The single direction exists multiple times, in <code>algebra.euclidean_domain</code> and <code>data.nat.gcd</code> and <code>data.pnat.basic</code></p>
 
+<a name="180025759"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180025759" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180025759">rory (Nov 06 2019 at 12:15)</a>:</h4>
+<blockquote>
+<p>The result Reid mentions is </p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">dvd_gcd_iff</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">↔</span> <span class="o">(</span><span class="n">a</span> <span class="err">∣</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">a</span> <span class="err">∣</span> <span class="n">c</span><span class="o">)</span>
+</pre></div>
+
+
+<p>in <code>algebra.gcd_domain</code></p>
+</blockquote>
+<p>How do I eventually convert from <code>gcd a b</code> to  <code>int.gcd</code>?<br>
+The final result could be proved using <code>int.antisymm</code>, but that requires <code>int.gcd</code> not <code>gcd</code></p>
+
+<a name="180025853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180025853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180025853">Mario Carneiro (Nov 06 2019 at 12:16)</a>:</h4>
+<p>there is almost certainly an analogous theorem for <code>int.gcd</code></p>
+
+<a name="180026003"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180026003" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180026003">Mario Carneiro (Nov 06 2019 at 12:19)</a>:</h4>
+<p>Hm, this particular theorem appears to be missing, but you can reconstruct it from <code>int.dvd_gcd</code>, <code>int.gcd_dvd_left</code>, <code>int.gcd_dvd_right</code></p>
+
+<a name="180026086"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Result%20exists%3F/near/180026086" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/44607Resultexists.html#180026086">Mario Carneiro (Nov 06 2019 at 12:20)</a>:</h4>
+<p>or you can use <code>int.coe_gcd</code> to convert <code>gcd</code> to <code>int.gcd</code></p>
+
 
 {% endraw %}
 
