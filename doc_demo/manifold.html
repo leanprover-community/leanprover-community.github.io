@@ -1,0 +1,103 @@
+<html><head><style>.indent{ padding-left: 1em; padding-right: 1em;}</style></head><h1>Manifolds</h1>
+<p>A manifold is a topological space M locally modelled on a model space H, i.e., the manifold is
+covered by open subsets on which there are local homeomorphisms (the charts) going to H. If the
+changes of charts satisfy some additional property (for instance if they are smooth), then M
+inherits additional structure (it makes sense to talk about smooth manifolds). There are therefore
+two different ingredients in a manifold:</p>
+<ul>
+<li>the set of charts, which is data</li>
+<li>the fact that changes of charts belong to some group (in fact groupoid), which is additional Prop.</li>
+</ul>
+<p>We separate these two parts in the definition: the manifold structure is just the set of charts, and
+then the different smoothness requirements (smooth manifold, orientable manifold, contact manifold,
+and so on) are additional properties of these charts. These properties are formalized through the
+notion of structure groupoid, i.e., a set of local homeomorphisms stable under composition and
+inverse, to which the change of coordinates should belong.</p>
+<h2>Main definitions</h2>
+<p><span style="background-color:#fdf6e3;color:#657b83;">structure_groupoid H</span>   : a subset of local homeomorphisms of <span style="background-color:#fdf6e3;color:#657b83;">H</span> stable under composition, inverse
+and restriction (ex: local diffeos)
+<span style="background-color:#fdf6e3;color:#657b83;">pregroupoid H</span>          : a subset of local homeomorphisms of <span style="background-color:#fdf6e3;color:#657b83;">H</span> stable under composition and
+restriction, but not inverse (ex: smooth maps)
+<span style="background-color:#fdf6e3;color:#657b83;">groupoid_of_pregroupoid</span>: construct a groupoid from a pregroupoid, by requiring that a map and its
+inverse both belong to the pregroupoid (ex: construct diffeos from smooth
+maps)
+<span style="background-color:#fdf6e3;color:#657b83;">continuous_groupoid H</span>  : the groupoid of all local homeomorphisms of <span style="background-color:#fdf6e3;color:#657b83;">H</span></p>
+<p><span style="background-color:#fdf6e3;color:#657b83;">manifold H M</span>           : manifold structure on M modelled on H, given by an atlas of local
+homeomorphisms from M to H whose sources cover M. This is a type class.
+<span style="background-color:#fdf6e3;color:#657b83;">has_groupoid M G</span>       : when <span style="background-color:#fdf6e3;color:#657b83;">G</span> is a structure groupoid on <span style="background-color:#fdf6e3;color:#657b83;">H</span> and <span style="background-color:#fdf6e3;color:#657b83;">M</span> is a manifold modelled on
+<span style="background-color:#fdf6e3;color:#657b83;">H</span>, require that all coordinate changes belong to <span style="background-color:#fdf6e3;color:#657b83;">G</span>. This is a type
+class
+<span style="background-color:#fdf6e3;color:#657b83;">atlas H M</span>              : when <span style="background-color:#fdf6e3;color:#657b83;">M</span> is a manifold modelled on <span style="background-color:#fdf6e3;color:#657b83;">H</span>, the atlas of this manifold
+structure, i.e., the set of charts
+<span style="background-color:#fdf6e3;color:#657b83;">structomorph G M M&#39;</span>    : the set of diffeomorphisms between the manifolds M and M' for the
+groupoid G. We avoid the word diffeomorphisms, keeping it for the
+smooth category.</p>
+<p>As a basic example, we give the instance
+<span style="background-color:#fdf6e3;color:#859900;">instance </span><span style="background-color:#fdf6e3;color:#d33682;">manifold_model_space </span><span style="background-color:#fdf6e3;color:#657b83;">(H : </span><span style="background-color:#fdf6e3;color:#268bd2;">Type</span><span style="background-color:#fdf6e3;color:#b58900;">*</span><span style="background-color:#fdf6e3;color:#657b83;">) [topological_space H] : manifold H H</span>
+saying that a topological space is a manifold over itself, with the identity as unique chart. This
+manifold structure is compatible with any groupoid.</p>
+<h2>Implementation notes</h2>
+<p>The atlas in a manifold is <em>not</em> a maximal atlas in general: the notion of maximality depends on the
+groupoid one considers, and changing groupoids changes the maximal atlas. With the current
+formalization, it makes sense first to choose the atlas, and then to ask whether this precise atlas
+defines a smooth manifold, an orientable manifold, and so on. A consequence is that structomorphisms
+between M and M' do <em>not</em> induce a bijection between the atlases of M and M': the definition is only
+that, read in charts, the structomorphism locally belongs to the groupoid under consideration.
+(This is equivalent to inducing a bijection between elements of the maximal atlas). A consequence
+is that the invariance under structomorphisms of properties defined in terms of the atlas is not
+obvious in general, and could require some work in theory (amounting to the fact that these
+properties only depend on the maximal atlas, for instance). In practice, this does not create any
+real difficulty.</p>
+<p>We use the letter <span style="background-color:#fdf6e3;color:#657b83;">H</span> for the model space thinking of the case of manifolds with boundary, where the
+model space is a half space.</p>
+<p>Manifolds are sometimes defined as topological spaces with an atlas of local diffeomorphisms, and
+sometimes as spaces with an atlas from which a topology is deduced. We use the former approach:
+otherwise, there would be an instance from manifolds to topological spaces, which means that any
+instance search for topological spaces would try to find manifold structures involving a yet
+unknown model space, leading to problems. However, we also introduce the latter approach,
+through a structure <span style="background-color:#fdf6e3;color:#657b83;">manifold_core</span> making it possible to construct a topology out of a set of local
+equivs with compatibility conditions (but we do not register it as an instance).</p>
+<p>In the definition of a manifold, the model space is written as an explicit parameter as there can be
+several model spaces for a given topological space. For instance, a complex manifold (modelled over
+ℂ^n) will also be seen sometimes as a real manifold modelled over ℝ^(2n).</p>
+<hr/><div><h4>structure_groupoid</h4><div class="indent"><p>A structure groupoid is a set of local homeomorphisms of a topological space stable under
+composition and inverse. They appear in the definition of the smoothness class of a manifold.</p>
+</div></div><div><h4>structure_groupoid.partial_order</h4><div class="indent"><p>Partial order on the set of groupoids, given by inclusion of the members of the groupoid</p>
+</div></div><div><h4>id_groupoid</h4><div class="indent"><p>The trivial groupoid, containing only the identity (and maps with empty source, as this is
+necessary from the definition)</p>
+</div></div><div><h4>structure_groupoid.lattice.order_bot</h4><div class="indent"><p>Every structure groupoid contains the identity groupoid</p>
+</div></div><div><h4>pregroupoid</h4><div class="indent"><p>To construct a groupoid, one may consider classes of local homeos such that both the function
+and its inverse have some property. If this property is stable under composition,
+one gets a groupoid. <span style="background-color:#fdf6e3;color:#657b83;">pregroupoid</span> bundles the properties needed for this construction, with the
+groupoid of smooth functions with smooth inverses as an application.</p>
+</div></div><div><h4>pregroupoid.groupoid</h4><div class="indent"><p>Construct a groupoid of local homeos for which the map and its inverse have some property,
+from a pregroupoid asserting that this property is stable under composition.</p>
+</div></div><div><h4>continuous_groupoid</h4><div class="indent"><p>The groupoid of all local homeomorphisms on a topological space H</p>
+</div></div><div><h4>structure_groupoid.lattice.order_top</h4><div class="indent"><p>Every structure groupoid is contained in the groupoid of all local homeomorphisms</p>
+</div></div><div><h4>manifold</h4><div class="indent"><p>A manifold is a topological space endowed with an atlas, i.e., a set of local homeomorphisms
+taking value in a model space H, called charts, such that the domains of the charts cover the whole
+space. We express the covering property by chosing for each x a member <span style="background-color:#fdf6e3;color:#657b83;">chart_at x</span> of the atlas
+containing x in its source: in the smooth case, this is convenient to construct the tangent bundle
+in an efficient way.
+The model space is written as an explicit parameter as there can be several model spaces for a
+given topological space. For instance, a complex manifold (modelled over ℂ^n) will also be seen
+sometimes as a real manifold over ℝ^(2n).</p>
+</div></div><div><h4>manifold_model_space</h4><div class="indent"><p>Any space is a manifold modelled over itself, by just using the identity chart</p>
+</div></div><div><h4>model_space_atlas</h4><div class="indent"><p>In the trivial manifold structure of a space modelled over itself through the identity, the
+atlas members are just the identity</p>
+</div></div><div><h4>chart_at_model_space_eq</h4><div class="indent"><p>In the model space, chart_at is always the identity</p>
+</div></div><div><h4>manifold_core</h4><div class="indent"><p>Sometimes, one may want to construct a manifold structure on a space which does not yet have
+a topological structure, where the topology would come from the charts. For this, one needs charts
+that are only local equivs, and continuity properties for their composition.
+This is formalised in <span style="background-color:#fdf6e3;color:#657b83;">manifold_core</span>.</p>
+</div></div><div><h4>manifold_core.to_topological_space</h4><div class="indent"><p>Topology generated by a set of charts on a Type.</p>
+</div></div><div><h4>has_groupoid</h4><div class="indent"><p>A manifold has an atlas in a groupoid G if the change of coordinates belong to the groupoid</p>
+</div></div><div><h4>has_groupoid_model_space</h4><div class="indent"><p>The trivial manifold structure on the model space is compatible with any groupoid</p>
+</div></div><div><h4>has_groupoid_continuous_groupoid</h4><div class="indent"><p>Any manifold structure is compatible with the groupoid of all local homeomorphisms</p>
+</div></div><div><h4>structomorph</h4><div class="indent"><p>A G-diffeomorphism between two manifolds is a homeomorphism which, when read in the charts,
+belongs to G. We avoid the word diffeomorph as it is too related to the smooth category, and use
+structomorph instead.</p>
+</div></div><div><h4>structomorph.refl</h4><div class="indent"><p>The identity is a diffeomorphism of any manifold, for any groupoid.</p>
+</div></div><div><h4>structomorph.symm</h4><div class="indent"><p>The inverse of a structomorphism is a structomorphism</p>
+</div></div><div><h4>structomorph.trans</h4><div class="indent"><p>The composition of structomorphisms is a structomorphism</p>
+</div></div></html>
