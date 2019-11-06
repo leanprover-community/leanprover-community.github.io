@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (7 messages, latest: Nov 06 2019 at 10:59)
+* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (8 messages, latest: Nov 06 2019 at 11:31)
 
 * [Reassign variable value](23264Reassignvariablevalue.html) (11 messages, latest: Nov 06 2019 at 10:21)
 
