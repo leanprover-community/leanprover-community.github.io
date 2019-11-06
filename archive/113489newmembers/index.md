@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Reassign variable value](23264Reassignvariablevalue.html) (12 messages, latest: Nov 06 2019 at 14:40)
+* [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (5 messages, latest: Nov 06 2019 at 20:03)
 
-* [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (4 messages, latest: Nov 06 2019 at 14:03)
+* [Reassign variable value](23264Reassignvariablevalue.html) (12 messages, latest: Nov 06 2019 at 14:40)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (19 messages, latest: Nov 06 2019 at 12:20)
 
