@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (153 messages, latest: Nov 06 2019 at 07:50)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (155 messages, latest: Nov 06 2019 at 08:41)
 
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (5 messages, latest: Nov 06 2019 at 07:07)
 
