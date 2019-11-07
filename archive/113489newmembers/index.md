@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (24 messages, latest: Nov 07 2019 at 14:47)
+* [compactness proof](74375compactnessproof.html) (1 message, latest: Nov 07 2019 at 16:55)
 
-* [product of integers](53624productofintegers.html) (1 message, latest: Nov 07 2019 at 14:09)
+* [product of integers](53624productofintegers.html) (4 messages, latest: Nov 07 2019 at 16:52)
+
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (24 messages, latest: Nov 07 2019 at 14:47)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (161 messages, latest: Nov 07 2019 at 07:04)
 
