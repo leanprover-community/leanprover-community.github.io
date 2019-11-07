@@ -42,6 +42,34 @@ If you <em>don't</em> have <code>complete K</code> in your context, and you stil
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180120335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180120335">Sebastien Gouezel (Nov 07 2019 at 10:48)</a>:</h4>
 <p>Yes, this is very funny. For instance, asking <code>complete_space ℚ</code> loops forever (or rather, it hits <code>instance_max_depth</code> quickly). Of course, I will never ask Lean to prove that <code>ℚ</code> is complete, but this might show up in some instance search if Lean is trying the wrong path.</p>
 
+<a name="180122054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180122054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180122054">Mario Carneiro (Nov 07 2019 at 11:14)</a>:</h4>
+<p>Could you show the types of these instances?</p>
+
+<a name="180122148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180122148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180122148">Mario Carneiro (Nov 07 2019 at 11:15)</a>:</h4>
+<p>Whichever instance involves looking for a field metavariable sounds like it shouldn't be an instance</p>
+
+<a name="180122224"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180122224" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180122224">Mario Carneiro (Nov 07 2019 at 11:17)</a>:</h4>
+<p>I don't think lean should always have every true relation between classes as an instance. It's not capitulation to say that some of them should be invoked explicitly</p>
+
+<a name="180122358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180122358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180122358">Mario Carneiro (Nov 07 2019 at 11:19)</a>:</h4>
+<p>If I understand correctly, instance A is <code>vector_space K K &lt;- field K</code>, which seems fine, and B is <code>complete V &lt;- complete_normed_field K, vector_space K V</code> which does not look fine because the <code>K</code> is free</p>
+
+<a name="180122417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180122417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180122417">Mario Carneiro (Nov 07 2019 at 11:20)</a>:</h4>
+<p>If B was <code>complete_vector_space K V</code> it wouldn't be a problem</p>
+
+<a name="180122747"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180122747" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180122747">Mario Carneiro (Nov 07 2019 at 11:24)</a>:</h4>
+<p>But given that completeness is a property only of <code>V</code> (and its metric structure), you should already "know" that it is complete without having to do proof search to find out. That is, I would expect instances of the form <code>complete V</code> for every concrete <code>V</code> (like <code>real</code>), or it should be in the context. Perhaps we want to prove that <code>real</code> is a complete space by proving that it is a vector space over another complete field, in which case we would apply that lemma (and supply the choice of <code>K</code>), but it's not a search lean should be doing on its own</p>
+
+<a name="180124149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180124149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180124149">Johan Commelin (Nov 07 2019 at 11:47)</a>:</h4>
+<p>Hmmm... you've told us this fact many times by now. For some reason it catches me by surprise time and again. I wonder when I will finitely learn this principle.</p>
+
 
 {% endraw %}
 
