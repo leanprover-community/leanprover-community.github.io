@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (158 messages, latest: Nov 07 2019 at 03:52)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (161 messages, latest: Nov 07 2019 at 07:04)
 
-* [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (5 messages, latest: Nov 06 2019 at 20:03)
+* [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (6 messages, latest: Nov 07 2019 at 07:03)
 
 * [Reassign variable value](23264Reassignvariablevalue.html) (12 messages, latest: Nov 06 2019 at 14:40)
 
