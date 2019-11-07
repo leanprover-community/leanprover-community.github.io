@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* ["Jupyter notebook" for Lean?](24287JupyternotebookforLean.html) (8 messages, latest: Nov 07 2019 at 21:50)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (67 messages, latest: Nov 07 2019 at 21:12)
+
 * [Cute instance loop](65569Cuteinstanceloop.html) (93 messages, latest: Nov 07 2019 at 18:09)
 
 * [vscode translations](15463vscodetranslations.html) (2 messages, latest: Nov 07 2019 at 17:16)
 
 * [linting in CI](98585lintinginCI.html) (11 messages, latest: Nov 07 2019 at 14:14)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (66 messages, latest: Nov 07 2019 at 11:48)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (48 messages, latest: Nov 06 2019 at 09:09)
 

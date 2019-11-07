@@ -16,6 +16,50 @@ permalink: archive/116395maths/89262groupcohomology.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180126655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180126655">Kevin Buzzard (Nov 07 2019 at 12:24)</a>:</h4>
 <p>So I'm embarking on group cohomology with an MSc student <span class="user-mention" data-user-id="243895">@Shenyang Wu</span> and we're defining <code>d</code> on cochains. As part of the definition we have these "contraction" maps <code>F (n : nat) (j : fin (n + 1)) (g : fin (n + 1) -&gt; G) : fin n -&gt; G</code> with definition <code>lam k, if k &lt; j then g k else if k = j then (g j) * (g (j + 1)) else g (k + 1)</code> and we'll need a lemma of the form F n k \circ F (n + 1) j = something like F n j \circ F (n + 1) k except that depending on whether j&lt;k or k&lt;j some j should be a j-1 or maybe some k should be a k-1. This is all no doubt some fundamental construction in some category of simplicial sets or something. <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="110087">@Scott Morrison</span> is what we need already in mathlib or available somewhere else, so we're not re-inventing the wheel? We need to understand <code>F</code> to prove d^2=0.</p>
 
+<a name="180180118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180118">Reid Barton (Nov 07 2019 at 21:51)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> proved that the chain complex of a simplicial abelian group is a complex (d^2 = 0)</p>
+
+<a name="180180135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180135">Kevin Buzzard (Nov 07 2019 at 21:51)</a>:</h4>
+<p>There is another way to set this up, where <code>F (n : nat) (j : fin (n + 1)) (g : fin (n + 1) -&gt; G) : fin n -&gt; G</code> just drops the j'th term</p>
+
+<a name="180180148"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180148" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180148">Reid Barton (Nov 07 2019 at 21:51)</a>:</h4>
+<p>However depending on how you set things up, you might have some difficulty showing that you have a simplicial object</p>
+
+<a name="180180169"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180169" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180169">Reid Barton (Nov 07 2019 at 21:51)</a>:</h4>
+<p>Yes, that way will be a lot easier, I think.</p>
+
+<a name="180180267"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180267" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180267">Kevin Buzzard (Nov 07 2019 at 21:52)</a>:</h4>
+<p>Thanks.</p>
+
+<a name="180180283"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180283" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180283">Reid Barton (Nov 07 2019 at 21:52)</a>:</h4>
+<p>At least, if you want to connect to Johan's work. Because you already have a simplicial object more or less by definition (a simplicial operator just acts by precomposition).</p>
+
+<a name="180180357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180357">Reid Barton (Nov 07 2019 at 21:53)</a>:</h4>
+<p>I think Johan's work might have been in a PR that was never merged, let me see if I can find it</p>
+
+<a name="180180495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180495">Reid Barton (Nov 07 2019 at 21:55)</a>:</h4>
+<p>Well I found <a href="https://github.com/leanprover-community/mathlib/issues/144" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/144">#144</a>, but I think there may have been a second attempt</p>
+
+<a name="180180683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180683">Reid Barton (Nov 07 2019 at 21:57)</a>:</h4>
+<p>Hmm, maybe there is only <a href="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/category_theory/simplex.lean" target="_blank" title="https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/category_theory/simplex.lean">https://github.com/rwbarton/lean-homotopy-theory/blob/lean-3.4.2/src/category_theory/simplex.lean</a></p>
+
+<a name="180180816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180816">Kevin Buzzard (Nov 07 2019 at 21:58)</a>:</h4>
+<p>Do you have any intention of PR'ing all that stuff?</p>
+
+<a name="180180861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180861">Kevin Buzzard (Nov 07 2019 at 21:59)</a>:</h4>
+<p>I want to make group cohomology in Lean and I'm pretty sure that some of those tools are going to be useful for setting up the basics.</p>
+
 
 {% endraw %}
 
