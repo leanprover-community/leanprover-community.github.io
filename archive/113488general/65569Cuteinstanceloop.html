@@ -1,0 +1,48 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/65569Cuteinstanceloop.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html">Cute instance loop</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180118035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180118035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180118035">Sebastien Gouezel (Nov 07 2019 at 10:14)</a>:</h4>
+<p>I just ran into a cute instance loop. A : if <code>K</code> is a field, it is a (finite-dimensional) vector space over itself. B : if <code>K</code> is a complete normed field, then any finite dimensional vector space over <code>K</code> is complete (I have just completed the proof of this fact). Combining these two, to prove the completeness of a normed field <code>K</code>, Lean will try to use the completeness of <code>K</code>, and loop.</p>
+<p>My problem is that these two instances are natural and useful, and I would like to keep both of them. In Lean 3, if I understand correctly, I can't, and I should not register B as an instance. <span class="user-mention" data-user-id="230999">@Daniel Selsam</span>, can you confirm that this will not be a problem in Lean 4? (Another problem with this instance in Lean 3, by the way, is that to prove the completeness of <code>E</code> Lean will start to look for an instance of <code>vector_space ?m1 E</code> for whatever <code>?m1</code>, and then it will try all the fields it knows about, and there are tons of them -- will this also be OK in Lean 4?)</p>
+
+<a name="180118932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180118932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180118932">Johan Commelin (Nov 07 2019 at 10:29)</a>:</h4>
+<p>Wait... so given a <code>normed_field K</code> that is <code>complete K</code>, you ask Lean to prove <code>complete K</code>, and it is like... yeah I know that <code>K</code> is a fin.dim vector space over this field <code>K</code>. So I can prove that <code>K</code> is complete, if this field <code>K</code> is a complete normed field. Hmmm... it's clear that <code>K</code> is a normed field, because the instance is <em>staring me right in the face</em>. Now let's see if I can prove that <code>K</code> is complete. Ooh, I know that <code>K</code> is a fin.dim vector space over... ... ...</p>
+
+<a name="180119653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180119653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180119653">Johan Commelin (Nov 07 2019 at 10:38)</a>:</h4>
+<p>Can't instances in the local context have some sort of infinite priority over instances coming from the library?</p>
+
+<a name="180119715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180119715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180119715">Johan Commelin (Nov 07 2019 at 10:39)</a>:</h4>
+<p>Oooh... never mind. It's more complicated.<br>
+If you <em>don't</em> have <code>complete K</code> in your context, and you still want to infer <code>complete K</code> for some reason (maybe it is a finite field extension of something complete)... then you can still run into this loop.</p>
+
+<a name="180119788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180119788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180119788">Johan Commelin (Nov 07 2019 at 10:40)</a>:</h4>
+<p>So somehow <code>complete_of_fin_dim_over_complete</code> should never be tried for vector space = base field.</p>
+
+<a name="180119960"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180119960" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180119960">Johan Commelin (Nov 07 2019 at 10:43)</a>:</h4>
+<p>So we need <code>@[inference_hint := assert (¬ (E = K))]</code></p>
+
+<a name="180120335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180120335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180120335">Sebastien Gouezel (Nov 07 2019 at 10:48)</a>:</h4>
+<p>Yes, this is very funny. For instance, asking <code>complete_space ℚ</code> loops forever (or rather, it hits <code>instance_max_depth</code> quickly). Of course, I will never ask Lean to prove that <code>ℚ</code> is complete, but this might show up in some instance search if Lean is trying the wrong path.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

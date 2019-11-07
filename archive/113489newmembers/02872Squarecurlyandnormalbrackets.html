@@ -40,6 +40,74 @@ permalink: archive/113489newmembers/02872Squarecurlyandnormalbrackets.html
 <p>E.g. in the definition of vec_add I had to make everything a a dependent type depending on n since otherwise the recursion wouldn't work out. Is it also possible to skip (\alpha:Type) in front of the colon and make everything a dependent type depending on \alpha?</p>
 <p>It is hard to spell out but I have a bunch of problems which seem very similar to each other making me feel that I didn't get something conceptually.</p>
 
+<a name="180117250"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180117250" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180117250">Johan Commelin (Nov 07 2019 at 10:01)</a>:</h4>
+<p>The difference is that <code>variable (α : Type)</code> saves you some typing.</p>
+
+<a name="180117334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180117334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180117334">Johan Commelin (Nov 07 2019 at 10:02)</a>:</h4>
+<p>The difference between <code>()</code> and <code>{}</code> is in how you can call such declarations. If you use <code>def foo {α : Type}</code> then <code>α</code> is <em>implicit</em> which means that you don't pass that argument to <code>foo</code> when you call it.</p>
+
+<a name="180117356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180117356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180117356">Johan Commelin (Nov 07 2019 at 10:03)</a>:</h4>
+<p>This is useful, if <code>α</code> can be figured out by looking at other arguments (for example <code>a : α</code> might be another argument to <code>foo</code>.</p>
+
+<a name="180117428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180117428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180117428">Johan Commelin (Nov 07 2019 at 10:04)</a>:</h4>
+<p>If at some point you do want to tell Lean the argument <code>α</code>, you can write <code>@foo α</code>, and the <code>@</code> will make all arguments to <code>foo</code> explicit.</p>
+
+<a name="180117964"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180117964" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180117964">yuppie (Nov 07 2019 at 10:13)</a>:</h4>
+<p>Oh thanks for the quick answer. I see.</p>
+
+<a name="180118063"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180118063" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180118063">yuppie (Nov 07 2019 at 10:15)</a>:</h4>
+<p>And writing variable \a:Type is somehow a "fixed constant" and every definition depending on it is fixed as well and cannot be instantiated with another type?</p>
+
+<a name="180118151"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180118151" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180118151">yuppie (Nov 07 2019 at 10:16)</a>:</h4>
+<p>I mean variable \a:Type is not syntactic sugar for inserting (a:Type) in front of every definition nor {a:Type}. It is really something else.</p>
+
+<a name="180118641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180118641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180118641">Johan Commelin (Nov 07 2019 at 10:24)</a>:</h4>
+<p>No, it is such syntactic sugar</p>
+
+<a name="180118658"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180118658" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180118658">Johan Commelin (Nov 07 2019 at 10:24)</a>:</h4>
+<p>And it is a bit smart, because it only gets inserted when needed</p>
+
+<a name="180118681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180118681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180118681">Johan Commelin (Nov 07 2019 at 10:25)</a>:</h4>
+<p>So it is not a "fixed constant"</p>
+
+<a name="180118865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180118865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180118865">yuppie (Nov 07 2019 at 10:28)</a>:</h4>
+<p>And is it sugar for normal brackets or curly braces?</p>
+
+<a name="180119008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180119008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180119008">Johan Commelin (Nov 07 2019 at 10:30)</a>:</h4>
+<p>Depends on what you put after the <code>variables</code> keyword</p>
+
+<a name="180119061"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180119061" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180119061">Johan Commelin (Nov 07 2019 at 10:30)</a>:</h4>
+<p>You can write <code>variables {G : Type} [group G] (g : G)</code></p>
+
+<a name="180119097"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180119097" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180119097">Johan Commelin (Nov 07 2019 at 10:31)</a>:</h4>
+<p>And if halfway your file you need to switch, you can write <code>variables (G)</code> and from then on <code>G</code> will be explicit</p>
+
+<a name="180119115"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180119115" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180119115">yuppie (Nov 07 2019 at 10:31)</a>:</h4>
+<p>Ahhh, I see!</p>
+
+<a name="180119192"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180119192" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180119192">yuppie (Nov 07 2019 at 10:32)</a>:</h4>
+<p>Thanks. This clarified a lot.</p>
+
+<a name="180119195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180119195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180119195">Rob Lewis (Nov 07 2019 at 10:32)</a>:</h4>
+<p>If you write <code>variable A : Type</code> with no parentheses it's explicit, the same as <code>(A : Type)</code>.</p>
+
 
 {% endraw %}
 
