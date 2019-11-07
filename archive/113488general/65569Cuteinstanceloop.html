@@ -70,6 +70,187 @@ If you <em>don't</em> have <code>complete K</code> in your context, and you stil
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180124149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180124149">Johan Commelin (Nov 07 2019 at 11:47)</a>:</h4>
 <p>Hmmm... you've told us this fact many times by now. For some reason it catches me by surprise time and again. I wonder when I will finitely learn this principle.</p>
 
+<a name="180126478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180126478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180126478">Sebastien Gouezel (Nov 07 2019 at 12:22)</a>:</h4>
+<p>I know, this is why I did not register it as an instance. But I find this a little bit sad, as this is an important, useful and nontrivial way to prove that a space is complete. Here is the type of the theorem</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">finite_dimensional</span><span class="bp">.</span><span class="n">complete</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_1</span> <span class="o">:</span> <span class="n">nondiscrete_normed_field</span> <span class="err">𝕜</span><span class="o">]</span> <span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_2</span> <span class="o">:</span> <span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span>
+<span class="o">[</span><span class="bp">_</span><span class="n">inst_3</span> <span class="o">:</span> <span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_6</span> <span class="o">:</span> <span class="n">complete_space</span> <span class="err">𝕜</span><span class="o">]</span> <span class="o">[</span><span class="bp">_</span><span class="n">inst_7</span> <span class="o">:</span> <span class="n">finite_dimensional</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">],</span> <span class="n">complete_space</span> <span class="n">E</span>
+</pre></div>
+
+<a name="180126597"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180126597" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180126597">Sebastien Gouezel (Nov 07 2019 at 12:23)</a>:</h4>
+<p>A way out could be to define a class <code>complete_nondiscrete_normed_field</code> extending both <code>nondiscrete_normed_field</code> and <code>complete_space</code>, and use it in the assumption. What do you think of this approach?</p>
+
+<a name="180126953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180126953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180126953">Mario Carneiro (Nov 07 2019 at 12:29)</a>:</h4>
+<blockquote>
+<p>But I find this a little bit sad, as this is an important, useful and nontrivial way to prove that a space is complete</p>
+</blockquote>
+<p>This is the sentiment I hope to combat by saying "it's not capitulation". Just because it's true doesn't mean it's a good way <em>for lean to find out</em> that a space is complete</p>
+
+<a name="180126973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180126973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180126973">Mario Carneiro (Nov 07 2019 at 12:29)</a>:</h4>
+<p>Are there any examples where this is the desired way to prove completeness of a space?</p>
+
+<a name="180127133"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127133" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127133">Mario Carneiro (Nov 07 2019 at 12:32)</a>:</h4>
+<p>I think this is a nice theorem, and the mere fact that it is entirely about typeclasses doesn't qualify it as an instance. There are plenty of other nice theorems which are not instances, it's not a second class status</p>
+
+<a name="180127248"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127248" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127248">Mario Carneiro (Nov 07 2019 at 12:34)</a>:</h4>
+<p><code>complete_nondiscrete_normed_field</code> doesn't solve the problem, since it is only merging two assumptions on <code>K</code> without addressing the fact that <code>K</code> doesn't appear in the consequent <code>complete_space E</code></p>
+
+<a name="180127377"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127377" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127377">Sebastien Gouezel (Nov 07 2019 at 12:36)</a>:</h4>
+<p>This is definitely used to prove completeness. For instance, if you want to check completeness of euclidean space, you can either make a messy computation with a clever blend of epsilons and Cauchy-Schwarz, or apply directly the theorem. More importantly, I want to write theorems with an assumption <code>[finite_dimensional R E]</code> and be able to use the completeness of <code>E</code> in the proof. Of course, I can put <code>haveI : complete_space E := ...</code> at the beginning of each such proof, but it will be tedious to say the least.</p>
+
+<a name="180127402"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127402" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127402">Sebastien Gouezel (Nov 07 2019 at 12:37)</a>:</h4>
+<p><code>complete_nondiscrete_normed_field</code> solves the looping problem, but I agree it does not solve the fact that there would be a metavariable in instance search.</p>
+
+<a name="180127421"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127421" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127421">Mario Carneiro (Nov 07 2019 at 12:37)</a>:</h4>
+<p>Is <code>R</code> the reals?</p>
+
+<a name="180127456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127456">Mario Carneiro (Nov 07 2019 at 12:37)</a>:</h4>
+<p>I would solve that by having a class <code>euclidean_space E</code> that implies <code>finite_dimensional R E</code> and <code>complete_space E</code></p>
+
+<a name="180127513"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127513" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127513">Sebastien Gouezel (Nov 07 2019 at 12:38)</a>:</h4>
+<p>Yes, sorry for the lack of unicode. Complex numbers and p-adics are also good examples.</p>
+
+<a name="180127529"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127529">Mario Carneiro (Nov 07 2019 at 12:38)</a>:</h4>
+<p>For those, you just prove <code>complete_space C</code> and <code>complete_space Q_[p]</code></p>
+
+<a name="180127532"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127532" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127532">Sebastien Gouezel (Nov 07 2019 at 12:38)</a>:</h4>
+<p>Yes, but this looks like a useless class as it is exactly equivalent to <code>finite_dimensional R E</code>.</p>
+
+<a name="180127554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127554">Sebastien Gouezel (Nov 07 2019 at 12:39)</a>:</h4>
+<p>What I mean is that I will want to use completeness of finite-dimensional spaces over <code>C</code> and <code>Q_p</code>.</p>
+
+<a name="180127575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127575">Mario Carneiro (Nov 07 2019 at 12:39)</a>:</h4>
+<p>you could also take it as an assumption, of course</p>
+
+<a name="180127633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127633">Mario Carneiro (Nov 07 2019 at 12:40)</a>:</h4>
+<p>this would be the obviously correct way to do it if <code>complete_space</code> had data</p>
+
+<a name="180127692"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127692" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127692">Mario Carneiro (Nov 07 2019 at 12:41)</a>:</h4>
+<p>What about <code>complete_fd K E</code>?</p>
+
+<a name="180127761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127761">Mario Carneiro (Nov 07 2019 at 12:42)</a>:</h4>
+<p>seems like this isn't much different from having a class <code>vector_space</code> (which is completely useless since it means the same as <code>module</code>)</p>
+
+<a name="180127778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127778">Sebastien Gouezel (Nov 07 2019 at 12:42)</a>:</h4>
+<p>You mean, two typeclass assumptions <code>finite_dimensional K E</code> and <code>complete_space E</code>, while the second one is implied by the first one? This looks like a hackish workaround instead of a real solution, but I agree it would work fine. I think I would rather go for the explicit instance at the beginning of each proof.</p>
+
+<a name="180127803"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127803">Mario Carneiro (Nov 07 2019 at 12:42)</a>:</h4>
+<p><code>complete_fd</code> is the conjunction of those classes</p>
+
+<a name="180127830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127830">Sebastien Gouezel (Nov 07 2019 at 12:43)</a>:</h4>
+<p>Yes, and therefore completely equivalent to <code>finite_dimensional K E</code>!</p>
+
+<a name="180127840"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127840" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127840">Mario Carneiro (Nov 07 2019 at 12:43)</a>:</h4>
+<p>These have data, though, don't they?</p>
+
+<a name="180127852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127852">Mario Carneiro (Nov 07 2019 at 12:43)</a>:</h4>
+<p><code>complete_space E</code> has to have a metric and stuff</p>
+
+<a name="180127858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127858">Sebastien Gouezel (Nov 07 2019 at 12:43)</a>:</h4>
+<p>The difference with <code>vector_space</code> is that this class is just here to make mathematicians comfortable.</p>
+
+<a name="180127911"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127911" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127911">Sebastien Gouezel (Nov 07 2019 at 12:44)</a>:</h4>
+<p>No, <code>complete_space</code> is a mixin over <code>metric_space</code>, without data.</p>
+
+<a name="180127925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127925">Mario Carneiro (Nov 07 2019 at 12:44)</a>:</h4>
+<p>hm, maybe fix that then</p>
+
+<a name="180127946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180127946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180127946">Mario Carneiro (Nov 07 2019 at 12:44)</a>:</h4>
+<p>it's not mixin very well</p>
+
+<a name="180128001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128001">Sebastien Gouezel (Nov 07 2019 at 12:45)</a>:</h4>
+<p>The topological hierarchy has a spine <code>topological_space &lt;- uniform_space &lt;- metric_space</code>, and additional mixins specifying zillions of properties. It seems to work pretty well!</p>
+
+<a name="180128046"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128046" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128046">Mario Carneiro (Nov 07 2019 at 12:46)</a>:</h4>
+<p>If you want to build stuff on top of a mixin though, it needs to be merged in</p>
+
+<a name="180128135"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128135" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128135">Sebastien Gouezel (Nov 07 2019 at 12:47)</a>:</h4>
+<p>I don't get it. We have a lot of theorems with assumptions <code>[topological_space \alpha] [t1_space \alpha]</code> or <code>[metric_space \alpha] [second_countable \alpha] [complete_space \alpha]</code>. There are so many possibilitiesof combination of the mixins that I don't see how we could merge anything.</p>
+
+<a name="180128220"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128220" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128220">Mario Carneiro (Nov 07 2019 at 12:49)</a>:</h4>
+<p>Those are all over one type though. it's not like <code>[complete_space A -&gt; complete_space B]</code> is a class</p>
+
+<a name="180128237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128237">Mario Carneiro (Nov 07 2019 at 12:49)</a>:</h4>
+<p>but that's basically what <code>finite_dimensional A B</code> is doing here</p>
+
+<a name="180128443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128443">Sebastien Gouezel (Nov 07 2019 at 12:52)</a>:</h4>
+<p>What I get from this discussion is the confirmation that my theorem <code>finite_dimensional.complete</code> should not be an instance, because of the metavariable in the search, and that I should rather instantiate it explicitly when I need it. Is that reasonable?</p>
+
+<a name="180128508"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128508" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128508">Mario Carneiro (Nov 07 2019 at 12:53)</a>:</h4>
+<p>Yes, that should work</p>
+
+<a name="180128510"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128510" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128510">Mario Carneiro (Nov 07 2019 at 12:53)</a>:</h4>
+<p>Why are these even typeclasses? They look like hypotheses to me</p>
+
+<a name="180128637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128637">Sebastien Gouezel (Nov 07 2019 at 12:55)</a>:</h4>
+<p>You mean, <code>finite_dimensional K E</code>? It is a typeclass in the current linear algebra framework. This seems reasonable as then it can be derived automatically for products, for function types over a fintype, for <code>K</code> itself, and so on.</p>
+
+<a name="180128647"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128647" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128647">Kevin Buzzard (Nov 07 2019 at 12:55)</a>:</h4>
+<p>I love that a mathematician and a computer scientist are having a chat about a completely basic theorem but the chat actually has some content. Why hasn't this question been solved 20 years ago? Is there an analogous question for this theorem in Coq and Isabelle, and if so, then do the answers just not help at all? Or did they not get as far as this theorem yet?</p>
+
+<a name="180128726"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128726" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128726">Kevin Buzzard (Nov 07 2019 at 12:56)</a>:</h4>
+<p>When we start on local fields, which we'll have to do at some point, the first thing we'll need is that a finite dimensional field extension of the p-adic numbers is complete.</p>
+
+<a name="180128754"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128754" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128754">Mario Carneiro (Nov 07 2019 at 12:57)</a>:</h4>
+<p>I mean <code>topological_property A</code></p>
+
+<a name="180128842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128842">Mario Carneiro (Nov 07 2019 at 12:58)</a>:</h4>
+<p>They aren't being used to define anything, and they are rather more like mathematical assumptions than structures</p>
+
+<a name="180128908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128908">Sebastien Gouezel (Nov 07 2019 at 12:59)</a>:</h4>
+<p>You know, this is not really a trivial theorem. I am sure it is not in Isabelle. I don't think it is in Coq either, as they don't have a lot of topology. The proof over real numbers is in the undergraduate cursus, and easy by compactness, but the proof for complete fields is really harder, by induction on the dimension. By the way, for the proof to compile in reasonable time, I had to add</p>
+<div class="codehilite"><pre><span></span><span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">,</span> <span class="n">priority</span> <span class="mi">10000</span><span class="o">]</span> <span class="n">pi</span><span class="bp">.</span><span class="n">module</span> <span class="n">normed_space</span><span class="bp">.</span><span class="n">to_vector_space</span>
+  <span class="n">vector_space</span><span class="bp">.</span><span class="n">to_module</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">add_comm_group</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">module</span>
+  <span class="n">linear_map</span><span class="bp">.</span><span class="n">finite_dimensional_range</span> <span class="k">Pi</span><span class="bp">.</span><span class="n">complete</span> <span class="n">nondiscrete_normed_field</span><span class="bp">.</span><span class="n">to_normed_field</span>
+</pre></div>
+
+
+<p>to help Lean a little bit!</p>
+
+<a name="180128954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180128954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180128954">Mario Carneiro (Nov 07 2019 at 12:59)</a>:</h4>
+<p>see, I don't want lean to choke on this instance</p>
+
 
 {% endraw %}
 

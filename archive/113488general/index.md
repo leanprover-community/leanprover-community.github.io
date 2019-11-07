@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (66 messages, latest: Nov 07 2019 at 11:48)
+* [Cute instance loop](65569Cuteinstanceloop.html) (56 messages, latest: Nov 07 2019 at 12:59)
 
-* [Cute instance loop](65569Cuteinstanceloop.html) (14 messages, latest: Nov 07 2019 at 11:47)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (66 messages, latest: Nov 07 2019 at 11:48)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (48 messages, latest: Nov 06 2019 at 09:09)
 
