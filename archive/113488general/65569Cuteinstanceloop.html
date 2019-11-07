@@ -448,6 +448,11 @@ If you <em>don't</em> have <code>complete K</code> in your context, and you stil
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180156244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180156244">Daniel Selsam (Nov 07 2019 at 17:49)</a>:</h4>
 <p>Otherwise typeclass resolution might still run forever when it is e.g. bigger <code>Nat</code>s that are being created, as opposed to bigger types.</p>
 
+<a name="180158025"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180158025" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180158025">Sebastien Gouezel (Nov 07 2019 at 18:09)</a>:</h4>
+<p>Or even max recursion size. Currently, when the maximal recursion depth is reached, instance search fails with an error message. It could instead fail on the branch it is, and resume the search on the next branch. I am still afraid that this or your <code>maxGoalSize</code> could lead to a combinatorial explosion. </p>
+<p>In Lean3, we avoid completely instances with Type metavariables because of this risk of combinatorial explosion. I think only allowing them when one can solve them from the context would solve most of our use cases.</p>
+
 
 {% endraw %}
 

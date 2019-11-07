@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cute instance loop](65569Cuteinstanceloop.html) (92 messages, latest: Nov 07 2019 at 17:49)
+* [Cute instance loop](65569Cuteinstanceloop.html) (93 messages, latest: Nov 07 2019 at 18:09)
 
 * [vscode translations](15463vscodetranslations.html) (2 messages, latest: Nov 07 2019 at 17:16)
 
