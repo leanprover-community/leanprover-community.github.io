@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [compactness proof](74375compactnessproof.html) (2 messages, latest: Nov 07 2019 at 18:46)
+* [compactness proof](74375compactnessproof.html) (6 messages, latest: Nov 07 2019 at 22:14)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (163 messages, latest: Nov 07 2019 at 18:08)
 

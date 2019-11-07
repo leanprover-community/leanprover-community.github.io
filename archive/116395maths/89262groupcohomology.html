@@ -60,6 +60,147 @@ permalink: archive/116395maths/89262groupcohomology.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180180861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180180861">Kevin Buzzard (Nov 07 2019 at 21:59)</a>:</h4>
 <p>I want to make group cohomology in Lean and I'm pretty sure that some of those tools are going to be useful for setting up the basics.</p>
 
+<a name="180181015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181015">Reid Barton (Nov 07 2019 at 22:00)</a>:</h4>
+<p>I have too big a backlog of things to PR...</p>
+
+<a name="180181041"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181041" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181041">Reid Barton (Nov 07 2019 at 22:01)</a>:</h4>
+<p>But this file doesn't depend on anything else in lean-homotopy-theory at least</p>
+
+<a name="180181089"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181089" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181089">Reid Barton (Nov 07 2019 at 22:01)</a>:</h4>
+<p>In your second setup, are you planning to mod out <code>fin (n + 1) -&gt; G</code> by the diagonal action of G?</p>
+
+<a name="180181170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181170">Kevin Buzzard (Nov 07 2019 at 22:02)</a>:</h4>
+<p>I'm wondering whether I can get away with not doing it.</p>
+
+<a name="180181186"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181186" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181186">Reid Barton (Nov 07 2019 at 22:02)</a>:</h4>
+<p>The alternative is to require that <code>0</code> is mapped to the identity of G but then the first face map will have a funny formula</p>
+
+<a name="180181187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181187">Kevin Buzzard (Nov 07 2019 at 22:02)</a>:</h4>
+<p><a href="https://mathoverflow.net/questions/6950/why-is-the-standard-definition-of-cocycle-the-one-that-always-comes-up" target="_blank" title="https://mathoverflow.net/questions/6950/why-is-the-standard-definition-of-cocycle-the-one-that-always-comes-up">https://mathoverflow.net/questions/6950/why-is-the-standard-definition-of-cocycle-the-one-that-always-comes-up</a></p>
+
+<a name="180181239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181239">Kevin Buzzard (Nov 07 2019 at 22:03)</a>:</h4>
+<p>I started by telling <span class="user-mention" data-user-id="243895">@Shenyang Wu</span> to use <code>(fin n -&gt; G) -&gt; M</code> and using the "twisted" d, which involves those maps <code>F</code> I mentioned earlier</p>
+
+<a name="180181268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181268">Kevin Buzzard (Nov 07 2019 at 22:03)</a>:</h4>
+<p>and then I realised that working with <code>fin (n + 1) -&gt; G</code> might be easier because the d^2=0 proof looked much easier</p>
+
+<a name="180181368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181368">Kevin Buzzard (Nov 07 2019 at 22:04)</a>:</h4>
+<p>but then you have to work around this quotient issue</p>
+
+<a name="180181417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181417">Reid Barton (Nov 07 2019 at 22:05)</a>:</h4>
+<p>As one of the answers observed, rather than actually form a quotient, you could then take only G-equivariant functions out of it</p>
+
+<a name="180181459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181459">Reid Barton (Nov 07 2019 at 22:05)</a>:</h4>
+<p>G-equivariant functions from <code>fin (n + 1) -&gt; G</code> to <code>M</code></p>
+
+<a name="180181517"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181517" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181517">Reid Barton (Nov 07 2019 at 22:06)</a>:</h4>
+<p>Actually I guess you have to do it that way maybe?</p>
+
+<a name="180181538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181538">Reid Barton (Nov 07 2019 at 22:06)</a>:</h4>
+<p>when M has nontrivial action</p>
+
+<a name="180181561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181561">Reid Barton (Nov 07 2019 at 22:06)</a>:</h4>
+<p>Oh, it's even in your question.</p>
+
+<a name="180181654"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181654" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181654">Kevin Buzzard (Nov 07 2019 at 22:07)</a>:</h4>
+<p>I should probably read that question at some point</p>
+
+<a name="180181921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181921">Reid Barton (Nov 07 2019 at 22:10)</a>:</h4>
+<p>I'm a little surprised I didn't answer this question</p>
+
+<a name="180181982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180181982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180181982">Kevin Buzzard (Nov 07 2019 at 22:10)</a>:</h4>
+<p>do you know the answer? I remember being not too convinced by any of the topologists' suggestions.</p>
+
+<a name="180182000"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182000" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182000">Reid Barton (Nov 07 2019 at 22:11)</a>:</h4>
+<p>Let me try to give what I think is a better answer</p>
+
+<a name="180182012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182012">Kevin Buzzard (Nov 07 2019 at 22:11)</a>:</h4>
+<p>I see cocycles coming up in all sorts of calculations in group theory</p>
+
+<a name="180182371"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182371" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182371">Reid Barton (Nov 07 2019 at 22:14)</a>:</h4>
+<p>I'm not sure exactly how well this will go, but anyways</p>
+
+<a name="180182380"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182380" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182380">Reid Barton (Nov 07 2019 at 22:14)</a>:</h4>
+<p>You should start with the category EG, which has one object for each element of G, and a unique morphism between any pair of objects</p>
+
+<a name="180182549"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182549" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182549">Reid Barton (Nov 07 2019 at 22:16)</a>:</h4>
+<p>This is a "resolution" of the category with one object and one morphism (we know maps out of this are G-fixed points, so this has something to do with group cohomology) as something on which G acts freely, by left multiplication, say</p>
+
+<a name="180182616"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182616" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182616">Reid Barton (Nov 07 2019 at 22:17)</a>:</h4>
+<p>Let's look at the orbits of EG under the action of G</p>
+
+<a name="180182796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182796">Reid Barton (Nov 07 2019 at 22:19)</a>:</h4>
+<p>There's obviously just one orbit of objects. For morphisms, if we have a morphism from x to y, give it the label x^{-1} y. Then g sends it to a morphism from gx to gy with the same label (gx)^{-1} gy = x^{-1} y. It's easy to see morphisms with the same label make up the orbits.</p>
+
+<a name="180182919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182919">Reid Barton (Nov 07 2019 at 22:20)</a>:</h4>
+<p>Moreover if we compose a morphism with label x^{-1} y with a morphism with label y^{-1} z we get a morphism with label x^{-1} z = (x^{-1} y) (y^{-1} z), so labels multiply under composition</p>
+
+<a name="180182942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182942">Reid Barton (Nov 07 2019 at 22:20)</a>:</h4>
+<p>So if we form the quotient EG/G, we get the category BG with one object and one morphism for each element of G, where composition of morphisms corresponds to multiplication in G.</p>
+
+<a name="180182984"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180182984" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180182984">Reid Barton (Nov 07 2019 at 22:21)</a>:</h4>
+<p>Now, let's look at simplices of the nerve of EG. An n-simplex of the nerve of EG is a functor from [n] = the category {0 -&gt; 1 -&gt; ... -&gt; n} to EG.</p>
+
+<a name="180183018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180183018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180183018">Reid Barton (Nov 07 2019 at 22:21)</a>:</h4>
+<p>But in EG there's a unique morphism between any two objects, so this is just given by a function from {0, 1, ..., n} to G.</p>
+
+<a name="180183177"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180183177" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180183177">Reid Barton (Nov 07 2019 at 22:22)</a>:</h4>
+<p>The image of this simplex under the projection EG -&gt; BG is now a functor from [n] to BG. In BG, there is just one object so the only interesting information is where the n morphisms 0 -&gt; 1, 1 -&gt; 2, ..., (n-1) -&gt; n go. For each one I have to give an element of G.</p>
+
+<a name="180183239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180183239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180183239">Reid Barton (Nov 07 2019 at 22:23)</a>:</h4>
+<p>If my original simplex was described by (x_0, ..., x_n) then its image in BG is described by (x_0^{-1} x_1, ..., x_{n-1}^{-1} x_n).</p>
+
+<a name="180183339"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180183339" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180183339">Reid Barton (Nov 07 2019 at 22:24)</a>:</h4>
+<p>In the other direction, if I have a simplex in BG (g_1, ..., g_n), then one of the simplices that it is the image of is (1, g_1, g_1 g_2, g_1 g_2 g_3, ..., g_1 ... g_n), and the others are given by left multiplication by any g in G.</p>
+
+<a name="180183357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180183357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180183357">Reid Barton (Nov 07 2019 at 22:24)</a>:</h4>
+<p>So that is where the formula you were asking about comes from.</p>
+
+<a name="180183410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180183410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180183410">Kevin Buzzard (Nov 07 2019 at 22:25)</a>:</h4>
+<p>I'll need some time to digest this, but thanks (I'm trying to do some topology)</p>
+
+<a name="180184023"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180184023" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180184023">Reid Barton (Nov 07 2019 at 22:32)</a>:</h4>
+<p>If M has trivial G-action, then H^*(G, M) is the cohomology of this simplicial set BG = EG/G with coefficients in M. The complex that computes this has C^n = functions from n-simplices of EG/G to M, or from n-simplices of BG to M. Correspondingly this gives functions defined on <code>(fin (n+1) -&gt; G) / G</code> or <code>fin n -&gt; G</code>, with the above rule for translating between these representations. In this case, because M has trivial action, the former can also be thought of as G-equivariant functions from <code>fin (n+1) -&gt; G</code> to M.<br>
+If M has nontrivial G-action, then I guess you need to say something about local systems and it's not quite as easy to relate group cohomology to simplicial cohomology.</p>
+
+<a name="180184166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/group%20cohomology/near/180184166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/89262groupcohomology.html#180184166">Reid Barton (Nov 07 2019 at 22:34)</a>:</h4>
+<p>For the purpose of formalization, the EG description makes it trivial to show that you've got a simplicial set. The simplicial structure maps are just given by composing <code>fin (m + 1) -&gt; fin (n + 1) -&gt; G</code></p>
+
 
 {% endraw %}
 
