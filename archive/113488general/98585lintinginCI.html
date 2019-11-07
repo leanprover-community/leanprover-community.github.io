@@ -34,6 +34,38 @@ permalink: archive/113488general/98585lintinginCI.html
 <p>In the metamath <a href="http://set.mm" target="_blank" title="http://set.mm">set.mm</a> repo we do something similar. There is a list of theorems whose use is "discouraged", meaning that you are allowed to reference them but there is an extra "I know what I'm doing" step. To accomplish this, we autogenerate a list of all theorems referencing discouraged theorems and check it in, and the CI regenerates the file and requires that it match. This means that if you want to get CI to pass, you have to also update the discouraged file, and this update shows in the git history.</p>
 <p>If we apply this to the mathlib lints, it suggests making a list of all excluded lints and checking it into the repo. Then if you add anything beyond what is in the list you don't pass CI, unless you also update the excluded list, and this gives PR reviewers a place to heckle you.</p>
 
+<a name="180134305"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180134305" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180134305">Rob Lewis (Nov 07 2019 at 14:00)</a>:</h4>
+<p>That's exactly the proposed setup. <code>nolints.txt</code> is stored in the <code>scripts</code> directory. Adding something noncompliant means you have to either touch that file or use the <code>nolint</code> attribute, both of which should be obvious in a PR.</p>
+
+<a name="180134360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180134360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180134360">Mario Carneiro (Nov 07 2019 at 14:00)</a>:</h4>
+<p>ah, okay it wasn't clear to me that the txt file is actually checked in</p>
+
+<a name="180134427"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180134427" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180134427">Rob Lewis (Nov 07 2019 at 14:01)</a>:</h4>
+<p>I should have linked <a href="https://github.com/leanprover-community/mathlib/issues/1636" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1636">#1636</a> too. It's easy to autogenerate it.</p>
+
+<a name="180134556"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180134556" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180134556">Rob Lewis (Nov 07 2019 at 14:02)</a>:</h4>
+<p>It has to be checked in, because Travis can't generate the list of "acceptable" failing lints itself. It would have to find the root commit of the PR, build it, and generate the list there. That would basically double the time of the Travis check.</p>
+
+<a name="180134731"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180134731" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180134731">Mario Carneiro (Nov 07 2019 at 14:04)</a>:</h4>
+<p>even if you could do that, I wouldn't recommend it. It is too brittle, "the last commit" is not very well defined</p>
+
+<a name="180135197"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180135197" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180135197">Rob Lewis (Nov 07 2019 at 14:08)</a>:</h4>
+<p>(oops, that example isn't right)</p>
+
+<a name="180135743"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180135743" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180135743">Rob Lewis (Nov 07 2019 at 14:14)</a>:</h4>
+<p>There are situations where good PRs will break the tests. Renaming/refactoring, of course, but also:</p>
+<blockquote>
+<p>Suppose def <code>f {T : Type} [group T] (t : T) := t</code> and theorem <code>g {T : Type} [group T] (t : T) : f t = t := rfl</code>. <code>f</code> will end up on the list because the group instance is unused, but <code>g</code> won't. If someone fixes <code>f</code>, the test will fail because <code>g</code> now has an unused argument.</p>
+</blockquote>
+<p>I think these won't happen accidentally though. It should be obvious to reviewers what's going on.</p>
+
 
 {% endraw %}
 

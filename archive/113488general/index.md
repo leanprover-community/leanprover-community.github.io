@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [linting in CI](98585lintinginCI.html) (4 messages, latest: Nov 07 2019 at 13:58)
+* [Cute instance loop](65569Cuteinstanceloop.html) (78 messages, latest: Nov 07 2019 at 14:45)
 
-* [Cute instance loop](65569Cuteinstanceloop.html) (77 messages, latest: Nov 07 2019 at 13:17)
+* [linting in CI](98585lintinginCI.html) (11 messages, latest: Nov 07 2019 at 14:14)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (66 messages, latest: Nov 07 2019 at 11:48)
 
