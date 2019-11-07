@@ -1,0 +1,40 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/98585lintinginCI.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html">linting in CI</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180133303"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180133303" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180133303">Rob Lewis (Nov 07 2019 at 13:50)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1634" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1634">#1634</a> proposes adding a full linting check to the CI for mathlib pull requests. Right now we have linters that check for missing doc strings, bad instance priorities, illegal constants in types, and some other things. Putting this in a CI check will give contributors faster feedback and remove some burden from PR reviewers.</p>
+<p>Since mathlib still fails some of these checks spectacularly, we can't run the test over the whole library yet. We can get around it by generating a list of failing declarations and whitelisting them right before we run the check. It's a little inelegant, but I'm not sure of a better way to do this without making all of mathlib compliant. (Obviously I'd like to get there eventually. It's a long road.)</p>
+<p>Any more thoughts or feedback here?</p>
+
+<a name="180133820"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180133820" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180133820">Johan Commelin (Nov 07 2019 at 13:56)</a>:</h4>
+<p>I'm in favour of your proposal (unless it blows up the time that Travis spends on checking a PR).</p>
+
+<a name="180133985"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180133985" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180133985">Rob Lewis (Nov 07 2019 at 13:57)</a>:</h4>
+<blockquote>
+<p>I'm in favour of your proposal (unless it blows up the time that Travis spends on checking a PR).</p>
+</blockquote>
+<p>It doesn't. Should add at most a few minutes.</p>
+
+<a name="180134171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/180134171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#180134171">Mario Carneiro (Nov 07 2019 at 13:58)</a>:</h4>
+<p>In the metamath <a href="http://set.mm" target="_blank" title="http://set.mm">set.mm</a> repo we do something similar. There is a list of theorems whose use is "discouraged", meaning that you are allowed to reference them but there is an extra "I know what I'm doing" step. To accomplish this, we autogenerate a list of all theorems referencing discouraged theorems and check it in, and the CI regenerates the file and requires that it match. This means that if you want to get CI to pass, you have to also update the discouraged file, and this update shows in the git history.</p>
+<p>If we apply this to the mathlib lints, it suggests making a list of all excluded lints and checking it into the repo. Then if you add anything beyond what is in the list you don't pass CI, unless you also update the excluded list, and this gives PR reviewers a place to heckle you.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
