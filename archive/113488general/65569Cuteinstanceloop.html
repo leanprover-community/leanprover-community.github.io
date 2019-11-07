@@ -348,6 +348,81 @@ If you <em>don't</em> have <code>complete K</code> in your context, and you stil
 <p>- If you literally reach the same goal twice (upto alpha equivalence), Lean4 will detect and do the right thing.<br>
 - You can still cause typeclass resolution to run forever in some cases, but to do this the generated goals must be getting bigger and bigger.</p>
 
+<a name="180140798"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180140798" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180140798">Sebastien Gouezel (Nov 07 2019 at 15:08)</a>:</h4>
+<p>Here is the minimal example:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">Field</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">VectorSpace</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">VectorSpaceSelf</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="n">VectorSpace</span> <span class="n">K</span> <span class="n">K</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">constructor</span>
+
+<span class="n">class</span> <span class="n">CompleteSpace</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">bad</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">VectorSpace</span> <span class="n">K</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">CompleteSpace</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="n">CompleteSpace</span> <span class="n">E</span> <span class="o">:=</span>
+  <span class="k">by</span> <span class="n">constructor</span>
+
+<span class="kn">instance</span> <span class="n">loops</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="n">CompleteSpace</span> <span class="n">K</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p><code>loops</code> should fail as there is no way to get completeness out of thin air, but Lean 3 will loop on it. It will try to apply the instance <code>bad</code> (as it sees <code>K</code> as a vector space over itself), and for this it will need the completeness of <code>K</code>, and therefore it loops.  From what you say, your Lean 4 algorithm should succeed on that one, which is very nice.</p>
+<p>Then, there is a second potential issue. When applying the instance <code>bad</code>, Lean knows the vector space <code>E</code> (from the type of the desired conclusion), but it does not know which field to choose, so it will try every field it has at its disposal. In this example, it can not go wild. But what happens if one adds, say,</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">AlgebraicClosure</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span> <span class="o">:=</span> <span class="n">K</span>
+
+<span class="kn">instance</span> <span class="n">AlgebraicClosure</span><span class="bp">.</span><span class="n">Field</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="n">Field</span> <span class="o">(</span><span class="n">AlgebraicClosure</span> <span class="n">K</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">constructor</span>
+
+<span class="kn">instance</span> <span class="n">loops_even_more</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">:</span> <span class="n">CompleteSpace</span> <span class="n">K</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>Here, I guess <code>loops_even_more</code> will also fail in Lean 4 as it will try to apply <code>bad</code> to more and more complicated fields, constructed by iterated algebraic closure. Is that indeed the case?</p>
+
+<a name="180142205"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180142205" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180142205">Daniel Selsam (Nov 07 2019 at 15:22)</a>:</h4>
+<p>Thanks. The first example will fail quickly in Lean4 since it is the same goals being solved over and over again, and Lean4 will detect this and do the right thing.</p>
+
+<a name="180142501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180142501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180142501">Johan Commelin (Nov 07 2019 at 15:25)</a>:</h4>
+<p>I hope that there is also a cheap heuristic that gives the loop in the second example a very low priority</p>
+
+<a name="180143039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180143039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180143039">Johan Commelin (Nov 07 2019 at 15:30)</a>:</h4>
+<p>Sometimes you need to alternate some constructions several times in a row, but it isn't very common. One example is:</p>
+<ul>
+<li>Take the field Q. this field is not algebraically closed, and not complete</li>
+<li>complete for the p-adic valuation to get Q_p. this field is not algebraically closed, it is complete</li>
+<li>take the algebraic closure to get Q_p-bar. this field is algebraically closed, it is not complete</li>
+<li>take the completion, to get C_p. this field is algebraically closed and it is complete.</li>
+</ul>
+<p>However, I certainly don't expect the typeclass system to figure out such things for me. So in general, I would like the type class system to be very hesitant to apply such constructors multiple times.</p>
+
+<a name="180143420"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180143420" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180143420">Daniel Selsam (Nov 07 2019 at 15:34)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="180144484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180144484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180144484">Daniel Selsam (Nov 07 2019 at 15:44)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="180144570"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180144570" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180144570">Daniel Selsam (Nov 07 2019 at 15:45)</a>:</h4>
+<p>(deleted)</p>
+
+<a name="180144679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180144679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180144679">Sebastien Gouezel (Nov 07 2019 at 15:46)</a>:</h4>
+<p>Great! I was afraid it would do the following: try to apply <code>bad ?K K</code> where <code>?K</code> is an unknown complete field over which one would like <code>K</code> to have a vector space structure. Since it doesn't know which field to use, what does Lean4 do to fill the meta-variable <code>?K</code>? Does it try all the fields it knows about, like <code>AlgebraicClosure K</code>, or is it more clever?</p>
+
+<a name="180145204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180145204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180145204">Sebastien Gouezel (Nov 07 2019 at 15:51)</a>:</h4>
+<p>For instance, in Lean 3,</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="n">works_fine</span> <span class="o">(</span><span class="n">K</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">Field</span> <span class="n">K</span><span class="o">]</span> <span class="o">[</span><span class="n">CompleteSpace</span> <span class="o">(</span><span class="n">AlgebraicClosure</span> <span class="n">K</span><span class="o">)]</span>
+  <span class="o">(</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">VectorSpace</span> <span class="o">(</span><span class="n">AlgebraicClosure</span> <span class="n">K</span><span class="o">)</span> <span class="n">E</span><span class="o">]</span> <span class="o">:</span> <span class="n">CompleteSpace</span> <span class="n">E</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>works fine, so Lean3 is clever enough to try to fill the metavariable with <code>AlgebraicClosure K</code> (probably using what it sees in the context?)</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cute instance loop](65569Cuteinstanceloop.html) (78 messages, latest: Nov 07 2019 at 14:45)
+* [Cute instance loop](65569Cuteinstanceloop.html) (87 messages, latest: Nov 07 2019 at 15:51)
 
 * [linting in CI](98585lintinginCI.html) (11 messages, latest: Nov 07 2019 at 14:14)
 
