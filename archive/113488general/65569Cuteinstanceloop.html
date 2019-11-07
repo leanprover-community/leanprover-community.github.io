@@ -427,6 +427,27 @@ If you <em>don't</em> have <code>complete K</code> in your context, and you stil
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180147614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180147614">Daniel Selsam (Nov 07 2019 at 16:14)</a>:</h4>
 <p>What I wrote before was wrong. Lean4 will indeed still loop in your second example. I apologize for the confusion.</p>
 
+<a name="180154276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180154276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180154276">Sebastien Gouezel (Nov 07 2019 at 17:26)</a>:</h4>
+<p>Would it be reasonable to change the behavior to the following one: if one encounters an instance in which there are Type variables which can not be inferred directly, then</p>
+<ul>
+<li>either there is something in the context which matches the instance, then use it </li>
+<li>or fail</li>
+</ul>
+<p>This would prevent the search from getting completely crazy, and still it would allow instances with Type metavariables, which can be handy in situations like the one discussed in the above thread. Are there situations where this is obviously wrong? (Or, as a middle ground, could one have an attribute on instances to say that they should follow this behavior -- all this is for Lean4, of course).</p>
+
+<a name="180155319"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180155319" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180155319">Sebastien Gouezel (Nov 07 2019 at 17:39)</a>:</h4>
+<p>Or an attribute <code>instance_search.restricted</code> or whatever, that one could set to choose the behavior between the current one and the less recursive one?</p>
+
+<a name="180155853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180155853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180155853">Daniel Selsam (Nov 07 2019 at 17:46)</a>:</h4>
+<p>How about just having a <code>maxGoalSize</code> flag, and refusing to consider any intermediate goals beyond that size? This works for your second example, and fails quickly even when set very high. Con: it would not work well if there were a combinatorial number of pretty-big-but-not-too-big undesired goals.</p>
+
+<a name="180156244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Cute%20instance%20loop/near/180156244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/65569Cuteinstanceloop.html#180156244">Daniel Selsam (Nov 07 2019 at 17:49)</a>:</h4>
+<p>Otherwise typeclass resolution might still run forever when it is e.g. bigger <code>Nat</code>s that are being created, as opposed to bigger types.</p>
+
 
 {% endraw %}
 
