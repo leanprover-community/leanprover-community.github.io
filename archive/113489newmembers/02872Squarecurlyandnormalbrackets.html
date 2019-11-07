@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/02872Squarecurlyandnormalbrackets.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html">Square, curly and normal brackets</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180116607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180116607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180116607">yuppie (Nov 07 2019 at 09:51)</a>:</h4>
+<p>Hey everybody,</p>
+<p>I am still trying to do the lean exercises in section 2, i.e. defining vector addition, matrix addition and matrix  multiplication. And this is what I have so far:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">vector</span>
+
+<span class="n">def</span> <span class="n">vec_add</span> <span class="o">(</span><span class="n">α</span><span class="o">:</span><span class="kt">Type</span><span class="o">)</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">⟨</span> <span class="o">[],</span>    <span class="n">h</span> <span class="bp">⟩</span> <span class="bp">_</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="o">[],</span> <span class="n">h</span> <span class="bp">⟩</span>
+<span class="bp">|</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">⟨</span> <span class="o">[],</span>    <span class="n">h</span> <span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span> <span class="o">[],</span> <span class="n">h</span> <span class="bp">⟩</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">v</span> <span class="n">w</span> <span class="o">:=</span>
+<span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">v</span><span class="o">)</span><span class="bp">+</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">w</span><span class="o">))</span> <span class="o">(</span><span class="n">vec_add</span> <span class="n">n</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">v</span><span class="o">))</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">w</span><span class="o">)))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">vec_add</span>
+
+<span class="kn">instance</span> <span class="n">vec_has_add</span> <span class="o">(</span><span class="n">α</span><span class="o">:</span><span class="kt">Type</span><span class="o">)[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">](</span><span class="n">n</span><span class="o">:</span><span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_add</span> <span class="o">(</span><span class="n">vector</span> <span class="n">α</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">vec_add</span> <span class="n">α</span> <span class="n">n</span><span class="bp">⟩</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">vec_has_add</span>
+
+<span class="n">def</span> <span class="n">scal_mul</span><span class="o">(</span><span class="n">α</span><span class="o">:</span><span class="kt">Type</span><span class="o">)[</span><span class="n">has_mul</span> <span class="n">α</span><span class="o">]:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="n">a</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">v</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span><span class="o">)</span> <span class="n">a</span> <span class="n">v</span> <span class="o">:=</span> <span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">v</span><span class="o">)</span><span class="bp">*</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">scal_mul</span> <span class="n">n</span> <span class="o">(</span><span class="n">a</span><span class="o">)</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">v</span><span class="o">)))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">scal_mul</span>
+</pre></div>
+
+
+<p>This somehow works. But I what exactly is the difference between declaring a variable \alpha:Type in the beginning of a file and putting (\alpha:Type) in front of the colon of every declaration? What is the difference between normal brackets and curly braces?</p>
+<p>E.g. in the definition of vec_add I had to make everything a a dependent type depending on n since otherwise the recursion wouldn't work out. Is it also possible to skip (\alpha:Type) in front of the colon and make everything a dependent type depending on \alpha?</p>
+<p>It is hard to spell out but I have a bunch of problems which seem very similar to each other making me feel that I didn't get something conceptually.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

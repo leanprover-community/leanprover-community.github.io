@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (1 message, latest: Nov 07 2019 at 09:51)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (161 messages, latest: Nov 07 2019 at 07:04)
 
 * [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (6 messages, latest: Nov 07 2019 at 07:03)
