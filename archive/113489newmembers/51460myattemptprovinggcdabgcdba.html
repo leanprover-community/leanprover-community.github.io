@@ -1,0 +1,55 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/51460myattemptprovinggcdabgcdba.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html">my attempt proving gcd(a, b) = gcd(b, a)</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180204001"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180204001" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180204001">agro1986 (Nov 08 2019 at 05:29)</a>:</h4>
+<p>Hi everyone. I tried defining gcd and then proving that gcd(a, b) implies gcd(b, a):</p>
+<div class="codehilite"><pre><span></span>variables {a b c d: ℤ}
+
+def divides (a b: ℤ): Prop := ∃(d: ℤ), b = a * d
+
+def gcd (a b d: ℤ): Prop :=
+  ¬(a = 0 ∧ b = 0) ∧
+  divides d a ∧
+  divides d b ∧
+  ∀ (c: ℤ), divides c a ∧ divides c b → c ≤ d
+
+theorem gcd_sym (h: gcd a b d): gcd b a d :=
+  begin
+    let hnonzero := h.left,        -- ¬(a = 0 ∧ b = 0)
+    let hda := h.right.left,       -- divides d a ∧
+    let hdb := h.right.right.left, -- divides d b ∧
+    let hgreatest := h.right.right.right,
+    apply and.intro,
+      exact (assume hzero: b = 0 ∧ a = 0,
+        hnonzero ⟨hzero.right, hzero.left⟩),
+    apply and.intro,
+      assumption,
+    apply and.intro,
+      assumption,
+    assume c,
+      let hc_lt_d := hgreatest c,
+      assume hc_divides,
+        exact hc_lt_d ⟨hc_divides.right, hc_divides.left⟩
+  end
+</pre></div>
+
+
+<p>Would you define gcd differently? (e.g., something that means the same thing but is more canonical to write in Lean)</p>
+<p>Also, the proof is a bit long for basically flipping some terms. Any way you would streamline it? Thanks a lot!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
