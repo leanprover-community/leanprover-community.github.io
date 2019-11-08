@@ -57,6 +57,31 @@ theorem gcd_sym (h: gcd a b d): gcd b a d :=
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180207878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180207878">Tim Baanen (Nov 08 2019 at 07:16)</a>:</h4>
 <p>But I'm pretty much an intuitionist, so take that as you want :P</p>
 
+<a name="180212659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180212659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180212659">Johan Commelin (Nov 08 2019 at 09:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="244890">@agro1986</span> Could you explain a bit of your background/motivation/goal? Such a bigger picture could help us with answering more specific questions. Are these training exercises, or do you want to formalise a particular piece of maths, or do you have another goal?</p>
+
+<a name="180213545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180213545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180213545">Kevin Buzzard (Nov 08 2019 at 09:17)</a>:</h4>
+<p>Here's a more compressed tactic mode proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">gcd_sym</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="n">d</span><span class="o">):</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">a</span> <span class="n">d</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">rcases</span> <span class="n">h</span> <span class="k">with</span> <span class="bp">⟨</span><span class="n">hne0</span><span class="o">,</span> <span class="n">hda</span><span class="o">,</span> <span class="n">hdb</span><span class="o">,</span> <span class="n">hdmin</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span> <span class="n">exact</span> <span class="n">mt</span> <span class="n">and</span><span class="bp">.</span><span class="n">comm</span><span class="bp">.</span><span class="n">mp</span> <span class="n">hne0</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span> <span class="n">assumption</span><span class="o">,</span>
+    <span class="n">rintros</span> <span class="n">c</span> <span class="bp">⟨</span><span class="n">ha</span><span class="o">,</span> <span class="n">hb</span><span class="bp">⟩</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">hdmin</span> <span class="n">c</span> <span class="bp">⟨</span><span class="n">hb</span><span class="o">,</span> <span class="n">ha</span><span class="bp">⟩</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="180213696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180213696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180213696">Kevin Buzzard (Nov 08 2019 at 09:20)</a>:</h4>
+<p>and here's a term mode proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">gcd_sym</span> <span class="o">(</span><span class="n">h</span><span class="o">:</span> <span class="n">gcd</span> <span class="n">a</span> <span class="n">b</span> <span class="n">d</span><span class="o">):</span> <span class="n">gcd</span> <span class="n">b</span> <span class="n">a</span> <span class="n">d</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">mt</span> <span class="n">and</span><span class="bp">.</span><span class="n">comm</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">hc</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">hc</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">hc</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span>
+</pre></div>
+
 
 {% endraw %}
 
