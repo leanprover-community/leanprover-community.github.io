@@ -82,6 +82,50 @@ theorem gcd_sym (h: gcd a b d): gcd b a d :=
 <span class="bp">⟨</span><span class="n">mt</span> <span class="n">and</span><span class="bp">.</span><span class="n">comm</span><span class="bp">.</span><span class="n">mp</span> <span class="n">h</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">1</span><span class="o">,</span> <span class="bp">λ</span> <span class="n">c</span> <span class="n">hc</span><span class="o">,</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span><span class="bp">.</span><span class="mi">2</span> <span class="bp">_</span> <span class="bp">⟨</span><span class="n">hc</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span> <span class="n">hc</span><span class="bp">.</span><span class="mi">1</span><span class="bp">⟩⟩</span>
 </pre></div>
 
+<a name="180220292"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180220292" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180220292">agro1986 (Nov 08 2019 at 11:11)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span> for now, training exercise to familiarize myself with the language :). I'm rereading an elementary number theory textbook while challenging myself to write the definitions and proofs using Lean</p>
+
+<a name="180221350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221350">agro1986 (Nov 08 2019 at 11:29)</a>:</h4>
+<p><span class="user-mention" data-user-id="238446">@Tim Baanen</span> hmm, that's an interesting way to think about it. Write the algorithm for it, and then using Lean prove that it satisfies certain properties...</p>
+<p>However when I try something like this:</p>
+<div class="codehilite"><pre><span></span>def add (a: ℤ) (b: ℤ): ℤ := a + b
+
+def add_sym (a: ℤ) (b: ℤ): add a b = add b a :=
+  begin
+    -- ???
+  end
+</pre></div>
+
+
+<p>I don't have any idea to first prove the super obvious definitionally 100% correct fact that <code>h: add a b = a + b</code> :(. Any pointers?</p>
+
+<a name="180221753"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221753" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221753">Mario Carneiro (Nov 08 2019 at 11:36)</a>:</h4>
+<p><code>rfl</code></p>
+
+<a name="180221780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221780">Mario Carneiro (Nov 08 2019 at 11:36)</a>:</h4>
+<p>in tactic mode, <code>unfold add</code> will change the goal to <code>a + b = b + a</code></p>
+
+<a name="180221915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180221915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180221915">Kevin Buzzard (Nov 08 2019 at 11:39)</a>:</h4>
+<p>Because it's true <em>by definition</em>, you can use the <code>change</code> tactic. For example <code>change a + b = b + a</code> should work.</p>
+
+<a name="180222047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/my%20attempt%20proving%20gcd%28a%2C%20b%29%20%3D%20gcd%28b%2C%20a%29/near/180222047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/51460myattemptprovinggcdabgcdba.html#180222047">agro1986 (Nov 08 2019 at 11:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> Great!</p>
+<div class="codehilite"><pre><span></span>def add_sym (a: ℤ) (b: ℤ): add a b = add b a :=
+  begin
+    unfold add,
+    ring,
+  end
+</pre></div>
+
+
+<p>change tactic also works! Thanks <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span></p>
+
 
 {% endraw %}
 

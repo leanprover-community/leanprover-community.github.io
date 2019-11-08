@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [nth append](02723nthappend.html) (2 messages, latest: Nov 08 2019 at 09:40)
+* [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (12 messages, latest: Nov 08 2019 at 11:41)
 
-* [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (6 messages, latest: Nov 08 2019 at 09:20)
+* [nth append](02723nthappend.html) (2 messages, latest: Nov 08 2019 at 09:40)
 
 * [How do I get the "right" side of a definition?](69521HowdoIgettherightsideofadefinition.html) (3 messages, latest: Nov 08 2019 at 04:51)
 
