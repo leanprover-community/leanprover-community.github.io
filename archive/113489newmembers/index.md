@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [vscode very slow](01264vscodeveryslow.html) (7 messages, latest: Nov 08 2019 at 15:33)
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (25 messages, latest: Nov 08 2019 at 18:42)
+
+* [vscode very slow](01264vscodeveryslow.html) (8 messages, latest: Nov 08 2019 at 18:37)
 
 * [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (14 messages, latest: Nov 08 2019 at 13:21)
 
@@ -24,8 +26,6 @@ permalink: archive/113489newmembers/index.html
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (163 messages, latest: Nov 07 2019 at 18:08)
 
 * [product of integers](53624productofintegers.html) (4 messages, latest: Nov 07 2019 at 16:52)
-
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (24 messages, latest: Nov 07 2019 at 14:47)
 
 * [The stupid way to prove the divisibility of sums](53166Thestupidwaytoprovethedivisibilityofsums.html) (6 messages, latest: Nov 07 2019 at 07:03)
 
