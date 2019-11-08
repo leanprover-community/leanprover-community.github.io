@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [vscode very slow](01264vscodeveryslow.html) (5 messages, latest: Nov 08 2019 at 14:58)
+* [vscode very slow](01264vscodeveryslow.html) (7 messages, latest: Nov 08 2019 at 15:33)
 
 * [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (14 messages, latest: Nov 08 2019 at 13:21)
 
