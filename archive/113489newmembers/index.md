@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [quantifier exercises](65860quantifierexercises.html) (47 messages, latest: Nov 08 2019 at 00:34)
+
 * [compactness proof](74375compactnessproof.html) (6 messages, latest: Nov 07 2019 at 22:14)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (163 messages, latest: Nov 07 2019 at 18:08)
@@ -1060,8 +1062,6 @@ permalink: archive/113489newmembers/index.html
 * [rw only simplifies if piped through my own function](16515rwonlysimplifiesifpipedthroughmyownfunction.html) (66 messages, latest: Sep 11 2018 at 07:27)
 
 * [finsets, decidable_mem, and filter](66073finsetsdecidablememandfilter.html) (6 messages, latest: Sep 11 2018 at 04:38)
-
-* [quantifier exercises](65860quantifierexercises.html) (45 messages, latest: Sep 11 2018 at 02:23)
 
 * [choosing from difference of finsets](80075choosingfromdifferenceoffinsets.html) (34 messages, latest: Sep 09 2018 at 21:04)
 

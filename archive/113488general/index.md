@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Cute instance loop](65569Cuteinstanceloop.html) (94 messages, latest: Nov 07 2019 at 23:57)
+* ["Jupyter notebook" for Lean?](24287JupyternotebookforLean.html) (9 messages, latest: Nov 08 2019 at 00:28)
 
-* ["Jupyter notebook" for Lean?](24287JupyternotebookforLean.html) (8 messages, latest: Nov 07 2019 at 21:50)
+* [Cute instance loop](65569Cuteinstanceloop.html) (94 messages, latest: Nov 07 2019 at 23:57)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (67 messages, latest: Nov 07 2019 at 21:12)
 
