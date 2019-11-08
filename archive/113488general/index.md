@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Travis](06426Travis.html) (193 messages, latest: Nov 08 2019 at 20:10)
+
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (58 messages, latest: Nov 08 2019 at 19:07)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (72 messages, latest: Nov 08 2019 at 15:38)
@@ -78,8 +80,6 @@ permalink: archive/113488general/index.html
 * [two basic recursor questions](12189twobasicrecursorquestions.html) (10 messages, latest: Oct 25 2019 at 23:25)
 
 * [Graham's number](86036Grahamsnumber.html) (19 messages, latest: Oct 25 2019 at 22:43)
-
-* [Travis](06426Travis.html) (192 messages, latest: Oct 25 2019 at 19:07)
 
 * [Writing proof terms to disk](15236Writingprooftermstodisk.html) (18 messages, latest: Oct 25 2019 at 02:41)
 
