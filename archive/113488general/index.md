@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linting in CI](98585lintinginCI.html) (13 messages, latest: Nov 08 2019 at 13:38)
+
 * [linter](19343linter.html) (4 messages, latest: Nov 08 2019 at 09:14)
 
 * [Cute instance loop](65569Cuteinstanceloop.html) (96 messages, latest: Nov 08 2019 at 09:09)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (67 messages, latest: Nov 07 2019 at 21:12)
 
 * [vscode translations](15463vscodetranslations.html) (2 messages, latest: Nov 07 2019 at 17:16)
-
-* [linting in CI](98585lintinginCI.html) (11 messages, latest: Nov 07 2019 at 14:14)
 
 * [Lean in the wild](43625Leaninthewild.html) (402 messages, latest: Nov 05 2019 at 12:15)
 
