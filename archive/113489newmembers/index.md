@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [nth append](02723nthappend.html) (1 message, latest: Nov 08 2019 at 04:59)
+
+* [How do I get the "right" side of a definition?](69521HowdoIgettherightsideofadefinition.html) (3 messages, latest: Nov 08 2019 at 04:51)
+
 * [quantifier exercises](65860quantifierexercises.html) (47 messages, latest: Nov 08 2019 at 00:34)
 
 * [compactness proof](74375compactnessproof.html) (6 messages, latest: Nov 07 2019 at 22:14)
