@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (1 message, latest: Nov 08 2019 at 05:29)
+* [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (3 messages, latest: Nov 08 2019 at 07:16)
 
 * [nth append](02723nthappend.html) (1 message, latest: Nov 08 2019 at 04:59)
 

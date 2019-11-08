@@ -9,11 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (49 messages, latest: Nov 08 2019 at 06:44)
+* [linter](19343linter.html) (1 message, latest: Nov 08 2019 at 07:56)
 
-* ["Jupyter notebook" for Lean?](24287JupyternotebookforLean.html) (9 messages, latest: Nov 08 2019 at 00:28)
+* ["Jupyter notebook" for Lean?](24287JupyternotebookforLean.html) (10 messages, latest: Nov 08 2019 at 07:13)
 
-* [Cute instance loop](65569Cuteinstanceloop.html) (94 messages, latest: Nov 07 2019 at 23:57)
+* [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (50 messages, latest: Nov 08 2019 at 07:13)
+
+* [Cute instance loop](65569Cuteinstanceloop.html) (95 messages, latest: Nov 08 2019 at 07:01)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (67 messages, latest: Nov 07 2019 at 21:12)
 
