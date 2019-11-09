@@ -9,13 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [help finding a lemma](30422helpfindingalemma.html) (204 messages, latest: Nov 09 2019 at 10:57)
+
+* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (10 messages, latest: Nov 09 2019 at 10:17)
+
 * [TPIL 4.6.6](96278TPIL466.html) (20 messages, latest: Nov 09 2019 at 08:45)
 
 * [1/0=0](83326100.html) (34 messages, latest: Nov 09 2019 at 07:22)
 
 * [nth append](02723nthappend.html) (7 messages, latest: Nov 09 2019 at 05:20)
-
-* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (9 messages, latest: Nov 09 2019 at 04:12)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (25 messages, latest: Nov 08 2019 at 18:42)
 
@@ -126,8 +128,6 @@ permalink: archive/113489newmembers/index.html
 * [subtype coercion](10559subtypecoercion.html) (15 messages, latest: Oct 23 2019 at 23:44)
 
 * [How do I map a list along with proof of membership?](55801HowdoImapalistalongwithproofofmembership.html) (3 messages, latest: Oct 23 2019 at 14:19)
-
-* [help finding a lemma](30422helpfindingalemma.html) (202 messages, latest: Oct 23 2019 at 00:55)
 
 * [wf recursion after mathlib update](37390wfrecursionaftermathlibupdate.html) (4 messages, latest: Oct 22 2019 at 21:40)
 

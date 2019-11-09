@@ -1031,6 +1031,31 @@ end
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">¬</span> <span class="o">(</span><span class="n">a</span> <span class="bp">&lt;</span> <span class="n">a</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">omega</span>
 </pre></div>
 
+<a name="180307730"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/180307730" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#180307730">Scott Morrison (Nov 09 2019 at 10:57)</a>:</h4>
+<p>I tried this problem again, using <code>push_cast</code> from <a href="https://github.com/leanprover-community/mathlib/issues/1464" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1464">#1464</a>, but still can't get there:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_cast</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">zmod</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="n">zmod</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">=</span> <span class="o">((</span><span class="n">k</span> <span class="bp">/</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="bp">+</span> <span class="n">k</span> <span class="err">%</span> <span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">zmod</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">k</span> <span class="o">(</span><span class="mi">2</span><span class="err">^</span><span class="n">n</span><span class="o">),</span> <span class="n">add_comm</span><span class="o">]</span> <span class="o">},</span>
+  <span class="n">push_cast</span><span class="o">,</span>
+  <span class="n">congr</span><span class="o">,</span>
+  <span class="n">convert</span> <span class="n">one_mul</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="n">norm_cast</span><span class="o">,</span>
+  <span class="n">conv</span> <span class="o">{</span> <span class="n">to_lhs</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">congr</span><span class="o">,</span> <span class="n">change</span> <span class="mi">2</span><span class="o">,</span> <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Anyone see how to finish this, or have an alternative suggestion to approach this in <code>zmod</code> land?</p>
+
+<a name="180307734"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/help%20finding%20a%20lemma/near/180307734" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30422helpfindingalemma.html#180307734">Scott Morrison (Nov 09 2019 at 10:57)</a>:</h4>
+<p>This stuff is still too awkward! :-)</p>
+
 
 {% endraw %}
 
