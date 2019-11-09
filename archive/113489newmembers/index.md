@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [help finding a lemma](30422helpfindingalemma.html) (206 messages, latest: Nov 09 2019 at 15:58)
+* [TPIL 4.6.7](61815TPIL467.html) (10 messages, latest: Nov 09 2019 at 16:55)
 
-* [TPIL 4.6.7](61815TPIL467.html) (9 messages, latest: Nov 09 2019 at 15:55)
+* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (11 messages, latest: Nov 09 2019 at 16:53)
 
-* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (10 messages, latest: Nov 09 2019 at 10:17)
+* [help finding a lemma](30422helpfindingalemma.html) (207 messages, latest: Nov 09 2019 at 16:03)
 
 * [TPIL 4.6.6](96278TPIL466.html) (20 messages, latest: Nov 09 2019 at 08:45)
 
