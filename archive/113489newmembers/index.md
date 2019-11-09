@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [1/0=0](83326100.html) (32 messages, latest: Nov 09 2019 at 01:59)
+
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (25 messages, latest: Nov 08 2019 at 18:42)
 
 * [vscode very slow](01264vscodeveryslow.html) (8 messages, latest: Nov 08 2019 at 18:37)
@@ -176,8 +178,6 @@ permalink: archive/113489newmembers/index.html
 * [emacs lean mathlib](84267emacsleanmathlib.html) (53 messages, latest: Oct 14 2019 at 02:36)
 
 * [range of ring morphism ?](53953rangeofringmorphism.html) (7 messages, latest: Oct 13 2019 at 19:56)
-
-* [1/0=0](83326100.html) (30 messages, latest: Oct 13 2019 at 11:33)
 
 * [complex.I is algebraic !](35943complexIisalgebraic.html) (12 messages, latest: Oct 13 2019 at 08:51)
 
