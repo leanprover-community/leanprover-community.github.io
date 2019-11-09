@@ -318,6 +318,14 @@ Hopefully that helps.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180240740" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180240740">Rob Lewis (Nov 08 2019 at 15:38)</a>:</h4>
 <p>Ah, cool. Does it produce the list at the time the file is compiled, or after the whole build is done? If we want to print attributes, it's important to generate this at the end. If a declaration gets tagged as a simp lemma in a later file than where it's declared, we need to catch that.</p>
 
+<a name="180333229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180333229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180333229">Wojciech Nawrocki (Nov 09 2019 at 21:45)</a>:</h4>
+<p>It produces the list using the environment that exists at the last line of the file being compiled. Note that we cannot know a priori all places where a lemma is tagged as simp, just as we cannot know a priori all instances of a type class. For this reason, I would say that such tags should be documented <em>in the module in which they exist</em> rather than at the point where the to-be-tagged-simp lemma is declared. Same goes for typeclass instances. We could aggregate them after processing all of mathlib and then retroactively add forward-links, but that wouldn't extend to a general notion of package and would be more of a hack.</p>
+
+<a name="180333312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180333312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180333312">Wojciech Nawrocki (Nov 09 2019 at 21:47)</a>:</h4>
+<p>By the way, while for typeclasses this makes perfect sense, the design choice of allowing lemmas to be tagged as <code>simp</code> after they are declared seems to only make sense if a lemma can be locally-simp, i.e. a useful simplification in the context of some theory, but maybe not generally. I'm not sure if this happens in mathlib but it seems plausible.</p>
+
 
 {% endraw %}
 

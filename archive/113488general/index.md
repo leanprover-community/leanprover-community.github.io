@@ -9,6 +9,12 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [truth v provability](66563truthvprovability.html) (21 messages, latest: Nov 09 2019 at 22:00)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (74 messages, latest: Nov 09 2019 at 21:47)
+
+* [git bisecting](62077gitbisecting.html) (32 messages, latest: Nov 09 2019 at 21:45)
+
 * [function with random definition](60909functionwithrandomdefinition.html) (52 messages, latest: Nov 09 2019 at 18:53)
 
 * [Travis](06426Travis.html) (194 messages, latest: Nov 09 2019 at 09:41)
@@ -20,8 +26,6 @@ permalink: archive/113488general/index.html
 * [vscode translations](15463vscodetranslations.html) (3 messages, latest: Nov 08 2019 at 23:54)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (58 messages, latest: Nov 08 2019 at 19:07)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (72 messages, latest: Nov 08 2019 at 15:38)
 
 * [linting in CI](98585lintinginCI.html) (13 messages, latest: Nov 08 2019 at 13:38)
 
