@@ -62,6 +62,60 @@ x*0 - x*0 = 0
 <span class="bp">#</span><span class="kn">check</span> <span class="n">mul_comm</span>     <span class="n">x</span> <span class="mi">0</span>     <span class="c1">-- x * 0 = 0 * x</span>
 </pre></div>
 
+<a name="180317035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180317035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180317035">Bryan Gin-ge Chen (Nov 09 2019 at 15:11)</a>:</h4>
+<p>It might be easier to start from something like this instead:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">sorry</span>
+<span class="bp">...</span>
+</pre></div>
+
+
+<p>(<a href="https://leanprover-community.github.io/lean-web-editor/#code=example%20%28x%20%3A%20%E2%84%A4%29%20%3A%20x%20*%200%20%3D%200%20%3A%3D%20%0Acalc%20x%20*%200%20%3D%20x%20*%20%281%20-%201%29%20%3A%20by%20rw%20%E2%86%90sub_self%0A%20%20%20%20%20%20%20...%20%3D%20x%20-%20x%20%20%20%20%20%20%20%3A%20by%20rw%20%5Bmul_sub%2C%20mul_one%5D%0A%20%20%20%20%20%20%20...%20%3D%200%20%20%20%20%20%20%20%20%20%20%20%3A%20sub_self%20x" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/#code=example%20%28x%20%3A%20%E2%84%A4%29%20%3A%20x%20*%200%20%3D%200%20%3A%3D%20%0Acalc%20x%20*%200%20%3D%20x%20*%20%281%20-%201%29%20%3A%20by%20rw%20%E2%86%90sub_self%0A%20%20%20%20%20%20%20...%20%3D%20x%20-%20x%20%20%20%20%20%20%20%3A%20by%20rw%20%5Bmul_sub%2C%20mul_one%5D%0A%20%20%20%20%20%20%20...%20%3D%200%20%20%20%20%20%20%20%20%20%20%20%3A%20sub_self%20x">Spoiler</a>)</p>
+
+<a name="180317447"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180317447" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180317447">Eduardo Cavazos (Nov 09 2019 at 15:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> Ah! OK... This seems to work:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+    <span class="k">calc</span>
+        <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span>   <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>   <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">sub_self</span>
+        <span class="bp">...</span>     <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">mul_sub</span>
+        <span class="bp">...</span>     <span class="bp">=</span> <span class="mi">0</span>             <span class="o">:</span> <span class="k">by</span> <span class="n">rw</span> <span class="n">sub_self</span>
+</pre></div>
+
+
+<p>Thank you again!!!</p>
+
+<a name="180317528"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180317528" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180317528">Bryan Gin-ge Chen (Nov 09 2019 at 15:23)</a>:</h4>
+<p>Nice work! (and it looks like I had an unnecessary <code>mul_one</code> step in my "Spoiler", whoops)</p>
+
+<a name="180317967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180317967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180317967">Eduardo Cavazos (Nov 09 2019 at 15:34)</a>:</h4>
+<p>Here's a version which doesn't use rewrite:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+    <span class="k">have</span> <span class="n">h1</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">,</span>              <span class="k">from</span> <span class="n">eq</span><span class="bp">.</span><span class="n">refl</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h2</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">,</span>  <span class="k">from</span> <span class="n">mul_sub</span> <span class="n">x</span> <span class="mi">1</span> <span class="mi">1</span><span class="o">,</span>
+    <span class="k">have</span> <span class="n">h3</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span>            <span class="k">from</span> <span class="n">sub_self</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span><span class="o">),</span>
+    <span class="k">calc</span>
+        <span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span>   <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span>   <span class="o">:</span> <span class="n">congr_arg</span> <span class="bp">_</span> <span class="n">h1</span>
+        <span class="bp">...</span>     <span class="bp">=</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="bp">-</span> <span class="n">x</span> <span class="bp">*</span> <span class="mi">1</span> <span class="o">:</span> <span class="n">h2</span>
+        <span class="bp">...</span>     <span class="bp">=</span> <span class="mi">0</span>             <span class="o">:</span> <span class="n">h3</span>
+</pre></div>
+
+<a name="180318693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180318693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180318693">Eduardo Cavazos (Nov 09 2019 at 15:52)</a>:</h4>
+<p>As an aside, when I open your spoiler link to view your approach, I see errors in the Lean Web Editor:</p>
+<div class="message_inline_image"><a href="https://i.imgur.com/jZlA9Xe.png" target="_blank" title="https://i.imgur.com/jZlA9Xe.png"><img src="https://i.imgur.com/jZlA9Xe.png"></a></div>
+
+<a name="180318698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180318698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180318698">Eduardo Cavazos (Nov 09 2019 at 15:52)</a>:</h4>
+<p>Do I need to do something to get it to execute properly in there?</p>
+
+<a name="180318787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180318787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180318787">Bryan Gin-ge Chen (Nov 09 2019 at 15:55)</a>:</h4>
+<p>Try clicking the (?) icon and then scroll down and click "Clear JS / wasm cache and refresh".</p>
+
 
 {% endraw %}
 
