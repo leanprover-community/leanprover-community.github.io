@@ -23,6 +23,30 @@ permalink: archive/113489newmembers/02723nthappend.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nth%20append/near/180214856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02723nthappend.html#180214856">Kevin Buzzard (Nov 08 2019 at 09:40)</a>:</h4>
 <p>I can't see it in data.list.basic; <code>nth_le_append</code> only deals with the n'th element of L equalling the n'th element of L++M</p>
 
+<a name="180296456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nth%20append/near/180296456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02723nthappend.html#180296456">Scott Morrison (Nov 09 2019 at 04:48)</a>:</h4>
+<p><span class="user-mention" data-user-id="232998">@Eamon Barrett</span></p>
+<div class="codehilite"><pre><span></span>import data.nat.basic
+
+lemma nth_le_append_right {α : Type} : Π (L M : list α) (k : ℕ) (h₀ : L.length ≤ k) (h₁) (h₂),
+  (L ++ M).nth_le k h₁ = M.nth_le (k - L.length) h₂
+| [] M k h₀ h₁ h₂ := rfl
+| (l :: L) M (k+1) h₀ h₁ h₂ :=
+  begin
+    dsimp,
+    conv { to_rhs, congr, skip, rw [←nat.sub_sub, nat.sub.right_comm, nat.add_sub_cancel], },
+    rw nth_le_append_right L M k (nat.lt_succ_iff.mp h₀),
+  end
+</pre></div>
+
+<a name="180296462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nth%20append/near/180296462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02723nthappend.html#180296462">Scott Morrison (Nov 09 2019 at 04:49)</a>:</h4>
+<p>(This isn't exactly what you asked for, which I think wasn't true.)</p>
+
+<a name="180296723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/nth%20append/near/180296723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02723nthappend.html#180296723">Scott Morrison (Nov 09 2019 at 04:58)</a>:</h4>
+<p>You can eliminate h2 here, which is a consequence of h0 and h1.</p>
+
 
 {% endraw %}
 

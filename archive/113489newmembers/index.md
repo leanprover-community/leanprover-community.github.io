@@ -9,15 +9,19 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [1/0=0](83326100.html) (32 messages, latest: Nov 09 2019 at 01:59)
+* [nth append](02723nthappend.html) (5 messages, latest: Nov 09 2019 at 04:58)
+
+* [TPIL 4.6.6](96278TPIL466.html) (5 messages, latest: Nov 09 2019 at 04:44)
+
+* [1/0=0](83326100.html) (33 messages, latest: Nov 09 2019 at 04:16)
+
+* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (9 messages, latest: Nov 09 2019 at 04:12)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (25 messages, latest: Nov 08 2019 at 18:42)
 
 * [vscode very slow](01264vscodeveryslow.html) (8 messages, latest: Nov 08 2019 at 18:37)
 
 * [my attempt proving gcd(a, b) = gcd(b, a)](51460myattemptprovinggcdabgcdba.html) (14 messages, latest: Nov 08 2019 at 13:21)
-
-* [nth append](02723nthappend.html) (2 messages, latest: Nov 08 2019 at 09:40)
 
 * [How do I get the "right" side of a definition?](69521HowdoIgettherightsideofadefinition.html) (3 messages, latest: Nov 08 2019 at 04:51)
 
@@ -34,8 +38,6 @@ permalink: archive/113489newmembers/index.html
 * [Reassign variable value](23264Reassignvariablevalue.html) (12 messages, latest: Nov 06 2019 at 14:40)
 
 * [How do you replace a goal by its contrapositive?](12163Howdoyoureplaceagoalbyitscontrapositive.html) (19 messages, latest: Nov 06 2019 at 12:20)
-
-* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (8 messages, latest: Nov 06 2019 at 11:31)
 
 * [error on "import tactic.ring"](32733erroronimporttacticring.html) (4 messages, latest: Nov 06 2019 at 07:04)
 
