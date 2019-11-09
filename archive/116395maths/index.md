@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (4 messages, latest: Nov 09 2019 at 18:56)
+* [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (5 messages, latest: Nov 09 2019 at 19:18)
 
 * [nonempty sets](89850nonemptysets.html) (8 messages, latest: Nov 09 2019 at 07:42)
 
