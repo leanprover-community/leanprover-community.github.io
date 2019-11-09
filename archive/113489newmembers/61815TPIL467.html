@@ -1,0 +1,68 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/61815TPIL467.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html">TPIL 4.6.7</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180316324"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180316324" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180316324">Eduardo Cavazos (Nov 09 2019 at 14:54)</a>:</h4>
+<p>In TPIL 4.6.7 we're asked to prove the following:</p>
+<div class="codehilite"><pre><span></span>example (x : ℤ) : x * 0 = 0 := sorry
+</pre></div>
+
+
+<p>It's suggested that we use <code>#check sub_self</code> as well as the identities in section 4.2.</p>
+<p>It looks like I can get:</p>
+<div class="codehilite"><pre><span></span>x * 0 = x * 0 + 0
+</pre></div>
+
+
+<p>using</p>
+<div class="codehilite"><pre><span></span>eq.symm (add_zero (x * 0))
+</pre></div>
+
+
+<p>And I can get:</p>
+<div class="codehilite"><pre><span></span>x * 0 - x * 0 = 0
+</pre></div>
+
+
+<p>using</p>
+<div class="codehilite"><pre><span></span>sub_self (x * 0)
+</pre></div>
+
+
+<p>So I have these two:</p>
+<div class="codehilite"><pre><span></span>x*0 = x*0 + 0
+
+x*0 - x*0 = 0
+</pre></div>
+
+
+<p>and it seems like I just need an intermediary step (move the <code>x*0</code> to the left of the <code>=</code> in the first expression to get the second?)</p>
+
+<a name="180316492"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/TPIL%204.6.7/near/180316492" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/61815TPIL467.html#180316492">Eduardo Cavazos (Nov 09 2019 at 14:58)</a>:</h4>
+<p>I did enumerate the various applications of the identities with <code>x * 0</code>:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">add_zero</span>     <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- x * 0 + 0 = x * 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">zero_add</span>     <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- 0 + x * 0 = x * 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">mul_one</span>      <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- x * 0 * 1 = x * 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">one_mul</span>      <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- 1 * (x * 0) = x * 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">neg_add_self</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- -(x * 0) + x * 0 = 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">add_neg_self</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- x * 0 + -(x * 0) = 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">sub_self</span>     <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="mi">0</span><span class="o">)</span> <span class="c1">-- x * 0 - x * 0 = 0</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">mul_comm</span>     <span class="n">x</span> <span class="mi">0</span>     <span class="c1">-- x * 0 = 0 * x</span>
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
