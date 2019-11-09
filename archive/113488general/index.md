@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [function with random definition](60909functionwithrandomdefinition.html) (43 messages, latest: Nov 09 2019 at 00:06)
+
+* [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
+
 * [vscode translations](15463vscodetranslations.html) (3 messages, latest: Nov 08 2019 at 23:54)
 
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (2 messages, latest: Nov 08 2019 at 23:37)
@@ -39,11 +43,7 @@ permalink: archive/113488general/index.html
 
 * [`let` = `have`](00711lethave.html) (11 messages, latest: Nov 03 2019 at 13:01)
 
-* [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (10 messages, latest: Nov 03 2019 at 12:15)
-
 * [unfortunate failures of `library_search`](02134unfortunatefailuresoflibrarysearch.html) (18 messages, latest: Nov 03 2019 at 04:06)
-
-* [function with random definition](60909functionwithrandomdefinition.html) (42 messages, latest: Nov 02 2019 at 23:16)
 
 * [Proving for Fun](94070ProvingforFun.html) (161 messages, latest: Nov 02 2019 at 21:12)
 
