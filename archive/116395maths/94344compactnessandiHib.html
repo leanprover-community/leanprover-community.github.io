@@ -1,0 +1,58 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/94344compactnessandiHib.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/94344compactnessandiHib.html">compactness and `⋃ (i : β) (H : i ∈ b)`</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180308921"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/compactness%20and%20%60%E2%8B%83%20%28i%20%3A%20%CE%B2%29%20%28H%20%3A%20i%20%E2%88%88%20b%29%60/near/180308921" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/94344compactnessandiHib.html#180308921">Kevin Buzzard (Nov 09 2019 at 11:30)</a>:</h4>
+<p>Whilst thinking about <a href="#narrow/stream/113489-new-members/topic/compactness.20proof/near/180182361" title="#narrow/stream/113489-new-members/topic/compactness.20proof/near/180182361">this</a> I realised that I couldn't find the version of "compact" which I wanted. I might naively say now "...and this is obviously the correct version of compactness which mathematicians use" but I might be blinded by the fact that it's the one I want now.</p>
+<p>In the library we seem to have</p>
+<div class="codehilite"><pre><span></span>compact_iff_finite_subcover :
+  ∀ {α : Type u_1} [_inst_1 : topological_space α] {s : set α},
+    compact s ↔
+      ∀ (c : set (set α)),
+        (∀ (t : set α), t ∈ c → is_open t) →
+        s ⊆ ⋃₀ c → (∃ (c&#39; : set (set α)) (H : c&#39; ⊆ c), set.finite c&#39; ∧ s ⊆ ⋃₀ c&#39;)
+
+compact_elim_finite_subcover :
+  ∀ {α : Type u_1} [_inst_1 : topological_space α] {s : set α} {c : set (set α)},
+    compact s →
+    (∀ (t : set α), t ∈ c → is_open t) →
+    s ⊆ ⋃₀ c → (∃ (c&#39; : set (set α)) (H : c&#39; ⊆ c), set.finite c&#39; ∧ s ⊆ ⋃₀ c&#39;)
+
+compact_elim_finite_subcover_image :
+  ∀ {α : Type u_1} {β : Type u_2} [_inst_1 : topological_space α] {s : set α} {b : set β} {c : β → set α},
+    compact s →
+    (∀ (i : β), i ∈ b → is_open (c i)) →
+    (s ⊆ ⋃ (i : β) (H : i ∈ b), c i) →
+    (∃ (b&#39; : set β) (H : b&#39; ⊆ b), set.finite b&#39; ∧ s ⊆ ⋃ (i : β) (H : i ∈ b&#39;), c i)
+</pre></div>
+
+
+<p>The first two are the usual type theory thing where people for some reason want sets of stuff instead of stuff indexed by a type. The third one, <code>compact_elim_finite_subcover_image</code>, has an index type <code>β</code> but then the cover of <code>s</code> is not by all the sets <code>c i</code> for <code>i : β</code>, there is this extra variable <code>b</code>, we cover <code>s</code> by the elements corresponding to <code>b</code> and so we have to work with this <code>⋃ (i : β) (H : i ∈ b')</code> thing. Here <code>H</code> is a Prop and in particular a subsingleton.</p>
+<p>What I want, today at least, is the more straightforward</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">topological_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">s</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">c</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">set</span> <span class="n">α</span><span class="o">}</span> <span class="o">:</span>
+    <span class="n">compact</span> <span class="n">s</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">is_open</span> <span class="o">(</span><span class="n">c</span> <span class="n">i</span><span class="o">))</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="n">s</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">β</span><span class="o">),</span> <span class="n">c</span> <span class="n">i</span><span class="o">)</span> <span class="bp">→</span>
+    <span class="o">(</span><span class="bp">∃</span> <span class="o">(</span><span class="n">b&#39;</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">β</span><span class="o">),</span> <span class="n">s</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">i</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">i</span> <span class="err">∈</span> <span class="n">b&#39;</span><span class="o">),</span> <span class="n">c</span> <span class="n">i</span><span class="o">)</span>
+<span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+
+<p>So no superfluous b (it is superfluous, one can just replace beta with b), and I've thrown in a finset for good measure rather than a set plus the assumption that it's finite. Furthermore this approach removes one of the <code>⋃ (i : β) (H : i ∈ b)</code> things which are somehow a pain to work with (until one discovers <code>set.Union_pos</code>).</p>
+<p>In fact I guess this is an iff. Should this example be in mathlib or is there some infinite list of variants which we can't hope to capture and I'm supposed to just get on with it and work with what we have?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

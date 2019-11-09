@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (1 message, latest: Nov 09 2019 at 11:30)
+
 * [nonempty sets](89850nonemptysets.html) (8 messages, latest: Nov 09 2019 at 07:42)
 
 * [group cohomology](89262groupcohomology.html) (63 messages, latest: Nov 08 2019 at 15:10)
