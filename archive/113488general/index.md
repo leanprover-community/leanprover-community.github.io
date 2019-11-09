@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (3 messages, latest: Nov 09 2019 at 02:29)
+
 * [function with random definition](60909functionwithrandomdefinition.html) (43 messages, latest: Nov 09 2019 at 00:06)
 
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
 
 * [vscode translations](15463vscodetranslations.html) (3 messages, latest: Nov 08 2019 at 23:54)
-
-* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (2 messages, latest: Nov 08 2019 at 23:37)
 
 * [Travis](06426Travis.html) (193 messages, latest: Nov 08 2019 at 20:10)
 
