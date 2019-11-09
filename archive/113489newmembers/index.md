@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (7 messages, latest: Nov 09 2019 at 20:52)
+
+* [mathlib dependency](82625mathlibdependency.html) (14 messages, latest: Nov 09 2019 at 20:42)
+
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (12 messages, latest: Nov 09 2019 at 19:11)
 
 * [TPIL 4.6.7](61815TPIL467.html) (10 messages, latest: Nov 09 2019 at 16:55)
