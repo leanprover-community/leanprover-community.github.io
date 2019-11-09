@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Travis](06426Travis.html) (194 messages, latest: Nov 09 2019 at 09:41)
+
 * [function with random definition](60909functionwithrandomdefinition.html) (44 messages, latest: Nov 09 2019 at 07:15)
 
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (4 messages, latest: Nov 09 2019 at 04:27)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
 
 * [vscode translations](15463vscodetranslations.html) (3 messages, latest: Nov 08 2019 at 23:54)
-
-* [Travis](06426Travis.html) (193 messages, latest: Nov 08 2019 at 20:10)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (58 messages, latest: Nov 08 2019 at 19:07)
 
