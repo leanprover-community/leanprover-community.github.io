@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [TPIL 4.6.6](96278TPIL466.html) (17 messages, latest: Nov 09 2019 at 05:59)
+* [TPIL 4.6.6](96278TPIL466.html) (19 messages, latest: Nov 09 2019 at 07:39)
+
+* [1/0=0](83326100.html) (34 messages, latest: Nov 09 2019 at 07:22)
 
 * [nth append](02723nthappend.html) (7 messages, latest: Nov 09 2019 at 05:20)
-
-* [1/0=0](83326100.html) (33 messages, latest: Nov 09 2019 at 04:16)
 
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (9 messages, latest: Nov 09 2019 at 04:12)
 
