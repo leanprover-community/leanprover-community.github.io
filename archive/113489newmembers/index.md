@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (164 messages, latest: Nov 10 2019 at 12:07)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (171 messages, latest: Nov 10 2019 at 14:54)
 
 * [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
 
