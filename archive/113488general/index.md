@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [truth v provability](66563truthvprovability.html) (33 messages, latest: Nov 10 2019 at 16:59)
+* [truth v provability](66563truthvprovability.html) (35 messages, latest: Nov 10 2019 at 17:21)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (77 messages, latest: Nov 10 2019 at 13:27)
 

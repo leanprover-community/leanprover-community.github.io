@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [the integer game](45674theintegergame.html) (18 messages, latest: Nov 10 2019 at 17:19)
+
 * [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (5 messages, latest: Nov 09 2019 at 19:18)
 
 * [nonempty sets](89850nonemptysets.html) (8 messages, latest: Nov 09 2019 at 07:42)
@@ -34,8 +36,6 @@ permalink: archive/116395maths/index.html
 * [bundling submonoids](35255bundlingsubmonoids.html) (27 messages, latest: Oct 27 2019 at 21:49)
 
 * [Proof by algorithm](86601Proofbyalgorithm.html) (346 messages, latest: Oct 27 2019 at 12:08)
-
-* [the integer game](45674theintegergame.html) (15 messages, latest: Oct 25 2019 at 21:03)
 
 * [algebraic independence in K-Algebras](58701algebraicindependenceinKAlgebras.html) (19 messages, latest: Oct 25 2019 at 15:43)
 
