@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [What are something to look at for beginners of lean?](64160Whataresomethingtolookatforbeginnersoflean.html) (4 messages, latest: Nov 10 2019 at 20:18)
+
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (8 messages, latest: Nov 10 2019 at 19:46)
 
 * [truth v provability](66563truthvprovability.html) (35 messages, latest: Nov 10 2019 at 17:21)
