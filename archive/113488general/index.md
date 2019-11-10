@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (5 messages, latest: Nov 10 2019 at 06:18)
+* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (9 messages, latest: Nov 10 2019 at 07:32)
 
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (5 messages, latest: Nov 10 2019 at 04:39)
 
