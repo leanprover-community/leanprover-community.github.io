@@ -330,6 +330,14 @@ Hopefully that helps.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180334499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180334499">Wojciech Nawrocki (Nov 09 2019 at 22:18)</a>:</h4>
 <p>Oh, and because the signature of <code>module_doc_strings : tactic (list (option name × string))</code> is weird, I am considering deleting it and replacing with <code>module_doc_string : string -&gt; string</code>, which returns the module doc string for the module identified by hopefully same scheme as in <code>import</code>, e.g. <code>module_doc_string ".mymod"</code> should return the doc for <code>./import.lean</code>. The declaration docs are still retrievable by folding over the environment, so no expressivity is lost.</p>
 
+<a name="180363429"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180363429" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180363429">Rob Lewis (Nov 10 2019 at 13:25)</a>:</h4>
+<p>I think, in general, we add attributes as soon as they're available. But this isn't always in the file where the declaration is defined: see e.g. the bottom of <code>norm_cast</code>. It intuitively seems useful to document that <code>int.coe_nat_succ</code> is a <code>move_cast</code> lemma. That is indeed some kind of forward reference, but I'm not sure that's a problem for this kind of documentation. It's documenting the library as a whole, forward references aren't necessarily wrong. But it does seem wrong when an attribute is added deep in the file hierarchy. Declaring <code>nat.prime</code> as a class in the p-adics files is an example of this, but there are also other reasons this shouldn't happen and WIP to change it.</p>
+
+<a name="180363484"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180363484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180363484">Rob Lewis (Nov 10 2019 at 13:27)</a>:</h4>
+<p>Besides tactic attributes like <code>move_cast</code>, <code>ext</code>, etc, there aren't many cases where global attributes are added long after the declarations are defined. There are some reducibility level changes I think.</p>
+
 
 {% endraw %}
 
