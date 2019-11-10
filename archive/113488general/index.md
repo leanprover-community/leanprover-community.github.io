@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [truth v provability](66563truthvprovability.html) (29 messages, latest: Nov 10 2019 at 08:57)
+* [truth v provability](66563truthvprovability.html) (30 messages, latest: Nov 10 2019 at 09:43)
 
 * [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (9 messages, latest: Nov 10 2019 at 07:32)
 
