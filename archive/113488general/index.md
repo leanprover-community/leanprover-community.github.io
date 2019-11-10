@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (5 messages, latest: Nov 10 2019 at 04:39)
+
 * [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (4 messages, latest: Nov 10 2019 at 01:05)
 
 * [truth v provability](66563truthvprovability.html) (28 messages, latest: Nov 09 2019 at 23:18)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [function with random definition](60909functionwithrandomdefinition.html) (52 messages, latest: Nov 09 2019 at 18:53)
 
 * [Travis](06426Travis.html) (194 messages, latest: Nov 09 2019 at 09:41)
-
-* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (4 messages, latest: Nov 09 2019 at 04:27)
 
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
 
