@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (9 messages, latest: Nov 09 2019 at 21:12)
+* [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
 
 * [mathlib dependency](82625mathlibdependency.html) (14 messages, latest: Nov 09 2019 at 20:42)
 

@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (5 messages, latest: Nov 10 2019 at 04:39)
+* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (5 messages, latest: Nov 10 2019 at 06:18)
 
-* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (4 messages, latest: Nov 10 2019 at 01:05)
+* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (5 messages, latest: Nov 10 2019 at 04:39)
 
 * [truth v provability](66563truthvprovability.html) (28 messages, latest: Nov 09 2019 at 23:18)
 

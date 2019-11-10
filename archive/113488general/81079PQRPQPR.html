@@ -33,6 +33,25 @@ permalink: archive/113488general/81079PQRPQPR.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180340385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180340385">Marc Huisinga (Nov 10 2019 at 01:05)</a>:</h4>
 <p>in my formal systems lecture it was called the german equivalent of "distribute"</p>
 
+<a name="180349652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/%28P%20%E2%86%92%20%28Q%20%E2%86%92%20R%29%29%20%E2%86%92%20%28P%20%E2%86%92%20Q%29%20%E2%86%92%20%28P%20%E2%86%92%20R%29/near/180349652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/81079PQRPQPR.html#180349652">Scott Morrison (Nov 10 2019 at 06:18)</a>:</h4>
+<p>I'm not sure I expected <code>library_search</code> to work here, but <code>{ intros, library_search }</code> certainly should, simply because <code>{ intros, solve_by_elim }</code> should work, because</p>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">logic</span><span class="bp">.</span><span class="n">basic</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">library_search</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">P</span> <span class="n">Q</span> <span class="n">R</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="o">(</span><span class="n">Q</span> <span class="bp">→</span> <span class="n">R</span><span class="o">))</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">Q</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">P</span> <span class="bp">→</span> <span class="n">R</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intros</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">a_2</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">a_1</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">a_2</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>works. However <code>solve_by_elim</code> fails, which is surely a bug. :-(</p>
+
 
 {% endraw %}
 
