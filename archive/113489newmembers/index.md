@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (164 messages, latest: Nov 10 2019 at 12:07)
+
 * [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
 
 * [mathlib dependency](82625mathlibdependency.html) (14 messages, latest: Nov 09 2019 at 20:42)
@@ -36,8 +38,6 @@ permalink: archive/113489newmembers/index.html
 * [quantifier exercises](65860quantifierexercises.html) (47 messages, latest: Nov 08 2019 at 00:34)
 
 * [compactness proof](74375compactnessproof.html) (6 messages, latest: Nov 07 2019 at 22:14)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (163 messages, latest: Nov 07 2019 at 18:08)
 
 * [product of integers](53624productofintegers.html) (4 messages, latest: Nov 07 2019 at 16:52)
 
