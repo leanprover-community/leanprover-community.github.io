@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [negation of a formula in prenex normal form](37992negationofaformulainprenexnormalform.html) (4 messages, latest: Nov 10 2019 at 19:38)
+
+* [noob question(s)](52075noobquestions.html) (1594 messages, latest: Nov 10 2019 at 19:12)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (171 messages, latest: Nov 10 2019 at 14:54)
 
 * [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
@@ -66,8 +70,6 @@ permalink: archive/113489newmembers/index.html
 * [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
 
 * [Look for lemma](97673Lookforlemma.html) (4 messages, latest: Nov 02 2019 at 21:56)
-
-* [noob question(s)](52075noobquestions.html) (1592 messages, latest: Nov 02 2019 at 16:03)
 
 * [Proof review](93401Proofreview.html) (40 messages, latest: Nov 02 2019 at 15:53)
 

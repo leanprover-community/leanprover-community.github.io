@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (8 messages, latest: Nov 10 2019 at 19:46)
+
 * [truth v provability](66563truthvprovability.html) (35 messages, latest: Nov 10 2019 at 17:21)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (77 messages, latest: Nov 10 2019 at 13:27)
 
 * [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (9 messages, latest: Nov 10 2019 at 07:32)
-
-* [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (5 messages, latest: Nov 10 2019 at 04:39)
 
 * [git bisecting](62077gitbisecting.html) (32 messages, latest: Nov 09 2019 at 21:45)
 
