@@ -9,6 +9,8 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
+* [#1582 nhds notation](487491582nhdsnotation.html) (31 messages, latest: Nov 10 2019 at 22:17)
+
 * [#1644 lie algebras](212301644liealgebras.html) (24 messages, latest: Nov 09 2019 at 14:28)
 
 * [#1647 push_cast](511361647pushcast.html) (1 message, latest: Nov 05 2019 at 10:20)
@@ -18,8 +20,6 @@ permalink: archive/144837PRreviews/index.html
 * [#1617 and #1619, fixing timeouts with "by exact"](367891617and1619fixingtimeoutswithbyexact.html) (2 messages, latest: Oct 27 2019 at 02:27)
 
 * [#1595 Dedekind's linear independence of characters](514841595Dedekindslinearindependenceofcharacters.html) (176 messages, latest: Oct 26 2019 at 20:59)
-
-* [#1582 nhds notation](487491582nhdsnotation.html) (30 messages, latest: Oct 21 2019 at 19:08)
 
 * [#1548 val_min_abs](138411548valminabs.html) (1 message, latest: Oct 13 2019 at 16:29)
 
