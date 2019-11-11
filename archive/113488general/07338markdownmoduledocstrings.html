@@ -338,6 +338,17 @@ Hopefully that helps.</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180363484" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180363484">Rob Lewis (Nov 10 2019 at 13:27)</a>:</h4>
 <p>Besides tactic attributes like <code>move_cast</code>, <code>ext</code>, etc, there aren't many cases where global attributes are added long after the declarations are defined. There are some reducibility level changes I think.</p>
 
+<a name="180435374"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180435374" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180435374">Rob Lewis (Nov 11 2019 at 16:02)</a>:</h4>
+<blockquote>
+<p>Oh, and because the signature of <code>module_doc_strings : tactic (list (option name × string))</code> is weird, I am considering deleting it and replacing with <code>module_doc_string : string -&gt; string</code>, which returns the module doc string for the module identified by hopefully same scheme as in <code>import</code>, e.g. <code>module_doc_string ".mymod"</code> should return the doc for <code>./import.lean</code>. The declaration docs are still retrievable by folding over the environment, so no expressivity is lost.</p>
+</blockquote>
+<p>Coming back to this: what would be best (for me) is a function that returns a list of pairs <code>(file, docs)</code>, where <code>file</code> is a string that identifies a Lean file and <code>docs</code> is the list of module doc strings for that file. (By module doc strings, I mean the file-level ones, not the ones associated with a declaration.)</p>
+
+<a name="180435480"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180435480" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180435480">Rob Lewis (Nov 11 2019 at 16:03)</a>:</h4>
+<p>As far as I can tell, there's still no way within Lean to get a module doc string from outside the current file. You're storing it in the oleans now, but it's not accessible by a metaprogram yet, right?</p>
+
 
 {% endraw %}
 

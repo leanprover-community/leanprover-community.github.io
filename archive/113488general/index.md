@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (79 messages, latest: Nov 11 2019 at 16:03)
+
 * [vscode translations](15463vscodetranslations.html) (4 messages, latest: Nov 11 2019 at 13:44)
 
 * [What are something to look at for beginners of lean?](64160Whataresomethingtolookatforbeginnersoflean.html) (4 messages, latest: Nov 10 2019 at 20:18)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (8 messages, latest: Nov 10 2019 at 19:46)
 
 * [truth v provability](66563truthvprovability.html) (35 messages, latest: Nov 10 2019 at 17:21)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (77 messages, latest: Nov 10 2019 at 13:27)
 
 * [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (9 messages, latest: Nov 10 2019 at 07:32)
 
