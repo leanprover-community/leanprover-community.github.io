@@ -9,9 +9,9 @@ permalink: archive/144837PRreviews/index.html
 
 ### Topics:
 
-* [#1644 lie algebras](212301644liealgebras.html) (25 messages, latest: Nov 11 2019 at 13:36)
+* [#1582 nhds notation](487491582nhdsnotation.html) (34 messages, latest: Nov 11 2019 at 15:53)
 
-* [#1582 nhds notation](487491582nhdsnotation.html) (33 messages, latest: Nov 11 2019 at 13:02)
+* [#1644 lie algebras](212301644liealgebras.html) (26 messages, latest: Nov 11 2019 at 15:15)
 
 * [#1647 push_cast](511361647pushcast.html) (1 message, latest: Nov 05 2019 at 10:20)
 

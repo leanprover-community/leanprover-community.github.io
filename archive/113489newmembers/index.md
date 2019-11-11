@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (30 messages, latest: Nov 11 2019 at 12:52)
+* [Making Sphinx notes](95035MakingSphinxnotes.html) (2 messages, latest: Nov 11 2019 at 15:08)
 
-* [Making Sphinx notes](95035MakingSphinxnotes.html) (1 message, latest: Nov 11 2019 at 11:35)
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (30 messages, latest: Nov 11 2019 at 12:52)
 
 * [leanpkg build ... too fast?](54460leanpkgbuildtoofast.html) (12 messages, latest: Nov 11 2019 at 06:40)
 
