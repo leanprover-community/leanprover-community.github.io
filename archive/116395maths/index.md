@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [the integer game](45674theintegergame.html) (18 messages, latest: Nov 10 2019 at 17:19)
+* [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (7 messages, latest: Nov 11 2019 at 13:49)
 
-* [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (5 messages, latest: Nov 09 2019 at 19:18)
+* [the integer game](45674theintegergame.html) (18 messages, latest: Nov 10 2019 at 17:19)
 
 * [nonempty sets](89850nonemptysets.html) (8 messages, latest: Nov 09 2019 at 07:42)
 

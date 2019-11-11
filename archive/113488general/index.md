@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [vscode translations](15463vscodetranslations.html) (4 messages, latest: Nov 11 2019 at 13:44)
+
 * [What are something to look at for beginners of lean?](64160Whataresomethingtolookatforbeginnersoflean.html) (4 messages, latest: Nov 10 2019 at 20:18)
 
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (8 messages, latest: Nov 10 2019 at 19:46)
@@ -26,8 +28,6 @@ permalink: archive/113488general/index.html
 * [Travis](06426Travis.html) (194 messages, latest: Nov 09 2019 at 09:41)
 
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
-
-* [vscode translations](15463vscodetranslations.html) (3 messages, latest: Nov 08 2019 at 23:54)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (58 messages, latest: Nov 08 2019 at 19:07)
 
