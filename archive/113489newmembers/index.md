@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Making Sphinx notes](95035MakingSphinxnotes.html) (1 message, latest: Nov 11 2019 at 11:35)
+
 * [leanpkg build ... too fast?](54460leanpkgbuildtoofast.html) (12 messages, latest: Nov 11 2019 at 06:40)
 
 * [nth append](02723nthappend.html) (8 messages, latest: Nov 10 2019 at 23:01)
