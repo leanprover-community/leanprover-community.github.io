@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (30 messages, latest: Nov 11 2019 at 12:52)
+
 * [Making Sphinx notes](95035MakingSphinxnotes.html) (1 message, latest: Nov 11 2019 at 11:35)
 
 * [leanpkg build ... too fast?](54460leanpkgbuildtoofast.html) (12 messages, latest: Nov 11 2019 at 06:40)
@@ -34,8 +36,6 @@ permalink: archive/113489newmembers/index.html
 * [TPIL 4.6.6](96278TPIL466.html) (20 messages, latest: Nov 09 2019 at 08:45)
 
 * [1/0=0](83326100.html) (34 messages, latest: Nov 09 2019 at 07:22)
-
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (25 messages, latest: Nov 08 2019 at 18:42)
 
 * [vscode very slow](01264vscodeveryslow.html) (8 messages, latest: Nov 08 2019 at 18:37)
 

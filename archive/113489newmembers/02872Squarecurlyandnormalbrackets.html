@@ -140,6 +140,54 @@ permalink: archive/113489newmembers/02872Squarecurlyandnormalbrackets.html
 <p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Don't worry about hassling me. I keep adding things to my list. I feel guilty that I am falling behind with corrections, but I am planning to catch up on Tuesday.</p>
 <p>But I agree that it would be good to have more documentation for mathlib. The docs folder is great. But it is also not hard to set up a new Sphinx document with the same style as TPIL. I'll be happy to do that if there is community interest in putting together a nice mathlib reference.</p>
 
+<a name="180420057"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180420057" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180420057">yuppie (Nov 11 2019 at 12:48)</a>:</h4>
+<p>I have been experimenting with the different types of variable declarations. Here is a code snippet:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">vector</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">α</span><span class="o">:</span><span class="kt">Type</span><span class="o">}</span>
+
+<span class="n">def</span> <span class="n">vec_add</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">Π</span> <span class="n">n</span> <span class="o">:</span> <span class="n">nat</span><span class="o">,</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">vector</span><span class="bp">.</span><span class="n">nil</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">v</span> <span class="n">w</span> <span class="o">:=</span>
+<span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">v</span><span class="o">)</span><span class="bp">+</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">w</span><span class="o">))</span> <span class="o">(</span><span class="n">vec_add</span> <span class="n">n</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">v</span><span class="o">))</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">w</span><span class="o">)))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">vec_add</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">vec_add</span>
+
+<span class="n">def</span> <span class="n">vec_add_2</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">α</span><span class="o">](</span><span class="n">n</span><span class="o">:</span><span class="n">nat</span><span class="o">)</span> <span class="o">:</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">vector</span> <span class="n">α</span> <span class="n">n</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">vector</span><span class="bp">.</span><span class="n">nil</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">v</span> <span class="n">w</span> <span class="o">:=</span>
+<span class="n">vector</span><span class="bp">.</span><span class="n">cons</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">v</span><span class="o">)</span><span class="bp">+</span><span class="n">vector</span><span class="bp">.</span><span class="n">head</span><span class="o">(</span><span class="n">w</span><span class="o">))</span> <span class="o">(</span><span class="n">vec_add_2</span> <span class="n">n</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">v</span><span class="o">))</span> <span class="o">(</span><span class="n">vector</span><span class="bp">.</span><span class="n">tail</span><span class="o">(</span><span class="n">w</span><span class="o">)))</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="n">vec_add_2</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">vec_add_2</span>
+</pre></div>
+
+
+<p>The check commands indicate that both declarations are of the same type but the first implementation type checks and the second does not. Somehow it interprets the first (explicit) argument as a vector and not as a natural number which is necessary for the recursion.</p>
+<p>My question: What is the difference between the two declarations (Pi after the colon vs. (n:nat) before the colon)? How do I make the implementation of vec_add_2 type check?</p>
+
+<a name="180420207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180420207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180420207">Johan Commelin (Nov 11 2019 at 12:50)</a>:</h4>
+<p>You can only pattern match on things after the colon</p>
+
+<a name="180420247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180420247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180420247">Johan Commelin (Nov 11 2019 at 12:51)</a>:</h4>
+<p>So you can use</p>
+<div class="codehilite"><pre><span></span><span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="bp">_</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">foo</span> <span class="n">bar</span>
+</pre></div>
+
+
+<p>in the second example. You only have two arguments to match on.</p>
+
+<a name="180420274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180420274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180420274">Tim Baanen (Nov 11 2019 at 12:51)</a>:</h4>
+<p>To add: If you put arguments before the colon, they will be bound for the whole declaration. So within the definition of <code>vec_add_2</code>, the expression <code>vec_add_2</code> has type <code>vector α n → vector α n → vector α n</code></p>
+
+<a name="180420364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Square%2C%20curly%20and%20normal%20brackets/near/180420364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/02872Squarecurlyandnormalbrackets.html#180420364">Johan Commelin (Nov 11 2019 at 12:52)</a>:</h4>
+<p>Right... that's an important thing to know for recursive definitions. And it took me some time to understand this. (I admit, I should probably have read TPIL...)</p>
+
 
 {% endraw %}
 
