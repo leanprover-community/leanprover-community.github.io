@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [leanpkg build ... too fast?](54460leanpkgbuildtoofast.html) (2 messages, latest: Nov 11 2019 at 00:48)
+
 * [nth append](02723nthappend.html) (8 messages, latest: Nov 10 2019 at 23:01)
 
 * [negation of a formula in prenex normal form](37992negationofaformulainprenexnormalform.html) (4 messages, latest: Nov 10 2019 at 19:38)
