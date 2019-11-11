@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [nth append](02723nthappend.html) (8 messages, latest: Nov 10 2019 at 23:01)
+
 * [negation of a formula in prenex normal form](37992negationofaformulainprenexnormalform.html) (4 messages, latest: Nov 10 2019 at 19:38)
 
 * [noob question(s)](52075noobquestions.html) (1594 messages, latest: Nov 10 2019 at 19:12)
@@ -28,8 +30,6 @@ permalink: archive/113489newmembers/index.html
 * [TPIL 4.6.6](96278TPIL466.html) (20 messages, latest: Nov 09 2019 at 08:45)
 
 * [1/0=0](83326100.html) (34 messages, latest: Nov 09 2019 at 07:22)
-
-* [nth append](02723nthappend.html) (7 messages, latest: Nov 09 2019 at 05:20)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (25 messages, latest: Nov 08 2019 at 18:42)
 
