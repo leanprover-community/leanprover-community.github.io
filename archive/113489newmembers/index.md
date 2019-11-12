@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Making Sphinx notes](95035MakingSphinxnotes.html) (9 messages, latest: Nov 12 2019 at 10:40)
+* [Making Sphinx notes](95035MakingSphinxnotes.html) (12 messages, latest: Nov 12 2019 at 14:43)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (172 messages, latest: Nov 12 2019 at 00:11)
 
