@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [wlog](90586wlog.html) (13 messages, latest: Nov 12 2019 at 06:59)
+* [type_of and friends](59957typeofandfriends.html) (4 messages, latest: Nov 12 2019 at 07:07)
 
-* [type_of and friends](59957typeofandfriends.html) (1 message, latest: Nov 12 2019 at 06:44)
+* [wlog](90586wlog.html) (13 messages, latest: Nov 12 2019 at 06:59)
 
 * [simp lemmas priority](36603simplemmaspriority.html) (1 message, latest: Nov 12 2019 at 02:43)
 
