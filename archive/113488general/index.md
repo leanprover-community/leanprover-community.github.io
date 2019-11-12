@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (130 messages, latest: Nov 12 2019 at 21:21)
+
 * [vscode snippets](92603vscodesnippets.html) (30 messages, latest: Nov 12 2019 at 19:27)
 
 * [simp lemmas priority](36603simplemmaspriority.html) (2 messages, latest: Nov 12 2019 at 17:58)
 
 * [Lean in the wild](43625Leaninthewild.html) (405 messages, latest: Nov 12 2019 at 17:34)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (123 messages, latest: Nov 12 2019 at 14:48)
 
 * [type_of and friends](59957typeofandfriends.html) (4 messages, latest: Nov 12 2019 at 07:07)
 
