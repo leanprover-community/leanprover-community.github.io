@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean in the wild](43625Leaninthewild.html) (403 messages, latest: Nov 12 2019 at 16:44)
+* [simp lemmas priority](36603simplemmaspriority.html) (2 messages, latest: Nov 12 2019 at 17:58)
+
+* [Lean in the wild](43625Leaninthewild.html) (405 messages, latest: Nov 12 2019 at 17:34)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (123 messages, latest: Nov 12 2019 at 14:48)
 
 * [type_of and friends](59957typeofandfriends.html) (4 messages, latest: Nov 12 2019 at 07:07)
 
 * [wlog](90586wlog.html) (13 messages, latest: Nov 12 2019 at 06:59)
-
-* [simp lemmas priority](36603simplemmaspriority.html) (1 message, latest: Nov 12 2019 at 02:43)
 
 * [vscode translations](15463vscodetranslations.html) (4 messages, latest: Nov 11 2019 at 13:44)
 

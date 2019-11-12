@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [More compactness questions](99551Morecompactnessquestions.html) (6 messages, latest: Nov 12 2019 at 16:59)
+* [More compactness questions](99551Morecompactnessquestions.html) (7 messages, latest: Nov 12 2019 at 17:08)
 
 * [compactness and `⋃ (i : β) (H : i ∈ b)`](94344compactnessandiHib.html) (7 messages, latest: Nov 11 2019 at 13:49)
 
