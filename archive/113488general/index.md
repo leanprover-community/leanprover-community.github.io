@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [simp lemmas priority](36603simplemmaspriority.html) (1 message, latest: Nov 12 2019 at 02:43)
+
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (117 messages, latest: Nov 12 2019 at 00:19)
 
 * [vscode translations](15463vscodetranslations.html) (4 messages, latest: Nov 11 2019 at 13:44)
