@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (172 messages, latest: Nov 12 2019 at 00:11)
+* [Making Sphinx notes](95035MakingSphinxnotes.html) (9 messages, latest: Nov 12 2019 at 10:40)
 
-* [Making Sphinx notes](95035MakingSphinxnotes.html) (3 messages, latest: Nov 11 2019 at 17:04)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (172 messages, latest: Nov 12 2019 at 00:11)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (30 messages, latest: Nov 11 2019 at 12:52)
 
