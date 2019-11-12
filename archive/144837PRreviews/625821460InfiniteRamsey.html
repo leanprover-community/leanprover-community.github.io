@@ -288,6 +288,68 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566844" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566844">Jared Corduan (Nov 12 2019 at 21:59)</a>:</h4>
 <p>I get an error on the <code>refl</code>after the left</p>
 
+<a name="180566989"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180566989" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180566989">Kevin Buzzard (Nov 12 2019 at 22:00)</a>:</h4>
+<p>maybe you should post working code. I filled in stuff to get your code working and maybe I made different choices to you. This compiles for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">inductive</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">red</span> <span class="o">:</span> <span class="n">color</span>
+<span class="bp">|</span> <span class="n">blue</span> <span class="o">:</span> <span class="n">color</span>
+
+<span class="kn">open</span> <span class="n">color</span>
+
+<span class="n">def</span> <span class="n">all_colors</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span> <span class="n">red</span> <span class="bp">::</span> <span class="n">blue</span> <span class="bp">::</span> <span class="n">multiset</span><span class="bp">.</span><span class="n">zero</span>
+<span class="o">,</span> <span class="k">begin</span> <span class="n">constructor</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span> <span class="kn">end</span><span class="bp">⟩</span>
+
+<span class="kn">instance</span> <span class="n">color_fintype</span>  <span class="o">:</span> <span class="n">fintype</span> <span class="n">color</span> <span class="o">:=</span>
+<span class="bp">⟨</span>
+<span class="n">all_colors</span><span class="o">,</span>
+<span class="k">begin</span>
+  <span class="n">intros</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+  <span class="n">right</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span>
+<span class="kn">end</span>
+<span class="bp">⟩</span>
+</pre></div>
+
+<a name="180567079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567079">Jared Corduan (Nov 12 2019 at 22:01)</a>:</h4>
+<p>ok, thanks, I was trying to get a short example of where I was stuck, but maybe I've done something weird</p>
+
+<a name="180567096"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567096" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567096">Kevin Buzzard (Nov 12 2019 at 22:01)</a>:</h4>
+<p>But I've seen this trick before with list.mem: </p>
+<div class="codehilite"><pre><span></span>example : 3 ∈ [1,2,3,4,5] :=
+begin
+  right,
+  right,
+  left,
+  refl,
+end
+</pre></div>
+
+
+<p>that was why I tried it.</p>
+
+<a name="180567255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567255">Jared Corduan (Nov 12 2019 at 22:03)</a>:</h4>
+<p>I appreciate the help! I'll play around some with that and see if I can get it working! I can't get the <code>assume x, by cases x; simp</code> to work either (the simp gets the red sqiggle), so I'm probably doing something odd.</p>
+
+<a name="180567316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567316">Patrick Massot (Nov 12 2019 at 22:04)</a>:</h4>
+<p>Then post working code.</p>
+
+<a name="180567333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567333">Patrick Massot (Nov 12 2019 at 22:04)</a>:</h4>
+<p>(minimized if possible)</p>
+
+<a name="180567391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/144837-PR%20reviews/topic/%231460%20Infinite%20Ramsey/near/180567391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/144837PRreviews/625821460InfiniteRamsey.html#180567391">Jared Corduan (Nov 12 2019 at 22:05)</a>:</h4>
+<p>The refl I assume was trying to prove <code>red = blue</code>, at least that's the goal I see. anyway, I get more organized and report back, thanks again!</p>
+
 
 {% endraw %}
 
