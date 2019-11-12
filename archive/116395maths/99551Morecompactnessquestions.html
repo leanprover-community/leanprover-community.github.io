@@ -1,0 +1,66 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/99551Morecompactnessquestions.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html">More compactness questions</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180533239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/More%20compactness%20questions/near/180533239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html#180533239">Lambert A'Campo (Nov 12 2019 at 16:19)</a>:</h4>
+<p>Suppose I used compactness to show that </p>
+<div class="codehilite"><pre><span></span><span class="n">finite</span> <span class="n">A</span> <span class="bp">∧</span> <span class="n">X</span> <span class="err">⊆</span> <span class="err">∪</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">A</span><span class="o">,</span> <span class="n">ball</span> <span class="n">a</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span>
+</pre></div>
+
+
+<p>How can I construct a function A -&gt; X which assigns to every x in X an a in A such that d(x,a) &lt; 0.5 ?</p>
+
+<a name="180534926"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/More%20compactness%20questions/near/180534926" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html#180534926">Chris Hughes (Nov 12 2019 at 16:35)</a>:</h4>
+<p>Something like <code>classical.some</code> or <code>classical.axiom_of_choice</code> should be useful.</p>
+
+<a name="180535788"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/More%20compactness%20questions/near/180535788" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html#180535788">Reid Barton (Nov 12 2019 at 16:43)</a>:</h4>
+<p>Also the <code>choose</code> tactic.</p>
+
+<a name="180536505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/More%20compactness%20questions/near/180536505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html#180536505">Reid Barton (Nov 12 2019 at 16:50)</a>:</h4>
+<p>(You might not think you need choice because A is finite, but <code>finite A</code> is not a constructively useful form of finiteness so you need what Lean calls "choice" anyways. It's easier to just use choice, and not use the <code>finite A</code> hypothesis.)</p>
+
+<a name="180536561"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/More%20compactness%20questions/near/180536561" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html#180536561">Reid Barton (Nov 12 2019 at 16:51)</a>:</h4>
+<p>In particular you should first transform the other hypothesis into "for all x, there exists a in A, such that ..."</p>
+
+<a name="180537325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/More%20compactness%20questions/near/180537325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/99551Morecompactnessquestions.html#180537325">Sebastien Gouezel (Nov 12 2019 at 16:59)</a>:</h4>
+<p>The <code>choose</code> tactic is just designed for this. Here is a possible proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">foo</span> <span class="o">[</span><span class="n">metric_space</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span> <span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">hX</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⊆</span> <span class="o">(</span><span class="err">⋃</span><span class="n">a</span> <span class="err">∈</span> <span class="n">A</span><span class="o">,</span> <span class="n">ball</span> <span class="n">a</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">))</span>
+  <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">ha</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="bp">∃</span><span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span><span class="o">),</span> <span class="bp">∀</span><span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">A</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ball</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">classical</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span><span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="bp">∃</span><span class="n">a</span><span class="o">,</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">A</span> <span class="bp">∧</span> <span class="o">(</span><span class="n">x</span> <span class="err">∈</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">ball</span> <span class="n">a</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">)</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">assume</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">by_cases</span> <span class="n">h</span> <span class="o">:</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">X</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">simpa</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span> <span class="kn">using</span> <span class="n">hX</span> <span class="n">h</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="bp">⟨</span><span class="n">a</span><span class="o">,</span> <span class="n">ha</span><span class="o">,</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">h</span><span class="o">]</span><span class="bp">⟩</span> <span class="o">}</span>
+  <span class="kn">end</span><span class="o">,</span>
+  <span class="n">choose</span> <span class="n">f</span> <span class="n">hf</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">f</span><span class="o">,</span> <span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="n">hf</span> <span class="n">x</span><span class="bp">⟩</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Note that in the way I have formalised the statement, the fact that <code>A</code> is nonempty needs to be an assumption, as otherwise the statement is not true (if <code>A</code> and <code>X</code> are empty but the whole type is not). If you formalize it slightly differently (requesting only that <code>f x</code> belongs to <code>A</code> when <code>x</code> is in <code>X</code>, for instance), this will not be necessary any more. It could be a good exercise for you to try to prove this modified statement following the same lines.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

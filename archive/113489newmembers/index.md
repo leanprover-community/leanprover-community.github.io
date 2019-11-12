@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Difference between def and let](30109Differencebetweendefandlet.html) (2 messages, latest: Nov 12 2019 at 15:42)
+* [Difference between def and let](30109Differencebetweendefandlet.html) (9 messages, latest: Nov 12 2019 at 16:43)
 
 * [Making Sphinx notes](95035MakingSphinxnotes.html) (12 messages, latest: Nov 12 2019 at 14:43)
 

@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean in the wild](43625Leaninthewild.html) (403 messages, latest: Nov 12 2019 at 16:44)
+
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (123 messages, latest: Nov 12 2019 at 14:48)
 
 * [type_of and friends](59957typeofandfriends.html) (4 messages, latest: Nov 12 2019 at 07:07)
@@ -44,8 +46,6 @@ permalink: archive/113488general/index.html
 * [Cute instance loop](65569Cuteinstanceloop.html) (96 messages, latest: Nov 08 2019 at 09:09)
 
 * ["Jupyter notebook" for Lean?](24287JupyternotebookforLean.html) (10 messages, latest: Nov 08 2019 at 07:13)
-
-* [Lean in the wild](43625Leaninthewild.html) (402 messages, latest: Nov 05 2019 at 12:15)
 
 * [nested namespaces](85988nestednamespaces.html) (5 messages, latest: Nov 05 2019 at 01:45)
 

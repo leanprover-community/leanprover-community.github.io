@@ -30,6 +30,59 @@ permalink: archive/113489newmembers/30109Differencebetweendefandlet.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180529194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180529194">Mario Carneiro (Nov 12 2019 at 15:42)</a>:</h4>
 <p>Let and def are morally similar but live in different syntactic classes. As for your particular example we need more context, preferably a MWE</p>
 
+<a name="180532307"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180532307" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180532307">Lambert A'Campo (Nov 12 2019 at 16:11)</a>:</h4>
+<p>What is a MWE?</p>
+
+<a name="180532322"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180532322" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180532322">Johan Commelin (Nov 12 2019 at 16:11)</a>:</h4>
+<p>minimal working example</p>
+
+<a name="180534130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180534130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180534130">Lambert A'Campo (Nov 12 2019 at 16:28)</a>:</h4>
+<p>Ok so here is a not quite minimal example and I don't understand why the declaration of the example has type problems.</p>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span>
+<span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">B&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">closed_ball</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">B&#39;</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">B&#39;</span><span class="o">),</span> <span class="n">ball</span> <span class="n">a</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180535221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180535221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180535221">Chris Hughes (Nov 12 2019 at 16:38)</a>:</h4>
+<p>MWE with imports</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">open</span> <span class="n">metric</span>
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">complete_space</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="n">def</span> <span class="n">B&#39;</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span> <span class="o">:=</span> <span class="n">closed_ball</span> <span class="mi">0</span> <span class="mi">1</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">B&#39;</span> <span class="err">⊆</span> <span class="err">⋃</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="n">a</span> <span class="err">∈</span> <span class="n">B&#39;</span><span class="o">),</span> <span class="n">ball</span> <span class="n">a</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The problem is that <code>V</code> is an implicit argument to <code>B'</code> and Lean cannot infer this argument</p>
+
+<a name="180535286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180535286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180535286">Chris Hughes (Nov 12 2019 at 16:39)</a>:</h4>
+<p>Writing <code>a ∈ (B' : set V)</code> fixes the problem.</p>
+
+<a name="180535456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180535456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180535456">Lambert A'Campo (Nov 12 2019 at 16:40)</a>:</h4>
+<p>Oh ok thank you!</p>
+
+<a name="180535777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Difference%20between%20def%20and%20let/near/180535777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/30109Differencebetweendefandlet.html#180535777">Reid Barton (Nov 12 2019 at 16:43)</a>:</h4>
+<p>In particular, <code>variables</code> are not "fixed" throughout a section.</p>
+
 
 {% endraw %}
 
