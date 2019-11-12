@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Difference between def and let](30109Differencebetweendefandlet.html) (2 messages, latest: Nov 12 2019 at 15:42)
+
 * [Making Sphinx notes](95035MakingSphinxnotes.html) (12 messages, latest: Nov 12 2019 at 14:43)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (172 messages, latest: Nov 12 2019 at 00:11)
