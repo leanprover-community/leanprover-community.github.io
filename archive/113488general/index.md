@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [wlog](90586wlog.html) (13 messages, latest: Nov 12 2019 at 06:59)
+
+* [type_of and friends](59957typeofandfriends.html) (1 message, latest: Nov 12 2019 at 06:44)
+
 * [simp lemmas priority](36603simplemmaspriority.html) (1 message, latest: Nov 12 2019 at 02:43)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (117 messages, latest: Nov 12 2019 at 00:19)
@@ -188,8 +192,6 @@ permalink: archive/113488general/index.html
 * [Mechanization Roundtable](33179MechanizationRoundtable.html) (9 messages, latest: Oct 06 2019 at 18:52)
 
 * [Sup of rats](82568Supofrats.html) (4 messages, latest: Oct 05 2019 at 10:07)
-
-* [wlog](90586wlog.html) (12 messages, latest: Oct 05 2019 at 05:07)
 
 * [doc_blame](42231docblame.html) (9 messages, latest: Oct 04 2019 at 18:10)
 
