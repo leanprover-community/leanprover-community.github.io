@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [vscode snippets](92603vscodesnippets.html) (30 messages, latest: Nov 12 2019 at 19:27)
+
 * [simp lemmas priority](36603simplemmaspriority.html) (2 messages, latest: Nov 12 2019 at 17:58)
 
 * [Lean in the wild](43625Leaninthewild.html) (405 messages, latest: Nov 12 2019 at 17:34)
@@ -82,8 +84,6 @@ permalink: archive/113488general/index.html
 * [Zulip users](15527Zulipusers.html) (14 messages, latest: Oct 27 2019 at 23:31)
 
 * [Lean vs other systems](78564Leanvsothersystems.html) (128 messages, latest: Oct 27 2019 at 17:33)
-
-* [vscode snippets](92603vscodesnippets.html) (29 messages, latest: Oct 27 2019 at 06:45)
 
 * [Logic notation hisotry](82669Logicnotationhisotry.html) (1 message, latest: Oct 27 2019 at 02:22)
 
