@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (172 messages, latest: Nov 12 2019 at 00:11)
+
 * [Making Sphinx notes](95035MakingSphinxnotes.html) (3 messages, latest: Nov 11 2019 at 17:04)
 
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (30 messages, latest: Nov 11 2019 at 12:52)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [negation of a formula in prenex normal form](37992negationofaformulainprenexnormalform.html) (4 messages, latest: Nov 10 2019 at 19:38)
 
 * [noob question(s)](52075noobquestions.html) (1594 messages, latest: Nov 10 2019 at 19:12)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (171 messages, latest: Nov 10 2019 at 14:54)
 
 * [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
 
