@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (22 messages, latest: Nov 13 2019 at 12:49)
+* [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (24 messages, latest: Nov 13 2019 at 13:38)
+
+* [analysis](03749analysis.html) (42 messages, latest: Nov 13 2019 at 13:04)
 
 * [potential projects](80411potentialprojects.html) (2 messages, latest: Nov 13 2019 at 10:36)
-
-* [analysis](03749analysis.html) (41 messages, latest: Nov 13 2019 at 10:25)
 
 * [norm_cast questions](19282normcastquestions.html) (4 messages, latest: Nov 13 2019 at 07:34)
 

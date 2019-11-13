@@ -1,0 +1,69 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/71586usingrecursortowriteterm.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/71586usingrecursortowriteterm.html">using recursor to write term</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180624814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20recursor%20to%20write%20term/near/180624814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71586usingrecursortowriteterm.html#180624814">Kevin Buzzard (Nov 13 2019 at 13:26)</a>:</h4>
+<p>I'm trying to be a computer scientist, unsuccessfully. I'm trying to define a function in term mode.</p>
+<div class="codehilite"><pre><span></span><span class="kn">inductive</span> <span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">c1</span> <span class="o">:</span> <span class="n">C</span>
+<span class="bp">|</span> <span class="n">c2</span> <span class="o">:</span> <span class="n">C</span>
+
+<span class="kn">inductive</span> <span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="bp">|</span> <span class="n">d1</span> <span class="o">:</span> <span class="n">D</span>
+<span class="bp">|</span> <span class="n">d2</span> <span class="o">:</span> <span class="n">D</span>
+
+<span class="n">def</span> <span class="n">thing1</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span>
+<span class="n">c</span><span class="bp">.</span><span class="n">rec</span>
+  <span class="o">(</span><span class="bp">_</span><span class="o">)</span> <span class="c1">-- correct &quot;don&#39;t know how to synthesize placeholder -- here&#39;s a helpful context&quot;</span>
+  <span class="o">(</span><span class="bp">_</span><span class="o">)</span> <span class="c1">-- correct</span>
+
+<span class="n">def</span> <span class="n">thing2</span> <span class="o">(</span><span class="n">c</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span>
+<span class="n">c</span><span class="bp">.</span><span class="n">rec</span>
+  <span class="o">(</span><span class="n">d</span><span class="bp">.</span><span class="n">rec</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+  <span class="o">(</span><span class="bp">_</span><span class="o">)</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at application</span>
+<span class="cm">  C.rec (D.rec ?m_3 ?m_4 d)</span>
+<span class="cm">term</span>
+<span class="cm">  D.rec ?m_2 ?m_3 d</span>
+<span class="cm">has type</span>
+<span class="cm">  ?m_1 d : Sort ?</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  ?m_1 C.c1 : Sort ?</span>
+<span class="cm">  -/</span>
+</pre></div>
+
+
+<p><code>thing1</code> is where things are going well. I want to use recursion on <code>c</code> and so I write <code>c.rec _ _</code> and both underscores have nice red underlines, indicating that I'm on the right track. </p>
+<p>But then I want to use recursion on <code>d</code> too, so I edit <code>thing1</code> until it becomes <code>thing2</code> and instead of having now three nice red underlines under my three underscores, Lean just gives up, flags the <code>c</code> in <code>c.rec</code> as an error. In reality the two inductive types are far more complicated and have parameters etc.</p>
+<p>Is there some trick to persuade Lean to start telling me the local context at every underscore? Have I just made some more basic error? It is going to be a royal pain figuring out all the types in my use case (some proofs are involved, I will need to drop into tactic mode at some point to supply all the terms needed). </p>
+<p>Am I missing a trick? Have I made an error?</p>
+
+<a name="180624922"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20recursor%20to%20write%20term/near/180624922" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71586usingrecursortowriteterm.html#180624922">Chris Hughes (Nov 13 2019 at 13:27)</a>:</h4>
+<p>Try <code>D.rec_on d</code>. I think there's a bug where it doesn't use the <code>elab_as_eliminator</code> when you use projection notation</p>
+
+<a name="180625109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20recursor%20to%20write%20term/near/180625109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71586usingrecursortowriteterm.html#180625109">Chris Hughes (Nov 13 2019 at 13:29)</a>:</h4>
+<p>Also <code>C.rec_on c</code></p>
+
+<a name="180626954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/using%20recursor%20to%20write%20term/near/180626954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/71586usingrecursortowriteterm.html#180626954">Kevin Buzzard (Nov 13 2019 at 13:49)</a>:</h4>
+<p>I think I love you. <em>Many</em> thanks!</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
