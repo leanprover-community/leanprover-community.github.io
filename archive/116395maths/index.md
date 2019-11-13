@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis](03749analysis.html) (6 messages, latest: Nov 12 2019 at 18:39)
+* [analysis](03749analysis.html) (11 messages, latest: Nov 12 2019 at 23:58)
+
+* [norm_cast questions](19282normcastquestions.html) (1 message, latest: Nov 12 2019 at 23:47)
 
 * [More compactness questions](99551Morecompactnessquestions.html) (7 messages, latest: Nov 12 2019 at 17:08)
 
