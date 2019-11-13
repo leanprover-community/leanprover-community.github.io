@@ -110,6 +110,44 @@ state: no goals
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180677243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180677243">Scott Viteri (Nov 13 2019 at 21:56)</a>:</h4>
 <p>I think I read somewhere that simp should only be used in a finishing position but it seems that my alternative is a to use a long string of rewrites. Is this preferable?</p>
 
+<a name="180678351"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180678351" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180678351">Rob Lewis (Nov 13 2019 at 22:08)</a>:</h4>
+<p>The problem here is that Lean isn't inferring the type of <code>sigma.mk 1 3</code>. It's of type <code>sigma f</code> where <code>f : nat -&gt; Type</code> where <code>f 1 = nat</code> and <code>f 2 = nat</code>, but that's not enough to know <code>f</code> is the constant function.</p>
+
+<a name="180678390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180678390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180678390">Rob Lewis (Nov 13 2019 at 22:09)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">list</span><span class="bp">.</span><span class="n">nodupkeys</span> <span class="o">[(</span><span class="n">sigma</span><span class="bp">.</span><span class="n">mk</span> <span class="mi">1</span> <span class="mi">3</span> <span class="o">:</span> <span class="n">sigma</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">ℕ</span><span class="o">)),</span> <span class="n">sigma</span><span class="bp">.</span><span class="n">mk</span> <span class="mi">2</span> <span class="mi">4</span><span class="o">]</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">simp</span><span class="o">,</span> <span class="n">exact</span> <span class="n">eq</span><span class="bp">.</span><span class="n">mp</span> <span class="o">(</span><span class="n">ne</span><span class="bp">.</span><span class="n">def</span> <span class="mi">1</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">succ_ne_self</span> <span class="mi">1</span><span class="o">)</span><span class="bp">.</span><span class="n">symm</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180679233"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180679233" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180679233">Scott Viteri (Nov 13 2019 at 22:18)</a>:</h4>
+<p>Great, I now have a working toy example:</p>
+<div class="codehilite"><pre><span></span>#eval alist.keys (alist.mk [(sigma.mk 1 3 : sigma (λ _, ℕ)), sigma.mk 2 4]
+                           (by {simp; exact eq.mp (ne.def 1 2) (nat.succ_ne_self 1).symm}))
+</pre></div>
+
+
+<p>produces [1,2]</p>
+
+<a name="180680226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180680226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180680226">Scott Viteri (Nov 13 2019 at 22:28)</a>:</h4>
+<p>The following also works </p>
+<div class="codehilite"><pre><span></span>#eval (alist.keys (alist.mk [(sigma.mk 1 [1] : sigma (λ _, list ℕ)), sigma.mk 2 [4,5]]
+                            (by {simp; exact eq.mp (ne.def 1 2) (nat.succ_ne_self 1).symm})))
+</pre></div>
+
+
+<p>So now my question is the following: <br>
+I plan on using assoc lists with natural numbers in the sigma.fst spot.<br>
+Is there a tactic that I can use that will take care of disequality proofs between nats when I first define an alist?</p>
+
+<a name="180682082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180682082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180682082">Mario Carneiro (Nov 13 2019 at 22:49)</a>:</h4>
+<p>You can try <code>dec_trivial</code></p>
+
 
 {% endraw %}
 
