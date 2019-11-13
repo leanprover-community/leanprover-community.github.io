@@ -92,6 +92,24 @@ Then why does <code>#check (alist.mk [{2,3}, {4,2}, {2,4}] _).nodupkeys</code> t
 </blockquote>
 <p>structures only have a single constructor <code>mk</code>. a value/proof of <code>entries.nodupkeys</code> is a parameter to that constructor, not a constructor of <code>alist</code> itself. one might also call it a projection ;)</p>
 
+<a name="180677074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180677074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180677074">Scott Viteri (Nov 13 2019 at 21:53)</a>:</h4>
+<p>This all makes sense. When I actually go to fill in the proof in the first place, I get the following error:</p>
+<div class="codehilite"><pre><span></span>example : list.nodupkeys [sigma.mk 1 3, sigma.mk 2 4] :=
+begin
+  simp, exact eq.mp (ne.def 1 2) (nat.succ_ne_self 1).symm
+end
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>tactic failed, result contains meta-variables
+state: no goals
+</pre></div>
+
+<a name="180677243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180677243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180677243">Scott Viteri (Nov 13 2019 at 21:56)</a>:</h4>
+<p>I think I read somewhere that simp should only be used in a finishing position but it seems that my alternative is a to use a long string of rewrites. Is this preferable?</p>
+
 
 {% endraw %}
 

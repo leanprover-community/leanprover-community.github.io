@@ -72,6 +72,32 @@ permalink: archive/113488general/90586wlog.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180487476" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180487476">Johan Commelin (Nov 12 2019 at 06:59)</a>:</h4>
 <p><span class="user-mention" data-user-id="110026">@Simon Hudon</span> Do you have any thoughts on this issue?</p>
 
+<a name="180672354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180672354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180672354">Alexander Bentkamp (Nov 13 2019 at 21:03)</a>:</h4>
+<p>I just found out that there is another parameter of this tactic: <code>discharger : tactic unit</code>. Its default value is <code>tactic.solve_by_elim &lt;|&gt; tactic.tautology tt &lt;|&gt; using_smt (smt_tactic.intros &gt;&gt; smt_tactic.solve_goals)</code>, which is the reason <code>wlog</code> takes so long. If you use <code>skip</code> instead, <code>wlog</code> is very fast. Of course, the disadvantage is that you get a lot of stupid goals afterwards.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">forty_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span><span class="bp">/</span><span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="bp">≤</span> <span class="mi">42</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">wlog</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="kn">using</span> <span class="o">[</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span> <span class="n">b</span> <span class="n">c</span> <span class="n">a</span><span class="o">,</span> <span class="n">c</span> <span class="n">b</span> <span class="n">a</span><span class="o">,</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="o">]</span> <span class="n">skip</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180674862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180674862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180674862">Johan Commelin (Nov 13 2019 at 21:29)</a>:</h4>
+<p>Thanks, that looks very helpful!</p>
+
+<a name="180675082"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180675082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180675082">Chris Hughes (Nov 13 2019 at 21:31)</a>:</h4>
+<p>But I guess you could use a more sensible tactic.</p>
+
+<a name="180675286"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180675286" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180675286">Simon Hudon (Nov 13 2019 at 21:33)</a>:</h4>
+<p>I thought that had been changed in mathlib already</p>
+
+<a name="180677043"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180677043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180677043">Alexander Bentkamp (Nov 13 2019 at 21:53)</a>:</h4>
+<p>Let us know if you find a nice way to discharge these goals. Maybe there could be a different default value for <code>discharger</code>?</p>
+
 
 {% endraw %}
 

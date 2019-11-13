@@ -9,9 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [std_basis](18397stdbasis.html) (2 messages, latest: Nov 13 2019 at 20:38)
+* [wlog](90586wlog.html) (18 messages, latest: Nov 13 2019 at 21:53)
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (179 messages, latest: Nov 13 2019 at 20:36)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (181 messages, latest: Nov 13 2019 at 21:33)
+
+* [Travis](06426Travis.html) (201 messages, latest: Nov 13 2019 at 21:12)
+
+* [std_basis](18397stdbasis.html) (2 messages, latest: Nov 13 2019 at 20:38)
 
 * [using recursor to write term](71586usingrecursortowriteterm.html) (6 messages, latest: Nov 13 2019 at 14:14)
 
@@ -22,8 +26,6 @@ permalink: archive/113488general/index.html
 * [Lean in the wild](43625Leaninthewild.html) (405 messages, latest: Nov 12 2019 at 17:34)
 
 * [type_of and friends](59957typeofandfriends.html) (4 messages, latest: Nov 12 2019 at 07:07)
-
-* [wlog](90586wlog.html) (13 messages, latest: Nov 12 2019 at 06:59)
 
 * [vscode translations](15463vscodetranslations.html) (4 messages, latest: Nov 11 2019 at 13:44)
 
@@ -38,8 +40,6 @@ permalink: archive/113488general/index.html
 * [git bisecting](62077gitbisecting.html) (32 messages, latest: Nov 09 2019 at 21:45)
 
 * [function with random definition](60909functionwithrandomdefinition.html) (52 messages, latest: Nov 09 2019 at 18:53)
-
-* [Travis](06426Travis.html) (194 messages, latest: Nov 09 2019 at 09:41)
 
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
 
