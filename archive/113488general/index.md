@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [using recursor to write term](71586usingrecursortowriteterm.html) (4 messages, latest: Nov 13 2019 at 13:49)
+* [using recursor to write term](71586usingrecursortowriteterm.html) (6 messages, latest: Nov 13 2019 at 14:14)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (168 messages, latest: Nov 13 2019 at 13:18)
 
