@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (175 messages, latest: Nov 13 2019 at 18:16)
+* [std_basis](18397stdbasis.html) (2 messages, latest: Nov 13 2019 at 20:38)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (179 messages, latest: Nov 13 2019 at 20:36)
 
 * [using recursor to write term](71586usingrecursortowriteterm.html) (6 messages, latest: Nov 13 2019 at 14:14)
 
