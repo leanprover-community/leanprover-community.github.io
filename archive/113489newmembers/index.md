@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Operator sections](95093Operatorsections.html) (1 message, latest: Nov 13 2019 at 13:48)
+* [Operator sections](95093Operatorsections.html) (3 messages, latest: Nov 13 2019 at 15:57)
 
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (13 messages, latest: Nov 13 2019 at 12:46)
 
