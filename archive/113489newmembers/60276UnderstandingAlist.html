@@ -1,0 +1,91 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/60276UnderstandingAlist.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html">Understanding Alist</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180661410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180661410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180661410">Scott Viteri (Nov 13 2019 at 19:18)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/c28497fa056ae52b93aa9aca2fd20155d57fa016/src/data/list/alist.lean#L16" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/c28497fa056ae52b93aa9aca2fd20155d57fa016/src/data/list/alist.lean#L16">https://github.com/leanprover-community/mathlib/blob/c28497fa056ae52b93aa9aca2fd20155d57fa016/src/data/list/alist.lean#L16</a> says that alist should have unique keys, but it in not clear to me how this is enforced. The alist.nodupkeys descructor is austensibly a proof that the keys are duplicated, but would this proof make more sense as a constuctor?</p>
+
+<a name="180661873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180661873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180661873">Scott Viteri (Nov 13 2019 at 19:23)</a>:</h4>
+<p>For example, <code> #reduce alist.keys (list.to_alist [{2,3}, {4,2}, {2,4}])</code> gives <code>list.map sigma.fst (list.erase_dupkeys._match_1 {2, 3} (list.erase_dupkeys._match_1 {4, 2} (list.erase_dupkeys._match_1 {2, 4} list.nil))) </code>,  and <code>#reduce (list.to_alist [{2,3}, {4,2}, {2,4}]).nodupkeys</code> triggers a memory consumption error (emacs).</p>
+
+<a name="180661967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180661967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180661967">Marc Huisinga (Nov 13 2019 at 19:24)</a>:</h4>
+<p>in order to create an alist you need to provide an element of entries.nodupkeys, which is a proof that there are no duplicate keys</p>
+
+<a name="180662042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180662042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180662042">Marc Huisinga (Nov 13 2019 at 19:25)</a>:</h4>
+<p>to_alist ensures this by calling erase_dupkeys, which removes all duplicates from the input</p>
+
+<a name="180662113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180662113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180662113">Bryan Gin-ge Chen (Nov 13 2019 at 19:26)</a>:</h4>
+<p>The <code>structure</code> syntax is a helper for defining inductive types with a single constructor (<a href="https://leanprover.github.io/theorem_proving_in_lean/structures_and_records.html#declaring-structures" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/structures_and_records.html#declaring-structures">TPiL section</a>). As Marc says, to construct an <code>alist</code>, you must supply both <code>entries</code> and <code>nodupkeys</code>.</p>
+
+<a name="180662158"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180662158" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180662158">Rob Lewis (Nov 13 2019 at 19:26)</a>:</h4>
+<p>By the way, unless you know what you're doing, you probably want to use <code>#eval</code> instead of <code>#reduce</code> for this kind of experimenting.</p>
+
+<a name="180662576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180662576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180662576">Scott Viteri (Nov 13 2019 at 19:31)</a>:</h4>
+<blockquote>
+<p>By the way, unless you know what you're doing, you probably want to use <code>#eval</code> instead of <code>#reduce</code> for this kind of experimenting.</p>
+</blockquote>
+<p>Ok, I'll use <code>#eval</code></p>
+
+<a name="180662894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180662894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180662894">Scott Viteri (Nov 13 2019 at 19:34)</a>:</h4>
+<p>So suppose I were to omit using nodupkeys_erase_dupkeys in list.to_alist.<br>
+Then why does <code>#check (alist.mk [{2,3}, {4,2}, {2,4}] _).nodupkeys</code> typecheck?</p>
+
+<a name="180663052"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180663052" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180663052">Scott Viteri (Nov 13 2019 at 19:36)</a>:</h4>
+<p>My understanding is that by using <code>_</code> I am inferring a proof, which in this case should not exist.<br>
+Maybe the distinction is that running eval on this expressions produces <code>don't know how to synthesize placeholder</code>.</p>
+
+<a name="180663320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180663320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180663320">Scott Viteri (Nov 13 2019 at 19:39)</a>:</h4>
+<blockquote>
+<p>The <code>structure</code> syntax is a helper for defining inductive types with a single constructor (<a href="https://leanprover.github.io/theorem_proving_in_lean/structures_and_records.html#declaring-structures" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/structures_and_records.html#declaring-structures">TPiL section</a>). As Marc says, to construct an <code>alist</code>, you must supply both <code>entries</code> and <code>nodupkeys</code>.</p>
+</blockquote>
+<p>My bad, <code>nodupkeys</code> is in fact a constructor here, thanks.</p>
+
+<a name="180664368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180664368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180664368">Rob Lewis (Nov 13 2019 at 19:49)</a>:</h4>
+<blockquote>
+<p>So suppose I were to omit using nodupkeys_erase_dupkeys in list.to_alist.<br>
+Then why does <code>#check (alist.mk [{2,3}, {4,2}, {2,4}] _).nodupkeys</code> typecheck?</p>
+</blockquote>
+<p>If you look at the output of <code>#check</code> you'll see a metavariable (<code>?M_1</code> or something). <code>#check</code> is displaying what the type would be, assuming you were to fill in all the placeholders that couldn't be filled in automatically.</p>
+
+<a name="180664789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180664789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180664789">Marc Huisinga (Nov 13 2019 at 19:53)</a>:</h4>
+<p>if you do this in regular code, you'll get <code>don't know how to synthesize placeholder</code>.<br>
+e.g.</p>
+<div class="codehilite"><pre><span></span>abbreviation f : ℕ → Type := λ n, ℕ
+def xs : list (sigma f) := [⟨2,3⟩, ⟨4,2⟩, ⟨2,4⟩]
+def foo : alist f := alist.mk xs _
+</pre></div>
+
+<a name="180665154"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180665154" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180665154">Kevin Buzzard (Nov 13 2019 at 19:56)</a>:</h4>
+<blockquote>
+<p>So suppose I were to omit using nodupkeys_erase_dupkeys in list.to_alist.<br>
+Then why does <code>#check (alist.mk [{2,3}, {4,2}, {2,4}] _).nodupkeys</code> typecheck?</p>
+</blockquote>
+<p><code>#check _ : 0 = 1</code> typechecks.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
