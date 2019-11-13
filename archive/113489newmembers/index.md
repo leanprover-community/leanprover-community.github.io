@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (2 messages, latest: Nov 13 2019 at 18:50)
+
 * [Operator sections](95093Operatorsections.html) (3 messages, latest: Nov 13 2019 at 15:57)
 
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (13 messages, latest: Nov 13 2019 at 12:46)
@@ -116,8 +118,6 @@ permalink: archive/113489newmembers/index.html
 * [example : ¬(p → q) → p ∧ ¬q](01019examplepqpq.html) (20 messages, latest: Oct 28 2019 at 00:04)
 
 * [trichotomy of naturals](58482trichotomyofnaturals.html) (6 messages, latest: Oct 27 2019 at 14:50)
-
-* [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (1 message, latest: Oct 27 2019 at 10:52)
 
 * [How to change the `#eval` duration?](51529Howtochangetheevalduration.html) (4 messages, latest: Oct 27 2019 at 09:30)
 
