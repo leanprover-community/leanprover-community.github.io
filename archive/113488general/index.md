@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [using recursor to write term](71586usingrecursortowriteterm.html) (6 messages, latest: Nov 13 2019 at 14:14)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (169 messages, latest: Nov 13 2019 at 16:21)
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (168 messages, latest: Nov 13 2019 at 13:18)
+* [using recursor to write term](71586usingrecursortowriteterm.html) (6 messages, latest: Nov 13 2019 at 14:14)
 
 * [vscode snippets](92603vscodesnippets.html) (30 messages, latest: Nov 12 2019 at 19:27)
 
