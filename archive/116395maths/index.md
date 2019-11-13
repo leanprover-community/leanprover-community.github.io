@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [By schoolkid](20764Byschoolkid.html) (1 message, latest: Nov 13 2019 at 00:57)
+* [norm_cast questions](19282normcastquestions.html) (4 messages, latest: Nov 13 2019 at 07:34)
 
-* [norm_cast questions](19282normcastquestions.html) (3 messages, latest: Nov 13 2019 at 00:37)
+* [By schoolkid](20764Byschoolkid.html) (2 messages, latest: Nov 13 2019 at 07:33)
 
 * [analysis](03749analysis.html) (11 messages, latest: Nov 12 2019 at 23:58)
 
