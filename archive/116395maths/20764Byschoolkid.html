@@ -1,0 +1,54 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/20764Byschoolkid.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/20764Byschoolkid.html">By schoolkid</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180578875"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/By%20schoolkid/near/180578875" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20764Byschoolkid.html#180578875">Chris Hughes (Nov 13 2019 at 00:57)</a>:</h4>
+<p><a href="https://twitter.com/SplufikNG/status/1193786365059534849?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1193786365059534849&amp;ref_url=https%3A%2F%2Fwww.legit.ng%2F1274537-chika-ofili-12-year-uk-based-nigerian-special-recognition-award-maths.html" target="_blank" title="https://twitter.com/SplufikNG/status/1193786365059534849?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1193786365059534849&amp;ref_url=https%3A%2F%2Fwww.legit.ng%2F1274537-chika-ofili-12-year-uk-based-nigerian-special-recognition-award-maths.html">A 12 year old just got a prize</a> for proving this.</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="mi">7</span> <span class="err">∣</span> <span class="n">n</span> <span class="bp">↔</span> <span class="mi">7</span> <span class="err">∣</span> <span class="o">(</span><span class="n">n</span> <span class="bp">/</span> <span class="mi">10</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="err">%</span> <span class="mi">10</span><span class="o">))</span>
+</pre></div>
+
+
+<p>This can be turned into a Presburger formula right? Should <code>omega</code> be able to do it?</p>
+<p>I tried turning it into a Presburger formula, but it didn't seem to work.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">omega</span>
+<span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">7</span> <span class="err">∣</span> <span class="n">n</span> <span class="bp">↔</span> <span class="mi">7</span> <span class="err">∣</span> <span class="o">(</span><span class="n">n</span> <span class="bp">/</span> <span class="mi">10</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="err">%</span> <span class="mi">10</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">dvd_iff_mod_eq_zero</span><span class="o">,</span> <span class="n">dvd_iff_mod_eq_zero</span><span class="o">],</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="n">n</span> <span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">7</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">n</span> <span class="mi">7</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="n">n</span> <span class="o">(</span><span class="k">show</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="mi">10</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="n">n</span> <span class="mi">10</span><span class="o">,</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_lt</span> <span class="o">(</span><span class="n">n</span> <span class="bp">/</span> <span class="mi">10</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="err">%</span> <span class="mi">10</span><span class="o">))</span> <span class="o">(</span><span class="k">show</span> <span class="mi">7</span> <span class="bp">&gt;</span> <span class="mi">0</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="o">),</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mod_add_div</span> <span class="o">(</span><span class="n">n</span> <span class="bp">/</span> <span class="mi">10</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="err">%</span> <span class="mi">10</span><span class="o">))</span> <span class="mi">7</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span> <span class="n">revert</span> <span class="n">this</span> <span class="o">},</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="n">n</span> <span class="err">%</span> <span class="mi">7</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">7</span> <span class="bp">=</span> <span class="n">b</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">10</span> <span class="bp">=</span> <span class="n">c</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="n">n</span> <span class="err">%</span> <span class="mi">10</span> <span class="bp">=</span> <span class="n">d</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="err">%</span> <span class="mi">7</span> <span class="bp">=</span> <span class="n">e</span><span class="o">,</span>
+  <span class="n">generalize</span> <span class="o">:</span> <span class="o">(</span><span class="n">c</span> <span class="bp">+</span> <span class="mi">5</span> <span class="bp">*</span> <span class="n">d</span><span class="o">)</span> <span class="bp">/</span> <span class="mi">7</span> <span class="bp">=</span> <span class="n">f</span><span class="o">,</span>
+  <span class="n">omega</span> <span class="c1">-- doesn&#39;t work</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<div class="inline-preview-twitter"><div class="twitter-tweet"><a href="https://twitter.com/SplufikNG/status/1193786365059534849?ref_src=twsrc%5Etfw%7Ctwcamp%5Etweetembed%7Ctwterm%5E1193786365059534849&amp;ref_url=https%3A%2F%2Fwww.legit.ng%2F1274537-chika-ofili-12-year-uk-based-nigerian-special-recognition-award-maths.html" target="_blank"><img class="twitter-avatar" src="https://pbs.twimg.com/profile_images/1183767235199942656/dD-e9OgS_normal.jpg"></a><p>12-year-old Nigerian boy based in the UK, Chika Ofili, has been presented with a Special Recognition Award for making a new discovery in Mathematics.
+
+The little Mathematician just discovered a new formula for divisibility by 7 in Maths. <a href="https://t.co/KGUIgsT6Dm" target="_blank" title="https://t.co/KGUIgsT6Dm">https://twitter.com/SplufikNG/status/1193786365059534849/photo/1</a></p><span>- NG to the World (@SplufikNG)</span><div class="twitter-image"><a href="https://t.co/KGUIgsT6Dm" target="_blank" title="https://t.co/KGUIgsT6Dm"><img src="https://pbs.twimg.com/media/EJEuMslX0AAGV7c.jpg:thumb"></a></div><div class="twitter-image"><a href="https://t.co/KGUIgsT6Dm" target="_blank" title="https://t.co/KGUIgsT6Dm"><img src="https://pbs.twimg.com/media/EJEuMs9XYAAjwaG.jpg:thumb"></a></div><div class="twitter-image"><a href="https://t.co/KGUIgsT6Dm" target="_blank" title="https://t.co/KGUIgsT6Dm"><img src="https://pbs.twimg.com/media/EJEuMtVWsAE3v4s.jpg:small"></a></div><div class="twitter-image"><a href="https://t.co/KGUIgsT6Dm" target="_blank" title="https://t.co/KGUIgsT6Dm"><img src="https://pbs.twimg.com/media/EJEuMtlWwAEKWtJ.jpg:thumb"></a></div></div></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

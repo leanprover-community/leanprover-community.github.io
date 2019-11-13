@@ -60,6 +60,56 @@ permalink: archive/116395maths/19282normcastquestions.html
 <div class="codehilite"><pre><span></span>
 </pre></div>
 
+<a name="180575451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_cast%20questions/near/180575451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19282normcastquestions.html#180575451">Kevin Buzzard (Nov 13 2019 at 00:00)</a>:</h4>
+<p>I'm still struggling to do the rational bit of sqrt(2) being irrational. I always hope that some day it will just look like the maths proof :-/</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">open</span> <span class="n">rat</span>
+
+<span class="kn">theorem</span> <span class="n">T1</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">d</span> <span class="bp">*</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">=</span> <span class="o">((</span><span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">))</span> <span class="o">:</span>
+  <span class="mi">2</span> <span class="bp">*</span> <span class="o">((</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">))</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- one tactic?</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">T2</span> <span class="o">(</span><span class="n">d</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">d</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">)</span> <span class="o">:</span> <span class="o">((</span><span class="n">d</span> <span class="bp">*</span> <span class="n">d</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">≠</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- one tactic?</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">,</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">a</span> <span class="bp">*</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">b</span> <span class="bp">→</span> <span class="n">a</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">)</span> <span class="bp">→</span> <span class="bp">¬</span> <span class="o">(</span><span class="bp">∃</span> <span class="n">q</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">,</span> <span class="n">q</span> <span class="err">^</span> <span class="mi">2</span> <span class="bp">=</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">-- intro</span>
+  <span class="n">rintro</span> <span class="n">h0</span> <span class="bp">⟨</span><span class="n">q</span><span class="o">,</span> <span class="n">hq</span><span class="bp">⟩</span><span class="o">,</span>
+  <span class="c1">-- notation for num and denom</span>
+  <span class="k">have</span> <span class="n">h</span> <span class="o">:=</span> <span class="n">q</span><span class="bp">.</span><span class="n">pos</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">pow_two</span> <span class="n">at</span> <span class="n">hq</span><span class="o">,</span> <span class="c1">-- q*q easier than q^2</span>
+  <span class="n">rw</span> <span class="err">←</span><span class="bp">@</span><span class="n">num_denom</span> <span class="n">q</span> <span class="n">at</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mul_def</span> <span class="n">at</span> <span class="n">hq</span><span class="o">,</span> <span class="c1">-- otherwise you get (a/b)*(a/b) and I want to tidy denominators</span>
+  <span class="n">rw</span> <span class="n">mk_eq_div</span> <span class="n">at</span> <span class="n">hq</span><span class="o">,</span> <span class="c1">-- finally there</span>
+  <span class="n">replace</span> <span class="n">hq</span> <span class="o">:=</span> <span class="n">hq</span><span class="bp">.</span><span class="n">symm</span><span class="o">,</span> <span class="c1">-- `symmetry&#39; at hq` should work here but I have an old mathlib apparently</span>
+  <span class="n">rw</span> <span class="n">eq_div_iff_mul_eq</span> <span class="n">at</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="n">swap</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_ne_zero_iff_pos</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">swap</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">int</span><span class="bp">.</span><span class="n">coe_nat_ne_zero_iff_pos</span><span class="bp">.</span><span class="mi">2</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">hq</span> <span class="o">:=</span> <span class="n">T1</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="n">replace</span> <span class="n">hq</span> <span class="o">:=</span> <span class="n">h0</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="n">norm_cast</span> <span class="n">at</span> <span class="n">hq</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">hq</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">cases</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">T2</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_ne_zero</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">intro</span> <span class="n">h2</span><span class="o">,</span> <span class="n">rw</span> <span class="n">h2</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span> <span class="n">cases</span> <span class="n">h</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180577555"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/norm_cast%20questions/near/180577555" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/19282normcastquestions.html#180577555">Alex J. Best (Nov 13 2019 at 00:37)</a>:</h4>
+<p>After <code>import data.rat.cast</code> both <code>T1</code> and <code>T2</code> are <code>  exact_mod_cast h,</code></p>
+
 
 {% endraw %}
 
