@@ -117,6 +117,38 @@ permalink: archive/116395maths/03749analysis.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180603980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180603980">Kevin Buzzard (Nov 13 2019 at 08:53)</a>:</h4>
 <p>Yes please do this. If people want to change it later that's fine. I am interested in formalising parts of our undergraduate syllabus and the fact that the derivative of sin is cos is used from day 1 in the "methods" courses (without justification, because everyone was told it in high school and the methods courses continue with this tradition) so this sort of thing is a big roadblock to even beginning to formalise the problem sheets in these courses.</p>
 
+<a name="180606013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180606013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180606013">Mario Carneiro (Nov 13 2019 at 09:24)</a>:</h4>
+<p>I would suggest focusing on <code>exp</code> for this roadmap. <code>sin</code> and <code>cos</code> should follow as algebraic combinations, not more power series</p>
+
+<a name="180606362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180606362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180606362">Mario Carneiro (Nov 13 2019 at 09:28)</a>:</h4>
+<p>I've also said this before, but the theory of power series and termwise differentiation is not required for <code>exp</code>; you can take the derivative at zero by some elementary estimates, using the definition of the derivative</p>
+
+<a name="180606417"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180606417" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180606417">Mario Carneiro (Nov 13 2019 at 09:29)</a>:</h4>
+<p>Not that it wouldn't be useful to have the analytic theory of power series, but to me it's a high powered tool that isn't needed here</p>
+
+<a name="180608126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180608126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180608126">Luca Seemungal (Nov 13 2019 at 09:52)</a>:</h4>
+<p>Ah, yes this makes sense. I see that in <code>data/complex/exponential.lean</code> we have that <code>exp</code> is defined as a power series and <code>sin</code> and <code>cos</code> are algebraic combinations of <code>exp</code> as you suggest.</p>
+
+<a name="180608136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180608136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180608136">Luca Seemungal (Nov 13 2019 at 09:52)</a>:</h4>
+<p>Right, of course - I can just guess the derivative of exp and then show it satisfies the definition of a Fréchet derivative. And I can also do the same with sin! Sorry, I was still in the "analysis 2" mindset where you don't know any multivariate calculus yet; at my university we proved all these derivative theorems by differentiating a power series term by term.</p>
+
+<a name="180608270"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180608270" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180608270">Luca Seemungal (Nov 13 2019 at 09:54)</a>:</h4>
+<p>I'll put a theory of power series as a different project some of us at Warwick will want to do after proving that the derivative of sine is cosine</p>
+
+<a name="180608505"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180608505" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180608505">Mario Carneiro (Nov 13 2019 at 09:57)</a>:</h4>
+<p>The trick with <code>exp</code> is to prove that <code>exp' 0 = 1</code>, and then <code>exp' a = (exp (a+x))' (x=0) = (exp a * exp x)' (0) = exp a * exp' 0 = exp a</code></p>
+
+<a name="180608699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180608699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180608699">Mario Carneiro (Nov 13 2019 at 09:58)</a>:</h4>
+<p>in other words, you can exploit <code>exp (a+x) = exp a * exp x</code> and the multiplication rule for differentiation to reduce the problem to calculating the derivative at zero</p>
+
 
 {% endraw %}
 
