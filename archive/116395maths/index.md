@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (22 messages, latest: Nov 13 2019 at 12:49)
+
 * [potential projects](80411potentialprojects.html) (2 messages, latest: Nov 13 2019 at 10:36)
 
 * [analysis](03749analysis.html) (41 messages, latest: Nov 13 2019 at 10:25)

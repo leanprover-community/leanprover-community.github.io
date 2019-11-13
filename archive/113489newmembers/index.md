@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (13 messages, latest: Nov 13 2019 at 12:46)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (177 messages, latest: Nov 13 2019 at 07:35)
 
 * [Difference between def and let](30109Differencebetweendefandlet.html) (9 messages, latest: Nov 12 2019 at 16:43)
@@ -28,8 +30,6 @@ permalink: archive/113489newmembers/index.html
 * [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
 
 * [mathlib dependency](82625mathlibdependency.html) (14 messages, latest: Nov 09 2019 at 20:42)
-
-* [power function injective over nat](51604powerfunctioninjectiveovernat.html) (12 messages, latest: Nov 09 2019 at 19:11)
 
 * [TPIL 4.6.7](61815TPIL467.html) (10 messages, latest: Nov 09 2019 at 16:55)
 
