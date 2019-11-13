@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis](03749analysis.html) (31 messages, latest: Nov 13 2019 at 09:58)
+* [potential projects](80411potentialprojects.html) (2 messages, latest: Nov 13 2019 at 10:36)
+
+* [analysis](03749analysis.html) (41 messages, latest: Nov 13 2019 at 10:25)
 
 * [norm_cast questions](19282normcastquestions.html) (4 messages, latest: Nov 13 2019 at 07:34)
 
