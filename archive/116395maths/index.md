@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Linear algebra](71530Linearalgebra.html) (9 messages, latest: Nov 14 2019 at 05:05)
+* [corners](50557corners.html) (3 messages, latest: Nov 14 2019 at 08:00)
 
-* [corners](50557corners.html) (2 messages, latest: Nov 13 2019 at 21:39)
+* [Linear algebra](71530Linearalgebra.html) (9 messages, latest: Nov 14 2019 at 05:05)
 
 * [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (24 messages, latest: Nov 13 2019 at 13:38)
 

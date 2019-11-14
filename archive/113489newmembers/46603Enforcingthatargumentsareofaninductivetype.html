@@ -1,0 +1,31 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html">Enforcing that arguments are of an inductive type?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180711478"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180711478" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180711478">Li Yao'an (Nov 14 2019 at 08:59)</a>:</h4>
+<p>I've been thinking about using Types to mimic sets. For each <code>set α</code>, we can construct a structure <code>tset</code> with a field of type α and a proof that α is in the set. However, I have run into a problem when defining subsets: what I want is a function <code>subset</code>that takes in two tsets and says whether the first is a subset of the second. Informally, we want <code>subset</code> to be : <code>∀ s : S, ∃ t : T, ↑ s = ↑ t</code>. However, the equality only makes sense if the types of the sets building S and T were the same.</p>
+<p>This would be solved if we could enforce that arguments be of a certain type by writing something like :</p>
+<div class="codehilite"><pre><span></span>def subtset {α : Type} {S&#39; T&#39; : set α} (S := tset S&#39;) (T := tset T&#39;)  :=
+    ∀ s: S, ∃ t : T, ↑ s = ↑ t
+</pre></div>
+
+
+<p>where (S := tset S') is trying to mean that S is an object of type tset S'.</p>
+<p>Naturally, this doesn't work. I've also tried type classes, but that failed for me as well.</p>
+<p>What is a sensible way to specify that an argument must be of a given inductive type?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

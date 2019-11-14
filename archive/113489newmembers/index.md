@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (1 message, latest: Nov 14 2019 at 08:59)
+
 * [Understanding Alist](60276UnderstandingAlist.html) (34 messages, latest: Nov 13 2019 at 23:55)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (2 messages, latest: Nov 13 2019 at 18:50)
