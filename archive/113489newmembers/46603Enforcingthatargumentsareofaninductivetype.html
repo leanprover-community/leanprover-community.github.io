@@ -33,6 +33,19 @@ permalink: archive/113489newmembers/46603Enforcingthatargumentsareofaninductivet
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180715388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180715388">Mario Carneiro (Nov 14 2019 at 09:58)</a>:</h4>
 <p>It's not clear to me what it means for an element of <code>s : set A</code> to be a subset of an element of some other <code>t : set A</code>, because these elements are both just elements of <code>A</code>, which don't have any subset relation between them. Surely you mean to say simply <code>s \sub t</code>?</p>
 
+<a name="180717756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180717756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180717756">Li Yao'an (Nov 14 2019 at 10:30)</a>:</h4>
+<p>Thanks for the reply.</p>
+<p>I have not seen the automatic coercion of a set to a subtype in Mathlib. Where can I find the code or a reference explaining it?</p>
+<p>I meant for S and T to be the tsets (subtypes), but I guess it was not so clear I was inventing notation.</p>
+<p>Additionally, for learning purposes, let's say I want to rewrite that part of Mathlib myself.</p>
+<p>Say I have a coercion <code>coer : set → α</code>. For two<code> set α</code>'s S and T, I wish to express <code>S ⊂ T</code> without mentioning the sets explicitly. That is, I wish to construct a function <code>subset'</code> so that <code>subset' ( (coer S) (coer T) )</code> is the Prop that S is a subset of T. However, the arguments to <code>subset'</code> don't make sense if S and T are sets over different Types, so <strong>I want to enforce the condition that my first argument is exactly <code>tset S'</code> for some <code>S : set α</code>.</strong> </p>
+<p>In short, my question was: is the above possible? (with direct methods preferred over indirect methods)</p>
+
+<a name="180719259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Enforcing%20that%20arguments%20are%20of%20an%20inductive%20type%3F/near/180719259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/46603Enforcingthatargumentsareofaninductivetype.html#180719259">Chris Hughes (Nov 14 2019 at 10:50)</a>:</h4>
+<p>No. In Lean two types with the same cardinality are indistinguishable, so for example you cannot even prove <code>nat \ne int</code> and you could not prove that two infinite subtypes of <code>nat</code> are not equal to each other, or to any other countably infinite type.</p>
+
 
 {% endraw %}
 
