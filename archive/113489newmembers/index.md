@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (178 messages, latest: Nov 14 2019 at 13:51)
+
 * [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (6 messages, latest: Nov 14 2019 at 11:50)
 
 * [Understanding Alist](60276UnderstandingAlist.html) (34 messages, latest: Nov 13 2019 at 23:55)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Operator sections](95093Operatorsections.html) (3 messages, latest: Nov 13 2019 at 15:57)
 
 * [power function injective over nat](51604powerfunctioninjectiveovernat.html) (13 messages, latest: Nov 13 2019 at 12:46)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (177 messages, latest: Nov 13 2019 at 07:35)
 
 * [Difference between def and let](30109Differencebetweendefandlet.html) (9 messages, latest: Nov 12 2019 at 16:43)
 
