@@ -255,6 +255,112 @@ I think this means that I need to provide information that checking if for key d
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180686451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180686451">Marc Huisinga (Nov 13 2019 at 23:55)</a>:</h4>
 <p>looks like it used to be in an old version of TPIL: <a href="https://leanprover.github.io/tutorial/tutorial.pdf" target="_blank" title="https://leanprover.github.io/tutorial/tutorial.pdf">https://leanprover.github.io/tutorial/tutorial.pdf</a></p>
 
+<a name="180763360"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180763360" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180763360">Scott Viteri (Nov 14 2019 at 19:13)</a>:</h4>
+<p>Consider the following alists:</p>
+<div class="codehilite"><pre><span></span>def a : alist (λ (_:ℕ), ℕ) :=
+  alist.mk [sigma.mk 1 2, sigma.mk 2 3, sigma.mk 3 4] (by norm_num)
+
+def b : alist (λ (_:ℕ), list ℕ) :=
+  alist.mk [sigma.mk 1 [2], sigma.mk 2 [], sigma.mk 3 [1,2]] (by norm_num)
+
+#reduce (alist.replace 1 3 a)
+#reduce (alist.replace 1 [3] b)
+</pre></div>
+
+
+<p>Only the last line generates an error, saying that it failed to synthesize type class instance for decidable_eq or has_one. Looking at alist.replace and kreplace, I do not see any mention of decidability. Where is this coming from and how do I fix it?</p>
+
+<a name="180764010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764010">Kevin Buzzard (Nov 14 2019 at 19:19)</a>:</h4>
+<p>What do you mean by <code>alist.replace 1 [3] b</code>? Lean is trying to interpret this, and the errors are what it gets. What do you want it to mean?</p>
+
+<a name="180764274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764274">Kevin Buzzard (Nov 14 2019 at 19:21)</a>:</h4>
+<p>You know about the implicit inputs to the function, right? If you hover over <code>alist.replace</code> in VS Code you will see <code>Π {α : Type u} {β : α → Type v} [_inst_1 : decidable_eq α]</code>. Lean is trying to figure out what alpha and beta are -- what do you think they are?</p>
+
+<a name="180764438"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764438" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764438">Scott Viteri (Nov 14 2019 at 19:23)</a>:</h4>
+<p>When I look for alist.replace I see the following:</p>
+<div class="codehilite"><pre><span></span>def replace (a : α) (b : β a) (s : alist β) : alist β :=
+⟨kreplace a b s.entries, (kreplace_nodupkeys a b).2 s.nodupkeys⟩
+</pre></div>
+
+<a name="180764468"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764468" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764468">Scott Viteri (Nov 14 2019 at 19:23)</a>:</h4>
+<p>In mathlib/src/data/list/alist.lean</p>
+
+<a name="180764516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764516">Kevin Buzzard (Nov 14 2019 at 19:23)</a>:</h4>
+<p>But if you read the mathlib code then you don't see the variables. If you hover over the function then you'll see all the stuff I posted.</p>
+
+<a name="180764602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764602">Kevin Buzzard (Nov 14 2019 at 19:24)</a>:</h4>
+<p>Alternatively try <code>#check @alist.replace</code></p>
+
+<a name="180764649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764649">Kevin Buzzard (Nov 14 2019 at 19:25)</a>:</h4>
+<p>The @ means "tell me all the details of all the inputs to this function, including the stuff which Lean is going to figure out by itself"</p>
+
+<a name="180764712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180764712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180764712">Kevin Buzzard (Nov 14 2019 at 19:25)</a>:</h4>
+<div class="codehilite"><pre><span></span>alist.replace :
+  Π {α : Type u_1} {β : α → Type u_2} [_inst_1 : decidable_eq α] (a : α), β a → alist β → alist β
+</pre></div>
+
+
+<p>Lean says "ok I'll guess alpha, I'll guess beta, typeclass inference will guess _inst_1, now it's your turn"</p>
+
+<a name="180765127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765127">Kevin Buzzard (Nov 14 2019 at 19:29)</a>:</h4>
+<p>You wrote <code>alist.replace 1 [3] b</code>. Lean thinks "OK, so a is supposed to be 1, so alpha is some type which has a 1, gosh, there are lots of possibilities". Lean then gets [3] and thinks "Ok so beta 1 is supposed to be [3], I'll bear that in mind". Lean then gets b and thinks "OK so b must have type alist beta, but b <em>definitely</em> has type <code>alist (λ (_:ℕ), list ℕ)</code> so beta <em>must</em> be <code> (λ (_:ℕ), list ℕ)</code>. Hey this looks like it should work. I am now intrigued.</p>
+
+<a name="180765464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765464">Scott Viteri (Nov 14 2019 at 19:32)</a>:</h4>
+<p>I can get a more helpful error message if I put</p>
+<div class="codehilite"><pre><span></span>#check (alist.replace (1:ℕ) ([1]:list ℕ) b)
+</pre></div>
+
+<a name="180765552"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765552" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765552">Scott Viteri (Nov 14 2019 at 19:33)</a>:</h4>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  alist.replace 1 [1]
+term
+  [1]
+has type
+  list var : Type
+but is expected to have type
+  ?m_1 1 : Type ?
+</pre></div>
+
+<a name="180765773"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765773" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765773">Kevin Buzzard (Nov 14 2019 at 19:35)</a>:</h4>
+<p>You should comment out those <code>#reduce</code>s, they really slow things down. So here's how I would start debugging:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">alist</span><span class="bp">.</span><span class="n">replace</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="mi">1</span> <span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="n">b</span>
+</pre></div>
+
+<a name="180765853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765853">Kevin Buzzard (Nov 14 2019 at 19:35)</a>:</h4>
+<p>OK so indeed if we tell Lean what beta is, it works fine:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">alist</span><span class="bp">.</span><span class="n">replace</span> <span class="bp">_</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="bp">_</span><span class="o">:</span><span class="bp">ℕ</span><span class="o">),</span> <span class="n">list</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="bp">_</span> <span class="mi">1</span> <span class="o">[</span><span class="mi">3</span><span class="o">]</span> <span class="n">b</span>
+</pre></div>
+
+<a name="180765862"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765862" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765862">Kevin Buzzard (Nov 14 2019 at 19:36)</a>:</h4>
+<p>So the problem is that Lean is failing to guess beta.</p>
+
+<a name="180765948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180765948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180765948">Kevin Buzzard (Nov 14 2019 at 19:36)</a>:</h4>
+<p>This is some issue with the elaborator and it's beyond my pay grade to solve it. I would just fix it with the @ trick and move on.</p>
+
+<a name="180766317"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180766317" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180766317">Scott Viteri (Nov 14 2019 at 19:39)</a>:</h4>
+<p>Great. +1 for showing how you would debug</p>
+
+<a name="180767602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180767602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180767602">Scott Viteri (Nov 14 2019 at 19:52)</a>:</h4>
+<p>FYI, same problem and solution for alist.insert</p>
+
 
 {% endraw %}
 

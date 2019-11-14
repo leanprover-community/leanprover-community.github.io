@@ -9,11 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Understanding Alist](60276UnderstandingAlist.html) (52 messages, latest: Nov 14 2019 at 19:52)
+
+* [Lemmas about subtype.rec](37263Lemmasaboutsubtyperec.html) (44 messages, latest: Nov 14 2019 at 19:50)
+
+* [@\[refl\] and coercion to a reflexive binary relation](31640reflandcoerciontoareflexivebinaryrelation.html) (1 message, latest: Nov 14 2019 at 19:22)
+
 * [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (7 messages, latest: Nov 14 2019 at 14:15)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (178 messages, latest: Nov 14 2019 at 13:51)
-
-* [Understanding Alist](60276UnderstandingAlist.html) (34 messages, latest: Nov 13 2019 at 23:55)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (2 messages, latest: Nov 13 2019 at 18:50)
 

@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [local fields](06947localfields.html) (8 messages, latest: Nov 14 2019 at 19:49)
+
+* [By schoolkid](20764Byschoolkid.html) (6 messages, latest: Nov 14 2019 at 19:35)
+
 * [Define linear function from matrix](22614Definelinearfunctionfrommatrix.html) (29 messages, latest: Nov 14 2019 at 17:56)
 
 * [corners](50557corners.html) (3 messages, latest: Nov 14 2019 at 08:00)
@@ -22,8 +26,6 @@ permalink: archive/116395maths/index.html
 * [potential projects](80411potentialprojects.html) (2 messages, latest: Nov 13 2019 at 10:36)
 
 * [norm_cast questions](19282normcastquestions.html) (4 messages, latest: Nov 13 2019 at 07:34)
-
-* [By schoolkid](20764Byschoolkid.html) (2 messages, latest: Nov 13 2019 at 07:33)
 
 * [More compactness questions](99551Morecompactnessquestions.html) (7 messages, latest: Nov 12 2019 at 17:08)
 
