@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (178 messages, latest: Nov 14 2019 at 13:51)
+* [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (7 messages, latest: Nov 14 2019 at 14:15)
 
-* [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (6 messages, latest: Nov 14 2019 at 11:50)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (178 messages, latest: Nov 14 2019 at 13:51)
 
 * [Understanding Alist](60276UnderstandingAlist.html) (34 messages, latest: Nov 13 2019 at 23:55)
 
