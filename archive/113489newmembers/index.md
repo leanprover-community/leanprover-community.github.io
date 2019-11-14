@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Understanding Alist](60276UnderstandingAlist.html) (21 messages, latest: Nov 13 2019 at 22:49)
+* [Understanding Alist](60276UnderstandingAlist.html) (34 messages, latest: Nov 13 2019 at 23:55)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (2 messages, latest: Nov 13 2019 at 18:50)
 

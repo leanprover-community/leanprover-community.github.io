@@ -148,6 +148,113 @@ Is there a tactic that I can use that will take care of disequality proofs betwe
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180682082" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180682082">Mario Carneiro (Nov 13 2019 at 22:49)</a>:</h4>
 <p>You can try <code>dec_trivial</code></p>
 
+<a name="180683998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180683998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180683998">Rob Lewis (Nov 13 2019 at 23:16)</a>:</h4>
+<p>For proving specific disequalities like <code>1 ≠ 2</code> you can use <code>norm_num</code>.</p>
+
+<a name="180684088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180684088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180684088">Scott Viteri (Nov 13 2019 at 23:18)</a>:</h4>
+<p><code> failed to synthesize type class instance for |- decidable (list.nodupkeys [&lt;1,3&gt;,&lt;2,4&gt;]) </code><br>
+I think this means that I need to provide information that checking if for key duplicates is a decidable proposition.<br>
+dec_trivial points to of_as_true, which implicitly asks for a decidable proposition. Should I somehow provide <code>decidable_eq nat</code> to <code>@of_as_true</code>?</p>
+
+<a name="180684414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180684414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180684414">Scott Viteri (Nov 13 2019 at 23:23)</a>:</h4>
+<blockquote>
+<p>For proving specific disequalities like <code>1 ≠ 2</code> you can use <code>norm_num</code>.</p>
+</blockquote>
+<p>#eval (alist.keys (<a href="http://alist.mk" target="_blank" title="http://alist.mk">alist.mk</a> [(<a href="http://sigma.mk" target="_blank" title="http://sigma.mk">sigma.mk</a> 1 [3] : sigma (λ _,list ℕ)), <a href="http://sigma.mk" target="_blank" title="http://sigma.mk">sigma.mk</a> 2 [4]] (by norm_num)))<br>
+Woohoo!</p>
+
+<a name="180684693"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180684693" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180684693">Scott Viteri (Nov 13 2019 at 23:27)</a>:</h4>
+<p>But somehow not in this form??:</p>
+<div class="codehilite"><pre><span></span>def a : list (sigma (λ _, list ℕ)) := [sigma.mk 1 [3], sigma.mk 2 [4]]
+#eval (alist.keys (alist.mk a (by norm_num)))
+</pre></div>
+
+
+<p>What kind of witchcraft is this?</p>
+
+<a name="180685004"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180685004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180685004">Scott Viteri (Nov 13 2019 at 23:32)</a>:</h4>
+<blockquote>
+<p>But somehow not in this form??:</p>
+</blockquote>
+<p>def a : list (sigma (λ _, list ℕ)) := [sigma.mk 1 [3], <a href="http://sigma.mk" target="_blank" title="http://sigma.mk">sigma.mk</a> 2 [4]]<br>
+#eval (alist.keys (<a href="http://alist.mk" target="_blank" title="http://alist.mk">alist.mk</a> a (by norm_num)))</p>
+<div class="codehilite"><pre><span></span>What kind of witchcraft is this?
+</pre></div>
+
+
+<p>Nevermind, this works:</p>
+<div class="codehilite"><pre><span></span>def a : list (sigma (λ _, list ℕ)) := [sigma.mk 1 [3], sigma.mk 2 [4]]
+#eval (alist.keys (alist.mk a (by rw a; norm_num)))
+</pre></div>
+
+<a name="180685287"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180685287" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180685287">Mario Carneiro (Nov 13 2019 at 23:37)</a>:</h4>
+<blockquote>
+<p><code>failed to synthesize type class instance for |- decidable (list.nodupkeys [&lt;1,3&gt;,&lt;2,4&gt;])</code><br>
+I think this means that I need to provide information that checking if for key duplicates is a decidable proposition.</p>
+</blockquote>
+<p>That should be in mathlib, I guess it was missed. I'm sure <code>list.nodup</code> already has a decidable instance, and <code>alist.nodupkeys</code> is just a wrapper around that, so the proof should be easy</p>
+
+<a name="180685300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180685300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180685300">Marc Huisinga (Nov 13 2019 at 23:37)</a>:</h4>
+<p>alternatively:</p>
+<div class="codehilite"><pre><span></span>abbreviation a : list (sigma (λ _, list ℕ)) := [sigma.mk 1 [3], sigma.mk 2 [4]]
+#eval (alist.keys (alist.mk a (by norm_num)))
+</pre></div>
+
+
+<p>defs are semi-reducible (see <a href="https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html?highlight=semi%20reducible#elaboration-hints" target="_blank" title="https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html?highlight=semi%20reducible#elaboration-hints">https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html?highlight=semi%20reducible#elaboration-hints</a>)</p>
+
+<a name="180685358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180685358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180685358">Mario Carneiro (Nov 13 2019 at 23:38)</a>:</h4>
+<p>I would suggest <code>norm_num [a]</code> instead of making it an abbreviation</p>
+
+<a name="180685686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180685686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180685686">Scott Viteri (Nov 13 2019 at 23:43)</a>:</h4>
+<p>also </p>
+<div class="codehilite"><pre><span></span>#eval (let a : list (sigma (λ _, list ℕ)) := [sigma.mk 1 [3], sigma.mk 2 [4]] in
+          (alist.keys (alist.mk a (by norm_num)))
+</pre></div>
+
+
+<p>works</p>
+
+<a name="180686179"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180686179" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180686179">Scott Viteri (Nov 13 2019 at 23:50)</a>:</h4>
+<blockquote>
+<p>alternatively:</p>
+</blockquote>
+<p>abbreviation a : list (sigma (λ _, list ℕ)) := [sigma.mk 1 [3], <a href="http://sigma.mk" target="_blank" title="http://sigma.mk">sigma.mk</a> 2 [4]]<br>
+#eval (alist.keys (<a href="http://alist.mk" target="_blank" title="http://alist.mk">alist.mk</a> a (by norm_num)))</p>
+<div class="codehilite"><pre><span></span>defs are semi-reducible (see https://leanprover.github.io/theorem_proving_in_lean/interacting_with_lean.html?highlight=semi%20reducible#elaboration-hints)
+</pre></div>
+
+
+<p>I read this section, but it does not mention the abbreviation keyword. Where is this documented?</p>
+
+<a name="180686211"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180686211" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180686211">Scott Viteri (Nov 13 2019 at 23:51)</a>:</h4>
+<blockquote>
+<p>I would suggest <code>norm_num [a]</code> instead of making it an abbreviation</p>
+</blockquote>
+<p>Can I put a list of lemmas/definitions to rewrite with after any tactic?</p>
+
+<a name="180686325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180686325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180686325">Marc Huisinga (Nov 13 2019 at 23:53)</a>:</h4>
+<blockquote>
+<p>I read this section, but it does not mention the abbreviation keyword. Where is this documented?</p>
+</blockquote>
+<p>no idea, sebastian told me about it some day. you can also just tag the def as reducible instead</p>
+
+<a name="180686451"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Understanding%20Alist/near/180686451" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/60276UnderstandingAlist.html#180686451">Marc Huisinga (Nov 13 2019 at 23:55)</a>:</h4>
+<p>looks like it used to be in an old version of TPIL: <a href="https://leanprover.github.io/tutorial/tutorial.pdf" target="_blank" title="https://leanprover.github.io/tutorial/tutorial.pdf">https://leanprover.github.io/tutorial/tutorial.pdf</a></p>
+
 
 {% endraw %}
 
