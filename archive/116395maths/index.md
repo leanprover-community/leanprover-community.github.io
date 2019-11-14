@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Linear algebra](71530Linearalgebra.html) (8 messages, latest: Nov 14 2019 at 03:58)
+
 * [corners](50557corners.html) (2 messages, latest: Nov 13 2019 at 21:39)
 
 * [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (24 messages, latest: Nov 13 2019 at 13:38)
@@ -32,8 +34,6 @@ permalink: archive/116395maths/index.html
 * [group cohomology](89262groupcohomology.html) (63 messages, latest: Nov 08 2019 at 15:10)
 
 * [Result exists?](44607Resultexists.html) (13 messages, latest: Nov 06 2019 at 12:20)
-
-* [Linear algebra](71530Linearalgebra.html) (7 messages, latest: Nov 05 2019 at 10:46)
 
 * [uniqueness of division and remainder](15029uniquenessofdivisionandremainder.html) (6 messages, latest: Nov 04 2019 at 15:49)
 
