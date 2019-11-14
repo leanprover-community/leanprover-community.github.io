@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (1 message, latest: Nov 14 2019 at 08:59)
+* [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (3 messages, latest: Nov 14 2019 at 09:58)
 
 * [Understanding Alist](60276UnderstandingAlist.html) (34 messages, latest: Nov 13 2019 at 23:55)
 
