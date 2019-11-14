@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Define linear function from matrix](22614Definelinearfunctionfrommatrix.html) (29 messages, latest: Nov 14 2019 at 17:56)
+
 * [corners](50557corners.html) (3 messages, latest: Nov 14 2019 at 08:00)
 
 * [Linear algebra](71530Linearalgebra.html) (9 messages, latest: Nov 14 2019 at 05:05)
