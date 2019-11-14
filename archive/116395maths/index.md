@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Linear algebra](71530Linearalgebra.html) (10 messages, latest: Nov 14 2019 at 20:59)
+
 * [local fields](06947localfields.html) (8 messages, latest: Nov 14 2019 at 19:49)
 
 * [By schoolkid](20764Byschoolkid.html) (6 messages, latest: Nov 14 2019 at 19:35)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [Define linear function from matrix](22614Definelinearfunctionfrommatrix.html) (29 messages, latest: Nov 14 2019 at 17:56)
 
 * [corners](50557corners.html) (3 messages, latest: Nov 14 2019 at 08:00)
-
-* [Linear algebra](71530Linearalgebra.html) (9 messages, latest: Nov 14 2019 at 05:05)
 
 * [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (24 messages, latest: Nov 13 2019 at 13:38)
 
