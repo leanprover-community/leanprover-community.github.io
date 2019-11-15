@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [group representations](24308grouprepresentations.html) (3 messages, latest: Nov 15 2019 at 00:10)
+* [group representations](24308grouprepresentations.html) (4 messages, latest: Nov 15 2019 at 01:41)
 
 * [Linear algebra](71530Linearalgebra.html) (10 messages, latest: Nov 14 2019 at 20:59)
 

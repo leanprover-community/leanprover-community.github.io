@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [@\[refl\] and coercion to a reflexive binary relation](31640reflandcoerciontoareflexivebinaryrelation.html) (3 messages, latest: Nov 15 2019 at 01:44)
+
 * [Understanding Alist](60276UnderstandingAlist.html) (52 messages, latest: Nov 14 2019 at 19:52)
 
 * [Lemmas about subtype.rec](37263Lemmasaboutsubtyperec.html) (44 messages, latest: Nov 14 2019 at 19:50)
-
-* [@\[refl\] and coercion to a reflexive binary relation](31640reflandcoerciontoareflexivebinaryrelation.html) (1 message, latest: Nov 14 2019 at 19:22)
 
 * [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (7 messages, latest: Nov 14 2019 at 14:15)
 
