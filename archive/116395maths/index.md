@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [filter at_infty](84293filteratinfty.html) (45 messages, latest: Nov 15 2019 at 16:32)
+* [analysis](03749analysis.html) (51 messages, latest: Nov 15 2019 at 17:26)
 
-* [analysis](03749analysis.html) (48 messages, latest: Nov 15 2019 at 14:28)
+* [filter at_infty](84293filteratinfty.html) (45 messages, latest: Nov 15 2019 at 16:32)
 
 * [group representations](24308grouprepresentations.html) (4 messages, latest: Nov 15 2019 at 01:41)
 

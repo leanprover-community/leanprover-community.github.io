@@ -98,6 +98,47 @@ permalink: archive/113488general/90586wlog.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180677043" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180677043">Alexander Bentkamp (Nov 13 2019 at 21:53)</a>:</h4>
 <p>Let us know if you find a nice way to discharge these goals. Maybe there could be a different default value for <code>discharger</code>?</p>
 
+<a name="180854359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/wlog/near/180854359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/90586wlog.html#180854359">Alexander Bentkamp (Nov 15 2019 at 17:40)</a>:</h4>
+<p><span class="user-mention" data-user-id="112680">@Johan Commelin</span>  With an auxiliary lemma for wlog with three variables, we can speed this up a lot.  Maybe this lemma <code>wlog3</code> should be in mathlib:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">wlog3</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_order</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">p</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">h₁</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">b</span> <span class="n">a</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">h₂</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">a</span> <span class="n">c</span> <span class="n">b</span><span class="o">)</span>
+  <span class="o">(</span><span class="n">hp</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span> <span class="n">a</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">∧</span> <span class="n">b</span> <span class="bp">≤</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">p</span> <span class="n">x</span> <span class="n">y</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="n">h₃</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="n">p</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">p</span> <span class="n">c</span> <span class="n">a</span> <span class="n">b</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h₁</span><span class="o">,</span> <span class="n">apply</span> <span class="n">h₂</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">},</span>
+  <span class="n">wlog</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">≤</span> <span class="n">y</span> <span class="bp">∧</span> <span class="n">y</span> <span class="bp">≤</span> <span class="n">z</span> <span class="kn">using</span> <span class="o">[</span><span class="n">x</span> <span class="n">y</span> <span class="n">z</span><span class="o">,</span> <span class="n">y</span> <span class="n">z</span> <span class="n">x</span><span class="o">,</span> <span class="n">z</span> <span class="n">x</span> <span class="n">y</span><span class="o">,</span> <span class="n">z</span> <span class="n">y</span> <span class="n">x</span><span class="o">,</span> <span class="n">y</span> <span class="n">x</span> <span class="n">z</span><span class="o">,</span> <span class="n">x</span> <span class="n">z</span> <span class="n">y</span><span class="o">],</span>
+  <span class="o">{</span> <span class="n">cases</span> <span class="n">le_total</span> <span class="n">x</span> <span class="n">y</span> <span class="k">with</span> <span class="n">hc₁</span><span class="bp">;</span>
+    <span class="n">cases</span> <span class="n">le_total</span> <span class="n">y</span> <span class="n">z</span> <span class="k">with</span> <span class="n">hc₂</span><span class="bp">;</span>
+    <span class="n">cases</span> <span class="n">le_total</span> <span class="n">x</span> <span class="n">z</span> <span class="k">with</span> <span class="n">hc₃</span><span class="bp">;</span>
+    <span class="n">cc</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">apply</span> <span class="n">hp</span><span class="o">,</span> <span class="n">assumption</span> <span class="o">},</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">forty_two</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="mi">0</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="mi">1</span><span class="o">:</span><span class="n">ℚ</span><span class="o">)</span><span class="bp">/</span><span class="o">(</span><span class="mi">1</span> <span class="bp">-</span> <span class="o">(</span><span class="mi">1</span><span class="bp">/</span><span class="n">a</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">b</span> <span class="bp">+</span> <span class="mi">1</span><span class="bp">/</span><span class="n">c</span><span class="o">))</span> <span class="bp">≤</span> <span class="mi">42</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">wlog3</span> <span class="bp">_</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">implies</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">h</span> <span class="kn">using</span> <span class="mi">3</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">change</span> <span class="n">implies</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">h</span> <span class="kn">using</span> <span class="mi">3</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">,</span>
+    <span class="n">ac_refl</span><span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>The trick is that we actually do not need to consider all 5 non-identity permutations. Just 2 permutations are enough to express all others.</p>
+<p>Unfortunately, I don't see a fast way to discharge the resulting goals in a way that is both fast and generally applicable.</p>
+
 
 {% endraw %}
 

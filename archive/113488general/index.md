@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [wlog](90586wlog.html) (19 messages, latest: Nov 15 2019 at 17:40)
+
 * [Travis](06426Travis.html) (204 messages, latest: Nov 14 2019 at 15:25)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (182 messages, latest: Nov 13 2019 at 22:03)
-
-* [wlog](90586wlog.html) (18 messages, latest: Nov 13 2019 at 21:53)
 
 * [std_basis](18397stdbasis.html) (2 messages, latest: Nov 13 2019 at 20:38)
 
