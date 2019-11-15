@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Giving a proof in the type](40166Givingaproofinthetype.html) (7 messages, latest: Nov 15 2019 at 22:58)
+
 * [@\[refl\] and coercion to a reflexive binary relation](31640reflandcoerciontoareflexivebinaryrelation.html) (3 messages, latest: Nov 15 2019 at 01:44)
 
 * [Understanding Alist](60276UnderstandingAlist.html) (52 messages, latest: Nov 14 2019 at 19:52)
