@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [introducing an element in tactic mode](30196introducinganelementintacticmode.html) (13 messages, latest: Nov 15 2019 at 20:53)
+* [introducing an element in tactic mode](30196introducinganelementintacticmode.html) (17 messages, latest: Nov 15 2019 at 21:43)
 
 * [wlog](90586wlog.html) (25 messages, latest: Nov 15 2019 at 19:20)
 
