@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [analysis](03749analysis.html) (46 messages, latest: Nov 15 2019 at 10:57)
+
 * [group representations](24308grouprepresentations.html) (4 messages, latest: Nov 15 2019 at 01:41)
 
 * [Linear algebra](71530Linearalgebra.html) (10 messages, latest: Nov 14 2019 at 20:59)
@@ -22,8 +24,6 @@ permalink: archive/116395maths/index.html
 * [corners](50557corners.html) (3 messages, latest: Nov 14 2019 at 08:00)
 
 * [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (24 messages, latest: Nov 13 2019 at 13:38)
-
-* [analysis](03749analysis.html) (42 messages, latest: Nov 13 2019 at 13:04)
 
 * [potential projects](80411potentialprojects.html) (2 messages, latest: Nov 13 2019 at 10:36)
 
