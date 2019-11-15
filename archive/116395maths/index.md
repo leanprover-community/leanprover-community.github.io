@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [group representations](24308grouprepresentations.html) (2 messages, latest: Nov 14 2019 at 23:59)
+
 * [Linear algebra](71530Linearalgebra.html) (10 messages, latest: Nov 14 2019 at 20:59)
 
 * [local fields](06947localfields.html) (8 messages, latest: Nov 14 2019 at 19:49)
