@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Using data.rat](47222Usingdatarat.html) (1 message, latest: Nov 16 2019 at 21:54)
+* [Using data.rat](47222Usingdatarat.html) (23 messages, latest: Nov 16 2019 at 22:58)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (180 messages, latest: Nov 16 2019 at 18:15)
 

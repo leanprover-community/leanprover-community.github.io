@@ -1,0 +1,69 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/31463missingcasesinautocases.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html">missing cases in auto_cases?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180930789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180930789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180930789">Lucas Allen (Nov 16 2019 at 22:23)</a>:</h4>
+<p><code>Auto_cases</code> seems to miss some possible <code>induction</code> hypotheses. One example of this is</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test_one</span> <span class="o">(</span><span class="n">n</span> <span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">*</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--auto_cases,</span>
+  <span class="n">induction</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Here <code>auto_cases</code> says that it "did not find any hypotheses to apply <code>cases</code> or <code>induction</code> to", but <code>induction h</code> works.</p>
+<p>Another example is</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">test_three</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="c1">--auto_cases,</span>
+  <span class="n">induction</span> <span class="n">n</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p><code>auto_cases</code> gives the same message, but <code>induction n</code> works, I don't know if this is what it's supposed to do though.</p>
+
+<a name="180930839"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180930839" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180930839">Reid Barton (Nov 16 2019 at 22:25)</a>:</h4>
+<p><code>auto_cases</code> isn't really intended for the end user</p>
+
+<a name="180930897"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180930897" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180930897">Reid Barton (Nov 16 2019 at 22:26)</a>:</h4>
+<p>It's part of <code>tidy</code>. It has a list of known types for which it's usually a good idea to apply <code>cases</code> (or occasionally <code>induction</code>, I don't really understand why <code>induction</code> is even necessary)</p>
+
+<a name="180931311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180931311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180931311">Lucas Allen (Nov 16 2019 at 22:38)</a>:</h4>
+<p>I see. If I wanted something like this for the end user, would it make more sense to just run <code>cases</code> and <code>induction</code> on each hypothesis and report the ones which work?</p>
+
+<a name="180931367"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180931367" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180931367">Reid Barton (Nov 16 2019 at 22:40)</a>:</h4>
+<p>I assumed you were the end user</p>
+
+<a name="180931368"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180931368" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180931368">Reid Barton (Nov 16 2019 at 22:40)</a>:</h4>
+<p>What are you really trying to do?</p>
+
+<a name="180931801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/missing%20cases%20in%20auto_cases%3F/near/180931801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/31463missingcasesinautocases.html#180931801">Lucas Allen (Nov 16 2019 at 22:54)</a>:</h4>
+<p>I'm writing a tactic called <code>check</code> which goes through a list of tactics (an extended version of the list from <code>tidy</code>) and reports which ones succeed without modifying the tactic state. The idea is that this might be helpful when I get stuck proving something. Would something like this be suitable for mathlib?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

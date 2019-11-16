@@ -18,6 +18,107 @@ permalink: archive/113489newmembers/47222Usingdatarat.html
 <div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">/</span> <span class="err">↑</span><span class="n">n</span> <span class="bp">=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
 </pre></div>
 
+<a name="180930138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930138">Kevin Buzzard (Nov 16 2019 at 22:02)</a>:</h4>
+<p>I can't find anything useful in <code>data.rat.basic</code></p>
+
+<a name="180930145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930145">Bhavik Mehta (Nov 16 2019 at 22:02)</a>:</h4>
+<p>Yeah, similarly</p>
+
+<a name="180930269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930269">Reid Barton (Nov 16 2019 at 22:07)</a>:</h4>
+<p><code>rat.mk a b</code> equals <code>(\u a) / (\u b)</code> right? (\u being the up arrow)</p>
+
+<a name="180930274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930274">Bhavik Mehta (Nov 16 2019 at 22:07)</a>:</h4>
+<p>I think I've got the skeleton of the proof, with some (I think easy) technicalities missing:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">{</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="mi">0</span><span class="o">}</span> <span class="o">:</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">/</span> <span class="err">↑</span><span class="n">n</span> <span class="bp">=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mk</span> <span class="n">a</span> <span class="o">(</span><span class="n">b</span> <span class="bp">*</span> <span class="n">n</span><span class="o">)</span> <span class="bp">*</span> <span class="err">↑</span><span class="n">n</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">this</span><span class="o">,</span> <span class="n">rw</span> <span class="n">mul_div_cancel</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">rat</span><span class="bp">.</span><span class="n">coe_nat_eq_mk</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">mul_def</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">div_mk_div_cancel_left</span><span class="o">],</span> <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180930382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930382">Bhavik Mehta (Nov 16 2019 at 22:10)</a>:</h4>
+<blockquote>
+<p><code>rat.mk a b</code> equals <code>(\u a) / (\u b)</code> right? (\u being the up arrow)</p>
+</blockquote>
+<p>Yeah, if the <code>\u</code> are casting correctly to Q</p>
+
+<a name="180930454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930454">Reid Barton (Nov 16 2019 at 22:13)</a>:</h4>
+<p>If you rewrite with that first, then it should be a general <code>div_mul</code> or something</p>
+
+<a name="180930462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930462">Reid Barton (Nov 16 2019 at 22:13)</a>:</h4>
+<p>Well, after more facts about casts I guess...</p>
+
+<a name="180930689"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930689" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930689">Bhavik Mehta (Nov 16 2019 at 22:20)</a>:</h4>
+<p><code>rw [rat.mk_eq_div, rat.mk_eq_div], simp, rw div_div_eq_div_mul</code> does it, thanks!</p>
+
+<a name="180930786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930786">Kevin Buzzard (Nov 16 2019 at 22:23)</a>:</h4>
+<p>Is the idea that you're not supposed to be using <code>rat.mk</code>?</p>
+
+<a name="180930854"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930854" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930854">Yury G. Kudryashov (Nov 16 2019 at 22:25)</a>:</h4>
+<p>BTW, is there any good reason <em>not</em> to define structures on <code>data.rat</code> by <code>equiv.discrete_field (_ : equiv data.rat (fraction_field int))</code>? Won't we get many theorems for free in this case?</p>
+
+<a name="180930899"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930899" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930899">Bhavik Mehta (Nov 16 2019 at 22:26)</a>:</h4>
+<p><code>data.rat</code> says: "It is defined as the set of pairs ⟨n, d⟩ of integers such that <code>d</code> is positive and <code>n</code> and <code>d</code> are coprime. This representation is preferred to the quotient because without periodic reduction, the numerator and denominator can grow exponentially (for example, adding 1/2 to itself repeatedly)."</p>
+
+<a name="180930901"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930901" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930901">Chris Hughes (Nov 16 2019 at 22:26)</a>:</h4>
+<p>The best solution is to use division and not <code>rat.mk</code></p>
+
+<a name="180930907"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930907" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930907">Kevin Buzzard (Nov 16 2019 at 22:26)</a>:</h4>
+<p>Coerce everything to Q first?</p>
+
+<a name="180930930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930930">Yury G. Kudryashov (Nov 16 2019 at 22:27)</a>:</h4>
+<p><span class="user-mention" data-user-id="246273">@Bhavik Mehta</span> I was talking about operations on <code>rat</code> and theorems about these operations, not the data type.</p>
+
+<a name="180930982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930982">Bhavik Mehta (Nov 16 2019 at 22:28)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span>  Ah okay, my mistake</p>
+
+<a name="180930993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930993">Yury G. Kudryashov (Nov 16 2019 at 22:29)</a>:</h4>
+<p>Most operations (except for <code>neg</code>?) need "cancel numerator and denominator" step anyway.</p>
+
+<a name="180930997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180930997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180930997">Yury G. Kudryashov (Nov 16 2019 at 22:29)</a>:</h4>
+<p>And this is exactly what functions from <code>equiv/algebra</code> will do.</p>
+
+<a name="180931816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180931816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180931816">Bhavik Mehta (Nov 16 2019 at 22:55)</a>:</h4>
+<blockquote>
+<p>The best solution is to use division and not <code>rat.mk</code></p>
+</blockquote>
+<p>This is so much less painful, thanks!!</p>
+
+<a name="180931860"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180931860" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180931860">Kevin Buzzard (Nov 16 2019 at 22:56)</a>:</h4>
+<p>I think the way it works is that there's a "mathlib standard way" to do things, and you have to learn it for the things you want to do.</p>
+
+<a name="180931867"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180931867" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180931867">Kevin Buzzard (Nov 16 2019 at 22:56)</a>:</h4>
+<p>Often you can learn it by simply reading the relevant mathlib files.</p>
+
+<a name="180931879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180931879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180931879">Mario Carneiro (Nov 16 2019 at 22:57)</a>:</h4>
+<p><code>rat.mk</code> is indeed supposed to be internal to the <code>data.rat</code> file and not used once <code>\u a / \u b</code> works</p>
+
+<a name="180931889"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20data.rat/near/180931889" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/47222Usingdatarat.html#180931889">Mario Carneiro (Nov 16 2019 at 22:58)</a>:</h4>
+<p>unless you care about computation and need a more efficient way of building the number</p>
+
 
 {% endraw %}
 

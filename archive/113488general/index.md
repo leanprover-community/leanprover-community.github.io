@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [setting up lean-git-hooks](38150settingupleangithooks.html) (7 messages, latest: Nov 16 2019 at 21:59)
+* [missing cases in auto_cases?](31463missingcasesinautocases.html) (7 messages, latest: Nov 16 2019 at 22:54)
+
+* [setting up lean-git-hooks](38150settingupleangithooks.html) (16 messages, latest: Nov 16 2019 at 22:10)
 
 * [ring](58961ring.html) (11 messages, latest: Nov 16 2019 at 10:30)
 

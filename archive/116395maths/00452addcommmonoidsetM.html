@@ -109,6 +109,268 @@ permalink: archive/116395maths/00452addcommmonoidsetM.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180928752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180928752">Kevin Buzzard (Nov 16 2019 at 21:16)</a>:</h4>
 <p>Why isn't this trivial to make from what you have made? There will be some map from <code>comm_semiring X</code> to <code>comm_monoid X</code> right?</p>
 
+<a name="180930565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930565">Kevin Buzzard (Nov 16 2019 at 22:16)</a>:</h4>
+<p>In <code>algebra/pointwise.lean</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pointwise_mul_comm_semiring</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_semiring</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul_comm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">t</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">split</span><span class="bp">;</span> <span class="o">{</span> <span class="n">rintros</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">,</span> <span class="n">mul_comm</span> <span class="bp">_</span> <span class="bp">_⟩</span> <span class="o">},</span>
+  <span class="bp">..</span><span class="n">pointwise_mul_semiring</span> <span class="o">}</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">pointwise_mul_semiring</span>
+
+<span class="c1">-- new part here</span>
+<span class="c1">-- can&#39;t get to_additive to work</span>
+<span class="c1">--@[to_additive]</span>
+<span class="n">def</span> <span class="n">foo</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_comm_monoid</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="n">pointwise_mul_comm_semiring</span>
+</pre></div>
+
+
+<p>How do I get <code>@[to_additive]</code> to buy that? The error is</p>
+<div class="codehilite"><pre><span></span>to_additive: can&#39;t transport set.foo to itself
+</pre></div>
+
+<a name="180930576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930576">Kevin Buzzard (Nov 16 2019 at 22:17)</a>:</h4>
+<p>Don't you love it when Kevin tries to edit mathlib</p>
+
+<a name="180930619"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930619" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930619">Reid Barton (Nov 16 2019 at 22:18)</a>:</h4>
+<p>I think the problem is that the name it would produce is the same, because <code>foo</code> doesn't contain any of the magic words</p>
+
+<a name="180930625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930625">Kevin Buzzard (Nov 16 2019 at 22:18)</a>:</h4>
+<p>Did you see you get a mention in the natural number game within the context of magic words? Oh actually that might still be in the beta</p>
+
+<a name="180930632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930632">Reid Barton (Nov 16 2019 at 22:19)</a>:</h4>
+<p>no...</p>
+
+<a name="180930639"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930639" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930639">Reid Barton (Nov 16 2019 at 22:20)</a>:</h4>
+<p>very good</p>
+
+<a name="180930681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930681">Kevin Buzzard (Nov 16 2019 at 22:20)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="n">where</span> <span class="c1">-- namespace set</span>
+
+<span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">comm_monoid</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_comm_monoid</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="n">pointwise_mul_comm_semiring</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">to_additive: can&#39;t transport set.comm_monoid to itself</span>
+<span class="cm">-/</span>
+</pre></div>
+
+<a name="180930683"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930683" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930683">Kevin Buzzard (Nov 16 2019 at 22:20)</a>:</h4>
+<p>So what is the magic word?</p>
+
+<a name="180930687"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930687" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930687">Reid Barton (Nov 16 2019 at 22:20)</a>:</h4>
+<p>I think you can put the name you want it to transform to after <code>to_additive</code></p>
+
+<a name="180930696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930696">Reid Barton (Nov 16 2019 at 22:21)</a>:</h4>
+<p>I don't know the whole list... usually things like <code>mul</code> or <code>one</code></p>
+
+<a name="180930752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930752">Kevin Buzzard (Nov 16 2019 at 22:22)</a>:</h4>
+<p>Progress: </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">to_additive</span> <span class="n">set</span><span class="bp">.</span><span class="n">add_comm_monoid</span><span class="o">]</span>
+<span class="n">def</span> <span class="n">comm_monoid</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_monoid</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">comm_semiring</span><span class="bp">.</span><span class="n">to_comm_monoid</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="n">pointwise_mul_comm_semiring</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at application</span>
+<span class="cm">  @pointwise_mul_comm_semiring α _inst_1</span>
+<span class="cm">term</span>
+<span class="cm">  _inst_1</span>
+<span class="cm">has type</span>
+<span class="cm">  add_comm_monoid α</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  comm_monoid α</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Does <code>to_additive</code> not move me from <code>comm_monoid</code> to <code>add_comm_monoid</code>?</p>
+
+<a name="180930761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180930761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180930761">Kevin Buzzard (Nov 16 2019 at 22:22)</a>:</h4>
+<p>This is the sort of error that you get when <code>to_additive</code> needs more hints</p>
+
+<a name="180931047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931047">Kevin Buzzard (Nov 16 2019 at 22:30)</a>:</h4>
+<p><span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> what am I doing wrong?</p>
+
+<a name="180931054"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931054" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931054">Chris Hughes (Nov 16 2019 at 22:30)</a>:</h4>
+<p>I'm guessing <code>comm_semiring.to_comm_monoid</code> doesn't have a <code>to_additive</code> attribute with <code>comm_semiring.to_add_comm_monoid</code></p>
+
+<a name="180931075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931075">Yury G. Kudryashov (Nov 16 2019 at 22:31)</a>:</h4>
+<p>I guess <span class="user-mention" data-user-id="110044">@Chris Hughes</span> is right.</p>
+
+<a name="180931076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931076">Chris Hughes (Nov 16 2019 at 22:31)</a>:</h4>
+<p>Which makes sense, because they're distinguished by more than just notation</p>
+
+<a name="180931118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931118">Kevin Buzzard (Nov 16 2019 at 22:32)</a>:</h4>
+<p>But the fact that this correctly doesn't exist doesn't help me, because I'm trying to do something sensible, right?</p>
+
+<a name="180931134"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931134" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931134">Kevin Buzzard (Nov 16 2019 at 22:33)</a>:</h4>
+<p>I have a map <code>comm_monoid α -&gt; comm_monoid (set α)</code> and now I want my map <code>add_comm_monoid α -&gt; add_comm_monoid (set α)</code> for free. Isn't that how life works?</p>
+
+<a name="180931138"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931138" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931138">Chris Hughes (Nov 16 2019 at 22:33)</a>:</h4>
+<p>Maybe if you mark pointwise_mul_comm_semiring as <code>to_additive</code></p>
+
+<a name="180931185"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931185" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931185">Kevin Buzzard (Nov 16 2019 at 22:34)</a>:</h4>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  @pointwise_mul_semiring α (@add_comm_monoid.to_add_monoid α _inst_1)
+term
+  @add_comm_monoid.to_add_monoid α _inst_1
+has type
+  add_monoid α
+but is expected to have type
+  monoid α
+</pre></div>
+
+<a name="180931189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931189">Chris Hughes (Nov 16 2019 at 22:34)</a>:</h4>
+<p>But then it's not obvious to me which <code>add_comm_monoid</code>, structure you want.</p>
+
+<a name="180931199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931199">Chris Hughes (Nov 16 2019 at 22:35)</a>:</h4>
+<p>Because there are two that makes sense, the additive one from the semiring and the multiplicative one from the semiring.</p>
+
+<a name="180931200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931200">Kevin Buzzard (Nov 16 2019 at 22:35)</a>:</h4>
+<p>Yeah I don't think that I want a to_additive version of <code>pointwise_mul_comm_semiring</code></p>
+
+<a name="180931255"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931255" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931255">Kevin Buzzard (Nov 16 2019 at 22:36)</a>:</h4>
+<p>I know what the additive version of <code>comm_monoid</code> is but I don't know what the additive version of <code>comm_semiring</code> is. Can I just manufacture this easily manually with ease using <code>additive</code> and <code>multiplicative</code> somehow and then sort out the attributes afterwards?</p>
+
+<a name="180931262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931262">Reid Barton (Nov 16 2019 at 22:37)</a>:</h4>
+<p>Yeah, I think <code>additive</code>/<code>multiplicative</code> might be the way to go</p>
+
+<a name="180931264"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931264" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931264">Kevin Buzzard (Nov 16 2019 at 22:37)</a>:</h4>
+<p><code>attribute [to_additive set.add_comm_monoid] set.comm_monoid</code> or something?</p>
+
+<a name="180931306"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931306" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931306">Yury G. Kudryashov (Nov 16 2019 at 22:38)</a>:</h4>
+<p><code>pointwise_mul_semiring</code> uses <code>sup</code> for addition, not pointwise <code>(+)</code>.</p>
+
+<a name="180931308"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931308" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931308">Kevin Buzzard (Nov 16 2019 at 22:38)</a>:</h4>
+<p>right. There is no +</p>
+
+<a name="180931312"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931312" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931312">Kevin Buzzard (Nov 16 2019 at 22:38)</a>:</h4>
+<p>But I don't care about this semiring</p>
+
+<a name="180931318"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931318" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931318">Kevin Buzzard (Nov 16 2019 at 22:39)</a>:</h4>
+<p>I can make <code>set.comm_monoid</code> and now I want <code>set.add_comm_monoid</code> for free but I'm going to have to make it I think.</p>
+
+<a name="180931363"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931363" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931363">Yury G. Kudryashov (Nov 16 2019 at 22:40)</a>:</h4>
+<p>You can try to define <code>set.comm_monoid</code> using <code>{ .. pointwise_mul_semiring }</code></p>
+
+<a name="180931366"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931366" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931366">Yury G. Kudryashov (Nov 16 2019 at 22:40)</a>:</h4>
+<p>Not sure if it'll work</p>
+
+<a name="180931369"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931369" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931369">Kevin Buzzard (Nov 16 2019 at 22:40)</a>:</h4>
+<p>As you can see, I already made the function in the first post in this thread. But I don't understand if this is a mathlib-acceptable approach.</p>
+
+<a name="180931376"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931376" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931376">Yury G. Kudryashov (Nov 16 2019 at 22:41)</a>:</h4>
+<p>Another way is to split the definition of <code>pointwise_mul_semiring</code> into two steps: first define the multiplicative monoid, then the semiring.</p>
+
+<a name="180931383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931383">Chris Hughes (Nov 16 2019 at 22:41)</a>:</h4>
+<p>Is there a function <code>comm_monoid X -&gt; add_comm_monoid X</code> in mathlib</p>
+
+<a name="180931384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931384">Kevin Buzzard (Nov 16 2019 at 22:41)</a>:</h4>
+<p>Aah the penny is dropping</p>
+
+<a name="180931425"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931425" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931425">Kevin Buzzard (Nov 16 2019 at 22:42)</a>:</h4>
+<p>The point is that the algorithm can't handle the translation the way I want to do it because it goes via the semiring and the algorithm gets stuck?</p>
+
+<a name="180931428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931428">Kevin Buzzard (Nov 16 2019 at 22:42)</a>:</h4>
+<blockquote>
+<p>Is there a function <code>comm_monoid X -&gt; add_comm_monoid X</code> in mathlib</p>
+</blockquote>
+<p>There should be an equiv!</p>
+
+<a name="180931434"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931434" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931434">Yury G. Kudryashov (Nov 16 2019 at 22:43)</a>:</h4>
+<p>Look at <code>algebra/group/type_tags</code></p>
+
+<a name="180931495"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931495" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931495">Yury G. Kudryashov (Nov 16 2019 at 22:44)</a>:</h4>
+<p>You can do a trick like <code>add_comm_monoid (set M) := show @add_comm_monoid (additive (set (multiplicative M))), by apply_instance</code>; didn't test</p>
+
+<a name="180931518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931518">Kevin Buzzard (Nov 16 2019 at 22:45)</a>:</h4>
+<div class="codehilite"><pre><span></span>tactic.mk_instance failed to generate instance for
+  add_comm_monoid (additive (set (multiplicative α)))
+state:
+α : Type u_1,
+_inst_1 : add_comm_monoid α
+⊢ add_comm_monoid (additive (set (multiplicative α)))
+</pre></div>
+
+<a name="180931564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931564">Reid Barton (Nov 16 2019 at 22:46)</a>:</h4>
+<p>is your original definition an instance?</p>
+
+<a name="180931572"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931572" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931572">Kevin Buzzard (Nov 16 2019 at 22:46)</a>:</h4>
+<p>My original definition isn't even in the file. I thought this was what we were trying to avoid.</p>
+
+<a name="180931633"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931633" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931633">Reid Barton (Nov 16 2019 at 22:49)</a>:</h4>
+<p>I mean <code>def comm_monoid [comm_monoid α] : comm_monoid (set α) :=</code></p>
+
+<a name="180931636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931636">Kevin Buzzard (Nov 16 2019 at 22:49)</a>:</h4>
+<p>How do I figure out the name of <a href="https://github.com/leanprover-community/mathlib/blob/6ebb7e7884c9b11c137f5bb288cd80a46bc6dfac/src/algebra/group/type_tags.lean#L66" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/6ebb7e7884c9b11c137f5bb288cd80a46bc6dfac/src/algebra/group/type_tags.lean#L66">this instance</a> painlessly?</p>
+
+<a name="180931702"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931702" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931702">Chris Hughes (Nov 16 2019 at 22:51)</a>:</h4>
+<p>I'm betting <code>additive.add_comm_monoid</code></p>
+
+<a name="180931703"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931703" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931703">Kevin Buzzard (Nov 16 2019 at 22:51)</a>:</h4>
+<p>I don't need to know, I've finally got there thanks to the extensive help from the three of you.</p>
+
+<a name="180931748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931748">Chris Hughes (Nov 16 2019 at 22:52)</a>:</h4>
+<p>I don't know of a general method for finding that out painlessly. The best I know it to make a def of the same type, prove it with <code>apply_instance</code> and <code>#print</code> it.</p>
+
+<a name="180931934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931934">Kevin Buzzard (Nov 16 2019 at 22:58)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1696" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1696">#1696</a></p>
+
+<a name="180931943"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180931943" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180931943">Kevin Buzzard (Nov 16 2019 at 22:59)</a>:</h4>
+<p>Thanks <span class="user-mention" data-user-id="112680">@Johan Commelin</span> <span class="user-mention" data-user-id="110032">@Reid Barton</span> <span class="user-mention" data-user-id="110044">@Chris Hughes</span> <span class="user-mention" data-user-id="214703">@Yury G. Kudryashov</span> for eventually getting me over the line.</p>
+
 
 {% endraw %}
 

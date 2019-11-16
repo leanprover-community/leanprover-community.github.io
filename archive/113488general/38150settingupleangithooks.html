@@ -97,6 +97,52 @@ if [ -e $HOOK_DIR ]; then
 </blockquote>
 <p>This is a good change. On some systems <code>/bin/sh</code> is actually bash; I assume those systems should have <code>/bin/bash</code> as well. Shells that use bash features should not assume <code>/bin/sh</code> is bash.</p>
 
+<a name="180930075"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930075" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930075">Alex J. Best (Nov 16 2019 at 22:00)</a>:</h4>
+<p><a href="https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script" target="_blank" title="https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script">https://stackoverflow.com/questions/226703/how-do-i-prompt-for-yes-no-cancel-input-in-a-linux-shell-script</a> gives several posix variants</p>
+
+<a name="180930140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930140">Reid Barton (Nov 16 2019 at 22:02)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ git checkout -b pointwise
+Switched to a new branch &#39;pointwise&#39;
+hint: The &#39;.git/hooks/post-checkout&#39; hook was ignored because it&#39;s not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.
+</pre></div>
+
+
+<blockquote>
+<p>I need more hints. I have no idea what that means.</p>
+</blockquote>
+<p><code>.git/hooks/post-checkout</code> is a file</p>
+
+<a name="180930149"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930149" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930149">Kevin Buzzard (Nov 16 2019 at 22:03)</a>:</h4>
+<p>But do I want to disable the warning or do I want to set the executable flag?</p>
+
+<a name="180930204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930204">Reid Barton (Nov 16 2019 at 22:04)</a>:</h4>
+<p>I've never used these hooks but presumably if you went to the trouble of setting them up then you want to set the executable flag so that they run.</p>
+
+<a name="180930257"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930257" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930257">Kevin Buzzard (Nov 16 2019 at 22:06)</a>:</h4>
+<p>I went to the trouble of cutting and pasting stuff from <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/index.md#caching-compilation" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/contribute/index.md#caching-compilation">here</a></p>
+
+<a name="180930276"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930276" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930276">Reid Barton (Nov 16 2019 at 22:07)</a>:</h4>
+<p>In that case, I don't understand how you ended up with the file without the executable flag being set, but you want to set it</p>
+
+<a name="180930325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930325">Kevin Buzzard (Nov 16 2019 at 22:08)</a>:</h4>
+<p><code>cache-olean</code> also had x not set</p>
+
+<a name="180930385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930385">Reid Barton (Nov 16 2019 at 22:10)</a>:</h4>
+<p>The fact that <code>setup-lean-git-hooks.sh</code> copies the files from <code>~/.mathlib</code> strikes me as bizarre</p>
+
+<a name="180930390"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930390" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930390">Reid Barton (Nov 16 2019 at 22:10)</a>:</h4>
+<p>The files live in the same repository</p>
+
 
 {% endraw %}
 
