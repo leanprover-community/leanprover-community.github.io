@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (104 messages, latest: Nov 16 2019 at 15:58)
+* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (222 messages, latest: Nov 16 2019 at 16:58)
 
 * [one-line proof of triviality](61028onelineproofoftriviality.html) (33 messages, latest: Nov 16 2019 at 11:45)
 
