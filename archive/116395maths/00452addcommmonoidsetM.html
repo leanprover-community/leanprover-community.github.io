@@ -69,6 +69,38 @@ permalink: archive/116395maths/00452addcommmonoidsetM.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180925800" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180925800">Kevin Buzzard (Nov 16 2019 at 19:52)</a>:</h4>
 <p>PS is this there already?</p>
 
+<a name="180926384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180926384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180926384">Johan Commelin (Nov 16 2019 at 20:09)</a>:</h4>
+<p>I guess you are looking for <code>algebra.pointwise</code>?</p>
+
+<a name="180926386"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180926386" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180926386">Johan Commelin (Nov 16 2019 at 20:09)</a>:</h4>
+<p>Or where is that file?</p>
+
+<a name="180926393"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180926393" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180926393">Johan Commelin (Nov 16 2019 at 20:09)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/blob/61ccaf65c4cfc9c6ff103463342e034347eb8b89/src/algebra/pointwise.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/61ccaf65c4cfc9c6ff103463342e034347eb8b89/src/algebra/pointwise.lean">https://github.com/leanprover-community/mathlib/blob/61ccaf65c4cfc9c6ff103463342e034347eb8b89/src/algebra/pointwise.lean</a></p>
+
+<a name="180927581"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180927581" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180927581">Kevin Buzzard (Nov 16 2019 at 20:42)</a>:</h4>
+<p>So the only mention of <code>comm_monoid</code> is </p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">pointwise_mul_comm_semiring</span> <span class="o">[</span><span class="n">comm_monoid</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">comm_semiring</span> <span class="o">(</span><span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">mul_comm</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">s</span> <span class="n">t</span><span class="o">,</span> <span class="n">set</span><span class="bp">.</span><span class="n">ext</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span>
+  <span class="k">by</span> <span class="n">split</span><span class="bp">;</span> <span class="o">{</span> <span class="n">rintros</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="n">rfl</span><span class="bp">⟩</span><span class="o">,</span> <span class="n">exact</span> <span class="bp">⟨_</span><span class="o">,</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">,</span> <span class="bp">_</span><span class="o">,</span> <span class="err">‹</span><span class="bp">_</span><span class="err">›</span><span class="o">,</span> <span class="n">mul_comm</span> <span class="bp">_</span> <span class="bp">_⟩</span> <span class="o">},</span>
+  <span class="bp">..</span><span class="n">pointwise_mul_semiring</span> <span class="o">}</span>
+</pre></div>
+
+
+<p>But this means that <code>set M</code> is a comm_monoid if <code>M</code> is a <code>comm_monoid</code>. I should be able to magically <code>to_additive</code> this now somehow?</p>
+
+<a name="180927919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180927919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180927919">Johan Commelin (Nov 16 2019 at 20:53)</a>:</h4>
+<p>No, I don't think that will work, because the conclusion doesn't have an additive version</p>
+
+<a name="180927925"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180927925" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180927925">Johan Commelin (Nov 16 2019 at 20:53)</a>:</h4>
+<p>I should just have made a commutative version of <a href="https://github.com/leanprover-community/mathlib/blob/61ccaf65c4cfc9c6ff103463342e034347eb8b89/src/algebra/pointwise.lean#L65" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/61ccaf65c4cfc9c6ff103463342e034347eb8b89/src/algebra/pointwise.lean#L65">https://github.com/leanprover-community/mathlib/blob/61ccaf65c4cfc9c6ff103463342e034347eb8b89/src/algebra/pointwise.lean#L65</a> but I seem to not have done that</p>
+
 
 {% endraw %}
 
