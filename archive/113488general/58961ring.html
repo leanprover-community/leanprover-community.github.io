@@ -1,0 +1,106 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/58961ring.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html">ring</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180906232"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906232" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906232">Sebastien Gouezel (Nov 16 2019 at 10:10)</a>:</h4>
+<p><code>ring</code> just failed me on</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">come_on_ring</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+   <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">((</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">ring</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">neg_neg</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">mul_comm</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>First line should work but does not close the goal. Also, if you replace the line <code>rw mul_comm</code> with <code>ring</code>, it fails again but expands the definition of the inverse, which it didn't do in the first step.</p>
+
+<a name="180906350"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906350" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906350">Mario Carneiro (Nov 16 2019 at 10:13)</a>:</h4>
+<p>this works for me:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">ℂ</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_field</span> <span class="n">ℂ</span><span class="o">]</span>
+<span class="kn">lemma</span> <span class="n">come_on_ring</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+   <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">((</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">ring1</span>
+</pre></div>
+
+<a name="180906394"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906394" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906394">Mario Carneiro (Nov 16 2019 at 10:14)</a>:</h4>
+<p>On further review, though, that typeclass is nonsense. Something requires a linear ordered semiring</p>
+
+<a name="180906412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906412">Mario Carneiro (Nov 16 2019 at 10:15)</a>:</h4>
+<p>I think it is because it is trying to use <code>rat.cast</code> to make sense of the one half</p>
+
+<a name="180906482"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906482" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906482">Sebastien Gouezel (Nov 16 2019 at 10:17)</a>:</h4>
+<p>Yes, <code>ℂ</code> is not really ordered, but still it has characteristic <code>0</code>...</p>
+
+<a name="180906588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906588">Mario Carneiro (Nov 16 2019 at 10:20)</a>:</h4>
+<p>The culprit is <code>tactic.norm_num</code> from core:</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">eval</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span> <span class="bp">`</span><span class="o">(</span><span class="mi">1</span> <span class="bp">/</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">))</span> <span class="bp">&gt;&gt;=</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">trace</span>
+<span class="c1">-- failed to synthesize &#39;linear_ordered_semiring&#39;</span>
+</pre></div>
+
+<a name="180906591"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906591" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906591">Mario Carneiro (Nov 16 2019 at 10:20)</a>:</h4>
+<p>mathlib has a <code>char_zero</code> typeclass to address this, but we used <code>linear_ordered_field</code> before that and the norm_num lemmas use it too</p>
+
+<a name="180906779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906779">Mario Carneiro (Nov 16 2019 at 10:26)</a>:</h4>
+<p>It uses</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">div_eq_div_helper</span>
+<span class="c1">-- theorem norm_num.div_eq_div_helper : ∀ {α : Type u} [_inst_1 : field α] (a b c d v : α),</span>
+<span class="c1">--   a * d = v → c * b = v → b ≠ 0 → d ≠ 0 → a / b = c / d</span>
+</pre></div>
+
+
+<p>to prove equality of divisions by cross multiplication (causing a <code>2 ≠ 0</code> subgoal), followed by</p>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">print</span> <span class="n">norm_num</span><span class="bp">.</span><span class="n">nonzero_of_pos_helper</span>
+<span class="c1">-- theorem norm_num.nonzero_of_pos_helper : ∀ {α : Type u} [_inst_1 : linear_ordered_semiring α] (a : α), a &gt; 0 → a ≠ 0</span>
+</pre></div>
+
+
+<p>to deduce this from <code>2 &gt; 0</code> (at which point we are talking nonsense since there is no such order on complexes)</p>
+
+<a name="180906851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906851">Mario Carneiro (Nov 16 2019 at 10:28)</a>:</h4>
+<p>In any case, you can solve the lemma like this:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">come_on_ring</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+   <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">((</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="o">{</span><span class="n">generalize</span><span class="o">:</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="n">a</span><span class="o">,</span> <span class="n">ring</span><span class="o">}</span>
+</pre></div>
+
+<a name="180906866"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906866" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906866">Sebastien Gouezel (Nov 16 2019 at 10:29)</a>:</h4>
+<p>OK. Finally, in my more complex computation, I cheated by hiding <code>1/2</code> from ring, with (a variant of)</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">come_on_ring</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span> <span class="o">:</span>
+   <span class="n">x</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">=</span> <span class="bp">-</span><span class="o">((</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">set</span> <span class="n">u</span> <span class="o">:</span> <span class="n">ℂ</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">2</span> <span class="o">:</span> <span class="n">ℂ</span><span class="o">)</span><span class="bp">⁻¹</span><span class="o">,</span>
+  <span class="n">ring</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180906919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/ring/near/180906919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/58961ring.html#180906919">Sebastien Gouezel (Nov 16 2019 at 10:30)</a>:</h4>
+<p>Yes, it's essentially the same as your solution with <code>generalize</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

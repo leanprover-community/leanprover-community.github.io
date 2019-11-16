@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [introducing an element in tactic mode](30196introducinganelementintacticmode.html) (22 messages, latest: Nov 16 2019 at 09:41)
+* [ring](58961ring.html) (11 messages, latest: Nov 16 2019 at 10:30)
+
+* [introducing an element in tactic mode](30196introducinganelementintacticmode.html) (25 messages, latest: Nov 16 2019 at 10:20)
 
 * [wlog](90586wlog.html) (25 messages, latest: Nov 15 2019 at 19:20)
 
