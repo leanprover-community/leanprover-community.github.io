@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [setting up lean-git-hooks](38150settingupleangithooks.html) (7 messages, latest: Nov 16 2019 at 21:59)
+
 * [ring](58961ring.html) (11 messages, latest: Nov 16 2019 at 10:30)
 
 * [introducing an element in tactic mode](30196introducinganelementintacticmode.html) (25 messages, latest: Nov 16 2019 at 10:20)

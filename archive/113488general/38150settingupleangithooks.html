@@ -1,0 +1,103 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/38150settingupleangithooks.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html">setting up lean-git-hooks</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180929670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180929670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180929670">Kevin Buzzard (Nov 16 2019 at 21:47)</a>:</h4>
+<p>Is my set-up borked? I don't usually edit mathlib. How do I start again?</p>
+<div class="codehilite"><pre><span></span>git clone git@github.com:leanprover-community/mathlib.git
+git fetch --all
+git checkout origin/lean-3.4.2
+cache-olean --fetch
+find src/ -name &#39;*.olean&#39; -exec touch {} +
+</pre></div>
+
+
+<p>all work fine. Then</p>
+<div class="codehilite"><pre><span></span>$ setup-lean-git-hooks
+This script will copy post-commit and post-checkout scripts to .git/hooks
+/home/buzzard/.mathlib/bin/setup-lean-git-hooks: 5: read: Illegal option -n
+
+/home/buzzard/.mathlib/bin/setup-lean-git-hooks: 7: /home/buzzard/.mathlib/bin/setup-lean-git-hooks: [[: not found
+Cancelled...
+buzzard@bob:~/Lean/lean-projects/mathlib$
+</pre></div>
+
+<a name="180929713"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180929713" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180929713">Kevin Buzzard (Nov 16 2019 at 21:48)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ /bin/sh
+$ read -p &quot;Do you want to proceed? &quot; -n 1 -r
+/bin/sh: 1: read: Illegal option -n
+</pre></div>
+
+<a name="180929778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180929778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180929778">Kevin Buzzard (Nov 16 2019 at 21:50)</a>:</h4>
+<p>Editing <code>$HOME/.mathlib/bin/setup-lean-git-hooks</code> so that it starts with <code>/bin/bash</code> works for me on Ubuntu. Is that not an acceptable change in general?</p>
+
+<a name="180929789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180929789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180929789">Kevin Buzzard (Nov 16 2019 at 21:51)</a>:</h4>
+<p>By default I seem to have this:</p>
+<div class="codehilite"><pre><span></span>$ more /home/buzzard/.mathlib/bin/setup-lean-git-hooks
+#! /bin/sh
+HOOK_DIR=`git rev-parse --git-dir`/hooks
+if [ -e $HOOK_DIR ]; then
+    echo This script will copy post-commit and post-checkout scripts to $HOOK_DIR
+    read -p &quot;Do you want to proceed? &quot; -n 1 -r
+...
+</pre></div>
+
+
+<p>and this doesn't work for me on Ubuntu 18.04</p>
+
+<a name="180929903"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180929903" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180929903">Kevin Buzzard (Nov 16 2019 at 21:55)</a>:</h4>
+<div class="codehilite"><pre><span></span>$ git checkout -b pointwise
+Switched to a new branch &#39;pointwise&#39;
+hint: The &#39;.git/hooks/post-checkout&#39; hook was ignored because it&#39;s not set as executable.
+hint: You can disable this warning with `git config advice.ignoredHook false`.
+</pre></div>
+
+
+<p>I need more hints. I have no idea what that means.</p>
+
+<a name="180930011"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930011" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930011">Alex J. Best (Nov 16 2019 at 21:58)</a>:</h4>
+<blockquote>
+<p>By default I seem to have this:</p>
+</blockquote>
+<div class="codehilite"><pre><span></span>$ more /home/buzzard/.mathlib/bin/setup-lean-git-hooks
+#! /bin/sh
+HOOK_DIR=`git rev-parse --git-dir`/hooks
+if [ -e $HOOK_DIR ]; then
+    echo This script will copy post-commit and post-checkout scripts to $HOOK_DIR
+    read -p &quot;Do you want to proceed? &quot; -n 1 -r
+...
+</pre></div>
+
+
+<blockquote>
+<p>and this doesn't work for me on Ubuntu 18.04</p>
+</blockquote>
+<p>If you change the first line to  <code>#! /bin/bash</code> does it work?</p>
+
+<a name="180930027"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/setting%20up%20lean-git-hooks/near/180930027" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38150settingupleangithooks.html#180930027">Reid Barton (Nov 16 2019 at 21:59)</a>:</h4>
+<blockquote>
+<p>Editing <code>$HOME/.mathlib/bin/setup-lean-git-hooks</code> so that it starts with <code>/bin/bash</code> works for me on Ubuntu. Is that not an acceptable change in general?</p>
+</blockquote>
+<p>This is a good change. On some systems <code>/bin/sh</code> is actually bash; I assume those systems should have <code>/bin/bash</code> as well. Shells that use bash features should not assume <code>/bin/sh</code> is bash.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
