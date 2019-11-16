@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob VS Code autocomplete question](49917noobVSCodeautocompletequestion.html) (4 messages, latest: Nov 16 2019 at 13:59)
+
 * [Giving a proof in the type](40166Givingaproofinthetype.html) (8 messages, latest: Nov 15 2019 at 23:04)
 
 * [@\[refl\] and coercion to a reflexive binary relation](31640reflandcoerciontoareflexivebinaryrelation.html) (3 messages, latest: Nov 15 2019 at 01:44)
