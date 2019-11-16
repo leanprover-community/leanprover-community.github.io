@@ -1,0 +1,37 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/20678notationforlimits.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/20678notationforlimits.html">notation for limits</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180883558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20limits/near/180883558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20678notationforlimits.html#180883558">Kevin Buzzard (Nov 15 2019 at 23:49)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="kn">notation</span> <span class="bp">`|`</span> <span class="n">x</span> <span class="bp">`|`</span> <span class="o">:=</span> <span class="n">abs</span> <span class="n">x</span>
+<span class="kn">definition</span> <span class="n">is_limit</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">(</span><span class="n">l</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">ε</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">ε</span> <span class="bp">→</span> <span class="bp">∃</span> <span class="n">N</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="bp">∀</span> <span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">,</span> <span class="n">N</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="bp">|</span><span class="n">a</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">l</span><span class="bp">|</span> <span class="bp">&lt;</span> <span class="n">ε</span>
+</pre></div>
+
+
+<p>I'd like to have some good notation for limits in Lean 3.4.2 or 3.5. Something as near to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><msub><mi mathvariant="normal">lim</mi><mo>⁡</mo><mrow><mi>n</mi><mo>→</mo><mi mathvariant="normal">∞</mi></mrow></msub><msub><mi>a</mi><mi>n</mi></msub><mo>=</mo><mi mathvariant="normal">ℓ</mi></mrow><annotation encoding="application/x-tex">\operatorname{lim}_{n\to\infty}a_n=\ell</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.84444em;vertical-align:-0.15em;"></span><span class="mop"><span class="mop"><span class="mord mathrm">l</span><span class="mord mathrm">i</span><span class="mord mathrm">m</span></span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mrel mtight">→</span><span class="mord mtight">∞</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord"><span class="mord mathdefault">a</span><span class="msupsub"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.151392em;"><span style="top:-2.5500000000000003em;margin-left:0em;margin-right:0.05em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mathdefault mtight">n</span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.15em;"><span></span></span></span></span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.69444em;vertical-align:0em;"></span><span class="mord">ℓ</span></span></span></span> as possible. Any suggestions?</p>
+
+<a name="180883657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20limits/near/180883657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20678notationforlimits.html#180883657">Kevin Buzzard (Nov 15 2019 at 23:50)</a>:</h4>
+<p>One issue is that "limit" isn't a function, it's really a predicate on a pair consisting of a sequence and a real number. The fact that for any sequence there's at most one real number which can be its limit is cool but I'm not exactly sure how to build it in.</p>
+
+<a name="180883704"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/notation%20for%20limits/near/180883704" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/20678notationforlimits.html#180883704">Chris Hughes (Nov 15 2019 at 23:51)</a>:</h4>
+<p>There's already a lim function on <code>cau_seq</code> in mathlib.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Giving a proof in the type](40166Givingaproofinthetype.html) (7 messages, latest: Nov 15 2019 at 22:58)
+* [Giving a proof in the type](40166Givingaproofinthetype.html) (8 messages, latest: Nov 15 2019 at 23:04)
 
 * [@\[refl\] and coercion to a reflexive binary relation](31640reflandcoerciontoareflexivebinaryrelation.html) (3 messages, latest: Nov 15 2019 at 01:44)
 
