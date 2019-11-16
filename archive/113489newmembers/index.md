@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [noob question(s)](52075noobquestions.html) (1601 messages, latest: Nov 16 2019 at 17:47)
+
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (179 messages, latest: Nov 16 2019 at 17:08)
+
 * [noob VS Code autocomplete question](49917noobVSCodeautocompletequestion.html) (14 messages, latest: Nov 16 2019 at 14:22)
 
 * [Giving a proof in the type](40166Givingaproofinthetype.html) (8 messages, latest: Nov 15 2019 at 23:04)
@@ -20,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [Lemmas about subtype.rec](37263Lemmasaboutsubtyperec.html) (44 messages, latest: Nov 14 2019 at 19:50)
 
 * [Enforcing that arguments are of an inductive type?](46603Enforcingthatargumentsareofaninductivetype.html) (7 messages, latest: Nov 14 2019 at 14:15)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (178 messages, latest: Nov 14 2019 at 13:51)
 
 * [TPIL 3.7 labeled exercises](80902TPIL37labeledexercises.html) (2 messages, latest: Nov 13 2019 at 18:50)
 
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [nth append](02723nthappend.html) (8 messages, latest: Nov 10 2019 at 23:01)
 
 * [negation of a formula in prenex normal form](37992negationofaformulainprenexnormalform.html) (4 messages, latest: Nov 10 2019 at 19:38)
-
-* [noob question(s)](52075noobquestions.html) (1594 messages, latest: Nov 10 2019 at 19:12)
 
 * [How to check whether a notion is already in mathlib?](28788Howtocheckwhetheranotionisalreadyinmathlib.html) (10 messages, latest: Nov 10 2019 at 06:21)
 
