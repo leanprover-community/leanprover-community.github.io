@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (49 messages, latest: Nov 16 2019 at 14:58)
+
 * [one-line proof of triviality](61028onelineproofoftriviality.html) (33 messages, latest: Nov 16 2019 at 11:45)
 
 * [eigenvectors from eigenvalues](44251eigenvectorsfromeigenvalues.html) (5 messages, latest: Nov 16 2019 at 10:06)

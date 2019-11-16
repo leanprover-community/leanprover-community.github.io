@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob VS Code autocomplete question](49917noobVSCodeautocompletequestion.html) (4 messages, latest: Nov 16 2019 at 13:59)
+* [noob VS Code autocomplete question](49917noobVSCodeautocompletequestion.html) (14 messages, latest: Nov 16 2019 at 14:22)
 
 * [Giving a proof in the type](40166Givingaproofinthetype.html) (8 messages, latest: Nov 15 2019 at 23:04)
 

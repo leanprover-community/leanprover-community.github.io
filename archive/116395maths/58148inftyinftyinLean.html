@@ -1,0 +1,221 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/58148inftyinftyinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html">$$[-\infty,\infty]$$ in Lean?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180914397"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914397" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914397">Kevin Buzzard (Nov 16 2019 at 14:33)</a>:</h4>
+<p>I am trying to develop a nice theory of suprema on the reals so I can teach it cleanly to undergraduates in Lean. Along the way I realised that I didn't know if we had a convenient "black box" API for <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,\infty]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∞</span><span class="mclose">]</span></span></span></span>. I guess I'd like an addition, subtraction, multiplication and division on it, and a total order with a bottom and a top. Is that a thing in Lean? I want it to be the target of a <code>def supremum : set ℝ →</code> map.</p>
+
+<a name="180914456"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914456" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914456">Kevin Buzzard (Nov 16 2019 at 14:35)</a>:</h4>
+<p>I don't want to re-invent the wheel.</p>
+
+<a name="180914524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914524">Mario Carneiro (Nov 16 2019 at 14:37)</a>:</h4>
+<p>The operations aren't very nice</p>
+
+<a name="180914568"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914568" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914568">Mario Carneiro (Nov 16 2019 at 14:38)</a>:</h4>
+<p>what is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mi mathvariant="normal">∞</mi><mo>+</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">-\infty + \infty</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">∞</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span>? What about <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mn>0</mn><mo>⋅</mo><mi mathvariant="normal">∞</mi></mrow><annotation encoding="application/x-tex">0 \cdot \infty</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">⋅</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span></span></span></span>?</p>
+
+<a name="180914574"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914574" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914574">Kevin Buzzard (Nov 16 2019 at 14:38)</a>:</h4>
+<p>I don't care, I will never ask such silly questions so as far as I'm concerned it could be 37</p>
+
+<a name="180914585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914585">Kevin Buzzard (Nov 16 2019 at 14:39)</a>:</h4>
+<p>When I write my theorems I'll put in hypotheses which are guaranteed to make + make sense.</p>
+
+<a name="180914587"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914587" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914587">Mario Carneiro (Nov 16 2019 at 14:39)</a>:</h4>
+<p>the hypotheses are pretty hairy</p>
+
+<a name="180914617"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914617" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914617">Kevin Buzzard (Nov 16 2019 at 14:40)</a>:</h4>
+<p>You are quite happily incorrectly assigning <code>0</code> to <code>1/0</code> and we don't care because we'd never do that. Isn't it the same here?</p>
+
+<a name="180914637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914637">Kevin Buzzard (Nov 16 2019 at 14:40)</a>:</h4>
+<p>Do you want me to write you a formal API for what I want?</p>
+
+<a name="180914645"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914645" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914645">Mario Carneiro (Nov 16 2019 at 14:40)</a>:</h4>
+<p>Assuming <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>−</mo><mi mathvariant="normal">∞</mi><mo>+</mo><mi mathvariant="normal">∞</mi><mo>=</mo><mn>0</mn></mrow><annotation encoding="application/x-tex">-\infty+\infty=0</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">∞</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord">∞</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.64444em;vertical-align:0em;"></span><span class="mord">0</span></span></span></span>, the addition is associative except in the case <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">(</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo>+</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">)</mo><mo>+</mo><mi>a</mi><mi mathvariant="normal">≠</mi><mo>−</mo><mi mathvariant="normal">∞</mi><mo>+</mo><mo stretchy="false">(</mo><mi mathvariant="normal">∞</mi><mo>+</mo><mi>a</mi><mo stretchy="false">)</mo></mrow><annotation encoding="application/x-tex">(-\infty + \infty) + a \ne -\infty + (\infty + a)</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">−</span><span class="mord">∞</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord">∞</span><span class="mclose">)</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="mord mathdefault">a</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel"><span class="mrel"><span class="mord"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.69444em;"><span style="top:-3em;"><span class="pstrut" style="height:3em;"></span><span class="rlap"><span class="strut" style="height:0.8888799999999999em;vertical-align:-0.19444em;"></span><span class="inner"><span class="mrel"></span></span><span class="fix"></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.19444em;"><span></span></span></span></span></span></span><span class="mrel">=</span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.66666em;vertical-align:-0.08333em;"></span><span class="mord">−</span><span class="mord">∞</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">(</span><span class="mord">∞</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">a</span><span class="mclose">)</span></span></span></span></p>
+
+<a name="180914657"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914657" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914657">Kevin Buzzard (Nov 16 2019 at 14:41)</a>:</h4>
+<p>I can just develop a theory of sup and give you some sort of a formal API.</p>
+
+<a name="180914712"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914712" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914712">Mario Carneiro (Nov 16 2019 at 14:43)</a>:</h4>
+<p>I think it might be good to have a <code>with_bounds</code> constructor like <code>with_top</code> and <code>with_bot</code></p>
+
+<a name="180914718"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914718" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914718">Kevin Buzzard (Nov 16 2019 at 14:43)</a>:</h4>
+<p>(from mathlib:) </p>
+<div class="codehilite"><pre><span></span>noncomputable def Sup (S : set ℝ) : ℝ :=
+if h : (∃ x, x ∈ S) ∧ (∃ x, ∀ y ∈ S, y ≤ x)
+then classical.some (exists_sup S h.1 h.2) else 0
+</pre></div>
+
+
+<p>That is not a pretty function.</p>
+
+<a name="180914760"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914760" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914760">Kevin Buzzard (Nov 16 2019 at 14:44)</a>:</h4>
+<p>A better target is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,+\infty]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">+</span><span class="mord">∞</span><span class="mclose">]</span></span></span></span>.</p>
+
+<a name="180914764"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914764" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914764">Kevin Buzzard (Nov 16 2019 at 14:44)</a>:</h4>
+<p><span class="user-mention" data-user-id="110064">@Kenny Lau</span> what do you think?</p>
+
+<a name="180914830"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914830" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914830">Mario Carneiro (Nov 16 2019 at 14:46)</a>:</h4>
+<p>I'm not really disagreeing, but I'm surprised to hear this coming from a mathematician</p>
+
+<a name="180914838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914838">Mario Carneiro (Nov 16 2019 at 14:47)</a>:</h4>
+<p>metamath has extended reals defined just as you say, with a bunch of messy totalized algebraic operations</p>
+
+<a name="180914879"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914879" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914879">Mario Carneiro (Nov 16 2019 at 14:48)</a>:</h4>
+<p>but it works better in ZFC I think because you can just take subsets for things like <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mn>0</mn><mo separator="true">,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[0,\infty]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">0</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∞</span><span class="mclose">]</span></span></span></span> instead of building a whole new type from scratch</p>
+
+<a name="180914882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914882">Kevin Buzzard (Nov 16 2019 at 14:48)</a>:</h4>
+<p>Oh so now can you just magically import it to Lean 3?</p>
+
+<a name="180914898"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914898" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914898">Mario Carneiro (Nov 16 2019 at 14:49)</a>:</h4>
+<p>The <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo>≤</mo></mrow><annotation encoding="application/x-tex">\le</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.7719400000000001em;vertical-align:-0.13597em;"></span><span class="mrel">≤</span></span></span></span> relation is actually defined over <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty, \infty]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">∞</span><span class="mclose">]</span></span></span></span> and merely specializes to <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi mathvariant="double-struck">R</mi></mrow><annotation encoding="application/x-tex">\mathbb{R}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68889em;vertical-align:0em;"></span><span class="mord"><span class="mord mathbb">R</span></span></span></span></span></p>
+
+<a name="180914900"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914900" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914900">Kevin Buzzard (Nov 16 2019 at 14:49)</a>:</h4>
+<p>I don't care about your silly infrastructure issues, I would be completely happy with an axiomatised version of <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,+\infty]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">+</span><span class="mord">∞</span><span class="mclose">]</span></span></span></span> and then just a way of knowing that the metamath API which I would use, could be ported to Lean by you.</p>
+
+<a name="180914908"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914908" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914908">Kevin Buzzard (Nov 16 2019 at 14:49)</a>:</h4>
+<p>It would save us all a lot of bother. I would quite happily just develop with a metamath API.</p>
+
+<a name="180914950"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914950" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914950">Mario Carneiro (Nov 16 2019 at 14:50)</a>:</h4>
+<p>I don't think you would actually save much in this case</p>
+
+<a name="180914957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914957">Mario Carneiro (Nov 16 2019 at 14:50)</a>:</h4>
+<p>the theorems are all pretty trivial, it's like "integer world"</p>
+
+<a name="180914963"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914963" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914963">Kevin Buzzard (Nov 16 2019 at 14:51)</a>:</h4>
+<p>So for example how do I prove <code>sup (X + Y) = sup X + sup Y</code>?</p>
+
+<a name="180914971"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914971" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914971">Johan Commelin (Nov 16 2019 at 14:51)</a>:</h4>
+<p>That's false</p>
+
+<a name="180914973"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914973" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914973">Johan Commelin (Nov 16 2019 at 14:51)</a>:</h4>
+<p>It depends on what X and Y are</p>
+
+<a name="180914975"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914975" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914975">Kevin Buzzard (Nov 16 2019 at 14:51)</a>:</h4>
+<p>ok assuming some edge conditions</p>
+
+<a name="180914977"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914977" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914977">Kevin Buzzard (Nov 16 2019 at 14:51)</a>:</h4>
+<p>it's true with probability 1</p>
+
+<a name="180914978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180914978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180914978">Mario Carneiro (Nov 16 2019 at 14:51)</a>:</h4>
+<p>like that everything is a defined real number?</p>
+
+<a name="180915020"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915020" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915020">Kevin Buzzard (Nov 16 2019 at 14:52)</a>:</h4>
+<p><code>sup (X + Y) = sup X + sup Y</code> is a well-known example sheet question so it must be true.</p>
+
+<a name="180915035"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915035" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915035">Kevin Buzzard (Nov 16 2019 at 14:52)</a>:</h4>
+<p>the details of sorting out the edge cases are left to the reader.</p>
+
+<a name="180915047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915047">Mario Carneiro (Nov 16 2019 at 14:53)</a>:</h4>
+<p>extended reals are basically an exercise in "trivial generalization". You have a bunch of theorems about reals, you replace everything with extended reals, and then stuff holds under some assumption, and you work out the assumption</p>
+
+<a name="180915053"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915053" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915053">Mario Carneiro (Nov 16 2019 at 14:53)</a>:</h4>
+<p>and if the assumption is "everything is real" then you scrap the theorem</p>
+
+<a name="180915055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915055">Kevin Buzzard (Nov 16 2019 at 14:54)</a>:</h4>
+<p>So what is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mo stretchy="false">[</mo><mo>−</mo><mi mathvariant="normal">∞</mi><mo separator="true">,</mo><mo>+</mo><mi mathvariant="normal">∞</mi><mo stretchy="false">]</mo></mrow><annotation encoding="application/x-tex">[-\infty,+\infty]</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mopen">[</span><span class="mord">−</span><span class="mord">∞</span><span class="mpunct">,</span><span class="mspace" style="margin-right:0.16666666666666666em;"></span><span class="mord">+</span><span class="mord">∞</span><span class="mclose">]</span></span></span></span> called in Lean?</p>
+
+<a name="180915094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915094">Mario Carneiro (Nov 16 2019 at 14:54)</a>:</h4>
+<p><code>ereal</code> seems reasonable</p>
+
+<a name="180915098"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915098" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915098">Kevin Buzzard (Nov 16 2019 at 14:54)</a>:</h4>
+<p>But it doesn't exist yet in mathlib?</p>
+
+<a name="180915100"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915100" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915100">Mario Carneiro (Nov 16 2019 at 14:54)</a>:</h4>
+<p>nope</p>
+
+<a name="180915102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915102">Kevin Buzzard (Nov 16 2019 at 14:54)</a>:</h4>
+<p>and does it exist in metamath?</p>
+
+<a name="180915103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915103">Mario Carneiro (Nov 16 2019 at 14:54)</a>:</h4>
+<p><code>with_bot (with_top real)</code> does</p>
+
+<a name="180915113"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915113" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915113">Kevin Buzzard (Nov 16 2019 at 14:55)</a>:</h4>
+<p>So is that the mathlib-correct definition of <code>ereal</code> in Lean?</p>
+
+<a name="180915114"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915114" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915114">Mario Carneiro (Nov 16 2019 at 14:55)</a>:</h4>
+<p>yes, metamath has used this representation for a long time</p>
+
+<a name="180915116"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915116" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915116">Mario Carneiro (Nov 16 2019 at 14:56)</a>:</h4>
+<p>Depends on whether you care about computability. There is a way to define it using cauchy sequences that converge to infinity</p>
+
+<a name="180915160"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915160" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915160">Kevin Buzzard (Nov 16 2019 at 14:56)</a>:</h4>
+<p>Can you just give me a way of generating a Lean 3.5.0c definition of <code>ereal</code> with all its metamath API?</p>
+
+<a name="180915161"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915161" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915161">Mario Carneiro (Nov 16 2019 at 14:56)</a>:</h4>
+<p>If you don't care about computability, then <code>with_bounds real</code> would do the trick</p>
+
+<a name="180915166"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915166" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915166">Kevin Buzzard (Nov 16 2019 at 14:57)</a>:</h4>
+<p>using some <code>mm0</code> magic?</p>
+
+<a name="180915170"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915170" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915170">Mario Carneiro (Nov 16 2019 at 14:57)</a>:</h4>
+<p>you are wishing for a kind of magic that doesn't exist yet</p>
+
+<a name="180915171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915171">Mario Carneiro (Nov 16 2019 at 14:57)</a>:</h4>
+<p>API translation is really hard because idioms are different</p>
+
+<a name="180915217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180915217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180915217">Mario Carneiro (Nov 16 2019 at 14:58)</a>:</h4>
+<p>I can give you theorems but they will be ugly and horrible</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
