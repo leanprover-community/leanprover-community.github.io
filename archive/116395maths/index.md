@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [one-line proof of triviality](61028onelineproofoftriviality.html) (16 messages, latest: Nov 16 2019 at 00:46)
+* [one-line proof of triviality](61028onelineproofoftriviality.html) (19 messages, latest: Nov 16 2019 at 08:58)
+
+* [eigenvectors from eigenvalues](44251eigenvectorsfromeigenvalues.html) (3 messages, latest: Nov 16 2019 at 08:36)
 
 * [notation for limits](20678notationforlimits.html) (4 messages, latest: Nov 16 2019 at 00:06)
 
