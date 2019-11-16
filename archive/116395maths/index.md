@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [notation for limits](20678notationforlimits.html) (3 messages, latest: Nov 15 2019 at 23:51)
+* [one-line proof of triviality](61028onelineproofoftriviality.html) (16 messages, latest: Nov 16 2019 at 00:46)
+
+* [notation for limits](20678notationforlimits.html) (4 messages, latest: Nov 16 2019 at 00:06)
 
 * [analysis](03749analysis.html) (51 messages, latest: Nov 15 2019 at 17:26)
 
