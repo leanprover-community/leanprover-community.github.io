@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [noob question(s)](52075noobquestions.html) (1601 messages, latest: Nov 16 2019 at 17:47)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (180 messages, latest: Nov 16 2019 at 18:15)
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (179 messages, latest: Nov 16 2019 at 17:08)
+* [noob question(s)](52075noobquestions.html) (1601 messages, latest: Nov 16 2019 at 17:47)
 
 * [noob VS Code autocomplete question](49917noobVSCodeautocompletequestion.html) (14 messages, latest: Nov 16 2019 at 14:22)
 
