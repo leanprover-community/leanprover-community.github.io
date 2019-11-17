@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Using data.rat](47222Usingdatarat.html) (23 messages, latest: Nov 16 2019 at 22:58)
+* [Frustrating nat proofs](54230Frustratingnatproofs.html) (10 messages, latest: Nov 16 2019 at 23:59)
+
+* [Using data.rat](47222Usingdatarat.html) (85 messages, latest: Nov 16 2019 at 23:39)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (180 messages, latest: Nov 16 2019 at 18:15)
 
