@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (233 messages, latest: Nov 17 2019 at 08:10)
+* [analysis](03749analysis.html) (53 messages, latest: Nov 17 2019 at 09:53)
 
-* [analysis](03749analysis.html) (52 messages, latest: Nov 17 2019 at 04:37)
+* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (233 messages, latest: Nov 17 2019 at 08:10)
 
 * [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (72 messages, latest: Nov 17 2019 at 01:12)
 
