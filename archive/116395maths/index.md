@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [analysis](03749analysis.html) (55 messages, latest: Nov 17 2019 at 17:31)
+
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (237 messages, latest: Nov 17 2019 at 16:50)
 
 * [restriction of scalars](85589restrictionofscalars.html) (4 messages, latest: Nov 17 2019 at 16:38)
-
-* [analysis](03749analysis.html) (54 messages, latest: Nov 17 2019 at 10:02)
 
 * [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (72 messages, latest: Nov 17 2019 at 01:12)
 
