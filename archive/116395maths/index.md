@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [pi with derivatives](79516piwithderivatives.html) (1 message, latest: Nov 16 2019 at 23:50)
+* [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (71 messages, latest: Nov 17 2019 at 00:59)
 
-* [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (61 messages, latest: Nov 16 2019 at 23:45)
+* [pi with derivatives](79516piwithderivatives.html) (1 message, latest: Nov 16 2019 at 23:50)
 
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (228 messages, latest: Nov 16 2019 at 17:04)
 

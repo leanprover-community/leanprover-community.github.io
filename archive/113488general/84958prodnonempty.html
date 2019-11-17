@@ -1,0 +1,72 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/84958prodnonempty.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html">prod.nonempty</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180934588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934588">Kevin Buzzard (Nov 17 2019 at 00:21)</a>:</h4>
+<p>What's the sensible proof of</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">(</span><span class="n">hX</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">X</span><span class="o">)</span> <span class="o">(</span><span class="n">hY</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">tactic</span><span class="bp">.</span><span class="n">unfreeze_local_instances</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hX</span> <span class="k">with</span> <span class="n">x</span><span class="o">,</span>
+  <span class="n">cases</span> <span class="n">hY</span> <span class="k">with</span> <span class="n">y</span><span class="o">,</span>
+  <span class="n">constructor</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">y</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="180934664"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934664" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934664">Mario Carneiro (Nov 17 2019 at 00:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">nonempty</span> <span class="n">X</span> <span class="bp">→</span> <span class="n">nonempty</span> <span class="n">Y</span> <span class="bp">→</span> <span class="n">nonempty</span> <span class="o">(</span><span class="n">X</span> <span class="bp">×</span> <span class="n">Y</span><span class="o">)</span>
+<span class="bp">|</span> <span class="bp">⟨</span><span class="n">x</span><span class="bp">⟩</span> <span class="bp">⟨</span><span class="n">y</span><span class="bp">⟩</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="180934723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934723">Kevin Buzzard (Nov 17 2019 at 00:24)</a>:</h4>
+<p>Should this be an instance?</p>
+
+<a name="180934738"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934738" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934738">Mario Carneiro (Nov 17 2019 at 00:25)</a>:</h4>
+<p>yes, this looks like a good instance</p>
+
+<a name="180934816"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934816" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934816">Kevin Buzzard (Nov 17 2019 at 00:27)</a>:</h4>
+<p>Should this be a class:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">bounded_above</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">set</span> <span class="n">ℝ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">is_bounded_above</span> <span class="o">:</span> <span class="n">bounded</span> <span class="o">(</span><span class="bp">≤</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+</pre></div>
+
+<a name="180934858"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934858" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934858">Kevin Buzzard (Nov 17 2019 at 00:28)</a>:</h4>
+<p>I'm trying to understand the fact that a non-empty bounded-above set has a unique least upper bound.</p>
+
+<a name="180934874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934874">Kevin Buzzard (Nov 17 2019 at 00:29)</a>:</h4>
+<p>If <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi></mrow><annotation encoding="application/x-tex">X</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span></span></span></span> and <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>Y</mi></mrow><annotation encoding="application/x-tex">Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span> are non-empty bounded-above sets of reals then so is <span class="katex"><span class="katex-mathml"><math><semantics><mrow><mi>X</mi><mo>+</mo><mi>Y</mi></mrow><annotation encoding="application/x-tex">X+Y</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.76666em;vertical-align:-0.08333em;"></span><span class="mord mathdefault" style="margin-right:0.07847em;">X</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span><span class="mbin">+</span><span class="mspace" style="margin-right:0.2222222222222222em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.22222em;">Y</span></span></span></span>. I'm wondering if typeclass inference has any business knowing this.</p>
+
+<a name="180934946"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934946" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934946">Mario Carneiro (Nov 17 2019 at 00:31)</a>:</h4>
+<p>it's debatable, but to me it seems like much ado about one theorem</p>
+
+<a name="180934991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180934991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180934991">Mario Carneiro (Nov 17 2019 at 00:32)</a>:</h4>
+<p>sometimes I wish we could just let theorems be theorems</p>
+
+<a name="180935010"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/prod.nonempty/near/180935010" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/84958prodnonempty.html#180935010">Mario Carneiro (Nov 17 2019 at 00:33)</a>:</h4>
+<p>and just use them by name like normal people instead of going to incredible lengths to make everything appear wordless</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

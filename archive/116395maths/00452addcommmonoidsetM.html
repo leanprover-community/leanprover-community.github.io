@@ -375,6 +375,69 @@ _inst_1 : add_comm_monoid α
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180933414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180933414">Kevin Buzzard (Nov 16 2019 at 23:45)</a>:</h4>
 <p>updated <a href="https://github.com/leanprover-community/mathlib/issues/1696" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1696">#1696</a> after conversation which for some reason ended up <a href="#narrow/stream/113489-new-members/topic/Using.20data.2Erat/near/180932863" title="#narrow/stream/113489-new-members/topic/Using.20data.2Erat/near/180932863">in another thread</a></p>
 
+<a name="180934078"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180934078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180934078">Kevin Buzzard (Nov 17 2019 at 00:04)</a>:</h4>
+<p>Is there room for this</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">add_comm_monoid</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">has_add</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">has_zero</span> <span class="n">M</span><span class="o">]</span>
+<span class="o">(</span><span class="n">add_assoc</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="o">(</span><span class="n">b</span> <span class="bp">+</span> <span class="n">c</span><span class="o">))</span>
+<span class="o">(</span><span class="n">add_zero</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="mi">0</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span>
+<span class="o">(</span><span class="n">add_comm</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">M</span><span class="o">,</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">b</span> <span class="bp">+</span> <span class="n">a</span><span class="o">)</span> <span class="o">:</span>
+<span class="n">add_comm_monoid</span> <span class="n">M</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">add</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">+</span><span class="o">),</span>
+  <span class="n">add_assoc</span> <span class="o">:=</span> <span class="n">add_assoc</span><span class="o">,</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="o">(</span><span class="mi">0</span><span class="o">),</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="n">add_zero</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="n">add_comm</span><span class="o">,</span>
+  <span class="n">zero_add</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">a</span><span class="o">,</span> <span class="n">add_comm</span> <span class="n">a</span> <span class="mi">0</span> <span class="bp">▸</span> <span class="n">add_zero</span> <span class="n">a</span><span class="o">,</span>
+<span class="o">}</span>
+</pre></div>
+
+
+<p>in mathlib? It's the correct constructor for <code>add_comm_monoid</code> where we don't ask for axioms which can be deduced from other axioms.</p>
+
+<a name="180934144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180934144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180934144">Mario Carneiro (Nov 17 2019 at 00:07)</a>:</h4>
+<p>Yes, I've wanted to see these sort of things for a while. As you've pointed out, it's a bit sad that you lose constructor notation. One way to fix that is to make a new structure with only these fields and a function to take it to <code>add_comm_monoid</code>. Compare with <code>nonneg_group</code> for making ordered groups</p>
+
+<a name="180934187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180934187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180934187">Mario Carneiro (Nov 17 2019 at 00:08)</a>:</h4>
+<p>However, I think it is a bad idea to make this auxiliary structure a class, because it just makes the instance hierarchy bigger</p>
+
+<a name="180934194"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180934194" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180934194">Kevin Buzzard (Nov 17 2019 at 00:09)</a>:</h4>
+<p>I see. So the user makes an auxiliary structure and then they register the resulting <code>add_comm_monoid</code> term with type class inference afterwards?</p>
+
+<a name="180934268"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180934268" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180934268">Mario Carneiro (Nov 17 2019 at 00:11)</a>:</h4>
+<p>right, they get a proof that looks like</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="o">:</span> <span class="n">add_comm_monoid</span> <span class="n">foo</span> <span class="o">:=</span>
+<span class="n">add_comm_monoid</span><span class="bp">.</span><span class="n">mk&#39;</span> <span class="o">{</span>
+  <span class="n">zero</span> <span class="o">:=</span> <span class="bp">...</span><span class="o">,</span>
+  <span class="n">add_zero</span> <span class="o">:=</span> <span class="bp">...</span><span class="o">,</span>
+  <span class="n">add_comm</span> <span class="o">:=</span> <span class="bp">...</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">foo</span><span class="bp">.</span><span class="n">add_semigroup</span> <span class="o">}</span>
+</pre></div>
+
+<a name="180935291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180935291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180935291">Kevin Buzzard (Nov 17 2019 at 00:42)</a>:</h4>
+<p>gaargh I broke <code>measure_theory/outer_measure</code></p>
+
+<a name="180935501"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180935501" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180935501">Kevin Buzzard (Nov 17 2019 at 00:49)</a>:</h4>
+<p>fixed</p>
+
+<a name="180935625"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180935625" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180935625">Kevin Buzzard (Nov 17 2019 at 00:53)</a>:</h4>
+<p>Where does <code>add_comm_monoid.mk'</code> go? It seems to want to go in core.</p>
+
+<a name="180935776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180935776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180935776">Kevin Buzzard (Nov 17 2019 at 00:58)</a>:</h4>
+<p>Is there an argument which says that these auxiliary structures should go in some new file? I remember now <a href="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/" target="_blank" title="https://xenaproject.wordpress.com/2018/04/30/group-theory-revision/">making such a better constructor for <code>group</code></a> and I bet I never PR'ed that.</p>
+
+<a name="180935782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/add_comm_monoid%20%28set%20M%29/near/180935782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/00452addcommmonoidsetM.html#180935782">Kevin Buzzard (Nov 17 2019 at 00:59)</a>:</h4>
+<p>I seem to use <code>class has_group_notation (G : Type) extends has_mul G, has_one G, has_inv G</code></p>
+
 
 {% endraw %}
 
