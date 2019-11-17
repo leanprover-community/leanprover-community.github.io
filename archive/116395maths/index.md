@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis](03749analysis.html) (56 messages, latest: Nov 17 2019 at 19:13)
+* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (239 messages, latest: Nov 17 2019 at 20:33)
 
-* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (237 messages, latest: Nov 17 2019 at 16:50)
+* [analysis](03749analysis.html) (56 messages, latest: Nov 17 2019 at 19:13)
 
 * [restriction of scalars](85589restrictionofscalars.html) (4 messages, latest: Nov 17 2019 at 16:38)
 
