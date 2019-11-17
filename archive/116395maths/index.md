@@ -9,19 +9,19 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (230 messages, latest: Nov 17 2019 at 04:50)
+
+* [analysis](03749analysis.html) (52 messages, latest: Nov 17 2019 at 04:37)
+
 * [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (72 messages, latest: Nov 17 2019 at 01:12)
 
 * [pi with derivatives](79516piwithderivatives.html) (1 message, latest: Nov 16 2019 at 23:50)
-
-* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (228 messages, latest: Nov 16 2019 at 17:04)
 
 * [one-line proof of triviality](61028onelineproofoftriviality.html) (33 messages, latest: Nov 16 2019 at 11:45)
 
 * [eigenvectors from eigenvalues](44251eigenvectorsfromeigenvalues.html) (5 messages, latest: Nov 16 2019 at 10:06)
 
 * [notation for limits](20678notationforlimits.html) (4 messages, latest: Nov 16 2019 at 00:06)
-
-* [analysis](03749analysis.html) (51 messages, latest: Nov 15 2019 at 17:26)
 
 * [filter at_infty](84293filteratinfty.html) (45 messages, latest: Nov 15 2019 at 16:32)
 
