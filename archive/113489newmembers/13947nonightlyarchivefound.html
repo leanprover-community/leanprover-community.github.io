@@ -1,0 +1,72 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/13947nonightlyarchivefound.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html">no nightly archive found</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="180974655"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/180974655" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#180974655">Luis O'Shea (Nov 17 2019 at 22:01)</a>:</h4>
+<p>Downloading a local copy of KB's <a href="https://github.com/ImperialCollegeLondon/M1F_example_sheets" target="_blank" title="https://github.com/ImperialCollegeLondon/M1F_example_sheets">M1F Example Sheets</a> repo I ran into a small problem when running <code>update-mathlib</code> which errored out saying "Error: no nightly archive found". I believe this is benign; at any rate I was able to run <code>leanpkg build</code> successfully, and the lean files seemed to open in VS Code without errors. Assuming this is as expected, I'm mostly reporting this for other beginners (like me).</p>
+<p>Below is what I did and its output:</p>
+<div class="codehilite"><pre><span></span>$ git clone https://github.com/ImperialCollegeLondon/M1F_example_sheets.git
+Cloning into <span class="s1">&#39;M1F_example_sheets&#39;</span>...
+remote: Enumerating objects: <span class="m">12</span>, <span class="k">done</span>.
+remote: Counting objects: <span class="m">100</span>% <span class="o">(</span><span class="m">12</span>/12<span class="o">)</span>, <span class="k">done</span>.
+remote: Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">12</span>/12<span class="o">)</span>, <span class="k">done</span>.
+remote: Total <span class="m">942</span> <span class="o">(</span>delta <span class="m">4</span><span class="o">)</span>, reused <span class="m">0</span> <span class="o">(</span>delta <span class="m">0</span><span class="o">)</span>, pack-reused <span class="m">930</span>
+Receiving objects: <span class="m">100</span>% <span class="o">(</span><span class="m">942</span>/942<span class="o">)</span>, <span class="m">1</span>.30 MiB <span class="p">|</span> <span class="m">7</span>.42 MiB/s, <span class="k">done</span>.
+Resolving deltas: <span class="m">100</span>% <span class="o">(</span><span class="m">514</span>/514<span class="o">)</span>, <span class="k">done</span>.
+
+$ <span class="nb">cd</span> M1F_example_sheets/
+
+$ leanpkg configure
+info: downloading component <span class="s1">&#39;lean&#39;</span>
+info: installing component <span class="s1">&#39;lean&#39;</span>
+configuring M1F_2018-19 <span class="m">0</span>.1
+mathlib: cloning https://github.com/leanprover/mathlib to _target/deps/mathlib
+&gt; mkdir -p _target/deps/mathlib
+&gt; git clone https://github.com/leanprover/mathlib _target/deps/mathlib
+Cloning into <span class="s1">&#39;_target/deps/mathlib&#39;</span>...
+remote: Enumerating objects: <span class="m">13</span>, <span class="k">done</span>.
+remote: Counting objects: <span class="m">100</span>% <span class="o">(</span><span class="m">13</span>/13<span class="o">)</span>, <span class="k">done</span>.
+remote: Compressing objects: <span class="m">100</span>% <span class="o">(</span><span class="m">13</span>/13<span class="o">)</span>, <span class="k">done</span>.
+remote: Total <span class="m">27510</span> <span class="o">(</span>delta <span class="m">3</span><span class="o">)</span>, reused <span class="m">1</span> <span class="o">(</span>delta <span class="m">0</span><span class="o">)</span>, pack-reused <span class="m">27497</span>
+Receiving objects: <span class="m">100</span>% <span class="o">(</span><span class="m">27510</span>/27510<span class="o">)</span>, <span class="m">13</span>.64 MiB <span class="p">|</span> <span class="m">11</span>.51 MiB/s, <span class="k">done</span>.
+Resolving deltas: <span class="m">100</span>% <span class="o">(</span><span class="m">20453</span>/20453<span class="o">)</span>, <span class="k">done</span>.
+&gt; git checkout --detach 2a86b06b1853493ab4fb381514e7d1a3f4dfc54b    <span class="c1"># in directory _target/deps/mathlib</span>
+HEAD is now at 2a86b06b fix<span class="o">(</span>order/filter<span class="o">)</span>: tendsto_at_top only requires preorder not partial_order
+
+$ update-mathlib
+Info: No github section found in <span class="s1">&#39;git config&#39;</span>, we will use GitHub with no authentication
+Querying GitHub...
+Error: no nightly archive found
+
+$ leanpkg build
+configuring M1F_2018-19 <span class="m">0</span>.1
+mathlib: trying to update _target/deps/mathlib to revision 2a86b06b1853493ab4fb381514e7d1a3f4dfc54b
+&gt; git checkout --detach 2a86b06b1853493ab4fb381514e7d1a3f4dfc54b    <span class="c1"># in directory _target/deps/mathlib</span>
+HEAD is now at 2a86b06b fix<span class="o">(</span>order/filter<span class="o">)</span>: tendsto_at_top only requires preorder not partial_order
+&gt; lean --make src
+<span class="c1"># Lots of warnings from files in src/ about declarations that use sorry.  No errors.</span>
+</pre></div>
+
+<a name="180976538"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/180976538" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#180976538">Kevin Buzzard (Nov 17 2019 at 22:58)</a>:</h4>
+<p>I can quite believe that that repo is older than the update-mathlib set-up.</p>
+
+<a name="180976551"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/180976551" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#180976551">Kevin Buzzard (Nov 17 2019 at 22:59)</a>:</h4>
+<p>Just do leanpkg upgrade or update or whatever it is that gets new mathlib. Then it might work</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
