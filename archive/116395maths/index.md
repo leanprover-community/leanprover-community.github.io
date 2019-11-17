@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis](03749analysis.html) (55 messages, latest: Nov 17 2019 at 17:31)
+* [analysis](03749analysis.html) (56 messages, latest: Nov 17 2019 at 19:13)
 
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (237 messages, latest: Nov 17 2019 at 16:50)
 

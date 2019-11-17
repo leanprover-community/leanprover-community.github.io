@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Help! I'm too lazy to find the solution on my own.. Even ...](74535HelpImtoolazytofindthesolutiononmyownEven.html) (1 message, latest: Nov 17 2019 at 19:01)
+
 * [filling structure hole](68223fillingstructurehole.html) (2 messages, latest: Nov 17 2019 at 03:08)
 
 * [prod.nonempty](84958prodnonempty.html) (13 messages, latest: Nov 17 2019 at 02:09)
