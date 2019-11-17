@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (71 messages, latest: Nov 17 2019 at 00:59)
+* [add_comm_monoid (set M)](00452addcommmonoidsetM.html) (72 messages, latest: Nov 17 2019 at 01:12)
 
 * [pi with derivatives](79516piwithderivatives.html) (1 message, latest: Nov 16 2019 at 23:50)
 
