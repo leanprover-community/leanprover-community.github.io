@@ -115,6 +115,35 @@ permalink: archive/113488general/70598defeq.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/169558144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#169558144">Mario Carneiro (Jul 03 2019 at 11:31)</a>:</h4>
 <p>I think lean's support for inductive predicates is incomplete, and <code>eq</code> is being hard coded</p>
 
+<a name="181064836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181064836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181064836">Wojciech Nawrocki (Nov 18 2019 at 22:50)</a>:</h4>
+<p>I'm getting the same error elsewhere now, even though I'm not trying to define any code (but <code>omega</code> is, probably?):</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">omega</span> <span class="c">/-</span><span class="cm"> fine -/</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">omega</span> <span class="o">},</span>
+<span class="kn">end</span> <span class="c">/-</span><span class="cm"> fine -/</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">omega</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+<span class="kn">end</span> <span class="c">/-</span><span class="cm"> VM does not have code for &#39;nat.zero&#39; -/</span>
+</pre></div>
+
+
+<p>Does anyone know if this is expected to happen with <code>omega</code>? Is there a way around it?</p>
+
+<a name="181065411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181065411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181065411">Mario Carneiro (Nov 18 2019 at 22:59)</a>:</h4>
+<p>To make things more confusing:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span><span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">begin</span>
+  <span class="n">cases</span> <span class="n">n</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">change</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">omega</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+<span class="kn">end</span> <span class="c1">-- fine</span>
+</pre></div>
+
 
 {% endraw %}
 

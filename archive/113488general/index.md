@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [defeq](70598defeq.html) (17 messages, latest: Nov 18 2019 at 22:59)
+
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (15 messages, latest: Nov 18 2019 at 21:55)
 
 * [Help! I'm too lazy to find the solution on my own.. Even ...](74535HelpImtoolazytofindthesolutiononmyownEven.html) (1 message, latest: Nov 17 2019 at 19:01)
@@ -640,8 +642,6 @@ permalink: archive/113488general/index.html
 * [local context names](27269localcontextnames.html) (5 messages, latest: Jul 03 2019 at 15:26)
 
 * [mem_preimage_eq](48382mempreimageeq.html) (23 messages, latest: Jul 03 2019 at 14:30)
-
-* [defeq](70598defeq.html) (15 messages, latest: Jul 03 2019 at 11:31)
 
 * [Reference Manual](27086ReferenceManual.html) (6 messages, latest: Jul 02 2019 at 20:39)
 
