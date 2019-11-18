@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [no nightly archive found](13947nonightlyarchivefound.html) (3 messages, latest: Nov 17 2019 at 22:59)
+* [no nightly archive found](13947nonightlyarchivefound.html) (4 messages, latest: Nov 18 2019 at 04:27)
 
 * [Using data.rat](47222Usingdatarat.html) (130 messages, latest: Nov 17 2019 at 02:53)
 
