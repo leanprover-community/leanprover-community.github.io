@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (15 messages, latest: Nov 18 2019 at 21:55)
+
 * [Help! I'm too lazy to find the solution on my own.. Even ...](74535HelpImtoolazytofindthesolutiononmyownEven.html) (1 message, latest: Nov 17 2019 at 19:01)
 
 * [filling structure hole](68223fillingstructurehole.html) (2 messages, latest: Nov 17 2019 at 03:08)

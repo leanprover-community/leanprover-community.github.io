@@ -1,0 +1,95 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/41870Normalizationfailsinlean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html">Normalization fails in lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181055359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181055359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181055359">Mario Carneiro (Nov 18 2019 at 21:01)</a>:</h4>
+<p>Andreas Abel and Thierry Coquand have brought my attention to the following counterexample to normalization in impredicative type theories with proof irrelevance, such as Lean.</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">false&#39;</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">p</span>
+<span class="n">def</span> <span class="n">true&#39;</span> <span class="o">:=</span> <span class="n">false&#39;</span> <span class="bp">→</span> <span class="n">false&#39;</span>
+<span class="n">def</span> <span class="n">omega</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false&#39;</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span> <span class="n">A</span><span class="o">,</span> <span class="bp">@</span><span class="n">cast</span> <span class="n">true&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">h</span> <span class="n">true&#39;</span> <span class="n">A</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span><span class="o">:</span> <span class="n">false&#39;</span><span class="o">,</span> <span class="n">z</span> <span class="n">true&#39;</span> <span class="n">z</span>
+
+<span class="n">def</span> <span class="n">Omega</span> <span class="o">:</span> <span class="o">(</span><span class="bp">∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span><span class="o">)</span> <span class="bp">→</span> <span class="n">false&#39;</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">omega</span> <span class="n">h</span> <span class="n">true&#39;</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">Omega</span> <span class="c1">-- timeout</span>
+</pre></div>
+
+<a name="181055479"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181055479" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181055479">Patrick Massot (Nov 18 2019 at 21:02)</a>:</h4>
+<p>Should we care?</p>
+
+<a name="181055756"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181055756" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181055756">Mario Carneiro (Nov 18 2019 at 21:05)</a>:</h4>
+<p>It is news; this was the last remaining unresolved question in my MS thesis, and I had expected it to be true, so this counterexample is a surprise. Normalization is sometimes used for proofs of consistency, but in lean's case we have a model construction that achieves this goal by alternate means, so that at least is not at risk</p>
+
+<a name="181056278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181056278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181056278">Mario Carneiro (Nov 18 2019 at 21:09)</a>:</h4>
+<p>It does, however, put us more firmly in the "classical" camp, because our type theory can't be used to "just compute" anything that doesn't use axioms</p>
+
+<a name="181056423"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181056423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181056423">Mario Carneiro (Nov 18 2019 at 21:10)</a>:</h4>
+<p>at this point I would prefer to just have a reflection axiom to deduce <code>A</code> is defeq to <code>B</code> from <code>A = B</code> and finish the job</p>
+
+<a name="181056857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181056857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181056857">Mario Carneiro (Nov 18 2019 at 21:14)</a>:</h4>
+<p>It does possibly open the door to performing arbitrary TM computations in the lean kernel. We already knew that this was possible in theory, but lean would not actually perform the required sequence of reductions, it would get stuck early on. The difference with this example is that lean <em>actually</em> goes ahead and does the infinite reduction.</p>
+
+<a name="181057260"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181057260" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181057260">Mario Carneiro (Nov 18 2019 at 21:18)</a>:</h4>
+<p>(It's not clear if this can be used to do <em>useful</em> computation, though, as, like the example in my paper, it requires an inconsistent context, so it's tricky to get the computation out into an inhabited context.)</p>
+
+<a name="181059585"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181059585" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181059585">Simon Hudon (Nov 18 2019 at 21:42)</a>:</h4>
+<p>In <code>#reduce Omega -- timeout</code>, <code>Omega</code> should be a lambda abstraction. Why does the reduction not stop there?</p>
+
+<a name="181059714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181059714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181059714">Bryan Gin-ge Chen (Nov 18 2019 at 21:43)</a>:</h4>
+<p>Are there options to control the number of steps <code>#reduce</code> takes? Is there any option to trace the reduction steps?</p>
+
+<a name="181059978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181059978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181059978">Mario Carneiro (Nov 18 2019 at 21:46)</a>:</h4>
+<p><code>#reduce</code> will reduce the whole term to a normal form, it doesn't stop at whnf</p>
+
+<a name="181060017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181060017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181060017">Mario Carneiro (Nov 18 2019 at 21:47)</a>:</h4>
+<p>sadly there is no way to trace the reduction</p>
+
+<a name="181060127"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181060127" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181060127">Bryan Gin-ge Chen (Nov 18 2019 at 21:48)</a>:</h4>
+<p>How hard would it be to imitate the reduction in <code>meta</code> code?</p>
+
+<a name="181060342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181060342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181060342">Mario Carneiro (Nov 18 2019 at 21:50)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">Omega</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">Omega</span> <span class="n">h</span> <span class="o">:=</span>
+<span class="k">calc</span> <span class="n">Omega</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">omega</span> <span class="n">h</span> <span class="n">true&#39;</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">rfl</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="bp">@</span><span class="n">cast</span> <span class="n">true&#39;</span> <span class="n">true&#39;</span> <span class="o">(</span><span class="n">h</span> <span class="n">true&#39;</span> <span class="n">true&#39;</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span><span class="o">:</span> <span class="n">false&#39;</span><span class="o">,</span> <span class="n">z</span> <span class="n">true&#39;</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">rfl</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span><span class="o">:</span> <span class="n">false&#39;</span><span class="o">,</span> <span class="n">z</span> <span class="n">true&#39;</span> <span class="n">z</span><span class="o">)</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">rfl</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span> <span class="n">true&#39;</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">rfl</span>
+         <span class="bp">...</span> <span class="bp">=</span> <span class="n">Omega</span> <span class="n">h</span> <span class="o">:</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="181060697"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181060697" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181060697">Jeremy Avigad (Nov 18 2019 at 21:54)</a>:</h4>
+<p>Their result is a very pretty result, even though it is unfortunate for Lean. But it is not clear whether this result has any bearing on data, i.e. whether we can get a term of type <code>nat</code> that doesn't normalize. And even if we can, there is still hope for <code>eval</code>, which will erase nonsense like Omega.</p>
+<p>I don't know what to make of it. Definitional proof irrelevance is nice in practice, and it is hard to imagine someone formalizing mathematics stumbling across a non-normalizing term. I'd rather have a type theory that is theoretically bad but nice in practice than a type theory that is theoretically nice but bad in practice, but of course it would be better to have a theory with both the theoretical and the practical virtues.</p>
+
+<a name="181060789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181060789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181060789">Mario Carneiro (Nov 18 2019 at 21:55)</a>:</h4>
+<p>So the question of whether VM evaluation on a computable well typed term can run forever is still open</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
