@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [no nightly archive found](13947nonightlyarchivefound.html) (5 messages, latest: Nov 18 2019 at 05:33)
+* [Using data.rat](47222Usingdatarat.html) (142 messages, latest: Nov 18 2019 at 08:51)
 
-* [Using data.rat](47222Usingdatarat.html) (130 messages, latest: Nov 17 2019 at 02:53)
+* [no nightly archive found](13947nonightlyarchivefound.html) (5 messages, latest: Nov 18 2019 at 05:33)
 
 * [Frustrating nat proofs](54230Frustratingnatproofs.html) (14 messages, latest: Nov 17 2019 at 02:11)
 
