@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (17 messages, latest: Nov 19 2019 at 09:48)
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (18 messages, latest: Nov 19 2019 at 10:08)
 
 * [defeq](70598defeq.html) (25 messages, latest: Nov 18 2019 at 23:22)
 

@@ -113,6 +113,42 @@ permalink: archive/113488general/41870Normalizationfailsinlean.html
 </blockquote>
 <p>So in fact this is something to celebrate, as far as mathematicians are concerned!</p>
 
+<a name="181097047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181097047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181097047">Mario Carneiro (Nov 19 2019 at 10:08)</a>:</h4>
+<p>Embedded lambda calculus:</p>
+<div class="codehilite"><pre><span></span><span class="kn">section</span>
+<span class="kn">parameter</span> <span class="o">(</span><span class="n">H</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">D</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">p</span>
+<span class="n">def</span> <span class="n">F</span> <span class="o">:=</span> <span class="n">D</span> <span class="bp">→</span> <span class="n">D</span>
+
+<span class="n">def</span> <span class="n">app</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="n">a</span> <span class="n">F</span> <span class="n">b</span>
+<span class="n">local</span> <span class="kn">infix</span> <span class="bp">`</span> <span class="err">$$</span> <span class="bp">`</span><span class="o">:</span><span class="mi">400</span> <span class="o">:=</span> <span class="n">app</span>
+
+<span class="n">def</span> <span class="n">lam</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">D</span> <span class="bp">→</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">A</span><span class="o">,</span> <span class="bp">@</span><span class="n">cast</span> <span class="n">F</span> <span class="bp">_</span> <span class="o">(</span><span class="n">H</span> <span class="n">F</span> <span class="n">A</span><span class="o">)</span> <span class="n">f</span>
+<span class="n">local</span> <span class="kn">notation</span> <span class="bp">`</span><span class="err">Λ</span><span class="bp">`</span> <span class="n">binders</span> <span class="bp">`</span><span class="o">,</span> <span class="bp">`</span> <span class="n">r</span><span class="o">:(</span><span class="n">scoped</span> <span class="n">P</span><span class="o">,</span> <span class="n">lam</span> <span class="n">P</span><span class="o">)</span> <span class="o">:=</span> <span class="n">r</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)</span> <span class="o">:</span> <span class="n">lam</span> <span class="n">f</span> <span class="err">$$</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">f</span> <span class="n">x</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="n">def</span> <span class="n">y</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="err">Λ</span> <span class="n">z</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">z</span> <span class="err">$$</span> <span class="n">z</span><span class="o">)</span>
+<span class="n">def</span> <span class="n">Y</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">F</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="n">y</span> <span class="n">f</span> <span class="err">$$</span> <span class="n">y</span> <span class="n">f</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">lam</span> <span class="n">id</span>
+
+<span class="n">def</span> <span class="n">zero</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="err">Λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span>
+<span class="n">def</span> <span class="n">succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="err">Λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">f</span> <span class="err">$$</span> <span class="o">(</span><span class="n">n</span> <span class="err">$$</span> <span class="n">f</span> <span class="err">$$</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">of_nat</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="bp">→</span> <span class="n">D</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">zero</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">n</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span> <span class="n">succ</span> <span class="o">(</span><span class="n">of_nat</span> <span class="n">n</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">plus</span> <span class="o">(</span><span class="n">m</span> <span class="n">n</span> <span class="o">:</span> <span class="n">D</span><span class="o">)</span> <span class="o">:</span> <span class="n">D</span> <span class="o">:=</span> <span class="err">Λ</span> <span class="n">f</span> <span class="n">x</span><span class="o">,</span> <span class="n">m</span> <span class="err">$$</span> <span class="n">f</span> <span class="err">$$</span> <span class="o">(</span><span class="n">n</span> <span class="err">$$</span> <span class="n">f</span> <span class="err">$$</span> <span class="n">x</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="n">plus</span> <span class="o">(</span><span class="n">of_nat</span> <span class="mi">2</span><span class="o">)</span> <span class="o">(</span><span class="n">of_nat</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="n">of_nat</span> <span class="mi">4</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

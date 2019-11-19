@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Tidying up a proof](22757Tidyingupaproof.html) (1 message, latest: Nov 19 2019 at 10:53)
+
+* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (46 messages, latest: Nov 19 2019 at 10:47)
+
 * [no nightly archive found](13947nonightlyarchivefound.html) (10 messages, latest: Nov 19 2019 at 09:15)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (189 messages, latest: Nov 19 2019 at 07:15)
