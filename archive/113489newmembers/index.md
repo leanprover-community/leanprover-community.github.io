@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (187 messages, latest: Nov 19 2019 at 01:55)
+* [no nightly archive found](13947nonightlyarchivefound.html) (9 messages, latest: Nov 19 2019 at 07:25)
 
-* [no nightly archive found](13947nonightlyarchivefound.html) (8 messages, latest: Nov 19 2019 at 01:05)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (189 messages, latest: Nov 19 2019 at 07:15)
+
+* [proving sum(range 0) = 0](33654provingsumrange00.html) (6 messages, latest: Nov 19 2019 at 07:14)
 
 * [Frustrating nat proofs](54230Frustratingnatproofs.html) (15 messages, latest: Nov 19 2019 at 00:31)
 
