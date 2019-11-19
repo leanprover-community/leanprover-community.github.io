@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VSCode overflow?](68152VSCodeoverflow.html) (12 messages, latest: Nov 19 2019 at 20:33)
+* [recursion on length of list](26251recursiononlengthoflist.html) (8 messages, latest: Nov 19 2019 at 21:53)
 
-* [recursion on length of list](26251recursiononlengthoflist.html) (7 messages, latest: Nov 19 2019 at 20:32)
+* [computable real functions](16586computablerealfunctions.html) (13 messages, latest: Nov 19 2019 at 21:09)
+
+* [VSCode overflow?](68152VSCodeoverflow.html) (12 messages, latest: Nov 19 2019 at 20:33)
 
 * [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (4 messages, latest: Nov 19 2019 at 19:42)
 
 * [linting in CI](98585lintinginCI.html) (19 messages, latest: Nov 19 2019 at 18:12)
-
-* [computable real functions](16586computablerealfunctions.html) (12 messages, latest: Nov 19 2019 at 17:56)
 
 * [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (8 messages, latest: Nov 19 2019 at 17:48)
 
