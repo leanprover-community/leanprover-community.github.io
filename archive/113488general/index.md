@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VSCode overflow?](68152VSCodeoverflow.html) (10 messages, latest: Nov 19 2019 at 19:56)
+* [VSCode overflow?](68152VSCodeoverflow.html) (12 messages, latest: Nov 19 2019 at 20:33)
+
+* [recursion on length of list](26251recursiononlengthoflist.html) (7 messages, latest: Nov 19 2019 at 20:32)
 
 * [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (4 messages, latest: Nov 19 2019 at 19:42)
 
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [computable real functions](16586computablerealfunctions.html) (12 messages, latest: Nov 19 2019 at 17:56)
 
 * [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (8 messages, latest: Nov 19 2019 at 17:48)
-
-* [recursion on length of list](26251recursiononlengthoflist.html) (2 messages, latest: Nov 19 2019 at 17:12)
 
 * [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
 
