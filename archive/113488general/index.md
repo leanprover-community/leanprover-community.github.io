@@ -9,7 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computable real functions](16586computablerealfunctions.html) (1 message, latest: Nov 19 2019 at 16:56)
+* [computable real functions](16586computablerealfunctions.html) (12 messages, latest: Nov 19 2019 at 17:56)
+
+* [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (8 messages, latest: Nov 19 2019 at 17:48)
+
+* [recursion on length of list](26251recursiononlengthoflist.html) (2 messages, latest: Nov 19 2019 at 17:12)
 
 * [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
 
