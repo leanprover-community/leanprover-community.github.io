@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [linting in CI](98585lintinginCI.html) (16 messages, latest: Nov 19 2019 at 12:19)
+
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (18 messages, latest: Nov 19 2019 at 10:08)
 
 * [defeq](70598defeq.html) (25 messages, latest: Nov 18 2019 at 23:22)
@@ -62,8 +64,6 @@ permalink: archive/113488general/index.html
 * [typeclass or implicit arguments](78731typeclassorimplicitarguments.html) (11 messages, latest: Nov 09 2019 at 00:03)
 
 * [A benchmark of four statements](63622Abenchmarkoffourstatements.html) (58 messages, latest: Nov 08 2019 at 19:07)
-
-* [linting in CI](98585lintinginCI.html) (13 messages, latest: Nov 08 2019 at 13:38)
 
 * [linter](19343linter.html) (4 messages, latest: Nov 08 2019 at 09:14)
 
