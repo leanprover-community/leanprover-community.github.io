@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [no nightly archive found](13947nonightlyarchivefound.html) (9 messages, latest: Nov 19 2019 at 07:25)
+* [no nightly archive found](13947nonightlyarchivefound.html) (10 messages, latest: Nov 19 2019 at 09:15)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (189 messages, latest: Nov 19 2019 at 07:15)
 

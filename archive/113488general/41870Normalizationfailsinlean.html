@@ -89,6 +89,30 @@ permalink: archive/113488general/41870Normalizationfailsinlean.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181060789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181060789">Mario Carneiro (Nov 18 2019 at 21:55)</a>:</h4>
 <p>So the question of whether VM evaluation on a computable well typed term can run forever is still open</p>
 
+<a name="181095679"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181095679" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181095679">Mario Carneiro (Nov 19 2019 at 09:46)</a>:</h4>
+<p>Here's a modification of the example to act like a Y combinator:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">false&#39;</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">p</span>
+<span class="n">def</span> <span class="n">true&#39;</span> <span class="o">:=</span> <span class="n">false&#39;</span> <span class="bp">→</span> <span class="n">false&#39;</span>
+<span class="n">def</span> <span class="n">y</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">false&#39;</span> <span class="bp">→</span> <span class="n">false&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">false&#39;</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">A</span><span class="o">,</span> <span class="bp">@</span><span class="n">cast</span> <span class="n">true&#39;</span> <span class="bp">_</span> <span class="o">(</span><span class="n">h</span> <span class="n">true&#39;</span> <span class="n">A</span><span class="o">)</span> <span class="err">$</span> <span class="bp">λ</span> <span class="n">z</span><span class="o">:</span> <span class="n">false&#39;</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">z</span> <span class="n">true&#39;</span> <span class="n">z</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">Y</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">false&#39;</span> <span class="bp">→</span> <span class="n">false&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">false&#39;</span> <span class="o">:=</span>
+<span class="n">y</span> <span class="n">f</span> <span class="n">h</span> <span class="n">true&#39;</span> <span class="o">(</span><span class="n">y</span> <span class="n">f</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">f</span> <span class="n">h</span><span class="o">)</span> <span class="o">:</span> <span class="n">Y</span> <span class="n">f</span> <span class="n">h</span> <span class="bp">=</span> <span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">f</span> <span class="o">(</span><span class="n">Y</span> <span class="n">f</span> <span class="n">h</span><span class="o">))))))</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+
+<p>Now we can compute with arbitrary functions on <code>false'</code> :P</p>
+
+<a name="181095838"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181095838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181095838">Kevin Buzzard (Nov 19 2019 at 09:48)</a>:</h4>
+<blockquote>
+<p>It does, however, put us more firmly in the "classical" camp, because our type theory can't be used to "just compute" anything that doesn't use axioms</p>
+</blockquote>
+<p>So in fact this is something to celebrate, as far as mathematicians are concerned!</p>
+
 
 {% endraw %}
 
