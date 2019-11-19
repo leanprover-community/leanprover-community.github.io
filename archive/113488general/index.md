@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (9 messages, latest: Nov 19 2019 at 22:43)
+
 * [recursion on length of list](26251recursiononlengthoflist.html) (8 messages, latest: Nov 19 2019 at 21:53)
 
 * [computable real functions](16586computablerealfunctions.html) (13 messages, latest: Nov 19 2019 at 21:09)
@@ -18,8 +20,6 @@ permalink: archive/113488general/index.html
 * [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (4 messages, latest: Nov 19 2019 at 19:42)
 
 * [linting in CI](98585lintinginCI.html) (19 messages, latest: Nov 19 2019 at 18:12)
-
-* [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (8 messages, latest: Nov 19 2019 at 17:48)
 
 * [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
 
