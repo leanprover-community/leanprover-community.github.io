@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [idiomatic Lean for python L\[a:b\]](04350idiomaticLeanforpythonLab.html) (6 messages, latest: Nov 19 2019 at 15:49)
+
 * [linting in CI](98585lintinginCI.html) (16 messages, latest: Nov 19 2019 at 12:19)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (18 messages, latest: Nov 19 2019 at 10:08)

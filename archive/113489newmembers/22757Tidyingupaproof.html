@@ -246,6 +246,236 @@ f1 n s : ℕ
 
 <p>It does easily follow from <code>choose_mul_fact_mul_fact</code> though</p>
 
+<a name="181120144"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120144" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120144">Sebastien Gouezel (Nov 19 2019 at 15:13)</a>:</h4>
+<blockquote>
+<p>What would the Isabelle proof of this triviality look like? <span class="user-mention silent" data-user-id="110050">Sebastien Gouezel</span> do you know?</p>
+</blockquote>
+<p>Isabelle automation is order of magnitudes better. So, anything will work. I just tried it:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">for_kevin</span><span class="o">:</span>
+  <span class="n">fixes</span> <span class="n">f1</span> <span class="n">n</span> <span class="n">s</span><span class="bp">::</span><span class="n">nat</span>
+  <span class="n">shows</span> <span class="s2">&quot;f1 * (n-s) = (n-s) * f1&quot;</span>
+<span class="k">by</span> <span class="n">simp</span>
+</pre></div>
+
+
+<p>You can replace <code>by simp</code> with <code>by auto</code>, or <code>by algebra</code>, or <code>by fastforce</code>, or <code>by force</code>. In fact, I just typed <code>try0</code> and Isabelle suggested all these solutions right away.</p>
+
+<a name="181120242"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120242" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120242">Mario Carneiro (Nov 19 2019 at 15:14)</a>:</h4>
+<p>I think he's talking about the choose proof</p>
+
+<a name="181120358"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120358" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120358">Sebastien Gouezel (Nov 19 2019 at 15:15)</a>:</h4>
+<p>Which statement?</p>
+
+<a name="181120498"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120498" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120498">Mario Carneiro (Nov 19 2019 at 15:16)</a>:</h4>
+<p>Probably <code>main_lemma</code>?</p>
+
+<a name="181120509"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120509" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120509">Kevin Buzzard (Nov 19 2019 at 15:16)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">main_lemma</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="n">n</span> <span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">hr1</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">≤</span> <span class="n">r</span><span class="o">)</span> <span class="o">(</span><span class="n">hr2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">*</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">B</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">r</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">→</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="n">n</span> <span class="n">r</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">B</span> <span class="bp">/</span> <span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="n">n</span> <span class="o">(</span><span class="n">r</span><span class="bp">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">:=</span>
+</pre></div>
+
+<a name="181120524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120524">Kevin Buzzard (Nov 19 2019 at 15:17)</a>:</h4>
+<p>I really want this to be easy</p>
+
+<a name="181120527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120527">Mario Carneiro (Nov 19 2019 at 15:17)</a>:</h4>
+<p>I get the sense that kevin's proof is a tactic bash</p>
+
+<a name="181120589"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120589">Kevin Buzzard (Nov 19 2019 at 15:17)</a>:</h4>
+<p>My proof is "LOOK. <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mrow><mo fence="true">(</mo><mfrac linethickness="0px"><mi>n</mi><mi>r</mi></mfrac><mo fence="true">)</mo></mrow><mo>=</mo><mfrac><mrow><mi>n</mi><mo stretchy="false">!</mo></mrow><mrow><mi>r</mi><mo stretchy="false">!</mo><mo stretchy="false">(</mo><mi>n</mi><mo>−</mo><mi>r</mi><mo stretchy="false">)</mo><mo stretchy="false">!</mo></mrow></mfrac></mrow><annotation encoding="application/x-tex">\binom{n}{r}=\frac{n!}{r!(n-r)!}</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1.20001em;vertical-align:-0.35001em;"></span><span class="mord"><span class="mopen delimcenter" style="top:0em;"><span class="delimsizing size1">(</span></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.7453919999999999em;"><span style="top:-2.3550000000000004em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span></span></span></span><span style="top:-3.144em;"><span class="pstrut" style="height:2.7em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.345em;"><span></span></span></span></span></span><span class="mclose delimcenter" style="top:0em;"><span class="delimsizing size1">)</span></span></span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:1.400108em;vertical-align:-0.52em;"></span><span class="mord"><span class="mopen nulldelimiter"></span><span class="mfrac"><span class="vlist-t vlist-t2"><span class="vlist-r"><span class="vlist" style="height:0.8801079999999999em;"><span style="top:-2.655em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mclose mtight">!</span><span class="mopen mtight">(</span><span class="mord mathdefault mtight">n</span><span class="mbin mtight">−</span><span class="mord mathdefault mtight" style="margin-right:0.02778em;">r</span><span class="mclose mtight">)</span><span class="mclose mtight">!</span></span></span></span><span style="top:-3.23em;"><span class="pstrut" style="height:3em;"></span><span class="frac-line" style="border-bottom-width:0.04em;"></span></span><span style="top:-3.394em;"><span class="pstrut" style="height:3em;"></span><span class="sizing reset-size6 size3 mtight"><span class="mord mtight"><span class="mord mathdefault mtight">n</span><span class="mclose mtight">!</span></span></span></span></span><span class="vlist-s">​</span></span><span class="vlist-r"><span class="vlist" style="height:0.52em;"><span></span></span></span></span></span><span class="mclose nulldelimiter"></span></span></span></span></span> AND THE REST IS TRIVIAL"</p>
+
+<a name="181120667"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120667" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120667">Mario Carneiro (Nov 19 2019 at 15:18)</a>:</h4>
+<p>This sort of proof feels easier in metamath to me</p>
+
+<a name="181120675"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120675" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120675">Kevin Buzzard (Nov 19 2019 at 15:18)</a>:</h4>
+<p>(assuming <code>fact_succ</code>)</p>
+
+<a name="181120696"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120696" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120696">Mario Carneiro (Nov 19 2019 at 15:18)</a>:</h4>
+<p>all this business with saturating subtraction isn't a problem</p>
+
+<a name="181120853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181120853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181120853">Mario Carneiro (Nov 19 2019 at 15:20)</a>:</h4>
+<p>It might help if <code>nat.choose</code> was defined over integers</p>
+
+<a name="181121614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181121614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181121614">Kevin Buzzard (Nov 19 2019 at 15:26)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="c1">-- Should this be in data.rat? It doesn&#39;t easily follow from nat.choose_eq_fact_div_fact</span>
+<span class="n">def</span> <span class="n">rat</span><span class="bp">.</span><span class="n">choose_eq_fact_div_fact</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">choose</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fact</span> <span class="n">n</span> <span class="bp">/</span> <span class="o">(</span><span class="n">fact</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">k</span><span class="o">))</span> <span class="o">:=</span>
+</pre></div>
+
+
+<p>It does easily follow from <code>choose_mul_fact_mul_fact</code> though</p>
+</blockquote>
+<p>My proof was an attempt to show this and it was still pretty horrible. What am I missing?</p>
+
+<a name="181121708"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181121708" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181121708">Kevin Buzzard (Nov 19 2019 at 15:27)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">rat</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">open</span> <span class="n">nat</span>
+
+<span class="c1">-- this should be in mathlib, right?</span>
+<span class="kn">theorem</span> <span class="n">div_le_div_iff</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">linear_ordered_field</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="n">d</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span>
+  <span class="o">(</span><span class="n">hc</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">c</span><span class="o">)</span> <span class="o">(</span><span class="n">hd</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">&lt;</span> <span class="n">d</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">/</span> <span class="n">c</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">/</span> <span class="n">d</span> <span class="bp">↔</span> <span class="n">a</span> <span class="bp">*</span> <span class="n">d</span> <span class="bp">≤</span> <span class="n">b</span> <span class="bp">*</span> <span class="n">c</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="o">[</span><span class="n">le_div_iff</span> <span class="n">hd</span><span class="o">,</span> <span class="n">div_mul_eq_mul_div</span><span class="o">,</span> <span class="n">div_le_iff</span> <span class="n">hc</span><span class="o">]</span>
+
+<span class="c1">-- Should this be in data.rat? It doesn&#39;t easily follow from nat.choose_eq_fact_div_fact</span>
+<span class="n">def</span> <span class="n">rat</span><span class="bp">.</span><span class="n">choose_eq_fact_div_fact</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">choose</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fact</span> <span class="n">n</span> <span class="bp">/</span> <span class="o">(</span><span class="n">fact</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">k</span><span class="o">))</span> <span class="o">:=</span>
+<span class="n">eq_div_of_mul_eq</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">mul_ne_zero</span> <span class="o">(</span><span class="n">ne_of_gt</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">fact_pos</span><span class="o">])</span> <span class="o">(</span><span class="n">ne_of_gt</span> <span class="err">$</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">fact_pos</span><span class="o">]))</span> <span class="err">$</span>
+<span class="k">begin</span> <span class="n">norm_cast</span><span class="o">,</span> <span class="n">rw</span> <span class="err">←</span><span class="n">mul_assoc</span><span class="o">,</span> <span class="n">exact</span> <span class="n">choose_mul_fact_mul_fact</span> <span class="n">h</span> <span class="kn">end</span>
+
+<span class="c1">-- r = s + 1</span>
+<span class="c1">-- n = t + 1 + s</span>
+<span class="kn">theorem</span> <span class="n">main_lemma</span> <span class="o">{</span><span class="n">A</span> <span class="n">B</span> <span class="n">s</span> <span class="n">t</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">A</span> <span class="bp">*</span> <span class="o">(</span><span class="n">s</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">≤</span> <span class="n">B</span> <span class="bp">*</span> <span class="o">(</span><span class="n">t</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">/</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="o">(</span><span class="n">t</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="o">(</span><span class="n">s</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="bp">≤</span> <span class="n">B</span> <span class="bp">/</span> <span class="n">nat</span><span class="bp">.</span><span class="n">choose</span> <span class="o">(</span><span class="n">t</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="n">s</span><span class="o">)</span> <span class="n">s</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">rat</span><span class="bp">.</span><span class="n">choose_eq_fact_div_fact</span><span class="o">,</span> <span class="n">rat</span><span class="bp">.</span><span class="n">choose_eq_fact_div_fact</span><span class="o">,</span> <span class="n">div_div_eq_mul_div</span><span class="o">,</span> <span class="n">div_div_eq_mul_div</span><span class="o">],</span>
+  <span class="n">apply</span> <span class="n">div_le_div_of_le_of_pos</span><span class="o">,</span>
+  <span class="n">norm_cast</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_cancel</span><span class="o">,</span> <span class="n">add_right_comm</span><span class="o">,</span> <span class="n">add_assoc</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">add_sub_cancel</span><span class="o">,</span> <span class="n">fact_succ</span><span class="o">,</span> <span class="n">fact_succ</span><span class="o">],</span>
+  <span class="n">convert</span> <span class="n">nat</span><span class="bp">.</span><span class="n">mul_le_mul_right</span> <span class="o">(</span><span class="n">fact</span> <span class="n">s</span> <span class="bp">*</span> <span class="n">fact</span> <span class="n">t</span><span class="o">)</span> <span class="n">h</span> <span class="kn">using</span> <span class="mi">1</span><span class="o">,</span>
+  <span class="n">repeat</span> <span class="o">{</span><span class="n">linarith</span><span class="o">},</span> <span class="n">repeat</span> <span class="o">{</span><span class="n">rw</span> <span class="n">succ_eq_add_one</span><span class="bp">;</span> <span class="n">ring</span><span class="o">},</span>
+  <span class="n">norm_cast</span><span class="o">,</span> <span class="n">apply</span> <span class="n">fact_pos</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Using less painful variables s and t I can get it down to this.</p>
+
+<a name="181122012"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122012" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122012">Kevin Buzzard (Nov 19 2019 at 15:30)</a>:</h4>
+<p>But if Isabelle can just blast through it then this will give me a better understanding of what we are missing in Lean. This proof should be trivial given some hints -- shouldn't it? <code>by schoolkid using [choose_mul_fact_mul_fact, fact_pos, fact_succ]</code></p>
+
+<a name="181122015"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122015" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122015">Mario Carneiro (Nov 19 2019 at 15:30)</a>:</h4>
+<p>I think you got it down pretty well.</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">rat</span><span class="bp">.</span><span class="n">choose_eq_fact_div_fact</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="o">(</span><span class="n">choose</span> <span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="n">ℚ</span><span class="o">)</span> <span class="bp">=</span> <span class="n">fact</span> <span class="n">n</span> <span class="bp">/</span> <span class="o">(</span><span class="n">fact</span> <span class="n">k</span> <span class="bp">*</span> <span class="n">fact</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">k</span><span class="o">))</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">rw</span> <span class="n">eq_div_iff_mul_eq</span><span class="bp">;</span> <span class="n">norm_cast</span><span class="bp">;</span> <span class="o">[</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="err">←</span> <span class="n">mul_assoc</span><span class="o">,</span> <span class="n">choose_mul_fact_mul_fact</span> <span class="n">h</span><span class="o">],</span>
+  <span class="n">exact</span> <span class="n">ne_of_gt</span> <span class="o">(</span><span class="n">mul_pos</span> <span class="o">(</span><span class="n">fact_pos</span> <span class="bp">_</span><span class="o">)</span> <span class="o">(</span><span class="n">fact_pos</span> <span class="bp">_</span><span class="o">))]</span>
+</pre></div>
+
+<a name="181122045"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122045" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122045">Mario Carneiro (Nov 19 2019 at 15:31)</a>:</h4>
+<p>If you have a sledgehammer then you can make it through this, I think</p>
+
+<a name="181122108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122108">Kevin Buzzard (Nov 19 2019 at 15:31)</a>:</h4>
+<p>because all schoolkids know <code>div_div_eq_mul_div, div_le_div_of_le_of_pos, div_div_eq_mul_div, nat.add_sub_cancel</code> etc</p>
+
+<a name="181122204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122204">Mario Carneiro (Nov 19 2019 at 15:32)</a>:</h4>
+<p>they also know a number of false variations on those :P</p>
+
+<a name="181122239"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122239" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122239">Kevin Buzzard (Nov 19 2019 at 15:32)</a>:</h4>
+<p>Yeah, it's a pretty powerful tactic. You can prove <code>false</code> with it if you're not careful</p>
+
+<a name="181122326"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122326" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122326">Kevin Buzzard (Nov 19 2019 at 15:33)</a>:</h4>
+<p>I started my lectures this year with a proof that all triangles were equilateral and it was only once I'd finished that people started complaining; I made the error about 10 lines before that.</p>
+
+<a name="181122354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181122354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181122354">Kevin Buzzard (Nov 19 2019 at 15:33)</a>:</h4>
+<p>They were happy with the method but uncomfortable with the conclusion</p>
+
+<a name="181123467"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181123467" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181123467">Sebastien Gouezel (Nov 19 2019 at 15:43)</a>:</h4>
+<p>Here is an Isabelle proof:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">for_kevin2</span><span class="o">:</span>
+  <span class="n">fixes</span> <span class="n">A</span> <span class="n">B</span> <span class="n">n</span> <span class="n">r</span><span class="bp">::</span><span class="n">nat</span>
+  <span class="n">assumes</span> <span class="s2">&quot;1 ≤ r&quot;</span> <span class="s2">&quot;r ≤ n&quot;</span> <span class="s2">&quot;A * r ≤ B * (n-r+1)&quot;</span>
+  <span class="n">shows</span> <span class="s2">&quot;A / (binomial n r) ≤ B / (binomial n (r-1))&quot;</span>
+<span class="k">proof</span> <span class="bp">-</span>
+  <span class="k">have</span> <span class="n">I</span><span class="o">:</span> <span class="s2">&quot;binomial n r = (fact n)/(fact r * fact (n-r))&quot;</span>
+    <span class="kn">using</span> <span class="n">assms</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="n">binomial_fact</span> <span class="k">by</span> <span class="n">blast</span>
+  <span class="k">have</span> <span class="n">J</span> <span class="o">:</span> <span class="s2">&quot;binomial n (r-1) = (fact n)/(fact (r-1) * fact (n+1-r))&quot;</span>
+    <span class="kn">using</span> <span class="n">assms</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="n">assms</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="n">binomial_fact</span><span class="o">[</span><span class="n">of</span> <span class="s2">&quot;r-1&quot;</span> <span class="n">n</span><span class="o">]</span> <span class="k">by</span> <span class="n">force</span>
+  <span class="k">have</span> <span class="n">K</span> <span class="o">:</span> <span class="s2">&quot;fact r = of_nat r * fact (r-1)&quot;</span>
+    <span class="kn">using</span> <span class="n">fact_reduce</span><span class="o">[</span><span class="n">of</span> <span class="n">r</span><span class="o">]</span> <span class="n">assms</span><span class="o">(</span><span class="mi">1</span><span class="o">)</span> <span class="k">by</span> <span class="n">auto</span>
+  <span class="k">have</span> <span class="n">L</span> <span class="o">:</span> <span class="s2">&quot;fact (n+1-r) = of_nat (n+1-r) * fact (n-r)&quot;</span>
+    <span class="kn">using</span> <span class="n">fact_reduce</span><span class="o">[</span><span class="n">of</span> <span class="s2">&quot;n+1-r&quot;</span><span class="o">]</span> <span class="n">assms</span> <span class="k">by</span> <span class="n">auto</span>
+  <span class="k">show</span> <span class="err">?</span><span class="n">thesis</span> <span class="n">unfolding</span> <span class="n">I</span> <span class="n">J</span> <span class="n">K</span> <span class="n">L</span> <span class="n">apply</span> <span class="o">(</span><span class="n">auto</span> <span class="n">simp</span> <span class="n">add</span><span class="o">:</span> <span class="n">divide_simps</span><span class="o">)</span>
+    <span class="k">by</span> <span class="o">(</span><span class="n">metis</span> <span class="n">Suc_diff_le</span> <span class="n">Suc_eq_plus1_left</span> <span class="n">add</span><span class="bp">.</span><span class="n">commute</span> <span class="n">assms</span><span class="o">(</span><span class="mi">2</span><span class="o">)</span> <span class="n">assms</span><span class="o">(</span><span class="mi">3</span><span class="o">)</span> <span class="n">of_nat_mono</span> <span class="n">of_nat_mult</span><span class="o">)</span>
+<span class="k">qed</span>
+</pre></div>
+
+
+<p>I still had to help it a little bit giving the auxiliary statements <code>I</code>, <code>J</code>, <code>K</code>, <code>L</code>. The last line is needed since my assumption is formulated for integer numbers but the conclusion needs it over rationals (in fact here over the reals, as Isabelle coerced everything to reals when I wrote the division). The point is I didn't write this line, it was found by sledgehammer.</p>
+
+<a name="181123806"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181123806" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181123806">Sebastien Gouezel (Nov 19 2019 at 15:46)</a>:</h4>
+<p>I should tell you what <code>binomial_fact</code> and <code>fact_reduce</code> are, by the way. They are preexisting facts in the library, as follows.</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">fact_reduce</span><span class="o">:</span> <span class="s2">&quot;n &gt; 0 ⟹ fact n = of_nat n * fact (n - 1)&quot;</span>
+  <span class="k">by</span> <span class="o">(</span><span class="n">cases</span> <span class="n">n</span><span class="o">)</span> <span class="n">auto</span>
+
+<span class="kn">lemma</span> <span class="n">binomial_fact</span><span class="o">:</span>
+  <span class="n">assumes</span> <span class="n">kn</span><span class="o">:</span> <span class="s2">&quot;k ≤ n&quot;</span>
+  <span class="n">shows</span> <span class="s2">&quot;(of_nat (n choose k) :: &#39;a::field_char_0) = fact n / (fact k * fact (n - k))&quot;</span>
+</pre></div>
+
+<a name="181123817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181123817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181123817">Kevin Buzzard (Nov 19 2019 at 15:46)</a>:</h4>
+<p>So I, J, K, L are the things we knew we needed, and the proofs are relatively straightforward using automation, and then you have some proof which kind of looks awful, although it also looks much shorter than the Lean proof, but it was also found using automation. Thanks Sebastien.</p>
+
+<a name="181123882"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181123882" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181123882">Kevin Buzzard (Nov 19 2019 at 15:47)</a>:</h4>
+<p>In particular the proof still looks a bit clunky but it was probably much easier for the user to write.</p>
+
+<a name="181124262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124262">Sebastien Gouezel (Nov 19 2019 at 15:50)</a>:</h4>
+<p>When I write an Isabelle proof I write down enough intermediate statements, and then I ask automation to complete the proof of each intermediate statement, and also to combine them all to prove the main  result. If it doesn't work, I add more intermediate statements. This is really different from the way I write Lean proofs (and I think the Isabelle way is much smoother!)</p>
+
+<a name="181124340"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124340" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124340">Kevin Buzzard (Nov 19 2019 at 15:50)</a>:</h4>
+<p>So now we need to turn this into some sort of concrete proposal(s) for improving Lean.</p>
+
+<a name="181124412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124412">Kevin Buzzard (Nov 19 2019 at 15:51)</a>:</h4>
+<p>Occasionally people pop up and say "I want to write Lean automation, what do you guys need?" and if they're not mathematicians I feel like I can't say "Groebner bases"</p>
+
+<a name="181124663"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124663" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124663">Kevin Buzzard (Nov 19 2019 at 15:53)</a>:</h4>
+<p>but I can't tell my <code>cc</code> from my <code>simp</code> so I don't feel competent enough to answer a computer scientist. Oh, I know we need a sledgehammer but this seems like a highly non-trivial task. I used to know that we needed <code>norm_cast</code> but now we have that. Imagine how much worse the Lean proof would have been a year ago.</p>
+
+<a name="181124748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124748">Sebastien Gouezel (Nov 19 2019 at 15:54)</a>:</h4>
+<p>What we really need is <code>auto</code> (or <code>force</code>). Something that uses the simplifier but also tries some things that have been marked as reasonable in the library, and backtracks if it doesn't work (with some backtracking depth which is not the same for <code>auto</code>, <code>fastforce</code> and <code>force</code>). This is called a tableau prover, I think.</p>
+
+<a name="181124817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124817">Bryan Gin-ge Chen (Nov 19 2019 at 15:54)</a>:</h4>
+<p>Is it like a stronger version of <code>tidy</code>?</p>
+
+<a name="181124910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181124910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181124910">Kevin Buzzard (Nov 19 2019 at 15:55)</a>:</h4>
+<p>Out of interest, how long does the automation take to (a) prove I,J,K,L, (b) find the two-line incantation at the end and (c) compile the two-line incantation at the end? Are (a) and (c) super-quick and (b) might take a few minutes?</p>
+
+<a name="181125212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181125212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181125212">Sebastien Gouezel (Nov 19 2019 at 15:57)</a>:</h4>
+<p>What I also dearly miss is simprocs, i.e., simple algorithms that are used by <code>simp</code> to try to simplify things in addition to the lemmas that have been marked as <code>simp</code>. <span class="user-mention" data-user-id="110294">@Johannes Hölzl</span> had given a start to this, in <a href="https://github.com/johoelzl/lean-simp-loop" target="_blank" title="https://github.com/johoelzl/lean-simp-loop">https://github.com/johoelzl/lean-simp-loop</a>, but I think it never made it into production. For instance, if you see <code>∃a, a = t ∧ p a</code>, you would like to reduce it to <code>p t</code>.</p>
+
+<a name="181125325"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181125325" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181125325">Kevin Buzzard (Nov 19 2019 at 15:58)</a>:</h4>
+<p>That's not some lemma in logic.basic which you can just rewrite or something?</p>
+
+<a name="181125338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181125338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181125338">Kevin Buzzard (Nov 19 2019 at 15:59)</a>:</h4>
+<p>Is it  a bad simp lemma?</p>
+
+<a name="181125344"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Tidying%20up%20a%20proof/near/181125344" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/22757Tidyingupaproof.html#181125344">Sebastien Gouezel (Nov 19 2019 at 15:59)</a>:</h4>
+<p>(a) and (c) are instantaneous. (b) takes less than 5 seconds.</p>
+
 
 {% endraw %}
 
