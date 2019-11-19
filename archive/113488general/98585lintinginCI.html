@@ -86,6 +86,18 @@ permalink: archive/113488general/98585lintinginCI.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/181105736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#181105736">Rob Lewis (Nov 19 2019 at 12:19)</a>:</h4>
 <p>I'm thinking it might be better to remove the <code>instance_priority</code> test from linting at first. I started a branch a little while ago to see how hard it would be to pass that test, and it seemed tricky. There were some unexpected errors. It would be safer to investigate that first before adding it to CI.</p>
 
+<a name="181138291"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/181138291" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#181138291">Rob Lewis (Nov 19 2019 at 18:09)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1634" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1634">#1634</a> has landed. What this means for you: Travis will complain about your PRs if they add declarations that don't pass our linting tests. This means that all definitions must have doc strings, there should be no unused arguments to declarations, you have to use <code>def</code> and <code>lemma</code>/<code>theorem</code> in the right places, and a few other things.</p>
+
+<a name="181138437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/181138437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#181138437">Rob Lewis (Nov 19 2019 at 18:11)</a>:</h4>
+<p>If your PR adds something that fails a test, but you think it should be allowed anyway, you can use the <code>@[nolint]</code> attribute, with a comment justifying its use. Reviewers should look for this and question whether it's really necessary.</p>
+
+<a name="181138627"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/linting%20in%20CI/near/181138627" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/98585lintinginCI.html#181138627">Rob Lewis (Nov 19 2019 at 18:12)</a>:</h4>
+<p>PRs that rename a lot of existing declarations could lead to failures. The solution here is to regenerate <code>scripts/nolints.txt</code> using <code>scripts/mk_nolint.lean</code>. We'll see in practice how often this is necessary.</p>
+
 
 {% endraw %}
 

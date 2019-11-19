@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (1 message, latest: Nov 19 2019 at 18:57)
+
+* [linting in CI](98585lintinginCI.html) (19 messages, latest: Nov 19 2019 at 18:12)
+
 * [computable real functions](16586computablerealfunctions.html) (12 messages, latest: Nov 19 2019 at 17:56)
 
 * [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (8 messages, latest: Nov 19 2019 at 17:48)
@@ -18,8 +22,6 @@ permalink: archive/113488general/index.html
 * [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
 
 * [idiomatic Lean for python L\[a:b\]](04350idiomaticLeanforpythonLab.html) (6 messages, latest: Nov 19 2019 at 15:49)
-
-* [linting in CI](98585lintinginCI.html) (16 messages, latest: Nov 19 2019 at 12:19)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (18 messages, latest: Nov 19 2019 at 10:08)
 

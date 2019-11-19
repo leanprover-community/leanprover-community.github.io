@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (49 messages, latest: Nov 19 2019 at 16:50)
+* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (56 messages, latest: Nov 19 2019 at 18:55)
+
+* [proving sum(range 0) = 0](33654provingsumrange00.html) (13 messages, latest: Nov 19 2019 at 18:17)
 
 * [Tidying up a proof](22757Tidyingupaproof.html) (65 messages, latest: Nov 19 2019 at 16:02)
-
-* [proving sum(range 0) = 0](33654provingsumrange00.html) (9 messages, latest: Nov 19 2019 at 15:48)
 
 * [no nightly archive found](13947nonightlyarchivefound.html) (10 messages, latest: Nov 19 2019 at 09:15)
 

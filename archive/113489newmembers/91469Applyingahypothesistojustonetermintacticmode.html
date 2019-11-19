@@ -285,6 +285,77 @@ After a hiatus (paper deadline ;-), I've started trying to get my head around ta
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181130933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181130933">Reid Barton (Nov 19 2019 at 16:50)</a>:</h4>
 <p>Oh, like if <code>h1 : a = b</code> and <code>h2 : c = d</code>, then you write something like <code>congr_hyp _ + _ using h1 h2</code> and you get a proof of <code>a + c = b + d</code>?</p>
 
+<a name="181140496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181140496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181140496">Julian Gilbey (Nov 19 2019 at 18:33)</a>:</h4>
+<blockquote>
+<p>if you want to <em>not</em> import anything else, you should start the file with <code>prelude</code></p>
+</blockquote>
+<p>Ah, thanks <span class="user-mention" data-user-id="110049">@Mario Carneiro</span> - I didn't know that!</p>
+
+<a name="181140828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181140828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181140828">Julian Gilbey (Nov 19 2019 at 18:36)</a>:</h4>
+<blockquote>
+<p>Probably you can also close the goal directly with <code>simp [h]</code></p>
+</blockquote>
+<p>Ooh, <code>subst h</code> followed by <code>exact mul_one 1</code> works, and so does <code>rw [h, mul_one]</code>, and so does <code>simp [h]</code>.  Thanks!  So much nicer than what I did ;-)</p>
+
+<a name="181140919"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181140919" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181140919">Kevin Buzzard (Nov 19 2019 at 18:37)</a>:</h4>
+<blockquote>
+<p>For the forward direction. I agree that a step like "multiply both sides with ..." doesn't have a nice tactic-verb yet.</p>
+</blockquote>
+<p>This just happened to me again: I had <code>h : list.of_fn f = []</code> with <code>f : fin n -&gt; X</code> and I wanted to deduce that n was 0 (this was not the goal). The theorem <code>list.length_of_fn</code> tells me that <code>length(list.of_fn f) = n</code> so I just wanted to "apply list.length to h" and then rw list.length_of_fn. I don't know an easy way to do this in tactic mode without this apply idea.</p>
+
+<a name="181141017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181141017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181141017">Kevin Buzzard (Nov 19 2019 at 18:38)</a>:</h4>
+<blockquote>
+<blockquote>
+<p>Probably you can also close the goal directly with <code>simp [h]</code></p>
+</blockquote>
+<p>Ooh, <code>subst h</code> followed by <code>exact mul_one 1</code> works, and so does <code>rw [h, mul_one]</code>, and so does <code>simp [h]</code>.  Thanks!  So much nicer than what I did ;-)</p>
+</blockquote>
+<p>Of course, the reason that <code>simp</code> might help is that someone already proved all or most of what you wanted, probably in term mode, and then tagged it <code>[@simp]</code>.</p>
+
+<a name="181141584"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181141584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181141584">Julian Gilbey (Nov 19 2019 at 18:44)</a>:</h4>
+<blockquote>
+<p>Here's how I'd do it, basically following your (2) for the first part:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">mul_right_cancel</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">],</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span>
+</pre></div>
+
+
+<p>(I've also deliberately avoided using <code>simp</code> and such so you can see what's going on)</p>
+</blockquote>
+<p>Thanks <span class="user-mention" data-user-id="246273">@Bhavik Mehta</span> Now this is interesting: <code>apply mul_right_cancel</code> can apply the lemma backwards, which somewhat surprises me.  How does it know that it's a two-way implication?</p>
+
+<a name="181142432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181142432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181142432">Kevin Buzzard (Nov 19 2019 at 18:53)</a>:</h4>
+<p>If you hover over <code>mul_right_cancel</code> you'll see its definition: <code>mul_right_cancel : ∀ {α : Type} [_inst_1 : right_cancel_semigroup α] {a b c : α}, a * b = c * b → a = c</code>. So it's a one way implication. And <code>apply</code> applies a function, so it's all consistent.</p>
+
+<a name="181142632"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181142632" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181142632">Kevin Buzzard (Nov 19 2019 at 18:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">(</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span>
+<span class="kn">example</span> <span class="o">[</span><span class="n">group</span> <span class="n">G</span><span class="o">]</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span> <span class="bp">↔</span> <span class="n">x</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+    <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="bp">@</span><span class="n">mul_right_cancel</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">x</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">one_mul</span><span class="o">],</span>
+  <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">h</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This way doesn't have metavariables in.</p>
+
 
 {% endraw %}
 
