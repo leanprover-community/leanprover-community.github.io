@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Tidying up a proof](22757Tidyingupaproof.html) (1 message, latest: Nov 19 2019 at 10:53)
+* [Tidying up a proof](22757Tidyingupaproof.html) (4 messages, latest: Nov 19 2019 at 11:29)
 
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (46 messages, latest: Nov 19 2019 at 10:47)
 
