@@ -9,11 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [no nightly archive found](13947nonightlyarchivefound.html) (6 messages, latest: Nov 19 2019 at 00:55)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (187 messages, latest: Nov 19 2019 at 01:55)
+
+* [no nightly archive found](13947nonightlyarchivefound.html) (8 messages, latest: Nov 19 2019 at 01:05)
 
 * [Frustrating nat proofs](54230Frustratingnatproofs.html) (15 messages, latest: Nov 19 2019 at 00:31)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (184 messages, latest: Nov 18 2019 at 21:59)
 
 * [Using data.rat](47222Usingdatarat.html) (142 messages, latest: Nov 18 2019 at 08:51)
 

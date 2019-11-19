@@ -93,6 +93,22 @@ path = &quot;src&quot;
 mathlib = {git = &quot;https://github.com/leanprover/mathlib&quot;, rev = &quot;7c5f282dcfe1e0f20050f4aae3b6bdf77a652a13&quot;}
 </pre></div>
 
+<a name="181072823"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/181072823" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#181072823">Bryan Gin-ge Chen (Nov 19 2019 at 01:01)</a>:</h4>
+<p>This is probably the offending line:</p>
+<blockquote>
+<p><code>lean_version = "nightly-2018-06-21"</code></p>
+</blockquote>
+<p>This is a really old version of Lean. Currently <code>update-mathlib</code> can only supply Lean binaries for Lean 3.4.2.</p>
+
+<a name="181073018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/181073018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#181073018">Bryan Gin-ge Chen (Nov 19 2019 at 01:05)</a>:</h4>
+<p>Furthermore, the reason that <code>leanpkg build</code> errored out after <code>leanpkg upgrade</code> is that recent versions of mathlib are not compatible with versions of Lean before 3.4.2. So, if you change that line to this:</p>
+<blockquote>
+<p><code>lean_version = "3.4.2"</code></p>
+</blockquote>
+<p>Then both <code>leanpkg build</code> and <code>update-mathlib</code> should both work again.</p>
+
 
 {% endraw %}
 

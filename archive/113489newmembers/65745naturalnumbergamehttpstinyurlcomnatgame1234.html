@@ -999,6 +999,19 @@ If PRs are OK, I sent one here :) <a href="https://github.com/ImperialCollegeLon
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/181061078" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#181061078">Lucas Allen (Nov 18 2019 at 21:59)</a>:</h4>
 <p>I struggled with <code>mul_left_cancel</code> for hours. I eventually cheated and looked at the answer on github. The trick is to start the proof with <code>revert b</code> or <code>revert c</code>, so that when you do <code>induction</code> and then <code>cases</code> the variable in the induction hypothesis isn't changed to <code>succ</code> something.</p>
 
+<a name="181073079"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/181073079" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#181073079">Luis O'Shea (Nov 19 2019 at 01:06)</a>:</h4>
+<p>I also found the use of <code>revert</code> in the proof of <code>mul_left_cancel</code> tricky (although KB added a very explicit hint to the game around v1.09b). Looking around in other examples I found various uses of <code>revert</code> which are not critical (i.e., can be easily done without <code>revert</code>). This was the first proof which truly used (IMO).</p>
+
+<a name="181073174"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/181073174" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#181073174">Luis O'Shea (Nov 19 2019 at 01:09)</a>:</h4>
+<p>As it happens I think it's an interesting issue since I think mathematicians don't clearly distinguish between like "n is natural number implies 2n is even" and "for all natural numbers n, 2n is even". That makes <code>revert</code> (as used in <code>mul_left_cancel</code>) slippery, but interesting. (At least this is how I see it.)</p>
+
+<a name="181075142"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/natural%20number%20game%20%28https%3A//tinyurl.com/natgame1234%29/near/181075142" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/65745naturalnumbergamehttpstinyurlcomnatgame1234.html#181075142">Luis O'Shea (Nov 19 2019 at 01:55)</a>:</h4>
+<p>For example in <a href="https://github.com/ImperialCollegeLondon/M1F_example_sheets/blob/master/src/example_sheet_01/Sht1Q1/S0101.lean" target="_blank" title="https://github.com/ImperialCollegeLondon/M1F_example_sheets/blob/master/src/example_sheet_01/Sht1Q1/S0101.lean">M1F example sheets/S0101.lean</a> the first proof (of <code>M1F_Sheet01_Q01a_is_F</code>) uses <code>revert</code> in an inessential way: instead of <code>revert H2,norm_num</code> you can say <code>norm_num at H2,assumption</code>. However <code>revert</code> can not be eliminated from the proof of <code>mul_left_cancel</code> so easily, if at all.<br>
+As a beginner I think it would be useful to see another simple but "essential" use of <code>revert</code>.</p>
+
 
 {% endraw %}
 
