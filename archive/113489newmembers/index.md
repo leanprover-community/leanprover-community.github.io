@@ -9,15 +9,15 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (56 messages, latest: Nov 19 2019 at 18:55)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (190 messages, latest: Nov 19 2019 at 19:39)
+
+* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (61 messages, latest: Nov 19 2019 at 19:33)
+
+* [Tidying up a proof](22757Tidyingupaproof.html) (69 messages, latest: Nov 19 2019 at 19:30)
 
 * [proving sum(range 0) = 0](33654provingsumrange00.html) (13 messages, latest: Nov 19 2019 at 18:17)
 
-* [Tidying up a proof](22757Tidyingupaproof.html) (65 messages, latest: Nov 19 2019 at 16:02)
-
 * [no nightly archive found](13947nonightlyarchivefound.html) (10 messages, latest: Nov 19 2019 at 09:15)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (189 messages, latest: Nov 19 2019 at 07:15)
 
 * [Frustrating nat proofs](54230Frustratingnatproofs.html) (15 messages, latest: Nov 19 2019 at 00:31)
 

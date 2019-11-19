@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (1 message, latest: Nov 19 2019 at 18:57)
+* [VSCode overflow?](68152VSCodeoverflow.html) (10 messages, latest: Nov 19 2019 at 19:56)
+
+* [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (4 messages, latest: Nov 19 2019 at 19:42)
 
 * [linting in CI](98585lintinginCI.html) (19 messages, latest: Nov 19 2019 at 18:12)
 
@@ -288,8 +290,6 @@ permalink: archive/113488general/index.html
 * [norm_cast not behaving as expected](53506normcastnotbehavingasexpected.html) (11 messages, latest: Sep 20 2019 at 10:54)
 
 * [Infinity Hotel](67367InfinityHotel.html) (77 messages, latest: Sep 20 2019 at 09:50)
-
-* [VSCode overflow?](68152VSCodeoverflow.html) (9 messages, latest: Sep 20 2019 at 06:23)
 
 * [push coe](38808pushcoe.html) (13 messages, latest: Sep 19 2019 at 08:12)
 
