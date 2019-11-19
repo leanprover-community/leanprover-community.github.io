@@ -144,6 +144,41 @@ permalink: archive/113488general/70598defeq.html
 <span class="kn">end</span> <span class="c1">-- fine</span>
 </pre></div>
 
+<a name="181065494"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181065494" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181065494">Mario Carneiro (Nov 18 2019 at 23:00)</a>:</h4>
+<p>compare:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">omega</span>
+<span class="c1">-- VM does not have code for &#39;nat.zero&#39;</span>
+</pre></div>
+
+<a name="181065954"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181065954" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181065954">Wojciech Nawrocki (Nov 18 2019 at 23:06)</a>:</h4>
+<p>Ah, so the VM has code for typeclass-<code>0</code> but not nat-<code>0</code>. I can backport the <code>change</code> to fix where I originally encountered this :)</p>
+
+<a name="181065972"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181065972" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181065972">Mario Carneiro (Nov 18 2019 at 23:06)</a>:</h4>
+<p>No, it's a bug in <code>eval_expr</code></p>
+
+<a name="181066033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181066033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181066033">Mario Carneiro (Nov 18 2019 at 23:07)</a>:</h4>
+<p>Of course the VM has code for <code>nat.zero</code>, it's a constructor of a data type. But it doesn't like it when you call <code>eval_expr nat `(nat.zero)</code>; <code>eval_expr nat `(id nat.zero)</code> works fine</p>
+
+<a name="181066088"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181066088" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181066088">Mario Carneiro (Nov 18 2019 at 23:08)</a>:</h4>
+<p>this is a known bug, and mathlib has <code>eval_expr'</code> for this, but <code>omega</code> forgot to use it</p>
+
+<a name="181066382"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181066382" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181066382">Wojciech Nawrocki (Nov 18 2019 at 23:12)</a>:</h4>
+<p>Ah, <code>grep</code> tells me almost no tactics that use <code>eval_expr</code> use the primed version. Should they all use it instead?</p>
+
+<a name="181066856"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181066856" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181066856">Mario Carneiro (Nov 18 2019 at 23:19)</a>:</h4>
+<p><a href="https://github.com/leanprover-community/mathlib/issues/1711" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1711">#1711</a></p>
+
+<a name="181067039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/defeq/near/181067039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/70598defeq.html#181067039">Mario Carneiro (Nov 18 2019 at 23:22)</a>:</h4>
+<p>Actually, I think that omega should probably not be using <code>eval_expr' nat</code> here at all, and instead it should use <code>expr.to_nat</code>, which more accurately detects numerals</p>
+
 
 {% endraw %}
 
