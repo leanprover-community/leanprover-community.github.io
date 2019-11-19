@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [computable real functions](16586computablerealfunctions.html) (1 message, latest: Nov 19 2019 at 16:56)
+
+* [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
+
 * [idiomatic Lean for python L\[a:b\]](04350idiomaticLeanforpythonLab.html) (6 messages, latest: Nov 19 2019 at 15:49)
 
 * [linting in CI](98585lintinginCI.html) (16 messages, latest: Nov 19 2019 at 12:19)

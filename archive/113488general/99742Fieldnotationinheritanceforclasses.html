@@ -1,0 +1,104 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/99742Fieldnotationinheritanceforclasses.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html">Field notation inheritance for classes.</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181128005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128005">Juho Kupiainen (Nov 19 2019 at 16:21)</a>:</h4>
+<p>How do I get something like this to work?</p>
+<div class="codehilite"><pre><span></span>class AA (α : Type):=
+(some_op : α → α → ℕ )
+
+class BB (α : Type) extends AA α :=
+(other_op : α → α → ℕ)
+namespace BB
+def caabb {α : Type} (bb : BB α) := λ x y : α, (bb.some_op y x) + (bb.other_op x y)
+end BB
+</pre></div>
+
+
+<p>I'm trying to build this so that you can write</p>
+<div class="codehilite"><pre><span></span>def asd {α : Type} (bb1 bb2 : BB α) := λ x y, (bb1.caabb x y) + (bb2.caabb x y)
+</pre></div>
+
+
+<p>It works if I replace the class keyword with a structure keyword.</p>
+
+<a name="181128373"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128373" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128373">Reid Barton (Nov 19 2019 at 16:24)</a>:</h4>
+<p>You probably want <code>structure</code> everywhere, not <code>class</code>?</p>
+
+<a name="181128618"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128618" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128618">Juho Kupiainen (Nov 19 2019 at 16:26)</a>:</h4>
+<p>But then I can't say some_op a1 a2</p>
+
+<a name="181128634"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128634" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128634">Reid Barton (Nov 19 2019 at 16:26)</a>:</h4>
+<p>Oh... you said that. But what you wrote for <code>bb.other_op</code> is wrong already, so I don't understand what you actually want</p>
+
+<a name="181128650"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128650" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128650">Reid Barton (Nov 19 2019 at 16:26)</a>:</h4>
+<p>Ask a better question <span aria-label="upside down" class="emoji emoji-1f643" role="img" title="upside down">:upside_down:</span></p>
+
+<a name="181128686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128686">Juho Kupiainen (Nov 19 2019 at 16:27)</a>:</h4>
+<p>Right. Say AA also extends the monoid class.</p>
+
+<a name="181128714"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128714" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128714">Floris van Doorn (Nov 19 2019 at 16:27)</a>:</h4>
+<p>If you want to keep using classes, this works:</p>
+<div class="codehilite"><pre><span></span><span class="n">class</span> <span class="n">AA</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">):=</span>
+<span class="o">(</span><span class="n">some_op</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="n">class</span> <span class="n">BB</span> <span class="o">(</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="kn">extends</span> <span class="n">AA</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">other_op</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span><span class="o">)</span>
+
+<span class="kn">open</span> <span class="n">AA</span>
+<span class="kn">namespace</span> <span class="n">BB</span>
+<span class="n">def</span> <span class="n">caabb</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">bb</span> <span class="o">:</span> <span class="n">BB</span> <span class="n">α</span><span class="o">]</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">some_op</span> <span class="n">y</span> <span class="n">x</span> <span class="bp">+</span> <span class="n">other_op</span> <span class="n">x</span> <span class="n">y</span>
+<span class="kn">end</span> <span class="n">BB</span>
+</pre></div>
+
+<a name="181128805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128805">Floris van Doorn (Nov 19 2019 at 16:28)</a>:</h4>
+<p>You need to <code>open AA</code> (so that <code>AA.some_op</code> is abbreviated to <code>some_op</code>) or alternatively define the projecction <code>some_op</code> in another namespace.</p>
+
+<a name="181128821"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128821" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128821">Reid Barton (Nov 19 2019 at 16:28)</a>:</h4>
+<p>If you're using classes, then you probably don't want to be using the field projection notation at all</p>
+
+<a name="181128828"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128828" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128828">Reid Barton (Nov 19 2019 at 16:28)</a>:</h4>
+<p>At least in a simple example like this</p>
+
+<a name="181128878"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181128878" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181128878">Reid Barton (Nov 19 2019 at 16:29)</a>:</h4>
+<p>You can also remove the name <code>bb : </code></p>
+
+<a name="181129047"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181129047" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181129047">Floris van Doorn (Nov 19 2019 at 16:30)</a>:</h4>
+<p>But if you want <em>multiple</em> <code>BB</code> instances on the same type, classes might not be the thing you want to use.<br>
+This example</p>
+<div class="codehilite"><pre><span></span>def asd {α : Type} (bb1 bb2 : BB α) := λ x y, (bb1.caabb x y) + (bb2.caabb x y)
+</pre></div>
+
+
+<p>will be a pain with classes.</p>
+
+<a name="181129280"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Field%20notation%20inheritance%20for%20classes./near/181129280" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/99742Fieldnotationinheritanceforclasses.html#181129280">Floris van Doorn (Nov 19 2019 at 16:32)</a>:</h4>
+<p>When using structures, the user specifies which structure to use (so you often use projection notation), and with classes you ask Lean to find the instance (like how Lean will find <code>add_group</code> on the integers). If you have two <code>group</code> or <code>BB</code> instances on the same type, Lean will just pick one for you, and it's  a little ugly to specify it yourself (you can do it, with something like <code>@ccaabb _ bb2 x y</code>)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
