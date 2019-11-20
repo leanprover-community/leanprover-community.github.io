@@ -9,13 +9,13 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (23 messages, latest: Nov 20 2019 at 18:34)
+
 * [linting in CI](98585lintinginCI.html) (20 messages, latest: Nov 20 2019 at 15:25)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (218 messages, latest: Nov 20 2019 at 15:03)
 
 * [VScode goodies](03279VScodegoodies.html) (3 messages, latest: Nov 20 2019 at 13:10)
-
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (22 messages, latest: Nov 20 2019 at 12:05)
 
 * [hole command in tactic mode](94076holecommandintacticmode.html) (1 message, latest: Nov 20 2019 at 10:22)
 

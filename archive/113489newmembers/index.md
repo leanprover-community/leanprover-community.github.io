@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (65 messages, latest: Nov 20 2019 at 17:56)
+* [One-line proof](28766Onelineproof.html) (3 messages, latest: Nov 20 2019 at 18:48)
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (198 messages, latest: Nov 20 2019 at 17:36)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (199 messages, latest: Nov 20 2019 at 18:08)
+
+* [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (65 messages, latest: Nov 20 2019 at 17:56)
 
 * [Using attach with fold](40477Usingattachwithfold.html) (31 messages, latest: Nov 20 2019 at 15:00)
 
