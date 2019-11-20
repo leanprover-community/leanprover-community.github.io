@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [proving sum(range 0) = 0](33654provingsumrange00.html) (14 messages, latest: Nov 20 2019 at 00:19)
+* [Comments on proof](16842Commentsonproof.html) (4 messages, latest: Nov 20 2019 at 01:09)
 
-* [Comments on proof](16842Commentsonproof.html) (3 messages, latest: Nov 20 2019 at 00:03)
+* [proving sum(range 0) = 0](33654provingsumrange00.html) (14 messages, latest: Nov 20 2019 at 00:19)
 
 * [Tidying up a proof](22757Tidyingupaproof.html) (70 messages, latest: Nov 19 2019 at 23:53)
 

@@ -47,6 +47,21 @@ permalink: archive/113489newmembers/16842Commentsonproof.html
 <p>Somewhat related: you can try replacing <code>simp</code> with <code>squeeze_simp</code>. It will return a message with a roughly equivalent <code>simp only</code> statement that has a (partial) list of used lemmas. It's not perfect though - it might miss some lemmas or have some extra ones.</p>
 <p>3) is interesting, I'm not sure why the <code>2 &gt; 0</code> goal introduced by the <code>← add_mul_div_left</code> rewrite disappears outside the square brackets and then reappears later.</p>
 
+<a name="181171362"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Comments%20on%20proof/near/181171362" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16842Commentsonproof.html#181171362">Luis O'Shea (Nov 20 2019 at 01:09)</a>:</h4>
+<p>Below is the new proof with suggestions (1) and (2) applied (thanks for <code>squeeze_simp</code> -- that was very helpful). The problem I now have is that having removed <code>simp</code> the long string of rewrites seems hard to read (to me). Is this really idiomatic?</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">nat_sum</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">sum</span><span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">n_ih</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">refl</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">rw</span> <span class="o">[</span><span class="n">range_concat</span><span class="o">,</span> <span class="n">sum_append</span><span class="o">,</span> <span class="n">sum_cons</span><span class="o">,</span> <span class="n">sum_nil</span><span class="o">,</span> <span class="n">n_ih</span><span class="o">,</span>
+        <span class="err">←</span> <span class="n">add_mul_div_left</span><span class="o">,</span> <span class="n">add_zero</span><span class="o">,</span> <span class="err">←</span> <span class="n">right_distrib</span><span class="o">,</span> <span class="n">mul_comm</span><span class="o">,</span>
+        <span class="n">succ_sub_succ_eq_sub</span><span class="o">,</span> <span class="n">nat</span><span class="bp">.</span><span class="n">sub_zero</span><span class="o">],</span>
+    <span class="o">{</span> <span class="n">cases</span> <span class="n">n</span><span class="bp">;</span><span class="n">refl</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">apply</span> <span class="n">zero_lt_succ</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
