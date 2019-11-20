@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (19 messages, latest: Nov 20 2019 at 10:40)
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (21 messages, latest: Nov 20 2019 at 11:59)
 
 * [VScode goodies](03279VScodegoodies.html) (2 messages, latest: Nov 20 2019 at 10:24)
 
