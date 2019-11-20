@@ -394,6 +394,22 @@ After a hiatus (paper deadline ;-), I've started trying to get my head around ta
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181146412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181146412">Bhavik Mehta (Nov 19 2019 at 19:33)</a>:</h4>
 <p>I'd argue we do a bit of both</p>
 
+<a name="181232019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181232019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181232019">Julian Gilbey (Nov 20 2019 at 17:54)</a>:</h4>
+<p>Ah, thanks <span class="user-mention" data-user-id="246273">@Bhavik Mehta</span> and <span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>  - I think I'm getting it!  How does this sound: <code>apply</code> says something along the lines of "we're trying to prove B; we have a theorem of the form A =&gt; B, and we <code>apply</code> this theorem, then we only need to prove A in order to be done".  So in this case, we're trying to prove <code>x=1</code>, and applying <code>mul_right_cancel</code> therefore says "if we can reach <code>x*y=1*y</code> for some y, then we're done, because we can just apply <code>mul_right_cancel</code> at that point".  (And that explains why the state after <code>apply mul_right_cancel</code>looks like this.) So when the docs talk about "rewriting the target", it means something like: <code>apply</code> changes our target by saying "if we get to an earlier point, we are effectively done".</p>
+
+<a name="181232125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181232125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181232125">Mario Carneiro (Nov 20 2019 at 17:56)</a>:</h4>
+<p>you can think of <code>apply T</code> as saying "by <code>T</code>, it suffices to show..."</p>
+
+<a name="181232191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181232191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181232191">Kevin Buzzard (Nov 20 2019 at 17:56)</a>:</h4>
+<p>It's doing the proof backwards. The CS people like it</p>
+
+<a name="181232212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Applying%20a%20hypothesis%20to%20just%20one%20term%20in%20tactic%20mode/near/181232212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/91469Applyingahypothesistojustonetermintacticmode.html#181232212">Kevin Buzzard (Nov 20 2019 at 17:56)</a>:</h4>
+<p>Because it's writing the function forward</p>
+
 
 {% endraw %}
 
