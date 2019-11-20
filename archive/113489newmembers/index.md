@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to use choice tactic?](00065Howtousechoicetactic.html) (2 messages, latest: Nov 20 2019 at 04:53)
+* [How to use choice tactic?](00065Howtousechoicetactic.html) (3 messages, latest: Nov 20 2019 at 05:22)
 
 * [Comments on proof](16842Commentsonproof.html) (4 messages, latest: Nov 20 2019 at 01:09)
 
