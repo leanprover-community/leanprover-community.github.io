@@ -29,6 +29,32 @@ permalink: archive/113489newmembers/28766Onelineproof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/One-line%20proof/near/181236579" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28766Onelineproof.html#181236579">Mario Carneiro (Nov 20 2019 at 18:48)</a>:</h4>
 <p><code>cases h; refl</code></p>
 
+<a name="181238745"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/One-line%20proof/near/181238745" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28766Onelineproof.html#181238745">Rob Lewis (Nov 20 2019 at 19:13)</a>:</h4>
+<p>Or <code>injection h</code></p>
+
+<a name="181239342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/One-line%20proof/near/181239342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28766Onelineproof.html#181239342">Bhavik Mehta (Nov 20 2019 at 19:18)</a>:</h4>
+<p>Ah, <code>injection</code> is what I was looking for. I don't get what <code>cases</code> is doing in that line, and why that works</p>
+
+<a name="181239770"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/One-line%20proof/near/181239770" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28766Onelineproof.html#181239770">Bhavik Mehta (Nov 20 2019 at 19:22)</a>:</h4>
+<p>Out of interest, how would I prove this in term mode</p>
+
+<a name="181241385"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/One-line%20proof/near/181241385" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28766Onelineproof.html#181241385">Marc Huisinga (Nov 20 2019 at 19:39)</a>:</h4>
+<div class="codehilite"><pre><span></span>example {α β : Type} {x : α} {y z : β} (h : (x, y) = (x, z)) : y = z := (prod.mk.inj h).2
+</pre></div>
+
+
+<p><code>prod.mk.inj</code> uses <code>prod.no_confusion</code> which afaik you get for all inductive types that are not propositions</p>
+
+<a name="181241521"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/One-line%20proof/near/181241521" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/28766Onelineproof.html#181241521">Andrew Ashworth (Nov 20 2019 at 19:40)</a>:</h4>
+<p>yes, it's auto-generated afaik </p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">{</span><span class="n">y</span> <span class="n">z</span> <span class="o">:</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">y</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="n">z</span><span class="o">))</span> <span class="o">:</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">z</span> <span class="o">:=</span> <span class="n">prod</span><span class="bp">.</span><span class="n">no_confusion</span> <span class="n">h</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">id</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 
