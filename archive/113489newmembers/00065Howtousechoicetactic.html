@@ -35,6 +35,30 @@ end
 <p>Rewriting inv gives some scary-looking term, and simp-ing gives "f (classical.some _) = b", when it seems that the proposition that choice was made on has been lost.</p>
 <p>What is a good way of recovering the proposition in an existential statement? How could this proof be fixed? (A proof ending with "assumption" would be extra nice, to show how the proposition can be added as a hypothesis)</p>
 
+<a name="181179817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181179817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181179817">Bryan Gin-ge Chen (Nov 20 2019 at 04:53)</a>:</h4>
+<p>The key is <code>classical.some_spec</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span>
+<span class="kn">open</span> <span class="n">function</span>
+<span class="n">noncomputable</span> <span class="n">theory</span>
+
+<span class="n">def</span> <span class="n">inv</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intro</span> <span class="n">b</span><span class="o">,</span> <span class="n">rw</span> <span class="o">[</span><span class="n">surjective</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">choose</span> <span class="n">a</span> <span class="n">h</span> <span class="kn">using</span> <span class="n">h</span> <span class="n">b</span><span class="o">,</span> <span class="n">exact</span> <span class="n">a</span>
+<span class="kn">end</span>
+
+<span class="kn">theorem</span> <span class="n">should_be_trivial</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="k">let</span> <span class="n">f&#39;</span> <span class="o">:=</span> <span class="n">inv</span> <span class="n">f</span> <span class="n">h</span> <span class="k">in</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">intros</span> <span class="n">f&#39;</span> <span class="n">b</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">h</span> <span class="n">b</span><span class="o">),</span>
+<span class="kn">end</span>
+
+<span class="c1">-- n.b. using tactics in defs is discouraged (because it leads to scary-looking terms)</span>
+<span class="n">def</span> <span class="n">inv&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">h</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
 
 {% endraw %}
 
