@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [How to use choice tactic?](00065Howtousechoicetactic.html) (3 messages, latest: Nov 20 2019 at 05:22)
+* [Comments on proof](16842Commentsonproof.html) (5 messages, latest: Nov 20 2019 at 07:53)
 
-* [Comments on proof](16842Commentsonproof.html) (4 messages, latest: Nov 20 2019 at 01:09)
+* [How to use choice tactic?](00065Howtousechoicetactic.html) (3 messages, latest: Nov 20 2019 at 05:22)
 
 * [proving sum(range 0) = 0](33654provingsumrange00.html) (14 messages, latest: Nov 20 2019 at 00:19)
 
