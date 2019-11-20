@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (197 messages, latest: Nov 20 2019 at 16:38)
+
 * [Using attach with fold](40477Usingattachwithfold.html) (31 messages, latest: Nov 20 2019 at 15:00)
 
 * [no nightly archive found](13947nonightlyarchivefound.html) (11 messages, latest: Nov 20 2019 at 13:13)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [Tidying up a proof](22757Tidyingupaproof.html) (71 messages, latest: Nov 20 2019 at 08:18)
 
 * [proving sum(range 0) = 0](33654provingsumrange00.html) (14 messages, latest: Nov 20 2019 at 00:19)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (193 messages, latest: Nov 19 2019 at 20:14)
 
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (61 messages, latest: Nov 19 2019 at 19:33)
 

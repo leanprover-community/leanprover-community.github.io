@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Convergence uniform in one argument](84684Convergenceuniforminoneargument.html) (11 messages, latest: Nov 20 2019 at 16:49)
+
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (246 messages, latest: Nov 17 2019 at 23:42)
 
 * [analysis](03749analysis.html) (56 messages, latest: Nov 17 2019 at 19:13)
