@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (217 messages, latest: Nov 20 2019 at 13:45)
+* [linting in CI](98585lintinginCI.html) (20 messages, latest: Nov 20 2019 at 15:25)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (218 messages, latest: Nov 20 2019 at 15:03)
 
 * [VScode goodies](03279VScodegoodies.html) (3 messages, latest: Nov 20 2019 at 13:10)
 
@@ -30,8 +32,6 @@ permalink: archive/113488general/index.html
 * [VSCode overflow?](68152VSCodeoverflow.html) (12 messages, latest: Nov 19 2019 at 20:33)
 
 * [ctrl-space in VS Code](46218ctrlspaceinVSCode.html) (4 messages, latest: Nov 19 2019 at 19:42)
-
-* [linting in CI](98585lintinginCI.html) (19 messages, latest: Nov 19 2019 at 18:12)
 
 * [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
 
