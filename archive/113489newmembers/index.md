@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Tidying up a proof](22757Tidyingupaproof.html) (70 messages, latest: Nov 19 2019 at 23:53)
+
+* [Comments on proof](16842Commentsonproof.html) (2 messages, latest: Nov 19 2019 at 23:46)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (193 messages, latest: Nov 19 2019 at 20:14)
 
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (61 messages, latest: Nov 19 2019 at 19:33)
-
-* [Tidying up a proof](22757Tidyingupaproof.html) (69 messages, latest: Nov 19 2019 at 19:30)
 
 * [proving sum(range 0) = 0](33654provingsumrange00.html) (13 messages, latest: Nov 19 2019 at 18:17)
 
