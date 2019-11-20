@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (21 messages, latest: Nov 20 2019 at 11:59)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (203 messages, latest: Nov 20 2019 at 12:50)
+
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (22 messages, latest: Nov 20 2019 at 12:05)
 
 * [VScode goodies](03279VScodegoodies.html) (2 messages, latest: Nov 20 2019 at 10:24)
 
@@ -54,8 +56,6 @@ permalink: archive/113488general/index.html
 * [wlog](90586wlog.html) (25 messages, latest: Nov 15 2019 at 19:20)
 
 * [Travis](06426Travis.html) (204 messages, latest: Nov 14 2019 at 15:25)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (182 messages, latest: Nov 13 2019 at 22:03)
 
 * [std_basis](18397stdbasis.html) (2 messages, latest: Nov 13 2019 at 20:38)
 

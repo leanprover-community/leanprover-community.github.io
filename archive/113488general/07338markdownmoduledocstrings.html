@@ -826,6 +826,112 @@ and
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/180677893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#180677893">Bryan Gin-ge Chen (Nov 13 2019 at 22:03)</a>:</h4>
 <p>How many commutative diagrams do we have in the docstrings right now?</p>
 
+<a name="181202029"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202029" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202029">Rob Lewis (Nov 20 2019 at 12:24)</a>:</h4>
+<p>Okay, I found a bit more time to work on this. Here's a refresh. Maybe the colors are more to Patrick's taste. <a href="https://robertylewis.com/mathlib_docs/" target="_blank" title="https://robertylewis.com/mathlib_docs/">https://robertylewis.com/mathlib_docs/</a></p>
+
+<a name="181202207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202207">Rob Lewis (Nov 20 2019 at 12:26)</a>:</h4>
+<p>This builds with <span class="user-mention" data-user-id="128280">@Wojciech Nawrocki</span> 's additions to 3.5c, so it can display module docs used to section a file. I don't think we have any of these in mathlib yet, but here's a demo: <a href="https://robertylewis.com/mathlib_docs/topology/whoa.html" target="_blank" title="https://robertylewis.com/mathlib_docs/topology/whoa.html">https://robertylewis.com/mathlib_docs/topology/whoa.html</a></p>
+
+<a name="181202428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202428">Mario Carneiro (Nov 20 2019 at 12:29)</a>:</h4>
+<p>The font for theorem statements is a bit large (being used also as the header). Most statements don't fit on one line, and a decent fraction of them seem to have the line break exactly where things get interesting</p>
+
+<a name="181202558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202558">Mario Carneiro (Nov 20 2019 at 12:30)</a>:</h4>
+<p>One possibility is to remove all implicit and instance implicit arguments from the main display, and put them in smaller type afterward</p>
+
+<a name="181202626"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202626" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202626">Johan Commelin (Nov 20 2019 at 12:31)</a>:</h4>
+<p>Nice work! Starts to look really good. I agree with Mario's points though.</p>
+
+<a name="181202736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202736">Mario Carneiro (Nov 20 2019 at 12:32)</a>:</h4>
+<p>Also, you might try to detect unnamed hypotheses by type so that you can turn more arguments into arrows (especially arguments named <code>a_1</code>, <code>a_2</code> that were arrows to begin with)</p>
+
+<a name="181202757"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202757" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202757">Rob Lewis (Nov 20 2019 at 12:33)</a>:</h4>
+<p>Sure, it's easy enough to change the font sizes. The line breaks will obviously depend on how wide your window is. This can be fiddled with.</p>
+
+<a name="181202824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202824">Rob Lewis (Nov 20 2019 at 12:34)</a>:</h4>
+<blockquote>
+<p>One possibility is to remove all implicit and instance implicit arguments from the main display, and put them in smaller type afterward</p>
+</blockquote>
+<p>Not sure exactly what you have in mind with "put them in smaller type afterward." Do you mean state the type twice, once without implicits and once with?</p>
+
+<a name="181202932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181202932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181202932">Rob Lewis (Nov 20 2019 at 12:35)</a>:</h4>
+<blockquote>
+<p>Also, you might try to detect unnamed hypotheses by type so that you can turn more arguments into arrows (especially arguments named <code>a_1</code>, <code>a_2</code> that were arrows to begin with)</p>
+</blockquote>
+<p>What's the robust way to do this? In effect, "intros until the last named argument."</p>
+
+<a name="181203059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203059">Mario Carneiro (Nov 20 2019 at 12:37)</a>:</h4>
+<p>not sure if it's better to quote just the omitted implicits or the full type. I was thinking something like:</p>
+<ul>
+<li>Line 1 (header): <code>theorem add_monoid.zero_smul (a : β) :</code></li>
+<li>Line 2 (main text): <code>add_monoid.smul 0 a = 0</code></li>
+<li>Line 3 (footnote size): <code>@[simp]</code>; <code>{β : Type u} [add_monoid β]</code></li>
+</ul>
+
+<a name="181203159"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203159" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203159">Mario Carneiro (Nov 20 2019 at 12:38)</a>:</h4>
+<p>If you have expr info, you can check whether a variable appears in the body to determine if it can be "arrowed"</p>
+
+<a name="181203178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203178">Mario Carneiro (Nov 20 2019 at 12:38)</a>:</h4>
+<p>there is an expr function for this</p>
+
+<a name="181203203"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203203" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203203">Mario Carneiro (Nov 20 2019 at 12:39)</a>:</h4>
+<p><code>expr.is_arrow</code></p>
+
+<a name="181203217"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203217">Mario Carneiro (Nov 20 2019 at 12:39)</a>:</h4>
+<p>which uses <code>expr.has_var</code></p>
+
+<a name="181203396"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203396" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203396">Mario Carneiro (Nov 20 2019 at 12:42)</a>:</h4>
+<p>I don't feel strongly about how much lean syntax to use in these displays. I and many others will be used to it, but I would also be happy with something that reimagines the syntax a bit or puts more things in a prose style</p>
+
+<a name="181203502"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203502" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203502">Rob Lewis (Nov 20 2019 at 12:43)</a>:</h4>
+<blockquote>
+<p>not sure if it's better to quote just the omitted implicits or the full type. I was thinking something like:</p>
+<ul>
+<li>Line 1 (header): <code>theorem add_monoid.zero_smul (a : β) :</code></li>
+<li>Line 2 (main text): <code>add_monoid.smul 0 a = 0</code></li>
+<li>Line 3 (footnote size): <code>@[simp]</code>; <code>{β : Type u} [add_monoid β]</code></li>
+</ul>
+</blockquote>
+<p>Hmm. This hides the information about where the implicits appear in the signature. Usually you don't need to know this but sometimes you do, and it limits how useful the docs are if they don't give it. What about a javascript toggle to flip between "all variables" and "explicit only"? "explicit only" could be the default.</p>
+
+<a name="181203564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203564">Rob Lewis (Nov 20 2019 at 12:44)</a>:</h4>
+<p>I hate to suggest more javascript work for me to do, but it would look nice.</p>
+
+<a name="181203601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203601">Rob Lewis (Nov 20 2019 at 12:45)</a>:</h4>
+<blockquote>
+<p><code>expr.is_arrow</code></p>
+</blockquote>
+<p>Ah, right. I think I can do this easily.</p>
+
+<a name="181203766"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203766" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203766">Mario Carneiro (Nov 20 2019 at 12:47)</a>:</h4>
+<p>I know that this makes exact implicit order not visible, but I think that's a tolerable tradeoff. We already have methods like <code>#print</code> or hovers for getting this kind of info from a definition, and we're already not sharing some information that might be relevant, like the definition or proof itself</p>
+
+<a name="181203852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181203852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181203852">Mario Carneiro (Nov 20 2019 at 12:48)</a>:</h4>
+<p>If you want to have a JS toggle for this, I wouldn't mind it though</p>
+
+<a name="181204019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/markdown%20module%20docstrings/near/181204019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/07338markdownmoduledocstrings.html#181204019">Mario Carneiro (Nov 20 2019 at 12:50)</a>:</h4>
+<p>For a much harder problem, I would really like to see some proof displays. I have gotten a lot of value out of the metamath web pages that give super detailed proofs of anything you could hope for, and it would be great if lean had anything half as good</p>
+
 
 {% endraw %}
 

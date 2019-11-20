@@ -1,0 +1,70 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/40477Usingattachwithfold.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html">Using attach with fold</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181201259"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181201259" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181201259">Bhavik Mehta (Nov 20 2019 at 12:14)</a>:</h4>
+<p>I'm trying to prove that if z is disjoint from everything in A, then z is disjoint from the union of the things in A:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">disjoint_all</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">{</span><span class="n">z</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">A</span><span class="o">,</span> <span class="n">disjoint</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">disjoint</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">fold</span> <span class="o">(</span><span class="err">∪</span><span class="o">)</span> <span class="err">∅</span> <span class="n">id</span><span class="o">)</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">A</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">fold_empty</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">disjoint_empty_left</span><span class="o">,</span>
+  <span class="n">intros</span> <span class="n">a</span> <span class="n">s</span> <span class="n">h₂</span> <span class="n">k</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">fold_insert</span> <span class="n">h₂</span><span class="o">],</span>
+    <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">disjoint_union_left</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">apply</span> <span class="n">h</span><span class="o">,</span>
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">k</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>It was all going really well, but I just need to show that the element we're inserting for the fold has come from <code>A</code> - which should be obvious because we're folding over <code>A</code>. (Not entirely sure why <code>induction_on</code> isn't set up so that I can use this...) I'm pretty sure this is the sort of thing <code>attach</code> is meant to fix, but letting <code>B := A.attach</code> means it's no longer clear to me how the induction should work - if I do induction on <code>B</code> how can I prove that the thing we get is equivalent?</p>
+
+<a name="181201580"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181201580" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181201580">Mario Carneiro (Nov 20 2019 at 12:18)</a>:</h4>
+<p>You might find it easier working with <code>A.bind id</code> as the union of A, or perhaps <code>⋃ x ∈ A, ↑x</code></p>
+
+<a name="181201894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181201894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181201894">Mario Carneiro (Nov 20 2019 at 12:22)</a>:</h4>
+<p>You need to do induction generalizing <code>h</code>:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">disjoint_all</span> <span class="o">{</span><span class="n">α</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">α</span><span class="o">)}</span> <span class="o">{</span><span class="n">z</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">A</span><span class="o">,</span> <span class="n">disjoint</span> <span class="n">x</span> <span class="n">z</span><span class="o">)</span> <span class="o">:</span> <span class="n">disjoint</span> <span class="o">(</span><span class="n">A</span><span class="bp">.</span><span class="n">fold</span> <span class="o">(</span><span class="err">∪</span><span class="o">)</span> <span class="err">∅</span> <span class="n">id</span><span class="o">)</span> <span class="n">z</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">revert</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">A</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">fold_empty</span><span class="o">,</span>
+    <span class="n">apply</span> <span class="n">finset</span><span class="bp">.</span><span class="n">disjoint_empty_left</span> <span class="o">},</span>
+  <span class="o">{</span> <span class="n">intros</span> <span class="n">a</span> <span class="n">s</span> <span class="n">h₂</span> <span class="n">ih</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">finset</span><span class="bp">.</span><span class="n">fold_insert</span> <span class="n">h₂</span><span class="o">],</span>
+    <span class="n">rw</span> <span class="n">finset</span><span class="bp">.</span><span class="n">disjoint_union_left</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">h</span> <span class="bp">_</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_insert_self</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">},</span>
+    <span class="o">{</span> <span class="n">exact</span> <span class="n">ih</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span> <span class="n">hx</span><span class="o">,</span> <span class="n">h</span> <span class="bp">_</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">mem_insert_of_mem</span> <span class="n">hx</span><span class="o">))</span> <span class="o">}</span> <span class="o">}</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="181202530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181202530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181202530">Bhavik Mehta (Nov 20 2019 at 12:30)</a>:</h4>
+<p>I see, thanks!</p>
+
+<a name="181202637"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181202637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181202637">Bhavik Mehta (Nov 20 2019 at 12:31)</a>:</h4>
+<p>I'm surprised that the generalisation trick works, but it makes sense! I can't use your latter suggestion for the union, since I do need finiteness in another part of my proof, but I'll have a go with <code>bind</code> as well.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

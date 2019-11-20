@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Using attach with fold](40477Usingattachwithfold.html) (5 messages, latest: Nov 20 2019 at 12:31)
+
 * [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (12 messages, latest: Nov 20 2019 at 10:56)
 
 * [How to use choice tactic?](00065Howtousechoicetactic.html) (13 messages, latest: Nov 20 2019 at 09:14)
