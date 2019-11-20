@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [One-line proof](28766Onelineproof.html) (8 messages, latest: Nov 20 2019 at 19:40)
+* [One-line proof](28766Onelineproof.html) (9 messages, latest: Nov 20 2019 at 22:51)
+
+* [add_monoid N](17501addmonoidN.html) (2 messages, latest: Nov 20 2019 at 22:35)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (199 messages, latest: Nov 20 2019 at 18:08)
 
