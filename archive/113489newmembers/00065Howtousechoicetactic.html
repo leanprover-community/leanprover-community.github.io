@@ -119,6 +119,28 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181189311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181189311">Mario Carneiro (Nov 20 2019 at 08:56)</a>:</h4>
 <p>The <code>choose</code> tactic is only appropriate if you only need the function local to a proof</p>
 
+<a name="181189752"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181189752" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181189752">Li Yao'an (Nov 20 2019 at 09:04)</a>:</h4>
+<p>Thanks everybody who replied. Here is my takeaway from this thread (hopefully useful to any future lost souls):</p>
+<p>1) When using choice to extract witnesses, "set_option pp.proofs true" elaborates the tactics state so that it makes sense.<br>
+2) We can use classical.some_spec to extract the hypothesis of the witness.</p>
+<p>Example:</p>
+<div class="codehilite"><pre><span></span>theorem should_be_trivial {α β} (f : α → β) (h : surjective f) : let f&#39; := inv&#39; f h in ∀ b : β, f (f&#39; b) = b :=
+begin
+    intros f&#39; b, simp [f&#39;], dunfold inv&#39;,
+    have := classical.some_spec (h b), -- the argument of some_spec is precisely that of classical.some in the tactic state
+    assumption
+end
+</pre></div>
+
+<a name="181190262"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181190262" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181190262">Mario Carneiro (Nov 20 2019 at 09:13)</a>:</h4>
+<p>1) Lean doesn't print holes in terms as <code>_</code>, it prints them as <code>?m_1</code>. If you see a <code>_</code> it's a proof that has been suppressed from printing but is present internally</p>
+
+<a name="181190338"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181190338" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181190338">Mario Carneiro (Nov 20 2019 at 09:14)</a>:</h4>
+<p>so it's not about "elaborating the tactic state", it's about showing more information (hence the <code>pp</code> for pretty printer)</p>
+
 
 {% endraw %}
 
