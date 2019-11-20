@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (203 messages, latest: Nov 20 2019 at 12:50)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (217 messages, latest: Nov 20 2019 at 13:45)
+
+* [VScode goodies](03279VScodegoodies.html) (3 messages, latest: Nov 20 2019 at 13:10)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (22 messages, latest: Nov 20 2019 at 12:05)
-
-* [VScode goodies](03279VScodegoodies.html) (2 messages, latest: Nov 20 2019 at 10:24)
 
 * [hole command in tactic mode](94076holecommandintacticmode.html) (1 message, latest: Nov 20 2019 at 10:22)
 

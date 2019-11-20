@@ -64,6 +64,108 @@ permalink: archive/113489newmembers/40477Usingattachwithfold.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181202637" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181202637">Bhavik Mehta (Nov 20 2019 at 12:31)</a>:</h4>
 <p>I'm surprised that the generalisation trick works, but it makes sense! I can't use your latter suggestion for the union, since I do need finiteness in another part of my proof, but I'll have a go with <code>bind</code> as well.</p>
 
+<a name="181206124"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206124" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206124">Reid Barton (Nov 20 2019 at 13:21)</a>:</h4>
+<p>Not sure how helpful this is, but I think the original proof is misguided. You shouldn't be using induction to prove this at all. Instead, you should have a lemma that tells you when something is an element of <code>A.fold (∪) ∅ id</code> (which you will prove by induction).</p>
+
+<a name="181206226"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206226" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206226">Mario Carneiro (Nov 20 2019 at 13:22)</a>:</h4>
+<p>Using <code>A.bind id</code> basically solves this problem, since it already has the requisite lemmas</p>
+
+<a name="181206228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206228">Reid Barton (Nov 20 2019 at 13:22)</a>:</h4>
+<p>Then this proof becomes easy (<code>intro a</code>, apply lemmas about what it means for <code>a</code> to be an element of various <code>finset</code>s).</p>
+
+<a name="181206345"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206345" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206345">Reid Barton (Nov 20 2019 at 13:24)</a>:</h4>
+<p>The difference is that knowing the elements of <code>A.fold (∪) ∅ id</code> totally characterizes it as a set, so you won't have to do another induction for the next lemma like this one that you need.</p>
+
+<a name="181206356"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206356" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206356">Reid Barton (Nov 20 2019 at 13:24)</a>:</h4>
+<p>Yeah, I'm a little surprised there isn't already a definition like <code>A.Union := A.bind id</code>.</p>
+
+<a name="181206577"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206577" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206577">Mario Carneiro (Nov 20 2019 at 13:27)</a>:</h4>
+<p>Me too, but really I don't think <code>Union</code> will be able to provide better lemmas than <code>bind</code> already has, when specialized to <code>id</code></p>
+
+<a name="181206582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206582">Bhavik Mehta (Nov 20 2019 at 13:27)</a>:</h4>
+<p>I think your criticism is fair, but this lemma was meant to be used when proving that the cardinality of the union is the sum of the cardinalities when the sets are all disjoint - so this seemed like the natural way of going about it. Perhaps with broader context using bind might turn out better, I will try further. I think I will need to characterise elements at some point anyway.</p>
+
+<a name="181206666"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206666" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206666">Mario Carneiro (Nov 20 2019 at 13:28)</a>:</h4>
+<p>that theorem generalizes to <code>bind</code> indeed</p>
+
+<a name="181206705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206705">Mario Carneiro (Nov 20 2019 at 13:29)</a>:</h4>
+<p>in fact it already exists - <code>finset.card_bind</code> in <code>algebra.big_operators</code></p>
+
+<a name="181206852"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181206852" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181206852">Bhavik Mehta (Nov 20 2019 at 13:31)</a>:</h4>
+<p>Oh! Big operators sounds very useful, thank you</p>
+
+<a name="181207108"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207108" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207108">Reid Barton (Nov 20 2019 at 13:35)</a>:</h4>
+<p>Yeah, mainly I think <code>finset.bind id</code> is not that easily discoverable, especially because <code>bind</code> is a notion which doesn't really appear in math.</p>
+
+<a name="181207140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207140">Mario Carneiro (Nov 20 2019 at 13:35)</a>:</h4>
+<p>the name is only useful if you think in monads</p>
+
+<a name="181207199"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207199" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207199">Mario Carneiro (Nov 20 2019 at 13:36)</a>:</h4>
+<p>the notion of course does appear in math, but it's called "indexed union"</p>
+
+<a name="181207256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207256">Reid Barton (Nov 20 2019 at 13:37)</a>:</h4>
+<p>Tangentially related story. I wanted to prove that if <code>o : roption α</code> and <code>a ∈ o</code> and <code>b ∈ o</code> then <code>a = b</code>. I didn't see it looking through <code>data.pfun</code> so I defined <code>mem_unique</code> and proved it.</p>
+
+<a name="181207274"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207274" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207274">Bhavik Mehta (Nov 20 2019 at 13:37)</a>:</h4>
+<p>Yeah I was familiar with the notion of bind, but my cardinality theorem felt like the maths proof should use induction</p>
+
+<a name="181207282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207282">Reid Barton (Nov 20 2019 at 13:37)</a>:</h4>
+<p>That worked fine but then Lean gave an error on this later line:</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">mem_unique</span> <span class="o">:</span> <span class="n">relator</span><span class="bp">.</span><span class="n">left_unique</span> <span class="o">((</span><span class="err">∈</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">roption</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span><span class="o">)</span>
+</pre></div>
+
+<a name="181207364"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207364" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207364">Reid Barton (Nov 20 2019 at 13:38)</a>:</h4>
+<p>It's actually exactly the same type but my eyes were looking for <code>a ∈ o → b ∈ o → a = b</code></p>
+
+<a name="181207391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207391">Bhavik Mehta (Nov 20 2019 at 13:38)</a>:</h4>
+<p>Also I don't think I saw theorems about cardinality of bind, but maybe I looked in the wrong place</p>
+
+<a name="181207409"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207409" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207409">Mario Carneiro (Nov 20 2019 at 13:39)</a>:</h4>
+<p>I think it has happened to me on at least three separate occasions that I prove a lemma and end up finding that it already exists because the name clashes</p>
+
+<a name="181207544"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207544">Mario Carneiro (Nov 20 2019 at 13:40)</a>:</h4>
+<p>I also wouldn't have thought to look there for it; I grepped for <code>card_bind</code></p>
+
+<a name="181207569"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207569" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207569">Mario Carneiro (Nov 20 2019 at 13:41)</a>:</h4>
+<p>it makes sense in hindsight, because that's where <code>finset.sum</code> is defined, which is required for the statement</p>
+
+<a name="181207966"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181207966" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181207966">Bhavik Mehta (Nov 20 2019 at 13:46)</a>:</h4>
+<p>It wasn't required for my statement :P But yeah this helps a lot, thanks both</p>
+
+<a name="181208136"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181208136" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181208136">Bhavik Mehta (Nov 20 2019 at 13:49)</a>:</h4>
+<p>Tangential: if my goal has something like <code>id a</code> or <code>(λ x, _) y</code>, sometimes lean doesn't unify it how I want - what's the tactic I need for simplifying those terms? (I know <code>simp</code> would do it, but it feels like overkill and might screw up other terms)</p>
+
+<a name="181208243"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181208243" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181208243">Mario Carneiro (Nov 20 2019 at 13:50)</a>:</h4>
+<p><code>dsimp</code></p>
+
+<a name="181208294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Using%20attach%20with%20fold/near/181208294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40477Usingattachwithfold.html#181208294">Bhavik Mehta (Nov 20 2019 at 13:51)</a>:</h4>
+<p>Awesome thanks</p>
+
 
 {% endraw %}
 
