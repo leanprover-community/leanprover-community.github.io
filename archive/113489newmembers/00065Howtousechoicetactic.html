@@ -1,0 +1,41 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/00065Howtousechoicetactic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html">How to use choice tactic?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181176749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181176749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181176749">Li Yao'an (Nov 20 2019 at 03:20)</a>:</h4>
+<p>When we have an existential statement, we can use choice to construct a witness w. However, while w retains the correct type, the fact that it is a witness to a particular proposition is sometimes (seemingly) lost.  Here is an example:</p>
+<div class="codehilite"><pre><span></span>import tactic
+open function
+noncomputable theory
+
+def inv {α β} (f : α → β) (h : surjective f) : β → α :=
+begin
+    intro b, rw [surjective] at h,
+    choose a h using h b, exact a
+end
+
+theorem should_be_trivial {α β} (f : α → β) (h : surjective f) : let f&#39; := inv f h in ∀ b : β, f (f&#39; b) = b :=
+begin
+    simp, intro b, rw inv, admit
+end
+</pre></div>
+
+
+<p>Rewriting inv gives some scary-looking term, and simp-ing gives "f (classical.some _) = b", when it seems that the proposition that choice was made on has been lost.</p>
+<p>What is a good way of recovering the proposition in an existential statement? How could this proof be fixed? (A proof ending with "assumption" would be extra nice, to show how the proposition can be added as a hypothesis)</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

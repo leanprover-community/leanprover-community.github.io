@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (10 messages, latest: Nov 20 2019 at 03:19)
+
 * [computable real functions](16586computablerealfunctions.html) (14 messages, latest: Nov 20 2019 at 02:43)
 
 * [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (9 messages, latest: Nov 19 2019 at 22:43)
@@ -68,8 +70,6 @@ permalink: archive/113488general/index.html
 * [update-mathlib "mathlib reference is a fork"](61397updatemathlibmathlibreferenceisafork.html) (8 messages, latest: Nov 10 2019 at 19:46)
 
 * [truth v provability](66563truthvprovability.html) (35 messages, latest: Nov 10 2019 at 17:21)
-
-* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (9 messages, latest: Nov 10 2019 at 07:32)
 
 * [git bisecting](62077gitbisecting.html) (32 messages, latest: Nov 09 2019 at 21:45)
 
