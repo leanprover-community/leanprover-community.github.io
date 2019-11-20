@@ -9,6 +9,14 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (19 messages, latest: Nov 20 2019 at 10:40)
+
+* [VScode goodies](03279VScodegoodies.html) (2 messages, latest: Nov 20 2019 at 10:24)
+
+* [hole command in tactic mode](94076holecommandintacticmode.html) (1 message, latest: Nov 20 2019 at 10:22)
+
+* [extending instances](17071extendinginstances.html) (15 messages, latest: Nov 20 2019 at 10:17)
+
 * [computable real functions](16586computablerealfunctions.html) (15 messages, latest: Nov 20 2019 at 08:16)
 
 * [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (10 messages, latest: Nov 20 2019 at 03:19)
@@ -26,8 +34,6 @@ permalink: archive/113488general/index.html
 * [Field notation inheritance for classes.](99742Fieldnotationinheritanceforclasses.html) (13 messages, latest: Nov 19 2019 at 16:32)
 
 * [idiomatic Lean for python L\[a:b\]](04350idiomaticLeanforpythonLab.html) (6 messages, latest: Nov 19 2019 at 15:49)
-
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (18 messages, latest: Nov 19 2019 at 10:08)
 
 * [defeq](70598defeq.html) (25 messages, latest: Nov 18 2019 at 23:22)
 

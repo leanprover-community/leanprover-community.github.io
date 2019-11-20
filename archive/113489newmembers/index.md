@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (12 messages, latest: Nov 20 2019 at 10:56)
+
 * [How to use choice tactic?](00065Howtousechoicetactic.html) (13 messages, latest: Nov 20 2019 at 09:14)
 
 * [Comments on proof](16842Commentsonproof.html) (8 messages, latest: Nov 20 2019 at 08:31)
@@ -102,8 +104,6 @@ permalink: archive/113489newmembers/index.html
 * [I proved divisibility is transitive!](29909Iproveddivisibilityistransitive.html) (30 messages, latest: Nov 04 2019 at 16:15)
 
 * [Bug with letter H?](80050BugwithletterH.html) (5 messages, latest: Nov 04 2019 at 09:51)
-
-* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (11 messages, latest: Nov 04 2019 at 09:20)
 
 * [(no topic)](79918notopic.html) (216 messages, latest: Nov 03 2019 at 19:48)
 

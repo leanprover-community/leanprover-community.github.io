@@ -149,6 +149,33 @@ permalink: archive/113488general/41870Normalizationfailsinlean.html
 <span class="kn">end</span>
 </pre></div>
 
+<a name="181196013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Normalization%20fails%20in%20lean/near/181196013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/41870Normalizationfailsinlean.html#181196013">Gaëtan Gilbert (Nov 20 2019 at 10:40)</a>:</h4>
+<blockquote>
+<p>(It's not clear if this can be used to do useful computation, though, as, like the example in my paper, it requires an inconsistent context, so it's tricky to get the computation out into an inhabited context.)</p>
+</blockquote>
+<p>It doesn't require an inconsistent context (but does require an axiom AFAICT), you can do the same manipulation using an hypothesis <code>∀ (A B : Prop), A → B → A = B</code> (propext for inhabited propositions) and instead of inhabiting <code>∀ p : Prop, p</code> inhabit <code>∀ p : Prop, p → p</code><br>
+ie</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">top</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="n">p</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">,</span> <span class="n">p</span> <span class="bp">→</span> <span class="n">p</span>
+
+<span class="n">def</span> <span class="n">ext</span> <span class="o">:=</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">),</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">B</span> <span class="bp">→</span> <span class="n">A</span> <span class="bp">=</span> <span class="n">B</span>
+
+<span class="n">def</span> <span class="n">supercast</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">ext</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="n">B</span> <span class="o">:</span> <span class="kt">Prop</span><span class="o">)</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">b</span> <span class="o">:</span> <span class="n">B</span><span class="o">)</span> <span class="o">:</span> <span class="n">B</span>
+  <span class="o">:=</span> <span class="bp">@</span><span class="n">cast</span> <span class="n">A</span> <span class="n">B</span> <span class="o">(</span><span class="n">h</span> <span class="n">A</span> <span class="n">B</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="n">a</span>
+
+<span class="n">def</span> <span class="n">omega</span> <span class="o">:</span> <span class="n">ext</span> <span class="bp">→</span> <span class="n">top</span> <span class="o">:=</span>
+  <span class="bp">λ</span> <span class="n">h</span> <span class="n">A</span> <span class="n">a</span><span class="o">,</span> <span class="n">supercast</span> <span class="n">h</span> <span class="o">(</span><span class="n">top</span> <span class="bp">→</span> <span class="n">top</span><span class="o">)</span> <span class="n">A</span>
+    <span class="o">(</span><span class="bp">λ</span> <span class="n">z</span><span class="o">:</span> <span class="n">top</span><span class="o">,</span> <span class="n">z</span> <span class="o">(</span><span class="n">top</span> <span class="bp">→</span> <span class="n">top</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="n">z</span><span class="o">)</span> <span class="n">a</span>
+
+<span class="n">def</span> <span class="n">Omega</span> <span class="o">:</span> <span class="n">ext</span> <span class="bp">→</span> <span class="n">top</span> <span class="o">:=</span>
+  <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">omega</span> <span class="n">h</span> <span class="o">(</span><span class="n">top</span> <span class="bp">→</span> <span class="n">top</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">omega</span> <span class="n">h</span><span class="o">)</span>
+
+<span class="bp">#</span><span class="n">reduce</span> <span class="n">Omega</span> <span class="c1">-- timeout</span>
+</pre></div>
+
+
+<p>See also discussion at <a href="https://github.com/coq/coq/pull/10390" target="_blank" title="https://github.com/coq/coq/pull/10390">https://github.com/coq/coq/pull/10390</a></p>
+
 
 {% endraw %}
 
