@@ -63,6 +63,62 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181180803" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181180803">Bryan Gin-ge Chen (Nov 20 2019 at 05:22)</a>:</h4>
 <p><code>foo_spec</code> seems to be the conventional name for the theorem that provides the defining property of <code>foo</code>, e.g. <code>nat.find_greatest_spec</code> (for <code>nat.find_greatest</code>), <code>finset.choose_spec</code> (for <code>finset.choose</code>), etc.</p>
 
+<a name="181187499"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181187499" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181187499">Li Yao'an (Nov 20 2019 at 08:20)</a>:</h4>
+<p>Thanks for the reply, but I am still confused. I believe this is at least in part due to the "classical.some _" terms which appear.</p>
+<p>It seems to me that after unfolding the definition, the witnesses appear in the interactive tactic window as classical.some _, which does not tell us what the value is a witness for (although Lean seems to know of this). For example:</p>
+<div class="codehilite"><pre><span></span>theorem contrived_example {α β} (f : α → β) (h : surjective f) (a1 a2 : α) (b1 b2 : β) (h2 : a1 = inv&#39; f h b1)
+    (h3 : a2 = inv&#39; f h b2) (h4 : b1 = b2): a1 = a2 :=
+begin
+  rw [h2, h3], dunfold inv&#39;, -- At this point the goal is to show &quot;classical.some _ = classical.some _&quot;, refl fails
+  simp [h4] -- something happens behind the scenes and it&#39;s probably eventually resolved by refl
+end
+</pre></div>
+
+
+<p>Is there a way to elaborate this "classical.some _"? </p>
+<p>Additionally, would it be possible to have an interactive tactic to extract the propositions from the values resulting from the application of classical.some? For example, if we had "p : nat -&gt; Prop" and "h : \exists n, p n", then we could replace instances of "classical.some h" with x and add an additional hypothesis "p x".</p>
+
+<a name="181187719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181187719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181187719">Mario Carneiro (Nov 20 2019 at 08:24)</a>:</h4>
+<p>it's a printing setting. Try setting <code>set_option pp.proofs true</code></p>
+
+<a name="181188147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181188147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181188147">Kevin Buzzard (Nov 20 2019 at 08:32)</a>:</h4>
+<p>I thought the whole point of <code>choose</code> was so that the user didn't have to know about <code>classical.some_spec</code>?</p>
+
+<a name="181188256"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181188256" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181188256">Kevin Buzzard (Nov 20 2019 at 08:35)</a>:</h4>
+<p>Aah I see. So in the <code>def</code> you get the proof you need, but then the def finishes and the proof is lost. I guess you shouldn't be using tactic mode for the definition of the inverse function really. If you define it using <code>choose</code> in <code>should_be_trivial</code> you'll be OK. I guess an alternative is to define <code>inv</code> not just to return a function but to return a pair consisting of a function and the proof that it's an inverse.</p>
+
+<a name="181188705"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181188705" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181188705">Kevin Buzzard (Nov 20 2019 at 08:43)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+<span class="kn">open</span> <span class="n">function</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">inv&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">{</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="bp">//</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span><span class="o">}</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="n">rw</span> <span class="o">[</span><span class="n">surjective</span><span class="o">]</span> <span class="n">at</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">choose</span> <span class="n">f&#39;</span> <span class="n">hh</span> <span class="kn">using</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="bp">⟨</span><span class="n">f&#39;</span><span class="o">,</span> <span class="n">hh</span><span class="bp">⟩</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="181189289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181189289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181189289">Mario Carneiro (Nov 20 2019 at 08:56)</a>:</h4>
+<p>The recommended way to define functions using choice is to write down the property defining the function and prove it straight away with <code>some</code> and <code>some_spec</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">inv</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some</span> <span class="o">(</span><span class="n">h</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">should_be_trivial</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">surjective</span> <span class="n">f</span><span class="o">)</span> <span class="o">:</span> <span class="k">let</span> <span class="n">f&#39;</span> <span class="o">:=</span> <span class="n">inv</span> <span class="n">f</span> <span class="n">h</span> <span class="k">in</span> <span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">b</span><span class="o">,</span> <span class="n">classical</span><span class="bp">.</span><span class="n">some_spec</span> <span class="o">(</span><span class="n">h</span> <span class="n">b</span><span class="o">)</span>
+</pre></div>
+
+<a name="181189311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/How%20to%20use%20choice%20tactic%3F/near/181189311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/00065Howtousechoicetactic.html#181189311">Mario Carneiro (Nov 20 2019 at 08:56)</a>:</h4>
+<p>The <code>choose</code> tactic is only appropriate if you only need the function local to a proof</p>
+
 
 {% endraw %}
 

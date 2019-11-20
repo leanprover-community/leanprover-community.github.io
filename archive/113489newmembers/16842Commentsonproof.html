@@ -66,6 +66,37 @@ permalink: archive/113489newmembers/16842Commentsonproof.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Comments%20on%20proof/near/181186196" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16842Commentsonproof.html#181186196">Kevin Buzzard (Nov 20 2019 at 07:53)</a>:</h4>
 <p>I feel a bit bad that I didn't introduce the <code>{ }</code> convention in the natural number game. It was because it was always induction on nat, and the base case was usually trivial. There is some talk about this in TPIL, there are several conventions for this sort of thing and I always thought of them as equal but mathlib seems to have chosen one and hence this should probably be the one I'm promoting.</p>
 
+<a name="181187406"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Comments%20on%20proof/near/181187406" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16842Commentsonproof.html#181187406">Kevin Buzzard (Nov 20 2019 at 08:18)</a>:</h4>
+<p>The long string of rewrites is hiding a triviality. To be honest I would have been too scared to approach this sum because integer division is hard to work with (5/2=2 etc). I would have been tempted to either prove 2*sum = ... or to work with rationals.</p>
+
+<a name="181188076"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Comments%20on%20proof/near/181188076" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16842Commentsonproof.html#181188076">Kevin Buzzard (Nov 20 2019 at 08:31)</a>:</h4>
+<p>Here's my effort.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">list</span><span class="bp">.</span><span class="n">basic</span>  <span class="n">tactic</span><span class="bp">.</span><span class="n">ring</span>
+<span class="kn">open</span> <span class="n">list</span> <span class="n">nat</span>
+
+<span class="kn">theorem</span> <span class="n">nat_sum</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">sum</span><span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span> <span class="bp">/</span> <span class="mi">2</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">*</span> <span class="n">sum</span> <span class="o">(</span><span class="n">range</span> <span class="n">n</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="n">n</span><span class="o">,</span> <span class="c1">-- terrified of denominators</span>
+    <span class="n">rw</span> <span class="err">←</span><span class="n">this</span><span class="o">,</span> <span class="n">simp</span><span class="o">,</span>
+  <span class="c1">-- induction</span>
+  <span class="n">induction</span> <span class="n">n</span> <span class="k">with</span> <span class="n">n</span> <span class="n">n_ih</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span> <span class="c1">-- base case done</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">range_concat</span><span class="o">,</span> <span class="n">sum_append</span><span class="o">,</span> <span class="n">mul_add</span><span class="o">,</span> <span class="n">n_ih</span><span class="o">],</span> <span class="c1">-- just enough to use induction hypo</span>
+  <span class="n">cases</span> <span class="n">n</span><span class="o">,</span> <span class="n">refl</span><span class="o">,</span> <span class="c1">-- to deal with awkward n - 1 case when n = 0</span>
+  <span class="c1">-- ring won&#39;t work until the singleton sum and succ and subtraction are gone</span>
+  <span class="c1">-- and simp will rmove most of these. But I can&#39;t use simp in the middle of a proof.</span>
+  <span class="c1">-- So first I wrote `simp, repeat {rw succ_eq_add_one}`, and now I copy paste the result</span>
+  <span class="n">suffices</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">2</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">*</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">),</span>
+    <span class="n">simpa</span> <span class="kn">using</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">ring</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="181188083"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Comments%20on%20proof/near/181188083" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/16842Commentsonproof.html#181188083">Kevin Buzzard (Nov 20 2019 at 08:31)</a>:</h4>
+<p>My philosophy is that if what you're doing is clear you can just try and kill the result quickly with tactics and hang readibility, just add comments</p>
+
 
 {% endraw %}
 

@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (10 messages, latest: Nov 20 2019 at 03:19)
+* [computable real functions](16586computablerealfunctions.html) (15 messages, latest: Nov 20 2019 at 08:16)
 
-* [computable real functions](16586computablerealfunctions.html) (14 messages, latest: Nov 20 2019 at 02:43)
+* [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (10 messages, latest: Nov 20 2019 at 03:19)
 
 * [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (9 messages, latest: Nov 19 2019 at 22:43)
 
