@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [computable real functions](16586computablerealfunctions.html) (14 messages, latest: Nov 20 2019 at 02:43)
+
 * [list of length n from `fin n -> X`](10564listoflengthnfromfinnX.html) (9 messages, latest: Nov 19 2019 at 22:43)
 
 * [recursion on length of list](26251recursiononlengthoflist.html) (8 messages, latest: Nov 19 2019 at 21:53)
-
-* [computable real functions](16586computablerealfunctions.html) (13 messages, latest: Nov 19 2019 at 21:09)
 
 * [VSCode overflow?](68152VSCodeoverflow.html) (12 messages, latest: Nov 19 2019 at 20:33)
 
