@@ -37,6 +37,91 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dealing%20with%20ite/near/177678838" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html#177678838">Mario Carneiro (Oct 09 2019 at 03:16)</a>:</h4>
 <p>the <code>1 &lt;= 2</code> can be solved by <code>norm_num</code> or <code>exact dec_trivial</code></p>
 
+<a name="181263723"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dealing%20with%20ite/near/181263723" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html#181263723">Reuben Rowe (Nov 21 2019 at 00:08)</a>:</h4>
+<p>This is very useful - <code>split_ifs</code> seems to make handling the cases of if-then-else very convenient. However I'd still like to understand a bit more about how <code>simp</code> deals with if-then-else.</p>
+<p>Like Chu-Wee, I had hit upon the strategy of using <code>by_cases</code> on the branching condition, and then using <code>simp</code>. The following (a slight variation of Chu-Wee's code) is a MWE demonstrating the situation I was playing around with.</p>
+<div class="codehilite"><pre><span></span>def f {α : Sort*} [decidable_eq α] (a b : α) : ℕ :=
+  if a = b then 0 else 0
+
+example {α : Sort*} [decidable_eq α] : ∀ (a b : α), (f a b) = 0 :=
+  begin
+    intros,
+    rw f,
+    by_cases (a = b),
+        {simp [‹a = b›],},
+        {simp [‹a ≠ b›],},
+  end
+</pre></div>
+
+
+<p>But then I read in the documentation for <code>simp</code> that it is bad practice to use it in the middle of a proof (OK, here it is at the end of each case's proof, but this is just a MWE, and in general I might need to do further proving). So I used the <code>set_option trace.simplify.rewrite true</code> option to display the lemmas that <code>simp</code> found and used, with the aim of replacing the use of <code>simp</code> with <code>rewrite</code> using these lemmas. Taking the first case (<code>a = b</code>), I got the following output.</p>
+<div class="codehilite"><pre><span></span>0. [simplify.rewrite] [h]: a ==&gt; b
+0. [simplify.rewrite] [eq_self_iff_true]: b = b ==&gt; true
+0. [simplify.rewrite] [if_true]: ite true 0 0 ==&gt; 0
+0. [simplify.rewrite] [eq_self_iff_true]: 0 = 0 ==&gt; true
+</pre></div>
+
+
+<p>Things seem to start off well, but I quickly hit a snag:</p>
+<div class="codehilite"><pre><span></span>...
+by_cases (a = b),
+    { -- Current goal is ite (a = b) 0 0 = 0
+        rw ‹a = b›, -- Current goal is ite (b = b) 0 0 = 0
+        rw eq_self_iff_true,  -- rewrite tactic failed, motive is not type correct
+</pre></div>
+
+
+<p>Using the <code>set_option trace.check true</code>, I got the following information about the failure.</p>
+<div class="codehilite"><pre><span></span>[check] application type mismatch at
+  ite _a
+argument type
+  decidable (b = b)
+expected type
+  decidable _a
+</pre></div>
+
+
+<p>The goal that I would expect to see after this last rewrite is <code>ite (true) 0 0 = 0</code>. So I understand that what is going wrong here is that <code>ite</code> is taking an implicitly inserted argument, which is a proof that the branching condition is decidable. For the goal <code>ite (b = b) 0 0 = 0</code> I'm guessing the proof that is implicitly synthesised is probably <code>decidable.is_true rfl : decidable (b = b)</code>. Now, after the rewrite <code>a = b ==&gt; true</code>, I imagine that the branching condition <code>(b = b)</code> in <code>ite (b = b) 0 0 = 0</code> is being transformed, but not the decidability proof, and the source of the above error is that this is a witness for <code>decidable (b = b)</code> but not for <code>decidable (true)</code>.</p>
+<p>So, I don't understand how <code>simp</code> is using the <code>eq_self_iff_true</code> lemma in a rewrite.</p>
+<p>I also noticed that it then uses the lemma <code>if_true</code>, and after digging around in the library I found that <code>if_true</code> actually uses the lemma:</p>
+<p><code>if_pos {c : Prop} [h : decidable c] (hc : c) {α : Sort u} {t e : α} : (ite c t e) = t</code></p>
+<p>I was able to use this directly in the following calculational proof of the case.</p>
+<div class="codehilite"><pre><span></span>calc
+   f a b = (if (a = b) then 0 else 0) : by refl
+     ... = 0 : by rw if_pos ‹a = b›,
+</pre></div>
+
+
+<p>So, my question here is: what proof is <code>simp</code> finding in this situation?</p>
+
+<a name="181264948"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Dealing%20with%20ite/near/181264948" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/08051Dealingwithite.html#181264948">Alex J. Best (Nov 21 2019 at 00:30)</a>:</h4>
+<p>You can always use <code>#print</code> to see the proof term like</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">aa</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="o">:</span> <span class="n">ite</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span> <span class="mi">0</span> <span class="mi">0</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">simp</span> <span class="o">[</span><span class="err">‹</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="err">›</span><span class="o">],</span>
+  <span class="kn">end</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">aa</span>
+</pre></div>
+
+
+<p>this is a bit ugly but we can see the names of some key lemmas like <code>if_simp_congr</code> which says two <code>ite</code>s are equal if their arguments are all equal and the props are equivalent. You can use this via</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="n">Sort</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="n">intros</span><span class="o">,</span>
+    <span class="n">rw</span> <span class="n">f</span><span class="o">,</span>
+    <span class="n">by_cases</span> <span class="o">(</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="o">),</span>
+        <span class="o">{</span><span class="n">rw</span> <span class="err">‹</span><span class="n">a</span> <span class="bp">=</span> <span class="n">b</span><span class="err">›</span><span class="o">,</span>
+        <span class="n">rw</span> <span class="n">if_simp_congr</span> <span class="o">(</span><span class="n">eq_self_iff_true</span> <span class="n">b</span><span class="o">)</span> <span class="o">(</span><span class="n">rfl</span><span class="o">)</span> <span class="o">(</span><span class="n">rfl</span><span class="o">),</span>
+        <span class="n">rw</span> <span class="n">if_true</span><span class="o">,</span> <span class="o">},</span>
+        <span class="o">{</span><span class="n">simp</span> <span class="o">[</span><span class="err">‹</span><span class="n">a</span> <span class="bp">≠</span> <span class="n">b</span><span class="err">›</span><span class="o">],},</span>
+  <span class="kn">end</span>
+</pre></div>
+
+
+<p><code>if_simp_congr</code> is a version of  <code>if_congr</code> with less decidability assumptions than <code>if_congr</code>.</p>
+
 
 {% endraw %}
 

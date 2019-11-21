@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Dealing with ite](08051Dealingwithite.html) (5 messages, latest: Nov 21 2019 at 00:30)
+
 * [One-line proof](28766Onelineproof.html) (11 messages, latest: Nov 20 2019 at 23:10)
 
 * [add_monoid N](17501addmonoidN.html) (2 messages, latest: Nov 20 2019 at 22:35)
@@ -244,8 +246,6 @@ permalink: archive/113489newmembers/index.html
 * [reduce bool variable](98379reduceboolvariable.html) (3 messages, latest: Oct 11 2019 at 07:32)
 
 * [Beginner question: inequality](54434Beginnerquestioninequality.html) (19 messages, latest: Oct 09 2019 at 16:56)
-
-* [Dealing with ite](08051Dealingwithite.html) (3 messages, latest: Oct 09 2019 at 03:16)
 
 * [working with symbolic real numbers](35296workingwithsymbolicrealnumbers.html) (7 messages, latest: Oct 08 2019 at 19:13)
 

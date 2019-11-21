@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computable real functions](16586computablerealfunctions.html) (17 messages, latest: Nov 20 2019 at 23:43)
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (24 messages, latest: Nov 21 2019 at 00:23)
 
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (23 messages, latest: Nov 20 2019 at 18:34)
+* [computable real functions](16586computablerealfunctions.html) (17 messages, latest: Nov 20 2019 at 23:43)
 
 * [linting in CI](98585lintinginCI.html) (20 messages, latest: Nov 20 2019 at 15:25)
 
