@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode goodies](03279VScodegoodies.html) (5 messages, latest: Nov 21 2019 at 06:48)
+
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (26 messages, latest: Nov 21 2019 at 01:38)
 
 * [computable real functions](16586computablerealfunctions.html) (17 messages, latest: Nov 20 2019 at 23:43)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [linting in CI](98585lintinginCI.html) (20 messages, latest: Nov 20 2019 at 15:25)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (218 messages, latest: Nov 20 2019 at 15:03)
-
-* [VScode goodies](03279VScodegoodies.html) (3 messages, latest: Nov 20 2019 at 13:10)
 
 * [hole command in tactic mode](94076holecommandintacticmode.html) (1 message, latest: Nov 20 2019 at 10:22)
 
