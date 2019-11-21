@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode goodies](03279VScodegoodies.html) (41 messages, latest: Nov 21 2019 at 20:59)
+* [VScode goodies](03279VScodegoodies.html) (42 messages, latest: Nov 21 2019 at 21:40)
 
 * [computable real functions](16586computablerealfunctions.html) (35 messages, latest: Nov 21 2019 at 16:49)
 

@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [image under smul/add/etc](31750imageundersmuladdetc.html) (3 messages, latest: Nov 21 2019 at 20:33)
+* [abel multiplication](00067abelmultiplication.html) (7 messages, latest: Nov 21 2019 at 21:44)
 
-* [abel multiplication](00067abelmultiplication.html) (6 messages, latest: Nov 21 2019 at 20:30)
+* [image under smul/add/etc](31750imageundersmuladdetc.html) (3 messages, latest: Nov 21 2019 at 20:33)
 
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (253 messages, latest: Nov 21 2019 at 18:22)
 
