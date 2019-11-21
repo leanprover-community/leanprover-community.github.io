@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [VScode goodies](03279VScodegoodies.html) (36 messages, latest: Nov 21 2019 at 15:53)
+* [computable real functions](16586computablerealfunctions.html) (35 messages, latest: Nov 21 2019 at 16:49)
 
-* [computable real functions](16586computablerealfunctions.html) (21 messages, latest: Nov 21 2019 at 15:47)
+* [VScode goodies](03279VScodegoodies.html) (37 messages, latest: Nov 21 2019 at 16:22)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (27 messages, latest: Nov 21 2019 at 14:23)
 
