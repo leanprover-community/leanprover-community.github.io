@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Dealing with ite](08051Dealingwithite.html) (9 messages, latest: Nov 21 2019 at 10:56)
+
+* [Tidying up a proof](22757Tidyingupaproof.html) (75 messages, latest: Nov 21 2019 at 10:38)
+
 * [Using attach with fold](40477Usingattachwithfold.html) (32 messages, latest: Nov 21 2019 at 09:47)
 
 * [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (1 message, latest: Nov 21 2019 at 09:36)
-
-* [Dealing with ite](08051Dealingwithite.html) (7 messages, latest: Nov 21 2019 at 08:08)
 
 * [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
 
@@ -30,8 +32,6 @@ permalink: archive/113489newmembers/index.html
 * [How to use choice tactic?](00065Howtousechoicetactic.html) (13 messages, latest: Nov 20 2019 at 09:14)
 
 * [Comments on proof](16842Commentsonproof.html) (8 messages, latest: Nov 20 2019 at 08:31)
-
-* [Tidying up a proof](22757Tidyingupaproof.html) (71 messages, latest: Nov 20 2019 at 08:18)
 
 * [proving sum(range 0) = 0](33654provingsumrange00.html) (14 messages, latest: Nov 20 2019 at 00:19)
 
