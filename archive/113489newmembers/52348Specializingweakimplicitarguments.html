@@ -1,0 +1,35 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/52348Specializingweakimplicitarguments.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/52348Specializingweakimplicitarguments.html">Specializing weak implicit arguments</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181288450"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20weak%20implicit%20arguments/near/181288450" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52348Specializingweakimplicitarguments.html#181288450">Li Yao'an (Nov 21 2019 at 09:36)</a>:</h4>
+<p>I'm trying to work with the inductive definition in mathlib. If I didn't misinterpret the notation, it uses weak implicit arguments in the forall quantifier, which I am having trouble trying to specialize, since unlike normal arguments, h a does not specialize the hypothesis with argument a. The exact example I'm trying to do is below. How does one deal with these weak implicit arguments?</p>
+<div class="codehilite"><pre><span></span>def bijective&#39; {α β} (f : α → β) : Prop :=
+    ∃ f&#39; : β → α, (∀ a : α, f&#39; (f a) = a) ∧ (∀ b : β, f (f&#39; b) = b)
+
+theorem bijective_iff_bijective&#39; {α β} (f : α → β) : bijective f ↔ bijective&#39; f :=
+begin
+    dunfold bijective bijective&#39; surjective injective, split,
+        {intro h, cases h with h1 h2, existsi λ b, classical.some (h2 b), simp, split,
+            {intro a, have h3 := some_spec (h2 (f a)), sorry}, -- How to resolve this?
+            {sorry}},
+        {sorry},
+    done
+end
+</pre></div>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

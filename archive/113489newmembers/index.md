@@ -9,6 +9,10 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Using attach with fold](40477Usingattachwithfold.html) (32 messages, latest: Nov 21 2019 at 09:47)
+
+* [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (1 message, latest: Nov 21 2019 at 09:36)
+
 * [Dealing with ite](08051Dealingwithite.html) (7 messages, latest: Nov 21 2019 at 08:08)
 
 * [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
@@ -20,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (199 messages, latest: Nov 20 2019 at 18:08)
 
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (65 messages, latest: Nov 20 2019 at 17:56)
-
-* [Using attach with fold](40477Usingattachwithfold.html) (31 messages, latest: Nov 20 2019 at 15:00)
 
 * [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (12 messages, latest: Nov 20 2019 at 10:56)
 

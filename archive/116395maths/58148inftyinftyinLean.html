@@ -1044,6 +1044,13 @@ instance : lattice.complete_lattice (with_bot (with_top ℝ)) := sorry
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/180977864" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#180977864">Chris Hughes (Nov 17 2019 at 23:42)</a>:</h4>
 <p>Just proving <code>option.cases_on</code> but with <code>coe</code> instead of <code>some</code>could be okay.</p>
 
+<a name="181287167"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/181287167" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#181287167">Kevin Buzzard (Nov 21 2019 at 09:15)</a>:</h4>
+<p>OK so having thought about this a bit more I decided that one interesting approach might be constructing <code>instance {α : Type*} [conditionally_complete_lattice α] :
+  conditionally_complete_lattice (with_top α)</code> and similarly for <code>with_bot</code>. I've done <code>with_top</code> (see <a href="https://gist.github.com/kbuzzard/73d45ef2c350b3beb81017ae52606d71" target="_blank" title="https://gist.github.com/kbuzzard/73d45ef2c350b3beb81017ae52606d71">here</a>). For <code>with_bot</code> I could just duplicate code, or I could use some trickery with order_dual and try and generate it automatically.</p>
+<p>What I'm worried about with the order-dual trickery is that when I prove that with_bot (with_top (conditionally_complete_lattice)) is a complete lattice, 50% of the time I see "sup" it will mean "inf", because presumably order_dual alpha is just defined to be alpha. If I just duplicate the code then I won't have this issue. It's about 65 lines of code. What is best practice here? </p>
+<p>I should say that the idea here is to "refine" Sup. For a set of reals which is not bounded or not non-empty, Sup returns 37. The refined Sup on with_top real will return a slightly more sensible value, i.e. it's right for unbounded sets but still 37 for the empty set, and similar comments apply for the refined Inf. After adding a top and a bottom, one will have the theorem that Sup returns the correct value for non-empty bounded sets, so then one only has to add in the proof that it also returns a sensible value for the empty set and an unbounded set.</p>
+
 
 {% endraw %}
 
