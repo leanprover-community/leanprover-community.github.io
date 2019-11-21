@@ -1051,6 +1051,71 @@ instance : lattice.complete_lattice (with_bot (with_top ℝ)) := sorry
 <p>What I'm worried about with the order-dual trickery is that when I prove that with_bot (with_top (conditionally_complete_lattice)) is a complete lattice, 50% of the time I see "sup" it will mean "inf", because presumably order_dual alpha is just defined to be alpha. If I just duplicate the code then I won't have this issue. It's about 65 lines of code. What is best practice here? </p>
 <p>I should say that the idea here is to "refine" Sup. For a set of reals which is not bounded or not non-empty, Sup returns 37. The refined Sup on with_top real will return a slightly more sensible value, i.e. it's right for unbounded sets but still 37 for the empty set, and similar comments apply for the refined Inf. After adding a top and a bottom, one will have the theorem that Sup returns the correct value for non-empty bounded sets, so then one only has to add in the proof that it also returns a sensible value for the empty set and an unbounded set.</p>
 
+<a name="181327464"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/%24%24%5B-%5Cinfty%2C%5Cinfty%5D%24%24%20in%20Lean%3F/near/181327464" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/58148inftyinftyinLean.html#181327464">Kevin Buzzard (Nov 21 2019 at 17:32)</a>:</h4>
+<p>Concrete question:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span>
+
+<span class="kn">open</span> <span class="n">lattice</span>
+
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Sup</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_Sup</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="k">if</span> <span class="err">⊤</span> <span class="err">∈</span> <span class="n">S</span> <span class="k">then</span> <span class="err">⊤</span> <span class="k">else</span>
+      <span class="k">let</span> <span class="n">So</span> <span class="o">:=</span> <span class="o">(</span><span class="n">coe</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">α</span><span class="o">)</span> <span class="k">in</span>
+      <span class="k">if</span> <span class="n">bdd_above</span> <span class="n">So</span> <span class="k">then</span> <span class="err">↑</span><span class="o">(</span><span class="n">Sup</span> <span class="n">So</span><span class="o">)</span> <span class="k">else</span> <span class="err">⊤</span><span class="bp">⟩</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Inf</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_Inf</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨λ</span> <span class="n">S</span><span class="o">,</span> <span class="k">if</span> <span class="n">S</span> <span class="err">⊆</span> <span class="o">{</span><span class="err">⊤</span><span class="o">}</span> <span class="k">then</span> <span class="err">⊤</span> <span class="k">else</span> <span class="err">↑</span><span class="o">(</span><span class="n">Inf</span> <span class="o">(</span><span class="n">coe</span> <span class="bp">⁻¹</span><span class="err">&#39;</span> <span class="n">S</span><span class="o">)</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span><span class="bp">⟩</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">with_top</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le_cSup</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">cSup_le</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">cInf_le</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">le_cInf</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">with_top</span><span class="bp">.</span><span class="n">lattice</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Sup</span><span class="o">,</span>
+  <span class="bp">..</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Inf</span>
+<span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Sup</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_Sup</span> <span class="o">(</span><span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">(</span><span class="bp">@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Inf</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">Inf</span><span class="bp">⟩</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Inf</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span> <span class="n">has_Sup</span> <span class="o">(</span><span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="o">(</span><span class="bp">@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Sup</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">Sup</span><span class="bp">⟩</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">with_bot</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span>
+  <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">conditionally_complete_lattice</span> <span class="n">α</span><span class="o">]</span> <span class="o">:</span>
+  <span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">with_bot</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">le_cSup</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">cInf_le</span><span class="o">,</span>
+  <span class="n">cSup_le</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">le_cInf</span><span class="o">,</span>
+  <span class="n">cInf_le</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">le_cSup</span><span class="o">,</span>
+  <span class="n">le_cInf</span> <span class="o">:=</span> <span class="o">(</span><span class="bp">@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">)</span><span class="bp">.</span><span class="n">cSup_le</span><span class="o">,</span>
+  <span class="bp">..@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">lattice</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="bp">..@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Sup</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span><span class="o">,</span>
+  <span class="bp">..@</span><span class="n">with_top</span><span class="bp">.</span><span class="n">conditionally_complete_lattice</span><span class="bp">.</span><span class="n">has_Inf</span> <span class="o">(</span><span class="n">order_dual</span> <span class="n">α</span><span class="o">)</span> <span class="bp">_</span>
+<span class="o">}</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">type mismatch at field &#39;le_cSup&#39;</span>
+<span class="cm">  conditionally_complete_lattice.cInf_le</span>
+<span class="cm">has type</span>
+<span class="cm">  ∀ (s : set (with_top (order_dual α))) (a : with_top (order_dual α)),</span>
+<span class="cm">    bdd_below s → a ∈ s → conditionally_complete_lattice.Inf s ≤ a</span>
+<span class="cm">but is expected to have type</span>
+<span class="cm">  ∀ (s : set (with_bot α)) (a : with_bot α), bdd_above s → a ∈ s → a ≤ has_Sup.Sup s</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Should I be fixing this sorry?</p>
+
 
 {% endraw %}
 

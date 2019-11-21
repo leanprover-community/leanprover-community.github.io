@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (247 messages, latest: Nov 21 2019 at 09:15)
+* [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (248 messages, latest: Nov 21 2019 at 17:32)
 
 * [Convergence uniform in one argument](84684Convergenceuniforminoneargument.html) (12 messages, latest: Nov 20 2019 at 17:13)
 
