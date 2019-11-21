@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [VScode goodies](03279VScodegoodies.html) (13 messages, latest: Nov 21 2019 at 14:47)
+
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (27 messages, latest: Nov 21 2019 at 14:23)
+
 * [check out mlang](16870checkoutmlang.html) (4 messages, latest: Nov 21 2019 at 12:27)
-
-* [VScode goodies](03279VScodegoodies.html) (10 messages, latest: Nov 21 2019 at 08:25)
-
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (26 messages, latest: Nov 21 2019 at 01:38)
 
 * [computable real functions](16586computablerealfunctions.html) (17 messages, latest: Nov 20 2019 at 23:43)
 

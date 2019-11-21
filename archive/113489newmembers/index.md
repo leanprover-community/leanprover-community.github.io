@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [add_monoid N](17501addmonoidN.html) (4 messages, latest: Nov 21 2019 at 14:25)
+
 * [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (18 messages, latest: Nov 21 2019 at 13:55)
 
 * [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (4 messages, latest: Nov 21 2019 at 13:35)
@@ -22,8 +24,6 @@ permalink: archive/113489newmembers/index.html
 * [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
 
 * [One-line proof](28766Onelineproof.html) (11 messages, latest: Nov 20 2019 at 23:10)
-
-* [add_monoid N](17501addmonoidN.html) (2 messages, latest: Nov 20 2019 at 22:35)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (199 messages, latest: Nov 20 2019 at 18:08)
 
