@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [computable real functions](16586computablerealfunctions.html) (17 messages, latest: Nov 20 2019 at 23:43)
+
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (23 messages, latest: Nov 20 2019 at 18:34)
 
 * [linting in CI](98585lintinginCI.html) (20 messages, latest: Nov 20 2019 at 15:25)
@@ -20,8 +22,6 @@ permalink: archive/113488general/index.html
 * [hole command in tactic mode](94076holecommandintacticmode.html) (1 message, latest: Nov 20 2019 at 10:22)
 
 * [extending instances](17071extendinginstances.html) (15 messages, latest: Nov 20 2019 at 10:17)
-
-* [computable real functions](16586computablerealfunctions.html) (15 messages, latest: Nov 20 2019 at 08:16)
 
 * [(P → (Q → R)) → (P → Q) → (P → R)](81079PQRPQPR.html) (10 messages, latest: Nov 20 2019 at 03:19)
 
