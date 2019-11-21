@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
+* [Dealing with ite](08051Dealingwithite.html) (7 messages, latest: Nov 21 2019 at 08:08)
 
-* [Dealing with ite](08051Dealingwithite.html) (5 messages, latest: Nov 21 2019 at 00:30)
+* [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
 
 * [One-line proof](28766Onelineproof.html) (11 messages, latest: Nov 20 2019 at 23:10)
 
