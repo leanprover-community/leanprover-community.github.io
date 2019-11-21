@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (3 messages, latest: Nov 21 2019 at 11:56)
+
 * [Dealing with ite](08051Dealingwithite.html) (9 messages, latest: Nov 21 2019 at 10:56)
 
 * [Tidying up a proof](22757Tidyingupaproof.html) (75 messages, latest: Nov 21 2019 at 10:38)
 
 * [Using attach with fold](40477Usingattachwithfold.html) (32 messages, latest: Nov 21 2019 at 09:47)
-
-* [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (1 message, latest: Nov 21 2019 at 09:36)
 
 * [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
 
