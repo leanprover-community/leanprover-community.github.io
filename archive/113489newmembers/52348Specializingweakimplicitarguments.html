@@ -37,6 +37,30 @@ end
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20weak%20implicit%20arguments/near/181297225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52348Specializingweakimplicitarguments.html#181297225">Mario Carneiro (Nov 21 2019 at 11:56)</a>:</h4>
 <p>but you can apply a weak implicit using <code>@h1 (some _) a</code></p>
 
+<a name="181304320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Specializing%20weak%20implicit%20arguments/near/181304320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/52348Specializingweakimplicitarguments.html#181304320">Kevin Buzzard (Nov 21 2019 at 13:35)</a>:</h4>
+<p>Note also the <code>choose</code> tactic:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">interactive</span>
+
+<span class="kn">open</span> <span class="n">function</span>
+
+<span class="n">def</span> <span class="n">bijective&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span>
+    <span class="bp">∃</span> <span class="n">f&#39;</span> <span class="o">:</span> <span class="n">β</span> <span class="bp">→</span> <span class="n">α</span><span class="o">,</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">f&#39;</span> <span class="o">(</span><span class="n">f</span> <span class="n">a</span><span class="o">)</span> <span class="bp">=</span> <span class="n">a</span><span class="o">)</span> <span class="bp">∧</span> <span class="o">(</span><span class="bp">∀</span> <span class="n">b</span> <span class="o">:</span> <span class="n">β</span><span class="o">,</span> <span class="n">f</span> <span class="o">(</span><span class="n">f&#39;</span> <span class="n">b</span><span class="o">)</span> <span class="bp">=</span> <span class="n">b</span><span class="o">)</span>
+
+<span class="kn">theorem</span> <span class="n">bijective_iff_bijective&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="n">β</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">β</span><span class="o">)</span> <span class="o">:</span> <span class="n">bijective</span> <span class="n">f</span> <span class="bp">↔</span> <span class="n">bijective&#39;</span> <span class="n">f</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">split</span><span class="o">,</span>
+  <span class="o">{</span> <span class="n">intro</span> <span class="n">h</span><span class="o">,</span>
+    <span class="n">choose</span> <span class="n">f&#39;</span> <span class="n">h&#39;</span> <span class="kn">using</span> <span class="n">h</span><span class="bp">.</span><span class="mi">2</span><span class="o">,</span>
+    <span class="n">use</span> <span class="n">f&#39;</span><span class="o">,</span>
+    <span class="n">split</span><span class="o">,</span>
+      <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">exact</span> <span class="n">h&#39;</span><span class="o">,</span>
+  <span class="o">},</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 

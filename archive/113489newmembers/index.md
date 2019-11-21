@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (3 messages, latest: Nov 21 2019 at 11:56)
+* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (18 messages, latest: Nov 21 2019 at 13:55)
+
+* [Specializing weak implicit arguments](52348Specializingweakimplicitarguments.html) (4 messages, latest: Nov 21 2019 at 13:35)
 
 * [Dealing with ite](08051Dealingwithite.html) (9 messages, latest: Nov 21 2019 at 10:56)
 
@@ -26,8 +28,6 @@ permalink: archive/113489newmembers/index.html
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (199 messages, latest: Nov 20 2019 at 18:08)
 
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (65 messages, latest: Nov 20 2019 at 17:56)
-
-* [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (12 messages, latest: Nov 20 2019 at 10:56)
 
 * [How to use choice tactic?](00065Howtousechoicetactic.html) (13 messages, latest: Nov 20 2019 at 09:14)
 
