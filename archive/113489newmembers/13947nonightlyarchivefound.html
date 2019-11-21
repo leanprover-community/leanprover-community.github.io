@@ -121,6 +121,50 @@ mathlib = {git = &quot;https://github.com/leanprover/mathlib&quot;, rev = &quot;
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/181205584" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#181205584">Kevin Buzzard (Nov 20 2019 at 13:13)</a>:</h4>
 <p>OK so I am hoping that if you pull the updated repo, this is fixed. Thanks for pointing this out. Some of the proofs had broken but I just fixed them all.</p>
 
+<a name="181267661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/no%20nightly%20archive%20found/near/181267661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/13947nonightlyarchivefound.html#181267661">Luis O'Shea (Nov 21 2019 at 01:20)</a>:</h4>
+<p>Yes, thank you! I think this is now fixed. See below for output, in case anyone is curious. (All the output from <code>leanpkg build</code> is warnings, mostly about <code>sorry</code> and a few uses of <code>#exit</code> which can all be traced to KB's commit <a href="https://github.com/ImperialCollegeLondon/M1F_example_sheets/commit/1f794ff03f99d803c383e520c0809e03c17da9bd" target="_blank" title="https://github.com/ImperialCollegeLondon/M1F_example_sheets/commit/1f794ff03f99d803c383e520c0809e03c17da9bd">mathlib broke my 2017 soln</a>; in other words, it all seems good.)</p>
+<div class="codehilite"><pre><span></span><span class="gp">$</span> git clone https://github.com/ImperialCollegeLondon/M1F_example_sheets.git M1F_example_sheets3
+<span class="go">Cloning into &#39;M1F_example_sheets3&#39;...</span>
+<span class="go">remote: Enumerating objects: 56, done.</span>
+<span class="go">remote: Counting objects: 100% (56/56), done.</span>
+<span class="go">remote: Compressing objects: 100% (51/51), done.</span>
+<span class="go">remote: Total 986 (delta 11), reused 24 (delta 4), pack-reused 930</span>
+<span class="go">Receiving objects: 100% (986/986), 1.32 MiB | 6.99 MiB/s, done.</span>
+<span class="go">Resolving deltas: 100% (521/521), done.</span>
+
+<span class="gp">$</span> <span class="nb">cd</span> M1F_example_sheets3/
+
+<span class="gp">$</span> leanpkg configure
+<span class="go">configuring M1F_2018-19 0.1</span>
+<span class="go">mathlib: cloning https://github.com/leanprover/mathlib to _target/deps/mathlib</span>
+<span class="gp">&gt;</span> mkdir -p _target/deps/mathlib
+<span class="gp">&gt;</span> git clone https://github.com/leanprover/mathlib _target/deps/mathlib
+<span class="go">Cloning into &#39;_target/deps/mathlib&#39;...</span>
+<span class="go">remote: Enumerating objects: 45, done.</span>
+<span class="go">remote: Counting objects: 100% (45/45), done.</span>
+<span class="go">remote: Compressing objects: 100% (35/35), done.</span>
+<span class="go">remote: Total 27548 (delta 18), reused 18 (delta 10), pack-reused 27503</span>
+<span class="go">Receiving objects: 100% (27548/27548), 13.69 MiB | 10.56 MiB/s, done.</span>
+<span class="go">Resolving deltas: 100% (20473/20473), done.</span>
+<span class="gp">&gt;</span> git checkout --detach d67e527adc99837b731799190fdc7cbeb596254f    <span class="c1"># in directory _target/deps/mathlib</span>
+<span class="go">HEAD is now at d67e527a feat(algebra/group_power): prove Bernoulli&#39;s inequality for `a ≥ -2` (#1709)</span>
+
+<span class="gp">$</span> update-mathlib
+<span class="go">Info: No github section found in &#39;git config&#39;, we will use GitHub with no authentication</span>
+<span class="go">Querying GitHub...</span>
+<span class="go">Downloading nightly...</span>
+<span class="go">Extracting nightly...</span>
+
+<span class="gp">$</span> leanpkg build
+<span class="go">configuring M1F_2018-19 0.1</span>
+<span class="go">mathlib: trying to update _target/deps/mathlib to revision d67e527adc99837b731799190fdc7cbeb596254f</span>
+<span class="gp">&gt;</span> git checkout --detach d67e527adc99837b731799190fdc7cbeb596254f    <span class="c1"># in directory _target/deps/mathlib</span>
+<span class="go">HEAD is now at d67e527a feat(algebra/group_power): prove Bernoulli&#39;s inequality for `a ≥ -2` (#1709)</span>
+<span class="gp">&gt;</span> lean --make src
+<span class="gp">#</span> several dozen warnings
+</pre></div>
+
 
 {% endraw %}
 

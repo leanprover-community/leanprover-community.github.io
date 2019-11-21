@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (24 messages, latest: Nov 21 2019 at 00:23)
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (26 messages, latest: Nov 21 2019 at 01:38)
 
 * [computable real functions](16586computablerealfunctions.html) (17 messages, latest: Nov 20 2019 at 23:43)
 

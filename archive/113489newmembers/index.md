@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [no nightly archive found](13947nonightlyarchivefound.html) (12 messages, latest: Nov 21 2019 at 01:20)
+
 * [Dealing with ite](08051Dealingwithite.html) (5 messages, latest: Nov 21 2019 at 00:30)
 
 * [One-line proof](28766Onelineproof.html) (11 messages, latest: Nov 20 2019 at 23:10)
@@ -20,8 +22,6 @@ permalink: archive/113489newmembers/index.html
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (65 messages, latest: Nov 20 2019 at 17:56)
 
 * [Using attach with fold](40477Usingattachwithfold.html) (31 messages, latest: Nov 20 2019 at 15:00)
-
-* [no nightly archive found](13947nonightlyarchivefound.html) (11 messages, latest: Nov 20 2019 at 13:13)
 
 * [Equivalent of subtype.eq for structures?](22382Equivalentofsubtypeeqforstructures.html) (12 messages, latest: Nov 20 2019 at 10:56)
 
