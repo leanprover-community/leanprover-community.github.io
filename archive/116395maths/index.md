@@ -9,6 +9,10 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [image under smul/add/etc](31750imageundersmuladdetc.html) (3 messages, latest: Nov 21 2019 at 20:33)
+
+* [abel multiplication](00067abelmultiplication.html) (6 messages, latest: Nov 21 2019 at 20:30)
+
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (253 messages, latest: Nov 21 2019 at 18:22)
 
 * [Convergence uniform in one argument](84684Convergenceuniforminoneargument.html) (12 messages, latest: Nov 20 2019 at 17:13)
@@ -358,8 +362,6 @@ permalink: archive/116395maths/index.html
 * [Chebyshev's inequality](51585Chebyshevsinequality.html) (6 messages, latest: May 30 2019 at 17:05)
 
 * [cubing a cube](80825cubingacube.html) (128 messages, latest: May 29 2019 at 19:43)
-
-* [abel multiplication](00067abelmultiplication.html) (5 messages, latest: May 29 2019 at 17:38)
 
 * [betweenness](67844betweenness.html) (5 messages, latest: May 29 2019 at 14:20)
 
