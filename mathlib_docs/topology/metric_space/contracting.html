@@ -3,7 +3,7 @@
     <head>
         <link rel="stylesheet" href="https://leanprover-community.github.io/mathlib_docs/style_js_frame.css">
         <link rel="shortcut icon" href="https://leanprover-community.github.io/assets/img/lean.ico">
-        <title>mathlib docs: category_theory.types</title>
+        <title>mathlib docs: topology.metric_space.contracting</title>
         <meta charset="UTF-8">
     </head>
     <body>
@@ -160,7 +160,7 @@
 
 
 </div><div class="nav_sect">category_theory</div>
-<div class="nav_sect_inner" id="category_theory">
+<div class="nav_sect_inner hidden" id="category_theory">
 <div class="nav_sect">adjunction</div>
 <div class="nav_sect_inner hidden" id="category_theory/adjunction">
 <a class="nav_file" id="category_theory/adjunction/basic.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/adjunction/basic.html">basic</a><br>
@@ -269,7 +269,7 @@
 <a class="nav_file" id="category_theory/punit.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/punit.html">punit</a><br>
 <a class="nav_file" id="category_theory/single_obj.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/single_obj.html">single_obj</a><br>
 <a class="nav_file" id="category_theory/sparse.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/sparse.html">sparse</a><br>
-<a class="nav_file visible" id="category_theory/types.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html">types</a><br>
+<a class="nav_file" id="category_theory/types.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html">types</a><br>
 <a class="nav_file" id="category_theory/whiskering.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/whiskering.html">whiskering</a><br>
 <a class="nav_file" id="category_theory/yoneda.html" href="https://leanprover-community.github.io/mathlib_docs/category_theory/yoneda.html">yoneda</a><br>
 
@@ -1047,7 +1047,7 @@
 
 
 </div><div class="nav_sect">topology</div>
-<div class="nav_sect_inner hidden" id="topology">
+<div class="nav_sect_inner" id="topology">
 <div class="nav_sect">algebra</div>
 <div class="nav_sect_inner hidden" id="topology/algebra">
 <a class="nav_file" id="topology/algebra/continuous_functions.html" href="https://leanprover-community.github.io/mathlib_docs/topology/algebra/continuous_functions.html">continuous_functions</a><br>
@@ -1089,13 +1089,13 @@
 
 
 </div><div class="nav_sect">metric_space</div>
-<div class="nav_sect_inner hidden" id="topology/metric_space">
+<div class="nav_sect_inner" id="topology/metric_space">
 <a class="nav_file" id="topology/metric_space/baire.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/baire.html">baire</a><br>
 <a class="nav_file" id="topology/metric_space/basic.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html">basic</a><br>
 <a class="nav_file" id="topology/metric_space/cau_seq_filter.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/cau_seq_filter.html">cau_seq_filter</a><br>
 <a class="nav_file" id="topology/metric_space/closeds.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/closeds.html">closeds</a><br>
 <a class="nav_file" id="topology/metric_space/completion.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/completion.html">completion</a><br>
-<a class="nav_file" id="topology/metric_space/contracting.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html">contracting</a><br>
+<a class="nav_file visible" id="topology/metric_space/contracting.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html">contracting</a><br>
 <a class="nav_file" id="topology/metric_space/emetric_space.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/emetric_space.html">emetric_space</a><br>
 <a class="nav_file" id="topology/metric_space/gluing.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gluing.html">gluing</a><br>
 <a class="nav_file" id="topology/metric_space/gromov_hausdorff.html" href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/gromov_hausdorff.html">gromov_hausdorff</a><br>
@@ -1151,243 +1151,125 @@
 
 </div></div>
 <div class="column middle"><div class="content">
-<a id="top"></a><div class="def"><a id="category_theory.types"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L14">category_theory.types</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.large_category">category_theory.large_category</a> (Type u)</div>
+<a id="top"></a><div class="mod_doc">
+<h1>Contracting maps</h1>
+
+<p>A Lipschitz continuous self-map with Lipschitz constant <code>K &lt; 1</code> is called a <em>contracting map</em>.
+In this file we prove the Banach fixed point theorem, some explicit estimates on the rate
+of convergence, and some properties of the map sending a contracting map to its fixed point.</p>
+</div><div class="thm"><a id="fixed_point_of_tendsto_iterate"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L26">fixed_point_of_tendsto_iterate</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#continuous_at">continuous_at</a> f x → (∃ (x₀ : α), <a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.tendsto">filter.tendsto</a> (λ (n : ℕ), f^[n] x₀) <a href="https://leanprover-community.github.io/mathlib_docs/order/filter/basic.html#filter.at_top">filter.at_top</a> (<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#nhds">nhds</a> x)) → f x = x</div>
+<p>If the iterates <code>f^[n] x₀</code> converge to <code>x</code> and <code>f</code> is continuous at <code>x</code>,
+then <code>x</code> is a fixed point for <code>f</code>.</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/basic.html#topological_space">topological_space</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/separation.html#t2_space">t2_space</a> α]</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">{x : α}</span></li>
+
+
+
+</ul></div><div class="def"><a id="contracting_with"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L37">contracting_with</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a> → (α → α) → Prop</div>
+<p>A map is said to be <code>contracting_with K</code>, if <code>K &lt; 1</code> and <code>f</code> is <code>lipschitz_with K</code>.</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span></li>
+
+
+
+</ul></div><div class="thm"><a id="contracting_with.to_lipschitz_with"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L46">contracting_with.to_lipschitz_with</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f → <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/lipschitz.html#lipschitz_with">lipschitz_with</a> K f</div>
 <p></p>
        <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span></li>
 
-<li>Attributes: instance</li>
 
 
-</ul></div><div class="thm"><a id="category_theory.types_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L19">category_theory.types_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(α ⟶ β) = (α → β)</div>
+</ul></div><div class="thm"><a id="contracting_with.one_sub_K_pos"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L48">contracting_with.one_sub_K_pos</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f → 0 < 1 - ↑K</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{α β : Type u}</span></li>
-<li>Attributes: simp</li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span></li>
 
 
-</ul></div><div class="thm"><a id="category_theory.types_id"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L20">category_theory.types_id</a></span> <span class="decl_args">(X : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">𝟙 X = <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#id">id</a></div>
+
+</ul></div><div class="thm"><a id="contracting_with.dist_inequality"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L50">contracting_with.dist_inequality</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(x y : α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist x y ≤ (has_dist.dist x (f x) + has_dist.dist y (f y)) / (1 - ↑K)</div>
 <p></p>
        <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span></li>
 
-<li>Attributes: simp</li>
 
 
-</ul></div><div class="thm"><a id="category_theory.types_comp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L21">category_theory.types_comp</a></span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">(g : Y ⟶ Z)</span> <span class="decl_args">:</span>       <div class="decl_type">f ≫ g = g ∘ f</div>
+</ul></div><div class="thm"><a id="contracting_with.dist_le_of_fixed_point"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L57">contracting_with.dist_le_of_fixed_point</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">f y = y → has_dist.dist x y ≤ has_dist.dist x (f x) / (1 - ↑K)</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y Z : Type u}</span></li>
-<li>Attributes: simp</li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">{y : α}</span></li>
 
 
-</ul></div><div class="def"><a id="category_theory.functor.sections"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L27">category_theory.functor.sections</a></span> <span class="decl_args">(F : J ⥤ Type w)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/data/set.html#set">set</a> (Π (j : J), F.obj j)</div>
+
+</ul></div><div class="thm"><a id="contracting_with.fixed_point_unique'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L61">contracting_with.fixed_point_unique'</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">:</span>       <div class="decl_type">f x = x → f y = y → x = y</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{J : Type u}</span> <span class="impl_arg">[𝒥 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> J]</span></li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">{x y : α}</span></li>
 
 
 
-</ul></div><div class="thm"><a id="category_theory.functor_to_types.map_comp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L36">category_theory.functor_to_types.map_comp</a></span> <span class="decl_args">(F : C ⥤ Type w)</span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">(g : Y ⟶ Z)</span> <span class="decl_args">(a : F.obj X)</span> <span class="decl_args">:</span>       <div class="decl_type">F.map (f ≫ g) a = F.map g (F.map f a)</div>
+</ul></div><div class="thm"><a id="contracting_with.exists_fixed_point"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L66">contracting_with.exists_fixed_point</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">:</span>       <div class="decl_type">∃ (x : α), f x = x</div>
+<p>Banach fixed-point theorem, contraction mapping theorem</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[hα : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#nonempty">nonempty</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span></li>
+
+
+
+</ul></div><div class="thm"><a id="contracting_with.dist_fixed_point_fixed_point_of_dist_le'"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L76">contracting_with.dist_fixed_point_fixed_point_of_dist_le'</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(g : α → α)</span> <span class="decl_args">(hx : f x = x)</span> <span class="decl_args">(hy : g y = y)</span> <span class="decl_args">:</span>       <div class="decl_type">(∀ (z : α), has_dist.dist (f z) (g z) ≤ C) → has_dist.dist x y ≤ C / (1 - ↑K)</div>
+<p>Let <code>f</code> be a contracting map with constant <code>K</code>; let <code>g</code> be another map uniformly
+<code>C</code>-close to <code>f</code>. If <code>x</code> and <code>y</code> are their fixed points, then <code>dist x y ≤ C / (1 - K)</code>.</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">{x y : α}</span> <span class="impl_arg">{C : ℝ}</span></li>
+
+
+
+</ul></div><div class="def"><a id="contracting_with.fixed_point"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L89">contracting_with.fixed_point</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">:</span>       <div class="decl_type">α</div>
+<p>The unique fixed point of a contracting map.</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span></li>
+
+
+
+</ul></div><div class="thm"><a id="contracting_with.fixed_point_is_fixed"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L92">contracting_with.fixed_point_is_fixed</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">:</span>       <div class="decl_type">f (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf) = <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf</div>
+<p>The point provided by <code>contracting_with.fixed_point</code> is actually a fixed point.</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span></li>
+
+
+
+</ul></div><div class="thm"><a id="contracting_with.fixed_point_unique"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L95">contracting_with.fixed_point_unique</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">:</span>       <div class="decl_type">f x = x → x = <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X Y Z : C}</span></li>
-<li>Attributes: simp</li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span> <span class="impl_arg">{x : α}</span></li>
 
 
-</ul></div><div class="thm"><a id="category_theory.functor_to_types.map_id"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L39">category_theory.functor_to_types.map_id</a></span> <span class="decl_args">(F : C ⥤ Type w)</span> <span class="decl_args">(a : F.obj X)</span> <span class="decl_args">:</span>       <div class="decl_type">F.map (𝟙 X) a = a</div>
+
+</ul></div><div class="thm"><a id="contracting_with.dist_fixed_point_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L98">contracting_with.dist_fixed_point_le</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(x : α)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist x (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf) ≤ has_dist.dist x (f x) / (1 - ↑K)</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X : C}</span></li>
-<li>Attributes: simp</li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span></li>
 
 
-</ul></div><div class="thm"><a id="category_theory.functor_to_types.naturality"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L42">category_theory.functor_to_types.naturality</a></span> <span class="decl_args">(F G : C ⥤ Type w)</span> <span class="decl_args">(σ : F ⟶ G)</span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">(x : F.obj X)</span> <span class="decl_args">:</span>       <div class="decl_type">σ.app Y (F.map f x) = G.map f (σ.app X x)</div>
+
+</ul></div><div class="thm"><a id="contracting_with.aposteriori_dist_iterate_fixed_point_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L102">contracting_with.aposteriori_dist_iterate_fixed_point_le</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(x : α)</span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist (f^[n] x) (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf) ≤ has_dist.dist (f^[n] x) (f^[n + 1] x) / (1 - ↑K)</div>
+<p>Aposteriori estimates on the convergence of iterates to the fixed point.</p>
+       <ul>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span></li>
+
+
+
+</ul></div><div class="thm"><a id="contracting_with.apriori_dist_iterate_fixed_point_le"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L106">contracting_with.apriori_dist_iterate_fixed_point_le</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(x : α)</span> <span class="decl_args">(n : ℕ)</span> <span class="decl_args">:</span>       <div class="decl_type">has_dist.dist (f^[n] x) (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf) ≤ has_dist.dist x (f x) * ↑K ^ n / (1 - ↑K)</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X Y : C}</span></li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span></li>
 
 
 
-</ul></div><div class="thm"><a id="category_theory.functor_to_types.comp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L45">category_theory.functor_to_types.comp</a></span> <span class="decl_args">(F G H : C ⥤ Type w)</span> <span class="decl_args">(σ : F ⟶ G)</span> <span class="decl_args">(τ : G ⟶ H)</span> <span class="decl_args">(x : F.obj X)</span> <span class="decl_args">:</span>       <div class="decl_type">(σ ≫ τ).app X x = τ.app X (σ.app X x)</div>
+</ul></div><div class="thm"><a id="contracting_with.fixed_point_lipschitz_in_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean#L112">contracting_with.fixed_point_lipschitz_in_map</a></span> <span class="decl_args">(hf : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K f)</span> <span class="decl_args">(hg : <a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with">contracting_with</a> K g)</span> <span class="decl_args">:</span>       <div class="decl_type">(∀ (z : α), has_dist.dist (f z) (g z) ≤ C) →
+has_dist.dist (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hf) (<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/contracting.html#contracting_with.fixed_point">contracting_with.fixed_point</a> hg) ≤ C / (1 - ↑K)</div>
 <p></p>
        <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{X : C}</span></li>
-<li>Attributes: simp</li>
+<li>Implicit arguments: <span class="impl_arg">{α : Type u}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/metric_space/basic.html#metric_space">metric_space</a> α]</span> <span class="impl_arg">{K : <a href="https://leanprover-community.github.io/mathlib_docs/data/real/nnreal.html#nnreal">nnreal</a>}</span> <span class="impl_arg">{f : α → α}</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#inhabited">inhabited</a> α]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/topology/uniform_space/cauchy.html#complete_space">complete_space</a> α]</span> <span class="impl_arg">{g : α → α}</span> <span class="impl_arg">{C : ℝ}</span></li>
 
-
-</ul></div><div class="thm"><a id="category_theory.functor_to_types.hcomp"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L49">category_theory.functor_to_types.hcomp</a></span> <span class="decl_args">(F G : C ⥤ Type w)</span> <span class="decl_args">(σ : F ⟶ G)</span> <span class="decl_args">(I J : D ⥤ C)</span> <span class="decl_args">(ρ : I ⟶ J)</span> <span class="decl_args">(x : (I ⋙ F).obj W)</span> <span class="decl_args">:</span>       <div class="decl_type">(ρ ◫ σ).app W x = G.map (ρ.app W) (σ.app (I.obj W) x)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{C : Type u}</span> <span class="impl_arg">[𝒞 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> C]</span> <span class="impl_arg">{D : Type u'}</span> <span class="impl_arg">[𝒟 : <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.category">category_theory.category</a> D]</span> <span class="impl_arg">{W : D}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.ulift_trivial"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L53">category_theory.ulift_trivial</a></span> <span class="decl_args">(V : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift">ulift</a> V ≅ V</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="def"><a id="category_theory.ulift_functor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L55">category_theory.ulift_functor</a></span>  <span class="decl_args">:</span>       <div class="decl_type">Type u ⥤ Type (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/algebra/functions.html#max">max</a> u v)</div>
-<p></p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="category_theory.ulift_functor_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L59">category_theory.ulift_functor_map</a></span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">(x : <a href="https://leanprover-community.github.io/mathlib_docs/core/init/logic.html#ulift">ulift</a> X)</span> <span class="decl_args">:</span>       <div class="decl_type">category_theory.ulift_functor.map f x = {down := f (x.down)}</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.ulift_functor_full"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L62">category_theory.ulift_functor_full</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/fully_faithful.html#category_theory.full">category_theory.full</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.ulift_functor">category_theory.ulift_functor</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="category_theory.ulift_functor_faithful"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L64">category_theory.ulift_functor_faithful</a></span>  <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/fully_faithful.html#category_theory.faithful">category_theory.faithful</a> <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.ulift_functor">category_theory.ulift_functor</a></div>
-<p></p>
-       <ul>
-
-<li>Attributes: instance</li>
-
-
-</ul></div><div class="def"><a id="category_theory.hom_of_element"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L68">category_theory.hom_of_element</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X → (<a href="https://leanprover-community.github.io/mathlib_docs/core/init/core.html#punit">punit</a> ⟶ X)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.hom_of_element_eq_iff"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L70">category_theory.hom_of_element_eq_iff</a></span> <span class="decl_args">(x y : X)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.hom_of_element">category_theory.hom_of_element</a> x = <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.hom_of_element">category_theory.hom_of_element</a> y ↔ x = y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.mono_iff_injective"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L74">category_theory.mono_iff_injective</a></span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.mono">category_theory.mono</a> f ↔ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.injective">function.injective</a> f</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.epi_iff_surjective"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L87">category_theory.epi_iff_surjective</a></span> <span class="decl_args">(f : X ⟶ Y)</span> <span class="decl_args">:</span>       <div class="decl_type"><a href="https://leanprover-community.github.io/mathlib_docs/category_theory/category/default.html#category_theory.epi">category_theory.epi</a> f ↔ <a href="https://leanprover-community.github.io/mathlib_docs/core/init/function.html#function.surjective">function.surjective</a> f</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="category_theory.of_type_functor"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L118">category_theory.of_type_functor</a></span> <span class="decl_args">(m : Type u → Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">Type u ⥤ Type v</div>
-<p><code>of_type_functor m</code> converts from Lean's <code>Type</code>-based <code>category</code> to <code>category_theory</code>. This
-allows us to use these functors in category theory.</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor">functor</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_functor">is_lawful_functor</a> m]</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.of_type_functor_obj"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L128">category_theory.of_type_functor_obj</a></span> <span class="decl_args">(m : Type u → Type v)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.of_type_functor">category_theory.of_type_functor</a> m).obj = m</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor">functor</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_functor">is_lawful_functor</a> m]</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="category_theory.of_type_functor_map"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L131">category_theory.of_type_functor_map</a></span> <span class="decl_args">(m : Type u → Type v)</span> <span class="decl_args">(f : α → β)</span> <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.of_type_functor">category_theory.of_type_functor</a> m).map f = functor.map f</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/functor.html#functor">functor</a> m]</span> <span class="impl_arg">[<a href="https://leanprover-community.github.io/mathlib_docs/core/init/category/lawful.html#is_lawful_functor">is_lawful_functor</a> m]</span> <span class="impl_arg">{α β : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="equiv.to_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L146">equiv.to_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃ Y → (X ≅ Y)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="equiv.to_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L152">equiv.to_iso_hom</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#equiv.to_iso">equiv.to_iso</a> e).hom = ⇑e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">{e : X ≃ Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="equiv.to_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L153">equiv.to_iso_inv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#equiv.to_iso">equiv.to_iso</a> e).inv = ⇑(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> e)</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span> <span class="impl_arg">{e : X ≃ Y}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="category_theory.iso.to_equiv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L163">category_theory.iso.to_equiv</a></span>  <span class="decl_args">:</span>       <div class="decl_type">(X ≅ Y) → X ≃ Y</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-
-
-
-</ul></div><div class="thm"><a id="category_theory.iso.to_equiv_fun"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L169">category_theory.iso.to_equiv_fun</a></span> <span class="decl_args">(i : X ≅ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.iso.to_equiv">category_theory.iso.to_equiv</a> i) = i.hom</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="category_theory.iso.to_equiv_symm_fun"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L170">category_theory.iso.to_equiv_symm_fun</a></span> <span class="decl_args">(i : X ≅ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.iso.to_equiv">category_theory.iso.to_equiv</a> i)) = i.inv</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="equiv_iso_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L181">equiv_iso_iso_inv</a></span> <span class="decl_args">(i : X ≅ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">equiv_iso_iso.inv i = <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.iso.to_equiv">category_theory.iso.to_equiv</a> i</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="equiv_iso_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L181">equiv_iso_iso_hom</a></span> <span class="decl_args">(e : X ≃ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">equiv_iso_iso.hom e = <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#equiv.to_iso">equiv.to_iso</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="def"><a id="equiv_iso_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L181">equiv_iso_iso</a></span>  <span class="decl_args">:</span>       <div class="decl_type">X ≃ Y ≅ X ≅ Y</div>
-<p>equivalences (between types in the same universe) are the same as (isomorphic to) isomorphisms of types</p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-
-
-
-</ul></div><div class="def"><a id="equiv_equiv_iso"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L187">equiv_equiv_iso</a></span> <span class="decl_args">(X Y : Type u)</span> <span class="decl_args">:</span>       <div class="decl_type">X ≃ Y ≃ (X ≅ Y)</div>
-<p>equivalences (between types in the same universe) are the same as (equivalent to) isomorphisms of types</p>
-       <ul>
-
-
-
-
-</ul></div><div class="thm"><a id="equiv_equiv_iso_hom"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L190">equiv_equiv_iso_hom</a></span> <span class="decl_args">(e : X ≃ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#equiv_equiv_iso">equiv_equiv_iso</a> X Y) e = <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#equiv.to_iso">equiv.to_iso</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
-
-
-</ul></div><div class="thm"><a id="equiv_equiv_iso_inv"></a>      <span class="decl_name"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean#L191">equiv_equiv_iso_inv</a></span> <span class="decl_args">(e : X ≅ Y)</span> <span class="decl_args">:</span>       <div class="decl_type">⇑(<a href="https://leanprover-community.github.io/mathlib_docs/data/equiv/basic.html#equiv.symm">equiv.symm</a> (<a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#equiv_equiv_iso">equiv_equiv_iso</a> X Y)) e = <a href="https://leanprover-community.github.io/mathlib_docs/category_theory/types.html#category_theory.iso.to_equiv">category_theory.iso.to_equiv</a> e</div>
-<p></p>
-       <ul>
-<li>Implicit arguments: <span class="impl_arg">{X Y : Type u}</span></li>
-<li>Attributes: simp</li>
 
 
 </ul></div>
@@ -1396,40 +1278,22 @@ allows us to use these functors in category theory.</p>
 <h1>Lean <a href="https://leanprover-community.github.io">mathlib</a> docs</h1><div class="search">
 <script async src="https://cse.google.com/cse.js?cx=013315010647789779870:7aikx0zd1z9"></script>
 <div class="gcse-search"></div>
-</div><h2><a href="#top">types</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/category_theory/types.lean">(view source on GitHub)</a></div><a href="#category_theory.epi_iff_surjective">category_theory.epi_iff_surjective</a><br>
-<a href="#category_theory.functor.sections">category_theory.functor.sections</a><br>
-<a href="#category_theory.functor_to_types.comp">category_theory.functor_to_types.comp</a><br>
-<a href="#category_theory.functor_to_types.hcomp">category_theory.functor_to_types.hcomp</a><br>
-<a href="#category_theory.functor_to_types.map_comp">category_theory.functor_to_types.map_comp</a><br>
-<a href="#category_theory.functor_to_types.map_id">category_theory.functor_to_types.map_id</a><br>
-<a href="#category_theory.functor_to_types.naturality">category_theory.functor_to_types.naturality</a><br>
-<a href="#category_theory.hom_of_element">category_theory.hom_of_element</a><br>
-<a href="#category_theory.hom_of_element_eq_iff">category_theory.hom_of_element_eq_iff</a><br>
-<a href="#category_theory.iso.to_equiv">category_theory.iso.to_equiv</a><br>
-<a href="#category_theory.iso.to_equiv_fun">category_theory.iso.to_equiv_fun</a><br>
-<a href="#category_theory.iso.to_equiv_symm_fun">category_theory.iso.to_equiv_symm_fun</a><br>
-<a href="#category_theory.mono_iff_injective">category_theory.mono_iff_injective</a><br>
-<a href="#category_theory.of_type_functor">category_theory.of_type_functor</a><br>
-<a href="#category_theory.of_type_functor_map">category_theory.of_type_functor_map</a><br>
-<a href="#category_theory.of_type_functor_obj">category_theory.of_type_functor_obj</a><br>
-<a href="#category_theory.types">category_theory.types</a><br>
-<a href="#category_theory.types_comp">category_theory.types_comp</a><br>
-<a href="#category_theory.types_hom">category_theory.types_hom</a><br>
-<a href="#category_theory.types_id">category_theory.types_id</a><br>
-<a href="#category_theory.ulift_functor">category_theory.ulift_functor</a><br>
-<a href="#category_theory.ulift_functor_faithful">category_theory.ulift_functor_faithful</a><br>
-<a href="#category_theory.ulift_functor_full">category_theory.ulift_functor_full</a><br>
-<a href="#category_theory.ulift_functor_map">category_theory.ulift_functor_map</a><br>
-<a href="#category_theory.ulift_trivial">category_theory.ulift_trivial</a><br>
-<a href="#equiv.to_iso">equiv.to_iso</a><br>
-<a href="#equiv.to_iso_hom">equiv.to_iso_hom</a><br>
-<a href="#equiv.to_iso_inv">equiv.to_iso_inv</a><br>
-<a href="#equiv_equiv_iso">equiv_equiv_iso</a><br>
-<a href="#equiv_equiv_iso_hom">equiv_equiv_iso_hom</a><br>
-<a href="#equiv_equiv_iso_inv">equiv_equiv_iso_inv</a><br>
-<a href="#equiv_iso_iso">equiv_iso_iso</a><br>
-<a href="#equiv_iso_iso_hom">equiv_iso_iso_hom</a><br>
-<a href="#equiv_iso_iso_inv">equiv_iso_iso_inv</a><br>
+</div><h2><a href="#top">contracting</a></h2><div class="gh_link"><a href="https://github.com/leanprover-community/mathlib/blob/004618ad1ad06391872e11a77bf7440ef575e839/src/topology/metric_space/contracting.lean">(view source on GitHub)</a></div><a href="#contracting_with">contracting_with</a><br>
+<a href="#contracting_with.aposteriori_dist_iterate_fixed_point_le">contracting_with.aposteriori_dist_iterate_fixed_point_le</a><br>
+<a href="#contracting_with.apriori_dist_iterate_fixed_point_le">contracting_with.apriori_dist_iterate_fixed_point_le</a><br>
+<a href="#contracting_with.dist_fixed_point_fixed_point_of_dist_le'">contracting_with.dist_fixed_point_fixed_point_of_dist_le'</a><br>
+<a href="#contracting_with.dist_fixed_point_le">contracting_with.dist_fixed_point_le</a><br>
+<a href="#contracting_with.dist_inequality">contracting_with.dist_inequality</a><br>
+<a href="#contracting_with.dist_le_of_fixed_point">contracting_with.dist_le_of_fixed_point</a><br>
+<a href="#contracting_with.exists_fixed_point">contracting_with.exists_fixed_point</a><br>
+<a href="#contracting_with.fixed_point">contracting_with.fixed_point</a><br>
+<a href="#contracting_with.fixed_point_is_fixed">contracting_with.fixed_point_is_fixed</a><br>
+<a href="#contracting_with.fixed_point_lipschitz_in_map">contracting_with.fixed_point_lipschitz_in_map</a><br>
+<a href="#contracting_with.fixed_point_unique">contracting_with.fixed_point_unique</a><br>
+<a href="#contracting_with.fixed_point_unique'">contracting_with.fixed_point_unique'</a><br>
+<a href="#contracting_with.one_sub_K_pos">contracting_with.one_sub_K_pos</a><br>
+<a href="#contracting_with.to_lipschitz_with">contracting_with.to_lipschitz_with</a><br>
+<a href="#fixed_point_of_tendsto_iterate">fixed_point_of_tendsto_iterate</a><br>
 </div></div>
 
         </div>
