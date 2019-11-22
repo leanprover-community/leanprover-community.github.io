@@ -1,0 +1,39 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/07549Definingafunctionbyorelim.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html">Defining a function by or.elim</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181608982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181608982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181608982">Bhavik Mehta (Nov 22 2019 at 04:19)</a>:</h4>
+<p>I'm trying to define a function which has the hypothesis <code>r ≤ n</code>, and it's defined differently if <code>r = n</code> compared to <code>r &lt; n</code>, but <code>or.elim</code> doesn't work since the result isn't a Prop, any help appreciated. (Simplified example - the definition of <code>rset</code> shouldn't matter at all, but it has type <code>rset : ℕ → Π (X : Type u_2) [_inst_3 : fintype X], Type u_2</code>):</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">f1</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">constant</span> <span class="n">f2</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">r</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">decompose</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="err">𝒜</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hr2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">or</span><span class="bp">.</span><span class="n">elim</span> <span class="o">(</span><span class="n">lt_or_eq_of_le</span> <span class="n">hr2</span><span class="o">)</span> <span class="bp">_</span> <span class="bp">_</span>
+
+<span class="c1">-- I want decompose A n _ = f1 n A</span>
+<span class="c1">--    and decompose A r _ = (f1 r A) ∪ f2 (decompose A (r+1) _)</span>
+</pre></div>
+
+<a name="181609042"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181609042" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181609042">Bhavik Mehta (Nov 22 2019 at 04:20)</a>:</h4>
+<p><code>If then else</code> doesn't work for me, since in the <code>then</code> part I lose the proof that <code>r = n</code>, which I need to make it typecheck</p>
+
+<a name="181609058"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181609058" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181609058">Bhavik Mehta (Nov 22 2019 at 04:21)</a>:</h4>
+<p>Ooh <code>dite</code> looks about right...</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
