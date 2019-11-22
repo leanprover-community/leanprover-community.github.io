@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (6 messages, latest: Nov 22 2019 at 11:43)
+* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (12 messages, latest: Nov 22 2019 at 12:58)
 
-* [Coq for Lean users (or vice versa)?](67254CoqforLeanusersorviceversa.html) (3 messages, latest: Nov 22 2019 at 07:03)
+* [Coq for Lean users (or vice versa)?](67254CoqforLeanusersorviceversa.html) (4 messages, latest: Nov 22 2019 at 12:46)
 
 * [add_monoid N](17501addmonoidN.html) (4 messages, latest: Nov 21 2019 at 14:25)
 

@@ -65,6 +65,31 @@ but is expected to have type
 <p>Now I'd usually just use <code>rw</code> to sort this out - but I'd have to go into tactic mode for that first and it might be awkward to prove things about this definition then. I can't get <code>▸</code> to work either, it gives some confusing messages about motives. </p>
 <p>Alternatively I'd be interested if this definition could be given downwards instead - the things I tried didn't work...</p>
 
+<a name="181633786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181633786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181633786">Edward Ayers (Nov 22 2019 at 12:47)</a>:</h4>
+<p>I feel like doing a cast in the above definition is unavoidable since <code>(n-k) != (n - (k+1) + 1) </code> when <code>n=k</code>, which is fine because <code>hk : k+1 &lt;= n</code> but still requires reasoning.</p>
+
+<a name="181633894"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181633894" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181633894">Simon Hudon (Nov 22 2019 at 12:49)</a>:</h4>
+<p>That's true and that suggests to me that your types are overly dependent. You might want to separate them into types that you don't have to rewrite so much and a proposition on those types that adds the nuances that you now encode with dependent types.</p>
+
+<a name="181634006"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181634006" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181634006">Edward Ayers (Nov 22 2019 at 12:50)</a>:</h4>
+<p>It's pretty disheartening that dependent types seem to cause more problems than they solve in situations like this.</p>
+
+<a name="181634228"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181634228" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181634228">Edward Ayers (Nov 22 2019 at 12:53)</a>:</h4>
+<p>You might be able to write it out as upward induction by using wf induction with the size being <code>n - r</code>.</p>
+
+<a name="181634342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181634342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181634342">Marc Huisinga (Nov 22 2019 at 12:55)</a>:</h4>
+<p>is this really an issue with dependent types, though?<br>
+i feel like carrying around an invariant everywhere you go like <code>rset</code> seems to do is rarely the right thing to do anyways because you always need to ensure that it is maintained.</p>
+
+<a name="181634582"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181634582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181634582">Marc Huisinga (Nov 22 2019 at 12:58)</a>:</h4>
+<p>this is usually easy when you already have a full interface that maintains the invariant for you (e.g. as is the case for <code>finset</code>) but even then it can be cumbersome if you need to work harder in order to use the interface (e.g. mapping over a finset requires injectivity)</p>
+
 
 {% endraw %}
 
