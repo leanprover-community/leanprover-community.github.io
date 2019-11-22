@@ -294,6 +294,39 @@ i feel like carrying around an invariant everywhere you go like <code>rset</code
 
 <p>The commented out line works fine but involves a stupid function. Without it I'm surprised I can't get the stupid triangle to work and I'm also surprised that <code>omega</code> wouldn't work without a lot of coaxing. I still have a lot to learn :-/</p>
 
+<a name="181639722"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639722" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639722">Bhavik Mehta (Nov 22 2019 at 14:00)</a>:</h4>
+<p><code>noncomputable</code>! But this thing should be computable</p>
+
+<a name="181639783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639783">Kevin Buzzard (Nov 22 2019 at 14:01)</a>:</h4>
+<p>Is that because of the instance I added? I couldn't get union to work</p>
+
+<a name="181639786"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639786" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639786">Rob Lewis (Nov 22 2019 at 14:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span> Are you using a recent mathlib? Seul fixed some of the issues with coaxing omega last month.</p>
+
+<a name="181639861"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639861" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639861">Kevin Buzzard (Nov 22 2019 at 14:02)</a>:</h4>
+<p>I hope so because I just submitted a PR</p>
+
+<a name="181639868"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639868" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639868">Bhavik Mehta (Nov 22 2019 at 14:02)</a>:</h4>
+<p>Oh the union should work without an instance I think</p>
+
+<a name="181639937"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639937" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639937">Bhavik Mehta (Nov 22 2019 at 14:03)</a>:</h4>
+<p>Sorry I think that's my fault</p>
+
+<a name="181640400"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181640400" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181640400">Bhavik Mehta (Nov 22 2019 at 14:07)</a>:</h4>
+<p>Okay yeah that was my fault, since I abstracted away what <code>rset</code> was, it couldn't automatically derive <code>decidable_eq</code> for it, and so <code>finset (rset _ _)</code> didn't have <code>has_union</code></p>
+
+<a name="181640443"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181640443" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181640443">Bhavik Mehta (Nov 22 2019 at 14:07)</a>:</h4>
+<p>Changing the <code>constant rset</code> line to:<br>
+<code>def rset (r : ℕ) (X) [fintype X] := {x : finset X // x ∈ finset.powerset_len r (fintype.elems X)}</code> should make <code>has_union</code> work</p>
+
 
 {% endraw %}
 

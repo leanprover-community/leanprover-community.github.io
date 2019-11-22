@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [computable real functions](16586computablerealfunctions.html) (38 messages, latest: Nov 22 2019 at 13:58)
+* [computable real functions](16586computablerealfunctions.html) (39 messages, latest: Nov 22 2019 at 14:09)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (237 messages, latest: Nov 22 2019 at 13:54)
 
