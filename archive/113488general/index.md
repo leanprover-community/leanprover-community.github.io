@@ -9,11 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [option golf puzzle](59308optiongolfpuzzle.html) (6 messages, latest: Nov 22 2019 at 16:41)
+
 * [computable real functions](16586computablerealfunctions.html) (39 messages, latest: Nov 22 2019 at 14:09)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (237 messages, latest: Nov 22 2019 at 13:54)
-
-* [option golf puzzle](59308optiongolfpuzzle.html) (5 messages, latest: Nov 22 2019 at 13:03)
 
 * [missing cases in auto_cases?](31463missingcasesinautocases.html) (9 messages, latest: Nov 22 2019 at 02:08)
 

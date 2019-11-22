@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [analysis](03749analysis.html) (69 messages, latest: Nov 22 2019 at 16:58)
+
 * [abel multiplication](00067abelmultiplication.html) (7 messages, latest: Nov 21 2019 at 21:44)
 
 * [image under smul/add/etc](31750imageundersmuladdetc.html) (3 messages, latest: Nov 21 2019 at 20:33)
@@ -16,8 +18,6 @@ permalink: archive/116395maths/index.html
 * [$$\[-\infty,\infty\]$$ in Lean?](58148inftyinftyinLean.html) (253 messages, latest: Nov 21 2019 at 18:22)
 
 * [Convergence uniform in one argument](84684Convergenceuniforminoneargument.html) (12 messages, latest: Nov 20 2019 at 17:13)
-
-* [analysis](03749analysis.html) (56 messages, latest: Nov 17 2019 at 19:13)
 
 * [restriction of scalars](85589restrictionofscalars.html) (4 messages, latest: Nov 17 2019 at 16:38)
 

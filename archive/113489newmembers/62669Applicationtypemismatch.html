@@ -96,6 +96,49 @@ If you can make the "output garbage" somewhat useful even if the input is garbag
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181637130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181637130">Kevin Buzzard (Nov 22 2019 at 13:29)</a>:</h4>
 <p><code>toto</code> is true by <code>rfl</code> but had this not been the case, the goal would have changed to <code>n = n + 1 - 1</code>. Possibly.</p>
 
+<a name="181652488"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652488" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652488">Vincent Beffara (Nov 22 2019 at 16:16)</a>:</h4>
+<blockquote>
+<p>This example will work if you <code>revert h</code> before the rewrite. Then both occurrences of <code>n</code> will get rewritten at the same time. But in general, this will be frustrating, and yes it is the reason why 1/0=0.</p>
+</blockquote>
+<p>Ah, that is nice to know. So how can I tell whether <code>rw</code> will rewrite the first occurrence of <code>n</code> or all of them at once?</p>
+<p>And a related question, if the <code>h</code> is not part of my environment but a field in some structure somewhere (and the <code>n</code> is in another field of the same structure), does all that mean that I will have to deconstruct the whole structure before I can apply <code>rw</code> then?</p>
+
+<a name="181652576"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652576" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652576">Kevin Buzzard (Nov 22 2019 at 16:17)</a>:</h4>
+<blockquote>
+<p>You only need to check <code>good x</code> on theorems that need it, but not on the function itself.<br>
+If you can make the "output garbage" somewhat useful even if the input is garbage, that's even better, because it will allow you to drop some checks of <code>good x</code>. That's the reason why <code>1/0 = 0</code> and not <code>1/0 = 37</code> even though Kevin would have liked that.</p>
+</blockquote>
+<p>It's morally dishonest to prove theorems about junk.</p>
+
+<a name="181652653"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652653" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652653">Kevin Buzzard (Nov 22 2019 at 16:18)</a>:</h4>
+<p>You can target which <code>n</code>s <code>rw</code> will rewrite, it's somewhat arcane but it's possible.</p>
+
+<a name="181652711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652711">Kevin Buzzard (Nov 22 2019 at 16:19)</a>:</h4>
+<p>See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md</a></p>
+
+<a name="181652739"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652739" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652739">Vincent Beffara (Nov 22 2019 at 16:19)</a>:</h4>
+<p>Is it arcane even if I want to target "all the <code>n</code>s even those hidden in assumptions that show up as <code>_</code>"?</p>
+
+<a name="181652837"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652837" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652837">Kevin Buzzard (Nov 22 2019 at 16:20)</a>:</h4>
+<p>I just usually proceed by trial and error :-/ I try <code>rw</code>, <code>erw</code>, <code>simp only</code> and then I ask here :D</p>
+
+<a name="181652932"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181652932" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181652932">Vincent Beffara (Nov 22 2019 at 16:21)</a>:</h4>
+<blockquote>
+<p>See <a href="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md">https://github.com/leanprover-community/mathlib/blob/master/docs/extras/conv.md</a></p>
+</blockquote>
+<p>Feels a bit brittle to navigate through the expression and tag all the occurrences one by one ...</p>
+
+<a name="181654564"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181654564" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181654564">Patrick Massot (Nov 22 2019 at 16:36)</a>:</h4>
+<p>The slightly confusing rule is: <code>rw</code> rewrites every occurrence but it has to be the exact same rewriting. For instance, if your goal contains <code>((a+b)+ (c+d)) + (a + b)</code>, <code>rw add_comm</code> will perform only one rewrite, although there are five additions, because it will see the outermost addition (second to last one in left to right order), specialize the <code>add_comm</code> lemma to <code>add_comm ((a+b)+(c+d)) (a+b)</code> and perform all rewrite using that specialized lemma.  On the other hand <code>rw add_comm a b</code> will perform two rewriting, because that specific lemma matches two subterms in the goal.</p>
+
 
 {% endraw %}
 

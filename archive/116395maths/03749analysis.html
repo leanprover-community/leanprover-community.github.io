@@ -260,6 +260,65 @@ permalink: archive/116395maths/03749analysis.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/180968589" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#180968589">Luca Seemungal (Nov 17 2019 at 19:13)</a>:</h4>
 <p>Sounds interesting. I've no idea :)</p>
 
+<a name="181654370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181654370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181654370">Luca Seemungal (Nov 22 2019 at 16:35)</a>:</h4>
+<p>what does the  <code>L[𝕜] F</code> in <code>analysis/calculus/fderiv.lean</code> mean? </p>
+<div class="codehilite"><pre><span></span>def has_fderiv_at_filter (f : E → F) (f&#39; : E →L[𝕜] F) (x : E) (L : filter E) :=
+is_o (λ x&#39;, f x&#39; - f x - f&#39; (x&#39; - x)) (λ x&#39;, x&#39; - x) L
+</pre></div>
+
+<a name="181654524"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181654524" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181654524">Reid Barton (Nov 22 2019 at 16:36)</a>:</h4>
+<p>I think <code>→L[𝕜]</code> means a continuous 𝕜-linear map. Jump to definition should help.</p>
+
+<a name="181655152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181655152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181655152">Luca Seemungal (Nov 22 2019 at 16:42)</a>:</h4>
+<p>Cheers! The thing is though, when I <code>git clone</code> mathlib, and then I open it in vs-code, none of it seems to compile? Do I have to grab some binaries from somewhere? Do I have to just wait?</p>
+
+<a name="181655231"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181655231" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181655231">Patrick Massot (Nov 22 2019 at 16:43)</a>:</h4>
+<p>What are you doing? Are you contributing to mathlib or using mathlib?</p>
+
+<a name="181655316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181655316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181655316">Luca Seemungal (Nov 22 2019 at 16:44)</a>:</h4>
+<p>Contributing / messing about with it to understand it more</p>
+
+<a name="181655410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181655410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181655410">Patrick Massot (Nov 22 2019 at 16:45)</a>:</h4>
+<p>Ok, then git clone is a good first move. Then you need to checkout the <code>lean-3.4.2</code> branch and call <code>cache-olean --fetch</code> (assuming your installed the supporting tooling as described in mathlib install page).</p>
+
+<a name="181655631"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181655631" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181655631">Luca Seemungal (Nov 22 2019 at 16:47)</a>:</h4>
+<p>Thanks! This seems to be working a bit more. I now get errors like</p>
+<div class="codehilite"><pre><span></span>file &#39;analysis/asymptotics&#39; not found in the LEAN_PATH
+</pre></div>
+
+<a name="181656069"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181656069" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181656069">Patrick Massot (Nov 22 2019 at 16:52)</a>:</h4>
+<p>Where are you seeing this? Did you restart the Lean server after fetching oleans?</p>
+
+<a name="181656383"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181656383" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181656383">Luca Seemungal (Nov 22 2019 at 16:56)</a>:</h4>
+<p>yes, I have restarted the lean server. Now I get issues like</p>
+<div class="codehilite"><pre><span></span>could not resolve import: analysis.calculus.fderiv
+</pre></div>
+
+<a name="181656419"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181656419" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181656419">Patrick Massot (Nov 22 2019 at 16:56)</a>:</h4>
+<p>Did you open the mathlib folder in VScode?</p>
+
+<a name="181656440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181656440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181656440">Patrick Massot (Nov 22 2019 at 16:57)</a>:</h4>
+<p>Or directly a file?</p>
+
+<a name="181656454"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181656454" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181656454">Patrick Massot (Nov 22 2019 at 16:57)</a>:</h4>
+<p>Or a subfolder of the mathlib folder?</p>
+
+<a name="181656607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/analysis/near/181656607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/03749analysis.html#181656607">Luca Seemungal (Nov 22 2019 at 16:58)</a>:</h4>
+<p>Ah, yes! I had opened <code>src</code>. Everything is working fine now, thanks!</p>
+
 
 {% endraw %}
 
