@@ -41,6 +41,30 @@ permalink: archive/113489newmembers/07549Definingafunctionbyorelim.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181619685" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181619685">Patrick Massot (Nov 22 2019 at 08:58)</a>:</h4>
 <p>Let's also repeat that you can write if ... then ... else... also keeping the assumption, using <code>if h : ... then ... else ...</code>.</p>
 
+<a name="181630190"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181630190" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181630190">Bhavik Mehta (Nov 22 2019 at 11:43)</a>:</h4>
+<p>I'm struggling with this definition still - there seems to be a couple of factors making this awkward... It's kind of defined inductively downward, starting from r=n and going down to r=0. So I'm trying first to define a flipped version, with <code>k = n-r</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">decompose&#39;</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">k</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">f1</span> <span class="n">n</span> <span class="n">A</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">hk</span> <span class="o">:=</span> <span class="n">f1</span> <span class="bp">_</span> <span class="n">A</span> <span class="err">∪</span> <span class="o">(</span><span class="n">f2</span> <span class="o">(</span><span class="n">decompose&#39;</span> <span class="n">k</span> <span class="bp">_</span><span class="o">))</span>
+</pre></div>
+
+
+<p>but I'm getting the error </p>
+<div class="codehilite"><pre><span></span>type mismatch at application
+  f2 (decompose&#39; k ?m_1)
+term
+  decompose&#39; k ?m_1
+has type
+  finset (rset (n - k) X)
+but is expected to have type
+  finset (rset (n - (k + 1) + 1) X)
+</pre></div>
+
+
+<p>Now I'd usually just use <code>rw</code> to sort this out - but I'd have to go into tactic mode for that first and it might be awkward to prove things about this definition then. I can't get <code>▸</code> to work either, it gives some confusing messages about motives. </p>
+<p>Alternatively I'd be interested if this definition could be given downwards instead - the things I tried didn't work...</p>
+
 
 {% endraw %}
 
