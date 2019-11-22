@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [option golf puzzle](59308optiongolfpuzzle.html) (6 messages, latest: Nov 22 2019 at 16:41)
+* [option golf puzzle](59308optiongolfpuzzle.html) (7 messages, latest: Nov 22 2019 at 17:20)
 
 * [computable real functions](16586computablerealfunctions.html) (39 messages, latest: Nov 22 2019 at 14:09)
 
