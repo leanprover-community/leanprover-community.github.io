@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Coq for Lean users (or vice versa)?](67254CoqforLeanusersorviceversa.html) (1 message, latest: Nov 22 2019 at 01:51)
+* [Coq for Lean users (or vice versa)?](67254CoqforLeanusersorviceversa.html) (2 messages, latest: Nov 22 2019 at 03:31)
 
 * [add_monoid N](17501addmonoidN.html) (4 messages, latest: Nov 21 2019 at 14:25)
 
