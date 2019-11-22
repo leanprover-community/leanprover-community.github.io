@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis](03749analysis.html) (70 messages, latest: Nov 22 2019 at 17:00)
+* [analysis](03749analysis.html) (73 messages, latest: Nov 22 2019 at 18:07)
 
 * [abel multiplication](00067abelmultiplication.html) (7 messages, latest: Nov 21 2019 at 21:44)
 
