@@ -9,9 +9,9 @@ permalink: archive/187764Leanforteaching/index.html
 
 ### Topics:
 
-* [Making Lean web games](00387MakingLeanwebgames.html) (1 message, latest: Nov 16 2019 at 10:50)
+* [graphs](66822graphs.html) (7 messages, latest: Nov 22 2019 at 02:05)
 
-* [graphs](66822graphs.html) (6 messages, latest: Oct 23 2019 at 06:45)
+* [Making Lean web games](00387MakingLeanwebgames.html) (1 message, latest: Nov 16 2019 at 10:50)
 
 * [natural number game](77211naturalnumbergame.html) (21 messages, latest: Oct 14 2019 at 02:23)
 
