@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (12 messages, latest: Nov 22 2019 at 12:58)
+* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (39 messages, latest: Nov 22 2019 at 13:59)
+
+* [Application type mismatch](62669Applicationtypemismatch.html) (10 messages, latest: Nov 22 2019 at 13:29)
 
 * [Coq for Lean users (or vice versa)?](67254CoqforLeanusersorviceversa.html) (4 messages, latest: Nov 22 2019 at 12:46)
 

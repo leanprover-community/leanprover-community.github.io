@@ -9,21 +9,21 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [option golf puzzle](59308optiongolfpuzzle.html) (3 messages, latest: Nov 22 2019 at 09:56)
+* [computable real functions](16586computablerealfunctions.html) (38 messages, latest: Nov 22 2019 at 13:58)
+
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (237 messages, latest: Nov 22 2019 at 13:54)
+
+* [option golf puzzle](59308optiongolfpuzzle.html) (5 messages, latest: Nov 22 2019 at 13:03)
 
 * [missing cases in auto_cases?](31463missingcasesinautocases.html) (9 messages, latest: Nov 22 2019 at 02:08)
 
 * [VScode goodies](03279VScodegoodies.html) (42 messages, latest: Nov 21 2019 at 21:40)
-
-* [computable real functions](16586computablerealfunctions.html) (35 messages, latest: Nov 21 2019 at 16:49)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (27 messages, latest: Nov 21 2019 at 14:23)
 
 * [check out mlang](16870checkoutmlang.html) (4 messages, latest: Nov 21 2019 at 12:27)
 
 * [linting in CI](98585lintinginCI.html) (20 messages, latest: Nov 20 2019 at 15:25)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (218 messages, latest: Nov 20 2019 at 15:03)
 
 * [hole command in tactic mode](94076holecommandintacticmode.html) (1 message, latest: Nov 20 2019 at 10:22)
 

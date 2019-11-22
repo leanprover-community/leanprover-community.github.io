@@ -1,0 +1,102 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/62669Applicationtypemismatch.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html">Application type mismatch</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181635755"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181635755" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181635755">Vincent Beffara (Nov 22 2019 at 13:12)</a>:</h4>
+<p>Hi,</p>
+<p>Still trying to figure out how lean works ... so I have a function defined under the condition that some predicate holds on the argument, something like</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">good</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">whatever</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="n">something</span>
+<span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">whatever</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">x</span><span class="o">)</span> <span class="o">:=</span> <span class="n">blah</span>
+</pre></div>
+
+
+<p>and I would like to rewrite the argument <code>x</code> in <code>f x h</code>, but I get the error <code>[check] application type mismatch at ...</code> stating, if I understand the message correctly, that after rewriting the <code>x</code> to some <code>y</code>, then we would get <code>f y h</code> with <code>h : good x</code> instead of <code>good y</code>. Certainly doing the same rewrite inside of <code>h</code> would make it fit, but if I understand it right, <code>rw</code> only acts at one location at a time.</p>
+<p>What is the right way to do this rewrite? Is that what <code>simp only</code> is for? Is that kind of issue the reason why <code>1/0=0</code>?</p>
+
+<a name="181635787"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181635787" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181635787">Vincent Beffara (Nov 22 2019 at 13:13)</a>:</h4>
+<p>OK, more explicit example:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">good</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span>
+<span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="kn">lemma</span> <span class="n">toto</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">norm_num</span> <span class="o">}</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">f</span> <span class="n">n</span> <span class="n">h</span> <span class="o">:=</span>
+    <span class="k">begin</span>
+        <span class="n">rw</span> <span class="o">(</span><span class="bp">@</span><span class="n">toto</span> <span class="n">n</span><span class="o">),</span>
+        <span class="n">sorry</span>
+    <span class="kn">end</span>
+</pre></div>
+
+<a name="181636725"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181636725" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181636725">Johan Commelin (Nov 22 2019 at 13:24)</a>:</h4>
+<blockquote>
+<p>Is that kind of issue the reason why <code>1/0=0</code>?</p>
+</blockquote>
+<p>Yes, this is certainly one of the reasons</p>
+
+<a name="181636737"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181636737" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181636737">Rob Lewis (Nov 22 2019 at 13:24)</a>:</h4>
+<p>This example will work if you <code>revert h</code> before the rewrite. Then both occurrences of <code>n</code> will get rewritten at the same time. But in general, this will be frustrating, and yes it is the reason why 1/0=0.</p>
+
+<a name="181636771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181636771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181636771">Rob Lewis (Nov 22 2019 at 13:24)</a>:</h4>
+<p>In mathlib we generally prefer to "totalize" f, that is, to give it a default value when <code>good n</code> doesn't hold. Something like</p>
+
+<a name="181636777"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181636777" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181636777">Johan Commelin (Nov 22 2019 at 13:24)</a>:</h4>
+<p><span class="user-mention" data-user-id="242586">@Vincent Beffara</span> It turns out that it is often easier to define your function in such a way that it garbage whenever the input is garbage, instead of defining a partial function</p>
+
+<a name="181636778"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181636778" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181636778">Rob Lewis (Nov 22 2019 at 13:24)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="n">derive</span> <span class="n">decidable</span><span class="o">]</span> <span class="n">def</span> <span class="n">good</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span>
+
+<span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="bp">ℕ</span> <span class="o">:=</span> <span class="k">if</span> <span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span> <span class="k">then</span> <span class="n">n</span> <span class="k">else</span> <span class="n">default</span> <span class="bp">_</span>
+
+<span class="kn">lemma</span> <span class="n">f_val</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">f</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="n">f</span><span class="o">,</span> <span class="n">h</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">toto</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">norm_num</span> <span class="o">}</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">f</span> <span class="n">n</span> <span class="o">:=</span>
+    <span class="k">begin</span>
+        <span class="n">rw</span> <span class="o">[(</span><span class="bp">@</span><span class="n">toto</span> <span class="n">n</span><span class="o">)]</span> <span class="n">at</span> <span class="n">h</span> <span class="err">⊢</span><span class="o">,</span>
+        <span class="n">sorry</span>
+    <span class="kn">end</span>
+</pre></div>
+
+<a name="181636915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181636915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181636915">Johan Commelin (Nov 22 2019 at 13:26)</a>:</h4>
+<p>You only need to check <code>good x</code> on theorems that need it, but not on the function itself.<br>
+If you can make the "output garbage" somewhat useful even if the input is garbage, that's even better, because it will allow you to drop some checks of <code>good x</code>. That's the reason why <code>1/0 = 0</code> and not <code>1/0 = 37</code> even though Kevin would have liked that.</p>
+
+<a name="181637090"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181637090" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181637090">Kevin Buzzard (Nov 22 2019 at 13:28)</a>:</h4>
+<p>Here's another trick which is sometimes helpful:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">norm_num</span>
+
+<span class="n">def</span> <span class="n">good</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="kt">Prop</span> <span class="o">:=</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">n</span>
+<span class="n">def</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span><span class="o">)</span> <span class="o">:=</span> <span class="n">n</span>
+<span class="kn">lemma</span> <span class="n">toto</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">by</span> <span class="o">{</span> <span class="n">norm_num</span> <span class="o">}</span>
+<span class="kn">example</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">good</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">f</span> <span class="n">n</span> <span class="n">h</span> <span class="o">:=</span>
+  <span class="k">begin</span>
+    <span class="k">have</span> <span class="o">:</span> <span class="mi">3</span> <span class="err">∣</span> <span class="n">f</span> <span class="o">(</span><span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">-</span> <span class="mi">1</span><span class="o">)</span> <span class="n">h</span><span class="o">,</span> <span class="n">sorry</span><span class="o">,</span>
+    <span class="n">convert</span> <span class="n">this</span><span class="o">,</span>
+  <span class="kn">end</span>
+</pre></div>
+
+<a name="181637130"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Application%20type%20mismatch/near/181637130" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/62669Applicationtypemismatch.html#181637130">Kevin Buzzard (Nov 22 2019 at 13:29)</a>:</h4>
+<p><code>toto</code> is true by <code>rfl</code> but had this not been the case, the goal would have changed to <code>n = n + 1 - 1</code>. Possibly.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

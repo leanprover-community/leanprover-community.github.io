@@ -90,6 +90,210 @@ i feel like carrying around an invariant everywhere you go like <code>rset</code
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181634582" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181634582">Marc Huisinga (Nov 22 2019 at 12:58)</a>:</h4>
 <p>this is usually easy when you already have a full interface that maintains the invariant for you (e.g. as is the case for <code>finset</code>) but even then it can be cumbersome if you need to work harder in order to use the interface (e.g. mapping over a finset requires injectivity)</p>
 
+<a name="181634814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181634814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181634814">Simon Hudon (Nov 22 2019 at 13:01)</a>:</h4>
+<blockquote>
+<p>this is usually easy when you already have a full interface that maintains the invariant for you (e.g. as is the case for <code>finset</code>) </p>
+</blockquote>
+<p>Even in this case, a lot of the reasoning is encapsulated in the <code>multiset</code> module. This api is carefully layered, separating invariants and maintaining them when it is convenient and relevant.</p>
+<blockquote>
+<p>but even then it can be cumbersome if you need to work harder in order to use the interface (e.g. mapping over a finset requires injectivity)</p>
+</blockquote>
+<p>welll ... <code>finset</code> has <code>image</code> which does not require infectivity. Some apis aren't great to work with but I think this one does a great job.</p>
+
+<a name="181635212"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181635212" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181635212">Kevin Buzzard (Nov 22 2019 at 13:06)</a>:</h4>
+<p>I would attempt to show you how to fix the issue in this case but there are so many undefined variables that I can't cut and paste easily :-/</p>
+
+<a name="181635234"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181635234" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181635234">Marc Huisinga (Nov 22 2019 at 13:06)</a>:</h4>
+<blockquote>
+<p>welll ... <code>finset</code> has <code>image</code> which does not require infectivity. Some apis aren't great to work with but I think this one does a great job.</p>
+</blockquote>
+<p>i agree!</p>
+
+<a name="181635334"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181635334" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181635334">Marc Huisinga (Nov 22 2019 at 13:08)</a>:</h4>
+<p>i did not know about <code>image</code>. <code>finset</code> is definitely not a good example to choose (edit: for me quibbling about it being hard to maintain invariants).</p>
+
+<a name="181635814"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181635814" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181635814">Bhavik Mehta (Nov 22 2019 at 13:13)</a>:</h4>
+<blockquote>
+<p>You might be able to write it out as upward induction by using wf induction with the size being <code>n - r</code>.</p>
+</blockquote>
+<p>Yeah, this was the idea of the flipped version with <code>k = n-r</code></p>
+
+<a name="181635890"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181635890" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181635890">Bhavik Mehta (Nov 22 2019 at 13:14)</a>:</h4>
+<blockquote>
+<p>I would attempt to show you how to fix the issue in this case but there are so many undefined variables that I can't cut and paste easily :-/</p>
+</blockquote>
+<p>I hoped giving <code>f1</code> and <code>f2</code> as constants would help copy-pasting, but I'll abstract a bit more</p>
+
+<a name="181635896"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181635896" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181635896">Simon Hudon (Nov 22 2019 at 13:14)</a>:</h4>
+<blockquote>
+<p>i did not know about <code>image</code>. <code>finset</code> is definetly not a good example to choose.</p>
+</blockquote>
+<p>I actually really like the examples of <code>finset</code> and <code>finmap</code> for API designed because of how carefully layered they are. They also show two different directions. <code>finset</code> is an invariant layered on top of a quotient. In a way, <code>finmap</code> is also an invariant on top of a quotient also because it's defined in terms of <code>multimap</code> but most useful lemmas relate <code>finmap</code> to <code>alist</code> and makes the design upside down: a quotient on top of an invariant.</p>
+
+<a name="181636171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181636171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181636171">Bhavik Mehta (Nov 22 2019 at 13:17)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">X</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+
+<span class="kn">constant</span> <span class="n">rset</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">f1</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">constant</span> <span class="n">f2</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">r</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">decompose&#39;</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">k</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">f1</span> <span class="n">n</span> <span class="n">A</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">hk</span> <span class="o">:=</span> <span class="n">f1</span> <span class="bp">_</span> <span class="n">A</span> <span class="err">∪</span> <span class="o">(</span><span class="n">f2</span> <span class="o">(</span><span class="n">decompose&#39;</span> <span class="n">k</span> <span class="bp">_</span><span class="o">))</span>
+
+<span class="c1">-- I want decompose A n _ = f1 n A</span>
+<span class="c1">--    and decompose A r _ = (f1 r A) ∪ f2 (decompose A (r+1) _)</span>
+<span class="c1">-- so I&#39;m using decompose A r = decompose&#39; A (n-r)</span>
+</pre></div>
+
+
+<p>This should be copy-paste-able</p>
+
+<a name="181636472"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181636472" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181636472">Simon Hudon (Nov 22 2019 at 13:20)</a>:</h4>
+<p>What is the definition of <code>rset</code>?</p>
+
+<a name="181636504"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181636504" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181636504">Bhavik Mehta (Nov 22 2019 at 13:21)</a>:</h4>
+<p>Other attempt which also doesn't work:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">decompose</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">r</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">A</span> <span class="n">r</span> <span class="n">hr</span><span class="o">,</span> <span class="n">dite</span> <span class="o">(</span><span class="n">r</span><span class="bp">=</span><span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="bp">λ</span> <span class="bp">_</span><span class="o">,</span> <span class="n">f1</span> <span class="n">r</span> <span class="n">A</span><span class="o">)</span> <span class="err">$</span>
+  <span class="k">assume</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">¬</span><span class="o">(</span><span class="n">r</span> <span class="bp">=</span> <span class="n">n</span><span class="o">),</span>
+  <span class="k">have</span> <span class="n">k2</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">&lt;</span> <span class="n">n</span><span class="o">,</span> <span class="k">from</span> <span class="n">lt_of_le_of_ne</span> <span class="err">‹</span><span class="n">r</span> <span class="bp">≤</span> <span class="n">n</span><span class="err">›</span> <span class="n">k</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">f1</span> <span class="n">r</span> <span class="err">𝒜</span><span class="o">)</span> <span class="err">∪</span> <span class="n">f2</span> <span class="o">(</span><span class="n">decompose</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span>
+</pre></div>
+
+<a name="181636534"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181636534" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181636534">Bhavik Mehta (Nov 22 2019 at 13:21)</a>:</h4>
+<p>I don't believe it should matter for this, but </p>
+<div class="codehilite"><pre><span></span><span class="bp">@</span><span class="o">[</span><span class="kn">reducible</span><span class="o">]</span> <span class="n">def</span> <span class="n">rset</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">X</span><span class="o">]</span> <span class="o">:=</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span> <span class="bp">//</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">finset</span><span class="bp">.</span><span class="n">powerset_len</span> <span class="n">r</span> <span class="o">(</span><span class="n">elems</span> <span class="n">X</span><span class="o">)}</span>
+</pre></div>
+
+
+<p>I've got ~300 lines of other stuff using this definition which work nicely together</p>
+
+<a name="181637206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181637206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181637206">Kevin Buzzard (Nov 22 2019 at 13:30)</a>:</h4>
+<p>oh sorry! I missed the earlier part of the discussion</p>
+
+<a name="181638141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638141">Simon Hudon (Nov 22 2019 at 13:43)</a>:</h4>
+<p>What if you broke down this definition into two parts:</p>
+<div class="codehilite"><pre><span></span><span class="kn">constant</span> <span class="n">f1</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">constant</span> <span class="n">f2</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="n">def</span> <span class="n">decompose&#39;</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">f1</span> <span class="n">n</span> <span class="n">A</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">hk</span> <span class="o">:=</span> <span class="n">f1</span> <span class="bp">_</span> <span class="n">A</span> <span class="err">∪</span> <span class="o">(</span><span class="n">f2</span> <span class="o">(</span><span class="n">decompose&#39;</span> <span class="n">k</span> <span class="bp">_</span><span class="o">))</span>
+
+<span class="kn">lemma</span> <span class="n">decompose_powerset_len</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span>
+   <span class="n">x</span> <span class="err">∈</span> <span class="n">decompose</span> <span class="n">A</span> <span class="n">k</span> <span class="n">hk</span> <span class="bp">→</span> <span class="n">x</span> <span class="err">∈</span> <span class="n">powerset_len</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">k</span><span class="o">)</span> <span class="o">(</span><span class="n">elems</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="c">/-</span><span class="cm"> put proof here -/</span>
+
+<span class="n">def</span> <span class="n">decompose</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">hk</span> <span class="o">:</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">k</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+<span class="o">(</span><span class="n">decompose&#39;</span> <span class="n">A</span> <span class="n">k</span> <span class="n">hk</span><span class="o">)</span><span class="bp">.</span><span class="n">attach</span><span class="bp">.</span><span class="n">image</span> <span class="err">$</span> <span class="bp">λ</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">hx</span><span class="bp">⟩</span><span class="o">,</span> <span class="bp">⟨</span><span class="n">x</span><span class="o">,</span><span class="n">decompose_powerset_len</span> <span class="n">A</span> <span class="n">k</span> <span class="n">hk</span> <span class="n">x</span> <span class="n">hx</span><span class="bp">⟩</span>
+</pre></div>
+
+<a name="181638300"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638300" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638300">Simon Hudon (Nov 22 2019 at 13:45)</a>:</h4>
+<p>The alternative, as <span class="user-mention" data-user-id="121918">@Edward Ayers</span> noted is to use cast but this is only pushing the problem further down the line. When you use your definition for rewriting, you're going to find that you have <code>cast</code> popping up in inconvenient locations.</p>
+
+<a name="181638333"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638333" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638333">Bhavik Mehta (Nov 22 2019 at 13:45)</a>:</h4>
+<p>So you're suggesting to change the types of <code>f1</code> and <code>f2</code> as well?</p>
+
+<a name="181638404"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638404" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638404">Bhavik Mehta (Nov 22 2019 at 13:46)</a>:</h4>
+<p>If possible I'd really prefer not to change the type of <code>f2</code>, it's kind of fundamental to the problem at hand</p>
+
+<a name="181638410"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638410" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638410">Simon Hudon (Nov 22 2019 at 13:46)</a>:</h4>
+<p>Yes or at least provide a version without the <code>rset</code>.</p>
+
+<a name="181638414"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638414" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638414">Bhavik Mehta (Nov 22 2019 at 13:46)</a>:</h4>
+<p>Oh!</p>
+
+<a name="181638437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638437">Bhavik Mehta (Nov 22 2019 at 13:46)</a>:</h4>
+<p>I see, and provide a lemma saying that if the source has the restricted type then the target does too</p>
+
+<a name="181638469"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638469" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638469">Simon Hudon (Nov 22 2019 at 13:47)</a>:</h4>
+<p><code>f2</code> looks a bit more challenging to change than <code>f1</code> but I can't say for sure. I don't have the definition</p>
+
+<a name="181638477"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638477" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638477">Simon Hudon (Nov 22 2019 at 13:47)</a>:</h4>
+<p>That's right</p>
+
+<a name="181638636"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638636" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638636">Bhavik Mehta (Nov 22 2019 at 13:49)</a>:</h4>
+<p>Changing this is gonna mean changing a lot of stuff :(</p>
+
+<a name="181638661"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638661" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638661">Bhavik Mehta (Nov 22 2019 at 13:49)</a>:</h4>
+<p>(the details are here: <a href="https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona.lean#L155" target="_blank" title="https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona.lean#L155">https://github.com/b-mehta/lean-experiments/blob/master/src/kruskal_katona.lean#L155</a>. <code>f2</code> is the same as <code>shadow</code>)</p>
+
+<a name="181638812"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181638812" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181638812">Bhavik Mehta (Nov 22 2019 at 13:51)</a>:</h4>
+<p>But I think I see the general design principle here: definitions and functions shouldn't have restricted types, and we instead move the restrictions to the lemmas about our definitions and functions. Is this about right?</p>
+
+<a name="181639141"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639141" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639141">Simon Hudon (Nov 22 2019 at 13:54)</a>:</h4>
+<p>That's a bit oversimplified. One time the restrictions are helpful is when the constraints don't change much throughout your formula. A take away lesson I'd rather give is: understand the ups and down of intrinsic invariant (dependent types and subtypes) versus extrinsic constraints and consider using one when the other is leading to painful proofs</p>
+
+<a name="181639490"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639490" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639490">Bhavik Mehta (Nov 22 2019 at 13:58)</a>:</h4>
+<p>I think the restrictions are helpful in my case, then - the proofs using <code>f2</code> weren't particularly painful</p>
+
+<a name="181639558"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181639558" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181639558">Kevin Buzzard (Nov 22 2019 at 13:59)</a>:</h4>
+<blockquote>
+<p>I would attempt to show you how to fix the issue in this case but there are so many undefined variables that I can't cut and paste easily :-/</p>
+</blockquote>
+<p>I can't do it :-. Here are my efforts:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">finset</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+<span class="kn">import</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">omega</span> <span class="n">tactic</span><span class="bp">.</span><span class="n">linarith</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">X</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">X</span><span class="o">]</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span>
+
+<span class="kn">constant</span> <span class="n">rset</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">X</span><span class="o">)</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">X</span><span class="o">]</span> <span class="o">:</span> <span class="kt">Type</span>
+<span class="kn">constant</span> <span class="n">f1</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span>
+<span class="kn">constant</span> <span class="n">f2</span> <span class="o">{</span><span class="n">r</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">B</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">r</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span>
+
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">(</span><span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span> <span class="o">:</span> <span class="n">has_union</span> <span class="o">(</span><span class="n">finset</span> <span class="n">Y</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+
+<span class="n">def</span> <span class="n">stupid</span> <span class="o">(</span><span class="n">n</span> <span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">-</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">k</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span> <span class="bp">→</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span>
+<span class="bp">λ</span> <span class="n">t</span><span class="o">,</span> <span class="k">by</span> <span class="n">rwa</span> <span class="n">h</span> <span class="n">at</span> <span class="n">t</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">decompose&#39;</span> <span class="o">{</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">finset</span> <span class="n">X</span><span class="o">))</span> <span class="o">:</span> <span class="bp">Π</span> <span class="o">(</span><span class="n">k</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">),</span> <span class="n">k</span> <span class="bp">≤</span> <span class="n">n</span> <span class="bp">→</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span><span class="bp">-</span><span class="n">k</span><span class="o">)</span> <span class="n">X</span><span class="o">)</span>
+<span class="bp">|</span> <span class="mi">0</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">f1</span> <span class="n">n</span> <span class="n">A</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">k</span><span class="bp">+</span><span class="mi">1</span><span class="o">)</span> <span class="n">hk</span> <span class="o">:=</span> <span class="n">f1</span> <span class="bp">_</span> <span class="n">A</span> <span class="err">∪</span> <span class="o">(</span>
+    <span class="k">have</span> <span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">-</span> <span class="n">k</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">-</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span> <span class="k">begin</span> <span class="n">clear</span> <span class="n">decompose&#39;</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="n">A</span><span class="o">,</span> <span class="n">omega</span><span class="o">,</span> <span class="kn">end</span><span class="o">,</span> <span class="c1">-- ??</span>
+<span class="c1">--    (f2 (stupid _ _ h (decompose&#39; k (le_trans (nat.le_succ k) hk) : finset (rset (n - k) X)) : finset (rset (n - (k + 1) + 1) X))))</span>
+    <span class="k">let</span> <span class="n">temp</span> <span class="o">:=</span> <span class="o">(</span><span class="n">decompose&#39;</span> <span class="n">k</span> <span class="o">(</span><span class="n">le_trans</span> <span class="o">(</span><span class="n">nat</span><span class="bp">.</span><span class="n">le_succ</span> <span class="n">k</span><span class="o">)</span> <span class="n">hk</span><span class="o">)</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="n">k</span><span class="o">)</span> <span class="n">X</span><span class="o">))</span> <span class="k">in</span>
+    <span class="bp">@</span><span class="n">f2</span> <span class="n">X</span> <span class="bp">_</span><span class="n">inst_1</span> <span class="bp">_</span><span class="n">inst_2</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">))</span> <span class="o">((</span><span class="n">h</span> <span class="bp">▸</span> <span class="n">temp</span> <span class="o">:</span> <span class="n">finset</span> <span class="o">(</span><span class="n">rset</span> <span class="o">(</span><span class="n">n</span> <span class="bp">-</span> <span class="o">(</span><span class="n">k</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="n">X</span><span class="o">))))</span>
+</pre></div>
+
+
+<p>The commented out line works fine but involves a stupid function. Without it I'm surprised I can't get the stupid triangle to work and I'm also surprised that <code>omega</code> wouldn't work without a lot of coaxing. I still have a lot to learn :-/</p>
+
 
 {% endraw %}
 
