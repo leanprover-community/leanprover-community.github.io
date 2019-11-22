@@ -13,6 +13,8 @@ programming. This project is very active, with many regular contributors and dai
 
 The contents, design, and community organization of mathlib are described in the paper [The Lean mathematical library](papers/mathlib-paper.pdf).
 
+We provide [API documentation](mathlib_docs/) for mathlib and core Lean. Note: these docs are incomplete and under development.
+
 This site hosts an [online JavaScript / WebAssembly version](lean-web-editor/) of the [community fork of Lean](https://github.com/leanprover-community/lean) where you can try out Lean and mathlib in your browser.
 
 Much of the discussion surrounding Lean occurs in a [Zulip chat room](https://leanprover.zulipchat.com).
