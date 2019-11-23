@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (238 messages, latest: Nov 23 2019 at 05:59)
+
 * [Lean Links](54466LeanLinks.html) (20 messages, latest: Nov 23 2019 at 02:01)
 
 * [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (2 messages, latest: Nov 23 2019 at 00:19)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [option golf puzzle](59308optiongolfpuzzle.html) (9 messages, latest: Nov 22 2019 at 23:43)
 
 * [computable real functions](16586computablerealfunctions.html) (39 messages, latest: Nov 22 2019 at 14:09)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (237 messages, latest: Nov 22 2019 at 13:54)
 
 * [missing cases in auto_cases?](31463missingcasesinautocases.html) (9 messages, latest: Nov 22 2019 at 02:08)
 
