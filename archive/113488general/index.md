@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean Links](54466LeanLinks.html) (35 messages, latest: Nov 23 2019 at 11:41)
+* [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (17 messages, latest: Nov 23 2019 at 12:59)
 
-* [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (10 messages, latest: Nov 23 2019 at 10:15)
+* [Lean Links](54466LeanLinks.html) (38 messages, latest: Nov 23 2019 at 12:58)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (238 messages, latest: Nov 23 2019 at 05:59)
 
