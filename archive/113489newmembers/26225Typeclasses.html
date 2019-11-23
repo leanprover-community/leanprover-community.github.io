@@ -56,6 +56,46 @@ permalink: archive/113489newmembers/26225Typeclasses.html
 <p>The lemma T type checks (ok it might not be pretty but it works). But I wanted to rewrite it in a way that looks more "native" (how you would find it on a exercise sheet). And I tried theorem U but somehow I don't really get the type class comm_group (or type classes in general). How do you repair this?</p>
 <p>Thanks for your help!</p>
 
+<a name="181733857"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20classes/near/181733857" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26225Typeclasses.html#181733857">Alex J. Best (Nov 23 2019 at 22:27)</a>:</h4>
+<p>Here is what I would do, I shortened <code>T</code> a bit by using a new lemma fixed the statement of <code>U</code> and try to explain typeclasses a little, hope it helps!</p>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="c1">-- this is a useful lemma, it is used 3 times even in the on paper proof</span>
+<span class="kn">lemma</span> <span class="n">W</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">⁻¹</span><span class="o">))</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- multiply by x⁻¹</span>
+    <span class="n">rwa</span> <span class="o">[</span><span class="n">pow_two</span><span class="o">,</span> <span class="n">inv_mul_cancel_left</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">T</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span> <span class="n">y</span> <span class="o">:</span> <span class="n">α</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">*</span> <span class="n">y</span> <span class="bp">=</span> <span class="n">y</span> <span class="bp">*</span> <span class="n">x</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="n">W</span> <span class="o">(</span><span class="n">h</span> <span class="n">x</span><span class="o">),</span> <span class="c1">-- our lemma applies here call it `this`</span>
+  <span class="c1">-- instead of using this we can just write W (h (blah)) explicitly everywhere if we want</span>
+  <span class="k">have</span> <span class="n">l</span> <span class="o">:=</span> <span class="n">this</span> <span class="o">(</span><span class="n">x</span> <span class="bp">*</span> <span class="n">y</span><span class="o">),</span>
+  <span class="n">rwa</span> <span class="o">[</span><span class="n">mul_inv_rev</span><span class="o">,</span> <span class="err">←</span> <span class="n">this</span> <span class="n">x</span><span class="o">,</span> <span class="err">←</span> <span class="n">this</span> <span class="n">y</span><span class="o">]</span> <span class="n">at</span> <span class="n">l</span><span class="o">,</span> <span class="c1">-- (a*b)⁻¹ = b⁻¹ *a⁻¹ and our lemma twice</span>
+<span class="kn">end</span>
+
+<span class="c1">-- the original formulation order_of x = 2 is bad, the order of 1 is always 1</span>
+<span class="c1">-- so no such groups existed! instead we want the order to be divide 2</span>
+<span class="kn">lemma</span> <span class="n">Q</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">order_of</span> <span class="n">x</span> <span class="err">∣</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">λ</span> <span class="n">x</span><span class="o">,</span> <span class="k">begin</span>
+  <span class="n">cases</span> <span class="o">(</span><span class="n">h</span> <span class="n">x</span><span class="o">),</span>
+  <span class="n">rw</span> <span class="o">[</span><span class="n">h_1</span><span class="o">,</span> <span class="n">pow_mul</span><span class="o">,</span> <span class="n">pow_order_of_eq_one</span><span class="o">,</span> <span class="n">one_pow</span><span class="o">],</span> <span class="c1">-- use whatever divisibility we have</span>
+<span class="kn">end</span>
+
+<span class="c1">-- to add a typeclass for α we define an instance of it</span>
+<span class="c1">-- in fact to give a comm_group we have to give the group structure</span>
+<span class="c1">-- and the statement that multiplication commutes, so we assume a given group structure</span>
+<span class="c1">-- [group α] like normal, but we name it g [g : group α], so we can refer to it</span>
+<span class="c1">-- this is the last line ..g it says &quot;use the group structure coming from g&quot;</span>
+<span class="c1">-- so we just have to prove commutativity by combining our lemmas</span>
+<span class="kn">instance</span> <span class="n">order_two_comm_group</span> <span class="o">[</span><span class="n">g</span> <span class="o">:</span> <span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="bp">∀</span> <span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span> <span class="n">order_of</span> <span class="n">x</span> <span class="err">∣</span> <span class="mi">2</span><span class="o">)</span> <span class="o">:</span> <span class="n">comm_group</span> <span class="n">α</span> <span class="o">:=</span>
+<span class="o">{</span>
+  <span class="n">mul_comm</span> <span class="o">:=</span> <span class="n">T</span> <span class="o">(</span><span class="n">Q</span> <span class="n">h</span><span class="o">),</span>
+  <span class="bp">..</span><span class="n">g</span> <span class="o">}</span>
+</pre></div>
+
 
 {% endraw %}
 
