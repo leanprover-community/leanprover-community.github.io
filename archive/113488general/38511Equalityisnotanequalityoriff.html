@@ -105,6 +105,58 @@ permalink: archive/113488general/38511Equalityisnotanequalityoriff.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181715004" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181715004">Abhimanyu Pallavi Sudhir (Nov 23 2019 at 13:00)</a>:</h4>
 <p>If you remove the import <code>ring_theory.algebra_operations</code>, it happens quickly.</p>
 
+<a name="181717189"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181717189" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181717189">Mario Carneiro (Nov 23 2019 at 14:07)</a>:</h4>
+<p>It's probably because you have an assigned metavariable caused by the tactic that created the hypothesis</p>
+
+<a name="181717240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181717240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181717240">Mario Carneiro (Nov 23 2019 at 14:08)</a>:</h4>
+<p>I don't think <code>have h : _ := ...</code> will cause this, but you will notice that my code used <code>have h := ...</code> instead</p>
+
+<a name="181717316"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181717316" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181717316">Mario Carneiro (Nov 23 2019 at 14:11)</a>:</h4>
+<p>yep, this is the cause</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">this</span><span class="o">,</span> <span class="c1">-- no problem</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">this</span><span class="o">,</span> <span class="c1">-- rewrite tactic failed, lemma is not an equality nor a iff</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">this</span><span class="o">,</span> <span class="c1">-- rewrite tactic failed, lemma lhs is a metavariable</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">_</span> <span class="bp">+</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">this</span><span class="o">,</span> <span class="c1">-- no problem</span>
+  <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="181718314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181718314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181718314">Abhimanyu Pallavi Sudhir (Nov 23 2019 at 14:43)</a>:</h4>
+<p>Huh. I don't think I'd ever seen this happen before.</p>
+
+<a name="181718323"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181718323" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181718323">Abhimanyu Pallavi Sudhir (Nov 23 2019 at 14:43)</a>:</h4>
+<p>I'm still not sure I understand. Why does Lean care how I defined the have statement? The statement introduced to the environment is still the same -- no metavariables. Right?</p>
+
+<a name="181718437"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181718437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181718437">Kevin Buzzard (Nov 23 2019 at 14:47)</a>:</h4>
+<p>Is this one of those things where the end user can't see what's going on?</p>
+
 
 {% endraw %}
 

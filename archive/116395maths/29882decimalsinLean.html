@@ -1,0 +1,112 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/29882decimalsinLean.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html">decimals in Lean</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181718320"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718320" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718320">Kevin Buzzard (Nov 23 2019 at 14:43)</a>:</h4>
+<p>I've never used these before. I was just playing around with them and ran into this (Lean knows 0.5=1/2 by the way :D ) :</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+
+<span class="n">noncomputable</span> <span class="n">def</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span>
+
+<span class="bp">#</span><span class="kn">print</span> <span class="n">x</span> <span class="c1">-- 1 / 2</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">numerals</span> <span class="n">false</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">x</span> <span class="c1">-- has_one.one ℝ / bit0 (has_one.one ℝ)</span>
+<span class="kn">set_option</span> <span class="n">pp</span><span class="bp">.</span><span class="n">numerals</span> <span class="n">true</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="bp">∃</span> <span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">,</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">1</span> <span class="o">:=</span> <span class="bp">⟨</span><span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span><span class="bp">⟩</span>
+
+<span class="n">class</span> <span class="n">less_than_one</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span>
+<span class="o">(</span><span class="n">thm</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">)</span>
+
+<span class="c1">-- Lean assures me it&#39;s computable</span>
+<span class="kn">instance</span> <span class="n">foo</span> <span class="o">:</span> <span class="n">less_than_one</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">thm</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span> <span class="c1">-- works fine</span>
+<span class="o">}</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">less_than_one</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">,</span>
+  <span class="n">thm</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span> <span class="c1">-- fails</span>
+<span class="o">}</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">norm_num failed to simplify</span>
+<span class="cm">state:</span>
+<span class="cm">⊢ quotient.lift_on₂ (algebra.div 1 2) 1 has_lt.lt real.has_lt._proof_1</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Where did <code>quotient.lift_on₂</code> come from?</p>
+
+<a name="181718554"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718554" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718554">Chris Hughes (Nov 23 2019 at 14:50)</a>:</h4>
+<p>Somehow the definition of &lt; on reals is leaking through.</p>
+
+<a name="181718682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718682">Kevin Buzzard (Nov 23 2019 at 14:54)</a>:</h4>
+<p>Oh! I was thinking it was some crazy internal construction of the class! I'm such a fool :D</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">XXX</span> <span class="o">:</span> <span class="n">has_lt</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">XXX</span> <span class="c1">-- real.has_lt (duh)</span>
+<span class="bp">#</span><span class="kn">print</span> <span class="n">real</span><span class="bp">.</span><span class="n">has_lt</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">@[instance]</span>
+<span class="cm">protected def real.has_lt : has_lt ℝ :=</span>
+<span class="cm">{lt := λ (x y : ℝ), quotient.lift_on₂ x y has_lt.lt real.has_lt._proof_1}</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>And there it is.</p>
+
+<a name="181718698"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718698" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718698">Kevin Buzzard (Nov 23 2019 at 14:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">less_than_one</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">,</span>
+  <span class="n">thm</span> <span class="o">:=</span> <span class="k">show</span> <span class="o">(</span><span class="mi">0</span><span class="bp">.</span><span class="mi">5</span> <span class="o">:</span> <span class="n">ℝ</span><span class="o">)</span> <span class="bp">&lt;</span> <span class="mi">1</span><span class="o">,</span> <span class="k">by</span> <span class="n">norm_num</span> <span class="c1">-- works</span>
+<span class="o">}</span>
+</pre></div>
+
+<a name="181718782"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718782" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718782">Rob Lewis (Nov 23 2019 at 14:57)</a>:</h4>
+<p><code>real.has_lt</code> should probably be irreducible, no?</p>
+
+<a name="181718783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718783">Kevin Buzzard (Nov 23 2019 at 14:57)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">attribute</span> <span class="o">[</span><span class="kn">irreducible</span><span class="o">]</span> <span class="n">real</span><span class="bp">.</span><span class="n">has_lt</span>
+
+<span class="n">noncomputable</span> <span class="kn">instance</span> <span class="n">bar</span> <span class="o">:</span> <span class="n">less_than_one</span> <span class="o">:=</span>
+<span class="o">{</span> <span class="n">x</span> <span class="o">:=</span> <span class="mi">0</span><span class="bp">.</span><span class="mi">5</span><span class="o">,</span>
+  <span class="n">thm</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">norm_num</span> <span class="c1">-- still fails</span>
+<span class="o">}</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">norm_num failed to simplify</span>
+<span class="cm">state:</span>
+<span class="cm">⊢ algebra.div 1 2 &lt; 1</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>Oh I thought I was such a pro :-)</p>
+
+<a name="181718827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/decimals%20in%20Lean/near/181718827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/29882decimalsinLean.html#181718827">Kevin Buzzard (Nov 23 2019 at 14:58)</a>:</h4>
+<p>[written before Rob's post]</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}

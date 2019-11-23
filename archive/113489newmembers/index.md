@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (2 messages, latest: Nov 23 2019 at 13:59)
+* [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (3 messages, latest: Nov 23 2019 at 14:29)
 
 * [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (58 messages, latest: Nov 23 2019 at 13:52)
 
