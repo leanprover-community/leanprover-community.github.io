@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Type classes](26225Typeclasses.html) (1 message, latest: Nov 23 2019 at 21:23)
+
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (33 messages, latest: Nov 23 2019 at 18:24)
 
 * [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (3 messages, latest: Nov 23 2019 at 14:29)

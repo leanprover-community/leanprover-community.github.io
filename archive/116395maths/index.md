@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [decimals in Lean](29882decimalsinLean.html) (11 messages, latest: Nov 23 2019 at 16:59)
+* [analysis](03749analysis.html) (82 messages, latest: Nov 23 2019 at 21:32)
 
-* [analysis](03749analysis.html) (79 messages, latest: Nov 22 2019 at 20:17)
+* [decimals in Lean](29882decimalsinLean.html) (11 messages, latest: Nov 23 2019 at 16:59)
 
 * [abel multiplication](00067abelmultiplication.html) (7 messages, latest: Nov 21 2019 at 21:44)
 
