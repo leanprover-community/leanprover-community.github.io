@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (2 messages, latest: Nov 23 2019 at 00:19)
+
 * [option golf puzzle](59308optiongolfpuzzle.html) (9 messages, latest: Nov 22 2019 at 23:43)
 
 * [computable real functions](16586computablerealfunctions.html) (39 messages, latest: Nov 22 2019 at 14:09)
