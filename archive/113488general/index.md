@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Lean Links](54466LeanLinks.html) (19 messages, latest: Nov 23 2019 at 01:55)
+* [Lean Links](54466LeanLinks.html) (20 messages, latest: Nov 23 2019 at 02:01)
 
 * [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (2 messages, latest: Nov 23 2019 at 00:19)
 
