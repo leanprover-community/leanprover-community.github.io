@@ -157,6 +157,50 @@ permalink: archive/113488general/38511Equalityisnotanequalityoriff.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181718437" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181718437">Kevin Buzzard (Nov 23 2019 at 14:47)</a>:</h4>
 <p>Is this one of those things where the end user can't see what's going on?</p>
 
+<a name="181719545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181719545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181719545">Mario Carneiro (Nov 23 2019 at 15:19)</a>:</h4>
+<p>yes, at least not without some hackery</p>
+
+<a name="181719873"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181719873" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181719873">Mario Carneiro (Nov 23 2019 at 15:28)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">open</span> <span class="n">tactic</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">do</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">this</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span> <span class="err">∘</span> <span class="n">expr</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">),</span>
+  <span class="c1">-- (app (app (app (const eq [1]) ... (fully elaborated)</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">do</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">this</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span> <span class="err">∘</span> <span class="n">expr</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">),</span>
+  <span class="c1">-- (mvar ...)</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">do</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">this</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span> <span class="err">∘</span> <span class="n">expr</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">),</span>
+  <span class="c1">-- (app (app (app (const eq [?_mlocal._fresh.1485.2073]) (mvar) (mvar)) (mvar))</span>
+<span class="kn">end</span>
+
+<span class="kn">example</span> <span class="o">:</span> <span class="mi">2</span> <span class="bp">+</span> <span class="mi">3</span> <span class="bp">=</span> <span class="mi">0</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:</span> <span class="bp">_</span> <span class="bp">+</span> <span class="bp">_</span> <span class="bp">=</span> <span class="bp">_</span> <span class="o">:=</span> <span class="n">add_comm</span> <span class="mi">2</span> <span class="mi">3</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">do</span> <span class="n">get_local</span> <span class="bp">`</span><span class="n">this</span> <span class="bp">&gt;&gt;=</span> <span class="n">infer_type</span> <span class="bp">&gt;&gt;=</span> <span class="n">trace</span> <span class="err">∘</span> <span class="n">expr</span><span class="bp">.</span><span class="n">to_raw_fmt</span><span class="o">),</span>
+  <span class="c1">-- (app (app (app (const eq [?_mlocal._fresh.1599.1006+1]) (mvar))</span>
+    <span class="c1">-- (app (app (app (app (const has_add.add) (mvar)) (mvar)) (mvar)) (mvar))) (mvar))</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>This shows the actual type of the <code>this</code> variable after each call. The <code>mvar</code>s normally appear as <code>?m_1</code> when printed, but these are <code>mvar</code>s that have already been assigned, so the pretty printer goes ahead and shows the assignment. But several uncarefully written tactics match directly on this type rather than unfolding metavariables first, and <code>rw</code>'s equality check is one of these. It just says "is this expr an <code>eq</code> application? If not, fail" and so it fails because it is actually an <code>mvar</code> which is an <code>eq</code> application if lean were to check the metavariable assignment.</p>
+
+<a name="181719934"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181719934" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181719934">Mario Carneiro (Nov 23 2019 at 15:30)</a>:</h4>
+<p>Basically, the type of the first <code>this</code> is <code>2 + 3 = 3 + 2</code>, and the type of the second is <code>?m_1</code> where <code>?m_1 := 2 + 3 = 3 + 2</code></p>
+
 
 {% endraw %}
 
