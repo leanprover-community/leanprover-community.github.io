@@ -33,6 +33,14 @@ permalink: archive/113488general/38511Equalityisnotanequalityoriff.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181706529" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181706529">Kevin Buzzard (Nov 23 2019 at 08:34)</a>:</h4>
 <p>I'm looking at the actual terms and superficially it looks like they should match, but they are <em>really huge</em>. You might need some expert advice about how to make the terms more compact. This might be the actual problem -- the code you're writing is producing mega-large terms for some reason.</p>
 
+<a name="181708780"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181708780" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181708780">Mario Carneiro (Nov 23 2019 at 09:46)</a>:</h4>
+<p>You shouldn't be using if-then in <code>forced_sum</code>, it's a Prop and it's not decidable</p>
+
+<a name="181709038"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Equality%20is%20not%20an%20equality%20or%20iff/near/181709038" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/38511Equalityisnotanequalityoriff.html#181709038">Mario Carneiro (Nov 23 2019 at 09:54)</a>:</h4>
+<p>But for me the problem seems to be that <code>linear_independent ℝ (λ m n : ℕ, s (n + m))</code> takes forever to elaborate, because <code>module ℝ (ℕ → ℝ)</code> takes forever to synthesize, because of some instances in <code>ring_theory.algebra_operations</code>. I think we need to take another look at these instances, this isn't the first time they have caused trouble</p>
+
 
 {% endraw %}
 

@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (5 messages, latest: Nov 23 2019 at 08:34)
+* [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (7 messages, latest: Nov 23 2019 at 09:54)
 
 * [markdown module docstrings](07338markdownmoduledocstrings.html) (238 messages, latest: Nov 23 2019 at 05:59)
 
