@@ -9,11 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (2 messages, latest: Nov 23 2019 at 13:59)
+
+* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (58 messages, latest: Nov 23 2019 at 13:52)
+
 * [Application type mismatch](62669Applicationtypemismatch.html) (18 messages, latest: Nov 22 2019 at 16:36)
 
 * [Problems with installation](53555Problemswithinstallation.html) (3 messages, latest: Nov 22 2019 at 16:22)
-
-* [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (55 messages, latest: Nov 22 2019 at 15:31)
 
 * [Coq for Lean users (or vice versa)?](67254CoqforLeanusersorviceversa.html) (4 messages, latest: Nov 22 2019 at 12:46)
 

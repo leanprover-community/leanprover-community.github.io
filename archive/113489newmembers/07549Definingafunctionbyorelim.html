@@ -374,6 +374,30 @@ i feel like carrying around an invariant everywhere you go like <code>rset</code
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181648187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181648187">Kevin Buzzard (Nov 22 2019 at 15:31)</a>:</h4>
 <p>This is not the first time I've seen this issue and I should perhaps have been wise enough by now to come up with Reid's definition. <span class="user-mention" data-user-id="246273">@Bhavik Mehta</span> I once wrote such a function when working with quotient groups -- I needed a map from <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi mathvariant="normal">/</mi><mi>H</mi></mrow><annotation encoding="application/x-tex">G/H</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span></span></span></span> to <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>G</mi><mi mathvariant="normal">/</mi><mi>K</mi></mrow><annotation encoding="application/x-tex">G/K</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:1em;vertical-align:-0.25em;"></span><span class="mord mathdefault">G</span><span class="mord">/</span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> when I had a proof that <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>H</mi><mo>=</mo><mi>K</mi></mrow><annotation encoding="application/x-tex">H=K</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.08125em;">H</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span><span class="mrel">=</span><span class="mspace" style="margin-right:0.2777777777777778em;"></span></span><span class="base"><span class="strut" style="height:0.68333em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.07153em;">K</span></span></span></span> and I did it in the same way that Reid suggested above.</p>
 
+<a name="181716660"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181716660" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181716660">Bhavik Mehta (Nov 23 2019 at 13:50)</a>:</h4>
+<blockquote>
+<p><span class="user-mention silent" data-user-id="246273">Bhavik Mehta</span> I think the easiest approach is to define something along the lines of</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">rset</span><span class="bp">.</span><span class="n">cast</span> <span class="o">{</span><span class="n">X</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">{</span><span class="n">r</span> <span class="n">r&#39;</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">r</span> <span class="bp">=</span> <span class="n">r&#39;</span><span class="o">)</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">rset</span> <span class="n">r</span> <span class="n">X</span><span class="o">)</span> <span class="o">:</span> <span class="n">rset</span> <span class="n">r&#39;</span> <span class="n">X</span> <span class="o">:=</span>
+<span class="bp">⟨</span><span class="n">A</span><span class="bp">.</span><span class="n">val</span><span class="o">,</span> <span class="n">h</span> <span class="bp">▸</span> <span class="n">A</span><span class="bp">.</span><span class="n">property</span><span class="bp">⟩</span>
+</pre></div>
+
+
+<p>and use it where you need to "fix" the size of an <code>rset</code></p>
+</blockquote>
+<p>I like this, thanks!</p>
+
+<a name="181716670"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181716670" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181716670">Bhavik Mehta (Nov 23 2019 at 13:51)</a>:</h4>
+<blockquote>
+<p>By the way, writing <code>x ∈ finset.powerset_len r (fintype.elems X)</code> as the property rather than <code>x.card = r</code> looks rather awkward to me.</p>
+</blockquote>
+<p>Ah this is a good point...</p>
+
+<a name="181716717"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Defining%20a%20function%20by%20or.elim/near/181716717" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/07549Definingafunctionbyorelim.html#181716717">Bhavik Mehta (Nov 23 2019 at 13:52)</a>:</h4>
+<p>I'd made <code>rset_mk (A : finset X) (H : finset.card A = r) : rset r X </code> instead to get around this, but your way is a lot cleaner</p>
+
 
 {% endraw %}
 
