@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (33 messages, latest: Nov 23 2019 at 18:24)
+
 * [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (3 messages, latest: Nov 23 2019 at 14:29)
 
 * [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (58 messages, latest: Nov 23 2019 at 13:52)
@@ -72,8 +74,6 @@ permalink: archive/113489newmembers/index.html
 * [Difference between def and let](30109Differencebetweendefandlet.html) (9 messages, latest: Nov 12 2019 at 16:43)
 
 * [Making Sphinx notes](95035MakingSphinxnotes.html) (12 messages, latest: Nov 12 2019 at 14:43)
-
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (30 messages, latest: Nov 11 2019 at 12:52)
 
 * [leanpkg build ... too fast?](54460leanpkgbuildtoofast.html) (12 messages, latest: Nov 11 2019 at 06:40)
 
