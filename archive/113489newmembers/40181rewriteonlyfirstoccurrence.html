@@ -100,6 +100,43 @@ permalink: archive/113489newmembers/40181rewriteonlyfirstoccurrence.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181772238" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181772238">Kevin Buzzard (Nov 24 2019 at 18:46)</a>:</h4>
 <p>Is that reverse mathematics?</p>
 
+<a name="181772974"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181772974" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181772974">Mario Carneiro (Nov 24 2019 at 19:05)</a>:</h4>
+<p>Hm, it's a bit complicated because you made up all the theorem names, but this prelude does the job:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">nat</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">namespace</span> <span class="n">mynat</span>
+<span class="kn">open</span> <span class="n">nat</span>
+<span class="kn">theorem</span> <span class="n">add_one_eq_succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">theorem</span> <span class="n">add_left_cancel</span> <span class="o">(</span><span class="n">a</span> <span class="n">b</span> <span class="n">c</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">c</span> <span class="bp">→</span> <span class="n">b</span> <span class="bp">=</span> <span class="n">c</span> <span class="o">:=</span> <span class="n">add_left_cancel</span>
+<span class="kn">theorem</span> <span class="n">zero_ne_succ</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="mi">0</span> <span class="bp">≠</span> <span class="n">succ</span> <span class="n">n</span><span class="bp">.</span>
+<span class="kn">theorem</span> <span class="n">one_eq_succ_zero</span> <span class="o">:</span> <span class="mi">1</span> <span class="bp">=</span> <span class="n">succ</span> <span class="mi">0</span> <span class="o">:=</span> <span class="n">rfl</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">add_one_eq_succ</span><span class="o">,</span>
+  <span class="k">assume</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">conv</span> <span class="n">at</span> <span class="n">h</span> <span class="o">{</span><span class="n">to_lhs</span><span class="o">,</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">add_zero</span> <span class="n">n</span><span class="o">},</span>
+  <span class="k">have</span> <span class="n">h2</span> <span class="o">:=</span> <span class="n">add_left_cancel</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">zero_ne_succ</span> <span class="mi">0</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="err">←</span> <span class="n">one_eq_succ_zero</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">h2</span><span class="o">,</span>
+<span class="kn">end</span>
+
+<span class="kn">end</span> <span class="n">mynat</span>
+</pre></div>
+
+<a name="181773125"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181773125" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181773125">Mario Carneiro (Nov 24 2019 at 19:09)</a>:</h4>
+<p>and golfed:</p>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">≠</span> <span class="n">succ</span> <span class="n">n</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">exact</span> <span class="bp">λ</span> <span class="n">h</span><span class="o">,</span> <span class="n">zero_ne_succ</span> <span class="mi">0</span> <span class="o">(</span><span class="n">add_left_cancel</span> <span class="n">n</span> <span class="mi">0</span> <span class="mi">1</span> <span class="n">h</span><span class="o">)</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>the best tactic proof is a term proof :P</p>
+
 
 {% endraw %}
 
