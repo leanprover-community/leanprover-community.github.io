@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (201 messages, latest: Nov 24 2019 at 15:27)
+* [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (18 messages, latest: Nov 24 2019 at 18:46)
 
-* [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (16 messages, latest: Nov 24 2019 at 15:15)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (202 messages, latest: Nov 24 2019 at 18:43)
 
 * [Type classes](26225Typeclasses.html) (2 messages, latest: Nov 23 2019 at 22:27)
 
