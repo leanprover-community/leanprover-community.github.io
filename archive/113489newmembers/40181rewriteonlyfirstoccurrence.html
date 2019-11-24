@@ -1,0 +1,46 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/40181rewriteonlyfirstoccurrence.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html">rewrite only first occurrence?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181763874"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181763874" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181763874">agro1986 (Nov 24 2019 at 14:55)</a>:</h4>
+<p>Hi all. In tactics mode, how do I say <code>rewrite th1 but please do it only on the first occurence k thx</code>? Thanks a lot</p>
+
+<a name="181763944"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181763944" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181763944">Mario Carneiro (Nov 24 2019 at 14:57)</a>:</h4>
+<p>you can do it with <code>conv</code>, but I would like to see a use case first</p>
+
+<a name="181763945"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181763945" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181763945">agro1986 (Nov 24 2019 at 14:57)</a>:</h4>
+<p>More concretely, I want to change <code>n = n + 1</code> into <code>n + 0 = n + 1</code>. If I use the proof <code>n = n + 0</code>, rw will change it into <code>n + 0 = n + 0 + 1</code> :(</p>
+
+<a name="181764002"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764002" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764002">Mario Carneiro (Nov 24 2019 at 14:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="o">{</span><span class="n">to_lhs</span><span class="o">,</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">add_zero</span> <span class="n">n</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="181764017"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764017" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764017">Mario Carneiro (Nov 24 2019 at 14:59)</a>:</h4>
+<p>it's not changing the first occurrence, but it is rewriting only on the lhs of the equality</p>
+
+<a name="181764018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764018">Mario Carneiro (Nov 24 2019 at 14:59)</a>:</h4>
+<p>which achieves the same effect</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
