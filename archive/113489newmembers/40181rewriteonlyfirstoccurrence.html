@@ -40,6 +40,58 @@ permalink: archive/113489newmembers/40181rewriteonlyfirstoccurrence.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764018">Mario Carneiro (Nov 24 2019 at 14:59)</a>:</h4>
 <p>which achieves the same effect</p>
 
+<a name="181764102"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764102" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764102">agro1986 (Nov 24 2019 at 15:01)</a>:</h4>
+<p><span class="user-mention" data-user-id="110049">@Mario Carneiro</span> thanks. What about the case where I want to change a hypothesis <code>h</code>, not the goal? In rw we say <code>rw th1 at h</code></p>
+
+<a name="181764145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764145">Mario Carneiro (Nov 24 2019 at 15:02)</a>:</h4>
+<p><code>at h</code> still works</p>
+
+<a name="181764152"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764152" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764152">Mario Carneiro (Nov 24 2019 at 15:02)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℕ</span><span class="o">)</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">n</span> <span class="bp">=</span> <span class="n">n</span> <span class="bp">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">true</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">conv</span> <span class="n">at</span> <span class="n">h</span> <span class="o">{</span><span class="n">to_lhs</span><span class="o">,</span> <span class="n">rw</span> <span class="err">←</span> <span class="n">add_zero</span> <span class="n">n</span><span class="o">},</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="181764157"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764157" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764157">Mario Carneiro (Nov 24 2019 at 15:02)</a>:</h4>
+<p>it goes on the <code>conv</code> because that's the part that figures out where to work</p>
+
+<a name="181764171"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764171" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764171">agro1986 (Nov 24 2019 at 15:03)</a>:</h4>
+<p>Ahh I see! I tried writing <code>at h</code> at the end of the sentence so it didn't work. Thanks a lot!</p>
+
+<a name="181764221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764221">Mario Carneiro (Nov 24 2019 at 15:04)</a>:</h4>
+<p>if you mouse over the <code>conv</code> it should print <code>conv (at id)? (in expr)? { tactic }</code> which shows the correct order of use</p>
+
+<a name="181764294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764294">agro1986 (Nov 24 2019 at 15:06)</a>:</h4>
+<p>cool! I used it for solving this: <a href="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/" target="_blank" title="http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/">http://wwwf.imperial.ac.uk/~buzzard/xena/natural_number_game/</a></p>
+<div class="codehilite"><pre><span></span>  rw ← add_one_eq_succ,
+  assume h,
+  conv at h {to_lhs, rw ← add_zero n},
+  have h2 := add_left_cancel _ _ _ h,
+  apply zero_ne_succ 0,
+  rw ← one_eq_succ_zero,
+  exact h2,
+</pre></div>
+
+<a name="181764527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764527">Mario Carneiro (Nov 24 2019 at 15:13)</a>:</h4>
+<p>what's the theorem?</p>
+
+<a name="181764602"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764602" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764602">Mario Carneiro (Nov 24 2019 at 15:15)</a>:</h4>
+<p>the natural number game says what theorem you are proving just outside the text box, you need that if you want to quote the theorem outside the game (and some more besides that, depending on how advanced the theorem is, you might have your own definitions and such to rely on)</p>
+
+<a name="181764613"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/rewrite%20only%20first%20occurrence%3F/near/181764613" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/40181rewriteonlyfirstoccurrence.html#181764613">Mario Carneiro (Nov 24 2019 at 15:15)</a>:</h4>
+<p>it's always best to post complete examples here in chat so we can test your work</p>
+
 
 {% endraw %}
 

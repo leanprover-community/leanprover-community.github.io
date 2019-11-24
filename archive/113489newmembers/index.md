@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (6 messages, latest: Nov 24 2019 at 14:59)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (201 messages, latest: Nov 24 2019 at 15:27)
+
+* [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (16 messages, latest: Nov 24 2019 at 15:15)
 
 * [Type classes](26225Typeclasses.html) (2 messages, latest: Nov 23 2019 at 22:27)
 
@@ -40,8 +42,6 @@ permalink: archive/113489newmembers/index.html
 * [no nightly archive found](13947nonightlyarchivefound.html) (13 messages, latest: Nov 21 2019 at 07:32)
 
 * [One-line proof](28766Onelineproof.html) (11 messages, latest: Nov 20 2019 at 23:10)
-
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (199 messages, latest: Nov 20 2019 at 18:08)
 
 * [Applying a hypothesis to just one term in tactic mode](91469Applyingahypothesistojustonetermintacticmode.html) (65 messages, latest: Nov 20 2019 at 17:56)
 

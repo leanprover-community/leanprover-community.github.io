@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [analysis](03749analysis.html) (85 messages, latest: Nov 24 2019 at 08:29)
+* [analysis](03749analysis.html) (86 messages, latest: Nov 24 2019 at 15:13)
 
 * [decimals in Lean](29882decimalsinLean.html) (11 messages, latest: Nov 23 2019 at 16:59)
 
