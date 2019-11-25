@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [What do @\[ext\] @\[simp\] do?](41492Whatdoextsimpdo.html) (7 messages, latest: Nov 25 2019 at 20:52)
+* [Installing python(mathlib)](71274Installingpythonmathlib.html) (10 messages, latest: Nov 25 2019 at 21:58)
 
-* [Lean Links](54466LeanLinks.html) (72 messages, latest: Nov 25 2019 at 19:50)
+* [Lean Links](54466LeanLinks.html) (73 messages, latest: Nov 25 2019 at 21:07)
+
+* [What do @\[ext\] @\[simp\] do?](41492Whatdoextsimpdo.html) (7 messages, latest: Nov 25 2019 at 20:52)
 
 * [What does open_locale do?](29747Whatdoesopenlocaledo.html) (3 messages, latest: Nov 25 2019 at 19:09)
 
