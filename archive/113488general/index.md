@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (34 messages, latest: Nov 25 2019 at 17:58)
+* [`finsupp.mul_sum` should be different](95907finsuppmulsumshouldbedifferent.html) (1 message, latest: Nov 25 2019 at 18:25)
+
+* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (36 messages, latest: Nov 25 2019 at 18:03)
 
 * [Indexing Zulip](45931IndexingZulip.html) (98 messages, latest: Nov 25 2019 at 17:22)
 
