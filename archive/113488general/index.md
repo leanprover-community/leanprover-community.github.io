@@ -9,13 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Lean Links](54466LeanLinks.html) (72 messages, latest: Nov 25 2019 at 19:50)
+
+* [What does open_locale do?](29747Whatdoesopenlocaledo.html) (3 messages, latest: Nov 25 2019 at 19:09)
+
 * [`finsupp.mul_sum` should be different](95907finsuppmulsumshouldbedifferent.html) (1 message, latest: Nov 25 2019 at 18:25)
 
 * [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (36 messages, latest: Nov 25 2019 at 18:03)
 
 * [Indexing Zulip](45931IndexingZulip.html) (98 messages, latest: Nov 25 2019 at 17:22)
-
-* [Lean Links](54466LeanLinks.html) (70 messages, latest: Nov 25 2019 at 11:48)
 
 * [VScode warning](35995VScodewarning.html) (4 messages, latest: Nov 24 2019 at 16:42)
 
