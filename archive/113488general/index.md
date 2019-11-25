@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (19 messages, latest: Nov 25 2019 at 16:57)
+* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (34 messages, latest: Nov 25 2019 at 17:58)
+
+* [Indexing Zulip](45931IndexingZulip.html) (98 messages, latest: Nov 25 2019 at 17:22)
 
 * [Lean Links](54466LeanLinks.html) (70 messages, latest: Nov 25 2019 at 11:48)
 
@@ -430,8 +432,6 @@ permalink: archive/113488general/index.html
 * [donating olean files](57431donatingoleanfiles.html) (9 messages, latest: Aug 22 2019 at 16:19)
 
 * [unify fails in the presence of binders](90404unifyfailsinthepresenceofbinders.html) (24 messages, latest: Aug 22 2019 at 14:34)
-
-* [Indexing Zulip](45931IndexingZulip.html) (96 messages, latest: Aug 22 2019 at 13:18)
 
 * [building lean on arch fails](74681buildingleanonarchfails.html) (7 messages, latest: Aug 22 2019 at 12:53)
 
