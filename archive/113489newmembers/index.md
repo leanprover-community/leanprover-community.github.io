@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (34 messages, latest: Nov 25 2019 at 07:43)
+* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (206 messages, latest: Nov 25 2019 at 15:19)
 
-* [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (203 messages, latest: Nov 24 2019 at 19:09)
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (34 messages, latest: Nov 25 2019 at 07:43)
 
 * [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (20 messages, latest: Nov 24 2019 at 19:09)
 
