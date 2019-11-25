@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [condensed mathematics](39396condensedmathematics.html) (230 messages, latest: Nov 25 2019 at 13:12)
+* [condensed mathematics](39396condensedmathematics.html) (234 messages, latest: Nov 25 2019 at 14:53)
 
 * [Software verification](56367Softwareverification.html) (2 messages, latest: Nov 24 2019 at 19:35)
 
