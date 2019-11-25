@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [condensed mathematics](39396condensedmathematics.html) (193 messages, latest: Nov 25 2019 at 11:50)
+
 * [Software verification](56367Softwareverification.html) (2 messages, latest: Nov 24 2019 at 19:35)
 
 * [analysis](03749analysis.html) (86 messages, latest: Nov 24 2019 at 15:13)
@@ -406,8 +408,6 @@ permalink: archive/116395maths/index.html
 * [Integer gcd issues](42489Integergcdissues.html) (2 messages, latest: May 06 2019 at 22:27)
 
 * [`ring` might be worse now?](34164ringmightbeworsenow.html) (45 messages, latest: May 04 2019 at 14:53)
-
-* [condensed mathematics](39396condensedmathematics.html) (183 messages, latest: May 01 2019 at 14:10)
 
 * [cover with property](63841coverwithproperty.html) (2 messages, latest: May 01 2019 at 07:14)
 
