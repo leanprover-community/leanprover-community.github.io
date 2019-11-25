@@ -9,13 +9,13 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (34 messages, latest: Nov 25 2019 at 07:43)
+
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (203 messages, latest: Nov 24 2019 at 19:09)
 
 * [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (20 messages, latest: Nov 24 2019 at 19:09)
 
 * [Type classes](26225Typeclasses.html) (2 messages, latest: Nov 23 2019 at 22:27)
-
-* [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (33 messages, latest: Nov 23 2019 at 18:24)
 
 * [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (3 messages, latest: Nov 23 2019 at 14:29)
 
