@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (19 messages, latest: Nov 25 2019 at 16:57)
+
 * [Lean Links](54466LeanLinks.html) (70 messages, latest: Nov 25 2019 at 11:48)
 
 * [VScode warning](35995VScodewarning.html) (4 messages, latest: Nov 24 2019 at 16:42)
