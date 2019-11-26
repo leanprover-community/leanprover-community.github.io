@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [(non?)commutative linear ordered semirings](62299noncommutativelinearorderedsemirings.html) (2 messages, latest: Nov 26 2019 at 18:40)
+* [(non?)commutative linear ordered semirings](62299noncommutativelinearorderedsemirings.html) (3 messages, latest: Nov 26 2019 at 20:16)
 
 * [omega with atoms?](81801omegawithatoms.html) (3 messages, latest: Nov 26 2019 at 16:44)
 

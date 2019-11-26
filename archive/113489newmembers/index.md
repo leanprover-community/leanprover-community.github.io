@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (40 messages, latest: Nov 26 2019 at 19:57)
+* [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 
 * [Type ?M_1](72415TypeM1.html) (5 messages, latest: Nov 26 2019 at 17:59)
 
