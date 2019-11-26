@@ -22,6 +22,125 @@ permalink: archive/113489newmembers/09309multipleassumptionsofdefinitionallyequa
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181946876" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181946876">Kevin Buzzard (Nov 26 2019 at 17:58)</a>:</h4>
 <p>I guess I've never had to worry about not using names. Do you need both hypotheses in the context? If not then you could <code>clear</code> one. Otherwise probably you can use some <code>meta</code> magic (which I know nothing about) to give the bad tactic a fresh name or something.</p>
 
+<a name="181948686"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181948686" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181948686">Reuben Rowe (Nov 26 2019 at 18:18)</a>:</h4>
+<p>It's not that I can't use names for the hypotheses, it's that I want to try doing without - it's a style objective.</p>
+
+<a name="181949214"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949214" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949214">Kevin Buzzard (Nov 26 2019 at 18:24)</a>:</h4>
+<p>Just to be sure -- if you rewrite with the name of the correct assumption, does the rewrite not fail?</p>
+<p>I was looking at <a href="https://github.com/leanprover-community/mathlib/blob/master/src/order/conditionally_complete_lattice.lean" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/order/conditionally_complete_lattice.lean">conditionally complete lattices</a> in Lean's maths library over the last few days, and they use the french quotes in several places.</p>
+
+<a name="181949311"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949311" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949311">Reid Barton (Nov 26 2019 at 18:25)</a>:</h4>
+<p>I suppose the <code>assumption</code> tactic (which underlies the french quotes) could do a first pass to look for a hypothesis that matches the requested type syntactically. I seem to recall this coming up before.</p>
+
+<a name="181949784"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949784" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949784">Reuben Rowe (Nov 26 2019 at 18:31)</a>:</h4>
+<p><span class="user-mention" data-user-id="110038">@Kevin Buzzard</span>: yes, if I name the hypothesis <code>rw</code> succeeds</p>
+
+<a name="181949805"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949805" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949805">Rob Lewis (Nov 26 2019 at 18:31)</a>:</h4>
+<p>It might even be enough to change this line to <code>show p, by assumption</code>. <a href="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L871" target="_blank" title="https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L871">https://github.com/leanprover-community/lean/blob/master/library/init/meta/tactic.lean#L871</a></p>
+
+<a name="181949936"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949936" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949936">Rob Lewis (Nov 26 2019 at 18:32)</a>:</h4>
+<p>There's a chance that could have side effects elsewhere.</p>
+
+<a name="181949947"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949947" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949947">Reuben Rowe (Nov 26 2019 at 18:32)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span>: no, it is the <code>assumption</code> tactic itself which picks the wrong hypothesis</p>
+
+<a name="181949986"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181949986" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181949986">Rob Lewis (Nov 26 2019 at 18:33)</a>:</h4>
+<p>It doesn't matter which hypothesis the tactic chooses if they're definitionally the same. What matters is what the assumption tactic is used to prove.</p>
+
+<a name="181950005"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950005" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950005">Rob Lewis (Nov 26 2019 at 18:33)</a>:</h4>
+<p><code>(p : t)</code> isn't necessarily the same as <code>show t, from p</code>.</p>
+
+<a name="181950018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950018">Reuben Rowe (Nov 26 2019 at 18:33)</a>:</h4>
+<p><span class="user-mention" data-user-id="110032">@Reid Barton</span>: I played around by implementing a new version of <code>assumption</code> which checks for syntactic equality. In my particular case it was failing because there are meta-variables that are different.</p>
+
+<a name="181950033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950033">Rob Lewis (Nov 26 2019 at 18:33)</a>:</h4>
+<p>The latter guarantees a term with type <code>t</code>. The former guarantees a term with type defeq to <code>t</code>.</p>
+
+<a name="181950103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950103">Rob Lewis (Nov 26 2019 at 18:34)</a>:</h4>
+<p>So <code>assumption</code> would still find the first proof, but it would use it to prove the syntactic thing you want.</p>
+
+<a name="181950145"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950145" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950145">Reid Barton (Nov 26 2019 at 18:34)</a>:</h4>
+<p>That would make the french quote syntax marginally more useful as well</p>
+
+<a name="181950200"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181950200" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181950200">Reuben Rowe (Nov 26 2019 at 18:35)</a>:</h4>
+<p><span class="user-mention" data-user-id="110596">@Rob Lewis</span> oh right, yes I see what you mean</p>
+
+<a name="181951614"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181951614" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181951614">Reuben Rowe (Nov 26 2019 at 18:50)</a>:</h4>
+<p>So, I tried defining a local notation for french brackets with this proposed new implementation, and I was getting some errors:</p>
+<div class="codehilite"><pre><span></span>none of the overloads are applicable
+error for λ (x_1 : _),
+  show x_1, from has_bind.seq (tactic.save_info (_ 49 34)) (tactic.step tactic.interactive.assumption)
+assumption tactic failed
+</pre></div>
+
+
+<div class="codehilite"><pre><span></span>context: switched to basic overload resolution where arguments are elaborated without any information about the expected type, because failed to elaborate all candidates using the expected type
+  m = n
+this can happen because, for example, coercions were not considered in the process
+none of the overloads are applicable
+</pre></div>
+
+<a name="181951909"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181951909" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181951909">Reid Barton (Nov 26 2019 at 18:53)</a>:</h4>
+<p>That error looks weird</p>
+
+<a name="181952018"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952018" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952018">Reid Barton (Nov 26 2019 at 18:54)</a>:</h4>
+<p>How did you define the notation exactly?</p>
+
+<a name="181952021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952021">Reuben Rowe (Nov 26 2019 at 18:54)</a>:</h4>
+<p>It might be because in my code, there are some implicit goals that need to be solved.</p>
+
+<a name="181952039"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952039" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952039">Reuben Rowe (Nov 26 2019 at 18:54)</a>:</h4>
+<blockquote>
+<p>How did you define the notation exactly?</p>
+</blockquote>
+<p>notation <code>‹</code> p <code>›</code> := (show p, by assumption)</p>
+
+<a name="181952147"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952147" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952147">Reid Barton (Nov 26 2019 at 18:55)</a>:</h4>
+<p>Making it local notation (or just different syntax) might help, then it will override the global notation rather than Lean trying to consider both</p>
+
+<a name="181952180"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952180" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952180">Reuben Rowe (Nov 26 2019 at 18:55)</a>:</h4>
+<p>When I inline <code>show p, by assumption</code> at the place I want to use it (i.e. to generate a name for the hypothesis I want to apply <code>rw</code> to), it goes through fine, but also gives me new goals related to the parameters in my code.</p>
+
+<a name="181952278"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952278">Reuben Rowe (Nov 26 2019 at 18:56)</a>:</h4>
+<blockquote>
+<p>Making it local notation (or just different syntax) might help, then it will override the global notation rather than Lean trying to consider both</p>
+</blockquote>
+<p>Yeah, that seems to be working.</p>
+
+<a name="181952301"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952301" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952301">Reid Barton (Nov 26 2019 at 18:57)</a>:</h4>
+<p>Working working or the same behavior as when you wrote <code>show p, by assumption</code> manually?</p>
+
+<a name="181952470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952470">Reuben Rowe (Nov 26 2019 at 18:58)</a>:</h4>
+<p>The latter.</p>
+
+<a name="181952519"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/multiple%20assumptions%20of%20definitionally%20equal%20type/near/181952519" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/09309multipleassumptionsofdefinitionallyequaltype.html#181952519">Reuben Rowe (Nov 26 2019 at 18:59)</a>:</h4>
+<p>So, it is generating new goals related to the implicit parameters of <code>p</code>.</p>
+
 
 {% endraw %}
 
