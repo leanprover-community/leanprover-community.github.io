@@ -1,0 +1,53 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/81801omegawithatoms.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/81801omegawithatoms.html">omega with atoms?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="181939518"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/omega%20with%20atoms%3F/near/181939518" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81801omegawithatoms.html#181939518">Kevin Buzzard (Nov 26 2019 at 16:39)</a>:</h4>
+<p>Should I expect <code>omega</code> to kill this goal:</p>
+<div class="codehilite"><pre><span></span>1 goal
+n : ℕ,
+G_C G_L : list ℤ,
+hG : length G_C + length G_L = n + 1,
+iv : ℕ,
+hi : iv &lt; length G_C
+⊢ iv + (length G_C - iv - 1) + length G_L = n
+</pre></div>
+
+
+<p>It doesn't seem to, I get the <code>clear tactic failed, target type depends on 'G_C'
+</code> error. Is this just a bug? If I do this</p>
+<div class="codehilite"><pre><span></span>      <span class="n">generalize</span> <span class="n">hc</span> <span class="o">:</span> <span class="n">length</span> <span class="n">G_C</span> <span class="bp">=</span> <span class="n">c</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">hc</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+      <span class="n">clear</span> <span class="n">hc</span> <span class="n">G_C</span><span class="o">,</span>
+      <span class="n">generalize</span> <span class="n">hl</span> <span class="o">:</span> <span class="n">length</span> <span class="n">G_L</span> <span class="bp">=</span> <span class="n">l</span><span class="o">,</span>
+      <span class="n">rw</span> <span class="n">hl</span> <span class="n">at</span> <span class="bp">*</span><span class="o">,</span>
+      <span class="n">clear</span> <span class="n">hl</span> <span class="n">G_L</span><span class="o">,</span>
+      <span class="n">omega</span><span class="o">,</span>
+</pre></div>
+
+
+<p>then it works fine, i.e. I tell Lean that <code>length G_C</code> is just a constant natural. I also had to do the <code>clear</code>s or else I get other errors. Is this just the same bug in <code>omega</code>?</p>
+
+<a name="181939888"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/omega%20with%20atoms%3F/near/181939888" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81801omegawithatoms.html#181939888">Rob Lewis (Nov 26 2019 at 16:43)</a>:</h4>
+<p>It's <code>omega</code> being overly sensitive about the context again. You can post it here. <a href="https://github.com/leanprover-community/mathlib/issues/1484" target="_blank" title="https://github.com/leanprover-community/mathlib/issues/1484">https://github.com/leanprover-community/mathlib/issues/1484</a></p>
+
+<a name="181939991"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/omega%20with%20atoms%3F/near/181939991" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/81801omegawithatoms.html#181939991">Rob Lewis (Nov 26 2019 at 16:44)</a>:</h4>
+<p>These things need <span class="user-mention" data-user-id="116585">@Seul Baek</span> 's attention though. I don't really want to start touching the <code>omega</code> internals myself.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
