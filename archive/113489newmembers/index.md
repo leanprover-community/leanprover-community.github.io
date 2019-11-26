@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (1 message, latest: Nov 26 2019 at 15:53)
+* [Type ?M_1](72415TypeM1.html) (5 messages, latest: Nov 26 2019 at 17:59)
+
+* [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (2 messages, latest: Nov 26 2019 at 17:58)
 
 * [natural number game (https://tinyurl.com/natgame1234)](65745naturalnumbergamehttpstinyurlcomnatgame1234.html) (206 messages, latest: Nov 25 2019 at 15:19)
 
