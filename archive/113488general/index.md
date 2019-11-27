@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [paper about mathlib](90069paperaboutmathlib.html) (12 messages, latest: Nov 27 2019 at 18:23)
+
 * [Flypitch](73316Flypitch.html) (19 messages, latest: Nov 27 2019 at 17:54)
 
 * [delayed calc](80332delayedcalc.html) (2 messages, latest: Nov 27 2019 at 17:10)
@@ -190,8 +192,6 @@ permalink: archive/113488general/index.html
 * [instances and parameters](56368instancesandparameters.html) (41 messages, latest: Oct 21 2019 at 15:15)
 
 * [Strong binding power](90950Strongbindingpower.html) (2 messages, latest: Oct 21 2019 at 13:41)
-
-* [paper about mathlib](90069paperaboutmathlib.html) (11 messages, latest: Oct 21 2019 at 13:29)
 
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
