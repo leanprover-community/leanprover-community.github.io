@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Type classes](26225Typeclasses.html) (5 messages, latest: Nov 27 2019 at 07:49)
+* [Type classes](26225Typeclasses.html) (12 messages, latest: Nov 27 2019 at 08:51)
 
 * [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 
