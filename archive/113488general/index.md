@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [delayed calc](80332delayedcalc.html) (1 message, latest: Nov 27 2019 at 16:42)
+
 * [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (37 messages, latest: Nov 26 2019 at 21:01)
 
 * [Installing python(mathlib)](71274Installingpythonmathlib.html) (28 messages, latest: Nov 25 2019 at 22:27)

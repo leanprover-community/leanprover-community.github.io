@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [cannot find case names for induction](99017cannotfindcasenamesforinduction.html) (10 messages, latest: Nov 27 2019 at 14:44)
+* [cannot find case names for induction](99017cannotfindcasenamesforinduction.html) (11 messages, latest: Nov 27 2019 at 16:04)
 
 * [vscode deleting code](26348vscodedeletingcode.html) (5 messages, latest: Nov 27 2019 at 14:40)
 
