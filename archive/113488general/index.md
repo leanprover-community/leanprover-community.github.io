@@ -9,15 +9,15 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [library_search](97355librarysearch.html) (31 messages, latest: Nov 27 2019 at 19:45)
+* [library_search](97355librarysearch.html) (34 messages, latest: Nov 27 2019 at 20:54)
+
+* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (40 messages, latest: Nov 27 2019 at 20:50)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (12 messages, latest: Nov 27 2019 at 18:23)
 
 * [Flypitch](73316Flypitch.html) (19 messages, latest: Nov 27 2019 at 17:54)
 
 * [delayed calc](80332delayedcalc.html) (2 messages, latest: Nov 27 2019 at 17:10)
-
-* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (38 messages, latest: Nov 27 2019 at 17:04)
 
 * [Installing python(mathlib)](71274Installingpythonmathlib.html) (28 messages, latest: Nov 25 2019 at 22:27)
 

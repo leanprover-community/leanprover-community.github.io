@@ -183,6 +183,20 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182052544" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182052544">Sebastien Gouezel (Nov 27 2019 at 19:45)</a>:</h4>
 <p>Yes, the natural proof I would use is <code>ext, refl</code>, and it works fine. I was just amazed by the answer of <code>library_search</code>.</p>
 
+<a name="182057496"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057496" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057496">Johan Commelin (Nov 27 2019 at 20:49)</a>:</h4>
+<p>Isn't it nice that Lean is getting clever? That's what all the mathematicians want, right?</p>
+
+<a name="182057748"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057748" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057748">Floris van Doorn (Nov 27 2019 at 20:53)</a>:</h4>
+<p>This is one of the strange artifacts from Lean not having the definitional eta rule for structures. The eta rule for (say) products states that <code>x : prod A B</code> is definitionally equal to <code>(x.1, x.2)</code>. A rule like this makes sense. After all, the first and second projections of both <code>x</code> and <code>(x.1, x.2)</code> are already definitionally equal in Lean, so it makes sense to say that they are definitionally equal. </p>
+<p>In your case you have again two structures, where all projections are definitionally equal. This means that if you perform any transformation on both the LHS and the RHS that only take projections into account (like <code>neg</code>), you get something definitionally equal, which is why the proof that <code>library_search</code> found works.</p>
+<p>Originally the reason that Lean didn't get this rule was that the developers saw no compelling reason to add it. A while later I stated some (IMO) compelling reasons, but it never got added.</p>
+
+<a name="182057836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057836">Patrick Massot (Nov 27 2019 at 20:54)</a>:</h4>
+<p>This behavior of product never ceases to catch me by surprise.</p>
+
 
 {% endraw %}
 
