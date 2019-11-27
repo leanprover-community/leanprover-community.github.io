@@ -171,6 +171,44 @@ but is expected to have type
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20classes/near/182009278" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26225Typeclasses.html#182009278">Kevin Buzzard (Nov 27 2019 at 11:14)</a>:</h4>
 <p>In short, "field mul not provided" also means "don't take anything I say about multiplication seriously after this point"</p>
 
+<a name="182049328"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20classes/near/182049328" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26225Typeclasses.html#182049328">Elvorfirilmathredia (Nov 27 2019 at 19:09)</a>:</h4>
+<blockquote>
+<div class="codehilite"><pre><span></span><span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="c1">-- this is a useful lemma, it is used 3 times even in the on paper proof</span>
+<span class="kn">lemma</span> <span class="n">W</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+    <span class="k">have</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">((</span><span class="bp">*</span><span class="o">)</span> <span class="o">(</span><span class="n">x</span><span class="bp">⁻¹</span><span class="o">))</span> <span class="n">h</span><span class="o">,</span> <span class="c1">-- multiply by x⁻¹</span>
+    <span class="n">rwa</span> <span class="o">[</span><span class="n">pow_two</span><span class="o">,</span> <span class="n">inv_mul_cancel_left</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+</blockquote>
+<p>I'm still getting used to Lean so this is probably a stupid question, but why can I not write <code>have := congr_arg (group.mul (x⁻¹)) h</code> ?</p>
+<p>Hm, <code>has_mul.mul</code> works ...</p>
+
+<a name="182049701"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/Type%20classes/near/182049701" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/26225Typeclasses.html#182049701">Kevin Buzzard (Nov 27 2019 at 19:13)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">fintype</span>
+
+<span class="kn">variable</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span>
+<span class="kn">variables</span> <span class="o">[</span><span class="n">group</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">decidable_eq</span> <span class="n">α</span><span class="o">]</span> <span class="o">[</span><span class="n">fintype</span> <span class="n">α</span><span class="o">]</span>
+
+<span class="c1">-- this is a useful lemma, it is used 3 times even in the on paper proof</span>
+<span class="kn">lemma</span> <span class="n">W</span> <span class="o">{</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">}</span> <span class="o">(</span><span class="n">h</span> <span class="o">:</span> <span class="n">x</span><span class="err">^</span><span class="mi">2</span> <span class="bp">=</span> <span class="mi">1</span><span class="o">)</span> <span class="o">:</span> <span class="n">x</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="k">have</span> <span class="o">:=</span> <span class="n">congr_arg</span> <span class="o">(</span><span class="n">group</span><span class="bp">.</span><span class="n">mul</span> <span class="o">(</span><span class="n">x</span><span class="bp">⁻¹</span><span class="o">))</span> <span class="n">h</span><span class="o">,</span>
+  <span class="n">change</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="o">(</span><span class="n">x</span> <span class="err">^</span> <span class="mi">2</span><span class="o">)</span> <span class="bp">=</span> <span class="n">x</span><span class="bp">⁻¹</span> <span class="bp">*</span> <span class="mi">1</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+  <span class="n">rwa</span> <span class="o">[</span><span class="n">pow_two</span><span class="o">,</span> <span class="n">inv_mul_cancel_left</span><span class="o">,</span> <span class="n">mul_one</span><span class="o">]</span> <span class="n">at</span> <span class="n">this</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>[sorry if someone else posted, I'm on the underground with sporadic reception]. <code>rw</code> works with syntactic equality not definitional equality.</p>
+
 
 {% endraw %}
 

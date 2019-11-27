@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [library_search](97355librarysearch.html) (31 messages, latest: Nov 27 2019 at 19:45)
+
 * [paper about mathlib](90069paperaboutmathlib.html) (12 messages, latest: Nov 27 2019 at 18:23)
 
 * [Flypitch](73316Flypitch.html) (19 messages, latest: Nov 27 2019 at 17:54)
@@ -936,8 +938,6 @@ permalink: archive/113488general/index.html
 * [3.4.2 branch](99076342branch.html) (58 messages, latest: May 21 2019 at 01:04)
 
 * [dependencies](91432dependencies.html) (5 messages, latest: May 20 2019 at 22:10)
-
-* [library_search](97355librarysearch.html) (25 messages, latest: May 20 2019 at 19:51)
 
 * [protected to_additive](92759protectedtoadditive.html) (2 messages, latest: May 20 2019 at 19:15)
 
