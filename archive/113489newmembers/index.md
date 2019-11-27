@@ -9,9 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [vscode deleting code](26348vscodedeletingcode.html) (4 messages, latest: Nov 27 2019 at 10:57)
+* [Type classes](26225Typeclasses.html) (15 messages, latest: Nov 27 2019 at 11:14)
 
-* [Type classes](26225Typeclasses.html) (14 messages, latest: Nov 27 2019 at 10:41)
+* [vscode deleting code](26348vscodedeletingcode.html) (4 messages, latest: Nov 27 2019 at 10:57)
 
 * [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 
