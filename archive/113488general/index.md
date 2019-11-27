@@ -9,9 +9,11 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [delayed calc](80332delayedcalc.html) (1 message, latest: Nov 27 2019 at 16:42)
+* [Flypitch](73316Flypitch.html) (19 messages, latest: Nov 27 2019 at 17:54)
 
-* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (37 messages, latest: Nov 26 2019 at 21:01)
+* [delayed calc](80332delayedcalc.html) (2 messages, latest: Nov 27 2019 at 17:10)
+
+* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (38 messages, latest: Nov 27 2019 at 17:04)
 
 * [Installing python(mathlib)](71274Installingpythonmathlib.html) (28 messages, latest: Nov 25 2019 at 22:27)
 
@@ -288,8 +290,6 @@ permalink: archive/113488general/index.html
 * [equatilies](88311equatilies.html) (3 messages, latest: Sep 28 2019 at 11:46)
 
 * [instance depth again](78859instancedepthagain.html) (3 messages, latest: Sep 28 2019 at 03:09)
-
-* [Flypitch](73316Flypitch.html) (18 messages, latest: Sep 27 2019 at 11:21)
 
 * [leancrawler](21009leancrawler.html) (8 messages, latest: Sep 26 2019 at 18:12)
 
