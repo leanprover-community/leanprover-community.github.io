@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Type classes](26225Typeclasses.html) (5 messages, latest: Nov 27 2019 at 07:49)
+
 * [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 
 * [Type ?M_1](72415TypeM1.html) (5 messages, latest: Nov 26 2019 at 17:59)
@@ -18,8 +20,6 @@ permalink: archive/113489newmembers/index.html
 * [Square, curly and normal brackets](02872Squarecurlyandnormalbrackets.html) (34 messages, latest: Nov 25 2019 at 07:43)
 
 * [rewrite only first occurrence?](40181rewriteonlyfirstoccurrence.html) (20 messages, latest: Nov 24 2019 at 19:09)
-
-* [Type classes](26225Typeclasses.html) (2 messages, latest: Nov 23 2019 at 22:27)
 
 * [Learning Lean and mathlib](06501LearningLeanandmathlib.html) (3 messages, latest: Nov 23 2019 at 14:29)
 
