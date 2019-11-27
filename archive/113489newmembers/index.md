@@ -9,9 +9,11 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Type classes](26225Typeclasses.html) (15 messages, latest: Nov 27 2019 at 11:14)
+* [cannot find case names for induction](99017cannotfindcasenamesforinduction.html) (10 messages, latest: Nov 27 2019 at 14:44)
 
-* [vscode deleting code](26348vscodedeletingcode.html) (4 messages, latest: Nov 27 2019 at 10:57)
+* [vscode deleting code](26348vscodedeletingcode.html) (5 messages, latest: Nov 27 2019 at 14:40)
+
+* [Type classes](26225Typeclasses.html) (15 messages, latest: Nov 27 2019 at 11:14)
 
 * [multiple assumptions of definitionally equal type](09309multipleassumptionsofdefinitionallyequaltype.html) (43 messages, latest: Nov 26 2019 at 20:07)
 

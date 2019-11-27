@@ -1,0 +1,81 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/99017cannotfindcasenamesforinduction.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html">cannot find case names for induction</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182021033"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182021033" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182021033">Reuben Rowe (Nov 27 2019 at 14:00)</a>:</h4>
+<p>Why do I get the error "could not find open goal of given case" with the following code?</p>
+<div class="codehilite"><pre><span></span><span class="kn">universe</span> <span class="n">u</span>
+
+<span class="kn">variables</span> <span class="o">{</span> <span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span> <span class="o">}</span> <span class="o">{</span> <span class="n">size</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="bp">ℕ</span> <span class="o">}</span>
+
+<span class="n">include</span> <span class="n">size</span>
+<span class="kn">example</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="kt">Prop</span>
+  <span class="o">:=</span>
+    <span class="k">begin</span>
+      <span class="k">assume</span> <span class="n">a</span> <span class="o">:</span> <span class="n">α</span><span class="o">,</span>
+      <span class="k">let</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">size</span> <span class="n">a</span><span class="o">,</span>
+      <span class="n">induction</span> <span class="n">n</span><span class="o">,</span>
+      <span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">zero</span> <span class="o">{</span>
+        <span class="n">sorry</span><span class="o">,</span>
+      <span class="o">},</span>
+      <span class="n">case</span> <span class="n">nat</span><span class="bp">.</span><span class="n">succ</span> <span class="o">{</span>
+        <span class="n">sorry</span><span class="o">,</span>
+      <span class="o">},</span>
+      <span class="n">done</span>
+    <span class="kn">end</span>
+</pre></div>
+
+<a name="182021441"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182021441" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182021441">Patrick Massot (Nov 27 2019 at 14:05)</a>:</h4>
+<p>The error message is weird, but it's clearly Lean's answer to you trying to do something weird. Could you give more context? What are you actually trying to do?</p>
+
+<a name="182021998"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182021998" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182021998">Marc Huisinga (Nov 27 2019 at 14:12)</a>:</h4>
+<p>changing <code>let</code> to <code>have</code> works, but i am not sure what is going on either</p>
+
+<a name="182022952"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182022952" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182022952">Reuben Rowe (Nov 27 2019 at 14:22)</a>:</h4>
+<p>I want to prove a property about some relation on elements of an inductive type <span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mi>α</mi></mrow><annotation encoding="application/x-tex">\alpha</annotation></semantics></math></span><span aria-hidden="true" class="katex-html"><span class="base"><span class="strut" style="height:0.43056em;vertical-align:0em;"></span><span class="mord mathdefault" style="margin-right:0.0037em;">α</span></span></span></span>, but it doesn't hold by structural induction because the definition of the relation uses an operation that changes the elements, but which does preserve the size, so my induction must be on the size of the elements.</p>
+
+<a name="182022997"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182022997" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182022997">Reuben Rowe (Nov 27 2019 at 14:23)</a>:</h4>
+<blockquote>
+<p>trying to do something weird</p>
+</blockquote>
+<p>Why is this weird?</p>
+
+<a name="182023728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182023728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182023728">Patrick Massot (Nov 27 2019 at 14:30)</a>:</h4>
+<p>It will be very difficult to help you without a clearer explanation, or some code actually illustrating your use case. In the mean time, maybe reading <a href="#narrow/stream/113489-new-members/topic/Induction.20on.20minimum.20.22length.22" title="#narrow/stream/113489-new-members/topic/Induction.20on.20minimum.20.22length.22">https://leanprover.zulipchat.com/#narrow/stream/113489-new-members/topic/Induction.20on.20minimum.20.22length.22</a> could help (what you wrote sounds vaguely similar to that old thread).</p>
+
+<a name="182023767"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182023767" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182023767">Sebastien Gouezel (Nov 27 2019 at 14:31)</a>:</h4>
+<p>At the beginning of your proof, you have chosen an element <code>a</code>. Now, it is fixed forever, so you can not do an induction on its size. The naive way to do this would be to prove a statement of the form : "for all <code>n</code>, for all elements <code>a</code> of size<code>n</code>, then something holds", by induction over <code>n</code>. The non-naive way would be to <code>generalize</code> something.</p>
+
+<a name="182024771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182024771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182024771">Reuben Rowe (Nov 27 2019 at 14:41)</a>:</h4>
+<p>Ah yes, of course. I see - thanks! Sorry for all the stupid questions ;-)</p>
+
+<a name="182024842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182024842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182024842">Patrick Massot (Nov 27 2019 at 14:41)</a>:</h4>
+<p>Don't worry about asking "stupid" questions.</p>
+
+<a name="182025103"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/cannot%20find%20case%20names%20for%20induction/near/182025103" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/99017cannotfindcasenamesforinduction.html#182025103">Marc Huisinga (Nov 27 2019 at 14:44)</a>:</h4>
+<p>especially not with error messages like these. i still find it strange that it only fails when <code>case</code> is used wheras you just can't prove it if you don't use <code>case</code>.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
