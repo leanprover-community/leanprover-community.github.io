@@ -237,6 +237,34 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182062071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182062071">Floris van Doorn (Nov 27 2019 at 21:58)</a>:</h4>
 <p>Usually they are written a bit differently, using substitution instead of function application, but that will probably be more confusing. But just to be clear: something like <code>β</code>-reduction also applies if the term inside the lambda is not a application - so something like <code>(λ x, x) a ≡ a</code> is an instance of <code>β</code>-reduction</p>
 
+<a name="182063842"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182063842" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182063842">Chris Hughes (Nov 27 2019 at 22:25)</a>:</h4>
+<p>Why do the two <code>eta</code>s and <code>beta</code>s have the same name? Isn't the second <code>beta</code> just a combination of <code>delta</code> and <code>iota</code>?</p>
+
+<a name="182065296"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065296" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065296">Mario Carneiro (Nov 27 2019 at 22:46)</a>:</h4>
+<p>If you view the projections as primitive, they are different</p>
+
+<a name="182065700"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065700" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065700">Floris van Doorn (Nov 27 2019 at 22:53)</a>:</h4>
+<p>The last two names are maybe informal usage of these names. Yes, the second <code>beta</code> is indeed a combination of <code>delta</code> and <code>iota</code> in Lean. This is because products are defined as a inductive type. If records are primitive (not special cases of inductive types) then it could be its own rule.</p>
+<p>Sometimes <code>ι</code>-reduction is also called "<code>β</code>-reduction for inductive types". To explain this terminology, we have to take a step back.<br>
+In type theory, to each type former, there is a number of rules associated to it. I will explain these rules by using the natural numbers as an example.</p>
+<ul>
+<li>(Type) formation rules: when can I form this type? For natural numbers, we have <code>nat : Type</code></li>
+<li>(Term) introduction rules: when can I form an element of this type? For natural numbers: <code>0 : nat</code> and if <code>n : nat</code> then <code>n.succ : nat</code></li>
+<li>(Term) elimination rules: how can I eliminate out of this type? For natural numbers this is <code>nat.rec</code>.</li>
+<li>Then there are computation rules. These have two flavors<p>- What happens if I apply an elimination rule to an introduction rule? In general, this is sometimes called <code>beta</code>-reduction (since it corresponds to <br>
+<code>beta</code>-reduction when talking about functions). For natural numbers, these are the <code>iota</code>-reduction rules mentioned above.<br>
+- What happens if I apply an introduction rule to an elimination rule? These are called <code>eta</code>-conversion rules. The natural numbers don't really have them (I think you can write something like an eta-rule down, but it's not that useful. For functions and products, it's the eta rule I mentioned above.</p>
+</li>
+</ul>
+<p>This is the reason that different rules have the name <code>beta</code>/<code>eta</code>-reductions: they are the corresponding reduction rules for those type formers.</p>
+
+<a name="182065761"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182065761" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182065761">Floris van Doorn (Nov 27 2019 at 22:54)</a>:</h4>
+<p>If you want more information than my summary, you can look e.g. here: <a href="https://ncatlab.org/nlab/show/type+theory#Syntax" target="_blank" title="https://ncatlab.org/nlab/show/type+theory#Syntax">https://ncatlab.org/nlab/show/type+theory#Syntax</a></p>
+
 
 {% endraw %}
 

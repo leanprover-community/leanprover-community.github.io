@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [library_search](97355librarysearch.html) (41 messages, latest: Nov 27 2019 at 21:58)
+* [library_search](97355librarysearch.html) (45 messages, latest: Nov 27 2019 at 22:54)
 
 * [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (41 messages, latest: Nov 27 2019 at 21:56)
 
