@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [library_search](97355librarysearch.html) (34 messages, latest: Nov 27 2019 at 20:54)
+* [library_search](97355librarysearch.html) (41 messages, latest: Nov 27 2019 at 21:58)
 
-* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (40 messages, latest: Nov 27 2019 at 20:50)
+* [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (41 messages, latest: Nov 27 2019 at 21:56)
 
 * [paper about mathlib](90069paperaboutmathlib.html) (12 messages, latest: Nov 27 2019 at 18:23)
 

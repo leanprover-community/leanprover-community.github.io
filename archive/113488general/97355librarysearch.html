@@ -197,6 +197,46 @@ I'm very excited to see this! I really hope we will have a <code>back</code> in 
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182057836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182057836">Patrick Massot (Nov 27 2019 at 20:54)</a>:</h4>
 <p>This behavior of product never ceases to catch me by surprise.</p>
 
+<a name="182058493"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182058493" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182058493">Sebastien Gouezel (Nov 27 2019 at 21:04)</a>:</h4>
+<p>Even if you added this rule for structures, I guess it would not ensure that <code>id</code> and <code>lambda x, (x.1, x.2)</code> are defeq, right? (in manifolds, it would have helped me a lot if this had been true).</p>
+
+<a name="182058910"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182058910" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182058910">Sebastien Gouezel (Nov 27 2019 at 21:10)</a>:</h4>
+<p>I think it is the first time I understand what this eta rule for structures is. Thanks! Now I just need to understand alpha, beta, gamma, delta, and how many others do you have?</p>
+
+<a name="182058933"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182058933" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182058933">Johan Commelin (Nov 27 2019 at 21:11)</a>:</h4>
+<p>Ooh, and then there are Y and S and K combinators, in case you get bored....</p>
+
+<a name="182060049"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182060049" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182060049">Kevin Buzzard (Nov 27 2019 at 21:27)</a>:</h4>
+<p>I learnt about these alpha beta things when I was trying to get automation working in the definition of the complex numbers</p>
+
+<a name="182060126"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182060126" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182060126">Kevin Buzzard (Nov 27 2019 at 21:28)</a>:</h4>
+<p>All proofs of eg associativity of multiplication are "check on real and imaginary parts" so it was precisely these projections in a very concrete situation</p>
+
+<a name="182061967"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182061967" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182061967">Floris van Doorn (Nov 27 2019 at 21:57)</a>:</h4>
+<p>Here is a cheat sheet:</p>
+<div class="codehilite"><pre><span></span>α-equivalence: λ x, f x ≡ λ y, f y
+β-reduction: (λ x, f x) a ≡ f a
+δ-reduction: unfold a definition
+η-reduction: λ x, f x ≡ f (η-expansion is in the other direction)
+ι-reduction: nat.rec P₀ Pₛ 0 ≡ P₀ and nat.rec P₀ Pₛ n.succ ≡ Pₛ n (nat.rec P₀ Pₛ n)
+ζ-reduction: (let x := a in f x) ≡ f a
+β-reduction (for records): (x, y).1 ≡ x and (x, y).2 ≡ y
+η-reduction (for records): (x.1, x.2) ≡ x
+</pre></div>
+
+
+<p>all reduction rules are directed (from left to right), but if you take the congruence closure (that is, the smallest equivalence relation that respects all ways to make a term), you get the corresponding equivalence</p>
+
+<a name="182062071"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/library_search/near/182062071" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/97355librarysearch.html#182062071">Floris van Doorn (Nov 27 2019 at 21:58)</a>:</h4>
+<p>Usually they are written a bit differently, using substitution instead of function application, but that will probably be more confusing. But just to be clear: something like <code>β</code>-reduction also applies if the term inside the lambda is not a application - so something like <code>(λ x, x) a ≡ a</code> is an instance of <code>β</code>-reduction</p>
+
 
 {% endraw %}
 
