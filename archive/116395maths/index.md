@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [omega with atoms?](81801omegawithatoms.html) (4 messages, latest: Nov 28 2019 at 21:45)
+
 * [Comments? Summary of mathlib](93130CommentsSummaryofmathlib.html) (24 messages, latest: Nov 27 2019 at 06:17)
 
 * [(non?)commutative linear ordered semirings](62299noncommutativelinearorderedsemirings.html) (3 messages, latest: Nov 26 2019 at 20:16)
-
-* [omega with atoms?](81801omegawithatoms.html) (3 messages, latest: Nov 26 2019 at 16:44)
 
 * [condensed mathematics](39396condensedmathematics.html) (234 messages, latest: Nov 25 2019 at 14:53)
 
