@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [library_search](97355librarysearch.html) (46 messages, latest: Nov 28 2019 at 12:43)
+* [finset subtract one](23508finsetsubtractone.html) (4 messages, latest: Nov 28 2019 at 15:29)
+
+* [library_search](97355librarysearch.html) (47 messages, latest: Nov 28 2019 at 15:28)
 
 * [philosophy: the immediate aspect of mathematics](30591philosophytheimmediateaspectofmathematics.html) (41 messages, latest: Nov 27 2019 at 21:56)
 
