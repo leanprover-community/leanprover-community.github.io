@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Why do we need kernel reduction](35410Whydoweneedkernelreduction.html) (1 message, latest: Nov 28 2019 at 20:10)
+
 * [finset subtract one](23508finsetsubtractone.html) (4 messages, latest: Nov 28 2019 at 15:29)
 
 * [library_search](97355librarysearch.html) (47 messages, latest: Nov 28 2019 at 15:28)

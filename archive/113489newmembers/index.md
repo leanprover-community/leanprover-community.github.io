@@ -9,7 +9,9 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [WSL ubuntu error](67748WSLubuntuerror.html) (1 message, latest: Nov 28 2019 at 19:39)
+* [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (14 messages, latest: Nov 28 2019 at 20:59)
+
+* [WSL ubuntu error](67748WSLubuntuerror.html) (5 messages, latest: Nov 28 2019 at 20:46)
 
 * [Cases on fin 2](11356Casesonfin2.html) (7 messages, latest: Nov 28 2019 at 17:48)
 
@@ -318,8 +320,6 @@ permalink: archive/113489newmembers/index.html
 * [false.elim tactic?](50744falseelimtactic.html) (34 messages, latest: Sep 26 2019 at 22:44)
 
 * [Structure for simple graphs](22120Structureforsimplegraphs.html) (21 messages, latest: Sep 26 2019 at 21:48)
-
-* [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (9 messages, latest: Sep 24 2019 at 14:06)
 
 * [\l symbol](94975lsymbol.html) (4 messages, latest: Sep 23 2019 at 19:35)
 
