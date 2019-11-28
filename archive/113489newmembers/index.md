@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Cases on fin 2](11356Casesonfin2.html) (7 messages, latest: Nov 28 2019 at 17:48)
+
 * [Type classes](26225Typeclasses.html) (17 messages, latest: Nov 27 2019 at 19:13)
 
 * [cannot find case names for induction](99017cannotfindcasenamesforinduction.html) (11 messages, latest: Nov 27 2019 at 16:04)
