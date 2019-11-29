@@ -1,0 +1,103 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/116395maths/76014overloadingbu.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/116395maths/index.html">maths</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html">overloading \bu</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182190801"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182190801" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182190801">Kevin Buzzard (Nov 29 2019 at 16:46)</a>:</h4>
+<p>A student of mine <span class="user-mention" data-user-id="243895">@Shenyang Wu</span>  has a G-module M, so an abelian group with a left action of a group G, with notation <code>\bub</code> or <code>\bu</code>, the blob thing. He also wants to have the usual action of <code>int</code> on M. Can he use <code>\bub</code> for this too? </p>
+<p>We just had a torrid time getting <code>add_gsmul</code> to work, until I realised that now one has to put <code>open_locale add_group</code>. Is this what I'm supposed to be doing? The bub notation in algebra.group_power is "localized notation".</p>
+
+<a name="182191024"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191024" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191024">Floris van Doorn (Nov 29 2019 at 16:51)</a>:</h4>
+<p>It should work out of the box:</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">G</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="kn">example</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="err">•</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
+<a name="182191093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191093">Floris van Doorn (Nov 29 2019 at 16:52)</a>:</h4>
+<p>I think all of the <code>add_gsmul</code>/localized notation is to bootstrap our way before we have declared the actual module instance? Not sure though.</p>
+
+<a name="182191178"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191178" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191178">Kevin Buzzard (Nov 29 2019 at 16:54)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">group_power</span>
+
+<span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">theorem</span> <span class="n">blah</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">A</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="n">j</span><span class="o">)</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">i</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="err">•</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_gsmul</span><span class="o">,</span> <span class="c1">-- rewrite fails</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Why does this fail though?</p>
+
+<a name="182191207"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191207" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191207">Kevin Buzzard (Nov 29 2019 at 16:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="n">add_gsmul</span>
+<span class="c1">-- add_gsmul : ∀ (a : ?M_1) (i j : ℤ), gsmul (i + j) a = gsmul i a + gsmul j a</span>
+</pre></div>
+
+
+<p>It's defined using localised notation which doesn't make it out of the file</p>
+
+<a name="182191223"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191223" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191223">Kevin Buzzard (Nov 29 2019 at 16:55)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">add_gsmul</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">β</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">),</span> <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="n">j</span><span class="o">)</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">i</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="err">•</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="bp">@</span><span class="n">gpow_add</span> <span class="o">(</span><span class="n">multiplicative</span> <span class="n">β</span><span class="o">)</span> <span class="bp">_</span>
+</pre></div>
+
+
+<p>[from mathlib]</p>
+
+<a name="182191329"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191329" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191329">Floris van Doorn (Nov 29 2019 at 16:57)</a>:</h4>
+<p>They're not syntactically equal, but only definitionally equal. <code>•</code> is defined to be <code>gsmul</code>, but not syntactically the same as it. There should be a corresponding theorem in <code>algebra.module</code> though (probably called <code>add_smul</code>.</p>
+
+<a name="182191335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191335">Kevin Buzzard (Nov 29 2019 at 16:57)</a>:</h4>
+<p>so here I can fix this with <code>open_locale add_group</code>. Is this what I'm supposed to be doing?</p>
+
+<a name="182191405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191405">Kevin Buzzard (Nov 29 2019 at 16:58)</a>:</h4>
+<p>If I don't do this <code>open_locale</code> thing then <code>add_gsmul</code> is unusable (unless I constantly unfold the notation)</p>
+
+<a name="182191411"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191411" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191411">Kevin Buzzard (Nov 29 2019 at 16:58)</a>:</h4>
+<p>I just don't know if I'm asking too much here.</p>
+
+<a name="182191413"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191413" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191413">Floris van Doorn (Nov 29 2019 at 16:58)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">theorem</span> <span class="n">blah</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">)</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">A</span><span class="o">]</span> <span class="o">(</span><span class="n">a</span> <span class="o">:</span> <span class="n">A</span><span class="o">)</span> <span class="o">(</span><span class="n">i</span> <span class="n">j</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">:</span>
+  <span class="o">(</span><span class="n">i</span> <span class="bp">+</span> <span class="n">j</span><span class="o">)</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">=</span> <span class="n">i</span> <span class="err">•</span> <span class="n">a</span> <span class="bp">+</span> <span class="n">j</span> <span class="err">•</span> <span class="n">a</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">rw</span> <span class="n">add_smul</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="182191457"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191457">Kevin Buzzard (Nov 29 2019 at 16:59)</a>:</h4>
+<p>OK we'll press on with <code>add_smul</code> but I might be back here whining when the roof falls in. Thanks Floris.</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
