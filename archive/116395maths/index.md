@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [le_nhds_of_cauchy_adhp](04234lenhdsofcauchyadhp.html) (2 messages, latest: Nov 29 2019 at 21:03)
+* [le_nhds_of_cauchy_adhp](04234lenhdsofcauchyadhp.html) (3 messages, latest: Nov 29 2019 at 22:27)
+
+* [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (25 messages, latest: Nov 29 2019 at 22:25)
 
 * [summing from 0 to n-1](85268summingfrom0ton1.html) (27 messages, latest: Nov 29 2019 at 19:41)
 
@@ -64,8 +66,6 @@ permalink: archive/116395maths/index.html
 * [Define linear function from matrix](22614Definelinearfunctionfrommatrix.html) (29 messages, latest: Nov 14 2019 at 17:56)
 
 * [corners](50557corners.html) (3 messages, latest: Nov 14 2019 at 08:00)
-
-* [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (24 messages, latest: Nov 13 2019 at 13:38)
 
 * [potential projects](80411potentialprojects.html) (2 messages, latest: Nov 13 2019 at 10:36)
 
