@@ -80,6 +80,61 @@ permalink: archive/116395maths/85268summingfrom0ton1.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195055">Kevin Buzzard (Nov 29 2019 at 17:59)</a>:</h4>
 <p>all we need is an associative commutative addition on M</p>
 
+<a name="182195140"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195140" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195140">Kevin Buzzard (Nov 29 2019 at 18:00)</a>:</h4>
+<p>but as an input to the function one would have to supply the proof of R-linearity :-/</p>
+
+<a name="182195168"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195168" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195168">Kevin Buzzard (Nov 29 2019 at 18:01)</a>:</h4>
+<p>and there are lots of cases where this holds, e.g. M an R-module, M an add_comm_monoid and R=nat, M an add_comm_group and R=int...</p>
+
+<a name="182195370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195370">Johan Commelin (Nov 29 2019 at 18:04)</a>:</h4>
+<p>All of those are examples of <code>semimodule _ M</code></p>
+
+<a name="182195388"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195388" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195388">Kevin Buzzard (Nov 29 2019 at 18:04)</a>:</h4>
+<p>rofl and there was me laughing at that notion for months ;-)</p>
+
+<a name="182195405"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195405" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195405">Kevin Buzzard (Nov 29 2019 at 18:05)</a>:</h4>
+<p>semimodules! Whoever heard of them!</p>
+
+<a name="182195749"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195749" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195749">Kevin Buzzard (Nov 29 2019 at 18:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">finset.sum_smul :</span>
+<span class="cm">  ∀ {α : Type u_1} {β : Type u_2} [_inst_1 : add_comm_monoid β] (s : finset α) (n : ℕ) (f : α → β),</span>
+<span class="cm">    finset.sum s (λ (x : α), add_monoid.smul n (f x)) = add_monoid.smul n (finset.sum s f)</span>
+<span class="cm">-/</span>
+
+<span class="n">def</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_smul&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">M</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">semimodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">s</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span>
+</pre></div>
+
+<a name="182195953"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182195953" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182195953">Kevin Buzzard (Nov 29 2019 at 18:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">finset</span><span class="bp">.</span><span class="n">sum_smul&#39;</span> <span class="o">{</span><span class="n">α</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">R</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">semiring</span> <span class="n">R</span><span class="o">]</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">add_comm_monoid</span> <span class="n">M</span><span class="o">]</span>
+  <span class="o">[</span><span class="n">semimodule</span> <span class="n">R</span> <span class="n">M</span><span class="o">]</span> <span class="o">(</span><span class="n">s</span> <span class="o">:</span> <span class="n">finset</span> <span class="n">α</span><span class="o">)</span> <span class="o">(</span><span class="n">r</span> <span class="o">:</span> <span class="n">R</span><span class="o">)</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span>
+    <span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">s</span> <span class="o">(</span><span class="bp">λ</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">α</span><span class="o">),</span> <span class="o">(</span><span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">f</span> <span class="n">x</span><span class="o">)))</span> <span class="bp">=</span> <span class="n">r</span> <span class="err">•</span> <span class="o">(</span><span class="n">finset</span><span class="bp">.</span><span class="n">sum</span> <span class="n">s</span> <span class="n">f</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">by</span> <span class="n">haveI</span> <span class="o">:=</span> <span class="n">classical</span><span class="bp">.</span><span class="n">dec_eq</span> <span class="n">α</span><span class="bp">;</span> <span class="n">exact</span>
+<span class="n">finset</span><span class="bp">.</span><span class="n">induction_on</span> <span class="n">s</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span><span class="o">)</span> <span class="o">(</span><span class="k">by</span> <span class="n">simp</span> <span class="o">[</span><span class="bp">_</span><span class="n">root_</span><span class="bp">.</span><span class="n">smul_add</span><span class="o">]</span> <span class="o">{</span><span class="n">contextual</span> <span class="o">:=</span> <span class="n">tt</span><span class="o">})</span>
+</pre></div>
+
+
+<p>I am a skript kiddie! I just copied the original proof (which looks suspiciously Mario-like) mutatis mutandis and got away with it :D</p>
+
+<a name="182196104"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182196104" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182196104">Johan Commelin (Nov 29 2019 at 18:18)</a>:</h4>
+<p>The original <code>finset.sum_smul</code> should be a specialisation of this <code>'</code>-version</p>
+
+<a name="182197796"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/summing%20from%200%20to%20n-1/near/182197796" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/85268summingfrom0ton1.html#182197796">Kevin Buzzard (Nov 29 2019 at 18:54)</a>:</h4>
+<p>But actually this is a strange situation. The proof of <code>finset.sum_smul</code> is that it's the to-additive version of <code>finset.prod_pow</code>, but there is no multiplicative theory of semimodules being acted on multiplicatively by semirings so there's no <code>finset.prod_pow'</code>. In particular one doesn't actually want to redefine the type of <code>finset.sum_smul</code> because it will break <code>to_additive</code> stuff. How about I just add <code>finset.sum_smul'</code> without any extra plumbing?</p>
+
 
 {% endraw %}
 

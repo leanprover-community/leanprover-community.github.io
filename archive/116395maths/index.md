@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [summing from 0 to n-1](85268summingfrom0ton1.html) (17 messages, latest: Nov 29 2019 at 17:59)
+* [summing from 0 to n-1](85268summingfrom0ton1.html) (26 messages, latest: Nov 29 2019 at 18:54)
 
 * [overloading \bu](76014overloadingbu.html) (16 messages, latest: Nov 29 2019 at 17:06)
 
