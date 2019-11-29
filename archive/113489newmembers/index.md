@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Multiple applies/exacts/haves in tactic mode](23564Multipleappliesexactshavesintacticmode.html) (6 messages, latest: Nov 29 2019 at 17:32)
+
 * [update-mathlib required 'github'?](70403updatemathlibrequiredgithub.html) (14 messages, latest: Nov 28 2019 at 20:59)
 
 * [WSL ubuntu error](67748WSLubuntuerror.html) (5 messages, latest: Nov 28 2019 at 20:46)

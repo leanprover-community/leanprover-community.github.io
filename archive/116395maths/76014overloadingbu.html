@@ -97,6 +97,31 @@ permalink: archive/116395maths/76014overloadingbu.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191457" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191457">Kevin Buzzard (Nov 29 2019 at 16:59)</a>:</h4>
 <p>OK we'll press on with <code>add_smul</code> but I might be back here whining when the roof falls in. Thanks Floris.</p>
 
+<a name="182191520"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191520" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191520">Floris van Doorn (Nov 29 2019 at 17:00)</a>:</h4>
+<p>So if you do <code>open_locale</code>, the notation <code>•</code> is hijacked to mean <code>gsmul</code> instead of its usual definition (<code>has_smul.smul</code>). This is probably not a good idea, not in the least because you also want to write <code>g • m</code> with <code>g : G</code>.</p>
+
+<a name="182191547"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191547" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191547">Floris van Doorn (Nov 29 2019 at 17:00)</a>:</h4>
+<p>All theorems about <code>gsmul</code> should have a corresponding theorem about <code>smul</code> in <code>algebra.module</code>. Hopefully...</p>
+
+<a name="182191728"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191728" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191728">Floris van Doorn (Nov 29 2019 at 17:03)</a>:</h4>
+<p>well, that is not true... You might eventually want to use a lemma that <code>i • a = gsmul i a</code> (by <code>rfl</code>).<br>
+Perhaps <code>algebra.group_power</code> should be refactored: we want to use the operation <code>•</code> and not <code>gsmul</code> as much as possible.</p>
+
+<a name="182191912"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/overloading%20%5Cbu/near/182191912" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/76014overloadingbu.html#182191912">Floris van Doorn (Nov 29 2019 at 17:06)</a>:</h4>
+<p>One other option you have is to <code>open_locale smul</code>. Then <code>•ℤ</code> will be the notation for <code>gsmul</code>, which means you can rewrite with all the <code>gsmul</code>-lemmas. It will be annoying though, since you might accidentally type <code>•</code> instead of <code>•ℤ</code> which will type-check, but might lead to errors down the road.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">algebra</span><span class="bp">.</span><span class="n">module</span>
+
+<span class="kn">variables</span> <span class="o">{</span><span class="n">G</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">{</span><span class="n">M</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">ring</span> <span class="n">G</span><span class="o">]</span> <span class="o">[</span><span class="n">add_comm_group</span> <span class="n">M</span><span class="o">]</span> <span class="o">[</span><span class="n">module</span> <span class="n">G</span> <span class="n">M</span><span class="o">]</span>
+
+<span class="n">open_locale</span> <span class="n">smul</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">G</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">g</span> <span class="err">•</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+<span class="kn">example</span> <span class="o">(</span><span class="n">n</span> <span class="o">:</span> <span class="bp">ℤ</span><span class="o">)</span> <span class="o">(</span><span class="n">m</span> <span class="o">:</span> <span class="n">M</span><span class="o">)</span> <span class="o">:</span> <span class="n">n</span> <span class="err">•</span><span class="bp">ℤ</span> <span class="n">m</span> <span class="bp">=</span> <span class="n">n</span> <span class="err">•</span><span class="bp">ℤ</span> <span class="n">m</span> <span class="o">:=</span> <span class="n">rfl</span>
+</pre></div>
+
 
 {% endraw %}
 

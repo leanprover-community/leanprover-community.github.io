@@ -9,7 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [overloading \bu](76014overloadingbu.html) (12 messages, latest: Nov 29 2019 at 16:59)
+* [summing from 0 to n-1](85268summingfrom0ton1.html) (17 messages, latest: Nov 29 2019 at 17:59)
+
+* [overloading \bu](76014overloadingbu.html) (16 messages, latest: Nov 29 2019 at 17:06)
 
 * [cau_seq, cauchy_seq](26419causeqcauchyseq.html) (2 messages, latest: Nov 29 2019 at 03:12)
 
