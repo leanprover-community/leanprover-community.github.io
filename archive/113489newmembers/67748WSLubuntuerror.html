@@ -103,6 +103,63 @@ TypeError: argument of type &#39;WindowsPath&#39; is not iterable
 
 <p>This is the entire message.  I'm not sure if I should mess around with these codes if I don't know what I'm doing :P</p>
 
+<a name="182253139"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253139" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253139">Bryan Gin-ge Chen (Nov 30 2019 at 20:04)</a>:</h4>
+<p>Could you try running <code>format_project --debug</code>? I'm curious what kind of object <code>lean_exec_path</code> is. I suspect that <code>lean_exec_path</code> needs to be converted to a string somewhere along the way.</p>
+
+<a name="182253289"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253289" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253289">Jason KY. (Nov 30 2019 at 20:08)</a>:</h4>
+<p>This is what <code>format_project --debug</code> gives me:</p>
+<div class="codehilite"><pre><span></span>$ format_project --debug
+Lean executable path: C:\Users\Jason\.elan\toolchains\3.4.2\bin\lean
+LEAN_PATH: C:\Users\Jason\.elan\toolchains\3.4.2\bin\..\lib\lean\library:C:\Users\Jason\AppData\Local\Packages\CanonicalGroupLimited.Ubuntu16.04onWindows_79rhkp1fndgsc\LocalState\rootfs\home\jasonky\M4000x_LEAN_formalisation\src:_target\deps\mathlib\src
+Template folder: C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\templates
+Tactic state filters:  []
+Traceback (most recent call last):
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 156, in &lt;module&gt;
+    Fire(render_lean_project)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 138, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 471, in _Fire
+    target=component.__name__)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 675, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 119, in render_lean_project
+    TradBegin, TradEnd])
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\line_reader.py&quot;, line 24, in __init__
+    self.server = Server(lean_exec_path, lean_path)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\server.py&quot;, line 15, in __init__
+    env={&#39;LEAN_PATH&#39;: lean_path})
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 775, in __init__
+    restore_signals, start_new_session)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 1119, in _execute_child
+    args = list2cmdline(args)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 530, in list2cmdline
+    needquote = (&quot; &quot; in arg) or (&quot;\t&quot; in arg) or not arg
+TypeError: argument of type &#39;WindowsPath&#39; is not iterable
+</pre></div>
+
+<a name="182253575"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253575" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253575">Bryan Gin-ge Chen (Nov 30 2019 at 20:16)</a>:</h4>
+<p>Ah, OK, I guess this doesn't help much since <code>print</code> coerces objects to a string. The following might work (I can't test easily at the moment). Change <a href="https://github.com/leanprover-community/format_lean/blob/master/bin/format_project#L109" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/bin/format_project#L109">this line</a> to this:</p>
+<div class="codehilite"><pre><span></span>    <span class="n">lecture_reader</span> <span class="o">=</span> <span class="n">FileReader</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">lean_exec_path</span><span class="p">),</span> <span class="n">lean_path</span><span class="p">,</span>
+</pre></div>
+
+
+<p>and then reinstall format_lean.</p>
+
+<a name="182253827"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182253827" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182253827">Jason KY. (Nov 30 2019 at 20:23)</a>:</h4>
+<p>Emm... Now it gives no error but it's not compiling either :(</p>
+
+<a name="182254771"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182254771" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182254771">Bryan Gin-ge Chen (Nov 30 2019 at 20:50)</a>:</h4>
+<p>What happens, exactly? Does the command successfully run with no output but nothing is added in the "outdir" that you specified? What does the file that you used for "inpath" look like?</p>
+
+<a name="182254983"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182254983" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182254983">Jason KY. (Nov 30 2019 at 20:56)</a>:</h4>
+<p>I have <code>only = ['src/M40001/M40001.lean']</code>within my <code>format.toml</code>so I would expect it to compile the file indicated into the folder <code>html</code>. But when I run the command it creates some other files named <code>lecture</code> in <code>html</code>. The terminal itself does not return anything.</p>
+
 
 {% endraw %}
 
