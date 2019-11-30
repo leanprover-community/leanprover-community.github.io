@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [WSL ubuntu error](67748WSLubuntuerror.html) (10 messages, latest: Nov 30 2019 at 13:52)
+* [WSL ubuntu error](67748WSLubuntuerror.html) (11 messages, latest: Nov 30 2019 at 17:06)
 
 * [Multiple applies/exacts/haves in tactic mode](23564Multipleappliesexactshavesintacticmode.html) (9 messages, latest: Nov 30 2019 at 10:23)
 
