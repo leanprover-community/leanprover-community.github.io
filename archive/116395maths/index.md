@@ -9,11 +9,11 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [le_nhds_of_cauchy_adhp](04234lenhdsofcauchyadhp.html) (3 messages, latest: Nov 29 2019 at 22:27)
+* [le_nhds_of_cauchy_adhp](04234lenhdsofcauchyadhp.html) (9 messages, latest: Nov 29 2019 at 23:32)
+
+* [summing from 0 to n-1](85268summingfrom0ton1.html) (30 messages, latest: Nov 29 2019 at 23:12)
 
 * [constructive real algebraic numbers](46340constructiverealalgebraicnumbers.html) (25 messages, latest: Nov 29 2019 at 22:25)
-
-* [summing from 0 to n-1](85268summingfrom0ton1.html) (27 messages, latest: Nov 29 2019 at 19:41)
 
 * [overloading \bu](76014overloadingbu.html) (16 messages, latest: Nov 29 2019 at 17:06)
 
