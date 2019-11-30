@@ -66,6 +66,43 @@ ERROR: Can not perform a &#39;--user&#39; install. User site-packages are not vi
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182246883" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182246883">Kevin Buzzard (Nov 30 2019 at 17:06)</a>:</h4>
 <p>Why not just install python 3.7 on Windows following some google instructions and then download a command line terminal and type in the commands in the installation instructions? I don't know much about Windows but I don't really see why this wouldn't work. Just make sure the python exe is in the path for the terminal.</p>
 
+<a name="182251594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182251594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182251594">Jason KY. (Nov 30 2019 at 19:18)</a>:</h4>
+<p>I tried this and it <em>almost</em> worked! But it broke once I tried to compile the lean files saying <code>TypeError: argument of type 'WindowsPath' is not iterable</code>. I don't believe this to be a Python path issue, should it? My Python works fine in the terminal otherwise.</p>
+
+<a name="182252295"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182252295" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182252295">Bryan Gin-ge Chen (Nov 30 2019 at 19:39)</a>:</h4>
+<p>Did the error give you a file and line number? You may be able to fix that by changing that line in the Python so that it uses the <code>.name</code> field of the WindowsPath object.</p>
+
+<a name="182252668"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/WSL%20ubuntu%20error/near/182252668" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/67748WSLubuntuerror.html#182252668">Jason KY. (Nov 30 2019 at 19:50)</a>:</h4>
+<div class="codehilite"><pre><span></span>Traceback (most recent call last):
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 156, in &lt;module&gt;
+    Fire(render_lean_project)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 138, in Fire
+    component_trace = _Fire(component, args, parsed_flag_args, context, name)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 471, in _Fire
+    target=component.__name__)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\fire\core.py&quot;, line 675, in _CallAndUpdateTrace
+    component = fn(*varargs, **kwargs)
+  File &quot;C:/Users/Jason/AppData/Local/Programs/Python/Python37-32/Scripts/format_project&quot;, line 119, in render_lean_project
+    TradBegin, TradEnd])
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\line_reader.py&quot;, line 24, in __init__
+    self.server = Server(lean_exec_path, lean_path)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\site-packages\format_lean\server.py&quot;, line 15, in __init__
+    env={&#39;LEAN_PATH&#39;: lean_path})
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 775, in __init__
+    restore_signals, start_new_session)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 1119, in _execute_child
+    args = list2cmdline(args)
+  File &quot;C:\users\jason\appdata\local\programs\python\python37-32\lib\subprocess.py&quot;, line 530, in list2cmdline
+    needquote = (&quot; &quot; in arg) or (&quot;\t&quot; in arg) or not arg
+TypeError: argument of type &#39;WindowsPath&#39; is not iterable
+</pre></div>
+
+
+<p>This is the entire message.  I'm not sure if I should mess around with these codes if I don't know what I'm doing :P</p>
+
 
 {% endraw %}
 
