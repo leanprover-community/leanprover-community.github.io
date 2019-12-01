@@ -9,6 +9,10 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Jump to the definition of type class instance.](52858Jumptothedefinitionoftypeclassinstance.html) (1 message, latest: Dec 01 2019 at 12:53)
+
+* [removed](78771removed.html) (1 message, latest: Dec 01 2019 at 12:45)
+
 * [How old is `mathlib`?](90762Howoldismathlib.html) (9 messages, latest: Nov 30 2019 at 10:02)
 
 * [Why do we need kernel reduction](35410Whydoweneedkernelreduction.html) (4 messages, latest: Nov 29 2019 at 08:43)
