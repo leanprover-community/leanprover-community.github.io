@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [Structure Theorem](31046StructureTheorem.html) (1 message, latest: Dec 01 2019 at 13:37)
+* [Structure Theorem](31046StructureTheorem.html) (2 messages, latest: Dec 01 2019 at 14:41)
 
 * [summing from 0 to n-1](85268summingfrom0ton1.html) (32 messages, latest: Nov 30 2019 at 12:26)
 
