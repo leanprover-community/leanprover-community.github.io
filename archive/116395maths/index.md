@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [polynomials](62584polynomials.html) (6 messages, latest: Dec 01 2019 at 19:57)
+
 * [Structure Theorem](31046StructureTheorem.html) (12 messages, latest: Dec 01 2019 at 17:55)
 
 * [summing from 0 to n-1](85268summingfrom0ton1.html) (32 messages, latest: Nov 30 2019 at 12:26)
@@ -1336,8 +1338,6 @@ permalink: archive/116395maths/index.html
 * [easy proof of surjective_iff_injective](01478easyproofofsurjectiveiffinjective.html) (21 messages, latest: Apr 06 2018 at 21:01)
 
 * [homeo equiv etc.](49997homeoequivetc.html) (250 messages, latest: Apr 06 2018 at 10:46)
-
-* [polynomials](62584polynomials.html) (4 messages, latest: Apr 04 2018 at 09:09)
 
 * [free group](47376freegroup.html) (92 messages, latest: Apr 02 2018 at 05:00)
 

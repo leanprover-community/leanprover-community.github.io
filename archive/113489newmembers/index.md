@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Submodules : Structure VS Class](98158SubmodulesStructureVSClass.html) (39 messages, latest: Dec 01 2019 at 18:53)
+* [Submodules : Structure VS Class](98158SubmodulesStructureVSClass.html) (41 messages, latest: Dec 01 2019 at 19:12)
 
 * [Product types](56823Producttypes.html) (4 messages, latest: Dec 01 2019 at 13:24)
 
