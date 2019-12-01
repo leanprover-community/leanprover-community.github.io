@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [strange build behavior](07637strangebuildbehavior.html) (13 messages, latest: Dec 01 2019 at 16:32)
+
 * [Jump to the definition of type class instance.](52858Jumptothedefinitionoftypeclassinstance.html) (1 message, latest: Dec 01 2019 at 12:53)
 
 * [removed](78771removed.html) (1 message, latest: Dec 01 2019 at 12:45)
@@ -220,8 +222,6 @@ permalink: archive/113488general/index.html
 * [autogenerate the boring lemmas](68518autogeneratetheboringlemmas.html) (23 messages, latest: Oct 16 2019 at 12:34)
 
 * [#simp](14237simp.html) (6 messages, latest: Oct 15 2019 at 10:23)
-
-* [strange build behavior](07637strangebuildbehavior.html) (12 messages, latest: Oct 15 2019 at 03:31)
 
 * [optional proofs for type class inference](65166optionalproofsfortypeclassinference.html) (8 messages, latest: Oct 13 2019 at 17:18)
 
