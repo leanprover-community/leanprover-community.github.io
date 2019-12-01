@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Submodules : Structure VS Class](98158SubmodulesStructureVSClass.html) (39 messages, latest: Dec 01 2019 at 18:53)
+
 * [Product types](56823Producttypes.html) (4 messages, latest: Dec 01 2019 at 13:24)
 
 * [WSL ubuntu error](67748WSLubuntuerror.html) (78 messages, latest: Nov 30 2019 at 22:08)
