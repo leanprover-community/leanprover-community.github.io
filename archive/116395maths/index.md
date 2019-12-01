@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [polynomials](62584polynomials.html) (6 messages, latest: Dec 01 2019 at 19:57)
+* [Structure Theorem](31046StructureTheorem.html) (15 messages, latest: Dec 01 2019 at 20:59)
 
-* [Structure Theorem](31046StructureTheorem.html) (12 messages, latest: Dec 01 2019 at 17:55)
+* [polynomials](62584polynomials.html) (16 messages, latest: Dec 01 2019 at 20:20)
 
 * [summing from 0 to n-1](85268summingfrom0ton1.html) (32 messages, latest: Nov 30 2019 at 12:26)
 

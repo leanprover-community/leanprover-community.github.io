@@ -36,6 +36,80 @@ permalink: archive/116395maths/62584polynomials.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298217" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298217">Johan Commelin (Dec 01 2019 at 19:57)</a>:</h4>
 <p>Initially the coercion was to <code>p.coeff</code>... So <code>p n</code> would be the <code>n</code>th coefficient of <code>p</code>. Indeed, <code>coeff</code> wasn't even defined.</p>
 
+<a name="182298525"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298525" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298525">Rob Lewis (Dec 01 2019 at 20:07)</a>:</h4>
+<p>I'm not sure how it is now, but we've had some complicated type class issues with polynomials in the past. Maybe the coercion wasn't used to avoid creating more problems.</p>
+
+<a name="182298588"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298588" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298588">Sebastien Gouezel (Dec 01 2019 at 20:09)</a>:</h4>
+<p>The coercion to <code>p.coeff</code> is still there, but only locally in the polynomial file</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">coeff_coe_to_fun</span> <span class="o">:</span> <span class="n">has_coe_to_fun</span> <span class="o">(</span><span class="n">polynomial</span> <span class="n">α</span><span class="o">)</span> <span class="o">:=</span>
+<span class="n">finsupp</span><span class="bp">.</span><span class="n">has_coe_to_fun</span>
+
+<span class="n">local</span> <span class="n">attribute</span> <span class="o">[</span><span class="kn">instance</span><span class="o">]</span> <span class="n">finsupp</span><span class="bp">.</span><span class="n">comm_semiring</span> <span class="n">coeff_coe_to_fun</span>
+</pre></div>
+
+
+<p>so, you think the lack of the natural coercion is only for historical reasons, and not because the coercion created some problems down the way?</p>
+<p>Also, because of the order of variables in</p>
+<div class="codehilite"><pre><span></span><span class="c">/-</span><span class="cm">- `eval x p` is the evaluation of the polynomial `p` at `x` -/</span>
+<span class="n">def</span> <span class="kn">eval</span> <span class="o">:</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">polynomial</span> <span class="n">α</span> <span class="bp">→</span> <span class="n">α</span>
+</pre></div>
+
+
+<p>one can not talk of the function <code>p.eval</code>, only of <code>(λx, p.eval x)</code>... Anyway, this is good enough for what I have to do, and I don't know well enough the subtleties of this part of the library, so I am not going to try to improve this. A big warning in <code>polynomial.lean</code> might be helpful to those who, just like me, will assume from the start that the coercion should be there, and will try to debug their own code when it doesn't work :)</p>
+
+<a name="182298641"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298641" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298641">Sebastien Gouezel (Dec 01 2019 at 20:10)</a>:</h4>
+<p>I was answering <span class="user-mention" data-user-id="112680">@Johan Commelin</span> , not <span class="user-mention" data-user-id="110596">@Rob Lewis</span>  here.</p>
+
+<a name="182298652"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298652" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298652">Rob Lewis (Dec 01 2019 at 20:11)</a>:</h4>
+<p>Why can't you talk about <code>p.eval</code>? That's definitely used in places.</p>
+
+<a name="182298659"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298659" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298659">Rob Lewis (Dec 01 2019 at 20:12)</a>:</h4>
+<p>e.g. <a href="https://github.com/leanprover-community/mathlib/blob/master/src/data/padics/hensel.lean#L435" target="_blank" title="https://github.com/leanprover-community/mathlib/blob/master/src/data/padics/hensel.lean#L435">https://github.com/leanprover-community/mathlib/blob/master/src/data/padics/hensel.lean#L435</a></p>
+
+<a name="182298711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298711">Sebastien Gouezel (Dec 01 2019 at 20:13)</a>:</h4>
+<p>You can talk of <code>p.eval x</code>, but not of <code>p.eval</code> just by itself.</p>
+
+<a name="182298772"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298772" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298772">Sebastien Gouezel (Dec 01 2019 at 20:15)</a>:</h4>
+<p>So,</p>
+<div class="codehilite"><pre><span></span><span class="n">has_deriv_at</span> <span class="n">p</span><span class="bp">.</span><span class="kn">eval</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">derivative</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>does not typecheck, but </p>
+<div class="codehilite"><pre><span></span><span class="n">has_deriv_at</span> <span class="o">(</span><span class="bp">λ</span><span class="n">x</span><span class="o">,</span> <span class="n">p</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">x</span><span class="o">)</span> <span class="o">(</span><span class="n">p</span><span class="bp">.</span><span class="n">derivative</span><span class="bp">.</span><span class="kn">eval</span> <span class="n">x</span><span class="o">)</span> <span class="n">x</span>
+</pre></div>
+
+
+<p>does.</p>
+
+<a name="182298836"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298836" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298836">Sebastien Gouezel (Dec 01 2019 at 20:17)</a>:</h4>
+<p>This order of variables makes sense, though, as it makes it possible to write</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="kn">eval</span><span class="bp">.</span><span class="n">is_semiring_hom</span> <span class="o">:</span> <span class="n">is_semiring_hom</span> <span class="o">(</span><span class="kn">eval</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+<a name="182298893"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298893" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298893">Rob Lewis (Dec 01 2019 at 20:19)</a>:</h4>
+<p>Oh, I see what you mean.</p>
+
+<a name="182298942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/polynomials/near/182298942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/62584polynomials.html#182298942">Johan Commelin (Dec 01 2019 at 20:20)</a>:</h4>
+<blockquote>
+<p>This order of variables makes sense, though, as it makes it possible to write</p>
+<div class="codehilite"><pre><span></span><span class="kn">instance</span> <span class="kn">eval</span><span class="bp">.</span><span class="n">is_semiring_hom</span> <span class="o">:</span> <span class="n">is_semiring_hom</span> <span class="o">(</span><span class="kn">eval</span> <span class="n">x</span><span class="o">)</span>
+</pre></div>
+
+
+</blockquote>
+<p>I think that was the main reason to have this order of variables. Because <code>p.eval</code> usually doesn't have good algebraic properties.</p>
+
 
 {% endraw %}
 
