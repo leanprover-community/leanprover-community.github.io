@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Product types](56823Producttypes.html) (4 messages, latest: Dec 01 2019 at 13:24)
+
 * [WSL ubuntu error](67748WSLubuntuerror.html) (78 messages, latest: Nov 30 2019 at 22:08)
 
 * [Multiple applies/exacts/haves in tactic mode](23564Multipleappliesexactshavesintacticmode.html) (9 messages, latest: Nov 30 2019 at 10:23)
