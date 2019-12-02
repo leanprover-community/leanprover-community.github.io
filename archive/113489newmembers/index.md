@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Machine learning tooling](90466Machinelearningtooling.html) (11 messages, latest: Dec 02 2019 at 11:20)
+* [Machine learning tooling](90466Machinelearningtooling.html) (12 messages, latest: Dec 02 2019 at 12:07)
 
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (3 messages, latest: Dec 01 2019 at 23:33)
 
