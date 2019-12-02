@@ -1,0 +1,107 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113489newmembers/89727typeexpectederror.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113489newmembers/index.html">new members</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html">type expected error</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182348851"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182348851" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182348851">Calle Sönne (Dec 02 2019 at 14:14)</a>:</h4>
+<p>I get the following error that I do not quite understand:</p>
+<p>Code:</p>
+<div class="codehilite"><pre><span></span><span class="n">def</span> <span class="n">id_prod_maps</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">)</span> <span class="o">(</span><span class="n">S</span> <span class="o">:</span> <span class="n">sieve</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span><span class="o">}</span> <span class="n">X</span><span class="o">)</span> <span class="o">:=</span> <span class="bp">Π</span> <span class="n">k</span> <span class="o">:</span> <span class="n">domain</span> <span class="n">X</span> <span class="n">S</span><span class="o">,</span> <span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="n">k</span><span class="bp">.</span><span class="n">f</span><span class="bp">.</span><span class="n">op</span>
+</pre></div>
+
+
+<p>Error:</p>
+<div class="codehilite"><pre><span></span><span class="n">type</span> <span class="n">expected</span> <span class="n">at</span>
+  <span class="n">F</span><span class="bp">.</span><span class="n">map</span> <span class="o">(</span><span class="n">has_hom</span><span class="bp">.</span><span class="n">hom</span><span class="bp">.</span><span class="n">op</span><span class="bp">.</span><span class="o">{</span><span class="n">v</span> <span class="n">u</span><span class="o">}</span> <span class="o">(</span><span class="n">k</span><span class="bp">.</span><span class="n">f</span><span class="o">))</span>
+<span class="n">term</span> <span class="n">has</span> <span class="n">type</span>
+  <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">}</span> <span class="n">X</span><span class="o">)</span> <span class="err">⟶</span> <span class="n">F</span><span class="bp">.</span><span class="n">obj</span> <span class="o">(</span><span class="n">op</span><span class="bp">.</span><span class="o">{</span><span class="n">u</span><span class="bp">+</span><span class="mi">1</span><span class="o">}</span> <span class="o">(</span><span class="n">k</span><span class="bp">.</span><span class="n">Y</span><span class="o">))</span>
+</pre></div>
+
+
+<p>I dont quite understand this error, terms of type <code> F.obj (op.{u+1} X) ⟶ F.obj (op.{u+1} (k.Y)) </code> is exactly what I want my function to return! Or is this error F.map complaining?</p>
+
+<a name="182349074"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349074" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349074">Calle Sönne (Dec 02 2019 at 14:17)</a>:</h4>
+<p>I should note that F.map is defined as:</p>
+<div class="codehilite"><pre><span></span><span class="kn">structure</span> <span class="n">functor</span> <span class="o">(</span><span class="n">C</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₁</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₁</span><span class="o">}</span> <span class="n">C</span><span class="o">]</span> <span class="o">(</span><span class="n">D</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">[</span><span class="n">category</span><span class="bp">.</span><span class="o">{</span><span class="n">v₂</span><span class="o">}</span> <span class="n">D</span><span class="o">]</span> <span class="o">:</span>
+  <span class="kt">Type</span> <span class="o">(</span><span class="n">max</span> <span class="n">v₁</span> <span class="n">v₂</span> <span class="n">u₁</span> <span class="n">u₂</span><span class="o">)</span> <span class="o">:=</span>
+<span class="o">(</span><span class="n">obj</span>       <span class="o">:</span> <span class="n">C</span> <span class="bp">→</span> <span class="n">D</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map</span>       <span class="o">:</span> <span class="bp">Π</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="n">C</span><span class="o">},</span> <span class="o">(</span><span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="bp">→</span> <span class="o">((</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span> <span class="err">⟶</span> <span class="o">(</span><span class="n">obj</span> <span class="n">Y</span><span class="o">)))</span>
+<span class="o">(</span><span class="n">map_id&#39;</span>   <span class="o">:</span> <span class="bp">∀</span> <span class="o">(</span><span class="n">X</span> <span class="o">:</span> <span class="n">C</span><span class="o">),</span> <span class="n">map</span> <span class="o">(</span><span class="mi">𝟙</span> <span class="n">X</span><span class="o">)</span> <span class="bp">=</span> <span class="mi">𝟙</span> <span class="o">(</span><span class="n">obj</span> <span class="n">X</span><span class="o">)</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+<span class="o">(</span><span class="n">map_comp&#39;</span> <span class="o">:</span> <span class="bp">∀</span> <span class="o">{</span><span class="n">X</span> <span class="n">Y</span> <span class="n">Z</span> <span class="o">:</span> <span class="n">C</span><span class="o">}</span> <span class="o">(</span><span class="n">f</span> <span class="o">:</span> <span class="n">X</span> <span class="err">⟶</span> <span class="n">Y</span><span class="o">)</span> <span class="o">(</span><span class="n">g</span> <span class="o">:</span> <span class="n">Y</span> <span class="err">⟶</span> <span class="n">Z</span><span class="o">),</span> <span class="n">map</span> <span class="o">(</span><span class="n">f</span> <span class="err">≫</span> <span class="n">g</span><span class="o">)</span> <span class="bp">=</span> <span class="o">(</span><span class="n">map</span> <span class="n">f</span><span class="o">)</span> <span class="err">≫</span> <span class="o">(</span><span class="n">map</span> <span class="n">g</span><span class="o">)</span> <span class="bp">.</span> <span class="n">obviously</span><span class="o">)</span>
+</pre></div>
+
+
+<p>And considering the type in the error, <code> F.obj (op.{u+1} X) ⟶ F.obj (op.{u+1} (k.Y)) </code> it seems (to me) that functor.map does indeed return what it is supposed to</p>
+
+<a name="182349173"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349173" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349173">Patrick Massot (Dec 02 2019 at 14:18)</a>:</h4>
+<p>Lean complains <code>F.map k.f.op</code> is a function instead of being a type.</p>
+
+<a name="182349209"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349209" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349209">Patrick Massot (Dec 02 2019 at 14:18)</a>:</h4>
+<p>What is the type you hope <code>id_prod_maps (X : C) (S : sieve X)</code> will have?</p>
+
+<a name="182349237"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349237" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349237">Patrick Massot (Dec 02 2019 at 14:19)</a>:</h4>
+<p>Maybe you wrote Pi where you wanted lambda</p>
+
+<a name="182349282"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349282" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349282">Calle Sönne (Dec 02 2019 at 14:19)</a>:</h4>
+<p>Yes, that seems to be the problem. Thank you!</p>
+
+<a name="182349294"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349294" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349294">Patrick Massot (Dec 02 2019 at 14:19)</a>:</h4>
+<p>It's hard to tell without knowing what is the maths you want to formalize.</p>
+
+<a name="182349355"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349355" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349355">Patrick Massot (Dec 02 2019 at 14:20)</a>:</h4>
+<p>Ok, good.</p>
+
+<a name="182349359"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349359" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349359">Kevin Buzzard (Dec 02 2019 at 14:20)</a>:</h4>
+<p>Pi makes the types and lambda makes the terms</p>
+
+<a name="182349384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349384">Calle Sönne (Dec 02 2019 at 14:20)</a>:</h4>
+<p>So Pi returns types? I thought it returned a term of a type that depends on input</p>
+
+<a name="182349412"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349412" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349412">Patrick Massot (Dec 02 2019 at 14:21)</a>:</h4>
+<p>Pi is definitely a type maker.</p>
+
+<a name="182349449"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349449" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349449">Kevin Buzzard (Dec 02 2019 at 14:21)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">(</span><span class="n">X</span> <span class="n">Y</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">)</span>
+<span class="bp">#</span><span class="kn">check</span> <span class="k">Pi</span> <span class="o">(</span><span class="n">x</span> <span class="o">:</span> <span class="n">X</span><span class="o">),</span> <span class="n">Y</span> <span class="c1">-- X → Y : Type</span>
+</pre></div>
+
+<a name="182349486"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349486" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349486">Chris Hughes (Dec 02 2019 at 14:22)</a>:</h4>
+<blockquote>
+<p>I thought it returned a term of a type that depends on input</p>
+</blockquote>
+<p>That's what elements of Pi types do</p>
+
+<a name="182349546"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349546" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349546">Kevin Buzzard (Dec 02 2019 at 14:22)</a>:</h4>
+<p>Pi is like "forall".</p>
+
+<a name="182349601"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113489-new%20members/topic/type%20expected%20error/near/182349601" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113489newmembers/89727typeexpectederror.html#182349601">Kevin Buzzard (Dec 02 2019 at 14:23)</a>:</h4>
+<p>and lambda gives you the proof of "forall ..."</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
