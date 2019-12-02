@@ -16,6 +16,94 @@ permalink: archive/113488general/46280Kindsofdeclarations.html
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182379423" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182379423">Patrick Massot (Dec 02 2019 at 19:19)</a>:</h4>
 <p>Still coming back to meta-code, I'd like to clean up leancrawler a bit, and maybe PR part of it to mathlib for general use. The very first step is to triage declaration by kind (I would say type but that would be very confusing). Can anyone comment on <a href="https://gist.github.com/PatrickMassot/64167b3fce4b3f07c556328c1ffa683b" target="_blank" title="https://gist.github.com/PatrickMassot/64167b3fce4b3f07c556328c1ffa683b">https://gist.github.com/PatrickMassot/64167b3fce4b3f07c556328c1ffa683b</a>? Would mathlib be interested in that?</p>
 
+<a name="182384957"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182384957" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182384957">Floris van Doorn (Dec 02 2019 at 20:17)</a>:</h4>
+<p>I think that could be useful. <br>
+Some comments:</p>
+<ul>
+<li>Theorems can be instances when you write <code>@[instance] theorem ...</code></li>
+<li>Definitions can be classes when you write <code>@[class] def ...</code>. I believe this actually happens in mathlib.</li>
+<li>This is the first time that I see the declaration <code>environment.structure_fields</code>. That is useful. There are some declarations in <code>meta.expr</code> that mimic this built-in declaration. I will PR a change that removes those.</li>
+</ul>
+
+<a name="182385314"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182385314" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182385314">Floris van Doorn (Dec 02 2019 at 20:20)</a>:</h4>
+<p>Also, if you want to golf the function a bit, you can write <code>return $ if (env.is_projection n).is_some then Structure_field else Definition</code></p>
+
+<a name="182385791"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182385791" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182385791">Patrick Massot (Dec 02 2019 at 20:26)</a>:</h4>
+<p>Thanks a lot! New version:</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">environment</span><span class="bp">.</span><span class="n">get_kind</span> <span class="o">(</span><span class="n">env</span> <span class="o">:</span> <span class="n">environment</span><span class="o">)</span> <span class="o">:</span> <span class="n">declaration</span> <span class="bp">→</span> <span class="n">tactic</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">kind</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">thm</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span> <span class="o">(</span><span class="n">tactic</span><span class="bp">.</span><span class="n">has_attribute</span> <span class="bp">`</span><span class="n">class</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">Instance</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span> <span class="n">return</span> <span class="n">Lemma</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">defn</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
+    <span class="o">(</span><span class="n">has_attribute</span> <span class="bp">`</span><span class="n">class</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">Class</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+    <span class="o">(</span><span class="n">has_attribute</span> <span class="bp">`</span><span class="kn">instance</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">Instance</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+    <span class="n">return</span> <span class="o">(</span><span class="k">if</span> <span class="o">(</span><span class="n">env</span><span class="bp">.</span><span class="n">is_projection</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">is_some</span> <span class="k">then</span> <span class="n">Structure_field</span> <span class="k">else</span> <span class="n">Definition</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">cnst</span> <span class="n">n</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">do</span>
+    <span class="o">(</span><span class="n">has_attribute</span> <span class="bp">`</span><span class="n">class</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">Class</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+    <span class="n">return</span> <span class="o">(</span><span class="k">if</span> <span class="o">(</span><span class="n">env</span><span class="bp">.</span><span class="n">structure_fields</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">is_some</span> <span class="k">then</span> <span class="n">Structure</span>
+              <span class="k">else</span> <span class="k">if</span> <span class="n">is_ginductive</span> <span class="n">env</span> <span class="n">n</span> <span class="k">then</span> <span class="n">Inductive</span> <span class="k">else</span> <span class="n">Constant</span><span class="o">)</span>
+<span class="bp">|</span> <span class="o">(</span><span class="n">ax</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span><span class="o">)</span> <span class="o">:=</span> <span class="n">return</span> <span class="n">Axiom</span>
+</pre></div>
+
+<a name="182385833"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182385833" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182385833">Patrick Massot (Dec 02 2019 at 20:26)</a>:</h4>
+<p>Is it better?</p>
+
+<a name="182386094"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386094" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386094">Floris van Doorn (Dec 02 2019 at 20:28)</a>:</h4>
+<p>Line 2: <code> `class </code> -&gt; <code> `instance </code></p>
+<p>Suggestion: maybe first case on whether it has certain attributes, and only then case on the declaration-constructor (using <code>declaration.is_theorem</code> and friends from <code>meta.expr</code>)</p>
+
+<a name="182386118"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386118" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386118">Patrick Massot (Dec 02 2019 at 20:29)</a>:</h4>
+<p>oops</p>
+
+<a name="182386240"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386240" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386240">Patrick Massot (Dec 02 2019 at 20:30)</a>:</h4>
+<p>Do we have a nice way to do case analysis not based on constructors of inductive types?</p>
+
+<a name="182386269"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386269" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386269">Patrick Massot (Dec 02 2019 at 20:30)</a>:</h4>
+<p>Already in my version the nested if/then/else look ugly, for lack of <code>elif</code>.</p>
+
+<a name="182386736"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386736" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386736">Floris van Doorn (Dec 02 2019 at 20:35)</a>:</h4>
+<p>Not really...</p>
+
+<a name="182386776"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386776" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386776">Patrick Massot (Dec 02 2019 at 20:36)</a>:</h4>
+<p>I'll still try, so we'll be able to compare.</p>
+
+<a name="182386824"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182386824" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182386824">Floris van Doorn (Dec 02 2019 at 20:36)</a>:</h4>
+<p>You can still do a <code>match d with ...</code> in the middle of the expression.</p>
+
+<a name="182387107"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182387107" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182387107">Patrick Massot (Dec 02 2019 at 20:39)</a>:</h4>
+<p>How do you like</p>
+<div class="codehilite"><pre><span></span><span class="n">meta</span> <span class="n">def</span> <span class="n">environment</span><span class="bp">.</span><span class="n">get_kind&#39;</span> <span class="o">(</span><span class="n">env</span> <span class="o">:</span> <span class="n">environment</span><span class="o">)</span> <span class="o">(</span><span class="n">decl</span> <span class="o">:</span> <span class="n">declaration</span><span class="o">)</span> <span class="o">:</span> <span class="n">tactic</span> <span class="n">declaration</span><span class="bp">.</span><span class="n">kind</span> <span class="o">:=</span>
+<span class="n">do</span>
+  <span class="k">let</span> <span class="n">n</span> <span class="o">:=</span> <span class="n">decl</span><span class="bp">.</span><span class="n">to_name</span><span class="o">,</span>
+  <span class="o">(</span><span class="n">has_attribute</span> <span class="bp">`</span><span class="kn">instance</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">Instance</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+  <span class="o">(</span><span class="n">has_attribute</span> <span class="bp">`</span><span class="n">class</span> <span class="n">n</span> <span class="bp">&gt;&gt;</span> <span class="n">return</span> <span class="n">Class</span><span class="o">)</span> <span class="bp">&lt;|&gt;</span>
+  <span class="n">return</span> <span class="o">(</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">env</span><span class="bp">.</span><span class="n">structure_fields</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">is_some</span> <span class="k">then</span> <span class="n">Structure</span> <span class="k">else</span>
+    <span class="k">if</span> <span class="o">(</span><span class="n">env</span><span class="bp">.</span><span class="n">is_projection</span> <span class="n">n</span><span class="o">)</span><span class="bp">.</span><span class="n">is_some</span> <span class="k">then</span> <span class="n">Structure_field</span> <span class="k">else</span>
+    <span class="k">if</span> <span class="n">is_ginductive</span> <span class="n">env</span> <span class="n">n</span> <span class="k">then</span> <span class="n">Inductive</span> <span class="k">else</span>
+    <span class="k">if</span> <span class="n">decl</span><span class="bp">.</span><span class="n">is_definition</span> <span class="k">then</span> <span class="n">Definition</span> <span class="k">else</span>
+    <span class="k">if</span> <span class="n">decl</span><span class="bp">.</span><span class="n">is_theorem</span> <span class="k">then</span> <span class="n">Lemma</span> <span class="k">else</span>
+    <span class="k">if</span> <span class="n">decl</span><span class="bp">.</span><span class="n">is_constant</span> <span class="k">then</span> <span class="n">Constant</span> <span class="k">else</span> <span class="n">Axiom</span>
+</pre></div>
+
+<a name="182387195"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182387195" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182387195">Patrick Massot (Dec 02 2019 at 20:40)</a>:</h4>
+<p>Writing a proof that it's the same function (or not, I guess there is 50% change) would be a fun challenge.</p>
+
+<a name="182387247"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182387247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182387247">Patrick Massot (Dec 02 2019 at 20:40)</a>:</h4>
+<p>I think it's more readable. I hope it's the same result.</p>
+
 
 {% endraw %}
 
