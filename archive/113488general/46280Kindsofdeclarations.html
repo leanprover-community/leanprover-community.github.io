@@ -104,6 +104,32 @@ Some comments:</p>
 <h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182387247" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182387247">Patrick Massot (Dec 02 2019 at 20:40)</a>:</h4>
 <p>I think it's more readable. I hope it's the same result.</p>
 
+<a name="182390391"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182390391" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182390391">Floris van Doorn (Dec 02 2019 at 21:13)</a>:</h4>
+<p>I think this definition looks good.<br>
+What are you going to use this data for though? The datastructure <code>declaration.kind</code> assumes that the classes are disjoint, which is not true.<br>
+In addition to the previous mentioned cases (classes can be either structures or definitions, instances can be theorems or definitions), there are also structure fields that are instances. You lose this "secondary" information. This is fine, but depends on the application.</p>
+
+<a name="182390982"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182390982" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182390982">Patrick Massot (Dec 02 2019 at 21:19)</a>:</h4>
+<p>A version of this was used to create the graph at <a href="https://leanprover-community.github.io/lean-perfectoid-spaces/" target="_blank" title="https://leanprover-community.github.io/lean-perfectoid-spaces/">https://leanprover-community.github.io/lean-perfectoid-spaces/</a></p>
+
+<a name="182390993"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182390993" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182390993">Patrick Massot (Dec 02 2019 at 21:19)</a>:</h4>
+<p>But ideally I'd like a general purpose version.</p>
+
+<a name="182391059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182391059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182391059">Patrick Massot (Dec 02 2019 at 21:20)</a>:</h4>
+<p>So I don't want to lose anything I could keep.</p>
+
+<a name="182391085"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182391085" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182391085">Patrick Massot (Dec 02 2019 at 21:20)</a>:</h4>
+<p>So I choose probably use a more elaborate type.</p>
+
+<a name="182391471"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Kinds%20of%20declarations/near/182391471" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/46280Kindsofdeclarations.html#182391471">Floris van Doorn (Dec 02 2019 at 21:22)</a>:</h4>
+<p>If you don't want to lose information, you indeed want a more elaborate type. You could have a type with 4 constructors, corresponding to the constructors of <code>declaration</code> and then some boolean values whether it is a field/structure/class/instance.</p>
+
 
 {% endraw %}
 

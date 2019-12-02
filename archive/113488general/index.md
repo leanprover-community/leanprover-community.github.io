@@ -9,9 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Kinds of declarations](46280Kindsofdeclarations.html) (15 messages, latest: Dec 02 2019 at 20:40)
+* [Proof size](36642Proofsize.html) (6 messages, latest: Dec 02 2019 at 21:50)
 
-* [Proof size](36642Proofsize.html) (1 message, latest: Dec 02 2019 at 18:33)
+* [Kinds of declarations](46280Kindsofdeclarations.html) (21 messages, latest: Dec 02 2019 at 21:22)
 
 * [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (4 messages, latest: Dec 02 2019 at 18:05)
 
