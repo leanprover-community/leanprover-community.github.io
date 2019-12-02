@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (3 messages, latest: Dec 02 2019 at 16:50)
+* [Proof size](36642Proofsize.html) (1 message, latest: Dec 02 2019 at 18:33)
+
+* [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (4 messages, latest: Dec 02 2019 at 18:05)
 
 * [parsing with expected type](39813parsingwithexpectedtype.html) (2 messages, latest: Dec 02 2019 at 06:30)
 
