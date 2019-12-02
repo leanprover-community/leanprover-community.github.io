@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Advent of code in Lean](06346AdventofcodeinLean.html) (3 messages, latest: Dec 01 2019 at 23:33)
+
 * [Submodules : Structure VS Class](98158SubmodulesStructureVSClass.html) (41 messages, latest: Dec 01 2019 at 19:12)
 
 * [Product types](56823Producttypes.html) (4 messages, latest: Dec 01 2019 at 13:24)
