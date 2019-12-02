@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Machine learning tooling](90466Machinelearningtooling.html) (3 messages, latest: Dec 02 2019 at 10:58)
+
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (3 messages, latest: Dec 01 2019 at 23:33)
 
 * [Submodules : Structure VS Class](98158SubmodulesStructureVSClass.html) (41 messages, latest: Dec 01 2019 at 19:12)
