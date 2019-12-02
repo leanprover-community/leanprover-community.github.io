@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Machine learning tooling](90466Machinelearningtooling.html) (15 messages, latest: Dec 02 2019 at 17:35)
+* [Machine learning tooling](90466Machinelearningtooling.html) (19 messages, latest: Dec 02 2019 at 19:33)
 
 * [type expected error](89727typeexpectederror.html) (15 messages, latest: Dec 02 2019 at 14:23)
 
