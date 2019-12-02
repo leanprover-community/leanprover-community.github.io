@@ -9,7 +9,7 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Proof size](36642Proofsize.html) (6 messages, latest: Dec 02 2019 at 21:50)
+* [Proof size](36642Proofsize.html) (8 messages, latest: Dec 02 2019 at 22:33)
 
 * [Kinds of declarations](46280Kindsofdeclarations.html) (21 messages, latest: Dec 02 2019 at 21:22)
 

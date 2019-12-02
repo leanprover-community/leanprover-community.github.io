@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [Advent of code in Lean](06346AdventofcodeinLean.html) (5 messages, latest: Dec 02 2019 at 21:21)
+* [Advent of code in Lean](06346AdventofcodeinLean.html) (13 messages, latest: Dec 02 2019 at 22:49)
 
 * [Machine learning tooling](90466Machinelearningtooling.html) (19 messages, latest: Dec 02 2019 at 19:33)
 
