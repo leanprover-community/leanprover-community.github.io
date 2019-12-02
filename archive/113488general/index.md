@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [parsing with expected type](39813parsingwithexpectedtype.html) (2 messages, latest: Dec 02 2019 at 06:30)
+
 * [How old is `mathlib`?](90762Howoldismathlib.html) (10 messages, latest: Dec 02 2019 at 01:22)
 
 * [strange build behavior](07637strangebuildbehavior.html) (13 messages, latest: Dec 01 2019 at 16:32)
