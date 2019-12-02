@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (1 message, latest: Dec 02 2019 at 15:45)
+
 * [parsing with expected type](39813parsingwithexpectedtype.html) (2 messages, latest: Dec 02 2019 at 06:30)
 
 * [How old is `mathlib`?](90762Howoldismathlib.html) (10 messages, latest: Dec 02 2019 at 01:22)
