@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [timeout with nat division](52908timeoutwithnatdivision.html) (2 messages, latest: Dec 02 2019 at 23:52)
+* [Lean Links](54466LeanLinks.html) (74 messages, latest: Dec 03 2019 at 00:27)
+
+* [timeout with nat division](52908timeoutwithnatdivision.html) (4 messages, latest: Dec 03 2019 at 00:03)
 
 * [Proof size](36642Proofsize.html) (8 messages, latest: Dec 02 2019 at 22:33)
 
@@ -42,8 +44,6 @@ permalink: archive/113488general/index.html
 * [delayed calc](80332delayedcalc.html) (2 messages, latest: Nov 27 2019 at 17:10)
 
 * [Installing python(mathlib)](71274Installingpythonmathlib.html) (28 messages, latest: Nov 25 2019 at 22:27)
-
-* [Lean Links](54466LeanLinks.html) (73 messages, latest: Nov 25 2019 at 21:07)
 
 * [What do @\[ext\] @\[simp\] do?](41492Whatdoextsimpdo.html) (7 messages, latest: Nov 25 2019 at 20:52)
 
