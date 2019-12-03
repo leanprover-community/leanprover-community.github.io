@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (5 messages, latest: Dec 03 2019 at 06:40)
+
 * [Lean Links](54466LeanLinks.html) (74 messages, latest: Dec 03 2019 at 00:27)
 
 * [timeout with nat division](52908timeoutwithnatdivision.html) (4 messages, latest: Dec 03 2019 at 00:03)
@@ -16,8 +18,6 @@ permalink: archive/113488general/index.html
 * [Proof size](36642Proofsize.html) (8 messages, latest: Dec 02 2019 at 22:33)
 
 * [Kinds of declarations](46280Kindsofdeclarations.html) (21 messages, latest: Dec 02 2019 at 21:22)
-
-* [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (4 messages, latest: Dec 02 2019 at 18:05)
 
 * [parsing with expected type](39813parsingwithexpectedtype.html) (2 messages, latest: Dec 02 2019 at 06:30)
 
