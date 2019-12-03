@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [How do you use Lean at command line?](78951HowdoyouuseLeanatcommandline.html) (10 messages, latest: Dec 03 2019 at 22:53)
+
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (28 messages, latest: Dec 03 2019 at 21:35)
 
 * [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (5 messages, latest: Dec 03 2019 at 06:40)

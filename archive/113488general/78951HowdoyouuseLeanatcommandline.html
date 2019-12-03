@@ -1,0 +1,64 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/78951HowdoyouuseLeanatcommandline.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html">How do you use Lean at command line?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182504470"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182504470" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182504470">Daniel Donnelly (Dec 03 2019 at 22:35)</a>:</h4>
+<p>Hi, I'm not liking working with the Coffee/TypeScript code of VSCode, so I'm wanting to just communicate some other way with Lean itself.  How can I do this?</p>
+
+<a name="182504783"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182504783" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182504783">Bryan Gin-ge Chen (Dec 03 2019 at 22:38)</a>:</h4>
+<p>What exactly are you trying to do and what is unsatisfactory about VS Code? By the way, there is no coffeescript in the vscode-lean extension, only typescript and some HTML / JS for the info view...</p>
+
+<a name="182504928"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182504928" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182504928">Bryan Gin-ge Chen (Dec 03 2019 at 22:40)</a>:</h4>
+<p><code>lean -h</code> displays a list of command line options. If you want to write a program to communicate with Lean, then <code>lean --server</code> accepts JSON commands from stdin and returrns JSON responses to stdout.</p>
+
+<a name="182504978"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182504978" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182504978">Daniel Donnelly (Dec 03 2019 at 22:41)</a>:</h4>
+<blockquote>
+<p>What exactly are you trying to do and what is unsatisfactory about VS Code? By the way, there is no coffeescript in the vscode-lean extension, only typescript and some HTML / JS for the info view...</p>
+</blockquote>
+<p>I was connecting my app BananaCats as a program to send and receive the same traffic that goes to / from Lean to VSCode.  However, working with the typescript got really annoying.  What I would like is to create an IDE for Lean essentially, and without learning the TypeScript interface.</p>
+
+<a name="182504994"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182504994" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182504994">Daniel Donnelly (Dec 03 2019 at 22:41)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>  yes that's what I need</p>
+
+<a name="182505132"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182505132" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182505132">Daniel Donnelly (Dec 03 2019 at 22:42)</a>:</h4>
+<blockquote>
+<p><code>lean -h</code> displays a list of command line options. If you want to write a program to communicate with Lean, then <code>lean --server</code> accepts JSON commands from stdin and returrns JSON responses to stdout.</p>
+</blockquote>
+<p>Is there any reference yet for this interface?</p>
+
+<a name="182505365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182505365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182505365">Bryan Gin-ge Chen (Dec 03 2019 at 22:45)</a>:</h4>
+<p>Sadly, the best documentation for the server mode commands and responses is the following typescript file <a href="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts" target="_blank" title="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts">https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts</a> . Feel free to ask if you have any questions though.</p>
+
+<a name="182505677"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182505677" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182505677">Bryan Gin-ge Chen (Dec 03 2019 at 22:48)</a>:</h4>
+<p>Oh, this file is also useful <a href="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/commands.ts" target="_blank" title="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/commands.ts">https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/commands.ts</a></p>
+
+<a name="182506008"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182506008" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182506008">Daniel Donnelly (Dec 03 2019 at 22:52)</a>:</h4>
+<p>Thanks.  So it's mostly a reverse engineering jerb.  I will ask lots of questions :)</p>
+
+<a name="182506111"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/How%20do%20you%20use%20Lean%20at%20command%20line%3F/near/182506111" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/78951HowdoyouuseLeanatcommandline.html#182506111">Daniel Donnelly (Dec 03 2019 at 22:53)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>  is there a grammar reference for Lean somewhere or is it just embedded in the main manual?</p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
