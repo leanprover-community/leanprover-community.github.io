@@ -389,6 +389,36 @@ with<br>
 </blockquote>
 <p>I think that's a fair summary. I also said that Sledgehammer makes the learning curve much smoother in Isabelle/HOL than in Lean or COQ.</p>
 
+<a name="182477182"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182477182" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182477182">Sebastien Gouezel (Dec 03 2019 at 18:00)</a>:</h4>
+<blockquote>
+<p>He was a bit unfair to Lean though. He explained how Lean is harder to read than Isabelle by comparing tactic scripts on a white background with proof terms on a black background (using a video beamer making it impossible to read VScode's default dark theme).</p>
+</blockquote>
+<p>The point is that, proof terms don't exist in Isabelle, and this proof in Isabelle would just have been done by automation without needing to think at all. While a tactic proof in Lean would not have been nicer than the term proof. So, I don't think I have been really unfair :)</p>
+
+<a name="182477191"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182477191" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182477191">Rob Lewis (Dec 03 2019 at 18:00)</a>:</h4>
+<blockquote>
+<p>Jasmin's project <a href="http://matryoshka.gforge.inria.fr/" target="_blank" title="http://matryoshka.gforge.inria.fr/">http://matryoshka.gforge.inria.fr/</a> was meant to solve this problem, but it doesn't seem to progress much <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+</blockquote>
+<p>I don't think that's fair at all, the higher order proving work that they're doing is great progress.</p>
+
+<a name="182480021"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182480021" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182480021">Lambert A'Campo (Dec 03 2019 at 18:29)</a>:</h4>
+<p>Thanks for the extensive discussion. So do I understand correctly that I cannot use this lemma unless R and V have the same type? I find this very strange.</p>
+
+<a name="182481084"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182481084" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182481084">Lambert A'Campo (Dec 03 2019 at 18:39)</a>:</h4>
+<p>When I try to prove this theorem I need to transform <code>A : set V</code> to <code>A set ↥(submodule.span ℝ A)</code>... How does that work?</p>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">finite_dimensional_span_of_finite</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="err">↥</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">finite_dimensional</span><span class="bp">.</span><span class="n">of_fg</span><span class="o">,</span>
+  <span class="n">rw</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">fg_def</span><span class="o">,</span>
+  <span class="n">existsi</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="err">↥</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)),</span>
+<span class="kn">end</span>
+</pre></div>
+
 
 {% endraw %}
 
