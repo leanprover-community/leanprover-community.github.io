@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [Normalization fails in lean](41870Normalizationfailsinlean.html) (28 messages, latest: Dec 03 2019 at 21:35)
+
 * [Creating many representations for the same thing.](13087Creatingmanyrepresentationsforthesamething.html) (5 messages, latest: Dec 03 2019 at 06:40)
 
 * [Lean Links](54466LeanLinks.html) (74 messages, latest: Dec 03 2019 at 00:27)
@@ -66,8 +68,6 @@ permalink: archive/113488general/index.html
 * [missing cases in auto_cases?](31463missingcasesinautocases.html) (9 messages, latest: Nov 22 2019 at 02:08)
 
 * [VScode goodies](03279VScodegoodies.html) (42 messages, latest: Nov 21 2019 at 21:40)
-
-* [Normalization fails in lean](41870Normalizationfailsinlean.html) (27 messages, latest: Nov 21 2019 at 14:23)
 
 * [check out mlang](16870checkoutmlang.html) (4 messages, latest: Nov 21 2019 at 12:27)
 
