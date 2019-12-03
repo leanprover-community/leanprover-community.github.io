@@ -8,4 +8,4 @@ The site includes a static archive of the [leanprover Zulip chat](https://leanpr
 
 This script can be easily modified to work for other Zulip chats. See <https://github.com/zulip/zulip-archive>.
 
-The Jekyll style is thanks to wild-flame.
+The [Jekyll simple style](https://github.com/wild-flame/jekyll-simple) is thanks to [wild-flame](https://wild-flame.github.io/).
