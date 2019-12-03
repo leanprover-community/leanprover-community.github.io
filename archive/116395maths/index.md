@@ -9,6 +9,8 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
+* [Span of finite set is sequentially closed](63081Spanoffinitesetissequentiallyclosed.html) (2 messages, latest: Dec 03 2019 at 15:59)
+
 * [Structure Theorem](31046StructureTheorem.html) (15 messages, latest: Dec 01 2019 at 20:59)
 
 * [polynomials](62584polynomials.html) (16 messages, latest: Dec 01 2019 at 20:20)
