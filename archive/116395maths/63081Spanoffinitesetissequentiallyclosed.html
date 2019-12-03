@@ -62,6 +62,333 @@ permalink: archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html
 (2) the reals are a nondiscrete normed field [type class inference will handle this]<br>
 (3) the vector space spanned by a finite set is finite-dimensional [that will surely be there somewhere]</p>
 
+<a name="182470607"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182470607" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182470607">Kevin Buzzard (Dec 03 2019 at 17:00)</a>:</h4>
+<p>(2) is indeed there:</p>
+<div class="codehilite"><pre><span></span><span class="n">noncomputable</span> <span class="kn">example</span> <span class="o">:</span> <span class="n">nondiscrete_normed_field</span> <span class="n">ℝ</span> <span class="o">:=</span> <span class="k">by</span> <span class="n">apply_instance</span>
+</pre></div>
+
+
+<p>so you don't have to do anything -- type class inference will do it for you.</p>
+
+<a name="182470621"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182470621" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182470621">Lambert A'Campo (Dec 03 2019 at 17:00)</a>:</h4>
+<p>So we are this far</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">carrier</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:=</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">carrier</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span> <span class="n">S</span><span class="o">,</span>
+
+  <span class="n">apply</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>but we get an error: <br>
+invalid apply tactic, failed to unify<br>
+  is_closed S<br>
+with<br>
+  is_closed ↑?m_6</p>
+
+<a name="182470682"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182470682" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182470682">Lambert A'Campo (Dec 03 2019 at 17:01)</a>:</h4>
+<p>I thought that this should reduce it to showing that submodule.span \R A is finite dimensional</p>
+
+<a name="182470715"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182470715" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182470715">Kevin Buzzard (Dec 03 2019 at 17:01)</a>:</h4>
+<p>Is there any possibility that you can post some fully working code?</p>
+
+<a name="182470807"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182470807" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182470807">Kevin Buzzard (Dec 03 2019 at 17:02)</a>:</h4>
+<p>I'm getting a bit sick of having to guess all the imports ;-)</p>
+
+<a name="182470930"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182470930" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182470930">Lambert A'Campo (Dec 03 2019 at 17:03)</a>:</h4>
+<p>Yes of course, sorry.</p>
+<div class="codehilite"><pre><span></span><span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">banach</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">basis</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">dimension</span>
+<span class="kn">import</span> <span class="n">linear_algebra</span><span class="bp">.</span><span class="n">finite_dimensional</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">subset_properties</span>
+<span class="kn">import</span> <span class="n">set_theory</span><span class="bp">.</span><span class="n">cardinal</span>
+<span class="kn">import</span> <span class="n">data</span><span class="bp">.</span><span class="n">real</span><span class="bp">.</span><span class="n">basic</span>
+<span class="kn">import</span> <span class="n">topology</span><span class="bp">.</span><span class="n">sequences</span>
+<span class="kn">import</span> <span class="n">order</span><span class="bp">.</span><span class="n">bounded_lattice</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">specific_limits</span>
+<span class="kn">import</span> <span class="n">analysis</span><span class="bp">.</span><span class="n">normed_space</span><span class="bp">.</span><span class="n">finite_dimension</span>
+
+<span class="n">noncomputable</span> <span class="n">theory</span>
+<span class="n">open_locale</span> <span class="n">classical</span>
+
+<span class="kn">open</span> <span class="n">metric</span> <span class="n">set</span>
+
+<span class="kn">variables</span>
+<span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="bp">*</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">carrier</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:=</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">carrier</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span> <span class="n">S</span><span class="o">,</span>
+
+  <span class="n">apply</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="182471516"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182471516" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182471516">Kevin Buzzard (Dec 03 2019 at 17:09)</a>:</h4>
+<p>Yeah. There might be a universe issue and also a typeclass issue.</p>
+
+<a name="182471719"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182471719" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182471719">Kevin Buzzard (Dec 03 2019 at 17:11)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="bp">#</span><span class="kn">check</span> <span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span>
+<span class="c">/-</span><span class="cm"></span>
+<span class="cm">submodule.closed_of_finite_dimensional :</span>
+<span class="cm">  ∀ {𝕜 : Type u_2} [_inst_1 : nondiscrete_normed_field 𝕜] {E : Type u_2} [_inst_2 : normed_group E]</span>
+<span class="cm">  [_inst_3 : normed_space 𝕜 E] [_inst_6 : complete_space 𝕜] (s : submodule 𝕜 E)</span>
+<span class="cm">  [_inst_7 : finite_dimensional 𝕜 ↥s], is_closed ↑s</span>
+<span class="cm">-/</span>
+</pre></div>
+
+
+<p>For some reason <code>𝕜</code> and <code>E</code> are supposed to be in the same universe in this lemma. This might be some subtlety that I don't know about, or it might be an error in mathlib.</p>
+
+<a name="182471853"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182471853" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182471853">Kevin Buzzard (Dec 03 2019 at 17:12)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="c1">-- we use linear equivs, which require all the types to live in the same universe</span>
+<span class="kn">variables</span> <span class="o">{</span><span class="err">𝕜</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">nondiscrete_normed_field</span> <span class="err">𝕜</span><span class="o">]</span>
+<span class="o">{</span><span class="n">E</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">u</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">E</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">E</span><span class="o">]</span>
+<span class="o">{</span><span class="n">F</span> <span class="o">:</span> <span class="kt">Type</span> <span class="n">v</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">F</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="err">𝕜</span> <span class="n">F</span><span class="o">]</span>
+</pre></div>
+
+
+<p>This is explicit design decision. I don't know what's going on here. This has consequences for you -- the reals have type <code>Type</code> so Lean expects your  vector space also to have type <code>Type</code>.</p>
+
+<a name="182471914"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182471914" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182471914">Kevin Buzzard (Dec 03 2019 at 17:13)</a>:</h4>
+<p>But changing the variable to <code>{V : Type}</code> unmasks a new problem.</p>
+
+<a name="182472059"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182472059" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182472059">Kevin Buzzard (Dec 03 2019 at 17:15)</a>:</h4>
+<p>which is that type class inference cannot figure out why s is finite-dimensional.</p>
+
+<a name="182472099"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182472099" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182472099">Kevin Buzzard (Dec 03 2019 at 17:15)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span>
+<span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">carrier</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span> <span class="o">:=</span> <span class="err">↑</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">),</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span> <span class="n">S</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="n">V</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="n">sorry</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>works, but there's a sorry</p>
+
+<a name="182472229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182472229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182472229">Kevin Buzzard (Dec 03 2019 at 17:17)</a>:</h4>
+<p>So what is left is the proof that S is finite-dimensional. Oh -- by the way -- in Lean there is a "canonical" way of doing many things, and your definition of <code>S</code> as <code>(...).carrier</code> is non-canonical: I changed it to the canonical way of writing this, with the little up-arrow.</p>
+
+<a name="182473055"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473055" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473055">Kevin Buzzard (Dec 03 2019 at 17:23)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">variables</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span>
+
+<span class="kn">instance</span> <span class="n">moo</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="err">↥</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+
+<span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span><span class="bp">.</span><span class="n">carrier</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="k">let</span> <span class="n">S</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span> <span class="o">:=</span> <span class="err">↑</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">),</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span> <span class="n">S</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="bp">@</span><span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span> <span class="n">ℝ</span> <span class="bp">_</span> <span class="n">V</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="bp">_</span> <span class="o">(</span><span class="n">moo</span> <span class="n">A</span> <span class="n">h_fin</span><span class="o">),</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>There is this thing called type class inference, which mathematicians tend to push in all sorts of directions which it turns out that Lean 3 was not quite expecting, because computer scientists did not really know what mathematicians wanted to do with it. I can't actually get it to work in this situation (hence all the ridiculous <code>_</code>s and the <code>moo</code> in the lemma) but probably some fiddling around with priorities could fix this.</p>
+
+<a name="182473327"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473327" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473327">Patrick Massot (Dec 03 2019 at 17:25)</a>:</h4>
+<p>You should really change the statement to use the coercion.</p>
+
+<a name="182473342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473342">Kevin Buzzard (Dec 03 2019 at 17:25)</a>:</h4>
+<p>Actually I see now that perhaps <code>moo</code> is a bad instance, because <code>finite</code> is not a typeclass which might mean that typeclass inference will not be able to find the hypothesis that <code>A</code> is finite. I am a bit out of my depth here.</p>
+<p>However this is eventually resolved, the missing part of the argument is still the <code>sorry</code> above.</p>
+
+<a name="182473354"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473354" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473354">Patrick Massot (Dec 03 2019 at 17:26)</a>:</h4>
+<p><code>lemma finite_span_seq_closed (A : set V) : finite A → is_seq_closed (↑(submodule.span ℝ A) : set V)</code></p>
+
+<a name="182473440"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473440" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473440">Patrick Massot (Dec 03 2019 at 17:26)</a>:</h4>
+<p>Needing this up-arrow in the statement is really painful, but we don't know how to avoid this. We explain a tiny variation on this issue in our perfectoid paper.</p>
+
+<a name="182473475"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473475" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473475">Patrick Massot (Dec 03 2019 at 17:27)</a>:</h4>
+<p>Exactly in the paragraph where we complain about Lean elaboration being not yet good enough for maths.</p>
+
+<a name="182473594"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473594" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473594">Patrick Massot (Dec 03 2019 at 17:28)</a>:</h4>
+<p>Then you can write:</p>
+<div class="codehilite"><pre><span></span><span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:</span> <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="n">sorry</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="182473642"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473642" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473642">Patrick Massot (Dec 03 2019 at 17:28)</a>:</h4>
+<p>Where the sorry is still the same one, but there is no more Morse code <code>@... _ _ _ _ _</code></p>
+
+<a name="182473781"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473781" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473781">Kevin Buzzard (Dec 03 2019 at 17:29)</a>:</h4>
+<p>Patrick do you understand why V has to have type Type?</p>
+
+<a name="182473915"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182473915" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182473915">Patrick Massot (Dec 03 2019 at 17:30)</a>:</h4>
+<blockquote>
+<p>It might be in there -- <span class="user-mention silent" data-user-id="110050">Sebastien Gouezel</span> ? Oh, I just remembered he's giving a talk in Orsay right now ;-)</p>
+</blockquote>
+<p>Yes, he was finishing his talk at that moment. It was very nice talk. He explained maths for 15 minutes, then propaganda for Sledgehammer for 30 minutes then 15 minutes about how simple type theory is unfortunately unbearable.</p>
+
+<a name="182474019"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474019" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474019">Kevin Buzzard (Dec 03 2019 at 17:31)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">finite_dimensional_of_finite_span</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="err">↥</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:</span> <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finite_dimensional_of_finite_span</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>I moved the sorry to a more respectable place.</p>
+
+<a name="182474109"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474109" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474109">Patrick Massot (Dec 03 2019 at 17:32)</a>:</h4>
+<p>He was a bit unfair to Lean though. He explained how Lean is harder to read than Isabelle by comparing tactic scripts on a white background with proof terms on a black background (using a video beamer making it impossible to read VScode's default dark theme).</p>
+
+<a name="182474187"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474187" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474187">Patrick Massot (Dec 03 2019 at 17:32)</a>:</h4>
+<p>I would rename that as <code>finite_dimensional_span_of_finite</code>.</p>
+
+<a name="182474206"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474206" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474206">Patrick Massot (Dec 03 2019 at 17:32)</a>:</h4>
+<p>And no, I don't know anything about universe issues.</p>
+
+<a name="182474221"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474221" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474221">Kevin Buzzard (Dec 03 2019 at 17:33)</a>:</h4>
+<p>but then did someone ask him the question about which system is more likely to be able to define the tangent space of a manifold, a trivial undergraduate thing?</p>
+
+<a name="182474304"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474304" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474304">Kevin Buzzard (Dec 03 2019 at 17:33)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">finite_dimensional_span_of_finite</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="err">↥</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+
+<span class="kn">lemma</span> <span class="n">finite_span_seq_closed</span> <span class="o">(</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span> <span class="bp">→</span> <span class="n">is_seq_closed</span> <span class="o">(</span><span class="err">↑</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">intro</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="n">apply</span> <span class="n">is_seq_closed_of_is_closed</span><span class="o">,</span>
+  <span class="n">haveI</span> <span class="o">:</span> <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span> <span class="n">finite_dimensional_span_of_finite</span> <span class="n">h_fin</span><span class="o">,</span>
+  <span class="n">exact</span> <span class="n">submodule</span><span class="bp">.</span><span class="n">closed_of_finite_dimensional</span> <span class="bp">_</span><span class="o">,</span>
+<span class="kn">end</span>
+</pre></div>
+
+<a name="182474466"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474466" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474466">Patrick Massot (Dec 03 2019 at 17:35)</a>:</h4>
+<p>He was very clear Isabelle/HOL is unusable for maths. And also very clear that any system giving him dependant type (and the type <code>Type -&gt; X</code>) + Sledgehammer would make him quit Lean without thinking twice (which looks like a very sensible thing to do).</p>
+
+<a name="182474473"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474473" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474473">Kevin Buzzard (Dec 03 2019 at 17:35)</a>:</h4>
+<div class="codehilite"><pre><span></span><span class="kn">theorem</span> <span class="n">finite_dimensional_span_of_finite</span> <span class="o">{</span><span class="n">V</span> <span class="o">:</span> <span class="kt">Type</span><span class="o">}</span> <span class="o">[</span><span class="n">normed_group</span> <span class="n">V</span><span class="o">]</span> <span class="o">[</span><span class="n">normed_space</span> <span class="n">ℝ</span> <span class="n">V</span><span class="o">]</span> <span class="o">{</span><span class="n">A</span> <span class="o">:</span> <span class="n">set</span> <span class="n">V</span><span class="o">}</span> <span class="o">(</span><span class="n">hA</span> <span class="o">:</span> <span class="n">finite</span> <span class="n">A</span><span class="o">)</span> <span class="o">:</span>
+  <span class="n">finite_dimensional</span> <span class="n">ℝ</span> <span class="err">↥</span><span class="o">(</span><span class="n">submodule</span><span class="bp">.</span><span class="n">span</span> <span class="n">ℝ</span> <span class="n">A</span><span class="o">)</span> <span class="o">:=</span>
+<span class="k">begin</span>
+  <span class="n">apply</span> <span class="n">finite_dimensional</span><span class="bp">.</span><span class="n">of_fg</span><span class="o">,</span>
+  <span class="n">sorry</span>
+<span class="kn">end</span>
+</pre></div>
+
+
+<p>Now we need a finset from a finite set</p>
+
+<a name="182474681"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182474681" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182474681">Kevin Buzzard (Dec 03 2019 at 17:37)</a>:</h4>
+<blockquote>
+<p>He was very clear Isabelle/HOL is unusable for maths. And also very clear that any system giving him dependant type (and the type <code>Type -&gt; X</code>) + Sledgehammer would make him quit Lean without thinking twice (which looks like a very sensible thing to do).</p>
+</blockquote>
+<p>So we need to make a sledgehammer? Then he'll quit Lean for Lean.</p>
+
+<a name="182475201"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182475201" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182475201">Patrick Massot (Dec 03 2019 at 17:41)</a>:</h4>
+<p>Look at the discussion we are having. How could we say this software is usable if two non-beginners cannot prove <code>finite_dimensional_span_of_finite</code> within 10 seconds?</p>
+
+<a name="182475384"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182475384" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182475384">Patrick Massot (Dec 03 2019 at 17:43)</a>:</h4>
+<p>Of course we don't know the linear algebra part of the library, but this was Sébastien main point: sledgehammer makes knowing the library much much less important.</p>
+
+<a name="182475432"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182475432" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182475432">Patrick Massot (Dec 03 2019 at 17:44)</a>:</h4>
+<p>Jasmin's project <a href="http://matryoshka.gforge.inria.fr/" target="_blank" title="http://matryoshka.gforge.inria.fr/">http://matryoshka.gforge.inria.fr/</a> was meant to solve this problem, but it doesn't seem to progress much <span aria-label="sad" class="emoji emoji-2639" role="img" title="sad">:sad:</span></p>
+
+<a name="182475545"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182475545" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182475545">Kevin Buzzard (Dec 03 2019 at 17:44)</a>:</h4>
+<p>I see -- so this is the sort of thing which Sledgehammer does quickly?</p>
+
+<a name="182475789"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182475789" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182475789">Kevin Buzzard (Dec 03 2019 at 17:47)</a>:</h4>
+<p>Of course this result is easily provable, we just have to look through the library and learn the relevant parts (except that I need to leave the office in 10 minutes and I'm trying to finish a grant proposal before that ;-) )</p>
+
+<a name="182475980"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182475980" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182475980">Wojciech Nawrocki (Dec 03 2019 at 17:49)</a>:</h4>
+<blockquote>
+<p>sledgehammer makes knowing the library much much less important</p>
+</blockquote>
+<p>I found this to be the nicest thing about sledgehammer in Isabelle, even more so than the fact that it gives you a proof. The generated snippet is <em>a</em> proof of the goal at hand, but more importantly it contains a list of lemmas which can be used to prove it. Effectively, it's like <code>library_search</code> on steroids, because it automatically finds relevant facts - you can look at the lemmas it found and use them to write a nicer proof.</p>
+
+<a name="182476357"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182476357" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182476357">Kevin Buzzard (Dec 03 2019 at 17:53)</a>:</h4>
+<p>Then what is our long-term plan for getting a sledgehammer for Lean?</p>
+
+<a name="182476610"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182476610" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182476610">Gabriel Ebner (Dec 03 2019 at 17:55)</a>:</h4>
+<blockquote>
+<p>Then what is our long-term plan for getting a sledgehammer for Lean?</p>
+</blockquote>
+<p>Me moving to Amsterdam. <span aria-label="smile" class="emoji emoji-263a" role="img" title="smile">:smile:</span>  I'll talk about the current status in January.</p>
+
+<a name="182476942"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/116395-maths/topic/Span%20of%20finite%20set%20is%20sequentially%20closed/near/182476942" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/116395maths/63081Spanoffinitesetissequentiallyclosed.html#182476942">Sebastien Gouezel (Dec 03 2019 at 17:58)</a>:</h4>
+<blockquote>
+<p>Yes, he was finishing his talk at that moment. It was very nice talk. He explained maths for 15 minutes, then propaganda for Sledgehammer for 30 minutes then 15 minutes about how simple type theory is unfortunately unbearable.</p>
+</blockquote>
+<p>I think that's a fair summary. I also said that Sledgehammer makes the learning curve much smoother in Isabelle/HOL than in Lean or COQ.</p>
+
 
 {% endraw %}
 
