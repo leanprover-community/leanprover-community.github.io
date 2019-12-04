@@ -9,6 +9,8 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
+* [visualizations](70566visualizations.html) (66 messages, latest: Dec 04 2019 at 12:56)
+
 * [How do you use Lean at command line?](78951HowdoyouuseLeanatcommandline.html) (11 messages, latest: Dec 03 2019 at 23:26)
 
 * [Normalization fails in lean](41870Normalizationfailsinlean.html) (28 messages, latest: Dec 03 2019 at 21:35)
@@ -222,8 +224,6 @@ permalink: archive/113488general/index.html
 * [nolint doc](59595nolintdoc.html) (2 messages, latest: Oct 20 2019 at 20:42)
 
 * [Formal Methods in Mathematics / Lean Together 2020](50962FormalMethodsinMathematicsLeanTogether2020.html) (3 messages, latest: Oct 20 2019 at 16:43)
-
-* [visualizations](70566visualizations.html) (62 messages, latest: Oct 17 2019 at 12:00)
 
 * [algebraic closure](74840algebraicclosure.html) (216 messages, latest: Oct 16 2019 at 22:09)
 

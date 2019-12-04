@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Summing over a range](89483Summingoverarange.html) (3 messages, latest: Dec 04 2019 at 12:22)
+
 * [Advent of code in Lean](06346AdventofcodeinLean.html) (13 messages, latest: Dec 02 2019 at 22:49)
 
 * [Machine learning tooling](90466Machinelearningtooling.html) (19 messages, latest: Dec 02 2019 at 19:33)
