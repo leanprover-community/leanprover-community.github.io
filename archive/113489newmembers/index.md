@@ -9,7 +9,7 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
-* [VS code settings](14262VScodesettings.html) (1 message, latest: Dec 04 2019 at 13:05)
+* [VS code settings](14262VScodesettings.html) (6 messages, latest: Dec 04 2019 at 14:50)
 
 * [Summing over a range](89483Summingoverarange.html) (3 messages, latest: Dec 04 2019 at 12:22)
 
