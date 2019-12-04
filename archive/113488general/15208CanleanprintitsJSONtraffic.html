@@ -1,0 +1,159 @@
+---
+layout: archive
+title: Lean Prover Zulip Chat Archive
+permalink: archive/113488general/15208CanleanprintitsJSONtraffic.html
+---
+
+<h2>Stream: <a href="https://leanprover-community.github.io/archive/113488general/index.html">general</a>
+<h3>Topic: <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html">Can lean print its JSON traffic?</a></h3>
+
+<hr>
+
+<base href="https://leanprover.zulipchat.com">
+
+{% raw %}
+<a name="182593699"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182593699" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182593699">Daniel Donnelly (Dec 04 2019 at 20:09)</a>:</h4>
+<p>I am not understanding how the commands.ts file works.  I was thinking I could write a program that just acts as a stdio reader and shows me all traffic both ways.  Or, I could ask you if there's the ability to switch that on at the command line.  Or if not could someone write a simple "printf()" routine that prints out the JSON to VSCode's terminal?  That would save me a lot of trouble.  By that I mean actually modifying lean.  I'm not sure how to do that myself.</p>
+
+<a name="182594193"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594193" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594193">Daniel Donnelly (Dec 04 2019 at 20:14)</a>:</h4>
+<p>Can someone give me simple instructions how to build lean 4?</p>
+
+<a name="182594204"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594204" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594204">Yury G. Kudryashov (Dec 04 2019 at 20:14)</a>:</h4>
+<p>What is your OS?</p>
+
+<a name="182594225"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594225" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594225">Daniel Donnelly (Dec 04 2019 at 20:15)</a>:</h4>
+<blockquote>
+<p>What is your OS?</p>
+</blockquote>
+<p>Windows 10</p>
+
+<a name="182594229"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594229" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594229">Andrew Ashworth (Dec 04 2019 at 20:15)</a>:</h4>
+<p>Lean 4 might be a little premature. I tried building it with MinGW a few months ago and it didn't work</p>
+
+<a name="182594241"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594241" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594241">Daniel Donnelly (Dec 04 2019 at 20:15)</a>:</h4>
+<p>64-bit</p>
+
+<a name="182594244"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594244" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594244">Bryan Gin-ge Chen (Dec 04 2019 at 20:15)</a>:</h4>
+<p>I'm not sure I understand your question, but if you run <code>lean --server</code> at the command line, you can type or paste in JSON commands, following the outputs of the functions in <a href="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts" target="_blank" title="https://github.com/leanprover/lean-client-js/blob/master/lean-client-js-core/src/server.ts">server.ts</a>. For example, you can input:</p>
+<div class="codehilite"><pre><span></span>{&quot;command&quot;:&quot;sync&quot;, &quot;file_name&quot;:&quot;test.lean&quot;, &quot;content&quot;:&quot;example : true := sorry&quot;, &quot;seq_num&quot;:0}
+{&quot;command&quot;:&quot;info&quot;, &quot;file_name&quot;:&quot;test.lean&quot;, &quot;line&quot;:1, &quot;column&quot;:10, &quot;seq_num&quot;:0}
+</pre></div>
+
+<a name="182594335"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594335" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594335">Daniel Donnelly (Dec 04 2019 at 20:16)</a>:</h4>
+<p>Yes, but I don't know what to type in.  If I could use lean normally and see all traffic, that would be ideal.</p>
+
+<a name="182594428"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594428" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594428">Daniel Donnelly (Dec 04 2019 at 20:17)</a>:</h4>
+<p>Oh you're saying look at the lines:<br>
+<code>return this.send({command: 'info', file_name: file, line, column}</code><br>
+etc and that is exactly the json?</p>
+
+<a name="182594459"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594459" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594459">Bryan Gin-ge Chen (Dec 04 2019 at 20:17)</a>:</h4>
+<p>It's close, for instance, it's missing the <code>seq_num</code> key.</p>
+
+<a name="182594462"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594462" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594462">Daniel Donnelly (Dec 04 2019 at 20:17)</a>:</h4>
+<p>So what is the start-up sequence for Lean in JSON commands?</p>
+
+<a name="182594530"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594530" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594530">Yury G. Kudryashov (Dec 04 2019 at 20:18)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> I think that <span class="user-mention" data-user-id="236489">@Daniel Donnelly</span>  wants to see all the JSON traffic that goes between VS and Lean. On Linux I'd suggest some short bash script based on <code>tee</code> and redirection.</p>
+
+<a name="182594565"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594565" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594565">Daniel Donnelly (Dec 04 2019 at 20:18)</a>:</h4>
+<p>Can't someone just build me a binary that prints it all ?</p>
+
+<a name="182594593"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594593" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594593">Daniel Donnelly (Dec 04 2019 at 20:19)</a>:</h4>
+<p>Then in VSCode I could set the exec setting to that binary</p>
+
+<a name="182594608"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594608" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594608">Bryan Gin-ge Chen (Dec 04 2019 at 20:19)</a>:</h4>
+<blockquote>
+<p>If I could use lean normally and see all traffic, that would be ideal.</p>
+</blockquote>
+<p>If you're not opposed to fooling around in the browser, you can do this in the online lean editor: <a href="https://leanprover-community.github.io/lean-web-editor/" target="_blank" title="https://leanprover-community.github.io/lean-web-editor/">https://leanprover-community.github.io/lean-web-editor/</a></p>
+<p>Click the (?) to open the modal popup, then scroll to the bottom and check "Log server messages to console".</p>
+
+<a name="182594649"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594649" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594649">Daniel Donnelly (Dec 04 2019 at 20:19)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span>  that's awesome!  I will try it now</p>
+
+<a name="182594711"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594711" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594711">Bryan Gin-ge Chen (Dec 04 2019 at 20:20)</a>:</h4>
+<p>Then open your browser's dev console and you should see messages like this: </p>
+<div class="codehilite"><pre><span></span>15:17:33.006 =&gt; server:   { command: &quot;info&quot;, file_name: &quot;/test.lean&quot;, line: 6, column: 33 }
+15:17:33.009 &lt;= server:   { response: &quot;ok&quot;, seq_num: 2 }
+</pre></div>
+
+<a name="182594779"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594779" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594779">Bryan Gin-ge Chen (Dec 04 2019 at 20:20)</a>:</h4>
+<p>It's possible to do something similar with the VS Code extension, but it's a bunch more steps.</p>
+
+<a name="182594817"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594817" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594817">Daniel Donnelly (Dec 04 2019 at 20:21)</a>:</h4>
+<p><span class="user-mention" data-user-id="123965">@Bryan Gin-ge Chen</span> This is perfect.  Thank you!</p>
+
+<a name="182594846"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182594846" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182594846">Daniel Donnelly (Dec 04 2019 at 20:21)</a>:</h4>
+<p>Now I just have to open the executable with python which is out of the scope of here.</p>
+
+<a name="182595527"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182595527" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182595527">Daniel Donnelly (Dec 04 2019 at 20:29)</a>:</h4>
+<blockquote>
+<p>Then open your browser's dev console and you should see messages like this: </p>
+</blockquote>
+<p>15:17:33.006 =&gt; server:   { command: "info", file_name: "/test.lean", line: 6, column: 33 }<br>
+15:17:33.009 &lt;= server:   { response: "ok", seq_num: 2 }</p>
+<div class="codehilite"><pre><span></span>
+</pre></div>
+
+
+<p><a href="/user_uploads/3121/kLc6ETTC0MckXTM_ChkqprBD/pasted_image.png" target="_blank" title="pasted_image.png">pasted image</a> </p>
+<div class="message_inline_image"><a href="/user_uploads/3121/kLc6ETTC0MckXTM_ChkqprBD/pasted_image.png" target="_blank" title="pasted image"><img src="/user_uploads/3121/kLc6ETTC0MckXTM_ChkqprBD/pasted_image.png"></a></div><p>What is all that under __proto__ and is that present in the JSON?</p>
+
+<a name="182596365"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182596365" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182596365">Daniel Donnelly (Dec 04 2019 at 20:38)</a>:</h4>
+<p>Also, should I have one LeanInterface (ie. a python subprocess instance) per file or should I have a singleton LeanInterface that works on all files?</p>
+
+<a name="182597013"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182597013" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182597013">Patrick Massot (Dec 04 2019 at 20:44)</a>:</h4>
+<p>Did you already look at <a href="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/server.py" target="_blank" title="https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/server.py">https://github.com/leanprover-community/format_lean/blob/master/src/format_lean/server.py</a>?</p>
+
+<a name="182597865"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182597865" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182597865">Daniel Donnelly (Dec 04 2019 at 20:52)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  thanks that's truely helpful.  It shows all the stuff I actually need right now!</p>
+
+<a name="182598026"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182598026" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182598026">Daniel Donnelly (Dec 04 2019 at 20:54)</a>:</h4>
+<p>To answer my own question, since the online thing has an open / save feature, I opened up a local .lean file and it just sends a sync command to the server.  So in that case it's a singleton server instance I should be doing.</p>
+
+<a name="182598065"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182598065" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182598065">Patrick Massot (Dec 04 2019 at 20:54)</a>:</h4>
+<p>That file is really rudimentary. It's exactly what I needed at that time, no more.</p>
+
+<a name="182598093"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182598093" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182598093">Patrick Massot (Dec 04 2019 at 20:55)</a>:</h4>
+<p>But turning it into a general purpose tool could be very useful.</p>
+
+<a name="182598342"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182598342" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182598342">Daniel Donnelly (Dec 04 2019 at 20:57)</a>:</h4>
+<p><span class="user-mention" data-user-id="110031">@Patrick Massot</span>  what is <code>-j0</code> flag or should I just drop that?</p>
+
+<a name="182598370"></a>
+<h4><a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/Can%20lean%20print%20its%20JSON%20traffic%3F/near/182598370" class="zl"><img src="https://leanprover-community.github.io/assets/img/zulip2.png" alt="view this post on Zulip"></a> <a href="https://leanprover-community.github.io/archive/113488general/15208CanleanprintitsJSONtraffic.html#182598370">Patrick Massot (Dec 04 2019 at 20:57)</a>:</h4>
+<p>You should try <code>lean --help</code></p>
+
+
+{% endraw %}
+
+{% include archive_update.html %}
