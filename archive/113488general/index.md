@@ -9,7 +9,9 @@ permalink: archive/113488general/index.html
 
 ### Topics:
 
-* [Can lean print its JSON traffic?](15208CanleanprintitsJSONtraffic.html) (29 messages, latest: Dec 04 2019 at 20:57)
+* [markdown module docstrings](07338markdownmoduledocstrings.html) (239 messages, latest: Dec 04 2019 at 21:47)
+
+* [Can lean print its JSON traffic?](15208CanleanprintitsJSONtraffic.html) (44 messages, latest: Dec 04 2019 at 21:23)
 
 * [Name generation](24366Namegeneration.html) (11 messages, latest: Dec 04 2019 at 17:40)
 
@@ -66,8 +68,6 @@ permalink: archive/113488general/index.html
 * [VScode warning](35995VScodewarning.html) (4 messages, latest: Nov 24 2019 at 16:42)
 
 * [Equality is not an equality or iff](38511Equalityisnotanequalityoriff.html) (27 messages, latest: Nov 23 2019 at 15:30)
-
-* [markdown module docstrings](07338markdownmoduledocstrings.html) (238 messages, latest: Nov 23 2019 at 05:59)
 
 * [option golf puzzle](59308optiongolfpuzzle.html) (9 messages, latest: Nov 22 2019 at 23:43)
 
