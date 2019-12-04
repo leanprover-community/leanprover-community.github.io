@@ -9,7 +9,7 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [normed_space timeouts](97259normedspacetimeouts.html) (1 message, latest: Dec 03 2019 at 23:17)
+* [normed_space timeouts](97259normedspacetimeouts.html) (2 messages, latest: Dec 04 2019 at 07:47)
 
 * [Span of finite set is sequentially closed](63081Spanoffinitesetissequentiallyclosed.html) (92 messages, latest: Dec 03 2019 at 21:53)
 
