@@ -9,9 +9,9 @@ permalink: archive/116395maths/index.html
 
 ### Topics:
 
-* [division_ring'](95004divisionring.html) (4 messages, latest: Dec 04 2019 at 18:04)
+* [normed_space timeouts](97259normedspacetimeouts.html) (28 messages, latest: Dec 04 2019 at 19:58)
 
-* [normed_space timeouts](97259normedspacetimeouts.html) (27 messages, latest: Dec 04 2019 at 17:12)
+* [division_ring'](95004divisionring.html) (4 messages, latest: Dec 04 2019 at 18:04)
 
 * [local fields / nonarchimedean fields](86469localfieldsnonarchimedeanfields.html) (16 messages, latest: Dec 04 2019 at 10:37)
 

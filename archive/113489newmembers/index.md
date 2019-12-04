@@ -9,6 +9,8 @@ permalink: archive/113489newmembers/index.html
 
 ### Topics:
 
+* [Hypothetical judgements](40101Hypotheticaljudgements.html) (12 messages, latest: Dec 04 2019 at 19:58)
+
 * [Defining a function by or.elim](07549Definingafunctionbyorelim.html) (59 messages, latest: Dec 04 2019 at 16:20)
 
 * [VS code settings](14262VScodesettings.html) (6 messages, latest: Dec 04 2019 at 14:50)
